@@ -66,8 +66,8 @@ public class ItemInit {
     public static final BowItem ICE_BOW = (BowItem) new AdvancedBowItem(new Item.Properties().group(Groups.FLETCHING), 2f, 1.0f, 8, 2).setRegistryName("ice_bow");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //     Ingots or Dusts     //
-    /////////////////////////////
+    //     Ingredients     //
+    /////////////////////////
 
     // Glass shards
     public static final Item CLEAR_SHARD = new IngredientItem("clear_shard");
