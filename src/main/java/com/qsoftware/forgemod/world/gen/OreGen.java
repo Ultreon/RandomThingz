@@ -66,7 +66,6 @@ public class OreGen {
 
         // Configured Feature
         ConfiguredFeature<?, ?> configuredFeature = Feature.ORE.withConfiguration(oreFeatureConfig).range(maximum - topOffset).square().func_242731_b(bottomOffset);
-        Features.ORE_DIAMOND
 
         // Add feature
         for (Biome biome : biomes) {
@@ -81,7 +80,7 @@ public class OreGen {
         OreFeatureConfig oreFeatureConfig = new OreFeatureConfig(filler, blockState, size);
 
         // Configured Feature
-        ConfiguredFeature<?, ?> configuredFeature = Feature.ORE.withConfiguration(oreFeatureConfig).func_242733_d(maximum - topOffset).func_242728_a().func_242731_b(bottomOffset);
+        ConfiguredFeature<?, ?> configuredFeature = Feature.ORE.withConfiguration(oreFeatureConfig).range(maximum - topOffset).square().func_242731_b(bottomOffset);
 
         // Add feature
         QForgeUtils.LOGGER.info("Adding Ore Feature for: '" + ore.getRegistryName() + "' in biome: " + biome.getRegistryName());

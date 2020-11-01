@@ -59,7 +59,6 @@ public class GrasslandBiome extends BiomeTemplate
         DefaultBiomeFeatures.withOverworldOres(builder);
 
         ////////////////////////////////////////////////////////////
-        Features.ORE_DIAMOND
         // Vegetation
         builder.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Features.PATCH_SUGAR_CANE);
 
