@@ -1,0 +1,39 @@
+{
+    "variants": {
+        "distance=1": [
+			{ "model": "block/dark_oak_leaves" },
+			{ "model": "block/dark_oak_leaves1" },
+			{ "model": "block/dark_oak_leaves2" }
+				],
+        "distance=2": [
+			{ "model": "block/dark_oak_leaves" },
+			{ "model": "block/dark_oak_leaves1" },
+			{ "model": "block/dark_oak_leaves2" }
+				],
+        "distance=3": [
+			{ "model": "block/dark_oak_leaves" },
+			{ "model": "block/dark_oak_leaves1" },
+			{ "model": "block/dark_oak_leaves2" }
+				],
+        "distance=4": [
+			{ "model": "block/dark_oak_leaves" },
+			{ "model": "block/dark_oak_leaves1" },
+			{ "model": "block/dark_oak_leaves2" }
+				],
+        "distance=5": [
+			{ "model": "block/dark_oak_leaves" },
+			{ "model": "block/dark_oak_leaves1" },
+			{ "model": "block/dark_oak_leaves2" }
+				],
+        "distance=6": [
+			{ "model": "block/dark_oak_leaves" },
+			{ "model": "block/dark_oak_leaves1" },
+			{ "model": "block/dark_oak_leaves2" }
+				],
+        "distance=7": [
+			{ "model": "block/dark_oak_leaves" },
+			{ "model": "block/dark_oak_leaves1" },
+			{ "model": "block/dark_oak_leaves2" }
+				]
+    }
+}

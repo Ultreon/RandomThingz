@@ -1,18 +1,9 @@
 {
-  "variants": {
-    "": [
-    	{"model": "minecraft:block/red_mushroom"},
-    	{"model": "minecraft:block/red_mushroom", "y":90},
-    	{"model": "minecraft:block/red_mushroom", "y":180},
-    	{"model": "minecraft:block/red_mushroom", "y":270},
-      	{"model": "minecraft:block/red_mushroom_2"},
-      	{"model": "minecraft:block/red_mushroom_2", "y":90},
-    	{"model": "minecraft:block/red_mushroom_2", "y":180},
-    	{"model": "minecraft:block/red_mushroom_2", "y":270},
-      	{"model": "minecraft:block/red_mushroom_3"},
-      	{"model": "minecraft:block/red_mushroom_3", "y":90},
-    	{"model": "minecraft:block/red_mushroom_3", "y":180},
-    	{"model": "minecraft:block/red_mushroom_3", "y":270}
-    ]
-  }
+    "variants": {
+        "": [ { "model": "block/red_mushroom", "weight":1 }
+,{ "model": "block/red_mushroom1", "weight":1 }
+,{ "model": "block/red_mushroom2", "weight":1 }
+,{ "model": "block/red_mushroom3", "weight":1 }
+,{ "model": "block/red_mushroom4", "weight":1 }
+ ]   }
 }

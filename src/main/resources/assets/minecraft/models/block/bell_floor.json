@@ -1,8 +1,8 @@
 {
     "textures": {
         "particle": "block/bell_bottom",
-        "bar": "block/oak_planks",
-        "post": "block/stone"
+        "bar": "block/bell_post",
+        "post": "block/bell_walls"
     },
     "elements": [
         {

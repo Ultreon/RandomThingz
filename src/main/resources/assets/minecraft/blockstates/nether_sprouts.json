@@ -1,14 +1,9 @@
 {
-  "variants": {
-    "": [
-    	{"model": "minecraft:block/nether_sprouts"},
-    	{"model": "minecraft:block/nether_sprouts", "y":90},
-    	{"model": "minecraft:block/nether_sprouts", "y":180},
-    	{"model": "minecraft:block/nether_sprouts", "y":270},
-      {"model": "minecraft:block/nether_sprouts_2"},
-      {"model": "minecraft:block/nether_sprouts_2", "y":90},
-    	{"model": "minecraft:block/nether_sprouts_2", "y":180},
-    	{"model": "minecraft:block/nether_sprouts_2", "y":270}
-    ]
-  }
+    "variants": {
+        "": [ { "model": "block/nether_sprouts", "weight":1 }
+,{ "model": "block/nether_sprouts1", "weight":1 }
+,{ "model": "block/nether_sprouts2", "weight":1 }
+,{ "model": "block/nether_sprouts3", "weight":1 }
+
+ ]   }
 }

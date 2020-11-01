@@ -1,6 +1,6 @@
 {
-    "parent": "block/pressure_plate_up",
-    "textures": {
-        "texture": "block/dark_oak_pressure_plate"
-    }
+  "parent": "minecraft:block/pressure_plate_up",
+  "textures": {
+    "texture": "minecraft:block/dark_oak_pp"
+  }
 }

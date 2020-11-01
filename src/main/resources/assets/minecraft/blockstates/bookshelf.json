@@ -1,12 +1,8 @@
 {
     "variants": {
-        "": [
-        	{ "model": "block/bookshelf" },
-        	{ "model": "block/bookshelf_rotated", "y":90},
-        	{ "model": "block/bookshelf1" },
-        	{ "model": "block/bookshelf1_rotated", "y":90},
-        	{ "model": "block/bookshelf2" },
-        	{ "model": "block/bookshelf2_rotated", "y":90}
-        ]
-    }
+        "": [ { "model": "block/bookshelf", "weight":30 }
+,{ "model": "block/bookshelf/bookshelf1", "weight":25 },
+{ "model": "block/bookshelf/bookshelf2", "weight":12 },
+{ "model": "block/bookshelf/bookshelf3", "weight":6 },
+{ "model": "block/bookshelf/bookshelf4", "weight":12 } ]    }
 }

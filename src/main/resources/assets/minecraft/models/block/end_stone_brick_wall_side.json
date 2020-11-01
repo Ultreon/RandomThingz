@@ -1,7 +1,6 @@
 {
     "parent": "block/template_wall_side",
     "textures": {
-        "wall": "block/end_stone_bricks",
-        "top": "block/end_stone_bricks"
+        "wall": "block/end_stone_bricks"
     }
 }

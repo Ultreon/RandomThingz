@@ -1,14 +1,9 @@
 {
-  "variants": {
-    "": [
-      {"model": "minecraft:block/crimson_fungus"},
-    	{"model": "minecraft:block/crimson_fungus", "y":90},
-    	{"model": "minecraft:block/crimson_fungus", "y":180},
-    	{"model": "minecraft:block/crimson_fungus", "y":270},
-      {"model": "minecraft:block/crimson_fungus_2"},
-      {"model": "minecraft:block/crimson_fungus_2", "y":90},
-      {"model": "minecraft:block/crimson_fungus_2", "y":180},
-      {"model": "minecraft:block/crimson_fungus_2", "y":270}
-    ]
-  }
+    "variants": {
+        "": [ { "model": "block/crimson_fungus", "weight":1 }
+,{ "model": "block/crimson_fungus1", "weight":1 }
+,{ "model": "block/crimson_fungus2", "weight":1 }
+,{ "model": "block/crimson_fungus3", "weight":1 }
+
+ ]   }
 }

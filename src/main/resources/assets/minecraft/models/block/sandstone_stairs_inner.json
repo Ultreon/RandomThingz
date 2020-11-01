@@ -1,53 +1,8 @@
 {
-	"__comment": "Created by _GrandMagus_",
-	"parent": "block/stairs",
-	"textures": {
-		"particle": "block/polished_andesite",
-		"side": "block/sandstone",
-		"top": "block/sandstone_top",
-		"down": "block/sandstone_bottom"
-	},
-	"elements": [
-		{
-			"from": [ 0, 0, 0 ],
-			"to": [ 8, 5, 8 ],
-			"faces": {
-				"down": { "uv": [ 0, 8, 8, 16 ], "texture": "#down", "cullface": "down" },
-				"north": { "uv": [ 8, 11, 16, 16 ], "texture": "#side", "cullface": "north" },
-				"west": { "uv": [ 0, 11, 8, 16 ], "texture": "#side", "cullface": "west" }
-			}
-		},
-		{
-			"from": [ 8, 0, 0 ],
-			"to": [ 16, 16, 16 ],
-			"faces": {
-				"down": { "uv": [ 8, 0, 16, 16 ], "texture": "#down", "cullface": "down" },
-				"up": { "uv": [ 8, 0, 16, 16 ], "texture": "#top", "cullface": "up" },
-				"north": { "uv": [ 0, 0, 8, 16 ], "texture": "#side", "cullface": "north" },
-				"south": { "uv": [ 8, 0, 16, 16 ], "texture": "#side", "cullface": "south" },
-				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#side" },
-				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "east" }
-			}
-		},
-		{
-			"from": [ 0, 5, 0 ],
-			"to": [ 8, 8, 8 ],
-			"faces": {
-				"up": { "uv": [ 0, 0, 8, 8 ], "texture": "#top" },
-				"north": { "uv": [ 8, 0, 16, 3 ], "texture": "#side", "cullface": "north" },
-				"west": { "uv": [ 0, 0, 8, 3 ], "texture": "#side", "cullface": "west" }
-			}
-		},
-		{
-			"from": [ 0, 0, 8 ],
-			"to": [ 8, 16, 16 ],
-			"faces": {
-				"down": { "uv": [ 0, 0, 8, 8 ], "texture": "#down", "cullface": "down" },
-				"up": { "uv": [ 0, 8, 8, 16 ], "texture": "#top", "cullface": "up" },
-				"north": { "uv": [ 8, 0, 16, 16 ], "texture": "#side" },
-				"south": { "uv": [ 0, 0, 8, 16 ], "texture": "#side", "cullface": "south" },
-				"west": { "uv": [ 8, 0, 16, 16 ], "texture": "#side", "cullface": "west" }
-			}
-		}
-	]
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "minecraft:block/sandstone",
+    "top": "minecraft:block/sandstone",
+    "side": "minecraft:block/sandstone"
+  }
 }

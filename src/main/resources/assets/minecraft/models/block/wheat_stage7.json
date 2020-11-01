@@ -1,7 +1,6 @@
 {
-    "parent": "block/crop_double",
+    "parent": "block/crop",
     "textures": {
-        "crop": "block/wheat_stage7",
-        "crop_double": "block/wheat_stage7_top"
+        "crop": "block/wheat_stage_7"
     }
 }

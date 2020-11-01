@@ -1,47 +1,6 @@
 {
-	"credit": "Created by _GrandMagus_",
-	"texture_size": [32, 32],
-	"textures": {
-		"particle": "block/crimson_fungus",
-		"fungus": "block/crimson_fungus"
-	},
-	"elements": [
-		{
-			"from": [7, 0, 7],
-			"to": [9, 5, 9],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 6, 8]},
-			"faces": {
-				"north": {"uv": [15, 13.5, 16, 16], "texture": "#fungus"},
-				"east": {"uv": [15, 13.5, 16, 16], "texture": "#fungus"},
-				"south": {"uv": [15, 13.5, 16, 16], "texture": "#fungus"},
-				"west": {"uv": [15, 13.5, 16, 16], "texture": "#fungus"},
-				"up": {"uv": [15, 12.5, 16, 13.5], "texture": "#fungus"},
-				"down": {"uv": [15, 15, 16, 16], "texture": "#fungus"}
-			}
-		},
-		{
-			"from": [4, 5, 4],
-			"to": [12, 8, 12],
-			"faces": {
-				"north": {"uv": [9, 2.5, 13, 4], "texture": "#fungus"},
-				"east": {"uv": [4.5, 2.5, 8.5, 4], "texture": "#fungus"},
-				"south": {"uv": [0, 2.5, 4, 4], "texture": "#fungus"},
-				"west": {"uv": [4.5, 2.5, 8.5, 4], "texture": "#fungus"},
-				"up": {"uv": [5.5, 11.5, 9.5, 15.5], "texture": "#fungus"},
-				"down": {"uv": [0, 11, 4, 15], "texture": "#fungus"}
-			}
-		},
-		{
-			"from": [5, 8, 5],
-			"to": [11, 11, 11],
-			"faces": {
-				"north": {"uv": [0.5, 0, 3.5, 1.5], "texture": "#fungus"},
-				"east": {"uv": [8, 0.5, 11, 2], "texture": "#fungus"},
-				"south": {"uv": [11, 0, 14, 1.5], "texture": "#fungus"},
-				"west": {"uv": [5, 0, 8, 1.5], "texture": "#fungus"},
-				"up": {"uv": [6, 12, 9, 15], "texture": "#fungus"},
-				"down": {"uv": [10, 13, 13, 16], "texture": "#fungus"}
-			}
-		}
-	]
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "minecraft:block/crimson_fungi"
+  }
 }
