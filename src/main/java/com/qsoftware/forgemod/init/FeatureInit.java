@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 
 @SuppressWarnings("unused")
 public class FeatureInit {
-    public static final ConfiguredFeature<?, ?> ORE_RUBY = Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, Features.States.DIAMOND_ORE, 8)).range(16).square();
+    public static final ConfiguredFeature<?, ?> ORE_RUBY = Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.RUBY_BLOCK.getDefaultState(), 8)).range(16).square();
 
     public static void registerFeatures() {
         Class<FeatureInit> clazz = FeatureInit.class;
