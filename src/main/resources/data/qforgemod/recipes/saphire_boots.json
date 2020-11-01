@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:saphire"
+    }
+  },
+  "result": {
+    "item": "qforgemod:saphire_boots",
+    "count": 1
+  }
+}

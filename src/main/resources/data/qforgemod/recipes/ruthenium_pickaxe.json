@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    " s ",
+    " s "
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:ruthenium_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:ruthenium_pickaxe"
+  }
+}

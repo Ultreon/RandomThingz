@@ -1,0 +1,16 @@
+{
+	"group": "qforgemod",
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#"
+    ],
+    "key": {
+        "#": {
+            "item": "qforgemod:chandelier"
+        }
+    },
+    "result": {
+        "item": "minecraft:torch",
+        "count": 4
+    }
+}

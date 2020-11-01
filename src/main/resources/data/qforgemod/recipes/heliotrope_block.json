@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:heliotrope"
+    }
+  },
+  "result": {
+    "item": "qforgemod:heliotrope_block",
+    "count": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cc",
+    " s",
+    " s"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:nickle_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:nickle_hoe"
+  }
+}

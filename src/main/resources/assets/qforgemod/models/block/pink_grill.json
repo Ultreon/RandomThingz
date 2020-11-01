@@ -1,0 +1,6 @@
+{
+    "parent": "qforgemod:block/grill",
+    "textures": {
+        "color": "minecraft:block/pink_terracotta"
+    }
+}

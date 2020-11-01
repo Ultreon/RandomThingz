@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX ",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:morganite"
+    },
+    "#": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:morganite_hoe",
+    "count": 1
+  }
+}

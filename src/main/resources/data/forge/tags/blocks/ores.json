@@ -1,0 +1,15 @@
+{
+  "values": [
+    "#forge:ores/amethyst",
+    "#forge:ores/aquamarine",
+    "#forge:ores/copper",
+    "#forge:ores/infinity",
+    "#forge:ores/malachite",
+    "#forge:ores/ruby",
+    "#forge:ores/saphire",
+    "#forge:ores/steel",
+    "#forge:ores/tungsten",
+    "#forge:ores/ultrinium",
+    "#forge:ores/uranium"
+  ]
+}

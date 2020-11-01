@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "c c"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:osmium_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:osmium_helmet"
+  }
+}

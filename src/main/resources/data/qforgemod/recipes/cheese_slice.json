@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "qforgemod:cheese"},
+    {"item": "qforgemod:knife"}
+  ],
+  "result": {
+    "item": "qforgemod:cheese_slice",
+    "count": 6
+  }
+}

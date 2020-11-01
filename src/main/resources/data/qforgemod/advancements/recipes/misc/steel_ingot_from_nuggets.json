@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:steel_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_steel_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:steel_nugget"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:steel_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_steel_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

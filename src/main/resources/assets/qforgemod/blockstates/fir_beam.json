@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "qforgemod:block/fir_beam_x"
+    },
+    "axis=y": {
+      "model": "qforgemod:block/fir_beam_y"
+    },
+    "axis=z": {
+      "model": "qforgemod:block/fir_beam_z"
+    }
+  }
+}

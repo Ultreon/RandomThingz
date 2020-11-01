@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cc",
+    "s ",
+    "s "
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:palladium_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:palladium_hoe"
+  }
+}

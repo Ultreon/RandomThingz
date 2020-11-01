@@ -1,0 +1,94 @@
+{
+	"__comment": "Designed by Pavel Durov with Cubik Studio - https://cubik.studio",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "block/iron_bars",
+		"bars": "block/iron_bars",
+		"edge": "block/iron_bars"
+	},
+	"elements": [
+		{
+			"__comment": "Cube5",
+			"from": [ 7, 0, 12 ],
+			"to": [ 9, 16, 14 ],
+			"faces": {
+				"down": { "uv": [ 7, 7, 9, 9 ], "texture": "#bars" },
+				"up": { "uv": [ 7, 7, 9, 9 ], "texture": "#bars" },
+				"north": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" },
+				"south": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" },
+				"west": { "uv": [ 2, 0, 4, 16 ], "texture": "#bars" },
+				"east": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" }
+			}
+		},
+		{
+			"__comment": "Cube5",
+			"from": [ 7, 0, 2 ],
+			"to": [ 9, 16, 4 ],
+			"faces": {
+				"down": { "uv": [ 7, 12, 9, 14 ], "texture": "#bars" },
+				"up": { "uv": [ 7, 2, 9, 4 ], "texture": "#bars" },
+				"north": { "uv": [ 4, 0, 2, 16 ], "texture": "#bars" },
+				"south": { "uv": [ 4, 0, 2, 16 ], "texture": "#bars" },
+				"west": { "uv": [ 12, 0, 14, 16 ], "texture": "#bars" },
+				"east": { "uv": [ 2, 0, 4, 16 ], "texture": "#bars" }
+			}
+		},
+		{
+			"__comment": "Cube5",
+			"from": [ 7, 0, 7 ],
+			"to": [ 9, 16, 9 ],
+			"faces": {
+				"down": { "uv": [ 7, 7, 9, 9 ], "texture": "#bars" },
+				"up": { "uv": [ 7, 7, 9, 9 ], "texture": "#bars" },
+				"north": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" },
+				"south": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" },
+				"west": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" },
+				"east": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" }
+			}
+		},
+		{
+			"from": [ 8, 0, 0 ],
+			"to": [ 8.001, 16, 16 ],
+			"faces": {
+				"west": { "uv": [ 16, 0, 0, 16 ], "texture": "#bars" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#bars" }
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation":  [ 75, 45, 0 ],
+			"translation":  [ 0, 2.5, 0 ],
+			"scale":  [ 0.375, 0.375, 0.375 ]
+		},
+		"thirdperson_lefthand": {
+			"rotation":  [ 75, 45, 0 ],
+			"translation":  [ 0, 2.5, 0 ],
+			"scale":  [ 0.375, 0.375, 0.375 ]
+		},
+		"firstperson_righthand": {
+			"rotation":  [ 0, 45, 0 ],
+			"translation":  [ 0, 1.5, 0 ],
+			"scale":  [ 0.4, 0.4, 0.4 ]
+		},
+		"firstperson_lefthand": {
+			"rotation":  [ 0, 45, 0 ],
+			"translation":  [ 0, 1.5, 0 ],
+			"scale":  [ 0.4, 0.4, 0.4 ]
+		},
+		"gui": {
+			"rotation":  [ 30, -45, 0 ],
+			"scale":  [ 0.7, 0.7, 0.7 ]
+		},
+		"head": {
+			"rotation":  [ 0, 90, 0 ]
+		},
+		"ground": {
+			"translation":  [ 0, 3, 0 ],
+			"scale":  [ 0.25, 0.25, 0.25 ]
+		},
+		"fixed": {
+			"rotation":  [ 0, 90, 0 ]
+		}
+	}
+}

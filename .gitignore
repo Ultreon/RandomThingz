@@ -1,0 +1,59 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+.idea/
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+# QLiveReleases
+*.pik
+*.dill
+
+# Files from Forge MDK
+forge*changelog.txt
+
+/server/
+/move_old_output.py
+/release_module.py
+/mods_items.pik
+/lib/
+/quark/
+/refinedstorage/
+/mekanism/
+/logs/
+/.vscode/
+/qaddons/
+/src/additions/
+/src/api/
+/src/addons/
+/src/generated/
+/src/generators/
+/src/quark/
+/src/refinedstorage/
+/src/tools/
+
+src/additions/
+src/api/
+src/addons/
+src/generated/
+src/generators/
+src/quark/
+src/refinedstorage/
+src/tools/

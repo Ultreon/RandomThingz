@@ -1,0 +1,175 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:tungsten_nugget_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_tungsten_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tungsten_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_tungsten_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tungsten_shovel"
+          }
+        ]
+      }
+    },
+    "has_tungsten_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tungsten_axe"
+          }
+        ]
+      }
+    },
+    "has_tungsten_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tungsten_hoe"
+          }
+        ]
+      }
+    },
+    "has_tungsten_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tungsten_sword"
+          }
+        ]
+      }
+    },
+    "has_tungsten_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tungsten_helmet"
+          }
+        ]
+      }
+    },
+    "has_tungsten_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tungsten_chestplate"
+          }
+        ]
+      }
+    },
+    "has_tungsten_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tungsten_leggings"
+          }
+        ]
+      }
+    },
+    "has_tungsten_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tungsten_boots"
+          }
+        ]
+      }
+    },
+    "has_tungsten_horse_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tungsten_horse_armor"
+          }
+        ]
+      }
+    },
+    "has_chainmail_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_helmet"
+          }
+        ]
+      }
+    },
+    "has_chainmail_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_chestplate"
+          }
+        ]
+      }
+    },
+    "has_chainmail_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_leggings"
+          }
+        ]
+      }
+    },
+    "has_chainmail_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_boots"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:tungsten_nugget_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tungsten_pickaxe",
+      "has_tungsten_shovel",
+      "has_tungsten_axe",
+      "has_tungsten_hoe",
+      "has_tungsten_sword",
+      "has_tungsten_helmet",
+      "has_tungsten_chestplate",
+      "has_tungsten_leggings",
+      "has_tungsten_boots",
+      "has_tungsten_horse_armor",
+      "has_chainmail_helmet",
+      "has_chainmail_chestplate",
+      "has_chainmail_leggings",
+      "has_chainmail_boots",
+      "has_the_recipe"
+    ]
+  ]
+}

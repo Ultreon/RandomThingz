@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "qforgemod:infinity_pickaxe"
+    },
+    {
+      "item": "qforgemod:infinity_shovel"
+    },
+    {
+      "item": "qforgemod:infinity_axe"
+    },
+    {
+      "item": "qforgemod:infinity_hoe"
+    },
+    {
+      "item": "qforgemod:infinity_sword"
+    },
+    {
+      "item": "qforgemod:infinity_helmet"
+    },
+    {
+      "item": "qforgemod:infinity_chestplate"
+    },
+    {
+      "item": "qforgemod:infinity_leggings"
+    },
+    {
+      "item": "qforgemod:infinity_boots"
+    }
+  ],
+  "result": "qforgemod:infinity_nugget",
+  "experience": 8.5,
+  "cookingtime": 600
+}

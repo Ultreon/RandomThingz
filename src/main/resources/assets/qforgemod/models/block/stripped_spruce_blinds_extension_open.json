@@ -1,0 +1,7 @@
+{
+    "parent": "qforgemod:block/blinds_extension_open",
+    "textures": {
+        "slat": "minecraft:block/spruce_planks",
+        "cord": "minecraft:block/spruce_log"
+    }
+}

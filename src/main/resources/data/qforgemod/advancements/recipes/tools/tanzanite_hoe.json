@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:tanzanite_hoe"
+    ]
+  },
+  "criteria": {
+    "has_tanzanite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tanzanite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:tanzanite_hoe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tanzanite",
+      "has_the_recipe"
+    ]
+  ]
+}

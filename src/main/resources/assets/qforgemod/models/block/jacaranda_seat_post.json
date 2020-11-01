@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/seat_post",
+  "textures": {
+    "particle": "qforgemod:block/jacaranda_seat",
+    "texture": "qforgemod:block/jacaranda_seat"
+  }
+}

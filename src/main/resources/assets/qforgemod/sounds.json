@@ -1,0 +1,93 @@
+{
+  "teleport": {
+    "category": "block",
+    "subtitle": "qforgemod.subtitle.teleport",
+    "sounds": [
+      "qforgemod:teleport"
+    ]
+  },
+  "block.cabinet.open": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.open_cabinet",
+    "sounds": [
+      "qforgemod:block/cabinet/open"
+    ]
+  },
+  "block.cabinet.close": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.close_cabinet",
+    "sounds": [
+      "qforgemod:block/cabinet/close"
+    ]
+  },
+  "block.bedside_cabinet.open": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.open_cabinet",
+    "sounds": [
+      "qforgemod:block/bedside_cabinet/open"
+    ]
+  },
+  "block.bedside_cabinet.close": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.close_cabinet",
+    "sounds": [
+      "qforgemod:block/bedside_cabinet/close"
+    ]
+  },
+  "block.blinds.open": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.open_blinds",
+    "sounds": [
+      "qforgemod:block/blinds/open"
+    ]
+  },
+  "block.blinds.close": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.close_blinds",
+    "sounds": [
+      "qforgemod:block/blinds/close"
+    ]
+  },
+  "block.trampoline.bounce": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.trampoline_bounce",
+    "sounds": [
+      "qforgemod:block/trampoline/bounce"
+    ]
+  },
+  "block.grill.place": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.grill_place",
+    "sounds": [
+      "qforgemod:block/grill/place"
+    ]
+  },
+  "block.grill.flip": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.grill_flip",
+    "sounds": [
+      "qforgemod:block/grill/flip"
+    ]
+  },
+  "block.diving_board.bounce": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.diving_board.bounce",
+    "sounds": [
+      "qforgemod:block/diving_board/bounce"
+    ]
+  },
+  "block.fridge.open": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.open_fridge",
+    "sounds": [
+      "qforgemod:block/fridge/open"
+    ]
+  },
+  "block.fridge.close": {
+    "category": "block",
+    "subtitle": "subtitle.qforgemod.close_fridge",
+    "sounds": [
+      "qforgemod:block/fridge/close"
+    ]
+  }
+}

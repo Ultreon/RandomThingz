@@ -1,0 +1,6 @@
+{
+    "parent": "qforgemod:item/ice_bow",
+    "textures": {
+        "layer0": "qforgemod:items/ice_bow_pulling_1"
+    }
+}

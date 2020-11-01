@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c c",
+    "c c"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:ruthenium_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:ruthenium_boots"
+  }
+}

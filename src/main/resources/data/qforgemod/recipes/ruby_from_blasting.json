@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "qforgemod:ruby_ore"
+  },
+  "result": "qforgemod:ruby",
+  "experience": 0.7,
+  "cookingtime": 100
+}

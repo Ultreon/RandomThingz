@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=true" : {
+     "model" : "qforgemod:block/brazier"
+    },
+    "lit=false" : {
+      "model" : "qforgemod:block/brazier_extinguished"
+    }
+  }
+}

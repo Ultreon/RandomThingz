@@ -1,0 +1,8 @@
+{
+  "parent": "qforgemod:custom/palisade_inventory",
+  "textures": {
+    "particle": "qforgemod:block/redwood_palisade_side",
+    "side": "qforgemod:block/redwood_palisade_side",
+    "end": "qforgemod:block/redwood_palisade_end"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qforgemod:iridium_ingot"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:iridium_nugget",
+    "count": 9
+  }
+}

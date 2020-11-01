@@ -1,0 +1,19 @@
+{
+	"textureSize": [64, 32],
+	"models": [
+		{
+			"model": "creeper_head.jpm",
+			"part": "head",
+			"id": "head",
+			"translate": [0, 0, 0],
+			"animations":
+			[
+				{
+				"this.rz": "(sin(time / 20) / 80)",
+				"this.rx": "(sin(time / 20) / 80)",
+				"this.ry": "(sin(time / 20) / 80)"
+				}			
+			]
+		}
+	]
+}

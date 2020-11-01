@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:infinity_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:infinity_block"
+  }
+}

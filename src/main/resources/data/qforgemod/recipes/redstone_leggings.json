@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "c c",
+    "c c"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "qforgemod:redstone_leggings"
+  }
+}

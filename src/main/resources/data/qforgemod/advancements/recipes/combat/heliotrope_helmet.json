@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:heliotrope_helmet"
+    ]
+  },
+  "criteria": {
+    "has_heliotrope": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:heliotrope"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:heliotrope_helmet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heliotrope",
+      "has_the_recipe"
+    ]
+  ]
+}

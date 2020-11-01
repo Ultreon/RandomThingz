@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:heliotrope_from_smelting"
+    ]
+  },
+  "criteria": {
+    "has_heliotrope_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:heliotrope_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:heliotrope_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heliotrope_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

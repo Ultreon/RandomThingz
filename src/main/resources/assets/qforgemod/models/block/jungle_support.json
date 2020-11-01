@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/support",
+  "textures": {
+    "particle": "qforgemod:block/jungle_support",
+    "texture": "qforgemod:block/jungle_support"
+  }
+}

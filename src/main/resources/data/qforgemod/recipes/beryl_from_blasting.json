@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "qforgemod:beryl_ore"
+  },
+  "result": "qforgemod:beryl",
+  "experience": 0.7,
+  "cookingtime": 100
+}

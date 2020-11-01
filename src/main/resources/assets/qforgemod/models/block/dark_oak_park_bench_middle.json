@@ -1,0 +1,7 @@
+{
+    "parent": "qforgemod:block/park_bench_middle",
+    "textures": {
+        "legs": "minecraft:block/dark_oak_log",
+        "plank": "minecraft:block/dark_oak_planks"
+    }
+}

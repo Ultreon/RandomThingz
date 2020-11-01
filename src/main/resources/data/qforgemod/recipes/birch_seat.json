@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "x  ",
+    "y  "
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:birch_slab"
+    },
+    "y": {
+      "item": "minecraft:birch_fence"
+    }
+  },
+  "result": {
+    "item": "qforgemod:birch_seat",
+    "count": 2
+  }
+}

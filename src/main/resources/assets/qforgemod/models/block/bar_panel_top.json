@@ -1,0 +1,8 @@
+{
+  "parent": "qforgemod:custom/bar_panel_top",
+  "textures": {
+    "particle": "qforgemod:block/bar_panel_side",
+    "side": "qforgemod:block/bar_panel_side",
+    "end": "qforgemod:block/bar_panel_end"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:iridium_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:iridium_block"
+  }
+}

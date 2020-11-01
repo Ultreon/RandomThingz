@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/seat_inventory",
+  "textures": {
+    "particle": "qforgemod:block/acacia_seat",
+    "texture": "qforgemod:block/acacia_seat"
+  }
+}

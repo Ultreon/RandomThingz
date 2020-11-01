@@ -1,0 +1,6 @@
+{
+    "parent": "qforgemod:block/hedge_post_side",
+    "textures": {
+        "leaves": "minecraft:block/birch_leaves"
+    }
+}

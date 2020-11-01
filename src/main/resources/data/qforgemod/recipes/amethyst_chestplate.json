@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "qforgemod:amethyst"
+    }
+  },
+  "result": {
+    "item": "qforgemod:amethyst_chestplate",
+    "count": 1
+  }
+}

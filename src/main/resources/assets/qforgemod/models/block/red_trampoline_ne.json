@@ -1,0 +1,6 @@
+{
+    "parent": "qforgemod:block/trampoline_ne",
+    "textures": {
+        "padding": "minecraft:block/red_concrete"
+    }
+}

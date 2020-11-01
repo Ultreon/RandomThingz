@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "qforgemod:blocks/quarry_top",
+    "front": "qforgemod:blocks/quarry_front",
+    "side": "qforgemod:blocks/quarry_side"
+  }
+}

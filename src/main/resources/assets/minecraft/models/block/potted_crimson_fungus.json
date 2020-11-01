@@ -1,0 +1,123 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [32, 32],
+	"textures": {
+		"flowerpot": "block/flower_pot",
+		"dirt": "block/dirt",
+		"particle": "block/crimson_fungus",
+		"fungus": "block/crimson_fungus"
+	},
+	"elements": [
+		{
+			"from": [5, 0, 5],
+			"to": [6, 6, 11],
+			"faces": {
+				"north": {"uv": [10, 10, 11, 16], "texture": "#flowerpot"},
+				"east": {"uv": [5, 10, 11, 16], "texture": "#flowerpot"},
+				"south": {"uv": [5, 10, 6, 16], "texture": "#flowerpot"},
+				"west": {"uv": [5, 10, 11, 16], "texture": "#flowerpot"},
+				"up": {"uv": [5, 5, 6, 11], "texture": "#flowerpot"}
+			}
+		},
+		{
+			"from": [10, 0, 5],
+			"to": [11, 6, 11],
+			"faces": {
+				"north": {"uv": [5, 10, 6, 16], "texture": "#flowerpot"},
+				"east": {"uv": [5, 10, 11, 16], "texture": "#flowerpot"},
+				"south": {"uv": [10, 10, 11, 16], "texture": "#flowerpot"},
+				"west": {"uv": [5, 10, 11, 16], "texture": "#flowerpot"},
+				"up": {"uv": [10, 5, 11, 11], "texture": "#flowerpot"}
+			}
+		},
+		{
+			"from": [6, 0, 5],
+			"to": [10, 6, 6],
+			"faces": {
+				"north": {"uv": [6, 10, 10, 16], "texture": "#flowerpot"},
+				"south": {"uv": [6, 10, 10, 16], "texture": "#flowerpot"},
+				"up": {"uv": [6, 5, 10, 6], "texture": "#flowerpot"}
+			}
+		},
+		{
+			"from": [6, 0, 10],
+			"to": [10, 6, 11],
+			"faces": {
+				"north": {"uv": [6, 10, 10, 16], "texture": "#flowerpot"},
+				"south": {"uv": [6, 10, 10, 16], "texture": "#flowerpot"},
+				"up": {"uv": [6, 10, 10, 11], "texture": "#flowerpot"}
+			}
+		},
+		{
+			"from": [6, 0, 6],
+			"to": [10, 4, 10],
+			"faces": {
+				"up": {"uv": [3, 3, 5, 5], "texture": "#dirt"},
+				"down": {"uv": [6, 6, 10, 10], "texture": "#flowerpot", "cullface": "down"}
+			}
+		},
+		{
+			"name": "PlaneY6",
+			"from": [5, 0, 5],
+			"to": [11, 0.001, 11],
+			"faces": {
+				"down": {"uv": [5, 0, 11, 6], "texture": "#flowerpot", "cullface": "down"}
+			}
+		},
+		{
+			"from": [6, 10, 6],
+			"to": [10, 13, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 8]},
+			"faces": {
+				"north": {"uv": [9.5, 0.5, 11.5, 2], "texture": "#fungus"},
+				"east": {"uv": [3.5, 0.5, 5.5, 2], "texture": "#fungus"},
+				"south": {"uv": [11.5, 0, 13.5, 1.5], "texture": "#fungus"},
+				"west": {"uv": [5.5, 0, 7.5, 1.5], "texture": "#fungus"},
+				"up": {"uv": [6.5, 12.5, 8.5, 14.5], "rotation": 90, "texture": "#fungus"},
+				"down": {"uv": [10, 13, 12, 15], "texture": "#fungus"}
+			}
+		},
+		{
+			"from": [4, 7, 4],
+			"to": [12, 10, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10, 8]},
+			"faces": {
+				"north": {"uv": [9, 2.5, 13, 4], "texture": "#fungus"},
+				"east": {"uv": [4.5, 2.5, 8.5, 4], "texture": "#fungus"},
+				"south": {"uv": [0, 2.5, 4, 4], "texture": "#fungus"},
+				"west": {"uv": [4.5, 2.5, 8.5, 4], "texture": "#fungus"},
+				"up": {"uv": [5.5, 11.5, 9.5, 15.5], "texture": "#fungus"},
+				"down": {"uv": [0, 11, 4, 15], "texture": "#fungus"}
+			}
+		},
+		{
+			"from": [7, 4, 7],
+			"to": [9, 7, 9],
+			"faces": {
+				"north": {"uv": [15, 13.5, 16, 15], "texture": "#fungus"},
+				"east": {"uv": [15, 13.5, 16, 15], "texture": "#fungus"},
+				"south": {"uv": [15, 13.5, 16, 15], "texture": "#fungus"},
+				"west": {"uv": [15, 13.5, 16, 15], "texture": "#fungus"},
+				"up": {"uv": [15, 12.5, 16, 13.5], "texture": "#fungus"},
+				"down": {"uv": [15, 15, 16, 16], "texture": "#fungus"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 2],
+			"scale": [0.575, 0.575, 0.575]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 2],
+			"scale": [0.575, 0.575, 0.575]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.75, 0.75, 0.75]
+		}
+	}
+}

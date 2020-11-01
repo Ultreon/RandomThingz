@@ -1,0 +1,11 @@
+{
+  "type": "mekanism:crushing",
+  "input": {
+    "ingredient": {
+      "item": "qforgemod:aquamarine"
+    }
+  },
+  "output": {
+    "item": "qforgemod:aquamarine_dust"
+  }
+}

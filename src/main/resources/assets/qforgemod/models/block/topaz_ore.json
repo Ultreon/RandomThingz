@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:block/base_gem_ore",
+  "textures": {
+    "particle": "qforgemod:blocks/beryl_ore",
+    "all": "qforgemod:blocks/beryl_ore"
+  }
+}

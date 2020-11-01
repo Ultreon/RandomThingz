@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "# ",
+    "# "
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:steel_ingot"
+    },
+    "#": {
+      "tag": "sticks"
+    }
+  },
+  "result": {
+    "item": "qforgemod:steel_hoe"
+  }
+}

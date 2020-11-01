@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "qforgemod:lead_pickaxe"
+    },
+    {
+      "item": "qforgemod:lead_shovel"
+    },
+    {
+      "item": "qforgemod:lead_axe"
+    },
+    {
+      "item": "qforgemod:lead_hoe"
+    },
+    {
+      "item": "qforgemod:lead_sword"
+    },
+    {
+      "item": "qforgemod:lead_helmet"
+    },
+    {
+      "item": "qforgemod:lead_chestplate"
+    },
+    {
+      "item": "qforgemod:lead_leggings"
+    },
+    {
+      "item": "qforgemod:lead_boots"
+    }
+  ],
+  "result": "qforgemod:lead_nugget",
+  "experience": 0.1,
+  "cookingtime": 200
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/support",
+  "textures": {
+    "particle": "qforgemod:block/cherry_support",
+    "texture": "qforgemod:block/cherry_support"
+  }
+}

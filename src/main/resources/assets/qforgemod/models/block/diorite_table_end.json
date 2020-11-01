@@ -1,0 +1,7 @@
+{
+    "parent": "qforgemod:block/table_end",
+    "textures": {
+        "top": "block/polished_diorite",
+        "legs": "block/diorite"
+    }
+}

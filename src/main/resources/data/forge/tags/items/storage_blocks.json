@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#forge:storage_blocks/copper",
+    "#forge:storage_blocks/infinity",
+    "#forge:storage_blocks/steel",
+    "#forge:storage_blocks/tungsten",
+    "#forge:storage_blocks/ultrinium",
+    "#forge:storage_blocks/uranium"
+  ]
+}

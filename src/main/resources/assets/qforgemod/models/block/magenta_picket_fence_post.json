@@ -1,0 +1,6 @@
+{
+    "parent": "qforgemod:block/upgraded_fence_post",
+    "textures": {
+        "post": "minecraft:block/magenta_concrete"
+    }
+}

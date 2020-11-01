@@ -1,0 +1,35 @@
+{
+  "parent": "item/generated",
+  "defaults": {
+    "textures": {
+      "layer0": "qforgemod:items/aquamarine_chestplate"
+    },
+    "variants": {
+      "normal": {
+        "textures": {
+          "layer0": "qforgemod:items/aquamarine_chestplate"
+        }
+      },
+      "inventory": {
+        "textures": {
+          "layer0": "qforgemod:items/aquamarine_chestplate"
+        }
+      }
+    }
+  },
+  "textures": {
+    "layer0": "qforgemod:items/aquamarine_chestplate"
+  },
+  "variants": {
+    "normal": {
+      "textures": {
+        "layer0": "qforgemod:items/aquamarine_chestplate"
+      }
+    },
+    "inventory": {
+      "textures": {
+        "layer0": "qforgemod:items/aquamarine_chestplate"
+      }
+    }
+  }
+}

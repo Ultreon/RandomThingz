@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cc",
+    " s",
+    " s"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:copper_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:copper_hoe"
+  }
+}

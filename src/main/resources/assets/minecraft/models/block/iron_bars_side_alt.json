@@ -1,0 +1,45 @@
+{
+	"__comment": "Created by _GrandMagus_",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "block/iron_bars",
+		"bars": "block/iron_bars",
+		"edge": "block/iron_bars"
+	},
+	"elements": [
+		{
+			"from": [ 8, 0, 8 ],
+			"to": [ 8.001, 16, 16 ],
+			"faces": {
+				"west": { "uv": [ 8, 0, 0, 16 ], "texture": "#bars" },
+				"east": { "uv": [ 0, 0, 8, 16 ], "texture": "#bars" }
+			}
+		},
+		{
+			"__comment": "Cube5",
+			"from": [ 7, 0, 7 ],
+			"to": [ 9, 16, 9 ],
+			"faces": {
+				"down": { "uv": [ 7, 7, 9, 9 ], "texture": "#bars" },
+				"up": { "uv": [ 7, 7, 9, 9 ], "texture": "#bars" },
+				"north": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" },
+				"south": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" },
+				"west": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" },
+				"east": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" }
+			}
+		},
+		{
+			"__comment": "Cube5",
+			"from": [ 7, 0, 12 ],
+			"to": [ 9, 16, 14 ],
+			"faces": {
+				"down": { "uv": [ 7, 2, 9, 4 ], "texture": "#bars" },
+				"up": { "uv": [ 7, 12, 9, 14 ], "texture": "#bars" },
+				"north": { "uv": [ 14, 0, 12, 16 ], "texture": "#bars" },
+				"south": { "uv": [ 14, 0, 12, 16 ], "texture": "#bars" },
+				"west": { "uv": [ 12, 0, 14, 16 ], "texture": "#bars" },
+				"east": { "uv": [ 12, 0, 14, 16 ], "texture": "#bars" }
+			}
+		}
+	]
+}

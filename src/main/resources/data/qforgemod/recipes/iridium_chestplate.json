@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c c",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:iridium_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:iridium_chestplate"
+  }
+}

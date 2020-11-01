@@ -1,0 +1,46 @@
+{
+	"__comment": "Created by _GrandMagus_",
+	"parent": "block/template_piston_head",
+	"textures": {
+		"double": "block/piston_head_bedrock",
+		"unsticky": "block/piston_top",
+		"side": "block/piston_side",
+		"particle": "block/piston_top",
+		"sticky": "block/piston_top_sticky"
+	},
+	"elements": [
+		{
+			"from": [ 6, 6, 4 ],
+			"to": [ 10, 10, 12 ],
+			"faces": {
+				"down": { "uv": [ 0, 4, 8, 0 ], "texture": "#side", "rotation": 270 },
+				"up": { "uv": [ 0, 4, 8, 0 ], "texture": "#side", "rotation": 90 },
+				"west": { "uv": [ 0, 4, 8, 0 ], "texture": "#side" },
+				"east": { "uv": [ 0, 4, 8, 0 ], "texture": "#side", "rotation": 180 }
+			}
+		},
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 4 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 4 ], "texture": "#side", "rotation": 180 },
+				"up": { "uv": [ 0, 0, 16, 4 ], "texture": "#side" },
+				"north": { "uv": [ 16, 16, 0, 0 ], "texture": "#sticky", "rotation": 180 },
+				"south": { "uv": [ 16, 0, 0, 16 ], "texture": "#unsticky" },
+				"west": { "uv": [ 0, 0, 16, 4 ], "texture": "#side", "rotation": 270 },
+				"east": { "uv": [ 0, 0, 16, 4 ], "texture": "#side", "rotation": 90 }
+			}
+		},
+		{
+			"from": [ 5, 5, 12 ],
+			"to": [ 11, 11, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 8, 6, 12 ], "texture": "#double", "rotation": 180 },
+				"up": { "uv": [ 0, 8, 6, 12 ], "texture": "#double" },
+				"north": { "uv": [ 0, 2, 6, 8 ], "texture": "#double", "rotation": 90 },
+				"west": { "uv": [ 0, 8, 6, 12 ], "texture": "#double", "rotation": 270 },
+				"east": { "uv": [ 0, 8, 6, 12 ], "texture": "#double", "rotation": 90 }
+			}
+		}
+	]
+}

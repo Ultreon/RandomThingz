@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "qforgemod:nickle_pickaxe"
+    },
+    {
+      "item": "qforgemod:nickle_shovel"
+    },
+    {
+      "item": "qforgemod:nickle_axe"
+    },
+    {
+      "item": "qforgemod:nickle_hoe"
+    },
+    {
+      "item": "qforgemod:nickle_sword"
+    },
+    {
+      "item": "qforgemod:nickle_helmet"
+    },
+    {
+      "item": "qforgemod:nickle_chestplate"
+    },
+    {
+      "item": "qforgemod:nickle_leggings"
+    },
+    {
+      "item": "qforgemod:nickle_boots"
+    }
+  ],
+  "result": "qforgemod:nickle_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

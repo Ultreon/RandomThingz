@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qforgemod:fluorite_block"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:fluorite",
+    "count": 9
+  }
+}

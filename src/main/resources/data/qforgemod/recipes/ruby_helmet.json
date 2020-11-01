@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:ruby"
+    }
+  },
+  "result": {
+    "item": "qforgemod:ruby_helmet",
+    "count": 1
+  }
+}

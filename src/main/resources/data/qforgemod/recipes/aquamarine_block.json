@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "qforgemod:aquamarine"
+    }
+  },
+  "result": {
+    "item": "qforgemod:aquamarine_block",
+    "count": 1
+  }
+}

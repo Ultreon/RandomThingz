@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "qforgemod:steel_ore"
+  },
+  "result": "qforgemod:steel_ingot",
+  "experience": 0.7,
+  "cookingtime": 500
+}

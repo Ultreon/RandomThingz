@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": {"model": "qforgemod:block/modern_sofa"},
+    "facing=south": {"model": "qforgemod:block/modern_sofa", "y": 180},
+    "facing=west": {"model": "qforgemod:block/modern_sofa", "y": 270},
+    "facing=east": {"model": "qforgemod:block/modern_sofa", "y": 90}
+  }
+}

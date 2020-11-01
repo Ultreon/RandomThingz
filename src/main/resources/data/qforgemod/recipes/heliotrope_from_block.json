@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qforgemod:heliotrope_block"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:heliotrope",
+    "count": 9
+  }
+}

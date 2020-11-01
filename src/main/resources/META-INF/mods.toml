@@ -1,0 +1,145 @@
+# This is an example mods.toml file. It contains the data relating to the loading mods.
+# There are several mandatory fields (#mandatory), and many more that are optional (#optional).
+# The overall format is standard TOML format, v0.5.0.
+# Note that there are a couple of TOML lists in this file.
+# Find more information on toml format here:  https://github.com/toml-lang/toml
+# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
+modLoader="javafml" #mandatory
+license="""(C) Copyright 2020 - QTech Community
+
+DO NOT COPY, REDISTRIBUTE, FORK OR ANYTHING TO SPREAD THIS PROJECT.
+THIS IS A PRIVATE PROJECT AND SHOULD NOT BE PUBLIC IN ANYWAY.
+SO SPREADING THIS PROJECT IS NOT ALLOWED AND WILL NOT BE RESPECTED
+BY THE PROJECT AND LICENSE OWNER.
+"""
+
+# A version range to match for said mod loader - for regular FML @Mod it will be the forge version
+loaderVersion="[31,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+
+# A URL to refer people to when problems occur with this mod
+#issueTrackerURL="http://my.issue.tracker/" #optional
+
+# A list of mods - how many allowed here is determined by the individual mod loader
+
+[[mods]] #mandatory
+modId="qforgemod" #mandatory
+version="1.0-beta6" #mandatory
+displayName="QForgeUtils: Main Module" #mandatory
+#updateJSONURL="http://myurl.me/" #optional
+#displayURL="http://example.com/" #optional
+#logoFile="qforgemod.png" #optional
+credits="Xinzeon (Also known as Qboi, Qplay123, Xineon)." #optional
+authors="Xinzeon" #optional
+description='''
+§nThe§r§o mod for all your needs!§r
+
+§mHello, this is a description, and I do not know what to write here...§r
+
+§mYou don't have to be sad, have some lorem ipsum.§r
+
+§mLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sagittis luctus odio eu tempus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat ligula eget lacus auctor sagittis. In hac habitasse platea dictumst. Nunc gravida elit vitae sem vehicula efficitur. Donec mattis ipsum et arcu lobortis, eleifend sagittis sem rutrum. Cras pharetra quam eget posuere fermentum. Sed id tincidunt justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.§r
+
+§b§l§nAuthors:§r
+  §lDecorative Blocks: §r§ostohun§r, §olilypuree§r
+  §lCursorMod: §r§oATE47§r, §oKevinFernandezDominguez§r
+  §lQuark: §r§oVazkii, Wiiv, WireSegal, MCVinnyq§r
+
+§b§l§nCredits:§r
+  §l"Modern Sofa" by JustinRustin (Modern Sofa)§r
+  Available for download at §nhttps://blockmodels.com.com/model/361/ §r
+
+  §l"Club" by Gengar (Club)§r
+  §oAvailable for download at https://blockmodels.com.com/model/496/ §r
+
+  §l"Table with tablecloth" by Miep_HD (Table)§r
+  §oAvailable for download at https://blockmodels.com.com/model/668/ §r
+
+  §l"Healing Potion" by Gengar (Healing Potion)§r
+  §oAvailable for download at https://blockmodels.com.com/model/531/ §r
+
+  §l"Improved PC Gamer" by Giovanni_5656 (Game PC)§r
+  §oAvailable for download at https://blockmodels.com.com/model/339/ §r
+
+  §l"Router" by F1ash (Router)§r
+  §oAvailable for download at https://blockmodels.com.com/model/331/ §r
+
+  §l"Wooden Box" by F1ash (Crate)§r
+  §oAvailable for download at https://blockmodels.com.com/model/330/ §r
+
+§b§l§nOther Mods:§r
+  §l=--------------------------=§r
+  §oMr. Crayfish Furniture Mod§r
+  §l§n=--------------------------=§r
+  §lGitHub:§r
+   §o https://github.com/MrCrayfish/MrCrayfishFurnitureMod/tree/3a2a73eb43a8fa72b6f621175f7ad84b7ba5306b §r
+  §lCurseForge:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/mrcrayfish-furniture-mod §r
+  §lCurseForge Download:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/mrcrayfish-furniture-mod/files/2853267 §r
+
+  §l=--------------------------=§r
+  §oDecorative Blocks Mod§r
+  §l§n=--------------------------=§r
+  §lGitHub:§r
+   §o https://github.com/lilypuree/Decorative-Blocks/tree/7a7873720bfaad9cc366a4599ce7dae7921d981d §r
+  §lCurseForge:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/decorative-blocks §r
+  §lCurseForge Download:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/decorative-blocks/files/3033141 §r
+  §lCredits:§r
+    §oThanks for stohun for the amazing models§r
+
+  §l=--------------------------=§r
+  §oCursor Mod§r
+  §l§n=--------------------------=§r
+  §lGitHub:§r
+   §o https://github.com/ate47/CursorMod/tree/f5d1dda729da0de9e85735e53bc2e11510d75cae§r
+  §lCurseForge:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/cursor-mod §r
+  §lCurseForge Download:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/cursor-mod/files/2869638 §r
+
+  §l=--------------------------=§r
+  §oQuark (a Vanilla+ mod)§r
+  §l§n=--------------------------=§r
+  §lGitHub:§r
+   §o https://github.com/Vazkii/Quark/tree/0831e41bb822873b10e11da30d1b1d2fa74b471f §r
+  §lCurseForge:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/quark §r
+  §lCurseForge Download:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/quark/files/2980651 §r
+
+  §l=--------------------------=§r
+  §oJust Enough Items (JEI)§r
+  §l§n=--------------------------=§r
+  §lGitHub:§r
+   §o https://github.com/mezz/JustEnoughItems/tree/e346c0e7c5e8c13246c5e27e455075ac2910227d §r
+  §lCurseForge:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/jei §r
+  §lCurseForge Download:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/jei/files/3039710 §r
+
+  §l=--------------------------=§r
+  §oMekanism 10§r
+  §l§n=--------------------------=§r
+  §lGitHub:§r
+   §o https://github.com/mekanism/Mekanism/tree/f1b7f47dd784649366233ae707f9eef2a2cfe7fb §r
+  §lCurseForge:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/mekanism §r
+  §lCurseForge Download:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/mekanism/files/2996531 §r
+'''
+
+# QForgeUtils dependencies.
+[[dependencies.qforgemod]] #optional
+modId="forge" #mandatory
+mandatory=true #mandatory
+versionRange="[34,)" #mandatory
+ordering="NONE"
+side="BOTH"
+[[dependencies.qforgemod]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.3]"
+ordering="NONE"
+side="BOTH"

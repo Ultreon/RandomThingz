@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/support",
+  "textures": {
+    "particle": "qforgemod:block/ethereal_support",
+    "texture": "qforgemod:block/ethereal_support"
+  }
+}

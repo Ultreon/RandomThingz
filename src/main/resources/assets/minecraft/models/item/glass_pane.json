@@ -1,0 +1,8 @@
+{
+	"__comment": "Created by _GrandMagus_",
+	"parent":"item/template_glass_pane",
+	"textures": {
+		"pane": "block/glass_pane_top",
+		"texture": "block/glass"
+	}
+}

@@ -1,0 +1,28 @@
+{
+	"__comment": "Created by _GrandMagus_",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "block/redstone_dust_dot",
+		"overlay": "block/redstone_dust_overlay",
+		"line": "blocks/e_texture"
+	},
+	"elements": [
+		{
+			"from": [ 0, 0.3, 0 ],
+			"to": [ 16, 0.301, 8 ],
+			"shade": false,
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 8 ], "texture": "#line", "cullface": "down", "tintindex": 0 },
+				"up": { "uv": [ 0, 0, 16, 8 ], "texture": "#line", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [ 0, 0.25, 0 ],
+			"to": [ 16, 0.251, 8 ],
+			"shade": false,
+			"faces": {
+				"up": { "uv": [ 0, 0, 16, 8 ], "texture": "#overlay" }
+			}
+		}
+	]
+}

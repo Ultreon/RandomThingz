@@ -1,0 +1,7 @@
+{
+    "parent": "qforgemod:block/chair",
+    "textures": {
+        "seat": "block/stripped_oak_log",
+        "legs": "block/oak_log"
+    }
+}

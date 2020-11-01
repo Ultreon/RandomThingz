@@ -1,0 +1,6 @@
+{
+    "parent": "qforgemod:block/cooler_open",
+    "textures": {
+        "color": "minecraft:block/orange_terracotta"
+    }
+}

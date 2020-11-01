@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/support",
+  "textures": {
+    "particle": "qforgemod:block/mahogany_support",
+    "texture": "qforgemod:block/mahogany_support"
+  }
+}

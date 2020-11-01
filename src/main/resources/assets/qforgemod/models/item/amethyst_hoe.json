@@ -1,0 +1,35 @@
+{
+  "parent": "item/handheld",
+  "defaults": {
+    "textures": {
+      "layer0": "qforgemod:items/amethyst_hoe"
+    },
+    "variants": {
+      "normal": {
+        "textures": {
+          "layer0": "qforgemod:items/amethyst_hoe"
+        }
+      },
+      "inventory": {
+        "textures": {
+          "layer0": "qforgemod:items/amethyst_hoe"
+        }
+      }
+    }
+  },
+  "textures": {
+    "layer0": "qforgemod:items/amethyst_hoe"
+  },
+  "variants": {
+    "normal": {
+      "textures": {
+        "layer0": "qforgemod:items/amethyst_hoe"
+      }
+    },
+    "inventory": {
+      "textures": {
+        "layer0": "qforgemod:items/amethyst_hoe"
+      }
+    }
+  }
+}

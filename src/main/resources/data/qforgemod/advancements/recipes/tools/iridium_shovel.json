@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:iridium_shovel"
+    ]
+  },
+  "criteria": {
+    "has_iridium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:iridium_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:iridium_shovel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iridium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

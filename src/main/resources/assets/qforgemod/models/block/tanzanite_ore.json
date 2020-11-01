@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:block/base_metalic_ore",
+  "textures": {
+    "particle": "qforgemod:blocks/tanzanite_ore",
+    "all": "qforgemod:blocks/tanzanite_ore"
+  }
+}

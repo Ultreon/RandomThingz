@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X#X",
+    "#o#",
+    "X#X"
+  ],
+  "key": {
+    "X": {
+      "tag": "planks"
+    },
+    "#": {
+      "tag": "sticks"
+    },
+    "o": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "qforgemod:wooden_crate"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:amethyst"
+    ]
+  },
+  "criteria": {
+    "has_amethyst_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:amethyst_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:amethyst"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_amethyst_block",
+      "has_the_recipe"
+    ]
+  ]
+}

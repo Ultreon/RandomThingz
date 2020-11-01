@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:ultrinium_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:ultrinium_boots"
+  }
+}

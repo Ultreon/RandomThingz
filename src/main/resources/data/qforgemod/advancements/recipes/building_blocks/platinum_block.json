@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:platinum_block"
+    ]
+  },
+  "criteria": {
+    "has_platinum_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:platinum_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_platinum_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

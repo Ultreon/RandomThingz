@@ -1,0 +1,15 @@
+{
+  "values": [
+    "#forge:ingots/bronze",
+    "#forge:ingots/copper",
+    "#forge:ingots/infinity",
+    "#forge:ingots/osmium",
+    "#forge:ingots/refined_glowstone",
+    "#forge:ingots/refined_obsidian",
+    "#forge:ingots/steel",
+    "#forge:ingots/tin",
+    "#forge:ingots/tungsten",
+    "#forge:ingots/ultrinium",
+    "#forge:ingots/uranium"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "qforgemod:steel_pickaxe"
+    },
+    {
+      "item": "qforgemod:steel_shovel"
+    },
+    {
+      "item": "qforgemod:steel_axe"
+    },
+    {
+      "item": "qforgemod:steel_hoe"
+    },
+    {
+      "item": "qforgemod:steel_sword"
+    },
+    {
+      "item": "qforgemod:steel_helmet"
+    },
+    {
+      "item": "qforgemod:steel_chestplate"
+    },
+    {
+      "item": "qforgemod:steel_leggings"
+    },
+    {
+      "item": "qforgemod:steel_boots"
+    }
+  ],
+  "result": "qforgemod:steel_nugget",
+  "experience": 7,
+  "cookingtime": 900
+}

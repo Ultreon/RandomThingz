@@ -1,0 +1,175 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:platinum_nugget_from_smelting"
+    ]
+  },
+  "criteria": {
+    "has_platinum_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_platinum_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_shovel"
+          }
+        ]
+      }
+    },
+    "has_platinum_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_axe"
+          }
+        ]
+      }
+    },
+    "has_platinum_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_hoe"
+          }
+        ]
+      }
+    },
+    "has_platinum_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_sword"
+          }
+        ]
+      }
+    },
+    "has_platinum_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_helmet"
+          }
+        ]
+      }
+    },
+    "has_platinum_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_chestplate"
+          }
+        ]
+      }
+    },
+    "has_platinum_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_leggings"
+          }
+        ]
+      }
+    },
+    "has_platinum_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_boots"
+          }
+        ]
+      }
+    },
+    "has_platinum_horse_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:platinum_horse_armor"
+          }
+        ]
+      }
+    },
+    "has_chainmail_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_helmet"
+          }
+        ]
+      }
+    },
+    "has_chainmail_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_chestplate"
+          }
+        ]
+      }
+    },
+    "has_chainmail_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_leggings"
+          }
+        ]
+      }
+    },
+    "has_chainmail_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_boots"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:platinum_nugget_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_platinum_pickaxe",
+      "has_platinum_shovel",
+      "has_platinum_axe",
+      "has_platinum_hoe",
+      "has_platinum_sword",
+      "has_platinum_helmet",
+      "has_platinum_chestplate",
+      "has_platinum_leggings",
+      "has_platinum_boots",
+      "has_platinum_horse_armor",
+      "has_chainmail_helmet",
+      "has_chainmail_chestplate",
+      "has_chainmail_leggings",
+      "has_chainmail_boots",
+      "has_the_recipe"
+    ]
+  ]
+}

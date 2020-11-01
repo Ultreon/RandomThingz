@@ -1,0 +1,6 @@
+{
+    "parent": "qforgemod:block/trampoline",
+    "textures": {
+        "padding": "minecraft:block/light_gray_concrete"
+    }
+}

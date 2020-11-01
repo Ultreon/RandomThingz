@@ -1,0 +1,47 @@
+{
+  "block.qforgemod.elevator_white": "Ascensor blanco",
+  "block.qforgemod.elevator_black": "Ascensor negro",
+  "block.qforgemod.elevator_blue": "Ascensor azul",
+  "block.qforgemod.elevator_brown": "Ascensor marrón",
+  "block.qforgemod.elevator_cyan": "Ascensor cian",
+  "block.qforgemod.elevator_gray": "Ascensor gris",
+  "block.qforgemod.elevator_green": "Ascensor verde",
+  "block.qforgemod.elevator_light_blue": "Ascensor azul claro",
+  "block.qforgemod.elevator_lime": "Ascensor verde lima",
+  "block.qforgemod.elevator_magenta": "Ascensor magenta",
+  "block.qforgemod.elevator_orange": "Ascensor naranja",
+  "block.qforgemod.elevator_pink": "Ascensor rosa",
+  "block.qforgemod.elevator_purple": "Ascensor morado",
+  "block.qforgemod.elevator_red": "Ascensor rojo",
+  "block.qforgemod.elevator_light_gray": "Ascensor gris claro",
+  "block.qforgemod.elevator_yellow": "Ascensor amarillo",
+
+  "qforgemod.subtitle.teleport": "Ascensor es utilizado",
+
+  "screen.qforgemod.elevator": "Opciones de ascensor",
+  "screen.qforgemod.elevator.directional": "Direccional",
+  "screen.qforgemod.elevator.hide_arrow": "Esconder flecha",
+  "screen.qforgemod.elevator.reset_camo": "Quitar camuflage",
+
+  "qforgemod.message.missing_xp": "Necesitas más XP para poder teletransportarte",
+
+  "itemGroup.elevators_tab": "Ascensores",
+
+  "block.qforgemod.gravestone": "Tumba",
+  "item.qforgemod.death_info": "Obituario",
+  "entity.qforgemod.player_ghost": "Fantasma del jugador",
+  "message.died": "%s murió el %s",
+  "message.deathlocation": "Lugar de fallecimiento",
+  "message.no_deathlocation": "No está disponible el lugar de fallecimiento",
+  "message.create_grave_failed": "La tumba no se pudo situar",
+  "gui.deathinfo.name": "Nombre",
+  "gui.deathinfo.title": "Información de la muerte del jugador",
+  "gui.deathinfo.location": "Lugar",
+  "gui.deathinfo.dimension": "Dimensión",
+  "gui.deathinfo.title.items": "Objetos portados",
+  "gui.deathinfo.page": "Página",
+  "gui.deathinfo.time": "Fecha",
+  "gui.deathitems": "Objetos portados",
+  "button.next": "Siguiente",
+  "button.prev": "Atrás"
+}

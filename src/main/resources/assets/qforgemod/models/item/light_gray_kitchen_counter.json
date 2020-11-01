@@ -1,0 +1,6 @@
+{
+    "parent": "qforgemod:block/kitchen_counter_default",
+    "textures": {
+        "top": "minecraft:block/light_gray_terracotta"
+    }
+}

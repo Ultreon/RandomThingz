@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "qforgemod:tanzanite_ore"
+  },
+  "result": "qforgemod:tanzanite",
+  "experience": 0.7,
+  "cookingtime": 100
+}

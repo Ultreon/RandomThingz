@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c",
+    "s",
+    "s"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:uranium_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:uranium_shovel"
+  }
+}

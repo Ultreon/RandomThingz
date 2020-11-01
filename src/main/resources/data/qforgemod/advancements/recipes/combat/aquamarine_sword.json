@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:aquamarine_sword"
+    ]
+  },
+  "criteria": {
+    "has_aquamarine": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:aquamarine"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:aquamarine_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_aquamarine",
+      "has_the_recipe"
+    ]
+  ]
+}

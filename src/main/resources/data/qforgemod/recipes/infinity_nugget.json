@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qforgemod:infinity_ingot"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:infinity_nugget",
+    "count": 9
+  }
+}

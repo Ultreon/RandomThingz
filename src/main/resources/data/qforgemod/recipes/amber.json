@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "qforgemod:amber_ore"
+  },
+  "result": "qforgemod:amber",
+  "experience": 0.7,
+  "cookingtime": 200
+}

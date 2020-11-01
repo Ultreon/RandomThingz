@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "qforgemod:topaz_ore"
+  },
+  "result": "qforgemod:topaz",
+  "experience": 0.7,
+  "cookingtime": 200
+}

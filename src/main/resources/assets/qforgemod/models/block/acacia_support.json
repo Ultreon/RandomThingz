@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/support",
+  "textures": {
+    "particle": "qforgemod:block/acacia_support",
+    "texture": "qforgemod:block/acacia_support"
+  }
+}

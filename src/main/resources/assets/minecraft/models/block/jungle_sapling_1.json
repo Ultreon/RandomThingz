@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross_big",
+    "textures": {
+        "cross": "block/jungle_sapling_1"
+    }
+}

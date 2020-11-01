@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:fluorite"
+    }
+  },
+  "result": {
+    "item": "qforgemod:fluorite_block",
+    "count": 1
+  }
+}

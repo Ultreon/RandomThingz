@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:topaz_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_topaz_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:topaz_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:topaz_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_topaz_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

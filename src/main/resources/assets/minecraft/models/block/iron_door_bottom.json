@@ -1,0 +1,22 @@
+{
+	"__comment": "Created by _GrandMagus_",
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "block/iron_door_bottom",
+		"bottom": "block/iron_door_bottom",
+		"side": "block/iron_door_side"
+	},
+	"elements": [
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 3, 16, 16 ],
+			"faces": {
+				"down": { "uv": [ 10, 0, 13, 16 ], "texture": "#side", "cullface": "down" },
+				"north": { "uv": [ 6, 0, 3, 16 ], "texture": "#side", "cullface": "north" },
+				"south": { "uv": [ 6, 0, 9, 16 ], "texture": "#side", "cullface": "south" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom", "cullface": "west" },
+				"east": { "uv": [ 16, 0, 0, 16 ], "texture": "#bottom" }
+			}
+		}
+	]
+}

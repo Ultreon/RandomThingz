@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:peridot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:peridot_boots",
+    "count": 1
+  }
+}

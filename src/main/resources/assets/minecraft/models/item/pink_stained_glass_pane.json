@@ -1,0 +1,8 @@
+{
+	"__comment": "Created by _GrandMagus_",
+	"parent":"item/template_glass_pane",
+	"textures": {
+		"pane": "block/pink_stained_glass_pane_top",
+		"texture": "block/pink_stained_glass"
+	}
+}

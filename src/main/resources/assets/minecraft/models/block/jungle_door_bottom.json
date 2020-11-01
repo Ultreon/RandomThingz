@@ -1,0 +1,23 @@
+{
+	"__comment": "Created by _GrandMagus_",
+	"parent": "block/door_bottom",
+	"textures": {
+		"bottom": "block/jungle_door_bottom",
+		"top": "block/jungle_door_top",
+		"side": "block/jungle_door_side"
+	},
+	"elements": [
+		{
+			"__comment": "Cube1",
+			"from": [ 0, 0, 0 ],
+			"to": [ 3, 16, 16 ],
+			"faces": {
+				"down": { "uv": [ 8, 0, 11, 16 ], "texture": "#side" },
+				"north": { "uv": [ 3, 0, 6, 16 ], "texture": "#side" },
+				"south": { "uv": [ 6, 0, 9, 16 ], "texture": "#side" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom", "cullface": "west" },
+				"east": { "uv": [ 16, 0, 0, 16 ], "texture": "#bottom" }
+			}
+		}
+	]
+}

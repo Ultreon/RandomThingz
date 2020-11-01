@@ -1,0 +1,10 @@
+{
+	"group": "qforgemod",
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "minecraft:stone",
+        "item_h": "minecraft:stone"
+    },
+    "result": "qforgemod:stone_pillar",
+    "count": 1
+}

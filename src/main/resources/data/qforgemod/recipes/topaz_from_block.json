@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qforgemod:topaz_block"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:topaz",
+    "count": 9
+  }
+}

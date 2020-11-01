@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/support",
+  "textures": {
+    "particle": "qforgemod:block/palm_support",
+    "texture": "qforgemod:block/palm_support"
+  }
+}

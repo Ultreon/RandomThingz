@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c c",
+    "c c"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "qforgemod:redstone_boots"
+  }
+}

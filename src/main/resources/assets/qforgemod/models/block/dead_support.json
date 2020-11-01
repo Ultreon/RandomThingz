@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/support",
+  "textures": {
+    "particle": "qforgemod:block/dead_support",
+    "texture": "qforgemod:block/dead_support"
+  }
+}

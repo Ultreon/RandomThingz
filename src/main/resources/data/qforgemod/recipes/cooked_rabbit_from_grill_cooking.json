@@ -1,0 +1,11 @@
+{
+    "type": "qforgemod:grill_cooking",
+    "ingredient": {
+        "item": "minecraft:rabbit"
+    },
+    "result": {
+        "item": "minecraft:cooked_rabbit"
+    },
+    "experience": 4.0,
+    "cookingtime": 600
+}

@@ -1,0 +1,25 @@
+{
+	"textureSize": [64, 64],
+	"models": [
+		{
+			"model": "chest_lid.jpm",
+			"part": "lid",
+			"id": "lid",
+			"translate": [16, 5, -1]
+		},
+		{
+			"model": "chest_base.jpm",
+			"part": "base",
+			"id": "base",
+			"translate": [16, 10, 0]
+		},
+		{
+			"part": "knob",
+			"id": "knob",
+			"translate": [7, -1, 15],
+			"boxes": [
+				{"coordinates": [0, 0, 0, 2, 4, 1], "textureOffset": [0, 0]}
+			]
+		}
+	]
+}

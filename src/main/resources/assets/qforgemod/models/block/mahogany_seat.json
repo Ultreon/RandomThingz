@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/seat",
+  "textures": {
+    "particle": "qforgemod:block/mahogany_seat",
+    "texture": "qforgemod:block/mahogany_seat"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:epidote"
+    }
+  },
+  "result": {
+    "item": "qforgemod:epidote_helmet",
+    "count": 1
+  }
+}

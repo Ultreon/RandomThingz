@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "qforgemod:ultrinium_pickaxe"
+    },
+    {
+      "item": "qforgemod:ultrinium_shovel"
+    },
+    {
+      "item": "qforgemod:ultrinium_axe"
+    },
+    {
+      "item": "qforgemod:ultrinium_hoe"
+    },
+    {
+      "item": "qforgemod:ultrinium_sword"
+    },
+    {
+      "item": "qforgemod:ultrinium_helmet"
+    },
+    {
+      "item": "qforgemod:ultrinium_chestplate"
+    },
+    {
+      "item": "qforgemod:ultrinium_leggings"
+    },
+    {
+      "item": "qforgemod:ultrinium_boots"
+    }
+  ],
+  "result": "qforgemod:ultrinium_nugget",
+  "experience": 8.5,
+  "cookingtime": 600
+}

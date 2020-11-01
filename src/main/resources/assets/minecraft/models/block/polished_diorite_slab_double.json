@@ -1,0 +1,7 @@
+{
+	"parent": "block/polished_andesite_slab_double",
+	"textures": {
+		"particle": "block/polished_diorite",
+		"texture": "block/polished_diorite"
+	}
+}

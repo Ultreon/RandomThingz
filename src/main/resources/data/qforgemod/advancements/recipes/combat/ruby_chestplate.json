@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:ruby_chestplate"
+    ]
+  },
+  "criteria": {
+    "has_ruby": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:ruby"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:ruby_chestplate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ruby",
+      "has_the_recipe"
+    ]
+  ]
+}

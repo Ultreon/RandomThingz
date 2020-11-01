@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "qforgemod:palladium_pickaxe"
+    },
+    {
+      "item": "qforgemod:palladium_shovel"
+    },
+    {
+      "item": "qforgemod:palladium_axe"
+    },
+    {
+      "item": "qforgemod:palladium_hoe"
+    },
+    {
+      "item": "qforgemod:palladium_sword"
+    },
+    {
+      "item": "qforgemod:palladium_helmet"
+    },
+    {
+      "item": "qforgemod:palladium_chestplate"
+    },
+    {
+      "item": "qforgemod:palladium_leggings"
+    },
+    {
+      "item": "qforgemod:palladium_boots"
+    }
+  ],
+  "result": "qforgemod:palladium_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

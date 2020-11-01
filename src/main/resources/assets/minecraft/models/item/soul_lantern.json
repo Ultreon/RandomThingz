@@ -1,0 +1,8 @@
+{
+	"credit": "Created by _GrandMagus_",
+	"parent": "item/lantern",
+	"textures": {
+		"particle": "block/soul_lantern",
+		"lantern": "block/soul_lantern"
+	}
+}

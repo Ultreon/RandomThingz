@@ -1,0 +1,8 @@
+{
+  "parent": "qforgemod:custom/palisade_post",
+  "textures": {
+    "particle": "qforgemod:block/jacaranda_palisade_side",
+    "side": "qforgemod:block/jacaranda_palisade_side",
+    "end": "qforgemod:block/jacaranda_palisade_end"
+  }
+}

@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "qforgemod:block/eucalyptus_slab" },
+        "type=top": { "model": "qforgemod:block/eucalyptus_slab_top" },
+        "type=double": { "model": "qforgemod:block/eucalyptus_planks" }
+    }
+}

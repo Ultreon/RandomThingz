@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:malachite_from_smelting"
+    ]
+  },
+  "criteria": {
+    "has_malachite_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:malachite_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:malachite_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_malachite_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

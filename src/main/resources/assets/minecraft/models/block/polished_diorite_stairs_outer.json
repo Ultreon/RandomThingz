@@ -1,0 +1,7 @@
+{
+	"parent": "block/polished_andesite_stairs_outer",
+	"textures": {
+		"particle": "block/polished_diorite",
+		"texture": "block/polished_diorite"
+	}
+}

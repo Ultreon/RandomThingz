@@ -1,0 +1,11 @@
+{
+    "type": "qforgemod:grill_cooking",
+    "ingredient": {
+        "item": "minecraft:salmon"
+    },
+    "result": {
+        "item": "minecraft:cooked_salmon"
+    },
+    "experience": 4.0,
+    "cookingtime": 600
+}

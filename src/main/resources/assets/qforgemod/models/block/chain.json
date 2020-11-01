@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/chain",
+  "textures": {
+    "particle": "qforgemod:block/chain",
+    "texture": "qforgemod:block/chain"
+  }
+}

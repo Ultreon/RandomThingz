@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "": [
+      {"model": "minecraft:block/warped_fungus"},
+    	{"model": "minecraft:block/warped_fungus", "y":90},
+    	{"model": "minecraft:block/warped_fungus", "y":180},
+    	{"model": "minecraft:block/warped_fungus", "y":270},
+      {"model": "minecraft:block/warped_fungus_2"},
+      {"model": "minecraft:block/warped_fungus_2", "y":90},
+      {"model": "minecraft:block/warped_fungus_2", "y":180},
+      {"model": "minecraft:block/warped_fungus_2", "y":270}
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:tanzanite"
+    }
+  },
+  "result": {
+    "item": "qforgemod:tanzanite_helmet",
+    "count": 1
+  }
+}

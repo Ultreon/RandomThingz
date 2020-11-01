@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:beryl"
+    }
+  },
+  "result": {
+    "item": "qforgemod:beryl_boots",
+    "count": 1
+  }
+}

@@ -1,0 +1,49 @@
+{
+	"__comment": "Created by _GrandMagus_",
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "block/netherrack",
+		"cross": "block/netherrack_cross"
+	},
+	"elements": [
+		{
+			"__comment": "Cube1",
+			"from": [ 6.8, 16, 6.7 ],
+			"to": [ 9.799999, 17.5, 9.7 ],
+			"rotation": { "origin": [ 9.5, 16, 7 ], "axis": "y", "angle": 45 },
+			"faces": {
+				"up": { "uv": [ 9, 3, 12, 6 ], "texture": "#all", "cullface": "up" },
+				"north": { "uv": [ 8.000001, 0, 11, 1 ], "texture": "#all", "cullface": "up" },
+				"south": { "uv": [ 6, 4, 8.999999, 5 ], "texture": "#all", "cullface": "up" },
+				"west": { "uv": [ 9, 1, 12, 2 ], "texture": "#all", "cullface": "up" },
+				"east": { "uv": [ 9, 1, 12, 2 ], "texture": "#all", "cullface": "up" }
+			}
+		},
+		{
+			"__comment": "Cube1",
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "down" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "up" },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "north" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "south" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "west" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "east" }
+			}
+		},
+		{
+			"__comment": "Cube1",
+			"from": [ 5, 16, 7 ],
+			"to": [ 10, 17, 12 ],
+			"rotation": { "origin": [ 5, 16, 7 ], "axis": "y", "angle": -22.5 },
+			"faces": {
+				"up": { "uv": [ 5, 3, 10, 8 ], "texture": "#all", "cullface": "up" },
+				"north": { "uv": [ 6, 4, 11, 5 ], "texture": "#all", "cullface": "up" },
+				"south": { "uv": [ 5, 4, 10, 5 ], "texture": "#all", "cullface": "up" },
+				"west": { "uv": [ 7, 4, 12, 5 ], "texture": "#all", "cullface": "up" },
+				"east": { "uv": [ 4, 4, 9, 5 ], "texture": "#all", "cullface": "up" }
+			}
+		}
+	]
+}

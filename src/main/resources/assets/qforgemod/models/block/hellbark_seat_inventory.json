@@ -1,0 +1,7 @@
+{
+  "parent": "qforgemod:custom/seat_inventory",
+  "textures": {
+    "particle": "qforgemod:block/hellbark_seat",
+    "texture": "qforgemod:block/hellbark_seat"
+  }
+}

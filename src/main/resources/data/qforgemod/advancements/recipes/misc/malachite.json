@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:malachite"
+    ]
+  },
+  "criteria": {
+    "has_malachite_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:malachite_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:malachite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_malachite_block",
+      "has_the_recipe"
+    ]
+  ]
+}

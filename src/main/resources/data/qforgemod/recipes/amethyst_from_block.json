@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "qforgemod:amethyst_block"}
+  ],
+  "result": {
+    "item": "qforgemod:amethyst",
+    "count": 9
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "A A",
+    "A A"
+  ],
+  "key": {
+    "A": {
+      "item": "qforgemod:aquamarine"
+    }
+  },
+  "result": {
+    "item": "qforgemod:aquamarine_leggings",
+    "count": 1
+  }
+}

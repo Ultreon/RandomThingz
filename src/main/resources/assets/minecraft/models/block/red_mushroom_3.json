@@ -1,0 +1,33 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"particle": "block/red_mushroom_3d",
+		"mushroom": "block/red_mushroom_3d"
+	},
+	"elements": [
+		{
+			"from": [7, 0, 7],
+			"to": [9, 2, 9],
+			"faces": {
+				"north": {"uv": [14, 13, 16, 15], "texture": "#mushroom"},
+				"east": {"uv": [14, 13, 16, 15], "texture": "#mushroom"},
+				"south": {"uv": [14, 13, 16, 15], "texture": "#mushroom"},
+				"west": {"uv": [14, 13, 16, 15], "texture": "#mushroom"},
+				"up": {"uv": [14, 13, 16, 15], "texture": "#mushroom"},
+				"down": {"uv": [14, 14, 16, 16], "texture": "#mushroom"}
+			}
+		},
+		{
+			"from": [5, 2, 5],
+			"to": [11, 7, 11],
+			"faces": {
+				"north": {"uv": [0, 4, 6, 9], "texture": "#mushroom"},
+				"east": {"uv": [3, 4, 9, 9], "texture": "#mushroom"},
+				"south": {"uv": [6, 4, 12, 9], "texture": "#mushroom"},
+				"west": {"uv": [16, 4, 10, 9], "texture": "#mushroom"},
+				"up": {"uv": [8, 9, 14, 15], "texture": "#mushroom"},
+				"down": {"uv": [15, 13, 16, 14], "texture": "#mushroom"}
+			}
+		}
+	]
+}

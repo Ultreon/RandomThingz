@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:morganite"
+    }
+  },
+  "result": {
+    "item": "qforgemod:morganite_block",
+    "count": 1
+  }
+}

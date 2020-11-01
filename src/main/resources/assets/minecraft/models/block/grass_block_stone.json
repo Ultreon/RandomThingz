@@ -1,0 +1,58 @@
+{
+	"__comment": "Created by _GrandMagus_",
+	"parent": "block/block",
+	"textures": {
+		"particle": "block/dirt",
+		"bottom": "block/dirt",
+		"top": "block/grass_block_top",
+		"side": "block/grass_block_side",
+		"overlay": "block/grass_block_side_overlay",
+		"bushy": "block/grass_block_top_bushy",
+		"grass": "block/grass",
+		"stone": "block/stone"
+	},
+	"elements": [
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 16, 16 ], "texture": "#bottom", "cullface": "down" },
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#top", "cullface": "up", "tintindex": 0 },
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "north" },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "south" },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "west" },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#side", "cullface": "east" }
+			}
+		},
+		{
+			"from": [ 0, 16.24, 0 ],
+			"to": [ 16, 16.241, 16 ],
+			"faces": {
+				"up": { "uv": [ 0, 0, 16, 16 ], "texture": "#bushy", "cullface": "up", "tintindex": 0 }
+			}
+		},
+		{
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 16, 16 ],
+			"faces": {
+				"north": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "cullface": "north", "tintindex": 0 },
+				"south": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "cullface": "south", "tintindex": 0 },
+				"west": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "cullface": "west", "tintindex": 0 },
+				"east": { "uv": [ 0, 0, 16, 16 ], "texture": "#overlay", "cullface": "east", "tintindex": 0 }
+			}
+		},
+		{
+			"__comment": "Cube4",
+			"from": [ 3, 15.9, 9.5 ],
+			"to": [ 7, 16.9, 12.5 ],
+			"rotation": { "origin": [ 3, 16, 9.5 ], "axis": "y", "angle": 22.5 },
+			"faces": {
+				"up": { "uv": [ 11, 11, 15, 14 ], "texture": "#stone", "cullface": "up" },
+				"north": { "uv": [ 11, 11, 15, 12 ], "texture": "#stone", "cullface": "up" },
+				"south": { "uv": [ 11, 13, 15, 14 ], "texture": "#stone", "cullface": "up" },
+				"west": { "uv": [ 11, 11, 12, 14 ], "texture": "#stone", "cullface": "up", "rotation": 270 },
+				"east": { "uv": [ 14, 11, 15, 14 ], "texture": "#stone", "cullface": "up", "rotation": 270 }
+			}
+		}
+	]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    " S ",
+    " S "
+  ],
+  "key": {
+    "A": {
+      "item": "qforgemod:aquamarine"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:aquamarine_shovel",
+    "count": 1
+  }
+}

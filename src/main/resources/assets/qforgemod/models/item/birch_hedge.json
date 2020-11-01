@@ -1,0 +1,6 @@
+{
+    "parent": "qforgemod:item/hedge",
+    "textures": {
+        "leaves": "minecraft:block/birch_leaves"
+    }
+}

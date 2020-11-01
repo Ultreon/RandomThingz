@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "qforgemod:iridium_pickaxe"
+    },
+    {
+      "item": "qforgemod:iridium_shovel"
+    },
+    {
+      "item": "qforgemod:iridium_axe"
+    },
+    {
+      "item": "qforgemod:iridium_hoe"
+    },
+    {
+      "item": "qforgemod:iridium_sword"
+    },
+    {
+      "item": "qforgemod:iridium_helmet"
+    },
+    {
+      "item": "qforgemod:iridium_chestplate"
+    },
+    {
+      "item": "qforgemod:iridium_leggings"
+    },
+    {
+      "item": "qforgemod:iridium_boots"
+    }
+  ],
+  "result": "qforgemod:iridium_nugget",
+  "experience": 0.1,
+  "cookingtime": 200
+}

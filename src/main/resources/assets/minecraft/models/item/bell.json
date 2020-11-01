@@ -1,0 +1,101 @@
+{
+	"__comment": "Designed by Pavel Durov with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "block/bell_bottom",
+		"bar": "block/dark_oak_planks",
+		"post": "block/stone",
+		"side": "block/bell_side",
+		"top": "block/bell_top"
+	},
+	"elements": [
+		{
+			"from": [ 2, 13, 7 ],
+			"to": [ 14, 15, 9 ],
+			"faces": {
+				"down": { "uv": [ 2, 3, 14, 5 ], "texture": "#bar" },
+				"up": { "uv": [ 2, 3, 14, 5 ], "texture": "#bar" },
+				"north": { "uv": [ 2, 2, 14, 4 ], "texture": "#bar" },
+				"south": { "uv": [ 2, 3, 14, 5 ], "texture": "#bar" }
+			}
+		},
+		{
+			"from": [ 14, 0, 6 ],
+			"to": [ 16, 16, 10 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 2, 4 ], "texture": "#post", "cullface": "down" },
+				"up": { "uv": [ 0, 0, 2, 4 ], "texture": "#post", "cullface": "up" },
+				"north": { "uv": [ 0, 1, 2, 16 ], "texture": "#post" },
+				"south": { "uv": [ 0, 1, 2, 16 ], "texture": "#post" },
+				"west": { "uv": [ 0, 1, 4, 16 ], "texture": "#post" },
+				"east": { "uv": [ 0, 1, 4, 16 ], "texture": "#post" }
+			}
+		},
+		{
+			"from": [ 0, 0, 6 ],
+			"to": [ 2, 16, 10 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 2, 4 ], "texture": "#post", "cullface": "down" },
+				"up": { "uv": [ 0, 0, 2, 4 ], "texture": "#post", "cullface": "up" },
+				"north": { "uv": [ 0, 1, 2, 16 ], "texture": "#post" },
+				"south": { "uv": [ 0, 1, 2, 16 ], "texture": "#post" },
+				"west": { "uv": [ 0, 1, 4, 16 ], "texture": "#post" },
+				"east": { "uv": [ 0, 1, 4, 16 ], "texture": "#post" }
+			}
+		},
+		{
+			"__comment": "Cube4",
+			"from": [ 4, 4, 4 ],
+			"to": [ 12, 6, 12 ],
+			"faces": {
+				"down": { "uv": [ 0, 0, 8, 8 ], "texture": "#particle" },
+				"up": { "uv": [ 0, 0, 8, 8 ], "texture": "#particle" },
+				"north": { "uv": [ 0, 9, 8, 7 ], "texture": "#side" },
+				"south": { "uv": [ 0, 9, 8, 7 ], "texture": "#side" },
+				"west": { "uv": [ 0, 9, 8, 7 ], "texture": "#side" },
+				"east": { "uv": [ 0, 9, 8, 7 ], "texture": "#side" }
+			}
+		},
+		{
+			"__comment": "Cube4",
+			"from": [ 5, 6, 5 ],
+			"to": [ 11, 13, 11 ],
+			"faces": {
+				"down": { "uv": [ 1, 1, 7, 7 ], "texture": "#particle" },
+				"up": { "uv": [ 1, 1, 7, 7 ], "texture": "#top" },
+				"north": { "uv": [ 1, 7, 7, 0 ], "texture": "#side" },
+				"south": { "uv": [ 1, 7, 7, 0 ], "texture": "#side" },
+				"west": { "uv": [ 1, 7, 7, 0 ], "texture": "#side" },
+				"east": { "uv": [ 1, 7, 7, 0 ], "texture": "#side" }
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation":  [ 0, 2, 0 ],
+			"scale":  [ 0.5, 0.5, 0.5 ]
+		},
+		"thirdperson_lefthand": {
+			"translation":  [ 0, 2, 0 ],
+			"scale":  [ 0.5, 0.5, 0.5 ]
+		},
+		"firstperson_righthand": {
+			"rotation":  [ 0, 90, 0 ],
+			"scale":  [ 0.6, 0.6, 0.6 ]
+		},
+		"firstperson_lefthand": {
+			"rotation":  [ 0, 90, 0 ],
+			"scale":  [ 0.6, 0.6, 0.6 ]
+		},
+		"gui": {
+			"rotation":  [ 30, 45, 0 ],
+			"scale":  [ 0.7, 0.7, 0.7 ]
+		},
+		"head": {
+			"translation":  [ 0, 13, 0 ]
+		},
+		"ground": {
+			"translation":  [ 0, 3, 0 ],
+			"scale":  [ 0.5, 0.5, 0.5 ]
+		}
+	}
+}
