@@ -22,7 +22,7 @@ public class FeatureInit {
                 ConfiguredFeature<?, ?> configuredFeature;
 
                 // Get field value.
-                try666r6 {
+                try {
                     configuredFeature = (ConfiguredFeature<?, ?>) field.get(null);
                 } catch (Throwable t) {
                     throw new RuntimeException("Error occurred when reading field: " + field.getName().toLowerCase(), t);
