@@ -40,7 +40,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 10.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
+        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 12.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.26D);
     }
 
     public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {

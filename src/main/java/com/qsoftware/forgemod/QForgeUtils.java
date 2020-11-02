@@ -318,6 +318,7 @@ public class QForgeUtils
             GlobalEntityTypeAttributes.put(EntityTypeInit.HOG_ENTITY, HogEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK_ENTITY, DuckEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.BISON_ENTITY, BisonEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM_ENTITY, MoobloomEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.WRAT_HOG_ENTITY, WratHogEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER_ENTITY, FireCreeperEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN_ENTITY, IceEndermanEntity.registerAttributes().create());
