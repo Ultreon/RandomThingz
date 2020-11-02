@@ -30,7 +30,7 @@ public class HogEntity extends PigEntity {
     private EatGrassGoal eatGrassGoal;
     private int hogTimer;
 
-    public HogEntity(EntityType<? extends PigEntity> type, World worldIn) {
+    public HogEntity(EntityType<? extends HogEntity> type, World worldIn) {
         super(type, worldIn);
     }
 

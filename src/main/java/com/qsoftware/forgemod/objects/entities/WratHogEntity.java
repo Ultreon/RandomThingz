@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 public class WratHogEntity extends HogEntity {
-    public WratHogEntity(EntityType<? extends PigEntity> type, World worldIn) {
+    public WratHogEntity(EntityType<? extends WratHogEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
