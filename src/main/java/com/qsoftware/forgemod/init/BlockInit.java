@@ -13,6 +13,7 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.TallBlockItem;
+import net.minecraft.potion.Effects;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,6 +26,9 @@ import java.lang.reflect.Field;
 //@ObjectHolder(QForgeUtils.MOD_ID)
 @Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 public class BlockInit {
+    // Doors
+    public static final FlowerBlock BUTTERCUP = (FlowerBlock) new FlowerBlock(Effects.ABSORPTION, 8, Block.Properties.create(Material.IRON, MaterialColor.IRON).hardnessAndResistance(5.0F).sound(SoundType.METAL).notSolid()).setRegistryName("buttercup");
+
     // Doors
     public static final DoorBlock LAB_DOOR = (DoorBlock) new BaseDoorBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).hardnessAndResistance(5.0F).sound(SoundType.METAL).notSolid()).setRegistryName("lab_door");
     public static final DoorBlock SHOPPING_DOOR = (DoorBlock) new BaseDoorBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).hardnessAndResistance(4.7F).sound(SoundType.METAL).notSolid()).setRegistryName("shopping_door");
@@ -128,11 +132,8 @@ public class BlockInit {
             }
         }
 
-//        // Doors
-//        event.getRegistry().register(LAB_DOOR_ITEM);
-//        event.getRegistry().register(SHOPPING_DOOR_ITEM);
-//        event.getRegistry().register(IRON_GLASS_DOOR_ITEM);
-//        event.getRegistry().register(IRON_BARRIER_DOOR_ITEM);
+        // Flowers
+        event.getRegistry().register(new BlockItem(BUTTERCUP, new Item.Properties().group(Groups.NATURE)).setRegistryName("buttercup"));
 
         // Wood
         event.getRegistry().register(new BlockItem(EUCALYPTUS_LOG, new Item.Properties().group(Groups.LOGS)).setRegistryName("eucalyptus_log"));

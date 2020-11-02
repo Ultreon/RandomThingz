@@ -76,37 +76,42 @@ public class ItemInit {
             EntityTypeInit.DUCK_ENTITY,
             new Color(4, 104, 14).getRGB(),
             new Color(228, 181, 15).getRGB(),
-            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("duck_spawn_egg");
+            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("duck_spawn_egg");
     public static final SpawnEggItem HOG_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
             EntityTypeInit.HOG_ENTITY,
             new Color(84, 21, 0).getRGB(),
             new Color(166, 103, 61).getRGB(),
-            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("hog_spawn_egg");
+            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("hog_spawn_egg");
     public static final SpawnEggItem WRAT_HOG_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
             EntityTypeInit.WRAT_HOG_ENTITY,
             new Color(183, 111, 60).getRGB(),
             new Color(148, 90, 49).getRGB(),
-            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("wrat_hog_spawn_egg");
+            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("wrat_hog_spawn_egg");
     public static final SpawnEggItem BISON_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
             EntityTypeInit.BISON_ENTITY,
             new Color(79, 43, 5).getRGB(),
             new Color(180, 149, 56).getRGB(),
-            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("bison_spawn_egg");
+            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("bison_spawn_egg");
+    public static final SpawnEggItem MOOBLOOM_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.MOOBLOOM_ENTITY,
+            new Color(253, 213, 5).getRGB(),
+            new Color(247, 237, 193).getRGB(),
+            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("moobloom_spawn_egg");
     public static final SpawnEggItem OX_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
             EntityTypeInit.OX_ENTITY,
             new Color(164, 110, 61).getRGB(),
             new Color(212, 149, 92).getRGB(),
-            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("ox_spawn_egg");
+            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("ox_spawn_egg");
     public static final SpawnEggItem FIRE_CREEPER_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
             EntityTypeInit.FIRE_CREEPER_ENTITY,
             new Color(54, 58, 54).getRGB(),
             new Color(209, 39, 39).getRGB(),
-            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("fire_creeper_spawn_egg");
+            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("fire_creeper_spawn_egg");
     public static final SpawnEggItem ICE_ENDERMAN_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
             EntityTypeInit.ICE_ENDERMAN_ENTITY,
             new Color(0, 0, 0).getRGB(),
             new Color(123, 214, 214).getRGB(),
-            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("ice_enderman_spawn_egg");
+            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("ice_enderman_spawn_egg");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Ingredients     //

@@ -8,6 +8,7 @@ public class Groups {
     public static final LogsItemGroup LOGS = LogsItemGroup.instance;
     public static final WoodItemGroup WOOD = WoodItemGroup.instance;
     public static final IngredientsItemGroup INGREDIENTS = IngredientsItemGroup.instance;
+    public static final SpawnEggsItemGroup SPAWN_EGGS = SpawnEggsItemGroup.instance;
     public static final OresItemGroup ORES = OresItemGroup.instance;
     public static final IngotsNNuggetsItemGroup INGOTS_OR_DUSTS = IngotsNNuggetsItemGroup.instance;
     public static final GemsItemGroup GEMS = GemsItemGroup.instance;

@@ -25,6 +25,7 @@ public class ClientEventBusSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.BISON_ENTITY, BisonRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.OX_ENTITY, OxRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.DUCK_ENTITY, DuckRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.MOOBLOOM_ENTITY, MoobloomRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.ICE_ENDERMAN_ENTITY, IceEndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.FIRE_CREEPER_ENTITY, FireCreeperRenderer::new);
     }

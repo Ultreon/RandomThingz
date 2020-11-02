@@ -33,6 +33,10 @@ public class EntityTypeInit {
             .create(BisonEntity::new, EntityClassification.CREATURE)
             .size(1.0f, 1.0f)
             .build(new ResourceLocation(QForgeUtils.MOD_ID, "bison").toString());
+    public static final EntityType<MoobloomEntity> MOOBLOOM_ENTITY = EntityType.Builder
+            .create(MoobloomEntity::new, EntityClassification.CREATURE)
+            .size(1.0f, 1.0f)
+            .build(new ResourceLocation(QForgeUtils.MOD_ID, "moobloom").toString());
     public static final EntityType<OxEntity> OX_ENTITY = EntityType.Builder
             .create(OxEntity::new, EntityClassification.CREATURE)
             .size(1.0f, 1.0f)
