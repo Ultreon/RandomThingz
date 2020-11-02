@@ -5,10 +5,13 @@ import com.qsoftware.forgemod.config.ElevatorsConfig;
 import com.qsoftware.forgemod.config.FurnitureConfig;
 import com.qsoftware.forgemod.config.GravestoneConfig;
 import com.qsoftware.forgemod.init.BlockInit;
+import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.objects.entities.*;
 import com.qsoftware.forgemod.world.gen.OreGen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.crash.CrashReport;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -310,6 +313,15 @@ public class QForgeUtils
 //        MinecraftForge.EVENT_BUS.register(new DeathListener());
 //        MinecraftForge.EVENT_BUS.register(new BlockListener());
         MinecraftForge.EVENT_BUS.register(this);
+        event.enqueueWork(() -> {
+            GlobalEntityTypeAttributes.put(EntityTypeInit.OX_ENTITY, OxEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.HOG_ENTITY, HogEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK_ENTITY, DuckEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.BISON_ENTITY, BisonEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.WRAT_HOG_ENTITY, WratHogEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER_ENTITY, FireCreeperEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN_ENTITY, IceEndermanEntity.registerAttributes().create());
+        });
 
         // Furniture setup.
 //        setup.init(event);
