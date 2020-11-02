@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeUtils;
 import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.objects.items.*;
 import com.qsoftware.forgemod.objects.items.advanced.AdvancedBowItem;
 import com.qsoftware.forgemod.objects.items.base.IngotsOrDustsItem;
@@ -20,6 +21,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.awt.*;
 import java.lang.reflect.Field;
 
 @SuppressWarnings({"unused", "NumericOverflow"})
@@ -64,6 +66,47 @@ public class ItemInit {
     // Bows
     public static final BowItem BLAZE_BOW = (BowItem) new AdvancedBowItem(new Item.Properties().group(Groups.FLETCHING), 6.25f, 1.0f, 6, 1, true).setRegistryName("blaze_bow");
     public static final BowItem ICE_BOW = (BowItem) new AdvancedBowItem(new Item.Properties().group(Groups.FLETCHING), 2f, 1.0f, 8, 2).setRegistryName("ice_bow");
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //     Fletching     //
+    ///////////////////////
+
+    // Bows
+    public static final SpawnEggItem DUCK_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.DUCK_ENTITY,
+            new Color(4, 104, 14).getRGB(),
+            new Color(228, 181, 15).getRGB(),
+            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("duck_spawn_egg");
+    public static final SpawnEggItem HOG_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.HOG_ENTITY,
+            new Color(84, 21, 0).getRGB(),
+            new Color(166, 103, 61).getRGB(),
+            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("hog_spawn_egg");
+    public static final SpawnEggItem WRAT_HOG_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.WRAT_HOG_ENTITY,
+            new Color(183, 111, 60).getRGB(),
+            new Color(148, 90, 49).getRGB(),
+            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("wrat_hog_spawn_egg");
+    public static final SpawnEggItem BISON_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.BISON_ENTITY,
+            new Color(79, 43, 5).getRGB(),
+            new Color(180, 149, 56).getRGB(),
+            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("bison_spawn_egg");
+    public static final SpawnEggItem OX_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.OX_ENTITY,
+            new Color(164, 110, 61).getRGB(),
+            new Color(212, 149, 92).getRGB(),
+            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("ox_spawn_egg");
+    public static final SpawnEggItem FIRE_CREEPER_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.FIRE_CREEPER_ENTITY,
+            new Color(54, 58, 54).getRGB(),
+            new Color(209, 39, 39).getRGB(),
+            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("fire_creeper_spawn_egg");
+    public static final SpawnEggItem ICE_ENDERMAN_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.ICE_ENDERMAN_ENTITY,
+            new Color(0, 0, 0).getRGB(),
+            new Color(123, 214, 214).getRGB(),
+            new Item.Properties().group(Groups.FLETCHING)).setRegistryName("ice_enderman_spawn_egg");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Ingredients     //

@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "quark:item/light_gray_shard"
+        "layer0": "qforgemod:item/light_gray_shard"
     }
 }

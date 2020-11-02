@@ -40,19 +40,19 @@ public class FireCreeperEntity extends CreeperEntity {
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_ENDERMAN_AMBIENT;
+        return null;
     }
 
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_ENDERMAN_DEATH;
+        return SoundEvents.ENTITY_CREEPER_DEATH;
     }
 
     @Nullable
     @Override
     protected SoundEvent getHurtSound(@NotNull DamageSource damageSourceIn) {
-        return SoundEvents.ENTITY_ENDERMAN_HURT;
+        return SoundEvents.ENTITY_CREEPER_HURT;
     }
 
     @Override
