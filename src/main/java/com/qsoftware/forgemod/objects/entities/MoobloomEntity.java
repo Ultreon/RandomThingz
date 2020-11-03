@@ -8,10 +8,15 @@ import net.minecraft.block.FlowerBlock;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.monster.GuardianEntity;
+import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.Effect;
@@ -25,9 +30,9 @@ import net.minecraft.world.server.ServerWorld;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Random;
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.function.Predicate;
 
 @SuppressWarnings("deprecation")
 public class MoobloomEntity extends CowEntity implements IShearable, net.minecraftforge.common.IForgeShearable {
@@ -41,6 +46,31 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
         return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 12.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.26D);
+    }
+
+
+    static class TargetPredicate implements Predicate<LivingEntity> {
+        private final MoobloomEntity parentEntity;
+
+        public TargetPredicate(MoobloomEntity moobloom) {
+            this.parentEntity = moobloom;
+        }
+
+        public boolean test(@Nullable LivingEntity p_test_1_) {
+            return (p_test_1_ instanceof ZombieEntity) && p_test_1_.getDistanceSq(this.parentEntity) > 9.0D;
+        }
+    }
+
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.fromItems(Items.WHEAT), false));
+        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, new TargetPredicate(this)));
+        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
     }
 
     public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {

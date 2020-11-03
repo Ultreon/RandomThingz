@@ -102,16 +102,21 @@ public class ItemInit {
             new Color(164, 110, 61).getRGB(),
             new Color(212, 149, 92).getRGB(),
             new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("ox_spawn_egg");
-    public static final SpawnEggItem FIRE_CREEPER_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
-            EntityTypeInit.FIRE_CREEPER_ENTITY,
-            new Color(54, 58, 54).getRGB(),
-            new Color(209, 39, 39).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("fire_creeper_spawn_egg");
     public static final SpawnEggItem ICE_ENDERMAN_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
             EntityTypeInit.ICE_ENDERMAN_ENTITY,
             new Color(0, 0, 0).getRGB(),
             new Color(123, 214, 214).getRGB(),
             new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("ice_enderman_spawn_egg");
+    public static final SpawnEggItem FIRE_CREEPER_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.FIRE_CREEPER_ENTITY,
+            new Color(54, 58, 54).getRGB(),
+            new Color(209, 39, 39).getRGB(),
+            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("fire_creeper_spawn_egg");
+    public static final SpawnEggItem GLOW_SQUID_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.GLOW_SQUID_ENTITY,
+            new Color(47, 151, 153).getRGB(),
+            new Color(84, 221, 153).getRGB(),
+            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("glow_squid_spawn_egg");
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Ingredients     //

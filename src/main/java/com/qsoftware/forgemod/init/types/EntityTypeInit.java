@@ -53,6 +53,10 @@ public class EntityTypeInit {
             .create(FireCreeperEntity::new, EntityClassification.MONSTER)
             .size(1.0f, 2.0f)
             .build(new ResourceLocation(QForgeUtils.MOD_ID, "fire_creeper").toString());
+    public static final EntityType<GlowSquidEntity> GLOW_SQUID_ENTITY = EntityType.Builder
+            .create(GlowSquidEntity::new, EntityClassification.WATER_AMBIENT)
+            .size(1.0f, 1.0f)
+            .build(new ResourceLocation(QForgeUtils.MOD_ID, "glow_squid").toString());
 
     @SubscribeEvent
     public static void registerEntityTypes(final RegistryEvent.Register<EntityType<?>> event) {
