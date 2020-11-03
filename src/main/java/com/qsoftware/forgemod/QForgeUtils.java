@@ -5,12 +5,18 @@ import com.qsoftware.forgemod.config.ElevatorsConfig;
 import com.qsoftware.forgemod.config.FurnitureConfig;
 import com.qsoftware.forgemod.config.GravestoneConfig;
 import com.qsoftware.forgemod.init.BlockInit;
+import com.qsoftware.forgemod.init.FeatureInit;
+import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.renew.BlockInitNew;
+import com.qsoftware.forgemod.init.types.ContainerTypesInit;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
 import com.qsoftware.forgemod.objects.entities.*;
 import com.qsoftware.forgemod.world.gen.OreGen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.crash.CrashReport;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -197,6 +203,17 @@ public class QForgeUtils
 //        modEventBus.addGenericListener(TileEntityType.class, this::registerTileEntities);
 //        modEventBus.addGenericListener(EntityType.class, this::registerEntities);
 //        modEventBus.addGenericListener(ContainerType.class, this::registerContainers);
+
+        BlockInit.BLOCKS.register(modEventBus);
+        BlockInit.ITEMS.register(modEventBus);
+        BlockInit.BLOCKS.register(modEventBus);
+        BlockInit.ITEMS.register(modEventBus);
+        BlockInitNew.BLOCKS.register(modEventBus);
+        BlockInitNew.ITEMS.register(modEventBus);
+        ItemInit.ITEMS.register(modEventBus);
+        EntityTypeInit.ENTITY_TYPES.register(modEventBus);
+        ContainerTypesInit.CONTAINER_TYPES.register(modEventBus);
+        TileEntityTypesInit.TILE_ENTITY_TYPES.register(modEventBus);
 
         // Register listeners.
 //        modEventBus.addListener(ClientSetup::init);
