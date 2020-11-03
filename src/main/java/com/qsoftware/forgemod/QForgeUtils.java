@@ -206,8 +206,6 @@ public class QForgeUtils
 
         BlockInit.BLOCKS.register(modEventBus);
         BlockInit.ITEMS.register(modEventBus);
-        BlockInit.BLOCKS.register(modEventBus);
-        BlockInit.ITEMS.register(modEventBus);
         BlockInitNew.BLOCKS.register(modEventBus);
         BlockInitNew.ITEMS.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
