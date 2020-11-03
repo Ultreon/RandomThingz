@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:blocks/buttercup"
+    "layer0": "qforgemod:blocks/buttercup"
   }
 }

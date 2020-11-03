@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "minecraft:blocks/buttercup"
+    "cross": "qforgemod:blocks/buttercup"
   }
 }
