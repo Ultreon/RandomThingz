@@ -27,7 +27,6 @@ public class QuarryBlock extends Block {
         super(properties);
 
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, Boolean.FALSE));
-        this.setRegistryName("quarry");
     }
 
     @Nullable
