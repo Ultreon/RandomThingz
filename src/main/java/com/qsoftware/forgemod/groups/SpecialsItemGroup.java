@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class SpecialsItemGroup extends ItemGroup {
-    public static final SpecialsItemGroup instance = new SpecialsItemGroup(ItemGroup.GROUPS.length, "specials_tab");
+    public static final SpecialsItemGroup instance = new SpecialsItemGroup(ItemGroup.GROUPS.length, "qforgemod_specials");
 
     public SpecialsItemGroup(int index, String label) {
         super(index, label);
@@ -14,6 +14,6 @@ public class SpecialsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.WALKING_STAFF);
+        return new ItemStack(ItemInit.WALKING_STAFF.get());
     }
 }

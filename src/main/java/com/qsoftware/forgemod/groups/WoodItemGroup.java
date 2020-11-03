@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class WoodItemGroup extends ItemGroup {
-    public static final WoodItemGroup instance = new WoodItemGroup(ItemGroup.GROUPS.length, "wood_tab");
+    public static final WoodItemGroup instance = new WoodItemGroup(ItemGroup.GROUPS.length, "qforgemod_wood");
 
     public WoodItemGroup(int index, String label) {
         super(index, label);

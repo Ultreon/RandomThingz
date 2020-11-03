@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class ShapesItemGroup extends ItemGroup {
-    public static final ShapesItemGroup instance = new ShapesItemGroup(ItemGroup.GROUPS.length, "shapes_tab");
+    public static final ShapesItemGroup instance = new ShapesItemGroup(ItemGroup.GROUPS.length, "qforgemod_shapes");
 
     public ShapesItemGroup(int index, String label) {
         super(index, label);

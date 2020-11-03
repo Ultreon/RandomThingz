@@ -20,7 +20,7 @@ public class ExampleChestContainer extends Container {
     private final IWorldPosCallable canInteractWithCallable;
 
     public ExampleChestContainer(final int windowId, final PlayerInventory playerInventory, final ExampleChestTileEntity tileEntity) {
-        super(ContainerTypesInit.EXAMPLE_CHEST, windowId);
+        super(ContainerTypesInit.EXAMPLE_CHEST.get(), windowId);
         this.tileEntity = tileEntity;
         this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getWorld()), tileEntity.getPos());
 
@@ -94,7 +94,7 @@ public class ExampleChestContainer extends Container {
 
     @Override
     public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, BlockInit.WOODEN_CRATE);
+        return isWithinUsableDistance(canInteractWithCallable, playerIn, BlockInit.WOODEN_CRATE.get());
     }
 
     private static ExampleChestTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {

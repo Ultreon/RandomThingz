@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.init;
 
+import com.qsoftware.forgemod.QForgeUtils;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import net.minecraft.block.Block;
 import net.minecraft.util.registry.Registry;
@@ -7,34 +8,17 @@ import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.lang.reflect.Field;
 
 @SuppressWarnings("unused")
 public class FeatureInit {
-    public static final ConfiguredFeature<?, ?> ORE_RUBY = Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.RUBY_BLOCK.getDefaultState(), 8)).range(16).square();
+    public static final ConfiguredFeature<? extends IFeatureConfig, ?> ORE_RUBY = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.RUBY_BLOCK.get().getDefaultState(), 8)).range(16).square());
 
-    public static void registerFeatures() {
-        Class<FeatureInit> clazz = FeatureInit.class;
-        Field[] fields = clazz.getFields();
-        for (Field field : fields) {
-            if (Block.class.isAssignableFrom(field.getType())) {
-                ConfiguredFeature<?, ?> configuredFeature;
-
-                // Get field value.
-                try {
-                    configuredFeature = (ConfiguredFeature<?, ?>) field.get(null);
-                } catch (Throwable t) {
-                    throw new RuntimeException("Error occurred when reading field: " + field.getName().toLowerCase(), t);
-                }
-
-                // Register feature.
-                try {
-                    Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, field.getName().toLowerCase(), configuredFeature);
-                } catch (Throwable t) {
-                    throw new RuntimeException("Error occurred when registering configured feature: " + field.getName().toLowerCase(), t);
-                }
-            }
-        }
+    private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
+        return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);
     }
 }

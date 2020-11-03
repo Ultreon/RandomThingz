@@ -7,7 +7,7 @@ import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 public class IngredientsItemGroup extends ItemGroup {
-    public static final IngredientsItemGroup instance = new IngredientsItemGroup(ItemGroup.GROUPS.length, "ingredients_tab");
+    public static final IngredientsItemGroup instance = new IngredientsItemGroup(ItemGroup.GROUPS.length, "qforgemod_ingredients");
 
     public IngredientsItemGroup(int index, String label) {
         super(index, label);

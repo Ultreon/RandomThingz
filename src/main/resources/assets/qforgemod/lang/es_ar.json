@@ -15,15 +15,5 @@
   "block.qforgemod.elevator_red": "Ascensor rojo",
   "block.qforgemod.elevator_light_gray": "Ascensor gris claro",
   "block.qforgemod.elevator_yellow": "Ascensor amarillo",
-
-  "qforgemod.subtitle.teleport": "Ascensor es utilizado",
-
-  "screen.qforgemod.elevator": "Opciones de ascensor",
-  "screen.qforgemod.elevator.directional": "Direccional",
-  "screen.qforgemod.elevator.hide_arrow": "Esconder flecha",
-  "screen.qforgemod.elevator.reset_camo": "Quitar camuflage",
-
-  "qforgemod.message.missing_xp": "Necesitás más XP para poder teletransportarte",
-
-  "itemGroup.elevators_tab": "Ascensores"
+  "itemGroup.qforgemod_elevators": "Ascensores"
 }

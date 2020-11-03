@@ -16,14 +16,5 @@
   "block.qforgemod.elevator_light_gray": "Elevador Cinza Claro",
   "block.qforgemod.elevator_yellow": "Elevador Amarelo",
 
-  "qforgemod.subtitle.teleport": "Elevador usado",
-
-  "screen.qforgemod.elevator": "Opções do Elevator",
-  "screen.qforgemod.elevator.directional": "Direcional",
-  "screen.qforgemod.elevator.hide_arrow": "Esconder seta",
-  "screen.qforgemod.elevator.reset_camo": "Remover camuflagem",
-
-  "qforgemod.message.missing_xp": "Não tens experiêcia suficiente para teleportar",
-
-  "itemGroup.elevators_tab": "Elevadores"
+  "itemGroup.qforgemod_elevators": "Elevadores"
 }

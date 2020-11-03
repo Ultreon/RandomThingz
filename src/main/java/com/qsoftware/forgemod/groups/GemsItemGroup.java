@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class GemsItemGroup extends ItemGroup {
-    public static final GemsItemGroup instance = new GemsItemGroup(ItemGroup.GROUPS.length, "gems_tab");
+    public static final GemsItemGroup instance = new GemsItemGroup(ItemGroup.GROUPS.length, "qforgemod_gems");
 
     public GemsItemGroup(int index, String label) {
         super(index, label);
@@ -15,6 +15,6 @@ public class GemsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.RUBY);
+        return new ItemStack(ItemInit.RUBY.get());
     }
 }

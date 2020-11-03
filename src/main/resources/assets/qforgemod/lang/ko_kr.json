@@ -16,52 +16,5 @@
   "block.qforgemod.elevator_light_gray": "회백색 엘리베이터",
   "block.qforgemod.elevator_yellow": "노랑색 엘리베이터",
 
-  "qforgemod.subtitle.teleport": "엘리베이터 작동됨",
-
-  "screen.qforgemod.elevator": "엘리베이터 설정",
-  "screen.qforgemod.elevator.directional": "방향",
-  "screen.qforgemod.elevator.hide_arrow": "화살표 미표시",
-  "screen.qforgemod.elevator.reset_camo": "위장 미표시",
-
-  "qforgemod.message.missing_xp": "충분한 경험치가 없어서 텔레포트를 할 수 없습니다.",
-
-  "itemGroup.elevators_tab": "엘리베이터",
-  "block.qforgemod.acacia_seat": "아카시아 의자",
-  "block.qforgemod.oak_support": "참나무 지지대",
-  "block.qforgemod.jungle_support": "정글 지지대",
-  "block.qforgemod.dark_oak_beam": "짙은 참나무 들보",
-  "block.qforgemod.birch_seat": "자작나무 의자",
-  "block.qforgemod.chain": "큰 사슬",
-  "block.qforgemod.dark_oak_support": "짙은 참나무 지지대",
-  "block.qforgemod.brazier": "화로",
-  "block.qforgemod.bonfire": "캠프파이어",
-  "block.qforgemod.oak_palisade": "참나무 말뚝",
-  "block.qforgemod.spruce_palisade": "가문비나무 말뚝",
-  "block.qforgemod.dark_oak_seat": "짙은 참나무 의자",
-  "block.qforgemod.jungle_beam": "정글 들보",
-  "block.qforgemod.jungle_palisade": "정글 말뚝",
-  "block.qforgemod.acacia_support": "아카시아 지지대",
-  "block.qforgemod.birch_support": "자작나무 지지대",
-  "block.qforgemod.spruce_beam": "가문비나무 들보",
-  "block.qforgemod.jungle_seat": "정글 의자",
-  "block.qforgemod.chandelier": "샹들리에",
-  "block.qforgemod.oak_beam": "참나무 들보",
-  "block.qforgemod.dark_oak_palisade": "짙은 참나무 말뚝",
-  "block.qforgemod.acacia_palisade": "아카시아 말뚝",
-  "block.qforgemod.birch_beam": "자작나무 들보",
-  "block.qforgemod.oak_seat": "참나무 의자",
-  "block.qforgemod.bar_panel": "쇠창살",
-  "block.qforgemod.acacia_beam": "아카시아 들보",
-  "block.qforgemod.birch_palisade": "자작나무 말뚝",
-  "block.qforgemod.stone_pillar": "돌 기둥",
-  "block.qforgemod.spruce_seat": "가문비나무 의자",
-  "block.qforgemod.rocky_dirt": "돌밭",
-  "block.qforgemod.spruce_support": "가문비나무 지지대",
-
-  "block.qforgemod.lattice": "목재 격자",
-  "fluid.qforgemod.thatch": "초가지붕",
-
-  "wiki.qforgemod.thatch" : "건초 더미를 묶는 끈을 가위로 자르세요. 순식간에 초가지붕을 만들어내는 초가지붕 유체가 흘러내립니다.",
-
-  "message.qforgemod.invalid_bonfire_activator_config" : "캠프파이어 활성 아이템 설정이 잘못되었습니다!"
+  "itemGroup.qforgemod_elevators": "엘리베이터"
 }

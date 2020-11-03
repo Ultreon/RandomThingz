@@ -6,7 +6,7 @@ import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 public class IngotsNNuggetsItemGroup extends ItemGroup {
-    public static final IngotsNNuggetsItemGroup instance = new IngotsNNuggetsItemGroup(ItemGroup.GROUPS.length, "ingots_n_nuggets_tab");
+    public static final IngotsNNuggetsItemGroup instance = new IngotsNNuggetsItemGroup(ItemGroup.GROUPS.length, "qforgemod_ingots_n_nuggets");
 
     public IngotsNNuggetsItemGroup(int index, String label) {
         super(index, label);

@@ -5,7 +5,7 @@ import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.objects.items.*;
 import com.qsoftware.forgemod.objects.items.advanced.AdvancedBowItem;
-import com.qsoftware.forgemod.objects.items.base.IngotsOrDustsItem;
+import com.qsoftware.forgemod.objects.items.base.IngotOrDustItem;
 import com.qsoftware.forgemod.objects.items.base.IngredientItem;
 import com.qsoftware.forgemod.objects.items.base.KnifeItem;
 import com.qsoftware.forgemod.objects.items.base.SliceableItem;
@@ -17,227 +17,232 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvents;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.awt.*;
-import java.lang.reflect.Field;
 
 @SuppressWarnings({"unused", "NumericOverflow"})
-@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
+//@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 //@ObjectHolder(QForgeUtils.MOD_ID)
 public class ItemInit {
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, QForgeUtils.MOD_ID);
+    
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Overpowered     //
     /////////////////////////
-    public static final Item KILL_SWITCH = new KillSwitchItem();
-    public static final Item BAN_HAMMER = new BanHammerItem();
+    public static final RegistryObject<Item> KILL_SWITCH = ITEMS.register("kill_switch", KillSwitchItem::new);
+    public static final RegistryObject<Item> BAN_HAMMER = ITEMS.register("ban_hammer", BanHammerItem::new);
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //     Miscellaneous     //
+    ///////////////////////////
+    public static final RegistryObject<Item> LEGENDARY_ENDER_PEARL = ITEMS.register("legendary_ender_pearl", () -> new LegendaryEnderPearlItem(new Item.Properties().group(Groups.MISC)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Food     //
     //////////////////
-    public static final Item CHEESE_BURGER = new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.2f).effect(() -> new EffectInstance(Effects.REGENERATION, 60, 1), 0.7f).build())).setRegistryName("cheese_burger");
-    public static final Item CHEESE_SLICE = new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.2f).build())).setRegistryName("cheese_slice");
-    public static final Item CHEESE = new SliceableItem(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.3f).build()), (stack) -> new ItemStack(CHEESE_SLICE, stack.getCount() * 6)).setRegistryName("cheese");
+    public static final RegistryObject<Item> CHEESE_BURGER = ITEMS.register("cheese_burger", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.2f).effect(() -> new EffectInstance(Effects.REGENERATION, 60, 1), 0.7f).build())));
+    public static final RegistryObject<Item> CHEESE_SLICE = ITEMS.register("cheese_slice", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.2f).build())));
+    public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese", () -> new SliceableItem(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.3f).build()), (stack) -> new ItemStack(CHEESE_SLICE.get(), stack.getCount() * 6)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Normal     //
     ////////////////////
-    public static final Item STICK_VARIANT_1 = new Item(new Item.Properties().group(Groups.NATURE)).setRegistryName("stick_variant1");
-    public static final Item STICK_VARIANT_2 = new Item(new Item.Properties().group(Groups.NATURE)).setRegistryName("stick_variant2");
-    public static final Item EUCALYPTUS_PLANK = new Item(new Item.Properties().group(Groups.WOOD)).setRegistryName("eucalyptus_plank");
-    public static final Item EUCALYPTUS_LEAF = new Item(new Item.Properties()
+    public static final RegistryObject<Item> STICK_VARIANT_1 = ITEMS.register("stick_variant_1", () -> new Item(new Item.Properties().group(Groups.NATURE)));
+    public static final RegistryObject<Item> STICK_VARIANT_2 = ITEMS.register("stick_variant_2", () -> new Item(new Item.Properties().group(Groups.NATURE)));
+    public static final RegistryObject<Item> EUCALYPTUS_PLANK = ITEMS.register("eucalyptus_plank", () -> new Item(new Item.Properties().group(Groups.WOOD)));
+    public static final RegistryObject<Item> EUCALYPTUS_LEAF = ITEMS.register("eucalyptus_leaf", () -> new Item(new Item.Properties()
             .group(Groups.NATURE)
             .food(new Food.Builder()
                     .hunger(1)
                     .saturation(0.2f)
                     .effect(() -> new EffectInstance(Effects.REGENERATION, 60, 1), 0.7f)
-                    .build()))
-            .setRegistryName("eucalyptus_leaf");
+                    .build())));
 
-    public static final Item KNIFE = new KnifeItem(new Item.Properties().group(Groups.SPECIALS).maxDamage(4)).setRegistryName("knife");
-    public static final Item MAGNET = new MagnetItem(new Item.Properties().group(Groups.SPECIALS).maxDamage(4)).setRegistryName("magnet");
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //     Fletching     //
-    ///////////////////////
-
-    // Bows
-    public static final BowItem BLAZE_BOW = (BowItem) new AdvancedBowItem(new Item.Properties().group(Groups.FLETCHING), 6.25f, 1.0f, 6, 1, true).setRegistryName("blaze_bow");
-    public static final BowItem ICE_BOW = (BowItem) new AdvancedBowItem(new Item.Properties().group(Groups.FLETCHING), 2f, 1.0f, 8, 2).setRegistryName("ice_bow");
+    public static final RegistryObject<Item> KNIFE = ITEMS.register("knife", () -> new KnifeItem(new Item.Properties().group(Groups.SPECIALS).maxDamage(4)));
+    public static final RegistryObject<Item> MAGNET = ITEMS.register("magnet", () -> new MagnetItem(new Item.Properties().group(Groups.SPECIALS).maxDamage(4)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Fletching     //
     ///////////////////////
 
     // Bows
-    public static final SpawnEggItem DUCK_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
-            EntityTypeInit.DUCK_ENTITY,
+    public static final RegistryObject<BowItem> BLAZE_BOW = ITEMS.register("blaze_bow", () -> (BowItem) new AdvancedBowItem(new Item.Properties().group(Groups.FLETCHING), 6.25f, 1.0f, 6, 1, true));
+    public static final RegistryObject<BowItem> ICE_BOW = ITEMS.register("ice_bow", () -> (BowItem) new AdvancedBowItem(new Item.Properties().group(Groups.FLETCHING), 2f, 1.0f, 8, 2));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //     Fletching     //
+    ///////////////////////
+
+    // Bows
+    public static final RegistryObject<SpawnEggItem> DUCK_SPAWN_EGG = ITEMS.register("duck_spawn_egg", () -> (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.DUCK_ENTITY.get(),
             new Color(4, 104, 14).getRGB(),
             new Color(228, 181, 15).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("duck_spawn_egg");
-    public static final SpawnEggItem HOG_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
-            EntityTypeInit.HOG_ENTITY,
+            new Item.Properties().group(Groups.SPAWN_EGGS)));
+    public static final RegistryObject<SpawnEggItem> HOG_SPAWN_EGG = ITEMS.register("hog_spawn_egg", () -> (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.HOG_ENTITY.get(),
             new Color(84, 21, 0).getRGB(),
             new Color(166, 103, 61).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("hog_spawn_egg");
-    public static final SpawnEggItem WRAT_HOG_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
-            EntityTypeInit.WRAT_HOG_ENTITY,
+            new Item.Properties().group(Groups.SPAWN_EGGS)));
+    public static final RegistryObject<SpawnEggItem> WRAT_HOG_SPAWN_EGG = ITEMS.register("wrat_hog_spawn_egg", () -> (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.WRAT_HOG_ENTITY.get(),
             new Color(183, 111, 60).getRGB(),
             new Color(148, 90, 49).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("wrat_hog_spawn_egg");
-    public static final SpawnEggItem BISON_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
-            EntityTypeInit.BISON_ENTITY,
+            new Item.Properties().group(Groups.SPAWN_EGGS)));
+    public static final RegistryObject<SpawnEggItem> BISON_SPAWN_EGG = ITEMS.register("bison_spawn_egg", () -> (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.BISON_ENTITY.get(),
             new Color(79, 43, 5).getRGB(),
             new Color(180, 149, 56).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("bison_spawn_egg");
-    public static final SpawnEggItem MOOBLOOM_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
-            EntityTypeInit.MOOBLOOM_ENTITY,
+            new Item.Properties().group(Groups.SPAWN_EGGS)));
+    public static final RegistryObject<SpawnEggItem> MOOBLOOM_SPAWN_EGG = ITEMS.register("moobloom_spawn_egg", () -> (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.MOOBLOOM_ENTITY.get(),
             new Color(253, 213, 5).getRGB(),
             new Color(247, 237, 193).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("moobloom_spawn_egg");
-    public static final SpawnEggItem OX_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
-            EntityTypeInit.OX_ENTITY,
+            new Item.Properties().group(Groups.SPAWN_EGGS)));
+    public static final RegistryObject<SpawnEggItem> OX_SPAWN_EGG = ITEMS.register("ox_spawn_egg", () -> (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.OX_ENTITY.get(),
             new Color(164, 110, 61).getRGB(),
             new Color(212, 149, 92).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("ox_spawn_egg");
-    public static final SpawnEggItem ICE_ENDERMAN_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
-            EntityTypeInit.ICE_ENDERMAN_ENTITY,
+            new Item.Properties().group(Groups.SPAWN_EGGS)));
+    public static final RegistryObject<SpawnEggItem> ICE_ENDERMAN_SPAWN_EGG = ITEMS.register("ice_enderman_spawn_egg", () -> (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.ICE_ENDERMAN_ENTITY.get(),
             new Color(0, 0, 0).getRGB(),
             new Color(123, 214, 214).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("ice_enderman_spawn_egg");
-    public static final SpawnEggItem FIRE_CREEPER_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
-            EntityTypeInit.FIRE_CREEPER_ENTITY,
+            new Item.Properties().group(Groups.SPAWN_EGGS)));
+    public static final RegistryObject<SpawnEggItem> FIRE_CREEPER_SPAWN_EGG = ITEMS.register("fire_creeper_spawn_egg", () -> (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.FIRE_CREEPER_ENTITY.get(),
             new Color(54, 58, 54).getRGB(),
             new Color(209, 39, 39).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("fire_creeper_spawn_egg");
-    public static final SpawnEggItem GLOW_SQUID_SPAWN_EGG = (SpawnEggItem) new SpawnEggItem(
-            EntityTypeInit.GLOW_SQUID_ENTITY,
+            new Item.Properties().group(Groups.SPAWN_EGGS)));
+    public static final RegistryObject<SpawnEggItem> GLOW_SQUID_SPAWN_EGG = ITEMS.register("glow_squid_spawn_egg", () -> (SpawnEggItem) new SpawnEggItem(
+            EntityTypeInit.GLOW_SQUID_ENTITY.get(),
             new Color(47, 151, 153).getRGB(),
             new Color(84, 221, 153).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)).setRegistryName("glow_squid_spawn_egg");
+            new Item.Properties().group(Groups.SPAWN_EGGS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Ingredients     //
     /////////////////////////
 
     // Glass shards
-    public static final Item CLEAR_SHARD = new IngredientItem("clear_shard");
-    public static final Item BLACK_SHARD = new IngredientItem("black_shard");
-    public static final Item BLUE_SHARD = new IngredientItem("blue_shard");
-    public static final Item BROWN_SHARD = new IngredientItem("brown_shard");
-    public static final Item CYAN_SHARD = new IngredientItem("cyan_shard");
-    public static final Item GRAY_SHARD = new IngredientItem("gray_shard");
-    public static final Item GREEN_SHARD = new IngredientItem("green_shard");
-    public static final Item LIGHT_BLUE_SHARD = new IngredientItem("light_blue_shard");
-    public static final Item LIGHT_GRAY_SHARD = new IngredientItem("light_gray_shard");
-    public static final Item LIME_SHARD = new IngredientItem("lime_shard");
-    public static final Item MAGENTA_SHARD = new IngredientItem("magenta_shard");
-    public static final Item ORANGE_SHARD = new IngredientItem("orange_shard");
-    public static final Item PINK_SHARD = new IngredientItem("pink_shard");
-    public static final Item PURPLE_SHARD = new IngredientItem("purple_shard");
-    public static final Item RED_SHARD = new IngredientItem("red_shard");
-    public static final Item WHITE_SHARD = new IngredientItem("white_shard");
-    public static final Item YELLOW_SHARD = new IngredientItem("yellow_shard");
+    public static final RegistryObject<Item> CLEAR_SHARD = ITEMS.register("clear_shard", IngredientItem::new);
+    public static final RegistryObject<Item> BLACK_SHARD = ITEMS.register("black_shard", IngredientItem::new);
+    public static final RegistryObject<Item> BLUE_SHARD = ITEMS.register("blue_shard", IngredientItem::new);
+    public static final RegistryObject<Item> BROWN_SHARD = ITEMS.register("brown_shard", IngredientItem::new);
+    public static final RegistryObject<Item> CYAN_SHARD = ITEMS.register("cyan_shard", IngredientItem::new);
+    public static final RegistryObject<Item> GRAY_SHARD = ITEMS.register("gray_shard", IngredientItem::new);
+    public static final RegistryObject<Item> GREEN_SHARD = ITEMS.register("green_shard", IngredientItem::new);
+    public static final RegistryObject<Item> LIGHT_BLUE_SHARD = ITEMS.register("light_blue_shard", IngredientItem::new);
+    public static final RegistryObject<Item> LIGHT_GRAY_SHARD = ITEMS.register("light_gray_shard", IngredientItem::new);
+    public static final RegistryObject<Item> LIME_SHARD = ITEMS.register("lime_shard", IngredientItem::new);
+    public static final RegistryObject<Item> MAGENTA_SHARD = ITEMS.register("magenta_shard", IngredientItem::new);
+    public static final RegistryObject<Item> ORANGE_SHARD = ITEMS.register("orange_shard", IngredientItem::new);
+    public static final RegistryObject<Item> PINK_SHARD = ITEMS.register("pink_shard", IngredientItem::new);
+    public static final RegistryObject<Item> PURPLE_SHARD = ITEMS.register("purple_shard", IngredientItem::new);
+    public static final RegistryObject<Item> RED_SHARD = ITEMS.register("red_shard", IngredientItem::new);
+    public static final RegistryObject<Item> WHITE_SHARD = ITEMS.register("white_shard", IngredientItem::new);
+    public static final RegistryObject<Item> YELLOW_SHARD = ITEMS.register("yellow_shard", IngredientItem::new);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Ingots or Dusts     //
     /////////////////////////////
 
     // Metals - Copper Level
-    public static final Item COPPER_INGOT = new IngotsOrDustsItem("copper_ingot");
-    public static final Item COPPER_NUGGET = new IngotsOrDustsItem("copper_nugget");
-    public static final Item COPPER_DUST = new IngotsOrDustsItem("copper_dust");
+    public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot", IngotOrDustItem::new);
+    public static final RegistryObject<Item> COPPER_NUGGET = ITEMS.register("copper_nugget", IngotOrDustItem::new);
+    public static final RegistryObject<Item> COPPER_DUST = ITEMS.register("copper_dust", IngotOrDustItem::new);
 
     // Metals - Steel Level
-    public static final Item STEEL_INGOT = new IngotsOrDustsItem("steel_ingot");
-    public static final Item STEEL_NUGGET = new IngotsOrDustsItem("steel_nugget");
-    public static final Item STEEL_DUST = new IngotsOrDustsItem("steel_dust");
+    public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", IngotOrDustItem::new);
+    public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", IngotOrDustItem::new);
+    public static final RegistryObject<Item> STEEL_DUST = ITEMS.register("steel_dust", IngotOrDustItem::new);
 
     // Metals - Tungsten Steel Level
-    public static final Item TUNGSTEN_INGOT = new IngotsOrDustsItem("tungsten_ingot");
-    public static final Item TUNGSTEN_NUGGET = new IngotsOrDustsItem("tungsten_nugget");
-    public static final Item TUNGSTEN_DUST = new IngotsOrDustsItem("tungsten_dust");
+    public static final RegistryObject<Item> TUNGSTEN_INGOT = ITEMS.register("tungsten_ingot", IngotOrDustItem::new);
+    public static final RegistryObject<Item> TUNGSTEN_NUGGET = ITEMS.register("tungsten_nugget", IngotOrDustItem::new);
+    public static final RegistryObject<Item> TUNGSTEN_DUST = ITEMS.register("tungsten_dust", IngotOrDustItem::new);
 
     // Metals - Ultrinium Level
-    public static final Item ULTRINIUM_INGOT = new IngotsOrDustsItem("ultrinium_ingot");
-    public static final Item ULTRINIUM_NUGGET = new IngotsOrDustsItem("ultrinium_nugget");
-    public static final Item ULTRINIUM_DUST = new IngotsOrDustsItem("ultrinium_dust");
+    public static final RegistryObject<Item> ULTRINIUM_INGOT = ITEMS.register("ultrinium_ingot", IngotOrDustItem::new);
+    public static final RegistryObject<Item> ULTRINIUM_NUGGET = ITEMS.register("ultrinium_nugget", IngotOrDustItem::new);
+    public static final RegistryObject<Item> ULTRINIUM_DUST = ITEMS.register("ultrinium_dust", IngotOrDustItem::new);
 
     // Metals - Infinity Level
-    public static final Item UNSTABLE_INFINITY_INGOT = new UnstableInfinityIngot();
-    public static final Item INFINITY_INGOT = new IngotsOrDustsItem("infinity_ingot");
-    public static final Item INFINITY_NUGGET = new IngotsOrDustsItem("infinity_nugget");
-    public static final Item INFINITY_DUST = new IngotsOrDustsItem("infinity_dust");
+    public static final RegistryObject<Item> UNSTABLE_INFINITY_INGOT = ITEMS.register("unstable_infinity_ingot", UnstableInfinityIngot::new);
+    public static final RegistryObject<Item> INFINITY_INGOT = ITEMS.register("infinity_ingot", IngotOrDustItem::new);
+    public static final RegistryObject<Item> INFINITY_NUGGET = ITEMS.register("infinity_nugget", IngotOrDustItem::new);
+    public static final RegistryObject<Item> INFINITY_DUST = ITEMS.register("infinity_dust", IngotOrDustItem::new);
 
     // Metals - Uranium Level
-    public static final Item URANIUM_INGOT = new IngotsOrDustsItem("uranium_ingot");
-    public static final Item URANIUM_NUGGET = new IngotsOrDustsItem("uranium_nugget");
-    public static final Item URANIUM_DUST = new IngotsOrDustsItem("uranium_dust");
+    public static final RegistryObject<Item> URANIUM_INGOT = ITEMS.register("uranium_ingot", IngotOrDustItem::new);
+    public static final RegistryObject<Item> URANIUM_NUGGET = ITEMS.register("uranium_nugget", IngotOrDustItem::new);
+    public static final RegistryObject<Item> URANIUM_DUST = ITEMS.register("uranium_dust", IngotOrDustItem::new);
 
     // Gems and other metals
-    public static final Item IRON_DUST = new IngotsOrDustsItem("iron_dust");
-    public static final Item GOLD_DUST = new IngotsOrDustsItem("gold_dust");
-    public static final Item RUBY_DUST = new IngotsOrDustsItem("ruby_dust");
-    public static final Item AMETHYST_DUST = new IngotsOrDustsItem("amethyst_dust");
-    public static final Item AQUAMARINE_DUST = new IngotsOrDustsItem("aquamarine_dust");
-    public static final Item SAPHIRE_DUST = new IngotsOrDustsItem("saphire_dust");
-    public static final Item MALACHITE_DUST = new IngotsOrDustsItem("malachite_dust");
-    public static final Item TOPAZ_DUST = new IngotsOrDustsItem("topaz_dust");
-    public static final Item AMBER_DUST = new IngotsOrDustsItem("amber_dust");
-    public static final Item BERYL_DUST = new IngotsOrDustsItem("beryl_dust");
-    public static final Item DIAMOND_DUST = new IngotsOrDustsItem("diamond_dust");
-    public static final Item TANZANITE_DUST = new IngotsOrDustsItem("tanzanite_dust");
+    public static final RegistryObject<Item> IRON_DUST = ITEMS.register("iron_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> GOLD_DUST = ITEMS.register("gold_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> RUBY_DUST = ITEMS.register("ruby_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> AMETHYST_DUST = ITEMS.register("amethyst_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> AQUAMARINE_DUST = ITEMS.register("aquamarine_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> SAPHIRE_DUST = ITEMS.register("saphire_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> MALACHITE_DUST = ITEMS.register("malachite_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> TOPAZ_DUST = ITEMS.register("topaz_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> AMBER_DUST = ITEMS.register("amber_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> BERYL_DUST = ITEMS.register("beryl_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> DIAMOND_DUST = ITEMS.register("diamond_dust", IngotOrDustItem::new);
+    public static final RegistryObject<Item> TANZANITE_DUST = ITEMS.register("tanzanite_dustt", IngotOrDustItem::new);
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Gems     //
     //////////////////
-    public static final Item RUBY = new Item(new Item.Properties().group(Groups.GEMS)).setRegistryName("ruby");
-    public static final Item AMETHYST = new Item(new Item.Properties().group(Groups.GEMS)).setRegistryName("amethyst");
-    public static final Item AQUAMARINE = new Item(new Item.Properties().group(Groups.GEMS)).setRegistryName("aquamarine");
-    public static final Item SAPHIRE = new Item(new Item.Properties().group(Groups.GEMS)).setRegistryName("saphire");
-    public static final Item MALACHITE = new Item(new Item.Properties().group(Groups.GEMS)).setRegistryName("malachite");
-    public static final Item TOPAZ = new Item(new Item.Properties().group(Groups.GEMS)).setRegistryName("topaz");
-    public static final Item AMBER = new Item(new Item.Properties().group(Groups.GEMS)).setRegistryName("amber");
-    public static final Item PERIDOT = new Item(new Item.Properties().group(Groups.GEMS)).setRegistryName("peridot");
-    public static final Item BERYL = new Item(new Item.Properties().group(Groups.GEMS)).setRegistryName("beryl");
-    public static final Item TANZANITE = new Item(new Item.Properties().group(Groups.GEMS)).setRegistryName("tanzanite");
+    public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", () -> new Item(new Item.Properties().group(Groups.GEMS)));
+    public static final RegistryObject<Item> AMETHYST = ITEMS.register("amethyst", () -> new Item(new Item.Properties().group(Groups.GEMS)));
+    public static final RegistryObject<Item> AQUAMARINE = ITEMS.register("aquamarine", () -> new Item(new Item.Properties().group(Groups.GEMS)));
+    public static final RegistryObject<Item> SAPHIRE = ITEMS.register("saphire", () -> new Item(new Item.Properties().group(Groups.GEMS)));
+    public static final RegistryObject<Item> MALACHITE = ITEMS.register("malachite", () -> new Item(new Item.Properties().group(Groups.GEMS)));
+    public static final RegistryObject<Item> TOPAZ = ITEMS.register("topaz", () -> new Item(new Item.Properties().group(Groups.GEMS)));
+    public static final RegistryObject<Item> AMBER = ITEMS.register("amber", () -> new Item(new Item.Properties().group(Groups.GEMS)));
+    public static final RegistryObject<Item> PERIDOT = ITEMS.register("peridot", () -> new Item(new Item.Properties().group(Groups.GEMS)));
+    public static final RegistryObject<Item> BERYL = ITEMS.register("beryl", () -> new Item(new Item.Properties().group(Groups.GEMS)));
+    public static final RegistryObject<Item> TANZANITE = ITEMS.register("tanzanite", () -> new Item(new Item.Properties().group(Groups.GEMS)));
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Icons     //
     ///////////////////
-    public static final Item DUNGEONS = new SwordItem(ItemTier.DIAMOND, 0, 0f, new Item.Properties().setNoRepair().maxStackSize(1)).setRegistryName("dungeons");
+    public static final RegistryObject<Item> DUNGEONS = ITEMS.register("dungeons", () -> new SwordItem(ItemTier.DIAMOND, 0, 0f, new Item.Properties().setNoRepair().maxStackSize(1)));
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Dungeons     //
     //////////////////////
-    public static final AxeItem DUNGEONS_DIAMOND_AXE = (AxeItem) new AxeItem(ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)).setRegistryName("dungeons_diamond_axe");
-    public static final SwordItem DUNGEONS_DIAMOND_SWORD = (SwordItem) new SwordItem(ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)).setRegistryName("dungeons_diamond_sword");
-    public static final SwordItem DUNGEONS_IRON_SWORD = (SwordItem) new SwordItem(ItemTier.IRON, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)).setRegistryName("dungeons_iron_sword");
-    public static final SwordItem DUNGEONS_BROADSWORD = (SwordItem) new SwordItem(ItemTier.IRON, 5, -3.75f, new Item.Properties().group(Groups.DUNGEONS)).setRegistryName("dungeons_broadsword");
+    public static final RegistryObject<AxeItem> DUNGEONS_DIAMOND_AXE = ITEMS.register("dungeons_diamond_axe", () -> (AxeItem) new AxeItem(ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)));
+    public static final RegistryObject<SwordItem> DUNGEONS_DIAMOND_SWORD = ITEMS.register("dungeons_diamond_sword", () -> (SwordItem) new SwordItem(ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)));
+    public static final RegistryObject<SwordItem> DUNGEONS_IRON_SWORD = ITEMS.register("dungeons_iron_sword", () -> (SwordItem) new SwordItem(ItemTier.IRON, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)));
+    public static final RegistryObject<SwordItem> DUNGEONS_BROADSWORD = ITEMS.register("dungeons_broadsword", () -> (SwordItem) new SwordItem(ItemTier.IRON, 5, -3.75f, new Item.Properties().group(Groups.DUNGEONS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Specials     //
     //////////////////////
 
     // Wands
-    public static final Item WALKING_STAFF = new WandItem();
-    public static final Item LIGHTNING_STAFF = new LightningStaffItem();
-    public static final Item NATURE_STAFF = new NatureStaffItem();
+    public static final RegistryObject<Item> WALKING_STAFF = ITEMS.register("walking_staff", WandItem::new);
+    public static final RegistryObject<Item> LIGHTNING_STAFF = ITEMS.register("lightning_staff", LightningStaffItem::new);
+    public static final RegistryObject<Item> NATURE_STAFF = ITEMS.register("nature_staff", NatureStaffItem::new);
 
     // Stone Level
-    public static final SwordItem STONE_SWORD_OF_DOOM  = (SwordItem) new SwordItem(ItemTier.STONE, 8, -2.0f, new Item.Properties().group(Groups.SPECIALS)).setRegistryName("stone_sword_of_doom");
+    public static final RegistryObject<SwordItem> STONE_SWORD_OF_DOOM = ITEMS.register("stone_sword_of_doom", () -> (SwordItem) new SwordItem(ItemTier.STONE, 8, -2.0f, new Item.Properties().group(Groups.SPECIALS)));
 
     // Iron Level
-    public static final AxeItem EMERGENCY_FIRE_AXE = (AxeItem) new AxeItem(ItemTier.IRON, 3, -2.55f, new Item.Properties().group(Groups.SPECIALS)).setRegistryName("emergency_fire_axe");
-    public static final SwordItem FIRE_SWORD = (SwordItem) new FireSwordItem(ItemTier.IRON, 5, -3.5f, new Item.Properties().group(Groups.SPECIALS)).setRegistryName("fire_sword");
+    public static final RegistryObject<AxeItem> EMERGENCY_FIRE_AXE = ITEMS.register("emergency_fire_axe", () -> (AxeItem) new AxeItem(ItemTier.IRON, 3, -2.55f, new Item.Properties().group(Groups.SPECIALS)));
+    public static final RegistryObject<SwordItem> FIRE_SWORD = ITEMS.register("fire_sword", () -> (SwordItem) new FireSwordItem(ItemTier.IRON, 5, -3.5f, new Item.Properties().group(Groups.SPECIALS)));
 
     // Diamond Level
-    public static final AxeItem LEVIATHAN_AXE = (AxeItem) new AxeItem(ItemTier.DIAMOND, 5, -2.55f, new Item.Properties().group(Groups.SPECIALS)).setRegistryName("leviathan_axe");
-    public static final AxeItem ADAMANTANIUM_AXE_RED = (AxeItem) new AxeItem(ItemTier.DIAMOND, 8, -1.875f, new Item.Properties().group(Groups.SPECIALS)).setRegistryName("adamantanium_axe_red");
+    public static final RegistryObject<AxeItem> LEVIATHAN_AXE = ITEMS.register("leviathan_axe", () -> (AxeItem) new AxeItem(ItemTier.DIAMOND, 5, -2.55f, new Item.Properties().group(Groups.SPECIALS)));
+    public static final RegistryObject<AxeItem> ADAMANTANIUM_AXE_RED = ITEMS.register("adamantanium_axe_red", () -> (AxeItem) new AxeItem(ItemTier.DIAMOND, 8, -1.875f, new Item.Properties().group(Groups.SPECIALS)));
 
-    public static final SwordItem DIAMOND_QUARTZ_SWORD = (SwordItem) new SwordItem(ItemTier.DIAMOND, 8, -2.0f, new Item.Properties().group(Groups.SPECIALS)).setRegistryName("diamond_quartz_sword");
+    public static final RegistryObject<SwordItem> DIAMOND_QUARTZ_SWORD = ITEMS.register("diamond_quartz_sword", () -> (SwordItem) new SwordItem(ItemTier.DIAMOND, 8, -2.0f, new Item.Properties().group(Groups.SPECIALS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Armors     //
@@ -245,140 +250,140 @@ public class ItemInit {
 
     // Materials
     public static final IArmorMaterial copperArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":copper", 13, new int[]{2, 5, 6, 2}, 10, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(ItemInit.COPPER_INGOT)
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(ItemInit.COPPER_INGOT.get())
     );
     public static final IArmorMaterial steelArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":steel", 24, new int[]{3, 6, 8, 4}, 14, 4f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, () -> Ingredient.fromItems(ItemInit.STEEL_INGOT)
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, () -> Ingredient.fromItems(ItemInit.STEEL_INGOT.get())
     );
     public static final IArmorMaterial tungstenArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":tungsten", 42, new int[]{4, 8, 12, 6}, 28, 5f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(ItemInit.TUNGSTEN_INGOT)
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(ItemInit.TUNGSTEN_INGOT.get())
     );
     public static final IArmorMaterial uraniumArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":uranium", 11, new int[]{2, 4, 5, 2}, 4, 0.5f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(ItemInit.URANIUM_INGOT)
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(ItemInit.URANIUM_INGOT.get())
     );
     public static final IArmorMaterial rubyArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":ruby", 24, new int[]{3, 6, 8, 4}, 14, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.RUBY)
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.RUBY.get())
     );
     public static final IArmorMaterial amethystArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":amethyst", 21, new int[]{2, 5, 7, 3}, 31, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.AMETHYST)
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.AMETHYST.get())
     );
     public static final IArmorMaterial aquamarineArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":aquamarine", 21, new int[]{2, 4, 6, 2}, 31, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.AQUAMARINE)
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.AQUAMARINE.get())
     );
     public static final IArmorMaterial saphireArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":saphire", 21, new int[]{2, 4, 6, 2}, 31, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.SAPHIRE)
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.SAPHIRE.get())
     );
     public static final IArmorMaterial malachiteArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":malachite", 21, new int[]{2, 4, 6, 2}, 31, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.MALACHITE)
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.MALACHITE.get())
     );
     public static final IArmorMaterial topazArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":topaz", 21, new int[]{2, 4, 6, 2}, 31, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.TOPAZ)
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.TOPAZ.get())
     );
     public static final IArmorMaterial amberArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":amber", 21, new int[]{2, 4, 6, 2}, 31, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.AMBER)
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.AMBER.get())
     );
     public static final IArmorMaterial berylArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":beryl", 21, new int[]{2, 4, 6, 2}, 31, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.BERYL)
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.BERYL.get())
     );
     public static final IArmorMaterial tanzaniteArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":tanzanite", 19, new int[]{3, 6, 8, 3}, 48, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.TANZANITE)
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.TANZANITE.get())
     );
     public static final IArmorMaterial ultriniumArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":ultrinium", 95250, new int[]{2375, 5643, 6485, 1947}, 375, 3854f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 290.0F, () -> Ingredient.fromItems(ItemInit.ULTRINIUM_INGOT)
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 290.0F, () -> Ingredient.fromItems(ItemInit.ULTRINIUM_INGOT.get())
     );
     public static final IArmorMaterial infinityArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":infinity", 95250, new int[]{Integer.MAX_VALUE + 1, Integer.MAX_VALUE + 1, Integer.MAX_VALUE + 1, Integer.MAX_VALUE + 1}, 9999, Float.POSITIVE_INFINITY,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, () -> Ingredient.fromItems(ItemInit.INFINITY_INGOT)
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0, () -> Ingredient.fromItems(ItemInit.INFINITY_INGOT.get())
     );
 
     // Armors - Copper
-    public static final Item COPPER_HELMET = new ArmorItem(copperArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("copper_helmet");
-    public static final Item COPPER_CHESTPLATE = new ArmorItem(copperArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("copper_chestplate");
-    public static final Item COPPER_LEGGINGS = new ArmorItem(copperArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("copper_leggings");
-    public static final Item COPPER_BOOTS = new ArmorItem(copperArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("copper_boots");
+    public static final RegistryObject<Item> COPPER_HELMET = ITEMS.register("copper_helmet", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> COPPER_CHESTPLATE = ITEMS.register("copper_chestplate", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> COPPER_LEGGINGS = ITEMS.register("copper_leggings", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> COPPER_BOOTS = ITEMS.register("copper_boots", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Steel
-    public static final Item STEEL_HELMET = new ArmorItem(steelArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("steel_helmet");
-    public static final Item STEEL_CHESTPLATE = new ArmorItem(steelArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("steel_chestplate");
-    public static final Item STEEL_LEGGINGS = new ArmorItem(steelArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("steel_leggings");
-    public static final Item STEEL_BOOTS = new ArmorItem(steelArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("steel_boots");
+    public static final RegistryObject<Item> STEEL_HELMET = ITEMS.register("steel_helmet", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> STEEL_CHESTPLATE = ITEMS.register("steel_chestplate", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> STEEL_LEGGINGS = ITEMS.register("steel_leggings", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> STEEL_BOOTS = ITEMS.register("steel_boots", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Tungsten Steel
-    public static final Item TUNGSTEN_HELMET = new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("tungsten_helmet");
-    public static final Item TUNGSTEN_CHESTPLATE = new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("tungsten_chestplate");
-    public static final Item TUNGSTEN_LEGGINGS = new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("tungsten_leggings");
-    public static final Item TUNGSTEN_BOOTS = new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("tungsten_boots");
+    public static final RegistryObject<Item> TUNGSTEN_HELMET = ITEMS.register("tungsten_helmet", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> TUNGSTEN_CHESTPLATE = ITEMS.register("tungsten_chestplate", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> TUNGSTEN_LEGGINGS = ITEMS.register("tungsten_leggings", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> TUNGSTEN_BOOTS = ITEMS.register("tungsten_boots", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Uranium
-    public static final Item URANIUM_HELMET = new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("uranium_helmet");
-    public static final Item URANIUM_CHESTPLATE = new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("uranium_chestplate");
-    public static final Item URANIUM_LEGGINGS = new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("uranium_leggings");
-    public static final Item URANIUM_BOOTS = new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("uranium_boots");
+    public static final RegistryObject<Item> URANIUM_HELMET = ITEMS.register("uranium_helmet", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> URANIUM_CHESTPLATE = ITEMS.register("uranium_chestplate", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> URANIUM_LEGGINGS = ITEMS.register("uranium_leggings", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> URANIUM_BOOTS = ITEMS.register("uranium_boots", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Ruby
-    public static final Item RUBY_HELMET = new ArmorItem(rubyArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("ruby_helmet");
-    public static final Item RUBY_CHESTPLATE = new ArmorItem(rubyArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("ruby_chestplate");
-    public static final Item RUBY_LEGGINGS = new ArmorItem(rubyArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("ruby_leggings");
-    public static final Item RUBY_BOOTS = new ArmorItem(rubyArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("ruby_boots");
+    public static final RegistryObject<Item> RUBY_HELMET = ITEMS.register("ruby_helmet", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> RUBY_CHESTPLATE = ITEMS.register("ruby_chestplate", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> RUBY_LEGGINGS = ITEMS.register("ruby_leggings", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> RUBY_BOOTS = ITEMS.register("ruby_boots", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Amethyst
-    public static final Item AMETHYST_HELMET = new ArmorItem(amethystArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("amethyst_helmet");
-    public static final Item AMETHYST_CHESTPLATE = new ArmorItem(amethystArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("amethyst_chestplate");
-    public static final Item AMETHYST_LEGGINGS = new ArmorItem(amethystArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("amethyst_leggings");
-    public static final Item AMETHYST_BOOTS = new ArmorItem(amethystArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("amethyst_boots");
+    public static final RegistryObject<Item> AMETHYST_HELMET = ITEMS.register("amethyst_helmet", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> AMETHYST_CHESTPLATE = ITEMS.register("amethyst_chestplate", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> AMETHYST_LEGGINGS = ITEMS.register("amethyst_leggings", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> AMETHYST_BOOTS = ITEMS.register("amethyst_boots", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Aquamarine
-    public static final Item AQUAMARINE_HELMET = new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("aquamarine_helmet");
-    public static final Item AQUAMARINE_CHESTPLATE = new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("aquamarine_chestplate");
-    public static final Item AQUAMARINE_LEGGINGS = new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("aquamarine_leggings");
-    public static final Item AQUAMARINE_BOOTS = new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("aquamarine_boots");
+    public static final RegistryObject<Item> AQUAMARINE_HELMET = ITEMS.register("aquamarine_helmet", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> AQUAMARINE_CHESTPLATE = ITEMS.register("aquamarine_chestplate", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> AQUAMARINE_LEGGINGS = ITEMS.register("aquamarine_leggings", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> AQUAMARINE_BOOTS = ITEMS.register("aquamarine_boots", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Saphire
-    public static final Item SAPHIRE_HELMET = new ArmorItem(saphireArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("saphire_helmet");
-    public static final Item SAPHIRE_CHESTPLATE = new ArmorItem(saphireArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("saphire_chestplate");
-    public static final Item SAPHIRE_LEGGINGS = new ArmorItem(saphireArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("saphire_leggings");
-    public static final Item SAPHIRE_BOOTS = new ArmorItem(saphireArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("saphire_boots");
+    public static final RegistryObject<Item> SAPHIRE_HELMET = ITEMS.register("saphire_helmet", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> SAPHIRE_CHESTPLATE = ITEMS.register("saphire_chestplate", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> SAPHIRE_LEGGINGS = ITEMS.register("saphire_leggings", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> SAPHIRE_BOOTS = ITEMS.register("saphire_boots", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Malachite
-    public static final Item MALACHITE_HELMET = new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("malachite_helmet");
-    public static final Item MALACHITE_CHESTPLATE = new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("malachite_chestplate");
-    public static final Item MALACHITE_LEGGINGS = new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("malachite_leggings");
-    public static final Item MALACHITE_BOOTS = new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("malachite_boots");
+    public static final RegistryObject<Item> MALACHITE_HELMET = ITEMS.register("malachite_helmet", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> MALACHITE_CHESTPLATE = ITEMS.register("malachite_chestplate", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> MALACHITE_LEGGINGS = ITEMS.register("malachite_leggings", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> MALACHITE_BOOTS = ITEMS.register("malachite_boots", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Topaz
-    public static final Item TOPAZ_HELMET = new ArmorItem(topazArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("topaz_helmet");
-    public static final Item TOPAZ_CHESTPLATE = new ArmorItem(topazArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("topaz_chestplate");
-    public static final Item TOPAZ_LEGGINGS = new ArmorItem(topazArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("topaz_leggings");
-    public static final Item TOPAZ_BOOTS = new ArmorItem(topazArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("topaz_boots");
+    public static final RegistryObject<Item> TOPAZ_HELMET = ITEMS.register("topaz_helmet", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> TOPAZ_CHESTPLATE = ITEMS.register("topaz_chestplate", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> TOPAZ_LEGGINGS = ITEMS.register("topaz_leggings", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> TOPAZ_BOOTS = ITEMS.register("topaz_boots", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Amber
-    public static final Item AMBER_HELMET = new ArmorItem(amberArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("amber_helmet");
-    public static final Item AMBER_CHESTPLATE = new ArmorItem(amberArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("amber_chestplate");
-    public static final Item AMBER_LEGGINGS = new ArmorItem(amberArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("amber_leggings");
-    public static final Item AMBER_BOOTS = new ArmorItem(amberArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("amber_boots");
+    public static final RegistryObject<Item> AMBER_HELMET = ITEMS.register("amber_helmet", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> AMBER_CHESTPLATE = ITEMS.register("amber_chestplate", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> AMBER_LEGGINGS = ITEMS.register("amber_leggings", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> AMBER_BOOTS = ITEMS.register("amber_boots", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Beryl
-    public static final Item BERYL_HELMET = new ArmorItem(berylArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("beryl_helmet");
-    public static final Item BERYL_CHESTPLATE = new ArmorItem(berylArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("beryl_chestplate");
-    public static final Item BERYL_LEGGINGS = new ArmorItem(berylArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("beryl_leggings");
-    public static final Item BERYL_BOOTS = new ArmorItem(berylArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("beryl_boots");
+    public static final RegistryObject<Item> BERYL_HELMET = ITEMS.register("beryl_helmet", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> BERYL_CHESTPLATE = ITEMS.register("beryl_chestplate", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> BERYL_LEGGINGS = ITEMS.register("beryl_leggings", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> BERYL_BOOTS = ITEMS.register("beryl_boots", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Tanzanite
-    public static final Item TANZANITE_HELMET = new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("tanzanite_helmet");
-    public static final Item TANZANITE_CHESTPLATE = new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("tanzanite_chestplate");
-    public static final Item TANZANITE_LEGGINGS = new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("tanzanite_leggings");
-    public static final Item TANZANITE_BOOTS = new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("tanzanite_boots");
+    public static final RegistryObject<Item> TANZANITE_HELMET = ITEMS.register("tanzanite_helmet", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> TANZANITE_CHESTPLATE = ITEMS.register("tanzanite_chestplate", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> TANZANITE_LEGGINGS = ITEMS.register("tanzanite_leggings", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> TANZANITE_BOOTS = ITEMS.register("tanzanite_boots", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Ultrinium
-    public static final Item ULTRINIUM_HELMET = new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)).setRegistryName("ultrinium_helmet");
-    public static final Item ULTRINIUM_CHESTPLATE = new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)).setRegistryName("ultrinium_chestplate");
-    public static final Item ULTRINIUM_LEGGINGS = new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)).setRegistryName("ultrinium_leggings");
-    public static final Item ULTRINIUM_BOOTS = new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)).setRegistryName("ultrinium_boots");
+    public static final RegistryObject<Item> ULTRINIUM_HELMET = ITEMS.register("ultrinium_helmet", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> ULTRINIUM_CHESTPLATE = ITEMS.register("ultrinium_chestplate", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> ULTRINIUM_LEGGINGS = ITEMS.register("ultrinium_leggings", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final RegistryObject<Item> ULTRINIUM_BOOTS = ITEMS.register("ultrinium_boots", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Ultrinium
-    public static final Item INFINITY_HELMET = new ArmorItem(infinityArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.OVERPOWERED)).setRegistryName("infinity_helmet");
-    public static final Item INFINITY_CHESTPLATE = new ArmorItem(infinityArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.OVERPOWERED)).setRegistryName("infinity_chestplate");
-    public static final Item INFINITY_LEGGINGS = new ArmorItem(infinityArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.OVERPOWERED)).setRegistryName("infinity_leggings");
-    public static final Item INFINITY_BOOTS = new ArmorItem(infinityArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.OVERPOWERED)).setRegistryName("infinity_boots");
+    public static final RegistryObject<Item> INFINITY_HELMET = ITEMS.register("infinity_helmet", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.OVERPOWERED)));
+    public static final RegistryObject<Item> INFINITY_CHESTPLATE = ITEMS.register("infinity_chestplate", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.OVERPOWERED)));
+    public static final RegistryObject<Item> INFINITY_LEGGINGS = ITEMS.register("infinity_leggings", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.OVERPOWERED)));
+    public static final RegistryObject<Item> INFINITY_BOOTS = ITEMS.register("infinity_boots", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.OVERPOWERED)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Tools     //
@@ -386,173 +391,173 @@ public class ItemInit {
 
     // Materials
     public static final IItemTier COPPER_ITEM_TIER = new ItemTierBuilder.Builder(2, 420, 5.3f, 1.4f, 10,
-            () -> Ingredient.fromItems(COPPER_INGOT)
+            () -> Ingredient.fromItems(COPPER_INGOT.get())
     );
     public static final IItemTier STEEL_ITEM_TIER = new ItemTierBuilder.Builder(3, 1465, 8.1f, 3.8f, 14,
-            () -> Ingredient.fromItems(STEEL_INGOT)
+            () -> Ingredient.fromItems(STEEL_INGOT.get())
     );
     public static final IItemTier TUNGSTEN_ITEM_TIER = new ItemTierBuilder.Builder(3, 3194, 9.4f, 4.7f, 28,
-            () -> Ingredient.fromItems(TUNGSTEN_INGOT)
+            () -> Ingredient.fromItems(TUNGSTEN_INGOT.get())
     );
     public static final IItemTier URANIUM_ITEM_TIER = new ItemTierBuilder.Builder(2, 730, 3.6f, 5.3f, 4,
-            () -> Ingredient.fromItems(URANIUM_INGOT)
+            () -> Ingredient.fromItems(URANIUM_INGOT.get())
     );
     public static final IItemTier RUBY_ITEM_TIER = new ItemTierBuilder.Builder(3, 970, 7.6f, 3.6f, 13,
-            () -> Ingredient.fromItems(RUBY)
+            () -> Ingredient.fromItems(RUBY.get())
     );
     public static final IItemTier AMETHYST_ITEM_TIER = new ItemTierBuilder.Builder(3, 650, 7.3f, 3.1f, 31,
-            () -> Ingredient.fromItems(AMETHYST)
+            () -> Ingredient.fromItems(AMETHYST.get())
     );
     public static final IItemTier AQUAMARINE_ITEM_TIER = new ItemTierBuilder.Builder(3, 740, 5.3f, 2.6f, 23,
-            () -> Ingredient.fromItems(AQUAMARINE)
+            () -> Ingredient.fromItems(AQUAMARINE.get())
     );
     public static final IItemTier SAPHIRE_ITEM_TIER = new ItemTierBuilder.Builder(2, 810, 5.2f, 2.5f, 29,
-            () -> Ingredient.fromItems(SAPHIRE)
+            () -> Ingredient.fromItems(SAPHIRE.get())
     );
     public static final IItemTier MALACHITE_ITEM_TIER = new ItemTierBuilder.Builder(2, 670, 4.3f, 3.2f, 12,
-            () -> Ingredient.fromItems(MALACHITE)
+            () -> Ingredient.fromItems(MALACHITE.get())
     );
     public static final IItemTier TOPAZ_ITEM_TIER = new ItemTierBuilder.Builder(2, 665, 4.4f, 3.9f, 17,
-            () -> Ingredient.fromItems(TOPAZ)
+            () -> Ingredient.fromItems(TOPAZ.get())
     );
     public static final IItemTier AMBER_ITEM_TIER = new ItemTierBuilder.Builder(2, 670, 3.9f, 3.1f, 16,
-            () -> Ingredient.fromItems(AMBER)
+            () -> Ingredient.fromItems(AMBER.get())
     );
     public static final IItemTier BERYL_ITEM_TIER = new ItemTierBuilder.Builder(2, 730, 4.8f, 3.5f, 11,
-            () -> Ingredient.fromItems(BERYL)
+            () -> Ingredient.fromItems(BERYL.get())
     );
     public static final IItemTier TANZANITE_ITEM_TIER = new ItemTierBuilder.Builder(3, 1090, 7.7125f, 3.5f, 48,
-            () -> Ingredient.fromItems(COPPER_INGOT)
+            () -> Ingredient.fromItems(COPPER_INGOT.get())
     );
     public static final IItemTier ULTRINIUM_ITEM_TIER = new ItemTierBuilder.Builder(4, 95250, 290.0f, 2375.4f, 375,
-            () -> Ingredient.fromItems(ULTRINIUM_INGOT)
+            () -> Ingredient.fromItems(ULTRINIUM_INGOT.get())
     );
     public static final IItemTier INFINITY = new ItemTierBuilder.Builder(5, Integer.MAX_VALUE + 1, Float.MAX_VALUE + 1, Float.MAX_VALUE + 1, Integer.MAX_VALUE + 1,
-            () -> Ingredient.fromItems(INFINITY_INGOT)
+            () -> Ingredient.fromItems(INFINITY_INGOT.get())
     );
 
     // Tools - Copper
-    public static final Item COPPER_SWORD = new SwordItem(COPPER_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("copper_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item COPPER_PICKAXE = new PickaxeItem(COPPER_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("copper_pickaxe");
-    public static final Item COPPER_SHOVEL = new ShovelItem(COPPER_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("copper_shovel");
-    public static final Item COPPER_AXE = new AxeItem(COPPER_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("copper_axe");
-    public static final Item COPPER_HOE = new HoeItem(COPPER_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("copper_hoe");
+    public static final RegistryObject<Item> COPPER_SWORD = ITEMS.register("copper_sword", () -> new SwordItem(COPPER_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> COPPER_PICKAXE = ITEMS.register("copper_pickaxe", () -> new PickaxeItem(COPPER_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> COPPER_SHOVEL = ITEMS.register("copper_shovel", () -> new ShovelItem(COPPER_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> COPPER_AXE = ITEMS.register("copper_axe", () -> new AxeItem(COPPER_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> COPPER_HOE = ITEMS.register("copper_hoe", () -> new HoeItem(COPPER_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Steel
-    public static final Item STEEL_SWORD = new SwordItem(STEEL_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("steel_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item STEEL_PICKAXE = new PickaxeItem(STEEL_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("steel_pickaxe");
-    public static final Item STEEL_SHOVEL = new ShovelItem(STEEL_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("steel_shovel");
-    public static final Item STEEL_AXE = new AxeItem(STEEL_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("steel_axe");
-    public static final Item STEEL_HOE = new HoeItem(STEEL_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("steel_hoe");
+    public static final RegistryObject<Item> STEEL_SWORD = ITEMS.register("steel_sword", () -> new SwordItem(STEEL_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> STEEL_PICKAXE = ITEMS.register("steel_pickaxe", () -> new PickaxeItem(STEEL_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> STEEL_SHOVEL = ITEMS.register("steel_shovel", () -> new ShovelItem(STEEL_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> STEEL_AXE = ITEMS.register("steel_axe", () -> new AxeItem(STEEL_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> STEEL_HOE = ITEMS.register("steel_hoe", () -> new HoeItem(STEEL_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Tungsten Steel
-    public static final Item TUNGSTEN_SWORD = new SwordItem(TUNGSTEN_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("tungsten_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item TUNGSTEN_PICKAXE = new PickaxeItem(TUNGSTEN_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("tungsten_pickaxe");
-    public static final Item TUNGSTEN_SHOVEL = new ShovelItem(TUNGSTEN_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("tungsten_shovel");
-    public static final Item TUNGSTEN_AXE = new AxeItem(TUNGSTEN_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("tungsten_axe");
-    public static final Item TUNGSTEN_HOE = new HoeItem(TUNGSTEN_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("tungsten_hoe");
+    public static final RegistryObject<Item> TUNGSTEN_SWORD = ITEMS.register("tungsten_sword", () -> new SwordItem(TUNGSTEN_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> TUNGSTEN_PICKAXE = ITEMS.register("tungsten_pickaxe", () -> new PickaxeItem(TUNGSTEN_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> TUNGSTEN_SHOVEL = ITEMS.register("tungsten_shovel", () -> new ShovelItem(TUNGSTEN_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> TUNGSTEN_AXE = ITEMS.register("tungsten_axe", () -> new AxeItem(TUNGSTEN_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> TUNGSTEN_HOE = ITEMS.register("tungsten_hoe", () -> new HoeItem(TUNGSTEN_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Uranium
-    public static final Item URANIUM_SWORD = new SwordItem(URANIUM_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("uranium_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item URANIUM_PICKAXE = new PickaxeItem(URANIUM_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("uranium_pickaxe");
-    public static final Item URANIUM_SHOVEL = new ShovelItem(URANIUM_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("uranium_shovel");
-    public static final Item URANIUM_AXE = new AxeItem(URANIUM_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("uranium_axe");
-    public static final Item URANIUM_HOE = new HoeItem(URANIUM_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("uranium_hoe");
+    public static final RegistryObject<Item> URANIUM_SWORD = ITEMS.register("uranium_sword", () -> new SwordItem(URANIUM_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> URANIUM_PICKAXE = ITEMS.register("uranium_pickaxe", () -> new PickaxeItem(URANIUM_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> URANIUM_SHOVEL = ITEMS.register("uranium_shovel", () -> new ShovelItem(URANIUM_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> URANIUM_AXE = ITEMS.register("uranium_axe", () -> new AxeItem(URANIUM_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> URANIUM_HOE = ITEMS.register("uranium_hoe", () -> new HoeItem(URANIUM_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Ruby
-    public static final Item RUBY_SWORD = new SwordItem(RUBY_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("ruby_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item RUBY_PICKAXE = new PickaxeItem(RUBY_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("ruby_pickaxe");
-    public static final Item RUBY_SHOVEL = new ShovelItem(RUBY_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("ruby_shovel");
-    public static final Item RUBY_AXE = new AxeItem(RUBY_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("ruby_axe");
-    public static final Item RUBY_HOE = new HoeItem(RUBY_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("ruby_hoe");
+    public static final RegistryObject<Item> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new SwordItem(RUBY_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(RUBY_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(RUBY_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(RUBY_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(RUBY_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Amethyst
-    public static final Item AMETHYST_SWORD = new SwordItem(AMETHYST_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("amethyst_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item AMETHYST_PICKAXE = new PickaxeItem(AMETHYST_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("amethyst_pickaxe");
-    public static final Item AMETHYST_SHOVEL = new ShovelItem(AMETHYST_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("amethyst_shovel");
-    public static final Item AMETHYST_AXE = new AxeItem(AMETHYST_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("amethyst_axe");
-    public static final Item AMETHYST_HOE = new HoeItem(AMETHYST_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("amethyst_hoe");
+    public static final RegistryObject<Item> AMETHYST_SWORD = ITEMS.register("amethyst_sword", () -> new SwordItem(AMETHYST_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> AMETHYST_PICKAXE = ITEMS.register("amethyst_pickaxe", () -> new PickaxeItem(AMETHYST_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> AMETHYST_SHOVEL = ITEMS.register("amethyst_shovel", () -> new ShovelItem(AMETHYST_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> AMETHYST_AXE = ITEMS.register("amethyst_axe", () -> new AxeItem(AMETHYST_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> AMETHYST_HOE = ITEMS.register("amethyst_hoe", () -> new HoeItem(AMETHYST_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Aquamarine
-    public static final Item AQUAMARINE_SWORD = new SwordItem(AQUAMARINE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("aquamarine_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item AQUAMARINE_PICKAXE = new PickaxeItem(AQUAMARINE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("aquamarine_pickaxe");
-    public static final Item AQUAMARINE_SHOVEL = new ShovelItem(AQUAMARINE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("aquamarine_shovel");
-    public static final Item AQUAMARINE_AXE = new AxeItem(AQUAMARINE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("aquamarine_axe");
-    public static final Item AQUAMARINE_HOE = new HoeItem(AQUAMARINE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("aquamarine_hoe");
+    public static final RegistryObject<Item> AQUAMARINE_SWORD = ITEMS.register("aquamarine_sword", () -> new SwordItem(AQUAMARINE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> AQUAMARINE_PICKAXE = ITEMS.register("aquamarine_pickaxe", () -> new PickaxeItem(AQUAMARINE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> AQUAMARINE_SHOVEL = ITEMS.register("aquamarine_shovel", () -> new ShovelItem(AQUAMARINE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> AQUAMARINE_AXE = ITEMS.register("aquamarine_axe", () -> new AxeItem(AQUAMARINE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> AQUAMARINE_HOE = ITEMS.register("aquamarine_hoe", () -> new HoeItem(AQUAMARINE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Saphire
-    public static final Item SAPHIRE_SWORD = new SwordItem(SAPHIRE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("saphire_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item SAPHIRE_PICKAXE = new PickaxeItem(SAPHIRE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("saphire_pickaxe");
-    public static final Item SAPHIRE_SHOVEL = new ShovelItem(SAPHIRE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("saphire_shovel");
-    public static final Item SAPHIRE_AXE = new AxeItem(SAPHIRE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("saphire_axe");
-    public static final Item SAPHIRE_HOE = new HoeItem(SAPHIRE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("saphire_hoe");
+    public static final RegistryObject<Item> SAPHIRE_SWORD = ITEMS.register("saphire_sword", () -> new SwordItem(SAPHIRE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> SAPHIRE_PICKAXE = ITEMS.register("saphire_pickaxe", () -> new PickaxeItem(SAPHIRE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> SAPHIRE_SHOVEL = ITEMS.register("saphire_shovel", () -> new ShovelItem(SAPHIRE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> SAPHIRE_AXE = ITEMS.register("saphire_axe", () -> new AxeItem(SAPHIRE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> SAPHIRE_HOE = ITEMS.register("saphire_hoe", () -> new HoeItem(SAPHIRE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Malachite
-    public static final Item MALACHITE_SWORD = new SwordItem(MALACHITE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("malachite_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item MALACHITE_PICKAXE = new PickaxeItem(MALACHITE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("malachite_pickaxe");
-    public static final Item MALACHITE_SHOVEL = new ShovelItem(MALACHITE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("malachite_shovel");
-    public static final Item MALACHITE_AXE = new AxeItem(MALACHITE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("malachite_axe");
-    public static final Item MALACHITE_HOE = new HoeItem(MALACHITE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("malachite_hoe");
+    public static final RegistryObject<Item> MALACHITE_SWORD = ITEMS.register("malachite_sword", () -> new SwordItem(MALACHITE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> MALACHITE_PICKAXE = ITEMS.register("malachite_pickaxe", () -> new PickaxeItem(MALACHITE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> MALACHITE_SHOVEL = ITEMS.register("malachite_shovel", () -> new ShovelItem(MALACHITE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> MALACHITE_AXE = ITEMS.register("malachite_axe", () -> new AxeItem(MALACHITE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> MALACHITE_HOE = ITEMS.register("malachite_hoe", () -> new HoeItem(MALACHITE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Topaz
-    public static final Item TOPAZ_SWORD = new SwordItem(TOPAZ_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("topaz_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item TOPAZ_PICKAXE = new PickaxeItem(TOPAZ_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("topaz_pickaxe");
-    public static final Item TOPAZ_SHOVEL = new ShovelItem(TOPAZ_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("topaz_shovel");
-    public static final Item TOPAZ_AXE = new AxeItem(TOPAZ_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("topaz_axe");
-    public static final Item TOPAZ_HOE = new HoeItem(TOPAZ_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("topaz_hoe");
+    public static final RegistryObject<Item> TOPAZ_SWORD = ITEMS.register("topaz_sword", () -> new SwordItem(TOPAZ_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> TOPAZ_PICKAXE = ITEMS.register("topaz_pickaxe", () -> new PickaxeItem(TOPAZ_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> TOPAZ_SHOVEL = ITEMS.register("topaz_shovel", () -> new ShovelItem(TOPAZ_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> TOPAZ_AXE = ITEMS.register("topaz_axe", () -> new AxeItem(TOPAZ_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> TOPAZ_HOE = ITEMS.register("topaz_hoe", () -> new HoeItem(TOPAZ_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Amber
-    public static final Item AMBER_SWORD = new SwordItem(AMBER_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("amber_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item AMBER_PICKAXE = new PickaxeItem(AMBER_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("amber_pickaxe");
-    public static final Item AMBER_SHOVEL = new ShovelItem(AMBER_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("amber_shovel");
-    public static final Item AMBER_AXE = new AxeItem(AMBER_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("amber_axe");
-    public static final Item AMBER_HOE = new HoeItem(AMBER_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("amber_hoe");
+    public static final RegistryObject<Item> AMBER_SWORD = ITEMS.register("amber_sword", () -> new SwordItem(AMBER_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> AMBER_PICKAXE = ITEMS.register("amber_pickaxe", () -> new PickaxeItem(AMBER_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> AMBER_SHOVEL = ITEMS.register("amber_shovel", () -> new ShovelItem(AMBER_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> AMBER_AXE = ITEMS.register("amber_axe", () -> new AxeItem(AMBER_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> AMBER_HOE = ITEMS.register("amber_hoe", () -> new HoeItem(AMBER_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Beryl
-    public static final Item BERYL_SWORD = new SwordItem(BERYL_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("beryl_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item BERYL_PICKAXE = new PickaxeItem(BERYL_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("beryl_pickaxe");
-    public static final Item BERYL_SHOVEL = new ShovelItem(BERYL_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("beryl_shovel");
-    public static final Item BERYL_AXE = new AxeItem(BERYL_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("beryl_axe");
-    public static final Item BERYL_HOE = new HoeItem(BERYL_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("beryl_hoe");
+    public static final RegistryObject<Item> BERYL_SWORD = ITEMS.register("beryl_sword", () -> new SwordItem(BERYL_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> BERYL_PICKAXE = ITEMS.register("beryl_pickaxe", () -> new PickaxeItem(BERYL_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> BERYL_SHOVEL = ITEMS.register("beryl_shovel", () -> new ShovelItem(BERYL_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> BERYL_AXE = ITEMS.register("beryl_axe", () -> new AxeItem(BERYL_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> BERYL_HOE = ITEMS.register("beryl_hoe", () -> new HoeItem(BERYL_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Tanzanite
-    public static final Item TANZANITE_SWORD = new SwordItem(TANZANITE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("tanzanite_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item TANZANITE_PICKAXE = new PickaxeItem(TANZANITE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("tanzanite_pickaxe");
-    public static final Item TANZANITE_SHOVEL = new ShovelItem(TANZANITE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("tanzanite_shovel");
-    public static final Item TANZANITE_AXE = new AxeItem(TANZANITE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("tanzanite_axe");
-    public static final Item TANZANITE_HOE = new HoeItem(TANZANITE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("tanzanite_hoe");
+    public static final RegistryObject<Item> TANZANITE_SWORD = ITEMS.register("tanzanite_sword", () -> new SwordItem(TANZANITE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> TANZANITE_PICKAXE = ITEMS.register("tanzanite_pickaxe", () -> new PickaxeItem(TANZANITE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> TANZANITE_SHOVEL = ITEMS.register("tanzanite_shovel", () -> new ShovelItem(TANZANITE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> TANZANITE_AXE = ITEMS.register("tanzanite_axe", () -> new AxeItem(TANZANITE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> TANZANITE_HOE = ITEMS.register("tanzanite_hoe", () -> new HoeItem(TANZANITE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Ultrinium
-    public static final Item ULTRINIUM_SWORD = new SwordItem(ULTRINIUM_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("ultrinium_sword"); // ModItemTier.ULTRINIUM);
-    public static final Item ULTRINIUM_PICKAXE = new PickaxeItem(ULTRINIUM_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("ultrinium_pickaxe");
-    public static final Item ULTRINIUM_SHOVEL = new ShovelItem(ULTRINIUM_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("ultrinium_shovel");
-    public static final Item ULTRINIUM_AXE = new AxeItem(ULTRINIUM_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("ultrinium_axe");
-    public static final Item ULTRINIUM_HOE = new HoeItem(ULTRINIUM_ITEM_TIER, 3955, -2.0f, new Item.Properties().group(Groups.TOOLS)).setRegistryName("ultrinium_hoe");
+    public static final RegistryObject<Item> ULTRINIUM_SWORD = ITEMS.register("ultrinium_sword", () -> new SwordItem(ULTRINIUM_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final RegistryObject<Item> ULTRINIUM_PICKAXE = ITEMS.register("ultrinium_pickaxe", () -> new PickaxeItem(ULTRINIUM_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> ULTRINIUM_SHOVEL = ITEMS.register("ultrinium_shovel", () -> new ShovelItem(ULTRINIUM_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> ULTRINIUM_AXE = ITEMS.register("ultrinium_axe", () -> new AxeItem(ULTRINIUM_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final RegistryObject<Item> ULTRINIUM_HOE = ITEMS.register("ultrinium_hoe", () -> new HoeItem(ULTRINIUM_ITEM_TIER, 3955, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Infinity
-    public static final Item INFINITY_SWORD = new InfinitySwordItem();
-    public static final Item INFINITY_PICKAXE = new InfinityPickaxeItem();
-    public static final Item INFINITY_SHOVEL = new InfinityShovelItem();
-    public static final Item INFINITY_AXE = new InfinityAxeItem();
-    public static final Item INFINITY_HOE = new InfinityHoeItem();
+    public static final RegistryObject<Item> INFINITY_SWORD = ITEMS.register("infinity_sword", InfinitySwordItem::new);
+    public static final RegistryObject<Item> INFINITY_PICKAXE = ITEMS.register("infinity_pickaxe", InfinityPickaxeItem::new);
+    public static final RegistryObject<Item> INFINITY_SHOVEL = ITEMS.register("infinity_shovel", InfinityShovelItem::new);
+    public static final RegistryObject<Item> INFINITY_AXE = ITEMS.register("infinity_axe", InfinityAxeItem::new);
+    public static final RegistryObject<Item> INFINITY_HOE = ITEMS.register("infinity_hoe", InfinityHoeItem::new);
 
-    @SubscribeEvent
-    public static void registerItems(final RegistryEvent.Register<Item> event) {
-        Class<ItemInit> clazz = ItemInit.class;
-        Field[] fields = clazz.getFields();
-        for (Field field : fields) {
-            if (Item.class.isAssignableFrom(field.getType())) {
-                try {
-                    Item item = (Item) field.get(null);
-//                    field.setAccessible(true);
-//                    field.set(null, item.setRegistryName(QForgeUtils.MOD_ID, field.getName().toLowerCase()));
-                    event.getRegistry().register(item);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (Throwable t) {
-                    throw new RuntimeException("Error occurred when reading field, or registering item: " + field.getName(), t);
-                }
-            }
-        }
-    }
+//    @SubscribeEvent
+//    public static void registerItems(final RegistryEvent.Register<Item> event) {
+//        Class<ItemInit> clazz = ItemInit.class;
+//        Field[] fields = clazz.getFields();
+//        for (Field field : fields) {
+//            if (Item.class.isAssignableFrom(field.getType())) {
+//                try {
+//                    Item item = (Item) field.get(null);
+////                    field.setAccessible(true);
+////                    field.set(null, item.setRegistryName(QForgeUtils.MOD_ID, field.getName().toLowerCase()));
+//                    event.getRegistry().register(item);
+//                } catch (IllegalAccessException e) {
+//                    e.printStackTrace();
+//                } catch (Throwable t) {
+//                    throw new RuntimeException("Error occurred when reading field, or registering item: " + field.getName(), t);
+//                }
+//            }
+//        }
+//    }
 }

@@ -26,8 +26,6 @@ import java.util.List;
 public class WandItem extends Item {
     public WandItem() {
         super(new Item.Properties().group(Groups.OVERPOWERED));
-
-        setRegistryName("wand");
     }
 
     @Override

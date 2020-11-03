@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class FoodItemGroup extends ItemGroup {
-    public static final FoodItemGroup instance = new FoodItemGroup(ItemGroup.GROUPS.length, "food");
+    public static final FoodItemGroup instance = new FoodItemGroup(ItemGroup.GROUPS.length, "qforgemod_food");
 
     public FoodItemGroup(int index, String label) {
         super(index, label);
@@ -14,6 +14,6 @@ public class FoodItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.CHEESE_BURGER);
+        return new ItemStack(ItemInit.CHEESE_BURGER.get());
     }
 }

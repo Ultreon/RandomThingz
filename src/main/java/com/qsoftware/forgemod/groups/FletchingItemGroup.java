@@ -8,7 +8,7 @@ import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 public class FletchingItemGroup extends ItemGroup {
-    public static final FletchingItemGroup instance = new FletchingItemGroup(ItemGroup.GROUPS.length, "fletching_tab");
+    public static final FletchingItemGroup instance = new FletchingItemGroup(ItemGroup.GROUPS.length, "qforgemod_fletching");
 
     public FletchingItemGroup(int index, String label) {
         super(index, label);

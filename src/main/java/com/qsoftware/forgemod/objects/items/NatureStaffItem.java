@@ -30,8 +30,6 @@ import java.util.Optional;
 public class NatureStaffItem extends Item {
     public NatureStaffItem() {
         super(new Item.Properties().group(Groups.SPECIALS));
-
-        this.setRegistryName("nature_staff");
     }
 
     /**

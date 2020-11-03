@@ -16,7 +16,5 @@
   "block.qforgemod.elevator_light_gray": "Açık Gri Asansör",
   "block.qforgemod.elevator_yellow": "Sarı Asansör",
 
-  "qforgemod.subtitle.teleport": "Asansör Kullanımı",
-
-  "itemGroup.elevators_tab": "Elevators"
+  "itemGroup.qforgemod_elevators": "Elevators"
 }

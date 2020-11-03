@@ -7,7 +7,7 @@ import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 public class ToolsItemGroup extends ItemGroup {
-    public static final ToolsItemGroup instance = new ToolsItemGroup(ItemGroup.GROUPS.length, "tools_tab");
+    public static final ToolsItemGroup instance = new ToolsItemGroup(ItemGroup.GROUPS.length, "qforgemod_tools");
 
     public ToolsItemGroup(int index, String label) {
         super(index, label);

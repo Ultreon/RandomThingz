@@ -16,25 +16,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.lang.reflect.Field;
 
-@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus= Mod.EventBusSubscriber.Bus.MOD)
+//@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus= Mod.EventBusSubscriber.Bus.MOD)
 public class BiomeInit {
-    public static final Biome EXAMPLE_BIOME = new ExampleBiome().build();
-
-    @SubscribeEvent
-    public static void registerBiomes(final RegistryEvent.Register<Biome> event) {
-        Class<BlockInit> clazz = BlockInit.class;
-        Field[] fields = clazz.getFields();
-        for (Field field : fields) {
-            if (Biome.class.isAssignableFrom(field.getType())) {
-                try {
-                    Biome item = (Biome) field.get(null);
-                    event.getRegistry().register(item);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (Throwable t) {
-                    throw new RuntimeException("Error occurred when reading field, or registering item: " + field.getName(), t);
-                }
-            }
-        }
-    }
+    public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, QForgeUtils.MOD_ID);
+    public static final RegistryObject<Biome> EXAMPLE_BIOME = BIOMES.register("example_biome", () -> new ExampleBiome().build());
 }

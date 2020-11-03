@@ -7,7 +7,7 @@ import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 public class ArmorsItemGroup extends ItemGroup {
-    public static final ArmorsItemGroup instance = new ArmorsItemGroup(ItemGroup.GROUPS.length, "armors_tab");
+    public static final ArmorsItemGroup instance = new ArmorsItemGroup(ItemGroup.GROUPS.length, "qforgemod_armors");
 
     public ArmorsItemGroup(int index, String label) {
         super(index, label);

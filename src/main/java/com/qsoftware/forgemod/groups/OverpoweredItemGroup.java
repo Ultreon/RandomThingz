@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class OverpoweredItemGroup extends ItemGroup {
-    public static final OverpoweredItemGroup instance = new OverpoweredItemGroup(ItemGroup.GROUPS.length, "gems_tab");
+    public static final OverpoweredItemGroup instance = new OverpoweredItemGroup(ItemGroup.GROUPS.length, "qforgemod_gems");
 
     public OverpoweredItemGroup(int index, String label) {
         super(index, label);

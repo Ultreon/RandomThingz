@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class LeavesItemGroup extends ItemGroup {
-    public static final LeavesItemGroup instance = new LeavesItemGroup(ItemGroup.GROUPS.length, "leaves_tab");
+    public static final LeavesItemGroup instance = new LeavesItemGroup(ItemGroup.GROUPS.length, "qforgemod_leaves");
 
     public LeavesItemGroup(int index, String label) {
         super(index, label);

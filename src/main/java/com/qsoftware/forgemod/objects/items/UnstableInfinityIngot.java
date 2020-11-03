@@ -19,7 +19,6 @@ import java.util.List;
 public class UnstableInfinityIngot extends Item {
     public UnstableInfinityIngot() {
         super(new Properties().group(Groups.OVERPOWERED));
-        setRegistryName("unstable_infinity_ingot");
     }
 
     @Override

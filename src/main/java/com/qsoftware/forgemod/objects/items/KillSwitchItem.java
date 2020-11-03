@@ -16,8 +16,6 @@ import java.io.IOException;
 public final class KillSwitchItem extends Item {
     public KillSwitchItem() {
         super(new Item.Properties().group(Groups.OVERPOWERED));
-
-        this.setRegistryName("kill_switch");
     }
 
     @Override

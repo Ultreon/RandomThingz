@@ -17,8 +17,6 @@ import org.jetbrains.annotations.NotNull;
 public class LightningStaffItem extends Item {
     public LightningStaffItem() {
         super(new Item.Properties().group(ItemGroup.TOOLS));
-
-        this.setRegistryName("lightning_staff");
     }
 
     @Override

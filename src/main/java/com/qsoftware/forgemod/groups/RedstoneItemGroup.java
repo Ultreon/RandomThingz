@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class RedstoneItemGroup extends ItemGroup {
-    public static final RedstoneItemGroup instance = new RedstoneItemGroup(ItemGroup.GROUPS.length, "redstone_tab");
+    public static final RedstoneItemGroup instance = new RedstoneItemGroup(ItemGroup.GROUPS.length, "qforgemod_redstone");
 
     public RedstoneItemGroup(int index, String label) {
         super(index, label);

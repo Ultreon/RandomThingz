@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class DungeonsItemGroup extends ItemGroup {
-    public static final DungeonsItemGroup instance = new DungeonsItemGroup(ItemGroup.GROUPS.length, "dungeons_tab");
+    public static final DungeonsItemGroup instance = new DungeonsItemGroup(ItemGroup.GROUPS.length, "qforgemod_dungeons");
 
     public DungeonsItemGroup(int index, String label) {
         super(index, label);
@@ -15,6 +15,6 @@ public class DungeonsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.DUNGEONS);
+        return new ItemStack(ItemInit.DUNGEONS.get());
     }
 }

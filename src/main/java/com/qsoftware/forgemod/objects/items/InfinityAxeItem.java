@@ -47,11 +47,9 @@ public class InfinityAxeItem extends AxeItem {
 
             @Override
             public @NotNull Ingredient getRepairMaterial() {
-                return Ingredient.fromItems(ItemInit.INFINITY_INGOT);
+                return Ingredient.fromItems(ItemInit.INFINITY_INGOT.get());
             }
         }, 1, -0.0f, new Properties().group(Groups.OVERPOWERED));
-
-        this.setRegistryName("infinity_axe");
     }
 
     @Override
@@ -77,7 +75,7 @@ public class InfinityAxeItem extends AxeItem {
                 victim.attackEntityFrom(new DamageSourceInfinitySword(player).setDamageBypassesArmor(), 4.0F);
                 return true;
             }
-            if (pvp.getHeldItem(Hand.MAIN_HAND) != null && pvp.getHeldItem(Hand.MAIN_HAND).getItem() == ItemInit.INFINITY_SWORD && pvp.isHandActive()) {
+            if (pvp.getHeldItem(Hand.MAIN_HAND) != null && pvp.getHeldItem(Hand.MAIN_HAND).getItem() == ItemInit.INFINITY_SWORD.get() && pvp.isHandActive()) {
                 return true;
             }
         }
@@ -94,10 +92,10 @@ public class InfinityAxeItem extends AxeItem {
 //
 //            // Check Armor
 //            if (!armor.isEmpty()) {
-//                if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS)) {
-//                    if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS)) {
-//                        if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE)) {
-//                            if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET)) {
+//                if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS.get())) {
+//                    if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS.get())) {
+//                        if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE.get())) {
+//                            if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET.get())) {
 //                                return false;
 //                            }
 //                        }
@@ -116,10 +114,10 @@ public class InfinityAxeItem extends AxeItem {
 
         // Check Armor
         if (!armor.isEmpty()) {
-            if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS)) {
-                if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS)) {
-                    if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE)) {
-                        if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET)) {
+            if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS.get())) {
+                if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS.get())) {
+                    if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE.get())) {
+                        if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET.get())) {
                             return true;
                         }
                     }
@@ -155,10 +153,10 @@ public class InfinityAxeItem extends AxeItem {
 //
 //                // Check Armor
 //                if (!armor.isEmpty()) {
-//                    if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS)) {
-//                        if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS)) {
-//                            if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE)) {
-//                                if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET)) {
+//                    if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS.get())) {
+//                        if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS.get())) {
+//                            if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE.get())) {
+//                                if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET.get())) {
 //                                    return true;
 //                                }
 //                            }

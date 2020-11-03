@@ -21,8 +21,6 @@ import java.util.Date;
 public class BanHammerItem extends Item {
     public BanHammerItem() {
         super(new Item.Properties().group(Groups.OVERPOWERED));
-
-        this.setRegistryName("ban_hammer");
     }
 
     @Override

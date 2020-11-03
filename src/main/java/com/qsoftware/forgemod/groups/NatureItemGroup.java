@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class NatureItemGroup extends ItemGroup {
-    public static final NatureItemGroup instance = new NatureItemGroup(ItemGroup.GROUPS.length, "nature_tab");
+    public static final NatureItemGroup instance = new NatureItemGroup(ItemGroup.GROUPS.length, "qforgemod_nature");
 
     public NatureItemGroup(int index, String label) {
         super(index, label);
@@ -14,6 +14,6 @@ public class NatureItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.EUCALYPTUS_LEAF);
+        return new ItemStack(ItemInit.EUCALYPTUS_LEAF.get());
     }
 }

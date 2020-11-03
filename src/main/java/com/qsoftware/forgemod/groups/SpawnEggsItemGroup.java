@@ -8,7 +8,7 @@ import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 public class SpawnEggsItemGroup extends ItemGroup {
-    public static final SpawnEggsItemGroup instance = new SpawnEggsItemGroup(ItemGroup.GROUPS.length, "spawn_eggs_tab");
+    public static final SpawnEggsItemGroup instance = new SpawnEggsItemGroup(ItemGroup.GROUPS.length, "qforgemod_spawn_eggs");
 
     public SpawnEggsItemGroup(int index, String label) {
         super(index, label);
@@ -16,6 +16,6 @@ public class SpawnEggsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.MOOBLOOM_SPAWN_EGG);
+        return new ItemStack(ItemInit.MOOBLOOM_SPAWN_EGG.get());
     }
 }

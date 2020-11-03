@@ -51,7 +51,7 @@ public class QForgeUtils
     public static final String MOD_ID = "qforgemod";
     public static final String MOD_NAME = "QForgeUtils";
     @SuppressWarnings("unused")
-    public static final String MOD_VERSION = "1.1-beta3";
+    public static final String MOD_VERSION = "1.1-beta4";
 
     // Other
 //    @SuppressWarnings({"unused", "RedundantSuppression"})
@@ -298,10 +298,10 @@ public class QForgeUtils
 //        PROXY.onSetupClient();
 
         // do something that can only be done on the client
-        RenderTypeLookup.setRenderLayer(BlockInit.LAB_DOOR, RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.SHOPPING_DOOR, RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.IRON_GLASS_DOOR, RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.IRON_BARRIER_DOOR, RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.LAB_DOOR.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.SHOPPING_DOOR.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.IRON_GLASS_DOOR.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.IRON_BARRIER_DOOR.get(), RenderType.getTranslucent());
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
@@ -314,15 +314,15 @@ public class QForgeUtils
 //        MinecraftForge.EVENT_BUS.register(new BlockListener());
         MinecraftForge.EVENT_BUS.register(this);
         event.enqueueWork(() -> {
-            GlobalEntityTypeAttributes.put(EntityTypeInit.OX_ENTITY, OxEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.HOG_ENTITY, HogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK_ENTITY, DuckEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.BISON_ENTITY, BisonEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM_ENTITY, MoobloomEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.WRAT_HOG_ENTITY, WratHogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN_ENTITY, IceEndermanEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER_ENTITY, FireCreeperEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.GLOW_SQUID_ENTITY, GlowSquidEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.OX_ENTITY.get(), OxEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.HOG_ENTITY.get(), HogEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK_ENTITY.get(), DuckEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.BISON_ENTITY.get(), BisonEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM_ENTITY.get(), MoobloomEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.WRAT_HOG_ENTITY.get(), WratHogEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN_ENTITY.get(), IceEndermanEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER_ENTITY.get(), FireCreeperEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.GLOW_SQUID_ENTITY.get(), GlowSquidEntity.registerAttributes().create());
         });
 
         // Furniture setup.

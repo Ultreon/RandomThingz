@@ -60,6 +60,6 @@ public class QuarryBlock extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return TileEntityTypesInit.QUARRY.create();
+        return TileEntityTypesInit.QUARRY.get().create();
     }
 }

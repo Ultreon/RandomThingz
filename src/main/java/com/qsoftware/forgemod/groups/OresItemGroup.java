@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class OresItemGroup extends ItemGroup {
-    public static final OresItemGroup instance = new OresItemGroup(ItemGroup.GROUPS.length, "ores_tab");
+    public static final OresItemGroup instance = new OresItemGroup(ItemGroup.GROUPS.length, "qforgemod_ores");
 
     public OresItemGroup(int index, String label) {
         super(index, label);
@@ -14,6 +14,6 @@ public class OresItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(BlockInit.RUBY_ORE);
+        return new ItemStack(BlockInit.RUBY_ORE.get());
     }
 }
