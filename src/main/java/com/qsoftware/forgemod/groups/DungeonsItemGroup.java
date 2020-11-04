@@ -15,6 +15,6 @@ public class DungeonsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.DUNGEONS.get());
+        return new ItemStack(ItemInit.DUNGEONS);
     }
 }

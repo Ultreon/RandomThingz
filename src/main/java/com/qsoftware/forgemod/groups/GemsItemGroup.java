@@ -15,6 +15,6 @@ public class GemsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.RUBY.get());
+        return new ItemStack(ItemInit.RUBY);
     }
 }

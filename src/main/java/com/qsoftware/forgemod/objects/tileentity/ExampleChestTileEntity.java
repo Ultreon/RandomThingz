@@ -51,7 +51,7 @@ public class ExampleChestTileEntity extends LockableLootTileEntity {
     }
 
     public ExampleChestTileEntity() {
-        this(TileEntityTypesInit.EXAMPLE_CHEST.get());
+        this(TileEntityTypesInit.EXAMPLE_CHEST);
     }
 
     @Override

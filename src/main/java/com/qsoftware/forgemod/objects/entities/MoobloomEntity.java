@@ -165,7 +165,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
             this.world.addEntity(cowentity);
 
             for(int i = 0; i < 5; ++i) {
-                this.world.addEntity(new ItemEntity(this.world, this.getPosX(), this.getPosYHeight(1.0D), this.getPosZ(), new ItemStack(BlockInit.BUTTERCUP.get())));
+                this.world.addEntity(new ItemEntity(this.world, this.getPosX(), this.getPosYHeight(1.0D), this.getPosZ(), new ItemStack(BlockInit.BUTTERCUP)));
             }
         }
 
@@ -213,7 +213,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
     }
 
     public MoobloomEntity func_241840_a(@NotNull ServerWorld p_241840_1_, @NotNull AgeableEntity p_241840_2_) {
-        return EntityTypeInit.MOOBLOOM_ENTITY.get().create(p_241840_1_);
+        return EntityTypeInit.MOOBLOOM_ENTITY.create(p_241840_1_);
     }
 
     @Override
@@ -246,7 +246,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
 
             java.util.List<ItemStack> items = new java.util.ArrayList<>();
             for (int i = 0; i < 5; ++i) {
-                items.add(new ItemStack(BlockInit.BUTTERCUP.get()));
+                items.add(new ItemStack(BlockInit.BUTTERCUP));
             }
 
             return items;

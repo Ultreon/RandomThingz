@@ -18,10 +18,10 @@ public class ItemInitNew {
     //     Block Items     //
     /////////////////////////
 //    public static final DeferredRegister<Item> BLOCK_ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, QForgeUtils.MOD_ID);
-//    public static final RegistryObject<Item> TOPAZ_ORE_ITEM = BLOCK_ITEMS.register("topaz_ore", () -> new BlockItem(BlockInitNew.TOPAZ_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> TOPAZ_BLOCK_ITEM = BLOCK_ITEMS.register("topaz_block", () -> new BlockItem(BlockInitNew.TOPAZ_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> AMBER_ORE_ITEM = BLOCK_ITEMS.register("amber_ore", () -> new BlockItem(BlockInitNew.AMBER_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> AMBER_BLOCK_ITEM = BLOCK_ITEMS.register("amber_block", () -> new BlockItem(BlockInitNew.AMBER_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> BERYL_ORE_ITEM = BLOCK_ITEMS.register("beryl_ore", () -> new BlockItem(BlockInitNew.BERYL_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> BERYL_BLOCK_ITEM = BLOCK_ITEMS.register("beryl_block", () -> new BlockItem(BlockInitNew.BERYL_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> TOPAZ_ORE_ITEM = BLOCK_ITEMS.register("topaz_ore", () -> new BlockItem(BlockInitNew.TOPAZ_ORE, new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> TOPAZ_BLOCK_ITEM = BLOCK_ITEMS.register("topaz_block", () -> new BlockItem(BlockInitNew.TOPAZ_BLOCK, new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> AMBER_ORE_ITEM = BLOCK_ITEMS.register("amber_ore", () -> new BlockItem(BlockInitNew.AMBER_ORE, new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> AMBER_BLOCK_ITEM = BLOCK_ITEMS.register("amber_block", () -> new BlockItem(BlockInitNew.AMBER_BLOCK, new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> BERYL_ORE_ITEM = BLOCK_ITEMS.register("beryl_ore", () -> new BlockItem(BlockInitNew.BERYL_ORE, new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> BERYL_BLOCK_ITEM = BLOCK_ITEMS.register("beryl_block", () -> new BlockItem(BlockInitNew.BERYL_BLOCK, new Item.Properties().group(Groups.ORES)));
 }

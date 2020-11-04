@@ -16,6 +16,6 @@ public class SpawnEggsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.MOOBLOOM_SPAWN_EGG.get());
+        return new ItemStack(ItemInit.MOOBLOOM_SPAWN_EGG);
     }
 }

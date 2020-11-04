@@ -26,6 +26,6 @@ public class WratHogEntity extends HogEntity {
     @Override
     @ParametersAreNonnullByDefault
     public WratHogEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.WRAT_HOG_ENTITY.get().create(this.world);
+        return EntityTypeInit.WRAT_HOG_ENTITY.create(this.world);
     }
 }

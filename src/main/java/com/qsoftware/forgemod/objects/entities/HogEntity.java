@@ -96,7 +96,7 @@ public class HogEntity extends PigEntity {
     @Override
     @ParametersAreNonnullByDefault
     public HogEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.HOG_ENTITY.get().create(this.world);
+        return EntityTypeInit.HOG_ENTITY.create(this.world);
     }
 
     @Override

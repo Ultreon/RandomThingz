@@ -14,6 +14,6 @@ public class FoodItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.CHEESE_BURGER.get());
+        return new ItemStack(ItemInit.CHEESE_BURGER);
     }
 }

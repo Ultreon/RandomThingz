@@ -14,6 +14,6 @@ public class MachinesItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(BlockInit.QUARRY_BLOCK.get());
+        return new ItemStack(BlockInit.QUARRY_BLOCK);
     }
 }

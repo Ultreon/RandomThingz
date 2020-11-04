@@ -14,6 +14,6 @@ public class OresItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(BlockInit.RUBY_ORE.get());
+        return new ItemStack(BlockInit.RUBY_ORE);
     }
 }

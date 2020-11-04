@@ -1,11 +1,6 @@
 package com.qsoftware.forgemod;
 
-import com.qsoftware.forgemod.config.DecorativeBlocksConfig;
-import com.qsoftware.forgemod.config.ElevatorsConfig;
-import com.qsoftware.forgemod.config.FurnitureConfig;
-import com.qsoftware.forgemod.config.GravestoneConfig;
 import com.qsoftware.forgemod.init.BlockInit;
-import com.qsoftware.forgemod.init.FeatureInit;
 import com.qsoftware.forgemod.init.ItemInit;
 import com.qsoftware.forgemod.init.renew.BlockInitNew;
 import com.qsoftware.forgemod.init.types.ContainerTypesInit;
@@ -16,7 +11,6 @@ import com.qsoftware.forgemod.world.gen.OreGen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.crash.CrashReport;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -182,10 +176,6 @@ public class QForgeUtils
 //        Registration.register();
 
         // Register pre-configs.
-        modLoadingContext.registerConfig(ModConfig.Type.COMMON, DecorativeBlocksConfig.COMMON_CONFIG, "decorativeBlocks-common.toml");
-        modLoadingContext.registerConfig(ModConfig.Type.CLIENT, FurnitureConfig.clientSpec, "furniture-client.toml");
-        modLoadingContext.registerConfig(ModConfig.Type.COMMON, FurnitureConfig.commonSpec, "furniture-common.toml");
-        modLoadingContext.registerConfig(ModConfig.Type.SERVER, ElevatorsConfig.SPEC, "elevators-server.toml");
 
 
         // Cursor registration.
@@ -217,13 +207,9 @@ public class QForgeUtils
 //        modEventBus.addListener(ClientSetup::init);
         modEventBus.addListener(this::loadComplete);
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::configEvent);
+//        modEventBus.addListener(this::configEvent);
         modEventBus.addListener(this::enqueueIMC);
         modEventBus.addListener(this::processIMC);
-
-        // Register post-configs.
-        modLoadingContext.registerConfig(ModConfig.Type.SERVER, GravestoneConfig.SERVER_SPEC, "gravestone-server.toml");
-        modLoadingContext.registerConfig(ModConfig.Type.CLIENT, GravestoneConfig.CLIENT_SPEC, "gravestone-client.toml");
 
         // Client-start.
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
@@ -246,19 +232,10 @@ public class QForgeUtils
 
     @OnlyIn(Dist.CLIENT)
     public void clientStart() {
-//        FMLJavaModLoadingContext.get().getModEventBus().addListener(QForgeUtils.this::clientOnlySetup);
+//        FMLJavaModLoadingContext.getModEventBus().addListener(QForgeUtils.this::clientOnlySetup);
     }
 
-    @SubscribeEvent
-    public void configEvent(ModConfig.ModConfigEvent event) {
-        if (event.getConfig().getType() == ModConfig.Type.SERVER) {
-            GravestoneConfig.loadServer();
-        } else if (event.getConfig().getType() == ModConfig.Type.CLIENT) {
-            GravestoneConfig.loadClient();
-        }
-    }
-
-//    @SubscribeEvent
+    //    @SubscribeEvent
 //    @OnlyIn(Dist.CLIENT)
 //    public void clientOnlySetup(FMLClientSetupEvent event) {
 //        ClientRegistry.bindTileEntityRenderer(GRAVESTONE_TILEENTITY, GravestoneRenderer::new);
@@ -313,10 +290,10 @@ public class QForgeUtils
 //        PROXY.onSetupClient();
 
         // do something that can only be done on the client
-        RenderTypeLookup.setRenderLayer(BlockInit.LAB_DOOR.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.SHOPPING_DOOR.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.IRON_GLASS_DOOR.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.IRON_BARRIER_DOOR.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.LAB_DOOR, RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.SHOPPING_DOOR, RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.IRON_GLASS_DOOR, RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.IRON_BARRIER_DOOR, RenderType.getTranslucent());
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
@@ -327,17 +304,21 @@ public class QForgeUtils
         // Register events.
 //        MinecraftForge.EVENT_BUS.register(new DeathListener());
 //        MinecraftForge.EVENT_BUS.register(new BlockListener());
-        MinecraftForge.EVENT_BUS.register(this);
+//        MinecraftForge.EVENT_BUS.register(this);
+
+        LOGGER.info("Common setup event.");
+        System.exit(0);
+
         event.enqueueWork(() -> {
-            GlobalEntityTypeAttributes.put(EntityTypeInit.OX_ENTITY.get(), OxEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.HOG_ENTITY.get(), HogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK_ENTITY.get(), DuckEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.BISON_ENTITY.get(), BisonEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM_ENTITY.get(), MoobloomEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.WRAT_HOG_ENTITY.get(), WratHogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN_ENTITY.get(), IceEndermanEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER_ENTITY.get(), FireCreeperEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.GLOW_SQUID_ENTITY.get(), GlowSquidEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.OX_ENTITY, OxEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.HOG_ENTITY, HogEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK_ENTITY, DuckEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.BISON_ENTITY, BisonEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM_ENTITY, MoobloomEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.WRAT_HOG_ENTITY, WratHogEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN_ENTITY, IceEndermanEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER_ENTITY, FireCreeperEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.GLOW_SQUID_ENTITY, GlowSquidEntity.registerAttributes().create());
         });
 
         // Furniture setup.
@@ -353,7 +334,7 @@ public class QForgeUtils
 
     private void processIMC(final InterModProcessEvent event) {
         LOGGER.info("Got IMC {}", event.getIMCStream().
-                map(m->m.getMessageSupplier().get()).
+                map(m->m.getMessageSupplier()).
                 collect(Collectors.toList()));
     }
 
@@ -370,9 +351,9 @@ public class QForgeUtils
 //            if (entry != null) {
 //                ModInfo info = entry.getInfo();
 //                if (info != null) {
-//                    Optional<? extends ModContainer> op = ModList.get().getModContainerById(info.getModId());
+//                    Optional<? extends ModContainer> op = ModList.getModContainerById(info.getModId());
 //                    if (op.isPresent()) {
-//                        boolean value = op.get().getCustomExtension(ExtensionPoint.CONFIGGUIFACTORY).isPresent();
+//                        boolean value = op.getCustomExtension(ExtensionPoint.CONFIGGUIFACTORY).isPresent();
 //                        String config = I18n.format("fml.menu.mods.config");
 //                        for (IGuiEventListener b : screen.children)
 //                            if (b instanceof Button && ((Button) b).getMessage().equals(config))
@@ -538,7 +519,7 @@ public class QForgeUtils
 //    }
 
     private void loadComplete(FMLLoadCompleteEvent event) {
-//        config.sync(FMLPaths.CONFIGDIR.get().resolve(MOD_ID + ".toml").toFile());
+//        config.sync(FMLPaths.CONFIGDIR.resolve(MOD_ID + ".toml").toFile());
 //        cursors.values().forEach(CursorConfig::getCursor); // force allocation
 
         LOGGER.info("LoadCompleteEvent: " + event);

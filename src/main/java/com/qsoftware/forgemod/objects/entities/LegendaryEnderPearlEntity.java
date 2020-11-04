@@ -31,15 +31,15 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
     }
 
     public LegendaryEnderPearlEntity(World worldIn, LivingEntity throwerIn) {
-        super(EntityTypeInit.LEGENDARY_ENDER_PEARL.get(), throwerIn, worldIn);
+        super(EntityTypeInit.LEGENDARY_ENDER_PEARL, throwerIn, worldIn);
     }
 
     public LegendaryEnderPearlEntity(World worldIn, double x, double y, double z) {
-        super(EntityTypeInit.LEGENDARY_ENDER_PEARL.get(), x, y, z, worldIn);
+        super(EntityTypeInit.LEGENDARY_ENDER_PEARL, x, y, z, worldIn);
     }
 
     protected Item getDefaultItem() {
-        return ItemInit.LEGENDARY_ENDER_PEARL.get();
+        return ItemInit.LEGENDARY_ENDER_PEARL;
     }
 
     /**

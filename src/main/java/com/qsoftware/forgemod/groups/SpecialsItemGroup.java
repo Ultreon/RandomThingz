@@ -14,6 +14,6 @@ public class SpecialsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.WALKING_STAFF.get());
+        return new ItemStack(ItemInit.WALKING_STAFF);
     }
 }

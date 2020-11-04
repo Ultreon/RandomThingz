@@ -39,7 +39,7 @@ public class OldWoodenCrate extends FaceableBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return TileEntityTypesInit.EXAMPLE_CHEST.get().create();
+        return TileEntityTypesInit.EXAMPLE_CHEST.create();
     }
 
     @Override

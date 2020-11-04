@@ -15,6 +15,6 @@ public class MiscellaneousItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.LEGENDARY_ENDER_PEARL.get());
+        return new ItemStack(ItemInit.LEGENDARY_ENDER_PEARL);
     }
 }
