@@ -7,6 +7,7 @@ import com.qsoftware.forgemod.QForgeUtils;
 import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.registration.WrappedDeferredRegister;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.text.ITextComponent;
@@ -27,7 +28,7 @@ public class ItemDeferredRegister extends WrappedDeferredRegister<Item> {
     }
 
     public static Item.Properties getMekBaseProperties() {
-        return new Item.Properties().group(Groups.MISC);
+        return new Item.Properties();
     }
 
     public ItemRegistryObject<Item> register(String name) {

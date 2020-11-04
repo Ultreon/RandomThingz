@@ -1,7 +1,0 @@
-{
-	"parent": "block/polished_andesite_stairs_inner",
-	"textures": {
-		"particle": "block/quartz_block_side",
-		"texture": "block/quartz_block_side"
-	}
-}
