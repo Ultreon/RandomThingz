@@ -94,7 +94,7 @@ public class ExampleChestContainer extends Container {
 
     @Override
     public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, BlockInit.WOODEN_CRATE);
+        return isWithinUsableDistance(canInteractWithCallable, playerIn, BlockInit.WOODEN_CRATE.get());
     }
 
     private static ExampleChestTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {

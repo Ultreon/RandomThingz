@@ -28,7 +28,7 @@ import java.util.function.Supplier;
 @SuppressWarnings({"unused", "NumericOverflow"})
 //@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 //@ObjectHolder(QForgeUtils.MOD_ID)
-public class ItemInit {
+public class ItemInit extends ObjectInit<Item> {
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeUtils.MOD_ID);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.init.types;
 
 import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.init.ObjectInit;
 import com.qsoftware.forgemod.objects.entities.*;
 import com.qsoftware.forgemod.objects.entities.baby.*;
 import com.qsoftware.forgemod.registration.impl.EntityTypeDeferredRegister;
@@ -8,8 +9,9 @@ import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.tileentity.TileEntityType;
 
-public class EntityTypeInit {
+public class EntityTypeInit extends ObjectInit<EntityType<?>> {
     private EntityTypeInit() {
     }
 

@@ -24,7 +24,7 @@ public class QuarryTileEntity extends TileEntity implements ITickableTileEntity 
     }
 
     public QuarryTileEntity() {
-        this(TileEntityTypesInit.QUARRY);
+        this(TileEntityTypesInit.QUARRY.get());
     }
 
     @Override

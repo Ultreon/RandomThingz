@@ -35,15 +35,15 @@ public class OreGen {
 
         // Loop all biomes for creating ore features.
         for (Biome biome : ForgeRegistries.BIOMES) {
-            createOreFeature(16, 5, 5, 64, 8, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.COPPER_ORE, biome);
-            createOreFeature(13, 5, 5, 42, 3, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.STEEL_ORE, biome);
-            createOreFeature(6, 5, 5, 23, 2, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.TUNGSTEN_ORE, biome);
-            createOreFeature(10, 1, 1, 8, 5, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.URANIUM_ORE, biome);
-            createOreFeature(6, 8, 3, 30, 3, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.RUBY_ORE, biome);
-            createOreFeature(8, 8, 6, 36, 4, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.AMETHYST_ORE, biome);
-            createOreFeature(4, 1, 1, 14, 2, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.TANZANITE_ORE, biome);
-            createOreFeature(3, 8, 0, 11, 1, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.ULTRINIUM_ORE, biome);
-            createOreFeature(1, 8, 0, 10, 1, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.INFINITY_ORE, biome);
+            createOreFeature(16, 5, 5, 64, 8, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.COPPER_ORE.get(), biome);
+            createOreFeature(13, 5, 5, 42, 3, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.STEEL_ORE.get(), biome);
+            createOreFeature(6, 5, 5, 23, 2, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.TUNGSTEN_ORE.get(), biome);
+            createOreFeature(10, 1, 1, 8, 5, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.URANIUM_ORE.get(), biome);
+            createOreFeature(6, 8, 3, 30, 3, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.RUBY_ORE.get(), biome);
+            createOreFeature(8, 8, 6, 36, 4, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.AMETHYST_ORE.get(), biome);
+            createOreFeature(4, 1, 1, 14, 2, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.TANZANITE_ORE.get(), biome);
+            createOreFeature(3, 8, 0, 11, 1, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.ULTRINIUM_ORE.get(), biome);
+            createOreFeature(1, 8, 0, 10, 1, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.INFINITY_ORE.get(), biome);
 
             // Bottom obsidian noise.
             createOreFeature(4096, 1, 0, 1, 3, OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, Blocks.OBSIDIAN, biome);

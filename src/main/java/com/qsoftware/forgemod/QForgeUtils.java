@@ -296,10 +296,11 @@ public class QForgeUtils
 //        PROXY.onSetupClient();
 
         // do something that can only be done on the client
-        RenderTypeLookup.setRenderLayer(BlockInit.LAB_DOOR, RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.SHOPPING_DOOR, RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.IRON_GLASS_DOOR, RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.IRON_BARRIER_DOOR, RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.LAB_DOOR.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.SHOPPING_DOOR.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.IRON_GLASS_DOOR.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.IRON_BARRIER_DOOR.get(), RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(BlockInit.BUTTERCUP.get(), RenderType.getTranslucent());
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 

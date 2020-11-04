@@ -23,8 +23,8 @@ public class ItemListener {
                 event.getEntityItem().getItem().getItem() == ItemInit.INFINITY_INGOT ||
                 event.getEntityItem().getItem().getItem() == ItemInit.INFINITY_NUGGET ||
                 event.getEntityItem().getItem().getItem() == ItemInit.INFINITY_DUST ||
-                event.getEntityItem().getItem().getItem() == BlockInit.INFINITY_BLOCK.asItem().getItem() ||
-                event.getEntityItem().getItem().getItem() == BlockInit.INFINITY_ORE.asItem().getItem()) {
+                event.getEntityItem().getItem().getItem() == BlockInit.INFINITY_BLOCK.get().asItem().getItem() ||
+                event.getEntityItem().getItem().getItem() == BlockInit.INFINITY_ORE.get().asItem().getItem()) {
             event.getEntityItem().setInvulnerable(true);
         }
     }

@@ -2,11 +2,13 @@ package com.qsoftware.forgemod.init.renew;
 
 import com.qsoftware.forgemod.QForgeUtils;
 import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ObjectInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
@@ -16,7 +18,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 @SuppressWarnings({"unused", "RedundantSuppression", "ConstantConditions"})
 @Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
-public class BlockInitNew {
+public class BlockInitNew extends ObjectInit<Block> {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Blocks     //
     ////////////////////

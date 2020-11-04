@@ -2,7 +2,9 @@ package com.qsoftware.forgemod.init.types;
 
 import com.qsoftware.forgemod.QForgeUtils;
 import com.qsoftware.forgemod.container.ExampleChestContainer;
+import com.qsoftware.forgemod.init.ObjectInit;
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,7 +16,7 @@ import net.minecraftforge.registries.ObjectHolder;
 
 import java.lang.reflect.Field;
 
-public class ContainerTypesInit {
+public class ContainerTypesInit extends ObjectInit<ContainerType<?>> {
     public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, QForgeUtils.MOD_ID);
 
     public static final RegistryObject<ContainerType<ExampleChestContainer>> EXAMPLE_CHEST = CONTAINER_TYPES.register("example_chest", () -> IForgeContainerType.create(ExampleChestContainer::new));
