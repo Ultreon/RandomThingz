@@ -3,15 +3,18 @@ package com.qsoftware.forgemod;
 import com.qsoftware.forgemod.init.BlockInit;
 import com.qsoftware.forgemod.init.ItemInit;
 import com.qsoftware.forgemod.init.renew.BlockInitNew;
+import com.qsoftware.forgemod.init.renew.ItemInitNew;
 import com.qsoftware.forgemod.init.types.ContainerTypesInit;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
 import com.qsoftware.forgemod.objects.entities.*;
+import com.qsoftware.forgemod.registries.EntityTypeInitNew;
 import com.qsoftware.forgemod.world.gen.OreGen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,7 +24,6 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -161,6 +163,10 @@ public class QForgeUtils
         return instance;
     }
 
+    public static ResourceLocation rl(String path) {
+        return new ResourceLocation(MOD_ID, path);
+    }
+
     /**
      * The QForgeUtils constructor for mod-loading.
      */
@@ -199,6 +205,8 @@ public class QForgeUtils
         BlockInitNew.BLOCKS.register(modEventBus);
         BlockInitNew.ITEMS.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
+        ItemInitNew.ITEMS.register(modEventBus);
+        EntityTypeInitNew.ENTITY_TYPES.register(modEventBus);
         EntityTypeInit.ENTITY_TYPES.register(modEventBus);
         ContainerTypesInit.CONTAINER_TYPES.register(modEventBus);
         TileEntityTypesInit.TILE_ENTITY_TYPES.register(modEventBus);
@@ -306,19 +314,19 @@ public class QForgeUtils
 //        MinecraftForge.EVENT_BUS.register(new BlockListener());
 //        MinecraftForge.EVENT_BUS.register(this);
 
-        LOGGER.info("Common setup event.");
-        System.exit(0);
+//        LOGGER.info("Common setup event.");
+//        System.exit(0);
 
         event.enqueueWork(() -> {
-            GlobalEntityTypeAttributes.put(EntityTypeInit.OX_ENTITY, OxEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.HOG_ENTITY, HogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK_ENTITY, DuckEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.BISON_ENTITY, BisonEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM_ENTITY, MoobloomEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.WRAT_HOG_ENTITY, WratHogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN_ENTITY, IceEndermanEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER_ENTITY, FireCreeperEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.GLOW_SQUID_ENTITY, GlowSquidEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.OX_ENTITY.get(), OxEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.HOG_ENTITY.get(), HogEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK_ENTITY.get(), DuckEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.BISON_ENTITY.get(), BisonEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM_ENTITY.get(), MoobloomEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.WRAT_HOG_ENTITY.get(), WratHogEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN_ENTITY.get(), IceEndermanEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER_ENTITY.get(), FireCreeperEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.GLOW_SQUID_ENTITY.get(), GlowSquidEntity.registerAttributes().create());
         });
 
         // Furniture setup.

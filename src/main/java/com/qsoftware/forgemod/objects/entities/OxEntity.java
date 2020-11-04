@@ -26,6 +26,6 @@ public class OxEntity extends CowEntity {
     @Override
     @ParametersAreNonnullByDefault
     public OxEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.OX_ENTITY.create(this.world);
+        return EntityTypeInit.OX_ENTITY.get().create(this.world);
     }
 }

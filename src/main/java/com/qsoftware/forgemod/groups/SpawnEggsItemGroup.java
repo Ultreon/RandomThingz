@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.groups;
 
 import com.qsoftware.forgemod.init.BlockInit;
 import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.renew.ItemInitNew;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -16,6 +17,6 @@ public class SpawnEggsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.MOOBLOOM_SPAWN_EGG);
+        return new ItemStack(ItemInitNew.BABY_CREEPER_SPAWN_EGG);
     }
 }

@@ -57,7 +57,7 @@ public class DuckEntity extends ChickenEntity {
     @Override
     @ParametersAreNonnullByDefault
     public DuckEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.DUCK_ENTITY.create(this.world);
+        return EntityTypeInit.DUCK_ENTITY.get().create(this.world);
     }
     @Nullable
     @Override

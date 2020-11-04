@@ -213,7 +213,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
     }
 
     public MoobloomEntity func_241840_a(@NotNull ServerWorld p_241840_1_, @NotNull AgeableEntity p_241840_2_) {
-        return EntityTypeInit.MOOBLOOM_ENTITY.create(p_241840_1_);
+        return EntityTypeInit.MOOBLOOM_ENTITY.get().create(p_241840_1_);
     }
 
     @Override

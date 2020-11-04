@@ -9,16 +9,18 @@ import com.qsoftware.forgemod.objects.items.base.IngotOrDustItem;
 import com.qsoftware.forgemod.objects.items.base.IngredientItem;
 import com.qsoftware.forgemod.objects.items.base.KnifeItem;
 import com.qsoftware.forgemod.objects.items.base.SliceableItem;
+import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
+import com.qsoftware.forgemod.registration.impl.ItemDeferredRegister;
+import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
 import com.qsoftware.forgemod.util.builder.ArmorMaterialBuilder;
 import com.qsoftware.forgemod.util.builder.ItemTierBuilder;
+import net.minecraft.entity.Entity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvents;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.awt.*;
 import java.util.function.Supplier;
@@ -27,9 +29,9 @@ import java.util.function.Supplier;
 //@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 //@ObjectHolder(QForgeUtils.MOD_ID)
 public class ItemInit {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, QForgeUtils.MOD_ID);
-    
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeUtils.MOD_ID);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Overpowered     //
     /////////////////////////
     public static final Item KILL_SWITCH = register("kill_switch", KillSwitchItem::new);
@@ -76,52 +78,52 @@ public class ItemInit {
     //     Fletching     //
     ///////////////////////
 
-    // Bows
-    public static final SpawnEggItem DUCK_SPAWN_EGG = register("duck_spawn_egg", () -> new SpawnEggItem(
-            EntityTypeInit.DUCK_ENTITY,
-            new Color(4, 104, 14).getRGB(),
-            new Color(228, 181, 15).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)));
-    public static final SpawnEggItem HOG_SPAWN_EGG = register("hog_spawn_egg", () -> new SpawnEggItem(
-            EntityTypeInit.HOG_ENTITY,
-            new Color(84, 21, 0).getRGB(),
-            new Color(166, 103, 61).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)));
-    public static final SpawnEggItem WRAT_HOG_SPAWN_EGG = register("wrat_hog_spawn_egg", () -> new SpawnEggItem(
-            EntityTypeInit.WRAT_HOG_ENTITY,
-            new Color(183, 111, 60).getRGB(),
-            new Color(148, 90, 49).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)));
-    public static final SpawnEggItem BISON_SPAWN_EGG = register("bison_spawn_egg", () -> new SpawnEggItem(
-            EntityTypeInit.BISON_ENTITY,
-            new Color(79, 43, 5).getRGB(),
-            new Color(180, 149, 56).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)));
-    public static final SpawnEggItem MOOBLOOM_SPAWN_EGG = register("moobloom_spawn_egg", () -> new SpawnEggItem(
-            EntityTypeInit.MOOBLOOM_ENTITY,
-            new Color(253, 213, 5).getRGB(),
-            new Color(247, 237, 193).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)));
-    public static final SpawnEggItem OX_SPAWN_EGG = register("ox_spawn_egg", () -> new SpawnEggItem(
-            EntityTypeInit.OX_ENTITY,
-            new Color(164, 110, 61).getRGB(),
-            new Color(212, 149, 92).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)));
-    public static final SpawnEggItem ICE_ENDERMAN_SPAWN_EGG = register("ice_enderman_spawn_egg", () -> new SpawnEggItem(
-            EntityTypeInit.ICE_ENDERMAN_ENTITY,
-            new Color(0, 0, 0).getRGB(),
-            new Color(123, 214, 214).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)));
-    public static final SpawnEggItem FIRE_CREEPER_SPAWN_EGG = register("fire_creeper_spawn_egg", () -> new SpawnEggItem(
-            EntityTypeInit.FIRE_CREEPER_ENTITY,
-            new Color(54, 58, 54).getRGB(),
-            new Color(209, 39, 39).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)));
-    public static final SpawnEggItem GLOW_SQUID_SPAWN_EGG = register("glow_squid_spawn_egg", () -> new SpawnEggItem(
-            EntityTypeInit.GLOW_SQUID_ENTITY,
-            new Color(47, 151, 153).getRGB(),
-            new Color(84, 221, 153).getRGB(),
-            new Item.Properties().group(Groups.SPAWN_EGGS)));
+//    // Bows
+//    public static final SpawnEggItem DUCK_SPAWN_EGG = register("duck_spawn_egg", () -> new SpawnEggItem(
+//            EntityTypeInit.DUCK_ENTITY.get(),
+//            new Color(4, 104, 14).getRGB(),
+//            new Color(228, 181, 15).getRGB(),
+//            new Item.Properties().group(Groups.SPAWN_EGGS)));
+//    public static final SpawnEggItem HOG_SPAWN_EGG = register("hog_spawn_egg", () -> new SpawnEggItem(
+//            EntityTypeInit.HOG_ENTITY.get(),
+//            new Color(84, 21, 0).getRGB(),
+//            new Color(166, 103, 61).getRGB(),
+//            new Item.Properties().group(Groups.SPAWN_EGGS)));
+//    public static final SpawnEggItem WRAT_HOG_SPAWN_EGG = register("wrat_hog_spawn_egg", () -> new SpawnEggItem(
+//            EntityTypeInit.WRAT_HOG_ENTITY.get(),
+//            new Color(183, 111, 60).getRGB(),
+//            new Color(148, 90, 49).getRGB(),
+//            new Item.Properties().group(Groups.SPAWN_EGGS)));
+//    public static final SpawnEggItem BISON_SPAWN_EGG = register("bison_spawn_egg", () -> new SpawnEggItem(
+//            EntityTypeInit.BISON_ENTITY.get(),
+//            new Color(79, 43, 5).getRGB(),
+//            new Color(180, 149, 56).getRGB(),
+//            new Item.Properties().group(Groups.SPAWN_EGGS)));
+//    public static final SpawnEggItem MOOBLOOM_SPAWN_EGG = register("moobloom_spawn_egg", () -> new SpawnEggItem(
+//            EntityTypeInit.MOOBLOOM_ENTITY.get(),
+//            new Color(253, 213, 5).getRGB(),
+//            new Color(247, 237, 193).getRGB(),
+//            new Item.Properties().group(Groups.SPAWN_EGGS)));
+//    public static final SpawnEggItem OX_SPAWN_EGG = register("ox_spawn_egg", () -> new SpawnEggItem(
+//            EntityTypeInit.OX_ENTITY.get(),
+//            new Color(164, 110, 61).getRGB(),
+//            new Color(212, 149, 92).getRGB(),
+//            new Item.Properties().group(Groups.SPAWN_EGGS)));
+//    public static final SpawnEggItem ICE_ENDERMAN_SPAWN_EGG = register("ice_enderman_spawn_egg", () -> new SpawnEggItem(
+//            EntityTypeInit.ICE_ENDERMAN_ENTITY.get(),
+//            new Color(0, 0, 0).getRGB(),
+//            new Color(123, 214, 214).getRGB(),
+//            new Item.Properties().group(Groups.SPAWN_EGGS)));
+//    public static final SpawnEggItem FIRE_CREEPER_SPAWN_EGG = register("fire_creeper_spawn_egg", () -> new SpawnEggItem(
+//            EntityTypeInit.FIRE_CREEPER_ENTITY.get(),
+//            new Color(54, 58, 54).getRGB(),
+//            new Color(209, 39, 39).getRGB(),
+//            new Item.Properties().group(Groups.SPAWN_EGGS)));
+//    public static final SpawnEggItem GLOW_SQUID_SPAWN_EGG = register("glow_squid_spawn_egg", () -> new SpawnEggItem(
+//            EntityTypeInit.GLOW_SQUID_ENTITY.get(),
+//            new Color(47, 151, 153).getRGB(),
+//            new Color(84, 221, 153).getRGB(),
+//            new Item.Properties().group(Groups.SPAWN_EGGS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Ingredients     //
@@ -564,5 +566,11 @@ public class ItemInit {
     private static <T extends Item> T register(String name, Supplier<T> supplier) {
         ITEMS.register(name, supplier);
         return supplier.get();
+    }
+
+    private static <ENTITY extends Entity> ItemRegistryObject<AdditionsSpawnEggItem> registerSpawnEgg(EntityTypeRegistryObject<ENTITY> entityTypeProvider,
+                                                                                                      int primaryColor, int secondaryColor) {
+        //Note: We are required to use a custom item as we cannot use the base SpawnEggItem due to the entity type not being initialized yet
+        return ITEMS.register(entityTypeProvider.getInternalRegistryName() + "_spawn_egg", () -> new AdditionsSpawnEggItem(entityTypeProvider, primaryColor, secondaryColor));
     }
 }

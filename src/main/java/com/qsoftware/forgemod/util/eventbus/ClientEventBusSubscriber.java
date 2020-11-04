@@ -20,14 +20,14 @@ public class ClientEventBusSubscriber {
 //        ScreenManager.registerFactory(ContainerTypesInit.EXAMPLE_CHEST, ExampleChestScreen::new);
 
         // Entity renderers.
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.HOG_ENTITY, HogRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.WRAT_HOG_ENTITY, WratHogRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.BISON_ENTITY, BisonRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.OX_ENTITY, OxRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.DUCK_ENTITY, DuckRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.MOOBLOOM_ENTITY, MoobloomRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.ICE_ENDERMAN_ENTITY, IceEndermanRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.FIRE_CREEPER_ENTITY, FireCreeperRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.GLOW_SQUID_ENTITY, GlowSquidRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.HOG_ENTITY.get(), HogRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.WRAT_HOG_ENTITY.get(), WratHogRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.BISON_ENTITY.get(), BisonRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.OX_ENTITY.get(), OxRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.DUCK_ENTITY.get(), DuckRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.MOOBLOOM_ENTITY.get(), MoobloomRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.ICE_ENDERMAN_ENTITY.get(), IceEndermanRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.FIRE_CREEPER_ENTITY.get(), FireCreeperRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.GLOW_SQUID_ENTITY.get(), GlowSquidRenderer::new);
     }
 }

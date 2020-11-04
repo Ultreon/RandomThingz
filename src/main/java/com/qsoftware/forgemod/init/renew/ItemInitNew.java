@@ -1,27 +1,25 @@
 package com.qsoftware.forgemod.init.renew;
 
 import com.qsoftware.forgemod.QForgeUtils;
-import com.qsoftware.forgemod.groups.Groups;
-import com.qsoftware.forgemod.init.renew.BlockInitNew;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import com.qsoftware.forgemod.objects.items.AdditionsSpawnEggItem;
+import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
+import com.qsoftware.forgemod.registration.impl.ItemDeferredRegister;
+import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
+import com.qsoftware.forgemod.registries.EntityTypeInitNew;
+import net.minecraft.entity.Entity;
 
-@Deprecated
 public class ItemInitNew {
-//    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, QForgeUtils.MOD_ID);
-//    public static final RegistryObject<Item> DEF_ITEM = ITEMS.register("def_item", () -> new Item(new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeUtils.MOD_ID);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //     Block Items     //
-    /////////////////////////
-//    public static final DeferredRegister<Item> BLOCK_ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, QForgeUtils.MOD_ID);
-//    public static final RegistryObject<Item> TOPAZ_ORE_ITEM = BLOCK_ITEMS.register("topaz_ore", () -> new BlockItem(BlockInitNew.TOPAZ_ORE, new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> TOPAZ_BLOCK_ITEM = BLOCK_ITEMS.register("topaz_block", () -> new BlockItem(BlockInitNew.TOPAZ_BLOCK, new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> AMBER_ORE_ITEM = BLOCK_ITEMS.register("amber_ore", () -> new BlockItem(BlockInitNew.AMBER_ORE, new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> AMBER_BLOCK_ITEM = BLOCK_ITEMS.register("amber_block", () -> new BlockItem(BlockInitNew.AMBER_BLOCK, new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> BERYL_ORE_ITEM = BLOCK_ITEMS.register("beryl_ore", () -> new BlockItem(BlockInitNew.BERYL_ORE, new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> BERYL_BLOCK_ITEM = BLOCK_ITEMS.register("beryl_block", () -> new BlockItem(BlockInitNew.BERYL_BLOCK, new Item.Properties().group(Groups.ORES)));
+    public static final ItemRegistryObject<AdditionsSpawnEggItem> BABY_CREEPER_SPAWN_EGG = registerSpawnEgg(EntityTypeInitNew.BABY_CREEPER, 0x31E02F, 0x1E1E1E);
+    public static final ItemRegistryObject<AdditionsSpawnEggItem> BABY_ENDERMAN_SPAWN_EGG = registerSpawnEgg(EntityTypeInitNew.BABY_ENDERMAN, 0x242424, 0x1E1E1E);
+    public static final ItemRegistryObject<AdditionsSpawnEggItem> BABY_SKELETON_SPAWN_EGG = registerSpawnEgg(EntityTypeInitNew.BABY_SKELETON, 0xFFFFFF, 0x800080);
+    public static final ItemRegistryObject<AdditionsSpawnEggItem> BABY_STRAY_SPAWN_EGG = registerSpawnEgg(EntityTypeInitNew.BABY_STRAY, 0x7B9394, 0xF2FAFA);
+    public static final ItemRegistryObject<AdditionsSpawnEggItem> BABY_WITHER_SKELETON_SPAWN_EGG = registerSpawnEgg(EntityTypeInitNew.BABY_WITHER_SKELETON, 0x303030, 0x525454);
+
+    private static <ENTITY extends Entity> ItemRegistryObject<AdditionsSpawnEggItem> registerSpawnEgg(EntityTypeRegistryObject<ENTITY> entityTypeProvider,
+                                                                                                      int primaryColor, int secondaryColor) {
+        //Note: We are required to use a custom item as we cannot use the base SpawnEggItem due to the entity type not being initialized yet
+        return ITEMS.register(entityTypeProvider.getInternalRegistryName() + "_spawn_egg", () -> new AdditionsSpawnEggItem(entityTypeProvider, primaryColor, secondaryColor));
+    }
 }

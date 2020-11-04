@@ -19,7 +19,7 @@ public class EntitySpawns {
         if (event.getCategory() == Biome.Category.NETHER) {
             if (event.getName().getPath().equals("worldgen/biome/basalt_deltas") || event.getName().getPath().equals("basalt_deltas")) {
                 List<MobSpawnInfo.Spawners> monsterSpawns = event.getSpawns().getSpawner(EntityClassification.MONSTER);
-                monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.FIRE_CREEPER_ENTITY, 13, 1, 3));
+                monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.FIRE_CREEPER_ENTITY.get(), 13, 1, 3));
             }
         }
 
@@ -27,7 +27,7 @@ public class EntitySpawns {
         else if (event.getCategory() == Biome.Category.THEEND) {
             if (event.getName().getPath().equals("worldgen/biome/basalt_deltas") || event.getName().getPath().equals("basalt_deltas")) {
                 List<MobSpawnInfo.Spawners> monsterSpawns = event.getSpawns().getSpawner(EntityClassification.MONSTER);
-                monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.FIRE_CREEPER_ENTITY, 13, 1, 3));
+                monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.FIRE_CREEPER_ENTITY.get(), 13, 1, 3));
             }
         }
 
@@ -36,8 +36,8 @@ public class EntitySpawns {
             if (event.getCategory() != Biome.Category.OCEAN && event.getCategory() != Biome.Category.RIVER && event.getCategory() != Biome.Category.BEACH) {
                 List<MobSpawnInfo.Spawners> creatureSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
                 if (event.getCategory() != Biome.Category.JUNGLE) {
-                    creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.HOG_ENTITY, 10, 2, 5));
-                    creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.WRAT_HOG_ENTITY, 4, 2, 5));
+                    creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.HOG_ENTITY.get(), 10, 2, 5));
+                    creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.WRAT_HOG_ENTITY.get(), 4, 2, 5));
                 }
             }
             if (event.getCategory() == Biome.Category.PLAINS
@@ -47,24 +47,24 @@ public class EntitySpawns {
                     || event.getCategory() == Biome.Category.SAVANNA
                     || event.getCategory() == Biome.Category.EXTREME_HILLS) {
                 List<MobSpawnInfo.Spawners> creatureSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
-                creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.OX_ENTITY, 8, 2, 5));
+                creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.OX_ENTITY.get(), 8, 2, 5));
             }
             if (event.getCategory() == Biome.Category.RIVER) {
                 List<MobSpawnInfo.Spawners> creatureSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
-                creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.DUCK_ENTITY, 11, 2, 5));
+                creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.DUCK_ENTITY.get(), 11, 2, 5));
             }
             if (event.getCategory() == Biome.Category.DESERT) {
                 List<MobSpawnInfo.Spawners> creatureSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
-                creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.BISON_ENTITY, 6, 2, 5));
+                creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.BISON_ENTITY.get(), 6, 2, 5));
             }
             if (event.getCategory() == Biome.Category.ICY) {
                 List<MobSpawnInfo.Spawners> monsterSpawns = event.getSpawns().getSpawner(EntityClassification.MONSTER);
-                monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.ICE_ENDERMAN_ENTITY, 14, 1, 2));
+                monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.ICE_ENDERMAN_ENTITY.get(), 14, 1, 2));
             }
             if (event.getCategory() == Biome.Category.NETHER) {
                 if (event.getName().getPath().equals("worldgen/biome/basalt_deltas") || event.getName().getPath().equals("basalt_deltas")) {
                     List<MobSpawnInfo.Spawners> monsterSpawns = event.getSpawns().getSpawner(EntityClassification.MONSTER);
-                    monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.FIRE_CREEPER_ENTITY, 13, 1, 3));
+                    monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.FIRE_CREEPER_ENTITY.get(), 13, 1, 3));
                 }
             }
         }
