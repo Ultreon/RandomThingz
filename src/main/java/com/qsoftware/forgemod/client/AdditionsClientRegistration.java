@@ -6,9 +6,9 @@ import com.qsoftware.forgemod.client.renderer.entity.RenderBabyCreeper;
 import com.qsoftware.forgemod.client.renderer.entity.RenderBabyEnderman;
 import com.qsoftware.forgemod.common.client.ClientRegistrationUtil;
 import com.qsoftware.forgemod.init.renew.ItemInitNew;
+import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.objects.items.AdditionsSpawnEggItem;
 import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
-import com.qsoftware.forgemod.registries.EntityTypeInitNew;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.StrayRenderer;
@@ -32,11 +32,11 @@ public class AdditionsClientRegistration {
 //        new AdditionsKeyHandler();
 
         //Register entity rendering handlers
-        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInitNew.BABY_CREEPER, RenderBabyCreeper::new);
-        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInitNew.BABY_ENDERMAN, RenderBabyEnderman::new);
-        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInitNew.BABY_SKELETON, SkeletonRenderer::new);
-        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInitNew.BABY_STRAY, StrayRenderer::new);
-        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInitNew.BABY_WITHER_SKELETON, WitherSkeletonRenderer::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInit.BABY_CREEPER, RenderBabyCreeper::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInit.BABY_ENDERMAN, RenderBabyEnderman::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInit.BABY_SKELETON, SkeletonRenderer::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInit.BABY_STRAY, StrayRenderer::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInit.BABY_WITHER_SKELETON, WitherSkeletonRenderer::new);
     }
 
     @SubscribeEvent

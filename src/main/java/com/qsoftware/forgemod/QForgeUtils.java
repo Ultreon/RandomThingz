@@ -8,7 +8,6 @@ import com.qsoftware.forgemod.init.types.ContainerTypesInit;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
 import com.qsoftware.forgemod.objects.entities.*;
-import com.qsoftware.forgemod.registries.EntityTypeInitNew;
 import com.qsoftware.forgemod.world.gen.OreGen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -206,7 +205,6 @@ public class QForgeUtils
         BlockInitNew.ITEMS.register(modEventBus);
         ItemInit.ITEMS.register(modEventBus);
         ItemInitNew.ITEMS.register(modEventBus);
-        EntityTypeInitNew.ENTITY_TYPES.register(modEventBus);
         EntityTypeInit.ENTITY_TYPES.register(modEventBus);
         ContainerTypesInit.CONTAINER_TYPES.register(modEventBus);
         TileEntityTypesInit.TILE_ENTITY_TYPES.register(modEventBus);

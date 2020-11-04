@@ -1,11 +1,11 @@
 package com.qsoftware.forgemod.objects.entities;
 
 import com.qsoftware.forgemod.init.renew.ItemInitNew;
+import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.objects.entities.baby.EntityBabyStray;
 import com.qsoftware.forgemod.objects.items.AdditionsSpawnEggItem;
 import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
 import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
-import com.qsoftware.forgemod.registries.EntityTypeInitNew;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
@@ -36,26 +36,26 @@ public class SpawnHelper {
 
     public static void setupEntities() {
         //Register spawn controls for the baby entities based on the vanilla spawn controls
-        registerSpawnControls(EntityTypeInitNew.BABY_CREEPER, EntityTypeInitNew.BABY_ENDERMAN, EntityTypeInitNew.BABY_SKELETON,
-              EntityTypeInitNew.BABY_WITHER_SKELETON);
+        registerSpawnControls(EntityTypeInit.BABY_CREEPER, EntityTypeInit.BABY_ENDERMAN, EntityTypeInit.BABY_SKELETON,
+              EntityTypeInit.BABY_WITHER_SKELETON);
         //Slightly different restrictions for the baby stray, as strays have a slightly different spawn restriction
-        EntitySpawnPlacementRegistry.register(EntityTypeInitNew.BABY_STRAY.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+        EntitySpawnPlacementRegistry.register(EntityTypeInit.BABY_STRAY.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
               Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EntityBabyStray::spawnRestrictions);
         //Add the global entity type attributes for the entities
-        GlobalEntityTypeAttributes.put(EntityTypeInitNew.BABY_CREEPER.get(), CreeperEntity.registerAttributes().create());
-        GlobalEntityTypeAttributes.put(EntityTypeInitNew.BABY_ENDERMAN.get(), EndermanEntity.func_234287_m_().create());
-        GlobalEntityTypeAttributes.put(EntityTypeInitNew.BABY_SKELETON.get(), AbstractSkeletonEntity.registerAttributes().create());
-        GlobalEntityTypeAttributes.put(EntityTypeInitNew.BABY_STRAY.get(), AbstractSkeletonEntity.registerAttributes().create());
-        GlobalEntityTypeAttributes.put(EntityTypeInitNew.BABY_WITHER_SKELETON.get(), AbstractSkeletonEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_CREEPER.get(), CreeperEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_ENDERMAN.get(), EndermanEntity.func_234287_m_().create());
+        GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_SKELETON.get(), AbstractSkeletonEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_STRAY.get(), AbstractSkeletonEntity.registerAttributes().create());
+        GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_WITHER_SKELETON.get(), AbstractSkeletonEntity.registerAttributes().create());
         //Add dispenser spawn egg behaviors
         registerDelayedDispenserBehavior(ItemInitNew.BABY_CREEPER_SPAWN_EGG, ItemInitNew.BABY_ENDERMAN_SPAWN_EGG, ItemInitNew.BABY_SKELETON_SPAWN_EGG,
               ItemInitNew.BABY_STRAY_SPAWN_EGG, ItemInitNew.BABY_WITHER_SKELETON_SPAWN_EGG);
         //Add parrot sound imitations for baby mobs
         //Note: There is no imitation sound for endermen
-        ParrotEntity.IMITATION_SOUND_EVENTS.put(EntityTypeInitNew.BABY_CREEPER.get(), SoundEvents.ENTITY_PARROT_IMITATE_CREEPER);
-        ParrotEntity.IMITATION_SOUND_EVENTS.put(EntityTypeInitNew.BABY_SKELETON.get(), SoundEvents.ENTITY_PARROT_IMITATE_SKELETON);
-        ParrotEntity.IMITATION_SOUND_EVENTS.put(EntityTypeInitNew.BABY_STRAY.get(), SoundEvents.ENTITY_PARROT_IMITATE_STRAY);
-        ParrotEntity.IMITATION_SOUND_EVENTS.put(EntityTypeInitNew.BABY_WITHER_SKELETON.get(), SoundEvents.ENTITY_PARROT_IMITATE_WITHER_SKELETON);
+        ParrotEntity.IMITATION_SOUND_EVENTS.put(EntityTypeInit.BABY_CREEPER.get(), SoundEvents.ENTITY_PARROT_IMITATE_CREEPER);
+        ParrotEntity.IMITATION_SOUND_EVENTS.put(EntityTypeInit.BABY_SKELETON.get(), SoundEvents.ENTITY_PARROT_IMITATE_SKELETON);
+        ParrotEntity.IMITATION_SOUND_EVENTS.put(EntityTypeInit.BABY_STRAY.get(), SoundEvents.ENTITY_PARROT_IMITATE_STRAY);
+        ParrotEntity.IMITATION_SOUND_EVENTS.put(EntityTypeInit.BABY_WITHER_SKELETON.get(), SoundEvents.ENTITY_PARROT_IMITATE_WITHER_SKELETON);
     }
 
     @SafeVarargs
