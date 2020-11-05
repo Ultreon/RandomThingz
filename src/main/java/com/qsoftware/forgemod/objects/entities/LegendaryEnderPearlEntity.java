@@ -67,20 +67,12 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
                 if (serverplayerentity.connection.getNetworkManager().isChannelOpen() && serverplayerentity.world == this.world && !serverplayerentity.isSleeping()) {
                     net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(serverplayerentity, this.getPosX(), this.getPosY(), this.getPosZ(), 5.0F);
                     if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) { // Don't indent to lower patch size
-                        if (this.rand.nextFloat() < 0.05F && this.world.getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING)) {
-                            EndermiteEntity endermiteentity = EntityType.ENDERMITE.create(this.world);
-                            endermiteentity.setSpawnedByPlayer(true);
-                            endermiteentity.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
-                            this.world.addEntity(endermiteentity);
-                        }
-
                         if (entity.isPassenger()) {
                             entity.stopRiding();
                         }
 
                         entity.setPositionAndUpdate(event.getTargetX(), event.getTargetY(), event.getTargetZ());
                         entity.fallDistance = 0.0F;
-                        entity.attackEntityFrom(DamageSource.FALL, event.getAttackDamage());
                     } //Forge: End
                 }
             } else if (entity != null) {
@@ -110,7 +102,7 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
     public Entity changeDimension(ServerWorld server, net.minecraftforge.common.util.ITeleporter teleporter) {
         Entity entity = this.func_234616_v_();
         if (entity != null && entity.world.getDimensionKey() != server.getDimensionKey()) {
-            this.setShooter((Entity)null);
+//            this.setShooter((Entity)null);
         }
 
         return super.changeDimension(server, teleporter);

@@ -1,13 +1,16 @@
 package com.qsoftware.forgemod.util.eventbus;
 
 import com.qsoftware.forgemod.QForgeUtils;
-import com.qsoftware.forgemod.client.gui.ExampleChestScreen;
 import com.qsoftware.forgemod.client.renderer.*;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
-import com.qsoftware.forgemod.init.types.ContainerTypesInit;
-import net.minecraft.client.gui.ScreenManager;
+import com.qsoftware.forgemod.objects.entities.LegendaryEnderPearlEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -29,5 +32,6 @@ public class ClientEventBusSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.ICE_ENDERMAN_ENTITY.get(), IceEndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.FIRE_CREEPER_ENTITY.get(), FireCreeperRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.GLOW_SQUID_ENTITY.get(), GlowSquidRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.LEGENDARY_ENDER_PEARL.get(), manager -> new SpriteRenderer<>(Minecraft.getInstance().getRenderManager(), Minecraft.getInstance().getItemRenderer()));
     }
 }

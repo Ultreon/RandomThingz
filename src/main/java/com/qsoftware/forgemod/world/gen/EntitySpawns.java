@@ -23,6 +23,17 @@ public class EntitySpawns {
             }
         }
 
+        QForgeUtils.LOGGER.debug("Biome path: " + event.getName().getPath());
+        QForgeUtils.LOGGER.debug("Biome name: " + event.getName().toString());
+        QForgeUtils.LOGGER.debug("-============================-");
+
+        if (event.getCategory() == Biome.Category.NETHER) {
+            if (event.getName().getPath().equals("worldgen/biome/flower_forest") || event.getName().getPath().equals("flower_forest")) {
+                List<MobSpawnInfo.Spawners> monsterSpawns = event.getSpawns().getSpawner(EntityClassification.MONSTER);
+                monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.MOOBLOOM_ENTITY.get(), 3, 2, 5));
+            }
+        }
+
         // End mobs
         else if (event.getCategory() == Biome.Category.THEEND) {
             if (event.getName().getPath().equals("worldgen/biome/basalt_deltas") || event.getName().getPath().equals("basalt_deltas")) {
