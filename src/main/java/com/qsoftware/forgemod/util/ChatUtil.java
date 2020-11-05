@@ -5,6 +5,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Chat utilities.
+ *
+ * @author Qboi123
+ */
 public final class ChatUtil {
     private ChatUtil() {
     }

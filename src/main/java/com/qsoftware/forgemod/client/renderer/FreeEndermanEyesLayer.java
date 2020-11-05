@@ -12,6 +12,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Free enderman eyes layer class.
+ *
+ * @author Qboi123
+ */
 @OnlyIn(Dist.CLIENT)
 public class FreeEndermanEyesLayer<T extends EndermanEntity> extends AbstractEyesLayer<T, FreeEndermanModel<T>> {
    private final RenderType renderType;

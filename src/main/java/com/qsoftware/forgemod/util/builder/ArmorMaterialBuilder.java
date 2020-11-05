@@ -11,6 +11,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
+/**
+ * Armor material builder.
+ *
+ * @author Qboi123
+ */
 public class ArmorMaterialBuilder {
     public static class Builder implements IArmorMaterial {
 

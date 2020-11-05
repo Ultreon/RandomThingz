@@ -14,6 +14,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Lightning staff item class.
+ *
+ * @author Qboi123
+ */
 public class LightningStaffItem extends Item {
     public LightningStaffItem() {
         super(new Item.Properties().group(ItemGroup.TOOLS));

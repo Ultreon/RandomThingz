@@ -3,11 +3,10 @@ package com.qsoftware.forgemod.init.types;
 import com.qsoftware.forgemod.QForgeUtils;
 import com.qsoftware.forgemod.init.BlockInit;
 import com.qsoftware.forgemod.init.ObjectInit;
-import com.qsoftware.forgemod.objects.tileentity.ExampleChestTileEntity;
+import com.qsoftware.forgemod.objects.tileentity.CrateTileEntity;
 import com.qsoftware.forgemod.objects.tileentity.QuarryTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -22,28 +21,17 @@ public class TileEntityTypesInit extends ObjectInit<TileEntityType<?>> {
 
     @SuppressWarnings("ConstantConditions")
     public static final RegistryObject<TileEntityType<QuarryTileEntity>> QUARRY = register("quarry", () -> TileEntityType.Builder.create(QuarryTileEntity::new, BlockInit.QUARRY_BLOCK.get()).build(null));
-    public static final RegistryObject<TileEntityType<ExampleChestTileEntity>> EXAMPLE_CHEST = register("example_chest", () -> TileEntityType.Builder.create(ExampleChestTileEntity::new, BlockInit.WOODEN_CRATE.get()).build(null));
+    public static final RegistryObject<TileEntityType<CrateTileEntity>> EXAMPLE_CHEST = register("example_chest", () -> TileEntityType.Builder.create(CrateTileEntity::new, BlockInit.WOODEN_CRATE.get()).build(null));
 
+    /**
+     * Register tile entity.
+     *
+     * @param name the registry name.
+     * @param supplier supplier for registration.
+     * @param <T> tile-entity to register.
+     * @return an registry object of the tile-entity type.
+     */
     private static <T extends TileEntity> RegistryObject<TileEntityType<T>> register(String name, Supplier<TileEntityType<T>> supplier) {
         return TILE_ENTITY_TYPES.register(name, supplier);
     }
-
-//    @SubscribeEvent
-//    public static void registerEntityTypes(final RegistryEvent.Register<TileEntityType<?>> event) {
-//        Class<TileEntityTypesInit> clazz = TileEntityTypesInit.class;
-//        Field[] fields = clazz.getFields();
-//        for (Field field : fields) {
-//            if (TileEntityType.class.isAssignableFrom(field.getType())) {
-//                try {
-//                    TileEntityType<?> tileEntityType = (TileEntityType<?>) field.get(null);
-//                    tileEntityType.setRegistryName(field.getName().toLowerCase());
-//                    event.getRegistry().register(tileEntityType);
-//                } catch (IllegalAccessException e) {
-//                    e.printStackTrace();
-//                } catch (Throwable t) {
-//                    throw new RuntimeException("Error occurred when reading field, or registering tile-entity type: " + field.getName(), t);
-//                }
-//            }
-//        }
-//    }
 }

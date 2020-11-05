@@ -8,6 +8,7 @@ import com.qsoftware.forgemod.init.types.ContainerTypesInit;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
 import com.qsoftware.forgemod.objects.entities.*;
+import com.qsoftware.forgemod.objects.entities.baby.*;
 import com.qsoftware.forgemod.world.gen.OreGen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -36,6 +37,12 @@ import java.util.stream.Collectors;
 //import com.qsoftware.forgemod.proxy.CommonProxy;
 //import com.qsoftware.forgemod.setup.*;
 
+/**
+ * Mod class.
+ * Here is everything started.
+ *
+ * @author Qboi123
+ */
 @Mod("qforgemod")
 public class QForgeUtils
 {
@@ -317,15 +324,21 @@ public class QForgeUtils
 //        System.exit(0);
 
         event.enqueueWork(() -> {
-            GlobalEntityTypeAttributes.put(EntityTypeInit.OX_ENTITY.get(), OxEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.HOG_ENTITY.get(), HogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK_ENTITY.get(), DuckEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.BISON_ENTITY.get(), BisonEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM_ENTITY.get(), MoobloomEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.WRAT_HOG_ENTITY.get(), WratHogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN_ENTITY.get(), IceEndermanEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER_ENTITY.get(), FireCreeperEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.GLOW_SQUID_ENTITY.get(), GlowSquidEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_CREEPER.get(), EntityBabyCreeper.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_ENDERMAN.get(), EntityBabyEnderman.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_SKELETON.get(), EntityBabySkeleton.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_STRAY.get(), EntityBabyStray.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_WITHER_SKELETON.get(), EntityBabyWitherSkeleton.registerAttributes().create());
+
+            GlobalEntityTypeAttributes.put(EntityTypeInit.OX.get(), OxEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.HOG.get(), HogEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK.get(), DuckEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.BISON.get(), BisonEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM.get(), MoobloomEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.WARTHOG.get(), WarthogEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN.get(), IceEndermanEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER.get(), FireCreeperEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.GLOW_SQUID.get(), GlowSquidEntity.registerAttributes().create());
         });
 
         // Furniture setup.

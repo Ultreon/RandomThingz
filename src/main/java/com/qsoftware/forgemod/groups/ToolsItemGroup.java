@@ -6,6 +6,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Tools item group.
+ * For generic tools.
+ *
+ * @author Qboi123
+ */
 public class ToolsItemGroup extends ItemGroup {
     public static final ToolsItemGroup instance = new ToolsItemGroup(ItemGroup.GROUPS.length, "qforgemod_tools");
 

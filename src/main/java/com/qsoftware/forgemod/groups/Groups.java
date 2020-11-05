@@ -2,6 +2,11 @@ package com.qsoftware.forgemod.groups;
 
 import net.minecraft.item.ItemGroup;
 
+/**
+ * Groups collection.
+ *
+ * @author Qboi123
+ */
 public class Groups {
     public static final NatureItemGroup NATURE = NatureItemGroup.instance;
     public static final LeavesItemGroup LEAVES = LeavesItemGroup.instance;

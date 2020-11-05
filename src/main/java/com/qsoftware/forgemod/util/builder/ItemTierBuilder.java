@@ -7,6 +7,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
+/**
+ * Item tier builder.
+ *
+ * @author Qboi123
+ */
 public class ItemTierBuilder {
     public static class Builder implements IItemTier {
         protected int tier;

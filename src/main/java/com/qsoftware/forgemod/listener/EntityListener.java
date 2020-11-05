@@ -3,6 +3,11 @@ package com.qsoftware.forgemod.listener;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+/**
+ * Entity listener.
+ *
+ * @author Qboi123
+ */
 public class EntityListener {
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {

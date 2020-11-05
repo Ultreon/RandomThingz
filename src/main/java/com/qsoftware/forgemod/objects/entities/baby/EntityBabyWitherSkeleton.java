@@ -17,6 +17,11 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
+/**
+ * Baby wither skeleton entity class.
+ *
+ * @author Mekanism community.
+ */
 public class EntityBabyWitherSkeleton extends WitherSkeletonEntity implements IBabyEntity {
 
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(EntityBabyWitherSkeleton.class, DataSerializers.BOOLEAN);

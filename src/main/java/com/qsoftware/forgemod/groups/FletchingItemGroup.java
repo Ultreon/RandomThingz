@@ -7,6 +7,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Bows & arrows item group..
+ *
+ * @author Qboi123
+ */
 public class FletchingItemGroup extends ItemGroup {
     public static final FletchingItemGroup instance = new FletchingItemGroup(ItemGroup.GROUPS.length, "qforgemod_fletching");
 

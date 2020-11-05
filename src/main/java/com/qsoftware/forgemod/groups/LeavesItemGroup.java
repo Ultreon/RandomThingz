@@ -5,6 +5,12 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Leaves item group.
+ * Will be in the future merged with {@link NatureItemGroup}.
+ *
+ * @author Qboi123
+ */
 public class LeavesItemGroup extends ItemGroup {
     public static final LeavesItemGroup instance = new LeavesItemGroup(ItemGroup.GROUPS.length, "qforgemod_leaves");
 

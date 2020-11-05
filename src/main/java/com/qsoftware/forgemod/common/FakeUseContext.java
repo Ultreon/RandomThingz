@@ -9,6 +9,11 @@ import net.minecraft.util.math.BlockRayTraceResult;
 
 import javax.annotation.Nonnull;
 
+/**
+ * Fake use context for block-item uses class.
+ *
+ * @author Qboi123
+ */
 public class FakeUseContext extends BlockItemUseContext {
     private final BlockRayTraceResult rayTraceResult;
 

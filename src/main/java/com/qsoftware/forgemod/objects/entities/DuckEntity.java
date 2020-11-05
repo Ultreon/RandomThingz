@@ -25,6 +25,11 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/**
+ * Duck entity class.
+ *
+ * @author Qboi123
+ */
 public class DuckEntity extends ChickenEntity {
     private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.BREAD);
 
@@ -57,7 +62,7 @@ public class DuckEntity extends ChickenEntity {
     @Override
     @ParametersAreNonnullByDefault
     public DuckEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.DUCK_ENTITY.get().create(this.world);
+        return EntityTypeInit.DUCK.get().create(this.world);
     }
     @Nullable
     @Override

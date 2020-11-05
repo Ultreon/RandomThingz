@@ -30,7 +30,7 @@ import java.util.Map.Entry;
 @Mod.EventBusSubscriber(modid = QForgeUtils.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientRegistration {
 
-    private static final Map<ResourceLocation, CustomModelRegistryObject> customModels = new Object2ObjectOpenHashMap<>();
+//    private static final Map<ResourceLocation, CustomModelRegistryObject> customModels = new Object2ObjectOpenHashMap<>();
 
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {

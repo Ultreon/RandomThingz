@@ -18,6 +18,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
+/**
+ * Biome template class.
+ *
+ * @author Biomes 'o Plenty mod.
+ */
 public class BiomeTemplate
 {
     private final Map<BOPClimates, Integer> weightMap = new HashMap<>();

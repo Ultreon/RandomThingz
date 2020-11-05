@@ -27,6 +27,11 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Nature staff item class.
+ *
+ * @author Qboi123
+ */
 public class NatureStaffItem extends Item {
     public NatureStaffItem() {
         super(new Item.Properties().group(Groups.SPECIALS));

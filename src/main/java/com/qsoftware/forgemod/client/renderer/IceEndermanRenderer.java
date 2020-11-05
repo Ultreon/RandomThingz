@@ -17,6 +17,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
+/**
+ * Ice enderman entity renderer class.
+ *
+ * @author Qboi123
+ */
 @OnlyIn(Dist.CLIENT)
 public class IceEndermanRenderer extends MobRenderer<IceEndermanEntity, FreeEndermanModel<IceEndermanEntity>> {
     private static final ResourceLocation ENDERMAN_TEXTURES = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/enderman/ice.png");

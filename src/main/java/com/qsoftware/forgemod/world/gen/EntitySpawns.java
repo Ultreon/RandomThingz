@@ -11,6 +11,11 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
+/**
+ * Entity spawns class.
+ *
+ * @author Qboi123
+ */
 @Mod.EventBusSubscriber(modid = QForgeUtils.MOD_ID)
 public class EntitySpawns {
     @SubscribeEvent
@@ -18,22 +23,22 @@ public class EntitySpawns {
         // Nether mobs
         if (event.getName().getPath().equals("basalt_deltas")) {
             List<MobSpawnInfo.Spawners> monsterSpawns = event.getSpawns().getSpawner(EntityClassification.MONSTER);
-            monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.FIRE_CREEPER_ENTITY.get(), 13, 1, 3));
+            monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.FIRE_CREEPER.get(), 13, 1, 3));
             QForgeUtils.LOGGER.debug("Added Fire Creeper to " + event.getName());
         }
 
         // Overworld mobs
         if (event.getName().getPath().equals("flower_forest")) {
             List<MobSpawnInfo.Spawners> monsterSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
-            monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.MOOBLOOM_ENTITY.get(), 4, 2, 5));
+            monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.MOOBLOOM.get(), 4, 2, 5));
             QForgeUtils.LOGGER.debug("Added Moobloom to " + event.getName());
         }
         if (event.getCategory() != Biome.Category.OCEAN && event.getCategory() != Biome.Category.RIVER && event.getCategory() != Biome.Category.BEACH) {
             List<MobSpawnInfo.Spawners> creatureSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
             if (event.getCategory() != Biome.Category.JUNGLE) {
-                creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.HOG_ENTITY.get(), 10, 2, 5));
+                creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.HOG.get(), 10, 2, 5));
                 QForgeUtils.LOGGER.debug("Added Hog to " + event.getName());
-                creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.WRAT_HOG_ENTITY.get(), 4, 2, 5));
+                creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.WARTHOG.get(), 4, 2, 5));
                 QForgeUtils.LOGGER.debug("Added Warthog to " + event.getName());
             }
         }
@@ -44,22 +49,22 @@ public class EntitySpawns {
                 || event.getCategory() == Biome.Category.SAVANNA
                 || event.getCategory() == Biome.Category.EXTREME_HILLS) {
             List<MobSpawnInfo.Spawners> creatureSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
-            creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.OX_ENTITY.get(), 8, 2, 5));
+            creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.OX.get(), 8, 2, 5));
             QForgeUtils.LOGGER.debug("Added Ox to " + event.getName());
         }
         if (event.getCategory() == Biome.Category.RIVER) {
             List<MobSpawnInfo.Spawners> creatureSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
-            creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.DUCK_ENTITY.get(), 11, 2, 5));
+            creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.DUCK.get(), 11, 2, 5));
             QForgeUtils.LOGGER.debug("Added Duck to " + event.getName());
         }
         if (event.getCategory() == Biome.Category.DESERT) {
             List<MobSpawnInfo.Spawners> creatureSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
-            creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.BISON_ENTITY.get(), 6, 2, 5));
+            creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.BISON.get(), 6, 2, 5));
             QForgeUtils.LOGGER.debug("Added Bison to " + event.getName());
         }
         if (event.getCategory() == Biome.Category.ICY) {
             List<MobSpawnInfo.Spawners> monsterSpawns = event.getSpawns().getSpawner(EntityClassification.MONSTER);
-            monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.ICE_ENDERMAN_ENTITY.get(), 14, 1, 2));
+            monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.ICE_ENDERMAN.get(), 14, 1, 2));
             QForgeUtils.LOGGER.debug("Added Ice Enderman to " + event.getName());
         }
     }

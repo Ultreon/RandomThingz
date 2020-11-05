@@ -7,7 +7,10 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.Constants;
 
 /**
- * Author: MrCrayfish
+ * Item stack helper class.
+ * Currently used for save or load {@link ItemStack item stacks} to or from {@link CompoundNBT}
+ *
+ * @author MrCrayfish
  */
 public class ItemStackHelper
 {

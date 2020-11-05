@@ -13,6 +13,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+/**
+ * Kill switch item class.
+ *
+ * @author Qboi123
+ */
 public final class KillSwitchItem extends Item {
     public KillSwitchItem() {
         super(new Item.Properties().group(Groups.OVERPOWERED));

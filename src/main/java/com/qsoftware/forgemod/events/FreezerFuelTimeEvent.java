@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.eventbus.api.Event;
 
 /**
- * Author: MrCrayfish
+ * @author MrCrayfish
  */
 public class FreezerFuelTimeEvent extends Event
 {

@@ -21,6 +21,11 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
+/**
+ * Baby stray entity class.
+ *
+ * @author Mekanism community.
+ */
 public class EntityBabyStray extends StrayEntity implements IBabyEntity {
 
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(EntityBabyStray.class, DataSerializers.BOOLEAN);

@@ -4,6 +4,11 @@ import com.qsoftware.forgemod.common.Sliceable;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+/**
+ * Sliceable item class.
+ *
+ * @author Qboi123
+ */
 public class SliceableItem extends Item implements Sliceable {
     private final SliceAction action;
 

@@ -7,6 +7,11 @@
  ******************************************************************************/
 package com.qsoftware.forgemod.world.biomes;
 
+/**
+ * Biome climates enum.
+ *
+ * @author Biomes 'o Plenty mod.
+ */
 public enum BOPClimates
 {
     ICE_CAP,

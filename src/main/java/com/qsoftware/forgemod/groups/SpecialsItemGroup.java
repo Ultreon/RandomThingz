@@ -5,6 +5,11 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Special miscellaneous group.
+ *
+ * @author Qboi123
+ */
 public class SpecialsItemGroup extends ItemGroup {
     public static final SpecialsItemGroup instance = new SpecialsItemGroup(ItemGroup.GROUPS.length, "qforgemod_specials");
 
@@ -14,6 +19,6 @@ public class SpecialsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.WALKING_STAFF);
+        return new ItemStack(ItemInit.WALKING_STAFF.get());
     }
 }

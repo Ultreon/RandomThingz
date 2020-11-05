@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.objects.tileentity;
 
 import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
+import com.qsoftware.forgemod.objects.blocks.QuarryBlock;
 import com.qsoftware.forgemod.util.helpers.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,6 +16,12 @@ import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nullable;
 
+/**
+ * Quarry tile entity item class.
+ *
+ * @see QuarryBlock
+ * @author Qboi123
+ */
 public class QuarryTileEntity extends TileEntity implements ITickableTileEntity {
     public int x, y, z, tick;
     boolean initialized = false;

@@ -7,7 +7,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Supplier;
 
 /**
- * Author: MrCrayfish
+ * Block supplier item class.
+ *
+ * @author MrCrayfish
  */
 public class BlockSupplierItem extends BlockItem
 {

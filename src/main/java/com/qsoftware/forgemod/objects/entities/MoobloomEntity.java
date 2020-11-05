@@ -10,10 +10,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.monster.GuardianEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
@@ -34,6 +32,11 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Predicate;
 
+/**
+ * Moobloom entity class.
+ *
+ * @author Qboi123
+ */
 @SuppressWarnings("deprecation")
 public class MoobloomEntity extends CowEntity implements IShearable, net.minecraftforge.common.IForgeShearable {
     private Effect hasStewEffect;
@@ -213,7 +216,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
     }
 
     public MoobloomEntity func_241840_a(@NotNull ServerWorld p_241840_1_, @NotNull AgeableEntity p_241840_2_) {
-        return EntityTypeInit.MOOBLOOM_ENTITY.get().create(p_241840_1_);
+        return EntityTypeInit.MOOBLOOM.get().create(p_241840_1_);
     }
 
     @Override

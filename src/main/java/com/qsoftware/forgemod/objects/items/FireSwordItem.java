@@ -16,6 +16,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Fire sword item class.
+ *
+ * @author Qboi123
+ */
 public class FireSwordItem extends SwordItem {
     public FireSwordItem(ItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties properties) {
         super(tier, attackDamageIn, attackSpeedIn, properties);

@@ -9,6 +9,11 @@ import net.minecraft.world.gen.feature.structure.StructureFeatures;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
+/**
+ * Grasslands biome class.
+ *
+ * @author Biomes 'o Plenty mod.
+ */
 public class GrasslandBiome extends BiomeTemplate
 {
     public GrasslandBiome()

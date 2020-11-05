@@ -17,6 +17,11 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
+/**
+ * Baby skeleton entity class.
+ *
+ * @author Mekanism community.
+ */
 public class EntityBabySkeleton extends SkeletonEntity implements IBabyEntity {
 
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(EntityBabySkeleton.class, DataSerializers.BOOLEAN);

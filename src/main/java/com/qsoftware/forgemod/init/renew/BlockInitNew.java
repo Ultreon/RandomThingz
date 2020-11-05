@@ -16,6 +16,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+/**
+ * Blocks initialization class.
+ *
+ * @author Qboi123
+ */
 @SuppressWarnings({"unused", "RedundantSuppression", "ConstantConditions"})
 @Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 public class BlockInitNew extends ObjectInit<Block> {

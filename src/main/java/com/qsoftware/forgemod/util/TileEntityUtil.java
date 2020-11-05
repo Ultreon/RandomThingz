@@ -12,7 +12,9 @@ import net.minecraft.world.server.ServerWorld;
 import java.util.stream.Stream;
 
 /**
- * Author: MrCrayfish
+ * Tile entity utilities.
+ *
+ * @author MrCrayfish
  */
 public class TileEntityUtil
 {

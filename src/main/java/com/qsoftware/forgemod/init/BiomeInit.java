@@ -10,7 +10,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
-//@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus= Mod.EventBusSubscriber.Bus.MOD)
+/**
+ * Biomes initialization class.
+ *
+ * @author Qboi123
+ */
 public class BiomeInit extends ObjectInit<Biome> {
     public static final DeferredRegister<Biome> BIOMES = DeferredRegister.create(ForgeRegistries.BIOMES, QForgeUtils.MOD_ID);
     public static final RegistryObject<Biome> EXAMPLE_BIOME = register("example_biome", () -> new ExampleBiome().build());

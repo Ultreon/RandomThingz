@@ -17,6 +17,11 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
+/**
+ * Baby enderman entity class.
+ *
+ * @author Mekanism community.
+ */
 public class EntityBabyEnderman extends EndermanEntity implements IBabyEntity {
 
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(EntityBabyEnderman.class, DataSerializers.BOOLEAN);

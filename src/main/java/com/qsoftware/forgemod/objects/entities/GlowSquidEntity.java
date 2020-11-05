@@ -19,6 +19,11 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+/**
+ * Glow squid entity class.
+ *
+ * @author Qboi123
+ */
 public class GlowSquidEntity extends SquidEntity {
     public GlowSquidEntity(EntityType<? extends GlowSquidEntity> type, World worldIn) {
         super(type, worldIn);

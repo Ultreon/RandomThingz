@@ -8,11 +8,19 @@ import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
 import com.qsoftware.forgemod.registration.impl.ItemDeferredRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.Constants.NBT;
 
+/**
+ * Game PC block class.
+ *
+ * @author Mekanism community.
+ * @deprecated Use {@link CustomSpawnEggItem} instead.
+ */
+@Deprecated
 public class AdditionsSpawnEggItem extends SpawnEggItem {
 
     private final EntityTypeRegistryObject<?> entityTypeRO;

@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.graphics;
 
+import com.google.common.annotations.Beta;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
@@ -7,6 +8,10 @@ import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
 
+/**
+ * @author Qboi123
+ */
+@Beta
 public class MCGraphics {
     private final FontRenderer fontRenderer;
     private final Screen gui;

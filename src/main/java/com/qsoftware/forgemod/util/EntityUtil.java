@@ -4,6 +4,11 @@ import com.google.common.annotations.Beta;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
 
+/**
+ * Entity utilities
+ *
+ * @author Qboi123
+ */
 @Beta
 public final class EntityUtil {
     private EntityUtil() {

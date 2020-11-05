@@ -8,6 +8,11 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Voxel shape helper class.
+ *
+ * @author Qboi123
+ */
 public class VoxelShapeHelper
 {
     public static VoxelShape combineAll(Collection<VoxelShape> shapes)

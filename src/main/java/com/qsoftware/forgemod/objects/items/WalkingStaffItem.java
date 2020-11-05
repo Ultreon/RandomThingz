@@ -23,8 +23,13 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class WandItem extends Item {
-    public WandItem() {
+/**
+ * Walking staff item class.
+ *
+ * @author Qboi123
+ */
+public class WalkingStaffItem extends Item {
+    public WalkingStaffItem() {
         super(new Item.Properties().group(Groups.OVERPOWERED));
     }
 

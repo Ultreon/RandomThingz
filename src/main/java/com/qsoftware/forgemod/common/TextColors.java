@@ -2,6 +2,11 @@ package com.qsoftware.forgemod.common;
 
 import java.lang.String;
 
+/**
+ * Text colors class.
+ *
+ * @author Qboi123
+ */
 public enum TextColors {
     // Colors
     RED("4"),

@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.container;
 
 import com.qsoftware.forgemod.init.BlockInit;
 import com.qsoftware.forgemod.init.types.ContainerTypesInit;
-import com.qsoftware.forgemod.objects.tileentity.ExampleChestTileEntity;
+import com.qsoftware.forgemod.objects.tileentity.CrateTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -15,11 +15,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public class ExampleChestContainer extends Container {
-    public final ExampleChestTileEntity tileEntity;
+/**
+ * Crate container class.
+ *
+ * @author Qboi123
+ */
+public class CrateContainer extends Container {
+    public final CrateTileEntity tileEntity;
     private final IWorldPosCallable canInteractWithCallable;
 
-    public ExampleChestContainer(final int windowId, final PlayerInventory playerInventory, final ExampleChestTileEntity tileEntity) {
+    public CrateContainer(final int windowId, final PlayerInventory playerInventory, final CrateTileEntity tileEntity) {
         super(ContainerTypesInit.EXAMPLE_CHEST.get(), windowId);
         this.tileEntity = tileEntity;
         this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getWorld()), tileEntity.getPos());
@@ -97,21 +102,21 @@ public class ExampleChestContainer extends Container {
         return isWithinUsableDistance(canInteractWithCallable, playerIn, BlockInit.WOODEN_CRATE.get());
     }
 
-    private static ExampleChestTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
+    private static CrateTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
 //        return tileEntity;
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
 
         final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
 
-        if (tileAtPos instanceof ExampleChestTileEntity) {
-            return (ExampleChestTileEntity)tileAtPos;
+        if (tileAtPos instanceof CrateTileEntity) {
+            return (CrateTileEntity)tileAtPos;
         }
 
         throw new IllegalStateException("Tile entity is not of the expected class! " + tileAtPos);
     }
 
-    public ExampleChestContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
+    public CrateContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
         this(windowId, playerInventory, getTileEntity(playerInventory, data));
     }
 

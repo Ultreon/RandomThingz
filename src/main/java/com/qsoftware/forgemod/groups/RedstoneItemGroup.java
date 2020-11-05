@@ -5,6 +5,11 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Redstone item group.
+ *
+ * @author Qboi123
+ */
 public class RedstoneItemGroup extends ItemGroup {
     public static final RedstoneItemGroup instance = new RedstoneItemGroup(ItemGroup.GROUPS.length, "qforgemod_redstone");
 

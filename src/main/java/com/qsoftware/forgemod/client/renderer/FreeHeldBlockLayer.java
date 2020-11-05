@@ -17,6 +17,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.data.EmptyModelData;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Free held block layer class.
+ *
+ * @author Qboi123
+ */
 @OnlyIn(Dist.CLIENT)
 public class FreeHeldBlockLayer<T extends EndermanEntity, M extends FreeEndermanModel<T>> extends LayerRenderer<T, M> {
    public FreeHeldBlockLayer(IEntityRenderer<T, M> p_i50949_1_) {

@@ -11,6 +11,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Free creeper charge layer class.
+ *
+ * @author Qboi123
+ */
 @OnlyIn(Dist.CLIENT)
 public class FreeCreeperChargeLayer<T extends CreeperEntity, M extends FreeCreeperModel<T>> extends EnergyLayer<T, M> {
    private static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation("textures/entity/creeper/creeper_armor.png");

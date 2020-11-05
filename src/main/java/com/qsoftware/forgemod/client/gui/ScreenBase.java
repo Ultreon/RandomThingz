@@ -11,6 +11,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+/**
+ * Hog entity model class.
+ */
 public abstract class ScreenBase<T extends Container> extends ContainerScreen<T> {
 
     protected static final int FONT_COLOR = 4210752;

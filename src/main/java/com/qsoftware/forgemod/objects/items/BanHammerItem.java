@@ -18,6 +18,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
+/**
+ * Ban hammer item class.
+ *
+ * @author Qboi123
+ */
 public class BanHammerItem extends Item {
     public BanHammerItem() {
         super(new Item.Properties().group(Groups.OVERPOWERED));

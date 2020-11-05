@@ -14,6 +14,12 @@ import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/**
+ * Advanced bow item class.
+ * Support for custom velocity, inaccuracy, arrow attack damage, knockback and default flame.
+ *
+ * @author Qboi123
+ */
 @MethodsReturnNonnullByDefault
 public class AdvancedBowItem extends BowItem {
     private float velocity;

@@ -3,6 +3,9 @@ package com.qsoftware.forgemod.client.gui;
 import net.minecraft.client.gui.widget.button.CheckboxButton;
 import net.minecraft.util.text.ITextComponent;
 
+/**
+ * Hog entity model class.
+ */
 public class FunctionalCheckbox extends CheckboxButton {
 
     private final Toggleable onPress;

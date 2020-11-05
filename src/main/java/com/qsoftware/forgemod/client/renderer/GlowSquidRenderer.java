@@ -13,6 +13,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Glow squid entity renderer class.
+ *
+ * @author Qboi123
+ */
 @OnlyIn(Dist.CLIENT)
 public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, SquidModel<GlowSquidEntity>> {
    private static final ResourceLocation GLOW_SQUID_TEXTURES = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/squid/glow_squid.png");

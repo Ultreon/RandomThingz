@@ -6,6 +6,11 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Gems item group.
+ *
+ * @author Qboi123
+ */
 public class GemsItemGroup extends ItemGroup {
     public static final GemsItemGroup instance = new GemsItemGroup(ItemGroup.GROUPS.length, "qforgemod_gems");
 
@@ -15,6 +20,6 @@ public class GemsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.RUBY);
+        return new ItemStack(ItemInit.RUBY.get());
     }
 }

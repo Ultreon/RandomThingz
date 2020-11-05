@@ -8,6 +8,7 @@ import com.qsoftware.forgemod.common.client.ClientRegistrationUtil;
 import com.qsoftware.forgemod.init.renew.ItemInitNew;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.objects.items.AdditionsSpawnEggItem;
+import com.qsoftware.forgemod.objects.items.CustomSpawnEggItem;
 import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
@@ -138,8 +139,22 @@ public class AdditionsClientRegistration {
 //              ItemInitNew.PURPLE_BALLOON, ItemInitNew.CYAN_BALLOON, ItemInitNew.LIGHT_GRAY_BALLOON, ItemInitNew.GRAY_BALLOON, ItemInitNew.PINK_BALLOON,
 //              ItemInitNew.LIME_BALLOON, ItemInitNew.YELLOW_BALLOON, ItemInitNew.LIGHT_BLUE_BALLOON, ItemInitNew.MAGENTA_BALLOON, ItemInitNew.ORANGE_BALLOON,
 //              ItemInitNew.WHITE_BALLOON);
-        registerSpawnEggColorHandler(event.getItemColors(), ItemInitNew.BABY_CREEPER_SPAWN_EGG, ItemInitNew.BABY_ENDERMAN_SPAWN_EGG,
-              ItemInitNew.BABY_SKELETON_SPAWN_EGG, ItemInitNew.BABY_STRAY_SPAWN_EGG, ItemInitNew.BABY_WITHER_SKELETON_SPAWN_EGG);
+        registerSpawnEggColorHandler(event.getItemColors(),
+                ItemInitNew.BABY_CREEPER_SPAWN_EGG,
+                ItemInitNew.BABY_ENDERMAN_SPAWN_EGG,
+                ItemInitNew.BABY_SKELETON_SPAWN_EGG,
+                ItemInitNew.BABY_STRAY_SPAWN_EGG,
+                ItemInitNew.BABY_WITHER_SKELETON_SPAWN_EGG,
+                ItemInitNew.DUCK_SPAWN_EGG,
+                ItemInitNew.HOG_SPAWN_EGG,
+                ItemInitNew.WARTHOG_SPAWN_EGG,
+                ItemInitNew.BISON_SPAWN_EGG,
+                ItemInitNew.FIRE_CREEPER_SPAWN_EGG,
+                ItemInitNew.ICE_ENDERMAN_SPAWN_EGG,
+                ItemInitNew.GLOW_SQUID_SPAWN_EGG,
+                ItemInitNew.MOOBLOOM_SPAWN_EGG,
+                ItemInitNew.OX_SPAWN_EGG
+        );
     }
 
     @SubscribeEvent
@@ -148,8 +163,8 @@ public class AdditionsClientRegistration {
     }
 
     @SafeVarargs
-    private static void registerSpawnEggColorHandler(ItemColors colors, ItemRegistryObject<AdditionsSpawnEggItem>... spawnEggs) {
-        for (ItemRegistryObject<AdditionsSpawnEggItem> spawnEgg : spawnEggs) {
+    private static void registerSpawnEggColorHandler(ItemColors colors, ItemRegistryObject<CustomSpawnEggItem<?>>... spawnEggs) {
+        for (ItemRegistryObject<CustomSpawnEggItem<?>> spawnEgg : spawnEggs) {
             ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.getItem().getColor(tintIndex), spawnEgg);
         }
     }

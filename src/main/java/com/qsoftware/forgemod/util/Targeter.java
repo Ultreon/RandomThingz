@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.util;
 
 
+import com.google.common.annotations.Beta;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,6 +16,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Targeter for finding the target entity from an entity.
+ * Ported from spigot plugin QServerCore.
+ *
+ * @author Qboi123
+ */
+@Beta
 public final class Targeter {
     private Targeter() {
         throw new UnsupportedOperationException("Not allowed to initialize constructor.");

@@ -16,6 +16,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Magnet item class.
+ * Functionality to magnetize every item in an specific range.
+ *
+ * @author Qboi123
+ */
 public class MagnetItem extends Item {
     public MagnetItem(Properties properties) {
         super(properties);

@@ -9,6 +9,11 @@ import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nullable;
 
+/**
+ * Base container class.
+ *
+ * @author Qboi123
+ */
 public abstract class ContainerBase extends Container {
 
     protected IInventory inventory;

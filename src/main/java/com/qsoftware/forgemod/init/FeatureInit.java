@@ -15,6 +15,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.lang.reflect.Field;
 
+/**
+ * Features initialization class.
+ *
+ * @author Qboi123
+ */
 @SuppressWarnings("unused")
 public class FeatureInit {
     public static final ConfiguredFeature<? extends IFeatureConfig, ?> ORE_RUBY = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, BlockInit.RUBY_BLOCK.get().getDefaultState(), 8)).range(16).square());

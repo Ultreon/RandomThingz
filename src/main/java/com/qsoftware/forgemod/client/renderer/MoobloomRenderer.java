@@ -10,6 +10,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Moobloom entity renderer class.
+ *
+ * @author Qboi123
+ */
 @OnlyIn(Dist.CLIENT)
 public class MoobloomRenderer extends MobRenderer<MoobloomEntity, CowModel<MoobloomEntity>> {
    private static final ResourceLocation MOOBLOOM_TEXTURES = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/cow/moobloom.png");

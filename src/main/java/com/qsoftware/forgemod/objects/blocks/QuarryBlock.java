@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.objects.blocks;
 
 import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
+import com.qsoftware.forgemod.objects.tileentity.QuarryTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -18,6 +19,12 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+/**
+ * Quarry block class.
+ *
+ * @see QuarryTileEntity
+ * @author Qboi123
+ */
 @SuppressWarnings("deprecation")
 public class QuarryBlock extends Block {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;

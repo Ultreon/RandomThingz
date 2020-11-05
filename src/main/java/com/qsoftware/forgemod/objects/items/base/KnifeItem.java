@@ -3,6 +3,11 @@ package com.qsoftware.forgemod.objects.items.base;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+/**
+ * Knife item class.
+ *
+ * @author Qboi123
+ */
 public class KnifeItem extends Item {
     public KnifeItem(Properties properties) {
         super(properties.defaultMaxDamage(4));

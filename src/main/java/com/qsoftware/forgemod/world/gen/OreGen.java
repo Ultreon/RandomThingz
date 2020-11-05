@@ -22,6 +22,11 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Ore generator class.
+ *
+ * @author Qboi123
+ */
 @Mod.EventBusSubscriber(modid = QForgeUtils.MOD_ID)
 @SuppressWarnings({"SameParameterValue", "unused", "RedundantSuppression"})
 public class OreGen {

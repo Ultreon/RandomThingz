@@ -5,7 +5,7 @@ import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.objects.blocks.GamePcBlock;
 import com.qsoftware.forgemod.objects.blocks.QuarryBlock;
 import com.qsoftware.forgemod.objects.blocks.base.*;
-import com.qsoftware.forgemod.objects.blocks.furniture.OldWoodenCrate;
+import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
 import com.qsoftware.forgemod.objects.items.base.FaceableBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -21,6 +21,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
+/**
+ * Blocks initialization class
+ *
+ * @author Qboi123
+ */
 @SuppressWarnings("unused")
 public class BlockInit extends ObjectInit<Block> {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, QForgeUtils.MOD_ID);
@@ -57,7 +62,7 @@ public class BlockInit extends ObjectInit<Block> {
 
     // Tile entity
     public static final RegistryObject<Block> QUARRY_BLOCK = register("quarry", () -> new QuarryBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.9f, 2.9f).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> WOODEN_CRATE = register("wooden_crate", () -> new OldWoodenCrate(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.9f).sound(SoundType.WOOD)));
+    public static final RegistryObject<Block> WOODEN_CRATE = register("wooden_crate", () -> new WoodenCrateBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.9f).sound(SoundType.WOOD)));
 
     // Ore
     public static final RegistryObject<Block> COPPER_ORE = register("copper_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)));

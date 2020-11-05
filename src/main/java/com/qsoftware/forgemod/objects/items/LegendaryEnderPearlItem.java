@@ -12,6 +12,11 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Legendary ender pearl item class.
+ *
+ * @author Qboi123
+ */
 public class LegendaryEnderPearlItem extends EnderPearlItem {
     public LegendaryEnderPearlItem(Properties builder) {
         super(builder);

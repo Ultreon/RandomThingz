@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.objects.tileentity;
 
-import com.qsoftware.forgemod.container.ExampleChestContainer;
+import com.qsoftware.forgemod.container.CrateContainer;
 import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
-import com.qsoftware.forgemod.objects.blocks.furniture.OldWoodenCrate;
+import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,7 +35,13 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
-public class ExampleChestTileEntity extends LockableLootTileEntity {
+/**
+ * Crate tile entity class.
+ *
+ * @see WoodenCrateBlock
+ * @author Qboi123
+ */
+public class CrateTileEntity extends LockableLootTileEntity {
     // Chest contents.
     private NonNullList<ItemStack> chestContents = NonNullList.withSize(36, ItemStack.EMPTY);
 
@@ -46,11 +52,11 @@ public class ExampleChestTileEntity extends LockableLootTileEntity {
     private final IItemHandlerModifiable items = createHandler();
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
-    public ExampleChestTileEntity(TileEntityType<?> typeIn) {
+    public CrateTileEntity(TileEntityType<?> typeIn) {
         super(typeIn);
     }
 
-    public ExampleChestTileEntity() {
+    public CrateTileEntity() {
         this(TileEntityTypesInit.EXAMPLE_CHEST.get());
     }
 
@@ -80,7 +86,7 @@ public class ExampleChestTileEntity extends LockableLootTileEntity {
 
     @Override
     protected Container createMenu(int id, PlayerInventory player) {
-        return new ExampleChestContainer(id, player, this);
+        return new CrateContainer(id, player, this);
     }
 
     @Override
@@ -143,7 +149,7 @@ public class ExampleChestTileEntity extends LockableLootTileEntity {
     protected void onOpenOrClose() {
         Block block = this.getBlockState().getBlock();
         Objects.requireNonNull(this.world);
-        if (block instanceof OldWoodenCrate) {
+        if (block instanceof WoodenCrateBlock) {
             this.world.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
             this.world.notifyNeighborsOfStateChange(this.pos, block);
         }
@@ -154,15 +160,15 @@ public class ExampleChestTileEntity extends LockableLootTileEntity {
         BlockState blockState = reader.getBlockState(pos);
         if (blockState.hasTileEntity()) {
             TileEntity tileEntity = reader.getTileEntity(pos);
-            if (tileEntity instanceof ExampleChestTileEntity) {
-                return ((ExampleChestTileEntity) tileEntity).numPlayersUsing;
+            if (tileEntity instanceof CrateTileEntity) {
+                return ((CrateTileEntity) tileEntity).numPlayersUsing;
             }
         }
         return 0;
     }
 
     @SuppressWarnings({"unused", "RedundantSuppression"})
-    public static void swapContents(ExampleChestTileEntity te, ExampleChestTileEntity otherTe) {
+    public static void swapContents(CrateTileEntity te, CrateTileEntity otherTe) {
         NonNullList<ItemStack> list = te.getItems();
         te.setItems(otherTe.getItems());
         otherTe.setItems(list);

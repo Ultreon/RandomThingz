@@ -10,6 +10,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Hog entity renderer class.
+ *
+ * @author Qboi123
+ */
 @OnlyIn(Dist.CLIENT)
 public class HogRenderer extends MobRenderer<HogEntity, HogModel<HogEntity>> {
     private static final ResourceLocation HOG_TEXTURE = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/hog/hog.png");

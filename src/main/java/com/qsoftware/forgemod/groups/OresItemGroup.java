@@ -5,6 +5,11 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Ores item group.
+ *
+ * @author Qboi123
+ */
 public class OresItemGroup extends ItemGroup {
     public static final OresItemGroup instance = new OresItemGroup(ItemGroup.GROUPS.length, "qforgemod_ores");
 

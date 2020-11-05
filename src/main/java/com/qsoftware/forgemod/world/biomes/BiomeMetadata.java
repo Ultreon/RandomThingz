@@ -11,12 +11,16 @@ import com.google.common.collect.ImmutableMap;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-public class BiomeMetadata
-{
+/**
+ * Biome metadata class.
+ *
+ * @author Biomes 'o Plenty mod.
+ */
+public class BiomeMetadata {
     private final ImmutableMap<BOPClimates, Integer> weightMap;
 
     @Nullable
@@ -34,8 +38,7 @@ public class BiomeMetadata
     @Nullable
     private final BiFunction<Double, Double, Integer> waterColorFunction;
 
-    protected BiomeMetadata(Map<BOPClimates, Integer> weights, @Nullable RegistryKey<Biome> beachBiome, @Nullable RegistryKey<Biome> riverBiome, BiFunction<Double, Double, Integer> foliageColorFunction, BiFunction<Double, Double, Integer> grassColorFunction, BiFunction<Double, Double, Integer> waterColorFunction)
-    {
+    protected BiomeMetadata(Map<BOPClimates, Integer> weights, @Nullable RegistryKey<Biome> beachBiome, @Nullable RegistryKey<Biome> riverBiome, @Nullable BiFunction<Double, Double, Integer> foliageColorFunction, @Nullable BiFunction<Double, Double, Integer> grassColorFunction, @Nullable BiFunction<Double, Double, Integer> waterColorFunction) {
         this.weightMap = ImmutableMap.copyOf(weights);
         this.beachBiome = beachBiome;
         this.riverBiome = riverBiome;

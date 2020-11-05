@@ -5,28 +5,28 @@ import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.EnderPearlEntity;
-import net.minecraft.entity.monster.EndermiteEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+/**
+ * Legendary Ender Pearl entity class.
+ *
+ * @author Qboi123
+ */
+@SuppressWarnings({"deprecation", "unused"})
 public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
 
     public LegendaryEnderPearlEntity(EntityType<? extends LegendaryEnderPearlEntity> p_i50153_1_, World world) {
@@ -41,14 +41,14 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
         super(EntityTypeInit.LEGENDARY_ENDER_PEARL.getEntityType(), x, y, z, worldIn);
     }
 
-    protected Item getDefaultItem() {
-        return ItemInit.LEGENDARY_ENDER_PEARL;
+    protected @NotNull Item getDefaultItem() {
+        return ItemInit.LEGENDARY_ENDER_PEARL.get();
     }
 
     /**
      * Called when the arrow hits an entity
      */
-    protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
+    protected void onEntityHit(@NotNull EntityRayTraceResult p_213868_1_) {
         super.onEntityHit(p_213868_1_);
         p_213868_1_.getEntity().attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), 0.0F);
     }
@@ -61,7 +61,7 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
     /**
      * Called when this EntityFireball hits a block or entity.
      */
-    protected void onImpact(RayTraceResult result) {
+    protected void onImpact(@NotNull RayTraceResult result) {
         super.onImpact(result);
         Entity entity = this.func_234616_v_();
 
@@ -107,11 +107,13 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
     }
 
     @Nullable
-    public Entity changeDimension(ServerWorld server, net.minecraftforge.common.util.ITeleporter teleporter) {
+    public Entity changeDimension(@NotNull ServerWorld server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
         Entity entity = this.func_234616_v_();
         if (entity != null && entity.world.getDimensionKey() != server.getDimensionKey()) {
 //            this.setShooter((Entity)null);
+            entity.changeDimension(server, teleporter);
         }
 
         return super.changeDimension(server, teleporter);
-    }}
+    }
+}

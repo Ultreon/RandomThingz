@@ -6,15 +6,19 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-public class WratHogEntity extends HogEntity {
-    public WratHogEntity(EntityType<? extends WratHogEntity> type, World worldIn) {
+/**
+ * Wrat hog entity class.
+ *
+ * @author Qboi123
+ */
+public class WarthogEntity extends HogEntity {
+    public WarthogEntity(EntityType<? extends WarthogEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
@@ -25,7 +29,7 @@ public class WratHogEntity extends HogEntity {
     @Nullable
     @Override
     @ParametersAreNonnullByDefault
-    public WratHogEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.WRAT_HOG_ENTITY.get().create(this.world);
+    public WarthogEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
+        return EntityTypeInit.WARTHOG.get().create(this.world);
     }
 }

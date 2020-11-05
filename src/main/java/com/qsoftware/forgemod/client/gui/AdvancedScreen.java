@@ -13,6 +13,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * Advanced screen class.
+ *
+ * @author Qboi123
+ */
 public abstract class AdvancedScreen<T extends Container> extends ContainerScreen<T> {
     private final CopyOnWriteArrayList<Widget> widgets = new CopyOnWriteArrayList<>();
 

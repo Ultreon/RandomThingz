@@ -10,6 +10,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+/**
+ * NBT helper.
+ *
+ * @author Qboi123
+ */
 public class NBTHelper {
     public static CompoundNBT toNBT(Object o) {
         if (o instanceof ItemStack) {

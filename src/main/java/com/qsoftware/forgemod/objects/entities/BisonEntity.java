@@ -13,6 +13,11 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/**
+ * Bison entity class.
+ *
+ * @author Qboi123
+ */
 public class BisonEntity extends CowEntity {
     public BisonEntity(EntityType<? extends CowEntity> type, World worldIn) {
         super(type, worldIn);
@@ -26,6 +31,6 @@ public class BisonEntity extends CowEntity {
     @Override
     @ParametersAreNonnullByDefault
     public BisonEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.BISON_ENTITY.get().create(this.world);
+        return EntityTypeInit.BISON.get().create(this.world);
     }
 }

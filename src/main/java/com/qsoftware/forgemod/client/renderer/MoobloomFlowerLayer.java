@@ -16,6 +16,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Moobloom flower layer class.
+ *
+ * @author Qboi123
+ */
 @SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)
 public class MoobloomFlowerLayer<T extends MoobloomEntity> extends LayerRenderer<T, CowModel<T>> {

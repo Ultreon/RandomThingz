@@ -12,8 +12,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
-public class InfinityOre extends OreBlock {
-    public InfinityOre(Properties properties) {
+/**
+ * Infinity ore block class.
+ *
+ * @author Qboi123
+ */
+public class InfinityOreBlock extends OreBlock {
+    public InfinityOreBlock(Properties properties) {
         super(properties);
     }
 
@@ -26,16 +31,16 @@ public class InfinityOre extends OreBlock {
             player.getCombatTracker().trackDamage(new DamageSource("death.mine_infinity_ore"), player.getHealth(), player.getHealth());
             player.setHealth(0);
             player.onDeath(new DamageSource("death.mine.infinity_ore"));
-        } else if (heldItemMainhand.getItem() != ItemInit.ULTRINIUM_SHOVEL &&
-                heldItemMainhand.getItem() != ItemInit.ULTRINIUM_PICKAXE &&
-                heldItemMainhand.getItem() != ItemInit.ULTRINIUM_HOE &&
-                heldItemMainhand.getItem() != ItemInit.ULTRINIUM_SWORD &&
-                heldItemMainhand.getItem() != ItemInit.ULTRINIUM_AXE &&
-                heldItemMainhand.getItem() == ItemInit.INFINITY_SHOVEL &&
-                heldItemMainhand.getItem() == ItemInit.INFINITY_PICKAXE &&
-                heldItemMainhand.getItem() == ItemInit.INFINITY_HOE &&
-                heldItemMainhand.getItem() == ItemInit.INFINITY_SWORD &&
-                heldItemMainhand.getItem() == ItemInit.INFINITY_AXE) {
+        } else if (heldItemMainhand.getItem() != ItemInit.ULTRINIUM_SHOVEL.get() &&
+                heldItemMainhand.getItem() != ItemInit.ULTRINIUM_PICKAXE.get() &&
+                heldItemMainhand.getItem() != ItemInit.ULTRINIUM_HOE.get() &&
+                heldItemMainhand.getItem() != ItemInit.ULTRINIUM_SWORD.get() &&
+                heldItemMainhand.getItem() != ItemInit.ULTRINIUM_AXE.get() &&
+                heldItemMainhand.getItem() == ItemInit.INFINITY_SHOVEL.get() &&
+                heldItemMainhand.getItem() == ItemInit.INFINITY_PICKAXE.get() &&
+                heldItemMainhand.getItem() == ItemInit.INFINITY_HOE.get() &&
+                heldItemMainhand.getItem() == ItemInit.INFINITY_SWORD.get() &&
+                heldItemMainhand.getItem() == ItemInit.INFINITY_AXE.get()) {
             if (heldItemMainhand.isDamageable()) {
                 player.getHeldItemMainhand().damageItem(player.getHeldItemMainhand().getMaxDamage(), player, (entity) -> {
                     entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);

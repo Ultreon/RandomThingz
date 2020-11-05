@@ -5,6 +5,12 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Wood item group.
+ * For miscellaneous wood items and blocks.
+ *
+ * @author Qboi123
+ */
 public class WoodItemGroup extends ItemGroup {
     public static final WoodItemGroup instance = new WoodItemGroup(ItemGroup.GROUPS.length, "qforgemod_wood");
 

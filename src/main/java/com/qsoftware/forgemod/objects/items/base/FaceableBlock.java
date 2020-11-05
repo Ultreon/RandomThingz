@@ -13,6 +13,11 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+/**
+ * Game PC block class.
+ *
+ * @author Qboi123
+ */
 @SuppressWarnings("deprecation")
 public class FaceableBlock extends Block {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;

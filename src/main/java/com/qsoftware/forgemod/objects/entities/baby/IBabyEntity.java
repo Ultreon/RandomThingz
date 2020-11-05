@@ -9,6 +9,11 @@ import net.minecraft.network.datasync.DataParameter;
 
 import java.util.UUID;
 
+/**
+ * Base baby entity interface.
+ *
+ * @author Mekanism community.
+ */
 public interface IBabyEntity {
 
     //COPY of ZombieEntity BABY_SPEED_BOOST_ID and BABY_SPEED_BOOST

@@ -12,6 +12,11 @@ import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.tileentity.SkullTileEntity;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * Player skins.
+ *
+ * @author Gravestone Mod
+ */
 public class PlayerSkins {
 
     private static final HashMap<String, GameProfile> players = new HashMap<String, GameProfile>();

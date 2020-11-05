@@ -27,6 +27,11 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/**
+ * Hog entity class.
+ *
+ * @author Qboi123
+ */
 public class HogEntity extends PigEntity {
     public static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.CARROT, Items.POTATO, Items.BEETROOT, Blocks.BEDROCK);
 
@@ -96,7 +101,7 @@ public class HogEntity extends PigEntity {
     @Override
     @ParametersAreNonnullByDefault
     public HogEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.HOG_ENTITY.get().create(this.world);
+        return EntityTypeInit.HOG.get().create(this.world);
     }
 
     @Override

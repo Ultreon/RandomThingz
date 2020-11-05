@@ -9,12 +9,17 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Random;
 
+/**
+ * Tick listener.
+ *
+ * @author Qboi123
+ */
 @Mod.EventBusSubscriber(modid = QForgeUtils.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class TickListener {
     @SubscribeEvent
     public void randomTick(TickEvent.WorldTickEvent event) {
         if (new Random().nextInt(60) == 0) {
-            GlowSquidEntity squidEntity = new GlowSquidEntity(EntityTypeInit.GLOW_SQUID_ENTITY.get(), event.world);
+            GlowSquidEntity squidEntity = new GlowSquidEntity(EntityTypeInit.GLOW_SQUID.get(), event.world);
             squidEntity.setPosition(0, 255, 0);
             event.world.addEntity(squidEntity);
         }

@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.client.gui;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.qsoftware.forgemod.QForgeUtils;
-import com.qsoftware.forgemod.container.ExampleChestContainer;
+import com.qsoftware.forgemod.container.CrateContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class ExampleChestScreen extends ContainerScreen<ExampleChestContainer> {
+public class ExampleChestScreen extends ContainerScreen<CrateContainer> {
     private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(QForgeUtils.MOD_ID, "textures/gui/wooden_crate.png");
 
     @SuppressWarnings("unused")
@@ -25,7 +25,7 @@ public class ExampleChestScreen extends ContainerScreen<ExampleChestContainer> {
         playerInventory.player.sendMessage(new StringTextComponent("Button pressed!"), playerInventory.player.getUniqueID());
     }
 
-    public ExampleChestScreen(ExampleChestContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public ExampleChestScreen(CrateContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         guiLeft = 0;
         guiTop = 0;

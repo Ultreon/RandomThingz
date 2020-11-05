@@ -10,6 +10,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Ox entity renderer class.
+ *
+ * @author Qboi123
+ */
 @OnlyIn(Dist.CLIENT)
 public class OxRenderer extends MobRenderer<OxEntity, CowModel<OxEntity>> {
     private static final ResourceLocation BISON_TEXTURE = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/cow/ox.png");

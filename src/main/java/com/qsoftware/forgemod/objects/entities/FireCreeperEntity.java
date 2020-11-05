@@ -18,6 +18,11 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+/**
+ * Fire creeper entity class.
+ *
+ * @author Qboi123
+ */
 public class FireCreeperEntity extends CreeperEntity {
     public FireCreeperEntity(EntityType<? extends FireCreeperEntity> type, World worldIn) {
         super(type, worldIn);

@@ -18,6 +18,14 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+/**
+ * Specal block class.
+ *
+ * First created block in the project.
+ *
+ * @author Qboi123
+ */
+@Deprecated
 @SuppressWarnings("deprecation")
 public class SpecalBlock extends Block {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;

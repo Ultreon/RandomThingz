@@ -6,6 +6,11 @@ import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.forgespi.Environment;
 
+/**
+ * Keybinding list class.
+ *
+ * @author Qboi123
+ */
 public class KeyBindingList {
     public static KeyBinding[] modKeyBindings;
 

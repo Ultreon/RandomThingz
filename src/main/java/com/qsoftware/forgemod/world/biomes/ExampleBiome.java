@@ -10,6 +10,11 @@ import net.minecraft.world.gen.feature.structure.StructureFeatures;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
+/**
+ * Example biome
+ *
+ * @author Qboi123
+ */
 public class ExampleBiome extends BiomeTemplate {
 //    public Biome instance;
 //    public BiomeGenerationSettings settings = new BiomeGenerationSettings.Builder()

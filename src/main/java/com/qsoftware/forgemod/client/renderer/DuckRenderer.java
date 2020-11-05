@@ -11,6 +11,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+/**
+ * Duck entity renderer class.
+ *
+ * @author Qboi123
+ */
 @OnlyIn(Dist.CLIENT)
 public class DuckRenderer extends MobRenderer<DuckEntity, FreeChickenModel<DuckEntity>> {
     private static final ResourceLocation DUCK_TEXTURES = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/duck.png");

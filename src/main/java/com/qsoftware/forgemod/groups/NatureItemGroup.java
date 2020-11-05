@@ -5,6 +5,12 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Nature item groups.
+ * Such as saplings, flowers.
+ *
+ * @author Qboi123
+ */
 public class NatureItemGroup extends ItemGroup {
     public static final NatureItemGroup instance = new NatureItemGroup(ItemGroup.GROUPS.length, "qforgemod_nature");
 
@@ -14,6 +20,6 @@ public class NatureItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.EUCALYPTUS_LEAF);
+        return new ItemStack(ItemInit.EUCALYPTUS_LEAF.get());
     }
 }

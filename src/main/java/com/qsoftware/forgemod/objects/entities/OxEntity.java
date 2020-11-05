@@ -13,6 +13,11 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/**
+ * Ox entity class.
+ *
+ * @author Qboi123
+ */
 public class OxEntity extends CowEntity {
     public OxEntity(EntityType<? extends CowEntity> type, World worldIn) {
         super(type, worldIn);
@@ -26,6 +31,6 @@ public class OxEntity extends CowEntity {
     @Override
     @ParametersAreNonnullByDefault
     public OxEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.OX_ENTITY.get().create(this.world);
+        return EntityTypeInit.OX.get().create(this.world);
     }
 }

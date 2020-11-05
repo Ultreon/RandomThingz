@@ -4,7 +4,9 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
 /**
- * Author: MrCrayfish
+ * Render utilities.
+ *
+ * @author MrCrayfish
  */
 @SuppressWarnings("unused")
 public class RenderUtil

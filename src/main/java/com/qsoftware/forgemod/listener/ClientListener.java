@@ -13,6 +13,8 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.Random;
 
 /**
+ * Client listener
+ *
  * @author (partial) CoFH - https://github.com/CoFH
  */
 @Mod.EventBusSubscriber(modid = QForgeUtils.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)

@@ -7,9 +7,15 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+/**
+ * Infinity sword damage source.
+ *
+ * @author Qboi123
+ */
 public class DamageSourceInfinitySword extends EntityDamageSource {
 
     public DamageSourceInfinitySword(Entity source) {
@@ -17,7 +23,7 @@ public class DamageSourceInfinitySword extends EntityDamageSource {
     }
 
     @Override
-    public ITextComponent getDeathMessage(LivingEntity entity) {
+    public @NotNull ITextComponent getDeathMessage(LivingEntity entity) {
         ItemStack itemstack = damageSourceEntity instanceof LivingEntity ? ((LivingEntity) damageSourceEntity).getHeldItem(Hand.MAIN_HAND) : null;
         String s = "death.attack.infinity";
         int rando = entity.getEntityWorld().rand.nextInt(5);

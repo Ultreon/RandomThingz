@@ -8,6 +8,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Spawn egg item group.
+ *
+ * @author Qboi123
+ */
 public class SpawnEggsItemGroup extends ItemGroup {
     public static final SpawnEggsItemGroup instance = new SpawnEggsItemGroup(ItemGroup.GROUPS.length, "qforgemod_spawn_eggs");
 

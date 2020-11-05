@@ -19,6 +19,11 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
+/**
+ * Baby creeper entity class.
+ *
+ * @author Mekanism community.
+ */
 public class EntityBabyCreeper extends CreeperEntity implements IBabyEntity {
 
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(EntityBabyCreeper.class, DataSerializers.BOOLEAN);

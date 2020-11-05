@@ -16,6 +16,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+/**
+ * Unstable infinity ingot item class.
+ *
+ * @author Qboi123
+ */
 public class UnstableInfinityIngot extends Item {
     public UnstableInfinityIngot() {
         super(new Properties().group(Groups.OVERPOWERED));

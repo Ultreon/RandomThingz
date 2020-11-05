@@ -6,6 +6,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.glfw.GLFW;
 
+/**
+ * Keyboard helper.
+ * Check for holding shift, ctrl or alt.
+ *
+ * @author Qboi123
+ */
 public class KeyboardHelper {
     private static final long WINDOW = Minecraft.getInstance().getMainWindow().getHandle();
 

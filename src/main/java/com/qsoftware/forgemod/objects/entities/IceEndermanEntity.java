@@ -18,6 +18,11 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
+/**
+ * Ice enderman entity class.
+ *
+ * @author Qboi123
+ */
 public class IceEndermanEntity extends EndermanEntity {
     public IceEndermanEntity(EntityType<? extends EndermanEntity> type, World worldIn) {
         super(type, worldIn);
