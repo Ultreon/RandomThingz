@@ -1,7 +1,0 @@
-{
-  "parent": "qforgemod:custom/support",
-  "textures": {
-    "particle": "qforgemod:block/birch_support",
-    "texture": "qforgemod:block/birch_support"
-  }
-}

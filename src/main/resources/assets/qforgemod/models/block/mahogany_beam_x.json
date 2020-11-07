@@ -1,8 +1,0 @@
-{
-  "parent": "qforgemod:custom/beam_x",
-  "textures": {
-    "particle": "qforgemod:block/mahogany_beam_side",
-    "side": "qforgemod:block/mahogany_beam_side",
-    "end": "qforgemod:block/mahogany_beam_end"
-  }
-}

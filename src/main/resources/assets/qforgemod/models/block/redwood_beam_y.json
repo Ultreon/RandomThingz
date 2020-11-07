@@ -1,8 +1,0 @@
-{
-  "parent": "qforgemod:custom/beam_y",
-  "textures": {
-    "particle": "qforgemod:block/redwood_beam_side",
-    "side": "qforgemod:block/redwood_beam_side",
-    "end": "qforgemod:block/redwood_beam_end"
-  }
-}

@@ -15,7 +15,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.1-beta5'
+version = '1.1-beta6'
 group = 'com.qsoftware.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'QForgeMod'
 
@@ -112,7 +112,7 @@ dependencies {
     implementation group: 'xml-resolver', name: 'xml-resolver', version: '1.2'
     implementation group: 'org.yaml', name: 'snakeyaml', version: '1.26'
     
-    implementation fileTree(dir: 'qaddons/build/libs', include: ['*.jar'])
+//    implementation fileTree(dir: 'qaddons/build/libs', include: ['*.jar'])
     
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"

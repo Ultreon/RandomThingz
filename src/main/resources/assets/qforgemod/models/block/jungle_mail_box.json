@@ -1,7 +1,0 @@
-{
-    "parent": "qforgemod:block/mail_box",
-    "textures": {
-        "roof": "minecraft:block/jungle_log",
-        "box": "minecraft:block/jungle_planks"
-    }
-}

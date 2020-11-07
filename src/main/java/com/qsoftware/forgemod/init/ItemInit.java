@@ -104,6 +104,11 @@ public class ItemInit extends ObjectInit<Item> {
     public static final ItemRegistryObject<Item> COPPER_NUGGET = register("copper_nugget", IngotOrDustItem::new);
     public static final ItemRegistryObject<Item> COPPER_DUST = register("copper_dust", IngotOrDustItem::new);
 
+    // Metals - Copper Level
+    public static final ItemRegistryObject<Item> NICKLE_INGOT = register("nickle_ingot", IngotOrDustItem::new);
+    public static final ItemRegistryObject<Item> NICKLE_NUGGET = register("nickle_nugget", IngotOrDustItem::new);
+    public static final ItemRegistryObject<Item> NICKLE_DUST = register("nickle_dust", IngotOrDustItem::new);
+
     // Metals - Steel Level
     public static final ItemRegistryObject<Item> STEEL_INGOT = register("steel_ingot", IngotOrDustItem::new);
     public static final ItemRegistryObject<Item> STEEL_NUGGET = register("steel_nugget", IngotOrDustItem::new);
@@ -201,6 +206,9 @@ public class ItemInit extends ObjectInit<Item> {
     public static final IArmorMaterial copperArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":copper", 13, new int[]{2, 5, 6, 2}, 10, 1f,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(ItemInit.COPPER_INGOT.get())
     );
+    public static final IArmorMaterial nickleArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":nickle", 13, new int[]{2, 5, 7, 3}, 16, 1f,
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(ItemInit.NICKLE_INGOT.get())
+    );
     public static final IArmorMaterial steelArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":steel", 24, new int[]{3, 6, 8, 4}, 14, 4f,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, () -> Ingredient.fromItems(ItemInit.STEEL_INGOT.get())
     );
@@ -249,6 +257,12 @@ public class ItemInit extends ObjectInit<Item> {
     public static final ItemRegistryObject<Item> COPPER_CHESTPLATE = register("copper_chestplate", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
     public static final ItemRegistryObject<Item> COPPER_LEGGINGS = register("copper_leggings", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
     public static final ItemRegistryObject<Item> COPPER_BOOTS = register("copper_boots", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
+
+    // Armors - Nickle
+    public static final ItemRegistryObject<Item> NICKLE_HELMET = register("nickle_helmet", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
+    public static final ItemRegistryObject<Item> NICKLE_CHESTPLATE = register("nickle_chestplate", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.ARMORS)));
+    public static final ItemRegistryObject<Item> NICKLE_LEGGINGS = register("nickle_leggings", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.ARMORS)));
+    public static final ItemRegistryObject<Item> NICKLE_BOOTS = register("nickle_boots", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.ARMORS)));
 
     // Armors - Steel
     public static final ItemRegistryObject<Item> STEEL_HELMET = register("steel_helmet", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.ARMORS)));
@@ -342,6 +356,9 @@ public class ItemInit extends ObjectInit<Item> {
     public static final IItemTier COPPER_ITEM_TIER = new ItemTierBuilder.Builder(2, 420, 5.3f, 1.4f, 10,
             () -> Ingredient.fromItems(COPPER_INGOT)
     );
+    public static final IItemTier NICKLE_ITEM_TIER = new ItemTierBuilder.Builder(2, 480, 4.9f, 1.7f, 16,
+            () -> Ingredient.fromItems(NICKLE_INGOT)
+    );
     public static final IItemTier STEEL_ITEM_TIER = new ItemTierBuilder.Builder(3, 1465, 8.1f, 3.8f, 14,
             () -> Ingredient.fromItems(STEEL_INGOT)
     );
@@ -391,6 +408,13 @@ public class ItemInit extends ObjectInit<Item> {
     public static final ItemRegistryObject<Item> COPPER_SHOVEL = register("copper_shovel", () -> new ShovelItem(COPPER_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
     public static final ItemRegistryObject<Item> COPPER_AXE = register("copper_axe", () -> new AxeItem(COPPER_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
     public static final ItemRegistryObject<Item> COPPER_HOE = register("copper_hoe", () -> new HoeItem(COPPER_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+
+    // Tools - Nickle
+    public static final ItemRegistryObject<Item> NICKLE_SWORD = register("nickle_sword", () -> new SwordItem(NICKLE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));
+    public static final ItemRegistryObject<Item> NICKLE_PICKAXE = register("nickle_pickaxe", () -> new PickaxeItem(NICKLE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<Item> NICKLE_SHOVEL = register("nickle_shovel", () -> new ShovelItem(NICKLE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<Item> NICKLE_AXE = register("nickle_axe", () -> new AxeItem(NICKLE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<Item> NICKLE_HOE = register("nickle_hoe", () -> new HoeItem(NICKLE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Tools - Steel
     public static final ItemRegistryObject<Item> STEEL_SWORD = register("steel_sword", () -> new SwordItem(STEEL_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS))); // ModItemTier.ULTRINIUM)));

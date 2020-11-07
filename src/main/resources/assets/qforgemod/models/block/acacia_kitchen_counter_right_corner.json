@@ -1,7 +1,0 @@
-{
-    "parent": "qforgemod:block/kitchen_counter_right_corner",
-    "textures": {
-        "top": "minecraft:block/acacia_log",
-        "base": "minecraft:block/acacia_planks"
-    }
-}

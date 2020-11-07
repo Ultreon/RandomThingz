@@ -1,8 +1,0 @@
-{
-  "parent": "qforgemod:custom/beam_x",
-  "textures": {
-    "particle": "qforgemod:block/willow_beam_side",
-    "side": "qforgemod:block/willow_beam_side",
-    "end": "qforgemod:block/willow_beam_end"
-  }
-}

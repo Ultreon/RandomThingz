@@ -1,7 +1,0 @@
-{
-  "parent": "qforgemod:custom/support",
-  "textures": {
-    "particle": "qforgemod:block/spruce_support",
-    "texture": "qforgemod:block/spruce_support"
-  }
-}

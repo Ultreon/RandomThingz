@@ -1,8 +1,0 @@
-{
-  "parent": "qforgemod:custom/pillar",
-  "textures": {
-    "particle": "qforgemod:block/stone_pillar_side",
-    "side": "qforgemod:block/stone_pillar_side",
-    "end": "qforgemod:block/stone_pillar_end"
-  }
-}

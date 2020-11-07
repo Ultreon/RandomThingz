@@ -1,8 +1,0 @@
-{
-  "parent": "qforgemod:custom/beam_z",
-  "textures": {
-    "particle": "qforgemod:block/jacaranda_beam_side",
-    "side": "qforgemod:block/jacaranda_beam_side",
-    "end": "qforgemod:block/jacaranda_beam_end"
-  }
-}

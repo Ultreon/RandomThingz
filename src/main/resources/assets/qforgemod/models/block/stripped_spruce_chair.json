@@ -1,7 +1,0 @@
-{
-    "parent": "qforgemod:block/chair",
-    "textures": {
-        "seat": "block/stripped_spruce_log",
-        "legs": "block/spruce_log"
-    }
-}

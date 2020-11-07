@@ -1,8 +1,0 @@
-{
-    "parent": "qforgemod:block/desk_single",
-    "textures": {
-        "base": "minecraft:block/cobblestone",
-        "top": "block/stone",
-        "legs": "minecraft:block/cobblestone"
-    }
-}

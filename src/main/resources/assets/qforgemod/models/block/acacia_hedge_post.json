@@ -1,6 +1,0 @@
-{
-    "parent": "qforgemod:block/hedge_post",
-    "textures": {
-        "leaves": "minecraft:block/acacia_leaves"
-    }
-}

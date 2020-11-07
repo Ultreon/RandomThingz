@@ -1,9 +1,0 @@
-{
-  "parent": "qforgemod:custom/brazier_extinguished",
-  "textures": {
-    "all": "qforgemod:block/brazier_base",
-    "particle": "qforgemod:block/brazier_base",
-    "side": "qforgemod:block/brazier",
-    "base": "qforgemod:block/brazier_base"
-  }
-}

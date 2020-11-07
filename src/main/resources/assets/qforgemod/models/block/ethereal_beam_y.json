@@ -1,8 +1,0 @@
-{
-  "parent": "qforgemod:custom/beam_y",
-  "textures": {
-    "particle": "qforgemod:block/ethereal_beam_side",
-    "side": "qforgemod:block/ethereal_beam_side",
-    "end": "qforgemod:block/ethereal_beam_end"
-  }
-}

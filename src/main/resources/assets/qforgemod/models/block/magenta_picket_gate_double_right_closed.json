@@ -1,8 +1,0 @@
-{
-    "parent": "qforgemod:block/upgraded_gate_double_right_closed",
-    "textures": {
-        "hinge": "minecraft:block/magenta_concrete",
-        "pole": "minecraft:block/magenta_concrete",
-        "plank": "minecraft:block/magenta_concrete"
-    }
-}

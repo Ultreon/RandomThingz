@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:nickle_pickaxe"
+    ]
+  },
+  "criteria": {
+    "has_nickle_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:nickle_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "item": "qforgemod:nickle_pickaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nickle_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

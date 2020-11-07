@@ -1,7 +1,0 @@
-{
-    "parent": "qforgemod:block/kitchen_sink",
-    "textures": {
-        "base": "minecraft:block/acacia_planks",
-        "sink": "minecraft:block/gray_concrete"
-    }
-}

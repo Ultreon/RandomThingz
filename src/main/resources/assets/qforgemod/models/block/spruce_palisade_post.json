@@ -1,8 +1,0 @@
-{
-  "parent": "qforgemod:custom/palisade_post",
-  "textures": {
-    "particle": "qforgemod:block/spruce_palisade_side",
-    "side": "qforgemod:block/spruce_palisade_side",
-    "end": "qforgemod:block/spruce_palisade_end"
-  }
-}

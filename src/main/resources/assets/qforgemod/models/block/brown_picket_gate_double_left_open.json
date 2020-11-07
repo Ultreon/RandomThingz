@@ -1,8 +1,0 @@
-{
-    "parent": "qforgemod:block/upgraded_gate_double_left_open",
-    "textures": {
-        "hinge": "minecraft:block/brown_concrete",
-        "pole": "minecraft:block/brown_concrete",
-        "plank": "minecraft:block/brown_concrete"
-    }
-}

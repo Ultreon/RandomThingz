@@ -1,7 +1,0 @@
-{
-    "parent": "qforgemod:block/sofa_corner_right",
-    "textures": {
-        "wool": "minecraft:block/yellow_wool",
-        "support": "minecraft:block/oak_log"
-    }
-}

@@ -1,8 +1,0 @@
-{
-    "parent": "qforgemod:block/crate_open",
-    "textures": {
-        "hinge": "minecraft:block/light_gray_concrete",
-        "panel": "minecraft:block/stripped_spruce_log",
-        "frame": "minecraft:block/stripped_spruce_log"
-    }
-}

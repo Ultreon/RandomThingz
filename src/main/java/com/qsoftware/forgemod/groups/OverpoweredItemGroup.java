@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Qboi123
  */
 public class OverpoweredItemGroup extends ItemGroup {
-    public static final OverpoweredItemGroup instance = new OverpoweredItemGroup(ItemGroup.GROUPS.length, "qforgemod_gems");
+    public static final OverpoweredItemGroup instance = new OverpoweredItemGroup(ItemGroup.GROUPS.length, "qforgemod_god");
 
     public OverpoweredItemGroup(int index, String label) {
         super(index, label);

@@ -1,6 +1,0 @@
-{
-    "parent": "qforgemod:block/kitchen_sink_alt",
-    "textures": {
-        "sink": "minecraft:block/white_terracotta"
-    }
-}

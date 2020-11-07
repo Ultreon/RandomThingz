@@ -1,8 +1,0 @@
-{
-  "parent": "block/cube_column",
-  "textures": {
-    "particle": "qforgemod:block/birch_beam_side",
-    "side": "qforgemod:block/birch_beam_side",
-    "end": "qforgemod:block/birch_beam_end"
-  }
-}

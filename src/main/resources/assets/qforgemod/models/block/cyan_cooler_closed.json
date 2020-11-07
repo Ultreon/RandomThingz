@@ -1,6 +1,0 @@
-{
-    "parent": "qforgemod:block/cooler_closed",
-    "textures": {
-        "color": "minecraft:block/cyan_terracotta"
-    }
-}

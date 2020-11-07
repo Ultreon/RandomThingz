@@ -1,8 +1,0 @@
-{
-    "parent": "qforgemod:item/upgraded_gate",
-    "textures": {
-        "hinge": "minecraft:block/brown_concrete",
-        "pole": "minecraft:block/brown_concrete",
-        "plank": "minecraft:block/brown_concrete"
-    }
-}

@@ -7,7 +7,7 @@
   "item.qforgemod.cheese_slice": "Cheese Slice",
   "item.qforgemod.cheese_burger": "Cheeseburger",
 
-  "item.qforgemod.wand": "Walking Staff",
+  "item.qforgemod.walking_staff": "Walking Staff",
   "item.qforgemod.lightning_staff": "Lightning Staff",
   "item.qforgemod.nature_staff": "Nature's Staff",
 
@@ -143,6 +143,7 @@
   "item.qforgemod.uranium_nugget": "Uranium Nugget",
   "item.qforgemod.ultrinium_ingot": "Ultrinium Ingot",
   "item.qforgemod.ultrinium_nugget": "Ultrinium Nugget",
+  "item.qforgemod.unstable_infinity_ingot": "Unstable Infinity Ingot",
   "item.qforgemod.infinity_ingot": "Infinity Ingot",
   "item.qforgemod.infinity_nugget": "Infinity Nugget",
 
@@ -156,6 +157,28 @@
   "item.qforgemod.dungeons_iron_sword": "Iron Sword (of MC Dungeons)",
   "item.qforgemod.dungeons_broadsword": "Broadsword (of MC Dungeons)",
 
+  "item.qforgemod.legendary_ender_pearl": "Legendary Ender Pearl",
+
+  "item.qforgemod.baby_creeper_spawn_egg": "Baby Creeper Spawn Egg",
+  "item.qforgemod.baby_skeleton_spawn_egg": "Baby Skeleton Spawn Egg",
+  "item.qforgemod.baby_wither_skeleton_spawn_egg": "Baby Wither Skeleton Spawn Egg",
+  "item.qforgemod.baby_stray_spawn_egg": "Baby Stray Spawn Egg",
+  "item.qforgemod.baby_enderman_spawn_egg": "Baby Enderman Spawn Egg",
+  "item.qforgemod.glow_squid_spawn_egg": "Glow Squid Spawn Egg",
+  "item.qforgemod.moobloom_spawn_egg": "Moobloom Spawn Egg",
+  "item.qforgemod.ice_enderman_spawn_egg": "Ice Enderman Spawn Egg",
+  "item.qforgemod.fire_creeper_spawn_egg": "Fire Creeper Spawn Egg",
+  "item.qforgemod.duck_spawn_egg": "Duck Spawn Egg",
+  "item.qforgemod.hog_spawn_egg": "Hog Spawn Egg",
+  "item.qforgemod.ox_spawn_egg": "Ox Spawn Egg",
+  "item.qforgemod.bison_spawn_egg": "Bison Spawn Egg",
+  "item.qforgemod.warthog_spawn_egg": "Wrat Hog Spawn Egg",
+
+  "entity.qforgemod.baby_creeper": "Baby Creeper",
+  "entity.qforgemod.baby_skeleton": "Baby Skeleton",
+  "entity.qforgemod.baby_wither_skeleton": "Baby Wither Skeleton",
+  "entity.qforgemod.baby_stray": "Baby Stray",
+  "entity.qforgemod.baby_enderman": "Baby Enderman",
   "entity.qforgemod.glow_squid": "Glow Squid",
   "entity.qforgemod.moobloom": "Moobloom",
   "entity.qforgemod.ice_enderman": "Ice Enderman",
@@ -165,6 +188,9 @@
   "entity.qforgemod.ox": "Ox",
   "entity.qforgemod.bison": "Bison",
   "entity.qforgemod.warthog": "Wrat Hog",
+  "entity.qforgemod.legendary_ender_pearl": "Legendary Ender Pearl",
+
+  "block.qforgemod.buttercup": "Buttercup",
 
   "block.qforgemod.lab_door": "Lab Door",
   "block.qforgemod.shopping_door": "Shopping Door",
@@ -221,6 +247,8 @@
   "itemGroup.qforgemod_shapes": "Shapes",
   "itemGroup.qforgemod_specials": "Specials",
   "itemGroup.qforgemod_tools": "Tools",
+  "itemGroup.qforgemod_armors": "Armors",
+  "itemGroup.qforgemod_ingots_n_nuggets": "Metal Craftables",
   "itemGroup.qforgemod_leaves": "Leaves",
   "itemGroup.qforgemod_ingredients": "Ingredients",
   "itemGroup.qforgemod_redstone": "Redstone",
@@ -228,8 +256,8 @@
   "itemGroup.qforgemod_fletching": "Fletching",
   "itemGroup.qforgemod_gems": "Gems",
   "itemGroup.qforgemod_god": "God Items",
-  "itemGroup.qforgemod_misc": "Nature Tab 2",
-  "itemGroup.qforgemod.qforgemod_test": "Nature Tab 2",
+  "itemGroup.qforgemod_spawn_eggs": "Spawn Eggs",
+  "itemGroup.qforgemod_misc": "Miscellaneous",
 
   "block.qforgemod.elevator_white": "White Elevator",
   "block.qforgemod.elevator_black": "Black Elevator",

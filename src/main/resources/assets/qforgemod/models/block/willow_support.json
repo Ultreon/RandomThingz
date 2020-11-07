@@ -1,7 +1,0 @@
-{
-  "parent": "qforgemod:custom/support",
-  "textures": {
-    "particle": "qforgemod:block/willow_support",
-    "texture": "qforgemod:block/willow_support"
-  }
-}

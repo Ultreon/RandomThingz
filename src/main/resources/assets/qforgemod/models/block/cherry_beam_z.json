@@ -1,8 +1,0 @@
-{
-  "parent": "qforgemod:custom/beam_z",
-  "textures": {
-    "particle": "qforgemod:block/cherry_beam_side",
-    "side": "qforgemod:block/cherry_beam_side",
-    "end": "qforgemod:block/cherry_beam_end"
-  }
-}

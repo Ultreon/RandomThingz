@@ -1,8 +1,0 @@
-{
-  "parent": "qforgemod:custom/beam_y",
-  "textures": {
-    "particle": "qforgemod:block/dark_oak_beam_side",
-    "side": "qforgemod:block/dark_oak_beam_side",
-    "end": "qforgemod:block/dark_oak_beam_end"
-  }
-}

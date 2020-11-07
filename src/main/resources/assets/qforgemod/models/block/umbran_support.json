@@ -1,7 +1,0 @@
-{
-  "parent": "qforgemod:custom/support",
-  "textures": {
-    "particle": "qforgemod:block/umbran_support",
-    "texture": "qforgemod:block/umbran_support"
-  }
-}

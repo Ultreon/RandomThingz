@@ -1,7 +1,0 @@
-{
-  "parent": "qforgemod:custom/seat_top",
-  "textures": {
-    "particle": "qforgemod:block/palm_seat",
-    "texture": "qforgemod:block/palm_seat"
-  }
-}

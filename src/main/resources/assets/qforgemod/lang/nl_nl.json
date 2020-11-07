@@ -7,7 +7,7 @@
   "item.qforgemod.cheese_slice": "Kaas plakje",
   "item.qforgemod.cheese_burger": "Cheeseburger",
 
-  "item.qforgemod.wand": "Wandel staf",
+  "item.qforgemod.walking_staff": "Wandel staf",
   "item.qforgemod.lightning_staff": "Bliksem staf",
   "item.qforgemod.nature_staff": "Natuur staf",
 
@@ -143,6 +143,7 @@
   "item.qforgemod.uranium_nugget": "Uranium klompje",
   "item.qforgemod.ultrinium_ingot": "Ultrinium staaf",
   "item.qforgemod.ultrinium_nugget": "Ultrinium klompje",
+  "item.qforgemod.unstable_infinity_ingot": "Instabiele oneindigheids staaf",
   "item.qforgemod.infinity_ingot": "Oneindigheids staaf",
   "item.qforgemod.infinity_nugget": "Oneindigheids klompje",
 
@@ -156,15 +157,40 @@
   "item.qforgemod.dungeons_iron_sword": "IJzeren zwaard (van MC Dungeons)",
   "item.qforgemod.dungeons_broadsword": "Slagzwaard (van MC Dungeons)",
 
-  "entity.qforgemod.glow_squid": "Gloeiende ...",
+  "item.qforgemod.legendary_ender_pearl": "Legendarische ender parel",
+
+  "item.qforgemod.baby_creeper_spawn_egg": "Baby creeper spawnei",
+  "item.qforgemod.baby_skeleton_spawn_egg": "Baby skellet spawnei",
+  "item.qforgemod.baby_wither_skeleton_spawn_egg": "Baby wither skellet spawnei",
+  "item.qforgemod.baby_stray_spawn_egg": "Baby stray spawnei",
+  "item.qforgemod.baby_enderman_spawn_egg": "Baby enderman spawnei",
+  "item.qforgemod.glow_squid_spawn_egg": "Gloeinde inktvis spawnei",
+  "item.qforgemod.moobloom_spawn_egg": "Moobloom spawnei",
+  "item.qforgemod.ice_enderman_spawn_egg": "IJs enderman spawnei",
+  "item.qforgemod.fire_creeper_spawn_egg": "Vuur creeper spawnei",
+  "item.qforgemod.duck_spawn_egg": "Eend spawnei",
+  "item.qforgemod.hog_spawn_egg": "Zwijn spawnei",
+  "item.qforgemod.ox_spawn_egg": "Os spawnei",
+  "item.qforgemod.bison_spawn_egg": "Bizon spawnei",
+  "item.qforgemod.warthog_spawn_egg": "Wrattenzwijn spawnei",
+
+  "entity.qforgemod.baby_creeper": "Baby creeper",
+  "entity.qforgemod.baby_skeleton": "Baby skellet",
+  "entity.qforgemod.baby_wither_skeleton": "Baby wither skellet",
+  "entity.qforgemod.baby_stray": "Baby stray",
+  "entity.qforgemod.baby_enderman": "Baby enderman",
+  "entity.qforgemod.glow_squid": "Gloeiende inktvis",
   "entity.qforgemod.moobloom": "Moobloom",
-  "entity.qforgemod.ice_enderman": "IJs Enderman",
-  "entity.qforgemod.fire_creeper": "Vuur Creeper",
+  "entity.qforgemod.ice_enderman": "IJs enderman",
+  "entity.qforgemod.fire_creeper": "Vuur creeper",
   "entity.qforgemod.duck": "Eend",
   "entity.qforgemod.hog": "Zwijn",
   "entity.qforgemod.ox": "Os",
   "entity.qforgemod.bison": "Bizon",
   "entity.qforgemod.warthog": "Wrattenzwijn",
+  "entity.qforgemod.legendary_ender_pearl": "Legendarische ender parel",
+
+  "block.qforgemod.buttercup": "Boterbloem",
 
   "block.qforgemod.lab_door": "Lab deur",
   "block.qforgemod.shopping_door": "Winkel deur",
@@ -221,6 +247,8 @@
   "itemGroup.qforgemod_shapes": "Vormen",
   "itemGroup.qforgemod_specials": "Speciaal",
   "itemGroup.qforgemod_tools": "Gereedschap",
+  "itemGroup.qforgemod_armors": "Harnassen",
+  "itemGroup.qforgemod_ingots_n_nuggets": "Metalen craftables",
   "itemGroup.qforgemod_leaves": "Bladeren",
   "itemGroup.qforgemod_ingredients": "Ingrediënten",
   "itemGroup.qforgemod_redstone": "Redstone",
@@ -228,8 +256,8 @@
   "itemGroup.qforgemod_fletching": "Fletchen",
   "itemGroup.qforgemod_gems": "Edelstenen",
   "itemGroup.qforgemod_god": "Overpowered",
-  "itemGroup.qforgemod_misc": "Nature Tab 2",
-  "itemGroup.qforgemod.qforgemod_test": "Natuur tablad 2",
+  "itemGroup.qforgemod_spawn_eggs": "Spawneieren",
+  "itemGroup.qforgemod_misc": "Overige",
 
   "block.qforgemod.elevator_white": "Witte lift",
   "block.qforgemod.elevator_black": "Zwarte lift",
@@ -257,5 +285,6 @@
   "death.attack.infinity.2": "%1$s was uit het bestaan weggesneden door %2$s",
   "death.attack.infinity.3": "%1$s was vervaagd tot losse atomen door %2$s",
   "death.attack.infinity.4": "%1$s was vernietigd door %2$s",
-  "death.mine.infinity_ore": "%1$s was verwijderd wegens het mijnen van infinity erts"
+  "death.mine.infinity_ore": "%1$s was verwijderd wegens het mijnen van infinity erts",
+  "itemGroup.qforgemod.qforgemod_test": "Natuur tablad 2"
 }

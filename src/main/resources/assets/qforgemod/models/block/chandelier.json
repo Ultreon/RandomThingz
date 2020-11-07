@@ -1,9 +1,0 @@
-{
-  "parent": "qforgemod:custom/chandelier",
-  "textures": {
-    "particle": "qforgemod:block/chandelier_base",
-    "torch2": "qforgemod:block/torch_2",
-    "torch": "qforgemod:block/torch_1",
-    "base": "qforgemod:block/chandelier_base"
-  }
-}

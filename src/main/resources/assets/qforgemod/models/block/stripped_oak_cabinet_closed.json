@@ -1,7 +1,0 @@
-{
-    "parent": "qforgemod:block/cabinet_closed",
-    "textures": {
-        "door": "block/oak_log",
-        "base": "block/stripped_oak_log"
-    }
-}

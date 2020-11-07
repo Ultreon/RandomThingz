@@ -1,7 +1,0 @@
-{
-    "parent": "qforgemod:block/upgraded_fence_side",
-    "textures": {
-        "plank": "minecraft:block/pink_concrete",
-        "middle": "minecraft:block/pink_concrete"
-    }
-}
