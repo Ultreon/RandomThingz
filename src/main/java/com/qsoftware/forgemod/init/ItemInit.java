@@ -183,6 +183,7 @@ public class ItemInit extends ObjectInit<Item> {
     // Wands
     public static final ItemRegistryObject<Item> WALKING_STAFF = register("walking_staff", WalkingStaffItem::new);
     public static final ItemRegistryObject<Item> LIGHTNING_STAFF = register("lightning_staff", LightningStaffItem::new);
+    public static final ItemRegistryObject<Item> FIRE_STAFF = register("fire_staff", FireStaffItem::new);
     public static final ItemRegistryObject<Item> NATURE_STAFF = register("nature_staff", NatureStaffItem::new);
 
     // Stone Level
