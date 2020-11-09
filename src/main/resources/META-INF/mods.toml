@@ -70,17 +70,59 @@ description='''
    §o https://www.curseforge.com/minecraft/mc-mods/mrcrayfish-furniture-mod/files/2853267 §r
 
   §l=--------------------------=§r
-  §oMekanism 10§r
+  §oQForgeUtils 10§r
   §l§n=--------------------------=§r
   §lGitHub:§r
-   §o https://github.com/mekanism/Mekanism/tree/f1b7f47dd784649366233ae707f9eef2a2cfe7fb §r
+   §o https://github.com/mekanism/QForgeUtils/tree/f1b7f47dd784649366233ae707f9eef2a2cfe7fb §r
   §lCurseForge:§r
    §o https://www.curseforge.com/minecraft/mc-mods/mekanism §r
   §lCurseForge Download:§r
    §o https://www.curseforge.com/minecraft/mc-mods/mekanism/files/2996531 §r
 '''
 
+[[mods]]
+modId="silentlib"
+version="${file.jarVersion}"
+displayName="Silent Lib"
+updateJSONURL="https://raw.githubusercontent.com/SilentChaos512/SilentLib/1.14/update.json"
+description='''
+    Shared library for Silent's mods
+    '''
+
+# Silent Lib dependencies
+[[dependencies.silentlib]]
+modId="forge"
+mandatory=true
+versionRange="[33,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.silentlib]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.2,)"
+ordering="NONE"
+side="BOTH"
+
 # QForgeUtils dependencies.
+
+[[dependencies.qforgemod]]
+modId="forge"
+mandatory=true
+versionRange="[34,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.qforgemod]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.3,1.17)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.qforgemod]]
+modId="silentlib"
+mandatory=true
+versionRange="[4.9,)"
+ordering="NONE"
+side="BOTH"
 [[dependencies.qforgemod]] #optional
 modId="forge" #mandatory
 mandatory=true #mandatory

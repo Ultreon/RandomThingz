@@ -8,6 +8,11 @@
           "type": "minecraft:item",
           "name": "qforgemod:lead_block"
         }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
       ]
     }
   ]

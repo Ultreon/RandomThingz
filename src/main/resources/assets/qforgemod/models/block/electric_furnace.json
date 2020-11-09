@@ -1,0 +1,19 @@
+{
+    "parent": "block/cube",
+    "display": {
+        "firstperson_righthand": {
+            "rotation": [ 0, 135, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.40, 0.40, 0.40 ]
+        }
+    },
+    "textures": {
+        "particle": "qforgemod:block/electric_furnace/front",
+        "down": "qforgemod:block/electric_furnace/bottom",
+        "up": "qforgemod:block/electric_furnace/top",
+        "north": "qforgemod:block/electric_furnace/front",
+        "east": "qforgemod:block/electric_furnace/side",
+        "south": "qforgemod:block/electric_furnace/back",
+        "west": "qforgemod:block/electric_furnace/side"
+    }
+}

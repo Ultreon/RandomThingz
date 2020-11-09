@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 /**
- * Extended version of {@link IFluidHandler} to make it easier to integrate with Mekanism
+ * Extended version of {@link IFluidHandler} to make it easier to integrate with QForgeUtils
  */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

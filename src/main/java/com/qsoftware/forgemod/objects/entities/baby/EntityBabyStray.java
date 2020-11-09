@@ -24,7 +24,7 @@ import java.util.Random;
 /**
  * Baby stray entity class.
  *
- * @author Mekanism community.
+ * @author QForgeUtils community.
  */
 public class EntityBabyStray extends StrayEntity implements IBabyEntity {
 

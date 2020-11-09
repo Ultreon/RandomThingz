@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model":  "qforgemod:block/copper_ore"}
+    "": {
+      "model": "qforgemod:block/copper_ore"
+    }
   }
 }

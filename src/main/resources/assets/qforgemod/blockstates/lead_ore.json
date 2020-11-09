@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model":  "qforgemod:block/lead_ore"}
+    "": {
+      "model": "qforgemod:block/lead_ore"
+    }
   }
 }

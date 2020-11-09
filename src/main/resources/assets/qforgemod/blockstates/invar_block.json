@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qforgemod:block/invar_block"
+    }
+  }
+}

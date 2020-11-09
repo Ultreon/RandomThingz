@@ -1,7 +1,6 @@
 {
-  "parent": "qforgemod:block/base_metalic_ore",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "particle": "qforgemod:blocks/copper_ore",
-    "all": "qforgemod:blocks/copper_ore"
+    "all": "qforgemod:block/copper_ore"
   }
 }

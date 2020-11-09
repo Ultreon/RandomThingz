@@ -1,11 +1,16 @@
 {
-  "type": "mekanism:crushing",
-  "input": {
-    "ingredient": {
-      "item": "qforgemod:uranium_ingot"
-    }
+  "type": "qforgemod:crushing",
+  "process_time": 300,
+  "ingredient": {
+    "tag": "qforgemod:chunks/uranium"
   },
-  "output": {
-    "item": "qforgemod:uranium_dust"
-  }
+  "results": [
+    {
+      "item": "qforgemod:uranium_dust"
+    },
+    {
+      "item": "qforgemod:uranium_dust",
+      "chance": 0.1
+    }
+  ]
 }

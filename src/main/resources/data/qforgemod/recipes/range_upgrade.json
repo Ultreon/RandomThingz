@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qforgemod:upgrade_case"
+    },
+    {
+      "tag": "forge:ender_pearls"
+    },
+    {
+      "tag": "forge:ingots/invar"
+    },
+    {
+      "tag": "forge:ingots/invar"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:range_upgrade"
+  }
+}

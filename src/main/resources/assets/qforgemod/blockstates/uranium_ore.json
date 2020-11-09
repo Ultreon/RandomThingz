@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model":  "qforgemod:block/uranium_ore"}
+    "": {
+      "model": "qforgemod:block/uranium_ore"
+    }
   }
 }

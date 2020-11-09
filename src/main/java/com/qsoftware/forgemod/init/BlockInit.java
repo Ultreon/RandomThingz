@@ -65,10 +65,10 @@ public class BlockInit extends ObjectInit<Block> {
     public static final RegistryObject<Block> WOODEN_CRATE = register("wooden_crate", () -> new WoodenCrateBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.9f).sound(SoundType.WOOD)));
 
     // Ore
-    public static final RegistryObject<Block> COPPER_ORE = register("copper_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)));
+//    public static final RegistryObject<Block> COPPER_ORE = register("copper_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> STEEL_ORE = register("steel_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.125f, 3.375f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> TUNGSTEN_ORE = register("tungsten_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(5.125f, 6.425f).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> URANIUM_ORE = register("uranium_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.325f, 4.5625f).sound(SoundType.STONE)));
+//    public static final RegistryObject<Block> URANIUM_ORE = register("uranium_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.325f, 4.5625f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> RUBY_ORE = register("ruby_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.75f, 2.875f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> AMETHYST_ORE = register("amethyst_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.25f, 2.375f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> AQUAMARINE_ORE = register("aquamarine_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.155f, 2.4635f).sound(SoundType.STONE)));
@@ -79,10 +79,10 @@ public class BlockInit extends ObjectInit<Block> {
     public static final RegistryObject<Block> INFINITY_ORE = register("infinity_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(64.5f, Float.MAX_VALUE).sound(SoundType.STONE).harvestLevel(4)));
 
     // Solid Gem / Metal block
-    public static final RegistryObject<Block> COPPER_BLOCK = register("copper_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(2.9f, 2.9f).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> STEEL_BLOCK = register("steel_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.9875f, 4.275f).sound(SoundType.STONE)));
+//    public static final RegistryObject<Block> COPPER_BLOCK = register("copper_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(2.9f, 2.9f).sound(SoundType.STONE)));
+//    public static final RegistryObject<Block> STEEL_BLOCK = register("steel_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.9875f, 4.275f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> TUNGSTEN_BLOCK = register("tungsten_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5.9875f, 6.5525f).sound(SoundType.STONE)));
-    public static final RegistryObject<Block> URANIUM_BLOCK = register("uranium_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(2.8345f, 4.4675f).sound(SoundType.STONE)));
+//    public static final RegistryObject<Block> URANIUM_BLOCK = register("uranium_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(2.8345f, 4.4675f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> RUBY_BLOCK = register("ruby_block", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(4.25f, 5.5f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> AMETHYST_BLOCK = register("amethyst_block", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.875f, 4.0625f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> AQUAMARINE_BLOCK = register("aquamarine_block", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.995f, 4.1275f).sound(SoundType.STONE)));
@@ -135,14 +135,14 @@ public class BlockInit extends ObjectInit<Block> {
     public static final RegistryObject<Item> WOODEN_CRATE_ITEM = registerItem("wooden_crate", () -> new BlockItem(BlockInit.WOODEN_CRATE.get(), new Item.Properties().group(Groups.MACHINES)));
 
     // Solid Ore & material
-    public static final RegistryObject<Item> COPPER_ORE_ITEM = registerItem("copper_ore", () -> new BlockItem(BlockInit.COPPER_ORE.get(), new Item.Properties().group(Groups.ORES)));
-    public static final RegistryObject<Item> COPPER_BLOCK_ITEM = registerItem("copper_block", () -> new BlockItem(BlockInit.COPPER_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> COPPER_ORE_ITEM = registerItem("copper_ore", () -> new BlockItem(BlockInit.COPPER_ORE.get(), new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> COPPER_BLOCK_ITEM = registerItem("copper_block", () -> new BlockItem(BlockInit.COPPER_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
     public static final RegistryObject<Item> STEEL_ORE_ITEM = registerItem("steel_ore", () -> new BlockItem(BlockInit.STEEL_ORE.get(), new Item.Properties().group(Groups.ORES)));
-    public static final RegistryObject<Item> STEEL_BLOCK_ITEM = registerItem("steel_block", () -> new BlockItem(BlockInit.STEEL_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> STEEL_BLOCK_ITEM = registerItem("steel_block", () -> new BlockItem(BlockInit.STEEL_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
     public static final RegistryObject<Item> TUNGSTEN_ORE_ITEM = registerItem("tungsten_ore", () -> new BlockItem(BlockInit.TUNGSTEN_ORE.get(), new Item.Properties().group(Groups.ORES)));
     public static final RegistryObject<Item> TUNGSTEN_BLOCK_ITEM = registerItem("tungsten_block", () -> new BlockItem(BlockInit.TUNGSTEN_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
-    public static final RegistryObject<Item> URANIUM_ORE_ITEM = registerItem("uranium_ore", () -> new BlockItem(BlockInit.URANIUM_ORE.get(), new Item.Properties().group(Groups.ORES)));
-    public static final RegistryObject<Item> URANIUM_BLOCK_ITEM = registerItem("uranium_block", () -> new BlockItem(BlockInit.URANIUM_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> URANIUM_ORE_ITEM = registerItem("uranium_ore", () -> new BlockItem(BlockInit.URANIUM_ORE.get(), new Item.Properties().group(Groups.ORES)));
+//    public static final RegistryObject<Item> URANIUM_BLOCK_ITEM = registerItem("uranium_block", () -> new BlockItem(BlockInit.URANIUM_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
     public static final RegistryObject<Item> RUBY_ORE_ITEM = registerItem("ruby_ore", () -> new BlockItem(BlockInit.RUBY_ORE.get(), new Item.Properties().group(Groups.ORES)));
     public static final RegistryObject<Item> RUBY_BLOCK_ITEM = registerItem("ruby_block", () -> new BlockItem(BlockInit.RUBY_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
     public static final RegistryObject<Item> AMETHYST_ORE_ITEM = registerItem("amethyst_ore", () -> new BlockItem(BlockInit.AMETHYST_ORE.get(), new Item.Properties().group(Groups.ORES)));

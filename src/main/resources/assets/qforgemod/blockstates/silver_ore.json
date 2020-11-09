@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model":  "qforgemod:block/silver_ore"}
+    "": {
+      "model": "qforgemod:block/silver_ore"
+    }
   }
 }

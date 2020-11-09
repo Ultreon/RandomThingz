@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"0": "qforgemod:block/pipe",
+		"particle": "qforgemod:block/pipe"
+	},
+	"elements": [
+		{
+			"from": [6, 6, 6],
+			"to": [10, 10, 10],
+			"faces": {
+				"north": {"uv": [8, 0, 12, 4], "texture": "#0"},
+				"east": {"uv": [8, 0, 12, 4], "texture": "#0"},
+				"south": {"uv": [8, 0, 12, 4], "texture": "#0"},
+				"west": {"uv": [8, 0, 12, 4], "texture": "#0"},
+				"up": {"uv": [8, 0, 12, 4], "texture": "#0"},
+				"down": {"uv": [8, 0, 12, 4], "texture": "#0"}
+			}
+		}
+	]
+}

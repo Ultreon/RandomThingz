@@ -1,0 +1,12 @@
+{
+  "type": "qforgemod:crushing",
+  "process_time": 200,
+  "ingredient": {
+    "tag": "forge:ingots/redstone_alloy"
+  },
+  "results": [
+    {
+      "item": "qforgemod:redstone_alloy_dust"
+    }
+  ]
+}

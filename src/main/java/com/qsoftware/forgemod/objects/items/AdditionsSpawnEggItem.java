@@ -17,7 +17,7 @@ import net.minecraftforge.common.util.Constants.NBT;
 /**
  * Game PC block class.
  *
- * @author Mekanism community.
+ * @author QForgeUtils community.
  * @deprecated Use {@link CustomSpawnEggItem} instead.
  */
 @Deprecated

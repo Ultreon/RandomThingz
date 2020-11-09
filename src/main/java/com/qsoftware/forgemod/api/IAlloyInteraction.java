@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 
 /**
- * Implement this class in your TileEntity if it can interact with Mekanism alloys.
+ * Implement this class in your TileEntity if it can interact with QForgeUtils alloys.
  *
  * @author aidancbrady
  */

@@ -1,0 +1,6 @@
+{
+  "parent": "qforgemod:block/drying_rack",
+  "textures": {
+    "wood": "minecraft:block/jungle_planks"
+  }
+}

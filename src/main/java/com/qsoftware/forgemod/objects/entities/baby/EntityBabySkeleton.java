@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 /**
  * Baby skeleton entity class.
  *
- * @author Mekanism community.
+ * @author QForgeUtils community.
  */
 public class EntityBabySkeleton extends SkeletonEntity implements IBabyEntity {
 

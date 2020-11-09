@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * Base baby entity interface.
  *
- * @author Mekanism community.
+ * @author QForgeUtils community.
  */
 public interface IBabyEntity {
 

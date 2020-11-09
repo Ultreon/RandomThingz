@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "qforgemod:compressor"
+        },
+        "title": {
+            "translate": "advancements.qforgemod.compressor.title"
+        },
+        "description": {
+            "translate": "advancements.qforgemod.compressor.description"
+        }
+    },
+    "parent": "qforgemod:alloy_machine_frame",
+    "criteria": {
+        "get_item": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "qforgemod:compressor"
+                    }
+                ]
+            }
+        }
+    }
+}

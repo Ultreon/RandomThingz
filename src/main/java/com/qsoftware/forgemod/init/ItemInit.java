@@ -100,20 +100,20 @@ public class ItemInit extends ObjectInit<Item> {
     //     Ingots or Dusts     //
     /////////////////////////////
 
-    // Metals - Copper Level
-    public static final ItemRegistryObject<IngotOrDustItem> COPPER_INGOT = register("copper_ingot", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> COPPER_NUGGET = register("copper_nugget", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> COPPER_DUST = register("copper_dust", IngotOrDustItem::new);
+//    // Metals - Copper Level
+//    public static final ItemRegistryObject<IngotOrDustItem> COPPER_INGOT = register("copper_ingot", IngotOrDustItem::new);
+//    public static final ItemRegistryObject<IngotOrDustItem> COPPER_NUGGET = register("copper_nugget", IngotOrDustItem::new);
+//    public static final ItemRegistryObject<IngotOrDustItem> COPPER_DUST = register("copper_dust", IngotOrDustItem::new);
 
     // Metals - Copper Level
     public static final ItemRegistryObject<IngotOrDustItem> NICKLE_INGOT = register("nickle_ingot", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> NICKLE_NUGGET = register("nickle_nugget", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> NICKLE_DUST = register("nickle_dust", IngotOrDustItem::new);
 
-    // Metals - Steel Level
-    public static final ItemRegistryObject<IngotOrDustItem> STEEL_INGOT = register("steel_ingot", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> STEEL_NUGGET = register("steel_nugget", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> STEEL_DUST = register("steel_dust", IngotOrDustItem::new);
+//    // Metals - Steel Level
+//    public static final ItemRegistryObject<IngotOrDustItem> STEEL_INGOT = register("steel_ingot", IngotOrDustItem::new);
+//    public static final ItemRegistryObject<IngotOrDustItem> STEEL_NUGGET = register("steel_nugget", IngotOrDustItem::new);
+//    public static final ItemRegistryObject<IngotOrDustItem> STEEL_DUST = register("steel_dust", IngotOrDustItem::new);
 
     // Metals - Tungsten Steel Level
     public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_INGOT = register("tungsten_ingot", IngotOrDustItem::new);
@@ -131,14 +131,14 @@ public class ItemInit extends ObjectInit<Item> {
     public static final ItemRegistryObject<IngotOrDustItem> INFINITY_NUGGET = register("infinity_nugget", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> INFINITY_DUST = register("infinity_dust", IngotOrDustItem::new);
 
-    // Metals - Uranium Level
-    public static final ItemRegistryObject<IngotOrDustItem> URANIUM_INGOT = register("uranium_ingot", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> URANIUM_NUGGET = register("uranium_nugget", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> URANIUM_DUST = register("uranium_dust", IngotOrDustItem::new);
+//    // Metals - Uranium Level
+//    public static final ItemRegistryObject<IngotOrDustItem> URANIUM_INGOT = register("uranium_ingot", IngotOrDustItem::new);
+//    public static final ItemRegistryObject<IngotOrDustItem> URANIUM_NUGGET = register("uranium_nugget", IngotOrDustItem::new);
+//    public static final ItemRegistryObject<IngotOrDustItem> URANIUM_DUST = register("uranium_dust", IngotOrDustItem::new);
 
     // Gems and other metals
-    public static final ItemRegistryObject<IngotOrDustItem> IRON_DUST = register("iron_dust", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> GOLD_DUST = register("gold_dust", IngotOrDustItem::new);
+//    public static final ItemRegistryObject<IngotOrDustItem> IRON_DUST = register("iron_dust", IngotOrDustItem::new);
+//    public static final ItemRegistryObject<IngotOrDustItem> GOLD_DUST = register("gold_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> RUBY_DUST = register("ruby_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> AMETHYST_DUST = register("amethyst_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> AQUAMARINE_DUST = register("aquamarine_dust", IngotOrDustItem::new);
@@ -208,19 +208,19 @@ public class ItemInit extends ObjectInit<Item> {
 
     // Materials
     public static final IArmorMaterial copperArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":copper", 13, new int[]{2, 5, 6, 2}, 10, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(ItemInit.COPPER_INGOT.get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(Metals.COPPER.getIngot().get())
     );
     public static final IArmorMaterial nickleArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":nickle", 13, new int[]{2, 5, 7, 3}, 16, 1f,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(ItemInit.NICKLE_INGOT.get())
     );
     public static final IArmorMaterial steelArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":steel", 24, new int[]{3, 6, 8, 4}, 14, 4f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, () -> Ingredient.fromItems(ItemInit.STEEL_INGOT.get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, () -> Ingredient.fromItems(Metals.STEEL.getIngot().get())
     );
     public static final IArmorMaterial tungstenArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":tungsten", 42, new int[]{4, 8, 12, 6}, 28, 5f,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(ItemInit.TUNGSTEN_INGOT.get())
     );
     public static final IArmorMaterial uraniumArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":uranium", 11, new int[]{2, 4, 5, 2}, 4, 0.5f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(ItemInit.URANIUM_INGOT.get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(Metals.URANIUM.getIngot().get())
     );
     public static final IArmorMaterial rubyArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeUtils.MOD_ID + ":ruby", 24, new int[]{3, 6, 8, 4}, 14, 1f,
             SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ItemInit.RUBY.get())
@@ -358,19 +358,19 @@ public class ItemInit extends ObjectInit<Item> {
 
     // Materials
     public static final IItemTier COPPER_ITEM_TIER = new ItemTierBuilder.Builder(2, 420, 5.3f, 1.4f, 10,
-            () -> Ingredient.fromItems(COPPER_INGOT)
+            () -> Ingredient.fromItems(Metals.COPPER.getIngot().get())
     );
     public static final IItemTier NICKLE_ITEM_TIER = new ItemTierBuilder.Builder(2, 480, 4.9f, 1.7f, 16,
             () -> Ingredient.fromItems(NICKLE_INGOT)
     );
     public static final IItemTier STEEL_ITEM_TIER = new ItemTierBuilder.Builder(3, 1465, 8.1f, 3.8f, 14,
-            () -> Ingredient.fromItems(STEEL_INGOT)
+            () -> Ingredient.fromItems(Metals.STEEL.getIngot().get())
     );
     public static final IItemTier TUNGSTEN_ITEM_TIER = new ItemTierBuilder.Builder(3, 3194, 9.4f, 4.7f, 28,
             () -> Ingredient.fromItems(TUNGSTEN_INGOT)
     );
     public static final IItemTier URANIUM_ITEM_TIER = new ItemTierBuilder.Builder(2, 730, 3.6f, 5.3f, 4,
-            () -> Ingredient.fromItems(URANIUM_INGOT)
+            () -> Ingredient.fromItems(Metals.URANIUM.getIngot().get())
     );
     public static final IItemTier RUBY_ITEM_TIER = new ItemTierBuilder.Builder(3, 970, 7.6f, 3.6f, 13,
             () -> Ingredient.fromItems(RUBY)
@@ -397,7 +397,7 @@ public class ItemInit extends ObjectInit<Item> {
             () -> Ingredient.fromItems(BERYL)
     );
     public static final IItemTier TANZANITE_ITEM_TIER = new ItemTierBuilder.Builder(3, 1090, 7.7125f, 3.5f, 48,
-            () -> Ingredient.fromItems(COPPER_INGOT)
+            () -> Ingredient.fromItems(TANZANITE)
     );
     public static final IItemTier ULTRINIUM_ITEM_TIER = new ItemTierBuilder.Builder(4, 95250, 290.0f, 2375.4f, 375,
             () -> Ingredient.fromItems(ULTRINIUM_INGOT)

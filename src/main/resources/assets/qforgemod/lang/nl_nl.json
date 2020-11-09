@@ -286,5 +286,13 @@
   "death.attack.infinity.3": "%1$s was vervaagd tot losse atomen door %2$s",
   "death.attack.infinity.4": "%1$s was vernietigd door %2$s",
   "death.mine.infinity_ore": "%1$s was verwijderd wegens het mijnen van infinity erts",
-  "itemGroup.qforgemod.qforgemod_test": "Natuur tablad 2"
+
+  "misc.qforgemod.empty": "Leeg",
+  "misc.qforgemod.energy": "%s FE",
+  "misc.qforgemod.energyPerTick": "%s FE/t",
+  "misc.qforgemod.energyWithMax": "%s / %s FE",
+  "misc.qforgemod.fluidWithMax": "%s: %s / %s mB",
+  "misc.qforgemod.redstoneMode": "Redstone Modus: %s",
+  "misc.qforgemod.timeInSeconds": "Tijd: %ss",
+  "misc.qforgemod.upgradeSlot": "Upgrade Slot"
 }

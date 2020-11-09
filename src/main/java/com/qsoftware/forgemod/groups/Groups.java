@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.groups;
 
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemGroup;
 
 /**
@@ -27,5 +28,6 @@ public class Groups {
     public static final DungeonsItemGroup DUNGEONS = DungeonsItemGroup.instance;
     public static final RedstoneItemGroup REDSTONE = RedstoneItemGroup.instance;
     public static final FoodItemGroup FOOD = FoodItemGroup.instance;
+    public static final FluidItemGroup FLUIDS = FluidItemGroup.instance;
     public static final OverpoweredItemGroup OVERPOWERED = OverpoweredItemGroup.instance;
 }

@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model":  "qforgemod:block/steel_block"}
+    "": {
+      "model": "qforgemod:block/steel_block"
+    }
   }
 }

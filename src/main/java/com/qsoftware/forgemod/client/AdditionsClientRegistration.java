@@ -132,7 +132,7 @@ public class AdditionsClientRegistration {
 //                  Item item = stack.getItem();
 //                  if (item instanceof ItemBalloon) {
 //                      ItemBalloon balloon = (ItemBalloon) item;
-//                      return MekanismRenderer.getColorARGB(balloon.getColor(), 1);
+//                      return QForgeUtilsRenderer.getColorARGB(balloon.getColor(), 1);
 //                  }
 //                  return -1;
 //              }, ItemInitNew.BLACK_BALLOON, ItemInitNew.RED_BALLOON, ItemInitNew.GREEN_BALLOON, ItemInitNew.BROWN_BALLOON, ItemInitNew.BLUE_BALLOON,

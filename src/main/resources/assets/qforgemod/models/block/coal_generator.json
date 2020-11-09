@@ -1,0 +1,19 @@
+{
+    "parent": "block/cube",
+    "display": {
+        "firstperson_righthand": {
+            "rotation": [ 0, 135, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 0.40, 0.40, 0.40 ]
+        }
+    },
+    "textures": {
+        "particle": "qforgemod:block/coal_generator/front",
+        "down": "qforgemod:block/coal_generator/bottom",
+        "up": "qforgemod:block/coal_generator/top",
+        "north": "qforgemod:block/coal_generator/front",
+        "east": "qforgemod:block/coal_generator/side",
+        "south": "qforgemod:block/coal_generator/back",
+        "west": "qforgemod:block/coal_generator/side"
+    }
+}

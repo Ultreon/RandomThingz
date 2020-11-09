@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 /**
  * Baby creeper entity class.
  *
- * @author Mekanism community.
+ * @author QForgeUtils community.
  */
 public class EntityBabyCreeper extends CreeperEntity implements IBabyEntity {
 

@@ -58,7 +58,7 @@ public class ClientRegistrationUtil {
 //        ClientRegistrationUtil.registerBlockColorHandler(blockColors, itemColors, (state, world, pos, tintIndex) -> {
 //            Block block = state.getBlock();
 //            if (block instanceof IColoredBlock) {
-//                return MekanismRenderer.getColorARGB(((IColoredBlock) block).getColor(), 1);
+//                return QForgeUtilsRenderer.getColorARGB(((IColoredBlock) block).getColor(), 1);
 //            }
 //            return -1;
 //        }, (stack, tintIndex) -> {
@@ -66,7 +66,7 @@ public class ClientRegistrationUtil {
 //            if (item instanceof BlockItem) {
 //                Block block = ((BlockItem) item).getBlock();
 //                if (block instanceof IColoredBlock) {
-//                    return MekanismRenderer.getColorARGB(((IColoredBlock) block).getColor(), 1);
+//                    return QForgeUtilsRenderer.getColorARGB(((IColoredBlock) block).getColor(), 1);
 //                }
 //            }
 //            return -1;

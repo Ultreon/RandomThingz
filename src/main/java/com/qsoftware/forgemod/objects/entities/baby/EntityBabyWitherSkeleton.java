@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 /**
  * Baby wither skeleton entity class.
  *
- * @author Mekanism community.
+ * @author QForgeUtils community.
  */
 public class EntityBabyWitherSkeleton extends WitherSkeletonEntity implements IBabyEntity {
 

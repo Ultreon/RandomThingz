@@ -31,6 +31,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 //import com.qsoftware.forgemod.proxy.ClientProxy;
@@ -74,86 +75,12 @@ public class QForgeUtils
     @SuppressWarnings({"unused", "RedundantSuppression"})
     public static final String MOD_GUI_FACTORY = "fr.atesab.customqforgemod.gui.GuiFactoryCursorMod";
     public static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(QForgeUtils.MOD_NAME);
-//    private static boolean forceNextCursor = false;
-//    private static CursorType currentCursorType = CursorType.POINTER;
-//    private static final Map<CursorType, CursorConfig> cursors = new HashMap<>();
-//    private static final List<CursorClick> cursorClicks = new ArrayList<>();
-//    private static Configuration config;
 
-//    private static void changeCursor(CursorType cursor) {
-//        changeCursor(cursor, forceNextCursor);
-//        forceNextCursor = false;
-//    }
+    public static final Random RANDOM = new Random();
 
-//    private static void changeCursor(CursorType cursor, boolean forceChange) {
-//        if (!forceChange && cursor == currentCursorType)
-//            return;
-//        currentCursorType = cursor;
-//        CursorConfig cursorConfig = cursors.getOrDefault(cursor, cursor.getDefaultConfig());
-//        long cursorPtr = cursorConfig.getCursor();
-//        if (cursorPtr == MemoryUtil.NULL)
-//            throw new NullPointerException();
-//        GLFW.glfwSetCursor(Minecraft.getInstance().getMainWindow().getHandle(), cursorPtr); // getMainWindow
-//    }
-//
-//    /**
-//     * Force the next cursor to change (if config were change for example)
-//     */
-//    public static void forceNextCursor() {
-//        forceNextCursor = config.dynamicCursor;
-//    }
-//
-//    /**
-//     * @return the configuration
-//     */
-//    public static Configuration getConfig() {
-//        return config;
-//    }
-//
-//    /**
-//     * @return the map of all {@link CursorConfig} by there {@link CursorType}
-//     */
-//    public static Map<CursorType, CursorConfig> getCursors() {
-//        return cursors;
-//    }
-//
-//    /**
-//     * Register new {@link CursorType} (Work only before FML Post Initialization)
-//     *
-//     * @param cursorTypes the cursors
-//     */
-//    public static void registerCursor(CursorType... cursorTypes) {
-//        for (CursorType cursorType : cursorTypes)
-//            cursors.put(cursorType, cursorType.getDefaultConfig());
-//    }
-//
-//    /**
-//     * replace a {@link CursorType} config
-//     *
-//     * @param type the cursor type
-//     * @param config the new cursor config
-//     */
-//    public static void replaceCursor(CursorType type, CursorConfig config) {
-//        CursorConfig old = cursors.put(type, config);
-//        if (type == currentCursorType)
-//            changeCursor(type, true);
-//        if (Objects.requireNonNull(old).isAllocate())
-//            old.freeCursor();
-//    }
+    public static QForgeUtils INSTANCE;
+    public static IProxy PROXY;
 
-//    public static GraveStoneBlock GRAVESTONE;
-//    public static Item GRAVESTONE_ITEM;
-//    public static TileEntityType<GraveStoneTileEntity> GRAVESTONE_TILEENTITY;
-//    public static DeathInfoItem DEATHINFO;
-//    public static EntityType<GhostPlayerEntity> GHOST;
-//    public static ContainerType<DeathItemsContainer> DEATH_INFO_INVENTORY_CONTAINER;
-
-//    /**
-//     * Save mod config
-//     */
-//    public static void saveConfig() {
-//        config.save();
-//    }
     /**
      * Instance field, is protected.
      */
@@ -173,10 +100,18 @@ public class QForgeUtils
         return new ResourceLocation(MOD_ID, path);
     }
 
+    @SuppressWarnings("ConstantConditions")
+    public static boolean isDevBuild() {
+        return "NONE".equals(MOD_VERSION);
+    }
+
     /**
      * The QForgeUtils constructor for mod-loading.
      */
     public QForgeUtils() {
+        INSTANCE = this;
+        PROXY = DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);
+
         // Final fields.
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         final ModLoadingContext modLoadingContext = ModLoadingContext.get();
@@ -544,5 +479,9 @@ public class QForgeUtils
 
         LOGGER.info("LoadCompleteEvent: " + event);
         OreGen.generateOres();
+    }
+
+    public static ResourceLocation getId(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 }

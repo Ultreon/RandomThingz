@@ -1,0 +1,17 @@
+{
+  "type": "qforgemod:crushing",
+  "process_time": 400,
+  "ingredient": {
+    "tag": "forge:ores/platinum"
+  },
+  "results": [
+    {
+      "item": "qforgemod:platinum_chunks",
+      "count": 2
+    },
+    {
+      "item": "minecraft:cobblestone",
+      "chance": 0.1
+    }
+  ]
+}

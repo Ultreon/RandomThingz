@@ -37,153 +37,153 @@ public class ClientRegistration {
 //        MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
 //        MinecraftForge.EVENT_BUS.register(new RenderTickHandler());
 //        MinecraftForge.EVENT_BUS.register(SoundHandler.class);
-//        new MekanismKeyHandler();
+//        new QForgeUtilsKeyHandler();
 //        HolidayManager.init();
 
 //        //Register entity rendering handlers
-//        ClientRegistrationUtil.registerEntityRenderingHandler(MekanismEntityTypes.ROBIT, RenderRobit::new);
-//        ClientRegistrationUtil.registerEntityRenderingHandler(MekanismEntityTypes.FLAME, RenderFlame::new);
+//        ClientRegistrationUtil.registerEntityRenderingHandler(QForgeUtilsEntityTypes.ROBIT, RenderRobit::new);
+//        ClientRegistrationUtil.registerEntityRenderingHandler(QForgeUtilsEntityTypes.FLAME, RenderFlame::new);
 //
 //        //Register TileEntityRenderers
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderThermoelectricBoiler::new, MekanismTileEntityTypes.BOILER_CASING, MekanismTileEntityTypes.BOILER_VALVE);
-//        ClientRegistrationUtil.bindTileEntityRenderer(MekanismTileEntityTypes.CHEMICAL_DISSOLUTION_CHAMBER, RenderChemicalDissolutionChamber::new);
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderDynamicTank::new, MekanismTileEntityTypes.DYNAMIC_TANK, MekanismTileEntityTypes.DYNAMIC_VALVE);
-//        ClientRegistrationUtil.bindTileEntityRenderer(MekanismTileEntityTypes.DIGITAL_MINER, RenderDigitalMiner::new);
-//        ClientRegistrationUtil.bindTileEntityRenderer(MekanismTileEntityTypes.PERSONAL_CHEST, RenderPersonalChest::new);
-//        ClientRegistrationUtil.bindTileEntityRenderer(MekanismTileEntityTypes.QUANTUM_ENTANGLOPORTER, RenderQuantumEntangloporter::new);
-//        ClientRegistrationUtil.bindTileEntityRenderer(MekanismTileEntityTypes.SEISMIC_VIBRATOR, RenderSeismicVibrator::new);
-//        ClientRegistrationUtil.bindTileEntityRenderer(MekanismTileEntityTypes.SOLAR_NEUTRON_ACTIVATOR, RenderSolarNeutronActivator::new);
-//        ClientRegistrationUtil.bindTileEntityRenderer(MekanismTileEntityTypes.TELEPORTER, RenderTeleporter::new);
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderThermalEvaporationPlant::new, MekanismTileEntityTypes.THERMAL_EVAPORATION_CONTROLLER,
-//              MekanismTileEntityTypes.THERMAL_EVAPORATION_BLOCK, MekanismTileEntityTypes.THERMAL_EVAPORATION_VALVE);
-//        ClientRegistrationUtil.bindTileEntityRenderer(MekanismTileEntityTypes.INDUSTRIAL_ALARM, RenderIndustrialAlarm::new);
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderSPS::new, MekanismTileEntityTypes.SPS_CASING, MekanismTileEntityTypes.SPS_PORT);
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderBin::new, MekanismTileEntityTypes.BASIC_BIN, MekanismTileEntityTypes.ADVANCED_BIN, MekanismTileEntityTypes.ELITE_BIN,
-//              MekanismTileEntityTypes.ULTIMATE_BIN, MekanismTileEntityTypes.CREATIVE_BIN);
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderEnergyCube::new, MekanismTileEntityTypes.BASIC_ENERGY_CUBE, MekanismTileEntityTypes.ADVANCED_ENERGY_CUBE,
-//              MekanismTileEntityTypes.ELITE_ENERGY_CUBE, MekanismTileEntityTypes.ULTIMATE_ENERGY_CUBE, MekanismTileEntityTypes.CREATIVE_ENERGY_CUBE);
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderFluidTank::new, MekanismTileEntityTypes.BASIC_FLUID_TANK, MekanismTileEntityTypes.ADVANCED_FLUID_TANK,
-//              MekanismTileEntityTypes.ELITE_FLUID_TANK, MekanismTileEntityTypes.ULTIMATE_FLUID_TANK, MekanismTileEntityTypes.CREATIVE_FLUID_TANK);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderThermoelectricBoiler::new, QForgeUtilsTileEntityTypes.BOILER_CASING, QForgeUtilsTileEntityTypes.BOILER_VALVE);
+//        ClientRegistrationUtil.bindTileEntityRenderer(QForgeUtilsTileEntityTypes.CHEMICAL_DISSOLUTION_CHAMBER, RenderChemicalDissolutionChamber::new);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderDynamicTank::new, QForgeUtilsTileEntityTypes.DYNAMIC_TANK, QForgeUtilsTileEntityTypes.DYNAMIC_VALVE);
+//        ClientRegistrationUtil.bindTileEntityRenderer(QForgeUtilsTileEntityTypes.DIGITAL_MINER, RenderDigitalMiner::new);
+//        ClientRegistrationUtil.bindTileEntityRenderer(QForgeUtilsTileEntityTypes.PERSONAL_CHEST, RenderPersonalChest::new);
+//        ClientRegistrationUtil.bindTileEntityRenderer(QForgeUtilsTileEntityTypes.QUANTUM_ENTANGLOPORTER, RenderQuantumEntangloporter::new);
+//        ClientRegistrationUtil.bindTileEntityRenderer(QForgeUtilsTileEntityTypes.SEISMIC_VIBRATOR, RenderSeismicVibrator::new);
+//        ClientRegistrationUtil.bindTileEntityRenderer(QForgeUtilsTileEntityTypes.SOLAR_NEUTRON_ACTIVATOR, RenderSolarNeutronActivator::new);
+//        ClientRegistrationUtil.bindTileEntityRenderer(QForgeUtilsTileEntityTypes.TELEPORTER, RenderTeleporter::new);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderThermalEvaporationPlant::new, QForgeUtilsTileEntityTypes.THERMAL_EVAPORATION_CONTROLLER,
+//              QForgeUtilsTileEntityTypes.THERMAL_EVAPORATION_BLOCK, QForgeUtilsTileEntityTypes.THERMAL_EVAPORATION_VALVE);
+//        ClientRegistrationUtil.bindTileEntityRenderer(QForgeUtilsTileEntityTypes.INDUSTRIAL_ALARM, RenderIndustrialAlarm::new);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderSPS::new, QForgeUtilsTileEntityTypes.SPS_CASING, QForgeUtilsTileEntityTypes.SPS_PORT);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderBin::new, QForgeUtilsTileEntityTypes.BASIC_BIN, QForgeUtilsTileEntityTypes.ADVANCED_BIN, QForgeUtilsTileEntityTypes.ELITE_BIN,
+//              QForgeUtilsTileEntityTypes.ULTIMATE_BIN, QForgeUtilsTileEntityTypes.CREATIVE_BIN);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderEnergyCube::new, QForgeUtilsTileEntityTypes.BASIC_ENERGY_CUBE, QForgeUtilsTileEntityTypes.ADVANCED_ENERGY_CUBE,
+//              QForgeUtilsTileEntityTypes.ELITE_ENERGY_CUBE, QForgeUtilsTileEntityTypes.ULTIMATE_ENERGY_CUBE, QForgeUtilsTileEntityTypes.CREATIVE_ENERGY_CUBE);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderFluidTank::new, QForgeUtilsTileEntityTypes.BASIC_FLUID_TANK, QForgeUtilsTileEntityTypes.ADVANCED_FLUID_TANK,
+//              QForgeUtilsTileEntityTypes.ELITE_FLUID_TANK, QForgeUtilsTileEntityTypes.ULTIMATE_FLUID_TANK, QForgeUtilsTileEntityTypes.CREATIVE_FLUID_TANK);
 //        //Transmitters
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderLogisticalTransporter::new, MekanismTileEntityTypes.RESTRICTIVE_TRANSPORTER,
-//              MekanismTileEntityTypes.DIVERSION_TRANSPORTER, MekanismTileEntityTypes.BASIC_LOGISTICAL_TRANSPORTER, MekanismTileEntityTypes.ADVANCED_LOGISTICAL_TRANSPORTER,
-//              MekanismTileEntityTypes.ELITE_LOGISTICAL_TRANSPORTER, MekanismTileEntityTypes.ULTIMATE_LOGISTICAL_TRANSPORTER);
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderMechanicalPipe::new, MekanismTileEntityTypes.BASIC_MECHANICAL_PIPE,
-//              MekanismTileEntityTypes.ADVANCED_MECHANICAL_PIPE, MekanismTileEntityTypes.ELITE_MECHANICAL_PIPE, MekanismTileEntityTypes.ULTIMATE_MECHANICAL_PIPE);
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderPressurizedTube::new, MekanismTileEntityTypes.BASIC_PRESSURIZED_TUBE,
-//              MekanismTileEntityTypes.ADVANCED_PRESSURIZED_TUBE, MekanismTileEntityTypes.ELITE_PRESSURIZED_TUBE, MekanismTileEntityTypes.ULTIMATE_PRESSURIZED_TUBE);
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderUniversalCable::new, MekanismTileEntityTypes.BASIC_UNIVERSAL_CABLE,
-//              MekanismTileEntityTypes.ADVANCED_UNIVERSAL_CABLE, MekanismTileEntityTypes.ELITE_UNIVERSAL_CABLE, MekanismTileEntityTypes.ULTIMATE_UNIVERSAL_CABLE);
-//        ClientRegistrationUtil.bindTileEntityRenderer(RenderThermodynamicConductor::new, MekanismTileEntityTypes.BASIC_THERMODYNAMIC_CONDUCTOR,
-//              MekanismTileEntityTypes.ADVANCED_THERMODYNAMIC_CONDUCTOR, MekanismTileEntityTypes.ELITE_THERMODYNAMIC_CONDUCTOR, MekanismTileEntityTypes.ULTIMATE_THERMODYNAMIC_CONDUCTOR);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderLogisticalTransporter::new, QForgeUtilsTileEntityTypes.RESTRICTIVE_TRANSPORTER,
+//              QForgeUtilsTileEntityTypes.DIVERSION_TRANSPORTER, QForgeUtilsTileEntityTypes.BASIC_LOGISTICAL_TRANSPORTER, QForgeUtilsTileEntityTypes.ADVANCED_LOGISTICAL_TRANSPORTER,
+//              QForgeUtilsTileEntityTypes.ELITE_LOGISTICAL_TRANSPORTER, QForgeUtilsTileEntityTypes.ULTIMATE_LOGISTICAL_TRANSPORTER);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderMechanicalPipe::new, QForgeUtilsTileEntityTypes.BASIC_MECHANICAL_PIPE,
+//              QForgeUtilsTileEntityTypes.ADVANCED_MECHANICAL_PIPE, QForgeUtilsTileEntityTypes.ELITE_MECHANICAL_PIPE, QForgeUtilsTileEntityTypes.ULTIMATE_MECHANICAL_PIPE);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderPressurizedTube::new, QForgeUtilsTileEntityTypes.BASIC_PRESSURIZED_TUBE,
+//              QForgeUtilsTileEntityTypes.ADVANCED_PRESSURIZED_TUBE, QForgeUtilsTileEntityTypes.ELITE_PRESSURIZED_TUBE, QForgeUtilsTileEntityTypes.ULTIMATE_PRESSURIZED_TUBE);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderUniversalCable::new, QForgeUtilsTileEntityTypes.BASIC_UNIVERSAL_CABLE,
+//              QForgeUtilsTileEntityTypes.ADVANCED_UNIVERSAL_CABLE, QForgeUtilsTileEntityTypes.ELITE_UNIVERSAL_CABLE, QForgeUtilsTileEntityTypes.ULTIMATE_UNIVERSAL_CABLE);
+//        ClientRegistrationUtil.bindTileEntityRenderer(RenderThermodynamicConductor::new, QForgeUtilsTileEntityTypes.BASIC_THERMODYNAMIC_CONDUCTOR,
+//              QForgeUtilsTileEntityTypes.ADVANCED_THERMODYNAMIC_CONDUCTOR, QForgeUtilsTileEntityTypes.ELITE_THERMODYNAMIC_CONDUCTOR, QForgeUtilsTileEntityTypes.ULTIMATE_THERMODYNAMIC_CONDUCTOR);
 //
 //        //Block render layers
 //        //Cutout
-//        ClientRegistrationUtil.setRenderLayer(RenderType.getCutout(), MekanismBlocks.STRUCTURAL_GLASS, MekanismBlocks.LASER_AMPLIFIER, MekanismBlocks.LASER_TRACTOR_BEAM,
-//              MekanismBlocks.CHARGEPAD, MekanismBlocks.ELECTROLYTIC_SEPARATOR,
+//        ClientRegistrationUtil.setRenderLayer(RenderType.getCutout(), QForgeUtilsBlocks.STRUCTURAL_GLASS, QForgeUtilsBlocks.LASER_AMPLIFIER, QForgeUtilsBlocks.LASER_TRACTOR_BEAM,
+//              QForgeUtilsBlocks.CHARGEPAD, QForgeUtilsBlocks.ELECTROLYTIC_SEPARATOR,
 //              //Fluid Tanks
-//              MekanismBlocks.BASIC_FLUID_TANK, MekanismBlocks.ADVANCED_FLUID_TANK, MekanismBlocks.ELITE_FLUID_TANK, MekanismBlocks.ULTIMATE_FLUID_TANK,
-//              MekanismBlocks.CREATIVE_FLUID_TANK,
+//              QForgeUtilsBlocks.BASIC_FLUID_TANK, QForgeUtilsBlocks.ADVANCED_FLUID_TANK, QForgeUtilsBlocks.ELITE_FLUID_TANK, QForgeUtilsBlocks.ULTIMATE_FLUID_TANK,
+//              QForgeUtilsBlocks.CREATIVE_FLUID_TANK,
 //              //Transmitters
 //              //Restrictive Transporter
-//              MekanismBlocks.RESTRICTIVE_TRANSPORTER,
+//              QForgeUtilsBlocks.RESTRICTIVE_TRANSPORTER,
 //              //Mechanical Pipes
-//              MekanismBlocks.BASIC_MECHANICAL_PIPE, MekanismBlocks.ADVANCED_MECHANICAL_PIPE, MekanismBlocks.ELITE_MECHANICAL_PIPE, MekanismBlocks.ULTIMATE_MECHANICAL_PIPE,
+//              QForgeUtilsBlocks.BASIC_MECHANICAL_PIPE, QForgeUtilsBlocks.ADVANCED_MECHANICAL_PIPE, QForgeUtilsBlocks.ELITE_MECHANICAL_PIPE, QForgeUtilsBlocks.ULTIMATE_MECHANICAL_PIPE,
 //              //Pressurized Tubes
-//              MekanismBlocks.BASIC_PRESSURIZED_TUBE, MekanismBlocks.ADVANCED_PRESSURIZED_TUBE, MekanismBlocks.ELITE_PRESSURIZED_TUBE, MekanismBlocks.ULTIMATE_PRESSURIZED_TUBE,
+//              QForgeUtilsBlocks.BASIC_PRESSURIZED_TUBE, QForgeUtilsBlocks.ADVANCED_PRESSURIZED_TUBE, QForgeUtilsBlocks.ELITE_PRESSURIZED_TUBE, QForgeUtilsBlocks.ULTIMATE_PRESSURIZED_TUBE,
 //              //Universal Cables
-//              MekanismBlocks.BASIC_UNIVERSAL_CABLE, MekanismBlocks.ADVANCED_UNIVERSAL_CABLE, MekanismBlocks.ELITE_UNIVERSAL_CABLE, MekanismBlocks.ULTIMATE_UNIVERSAL_CABLE,
+//              QForgeUtilsBlocks.BASIC_UNIVERSAL_CABLE, QForgeUtilsBlocks.ADVANCED_UNIVERSAL_CABLE, QForgeUtilsBlocks.ELITE_UNIVERSAL_CABLE, QForgeUtilsBlocks.ULTIMATE_UNIVERSAL_CABLE,
 //              //Thermodynamic Conductors
-//              MekanismBlocks.BASIC_THERMODYNAMIC_CONDUCTOR, MekanismBlocks.ADVANCED_THERMODYNAMIC_CONDUCTOR, MekanismBlocks.ELITE_THERMODYNAMIC_CONDUCTOR,
-//              MekanismBlocks.ULTIMATE_THERMODYNAMIC_CONDUCTOR);
+//              QForgeUtilsBlocks.BASIC_THERMODYNAMIC_CONDUCTOR, QForgeUtilsBlocks.ADVANCED_THERMODYNAMIC_CONDUCTOR, QForgeUtilsBlocks.ELITE_THERMODYNAMIC_CONDUCTOR,
+//              QForgeUtilsBlocks.ULTIMATE_THERMODYNAMIC_CONDUCTOR);
 //        //TODO: Does the diversion transporter actually need to be in multiple render types
 //        // Also can we move the overlay from the TER to being part of the baked model
     }
 
     @SubscribeEvent
     public static void registerContainers(RegistryEvent.Register<ContainerType<?>> event) {
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.MODULE_TWEAKER, GuiModuleTweaker::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.MODULE_TWEAKER, GuiModuleTweaker::new);
 //
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.DICTIONARY, GuiDictionary::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.PORTABLE_TELEPORTER, GuiPortableTeleporter::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.SEISMIC_READER, GuiSeismicReader::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.QIO_FREQUENCY_SELECT_ITEM, GuiQIOItemFrequencySelect::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.PORTABLE_QIO_DASHBOARD, GuiPortableQIODashboard::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.DICTIONARY, GuiDictionary::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.PORTABLE_TELEPORTER, GuiPortableTeleporter::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.SEISMIC_READER, GuiSeismicReader::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.QIO_FREQUENCY_SELECT_ITEM, GuiQIOItemFrequencySelect::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.PORTABLE_QIO_DASHBOARD, GuiPortableQIODashboard::new);
 //
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.MAIN_ROBIT, GuiRobitMain::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.INVENTORY_ROBIT, GuiRobitInventory::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.SMELTING_ROBIT, GuiRobitSmelting::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.CRAFTING_ROBIT, GuiRobitCrafting::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.REPAIR_ROBIT, GuiRobitRepair::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.MAIN_ROBIT, GuiRobitMain::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.INVENTORY_ROBIT, GuiRobitInventory::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.SMELTING_ROBIT, GuiRobitSmelting::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.CRAFTING_ROBIT, GuiRobitCrafting::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.REPAIR_ROBIT, GuiRobitRepair::new);
 //
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.CHEMICAL_CRYSTALLIZER, GuiChemicalCrystallizer::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.CHEMICAL_DISSOLUTION_CHAMBER, GuiChemicalDissolutionChamber::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.CHEMICAL_INFUSER, GuiChemicalInfuser::new);
-//        ClientRegistrationUtil.registerAdvancedElectricScreen(MekanismContainerTypes.CHEMICAL_INJECTION_CHAMBER);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.CHEMICAL_OXIDIZER, GuiChemicalOxidizer::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.CHEMICAL_WASHER, GuiChemicalWasher::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.COMBINER, GuiCombiner::new);
-//        ClientRegistrationUtil.registerElectricScreen(MekanismContainerTypes.CRUSHER);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.DIGITAL_MINER, GuiDigitalMiner::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.DYNAMIC_TANK, GuiDynamicTank::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.ELECTRIC_PUMP, GuiElectricPump::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.ELECTROLYTIC_SEPARATOR, GuiElectrolyticSeparator::new);
-//        ClientRegistrationUtil.registerElectricScreen(MekanismContainerTypes.ENERGIZED_SMELTER);
-//        ClientRegistrationUtil.registerElectricScreen(MekanismContainerTypes.ENRICHMENT_CHAMBER);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.FLUIDIC_PLENISHER, GuiFluidicPlenisher::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.FORMULAIC_ASSEMBLICATOR, GuiFormulaicAssemblicator::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.FUELWOOD_HEATER, GuiFuelwoodHeater::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.LASER_AMPLIFIER, GuiLaserAmplifier::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.LASER_TRACTOR_BEAM, GuiLaserTractorBeam::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.METALLURGIC_INFUSER, GuiMetallurgicInfuser::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.OREDICTIONIFICATOR, GuiOredictionificator::new);
-//        ClientRegistrationUtil.registerAdvancedElectricScreen(MekanismContainerTypes.OSMIUM_COMPRESSOR);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.PRECISION_SAWMILL, GuiPrecisionSawmill::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.PRESSURIZED_REACTION_CHAMBER, GuiPRC::new);
-//        ClientRegistrationUtil.registerAdvancedElectricScreen(MekanismContainerTypes.PURIFICATION_CHAMBER);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.QUANTUM_ENTANGLOPORTER, GuiQuantumEntangloporter::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.RESISTIVE_HEATER, GuiResistiveHeater::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.ROTARY_CONDENSENTRATOR, GuiRotaryCondensentrator::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.SECURITY_DESK, GuiSecurityDesk::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.MODIFICATION_STATION, GuiModificationStation::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.ISOTOPIC_CENTRIFUGE, GuiIsotopicCentrifuge::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.NUTRITIONAL_LIQUIFIER, GuiNutritionalLiquifier::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.ANTIPROTONIC_NUCLEOSYNTHESIZER, GuiAntiprotonicNucleosynthesizer::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.SEISMIC_VIBRATOR, GuiSeismicVibrator::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.SOLAR_NEUTRON_ACTIVATOR, GuiSolarNeutronActivator::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.TELEPORTER, GuiTeleporter::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.THERMAL_EVAPORATION_CONTROLLER, GuiThermalEvaporationController::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.QIO_DRIVE_ARRAY, GuiQIODriveArray::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.QIO_DASHBOARD, GuiQIODashboard::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.QIO_IMPORTER, GuiQIOImporter::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.QIO_EXPORTER, GuiQIOExporter::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.QIO_REDSTONE_ADAPTER, GuiQIORedstoneAdapter::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.SPS, GuiSPS::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.CHEMICAL_CRYSTALLIZER, GuiChemicalCrystallizer::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.CHEMICAL_DISSOLUTION_CHAMBER, GuiChemicalDissolutionChamber::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.CHEMICAL_INFUSER, GuiChemicalInfuser::new);
+//        ClientRegistrationUtil.registerAdvancedElectricScreen(QForgeUtilsContainerTypes.CHEMICAL_INJECTION_CHAMBER);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.CHEMICAL_OXIDIZER, GuiChemicalOxidizer::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.CHEMICAL_WASHER, GuiChemicalWasher::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.COMBINER, GuiCombiner::new);
+//        ClientRegistrationUtil.registerElectricScreen(QForgeUtilsContainerTypes.CRUSHER);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.DIGITAL_MINER, GuiDigitalMiner::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.DYNAMIC_TANK, GuiDynamicTank::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.ELECTRIC_PUMP, GuiElectricPump::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.ELECTROLYTIC_SEPARATOR, GuiElectrolyticSeparator::new);
+//        ClientRegistrationUtil.registerElectricScreen(QForgeUtilsContainerTypes.ENERGIZED_SMELTER);
+//        ClientRegistrationUtil.registerElectricScreen(QForgeUtilsContainerTypes.ENRICHMENT_CHAMBER);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.FLUIDIC_PLENISHER, GuiFluidicPlenisher::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.FORMULAIC_ASSEMBLICATOR, GuiFormulaicAssemblicator::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.FUELWOOD_HEATER, GuiFuelwoodHeater::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.LASER_AMPLIFIER, GuiLaserAmplifier::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.LASER_TRACTOR_BEAM, GuiLaserTractorBeam::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.METALLURGIC_INFUSER, GuiMetallurgicInfuser::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.OREDICTIONIFICATOR, GuiOredictionificator::new);
+//        ClientRegistrationUtil.registerAdvancedElectricScreen(QForgeUtilsContainerTypes.OSMIUM_COMPRESSOR);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.PRECISION_SAWMILL, GuiPrecisionSawmill::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.PRESSURIZED_REACTION_CHAMBER, GuiPRC::new);
+//        ClientRegistrationUtil.registerAdvancedElectricScreen(QForgeUtilsContainerTypes.PURIFICATION_CHAMBER);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.QUANTUM_ENTANGLOPORTER, GuiQuantumEntangloporter::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.RESISTIVE_HEATER, GuiResistiveHeater::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.ROTARY_CONDENSENTRATOR, GuiRotaryCondensentrator::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.SECURITY_DESK, GuiSecurityDesk::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.MODIFICATION_STATION, GuiModificationStation::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.ISOTOPIC_CENTRIFUGE, GuiIsotopicCentrifuge::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.NUTRITIONAL_LIQUIFIER, GuiNutritionalLiquifier::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.ANTIPROTONIC_NUCLEOSYNTHESIZER, GuiAntiprotonicNucleosynthesizer::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.SEISMIC_VIBRATOR, GuiSeismicVibrator::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.SOLAR_NEUTRON_ACTIVATOR, GuiSolarNeutronActivator::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.TELEPORTER, GuiTeleporter::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.THERMAL_EVAPORATION_CONTROLLER, GuiThermalEvaporationController::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.QIO_DRIVE_ARRAY, GuiQIODriveArray::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.QIO_DASHBOARD, GuiQIODashboard::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.QIO_IMPORTER, GuiQIOImporter::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.QIO_EXPORTER, GuiQIOExporter::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.QIO_REDSTONE_ADAPTER, GuiQIORedstoneAdapter::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.SPS, GuiSPS::new);
 //
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.FACTORY, GuiFactory::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.CHEMICAL_TANK, GuiChemicalTank::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.FLUID_TANK, GuiFluidTank::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.ENERGY_CUBE, GuiEnergyCube::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.INDUCTION_MATRIX, GuiInductionMatrix::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.THERMOELECTRIC_BOILER, GuiThermoelectricBoiler::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.PERSONAL_CHEST_ITEM, GuiPersonalChestItem::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.PERSONAL_CHEST_BLOCK, GuiPersonalChestTile::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.FACTORY, GuiFactory::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.CHEMICAL_TANK, GuiChemicalTank::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.FLUID_TANK, GuiFluidTank::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.ENERGY_CUBE, GuiEnergyCube::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.INDUCTION_MATRIX, GuiInductionMatrix::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.THERMOELECTRIC_BOILER, GuiThermoelectricBoiler::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.PERSONAL_CHEST_ITEM, GuiPersonalChestItem::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.PERSONAL_CHEST_BLOCK, GuiPersonalChestTile::new);
 //
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.DIGITAL_MINER_CONFIG, GuiDigitalMinerConfig::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.LOGISTICAL_SORTER, GuiLogisticalSorter::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.DIGITAL_MINER_CONFIG, GuiDigitalMinerConfig::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.LOGISTICAL_SORTER, GuiLogisticalSorter::new);
 //
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.UPGRADE_MANAGEMENT, GuiUpgradeManagement::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.QIO_FREQUENCY_SELECT_TILE, GuiQIOTileFrequencySelect::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.UPGRADE_MANAGEMENT, GuiUpgradeManagement::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.QIO_FREQUENCY_SELECT_TILE, GuiQIOTileFrequencySelect::new);
 //
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.BOILER_STATS, GuiBoilerStats::new);
-//        ClientRegistrationUtil.registerScreen(MekanismContainerTypes.MATRIX_STATS, GuiMatrixStats::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.BOILER_STATS, GuiBoilerStats::new);
+//        ClientRegistrationUtil.registerScreen(QForgeUtilsContainerTypes.MATRIX_STATS, GuiMatrixStats::new);
     }
 
     @SubscribeEvent
     public static void registerModelLoaders(ModelRegistryEvent event) {
-//        ModelLoaderRegistry.registerLoader(Mekanism.rl("transmitter"), TransmitterLoader.INSTANCE);
-//        ModelLoaderRegistry.registerLoader(Mekanism.rl("mekanism"), MekanismModel.Loader.INSTANCE);
-//        MekanismModelCache.INSTANCE.setup();
+//        ModelLoaderRegistry.registerLoader(QForgeUtils.rl("transmitter"), TransmitterLoader.INSTANCE);
+//        ModelLoaderRegistry.registerLoader(QForgeUtils.rl("mekanism"), QForgeUtilsModel.Loader.INSTANCE);
+//        QForgeUtilsModelCache.INSTANCE.setup();
     }
 
     @SubscribeEvent
@@ -192,16 +192,16 @@ public class ClientRegistration {
 //            CustomModelRegistryObject obj = customModels.get(new ResourceLocation(rl.getNamespace(), rl.getPath()));
 //            return obj == null ? model : obj.createModel(model, event);
 //        });
-//        MekanismModelCache.INSTANCE.onBake(event);
+//        QForgeUtilsModelCache.INSTANCE.onBake(event);
     }
 
     @SubscribeEvent
     public static void registerParticleFactories(ParticleFactoryRegisterEvent event) {
-//        ClientRegistrationUtil.registerParticleFactory(MekanismParticleTypes.LASER, LaserParticle.Factory::new);
-//        ClientRegistrationUtil.registerParticleFactory(MekanismParticleTypes.JETPACK_FLAME, JetpackFlameParticle.Factory::new);
-//        ClientRegistrationUtil.registerParticleFactory(MekanismParticleTypes.JETPACK_SMOKE, JetpackSmokeParticle.Factory::new);
-//        ClientRegistrationUtil.registerParticleFactory(MekanismParticleTypes.SCUBA_BUBBLE, ScubaBubbleParticle.Factory::new);
-//        ClientRegistrationUtil.registerParticleFactory(MekanismParticleTypes.RADIATION, RadiationParticle.Factory::new);
+//        ClientRegistrationUtil.registerParticleFactory(QForgeUtilsParticleTypes.LASER, LaserParticle.Factory::new);
+//        ClientRegistrationUtil.registerParticleFactory(QForgeUtilsParticleTypes.JETPACK_FLAME, JetpackFlameParticle.Factory::new);
+//        ClientRegistrationUtil.registerParticleFactory(QForgeUtilsParticleTypes.JETPACK_SMOKE, JetpackSmokeParticle.Factory::new);
+//        ClientRegistrationUtil.registerParticleFactory(QForgeUtilsParticleTypes.SCUBA_BUBBLE, ScubaBubbleParticle.Factory::new);
+//        ClientRegistrationUtil.registerParticleFactory(QForgeUtilsParticleTypes.RADIATION, RadiationParticle.Factory::new);
     }
 
     @SubscribeEvent
@@ -213,35 +213,35 @@ public class ClientRegistration {
 //                      TileEntity tile = WorldUtils.getTileEntity(world, pos);
 //                      if (tile instanceof TileEntityQIOComponent) {
 //                          EnumColor color = ((TileEntityQIOComponent) tile).getColor();
-//                          return color != null ? MekanismRenderer.getColorARGB(color, 1) : -1;
+//                          return color != null ? QForgeUtilsRenderer.getColorARGB(color, 1) : -1;
 //                      }
 //                  }
 //                  return -1;
-//              }, MekanismBlocks.QIO_DRIVE_ARRAY, MekanismBlocks.QIO_DASHBOARD, MekanismBlocks.QIO_IMPORTER, MekanismBlocks.QIO_EXPORTER,
-//              MekanismBlocks.QIO_REDSTONE_ADAPTER);
+//              }, QForgeUtilsBlocks.QIO_DRIVE_ARRAY, QForgeUtilsBlocks.QIO_DASHBOARD, QForgeUtilsBlocks.QIO_IMPORTER, QForgeUtilsBlocks.QIO_EXPORTER,
+//              QForgeUtilsBlocks.QIO_REDSTONE_ADAPTER);
 //        ClientRegistrationUtil.registerIColoredBlockHandler(blockColors, itemColors,
 //              //Fluid Tank
-//              MekanismBlocks.BASIC_FLUID_TANK, MekanismBlocks.ADVANCED_FLUID_TANK, MekanismBlocks.ELITE_FLUID_TANK, MekanismBlocks.ULTIMATE_FLUID_TANK,
-//              MekanismBlocks.CREATIVE_FLUID_TANK);
+//              QForgeUtilsBlocks.BASIC_FLUID_TANK, QForgeUtilsBlocks.ADVANCED_FLUID_TANK, QForgeUtilsBlocks.ELITE_FLUID_TANK, QForgeUtilsBlocks.ULTIMATE_FLUID_TANK,
+//              QForgeUtilsBlocks.CREATIVE_FLUID_TANK);
 //        ClientRegistrationUtil.registerBlockColorHandler(blockColors, (state, world, pos, tintIndex) -> {
 //                  if (tintIndex == 1 && pos != null) {
 //                      TileEntityLogisticalTransporter transporter = WorldUtils.getTileEntity(TileEntityLogisticalTransporter.class, world, pos);
 //                      if (transporter != null) {
 //                          EnumColor renderColor = transporter.getTransmitter().getColor();
 //                          if (renderColor != null) {
-//                              return MekanismRenderer.getColorARGB(renderColor, 1);
+//                              return QForgeUtilsRenderer.getColorARGB(renderColor, 1);
 //                          }
 //                      }
 //                  }
 //                  return -1;
-//              }, MekanismBlocks.BASIC_LOGISTICAL_TRANSPORTER, MekanismBlocks.ADVANCED_LOGISTICAL_TRANSPORTER, MekanismBlocks.ELITE_LOGISTICAL_TRANSPORTER,
-//              MekanismBlocks.ULTIMATE_LOGISTICAL_TRANSPORTER);
+//              }, QForgeUtilsBlocks.BASIC_LOGISTICAL_TRANSPORTER, QForgeUtilsBlocks.ADVANCED_LOGISTICAL_TRANSPORTER, QForgeUtilsBlocks.ELITE_LOGISTICAL_TRANSPORTER,
+//              QForgeUtilsBlocks.ULTIMATE_LOGISTICAL_TRANSPORTER);
 //
-//        for (Cell<ResourceType, PrimaryResource, ItemRegistryObject<Item>> item : MekanismItems.PROCESSED_RESOURCES.cellSet()) {
+//        for (Cell<ResourceType, PrimaryResource, ItemRegistryObject<Item>> item : QForgeUtilsItems.PROCESSED_RESOURCES.cellSet()) {
 //            int tint = item.getColumnKey().getTint();
 //            ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, index) -> index == 1 ? tint : -1, item.getValue());
 //        }
-//        for (Map.Entry<PrimaryResource, BlockRegistryObject<?, ?>> entry : MekanismBlocks.PROCESSED_RESOURCE_BLOCKS.entrySet()) {
+//        for (Map.Entry<PrimaryResource, BlockRegistryObject<?, ?>> entry : QForgeUtilsBlocks.PROCESSED_RESOURCE_BLOCKS.entrySet()) {
 //            int tint = entry.getKey().getTint();
 //            ClientRegistrationUtil.registerBlockColorHandler(blockColors, itemColors, (state, world, pos, index) -> index == 1 ? tint : -1,
 //                  (stack, index) -> index == 1 ? tint : -1, entry.getValue());
@@ -250,10 +250,10 @@ public class ClientRegistration {
 //            if (index == 1) {
 //                ItemPortableQIODashboard item = (ItemPortableQIODashboard) stack.getItem();
 //                EnumColor color = item.getColor(stack);
-//                return color == null ? 0xFF555555 : MekanismRenderer.getColorARGB(color, 1);
+//                return color == null ? 0xFF555555 : QForgeUtilsRenderer.getColorARGB(color, 1);
 //            }
 //            return -1;
-//        }, MekanismItems.PORTABLE_QIO_DASHBOARD);
+//        }, QForgeUtilsItems.PORTABLE_QIO_DASHBOARD);
     }
 
     @SubscribeEvent
@@ -278,7 +278,7 @@ public class ClientRegistration {
 //            //Only allow an exact match, so we don't add to modded entities that only have a modded extended armor layer
 //            if (layerRenderer.getClass() == BipedArmorLayer.class) {
 //                BipedArmorLayer<T, M, A> bipedArmorLayer = (BipedArmorLayer<T, M, A>) layerRenderer;
-//                renderer.addLayer(new MekanismArmorLayer<>(renderer, bipedArmorLayer.modelLeggings, bipedArmorLayer.modelArmor));
+//                renderer.addLayer(new QForgeUtilsArmorLayer<>(renderer, bipedArmorLayer.modelLeggings, bipedArmorLayer.modelArmor));
 //                break;
 //            }
 //        }

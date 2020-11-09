@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 /**
  * Baby enderman entity class.
  *
- * @author Mekanism community.
+ * @author QForgeUtils community.
  */
 public class EntityBabyEnderman extends EndermanEntity implements IBabyEntity {
 

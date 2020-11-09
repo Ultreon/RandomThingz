@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "/#/",
+    "#s#",
+    "/#/"
+  ],
+  "key": {
+    "/": {
+      "tag": "forge:ingots/redstone_alloy"
+    },
+    "#": {
+      "tag": "forge:glass"
+    },
+    "s": {
+      "tag": "qforgemod:ingots/steels"
+    }
+  },
+  "result": {
+    "item": "qforgemod:alloy_machine_frame",
+    "count": 2
+  }
+}

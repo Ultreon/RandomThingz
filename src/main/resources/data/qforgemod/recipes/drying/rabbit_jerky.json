@@ -1,0 +1,10 @@
+{
+    "type": "qforgemod:drying",
+    "process_time": 400,
+    "ingredient": {
+        "item": "minecraft:rabbit"
+    },
+    "result": {
+        "item": "qforgemod:rabbit_jerky"
+    }
+}

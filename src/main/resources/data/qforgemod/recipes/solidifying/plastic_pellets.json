@@ -1,0 +1,11 @@
+{
+    "type": "qforgemod:solidifying",
+    "process_time": 600,
+    "ingredient": {
+        "tag": "forge:polyethylene"
+    },
+    "result": {
+        "item": "qforgemod:plastic_pellets",
+        "count": 8
+    }
+}

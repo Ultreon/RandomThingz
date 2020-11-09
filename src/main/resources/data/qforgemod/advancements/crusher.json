@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+            "item": "qforgemod:crusher"
+        },
+        "title": {
+            "translate": "advancements.qforgemod.crusher.title"
+        },
+        "description": {
+            "translate": "advancements.qforgemod.crusher.description"
+        }
+    },
+    "parent": "qforgemod:alloy_machine_frame",
+    "criteria": {
+        "get_item": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "qforgemod:crusher"
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.api;
 import net.minecraft.nbt.CompoundNBT;
 
 /**
- * Implement this in your TileEntity class if you wish for Mekanism filters to be able to store any of their information.
+ * Implement this in your TileEntity class if you wish for QForgeUtils filters to be able to store any of their information.
  *
  * @author aidancbrady
  */

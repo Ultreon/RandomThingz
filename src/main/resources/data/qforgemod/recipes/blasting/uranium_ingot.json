@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "tag": "qforgemod:chunks/uranium"
+    },
+    {
+      "tag": "forge:dusts/uranium"
+    }
+  ],
+  "result": "qforgemod:uranium_ingot",
+  "experience": 1.0,
+  "cookingtime": 100
+}

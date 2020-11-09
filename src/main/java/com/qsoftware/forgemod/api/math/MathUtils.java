@@ -20,7 +20,7 @@ public class MathUtils {
      *
      * @return an int clamped to {@link Integer#MAX_VALUE}
      *
-     * @see <a href="https://github.com/aidancbrady/Mekanism/pull/5203">Original PR</a>
+     * @see <a href="https://github.com/aidancbrady/QForgeUtils/pull/5203">Original PR</a>
      */
     public static int clampToInt(double d) {
         if (d < Integer.MAX_VALUE) {

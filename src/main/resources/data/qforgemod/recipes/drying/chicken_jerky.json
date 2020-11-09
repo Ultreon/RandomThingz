@@ -1,0 +1,10 @@
+{
+    "type": "qforgemod:drying",
+    "process_time": 400,
+    "ingredient": {
+        "item": "minecraft:chicken"
+    },
+    "result": {
+        "item": "qforgemod:chicken_jerky"
+    }
+}

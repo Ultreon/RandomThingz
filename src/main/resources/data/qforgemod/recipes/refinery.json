@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#C#",
+    "/X/",
+    "OHO"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/aluminum_steel"
+    },
+    "C": {
+      "item": "qforgemod:circuit_board"
+    },
+    "/": {
+      "item": "qforgemod:empty_canister"
+    },
+    "X": {
+      "item": "qforgemod:alloy_machine_frame"
+    },
+    "O": {
+      "tag": "forge:ingots/electrum"
+    },
+    "H": {
+      "item": "qforgemod:heating_element"
+    }
+  },
+  "result": {
+    "item": "qforgemod:refinery"
+  }
+}

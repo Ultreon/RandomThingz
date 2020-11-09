@@ -1,0 +1,38 @@
+{
+  "type": "qforgemod:alloy_smelting",
+  "process_time": 400,
+  "ingredients": [
+    {
+      "value": [
+        {
+          "tag": "forge:ingots/copper"
+        },
+        {
+          "tag": "qforgemod:chunks/copper"
+        },
+        {
+          "tag": "forge:dusts/copper"
+        }
+      ],
+      "count": 3
+    },
+    {
+      "value": [
+        {
+          "tag": "forge:ingots/zinc"
+        },
+        {
+          "tag": "qforgemod:chunks/zinc"
+        },
+        {
+          "tag": "forge:dusts/zinc"
+        }
+      ],
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "qforgemod:brass_ingot",
+    "count": 4
+  }
+}

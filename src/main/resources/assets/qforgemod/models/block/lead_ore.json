@@ -1,6 +1,6 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/lead_ore"
+    "all": "qforgemod:block/lead_ore"
   }
 }

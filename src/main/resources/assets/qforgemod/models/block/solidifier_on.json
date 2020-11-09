@@ -1,0 +1,31 @@
+{
+    "parent": "block/cube",
+    "display": {
+        "firstperson_righthand": {
+            "rotation": [
+                0,
+                135,
+                0
+            ],
+            "translation": [
+                0,
+                0,
+                0
+            ],
+            "scale": [
+                0.40,
+                0.40,
+                0.40
+            ]
+        }
+    },
+    "textures": {
+        "particle": "qforgemod:block/solidifier/front_on",
+        "down": "qforgemod:block/solidifier/bottom",
+        "up": "qforgemod:block/solidifier/top",
+        "north": "qforgemod:block/solidifier/front_on",
+        "east": "qforgemod:block/solidifier/side",
+        "south": "qforgemod:block/solidifier/back",
+        "west": "qforgemod:block/solidifier/side"
+    }
+}

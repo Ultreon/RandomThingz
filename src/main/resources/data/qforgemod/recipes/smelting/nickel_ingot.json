@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "tag": "qforgemod:chunks/nickel"
+    },
+    {
+      "tag": "forge:dusts/nickel"
+    }
+  ],
+  "result": "qforgemod:nickel_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}
