@@ -39,6 +39,7 @@ public class EntityTypeInit extends ObjectInit<EntityType<?>> {
 
     // Sprites
     public static final EntityTypeRegistryObject<LegendaryEnderPearlEntity> LEGENDARY_ENDER_PEARL = register("legendary_ender_pearl", EntityType.Builder.<LegendaryEnderPearlEntity>create(LegendaryEnderPearlEntity::new, EntityClassification.MISC).size(1.0f, 1.0f));
+    public static final EntityTypeRegistryObject<DynamiteEntity> DYNAMITE = register("dynamite", EntityType.Builder.<DynamiteEntity>create(DynamiteEntity::new, EntityClassification.MISC).size(1.0f, 1.0f));
 
     /**
      * Register an entity type.

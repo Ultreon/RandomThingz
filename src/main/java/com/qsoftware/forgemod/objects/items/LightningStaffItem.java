@@ -1,13 +1,13 @@
 package com.qsoftware.forgemod.objects.items;
 
+import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.objects.items.base.WandItem;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
@@ -19,32 +19,9 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class LightningStaffItem extends Item {
+public class LightningStaffItem extends WandItem {
     public LightningStaffItem() {
-        super(new Item.Properties().group(ItemGroup.TOOLS));
-    }
-
-    @Override
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, @NotNull PlayerEntity playerIn, @NotNull Hand handIn) {
-        if (worldIn instanceof ServerWorld) {
-            ServerWorld world = (ServerWorld) worldIn;
-
-            RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.ANY);
-            double posX = raytraceresult.getHitVec().x;
-            double posY = Math.floor(raytraceresult.getHitVec().y);
-            double posZ = raytraceresult.getHitVec().z;
-
-            System.out.println(posX);
-            System.out.println(posY);
-            System.out.println(posZ);
-
-            LightningBoltEntity l = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, worldIn);
-            l.setPosition(posX, posY, posZ);
-            l.setEffectOnly(false);
-            world.addEntity(l);
-        }
-        
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        super(5, 1, new Item.Properties().group(Groups.OVERPOWERED));
     }
 
     protected static BlockRayTraceResult rayTrace(World worldIn, PlayerEntity player, RayTraceContext.@NotNull FluidMode fluidMode) {
@@ -60,5 +37,28 @@ public class LightningStaffItem extends Item {
         double d0 = 128; // Todo: test value, if it will lag again, then lower the value. ( Possible not needed ;) )
         Vector3d vec3d1 = vec3d.add((double)f6 * d0, (double)f5 * d0, (double)f7 * d0);
         return worldIn.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
+    }
+
+    @Override
+    public void activate(ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity livingIn, float charge) {
+        if (!(livingIn instanceof PlayerEntity)) {
+            return;
+        }
+
+        PlayerEntity playerIn = (PlayerEntity) livingIn;
+
+        if (worldIn instanceof ServerWorld) {
+            ServerWorld world = (ServerWorld) worldIn;
+
+            RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.ANY);
+            double posX = raytraceresult.getHitVec().x;
+            double posY = Math.floor(raytraceresult.getHitVec().y);
+            double posZ = raytraceresult.getHitVec().z;
+
+            LightningBoltEntity l = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, worldIn);
+            l.setPosition(posX, posY, posZ);
+            l.setEffectOnly(false);
+            world.addEntity(l);
+        }
     }
 }

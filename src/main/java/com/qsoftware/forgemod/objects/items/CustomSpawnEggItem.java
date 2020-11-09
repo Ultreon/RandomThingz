@@ -12,8 +12,6 @@ import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Supplier;
-
 /**
  * Custom spawn egg item class.
  *
@@ -37,6 +35,10 @@ public class CustomSpawnEggItem<T extends Entity> extends SpawnEggItem {
                 return EntityType.byKey(entityTag.getString(NBTConstants.ID)).orElse(entityTypeIn.get());
             }
         }
+        return entityTypeIn.get();
+    }
+
+    public @NotNull EntityType<T> getEntityType() {
         return entityTypeIn.get();
     }
 }

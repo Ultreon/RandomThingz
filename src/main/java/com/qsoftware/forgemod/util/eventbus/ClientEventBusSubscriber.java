@@ -46,5 +46,6 @@ public class ClientEventBusSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.FIRE_CREEPER.get(), FireCreeperRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.GLOW_SQUID.get(), GlowSquidRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.LEGENDARY_ENDER_PEARL.get(), manager -> new SpriteRenderer<>(Minecraft.getInstance().getRenderManager(), Minecraft.getInstance().getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.DYNAMITE.get(), manager -> new SpriteRenderer<>(Minecraft.getInstance().getRenderManager(), Minecraft.getInstance().getItemRenderer()));
     }
 }

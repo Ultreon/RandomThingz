@@ -20,7 +20,7 @@ loaderVersion="[34,)" #mandatory This is typically bumped every Minecraft versio
 
 [[mods]] #mandatory
 modId="qforgemod" #mandatory
-version="1.1-beta6" #mandatory
+version="1.1-beta7" #mandatory
 displayName="QForgeUtils: Main Module" #mandatory
 #updateJSONURL="http://myurl.me/" #optional
 displayURL="https://quintenjungblut.wixsite.com/qplaysoftware/" #optional

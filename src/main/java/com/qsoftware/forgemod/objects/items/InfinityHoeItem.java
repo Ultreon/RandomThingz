@@ -62,7 +62,7 @@ public class InfinityHoeItem extends HoeItem {
 
     @Override
     public boolean hasEffect(ItemStack stack) {
-        return true;
+        return false;
     }
 
     @Override

@@ -59,7 +59,7 @@ public class InfinityPickaxeItem extends PickaxeItem {
 
     @Override
     public boolean hasEffect(@NotNull ItemStack stack) {
-        return true;
+        return false;
     }
 
     @Override

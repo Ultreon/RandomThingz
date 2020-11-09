@@ -59,7 +59,7 @@ public class InfinitySwordItem extends SwordItem {
 
     @Override
     public boolean hasEffect(@NotNull ItemStack stack) {
-        return true;
+        return false;
     }
 
     @Override

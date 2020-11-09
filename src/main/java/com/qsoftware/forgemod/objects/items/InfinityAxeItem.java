@@ -59,7 +59,7 @@ public class InfinityAxeItem extends AxeItem {
 
     @Override
     public boolean hasEffect(ItemStack stack) {
-        return true;
+        return false;
     }
 
     @Override

@@ -59,7 +59,7 @@ public class InfinityShovelItem extends ShovelItem {
 
     @Override
     public boolean hasEffect(@NotNull ItemStack stack) {
-        return true;
+        return false;
     }
 
     @Override

@@ -59,7 +59,7 @@ public class QForgeUtils
     public static final String MOD_ID = "qforgemod";
     public static final String MOD_NAME = "QForgeUtils";
     @SuppressWarnings("unused")
-    public static final String MOD_VERSION = "1.1-beta6";
+    public static final String MOD_VERSION = "1.1-beta7";
 
     // Other
 //    @SuppressWarnings({"unused", "RedundantSuppression"})

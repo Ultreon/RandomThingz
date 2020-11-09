@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.objects.items;
 
+import com.qsoftware.forgemod.objects.entities.DynamiteEntity;
 import com.qsoftware.forgemod.objects.entities.LegendaryEnderPearlEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderPearlItem;
@@ -17,8 +18,8 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class LegendaryEnderPearlItem extends EnderPearlItem {
-    public LegendaryEnderPearlItem(Properties builder) {
+public class DynamiteItem extends EnderPearlItem {
+    public DynamiteItem(Properties builder) {
         super(builder);
     }
 
@@ -28,10 +29,10 @@ public class LegendaryEnderPearlItem extends EnderPearlItem {
      */
     public @NotNull ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, @NotNull Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.ENTITY_ENDER_PEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+        worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
         playerIn.getCooldownTracker().setCooldown(this, 5);
         if (!worldIn.isRemote) {
-            LegendaryEnderPearlEntity enderPearlEntity = new LegendaryEnderPearlEntity(worldIn, playerIn);
+            DynamiteEntity enderPearlEntity = new DynamiteEntity(worldIn, playerIn);
             enderPearlEntity.setItem(itemstack);
             enderPearlEntity.func_234612_a_(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
             worldIn.addEntity(enderPearlEntity);

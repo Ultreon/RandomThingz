@@ -13,6 +13,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -34,16 +35,20 @@ public class UnstableInfinityIngot extends Item {
         } else {
             long createTime = nbt.getLong("createTime");
             if ((createTime + 200) < worldIn.getGameTime()) {
-                entityIn.replaceItemInInventory(itemSlot, ItemStack.EMPTY);
-                worldIn.createExplosion(entityIn, entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ(), 8f * (float)stack.getCount(), true, Explosion.Mode.DESTROY);
+                trigger(stack, worldIn, entityIn, itemSlot);
             }
         }
 
         super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
     }
 
+    public void trigger(ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot) {
+        entityIn.replaceItemInInventory(itemSlot, ItemStack.EMPTY);
+        worldIn.createExplosion(entityIn, entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ(), 8f * (float)stack.getCount(), true, Explosion.Mode.DESTROY);
+    }
+
     @Override
-    public void addInformation(ItemStack stack, @javax.annotation.Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
         if (worldIn == null) {
             return;

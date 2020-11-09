@@ -30,7 +30,7 @@ if __name__ == '__main__':
     for b_out in BUILD_OUTPUT:
         for item in os.listdir(b_out):
             i_path = os.path.normpath(os.path.join(b_out, item))
-            n_path = os.path.normpath(os.path.join(out1, os.path.splitext(item)[0] + build_id + os.path.splitext(item)[1]))
+            n_path = os.path.normpath(os.path.join(out1, item))
             if os.path.isfile(i_path):
                 os.rename(i_path, n_path)
                 log(f"Moved file \"{i_path}\" -> \"{os.path.split(n_path)[0]}\".")

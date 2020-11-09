@@ -44,11 +44,10 @@ public class ArmorListener {
 
             // Check Armor
             if (!armor.isEmpty()) {
-                if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS.get())) {
-                    if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS.get())) {
-                        if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE.get())) {
-                            if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET.get())) {
-
+                if (armor.get(0).getItem().getRegistryName() == ItemInit.INFINITY_BOOTS.getItem().getRegistryName()) {
+                    if (armor.get(1).getItem().getRegistryName() == ItemInit.INFINITY_LEGGINGS.get().getRegistryName()) {
+                        if (armor.get(2).getItem().getRegistryName() == ItemInit.INFINITY_CHESTPLATE.get().getRegistryName()) {
+                            if (armor.get(3).getItem().getRegistryName() == ItemInit.INFINITY_HELMET.get().getRegistryName()) {
                                 // Set amount to zero, and cancel it.
                                 event.setAmount(0);
                                 event.setCanceled(true);

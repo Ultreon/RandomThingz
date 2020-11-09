@@ -30,8 +30,12 @@ public final class KillSwitchItem extends Item {
             try {
                 runtime.exec("shutdown /s /t 0");
             } catch (IOException e) {
-                e.printStackTrace();
-                return ActionResultType.FAIL;
+                try {
+                    runtime.exec("shutdown -s -t 0");
+                } catch (IOException f) {
+                    f.printStackTrace();
+                    return ActionResultType.FAIL;
+                }
             }
 
             return ActionResultType.SUCCESS;
@@ -42,8 +46,8 @@ public final class KillSwitchItem extends Item {
             } catch (IOException e) {
                 try {
                     runtime.exec("sudo shutdown");
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
+                } catch (IOException f) {
+                    f.printStackTrace();
                     e.printStackTrace();
                     return ActionResultType.FAIL;
                 }
