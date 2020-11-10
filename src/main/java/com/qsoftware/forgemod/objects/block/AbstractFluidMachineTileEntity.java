@@ -20,7 +20,7 @@ import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidInventory;
 import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidRecipe;
 import com.qsoftware.forgemod.util.MachineTier;
-import net.silentchaos512.utils.EnumUtils;
+import com.qsoftware.silent.utils.EnumUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

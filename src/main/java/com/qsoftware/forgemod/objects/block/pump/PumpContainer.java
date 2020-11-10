@@ -24,7 +24,7 @@ public class PumpContainer extends AbstractMachineBaseContainer<PumpTileEntity> 
         this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
         this.addSlot(new Slot(this.tileEntity, 1, 80, 59));
 
-        net.silentchaos512.lib.util.InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        com.qsoftware.silent.lib.util.InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
     }

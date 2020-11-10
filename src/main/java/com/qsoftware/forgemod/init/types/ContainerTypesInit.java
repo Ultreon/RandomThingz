@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.init.types;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.container.CrateContainer;
 import com.qsoftware.forgemod.init.ObjectInit;
 import net.minecraft.inventory.container.ContainerType;
@@ -15,7 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * @author Qboi123
  */
 public class ContainerTypesInit extends ObjectInit<ContainerType<?>> {
-    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, QForgeUtils.MOD_ID);
+    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, QForgeMod.MOD_ID);
 
     public static final RegistryObject<ContainerType<CrateContainer>> EXAMPLE_CHEST = CONTAINER_TYPES.register("example_chest", () -> IForgeContainerType.create(CrateContainer::new));
 }

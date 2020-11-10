@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.init;
 
-import com.qsoftware.forgemod.QForgeUtils;
 import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.objects.item.*;
 import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;

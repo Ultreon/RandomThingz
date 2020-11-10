@@ -3,12 +3,10 @@ package com.qsoftware.forgemod.objects.items;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import com.qsoftware.forgemod.QForgeUtils;
 import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
 import com.qsoftware.forgemod.registration.impl.ItemDeferredRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;

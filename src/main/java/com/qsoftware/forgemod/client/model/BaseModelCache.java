@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.client.model;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.renderer.model.BlockModel;
 import net.minecraft.client.renderer.model.IBakedModel;
@@ -94,7 +94,7 @@ public class BaseModelCache {
             super.reload(evt);
             bakedModel = evt.getModelRegistry().get(rl);
             if (bakedModel == null) {
-                QForgeUtils.LOGGER.error("Baked model doesn't exist: {}", rl.toString());
+                QForgeMod.LOGGER.error("Baked model doesn't exist: {}", rl.toString());
                 bakedModel = evt.getModelManager().getMissingModel();
             }
             IUnbakedModel unbaked = evt.getModelLoader().getUnbakedModel(rl);

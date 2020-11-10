@@ -7,7 +7,7 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
-import net.silentchaos512.utils.EnumUtils;
+import com.qsoftware.silent.utils.EnumUtils;
 
 import java.util.function.Supplier;
 

@@ -1,10 +1,9 @@
 package com.qsoftware.forgemod.init.types;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.BlockInit;
 import com.qsoftware.forgemod.init.ObjectInit;
 import com.qsoftware.forgemod.objects.tileentity.CrateTileEntity;
-import com.qsoftware.forgemod.objects.tileentity.QuarryTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
@@ -17,10 +16,10 @@ import java.util.function.Supplier;
 //@ObjectHolder(QForgeUtils.MOD_ID)
 //@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 public class TileEntityTypesInit extends ObjectInit<TileEntityType<?>> {
-    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, QForgeUtils.MOD_ID);
+    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, QForgeMod.MOD_ID);
 
     @SuppressWarnings("ConstantConditions")
-    public static final RegistryObject<TileEntityType<QuarryTileEntity>> QUARRY = register("quarry", () -> TileEntityType.Builder.create(QuarryTileEntity::new, BlockInit.QUARRY_BLOCK.get()).build(null));
+//    public static final RegistryObject<TileEntityType<QuarryTileEntity>> QUARRY = register("quarry", () -> TileEntityType.Builder.create(QuarryTileEntity::new, BlockInit.QUARRY_BLOCK.get()).build(null));
     public static final RegistryObject<TileEntityType<CrateTileEntity>> EXAMPLE_CHEST = register("example_chest", () -> TileEntityType.Builder.create(CrateTileEntity::new, BlockInit.WOODEN_CRATE.get()).build(null));
 
     /**

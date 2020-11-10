@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.base;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.capability.EnergyStorageItemImpl;
 import com.qsoftware.forgemod.util.TextUtil;
 import net.minecraft.client.util.ITooltipFlag;
@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class EnergyStoringItem extends Item {
-    public static final ResourceLocation CHARGE = new ResourceLocation(QForgeUtils.MOD_ID, "charge");
+    public static final ResourceLocation CHARGE = new ResourceLocation(QForgeMod.MOD_ID, "charge");
 
     private final int maxEnergy;
     private final int maxReceive;

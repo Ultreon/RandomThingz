@@ -6,9 +6,9 @@ import net.minecraft.util.IItemProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.silentchaos512.lib.block.IBlockProvider;
-import net.silentchaos512.lib.util.NameUtils;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.silent.lib.block.IBlockProvider;
+import com.qsoftware.silent.lib.util.NameUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.Metals;
 import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.ModItems;
@@ -20,12 +20,12 @@ import java.util.Arrays;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, QForgeUtils.MOD_ID, existingFileHelper);
+        super(generator, QForgeMod.MOD_ID, existingFileHelper);
     }
 
     @Override
     public String getName() {
-        return "Silent's Mechanisms - Item Models";
+        return "QForgeMod - Item Models";
     }
 
     @Override

@@ -1,17 +1,17 @@
 package com.qsoftware.forgemod.util;
 
 import net.minecraft.util.ResourceLocation;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 
 public final class Constants {
-    public static final ResourceLocation ALLOY_SMELTING = QForgeUtils.getId("alloy_smelting");
-    public static final ResourceLocation COMPRESSING = QForgeUtils.getId("compressing");
-    public static final ResourceLocation CRUSHING = QForgeUtils.getId("crushing");
-    public static final ResourceLocation DRYING = QForgeUtils.getId("drying");
-    public static final ResourceLocation INFUSING = QForgeUtils.getId("infusing");
-    public static final ResourceLocation MIXING = QForgeUtils.getId("mixing");
-    public static final ResourceLocation REFINING = QForgeUtils.getId("refining");
-    public static final ResourceLocation SOLIDIFYING = QForgeUtils.getId("solidifying");
+    public static final ResourceLocation ALLOY_SMELTING = QForgeMod.getId("alloy_smelting");
+    public static final ResourceLocation COMPRESSING = QForgeMod.getId("compressing");
+    public static final ResourceLocation CRUSHING = QForgeMod.getId("crushing");
+    public static final ResourceLocation DRYING = QForgeMod.getId("drying");
+    public static final ResourceLocation INFUSING = QForgeMod.getId("infusing");
+    public static final ResourceLocation MIXING = QForgeMod.getId("mixing");
+    public static final ResourceLocation REFINING = QForgeMod.getId("refining");
+    public static final ResourceLocation SOLIDIFYING = QForgeMod.getId("solidifying");
 
     // Machine upgrades
     public static final int UPGRADES_PER_SLOT = 1;

@@ -7,10 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import com.qsoftware.forgemod.QForgeUtils;
 import com.qsoftware.forgemod.api.IMachineUpgrade;
 import com.qsoftware.forgemod.util.TextUtil;
-import net.silentchaos512.utils.MathUtils;
+import com.qsoftware.silent.utils.MathUtils;
 
 import javax.annotation.Nullable;
 import java.util.List;

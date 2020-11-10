@@ -1,11 +1,10 @@
 package com.qsoftware.forgemod.client.renderer;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.model.FreeChickenModel;
 import com.qsoftware.forgemod.objects.entities.DuckEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class DuckRenderer extends MobRenderer<DuckEntity, FreeChickenModel<DuckEntity>> {
-    private static final ResourceLocation DUCK_TEXTURES = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/duck.png");
+    private static final ResourceLocation DUCK_TEXTURES = new ResourceLocation(QForgeMod.MOD_ID, "textures/entity/duck.png");
 
     public DuckRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new FreeChickenModel<>(), 0.5F);

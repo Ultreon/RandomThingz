@@ -14,9 +14,9 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
-import net.silentchaos512.lib.registry.BlockRegistryObject;
-import net.silentchaos512.lib.registry.ItemRegistryObject;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.silent.lib.registry.BlockRegistryObject;
+import com.qsoftware.silent.lib.registry.ItemRegistryObject;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.block.MetalBlock;
 
 import java.util.Locale;
@@ -264,7 +264,7 @@ public enum Metals {
 
         Builder chunks() {
             this.chunks = () -> new Item(new Item.Properties().group(Groups.INGOTS_OR_DUSTS));
-            this.chunksTag = itemTag(QForgeUtils.getId("chunks/" + name));
+            this.chunksTag = itemTag(QForgeMod.getId("chunks/" + name));
             return this;
         }
 

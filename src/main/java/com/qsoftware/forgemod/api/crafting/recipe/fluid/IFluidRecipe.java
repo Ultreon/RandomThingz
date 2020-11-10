@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.api.crafting.recipe.fluid;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -95,7 +95,7 @@ public interface IFluidRecipe<C extends IFluidInventory> extends IRecipe<C> {
         if (fluid != null) {
             return new FluidStack(fluid, amount);
         } else {
-            QForgeUtils.LOGGER.error("Unknown fluid: {}", fluidId);
+            QForgeMod.LOGGER.error("Unknown fluid: {}", fluidId);
             return FluidStack.EMPTY;
         }
     }

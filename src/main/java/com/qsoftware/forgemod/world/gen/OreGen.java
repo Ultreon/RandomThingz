@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.world.gen;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.BlockInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -9,7 +9,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.template.RuleTest;
 //import net.minecraft.world.gen.placement.CountRangeConfig;
@@ -27,7 +26,7 @@ import java.util.HashMap;
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeUtils.MOD_ID)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
 @SuppressWarnings({"SameParameterValue", "unused", "RedundantSuppression"})
 public class OreGen {
 //    private static HashMap<Biome, > map = new HashMap<>();
@@ -36,7 +35,7 @@ public class OreGen {
 
     public static void generateOres() {
         // Started generating ores.
-        QForgeUtils.LOGGER.info("-===========- Generate Ores [START] -===========-");
+        QForgeMod.LOGGER.info("-===========- Generate Ores [START] -===========-");
 
         // Loop all biomes for creating ore features.
         for (Biome biome : ForgeRegistries.BIOMES) {
@@ -61,7 +60,7 @@ public class OreGen {
         }
 
         // Ended generating ores.
-        QForgeUtils.LOGGER.info("-===========- Generate Ores [ END ] -===========-");
+        QForgeMod.LOGGER.info("-===========- Generate Ores [ END ] -===========-");
     }
 
     protected static void createGemOreFeature(int count, int bottomOffset, int topOffset, int maximum, int size, RuleTest filler, Block ore, Biome[] biomes) {
@@ -74,7 +73,7 @@ public class OreGen {
 
         // Add feature
         for (Biome biome : biomes) {
-            QForgeUtils.LOGGER.info("Adding Ore Feature for: '" + ore.getRegistryName() + "' in biome: " + biome.getRegistryName());
+            QForgeMod.LOGGER.info("Adding Ore Feature for: '" + ore.getRegistryName() + "' in biome: " + biome.getRegistryName());
             list.add(new HashMap.SimpleEntry<>(GenerationStage.Decoration.UNDERGROUND_ORES, configuredFeature));
         }
     }
@@ -88,7 +87,7 @@ public class OreGen {
         ConfiguredFeature<?, ?> configuredFeature = Feature.ORE.withConfiguration(oreFeatureConfig).range(maximum - topOffset).square().func_242731_b(bottomOffset);
 
         // Add feature
-        QForgeUtils.LOGGER.info("Adding Ore Feature for: '" + ore.getRegistryName() + "' in biome: " + biome.getRegistryName());
+        QForgeMod.LOGGER.info("Adding Ore Feature for: '" + ore.getRegistryName() + "' in biome: " + biome.getRegistryName());
         list.add(new HashMap.SimpleEntry<>(GenerationStage.Decoration.UNDERGROUND_ORES, configuredFeature));
     }
 

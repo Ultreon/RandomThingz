@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.listener;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ItemInit;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.objects.entities.GlowSquidEntity;
@@ -22,7 +22,7 @@ import java.util.Random;
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeUtils.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ArmorListener {
     @SubscribeEvent
     public void randomTick(TickEvent.WorldTickEvent event) {

@@ -20,7 +20,7 @@ import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.util.InventoryUtils;
 import com.qsoftware.forgemod.util.MachineTier;
-import net.silentchaos512.utils.EnumUtils;
+import com.qsoftware.silent.utils.EnumUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

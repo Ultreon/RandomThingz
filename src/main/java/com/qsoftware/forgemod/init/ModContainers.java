@@ -1,5 +1,7 @@
 package com.qsoftware.forgemod.init;
 
+import com.qsoftware.forgemod.objects.block.quarry.QuarryContainer;
+import com.qsoftware.forgemod.objects.block.quarry.QuarryScreen;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
@@ -8,7 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.block.alloysmelter.AlloySmelterScreen;
 import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxContainer;
 import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxScreen;
@@ -45,6 +47,7 @@ public final class ModContainers {
     public static ContainerType<LavaGeneratorContainer> lavaGenerator;
     public static ContainerType<MixerContainer> mixer;
     public static ContainerType<PumpContainer> pump;
+    public static ContainerType<QuarryContainer> quarry;
     public static ContainerType<RefineryContainer> refinery;
     public static ContainerType<SolidifierContainer> solidifier;
 
@@ -64,6 +67,7 @@ public final class ModContainers {
         lavaGenerator = register("lava_generator", LavaGeneratorContainer::new);
         mixer = register("mixer", MixerContainer::new);
         pump = register("pump", PumpContainer::new);
+        quarry = register("quarry", QuarryContainer::new);
         refinery = register("refinery", RefineryContainer::new);
         solidifier = register("solidifier", SolidifierContainer::new);
     }
@@ -83,6 +87,7 @@ public final class ModContainers {
         ScreenManager.registerFactory(lavaGenerator, LavaGeneratorScreen::new);
         ScreenManager.registerFactory(mixer, MixerScreen::new);
         ScreenManager.registerFactory(pump, PumpScreen::new);
+        ScreenManager.registerFactory(quarry, QuarryScreen::new);
         ScreenManager.registerFactory(refinery, RefineryScreen::new);
         ScreenManager.registerFactory(solidifier, SolidifierScreen::new);
     }
@@ -93,7 +98,7 @@ public final class ModContainers {
     }
 
     private static <C extends Container> ContainerType<C> register(String name, ContainerType<C> containerType) {
-        containerType.setRegistryName(QForgeUtils.getId(name));
+        containerType.setRegistryName(QForgeMod.getId(name));
         ForgeRegistries.CONTAINERS.register(containerType);
         return containerType;
     }

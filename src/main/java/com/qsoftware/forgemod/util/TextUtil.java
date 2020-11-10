@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.util;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -11,7 +11,7 @@ public class TextUtil {
     private static final String ENERGY_FORMAT = "%,d";
 
     public static IFormattableTextComponent translate(String prefix, String suffix, Object... params) {
-        String key = String.format("%s.%s.%s", prefix, QForgeUtils.MOD_ID, suffix);
+        String key = String.format("%s.%s.%s", prefix, QForgeMod.MOD_ID, suffix);
         return new TranslationTextComponent(key, params);
     }
 

@@ -16,7 +16,7 @@
     "advancements.qforgemod.electric_furnace.description": "Make an Electric Furnace to smelt your stuff with energy instead of coal and wood!",
     "advancements.qforgemod.electric_furnace.title": "Electric Furnace",
     "advancements.qforgemod.root.description": "Mechanically Underrated",
-    "advancements.qforgemod.root.title": "Silent's Mechanisms",
+    "advancements.qforgemod.root.title": "QForgeMod",
     "advancements.qforgemod.stone_machine_frame.description": "Make the bare bones of all basic machines.",
     "advancements.qforgemod.stone_machine_frame.title": "Stone Machine Frame",
 	
@@ -207,7 +207,7 @@
     "item.qforgemod.refined_iron_ingot": "Raffinierter Eisenbarren",
     "item.qforgemod.zombie_leather": "Zombie Leder",
 	
-    "itemGroup.qforgemod": "Silent's Mechanisms",
+    "itemGroup.qforgemod": "QForgeMod",
 	
     "jei.qforgemod.category.alloy_smelting": "Legierungsschmelze",
     "jei.qforgemod.category.compressing": "Komprimieren",

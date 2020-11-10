@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
-import net.silentchaos512.lib.util.InventoryUtils;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import com.qsoftware.forgemod.objects.block.generator.AbstractFluidFuelGeneratorTileEntity;
 import com.qsoftware.forgemod.objects.block.generator.AbstractFluidGeneratorContainer;
 import com.qsoftware.forgemod.init.ModContainers;

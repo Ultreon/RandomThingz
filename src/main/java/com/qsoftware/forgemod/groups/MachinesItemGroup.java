@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.groups;
 
 import com.qsoftware.forgemod.init.BlockInit;
+import com.qsoftware.forgemod.init.ModBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +21,6 @@ public class MachinesItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(BlockInit.QUARRY_BLOCK.get());
+        return new ItemStack(ModBlocks.COAL_GENERATOR.get());
     }
 }

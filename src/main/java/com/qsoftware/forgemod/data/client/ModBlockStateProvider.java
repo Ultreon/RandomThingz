@@ -5,8 +5,8 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.silentchaos512.lib.util.NameUtils;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.silent.lib.util.NameUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.block.dryingrack.DryingRackBlock;
 import com.qsoftware.forgemod.init.Metals;
 import com.qsoftware.forgemod.init.ModBlocks;
@@ -16,13 +16,13 @@ import java.util.Arrays;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, QForgeUtils.MOD_ID, exFileHelper);
+        super(gen, QForgeMod.MOD_ID, exFileHelper);
     }
 
     @Nonnull
     @Override
     public String getName() {
-        return "Silent's Mechanisms - Block States and Models";
+        return "QForgeMod - Block States and Models";
     }
 
     @Override

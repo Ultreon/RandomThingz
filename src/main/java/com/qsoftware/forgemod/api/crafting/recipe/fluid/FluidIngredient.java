@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.api.crafting.recipe.fluid;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tags.FluidTags;
@@ -12,7 +12,7 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.silentchaos512.lib.util.NameUtils;
+import com.qsoftware.silent.lib.util.NameUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -85,7 +85,7 @@ public class FluidIngredient implements Predicate<FluidStack> {
             assert this.tag != null;
             this.tag.getAllElements();
         } catch (IllegalStateException ex) {
-            QForgeUtils.LOGGER.warn("Fluid tags not bound when needed! Trying to fetch tags...");
+            QForgeMod.LOGGER.warn("Fluid tags not bound when needed! Trying to fetch tags...");
             TagRegistryManager.fetchTags();
         }
         return this.tag.getAllElements().stream().map(f -> new FluidStack(f, this.amount)).collect(Collectors.toList());

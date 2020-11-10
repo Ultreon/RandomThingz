@@ -4,7 +4,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.IIntArray;
-import net.silentchaos512.utils.MathUtils;
+import com.qsoftware.silent.utils.MathUtils;
 
 public class AbstractEnergyStorageContainer<T extends AbstractEnergyInventoryTileEntity> extends Container {
     protected final T tileEntity;

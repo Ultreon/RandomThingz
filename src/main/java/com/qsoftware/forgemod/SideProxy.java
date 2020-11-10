@@ -21,7 +21,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.silentchaos512.lib.event.Greetings;
+import com.qsoftware.silent.lib.event.Greetings;
 
 import javax.annotation.Nullable;
 
@@ -54,7 +54,7 @@ class SideProxy implements com.qsoftware.forgemod.IProxy {
     @Nullable
     private static ITextComponent getBetaWelcomeMessage(PlayerEntity p) {
         return Config.showBetaWelcomeMessage.get()
-                ? new StringTextComponent("Thanks for trying Silent's Mechanisms! This mod is early in development, expect bugs and changes. You can disable this message in the config.")
+                ? new StringTextComponent("Thanks for trying QForgeMod! This mod is early in development, expect bugs and changes. You can disable this message in the config.")
                 : null;
     }
 

@@ -1,9 +1,8 @@
 package com.qsoftware.forgemod.init;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.objects.blocks.GamePcBlock;
-import com.qsoftware.forgemod.objects.blocks.QuarryBlock;
 import com.qsoftware.forgemod.objects.blocks.base.*;
 import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
 import com.qsoftware.forgemod.objects.items.base.FaceableBlock;
@@ -28,7 +27,7 @@ import java.util.function.Supplier;
  */
 @SuppressWarnings("unused")
 public class BlockInit extends ObjectInit<Block> {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, QForgeUtils.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, QForgeMod.MOD_ID);
 
     // Doors
     public static final RegistryObject<FlowerBlock> BUTTERCUP = register("buttercup", () -> new FlowerBlock(Effects.ABSORPTION, 8, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));
@@ -61,7 +60,7 @@ public class BlockInit extends ObjectInit<Block> {
     public static final RegistryObject<PressurePlateBlock> EUCALYPTUS_PRESSURE_PLATE = register("eucalyptus_pressure_plate", () -> new BasePressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).sound(SoundType.WOOD)));
 
     // Tile entity
-    public static final RegistryObject<Block> QUARRY_BLOCK = register("quarry", () -> new QuarryBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.9f, 2.9f).sound(SoundType.STONE)));
+//    public static final RegistryObject<Block> QUARRY_BLOCK = register("quarry", QuarryBlock::new);
     public static final RegistryObject<Block> WOODEN_CRATE = register("wooden_crate", () -> new WoodenCrateBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.9f).sound(SoundType.WOOD)));
 
     // Ore
@@ -99,7 +98,7 @@ public class BlockInit extends ObjectInit<Block> {
     // TNT Blocks
 //    public static final RegistryObject<TNTBlock> TNT_5 = register(() -> new AdvancedTNTBlock("tnt_5", Block.Properties.create(Material.TNT).hardnessAndResistance(1.9f, 1.5f).sound(SoundType.PLANT)));
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, QForgeUtils.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, QForgeMod.MOD_ID);
     // Flowers
     public static final RegistryObject<Item> BUTTERCUP_ITEM = registerItem("buttercup", () -> new BlockItem(BlockInit.BUTTERCUP.get(), new Item.Properties().group(Groups.NATURE)));
 
@@ -131,7 +130,7 @@ public class BlockInit extends ObjectInit<Block> {
     public static final RegistryObject<Item> EUCALYPTUS_PRESSURE_PLATE_ITEM = registerItem("eucalyptus_pressure_plate", () -> new BlockItem(BlockInit.EUCALYPTUS_PRESSURE_PLATE.get(), new Item.Properties().group(Groups.SHAPES)));
 
     // Tile entity
-    public static final RegistryObject<Item> QUARRY_BLOCK_ITEM = registerItem("quarry", () -> new BlockItem(BlockInit.QUARRY_BLOCK.get(), new Item.Properties().group(Groups.MACHINES)));
+//    public static final RegistryObject<Item> QUARRY_BLOCK_ITEM = registerItem("quarry", () -> new BlockItem(BlockInit.QUARRY_BLOCK.get(), new Item.Properties().group(Groups.MACHINES)));
     public static final RegistryObject<Item> WOODEN_CRATE_ITEM = registerItem("wooden_crate", () -> new BlockItem(BlockInit.WOODEN_CRATE.get(), new Item.Properties().group(Groups.MACHINES)));
 
     // Solid Ore & material

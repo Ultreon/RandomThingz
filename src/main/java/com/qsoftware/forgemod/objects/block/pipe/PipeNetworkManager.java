@@ -6,7 +6,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-@Mod.EventBusSubscriber(modid = QForgeUtils.MOD_ID)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
 public final class PipeNetworkManager {
     private static final Collection<LazyOptional<PipeNetwork>> NETWORK_LIST = Collections.synchronizedList(new ArrayList<>());
 
@@ -43,7 +43,7 @@ public final class PipeNetworkManager {
         PipeNetwork network = PipeNetwork.buildNetwork(world, pos);
         LazyOptional<PipeNetwork> lazy = LazyOptional.of(() -> network);
         NETWORK_LIST.add(lazy);
-        QForgeUtils.LOGGER.debug("create network {}", network);
+        QForgeMod.LOGGER.debug("create network {}", network);
         return lazy;
     }
 
@@ -55,7 +55,7 @@ public final class PipeNetworkManager {
     }
 
     private static void invalidateNetwork(LazyOptional<PipeNetwork> network) {
-        QForgeUtils.LOGGER.debug("invalidateNetwork {}", network);
+        QForgeMod.LOGGER.debug("invalidateNetwork {}", network);
         NETWORK_LIST.removeIf(n -> n.isPresent() && n.equals(network));
         network.ifPresent(PipeNetwork::invalidate);
         network.invalidate();

@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.init;
 
+import com.qsoftware.forgemod.objects.block.quarry.QuarryTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -9,8 +10,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.silentchaos512.lib.block.IBlockProvider;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.silent.lib.block.IBlockProvider;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxTileEntity;
 import com.qsoftware.forgemod.objects.block.compressor.CompressorTileEntity;
 import com.qsoftware.forgemod.objects.block.dryingrack.DryingRackBlock;
@@ -42,6 +43,7 @@ public final class ModTileEntities {
     public static TileEntityType<MixerTileEntity> mixer;
     public static TileEntityType<PipeTileEntity> pipe;
     public static TileEntityType<PumpTileEntity> pump;
+    public static TileEntityType<QuarryTileEntity> quarry;
     public static TileEntityType<RefineryTileEntity> refinery;
     public static TileEntityType<SolidifierTileEntity> solidifier;
     public static TileEntityType<WireTileEntity> wire;
@@ -64,6 +66,7 @@ public final class ModTileEntities {
         infuser = register("infuser", InfuserTileEntity::new, ModBlocks.INFUSER);
         pipe = register("pipe", PipeTileEntity::new, ModBlocks.PIPE);
         pump = register("pump", PumpTileEntity::new, ModBlocks.PUMP);
+        quarry = register("quarry", QuarryTileEntity::new, ModBlocks.QUARRY);
         refinery = register("refinery", RefineryTileEntity::new, ModBlocks.REFINERY);
         solidifier = register("solidifier", SolidifierTileEntity::new, ModBlocks.SOLIDIFIER);
         wire = register("wire", WireTileEntity::new, ModBlocks.WIRE);
@@ -80,7 +83,7 @@ public final class ModTileEntities {
 
     private static <T extends TileEntity> TileEntityType<T> register(String name, TileEntityType<T> type) {
         if (type.getRegistryName() == null) {
-            type.setRegistryName(QForgeUtils.getId(name));
+            type.setRegistryName(QForgeMod.getId(name));
         }
         ForgeRegistries.TILE_ENTITIES.register(type);
         return type;

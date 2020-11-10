@@ -105,7 +105,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @Override
     public String getName() {
-        return "Silent's Mechanisms - Item Tags";
+        return "QForgeMod - Item Tags";
     }
 
     private static final Logger LOGGER = LogManager.getLogger();

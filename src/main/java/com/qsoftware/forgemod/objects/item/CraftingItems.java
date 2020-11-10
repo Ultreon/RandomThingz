@@ -6,9 +6,8 @@ import net.minecraft.item.Food;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
 import net.minecraft.util.IItemProvider;
-import net.silentchaos512.lib.registry.ItemRegistryObject;
+import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.util.TextUtils;
 
 import javax.annotation.Nullable;
 

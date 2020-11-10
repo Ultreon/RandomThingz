@@ -11,8 +11,8 @@ import net.minecraft.util.IIntArray;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.silentchaos512.lib.tile.LockableSidedInventoryTileEntity;
-import net.silentchaos512.lib.tile.SyncVariable;
+import com.qsoftware.silent.lib.tile.LockableSidedInventoryTileEntity;
+import com.qsoftware.silent.lib.tile.SyncVariable;
 import com.qsoftware.forgemod.capability.EnergyStorageImpl;
 import com.qsoftware.forgemod.util.EnergyUtils;
 

@@ -4,14 +4,14 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseScreen;
 import com.qsoftware.forgemod.objects.block.refinery.RefineryTileEntity;
 import com.qsoftware.forgemod.client.renderer.RenderUtils;
 import com.qsoftware.forgemod.util.TextUtil;
 
 public class PumpScreen extends AbstractMachineBaseScreen<PumpContainer> {
-    private static final ResourceLocation TEXTURE = QForgeUtils.getId("textures/gui/pump.png");
+    private static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/pump.png");
 
     public PumpScreen(PumpContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);

@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.client.renderer;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.model.HogModel;
 import com.qsoftware.forgemod.objects.entities.HogEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
  */
 @OnlyIn(Dist.CLIENT)
 public class HogRenderer extends MobRenderer<HogEntity, HogModel<HogEntity>> {
-    private static final ResourceLocation HOG_TEXTURE = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/hog/hog.png");
+    private static final ResourceLocation HOG_TEXTURE = new ResourceLocation(QForgeMod.MOD_ID, "textures/entity/hog/hog.png");
 
     public HogRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new HogModel<>(), 0.7F);

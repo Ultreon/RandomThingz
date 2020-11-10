@@ -4,7 +4,7 @@ import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.IIntArray;
 import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.inventory.MachineUpgradeSlot;
-import net.silentchaos512.utils.EnumUtils;
+import com.qsoftware.silent.utils.EnumUtils;
 
 public class AbstractMachineBaseContainer<T extends AbstractMachineBaseTileEntity> extends AbstractEnergyStorageContainer<T> {
     protected AbstractMachineBaseContainer(ContainerType<?> type, int id, T tileEntityIn, IIntArray fieldsIn) {

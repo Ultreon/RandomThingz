@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.model.FreeEndermanModel;
 import com.qsoftware.forgemod.objects.entities.IceEndermanEntity;
 import net.minecraft.block.BlockState;
@@ -24,9 +24,9 @@ import java.util.Random;
  */
 @OnlyIn(Dist.CLIENT)
 public class IceEndermanRenderer extends MobRenderer<IceEndermanEntity, FreeEndermanModel<IceEndermanEntity>> {
-    private static final ResourceLocation ENDERMAN_TEXTURES = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/enderman/ice.png");
+    private static final ResourceLocation ENDERMAN_TEXTURES = new ResourceLocation(QForgeMod.MOD_ID, "textures/entity/enderman/ice.png");
 
-    private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/enderman/ice_eyes.png"));
+    private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(QForgeMod.MOD_ID, "textures/entity/enderman/ice_eyes.png"));
 
     private final Random rnd = new Random();
 

@@ -18,7 +18,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.silentchaos512.lib.util.TimeUtils;
+import com.qsoftware.silent.lib.util.TimeUtils;
 import com.qsoftware.forgemod.api.IFluidContainer;
 import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
@@ -28,7 +28,7 @@ import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.InventoryUtils;
 import com.qsoftware.forgemod.util.MachineTier;
 import com.qsoftware.forgemod.util.TextUtil;
-import net.silentchaos512.utils.EnumUtils;
+import com.qsoftware.silent.utils.EnumUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

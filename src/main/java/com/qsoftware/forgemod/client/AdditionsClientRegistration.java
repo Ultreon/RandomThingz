@@ -1,13 +1,12 @@
 package com.qsoftware.forgemod.client;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.model.AdditionsModelCache;
 import com.qsoftware.forgemod.client.renderer.entity.RenderBabyCreeper;
 import com.qsoftware.forgemod.client.renderer.entity.RenderBabyEnderman;
 import com.qsoftware.forgemod.common.client.ClientRegistrationUtil;
 import com.qsoftware.forgemod.init.renew.ItemInitNew;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
-import com.qsoftware.forgemod.objects.items.AdditionsSpawnEggItem;
 import com.qsoftware.forgemod.objects.items.CustomSpawnEggItem;
 import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -22,7 +21,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(modid = QForgeUtils.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AdditionsClientRegistration {
 
     private AdditionsClientRegistration() {

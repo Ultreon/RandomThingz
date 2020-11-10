@@ -16,7 +16,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.capability.EnergyStorageItemImpl;
 import com.qsoftware.forgemod.util.TextUtil;
 
@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class EnergyStoringItem extends Item {
-    public static final ResourceLocation CHARGE = QForgeUtils.getId("charge");
+    public static final ResourceLocation CHARGE = QForgeMod.getId("charge");
 
     private final int maxEnergy;
     private final int maxReceive;

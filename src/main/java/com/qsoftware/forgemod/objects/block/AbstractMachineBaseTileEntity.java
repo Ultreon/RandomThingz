@@ -11,7 +11,7 @@ import net.minecraft.util.IItemProvider;
 import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.objects.item.MachineUpgradeItem;
 import com.qsoftware.forgemod.util.MachineTier;
-import net.silentchaos512.utils.EnumUtils;
+import com.qsoftware.silent.utils.EnumUtils;
 
 public abstract class AbstractMachineBaseTileEntity extends AbstractEnergyInventoryTileEntity {
     public static final int FIELDS_COUNT = 5;

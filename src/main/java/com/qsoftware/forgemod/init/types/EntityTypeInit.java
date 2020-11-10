@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.init.types;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ObjectInit;
 import com.qsoftware.forgemod.objects.entities.*;
 import com.qsoftware.forgemod.objects.entities.baby.*;
@@ -19,7 +19,7 @@ public class EntityTypeInit extends ObjectInit<EntityType<?>> {
     private EntityTypeInit() {
     }
 
-    public static final EntityTypeDeferredRegister ENTITY_TYPES = new EntityTypeDeferredRegister(QForgeUtils.MOD_ID);
+    public static final EntityTypeDeferredRegister ENTITY_TYPES = new EntityTypeDeferredRegister(QForgeMod.MOD_ID);
 
     public static final EntityTypeRegistryObject<EntityBabyCreeper> BABY_CREEPER = ENTITY_TYPES.register("baby_creeper", EntityType.Builder.create(EntityBabyCreeper::new, EntityClassification.MONSTER).size(0.6F, 1.7F));
     public static final EntityTypeRegistryObject<EntityBabyEnderman> BABY_ENDERMAN = ENTITY_TYPES.register("baby_enderman", EntityType.Builder.create(EntityBabyEnderman::new, EntityClassification.MONSTER).size(0.6F, 2.9F));

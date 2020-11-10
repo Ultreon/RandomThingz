@@ -20,8 +20,8 @@ loaderVersion="[34,)" #mandatory This is typically bumped every Minecraft versio
 
 [[mods]] #mandatory
 modId="qforgemod" #mandatory
-version="1.1-beta7" #mandatory
-displayName="QForgeUtils: Main Module" #mandatory
+version="1.1-beta9" #mandatory
+displayName="QForgeMod: Main Module" #mandatory
 #updateJSONURL="http://myurl.me/" #optional
 displayURL="https://quintenjungblut.wixsite.com/qplaysoftware/" #optional
 #logoFile="qforgemod.png" #optional
@@ -81,22 +81,22 @@ description='''
 '''
 
 [[mods]]
-modId="silentlib"
-version="${file.jarVersion}"
-displayName="Silent Lib"
+modId="qsilentlib"
+version="4.9"
+displayName="QForgeMod: Silent Library"
 updateJSONURL="https://raw.githubusercontent.com/SilentChaos512/SilentLib/1.14/update.json"
 description='''
     Shared library for Silent's mods
     '''
 
 # Silent Lib dependencies
-[[dependencies.silentlib]]
+[[dependencies.qsilentlib]]
 modId="forge"
 mandatory=true
 versionRange="[33,)"
 ordering="NONE"
 side="BOTH"
-[[dependencies.silentlib]]
+[[dependencies.qsilentlib]]
 modId="minecraft"
 mandatory=true
 versionRange="[1.16.2,)"
@@ -104,23 +104,10 @@ ordering="NONE"
 side="BOTH"
 
 # QForgeUtils dependencies.
-
 [[dependencies.qforgemod]]
-modId="forge"
+modId="qsilentlib"
 mandatory=true
-versionRange="[34,)"
-ordering="NONE"
-side="BOTH"
-[[dependencies.qforgemod]]
-modId="minecraft"
-mandatory=true
-versionRange="[1.16.3,1.17)"
-ordering="NONE"
-side="BOTH"
-[[dependencies.qforgemod]]
-modId="silentlib"
-mandatory=true
-versionRange="[4.9,)"
+versionRange="4.9"
 ordering="NONE"
 side="BOTH"
 [[dependencies.qforgemod]] #optional

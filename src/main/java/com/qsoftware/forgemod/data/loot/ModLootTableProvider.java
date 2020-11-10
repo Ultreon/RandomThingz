@@ -20,7 +20,7 @@ public class ModLootTableProvider extends LootTableProvider {
 
     @Override
     public String getName() {
-        return "Silent's Mechanisms - Loot Tables";
+        return "QForgeMod - Loot Tables";
     }
 
     @Override

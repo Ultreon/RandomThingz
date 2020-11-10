@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.network;
 import net.minecraftforge.fml.network.FMLHandshakeHandler;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 
 import java.util.Objects;
 
@@ -12,7 +12,7 @@ public final class Network {
 
     public static SimpleChannel channel;
     static {
-        channel = NetworkRegistry.ChannelBuilder.named(QForgeUtils.getId("network"))
+        channel = NetworkRegistry.ChannelBuilder.named(QForgeMod.getId("network"))
                 .clientAcceptedVersions(s -> Objects.equals(s, VERSION))
                 .serverAcceptedVersions(s -> Objects.equals(s, VERSION))
                 .networkProtocolVersion(() -> VERSION)

@@ -9,8 +9,8 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fluids.FluidStack;
-import net.silentchaos512.lib.inventory.SlotOutputOnly;
-import net.silentchaos512.lib.util.InventoryUtils;
+import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
 import com.qsoftware.forgemod.init.ModContainers;
 

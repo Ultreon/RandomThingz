@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.listener;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.BlockInit;
 import com.qsoftware.forgemod.init.ItemInit;
 import net.minecraftforge.event.entity.item.ItemEvent;
@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Mod;
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeUtils.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ItemListener {
     @SubscribeEvent
     public static void onItem(ItemEvent event) {

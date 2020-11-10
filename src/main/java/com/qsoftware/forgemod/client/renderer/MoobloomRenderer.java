@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.client.renderer;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.entities.MoobloomEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
  */
 @OnlyIn(Dist.CLIENT)
 public class MoobloomRenderer extends MobRenderer<MoobloomEntity, CowModel<MoobloomEntity>> {
-   private static final ResourceLocation MOOBLOOM_TEXTURES = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/cow/moobloom.png");
+   private static final ResourceLocation MOOBLOOM_TEXTURES = new ResourceLocation(QForgeMod.MOD_ID, "textures/entity/cow/moobloom.png");
 
    public MoobloomRenderer(EntityRendererManager renderManagerIn) {
       super(renderManagerIn, new CowModel<>(), 0.7F);

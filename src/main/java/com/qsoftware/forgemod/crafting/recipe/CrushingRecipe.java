@@ -21,7 +21,7 @@ import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
 import com.qsoftware.forgemod.init.ModRecipes;
 import com.qsoftware.forgemod.objects.item.MachineUpgrades;
 import com.qsoftware.forgemod.util.Constants;
-import net.silentchaos512.utils.MathUtils;
+import com.qsoftware.silent.utils.MathUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;

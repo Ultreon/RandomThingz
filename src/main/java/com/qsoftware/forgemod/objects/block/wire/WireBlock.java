@@ -19,7 +19,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.IEnergyStorage;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.api.ConnectionType;
 import com.qsoftware.forgemod.api.IWrenchable;
 import com.qsoftware.forgemod.util.EnergyUtils;
@@ -71,7 +71,7 @@ public class WireBlock extends SixWayBlock implements IWrenchable {
         World world = context.getWorld();
         BlockState state = world.getBlockState(pos);
         Vector3d relative = context.getHitVec().subtract(pos.getX(), pos.getY(), pos.getZ());
-        QForgeUtils.LOGGER.debug("onWrench: {}", relative);
+        QForgeMod.LOGGER.debug("onWrench: {}", relative);
 
         Direction side = getClickedConnection(relative);
         if (side != null) {

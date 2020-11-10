@@ -6,7 +6,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 
 public class ModTags {
     public static final class Blocks {
@@ -48,6 +48,6 @@ public class ModTags {
     }
 
     private static ResourceLocation modId(String path) {
-        return new ResourceLocation(QForgeUtils.MOD_ID, path);
+        return new ResourceLocation(QForgeMod.MOD_ID, path);
     }
 }

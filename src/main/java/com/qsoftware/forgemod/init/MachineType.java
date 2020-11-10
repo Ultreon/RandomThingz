@@ -9,7 +9,7 @@ import com.qsoftware.forgemod.util.MachineTier;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.tileentity.TileEntityType;
-import net.silentchaos512.lib.util.Lazy;
+import com.qsoftware.silent.lib.util.Lazy;
 
 import java.util.Objects;
 import java.util.function.Supplier;

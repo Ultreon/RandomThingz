@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.init.renew;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ObjectInit;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.objects.items.CustomSpawnEggItem;
@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 
 @SuppressWarnings("unused")
 public class ItemInitNew extends ObjectInit<Item> {
-    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeUtils.MOD_ID);
+    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.MOD_ID);
 
     public static final ItemRegistryObject<CustomSpawnEggItem<?>> DUCK_SPAWN_EGG = registerSpawnEgg(EntityTypeInit.DUCK, 0x4680e, 0xe4b50f);
     public static final ItemRegistryObject<CustomSpawnEggItem<?>> HOG_SPAWN_EGG = registerSpawnEgg(EntityTypeInit.HOG, 0x541500, 0xa6673d);

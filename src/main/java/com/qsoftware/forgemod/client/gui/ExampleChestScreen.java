@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.container.CrateContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class ExampleChestScreen extends ContainerScreen<CrateContainer> {
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(QForgeUtils.MOD_ID, "textures/gui/wooden_crate.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wooden_crate.png");
 
     @SuppressWarnings("unused")
     private final Button BUTTON = new Button(20, 128, 20, 20, new StringTextComponent("TestButton"), this::onClick);

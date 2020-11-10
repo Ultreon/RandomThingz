@@ -6,10 +6,10 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
-import net.silentchaos512.lib.block.IBlockProvider;
+import com.qsoftware.silent.lib.block.IBlockProvider;
 import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.config.OreConfig;
-import net.silentchaos512.utils.Lazy;
+import com.qsoftware.silent.utils.Lazy;
 
 import java.util.Locale;
 import java.util.Optional;

@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.objects.item;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.IItemProvider;
-import net.silentchaos512.lib.registry.ItemRegistryObject;
+import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 import com.qsoftware.forgemod.api.IMachineUpgrade;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.util.Constants;

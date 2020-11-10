@@ -10,8 +10,8 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import net.silentchaos512.lib.util.NameUtils;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.silent.lib.util.NameUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ModRecipes;
 
 import javax.annotation.Nullable;
@@ -82,7 +82,7 @@ public final class CrushingRecipeBuilder {
     public void build(Consumer<IFinishedRecipe> consumer) {
         ResourceLocation resultId = NameUtils.fromItem(results.keySet().iterator().next());
         ResourceLocation id = new ResourceLocation(
-                "minecraft".equals(resultId.getNamespace()) ? QForgeUtils.MOD_ID : resultId.getNamespace(),
+                "minecraft".equals(resultId.getNamespace()) ? QForgeMod.MOD_ID : resultId.getNamespace(),
                 "crushing/" + resultId.getPath());
         build(consumer, id);
     }

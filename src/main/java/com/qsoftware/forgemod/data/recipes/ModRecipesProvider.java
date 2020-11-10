@@ -10,9 +10,9 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.Tags;
-import net.silentchaos512.lib.data.ExtendedShapedRecipeBuilder;
-import net.silentchaos512.lib.data.ExtendedShapelessRecipeBuilder;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.silent.lib.data.ExtendedShapedRecipeBuilder;
+import com.qsoftware.silent.lib.data.ExtendedShapelessRecipeBuilder;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.forgemod.init.Metals;
 import com.qsoftware.forgemod.init.ModBlocks;
@@ -38,7 +38,7 @@ public class ModRecipesProvider extends RecipeProvider {
 
     @Override
     public String getName() {
-        return "Silent's Mechanisms - Recipes";
+        return "QForgeMod - Recipes";
     }
 
     @Override
@@ -65,12 +65,12 @@ public class ModRecipesProvider extends RecipeProvider {
                         .patternLine("###")
                         .patternLine("###")
                         .key('#', metal.getNuggetTag().get())
-                        .build(consumer, QForgeUtils.getId("metals/" + metal.getName() + "_ingot_from_nugget"));
+                        .build(consumer, QForgeMod.getId("metals/" + metal.getName() + "_ingot_from_nugget"));
             }
             if (metal.getNugget().isPresent() && metal.getIngotTag().isPresent()) {
                 ExtendedShapelessRecipeBuilder.vanillaBuilder(metal.getNugget().get(), 9)
                         .addIngredient(metal.getIngotTag().get())
-                        .build(consumer, QForgeUtils.getId("metals/" + metal.getName() + "_nugget"));
+                        .build(consumer, QForgeMod.getId("metals/" + metal.getName() + "_nugget"));
             }
             if (metal.getStorageBlock().isPresent() && metal.getIngotTag().isPresent()) {
                 ExtendedShapedRecipeBuilder.vanillaBuilder(metal.getStorageBlock().get())
@@ -78,12 +78,12 @@ public class ModRecipesProvider extends RecipeProvider {
                         .patternLine("###")
                         .patternLine("###")
                         .key('#', metal.getIngotTag().get())
-                        .build(consumer, QForgeUtils.getId("metals/" + metal.getName() + "_block"));
+                        .build(consumer, QForgeMod.getId("metals/" + metal.getName() + "_block"));
             }
             if (metal.getIngot().isPresent() && metal.getStorageBlockItemTag().isPresent()) {
                 ExtendedShapelessRecipeBuilder.vanillaBuilder(metal.getIngot().get(), 9)
                         .addIngredient(metal.getStorageBlockItemTag().get())
-                        .build(consumer, QForgeUtils.getId("metals/" + metal.getName() + "_ingot_from_block"));
+                        .build(consumer, QForgeMod.getId("metals/" + metal.getName() + "_ingot_from_block"));
             }
         }
     }
@@ -166,7 +166,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .key('/', Metals.REDSTONE_ALLOY.getIngotTag().get())
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .addCriterion("has_item", hasItem(ModBlocks.ALLOY_MACHINE_FRAME))
-                .build(consumer, QForgeUtils.getId("alloy_smelter_from_basic"));
+                .build(consumer, QForgeMod.getId("alloy_smelter_from_basic"));
 
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.BASIC_CRUSHER)
                 .patternLine("###")
@@ -202,7 +202,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .key('D', Tags.Items.GEMS_DIAMOND)
                 .addCriterion("has_item", hasItem(ModBlocks.ALLOY_MACHINE_FRAME))
-                .build(consumer, QForgeUtils.getId("crusher_from_basic"));
+                .build(consumer, QForgeMod.getId("crusher_from_basic"));
 
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.COMPRESSOR)
                 .patternLine("#D#")
@@ -463,11 +463,11 @@ public class ModRecipesProvider extends RecipeProvider {
 
         ExtendedShapelessRecipeBuilder.vanillaBuilder(ModItems.EMPTY_CANISTER)
                 .addIngredient(ModItems.CANISTER)
-                .build(consumer, QForgeUtils.getId("canister_clear"));
+                .build(consumer, QForgeMod.getId("canister_clear"));
 
         ExtendedShapelessRecipeBuilder.vanillaBuilder(Items.LEATHER)
                 .addIngredient(CraftingItems.ZOMBIE_LEATHER, 4)
-                .build(consumer, QForgeUtils.getId("leather"));
+                .build(consumer, QForgeMod.getId("leather"));
     }
 
     private void registerSmelting(Consumer<IFinishedRecipe> consumer) {
@@ -492,10 +492,10 @@ public class ModRecipesProvider extends RecipeProvider {
     private void smeltingAndBlasting(Consumer<IFinishedRecipe> consumer, String name, Ingredient ingredient, IItemProvider result) {
         CookingRecipeBuilder.smeltingRecipe(ingredient, result, 1f, 200)
                 .addCriterion("has_item", hasItem(Blocks.FURNACE))
-                .build(consumer, QForgeUtils.getId("smelting/" + name));
+                .build(consumer, QForgeMod.getId("smelting/" + name));
         CookingRecipeBuilder.blastingRecipe(ingredient, result, 1f, 100)
                 .addCriterion("has_item", hasItem(Blocks.FURNACE))
-                .build(consumer, QForgeUtils.getId("blasting/" + name));
+                .build(consumer, QForgeMod.getId("blasting/" + name));
     }
 
     private static void registerAlloySmelting(Consumer<IFinishedRecipe> consumer) {
@@ -581,7 +581,7 @@ public class ModRecipesProvider extends RecipeProvider {
             }
             if (metal.getIngotTag().isPresent() && metal.getDust().isPresent()) {
                 crushingIngot(metal.getIngotTag().get(), metal.getDust().get())
-                        .build(consumer, QForgeUtils.getId("crushing/" + metal.getName() + "_dust_from_ingot"));
+                        .build(consumer, QForgeMod.getId("crushing/" + metal.getName() + "_dust_from_ingot"));
             }
         }
 
@@ -602,7 +602,7 @@ public class ModRecipesProvider extends RecipeProvider {
         crushingOreBonus(Tags.Items.ORES_EMERALD, Items.EMERALD).build(consumer);
         crushingOre(Tags.Items.ORES_GOLD, Metals.GOLD.getChunks().get(), Blocks.COBBLESTONE).build(consumer);
         crushingOre(Blocks.NETHER_GOLD_ORE, Metals.GOLD.getChunks().get(), Blocks.NETHERRACK)
-                .build(consumer, QForgeUtils.getId("crushing/gold_chunks_nether"));
+                .build(consumer, QForgeMod.getId("crushing/gold_chunks_nether"));
         crushingOre(Tags.Items.ORES_IRON, Metals.IRON.getChunks().get(), Blocks.COBBLESTONE).build(consumer);
 
         CrushingRecipeBuilder.builder(Blocks.ANCIENT_DEBRIS, 2 * CRUSHING_ORE_TIME)
@@ -637,13 +637,13 @@ public class ModRecipesProvider extends RecipeProvider {
                 Ingredient.fromItems(Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_PILLAR, Blocks.CHISELED_QUARTZ_BLOCK, Blocks.SMOOTH_QUARTZ),
                 200)
                 .result(Items.QUARTZ, 4)
-                .build(consumer, QForgeUtils.getId("crushing/quartz_from_blocks"));
+                .build(consumer, QForgeMod.getId("crushing/quartz_from_blocks"));
         CrushingRecipeBuilder.builder(Ingredient.fromItems(Blocks.RED_SANDSTONE, Blocks.CHISELED_RED_SANDSTONE), 200)
                 .result(Blocks.RED_SAND, 4)
-                .build(consumer, QForgeUtils.getId("crushing/red_sand_from_sandstone"));
+                .build(consumer, QForgeMod.getId("crushing/red_sand_from_sandstone"));
         CrushingRecipeBuilder.builder(Ingredient.fromItems(Blocks.SANDSTONE, Blocks.CHISELED_SANDSTONE), 200)
                 .result(Blocks.SAND, 4)
-                .build(consumer, QForgeUtils.getId("crushing/sand_from_sandstone"));
+                .build(consumer, QForgeMod.getId("crushing/sand_from_sandstone"));
         CrushingRecipeBuilder.builder(Blocks.GRAVEL, 200)
                 .result(Blocks.SAND, 1)
                 .result(Items.FLINT, 1, 0.1f)

@@ -3,11 +3,11 @@ package com.qsoftware.forgemod.objects.block.electricfurnace;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.block.AbstractMachineScreen;
 
 public class ElectricFurnaceScreen extends AbstractMachineScreen<ElectricFurnaceContainer> {
-    public static final ResourceLocation TEXTURE = QForgeUtils.getId("textures/gui/electric_furnace.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/electric_furnace.png");
 
     public ElectricFurnaceScreen(ElectricFurnaceContainer containerIn, PlayerInventory playerInventory, ITextComponent titleIn) {
         super(containerIn, playerInventory, titleIn);

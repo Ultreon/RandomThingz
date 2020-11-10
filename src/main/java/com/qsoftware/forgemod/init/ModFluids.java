@@ -7,7 +7,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 
 import java.util.function.Supplier;
 
@@ -43,7 +43,7 @@ public final class ModFluids {
     }
 
     private static <T extends Fluid> T register(String name, T fluid) {
-        ResourceLocation id = QForgeUtils.getId(name);
+        ResourceLocation id = QForgeMod.getId(name);
         fluid.setRegistryName(id);
         ForgeRegistries.FLUIDS.register(fluid);
         return fluid;
@@ -51,12 +51,12 @@ public final class ModFluids {
 
     private static ForgeFlowingFluid.Properties properties(String name, Supplier<Fluid> still, Supplier<Fluid> flowing) {
         String tex = "block/" + name;
-        return new ForgeFlowingFluid.Properties(still, flowing, FluidAttributes.builder(QForgeUtils.getId(tex + "_still"), QForgeUtils.getId(tex + "_flowing")));
+        return new ForgeFlowingFluid.Properties(still, flowing, FluidAttributes.builder(QForgeMod.getId(tex + "_still"), QForgeMod.getId(tex + "_flowing")));
     }
 
     private static ForgeFlowingFluid.Properties propertiesGas(String name, Supplier<Fluid> still) {
         String tex = "block/" + name;
         //noinspection ReturnOfNull -- null-returning Supplier for flowing fluid
-        return new ForgeFlowingFluid.Properties(still, () -> null, FluidAttributes.builder(QForgeUtils.getId(tex), QForgeUtils.getId(tex)).gaseous());
+        return new ForgeFlowingFluid.Properties(still, () -> null, FluidAttributes.builder(QForgeMod.getId(tex), QForgeMod.getId(tex)).gaseous());
     }
 }

@@ -10,7 +10,7 @@ import net.minecraft.util.IIntArray;
 import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
 import com.qsoftware.forgemod.util.MachineTier;
-import net.silentchaos512.utils.EnumUtils;
+import com.qsoftware.silent.utils.EnumUtils;
 
 public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTileEntity {
     public static final int FIELDS_COUNT = 7;

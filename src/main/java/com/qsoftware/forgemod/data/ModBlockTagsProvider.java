@@ -54,7 +54,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     public String getName() {
-        return "Silent's Mechanisms - Block Tags";
+        return "QForgeMod - Block Tags";
     }
 
     private static final Logger LOGGER = LogManager.getLogger();

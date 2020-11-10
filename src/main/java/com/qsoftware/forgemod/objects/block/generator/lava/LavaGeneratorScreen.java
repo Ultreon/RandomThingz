@@ -4,13 +4,13 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseScreen;
 import com.qsoftware.forgemod.client.renderer.RenderUtils;
 import com.qsoftware.forgemod.util.TextUtil;
 
 public class LavaGeneratorScreen extends AbstractMachineBaseScreen<LavaGeneratorContainer> {
-    public static final ResourceLocation TEXTURE = QForgeUtils.getId("textures/gui/fluid_generator.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/fluid_generator.png");
 
     public LavaGeneratorScreen(LavaGeneratorContainer container, PlayerInventory playerInventory, ITextComponent titleIn) {
         super(container, playerInventory, titleIn);

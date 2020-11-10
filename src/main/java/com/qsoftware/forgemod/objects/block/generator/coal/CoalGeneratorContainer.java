@@ -6,7 +6,7 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
-import net.silentchaos512.lib.util.InventoryUtils;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
 import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
 import com.qsoftware.forgemod.init.ModContainers;

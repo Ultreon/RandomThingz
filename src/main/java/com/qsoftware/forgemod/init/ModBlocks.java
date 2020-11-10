@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.objects.block.quarry.QuarryBlock;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.FlowingFluidBlock;
@@ -22,8 +23,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.silentchaos512.lib.registry.BlockRegistryObject;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.silent.lib.registry.BlockRegistryObject;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBlock;
 import com.qsoftware.forgemod.objects.block.MachineFrameBlock;
 import com.qsoftware.forgemod.objects.block.alloysmelter.AlloySmelterBlock;
@@ -82,6 +83,7 @@ public final class ModBlocks {
     public static final BlockRegistryObject<SolidifierBlock> SOLIDIFIER = register("solidifier", SolidifierBlock::new);
     public static final BlockRegistryObject<InfuserBlock> INFUSER = register("infuser", InfuserBlock::new);
     public static final BlockRegistryObject<PumpBlock> PUMP = register("pump", PumpBlock::new);
+    public static final BlockRegistryObject<QuarryBlock> QUARRY = register("quarry", QuarryBlock::new);
     public static final BlockRegistryObject<CoalGeneratorBlock> COAL_GENERATOR = register("coal_generator", CoalGeneratorBlock::new);
     public static final BlockRegistryObject<LavaGeneratorBlock> LAVA_GENERATOR = register("lava_generator", LavaGeneratorBlock::new);
     public static final BlockRegistryObject<DieselGeneratorBlock> DIESEL_GENERATOR = register("diesel_generator", DieselGeneratorBlock::new);
@@ -132,7 +134,7 @@ public final class ModBlocks {
     @Nullable
     public static ITextComponent checkForMissingLootTables(PlayerEntity player) {
         // Checks for missing block loot tables, but only in dev
-        if (!(player.world instanceof ServerWorld) || !QForgeUtils.isDevBuild()) return null;
+        if (!(player.world instanceof ServerWorld) || !QForgeMod.isDevBuild()) return null;
 
         LootTableManager lootTableManager = ((ServerWorld) player.world).getServer().getLootTableManager();
         Collection<String> missing = new ArrayList<>();
@@ -140,8 +142,8 @@ public final class ModBlocks {
         for (Block block : ForgeRegistries.BLOCKS.getValues()) {
             ResourceLocation lootTable = block.getLootTable();
             // The AirBlock check filters out removed blocks
-            if (lootTable.getNamespace().equals(QForgeUtils.MOD_ID) && !(block instanceof AirBlock) && !lootTableManager.getLootTableKeys().contains(lootTable)) {
-                QForgeUtils.LOGGER.error("Missing block loot table '{}' for {}", lootTable, block.getRegistryName());
+            if (lootTable.getNamespace().equals(QForgeMod.MOD_ID) && !(block instanceof AirBlock) && !lootTableManager.getLootTableKeys().contains(lootTable)) {
+                QForgeMod.LOGGER.error("Missing block loot table '{}' for {}", lootTable, block.getRegistryName());
                 missing.add(lootTable.toString());
             }
         }

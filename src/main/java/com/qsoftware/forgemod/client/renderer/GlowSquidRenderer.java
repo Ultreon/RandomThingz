@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.entities.GlowSquidEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
  */
 @OnlyIn(Dist.CLIENT)
 public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, SquidModel<GlowSquidEntity>> {
-   private static final ResourceLocation GLOW_SQUID_TEXTURES = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/squid/glow_squid.png");
+   private static final ResourceLocation GLOW_SQUID_TEXTURES = new ResourceLocation(QForgeMod.MOD_ID, "textures/entity/squid/glow_squid.png");
 
    public GlowSquidRenderer(EntityRendererManager renderManagerIn) {
       super(renderManagerIn, new SquidModel<>(), 0.7F);

@@ -18,7 +18,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
-import net.silentchaos512.lib.util.PlayerUtils;
+import com.qsoftware.silent.lib.util.PlayerUtils;
 import com.qsoftware.forgemod.crafting.recipe.DryingRecipe;
 import com.qsoftware.forgemod.init.ModRecipes;
 import com.qsoftware.forgemod.init.ModTileEntities;

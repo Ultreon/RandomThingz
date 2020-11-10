@@ -15,7 +15,7 @@ import com.qsoftware.forgemod.objects.item.MachineUpgrades;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.InventoryUtils;
 import com.qsoftware.forgemod.util.MachineTier;
-import net.silentchaos512.utils.EnumUtils;
+import com.qsoftware.silent.utils.EnumUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collection;

@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.client.renderer;
 
-import com.qsoftware.forgemod.QForgeUtils;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.model.HogModel;
 import com.qsoftware.forgemod.objects.entities.WarthogEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
  */
 @OnlyIn(Dist.CLIENT)
 public class WarthogRenderer extends MobRenderer<WarthogEntity, HogModel<WarthogEntity>> {
-    private static final ResourceLocation WARTHOG_TEXTURE = new ResourceLocation(QForgeUtils.MOD_ID, "textures/entity/hog/warthog.png");
+    private static final ResourceLocation WARTHOG_TEXTURE = new ResourceLocation(QForgeMod.MOD_ID, "textures/entity/hog/warthog.png");
 
     public WarthogRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new HogModel<>(), 0.7F);
