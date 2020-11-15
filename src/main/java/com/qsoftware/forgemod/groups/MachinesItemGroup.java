@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.BlockInit;
+import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.ModBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;

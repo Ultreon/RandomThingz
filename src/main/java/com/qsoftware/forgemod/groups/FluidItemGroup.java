@@ -1,7 +1,8 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.init.ModFluids;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +21,6 @@ public class FluidItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ModFluids.OIL.getFilledBucket());
+        return new ItemStack(Fluids.WATER.getFilledBucket());
     }
 }

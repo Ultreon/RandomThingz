@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +19,6 @@ public class FoodItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.CHEESE_BURGER.get());
+        return new ItemStack(ModItems.CHEESE_BURGER.get());
     }
 }

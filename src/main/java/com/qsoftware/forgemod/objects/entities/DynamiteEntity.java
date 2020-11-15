@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.entities;
 
-import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -43,7 +43,7 @@ public class DynamiteEntity extends ProjectileItemEntity {
     }
 
     protected @NotNull Item getDefaultItem() {
-        return ItemInit.LEGENDARY_ENDER_PEARL.get();
+        return ModItems.LEGENDARY_ENDER_PEARL.get();
     }
 
     /**

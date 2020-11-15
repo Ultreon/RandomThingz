@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.BlockInit;
-import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.ModBlocks;
+import com.qsoftware.forgemod.init.ModItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
+@Deprecated
 public class LogsItemGroup extends ItemGroup {
     public static final LogsItemGroup instance = new LogsItemGroup(ItemGroup.GROUPS.length, "qforgemod_logs");
 

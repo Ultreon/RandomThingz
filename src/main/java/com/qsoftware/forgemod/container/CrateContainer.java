@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.container;
 
-import com.qsoftware.forgemod.init.BlockInit;
+import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.types.ContainerTypesInit;
 import com.qsoftware.forgemod.objects.tileentity.CrateTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -99,7 +99,7 @@ public class CrateContainer extends Container {
 
     @Override
     public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, BlockInit.WOODEN_CRATE.get());
+        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.WOODEN_CRATE.get());
     }
 
     private static CrateTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.init.BlockInit;
+import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.objects.entities.MoobloomEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -31,7 +31,8 @@ public class MoobloomFlowerLayer<T extends MoobloomEntity> extends LayerRenderer
    public void render(@NotNull MatrixStack matrixStackIn, @NotNull IRenderTypeBuffer bufferIn, int packedLightIn, @SuppressWarnings("SpellCheckingInspection") T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
       if (!entitylivingbaseIn.isChild() && !entitylivingbaseIn.isInvisible()) {
          BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRendererDispatcher();
-         BlockState blockstate = BlockInit.BUTTERCUP.get().getDefaultState();
+         BlockState blockstate = ModBlocks.BUTTERCUP.get().getDefaultState();
+//         BlockState blockstate = Blocks.TORCH.getDefaultState();
          int i = LivingRenderer.getPackedOverlay(entitylivingbaseIn, 0.0F);
          matrixStackIn.push();
          matrixStackIn.translate(0.2F, -0.35F, 0.5D);

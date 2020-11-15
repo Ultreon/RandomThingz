@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.BlockInit;
-import com.qsoftware.forgemod.init.ItemInit;
-import com.qsoftware.forgemod.init.renew.ItemInitNew;
+import com.qsoftware.forgemod.init.ModBlocks;
+import com.qsoftware.forgemod.init.ModItems;
+import com.qsoftware.forgemod.init.renew.ModItemsNew;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -22,6 +22,6 @@ public class SpawnEggsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInitNew.BABY_CREEPER_SPAWN_EGG);
+        return new ItemStack(ModItemsNew.BABY_CREEPER_SPAWN_EGG);
     }
 }

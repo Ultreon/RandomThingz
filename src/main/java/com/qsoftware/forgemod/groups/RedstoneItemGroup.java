@@ -19,6 +19,6 @@ public class RedstoneItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(Blocks.PISTON, 16);
+        return new ItemStack(Blocks.PISTON);
     }
 }

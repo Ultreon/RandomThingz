@@ -10,7 +10,9 @@ import org.jetbrains.annotations.NotNull;
  * Will be in the future merged with {@link NatureItemGroup}.
  *
  * @author Qboi123
+ * @deprecated Use {@link Groups#NATURE} instead, on need of class: Use {@link NatureItemGroup}.
  */
+@Deprecated
 public class LeavesItemGroup extends ItemGroup {
     public static final LeavesItemGroup instance = new LeavesItemGroup(ItemGroup.GROUPS.length, "qforgemod_leaves");
 

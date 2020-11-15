@@ -1,0 +1,12 @@
+{
+  "type": "qforgemod:crushing",
+  "process_time": 250,
+  "ingredient": {
+    "item": "qforgemod:tungsten_ingot"
+  },
+  "results": [
+    {
+      "item": "qforgemod:tungsten_dust"
+    }
+  ]
+}

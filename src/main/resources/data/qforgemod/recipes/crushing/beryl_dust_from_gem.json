@@ -1,0 +1,12 @@
+{
+  "type": "qforgemod:crushing",
+  "process_time": 400,
+  "ingredient": {
+    "item": "qforgemod:beryl"
+  },
+  "results": [
+    {
+      "item": "qforgemod:beryl_dust"
+    }
+  ]
+}

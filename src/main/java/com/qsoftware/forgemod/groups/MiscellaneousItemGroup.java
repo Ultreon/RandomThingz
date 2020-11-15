@@ -1,9 +1,11 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.ModItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.NonNullList;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -20,6 +22,13 @@ public class MiscellaneousItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.LEGENDARY_ENDER_PEARL.get());
+        return new ItemStack(ModItems.LEGENDARY_ENDER_PEARL.get());
+    }
+
+    @Override
+    public void fill(NonNullList<ItemStack> items) {
+        super.fill(items);
+        items.add(new ItemStack(Items.ENDER_PEARL));
+        items.add(new ItemStack(Items.ENDER_EYE));
     }
 }

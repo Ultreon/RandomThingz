@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
+@Deprecated
 public class ArmorsItemGroup extends ItemGroup {
     public static final ArmorsItemGroup instance = new ArmorsItemGroup(ItemGroup.GROUPS.length, "qforgemod_armors");
 

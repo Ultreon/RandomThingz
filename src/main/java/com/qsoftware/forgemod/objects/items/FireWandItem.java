@@ -43,9 +43,9 @@ public class FireWandItem extends WandItem {
             Vector3d vector3d = player.getLookVec();
             l.setMotion(vector3d);
             l.explosionPower = (int)(4 * charge * strength);
-            l.accelerationX = vector3d.x * (4 * charge * strength);
-            l.accelerationY = vector3d.y * (4 * charge * strength);
-            l.accelerationZ = vector3d.z * (4 * charge * strength);
+            l.accelerationX = vector3d.x * (3 * charge * strength);
+            l.accelerationY = vector3d.y * (3 * charge * strength);
+            l.accelerationZ = vector3d.z * (3 * charge * strength);
             l.setInvulnerable(true);
             l.setShooter(player);
 

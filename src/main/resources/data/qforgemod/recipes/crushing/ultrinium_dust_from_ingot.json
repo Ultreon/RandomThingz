@@ -1,0 +1,12 @@
+{
+  "type": "qforgemod:crushing",
+  "process_time": 250,
+  "ingredient": {
+    "item": "qforgemod:ultrinium_ingot"
+  },
+  "results": [
+    {
+      "item": "qforgemod:ultrinium_dust"
+    }
+  ]
+}

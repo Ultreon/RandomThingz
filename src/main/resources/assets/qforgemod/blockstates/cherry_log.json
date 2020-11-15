@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "qforgemod:block/cherry_log" },
+    "axis=z": { "model": "qforgemod:block/cherry_log", "x": 90 },
+    "axis=x": { "model": "qforgemod:block/cherry_log", "x": 90, "y": 90 }
+  }
+}

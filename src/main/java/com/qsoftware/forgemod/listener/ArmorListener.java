@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.listener;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.objects.entities.GlowSquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -44,10 +44,10 @@ public class ArmorListener {
 
             // Check Armor
             if (!armor.isEmpty()) {
-                if (armor.get(0).getItem().getRegistryName() == ItemInit.INFINITY_BOOTS.getItem().getRegistryName()) {
-                    if (armor.get(1).getItem().getRegistryName() == ItemInit.INFINITY_LEGGINGS.get().getRegistryName()) {
-                        if (armor.get(2).getItem().getRegistryName() == ItemInit.INFINITY_CHESTPLATE.get().getRegistryName()) {
-                            if (armor.get(3).getItem().getRegistryName() == ItemInit.INFINITY_HELMET.get().getRegistryName()) {
+                if (armor.get(0).getItem().getRegistryName() == ModItems.INFINITY_BOOTS.getItem().getRegistryName()) {
+                    if (armor.get(1).getItem().getRegistryName() == ModItems.INFINITY_LEGGINGS.get().getRegistryName()) {
+                        if (armor.get(2).getItem().getRegistryName() == ModItems.INFINITY_CHESTPLATE.get().getRegistryName()) {
+                            if (armor.get(3).getItem().getRegistryName() == ModItems.INFINITY_HELMET.get().getRegistryName()) {
                                 // Set amount to zero, and cancel it.
                                 event.setAmount(0);
                                 event.setCanceled(true);
@@ -70,10 +70,10 @@ public class ArmorListener {
 
             // Check Armor
             if (!armor.isEmpty()) {
-                if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS.get())) {
-                    if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS.get())) {
-                        if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE.get())) {
-                            if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET.get())) {
+                if (armor.get(0).getItem().equals(ModItems.INFINITY_BOOTS.get())) {
+                    if (armor.get(1).getItem().equals(ModItems.INFINITY_LEGGINGS.get())) {
+                        if (armor.get(2).getItem().equals(ModItems.INFINITY_CHESTPLATE.get())) {
+                            if (armor.get(3).getItem().equals(ModItems.INFINITY_HELMET.get())) {
 
                                 // Set amount to zero, and cancel it.
                                 event.setCanceled(true);
@@ -96,10 +96,10 @@ public class ArmorListener {
 
             // Check Armor
             if (!armor.isEmpty()) {
-                if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS.get())) {
-                    if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS.get())) {
-                        if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE.get())) {
-                            if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET.get())) {
+                if (armor.get(0).getItem().equals(ModItems.INFINITY_BOOTS.get())) {
+                    if (armor.get(1).getItem().equals(ModItems.INFINITY_LEGGINGS.get())) {
+                        if (armor.get(2).getItem().equals(ModItems.INFINITY_CHESTPLATE.get())) {
+                            if (armor.get(3).getItem().equals(ModItems.INFINITY_HELMET.get())) {
                                 // Set amount to zero, and cancel it.
                                 event.setAmount(0);
                                 event.setCanceled(true);

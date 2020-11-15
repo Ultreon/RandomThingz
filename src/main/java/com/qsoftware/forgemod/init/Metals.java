@@ -263,19 +263,19 @@ public enum Metals {
         }
 
         Builder chunks() {
-            this.chunks = () -> new Item(new Item.Properties().group(Groups.INGOTS_OR_DUSTS));
+            this.chunks = () -> new Item(new Item.Properties().group(Groups.METAL_CRAFTABLES));
             this.chunksTag = itemTag(QForgeMod.getId("chunks/" + name));
             return this;
         }
 
         Builder dust() {
-            this.dust = () -> new Item(new Item.Properties().group(Groups.INGOTS_OR_DUSTS));
+            this.dust = () -> new Item(new Item.Properties().group(Groups.METAL_CRAFTABLES));
             this.dustTag = itemTag("dusts/" + name);
             return this;
         }
 
         Builder ingot() {
-            this.ingot = () -> new Item(new Item.Properties().group(Groups.INGOTS_OR_DUSTS));
+            this.ingot = () -> new Item(new Item.Properties().group(Groups.METAL_CRAFTABLES));
             this.ingotTag = itemTag("ingots/" + name);
             return this;
         }
@@ -286,7 +286,7 @@ public enum Metals {
         }
 
         Builder nugget() {
-            this.nugget = () -> new Item(new Item.Properties().group(Groups.INGOTS_OR_DUSTS));
+            this.nugget = () -> new Item(new Item.Properties().group(Groups.METAL_CRAFTABLES));
             this.nuggetTag = itemTag("nuggets/" + name);
             return this;
         }

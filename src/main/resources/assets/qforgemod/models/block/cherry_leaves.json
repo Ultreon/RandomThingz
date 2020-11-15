@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "qforgemod:blocks/cherry_leaves"
+  }
+}

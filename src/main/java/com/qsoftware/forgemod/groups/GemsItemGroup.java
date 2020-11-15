@@ -1,9 +1,10 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.ModItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -20,6 +21,6 @@ public class GemsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.RUBY.get());
+        return new ItemStack(Items.DIAMOND);
     }
 }

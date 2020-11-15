@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.BlockInit;
-import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.ModBlocks;
+import com.qsoftware.forgemod.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +20,6 @@ public class DungeonsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(ItemInit.DUNGEONS.get());
+        return new ItemStack(ModItems.DUNGEONS.get());
     }
 }

@@ -32,6 +32,7 @@ import javax.annotation.Nullable;
  * @author Qboi123
  */
 @SuppressWarnings("deprecation")
+@Deprecated
 public class WoodenCrateBlock extends FaceableBlock {
     public WoodenCrateBlock(Block.Properties properties) {
         super(properties);

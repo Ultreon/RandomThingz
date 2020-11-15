@@ -1,0 +1,12 @@
+{
+  "type": "qforgemod:crushing",
+  "process_time": 400,
+  "ingredient": {
+    "item": "qforgemod:saphire"
+  },
+  "results": [
+    {
+      "item": "qforgemod:saphire_dust"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "qforgemod:crushing",
+  "process_time": 400,
+  "ingredient": {
+    "item": "minecraft:diamond"
+  },
+  "results": [
+    {
+      "item": "qforgemod:diamond_dust"
+    }
+  ]
+}

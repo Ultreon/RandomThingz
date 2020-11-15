@@ -1,16 +1,16 @@
 package com.qsoftware.forgemod;
 
-import com.qsoftware.forgemod.init.BlockInit;
-import com.qsoftware.forgemod.init.ItemInit;
-import com.qsoftware.forgemod.init.renew.BlockInitNew;
-import com.qsoftware.forgemod.init.renew.ItemInitNew;
+import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.forgemod.init.renew.ModBlocksNew;
+import com.qsoftware.forgemod.init.renew.ModItemsNew;
 import com.qsoftware.forgemod.init.types.ContainerTypesInit;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
+import com.qsoftware.forgemod.common.IHasRenderType;
 import com.qsoftware.forgemod.objects.entities.*;
 import com.qsoftware.forgemod.objects.entities.baby.*;
-import com.qsoftware.forgemod.world.gen.OreGen;
-import net.minecraft.client.renderer.RenderType;
+import com.qsoftware.forgemod.world.gen.ModOreGen;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
@@ -127,12 +127,12 @@ public class QForgeMod {
 //        modEventBus.addGenericListener(EntityType.class, this::registerEntities);
 //        modEventBus.addGenericListener(ContainerType.class, this::registerContainers);
 
-        BlockInit.BLOCKS.register(modEventBus);
-        BlockInit.ITEMS.register(modEventBus);
-        BlockInitNew.BLOCKS.register(modEventBus);
-        BlockInitNew.ITEMS.register(modEventBus);
-        ItemInit.ITEMS.register(modEventBus);
-        ItemInitNew.ITEMS.register(modEventBus);
+//        ModBlocks.BLOCKS.register(modEventBus);
+//        ModBlocks.ITEMS.register(modEventBus);
+        ModBlocksNew.BLOCKS.register(modEventBus);
+        ModBlocksNew.ITEMS.register(modEventBus);
+//        ModItems.ITEMS.register(modEventBus);
+        ModItemsNew.ITEMS.register(modEventBus);
         EntityTypeInit.ENTITY_TYPES.register(modEventBus);
         ContainerTypesInit.CONTAINER_TYPES.register(modEventBus);
         TileEntityTypesInit.TILE_ENTITY_TYPES.register(modEventBus);
@@ -152,9 +152,9 @@ public class QForgeMod {
         });
 
         // Register init classes.
-//        BlockInitNew.BLOCKS.register(modEventBus);
-//        ItemInitNew.BLOCK_ITEMS.register(modEventBus);
-//        ItemInitNew.ITEMS.register(modEventBus);
+//        ModBlocksNew.BLOCKS.register(modEventBus);
+//        ModItemsNew.BLOCK_ITEMS.register(modEventBus);
+//        ModItemsNew.ITEMS.register(modEventBus);
 //        TileEntityTypesInit.TILE_ENTITY_TYPES.register(modEventBus);
 //        ContainerTypesInit.CONTAINER_TYPES.register(modEventBus);
 //        BiomeInit.BIOMES.register(modEventBus);
@@ -224,11 +224,18 @@ public class QForgeMod {
 //        PROXY.onSetupClient();
 
         // do something that can only be done on the client
-        RenderTypeLookup.setRenderLayer(BlockInit.LAB_DOOR.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.SHOPPING_DOOR.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.IRON_GLASS_DOOR.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.IRON_BARRIER_DOOR.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(BlockInit.BUTTERCUP.get(), RenderType.getTranslucent());
+        for (Block block : Registration.getBlocks()) {
+            if (block instanceof IHasRenderType) {
+                IHasRenderType hasRenderType = (IHasRenderType) block;
+                RenderTypeLookup.setRenderLayer(block, hasRenderType.getRenderType());
+            }
+        }
+
+//        RenderTypeLookup.setRenderLayer(ModBlocks.LAB_DOOR.get(), RenderType.getTranslucent());
+//        RenderTypeLookup.setRenderLayer(ModBlocks.SHOPPING_DOOR.get(), RenderType.getTranslucent());
+//        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_GLASS_DOOR.get(), RenderType.getTranslucent());
+//        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_BARRIER_DOOR.get(), RenderType.getTranslucent());
+//        RenderTypeLookup.setRenderLayer(ModBlocks.BUTTERCUP.get(), RenderType.getTranslucent());
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
@@ -269,7 +276,7 @@ public class QForgeMod {
 
     private void loadComplete(FMLLoadCompleteEvent event) {
         LOGGER.info("LoadCompleteEvent: " + event);
-        OreGen.generateOres();
+        ModOreGen.generateOres();
     }
 
     public static ResourceLocation getId(String path) {

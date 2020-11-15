@@ -1,0 +1,6 @@
+{
+    "parent": "block/button",
+    "textures": {
+        "texture": "qforgemod:blocks/cherry_planks"
+    }
+}

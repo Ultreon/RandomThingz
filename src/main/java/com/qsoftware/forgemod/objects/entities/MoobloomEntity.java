@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.entities;
 
-import com.qsoftware.forgemod.init.BlockInit;
+import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -168,7 +168,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
             this.world.addEntity(cowentity);
 
             for(int i = 0; i < 5; ++i) {
-                this.world.addEntity(new ItemEntity(this.world, this.getPosX(), this.getPosYHeight(1.0D), this.getPosZ(), new ItemStack(BlockInit.BUTTERCUP.get())));
+                this.world.addEntity(new ItemEntity(this.world, this.getPosX(), this.getPosYHeight(1.0D), this.getPosZ(), new ItemStack(ModBlocks.BUTTERCUP.get())));
             }
         }
 
@@ -249,7 +249,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
 
             java.util.List<ItemStack> items = new java.util.ArrayList<>();
             for (int i = 0; i < 5; ++i) {
-                items.add(new ItemStack(BlockInit.BUTTERCUP.get()));
+                items.add(new ItemStack(ModBlocks.BUTTERCUP.get()));
             }
 
             return items;

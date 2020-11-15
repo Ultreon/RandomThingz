@@ -1,8 +1,10 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.BlockInit;
+import com.qsoftware.forgemod.init.ModBlocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -19,6 +21,23 @@ public class OresItemGroup extends ItemGroup {
 
     @Override
     public @NotNull ItemStack createIcon() {
-        return new ItemStack(BlockInit.RUBY_ORE.get());
+        return new ItemStack(Blocks.DIAMOND_ORE);
+    }
+
+    @Override
+    public void fill(NonNullList<ItemStack> items) {
+        super.fill(items);
+        items.add(new ItemStack(Blocks.COAL_ORE));
+        items.add(new ItemStack(Blocks.IRON_ORE));
+        items.add(new ItemStack(Blocks.GOLD_ORE));
+        items.add(new ItemStack(Blocks.REDSTONE_ORE));
+        items.add(new ItemStack(Blocks.EMERALD_ORE));
+        items.add(new ItemStack(Blocks.DIAMOND_ORE));
+        items.add(new ItemStack(Blocks.COAL_BLOCK));
+        items.add(new ItemStack(Blocks.IRON_BLOCK));
+        items.add(new ItemStack(Blocks.GOLD_BLOCK));
+        items.add(new ItemStack(Blocks.REDSTONE_BLOCK));
+        items.add(new ItemStack(Blocks.EMERALD_BLOCK));
+        items.add(new ItemStack(Blocks.DIAMOND_BLOCK));
     }
 }

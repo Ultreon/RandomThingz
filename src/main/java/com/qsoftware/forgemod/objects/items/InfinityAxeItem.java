@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items;
 
 import com.qsoftware.forgemod.groups.Groups;
-import com.qsoftware.forgemod.init.ItemInit;
+import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.common.damagesource.DamageSourceInfinitySword;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -52,7 +52,7 @@ public class InfinityAxeItem extends AxeItem {
 
             @Override
             public @NotNull Ingredient getRepairMaterial() {
-                return Ingredient.fromItems(ItemInit.INFINITY_INGOT.get());
+                return Ingredient.fromItems(ModItems.INFINITY_INGOT.get());
             }
         }, 1, -0.0f, new Properties().group(Groups.OVERPOWERED));
     }
@@ -80,7 +80,7 @@ public class InfinityAxeItem extends AxeItem {
                 victim.attackEntityFrom(new DamageSourceInfinitySword(player).setDamageBypassesArmor(), 4.0F);
                 return true;
             }
-            if (pvp.getHeldItem(Hand.MAIN_HAND) != null && pvp.getHeldItem(Hand.MAIN_HAND).getItem() == ItemInit.INFINITY_SWORD.get() && pvp.isHandActive()) {
+            if (pvp.getHeldItem(Hand.MAIN_HAND) != null && pvp.getHeldItem(Hand.MAIN_HAND).getItem() == ModItems.INFINITY_SWORD.get() && pvp.isHandActive()) {
                 return true;
             }
         }
@@ -97,10 +97,10 @@ public class InfinityAxeItem extends AxeItem {
 //
 //            // Check Armor
 //            if (!armor.isEmpty()) {
-//                if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS.get())) {
-//                    if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS.get())) {
-//                        if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE.get())) {
-//                            if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET.get())) {
+//                if (armor.get(0).getItem().equals(ModItems.INFINITY_BOOTS.get())) {
+//                    if (armor.get(1).getItem().equals(ModItems.INFINITY_LEGGINGS.get())) {
+//                        if (armor.get(2).getItem().equals(ModItems.INFINITY_CHESTPLATE.get())) {
+//                            if (armor.get(3).getItem().equals(ModItems.INFINITY_HELMET.get())) {
 //                                return false;
 //                            }
 //                        }
@@ -119,10 +119,10 @@ public class InfinityAxeItem extends AxeItem {
 
         // Check Armor
         if (!armor.isEmpty()) {
-            if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS.get())) {
-                if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS.get())) {
-                    if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE.get())) {
-                        if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET.get())) {
+            if (armor.get(0).getItem().equals(ModItems.INFINITY_BOOTS.get())) {
+                if (armor.get(1).getItem().equals(ModItems.INFINITY_LEGGINGS.get())) {
+                    if (armor.get(2).getItem().equals(ModItems.INFINITY_CHESTPLATE.get())) {
+                        if (armor.get(3).getItem().equals(ModItems.INFINITY_HELMET.get())) {
                             return true;
                         }
                     }
@@ -158,10 +158,10 @@ public class InfinityAxeItem extends AxeItem {
 //
 //                // Check Armor
 //                if (!armor.isEmpty()) {
-//                    if (armor.get(0).getItem().equals(ItemInit.INFINITY_BOOTS.get())) {
-//                        if (armor.get(1).getItem().equals(ItemInit.INFINITY_LEGGINGS.get())) {
-//                            if (armor.get(2).getItem().equals(ItemInit.INFINITY_CHESTPLATE.get())) {
-//                                if (armor.get(3).getItem().equals(ItemInit.INFINITY_HELMET.get())) {
+//                    if (armor.get(0).getItem().equals(ModItems.INFINITY_BOOTS.get())) {
+//                        if (armor.get(1).getItem().equals(ModItems.INFINITY_LEGGINGS.get())) {
+//                            if (armor.get(2).getItem().equals(ModItems.INFINITY_CHESTPLATE.get())) {
+//                                if (armor.get(3).getItem().equals(ModItems.INFINITY_HELMET.get())) {
 //                                    return true;
 //                                }
 //                            }
