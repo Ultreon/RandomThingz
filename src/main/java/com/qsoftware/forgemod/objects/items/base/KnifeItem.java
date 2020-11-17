@@ -9,6 +9,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -19,6 +22,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -66,7 +70,12 @@ public class KnifeItem extends Item {
             Sliceable sliceable = (Sliceable) item;
             ItemStack newStack = sliceable.onKnifeSlice(stack1.copy());
 
+            double x = entity.getPosX();
+            double y = entity.getPosY();
+            double z = entity.getPosZ();
+
             entity.setItem(newStack);
+            entity.getItem().setAttachedEntity(entity);
 
             stack.damageItem(1, playerIn, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
             return ActionResult.resultSuccess(stack);
