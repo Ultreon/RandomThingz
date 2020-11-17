@@ -19,7 +19,7 @@
     "advancements.qforgemod.root.title": "QForgeMod",
     "advancements.qforgemod.stone_machine_frame.description": "Make the bare bones of all basic machines.",
     "advancements.qforgemod.stone_machine_frame.title": "Stone Machine Frame",
-	
+
     "block.qforgemod.acacia_drying_rack": "Akazien-Trockenregal",
     "block.qforgemod.alloy_machine_frame": "Legierter-Maschinenrahmen",
     "block.qforgemod.alloy_smelter": "Legierungsschmelze",
@@ -74,7 +74,7 @@
     "block.qforgemod.wire": "Kabel",
     "block.qforgemod.zinc_block": "Zinkblock",
     "block.qforgemod.zinc_ore": "Zinkerz",
-	
+
     "container.qforgemod.alloy_smelter": "Legierungsschmelze",
     "container.qforgemod.battery_box": "Batteriebox",
     "container.qforgemod.coal_generator": "Kohle-Generator",
@@ -86,13 +86,13 @@
     "container.qforgemod.mixer": "Mixer",
     "container.qforgemod.pump": "Pumpe",
     "container.qforgemod.refinery": "Raffinerie",
-	
+
     "container.qforgemod.solidifier": "Verfestiger",
-    "fluid.qforgemod.diesel": "Diesel",
-    "fluid.qforgemod.ethane": "Ethan",
-    "fluid.qforgemod.oil": "Öl",
-    "fluid.qforgemod.polyethylene": "Polyethylen",
-	
+    "block.qforgemod.diesel": "Diesel",
+    "block.qforgemod.ethane": "Ethan",
+    "block.qforgemod.oil": "Öl",
+    "block.qforgemod.polyethylene": "Polyethylen",
+
     "item.qforgemod.aluminum_dust": "Aluminiumstaub",
     "item.qforgemod.aluminum_ingot": "Aluminiumbarren",
     "item.qforgemod.aluminum_nugget": "Aluminiumnugget",
@@ -206,9 +206,9 @@
     "item.qforgemod.redstone_alloy_nugget": "Redstone-Legierung-Nugget",
     "item.qforgemod.refined_iron_ingot": "Raffinierter Eisenbarren",
     "item.qforgemod.zombie_leather": "Zombie Leder",
-	
+
     "itemGroup.qforgemod": "QForgeMod",
-	
+
     "jei.qforgemod.category.alloy_smelting": "Legierungsschmelze",
     "jei.qforgemod.category.compressing": "Komprimieren",
     "jei.qforgemod.category.crushing": "zerschmettern",
@@ -216,7 +216,7 @@
     "jei.qforgemod.category.mixing": "Mischen",
     "jei.qforgemod.category.refining": "Verfeinerung",
     "jei.qforgemod.category.solidifying": "Verfestigen",
-	
+
     "misc.qforgemod.empty": "Leer",
     "misc.qforgemod.energy": "%s FE",
     "misc.qforgemod.energyPerTick": "%s FE/t",

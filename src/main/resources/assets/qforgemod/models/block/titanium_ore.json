@@ -1,5 +1,5 @@
 {
-  "parent": "qforgemod:block/base_metalic_ore",
+  "parent": "block/cube_all",
   "textures": {
     "particle": "qforgemod:blocks/titanium_ore",
     "all": "qforgemod:blocks/titanium_ore"

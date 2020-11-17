@@ -1,7 +1,27 @@
 package com.qsoftware.forgemod.objects.items.base;
 
+import com.qsoftware.forgemod.common.Sliceable;
+import com.qsoftware.forgemod.common.TextColors;
+import com.qsoftware.forgemod.util.Targeter;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.util.math.RayTraceContext;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Knife item class.
@@ -26,48 +46,33 @@ public class KnifeItem extends Item {
         return new ItemStack(copy.getItem(), copy.getCount(), copy.serializeNBT());
     }
 
-//    @Override
-//    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-//        RayTraceResult rayTrace = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.NONE);
-//
-//        RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.ANY);
-//        double posX = raytraceresult.getHitVec().x;
-//        double posY = Math.floor(raytraceresult.getHitVec().y);
-//        double posZ = raytraceresult.getHitVec().z;
-//
-//        int range = 5;
-//        Vec3d v = playerIn.getLookVec().normalize();
-//        ItemEntity entity = null;
-//        for (int i = 1; i < range; i++) {
-//            AxisAlignedBB aabb = AxisAlignedBB.toImmutable(new MutableBoundingBox((int) (playerIn.getPosX() + v.x * i), (int) (playerIn.getPosY() + v.y * i), (int) (playerIn.getPosZ() + v.z * i), (int) (playerIn.getPosX() + v.x * i), (int) (playerIn.getPosY() + v.y * i), (int) (playerIn.getPosZ() + v.z * i)));
-//            List<ItemEntity> list = worldIn.getEntitiesWithinAABB(ItemEntity.class, aabb);
-//            if (!list.isEmpty()) {
-//                entity = list.get(0);
-//                if (entity != null) {
-//                    break;
-//                }
-//            }
-//        }
-//
-//        ItemStack stack = playerIn.getHeldItem(handIn);
-//
-//        playerIn.sendMessage(new StringTextComponent(ColorCodes.LIGHT_RED + "Entity: " + ColorCodes.WHITE + Objects.toString(entity, "null")));
-//
-//        if (entity != null) {
-//            ItemStack stack1 = entity.getItem();
-//            Item item = stack1.getItem();
-//            if (item instanceof Sliceable) {
-//                Sliceable sliceable = (Sliceable) item;
-//                ItemStack newStack = sliceable.onKnifeSlice(stack1.copy());
-//
-//                entity.setItem(newStack);
-//
-//                stack.damageItem(1, playerIn, playerEntity -> {
-//                    playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-//                });
-//            }
-//        }
-//
-//        return super.onItemRightClick(worldIn, playerIn, handIn);
-//    }
+    @Override
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, PlayerEntity playerIn, @NotNull Hand handIn) {
+        Entity entity1 = Targeter.getTarget(playerIn);
+
+        ItemStack stack = playerIn.getHeldItem(handIn);
+
+        if (!(entity1 instanceof ItemEntity)) {
+            return ActionResult.resultPass(stack);
+        }
+
+        ItemEntity entity = (ItemEntity) entity1;
+        playerIn.sendMessage(new StringTextComponent(TextColors.LIGHT_RED + "Entity: " + TextColors.WHITE + Objects.toString(entity, "null")), UUID.randomUUID());
+
+        ItemStack stack1 = entity.getItem();
+        Item item = stack1.getItem();
+
+        if (item instanceof Sliceable) {
+            Sliceable sliceable = (Sliceable) item;
+            ItemStack newStack = sliceable.onKnifeSlice(stack1.copy());
+
+            entity.setItem(newStack);
+
+            stack.damageItem(1, playerIn, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+            return ActionResult.resultSuccess(stack);
+        } else {
+            stack.damageItem(2, playerIn, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+            return ActionResult.resultFail(stack);
+        }
+    }
 }

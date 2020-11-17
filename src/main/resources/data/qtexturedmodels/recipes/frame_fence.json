@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#i#",
+    "#i#"
+  ],
+  "key": {
+    "#": {
+      "item": "qtexturedmodels:frameblock"
+    },
+	"i": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qtexturedmodels:frame_fence",
+    "count": 4
+  }
+}

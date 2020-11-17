@@ -1,0 +1,41 @@
+{
+  "block.qtexturedmodels.frameblock": "Blockrahmen",
+  "block.qtexturedmodels.frame_slab": "Stufenrahmen",
+  "block.qtexturedmodels.falling_frameblock": "Blockrahmen (von Gravitation beeinflusst - WIP)",
+  "block.qtexturedmodels.frame_button": "Knopfrahmen (Holz)",
+  "block.qtexturedmodels.frame_stairs": "Treppenrahmen",
+  "block.qtexturedmodels.frame_pressure_plate": "Druckplattenrahmen (Holz)",
+  "block.qtexturedmodels.frame_door": "Türrahmen",
+  "block.qtexturedmodels.frame_trapdoor": "Falltürrahmen",
+  "block.qtexturedmodels.frame_fence": "Zaunrahmen",
+  "block.qtexturedmodels.frame_bed": "Bettrahmen",
+  "block.qtexturedmodels.frame_wall": "Mauerrahmen",
+  "block.qtexturedmodels.frame_ladder": "Leiterrahmen",
+  "block.qtexturedmodels.frame_chest": "Truhenrahmen",
+  "block.qtexturedmodels.frame_fence_gate": "Zauntorrahmen",
+  "block.qtexturedmodels.frame_slope": "Rahmenschräge (WIP)",
+  "block.qtexturedmodels.frame_edged_slope": "Eckige Rahmenschräge (WIP)",
+
+  "block.qtexturedmodels.illusion_block": "Illusionsblock",
+  "block.qtexturedmodels.illusion_slab": "Illusionsstufe",
+  "block.qtexturedmodels.illusion_button": "Illusionsknopf",
+  "block.qtexturedmodels.illusion_stairs": "Illusionstreppen",
+  "block.qtexturedmodels.illusion_pressure_plate": "Illusionsdruckplatten",
+  "block.qtexturedmodels.illusion_door": "Illusionstür",
+  "block.qtexturedmodels.illusion_trapdoor": "Illusionsfalltür",
+  "block.qtexturedmodels.illusion_fence": "Illusionszaun",
+  "block.qtexturedmodels.illusion_bed": "Illusionsbett",
+  "block.qtexturedmodels.illusion_wall": "Illusionsmauer",
+  "block.qtexturedmodels.illusion_ladder": "Illusionsleiter",
+  "block.qtexturedmodels.illusion_chest": "Illusionstruhe",
+  "block.qtexturedmodels.illusion_fence_gate": "Illusionszauntor",
+
+  "container.frame_chest": "Truhe",
+
+  "item.qtexturedmodels.hammer": "Hammer",
+  "item.qtexturedmodels.texture_wrench": "Texturwerkzeug",
+  "item.qtexturedmodels.chisel": "Meißel",
+  "item.qtexturedmodels.paintbrush": "Pinsel",
+
+  "itemGroup.qtexturedmodels": "BlockCarpentry"
+}

@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.objects.item;
 
+import com.qsoftware.forgemod.common.TextColors;
 import com.qsoftware.forgemod.groups.Groups;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IBucketPickupHandler;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemUseContext;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -40,6 +42,7 @@ public class HandPumpItem extends EnergyStoringItem {
 
         if (energy.getEnergyStored() < ENERGY_PER_OPERATION) {
             // TODO: Notify player?
+            player.sendStatusMessage(new StringTextComponent(TextColors.RED + "No energy left!"), true);
             return ActionResultType.FAIL;
         }
 

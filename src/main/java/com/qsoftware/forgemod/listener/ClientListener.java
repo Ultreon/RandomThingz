@@ -18,7 +18,7 @@ public class ClientListener {
 	public static final ClientListener INSTANCE = new ClientListener();
 
 	@SubscribeEvent
-	public void handleFOVUpdateEvent(FOVUpdateEvent event) {
+	public static void handleFOVUpdateEvent(FOVUpdateEvent event) {
 		ItemStack stack = event.getEntity().getActiveItemStack();
 
 		if (stack.getItem() instanceof IFOVUpdateItem) {

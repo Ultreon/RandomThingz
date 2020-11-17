@@ -32,6 +32,9 @@ public class QVersion {
                 case "beta":
                     type = TYPE.BETA;
                     break;
+                case "pre":
+                    type = TYPE.PRE;
+                    break;
                 case "release":
                     type = TYPE.RELEASE;
                     break;
@@ -48,6 +51,7 @@ public class QVersion {
     public enum TYPE {
         ALPHA,
         BETA,
+        PRE,
         RELEASE
     }
 
@@ -68,6 +72,46 @@ public class QVersion {
 
     public TYPE getType() {
         return type;
+    }
+
+    public boolean isStable() {
+        return type == TYPE.RELEASE;
+    }
+
+    public String toString() {
+        String sb = String.valueOf(version) +
+                '.' +
+                subversion +
+                '-' +
+                type.name().toLowerCase() +
+                release;
+        return sb;
+    }
+
+    public String toLocalizedString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(version);
+        sb.append('.');
+        sb.append(subversion);
+        sb.append(' ');
+
+        switch (type) {
+            case ALPHA:
+                sb.append("Alpha");
+            case BETA:
+                sb.append("Beta");
+            case PRE:
+                sb.append("Pre Release");
+            case RELEASE:
+                sb.append("Release");
+            default:
+                sb.append("UNKNOWN");
+        }
+
+        sb.append(' ');
+        sb.append(release);
+
+        return sb.toString();
     }
 
     public int getRelease() {

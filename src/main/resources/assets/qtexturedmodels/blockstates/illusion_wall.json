@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "contains_block=true": { "model": "qtexturedmodels:block/illusion_wall" },
+    "contains_block=false": { "model": "qtexturedmodels:block/illusion_wall_empty" }
+  }
+}

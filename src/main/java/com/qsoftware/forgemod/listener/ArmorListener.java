@@ -24,15 +24,6 @@ import java.util.Random;
  */
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ArmorListener {
-    @SubscribeEvent
-    public void randomTick(TickEvent.WorldTickEvent event) {
-        if (new Random().nextInt(60) == 0) {
-            GlowSquidEntity squidEntity = new GlowSquidEntity(EntityTypeInit.GLOW_SQUID.get(), event.world);
-            squidEntity.setPosition(0, 255, 0);
-            event.world.addEntity(squidEntity);
-        }
-    }
-
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onPlayerDamage(LivingDamageEvent event) {
         if (event.getEntityLiving() instanceof PlayerEntity) {

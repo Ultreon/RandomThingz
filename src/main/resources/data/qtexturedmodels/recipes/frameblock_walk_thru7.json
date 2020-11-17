@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qtexturedmodels:frame_fence"
+    }
+  ],
+  "result": {
+    "item": "qtexturedmodels:frameblock_walk_thru"
+  }
+}

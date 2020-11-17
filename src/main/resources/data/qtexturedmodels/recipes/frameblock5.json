@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qtexturedmodels:frame_pressure_plate"
+    }
+  ],
+  "result": {
+    "item": "qtexturedmodels:frameblock",
+    "count": 2
+  }
+}

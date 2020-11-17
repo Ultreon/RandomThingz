@@ -1,10 +1,10 @@
 package com.qsoftware.forgemod.keybinds;
 
-import net.java.games.input.Keyboard;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.forgespi.Environment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Keybinding list class.
@@ -12,17 +12,19 @@ import net.minecraftforge.forgespi.Environment;
  * @author Qboi123
  */
 public class KeyBindingList {
-    public static KeyBinding[] modKeyBindings;
+    public static final List<KeyBinding> KEY_BINDINGS = new ArrayList<>();
+//    public static KeyBinding ADMIN_PANEL = new KeyBinding("key.qforgemod.admin_panel", 80, "key.categories.misc");
+    public static KeyBinding DEBUG_SCREEN = add(new KeyBinding("key.qforgemod.debug_screen", 293, "key.categories.qforgemod"));
 
     public static void register() {
-        modKeyBindings = new KeyBinding[1]; //Create array
-
-        // Assign all key binds to this array
-        modKeyBindings[0] = new KeyBinding("key.qforgemod.admin_panel", 80, "key.categories.misc");
-
         // Actually register all keys
-        for (int i = 0; i < modKeyBindings.length; ++i) {
-            ClientRegistry.registerKeyBinding(modKeyBindings[i]);
+        for (KeyBinding keyBinding : KEY_BINDINGS) {
+            ClientRegistry.registerKeyBinding(keyBinding);
         }
+    }
+
+    private static KeyBinding add(KeyBinding keyBinding) {
+        KEY_BINDINGS.add(keyBinding);
+        return keyBinding;
     }
 }

@@ -7,10 +7,13 @@ import com.qsoftware.forgemod.init.types.ContainerTypesInit;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
 import com.qsoftware.forgemod.common.IHasRenderType;
+import com.qsoftware.forgemod.keybinds.KeyBindingList;
+import com.qsoftware.forgemod.listener.GameOverlayListener;
 import com.qsoftware.forgemod.objects.entities.*;
 import com.qsoftware.forgemod.objects.entities.baby.*;
 import com.qsoftware.forgemod.world.gen.ModOreGen;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
@@ -51,7 +54,7 @@ public class QForgeMod {
     @SuppressWarnings("unused")
     public static final String MOD_VERSION = "1.1-beta9";
     @SuppressWarnings("unused")
-    public static final QVersion MOD_LOCALIZED_VERSION = new QVersion("1.1-beta9");
+    public static final QVersion VERSION = new QVersion(MOD_VERSION);
 
     // Other
 //    @SuppressWarnings({"unused", "RedundantSuppression"})
@@ -229,6 +232,11 @@ public class QForgeMod {
                 IHasRenderType hasRenderType = (IHasRenderType) block;
                 RenderTypeLookup.setRenderLayer(block, hasRenderType.getRenderType());
             }
+        }
+
+        KeyBindingList.register();
+        if (Minecraft.getInstance().getVersion().equals("MOD_DEV")) {
+            GameOverlayListener.DEBUG_PAGE = GameOverlayListener.PAGE.PLAYER_1;
         }
 
 //        RenderTypeLookup.setRenderLayer(ModBlocks.LAB_DOOR.get(), RenderType.getTranslucent());

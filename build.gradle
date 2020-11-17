@@ -167,7 +167,6 @@ dependencies {
     if (project.hasProperty("refined_storage_version")) {
         compile fg.deobf("com.raoulvdberge:refinedstorage:${project.refined_storage_version}")
     }
-
 //    implementation fileTree(dir: 'qaddons/build/libs', include: ['*.jar'])
     
     // You may put jars on which you depend on in ./libs or you may define them like so..

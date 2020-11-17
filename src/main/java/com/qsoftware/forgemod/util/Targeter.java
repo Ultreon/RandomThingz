@@ -3,14 +3,13 @@ package com.qsoftware.forgemod.util;
 
 import com.google.common.annotations.Beta;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,54 +28,39 @@ public final class Targeter {
     }
 
     @Nullable
-    public static <T extends Entity> Entity getTarget() {
-        Minecraft mc = Minecraft.getInstance();
-        float partialTicks = 1.0f;
+    public static <T extends Entity> Entity getTarget(PlayerEntity player) {
+        float f = player.rotationPitch;
+        float f1 = player.rotationYaw;
 
-        Entity entity = mc.getRenderViewEntity();
-        if (entity != null) {
-            if (mc.world != null) {
-                mc.getProfiler().startSection("pick");
-                mc.pointedEntity = null;
-                double reachDistance = Objects.requireNonNull(mc.playerController).getBlockReachDistance();
+        Vector3d vec3d = player.getEyePosition(1.0F);
 
-                mc.objectMouseOver = entity.pick(reachDistance, partialTicks, false);
-                Vector3d vector3d = entity.getEyePosition(partialTicks);
-                boolean flag = false;
-                int i = 3;
-                double reach = reachDistance;
-                if (mc.playerController.extendedReach()) {
-                    reach = 6.0D;
-                    reachDistance = reach;
-                } else {
-                    if (reachDistance > 3.0D) {
-                        flag = true;
-                    }
-                }
+        float f2 = MathHelper.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+        float f3 = MathHelper.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+        float f4 = -MathHelper.cos(-f * ((float) Math.PI / 180F));
+        float f5 = MathHelper.sin(-f * ((float) Math.PI / 180F));
 
-                reach = reach * reach;
-                if (mc.objectMouseOver != null) {
-                    reach = mc.objectMouseOver.getHitVec().squareDistanceTo(vector3d);
-                }
+        float f6 = f3 * f4;
+        float f7 = f2 * f4;
 
-                Vector3d entityLook = entity.getLook(1.0F);
-                Vector3d vector3d2 = vector3d.add(entityLook.x * reachDistance, entityLook.y * reachDistance, entityLook.z * reachDistance);
-                float f = 1.0F;
-                AxisAlignedBB expandedBounding = entity.getBoundingBox().expand(entityLook.scale(reachDistance)).grow(1.0D, 1.0D, 1.0D);
-                EntityRayTraceResult entityraytraceresult = ProjectileHelper.rayTraceEntities(entity, vector3d, vector3d2, expandedBounding, (p_215312_0_) -> !p_215312_0_.isSpectator() && p_215312_0_.canBeCollidedWith(), reach);
-                if (entityraytraceresult != null) {
-                    Entity entity1 = entityraytraceresult.getEntity();
-                    Vector3d vector3d3 = entityraytraceresult.getHitVec();
-                    double distance = vector3d.squareDistanceTo(vector3d3);
-                    if (flag && distance > 9.0D) {
-                        mc.objectMouseOver = BlockRayTraceResult.createMiss(vector3d3, Direction.getFacingFromVector(entityLook.x, entityLook.y, entityLook.z), new BlockPos(vector3d3));
-                    } else if (distance < reach || mc.objectMouseOver == null) {
-                        mc.objectMouseOver = entityraytraceresult;
-                        return entity1;
-                    }
-                }
+        double d0 = 5; // Todo: test value, if it will lag, then lower the value. ( Possible not needed ;) )
 
-                mc.getProfiler().endSection();
+        Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
+
+        if (Minecraft.getInstance().world != null) {
+            RayTraceResult raytraceresult = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+            if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
+                vec3d1 = raytraceresult.getHitVec();
+            }
+
+            RayTraceResult raytraceresult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().world, player, vec3d, vec3d1, player.getBoundingBox().grow(5.0D), entity -> !entity.equals(player));
+            if (raytraceresult1 != null) {
+                raytraceresult = raytraceresult1;
+            }
+            if (raytraceresult.getType() == RayTraceResult.Type.ENTITY) {
+                @SuppressWarnings("ConstantConditions") EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) raytraceresult;
+                return entityRayTraceResult.getEntity();
+            } else {
+                return null;
             }
         }
         return null;

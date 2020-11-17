@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "O",
+	"I",
+	"#"
+  ],
+  "key": {
+    "#": {
+      "item": "qtexturedmodels:frameblock"
+    },
+	"I": {
+      "item": "minecraft:stick"
+    },
+	"O": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "qtexturedmodels:texture_wrench",
+    "count": 1
+  }
+}

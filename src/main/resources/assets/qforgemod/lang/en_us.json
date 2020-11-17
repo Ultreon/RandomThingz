@@ -122,7 +122,7 @@
   "item.qforgemod.tungsten_dust": "Tungsten Steel Dust",
   "item.qforgemod.ruby_dust": "Ruby Dust",
   "item.qforgemod.amethyst_dust": "Amethyst Dust",
-  "item.qforgemod.aquamarine_dust": "Aquamrine Dust",
+  "item.qforgemod.aquamarine_dust": "Aquamarine Dust",
   "item.qforgemod.diamond_dust": "Diamond Dust",
   "item.qforgemod.tanzanite_dust": "Tanzanite Dust",
   "item.qforgemod.ultrinium_dust": "Ultrinium Dust",
@@ -138,7 +138,7 @@
 
   "item.qforgemod.ruby": "Ruby",
   "item.qforgemod.amethyst": "Amethyst",
-  "item.qforgemod.aquamarine": "Aquamrine",
+  "item.qforgemod.aquamarine": "Aquamarine",
   "item.qforgemod.tanzanite": "Tanzanite",
 
   "item.qforgemod.dungeons_diamond_axe": "Diamond Axe (of MC Dungeons)",
@@ -359,10 +359,10 @@
   "container.qforgemod.pump": "Pump",
   "container.qforgemod.refinery": "Refinery",
   "container.qforgemod.solidifier": "Solidifier",
-  "fluid.qforgemod.diesel": "Diesel",
-  "fluid.qforgemod.ethane": "Ethane",
-  "fluid.qforgemod.oil": "Oil",
-  "fluid.qforgemod.polyethylene": "Polyethylene",
+  "block.qforgemod.diesel": "Diesel",
+  "block.qforgemod.ethane": "Ethane",
+  "block.qforgemod.oil": "Oil",
+  "block.qforgemod.polyethylene": "Polyethylene",
   "item.qforgemod.aluminum_dust": "Aluminum Dust",
   "item.qforgemod.aluminum_ingot": "Aluminum Ingot",
   "item.qforgemod.aluminum_nugget": "Aluminum Nugget",
@@ -551,5 +551,8 @@
   "misc.qforgemod.pc.cards.floppy_disk": "Floppy Disk",
   "misc.qforgemod.pc.cards.floppy_disk.short": "FDD",
   "misc.qforgemod.pc.storage.usb": "USB Drive",
-  "misc.qforgemod.pc.storage.usb.short": "USB"
+  "misc.qforgemod.pc.storage.usb.short": "USB",
+
+  "key.qforgemod.debug_screen": "Show / Hide Debug Screen",
+  "key.categories.qforgemod": "QForgeMod keys"
 }
