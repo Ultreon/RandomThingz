@@ -74,8 +74,11 @@ public class KnifeItem extends Item {
             double y = entity.getPosY();
             double z = entity.getPosZ();
 
-            entity.setItem(newStack);
-            entity.getItem().setAttachedEntity(entity);
+            entity1.remove(false);
+
+            ItemEntity entity2 = new ItemEntity(worldIn, x, y, z, newStack);
+            entity2.setDefaultPickupDelay();
+            worldIn.addEntity(entity2);
 
             stack.damageItem(1, playerIn, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
             return ActionResult.resultSuccess(stack);
