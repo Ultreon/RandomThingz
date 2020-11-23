@@ -1,12 +1,12 @@
 package com.qsoftware.forgemod.objects.block.pipe;
 
+import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import com.qsoftware.forgemod.QForgeMod;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -18,7 +18,9 @@ import java.util.stream.Collectors;
 public final class PipeNetworkManager {
     private static final Collection<LazyOptional<PipeNetwork>> NETWORK_LIST = Collections.synchronizedList(new ArrayList<>());
 
-    private PipeNetworkManager() {throw new IllegalAccessError("Utility class");}
+    private PipeNetworkManager() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     @SuppressWarnings("ConstantConditions")
     @Nullable

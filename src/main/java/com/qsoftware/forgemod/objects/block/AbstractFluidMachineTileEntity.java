@@ -1,5 +1,11 @@
 package com.qsoftware.forgemod.objects.block;
 
+import com.qsoftware.forgemod.api.RedstoneMode;
+import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
+import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidInventory;
+import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidRecipe;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.silent.utils.EnumUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -15,12 +21,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import com.qsoftware.forgemod.api.RedstoneMode;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidInventory;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidRecipe;
-import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.silent.utils.EnumUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,8 +30,6 @@ import java.util.stream.IntStream;
 
 public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> extends AbstractMachineTileEntity<R> implements IFluidInventory {
     protected final FluidTank[] tanks;
-    private final LazyOptional<IFluidHandler> fluidHandlerCap;
-
     protected final IIntArray fields = new IIntArray() {
         @SuppressWarnings("deprecation") // Use of Registry
         @Override
@@ -86,6 +84,7 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
             return 7 + 2 * tanks.length;
         }
     };
+    private final LazyOptional<IFluidHandler> fluidHandlerCap;
 
     protected AbstractFluidMachineTileEntity(TileEntityType<?> typeIn, int inventorySize, int tankCount, int tankCapacity, MachineTier tier) {
         super(typeIn, inventorySize, tier);

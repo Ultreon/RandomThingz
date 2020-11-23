@@ -1,8 +1,9 @@
 package com.qsoftware.forgemod.api.datagen.recipe;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import net.minecraft.advancements.ICriterionInstance;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault

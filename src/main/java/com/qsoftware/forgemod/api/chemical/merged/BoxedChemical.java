@@ -1,9 +1,5 @@
 package com.qsoftware.forgemod.api.chemical.merged;
 
-import java.util.Objects;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.MekanismAPI;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.chemical.Chemical;
@@ -13,9 +9,14 @@ import com.qsoftware.forgemod.api.chemical.infuse.InfuseType;
 import com.qsoftware.forgemod.api.chemical.pigment.Pigment;
 import com.qsoftware.forgemod.api.chemical.slurry.Slurry;
 import com.qsoftware.forgemod.api.text.IHasTextComponent;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.ITextComponent;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Objects;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -24,6 +25,13 @@ public class BoxedChemical implements IHasTextComponent {
 
     //TODO: Make a subclass for the empty implementation?
     public static final BoxedChemical EMPTY = new BoxedChemical(ChemicalType.GAS, MekanismAPI.EMPTY_GAS);
+    private final ChemicalType chemicalType;
+    private final Chemical<?> chemical;
+
+    protected BoxedChemical(ChemicalType chemicalType, Chemical<?> chemical) {
+        this.chemicalType = chemicalType;
+        this.chemical = chemical;
+    }
 
     @SuppressWarnings("RedundantCast")
     public static BoxedChemical read(PacketBuffer buffer) {
@@ -59,14 +67,6 @@ public class BoxedChemical implements IHasTextComponent {
 
     public static BoxedChemical box(Chemical<?> chemical) {
         return new BoxedChemical(ChemicalType.getTypeFor(chemical), chemical);
-    }
-
-    private final ChemicalType chemicalType;
-    private final Chemical<?> chemical;
-
-    protected BoxedChemical(ChemicalType chemicalType, Chemical<?> chemical) {
-        this.chemicalType = chemicalType;
-        this.chemical = chemical;
     }
 
     public boolean isEmpty() {

@@ -16,9 +16,7 @@ public interface IConfigurable {
      *
      * @param player - the player who clicked the block
      * @param side   - the side the block was clicked on
-     *
      * @return action that was performed
-     *
      * @apiNote Only called from the server
      */
     ActionResultType onSneakRightClick(PlayerEntity player, Direction side);
@@ -28,9 +26,7 @@ public interface IConfigurable {
      *
      * @param player - the player who clicked the block
      * @param side   - the side the block was clicked on
-     *
      * @return action that was performed
-     *
      * @apiNote Only called from the server
      */
     ActionResultType onRightClick(PlayerEntity player, Direction side);

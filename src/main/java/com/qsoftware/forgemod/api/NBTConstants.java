@@ -2,9 +2,6 @@ package com.qsoftware.forgemod.api;
 
 public final class NBTConstants {
 
-    private NBTConstants() {
-    }
-
     //Ones that also are used for interacting with forge/vanilla
     public static final String BASE = "Base";
     public static final String BLOCK_ENTITY_TAG = "BlockEntityTag";
@@ -14,7 +11,6 @@ public final class NBTConstants {
     public static final String X = "x";
     public static final String Y = "y";
     public static final String Z = "z";
-
     //Server to Client specific sync NBT tags
     public static final String ACTIVE = "active";
     public static final String CLIENT_NEXT = "clientNext";
@@ -41,7 +37,6 @@ public final class NBTConstants {
     public static final String SOUND_SCALE = "soundScale";
     public static final String VALVE = "valve";
     public static final String VOLUME = "volume";
-
     //Generic constants
     public static final String ACTIVE_COOLED = "activeCooled";
     public static final String ACTIVE_NODES = "activeNodes";
@@ -188,4 +183,6 @@ public final class NBTConstants {
     public static final String UPGRADES = "upgrades";
     public static final String USED_NODES = "usedNodes";
     public static final String WORLD_GEN_VERSION = "worldGenVersion";
+    private NBTConstants() {
+    }
 }

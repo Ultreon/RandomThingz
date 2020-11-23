@@ -7,7 +7,7 @@ import net.minecraft.util.text.StringTextComponent;
 
 public class GuiNotif extends Screen {
     String text = "Hello world!";
- 
+
     public GuiNotif(MatrixStack matrixStack, Minecraft mc) {
         super(new StringTextComponent(""));
         int width = mc.getMainWindow().getScaledWidth();

@@ -1,6 +1,12 @@
 package com.qsoftware.forgemod.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.qsoftware.forgemod.crafting.recipe.DryingRecipe;
+import com.qsoftware.forgemod.init.ModBlocks;
+import com.qsoftware.forgemod.objects.block.compressor.CompressorScreen;
+import com.qsoftware.forgemod.util.Constants;
+import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.silent.lib.util.TextRenderUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -14,12 +20,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import com.qsoftware.silent.lib.util.TextRenderUtils;
-import com.qsoftware.forgemod.objects.block.compressor.CompressorScreen;
-import com.qsoftware.forgemod.crafting.recipe.DryingRecipe;
-import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.TextUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;

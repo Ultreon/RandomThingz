@@ -4,6 +4,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
+import com.qsoftware.forgemod.init.ModRecipes;
+import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
+import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
+import com.qsoftware.forgemod.util.Constants;
+import com.qsoftware.silent.utils.MathUtils;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,20 +22,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
-import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.objects.item.MachineUpgrades;
-import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.silent.utils.MathUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class CrushingRecipe implements IRecipe<IInventory> {
     private final ResourceLocation recipeId;
+    private final Map<ItemStack, Float> results = new LinkedHashMap<>();
     private int processTime;
     private Ingredient ingredient;
-    private final Map<ItemStack, Float> results = new LinkedHashMap<>();
 
     public CrushingRecipe(ResourceLocation recipeId) {
         this.recipeId = recipeId;

@@ -2,8 +2,10 @@ package com.qsoftware.forgemod.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.qsoftware.forgemod.init.OreMaterials;
+import com.qsoftware.forgemod.init.ModTags;
+import com.qsoftware.forgemod.objects.items.CraftingItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.ItemTagsProvider;
@@ -13,9 +15,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
-import com.qsoftware.forgemod.init.Metals;
-import com.qsoftware.forgemod.init.ModTags;
-import com.qsoftware.forgemod.objects.item.CraftingItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,8 +28,19 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class ModItemTagsProvider extends ItemTagsProvider {
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
+
     public ModItemTagsProvider(DataGenerator generatorIn, ModBlockTagsProvider blockTags) {
         super(generatorIn, blockTags);
+    }
+
+    private static ITag.INamedTag<Item> itemTag(ResourceLocation id) {
+        return ItemTags.makeWrapperTag(id.toString());
+    }
+
+    private static ResourceLocation forgeId(String path) {
+        return new ResourceLocation("forge", path);
     }
 
     @Override
@@ -42,9 +52,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         getOrCreateBuilder(ModTags.Items.PLASTIC).add(CraftingItems.PLASTIC_SHEET.asItem());
 
         getOrCreateBuilder(ModTags.Items.STEELS)
-                .addTag(Metals.ALUMINUM_STEEL.getIngotTag().get())
-                .addTag(Metals.BISMUTH_STEEL.getIngotTag().get())
-                .addTag(Metals.STEEL.getIngotTag().get());
+                .addTag(OreMaterials.ALUMINUM_STEEL.getIngotTag().get())
+                .addTag(OreMaterials.BISMUTH_STEEL.getIngotTag().get())
+                .addTag(OreMaterials.STEEL.getIngotTag().get());
         getOrCreateBuilder(ModTags.Items.COAL_GENERATOR_FUELS)
                 .addTag(ItemTags.COALS)
                 .addTag(itemTag(forgeId("nuggets/coal")))
@@ -54,7 +64,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         getOrCreateBuilder(ModTags.Items.DUSTS_COAL).add(CraftingItems.COAL_DUST.asItem());
 
-        for (Metals metal : Metals.values()) {
+        for (OreMaterials metal : OreMaterials.values()) {
             metal.getOreTag().ifPresent(tag ->
                     copy(tag, metal.getOreItemTag().get()));
             metal.getStorageBlockTag().ifPresent(tag ->
@@ -73,17 +83,17 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         copy(Tags.Blocks.ORES, Tags.Items.ORES);
         copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
-        groupBuilder(ModTags.Items.CHUNKS, Metals::getChunksTag);
-        groupBuilder(Tags.Items.DUSTS, Metals::getDustTag,
+        groupBuilder(ModTags.Items.CHUNKS, OreMaterials::getChunksTag);
+        groupBuilder(Tags.Items.DUSTS, OreMaterials::getDustTag,
                 ModTags.Items.DUSTS_COAL);
-        groupBuilder(Tags.Items.INGOTS, Metals::getIngotTag);
-        groupBuilder(Tags.Items.NUGGETS, Metals::getNuggetTag);
+        groupBuilder(Tags.Items.INGOTS, OreMaterials::getIngotTag);
+        groupBuilder(Tags.Items.NUGGETS, OreMaterials::getNuggetTag);
     }
 
     @SafeVarargs
-    private final void groupBuilder(ITag.INamedTag<Item> tag, Function<Metals, Optional<ITag.INamedTag<Item>>> tagGetter, ITag.INamedTag<Item>... extras) {
+    private final void groupBuilder(ITag.INamedTag<Item> tag, Function<OreMaterials, Optional<ITag.INamedTag<Item>>> tagGetter, ITag.INamedTag<Item>... extras) {
         Builder<Item> builder = getOrCreateBuilder(tag);
-        for (Metals metal : Metals.values()) {
+        for (OreMaterials metal : OreMaterials.values()) {
             tagGetter.apply(metal).ifPresent(builder::addTag);
         }
         for (ITag.INamedTag<Item> extraTag : extras) {
@@ -95,21 +105,10 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         getOrCreateBuilder(itemTag(id)).add(Arrays.stream(items).map(IItemProvider::asItem).toArray(Item[]::new));
     }
 
-    private static ITag.INamedTag<Item> itemTag(ResourceLocation id) {
-        return ItemTags.makeWrapperTag(id.toString());
-    }
-
-    private static ResourceLocation forgeId(String path) {
-        return new ResourceLocation("forge", path);
-    }
-
     @Override
     public String getName() {
         return "QForgeMod - Item Tags";
     }
-
-    private static final Logger LOGGER = LogManager.getLogger();
-    private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
 
     @Override
     public void act(DirectoryCache cache) {
@@ -123,7 +122,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 return; //Forge: Allow running this data provider without writing it. Recipe provider needs valid tags.
 
             try {
-                String s = GSON.toJson((JsonElement) jsonobject);
+                String s = GSON.toJson(jsonobject);
                 String s1 = HASH_FUNCTION.hashUnencodedChars(s).toString();
                 if (!Objects.equals(cache.getPreviousHash(path), s1) || !Files.exists(path)) {
                     Files.createDirectories(path.getParent());

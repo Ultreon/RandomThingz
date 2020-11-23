@@ -21,16 +21,16 @@ public class ExampleChestScreen extends ContainerScreen<CrateContainer> {
     @SuppressWarnings("unused")
     private final Button BUTTON = new Button(20, 128, 20, 20, new StringTextComponent("TestButton"), this::onClick);
 
-    private void onClick(Button button) {
-        playerInventory.player.sendMessage(new StringTextComponent("Button pressed!"), playerInventory.player.getUniqueID());
-    }
-
     public ExampleChestScreen(CrateContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         guiLeft = 0;
         guiTop = 0;
         xSize = 175;
         ySize = 183;
+    }
+
+    private void onClick(Button button) {
+        playerInventory.player.sendMessage(new StringTextComponent("Button pressed!"), playerInventory.player.getUniqueID());
     }
 
     @Override

@@ -58,10 +58,10 @@ public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
             } else if (container.isDone()) {
                 Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Done!", xPos + 5, yPos + 36, 0x007f00);
             } else {
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Mining...",                                       xPos + 5, yPos + 36, 0x3f3f3f);
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Total blocks: " + container.getTotalBlocks(),     xPos + 5, yPos + 48, 0x7f7f7f);
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Remaining: " +    container.getBlocksRemaining(), xPos + 5, yPos + 60, 0x7f7f7f);
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Y: " +            container.getCurrentY(),        xPos + 5, yPos + 72, 0x7f7f7f);
+                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Mining...", xPos + 5, yPos + 36, 0x3f3f3f);
+                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Total blocks: " + container.getTotalBlocks(), xPos + 5, yPos + 48, 0x7f7f7f);
+                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Remaining: " + container.getBlocksRemaining(), xPos + 5, yPos + 60, 0x7f7f7f);
+                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Y: " + container.getCurrentY(), xPos + 5, yPos + 72, 0x7f7f7f);
             }
         } else {
             Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);

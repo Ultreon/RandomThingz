@@ -1,15 +1,16 @@
 package com.qsoftware.forgemod.api.recipes;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.chemical.slurry.Slurry;
 import com.qsoftware.forgemod.api.chemical.slurry.SlurryStack;
 import com.qsoftware.forgemod.api.recipes.chemical.FluidChemicalToChemicalRecipe;
 import com.qsoftware.forgemod.api.recipes.inputs.FluidStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.SlurryStackIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault

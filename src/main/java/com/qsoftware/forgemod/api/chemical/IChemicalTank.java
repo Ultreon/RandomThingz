@@ -1,26 +1,26 @@
 package com.qsoftware.forgemod.api.chemical;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.IContentsListener;
 import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.api.chemical.attribute.ChemicalAttributeValidator;
 import com.qsoftware.forgemod.api.inventory.AutomationType;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>> extends IEmptyStackProvider<CHEMICAL, STACK>,
-      INBTSerializable<CompoundNBT>, IContentsListener {
+        INBTSerializable<CompoundNBT>, IContentsListener {
 
     /**
      * Helper for creating a stack of the type this {@link IChemicalTank} is storing.
      *
      * @param stored The stack to copy the type of.
      * @param size   The size of the new stack.
-     *
      * @return A new stack
      */
     STACK createStack(STACK stored, long size);
@@ -45,7 +45,6 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
      * Overrides the stack in this {@link IChemicalTank}.
      *
      * @param stack {@link ChemicalStack} to set this tank's contents to (may be empty).
-     *
      * @throws RuntimeException if this tank is called in a way that it was not expecting.
      * @implNote If the internal stack does get updated make sure to call {@link #onContentsChanged()}
      */
@@ -55,7 +54,6 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
      * Overrides the stack in this {@link IChemicalTank}.
      *
      * @param stack {@link ChemicalStack} to set this tank's contents to (may be empty).
-     *
      * @apiNote Unsafe version of {@link #setStack(ChemicalStack)}. This method is exposed for implementation and code deduplication reasons only and should
      * <strong>NOT</strong> be directly called outside of your own {@link IChemicalTank} where you already know the given {@link ChemicalStack} is valid.
      * @implNote If the internal stack does get updated make sure to call {@link #onContentsChanged()}
@@ -73,10 +71,8 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
      * @param stack          {@link ChemicalStack} to insert. This must not be modified by the tank.
      * @param action         The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
      * @param automationType The method that this tank is being interacted from.
-     *
      * @return The remaining {@link ChemicalStack} that was not inserted (if the entire stack is accepted, then return an empty {@link ChemicalStack}). May be the same as
      * the input {@link ChemicalStack} if unchanged, otherwise a new {@link ChemicalStack}. The returned {@link ChemicalStack} can be safely modified after
-     *
      * @implNote The {@link ChemicalStack} <em>should not</em> be modified in this function! If the internal stack does get updated make sure to call {@link
      * #onContentsChanged()}. It is also recommended to override this if your internal {@link ChemicalStack} is mutable so that a copy does not have to be made every run
      */
@@ -120,10 +116,8 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
      * @param amount         Amount to extract (may be greater than the current stack's max limit)
      * @param action         The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
      * @param automationType The method that this tank is being interacted from.
-     *
      * @return {@link ChemicalStack} extracted from the tank, must be empty if nothing can be extracted. The returned {@link ChemicalStack} can be safely modified after,
      * so the tank should return a new or copied stack.
-     *
      * @implNote The returned {@link ChemicalStack} can be safely modified after, so a new or copied stack should be returned. If the internal stack does get updated make
      * sure to call {@link #onContentsChanged()}. It is also recommended to override this if your internal {@link ChemicalStack} is mutable so that a copy does not have
      * to be made every run
@@ -159,7 +153,6 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
      * </ul>
      *
      * @param stack Stack to test with for validity
-     *
      * @return true if this {@link IChemicalTank} can accept the {@link ChemicalStack}, not considering the current state of the tank. false if this {@link IChemicalTank}
      * can never insert the {@link ChemicalStack} in any situation.
      */
@@ -167,15 +160,13 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
 
     /**
      * Convenience method for modifying the size of the stored stack.
-     *
+     * <p>
      * If there is a stack stored in this tank, set the size of it to the given amount. Capping at this chemical tank's limit. If the amount is less than or equal to
      * zero, then this instead sets the stack to the empty stack.
      *
      * @param amount The desired size to set the stack to.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return Actual size the stack was set to.
-     *
      * @implNote It is recommended to override this if your internal {@link ChemicalStack} is mutable so that a copy does not have to be made every run. If the internal
      * stack does get updated make sure to call {@link #onContentsChanged()}
      */
@@ -202,15 +193,13 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
 
     /**
      * Convenience method for growing the size of the stored stack.
-     *
+     * <p>
      * If there is a stack stored in this tank, increase its size by the given amount. Capping at this chemical tank's limit. If the stack shrinks to an amount of less
      * than or equal to zero, then this instead sets the stack to the empty stack.
      *
      * @param amount The desired amount to grow the stack by.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return Actual amount the stack grew.
-     *
      * @apiNote Negative values for amount are valid, and will instead cause the stack to shrink.
      * @implNote If the internal stack does get updated make sure to call {@link #onContentsChanged()}
      */
@@ -226,15 +215,13 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
 
     /**
      * Convenience method for shrinking the size of the stored stack.
-     *
+     * <p>
      * If there is a stack stored in this tank, shrink its size by the given amount. If this causes its size to become less than or equal to zero, then the stack is set
      * to the empty stack. If this method is used to grow the stack the size gets capped at this chemical tank's limit.
      *
      * @param amount The desired amount to shrink the stack by.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return Actual amount the stack shrunk.
-     *
      * @apiNote Negative values for amount are valid, and will instead cause the stack to grow.
      * @implNote If the internal stack does get updated make sure to call {@link #onContentsChanged()}
      */
@@ -246,7 +233,6 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
      * Convenience method for checking if this tank is empty.
      *
      * @return True if the tank is empty, false otherwise.
-     *
      * @implNote If your implementation of {@link #getStack()} returns a copy, this should be overridden to directly check against the internal stack.
      */
     default boolean isEmpty() {
@@ -264,7 +250,6 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
      * Convenience method for checking the amount of chemical in this tank.
      *
      * @return The size of the stored stack, or zero is the stack is empty.
-     *
      * @implNote If your implementation of {@link #getStack()} returns a copy, this should be overridden to directly check against the internal stack.
      */
     default long getStored() {
@@ -293,9 +278,7 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
      * Convenience method for checking if this tank's contents are of an equal type to a given chemical stack's.
      *
      * @param other The stack to compare to.
-     *
      * @return True if the tank's contents are equal, false otherwise.
-     *
      * @implNote If your implementation of {@link #getStack()} returns a copy, this should be overridden to directly check against the internal stack.
      */
     default boolean isTypeEqual(STACK other) {
@@ -306,9 +289,7 @@ public interface IChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extend
      * Convenience method for checking if this tank's contents are of an equal type to a given chemical's.
      *
      * @param other The chemical to compare to.
-     *
      * @return True if the tank's contents are equal, false otherwise.
-     *
      * @implNote If your implementation of {@link #getStack()} returns a copy, this should be overridden to directly check against the internal stack.
      */
     default boolean isTypeEqual(CHEMICAL other) {

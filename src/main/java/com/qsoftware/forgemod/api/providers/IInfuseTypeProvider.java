@@ -1,8 +1,9 @@
 package com.qsoftware.forgemod.api.providers;
 
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.chemical.infuse.InfuseType;
 import com.qsoftware.forgemod.api.chemical.infuse.InfusionStack;
+
+import javax.annotation.Nonnull;
 
 public interface IInfuseTypeProvider extends IChemicalProvider<InfuseType> {
 

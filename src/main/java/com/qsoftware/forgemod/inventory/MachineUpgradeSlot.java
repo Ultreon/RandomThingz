@@ -1,10 +1,10 @@
 package com.qsoftware.forgemod.inventory;
 
+import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgradeItem;
+import com.qsoftware.forgemod.util.Constants;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import com.qsoftware.forgemod.objects.item.MachineUpgradeItem;
-import com.qsoftware.forgemod.util.Constants;
 
 public class MachineUpgradeSlot extends Slot {
     public MachineUpgradeSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {

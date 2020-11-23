@@ -25,9 +25,9 @@ public class TileEntityTypesInit extends ObjectInit<TileEntityType<?>> {
     /**
      * Register tile entity.
      *
-     * @param name the registry name.
+     * @param name     the registry name.
      * @param supplier supplier for registration.
-     * @param <T> tile-entity to register.
+     * @param <T>      tile-entity to register.
      * @return an registry object of the tile-entity type.
      */
     private static <T extends TileEntity> RegistryObject<TileEntityType<T>> register(String name, Supplier<TileEntityType<T>> supplier) {

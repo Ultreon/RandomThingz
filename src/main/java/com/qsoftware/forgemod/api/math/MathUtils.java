@@ -2,10 +2,10 @@ package com.qsoftware.forgemod.api.math;
 
 public class MathUtils {
 
+    private static final long UNSIGNED_MASK = 0x7FFFFFFFFFFFFFFFL;
+
     private MathUtils() {
     }
-
-    private static final long UNSIGNED_MASK = 0x7FFFFFFFFFFFFFFFL;
 
     /**
      * Clamp a double to int without using Math.min due to double representation issues. Primary use: power systems that use int, where Mek uses doubles internally
@@ -17,9 +17,7 @@ public class MathUtils {
      * </code>
      *
      * @param d double to clamp
-     *
      * @return an int clamped to {@link Integer#MAX_VALUE}
-     *
      * @see <a href="https://github.com/aidancbrady/QForgeUtils/pull/5203">Original PR</a>
      */
     public static int clampToInt(double d) {
@@ -33,7 +31,6 @@ public class MathUtils {
      * Clamp a long to int
      *
      * @param l long to clamp
-     *
      * @return an int clamped to {@link Integer#MAX_VALUE}
      */
     public static int clampToInt(long l) {
@@ -47,7 +44,6 @@ public class MathUtils {
      * Clamp a double to a long
      *
      * @param d double to clamp
-     *
      * @return a long clamped to {@link Long#MAX_VALUE}
      */
     public static long clampToLong(double d) {
@@ -61,7 +57,6 @@ public class MathUtils {
      * Clamp an unsigned long to int
      *
      * @param l unsigned long to clamp
-     *
      * @return an int clamped to {@link Integer#MAX_VALUE}
      */
     public static int clampUnsignedToInt(long l) {
@@ -75,7 +70,6 @@ public class MathUtils {
      * Clamp an unsigned long to int
      *
      * @param l unsigned long to clamp
-     *
      * @return an int clamped to {@link Integer#MAX_VALUE}
      */
     public static long clampUnsignedToLong(long l) {

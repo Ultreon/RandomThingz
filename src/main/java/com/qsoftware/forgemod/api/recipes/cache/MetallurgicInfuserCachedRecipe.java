@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.cache;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.infuse.InfusionStack;
@@ -8,6 +7,8 @@ import com.qsoftware.forgemod.api.recipes.MetallurgicInfuserRecipe;
 import com.qsoftware.forgemod.api.recipes.inputs.IInputHandler;
 import com.qsoftware.forgemod.api.recipes.outputs.IOutputHandler;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -18,7 +19,7 @@ public class MetallurgicInfuserCachedRecipe extends CachedRecipe<MetallurgicInfu
     private final IInputHandler<@NonNull ItemStack> itemInputHandler;
 
     public MetallurgicInfuserCachedRecipe(MetallurgicInfuserRecipe recipe, IInputHandler<@NonNull InfusionStack> infusionInputHandler,
-          IInputHandler<@NonNull ItemStack> itemInputHandler, IOutputHandler<@NonNull ItemStack> outputHandler) {
+                                          IInputHandler<@NonNull ItemStack> itemInputHandler, IOutputHandler<@NonNull ItemStack> outputHandler) {
         super(recipe);
         this.infusionInputHandler = infusionInputHandler;
         this.itemInputHandler = itemInputHandler;

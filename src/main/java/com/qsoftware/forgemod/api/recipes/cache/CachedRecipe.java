@@ -1,12 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.cache;
 
-import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
-import java.util.function.BooleanSupplier;
-import java.util.function.IntConsumer;
-import java.util.function.IntSupplier;
-import java.util.function.IntUnaryOperator;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.energy.IEnergyContainer;
@@ -15,6 +8,14 @@ import com.qsoftware.forgemod.api.math.FloatingLong;
 import com.qsoftware.forgemod.api.math.FloatingLongConsumer;
 import com.qsoftware.forgemod.api.math.FloatingLongSupplier;
 import com.qsoftware.forgemod.api.recipes.MekanismRecipe;
+import it.unimi.dsi.fastutil.booleans.BooleanConsumer;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.BooleanSupplier;
+import java.util.function.IntConsumer;
+import java.util.function.IntSupplier;
+import java.util.function.IntUnaryOperator;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault

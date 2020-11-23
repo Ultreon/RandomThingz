@@ -1,14 +1,15 @@
 package com.qsoftware.forgemod.api.energy;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.IContentsListener;
 import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.api.inventory.AutomationType;
 import com.qsoftware.forgemod.api.math.FloatingLong;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -34,7 +35,6 @@ public interface IEnergyContainer extends INBTSerializable<CompoundNBT>, IConten
      * Overrides the amount of energy in this {@link IEnergyContainer}.
      *
      * @param energy Energy to set this container's contents to (may be {@link FloatingLong#ZERO}).
-     *
      * @throws RuntimeException if the handler is called in a way that the handler was not expecting. Such as if it was not expecting this to be called at all.
      * @implNote If the internal amount does get updated make sure to call {@link #onContentsChanged()}
      */
@@ -50,10 +50,8 @@ public interface IEnergyContainer extends INBTSerializable<CompoundNBT>, IConten
      * @param amount         Energy to insert. This must not be modified by the container.
      * @param action         The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
      * @param automationType The method that this container is being interacted from.
-     *
      * @return The remaining energy that was not inserted (if the entire amount is accepted, then return {@link FloatingLong#ZERO}). The returned {@link FloatingLong} can
      * be safely modified afterwards.
-     *
      * @implNote The {@link FloatingLong} <em>should not</em> be modified in this function! If the internal amount does get updated make sure to call {@link
      * #onContentsChanged()}. It is also recommended to override this if your internal {@link FloatingLong} is mutable so that a copy does not have to be made every run.
      */
@@ -86,10 +84,8 @@ public interface IEnergyContainer extends INBTSerializable<CompoundNBT>, IConten
      *                       handler.
      * @param action         The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
      * @param automationType The method that this container is being interacted from.
-     *
      * @return Energy extracted from the container, must be {@link FloatingLong#ZERO} if no energy can be extracted. The returned {@link FloatingLong} can be safely
      * modified after, so the container should return a new or copied {@link FloatingLong}.
-     *
      * @implNote The returned {@link FloatingLong} can be safely modified after, so a new or copied {@link FloatingLong} should be returned. If the internal amount does
      * get updated make sure to call {@link #onContentsChanged()}. It is also recommended to override this if your internal {@link FloatingLong} is mutable so that a copy
      * does not have to be made every run.

@@ -1,15 +1,16 @@
 package com.qsoftware.forgemod.api.chemical.gas;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.MekanismAPI;
 import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
 import com.qsoftware.forgemod.api.providers.IGasProvider;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.registries.IRegistryDelegate;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * GasStack - a specified amount of a defined Gas with certain properties.
@@ -36,25 +37,10 @@ public class GasStack extends ChemicalStack<Gas> {
         this(stack.getType(), amount);
     }
 
-    @Override
-    protected IRegistryDelegate<Gas> getDelegate(Gas gas) {
-        if (MekanismAPI.gasRegistry().getKey(gas) == null) {
-            MekanismAPI.logger.fatal("Failed attempt to create a GasStack for an unregistered Gas {} (type {})", gas.getRegistryName(), gas.getClass().getName());
-            throw new IllegalArgumentException("Cannot create a GasStack from an unregistered Gas");
-        }
-        return gas.delegate;
-    }
-
-    @Override
-    protected Gas getEmptyChemical() {
-        return MekanismAPI.EMPTY_GAS;
-    }
-
     /**
      * Returns the GasStack stored in the defined tag compound, or null if it doesn't exist.
      *
      * @param nbtTags - tag compound to read from
-     *
      * @return GasStack stored in the tag compound
      */
     public static GasStack readFromNBT(@Nullable CompoundNBT nbtTags) {
@@ -79,6 +65,20 @@ public class GasStack extends ChemicalStack<Gas> {
             return EMPTY;
         }
         return new GasStack(gas, amount);
+    }
+
+    @Override
+    protected IRegistryDelegate<Gas> getDelegate(Gas gas) {
+        if (MekanismAPI.gasRegistry().getKey(gas) == null) {
+            MekanismAPI.logger.fatal("Failed attempt to create a GasStack for an unregistered Gas {} (type {})", gas.getRegistryName(), gas.getClass().getName());
+            throw new IllegalArgumentException("Cannot create a GasStack from an unregistered Gas");
+        }
+        return gas.delegate;
+    }
+
+    @Override
+    protected Gas getEmptyChemical() {
+        return MekanismAPI.EMPTY_GAS;
     }
 
     /**

@@ -1,15 +1,10 @@
 package com.qsoftware.forgemod.api.chemical;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.chemical.attribute.ChemicalAttribute;
 import com.qsoftware.forgemod.api.providers.IChemicalProvider;
 import com.qsoftware.forgemod.api.text.IHasTextComponent;
 import com.qsoftware.forgemod.api.text.IHasTranslationKey;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
@@ -18,10 +13,16 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.ReverseTagWrapper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class Chemical<CHEMICAL extends Chemical<CHEMICAL>> extends ForgeRegistryEntry<CHEMICAL> implements IChemicalProvider<CHEMICAL>, IHasTextComponent,
-      IHasTranslationKey {
+        IHasTranslationKey {
 
     private final ReverseTagWrapper<CHEMICAL> reverseTags;
     private final Map<Class<? extends ChemicalAttribute>, ChemicalAttribute> attributeMap;
@@ -57,7 +58,6 @@ public abstract class Chemical<CHEMICAL extends Chemical<CHEMICAL>> extends Forg
      * Whether this chemical has an attribute of a certain type.
      *
      * @param type attribute type to check
-     *
      * @return if this chemical has the attribute
      */
     public boolean has(Class<? extends ChemicalAttribute> type) {
@@ -68,7 +68,6 @@ public abstract class Chemical<CHEMICAL extends Chemical<CHEMICAL>> extends Forg
      * Gets the attribute instance of a certain type, or null if it doesn't exist.
      *
      * @param type attribute type to get
-     *
      * @return attribute instance
      */
     @Nullable
@@ -108,7 +107,6 @@ public abstract class Chemical<CHEMICAL extends Chemical<CHEMICAL>> extends Forg
      * Writes this Chemical to a defined tag compound.
      *
      * @param nbtTags - tag compound to write this Chemical to
-     *
      * @return the tag compound this Chemical was written to
      */
     public abstract CompoundNBT write(CompoundNBT nbtTags);

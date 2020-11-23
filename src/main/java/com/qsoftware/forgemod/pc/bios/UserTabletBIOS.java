@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.pc.bios;
 
-public abstract class UserTabletBIOS extends UserBIOS{
+public abstract class UserTabletBIOS extends UserBIOS {
     @Override
     protected abstract void sleep();
 

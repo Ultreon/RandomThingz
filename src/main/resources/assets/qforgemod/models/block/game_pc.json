@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
+		"particle": "qforgemod:blocks/game_pc",
 		"0": "qforgemod:blocks/game_pc"
 	},
 	"elements": [

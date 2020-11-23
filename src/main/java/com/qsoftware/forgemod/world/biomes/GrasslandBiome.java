@@ -14,17 +14,14 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
  *
  * @author Biomes 'o Plenty mod.
  */
-public class GrasslandBiome extends BiomeTemplate
-{
-    public GrasslandBiome()
-    {
+public class GrasslandBiome extends BiomeTemplate {
+    public GrasslandBiome() {
         this.addWeight(BOPClimates.COOL_TEMPERATE, 5);
         this.setBeachBiome(Biomes.BEACH);
     }
 
     @Override
-    protected void configureBiome(Biome.Builder builder)
-    {
+    protected void configureBiome(Biome.Builder builder) {
         builder.precipitation(Biome.RainType.RAIN)
                 .category(Biome.Category.PLAINS)
                 .depth(0.1F)
@@ -43,8 +40,7 @@ public class GrasslandBiome extends BiomeTemplate
     }
 
     @Override
-    protected void configureGeneration(BiomeGenerationSettings.Builder builder)
-    {
+    protected void configureGeneration(BiomeGenerationSettings.Builder builder) {
         builder.withSurfaceBuilder(new ConfiguredSurfaceBuilder<>(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_SAND_CONFIG));
 
         // Structures
@@ -75,8 +71,7 @@ public class GrasslandBiome extends BiomeTemplate
     }
 
     @Override
-    protected void configureMobSpawns(MobSpawnInfo.Builder builder)
-    {
+    protected void configureMobSpawns(MobSpawnInfo.Builder builder) {
         // Entities
         builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.SHEEP, 12, 4, 4));
         builder.withSpawner(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(EntityType.PIG, 10, 4, 4));

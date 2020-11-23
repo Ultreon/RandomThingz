@@ -2,6 +2,12 @@ package com.qsoftware.forgemod.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.datafixers.util.Pair;
+import com.qsoftware.forgemod.crafting.recipe.CrushingRecipe;
+import com.qsoftware.forgemod.init.ModBlocks;
+import com.qsoftware.forgemod.objects.block.crusher.CrusherScreen;
+import com.qsoftware.forgemod.util.Constants;
+import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.silent.lib.util.TextRenderUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,12 +22,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
-import com.qsoftware.silent.lib.util.TextRenderUtils;
-import com.qsoftware.forgemod.objects.block.crusher.CrusherScreen;
-import com.qsoftware.forgemod.crafting.recipe.CrushingRecipe;
-import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.TextUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;

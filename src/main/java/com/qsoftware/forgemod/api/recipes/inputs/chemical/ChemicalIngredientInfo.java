@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.inputs.chemical;
 
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.JsonConstants;
 import com.qsoftware.forgemod.api.chemical.Chemical;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
@@ -18,6 +17,8 @@ import com.qsoftware.forgemod.api.chemical.slurry.Slurry;
 import com.qsoftware.forgemod.api.chemical.slurry.SlurryStack;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
 
 /**
  * Helper class for providing information to the various chemical ingredients
@@ -38,7 +39,7 @@ class ChemicalIngredientInfo<CHEMICAL extends Chemical<CHEMICAL>, STACK extends 
     private final STACK emptyStack;
 
     private ChemicalIngredientInfo(STACK emptyStack, ChemicalToStackCreator<CHEMICAL, STACK> chemicalToStackCreator, StackToStackCreator<STACK> stackToStackCreator,
-          String serializationKey, ChemicalTags<CHEMICAL> tags) {
+                                   String serializationKey, ChemicalTags<CHEMICAL> tags) {
         this.chemicalToStackCreator = chemicalToStackCreator;
         this.stackToStackCreator = stackToStackCreator;
         this.serializationKey = serializationKey;

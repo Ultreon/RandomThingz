@@ -2,12 +2,12 @@ package com.qsoftware.forgemod.client.button;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.text.StringTextComponent;
 import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
 import com.qsoftware.silent.utils.EnumUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.util.text.StringTextComponent;
 
 public class RedstoneModeButton extends Button {
     private final AbstractMachineBaseContainer container;

@@ -23,8 +23,7 @@ import java.util.function.BiFunction;
  *
  * @author Biomes 'o Plenty mod.
  */
-public class BiomeTemplate
-{
+public class BiomeTemplate {
     private final Map<BOPClimates, Integer> weightMap = new HashMap<>();
     private RegistryKey<Biome> beachBiome = Biomes.BEACH;
     private RegistryKey<Biome> riverBiome = Biomes.RIVER;
@@ -32,17 +31,26 @@ public class BiomeTemplate
     private BiFunction<Double, Double, Integer> grassColorFunction;
     private BiFunction<Double, Double, Integer> waterColorFunction;
 
-    protected void configureBiome(Biome.Builder builder) {}
-    protected void configureGeneration(BiomeGenerationSettings.Builder builder) {}
-    protected void configureMobSpawns(MobSpawnInfo.Builder builder) {}
+    public static int calculateSkyColor(float temperature) {
+        float lvt_1_1_ = temperature / 3.0F;
+        lvt_1_1_ = MathHelper.clamp(lvt_1_1_, -1.0F, 1.0F);
+        return MathHelper.hsvToRGB(0.62222224F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0F);
+    }
 
-    protected void configureDefaultMobSpawns(MobSpawnInfo.Builder builder)
-    {
+    protected void configureBiome(Biome.Builder builder) {
+    }
+
+    protected void configureGeneration(BiomeGenerationSettings.Builder builder) {
+    }
+
+    protected void configureMobSpawns(MobSpawnInfo.Builder builder) {
+    }
+
+    protected void configureDefaultMobSpawns(MobSpawnInfo.Builder builder) {
         builder.isValidSpawnBiomeForPlayer();
     }
 
-    public final Biome build()
-    {
+    public final Biome build() {
         Biome.Builder biomeBuilder = new Biome.Builder();
 
         // Configure the biome generation
@@ -61,45 +69,31 @@ public class BiomeTemplate
         return biomeBuilder.build();
     }
 
-    public final BiomeMetadata buildMetadata()
-    {
+    public final BiomeMetadata buildMetadata() {
         return new BiomeMetadata(this.weightMap, this.beachBiome, this.riverBiome, this.foliageColorFunction, this.grassColorFunction, this.waterColorFunction);
     }
 
-    public void addWeight(BOPClimates climate, int weight)
-    {
+    public void addWeight(BOPClimates climate, int weight) {
         this.weightMap.put(climate, weight);
     }
 
-    public void setBeachBiome(RegistryKey<Biome> biome)
-    {
+    public void setBeachBiome(RegistryKey<Biome> biome) {
         this.beachBiome = biome;
     }
 
-    public void setRiverBiome(RegistryKey<Biome> biome)
-    {
+    public void setRiverBiome(RegistryKey<Biome> biome) {
         this.riverBiome = biome;
     }
 
-    public void setFoliageColorFunction(BiFunction<Double, Double, Integer> func)
-    {
+    public void setFoliageColorFunction(BiFunction<Double, Double, Integer> func) {
         this.foliageColorFunction = func;
     }
 
-    public void setGrassColorFunction(BiFunction<Double, Double, Integer> func)
-    {
+    public void setGrassColorFunction(BiFunction<Double, Double, Integer> func) {
         this.grassColorFunction = func;
     }
 
-    public void setWaterColorFunction(BiFunction<Double, Double, Integer> func)
-    {
+    public void setWaterColorFunction(BiFunction<Double, Double, Integer> func) {
         this.waterColorFunction = func;
-    }
-
-    public static int calculateSkyColor(float temperature)
-    {
-        float lvt_1_1_ = temperature / 3.0F;
-        lvt_1_1_ = MathHelper.clamp(lvt_1_1_, -1.0F, 1.0F);
-        return MathHelper.hsvToRGB(0.62222224F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0F);
     }
 }

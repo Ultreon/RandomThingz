@@ -1,10 +1,11 @@
 package com.qsoftware.forgemod.api;
 
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.tier.AlloyTier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
+
+import javax.annotation.Nonnull;
 
 /**
  * Implement this class in your TileEntity if it can interact with QForgeUtils alloys.

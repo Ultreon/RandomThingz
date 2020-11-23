@@ -1,13 +1,14 @@
 package com.qsoftware.forgemod.api.recipes;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.recipes.inputs.ItemStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Extension of {@link ItemStackGasToItemStackRecipe} with a defined amount of ticks needed to process.

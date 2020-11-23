@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.cache.chemical;
 
-import java.util.function.LongSupplier;
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.Chemical;
@@ -14,11 +12,14 @@ import com.qsoftware.forgemod.api.recipes.inputs.chemical.IChemicalStackIngredie
 import com.qsoftware.forgemod.api.recipes.outputs.IOutputHandler;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.LongSupplier;
+
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemStackChemicalToItemStackCachedRecipe<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>,
-      INGREDIENT extends IChemicalStackIngredient<CHEMICAL, STACK>, RECIPE extends ItemStackChemicalToItemStackRecipe<CHEMICAL, STACK, INGREDIENT>>
-      extends CachedRecipe<RECIPE> {
+        INGREDIENT extends IChemicalStackIngredient<CHEMICAL, STACK>, RECIPE extends ItemStackChemicalToItemStackRecipe<CHEMICAL, STACK, INGREDIENT>>
+        extends CachedRecipe<RECIPE> {
 
     private final IOutputHandler<@NonNull ItemStack> outputHandler;
     private final IInputHandler<@NonNull ItemStack> itemInputHandler;
@@ -26,7 +27,7 @@ public class ItemStackChemicalToItemStackCachedRecipe<CHEMICAL extends Chemical<
     private final LongSupplier chemicalUsage;
 
     public ItemStackChemicalToItemStackCachedRecipe(RECIPE recipe, IInputHandler<@NonNull ItemStack> itemInputHandler,
-          ILongInputHandler<@NonNull STACK> chemicalInputHandler, LongSupplier chemicalUsage, IOutputHandler<@NonNull ItemStack> outputHandler) {
+                                                    ILongInputHandler<@NonNull STACK> chemicalInputHandler, LongSupplier chemicalUsage, IOutputHandler<@NonNull ItemStack> outputHandler) {
         super(recipe);
         this.itemInputHandler = itemInputHandler;
         this.chemicalInputHandler = chemicalInputHandler;

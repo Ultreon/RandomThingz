@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.cache.chemical;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.Chemical;
@@ -12,18 +11,20 @@ import com.qsoftware.forgemod.api.recipes.inputs.chemical.IChemicalStackIngredie
 import com.qsoftware.forgemod.api.recipes.outputs.IOutputHandler;
 import net.minecraftforge.fluids.FluidStack;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
 public class FluidChemicalToChemicalCachedRecipe<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>,
-      INGREDIENT extends IChemicalStackIngredient<CHEMICAL, STACK>, RECIPE extends FluidChemicalToChemicalRecipe<CHEMICAL, STACK, INGREDIENT>>
-      extends CachedRecipe<RECIPE> {
+        INGREDIENT extends IChemicalStackIngredient<CHEMICAL, STACK>, RECIPE extends FluidChemicalToChemicalRecipe<CHEMICAL, STACK, INGREDIENT>>
+        extends CachedRecipe<RECIPE> {
 
     private final IOutputHandler<@NonNull STACK> outputHandler;
     private final IInputHandler<@NonNull FluidStack> fluidInputHandler;
     private final IInputHandler<@NonNull STACK> chemicalInputHandler;
 
     public FluidChemicalToChemicalCachedRecipe(RECIPE recipe, IInputHandler<@NonNull FluidStack> fluidInputHandler, IInputHandler<@NonNull STACK> chemicalInputHandler,
-          IOutputHandler<@NonNull STACK> outputHandler) {
+                                               IOutputHandler<@NonNull STACK> outputHandler) {
         super(recipe);
         this.fluidInputHandler = fluidInputHandler;
         this.chemicalInputHandler = chemicalInputHandler;

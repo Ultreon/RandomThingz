@@ -1,9 +1,6 @@
 package com.qsoftware.forgemod.api.datagen.recipe.builder;
 
 import com.google.gson.JsonObject;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.JsonConstants;
 import com.qsoftware.forgemod.api.SerializerHelper;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
@@ -13,8 +10,12 @@ import com.qsoftware.forgemod.api.math.FloatingLong;
 import com.qsoftware.forgemod.api.recipes.inputs.FluidStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.ItemStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -24,13 +25,13 @@ public class PressurizedReactionRecipeBuilder extends MekanismRecipeBuilder<Pres
     private final ItemStackIngredient inputSolid;
     private final FluidStackIngredient inputFluid;
     private final GasStackIngredient inputGas;
-    private FloatingLong energyRequired = FloatingLong.ZERO;
     private final int duration;
     private final ItemStack outputItem;
     private final GasStack outputGas;
+    private FloatingLong energyRequired = FloatingLong.ZERO;
 
     protected PressurizedReactionRecipeBuilder(ItemStackIngredient inputSolid, FluidStackIngredient inputFluid, GasStackIngredient inputGas, int duration,
-          ItemStack outputItem, GasStack outputGas) {
+                                               ItemStack outputItem, GasStack outputGas) {
         super(mekSerializer("reaction"));
         this.inputSolid = inputSolid;
         this.inputFluid = inputFluid;
@@ -41,7 +42,7 @@ public class PressurizedReactionRecipeBuilder extends MekanismRecipeBuilder<Pres
     }
 
     public static PressurizedReactionRecipeBuilder reaction(ItemStackIngredient inputSolid, FluidStackIngredient inputFluid, GasStackIngredient inputGas,
-          int duration, ItemStack outputItem) {
+                                                            int duration, ItemStack outputItem) {
         if (outputItem.isEmpty()) {
             throw new IllegalArgumentException("This reaction recipe requires a non empty output item.");
         }
@@ -50,7 +51,7 @@ public class PressurizedReactionRecipeBuilder extends MekanismRecipeBuilder<Pres
     }
 
     public static PressurizedReactionRecipeBuilder reaction(ItemStackIngredient inputSolid, FluidStackIngredient inputFluid, GasStackIngredient inputGas, int duration,
-          GasStack outputGas) {
+                                                            GasStack outputGas) {
         if (outputGas.isEmpty()) {
             throw new IllegalArgumentException("This reaction recipe requires a non empty output gas.");
         }
@@ -59,7 +60,7 @@ public class PressurizedReactionRecipeBuilder extends MekanismRecipeBuilder<Pres
     }
 
     public static PressurizedReactionRecipeBuilder reaction(ItemStackIngredient inputSolid, FluidStackIngredient inputFluid, GasStackIngredient inputGas, int duration,
-          ItemStack outputItem, GasStack outputGas) {
+                                                            ItemStack outputItem, GasStack outputGas) {
         if (outputItem.isEmpty() || outputGas.isEmpty()) {
             throw new IllegalArgumentException("This reaction recipe requires non empty item and gas outputs.");
         }

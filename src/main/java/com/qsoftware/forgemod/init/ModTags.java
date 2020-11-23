@@ -1,18 +1,27 @@
 package com.qsoftware.forgemod.init;
 
+import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
-import com.qsoftware.forgemod.QForgeMod;
 
 public class ModTags {
+    private static ResourceLocation forgeId(String path) {
+        return new ResourceLocation("forge", path);
+    }
+
+    private static ResourceLocation modId(String path) {
+        return new ResourceLocation(QForgeMod.MOD_ID, path);
+    }
+
     public static final class Blocks {
         public static final ITag.INamedTag<Block> DRYING_RACKS = mod("drying_racks");
 
-        private Blocks() {}
+        private Blocks() {
+        }
 
         private static ITag.INamedTag<Block> forge(String path) {
             return BlockTags.makeWrapperTag(forgeId(path).toString());
@@ -32,7 +41,8 @@ public class ModTags {
         public static final ITag.INamedTag<Item> DRYING_RACKS = mod("drying_racks");
         public static final ITag.INamedTag<Item> STEELS = mod("ingots/steels");
 
-        private Items() {}
+        private Items() {
+        }
 
         private static ITag.INamedTag<Item> forge(String path) {
             return ItemTags.makeWrapperTag(forgeId(path).toString());
@@ -41,13 +51,5 @@ public class ModTags {
         private static ITag.INamedTag<Item> mod(String path) {
             return ItemTags.makeWrapperTag(modId(path).toString());
         }
-    }
-
-    private static ResourceLocation forgeId(String path) {
-        return new ResourceLocation("forge", path);
-    }
-
-    private static ResourceLocation modId(String path) {
-        return new ResourceLocation(QForgeMod.MOD_ID, path);
     }
 }

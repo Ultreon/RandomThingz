@@ -1,5 +1,9 @@
 package com.qsoftware.forgemod.objects.block.refinery;
 
+import com.qsoftware.forgemod.init.ModContainers;
+import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
+import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
@@ -9,10 +13,6 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fluids.FluidStack;
-import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
-import com.qsoftware.silent.lib.util.InventoryUtils;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
-import com.qsoftware.forgemod.init.ModContainers;
 
 public class RefineryContainer extends AbstractMachineBaseContainer<RefineryTileEntity> {
     public RefineryContainer(int id, PlayerInventory playerInventory) {

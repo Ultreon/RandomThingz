@@ -1,16 +1,16 @@
 package com.qsoftware.forgemod.objects.block.generator.diesel;
 
+import com.qsoftware.forgemod.api.IFluidContainer;
+import com.qsoftware.forgemod.init.ModContainers;
+import com.qsoftware.forgemod.objects.block.generator.AbstractFluidFuelGeneratorTileEntity;
+import com.qsoftware.forgemod.objects.block.generator.AbstractFluidGeneratorContainer;
+import com.qsoftware.forgemod.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
-import com.qsoftware.forgemod.api.IFluidContainer;
-import com.qsoftware.forgemod.objects.block.generator.AbstractFluidFuelGeneratorTileEntity;
-import com.qsoftware.forgemod.objects.block.generator.AbstractFluidGeneratorContainer;
-import com.qsoftware.forgemod.init.ModContainers;
-import com.qsoftware.forgemod.util.InventoryUtils;
 
 public class DieselGeneratorContainer extends AbstractFluidGeneratorContainer<DieselGeneratorTileEntity> {
     public DieselGeneratorContainer(int id, PlayerInventory player) {
@@ -18,7 +18,7 @@ public class DieselGeneratorContainer extends AbstractFluidGeneratorContainer<Di
     }
 
     public DieselGeneratorContainer(int id, PlayerInventory player, DieselGeneratorTileEntity tileEntity, IIntArray fields) {
-        super(ModContainers.dieselGenerator, id, tileEntity, fields);
+        super(ModContainers.DIESEL_GENERATOR, id, tileEntity, fields);
 
         this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
         this.addSlot(new Slot(this.tileEntity, 1, 80, 59));

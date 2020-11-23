@@ -1,5 +1,9 @@
 package com.qsoftware.forgemod.objects.block.mixer;
 
+import com.qsoftware.forgemod.init.ModContainers;
+import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
+import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
@@ -9,10 +13,6 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fluids.FluidStack;
-import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
-import com.qsoftware.silent.lib.util.InventoryUtils;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
-import com.qsoftware.forgemod.init.ModContainers;
 
 public class MixerContainer extends AbstractMachineBaseContainer<MixerTileEntity> {
     public MixerContainer(int id, PlayerInventory player) {
@@ -20,7 +20,7 @@ public class MixerContainer extends AbstractMachineBaseContainer<MixerTileEntity
     }
 
     public MixerContainer(int id, PlayerInventory player, MixerTileEntity tileEntity, IIntArray fields) {
-        super(ModContainers.mixer, id, tileEntity, fields);
+        super(ModContainers.MIXER, id, tileEntity, fields);
 
         this.addSlot(new Slot(this.tileEntity, 0, 8, 16));
         this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 8, 59));

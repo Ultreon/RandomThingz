@@ -1,12 +1,13 @@
 package com.qsoftware.forgemod.api.energy;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.math.FloatingLong;
 import com.qsoftware.forgemod.api.math.FloatingLongTransferUtils;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.Direction;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * A sided variant of {@link IStrictEnergyHandler}
@@ -27,11 +28,10 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
 
     /**
      * A sided variant of {@link IStrictEnergyHandler#getEnergyContainerCount()}, docs copied for convenience.
-     *
+     * <p>
      * Returns the number of energy storage units ("containers") available
      *
      * @param side The side we are interacting with the handler from (null for internal).
-     *
      * @return The number of containers available
      */
     int getEnergyContainerCount(@Nullable Direction side);
@@ -43,7 +43,7 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
 
     /**
      * A sided variant of {@link IStrictEnergyHandler#getEnergy(int)}, docs copied for convenience.
-     *
+     * <p>
      * Returns the energy stored in a given container.
      *
      * <p>
@@ -57,7 +57,6 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
      *
      * @param container Container to query.
      * @param side      The side we are interacting with the handler from (null for internal).
-     *
      * @return Energy in a given container. {@link FloatingLong#ZERO} if the container has no energy stored.
      */
     FloatingLong getEnergy(int container, @Nullable Direction side);
@@ -69,13 +68,12 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
 
     /**
      * A sided variant of {@link IStrictEnergyHandler#setEnergy(int, FloatingLong)}, docs copied for convenience.
-     *
+     * <p>
      * Overrides the energy stored in the given container. This method may throw an error if it is called unexpectedly.
      *
      * @param container Container to modify
      * @param energy    Energy to set the container to (may be {@link FloatingLong#ZERO}).
      * @param side      The side we are interacting with the handler from (null for internal).
-     *
      * @throws RuntimeException if the handler is called in a way that the handler was not expecting. Such as if it was not expecting this to be called at all.
      **/
     void setEnergy(int container, FloatingLong energy, @Nullable Direction side);
@@ -87,7 +85,7 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
 
     /**
      * A sided variant of {@link IStrictEnergyHandler#getMaxEnergy(int)}, docs copied for convenience.
-     *
+     * <p>
      * Retrieves the maximum amount of energy that can be stored in a given container.
      *
      * <p>
@@ -101,7 +99,6 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
      *
      * @param container Container to query.
      * @param side      The side we are interacting with the handler from (null for internal).
-     *
      * @return The maximum energy that can be stored in the container.
      */
     FloatingLong getMaxEnergy(int container, @Nullable Direction side);
@@ -113,7 +110,7 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
 
     /**
      * A sided variant of {@link IStrictEnergyHandler#getNeededEnergy(int)}, docs copied for convenience.
-     *
+     * <p>
      * Retrieves the amount of energy that is needed to fill a given container.
      *
      * <p>
@@ -127,7 +124,6 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
      *
      * @param container Container to query.
      * @param side      The side we are interacting with the handler from (null for internal).
-     *
      * @return The energy needed to fill the container.
      */
     FloatingLong getNeededEnergy(int container, @Nullable Direction side);
@@ -150,7 +146,6 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
      * @param amount    Energy to insert. This must not be modified by the container.
      * @param action    The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
      * @param side      The side we are interacting with the handler from (null for internal).
-     *
      * @return The remaining energy that was not inserted (if the entire amount is accepted, then return {@link FloatingLong#ZERO}). The returned {@link FloatingLong} can
      * be safely modified afterwards.
      */
@@ -163,7 +158,7 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
 
     /**
      * A sided variant of {@link IStrictEnergyHandler#extractEnergy(int, FloatingLong, Action)}, docs copied for convenience.
-     *
+     * <p>
      * Extracts energy from a specific container in this handler.
      * <p>
      * The returned value must be {@link FloatingLong#ZERO} if nothing is extracted, otherwise its must be less than or equal to {@code amount}.
@@ -173,7 +168,6 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
      * @param amount    Amount of energy to extract (may be greater than the current stored amount or the container's capacity) This must not be modified by the handler.
      * @param action    The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
      * @param side      The side we are interacting with the handler from (null for internal).
-     *
      * @return Energy extracted from the container, must be {@link FloatingLong#ZERO} if no energy can be extracted. The returned {@link FloatingLong} can be safely
      * modified after, so the container should return a new or copied {@link FloatingLong}.
      */
@@ -197,22 +191,20 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
      * @param amount Energy to insert. This must not be modified by the handler.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
      * @param side   The side we are interacting with the handler from (null for internal).
-     *
      * @return The remaining energy that was not inserted (if the entire amount is accepted, then return {@link FloatingLong#ZERO}). The returned {@link FloatingLong} can
      * be safely modified after.
-     *
      * @implNote The default implementation of this method, attempts to insert into containers that contain the energy, and if it will not all fit, falls back to
      * inserting into any empty containers.
      * @apiNote It is not guaranteed that the default implementation will be how this {@link IStrictEnergyHandler} ends up distributing the insertion.
      */
     default FloatingLong insertEnergy(FloatingLong amount, @Nullable Direction side, Action action) {
         return FloatingLongTransferUtils.insert(amount, action, () -> getEnergyContainerCount(side), container -> getEnergy(container, side),
-              (container, a, act) -> insertEnergy(container, a, side, act));
+                (container, a, act) -> insertEnergy(container, a, side, act));
     }
 
     /**
      * A sided variant of {@link IStrictEnergyHandler#extractEnergy(FloatingLong, Action)}, docs copied for convenience.
-     *
+     * <p>
      * Extracts energy from this handler, distribution is left <strong>entirely</strong> to this {@link IStrictEnergyHandler}.
      * <p>
      * The returned value must be {@link FloatingLong#ZERO} if nothing is extracted, otherwise its must be less than or equal to {@code amount}.
@@ -221,10 +213,8 @@ public interface ISidedStrictEnergyHandler extends IStrictEnergyHandler {
      * @param amount Amount of energy to extract (may be greater than the current stored amount or the container's capacity) This must not be modified by the handler.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
      * @param side   The side we are interacting with the handler from (null for internal).
-     *
      * @return Energy extracted from the container, must be {@link FloatingLong#ZERO} if no energy can be extracted. The returned {@link FloatingLong} can be safely
      * modified after, so the container should return a new or copied {@link FloatingLong}.
-     *
      * @implNote The default implementation of this method, extracts across all containers to try and reach the desired amount to extract.
      * @apiNote It is not guaranteed that the default implementation will be how this {@link IStrictEnergyHandler} ends up distributing the extraction.
      */

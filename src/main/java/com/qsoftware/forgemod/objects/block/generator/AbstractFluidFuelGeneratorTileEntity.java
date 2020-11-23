@@ -1,5 +1,11 @@
 package com.qsoftware.forgemod.objects.block.generator;
 
+import com.qsoftware.forgemod.api.IFluidContainer;
+import com.qsoftware.forgemod.api.RedstoneMode;
+import com.qsoftware.forgemod.config.Config;
+import com.qsoftware.forgemod.util.InventoryUtils;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.silent.utils.EnumUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -15,12 +21,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import com.qsoftware.forgemod.api.IFluidContainer;
-import com.qsoftware.forgemod.api.RedstoneMode;
-import com.qsoftware.forgemod.config.Config;
-import com.qsoftware.forgemod.util.InventoryUtils;
-import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.silent.utils.EnumUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,8 +29,6 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
     public static final int FIELDS_COUNT = 9;
 
     protected final FluidTank tank;
-    private final LazyOptional<IFluidHandler> fluidHandlerCap;
-
     protected final IIntArray fields = new IIntArray() {
         @SuppressWarnings("deprecation") // Use of Registry.FLUID
         @Override
@@ -82,6 +80,7 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
             return FIELDS_COUNT;
         }
     };
+    private final LazyOptional<IFluidHandler> fluidHandlerCap;
 
     protected AbstractFluidFuelGeneratorTileEntity(TileEntityType<?> typeIn, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, FluidTank tankIn) {
         super(typeIn, inventorySize, maxEnergy, maxReceive, maxExtract, MachineTier.STANDARD);

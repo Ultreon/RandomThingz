@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.cache.chemical;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.Chemical;
@@ -11,10 +10,12 @@ import com.qsoftware.forgemod.api.recipes.inputs.IInputHandler;
 import com.qsoftware.forgemod.api.recipes.outputs.IOutputHandler;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ItemStackToChemicalCachedRecipe<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>,
-      RECIPE extends ItemStackToChemicalRecipe<CHEMICAL, STACK>> extends CachedRecipe<RECIPE> {
+        RECIPE extends ItemStackToChemicalRecipe<CHEMICAL, STACK>> extends CachedRecipe<RECIPE> {
 
     private final IOutputHandler<@NonNull STACK> outputHandler;
     private final IInputHandler<@NonNull ItemStack> inputHandler;

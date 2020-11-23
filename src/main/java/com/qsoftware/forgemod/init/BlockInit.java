@@ -1,17 +1,13 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.objects.blocks.GamePcBlock;
 import com.qsoftware.forgemod.objects.blocks.base.*;
 import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
-import com.qsoftware.forgemod.objects.items.base.FaceableBlock;
+import com.qsoftware.forgemod.objects.items.type.FaceableBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.TallBlockItem;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
@@ -24,6 +20,7 @@ import java.util.function.Supplier;
  * Blocks initialization class
  *
  * @author Qboi123
+ * @deprecated use {@link ModBlocks} instead.
  */
 @Deprecated
 @SuppressWarnings("unused")
@@ -44,7 +41,7 @@ public class BlockInit extends ObjectInit<Block> {
     public static final RegistryObject<Block> EUCALYPTUS_LOG = register("eucalyptus_log", () -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.QUARTZ).hardnessAndResistance(2.0f).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
 
     // Furniture
-    public static final RegistryObject<Block> MODERN_SOFA = register("modern_sofa", () -> new FaceableBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7f, 15.0f).sound(SoundType.WOOD)));
+//    public static final RegistryObject<Block> MODERN_SOFA = register("modern_sofa", () -> new FaceableBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7f, 15.0f).sound(SoundType.WOOD)));
     public static final RegistryObject<Block> GAME_PC = register("game_pc", () -> new GamePcBlock(Block.Properties.create(Material.ANVIL).hardnessAndResistance(4.7f).sound(SoundType.ANVIL)));
     public static final RegistryObject<Block> ROUTER = register("router", () -> new FaceableBlock(Block.Properties.create(Material.ANVIL).hardnessAndResistance(4.7f).sound(SoundType.ANVIL)));
 
@@ -68,7 +65,7 @@ public class BlockInit extends ObjectInit<Block> {
 //    public static final RegistryObject<Block> COPPER_ORE = register("copper_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> STEEL_ORE = register("steel_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.125f, 3.375f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> TUNGSTEN_ORE = register("tungsten_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(5.125f, 6.425f).sound(SoundType.STONE)));
-//    public static final RegistryObject<Block> URANIUM_ORE = register("uranium_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.325f, 4.5625f).sound(SoundType.STONE)));
+    //    public static final RegistryObject<Block> URANIUM_ORE = register("uranium_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.325f, 4.5625f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> RUBY_ORE = register("ruby_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.75f, 2.875f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> AMETHYST_ORE = register("amethyst_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.25f, 2.375f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> AQUAMARINE_ORE = register("aquamarine_ore", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.155f, 2.4635f).sound(SoundType.STONE)));
@@ -82,7 +79,7 @@ public class BlockInit extends ObjectInit<Block> {
 //    public static final RegistryObject<Block> COPPER_BLOCK = register("copper_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(2.9f, 2.9f).sound(SoundType.STONE)));
 //    public static final RegistryObject<Block> STEEL_BLOCK = register("steel_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3.9875f, 4.275f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> TUNGSTEN_BLOCK = register("tungsten_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(5.9875f, 6.5525f).sound(SoundType.STONE)));
-//    public static final RegistryObject<Block> URANIUM_BLOCK = register("uranium_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(2.8345f, 4.4675f).sound(SoundType.STONE)));
+    //    public static final RegistryObject<Block> URANIUM_BLOCK = register("uranium_block", () -> new BaseBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(2.8345f, 4.4675f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> RUBY_BLOCK = register("ruby_block", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(4.25f, 5.5f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> AMETHYST_BLOCK = register("amethyst_block", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.875f, 4.0625f).sound(SoundType.STONE)));
     public static final RegistryObject<Block> AQUAMARINE_BLOCK = register("aquamarine_block", () -> new BaseBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.995f, 4.1275f).sound(SoundType.STONE)));

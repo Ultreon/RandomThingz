@@ -1,18 +1,5 @@
 package com.qsoftware.forgemod.api.chemical.merged;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.BooleanSupplier;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.chemical.Chemical;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
@@ -30,19 +17,19 @@ import com.qsoftware.forgemod.api.chemical.pigment.PigmentStack;
 import com.qsoftware.forgemod.api.chemical.slurry.ISlurryTank;
 import com.qsoftware.forgemod.api.chemical.slurry.Slurry;
 import com.qsoftware.forgemod.api.chemical.slurry.SlurryStack;
+import mcp.MethodsReturnNonnullByDefault;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.*;
+import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class MergedChemicalTank {
-
-    public static MergedChemicalTank create(IGasTank gasTank, IInfusionTank infusionTank, IPigmentTank pigmentTank, ISlurryTank slurryTank) {
-        Objects.requireNonNull(gasTank, "Gas tank cannot be null");
-        Objects.requireNonNull(infusionTank, "Infusion tank cannot be null");
-        Objects.requireNonNull(pigmentTank, "Pigment tank cannot be null");
-        Objects.requireNonNull(slurryTank, "Slurry tank cannot be null");
-        return new MergedChemicalTank(gasTank, infusionTank, pigmentTank, slurryTank);
-    }
 
     private final Map<ChemicalTankType<?, ?, ?>, IChemicalTank<?, ?>> tankMap = new HashMap<>();
 
@@ -72,6 +59,14 @@ public class MergedChemicalTank {
                 throw new IllegalArgumentException("No chemical tank supplied for type: " + type);
             }
         }
+    }
+
+    public static MergedChemicalTank create(IGasTank gasTank, IInfusionTank infusionTank, IPigmentTank pigmentTank, ISlurryTank slurryTank) {
+        Objects.requireNonNull(gasTank, "Gas tank cannot be null");
+        Objects.requireNonNull(infusionTank, "Infusion tank cannot be null");
+        Objects.requireNonNull(pigmentTank, "Pigment tank cannot be null");
+        Objects.requireNonNull(slurryTank, "Slurry tank cannot be null");
+        return new MergedChemicalTank(gasTank, infusionTank, pigmentTank, slurryTank);
     }
 
     public Collection<IChemicalTank<?, ?>> getAllTanks() {

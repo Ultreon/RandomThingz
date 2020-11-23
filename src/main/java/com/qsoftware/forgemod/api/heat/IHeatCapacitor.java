@@ -1,11 +1,12 @@
 package com.qsoftware.forgemod.api.heat;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.IContentsListener;
 import com.qsoftware.forgemod.api.NBTConstants;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.INBTSerializable;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -23,7 +24,6 @@ public interface IHeatCapacitor extends INBTSerializable<CompoundNBT>, IContents
      * dissipate. The trade off is that it also allows for lower amounts of heat to be inserted.
      *
      * @return Inverse conduction coefficient of this capacitor.
-     *
      * @apiNote Must be greater than {@code 0}
      */
     double getInverseConduction();
@@ -39,7 +39,6 @@ public interface IHeatCapacitor extends INBTSerializable<CompoundNBT>, IContents
      * Returns the heat capacity of this capacitor. This number can be thought of as specific heat x mass of the capacitor itself.
      *
      * @return Heat capacity of this capacitor.
-     *
      * @apiNote Must be at least {@code 1}
      */
     double getHeatCapacity();
@@ -55,7 +54,6 @@ public interface IHeatCapacitor extends INBTSerializable<CompoundNBT>, IContents
      * Overrides the amount of heat in this {@link IHeatCapacitor}.
      *
      * @param heat Heat to set this capacitor's storage to (may be {@code 0}).
-     *
      * @throws RuntimeException if the handler is called in a way that the handler was not expecting. Such as if it was not expecting this to be called at all.
      * @implNote If the internal amount does get updated make sure to call {@link #onContentsChanged()}
      */
@@ -65,7 +63,6 @@ public interface IHeatCapacitor extends INBTSerializable<CompoundNBT>, IContents
      * Handles a change of heat in this capacitor. Can be positive or negative.
      *
      * @param transfer The amount being transferred.
-     *
      * @implNote If the internal amount does get updated make sure to call {@link #onContentsChanged()}
      */
     void handleHeat(double transfer);

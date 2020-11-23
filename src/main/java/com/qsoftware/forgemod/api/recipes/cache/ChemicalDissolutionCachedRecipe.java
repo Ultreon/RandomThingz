@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.cache;
 
-import java.util.function.LongSupplier;
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.gas.GasStack;
@@ -10,6 +8,9 @@ import com.qsoftware.forgemod.api.recipes.inputs.IInputHandler;
 import com.qsoftware.forgemod.api.recipes.inputs.ILongInputHandler;
 import com.qsoftware.forgemod.api.recipes.outputs.BoxedChemicalOutputHandler;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.LongSupplier;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -21,7 +22,7 @@ public class ChemicalDissolutionCachedRecipe extends CachedRecipe<ChemicalDissol
     private final LongSupplier gasUsage;
 
     public ChemicalDissolutionCachedRecipe(ChemicalDissolutionRecipe recipe, IInputHandler<@NonNull ItemStack> itemInputHandler,
-          ILongInputHandler<@NonNull GasStack> chemicalInputHandler, LongSupplier gasUsage, BoxedChemicalOutputHandler outputHandler) {
+                                           ILongInputHandler<@NonNull GasStack> chemicalInputHandler, LongSupplier gasUsage, BoxedChemicalOutputHandler outputHandler) {
         super(recipe);
         this.itemInputHandler = itemInputHandler;
         this.gasInputHandler = chemicalInputHandler;

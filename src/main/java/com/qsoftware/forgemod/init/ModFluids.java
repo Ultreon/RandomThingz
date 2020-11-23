@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.init;
 
+import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.util.ResourceLocation;
@@ -7,7 +8,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
-import com.qsoftware.forgemod.QForgeMod;
 
 import java.util.function.Supplier;
 
@@ -19,7 +19,8 @@ public final class ModFluids {
     public static Fluid ETHANE;
     public static Fluid POLYETHYLENE;
 
-    private ModFluids() {}
+    private ModFluids() {
+    }
 
     public static void registerFluids(RegistryEvent.Register<Fluid> event) {
         ForgeFlowingFluid.Properties oilProps = properties("oil", () -> OIL, () -> FLOWING_OIL)

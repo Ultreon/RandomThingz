@@ -1,10 +1,10 @@
 package com.qsoftware.forgemod.objects.block.crusher;
 
+import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.objects.block.AbstractMachineScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.objects.block.AbstractMachineScreen;
 
 public class CrusherScreen extends AbstractMachineScreen<CrusherContainer> {
     public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/crusher.png");

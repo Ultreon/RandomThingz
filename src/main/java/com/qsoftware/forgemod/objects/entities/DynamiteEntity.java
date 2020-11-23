@@ -6,11 +6,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.network.IPacket;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
@@ -89,7 +87,7 @@ public class DynamiteEntity extends ProjectileItemEntity {
     public Entity changeDimension(@NotNull ServerWorld server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
         Entity entity = this.func_234616_v_();
         if (entity != null && entity.world.getDimensionKey() != server.getDimensionKey()) {
-            this.setShooter((Entity)null);
+            this.setShooter(null);
         }
 
         return super.changeDimension(server, teleporter);

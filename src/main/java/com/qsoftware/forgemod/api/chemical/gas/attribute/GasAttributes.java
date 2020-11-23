@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.api.chemical.gas.attribute;
 
-import java.util.List;
-import java.util.function.IntSupplier;
 import com.qsoftware.forgemod.api.chemical.attribute.ChemicalAttribute;
 import com.qsoftware.forgemod.api.chemical.gas.Gas;
 import com.qsoftware.forgemod.api.math.FloatingLong;
@@ -10,6 +8,9 @@ import com.qsoftware.forgemod.api.providers.IGasProvider;
 import com.qsoftware.forgemod.api.text.APILang;
 import com.qsoftware.forgemod.api.text.EnumColor;
 import net.minecraft.util.text.ITextComponent;
+
+import java.util.List;
+import java.util.function.IntSupplier;
 
 public class GasAttributes {
 

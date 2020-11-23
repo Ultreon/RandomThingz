@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.cache;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.merged.BoxedChemicalStack;
@@ -8,6 +7,8 @@ import com.qsoftware.forgemod.api.recipes.ChemicalCrystallizerRecipe;
 import com.qsoftware.forgemod.api.recipes.inputs.BoxedChemicalInputHandler;
 import com.qsoftware.forgemod.api.recipes.outputs.IOutputHandler;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault

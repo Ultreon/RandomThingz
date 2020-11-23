@@ -1,8 +1,5 @@
 package com.qsoftware.forgemod.api.recipes;
 
-import java.util.function.BiPredicate;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
@@ -10,14 +7,18 @@ import com.qsoftware.forgemod.api.chemical.gas.GasStack;
 import com.qsoftware.forgemod.api.chemical.merged.BoxedChemicalStack;
 import com.qsoftware.forgemod.api.recipes.inputs.ItemStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.Contract;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.BiPredicate;
+
 /**
  * Inputs: ItemStack + GasStack Output: GasStack
- *
+ * <p>
  * Chemical Dissolution Chamber
  *
  * @apiNote The gas input is a base value, and will still be multiplied by a per tick usage

@@ -1,5 +1,10 @@
 package com.qsoftware.forgemod.objects.block.generator.coal;
 
+import com.qsoftware.forgemod.init.ModTags;
+import com.qsoftware.forgemod.init.ModTileEntities;
+import com.qsoftware.forgemod.objects.block.generator.AbstractGeneratorTileEntity;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.forgemod.util.TextUtil;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
@@ -9,11 +14,6 @@ import net.minecraft.tileentity.AbstractFurnaceTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.ForgeHooks;
-import com.qsoftware.forgemod.objects.block.generator.AbstractGeneratorTileEntity;
-import com.qsoftware.forgemod.init.ModTags;
-import com.qsoftware.forgemod.init.ModTileEntities;
-import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.forgemod.util.TextUtil;
 
 import javax.annotation.Nullable;
 

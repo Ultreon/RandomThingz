@@ -1,5 +1,8 @@
 package com.qsoftware.forgemod.objects.block.pump;
 
+import com.qsoftware.forgemod.init.ModContainers;
+import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
+import com.qsoftware.forgemod.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
@@ -9,9 +12,6 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fluids.FluidStack;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
-import com.qsoftware.forgemod.init.ModContainers;
-import com.qsoftware.forgemod.util.InventoryUtils;
 
 public class PumpContainer extends AbstractMachineBaseContainer<PumpTileEntity> {
     public PumpContainer(int id, PlayerInventory playerInventory) {

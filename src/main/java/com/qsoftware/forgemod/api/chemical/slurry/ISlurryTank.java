@@ -1,11 +1,12 @@
 package com.qsoftware.forgemod.api.chemical.slurry;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.api.chemical.IChemicalTank;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.Constants.NBT;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Convenience extension to make working with generics easier.

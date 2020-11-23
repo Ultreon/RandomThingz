@@ -1,12 +1,13 @@
 package com.qsoftware.forgemod.api.chemical;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import java.util.Map;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.chemical.attribute.ChemicalAttribute;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Map;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault

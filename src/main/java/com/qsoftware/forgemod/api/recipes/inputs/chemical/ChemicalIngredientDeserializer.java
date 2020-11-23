@@ -1,18 +1,6 @@
 package com.qsoftware.forgemod.api.recipes.inputs.chemical;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
-import java.util.function.IntFunction;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
+import com.google.gson.*;
 import com.qsoftware.forgemod.api.JsonConstants;
 import com.qsoftware.forgemod.api.chemical.Chemical;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
@@ -26,10 +14,19 @@ import com.qsoftware.forgemod.api.chemical.pigment.PigmentStack;
 import com.qsoftware.forgemod.api.chemical.slurry.Slurry;
 import com.qsoftware.forgemod.api.chemical.slurry.SlurryStack;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.ChemicalStackIngredient.MultiIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.IntFunction;
 
 /**
  * Internal helper class used to reduce the additional code needed to deserialize different types of chemical stack ingredients
@@ -38,23 +35,23 @@ import net.minecraft.util.ResourceLocation;
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("Convert2Diamond")//The types cannot properly be inferred
 public class ChemicalIngredientDeserializer<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>,
-      INGREDIENT extends IChemicalStackIngredient<CHEMICAL, STACK>> {
+        INGREDIENT extends IChemicalStackIngredient<CHEMICAL, STACK>> {
 
     public static final ChemicalIngredientDeserializer<Gas, GasStack, GasStackIngredient> GAS = new ChemicalIngredientDeserializer<Gas, GasStack, GasStackIngredient>(
-          "gas", ChemicalIngredientInfo.GAS, ChemicalTags.GAS, GasStack::readFromPacket, Gas::getFromRegistry, GasStackIngredient::from, GasStackIngredient::from,
-          GasStackIngredient.Multi::new, GasStackIngredient[]::new);
+            "gas", ChemicalIngredientInfo.GAS, ChemicalTags.GAS, GasStack::readFromPacket, Gas::getFromRegistry, GasStackIngredient::from, GasStackIngredient::from,
+            GasStackIngredient.Multi::new, GasStackIngredient[]::new);
     public static final ChemicalIngredientDeserializer<InfuseType, InfusionStack, InfusionStackIngredient> INFUSION =
-          new ChemicalIngredientDeserializer<InfuseType, InfusionStack, InfusionStackIngredient>("infuse type", ChemicalIngredientInfo.INFUSION,
-                ChemicalTags.INFUSE_TYPE, InfusionStack::readFromPacket, InfuseType::getFromRegistry, InfusionStackIngredient::from, InfusionStackIngredient::from,
-                InfusionStackIngredient.Multi::new, InfusionStackIngredient[]::new);
+            new ChemicalIngredientDeserializer<InfuseType, InfusionStack, InfusionStackIngredient>("infuse type", ChemicalIngredientInfo.INFUSION,
+                    ChemicalTags.INFUSE_TYPE, InfusionStack::readFromPacket, InfuseType::getFromRegistry, InfusionStackIngredient::from, InfusionStackIngredient::from,
+                    InfusionStackIngredient.Multi::new, InfusionStackIngredient[]::new);
     public static final ChemicalIngredientDeserializer<Pigment, PigmentStack, PigmentStackIngredient> PIGMENT =
-          new ChemicalIngredientDeserializer<Pigment, PigmentStack, PigmentStackIngredient>("pigment", ChemicalIngredientInfo.PIGMENT, ChemicalTags.PIGMENT,
-                PigmentStack::readFromPacket, Pigment::getFromRegistry, PigmentStackIngredient::from, PigmentStackIngredient::from, PigmentStackIngredient.Multi::new,
-                PigmentStackIngredient[]::new);
+            new ChemicalIngredientDeserializer<Pigment, PigmentStack, PigmentStackIngredient>("pigment", ChemicalIngredientInfo.PIGMENT, ChemicalTags.PIGMENT,
+                    PigmentStack::readFromPacket, Pigment::getFromRegistry, PigmentStackIngredient::from, PigmentStackIngredient::from, PigmentStackIngredient.Multi::new,
+                    PigmentStackIngredient[]::new);
     public static final ChemicalIngredientDeserializer<Slurry, SlurryStack, SlurryStackIngredient> SLURRY =
-          new ChemicalIngredientDeserializer<Slurry, SlurryStack, SlurryStackIngredient>("slurry", ChemicalIngredientInfo.SLURRY, ChemicalTags.SLURRY,
-                SlurryStack::readFromPacket, Slurry::getFromRegistry, SlurryStackIngredient::from, SlurryStackIngredient::from, SlurryStackIngredient.Multi::new,
-                SlurryStackIngredient[]::new);
+            new ChemicalIngredientDeserializer<Slurry, SlurryStack, SlurryStackIngredient>("slurry", ChemicalIngredientInfo.SLURRY, ChemicalTags.SLURRY,
+                    SlurryStack::readFromPacket, Slurry::getFromRegistry, SlurryStackIngredient::from, SlurryStackIngredient::from, SlurryStackIngredient.Multi::new,
+                    SlurryStackIngredient[]::new);
 
     private final ChemicalTags<CHEMICAL> tags;
     private final Function<PacketBuffer, STACK> fromPacket;
@@ -67,8 +64,8 @@ public class ChemicalIngredientDeserializer<CHEMICAL extends Chemical<CHEMICAL>,
     private final String name;
 
     private ChemicalIngredientDeserializer(String name, ChemicalIngredientInfo<CHEMICAL, STACK> info, ChemicalTags<CHEMICAL> tags, Function<PacketBuffer, STACK> fromPacket,
-          Function<ResourceLocation, CHEMICAL> fromRegistry, Function<STACK, INGREDIENT> stackToIngredient, TagIngredientCreator<CHEMICAL, STACK, INGREDIENT> tagToIngredient,
-          Function<INGREDIENT[], INGREDIENT> multiCreator, IntFunction<INGREDIENT[]> arrayCreator) {
+                                           Function<ResourceLocation, CHEMICAL> fromRegistry, Function<STACK, INGREDIENT> stackToIngredient, TagIngredientCreator<CHEMICAL, STACK, INGREDIENT> tagToIngredient,
+                                           Function<INGREDIENT[], INGREDIENT> multiCreator, IntFunction<INGREDIENT[]> arrayCreator) {
         this.fromPacket = fromPacket;
         this.fromRegistry = fromRegistry;
         this.tags = tags;
@@ -200,16 +197,16 @@ public class ChemicalIngredientDeserializer<CHEMICAL extends Chemical<CHEMICAL>,
         return json;
     }
 
-    @FunctionalInterface
-    public interface TagIngredientCreator<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>,
-          INGREDIENT extends IChemicalStackIngredient<CHEMICAL, STACK>> {
-
-        INGREDIENT create(ITag<CHEMICAL> tag, long amount);
-    }
-
     public enum IngredientType {
         SINGLE,
         TAGGED,
         MULTI
+    }
+
+    @FunctionalInterface
+    public interface TagIngredientCreator<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>,
+            INGREDIENT extends IChemicalStackIngredient<CHEMICAL, STACK>> {
+
+        INGREDIENT create(ITag<CHEMICAL> tag, long amount);
     }
 }

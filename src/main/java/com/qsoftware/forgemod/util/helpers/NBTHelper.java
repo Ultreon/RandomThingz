@@ -41,7 +41,7 @@ public class NBTHelper {
         CompoundNBT nbt = new CompoundNBT();
         nbt.putInt("count", i.getCount());
         nbt.putString("item", i.getItem().getRegistryName().toString());
-        nbt.putByte("type", (byte)0);
+        nbt.putByte("type", (byte) 0);
         return nbt;
     }
 

@@ -1,17 +1,18 @@
 package com.qsoftware.forgemod.api.recipes;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.function.BiPredicate;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.gas.GasStack;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.Contract;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.BiPredicate;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault

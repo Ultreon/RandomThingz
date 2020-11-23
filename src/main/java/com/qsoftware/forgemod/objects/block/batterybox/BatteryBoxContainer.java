@@ -1,5 +1,9 @@
 package com.qsoftware.forgemod.objects.block.batterybox;
 
+import com.qsoftware.forgemod.init.ModContainers;
+import com.qsoftware.forgemod.objects.block.AbstractEnergyStorageContainer;
+import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
@@ -7,10 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraftforge.energy.CapabilityEnergy;
-import com.qsoftware.silent.lib.util.InventoryUtils;
-import com.qsoftware.forgemod.objects.block.AbstractEnergyStorageContainer;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
-import com.qsoftware.forgemod.init.ModContainers;
 
 public class BatteryBoxContainer extends AbstractEnergyStorageContainer {
     final BatteryBoxTileEntity tileEntity;
@@ -20,7 +20,7 @@ public class BatteryBoxContainer extends AbstractEnergyStorageContainer {
     }
 
     public BatteryBoxContainer(int id, PlayerInventory playerInventory, BatteryBoxTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.batteryBox, id, tileEntity, fieldsIn);
+        super(ModContainers.BATTERY_BOX, id, tileEntity, fieldsIn);
         this.tileEntity = tileEntity;
 
         this.addSlot(new Slot(this.tileEntity, 0, 71, 19));

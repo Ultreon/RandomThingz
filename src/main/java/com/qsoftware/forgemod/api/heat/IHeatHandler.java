@@ -1,7 +1,8 @@
 package com.qsoftware.forgemod.api.heat;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -18,7 +19,6 @@ public interface IHeatHandler {
      * Returns the temperature of a given capacitor.
      *
      * @param capacitor Capacitor to query.
-     *
      * @return Temperature of a given capacitor.
      */
     double getTemperature(int capacitor);
@@ -28,9 +28,7 @@ public interface IHeatHandler {
      * can dissipate. The trade off is that it also allows for lower amounts of heat to be inserted.
      *
      * @param capacitor Capacitor to query.
-     *
      * @return Inverse conduction coefficient of a given capacitor.
-     *
      * @apiNote Must be at least 1.
      */
     double getInverseConduction(int capacitor);
@@ -39,9 +37,7 @@ public interface IHeatHandler {
      * Returns the heat capacity of a given capacitor. This number can be thought of as the specific heat of the capacitor.
      *
      * @param capacitor Capacitor to query.
-     *
      * @return Heat capacity of a given capacitor.
-     *
      * @apiNote Must be at least 1.
      */
     double getHeatCapacity(int capacitor);
@@ -76,7 +72,6 @@ public interface IHeatHandler {
      * Calculates the total inverse conduction coefficient across all capacitors in this handler.
      *
      * @return The total inverse conduction coefficient across all capacitors in this handler.
-     *
      * @apiNote Must be greater than {@code 0}.
      */
     default double getTotalInverseConduction() {
@@ -115,7 +110,6 @@ public interface IHeatHandler {
      * Handles a change of heat in this block. Can be positive or negative.
      *
      * @param transfer The amount being transferred.
-     *
      * @implNote Default implementation splits it up to stored capacitors by heat capacity weightings.
      */
     default void handleHeat(double transfer) {

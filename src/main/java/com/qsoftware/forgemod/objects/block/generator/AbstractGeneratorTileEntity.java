@@ -1,5 +1,9 @@
 package com.qsoftware.forgemod.objects.block.generator;
 
+import com.qsoftware.forgemod.api.RedstoneMode;
+import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.silent.utils.EnumUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
@@ -7,10 +11,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.IIntArray;
-import com.qsoftware.forgemod.api.RedstoneMode;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
-import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.silent.utils.EnumUtils;
 
 public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTileEntity {
     public static final int FIELDS_COUNT = 7;
@@ -83,7 +83,7 @@ public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTil
 
     protected BlockState getInactiveState() {
         return getBlockState().with(AbstractFurnaceBlock.LIT, false);
-    };
+    }
 
     @Override
     public void tick() {

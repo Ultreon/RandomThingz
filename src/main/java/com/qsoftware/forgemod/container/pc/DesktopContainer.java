@@ -7,12 +7,11 @@ import net.minecraft.inventory.container.ContainerType;
 import org.jetbrains.annotations.Nullable;
 
 public class DesktopContainer extends Container {
-    private DesktopImage image = null;
+    private final DesktopImage image = null;
 
     protected DesktopContainer(@Nullable ContainerType<?> type, int id) {
         super(type, id);
     }
-
 
 
     @Override

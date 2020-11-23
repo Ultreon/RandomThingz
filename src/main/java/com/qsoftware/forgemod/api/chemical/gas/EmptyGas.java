@@ -1,11 +1,12 @@
 package com.qsoftware.forgemod.api.chemical.gas;
 
-import java.util.Collections;
-import java.util.Set;
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.MekanismAPI;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.Set;
 
 public final class EmptyGas extends Gas {
 

@@ -1,10 +1,11 @@
 package com.qsoftware.forgemod.api.inventory;
 
-import javax.annotation.Nonnull;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 @MethodsReturnNonnullByDefault
 public final class IgnoredIInventory implements IInventory {

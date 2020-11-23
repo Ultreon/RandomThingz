@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.cache;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.gas.GasStack;
@@ -10,6 +8,9 @@ import com.qsoftware.forgemod.api.recipes.inputs.IInputHandler;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
 import com.qsoftware.forgemod.api.recipes.outputs.IOutputHandler;
 import org.apache.commons.lang3.tuple.Pair;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -20,7 +21,7 @@ public class ChemicalInfuserCachedRecipe extends CachedRecipe<ChemicalInfuserRec
     private final IInputHandler<@NonNull GasStack> rightInputHandler;
 
     public ChemicalInfuserCachedRecipe(ChemicalInfuserRecipe recipe, IInputHandler<@NonNull GasStack> leftInputHandler, IInputHandler<@NonNull GasStack> rightInputHandler,
-          IOutputHandler<@NonNull GasStack> outputHandler) {
+                                       IOutputHandler<@NonNull GasStack> outputHandler) {
         super(recipe);
         this.leftInputHandler = leftInputHandler;
         this.rightInputHandler = rightInputHandler;

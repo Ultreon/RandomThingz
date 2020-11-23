@@ -1,5 +1,12 @@
 package com.qsoftware.forgemod.objects.block;
 
+import com.qsoftware.forgemod.api.RedstoneMode;
+import com.qsoftware.forgemod.capability.EnergyStorageImpl;
+import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
+import com.qsoftware.forgemod.util.Constants;
+import com.qsoftware.forgemod.util.InventoryUtils;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.silent.utils.EnumUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -9,13 +16,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.IIntArray;
-import com.qsoftware.forgemod.api.RedstoneMode;
-import com.qsoftware.forgemod.capability.EnergyStorageImpl;
-import com.qsoftware.forgemod.objects.item.MachineUpgrades;
-import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.InventoryUtils;
-import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.silent.utils.EnumUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collection;

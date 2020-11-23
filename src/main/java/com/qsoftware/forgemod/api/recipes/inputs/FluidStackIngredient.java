@@ -1,17 +1,6 @@
 package com.qsoftware.forgemod.api.recipes.inputs;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import com.google.gson.*;
 import com.qsoftware.forgemod.api.JsonConstants;
 import com.qsoftware.forgemod.api.SerializerHelper;
 import com.qsoftware.forgemod.api.annotations.NonNull;
@@ -23,6 +12,10 @@ import net.minecraft.tags.TagCollectionManager;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
 /**
  * Created by Thiakil on 12/07/2019.
@@ -122,6 +115,12 @@ public abstract class FluidStackIngredient implements InputIngredient<@NonNull F
         return new Multi(cleanedIngredients.toArray(new FluidStackIngredient[0]));
     }
 
+    private enum IngredientType {
+        SINGLE,
+        TAGGED,
+        MULTI
+    }
+
     public static class Single extends FluidStackIngredient {
 
         @Nonnull
@@ -129,6 +128,10 @@ public abstract class FluidStackIngredient implements InputIngredient<@NonNull F
 
         public Single(@Nonnull FluidStack fluidInstance) {
             this.fluidInstance = Objects.requireNonNull(fluidInstance);
+        }
+
+        public static Single read(PacketBuffer buffer) {
+            return new Single(FluidStack.readFromPacket(buffer));
         }
 
         @Override
@@ -170,10 +173,6 @@ public abstract class FluidStackIngredient implements InputIngredient<@NonNull F
             }
             return json;
         }
-
-        public static Single read(PacketBuffer buffer) {
-            return new Single(FluidStack.readFromPacket(buffer));
-        }
     }
 
     public static class Tagged extends FluidStackIngredient {
@@ -185,6 +184,10 @@ public abstract class FluidStackIngredient implements InputIngredient<@NonNull F
         public Tagged(@Nonnull ITag<Fluid> tag, int amount) {
             this.tag = tag;
             this.amount = amount;
+        }
+
+        public static Tagged read(PacketBuffer buffer) {
+            return new Tagged(FluidTags.makeWrapperTag(buffer.readResourceLocation().toString()), buffer.readVarInt());
         }
 
         @Override
@@ -233,10 +236,6 @@ public abstract class FluidStackIngredient implements InputIngredient<@NonNull F
             json.addProperty(JsonConstants.TAG, TagCollectionManager.getManager().getFluidTags().getValidatedIdFromTag(tag).toString());
             return json;
         }
-
-        public static Tagged read(PacketBuffer buffer) {
-            return new Tagged(FluidTags.makeWrapperTag(buffer.readResourceLocation().toString()), buffer.readVarInt());
-        }
     }
 
     public static class Multi extends FluidStackIngredient {
@@ -245,6 +244,14 @@ public abstract class FluidStackIngredient implements InputIngredient<@NonNull F
 
         protected Multi(@Nonnull FluidStackIngredient... ingredients) {
             this.ingredients = ingredients;
+        }
+
+        public static FluidStackIngredient read(PacketBuffer buffer) {
+            FluidStackIngredient[] ingredients = new FluidStackIngredient[buffer.readVarInt()];
+            for (int i = 0; i < ingredients.length; i++) {
+                ingredients[i] = FluidStackIngredient.read(buffer);
+            }
+            return createMulti(ingredients);
         }
 
         @Override
@@ -297,19 +304,5 @@ public abstract class FluidStackIngredient implements InputIngredient<@NonNull F
             }
             return json;
         }
-
-        public static FluidStackIngredient read(PacketBuffer buffer) {
-            FluidStackIngredient[] ingredients = new FluidStackIngredient[buffer.readVarInt()];
-            for (int i = 0; i < ingredients.length; i++) {
-                ingredients[i] = FluidStackIngredient.read(buffer);
-            }
-            return createMulti(ingredients);
-        }
-    }
-
-    private enum IngredientType {
-        SINGLE,
-        TAGGED,
-        MULTI
     }
 }

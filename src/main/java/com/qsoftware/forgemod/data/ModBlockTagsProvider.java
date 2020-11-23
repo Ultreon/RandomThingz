@@ -2,18 +2,17 @@ package com.qsoftware.forgemod.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.qsoftware.forgemod.init.OreMaterials;
+import com.qsoftware.forgemod.init.ModTags;
+import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.forgemod.objects.block.dryingrack.DryingRackBlock;
 import net.minecraft.block.Block;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.tags.ITag;
 import net.minecraftforge.common.Tags;
-import com.qsoftware.forgemod.objects.block.dryingrack.DryingRackBlock;
-import com.qsoftware.forgemod.init.Metals;
-import com.qsoftware.forgemod.init.ModTags;
-import com.qsoftware.forgemod.init.Registration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,6 +25,9 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
+
     public ModBlockTagsProvider(DataGenerator gen) {
         super(gen);
     }
@@ -34,20 +36,20 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     protected void registerTags() {
         getOrCreateBuilder(ModTags.Blocks.DRYING_RACKS).add(Registration.getBlocks(DryingRackBlock.class).toArray(new Block[0]));
 
-        for (Metals metal : Metals.values()) {
+        for (OreMaterials metal : OreMaterials.values()) {
             metal.getOreTag().ifPresent(tag ->
                     getOrCreateBuilder(tag).add(metal.getOre().get()));
             metal.getStorageBlockTag().ifPresent(tag ->
                     getOrCreateBuilder(tag).add(metal.getStorageBlock().get()));
         }
 
-        groupBuilder(Tags.Blocks.ORES, Metals::getOreTag);
-        groupBuilder(Tags.Blocks.STORAGE_BLOCKS, Metals::getStorageBlockTag);
+        groupBuilder(Tags.Blocks.ORES, OreMaterials::getOreTag);
+        groupBuilder(Tags.Blocks.STORAGE_BLOCKS, OreMaterials::getStorageBlockTag);
     }
 
-    private void groupBuilder(ITag.INamedTag<Block> tag, Function<Metals, Optional<ITag.INamedTag<Block>>> tagGetter) {
+    private void groupBuilder(ITag.INamedTag<Block> tag, Function<OreMaterials, Optional<ITag.INamedTag<Block>>> tagGetter) {
         Builder<Block> builder = getOrCreateBuilder(tag);
-        for (Metals metal : Metals.values()) {
+        for (OreMaterials metal : OreMaterials.values()) {
             tagGetter.apply(metal).ifPresent(builder::addTag);
         }
     }
@@ -56,9 +58,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     public String getName() {
         return "QForgeMod - Block Tags";
     }
-
-    private static final Logger LOGGER = LogManager.getLogger();
-    private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
 
     @Override
     public void act(DirectoryCache cache) {
@@ -72,7 +71,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 return; //Forge: Allow running this data provider without writing it. Recipe provider needs valid tags.
 
             try {
-                String s = GSON.toJson((JsonElement) jsonobject);
+                String s = GSON.toJson(jsonobject);
                 String s1 = HASH_FUNCTION.hashUnencodedChars(s).toString();
                 if (!Objects.equals(cache.getPreviousHash(path), s1) || !Files.exists(path)) {
                     Files.createDirectories(path.getParent());

@@ -1,24 +1,24 @@
 package com.qsoftware.forgemod.api.chemical;
 
-import java.util.List;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.IContentsListener;
 import com.qsoftware.forgemod.api.inventory.AutomationType;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.Direction;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public interface IMekanismChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>, TANK extends IChemicalTank<CHEMICAL, STACK>>
-      extends ISidedChemicalHandler<CHEMICAL, STACK>, IContentsListener {
+        extends ISidedChemicalHandler<CHEMICAL, STACK>, IContentsListener {
 
     /**
      * Used to check if an instance of {@link IMekanismChemicalHandler} actually has the ability to handle chemicals.
      *
      * @return True if we are actually capable of handling chemicals.
-     *
      * @apiNote If for some reason you are comparing to {@link IMekanismChemicalHandler} without having gotten the object via the chemical handler capability, then you
      * must call this method to make sure that it really can handle chemicals. As most mekanism tiles have this class in their hierarchy.
      * @implNote If this returns false the capability should not be exposed AND methods should turn reasonable defaults for not doing anything.
@@ -31,10 +31,8 @@ public interface IMekanismChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, S
      * Returns the list of TANKs that this chemical handler exposes on the given side.
      *
      * @param side The side we are interacting with the handler from (null for internal).
-     *
      * @return The list of all TANKs that this {@link IMekanismChemicalHandler} contains for the given side. If there are no tanks for the side or {@link #canHandle()} is
      * false then it returns an empty list.
-     *
      * @implNote When side is null (an internal request), this method <em>MUST</em> return all tanks in the handler. Additionally, if {@link #canHandle()} is false, this
      * <em>MUST</em> return an empty list.
      */
@@ -45,7 +43,6 @@ public interface IMekanismChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, S
      *
      * @param tank The index of the tank to retrieve.
      * @param side The side we are interacting with the handler from (null for internal).
-     *
      * @return The {@link TANK} that has the given index from the list of tanks on the given side.
      */
     @Nullable

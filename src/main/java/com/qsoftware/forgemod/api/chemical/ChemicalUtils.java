@@ -1,23 +1,24 @@
 package com.qsoftware.forgemod.api.chemical;
 
-import it.unimi.dsi.fastutil.ints.Int2ObjectFunction;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntList;
-import java.util.function.Function;
-import java.util.function.IntSupplier;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.gas.GasStack;
 import com.qsoftware.forgemod.api.chemical.infuse.InfusionStack;
 import com.qsoftware.forgemod.api.chemical.pigment.PigmentStack;
 import com.qsoftware.forgemod.api.chemical.slurry.SlurryStack;
+import it.unimi.dsi.fastutil.ints.Int2ObjectFunction;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.Function;
+import java.util.function.IntSupplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -49,7 +50,7 @@ public class ChemicalUtils {
     }
 
     public static <CHEMICAL extends Chemical<CHEMICAL>> CHEMICAL readChemicalFromNBT(@Nullable CompoundNBT nbtTags, CHEMICAL empty, String nbtName,
-          Function<ResourceLocation, CHEMICAL> registryLookup) {
+                                                                                     Function<ResourceLocation, CHEMICAL> registryLookup) {
         if (nbtTags == null || nbtTags.isEmpty()) {
             return empty;
         }
@@ -57,7 +58,7 @@ public class ChemicalUtils {
     }
 
     public static <CHEMICAL extends Chemical<CHEMICAL>> CHEMICAL readChemicalFromRegistry(@Nullable ResourceLocation name, CHEMICAL empty,
-          IForgeRegistry<CHEMICAL> registry) {
+                                                                                          IForgeRegistry<CHEMICAL> registry) {
         if (name == null) {
             return empty;
         }
@@ -72,7 +73,7 @@ public class ChemicalUtils {
      * Util method for a generic insert implementation for various handlers. Mainly for internal use only
      */
     public static <CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>> STACK insert(STACK stack, Action action, STACK empty,
-          IntSupplier tankCount, Int2ObjectFunction<@NonNull STACK> inTankGetter, InsertChemical<STACK> insertChemical) {
+                                                                                                            IntSupplier tankCount, Int2ObjectFunction<@NonNull STACK> inTankGetter, InsertChemical<STACK> insertChemical) {
         int tanks = tankCount.getAsInt();
         if (tanks == 1) {
             return insertChemical.insert(0, stack, action);
@@ -114,7 +115,7 @@ public class ChemicalUtils {
      * Util method for a generic extraction implementation for various handlers. Mainly for internal use only
      */
     public static <CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>> STACK extract(long amount, Action action, STACK empty,
-          IntSupplier tankCount, Int2ObjectFunction<@NonNull STACK> inTankGetter, ExtractChemical<STACK> extractChemical) {
+                                                                                                             IntSupplier tankCount, Int2ObjectFunction<@NonNull STACK> inTankGetter, ExtractChemical<STACK> extractChemical) {
         int tanks = tankCount.getAsInt();
         if (tanks == 1) {
             return extractChemical.extract(0, amount, action);
@@ -149,7 +150,7 @@ public class ChemicalUtils {
      * Util method for a generic extraction implementation for various handlers. Mainly for internal use only
      */
     public static <CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>> STACK extract(STACK stack, Action action, STACK empty,
-          IntSupplier tankCount, Int2ObjectFunction<@NonNull STACK> inTankGetter, ExtractChemical<STACK> extractChemical) {
+                                                                                                             IntSupplier tankCount, Int2ObjectFunction<@NonNull STACK> inTankGetter, ExtractChemical<STACK> extractChemical) {
         int tanks = tankCount.getAsInt();
         if (tanks == 1) {
             STACK inTank = inTankGetter.get(0);

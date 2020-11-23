@@ -1,10 +1,11 @@
 package com.qsoftware.forgemod.api.providers;
 
-import javax.annotation.Nonnull;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
 
 public interface IFluidProvider extends IBaseProvider {
 

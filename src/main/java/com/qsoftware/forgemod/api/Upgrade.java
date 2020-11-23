@@ -1,10 +1,5 @@
 package com.qsoftware.forgemod.api;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import javax.annotation.Nullable;
 import com.qsoftware.forgemod.api.math.MathUtils;
 import com.qsoftware.forgemod.api.text.APILang;
 import com.qsoftware.forgemod.api.text.EnumColor;
@@ -14,6 +9,12 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.Constants.NBT;
+
+import javax.annotation.Nullable;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public enum Upgrade implements IHasTranslationKey {
     SPEED("speed", APILang.UPGRADE_SPEED, APILang.UPGRADE_SPEED_DESCRIPTION, 8, EnumColor.RED),
@@ -67,6 +68,10 @@ public enum Upgrade implements IHasTranslationKey {
         return compound;
     }
 
+    public static Upgrade byIndexStatic(int index) {
+        return MathUtils.getByIndexMod(UPGRADES, index);
+    }
+
     public String getRawName() {
         return name;
     }
@@ -90,10 +95,6 @@ public enum Upgrade implements IHasTranslationKey {
 
     public boolean canMultiply() {
         return getMax() > 1;
-    }
-
-    public static Upgrade byIndexStatic(int index) {
-        return MathUtils.getByIndexMod(UPGRADES, index);
     }
 
     public interface IUpgradeInfoHandler {

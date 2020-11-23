@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.inputs;
 
-import java.util.Objects;
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.MekanismAPI;
 import com.qsoftware.forgemod.api.chemical.ChemicalType;
@@ -13,11 +11,10 @@ import com.qsoftware.forgemod.api.chemical.merged.MergedChemicalTank.Current;
 import com.qsoftware.forgemod.api.chemical.pigment.PigmentStack;
 import com.qsoftware.forgemod.api.chemical.slurry.SlurryStack;
 import com.qsoftware.forgemod.api.math.MathUtils;
-import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
-import com.qsoftware.forgemod.api.recipes.inputs.chemical.IChemicalStackIngredient;
-import com.qsoftware.forgemod.api.recipes.inputs.chemical.InfusionStackIngredient;
-import com.qsoftware.forgemod.api.recipes.inputs.chemical.PigmentStackIngredient;
-import com.qsoftware.forgemod.api.recipes.inputs.chemical.SlurryStackIngredient;
+import com.qsoftware.forgemod.api.recipes.inputs.chemical.*;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Objects;
 
 @ParametersAreNonnullByDefault
 public class BoxedChemicalInputHandler {
@@ -26,6 +23,12 @@ public class BoxedChemicalInputHandler {
 
     public BoxedChemicalInputHandler(MergedChemicalTank chemicalTank) {
         this.chemicalTank = Objects.requireNonNull(chemicalTank);
+    }
+
+    private static void logMismatchedStackSize(long actual, long expected) {
+        if (expected != actual) {
+            MekanismAPI.logger.error("Stack size changed by a different amount ({}) than requested ({}).", actual, expected, new Exception());
+        }
     }
 
     public BoxedChemicalStack getInput() {
@@ -98,11 +101,5 @@ public class BoxedChemicalInputHandler {
         }
         //TODO: Simulate the drain?
         return Math.min(MathUtils.clampToInt(getInput().getChemicalStack().getAmount() / (recipeInput.getChemicalStack().getAmount() * usageMultiplier)), currentMax);
-    }
-
-    private static void logMismatchedStackSize(long actual, long expected) {
-        if (expected != actual) {
-            MekanismAPI.logger.error("Stack size changed by a different amount ({}) than requested ({}).", actual, expected, new Exception());
-        }
     }
 }

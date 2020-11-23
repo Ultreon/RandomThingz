@@ -1,16 +1,10 @@
 package com.qsoftware.forgemod.compat.jei;
 
-import mezz.jei.api.IModPlugin;
-import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.VanillaRecipeCategoryUid;
-import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.registration.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.init.ModBlocks;
+import com.qsoftware.forgemod.init.ModItems;
+import com.qsoftware.forgemod.init.ModRecipes;
+import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.objects.block.alloysmelter.AlloySmelterContainer;
 import com.qsoftware.forgemod.objects.block.alloysmelter.AlloySmelterScreen;
 import com.qsoftware.forgemod.objects.block.compressor.CompressorContainer;
@@ -24,12 +18,18 @@ import com.qsoftware.forgemod.objects.block.infuser.InfuserScreen;
 import com.qsoftware.forgemod.objects.block.mixer.MixerScreen;
 import com.qsoftware.forgemod.objects.block.refinery.RefineryScreen;
 import com.qsoftware.forgemod.objects.block.solidifier.SolidifierScreen;
-import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.objects.item.CanisterItem;
+import com.qsoftware.forgemod.objects.items.fluid.CanisterItem;
 import com.qsoftware.forgemod.util.Constants;
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaRecipeCategoryUid;
+import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.registration.*;
+import net.minecraft.client.Minecraft;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +37,13 @@ import java.util.stream.Collectors;
 @JeiPlugin
 public class SMechanismsJeiPlugin implements IModPlugin {
     private static final ResourceLocation PLUGIN_UID = QForgeMod.getId("plugin/main");
+
+    private static List<IRecipe<?>> getRecipesOfType(IRecipeType<?> recipeType) {
+        assert Minecraft.getInstance().world != null;
+        return Minecraft.getInstance().world.getRecipeManager().getRecipes().stream()
+                .filter(r -> r.getType() == recipeType)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -66,13 +73,6 @@ public class SMechanismsJeiPlugin implements IModPlugin {
         registration.addRecipes(getRecipesOfType(ModRecipes.Types.MIXING), Constants.MIXING);
         registration.addRecipes(getRecipesOfType(ModRecipes.Types.REFINING), Constants.REFINING);
         registration.addRecipes(getRecipesOfType(ModRecipes.Types.SOLIDIFYING), Constants.SOLIDIFYING);
-    }
-
-    private static List<IRecipe<?>> getRecipesOfType(IRecipeType<?> recipeType) {
-        assert Minecraft.getInstance().world != null;
-        return Minecraft.getInstance().world.getRecipeManager().getRecipes().stream()
-                .filter(r -> r.getType() == recipeType)
-                .collect(Collectors.toList());
     }
 
     @Override

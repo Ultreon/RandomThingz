@@ -1,11 +1,5 @@
 package com.qsoftware.forgemod.api.chemical;
 
-import java.util.function.BiPredicate;
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.IContentsListener;
 import com.qsoftware.forgemod.api.NBTConstants;
@@ -13,30 +7,37 @@ import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.attribute.ChemicalAttributeValidator;
 import com.qsoftware.forgemod.api.inventory.AutomationType;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class BasicChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>> implements IChemicalTank<CHEMICAL, STACK>,
-      IChemicalHandler<CHEMICAL, STACK> {
+        IChemicalHandler<CHEMICAL, STACK> {
 
-    private final Predicate<@NonNull CHEMICAL> validator;
     protected final BiPredicate<@NonNull CHEMICAL, @NonNull AutomationType> canExtract;
     protected final BiPredicate<@NonNull CHEMICAL, @NonNull AutomationType> canInsert;
+    private final Predicate<@NonNull CHEMICAL> validator;
     @Nullable
     private final ChemicalAttributeValidator attributeValidator;
     private final long capacity;
+    @Nullable
+    private final IContentsListener listener;
     /**
      * @apiNote This is only protected for direct querying access. To modify this stack the external methods or {@link #setStackUnchecked(STACK)} should be used instead.
      */
     protected STACK stored;
-    @Nullable
-    private final IContentsListener listener;
 
     protected BasicChemicalTank(long capacity, BiPredicate<@NonNull CHEMICAL, @NonNull AutomationType> canExtract,
-          BiPredicate<@NonNull CHEMICAL, @NonNull AutomationType> canInsert, Predicate<@NonNull CHEMICAL> validator,
-          @Nullable ChemicalAttributeValidator attributeValidator, @Nullable IContentsListener listener) {
+                                BiPredicate<@NonNull CHEMICAL, @NonNull AutomationType> canInsert, Predicate<@NonNull CHEMICAL> validator,
+                                @Nullable ChemicalAttributeValidator attributeValidator, @Nullable IContentsListener listener) {
         this.capacity = capacity;
         this.canExtract = canExtract;
         this.canInsert = canInsert;
@@ -60,9 +61,7 @@ public abstract class BasicChemicalTank<CHEMICAL extends Chemical<CHEMICAL>, STA
      * Helper method to allow easily setting a rate at which this {@link BasicChemicalTank} can insert/extract chemicals.
      *
      * @param automationType The automation type to limit the rate by or null if we don't have access to an automation type.
-     *
      * @return The rate this tank can insert/extract at.
-     *
      * @implNote By default this returns {@link Long#MAX_VALUE} so as to not actually limit the tank's rate. By default this is also ignored for direct setting of the
      * stack/stack size
      */

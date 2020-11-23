@@ -25,7 +25,7 @@ public class CrateContainer extends Container {
     private final IWorldPosCallable canInteractWithCallable;
 
     public CrateContainer(final int windowId, final PlayerInventory playerInventory, final CrateTileEntity tileEntity) {
-        super(ContainerTypesInit.EXAMPLE_CHEST.get(), windowId);
+        super(ContainerTypesInit.WOODEN_CRATE.get(), windowId);
         this.tileEntity = tileEntity;
         this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getWorld()), tileEntity.getPos());
 
@@ -97,9 +97,8 @@ public class CrateContainer extends Container {
         }
     }
 
-    @Override
-    public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.WOODEN_CRATE.get());
+    public CrateContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
+        this(windowId, playerInventory, getTileEntity(playerInventory, data));
     }
 
     private static CrateTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
@@ -110,14 +109,15 @@ public class CrateContainer extends Container {
         final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
 
         if (tileAtPos instanceof CrateTileEntity) {
-            return (CrateTileEntity)tileAtPos;
+            return (CrateTileEntity) tileAtPos;
         }
 
         throw new IllegalStateException("Tile entity is not of the expected class! " + tileAtPos);
     }
 
-    public CrateContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
-        this(windowId, playerInventory, getTileEntity(playerInventory, data));
+    @Override
+    public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
+        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.WOODEN_CRATE.get());
     }
 
     @Override

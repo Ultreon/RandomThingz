@@ -11,7 +11,6 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.feature.template.RuleTest;
-//import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,7 +28,7 @@ import java.util.HashMap;
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
 @SuppressWarnings({"SameParameterValue", "unused", "RedundantSuppression"})
 public class ModOreGen {
-//    private static HashMap<Biome, > map = new HashMap<>();
+    //    private static HashMap<Biome, > map = new HashMap<>();
     private static final ArrayList<HashMap.SimpleEntry<GenerationStage.Decoration, ConfiguredFeature<?, ?>>> list = new ArrayList<>();
 //    public static final OreFeatureConfig.FillerBlockType FILLER_ALL_BLOCKS = new TagMatchRuleTest("FILLER_ALL_BLOCKS", "qforgemod_filler_all_blocks", (blockState) -> blockState.getBlock() != Blocks.BEDROCK);
 

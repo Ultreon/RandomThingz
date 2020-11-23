@@ -1,5 +1,7 @@
 package com.qsoftware.forgemod.objects.block.refinery;
 
+import com.qsoftware.forgemod.objects.block.AbstractMachineBlock;
+import com.qsoftware.forgemod.util.MachineTier;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,8 +20,6 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBlock;
-import com.qsoftware.forgemod.util.MachineTier;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -56,7 +56,7 @@ public class RefineryBlock extends AbstractMachineBlock {
         // TODO: Unique sound and particles? Copied from BlastFurnaceBlock.
         if (stateIn.get(LIT)) {
             double d0 = (double) pos.getX() + 0.5D;
-            double d1 = (double) pos.getY();
+            double d1 = pos.getY();
             double d2 = (double) pos.getZ() + 0.5D;
             if (rand.nextDouble() < 0.1D) {
                 worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);

@@ -6,6 +6,7 @@ import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
 import com.qsoftware.forgemod.util.MachineTier;
 import com.qsoftware.forgemod.util.TextUtil;
 import com.qsoftware.forgemod.util.helpers.NBTHelper;
+import com.qsoftware.silent.utils.EnumUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -21,26 +22,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import com.qsoftware.silent.utils.EnumUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
-    // Fields
-    public int x;
-    public int y;
-    public int z;
-
-    // Protected fields.
-    protected int tick;
-    protected boolean initialized = false;
-
     // Constants
     public static final int DEPTH = 5;
     public static final int ENERGY_PER_BLOCK = 100;
     public static final int FIELDS_COUNT = 20;
-
+    // Fields
+    public int x;
+    public int y;
+    public int z;
+    // Protected fields.
+    protected int tick;
+    protected boolean initialized = false;
     protected final IIntArray fields = new IIntArray() {
         @Override
         public int get(int index) {
@@ -104,6 +101,10 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         }
     };
 
+    public QuarryTileEntity() {
+        super(ModTileEntities.quarry, 2, 10_000, 100, 0, MachineTier.STANDARD);
+    }
+
     private int getBlocksRemaining() {
         return (x - (pos.getX() + 1) + 1) + (z - (pos.getZ() + 1) + 1) + ((y - 1) - DEPTH);
     }
@@ -114,10 +115,6 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
 
     private boolean isIllegalPosition() {
         return this.pos.getY() <= DEPTH + 1;
-    }
-
-    public QuarryTileEntity() {
-        super(ModTileEntities.quarry, 2, 10_000, 100, 0, MachineTier.STANDARD);
     }
 
     private int getEnergyPerOperation() {

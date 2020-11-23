@@ -1,15 +1,16 @@
 package com.qsoftware.forgemod.api.chemical.slurry;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.MekanismAPI;
 import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
 import com.qsoftware.forgemod.api.providers.ISlurryProvider;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.registries.IRegistryDelegate;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -31,26 +32,10 @@ public class SlurryStack extends ChemicalStack<Slurry> {
         this(stack.getType(), amount);
     }
 
-    @Override
-    protected IRegistryDelegate<Slurry> getDelegate(Slurry slurry) {
-        if (MekanismAPI.slurryRegistry().getKey(slurry) == null) {
-            MekanismAPI.logger.fatal("Failed attempt to create a SlurryStack for an unregistered Slurry {} (type {})", slurry.getRegistryName(),
-                  slurry.getClass().getName());
-            throw new IllegalArgumentException("Cannot create a SlurryStack from an unregistered Slurry");
-        }
-        return slurry.delegate;
-    }
-
-    @Override
-    protected Slurry getEmptyChemical() {
-        return MekanismAPI.EMPTY_SLURRY;
-    }
-
     /**
      * Returns the SlurryStack stored in the defined tag compound, or null if it doesn't exist.
      *
      * @param nbtTags - tag compound to read from
-     *
      * @return SlurryStack stored in the tag compound
      */
     public static SlurryStack readFromNBT(@Nullable CompoundNBT nbtTags) {
@@ -75,6 +60,21 @@ public class SlurryStack extends ChemicalStack<Slurry> {
             return EMPTY;
         }
         return new SlurryStack(slurry, amount);
+    }
+
+    @Override
+    protected IRegistryDelegate<Slurry> getDelegate(Slurry slurry) {
+        if (MekanismAPI.slurryRegistry().getKey(slurry) == null) {
+            MekanismAPI.logger.fatal("Failed attempt to create a SlurryStack for an unregistered Slurry {} (type {})", slurry.getRegistryName(),
+                    slurry.getClass().getName());
+            throw new IllegalArgumentException("Cannot create a SlurryStack from an unregistered Slurry");
+        }
+        return slurry.delegate;
+    }
+
+    @Override
+    protected Slurry getEmptyChemical() {
+        return MekanismAPI.EMPTY_SLURRY;
     }
 
     /**

@@ -1,10 +1,10 @@
 package com.qsoftware.forgemod.data.loot;
 
+import com.qsoftware.forgemod.init.Registration;
 import net.minecraft.block.Block;
 import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
-import com.qsoftware.forgemod.init.Registration;
 
 import java.util.stream.Collectors;
 

@@ -1,8 +1,9 @@
 package com.qsoftware.forgemod.api.recipes.cache;
 
+import com.qsoftware.forgemod.api.recipes.MekanismRecipe;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import com.qsoftware.forgemod.api.recipes.MekanismRecipe;
 
 //TODO: JavaDocs
 // Note: The cacheIndex is for purposes of what cache it will be stored in

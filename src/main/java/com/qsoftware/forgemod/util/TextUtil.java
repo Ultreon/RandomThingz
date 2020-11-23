@@ -26,8 +26,8 @@ public class TextUtil {
     }
 
     public static IFormattableTextComponent energyWithMax(int amount, int max) {
-         String s1 = String.format(ENERGY_FORMAT, amount);
-         String s2 = String.format(ENERGY_FORMAT, max);
+        String s1 = String.format(ENERGY_FORMAT, amount);
+        String s2 = String.format(ENERGY_FORMAT, max);
         return translate("misc", "energyWithMax", s1, s2);
     }
 

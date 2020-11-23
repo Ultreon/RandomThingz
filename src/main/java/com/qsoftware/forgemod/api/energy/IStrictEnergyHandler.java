@@ -1,10 +1,11 @@
 package com.qsoftware.forgemod.api.energy;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.math.FloatingLong;
 import com.qsoftware.forgemod.api.math.FloatingLongTransferUtils;
+import mcp.MethodsReturnNonnullByDefault;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -30,7 +31,6 @@ public interface IStrictEnergyHandler {
      * </p>
      *
      * @param container Container to query.
-     *
      * @return Energy in a given container. {@link FloatingLong#ZERO} if the container has no energy stored.
      */
     FloatingLong getEnergy(int container);
@@ -40,7 +40,6 @@ public interface IStrictEnergyHandler {
      *
      * @param container Container to modify
      * @param energy    Energy to set the container to (may be {@link FloatingLong#ZERO}).
-     *
      * @throws RuntimeException if the handler is called in a way that the handler was not expecting. Such as if it was not expecting this to be called at all.
      **/
     void setEnergy(int container, FloatingLong energy);
@@ -58,7 +57,6 @@ public interface IStrictEnergyHandler {
      * </p>
      *
      * @param container Container to query.
-     *
      * @return The maximum energy that can be stored in the container.
      */
     FloatingLong getMaxEnergy(int container);
@@ -76,7 +74,6 @@ public interface IStrictEnergyHandler {
      * </p>
      *
      * @param container Container to query.
-     *
      * @return The energy needed to fill the container.
      */
     FloatingLong getNeededEnergy(int container);
@@ -91,7 +88,6 @@ public interface IStrictEnergyHandler {
      * @param container Container to insert to.
      * @param amount    Energy to insert. This must not be modified by the container.
      * @param action    The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return The remaining energy that was not inserted (if the entire amount is accepted, then return {@link FloatingLong#ZERO}). The returned {@link FloatingLong} can
      * be safely modified afterwards.
      */
@@ -106,7 +102,6 @@ public interface IStrictEnergyHandler {
      * @param container Container to extract from.
      * @param amount    Amount of energy to extract (may be greater than the current stored amount or the container's capacity) This must not be modified by the handler.
      * @param action    The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return Energy extracted from the container, must be {@link FloatingLong#ZERO} if no energy can be extracted. The returned {@link FloatingLong} can be safely
      * modified after, so the container should return a new or copied {@link FloatingLong}.
      */
@@ -122,10 +117,8 @@ public interface IStrictEnergyHandler {
      *
      * @param amount Energy to insert. This must not be modified by the handler.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return The remaining energy that was not inserted (if the entire amount is accepted, then return {@link FloatingLong#ZERO}). The returned {@link FloatingLong} can
      * be safely modified after.
-     *
      * @implNote The default implementation of this method, attempts to insert into containers that contain the energy, and if it will not all fit, falls back to
      * inserting into any empty containers.
      * @apiNote It is not guaranteed that the default implementation will be how this {@link IStrictEnergyHandler} ends up distributing the insertion.
@@ -142,10 +135,8 @@ public interface IStrictEnergyHandler {
      *
      * @param amount Amount of energy to extract (may be greater than the current stored amount or the container's capacity) This must not be modified by the handler.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return Energy extracted from the container, must be {@link FloatingLong#ZERO} if no energy can be extracted. The returned {@link FloatingLong} can be safely
      * modified after, so the container should return a new or copied {@link FloatingLong}.
-     *
      * @implNote The default implementation of this method, extracts across all containers to try and reach the desired amount to extract.
      * @apiNote It is not guaranteed that the default implementation will be how this {@link IStrictEnergyHandler} ends up distributing the extraction.
      */

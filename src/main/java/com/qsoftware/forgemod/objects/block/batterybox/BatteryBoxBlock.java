@@ -1,6 +1,9 @@
 package com.qsoftware.forgemod.objects.block.batterybox;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -98,7 +101,7 @@ public class BatteryBoxBlock extends Block {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof BatteryBoxTileEntity) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (BatteryBoxTileEntity)tileentity);
+                InventoryHelper.dropInventoryItems(worldIn, pos, (BatteryBoxTileEntity) tileentity);
                 worldIn.updateComparatorOutputLevel(pos, this);
             }
 

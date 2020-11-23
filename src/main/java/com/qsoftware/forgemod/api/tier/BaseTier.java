@@ -1,9 +1,10 @@
 package com.qsoftware.forgemod.api.tier;
 
-import java.util.Locale;
 import com.qsoftware.forgemod.api.math.MathUtils;
 import com.qsoftware.forgemod.api.text.EnumColor;
 import net.minecraft.util.IStringSerializable;
+
+import java.util.Locale;
 
 /**
  * The default tiers used in QForgeUtils.
@@ -29,6 +30,10 @@ public enum BaseTier implements IStringSerializable {
         textColor = c1;
     }
 
+    public static BaseTier byIndexStatic(int index) {
+        return MathUtils.getByIndexMod(TIERS, index);
+    }
+
     public String getSimpleName() {
         return name;
     }
@@ -48,9 +53,5 @@ public enum BaseTier implements IStringSerializable {
     @Override
     public String getString() {
         return name().toLowerCase(Locale.ROOT);
-    }
-
-    public static BaseTier byIndexStatic(int index) {
-        return MathUtils.getByIndexMod(TIERS, index);
     }
 }

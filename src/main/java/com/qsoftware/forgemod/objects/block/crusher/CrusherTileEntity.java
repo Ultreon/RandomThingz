@@ -1,16 +1,16 @@
 package com.qsoftware.forgemod.objects.block.crusher;
 
+import com.qsoftware.forgemod.crafting.recipe.CrushingRecipe;
+import com.qsoftware.forgemod.init.MachineType;
+import com.qsoftware.forgemod.init.ModRecipes;
+import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.forgemod.util.TextUtil;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
-import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
-import com.qsoftware.forgemod.crafting.recipe.CrushingRecipe;
-import com.qsoftware.forgemod.init.MachineType;
-import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.forgemod.util.TextUtil;
 
 import javax.annotation.Nullable;
 import java.util.Collection;

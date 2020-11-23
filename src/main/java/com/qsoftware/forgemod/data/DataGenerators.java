@@ -1,15 +1,16 @@
 package com.qsoftware.forgemod.data;
 
-import net.minecraft.data.DataGenerator;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import com.qsoftware.forgemod.data.client.ModBlockStateProvider;
 import com.qsoftware.forgemod.data.client.ModItemModelProvider;
 import com.qsoftware.forgemod.data.loot.ModLootTableProvider;
 import com.qsoftware.forgemod.data.recipes.ModRecipesProvider;
+import net.minecraft.data.DataGenerator;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 
 public final class DataGenerators {
-    private DataGenerators() {}
+    private DataGenerators() {
+    }
 
     public static void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();

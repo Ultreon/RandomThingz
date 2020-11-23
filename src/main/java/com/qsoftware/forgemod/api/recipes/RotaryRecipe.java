@@ -1,15 +1,16 @@
 package com.qsoftware.forgemod.api.recipes;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.chemical.gas.GasStack;
 import com.qsoftware.forgemod.api.recipes.inputs.FluidStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Contract;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault

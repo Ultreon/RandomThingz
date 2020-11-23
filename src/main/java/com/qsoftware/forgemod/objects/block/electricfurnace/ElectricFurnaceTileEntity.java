@@ -1,16 +1,16 @@
 package com.qsoftware.forgemod.objects.block.electricfurnace;
 
 import com.google.common.collect.ImmutableList;
+import com.qsoftware.forgemod.init.ModTileEntities;
+import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.forgemod.util.TextUtil;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
-import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
-import com.qsoftware.forgemod.init.ModTileEntities;
-import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.forgemod.util.TextUtil;
 
 import javax.annotation.Nullable;
 import java.util.Collection;

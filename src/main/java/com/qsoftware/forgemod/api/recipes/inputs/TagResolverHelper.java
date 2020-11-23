@@ -1,8 +1,9 @@
 package com.qsoftware.forgemod.api.recipes.inputs;
 
+import net.minecraft.tags.ITag;
+
 import java.util.Collections;
 import java.util.List;
-import net.minecraft.tags.ITag;
 
 /**
  * @apiNote Only use this from within mekanism

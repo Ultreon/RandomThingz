@@ -1,12 +1,12 @@
 package com.qsoftware.forgemod.config;
 
+import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.init.Ores;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.Ores;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -58,11 +58,12 @@ public final class Config {
         commonSpec = builder.build();
     }
 
+    private Config() {
+    }
+
     public static Optional<OreConfig> getOreConfig(Ores ore) {
         return Optional.ofNullable(oreConfigs.getOrDefault(ore, null));
     }
-
-    private Config() {}
 
     public static void init() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, commonSpec);

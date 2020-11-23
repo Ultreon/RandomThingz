@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.init;
 
+import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
@@ -22,7 +23,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import com.qsoftware.forgemod.QForgeMod;
 
 import java.util.Collection;
 import java.util.function.Predicate;
@@ -45,7 +45,9 @@ public final class Registration {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = create(ForgeRegistries.RECIPE_SERIALIZERS);
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
 
-    private Registration() {throw new IllegalAccessError("Utility class");}
+    private Registration() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     public static void register() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

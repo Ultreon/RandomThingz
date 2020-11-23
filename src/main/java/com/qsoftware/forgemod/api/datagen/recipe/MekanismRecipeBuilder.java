@@ -2,16 +2,10 @@ package com.qsoftware.forgemod.api.datagen.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.JsonConstants;
 import com.qsoftware.forgemod.api.MekanismAPI;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.ICriterionInstance;
@@ -24,22 +18,28 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
 //TODO: We may also want to validate inputs, currently we are not validating our input ingredients as being valid, and are just validating the other parameters
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class MekanismRecipeBuilder<BUILDER extends MekanismRecipeBuilder<BUILDER>> {
 
-    protected static ResourceLocation mekSerializer(String name) {
-        return new ResourceLocation(MekanismAPI.MEKANISM_MODID, name);
-    }
-
     protected final List<ICondition> conditions = new ArrayList<>();
     protected final Advancement.Builder advancementBuilder = Advancement.Builder.builder();
     protected final ResourceLocation serializerName;
-
     protected MekanismRecipeBuilder(ResourceLocation serializerName) {
         this.serializerName = serializerName;
+    }
+
+    protected static ResourceLocation mekSerializer(String name) {
+        return new ResourceLocation(MekanismAPI.MEKANISM_MODID, name);
     }
 
     public BUILDER addCriterion(RecipeCriterion criterion) {
@@ -70,7 +70,7 @@ public abstract class MekanismRecipeBuilder<BUILDER extends MekanismRecipeBuilde
         if (hasCriteria()) {
             //If there is a way to "unlock" this recipe then add an advancement with the criteria
             advancementBuilder.withParentId(new ResourceLocation("recipes/root")).withCriterion("has_the_recipe", RecipeUnlockedTrigger.create(id))
-                  .withRewards(AdvancementRewards.Builder.recipe(id)).withRequirementsStrategy(IRequirementsStrategy.OR);
+                    .withRewards(AdvancementRewards.Builder.recipe(id)).withRequirementsStrategy(IRequirementsStrategy.OR);
         }
         consumer.accept(getResult(id));
     }

@@ -1,8 +1,9 @@
 package com.qsoftware.forgemod.api.providers;
 
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.chemical.pigment.Pigment;
 import com.qsoftware.forgemod.api.chemical.pigment.PigmentStack;
+
+import javax.annotation.Nonnull;
 
 public interface IPigmentProvider extends IChemicalProvider<Pigment> {
 

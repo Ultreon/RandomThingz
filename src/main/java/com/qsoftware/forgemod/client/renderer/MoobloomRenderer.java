@@ -17,18 +17,18 @@ import org.jetbrains.annotations.NotNull;
  */
 @OnlyIn(Dist.CLIENT)
 public class MoobloomRenderer extends MobRenderer<MoobloomEntity, CowModel<MoobloomEntity>> {
-   private static final ResourceLocation MOOBLOOM_TEXTURES = new ResourceLocation(QForgeMod.MOD_ID, "textures/entity/cow/moobloom.png");
+    private static final ResourceLocation MOOBLOOM_TEXTURES = new ResourceLocation(QForgeMod.MOD_ID, "textures/entity/cow/moobloom.png");
 
-   public MoobloomRenderer(EntityRendererManager renderManagerIn) {
-      super(renderManagerIn, new CowModel<>(), 0.7F);
-      this.addLayer(new MoobloomFlowerLayer<>(this));
-   }
+    public MoobloomRenderer(EntityRendererManager renderManagerIn) {
+        super(renderManagerIn, new CowModel<>(), 0.7F);
+        this.addLayer(new MoobloomFlowerLayer<>(this));
+    }
 
-   /**
-    * Returns the location of an entity's texture.
-    */
-   public @NotNull ResourceLocation getEntityTexture(@NotNull MoobloomEntity entity) {
-      return MOOBLOOM_TEXTURES;
-   }
+    /**
+     * Returns the location of an entity's texture.
+     */
+    public @NotNull ResourceLocation getEntityTexture(@NotNull MoobloomEntity entity) {
+        return MOOBLOOM_TEXTURES;
+    }
 
 }

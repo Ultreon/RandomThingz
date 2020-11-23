@@ -29,7 +29,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Random;
 import java.util.function.Predicate;
 
 /**
@@ -41,7 +43,10 @@ import java.util.function.Predicate;
 public class MoobloomEntity extends CowEntity implements IShearable, net.minecraftforge.common.IForgeShearable {
     private Effect hasStewEffect;
     private int effectDuration;
-    /** Stores the UUID of the most recent lightning bolt to strike */
+
+    /**
+     * Stores the UUID of the most recent lightning bolt to strike
+     */
 
     public MoobloomEntity(EntityType<? extends CowEntity> type, World worldIn) {
         super(type, worldIn);
@@ -51,17 +56,9 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
         return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 12.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.26D);
     }
 
-
-    static class TargetPredicate implements Predicate<LivingEntity> {
-        private final MoobloomEntity parentEntity;
-
-        public TargetPredicate(MoobloomEntity moobloom) {
-            this.parentEntity = moobloom;
-        }
-
-        public boolean test(@Nullable LivingEntity p_test_1_) {
-            return (p_test_1_ instanceof ZombieEntity) && p_test_1_.getDistanceSq(this.parentEntity) > 9.0D;
-        }
+    @SuppressWarnings("unused")
+    public static boolean func_223318_c(EntityType<MoobloomEntity> p_223318_0_, IWorld p_223318_1_, SpawnReason p_223318_2_, BlockPos p_223318_3_, Random p_223318_4_) {
+        return p_223318_1_.getBlockState(p_223318_3_.down()).isIn(Blocks.MYCELIUM) && p_223318_1_.getLightSubtracted(p_223318_3_, 0) > 8;
     }
 
     protected void registerGoals() {
@@ -78,11 +75,6 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
 
     public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
         return worldIn.getBlockState(pos.down()).isIn(Blocks.MYCELIUM) ? 10.0F : worldIn.getBrightness(pos) - 0.5F;
-    }
-
-    @SuppressWarnings("unused")
-    public static boolean func_223318_c(EntityType<MoobloomEntity> p_223318_0_, IWorld p_223318_1_, SpawnReason p_223318_2_, BlockPos p_223318_3_, Random p_223318_4_) {
-        return p_223318_1_.getBlockState(p_223318_3_.down()).isIn(Blocks.MYCELIUM) && p_223318_1_.getLightSubtracted(p_223318_3_, 0) > 8;
     }
 
     protected void registerData() {
@@ -117,7 +109,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
             return ActionResultType.func_233537_a_(this.world.isRemote);
         } else if (itemstack.getItem().isIn(ItemTags.SMALL_FLOWERS)) {
             if (this.hasStewEffect != null) {
-                for(int i = 0; i < 2; ++i) {
+                for (int i = 0; i < 2; ++i) {
                     this.world.addParticle(ParticleTypes.SMOKE, this.getPosX() + this.rand.nextDouble() / 2.0D, this.getPosYHeight(0.5D), this.getPosZ() + this.rand.nextDouble() / 2.0D, 0.0D, this.rand.nextDouble() / 5.0D, 0.0D);
                 }
             } else {
@@ -131,7 +123,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
                     itemstack.shrink(1);
                 }
 
-                for(int j = 0; j < 4; ++j) {
+                for (int j = 0; j < 4; ++j) {
                     this.world.addParticle(ParticleTypes.EFFECT, this.getPosX() + this.rand.nextDouble() / 2.0D, this.getPosYHeight(0.5D), this.getPosZ() + this.rand.nextDouble() / 2.0D, 0.0D, this.rand.nextDouble() / 5.0D, 0.0D);
                 }
 
@@ -149,7 +141,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
     public void shear(@NotNull SoundCategory category) {
         this.world.playMovingSound(null, this, SoundEvents.ENTITY_MOOSHROOM_SHEAR, category, 1.0F, 1.0F);
         if (!this.world.isRemote()) {
-            ((ServerWorld)this.world).spawnParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            ((ServerWorld) this.world).spawnParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
             this.remove();
             CowEntity cowentity = EntityType.COW.create(this.world);
             Objects.requireNonNull(cowentity).setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationYaw, this.rotationPitch);
@@ -167,7 +159,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
             cowentity.setInvulnerable(this.isInvulnerable());
             this.world.addEntity(cowentity);
 
-            for(int i = 0; i < 5; ++i) {
+            for (int i = 0; i < 5; ++i) {
                 this.world.addEntity(new ItemEntity(this.world, this.getPosX(), this.getPosYHeight(1.0D), this.getPosZ(), new ItemStack(ModBlocks.BUTTERCUP.get())));
             }
         }
@@ -181,7 +173,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
     public void writeAdditional(@NotNull CompoundNBT compound) {
         super.writeAdditional(compound);
         if (this.hasStewEffect != null) {
-            compound.putByte("EffectId", (byte)Effect.getId(this.hasStewEffect));
+            compound.putByte("EffectId", (byte) Effect.getId(this.hasStewEffect));
             compound.putInt("EffectDuration", this.effectDuration);
         }
 
@@ -205,9 +197,9 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
     private Optional<Pair<Effect, Integer>> getStewEffect(ItemStack p_213443_1_) {
         Item item = p_213443_1_.getItem();
         if (item instanceof BlockItem) {
-            Block block = ((BlockItem)item).getBlock();
+            Block block = ((BlockItem) item).getBlock();
             if (block instanceof FlowerBlock) {
-                FlowerBlock flowerblock = (FlowerBlock)block;
+                FlowerBlock flowerblock = (FlowerBlock) block;
                 return Optional.of(Pair.of(flowerblock.getStewEffect(), flowerblock.getStewEffectDuration()));
             }
         }
@@ -229,7 +221,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
     public java.util.List<ItemStack> onSheared(@javax.annotation.Nullable PlayerEntity player, @javax.annotation.Nonnull ItemStack item, World world, BlockPos pos, int fortune) {
         world.playMovingSound(null, this, SoundEvents.ENTITY_MOOSHROOM_SHEAR, player == null ? SoundCategory.BLOCKS : SoundCategory.PLAYERS, 1.0F, 1.0F);
         if (!world.isRemote()) {
-            ((ServerWorld)this.world).spawnParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            ((ServerWorld) this.world).spawnParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
             this.remove();
             CowEntity cowentity = EntityType.COW.create(this.world);
             Objects.requireNonNull(cowentity).setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationYaw, this.rotationPitch);
@@ -255,5 +247,17 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
             return items;
         }
         return java.util.Collections.emptyList();
+    }
+
+    static class TargetPredicate implements Predicate<LivingEntity> {
+        private final MoobloomEntity parentEntity;
+
+        public TargetPredicate(MoobloomEntity moobloom) {
+            this.parentEntity = moobloom;
+        }
+
+        public boolean test(@Nullable LivingEntity p_test_1_) {
+            return (p_test_1_ instanceof ZombieEntity) && p_test_1_.getDistanceSq(this.parentEntity) > 9.0D;
+        }
     }
 }

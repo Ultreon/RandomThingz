@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.objects.block;
 
+import com.qsoftware.forgemod.util.MachineTier;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +12,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import com.qsoftware.forgemod.util.MachineTier;
 
 public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
     protected final MachineTier tier;
@@ -19,6 +19,23 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
     public AbstractMachineBlock(MachineTier tier, Properties properties) {
         super(properties);
         this.tier = tier;
+    }
+
+    private static int calcRedstoneFromInventory(AbstractMachineBaseTileEntity inv) {
+        // Copied from Container.calcRedstoneFromInventory
+        int slotsFilled = 0;
+        float fillRatio = 0.0F;
+
+        for (int i = 0; i < inv.getSizeInventory() - inv.getMachineTier().getUpgradeSlots(); ++i) {
+            ItemStack itemstack = inv.getStackInSlot(i);
+            if (!itemstack.isEmpty()) {
+                fillRatio += (float) itemstack.getCount() / Math.min(inv.getInventoryStackLimit(), itemstack.getMaxStackSize());
+                ++slotsFilled;
+            }
+        }
+
+        fillRatio = fillRatio / (float) inv.getSizeInventory();
+        return MathHelper.floor(fillRatio * 14.0F) + (slotsFilled > 0 ? 1 : 0);
     }
 
     @Override
@@ -50,22 +67,5 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
             return calcRedstoneFromInventory((AbstractMachineBaseTileEntity) tileEntity);
         }
         return super.getComparatorInputOverride(blockState, worldIn, pos);
-    }
-
-    private static int calcRedstoneFromInventory(AbstractMachineBaseTileEntity inv) {
-        // Copied from Container.calcRedstoneFromInventory
-        int slotsFilled = 0;
-        float fillRatio = 0.0F;
-
-        for (int i = 0; i < inv.getSizeInventory() - inv.getMachineTier().getUpgradeSlots(); ++i) {
-            ItemStack itemstack = inv.getStackInSlot(i);
-            if (!itemstack.isEmpty()) {
-                fillRatio += (float) itemstack.getCount() / Math.min(inv.getInventoryStackLimit(), itemstack.getMaxStackSize());
-                ++slotsFilled;
-            }
-        }
-
-        fillRatio = fillRatio / (float) inv.getSizeInventory();
-        return MathHelper.floor(fillRatio * 14.0F) + (slotsFilled > 0 ? 1 : 0);
     }
 }

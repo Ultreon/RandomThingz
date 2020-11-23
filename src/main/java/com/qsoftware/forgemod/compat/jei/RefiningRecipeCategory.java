@@ -2,6 +2,14 @@ package com.qsoftware.forgemod.compat.jei;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.qsoftware.forgemod.crafting.recipe.RefiningRecipe;
+import com.qsoftware.forgemod.init.ModBlocks;
+import com.qsoftware.forgemod.init.ModItems;
+import com.qsoftware.forgemod.objects.block.refinery.RefineryScreen;
+import com.qsoftware.forgemod.objects.block.refinery.RefineryTileEntity;
+import com.qsoftware.forgemod.objects.items.fluid.CanisterItem;
+import com.qsoftware.forgemod.util.Constants;
+import com.qsoftware.forgemod.util.TextUtil;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,14 +24,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import com.qsoftware.forgemod.objects.block.refinery.RefineryScreen;
-import com.qsoftware.forgemod.objects.block.refinery.RefineryTileEntity;
-import com.qsoftware.forgemod.crafting.recipe.RefiningRecipe;
-import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.objects.item.CanisterItem;
-import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.TextUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -45,6 +45,14 @@ public class RefiningRecipeCategory implements IRecipeCategory<RefiningRecipe> {
         arrow = guiHelper.drawableBuilder(RefineryScreen.TEXTURE, 176, 14, 24, 17)
                 .buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
         localizedName = TextUtil.translate("jei", "category.refining").getString();
+    }
+
+    private static void addFluidContainers(Collection<ItemStack> list, Fluid fluid) {
+        ItemStack bucket = new ItemStack(fluid.getFilledBucket());
+        if (!bucket.isEmpty()) {
+            list.add(bucket);
+        }
+        list.add(CanisterItem.getStack(fluid));
     }
 
     @Override
@@ -127,13 +135,5 @@ public class RefiningRecipeCategory implements IRecipeCategory<RefiningRecipe> {
     @Override
     public void draw(RefiningRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 43 - GUI_START_X, 35 - GUI_START_Y);
-    }
-
-    private static void addFluidContainers(Collection<ItemStack> list, Fluid fluid) {
-        ItemStack bucket = new ItemStack(fluid.getFilledBucket());
-        if (!bucket.isEmpty()) {
-            list.add(bucket);
-        }
-        list.add(CanisterItem.getStack(fluid));
     }
 }

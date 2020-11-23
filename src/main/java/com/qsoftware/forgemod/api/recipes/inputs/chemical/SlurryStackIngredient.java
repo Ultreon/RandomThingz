@@ -1,8 +1,6 @@
 package com.qsoftware.forgemod.api.recipes.inputs.chemical;
 
 import com.google.gson.JsonElement;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import com.qsoftware.forgemod.api.chemical.slurry.Slurry;
 import com.qsoftware.forgemod.api.chemical.slurry.SlurryStack;
 import com.qsoftware.forgemod.api.providers.ISlurryProvider;
@@ -11,6 +9,9 @@ import com.qsoftware.forgemod.api.recipes.inputs.chemical.ChemicalStackIngredien
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.ChemicalStackIngredient.TaggedIngredient;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tags.ITag;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public interface SlurryStackIngredient extends IChemicalStackIngredient<Slurry, SlurryStack> {
 

@@ -35,7 +35,7 @@ public abstract class WandItem extends Item {
     public void inventoryTick(ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
         if (!nbt.contains("mana", 5)) {
-            nbt.putFloat("mana", (float)this.maxMana);
+            nbt.putFloat("mana", (float) this.maxMana);
         }
         if (!nbt.contains("maxMana", 3)) {
             nbt.putInt("maxMana", this.maxMana);
@@ -69,8 +69,8 @@ public abstract class WandItem extends Item {
             } else {
                 float timeLeft1 = (float) timeLeft;
                 float usedTime = getUseDuration(stack) - timeLeft1; // 10 = 72000 - 71990
-                if (usedTime > (float)chargeTime) { // 10 > 20
-                    usedTime = (float)chargeTime; // 10 = 20
+                if (usedTime > (float) chargeTime) { // 10 > 20
+                    usedTime = (float) chargeTime; // 10 = 20
                 }
                 if (mana - usedTime < 0f) { // 5 - 10 < 0
                     timeLeft1 = (int) (getUseDuration(stack) - mana); // 71995 = 72000 - 5
@@ -111,7 +111,7 @@ public abstract class WandItem extends Item {
             usedTime = chargeTime;
         }
 
-        return usedTime / (float)chargeTime;
+        return usedTime / (float) chargeTime;
     }
 
     /**
@@ -149,7 +149,7 @@ public abstract class WandItem extends Item {
 
     /**
      * Get mana.
-     * 
+     *
      * @param stack stack to get mana from.
      * @return the amount of mana, or -1 if it's invalid.
      */

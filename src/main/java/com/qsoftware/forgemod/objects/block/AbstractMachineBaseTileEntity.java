@@ -1,5 +1,9 @@
 package com.qsoftware.forgemod.objects.block;
 
+import com.qsoftware.forgemod.api.RedstoneMode;
+import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgradeItem;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.silent.utils.EnumUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -8,10 +12,6 @@ import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IItemProvider;
-import com.qsoftware.forgemod.api.RedstoneMode;
-import com.qsoftware.forgemod.objects.item.MachineUpgradeItem;
-import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.silent.utils.EnumUtils;
 
 public abstract class AbstractMachineBaseTileEntity extends AbstractEnergyInventoryTileEntity {
     public static final int FIELDS_COUNT = 5;
@@ -57,7 +57,7 @@ public abstract class AbstractMachineBaseTileEntity extends AbstractEnergyInvent
             return FIELDS_COUNT;
         }
     };
-    
+
     protected AbstractMachineBaseTileEntity(TileEntityType<?> typeIn, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, MachineTier tier) {
         super(typeIn, inventorySize + tier.getUpgradeSlots(), maxEnergy, maxReceive, maxExtract);
         this.tier = tier;

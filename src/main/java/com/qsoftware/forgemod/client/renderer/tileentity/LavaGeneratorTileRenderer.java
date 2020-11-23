@@ -1,10 +1,10 @@
 package com.qsoftware.forgemod.client.renderer.tileentity;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.qsoftware.forgemod.objects.block.generator.lava.LavaGeneratorTileEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import com.qsoftware.forgemod.objects.block.generator.lava.LavaGeneratorTileEntity;
 
 public class LavaGeneratorTileRenderer extends TileEntityRenderer<LavaGeneratorTileEntity> {
     public LavaGeneratorTileRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {

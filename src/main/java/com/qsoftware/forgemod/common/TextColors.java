@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.common;
 
-import java.lang.String;
-
 /**
  * Text colors class.
  *

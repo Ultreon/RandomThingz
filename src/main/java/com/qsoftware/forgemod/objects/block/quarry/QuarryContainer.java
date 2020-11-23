@@ -12,6 +12,14 @@ public class QuarryContainer extends AbstractMachineBaseContainer<QuarryTileEnti
         this(id, playerInventory, new QuarryTileEntity(), new IntArray(QuarryTileEntity.FIELDS_COUNT));
     }
 
+    public QuarryContainer(int id, PlayerInventory playerInventory, QuarryTileEntity tileEntity, IIntArray fields) {
+        super(ModContainers.quarry, id, tileEntity, fields);
+
+        InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+
+        this.addUpgradeSlots();
+    }
+
     public int getCurrentX() {
         int upper = fields.get(7) & 0xFFFF;
         int lower = fields.get(6) & 0xFFFF;
@@ -55,14 +63,6 @@ public class QuarryContainer extends AbstractMachineBaseContainer<QuarryTileEnti
     public boolean isIllegalPosition() {
         int value = fields.get(18) & 0xFFFF;
         return value == 1;
-    }
-
-    public QuarryContainer(int id, PlayerInventory playerInventory, QuarryTileEntity tileEntity, IIntArray fields) {
-        super(ModContainers.quarry, id, tileEntity, fields);
-
-        InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
-
-        this.addUpgradeSlots();
     }
 
 //    @SuppressWarnings("deprecation") // Use of Registry

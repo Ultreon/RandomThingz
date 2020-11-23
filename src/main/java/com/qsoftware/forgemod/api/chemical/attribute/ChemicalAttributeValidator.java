@@ -1,10 +1,11 @@
 package com.qsoftware.forgemod.api.chemical.attribute;
 
+import com.qsoftware.forgemod.api.chemical.Chemical;
+import com.qsoftware.forgemod.api.chemical.ChemicalStack;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import com.qsoftware.forgemod.api.chemical.Chemical;
-import com.qsoftware.forgemod.api.chemical.ChemicalStack;
 
 public interface ChemicalAttributeValidator {
 
@@ -12,20 +13,10 @@ public interface ChemicalAttributeValidator {
     ChemicalAttributeValidator ALWAYS_ALLOW = attr -> true;
 
     /**
-     * Whether a certain attribute is considered valid by the caller.
-     *
-     * @param attribute attribute to check
-     *
-     * @return if the attribute is valid
-     */
-    boolean validate(ChemicalAttribute attribute);
-
-    /**
      * Determines if a Chemical is considered valid from a provided attribute validator.
      *
      * @param chemical  chemical to test
      * @param validator validator to use
-     *
      * @return if the chemical is valid
      */
     static boolean process(Chemical<?> chemical, ChemicalAttributeValidator validator) {
@@ -37,7 +28,6 @@ public interface ChemicalAttributeValidator {
      *
      * @param stack     stack to test
      * @param validator validator to use
-     *
      * @return if the stack is valid
      */
     static boolean process(ChemicalStack<?> stack, ChemicalAttributeValidator validator) {
@@ -48,7 +38,6 @@ public interface ChemicalAttributeValidator {
      * Creates a simple attribute validator which accepts any attributes that don't require validation, and any attributes provided in the parameters.
      *
      * @param validAttributes attributes which can be accepted
-     *
      * @return simple attribute validator
      */
     @SafeVarargs
@@ -60,13 +49,20 @@ public interface ChemicalAttributeValidator {
      * Creates a simple attribute validator which accepts only attributes provided in the parameters.
      *
      * @param validAttributes attributes which can be accepted
-     *
      * @return simple attribute validator
      */
     @SafeVarargs
     static ChemicalAttributeValidator createStrict(Class<? extends ChemicalAttribute>... validAttributes) {
         return new SimpleAttributeValidator(validAttributes, false);
     }
+
+    /**
+     * Whether a certain attribute is considered valid by the caller.
+     *
+     * @param attribute attribute to check
+     * @return if the attribute is valid
+     */
+    boolean validate(ChemicalAttribute attribute);
 
     class SimpleAttributeValidator implements ChemicalAttributeValidator {
 

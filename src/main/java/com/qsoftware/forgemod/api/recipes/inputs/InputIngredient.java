@@ -1,10 +1,11 @@
 package com.qsoftware.forgemod.api.recipes.inputs;
 
 import com.google.gson.JsonElement;
+import net.minecraft.network.PacketBuffer;
+
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import net.minecraft.network.PacketBuffer;
 
 public interface InputIngredient<TYPE> extends Predicate<TYPE> {
 
@@ -12,7 +13,6 @@ public interface InputIngredient<TYPE> extends Predicate<TYPE> {
      * Evaluates this predicate on the given argument, ignoring any size data.
      *
      * @param type the input argument
-     *
      * @return {@code true} if the input argument matches the predicate, otherwise {@code false}
      */
     boolean testType(@Nonnull TYPE type);
@@ -23,7 +23,6 @@ public interface InputIngredient<TYPE> extends Predicate<TYPE> {
      * Primarily for JEI, a list of valid instances of the type
      *
      * @return List (empty means no valid registrations found and recipe is to be hidden)
-     *
      * @apiNote Do not modify any of the values returned by the representations
      */
     @Nonnull

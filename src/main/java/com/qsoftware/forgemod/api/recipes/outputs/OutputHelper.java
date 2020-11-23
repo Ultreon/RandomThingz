@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.outputs;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
@@ -16,6 +14,9 @@ import com.qsoftware.forgemod.api.recipes.SawmillRecipe.ChanceOutput;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.tuple.Pair;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class OutputHelper {
@@ -127,7 +128,7 @@ public class OutputHelper {
     }
 
     public static <STACK extends ChemicalStack<?>> void handleOutput(IChemicalTank<?, STACK> tank, STACK toOutput,
-          int operations) {
+                                                                     int operations) {
         if (operations == 0) {
             //This should not happen
             return;

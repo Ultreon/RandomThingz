@@ -2,11 +2,8 @@ package com.qsoftware.forgemod.listener;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
-import com.qsoftware.forgemod.objects.entities.GlowSquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -15,7 +12,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * Infinity armor listener.

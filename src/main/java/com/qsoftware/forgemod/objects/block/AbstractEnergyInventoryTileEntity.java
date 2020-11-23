@@ -1,5 +1,9 @@
 package com.qsoftware.forgemod.objects.block;
 
+import com.qsoftware.forgemod.capability.EnergyStorageImpl;
+import com.qsoftware.forgemod.util.EnergyUtils;
+import com.qsoftware.silent.lib.tile.LockableSidedInventoryTileEntity;
+import com.qsoftware.silent.lib.tile.SyncVariable;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -11,10 +15,6 @@ import net.minecraft.util.IIntArray;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
-import com.qsoftware.silent.lib.tile.LockableSidedInventoryTileEntity;
-import com.qsoftware.silent.lib.tile.SyncVariable;
-import com.qsoftware.forgemod.capability.EnergyStorageImpl;
-import com.qsoftware.forgemod.util.EnergyUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

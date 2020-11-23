@@ -2,9 +2,6 @@ package com.qsoftware.forgemod.api.heat;
 
 public class HeatAPI {
 
-    private HeatAPI() {
-    }
-
     /**
      * Default atmospheric temperature, automatically set in all heat capacitors. Heat is grounded in 0 degrees Kelvin.
      */
@@ -25,6 +22,8 @@ public class HeatAPI {
      * Default inverse insulation coefficient
      */
     public static final double DEFAULT_INVERSE_INSULATION = 0;
+    private HeatAPI() {
+    }
 
     public static class HeatTransfer {
 

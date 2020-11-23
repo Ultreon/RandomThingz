@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "/",
+    "/"
+  ],
+  "key": {
+    "A": {
+      "item": "qforgemod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:uranium_rod",
+    "count": 1
+  }
+}

@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.crafting.recipe;
 
 import com.google.gson.JsonObject;
+import com.qsoftware.forgemod.init.ModRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
@@ -9,7 +10,6 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import com.qsoftware.forgemod.init.ModRecipes;
 
 public class DryingRecipe implements IRecipe<IInventory> {
     private final ResourceLocation recipeId;

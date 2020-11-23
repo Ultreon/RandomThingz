@@ -1,15 +1,15 @@
 package com.qsoftware.forgemod.objects.block.generator.coal;
 
+import com.qsoftware.forgemod.init.ModContainers;
+import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
+import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
-import com.qsoftware.silent.lib.util.InventoryUtils;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
-import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
-import com.qsoftware.forgemod.init.ModContainers;
 
 public class CoalGeneratorContainer extends AbstractMachineBaseContainer<CoalGeneratorTileEntity> {
     final CoalGeneratorTileEntity tileEntity;
@@ -19,7 +19,7 @@ public class CoalGeneratorContainer extends AbstractMachineBaseContainer<CoalGen
     }
 
     public CoalGeneratorContainer(int id, PlayerInventory playerInventory, CoalGeneratorTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.coalGenerator, id, tileEntity, fieldsIn);
+        super(ModContainers.COAL_GENERATOR, id, tileEntity, fieldsIn);
         this.tileEntity = tileEntity;
 
         this.addSlot(new Slot(this.tileEntity, 0, 80, 33));

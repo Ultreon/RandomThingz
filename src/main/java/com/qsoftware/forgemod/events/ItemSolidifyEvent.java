@@ -7,24 +7,20 @@ import net.minecraftforge.eventbus.api.Event;
 /**
  * @author MrCrayfish
  */
-public class ItemSolidifyEvent extends Event
-{
+public class ItemSolidifyEvent extends Event {
     private final PlayerEntity player;
     private final ItemStack stack;
 
-    public ItemSolidifyEvent(PlayerEntity player, ItemStack stack)
-    {
+    public ItemSolidifyEvent(PlayerEntity player, ItemStack stack) {
         this.player = player;
         this.stack = stack;
     }
 
-    public PlayerEntity getPlayer()
-    {
+    public PlayerEntity getPlayer() {
         return player;
     }
 
-    public ItemStack getStack()
-    {
+    public ItemStack getStack() {
         return this.stack;
     }
 }

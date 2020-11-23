@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 
 /**
  * Specal block class.
- *
+ * <p>
  * First created block in the project.
  *
  * @author Qboi123

@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.objects.block.generator;
 
+import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.ContainerType;
@@ -8,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fluids.FluidStack;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
 
 public abstract class AbstractFluidGeneratorContainer<T extends AbstractFluidFuelGeneratorTileEntity> extends AbstractMachineBaseContainer<T> {
     public AbstractFluidGeneratorContainer(ContainerType<?> type, int id, T tileEntityIn, IIntArray fieldsIn) {

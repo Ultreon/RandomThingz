@@ -1,16 +1,17 @@
 package com.qsoftware.forgemod.api;
 
-import java.util.List;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.chemical.IChemicalTank;
 import com.qsoftware.forgemod.api.energy.IEnergyContainer;
 import com.qsoftware.forgemod.api.heat.IHeatCapacitor;
 import com.qsoftware.forgemod.api.inventory.IInventorySlot;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.IFluidTank;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

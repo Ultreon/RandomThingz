@@ -1,10 +1,5 @@
 package com.qsoftware.forgemod.api.chemical;
 
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.function.Supplier;
-import javax.annotation.Nullable;
 import com.qsoftware.forgemod.api.MekanismAPI;
 import com.qsoftware.forgemod.api.chemical.gas.Gas;
 import com.qsoftware.forgemod.api.chemical.infuse.InfuseType;
@@ -18,6 +13,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.common.Tags.IOptionalNamedTag;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.function.Supplier;
 
 public class ChemicalTags<CHEMICAL extends Chemical<CHEMICAL>> {
 

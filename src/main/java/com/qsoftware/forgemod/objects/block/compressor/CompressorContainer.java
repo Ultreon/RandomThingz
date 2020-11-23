@@ -1,16 +1,16 @@
 package com.qsoftware.forgemod.objects.block.compressor;
 
+import com.qsoftware.forgemod.init.ModContainers;
+import com.qsoftware.forgemod.objects.block.AbstractMachineContainer;
+import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
+import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
-import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
-import com.qsoftware.silent.lib.util.InventoryUtils;
-import com.qsoftware.forgemod.objects.block.AbstractMachineContainer;
-import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
-import com.qsoftware.forgemod.init.ModContainers;
 
 public class CompressorContainer extends AbstractMachineContainer<CompressorTileEntity> {
     public CompressorContainer(int id, PlayerInventory playerInventory) {
@@ -18,7 +18,7 @@ public class CompressorContainer extends AbstractMachineContainer<CompressorTile
     }
 
     public CompressorContainer(int id, PlayerInventory playerInventory, CompressorTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.compressor, id, tileEntity, fieldsIn);
+        super(ModContainers.COMPRESSOR, id, tileEntity, fieldsIn);
 
         this.addSlot(new Slot(this.tileEntity, 0, 56, 35));
         this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 117, 35));

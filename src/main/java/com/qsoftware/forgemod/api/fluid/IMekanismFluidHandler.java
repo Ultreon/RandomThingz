@@ -1,14 +1,15 @@
 package com.qsoftware.forgemod.api.fluid;
 
-import java.util.List;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.IContentsListener;
 import com.qsoftware.forgemod.api.inventory.AutomationType;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.Direction;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -18,7 +19,6 @@ public interface IMekanismFluidHandler extends ISidedFluidHandler, IContentsList
      * Used to check if an instance of {@link IMekanismFluidHandler} actually has the ability to handle fluid.
      *
      * @return True if we are actually capable of handling fluid.
-     *
      * @apiNote If for some reason you are comparing to {@link IMekanismFluidHandler} without having gotten the object via the fluid handler capability, then you must
      * call this method to make sure that it really can handle fluid. As most mekanism tiles have this class in their hierarchy.
      * @implNote If this returns false the capability should not be exposed AND methods should turn reasonable defaults for not doing anything.
@@ -31,10 +31,8 @@ public interface IMekanismFluidHandler extends ISidedFluidHandler, IContentsList
      * Returns the list of IExtendedFluidTanks that this fluid handler exposes on the given side.
      *
      * @param side The side we are interacting with the handler from (null for internal).
-     *
      * @return The list of all IExtendedFluidTanks that this {@link IMekanismFluidHandler} contains for the given side. If there are no tanks for the side or {@link
      * #canHandleFluid()} is false then it returns an empty list.
-     *
      * @implNote When side is null (an internal request), this method <em>MUST</em> return all tanks in the handler. Additionally, if {@link #canHandleFluid()} is false,
      * this <em>MUST</em> return an empty list.
      */
@@ -45,7 +43,6 @@ public interface IMekanismFluidHandler extends ISidedFluidHandler, IContentsList
      *
      * @param tank The index of the tank to retrieve.
      * @param side The side we are interacting with the handler from (null for internal).
-     *
      * @return The {@link IExtendedFluidTank} that has the given index from the list of tanks on the given side.
      */
     @Nullable

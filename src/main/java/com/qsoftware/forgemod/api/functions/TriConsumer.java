@@ -13,7 +13,6 @@ import java.util.function.Consumer;
  * @param <T> the type of the first argument to the operation
  * @param <U> the type of the second argument to the operation
  * @param <V> the type of the third argument to the operation
- *
  * @see Consumer
  */
 @FunctionalInterface
@@ -34,9 +33,7 @@ public interface TriConsumer<T, U, V> {
      * performed.
      *
      * @param after the operation to perform after this operation
-     *
      * @return a composed {@code TriConsumer} that performs in sequence this operation followed by the {@code after} operation
-     *
      * @throws NullPointerException if {@code after} is null
      */
     default TriConsumer<T, U, V> andThen(TriConsumer<? super T, ? super U, ? super V> after) {

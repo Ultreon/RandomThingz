@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.init.renew;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ObjectInit;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
-import com.qsoftware.forgemod.objects.items.CustomSpawnEggItem;
+import com.qsoftware.forgemod.objects.items.spawnegg.CustomSpawnEggItem;
 import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
 import com.qsoftware.forgemod.registration.impl.ItemDeferredRegister;
 import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
@@ -30,7 +30,7 @@ public class ModItemsNew extends ObjectInit<Item> {
     public static final ItemRegistryObject<CustomSpawnEggItem<?>> BABY_WITHER_SKELETON_SPAWN_EGG = registerSpawnEgg(EntityTypeInit.BABY_WITHER_SKELETON, 0x303030, 0x525454);
 
     private static <ENTITY extends Entity> ItemRegistryObject<CustomSpawnEggItem<?>> registerSpawnEgg(EntityTypeRegistryObject<ENTITY> entityTypeProvider,
-                                                                                                                          int primaryColor, int secondaryColor) {
+                                                                                                      int primaryColor, int secondaryColor) {
         //Note: We are required to use a custom item as we cannot use the base SpawnEggItem due to the entity type not being initialized yet
         return ITEMS.register(entityTypeProvider.getInternalRegistryName() + "_spawn_egg", () -> new CustomSpawnEggItem<>(entityTypeProvider, primaryColor, secondaryColor));
     }

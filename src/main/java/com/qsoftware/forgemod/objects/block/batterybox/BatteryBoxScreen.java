@@ -2,12 +2,12 @@ package com.qsoftware.forgemod.objects.block.batterybox;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.util.TextUtil;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.util.TextUtil;
 
 public class BatteryBoxScreen extends ContainerScreen<BatteryBoxContainer> {
     public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/battery_box.png");

@@ -1,12 +1,13 @@
 package com.qsoftware.forgemod.api.recipes;
 
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.inventory.IgnoredIInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 //TODO: Make implementations override equals and hashcode?
 public abstract class MekanismRecipe implements IRecipe<IgnoredIInventory> {

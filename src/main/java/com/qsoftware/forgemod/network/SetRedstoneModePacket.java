@@ -1,13 +1,13 @@
 package com.qsoftware.forgemod.network;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fml.network.NetworkEvent;
 import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
 import com.qsoftware.silent.utils.EnumUtils;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -27,10 +27,6 @@ public class SetRedstoneModePacket {
         return packet;
     }
 
-    public void toBytes(PacketBuffer buffer) {
-        buffer.writeByte(this.mode.ordinal());
-    }
-
     public static void handle(SetRedstoneModePacket packet, Supplier<NetworkEvent.Context> context) {
         ServerPlayerEntity player = context.get().getSender();
         context.get().enqueueWork(() -> handlePacket(packet, player));
@@ -46,5 +42,9 @@ public class SetRedstoneModePacket {
                 }
             }
         }
+    }
+
+    public void toBytes(PacketBuffer buffer) {
+        buffer.writeByte(this.mode.ordinal());
     }
 }

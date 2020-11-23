@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.init.ModFluids;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;

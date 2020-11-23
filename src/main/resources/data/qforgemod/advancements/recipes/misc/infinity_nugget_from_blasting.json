@@ -1,0 +1,135 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:infinity_nugget_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_infinity_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_infinity_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_shovel"
+          }
+        ]
+      }
+    },
+    "has_infinity_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_axe"
+          }
+        ]
+      }
+    },
+    "has_infinity_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_hoe"
+          }
+        ]
+      }
+    },
+    "has_infinity_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_sword"
+          }
+        ]
+      }
+    },
+    "has_infinity_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_helmet"
+          }
+        ]
+      }
+    },
+    "has_infinity_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_chestplate"
+          }
+        ]
+      }
+    },
+    "has_infinity_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_leggings"
+          }
+        ]
+      }
+    },
+    "has_infinity_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_boots"
+          }
+        ]
+      }
+    },
+    "has_infinity_horse_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_horse_armor"
+          }
+        ]
+      }
+    }
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:infinity_nugget_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_infinity_pickaxe",
+      "has_infinity_shovel",
+      "has_infinity_axe",
+      "has_infinity_hoe",
+      "has_infinity_sword",
+      "has_infinity_helmet",
+      "has_infinity_chestplate",
+      "has_infinity_leggings",
+      "has_infinity_boots",
+      "has_infinity_horse_armor",
+      "has_chainmail_helmet",
+      "has_chainmail_chestplate",
+      "has_chainmail_leggings",
+      "has_chainmail_boots",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.api.text;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import com.qsoftware.forgemod.api.IIncrementalEnum;
 import com.qsoftware.forgemod.api.math.MathUtils;
 import net.minecraft.block.material.MaterialColor;
@@ -13,6 +11,9 @@ import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.Tags;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Simple color enum for adding colors to in-game GUI strings of text.
@@ -45,9 +46,6 @@ public enum EnumColor implements IIncrementalEnum<EnumColor> {
      * The color code that will be displayed
      */
     public final String code;
-
-    private int[] rgbCode;
-    private Color color;
     private final APILang langEntry;
     private final String englishName;
     private final String registryPrefix;
@@ -55,6 +53,8 @@ public enum EnumColor implements IIncrementalEnum<EnumColor> {
     private final String dyeName;
     private final MaterialColor mapColor;
     private final ITag<Item> dyeTag;
+    private int[] rgbCode;
+    private Color color;
 
     EnumColor(String s, APILang langEntry, String englishName, @Nullable String dyeName, String registryPrefix, int[] rgbCode, DyeColor dyeColor) {
         this(s, langEntry, englishName, dyeName, registryPrefix, rgbCode, dyeColor.getMapColor(), dyeColor.getTag());
@@ -69,6 +69,10 @@ public enum EnumColor implements IIncrementalEnum<EnumColor> {
         setColorFromAtlas(rgbCode);
         this.mapColor = mapColor;
         this.dyeTag = dyeTag;
+    }
+
+    public static EnumColor byIndexStatic(int index) {
+        return MathUtils.getByIndexMod(COLORS, index);
     }
 
     public String getRegistryPrefix() {
@@ -120,7 +124,6 @@ public enum EnumColor implements IIncrementalEnum<EnumColor> {
      * Gets the 0-1 of this color's RGB value by dividing by 255 (used for OpenGL coloring).
      *
      * @param index - R:0, G:1, B:2
-     *
      * @return the color value
      */
     public float getColor(int index) {
@@ -134,10 +137,6 @@ public enum EnumColor implements IIncrementalEnum<EnumColor> {
     @Override
     public String toString() {
         return code;
-    }
-
-    public static EnumColor byIndexStatic(int index) {
-        return MathUtils.getByIndexMod(COLORS, index);
     }
 
     @Nonnull
@@ -155,7 +154,6 @@ public enum EnumColor implements IIncrementalEnum<EnumColor> {
      * Gets the red, green and blue color value, as an integer(range: 0 - 255).
      *
      * @return the color values.
-     *
      * @apiNote Modifying the returned array will result in this color object changing the color it represents, and should not be done.
      */
     public int[] getRgbCode() {

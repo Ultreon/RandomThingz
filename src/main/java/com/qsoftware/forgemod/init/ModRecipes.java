@@ -12,17 +12,6 @@ import net.minecraftforge.fml.RegistryObject;
 import java.util.function.Supplier;
 
 public final class ModRecipes {
-    public static final class Types {
-        public static final IRecipeType<AlloySmeltingRecipe> ALLOY_SMELTING = registerType(Constants.ALLOY_SMELTING);
-        public static final IRecipeType<CompressingRecipe> COMPRESSING = registerType(Constants.ALLOY_SMELTING);
-        public static final IRecipeType<CrushingRecipe> CRUSHING = registerType(Constants.ALLOY_SMELTING);
-        public static final IRecipeType<DryingRecipe> DRYING = registerType(Constants.ALLOY_SMELTING);
-        public static final IRecipeType<InfusingRecipe> INFUSING = registerType(Constants.INFUSING);
-        public static final IRecipeType<MixingRecipe> MIXING = registerType(Constants.MIXING);
-        public static final IRecipeType<RefiningRecipe> REFINING = registerType(Constants.REFINING);
-        public static final IRecipeType<SolidifyingRecipe> SOLIDIFYING = registerType(Constants.SOLIDIFYING);
-    }
-
     public static final RegistryObject<IRecipeSerializer<?>> ALLOY_SMELTING = registerSerializer(Constants.ALLOY_SMELTING, AlloySmeltingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> COMPRESSING = registerSerializer(Constants.COMPRESSING, CompressingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> CRUSHING = registerSerializer(Constants.CRUSHING, CrushingRecipe.Serializer::new);
@@ -31,10 +20,11 @@ public final class ModRecipes {
     public static final RegistryObject<IRecipeSerializer<?>> MIXING = registerSerializer(Constants.MIXING, MixingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> REFINING = registerSerializer(Constants.REFINING, RefiningRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> SOLIDIFYING = registerSerializer(Constants.SOLIDIFYING, SolidifyingRecipe.Serializer::new);
+    private ModRecipes() {
+    }
 
-    private ModRecipes() {}
-
-    static void register() {}
+    static void register() {
+    }
 
     private static RegistryObject<IRecipeSerializer<?>> registerSerializer(ResourceLocation name, Supplier<IRecipeSerializer<?>> serializer) {
         return Registration.RECIPE_SERIALIZERS.register(name.getPath(), serializer);
@@ -47,5 +37,16 @@ public final class ModRecipes {
                 return name.toString();
             }
         });
+    }
+
+    public static final class Types {
+        public static final IRecipeType<AlloySmeltingRecipe> ALLOY_SMELTING = registerType(Constants.ALLOY_SMELTING);
+        public static final IRecipeType<CompressingRecipe> COMPRESSING = registerType(Constants.ALLOY_SMELTING);
+        public static final IRecipeType<CrushingRecipe> CRUSHING = registerType(Constants.ALLOY_SMELTING);
+        public static final IRecipeType<DryingRecipe> DRYING = registerType(Constants.ALLOY_SMELTING);
+        public static final IRecipeType<InfusingRecipe> INFUSING = registerType(Constants.INFUSING);
+        public static final IRecipeType<MixingRecipe> MIXING = registerType(Constants.MIXING);
+        public static final IRecipeType<RefiningRecipe> REFINING = registerType(Constants.REFINING);
+        public static final IRecipeType<SolidifyingRecipe> SOLIDIFYING = registerType(Constants.SOLIDIFYING);
     }
 }

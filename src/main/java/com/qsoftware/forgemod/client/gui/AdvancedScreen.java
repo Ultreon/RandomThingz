@@ -66,6 +66,7 @@ public abstract class AdvancedScreen<T extends Container> extends ContainerScree
             }
         }
     }
+
     public List<Widget> getWidgets() {
         return widgets;
     }

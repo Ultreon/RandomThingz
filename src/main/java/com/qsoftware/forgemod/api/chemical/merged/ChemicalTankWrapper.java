@@ -1,15 +1,16 @@
 package com.qsoftware.forgemod.api.chemical.merged;
 
-import java.util.function.BooleanSupplier;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.chemical.Chemical;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
 import com.qsoftware.forgemod.api.chemical.IChemicalTank;
 import com.qsoftware.forgemod.api.chemical.attribute.ChemicalAttributeValidator;
 import com.qsoftware.forgemod.api.inventory.AutomationType;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.BooleanSupplier;
 
 /**
  * Helper class for wrapping a chemical tank for use in a multi chemical type. Disallowing interacting with various tanks if other tanks have contents. For example only

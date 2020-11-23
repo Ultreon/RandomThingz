@@ -3,12 +3,6 @@ package com.qsoftware.forgemod.api.recipes.inputs.chemical;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.JsonConstants;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.Chemical;
@@ -18,8 +12,11 @@ import com.qsoftware.forgemod.api.recipes.inputs.chemical.ChemicalIngredientDese
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tags.ITag;
 
+import javax.annotation.Nonnull;
+import java.util.*;
+
 public interface ChemicalStackIngredient<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>> extends
-      IChemicalStackIngredient<CHEMICAL, STACK> {
+        IChemicalStackIngredient<CHEMICAL, STACK> {
 
     abstract class SingleIngredient<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>> implements ChemicalStackIngredient<CHEMICAL, STACK> {
 
@@ -143,7 +140,7 @@ public interface ChemicalStackIngredient<CHEMICAL extends Chemical<CHEMICAL>, ST
     }
 
     abstract class MultiIngredient<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>,
-          INGREDIENT extends IChemicalStackIngredient<CHEMICAL, STACK>> implements ChemicalStackIngredient<CHEMICAL, STACK> {
+            INGREDIENT extends IChemicalStackIngredient<CHEMICAL, STACK>> implements ChemicalStackIngredient<CHEMICAL, STACK> {
 
         private final INGREDIENT[] ingredients;
 

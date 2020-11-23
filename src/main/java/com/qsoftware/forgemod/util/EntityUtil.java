@@ -18,7 +18,7 @@ public final class EntityUtil {
     /**
      * Instant kills an living entity.
      *
-     * @param entity the entity to kill.
+     * @param entity       the entity to kill.
      * @param damageSource the damage source, this is used for the death message.
      */
     public static void instantKill(LivingEntity entity, DamageSource damageSource) {
@@ -29,7 +29,7 @@ public final class EntityUtil {
     /**
      * Instant kills an living entity.
      *
-     * @param entity the entity to kill
+     * @param entity     the entity to kill
      * @param damageType the damage type, this is used for the death message.
      * @see LivingEntity#damageEntity(DamageSource, float)
      */

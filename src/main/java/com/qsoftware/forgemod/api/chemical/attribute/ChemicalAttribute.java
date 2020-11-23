@@ -1,7 +1,8 @@
 package com.qsoftware.forgemod.api.chemical.attribute;
 
-import java.util.List;
 import net.minecraft.util.text.ITextComponent;
+
+import java.util.List;
 
 /**
  * All chemical attributes should inherit from from this class. No specific implementation is required.
@@ -23,7 +24,6 @@ public abstract class ChemicalAttribute {
      * Add text components to this chemical attribute's tooltip.
      *
      * @param list list of tooltips to be displayed
-     *
      * @return updated list of tooltips
      */
     public List<ITextComponent> addTooltipText(List<ITextComponent> list) {

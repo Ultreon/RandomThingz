@@ -1,23 +1,20 @@
 package com.qsoftware.forgemod.api.chemical;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import java.util.Map;
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.api.chemical.gas.Gas;
 import com.qsoftware.forgemod.api.chemical.infuse.InfuseType;
 import com.qsoftware.forgemod.api.chemical.pigment.Pigment;
 import com.qsoftware.forgemod.api.chemical.slurry.Slurry;
-import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
-import com.qsoftware.forgemod.api.recipes.inputs.chemical.IChemicalStackIngredient;
-import com.qsoftware.forgemod.api.recipes.inputs.chemical.InfusionStackIngredient;
-import com.qsoftware.forgemod.api.recipes.inputs.chemical.PigmentStackIngredient;
-import com.qsoftware.forgemod.api.recipes.inputs.chemical.SlurryStackIngredient;
+import com.qsoftware.forgemod.api.recipes.inputs.chemical.*;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.common.util.Constants.NBT;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Map;
+import java.util.function.Predicate;
 
 //TODO: Make the chemicals know their own chemical type
 public enum ChemicalType implements IStringSerializable {
@@ -40,20 +37,6 @@ public enum ChemicalType implements IStringSerializable {
     ChemicalType(String name, Predicate<Chemical<?>> instanceCheck) {
         this.name = name;
         this.instanceCheck = instanceCheck;
-    }
-
-    @Nonnull
-    @Override
-    public String getString() {
-        return name;
-    }
-
-    public boolean isInstance(Chemical<?> chemical) {
-        return instanceCheck.test(chemical);
-    }
-
-    public void write(@Nonnull CompoundNBT nbt) {
-        nbt.putString(NBTConstants.CHEMICAL_TYPE, getString());
     }
 
     @Nullable
@@ -97,5 +80,19 @@ public enum ChemicalType implements IStringSerializable {
             return SLURRY;
         }
         throw new IllegalStateException("Unknown chemical ingredient type");
+    }
+
+    @Nonnull
+    @Override
+    public String getString() {
+        return name;
+    }
+
+    public boolean isInstance(Chemical<?> chemical) {
+        return instanceCheck.test(chemical);
+    }
+
+    public void write(@Nonnull CompoundNBT nbt) {
+        nbt.putString(NBTConstants.CHEMICAL_TYPE, getString());
     }
 }

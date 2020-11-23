@@ -1,5 +1,16 @@
 package com.qsoftware.forgemod.objects.block.pump;
 
+import com.qsoftware.forgemod.api.IFluidContainer;
+import com.qsoftware.forgemod.api.RedstoneMode;
+import com.qsoftware.forgemod.init.ModTileEntities;
+import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
+import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
+import com.qsoftware.forgemod.util.Constants;
+import com.qsoftware.forgemod.util.InventoryUtils;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.silent.lib.util.TimeUtils;
+import com.qsoftware.silent.utils.EnumUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.entity.player.PlayerInventory;
@@ -18,17 +29,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import com.qsoftware.silent.lib.util.TimeUtils;
-import com.qsoftware.forgemod.api.IFluidContainer;
-import com.qsoftware.forgemod.api.RedstoneMode;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
-import com.qsoftware.forgemod.init.ModTileEntities;
-import com.qsoftware.forgemod.objects.item.MachineUpgrades;
-import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.InventoryUtils;
-import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.forgemod.util.TextUtil;
-import com.qsoftware.silent.utils.EnumUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,7 +37,7 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
     public static final int ENERGY_PER_BUCKET = 500;
     public static final int PUMP_DELAY = TimeUtils.ticksFromSeconds(5);
     public static final int FIELDS_COUNT = 9;
-
+    private final FluidTank tank = new FluidTank(4000);
     protected final IIntArray fields = new IIntArray() {
         @SuppressWarnings("deprecation") // Use of Registry
         @Override
@@ -79,8 +79,6 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
             return FIELDS_COUNT;
         }
     };
-
-    private final FluidTank tank = new FluidTank(4000);
     private final LazyOptional<IFluidHandler> fluidCap = LazyOptional.of(() -> tank);
 
     public PumpTileEntity() {

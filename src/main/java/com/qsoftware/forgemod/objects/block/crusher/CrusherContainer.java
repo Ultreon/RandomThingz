@@ -1,17 +1,17 @@
 package com.qsoftware.forgemod.objects.block.crusher;
 
+import com.qsoftware.forgemod.init.MachineType;
+import com.qsoftware.forgemod.objects.block.AbstractMachineContainer;
+import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
-import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
-import com.qsoftware.silent.lib.util.InventoryUtils;
-import com.qsoftware.forgemod.objects.block.AbstractMachineContainer;
-import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
-import com.qsoftware.forgemod.init.MachineType;
-import com.qsoftware.forgemod.util.MachineTier;
 
 public class CrusherContainer extends AbstractMachineContainer<CrusherTileEntity> {
     public CrusherContainer(int id, PlayerInventory playerInventory, MachineTier tier) {

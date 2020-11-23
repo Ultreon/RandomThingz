@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.api.chemical.merged;
 
-import javax.annotation.Nullable;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
 import com.qsoftware.forgemod.api.chemical.ChemicalType;
 import com.qsoftware.forgemod.api.chemical.gas.GasStack;
@@ -11,10 +10,19 @@ import com.qsoftware.forgemod.api.text.IHasTextComponent;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 
+import javax.annotation.Nullable;
+
 public class BoxedChemicalStack implements IHasTextComponent {
 
     //TODO: Make a subclass for the empty implementation?
     public static final BoxedChemicalStack EMPTY = new BoxedChemicalStack(ChemicalType.GAS, GasStack.EMPTY);
+    private final ChemicalType chemicalType;
+    private final ChemicalStack<?> chemicalStack;
+
+    private BoxedChemicalStack(ChemicalType chemicalType, ChemicalStack<?> chemicalStack) {
+        this.chemicalType = chemicalType;
+        this.chemicalStack = chemicalStack;
+    }
 
     public static BoxedChemicalStack box(ChemicalStack<?> chemicalStack) {
         return new BoxedChemicalStack(ChemicalType.getTypeFor(chemicalStack), chemicalStack);
@@ -33,14 +41,6 @@ public class BoxedChemicalStack implements IHasTextComponent {
             stack = SlurryStack.readFromNBT(nbt);
         }
         return chemicalType == null || stack == null ? EMPTY : new BoxedChemicalStack(chemicalType, stack);
-    }
-
-    private final ChemicalType chemicalType;
-    private final ChemicalStack<?> chemicalStack;
-
-    private BoxedChemicalStack(ChemicalType chemicalType, ChemicalStack<?> chemicalStack) {
-        this.chemicalType = chemicalType;
-        this.chemicalStack = chemicalStack;
     }
 
     public BoxedChemical getType() {

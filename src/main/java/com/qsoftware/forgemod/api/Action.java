@@ -12,6 +12,17 @@ public enum Action {
         this.fluidAction = fluidAction;
     }
 
+    public static Action get(boolean execute) {
+        return execute ? EXECUTE : SIMULATE;
+    }
+
+    public static Action fromFluidAction(FluidAction action) {
+        if (action == FluidAction.EXECUTE) {
+            return EXECUTE;
+        } //else FluidAction.SIMULATE
+        return SIMULATE;
+    }
+
     public boolean execute() {
         return this == EXECUTE;
     }
@@ -26,16 +37,5 @@ public enum Action {
 
     public Action combine(boolean execute) {
         return get(execute && execute());
-    }
-
-    public static Action get(boolean execute) {
-        return execute ? EXECUTE : SIMULATE;
-    }
-
-    public static Action fromFluidAction(FluidAction action) {
-        if (action == FluidAction.EXECUTE) {
-            return EXECUTE;
-        } //else FluidAction.SIMULATE
-        return SIMULATE;
     }
 }

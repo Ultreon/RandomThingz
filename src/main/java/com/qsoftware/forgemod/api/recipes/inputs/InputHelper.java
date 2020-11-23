@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.inputs;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
 import com.qsoftware.forgemod.api.MekanismAPI;
 import com.qsoftware.forgemod.api.annotations.NonNull;
@@ -12,6 +10,9 @@ import com.qsoftware.forgemod.api.inventory.IInventorySlot;
 import com.qsoftware.forgemod.api.math.MathUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class InputHelper {

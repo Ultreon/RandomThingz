@@ -1,9 +1,12 @@
 package com.qsoftware.forgemod.api;
 
+import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgradeItem;
+import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
+
 /**
  * A machine upgrade item, which goes into the upgrade slots of machines. Also see {@link
- * com.qsoftware.forgemod.objects.item.MachineUpgradeItem} and {@link
- * com.qsoftware.forgemod.objects.item.MachineUpgrades}.
+ * MachineUpgradeItem} and {@link
+ * MachineUpgrades}.
  */
 public interface IMachineUpgrade {
     /**

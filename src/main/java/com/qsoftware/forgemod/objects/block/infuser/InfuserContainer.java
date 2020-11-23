@@ -1,5 +1,9 @@
 package com.qsoftware.forgemod.objects.block.infuser;
 
+import com.qsoftware.forgemod.init.ModContainers;
+import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
+import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
@@ -9,18 +13,14 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fluids.FluidStack;
-import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
-import com.qsoftware.silent.lib.util.InventoryUtils;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBaseContainer;
-import com.qsoftware.forgemod.init.ModContainers;
 
 public class InfuserContainer extends AbstractMachineBaseContainer<InfuserTileEntity> {
-    public InfuserContainer(int id, PlayerInventory playerInventory){
+    public InfuserContainer(int id, PlayerInventory playerInventory) {
         this(id, playerInventory, new InfuserTileEntity(), new IntArray(InfuserTileEntity.FIELDS_COUNT));
     }
 
     public InfuserContainer(int id, PlayerInventory playerInventory, InfuserTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.infuser, id, tileEntity, fieldsIn);
+        super(ModContainers.INFUSER, id, tileEntity, fieldsIn);
 
         this.addSlot(new Slot(this.tileEntity, InfuserTileEntity.SLOT_FLUID_CONTAINER_IN, 8, 16));
         this.addSlot(new SlotOutputOnly(this.tileEntity, InfuserTileEntity.SLOT_FLUID_CONTAINER_OUT, 8, 59));

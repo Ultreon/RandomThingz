@@ -1,12 +1,13 @@
 package com.qsoftware.forgemod.api.math;
 
+import com.qsoftware.forgemod.api.Action;
 import it.unimi.dsi.fastutil.ints.Int2ObjectFunction;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
-import java.util.function.IntSupplier;
-import javax.annotation.ParametersAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
-import com.qsoftware.forgemod.api.Action;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.IntSupplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

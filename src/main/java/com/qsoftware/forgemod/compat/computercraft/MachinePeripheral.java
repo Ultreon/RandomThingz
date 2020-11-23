@@ -1,11 +1,11 @@
 package com.qsoftware.forgemod.compat.computercraft;
 
-import dan200.computercraft.api.lua.LuaException;
-import dan200.computercraft.api.lua.LuaFunction;
-import dan200.computercraft.api.peripheral.IPeripheral;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseTileEntity;
+import dan200.computercraft.api.lua.LuaException;
+import dan200.computercraft.api.lua.LuaFunction;
+import dan200.computercraft.api.peripheral.IPeripheral;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

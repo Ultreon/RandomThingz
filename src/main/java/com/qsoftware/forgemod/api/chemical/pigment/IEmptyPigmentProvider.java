@@ -1,7 +1,8 @@
 package com.qsoftware.forgemod.api.chemical.pigment;
 
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.chemical.IEmptyStackProvider;
+
+import javax.annotation.Nonnull;
 
 public interface IEmptyPigmentProvider extends IEmptyStackProvider<Pigment, PigmentStack> {
 

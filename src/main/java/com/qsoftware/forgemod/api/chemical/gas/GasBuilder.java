@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.api.chemical.gas;
 
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.MekanismAPI;
 import com.qsoftware.forgemod.api.chemical.ChemicalBuilder;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;

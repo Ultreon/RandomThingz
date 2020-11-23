@@ -20,6 +20,15 @@ public class DryingRackTileEntityRenderer extends TileEntityRenderer<DryingRackT
         super(rendererDispatcherIn);
     }
 
+    private static Direction getFacing(DryingRackTileEntity tileEntity) {
+        World world = tileEntity.getWorld();
+        if (world != null) {
+            BlockState state = world.getBlockState(tileEntity.getPos());
+            return state.get(DryingRackBlock.FACING);
+        }
+        return Direction.NORTH;
+    }
+
     @Override
     public void render(DryingRackTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         ItemStack stack = tileEntityIn.getItem();
@@ -41,14 +50,5 @@ public class DryingRackTileEntityRenderer extends TileEntityRenderer<DryingRackT
             itemRenderer.renderItem(stack, ItemCameraTransforms.TransformType.FIXED, combinedLightIn, OverlayTexture.NO_OVERLAY, matrixStackIn, bufferIn);
             matrixStackIn.pop();
         }
-    }
-
-    private static Direction getFacing(DryingRackTileEntity tileEntity) {
-        World world = tileEntity.getWorld();
-        if (world != null) {
-            BlockState state = world.getBlockState(tileEntity.getPos());
-            return state.get(DryingRackBlock.FACING);
-        }
-        return Direction.NORTH;
     }
 }

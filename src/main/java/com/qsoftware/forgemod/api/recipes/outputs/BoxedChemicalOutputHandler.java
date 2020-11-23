@@ -1,11 +1,12 @@
 package com.qsoftware.forgemod.api.recipes.outputs;
 
-import java.util.Objects;
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
 import com.qsoftware.forgemod.api.chemical.IChemicalTank;
 import com.qsoftware.forgemod.api.chemical.merged.BoxedChemicalStack;
 import com.qsoftware.forgemod.api.chemical.merged.MergedChemicalTank;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Objects;
 
 @ParametersAreNonnullByDefault
 public class BoxedChemicalOutputHandler {

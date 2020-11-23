@@ -1,9 +1,6 @@
 package com.qsoftware.forgemod.api.datagen.recipe.builder;
 
 import com.google.gson.JsonObject;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.JsonConstants;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.chemical.Chemical;
@@ -15,20 +12,24 @@ import com.qsoftware.forgemod.api.chemical.infuse.InfusionStack;
 import com.qsoftware.forgemod.api.datagen.recipe.MekanismRecipeBuilder;
 import com.qsoftware.forgemod.api.recipes.inputs.ItemStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.ChemicalIngredientDeserializer;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemStackToChemicalRecipeBuilder<CHEMICAL extends Chemical<CHEMICAL>, STACK extends ChemicalStack<CHEMICAL>> extends
-      MekanismRecipeBuilder<ItemStackToChemicalRecipeBuilder<CHEMICAL, STACK>> {
+        MekanismRecipeBuilder<ItemStackToChemicalRecipeBuilder<CHEMICAL, STACK>> {
 
     private final ChemicalIngredientDeserializer<CHEMICAL, STACK, ?> outputSerializer;
     private final ItemStackIngredient input;
     private final STACK output;
 
     protected ItemStackToChemicalRecipeBuilder(ResourceLocation serializerName, ItemStackIngredient input, STACK output,
-          ChemicalIngredientDeserializer<CHEMICAL, STACK, ?> outputSerializer) {
+                                               ChemicalIngredientDeserializer<CHEMICAL, STACK, ?> outputSerializer) {
         super(serializerName);
         this.input = input;
         this.output = output;

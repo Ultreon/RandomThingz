@@ -1,8 +1,9 @@
 package com.qsoftware.forgemod.api.chemical;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
+import mcp.MethodsReturnNonnullByDefault;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -28,7 +29,6 @@ public interface IChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, STACK ext
      * </p>
      *
      * @param tank Tank to query.
-     *
      * @return {@link STACK} in a given tank. {@link #getEmptyStack()} if the tank is empty.
      */
     STACK getChemicalInTank(int tank);
@@ -38,7 +38,6 @@ public interface IChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, STACK ext
      *
      * @param tank  Tank to modify
      * @param stack {@link STACK} to set tank to (may be empty).
-     *
      * @throws RuntimeException if the handler is called in a way that the handler was not expecting.
      **/
     void setChemicalInTank(int tank, STACK stack);
@@ -47,7 +46,6 @@ public interface IChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, STACK ext
      * Retrieves the maximum amount of chemical that can be stored in a given tank.
      *
      * @param tank Tank to query.
-     *
      * @return The maximum chemical amount held by the tank.
      */
     long getTankCapacity(int tank);
@@ -65,7 +63,6 @@ public interface IChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, STACK ext
      *
      * @param tank  Tank to query.
      * @param stack Stack to test with for validity
-     *
      * @return true if the tank can accept the {@link STACK}, not considering the current state of the tank. false if the tank can never support the given {@link STACK}
      * in any situation.
      */
@@ -81,7 +78,6 @@ public interface IChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, STACK ext
      * @param tank   Tank to insert to.
      * @param stack  {@link STACK} to insert. This must not be modified by the tank.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return The remaining {@link STACK} that was not inserted (if the entire stack is accepted, then return an empty {@link STACK}). May be the same as the input
      * {@link STACK} if unchanged, otherwise a new {@link STACK}. The returned {@link STACK} can be safely modified after
      */
@@ -96,7 +92,6 @@ public interface IChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, STACK ext
      * @param tank   Tank to extract from.
      * @param amount Amount to extract (may be greater than the current stack's amount or the tank's capacity)
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return {@link STACK} extracted from the tank, must be empty if nothing can be extracted. The returned {@link STACK} can be safely modified after, so the tank
      * should return a new or copied stack.
      */
@@ -112,10 +107,8 @@ public interface IChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, STACK ext
      *
      * @param stack  {@link STACK} to insert. This must not be modified by the handler.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return The remaining {@link STACK} that was not inserted (if the entire stack is accepted, then return an empty {@link STACK}). May be the same as the input
      * {@link STACK} if unchanged, otherwise a new {@link STACK}. The returned {@link STACK} can be safely modified after
-     *
      * @implNote The default implementation of this method, attempts to insert into tanks that contain the same type of chemical as the supplied type, and if it will not
      * all fit, falls back to inserting into any empty tanks.
      * @apiNote It is not guaranteed that the default implementation will be how this {@link IChemicalHandler} ends up distributing the insertion.
@@ -132,10 +125,8 @@ public interface IChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, STACK ext
      *
      * @param amount Amount to extract (may be greater than the current stack's amount or the tank's capacity)
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return {@link STACK} extracted from the tank, must be empty if nothing can be extracted. The returned {@link STACK} can be safely modified after, so the tank
      * should return a new or copied stack.
-     *
      * @implNote The default implementation of this method, extracts across all tanks to try and reach the desired amount to extract. Once the first chemical that can be
      * extracted is found, all future extractions will make sure to also make sure they are for the same type of chemical.
      * @apiNote It is not guaranteed that the default implementation will be how this {@link IChemicalHandler} ends up distributing the extraction.
@@ -152,10 +143,8 @@ public interface IChemicalHandler<CHEMICAL extends Chemical<CHEMICAL>, STACK ext
      *
      * @param stack  {@link STACK} representing the {@link CHEMICAL} and maximum amount to be drained.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return {@link STACK} extracted from the tank, must be empty if nothing can be extracted. The returned {@link STACK} can be safely modified after, so the tank
      * should return a new or copied stack.
-     *
      * @implNote The default implementation of this method, extracts across all tanks that contents match the type of chemical passed into this method.
      * @apiNote It is not guaranteed that the default implementation will be how this {@link IChemicalHandler} ends up distributing the extraction.
      */

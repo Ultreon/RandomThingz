@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.api.math;
 
-import java.util.function.Consumer;
 import javax.annotation.Nonnull;
+import java.util.function.Consumer;
 
 /**
  * Represents an operation that accepts a single {@link FloatingLong}-valued argument and returns no result.  This is a specialization of {@link Consumer} for {@link

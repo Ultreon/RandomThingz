@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.objects.block.pipe;
 
+import com.qsoftware.forgemod.api.ConnectionType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -11,7 +12,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import com.qsoftware.forgemod.api.ConnectionType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -20,36 +20,13 @@ import java.util.*;
 public final class PipeNetwork implements IFluidHandler {
     private final IWorldReader world;
     private final Map<BlockPos, Set<Connection>> connections = new HashMap<>();
-    private boolean connectionsBuilt;
     private final FluidTank fluidTank;
+    private boolean connectionsBuilt;
 
     private PipeNetwork(IWorldReader world, Set<BlockPos> wires) {
         this.world = world;
         wires.forEach(pos -> connections.put(pos, Collections.emptySet()));
         this.fluidTank = new FluidTank(1000);
-    }
-
-    public boolean contains(IWorldReader world, BlockPos pos) {
-        return this.world == world && connections.containsKey(pos);
-    }
-
-    public int getPipeCount() {
-        return connections.size();
-    }
-
-    public Connection getConnection(BlockPos pos, Direction side) {
-        if (connections.containsKey(pos)) {
-            for (Connection connection : connections.get(pos)) {
-                if (connection.side == side) {
-                    return connection;
-                }
-            }
-        }
-        return new Connection(this, side, ConnectionType.NONE);
-    }
-
-    void invalidate() {
-        connections.values().forEach(set -> set.forEach(con -> con.getLazyOptional().invalidate()));
     }
 
     static PipeNetwork buildNetwork(IWorldReader world, BlockPos pos) {
@@ -76,6 +53,39 @@ public final class PipeNetwork implements IFluidHandler {
             }
         }
         return set;
+    }
+
+    @Nullable
+    private static IFluidHandler getFluidHandler(IBlockReader world, BlockPos pos, Direction side) {
+        TileEntity tileEntity = world.getTileEntity(pos.offset(side));
+        if (tileEntity != null) {
+            //noinspection ConstantConditions
+            return tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()).orElse(null);
+        }
+        return null;
+    }
+
+    public boolean contains(IWorldReader world, BlockPos pos) {
+        return this.world == world && connections.containsKey(pos);
+    }
+
+    public int getPipeCount() {
+        return connections.size();
+    }
+
+    public Connection getConnection(BlockPos pos, Direction side) {
+        if (connections.containsKey(pos)) {
+            for (Connection connection : connections.get(pos)) {
+                if (connection.side == side) {
+                    return connection;
+                }
+            }
+        }
+        return new Connection(this, side, ConnectionType.NONE);
+    }
+
+    void invalidate() {
+        connections.values().forEach(set -> set.forEach(con -> con.getLazyOptional().invalidate()));
     }
 
     private void buildConnections() {
@@ -132,16 +142,6 @@ public final class PipeNetwork implements IFluidHandler {
                 }
             }
         }
-    }
-
-    @Nullable
-    private static IFluidHandler getFluidHandler(IBlockReader world, BlockPos pos, Direction side) {
-        TileEntity tileEntity = world.getTileEntity(pos.offset(side));
-        if (tileEntity != null) {
-            //noinspection ConstantConditions
-            return tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()).orElse(null);
-        }
-        return null;
     }
 
     @Override

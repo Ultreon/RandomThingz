@@ -5,9 +5,6 @@ package com.qsoftware.forgemod.api;
  */
 public class JsonConstants {
 
-    private JsonConstants() {
-    }
-
     //Ingredients
     public static final String INGREDIENT = "ingredient";
     public static final String AMOUNT = "amount";
@@ -20,7 +17,6 @@ public class JsonConstants {
     public static final String PIGMENT = "pigment";
     public static final String SLURRY = "slurry";
     public static final String FLUID = "fluid";
-
     //Recipes
     public static final String TYPE = "type";
     public static final String CONDITIONS = "conditions";
@@ -47,7 +43,9 @@ public class JsonConstants {
     public static final String MAIN_OUTPUT = "mainOutput";
     public static final String SECONDARY_OUTPUT = "secondaryOutput";
     public static final String SECONDARY_CHANCE = "secondaryChance";
-
     //Transmitter model
     public static final String GLASS = "glass";
+
+    private JsonConstants() {
+    }
 }

@@ -1,20 +1,20 @@
 package com.qsoftware.forgemod.data.client;
 
+import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.init.OreMaterials;
+import com.qsoftware.forgemod.init.ModBlocks;
+import com.qsoftware.forgemod.init.ModItems;
+import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.forgemod.objects.items.CraftingItems;
+import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
+import com.qsoftware.silent.lib.block.IBlockProvider;
+import com.qsoftware.silent.lib.util.NameUtils;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import com.qsoftware.silent.lib.block.IBlockProvider;
-import com.qsoftware.silent.lib.util.NameUtils;
-import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.Metals;
-import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.objects.item.CraftingItems;
-import com.qsoftware.forgemod.objects.item.MachineUpgrades;
 
 import java.util.Arrays;
 
@@ -35,7 +35,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
 
         //noinspection OverlyLongLambda
-        Arrays.stream(Metals.values()).forEach(metal -> {
+        Arrays.stream(OreMaterials.values()).forEach(metal -> {
             metal.getOre().ifPresent(this::blockBuilder);
             metal.getStorageBlock().ifPresent(this::blockBuilder);
             metal.getChunks().ifPresent(item -> builder(item, itemGenerated));

@@ -1,6 +1,10 @@
 package com.qsoftware.forgemod.crafting.recipe;
 
 import com.google.gson.JsonObject;
+import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
+import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidInventory;
+import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidRecipe;
+import com.qsoftware.forgemod.init.ModRecipes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
@@ -11,10 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidInventory;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidRecipe;
-import com.qsoftware.forgemod.init.ModRecipes;
 
 import javax.annotation.Nullable;
 import java.util.Collections;

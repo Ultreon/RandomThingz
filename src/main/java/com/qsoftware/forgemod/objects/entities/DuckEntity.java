@@ -37,6 +37,10 @@ public class DuckEntity extends ChickenEntity {
         super(type, worldIn);
     }
 
+    public static AttributeModifierMap.MutableAttribute registerAttributes() {
+        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 4.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
+    }
+
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
@@ -47,10 +51,6 @@ public class DuckEntity extends ChickenEntity {
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
-    }
-
-    public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 4.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 
     @Override
@@ -64,6 +64,7 @@ public class DuckEntity extends ChickenEntity {
     public DuckEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
         return EntityTypeInit.DUCK.get().create(this.world);
     }
+
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {

@@ -1,9 +1,6 @@
 package com.qsoftware.forgemod.api.datagen.recipe.builder;
 
 import com.google.gson.JsonObject;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.JsonConstants;
 import com.qsoftware.forgemod.api.SerializerHelper;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
@@ -11,8 +8,12 @@ import com.qsoftware.forgemod.api.chemical.gas.GasStack;
 import com.qsoftware.forgemod.api.datagen.recipe.MekanismRecipeBuilder;
 import com.qsoftware.forgemod.api.recipes.inputs.FluidStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -62,6 +63,20 @@ public class RotaryRecipeBuilder extends MekanismRecipeBuilder<RotaryRecipeBuild
         return new RotaryRecipeResult(id);
     }
 
+    private enum RecipeDirection {
+        FLUID_TO_GAS(true, false),
+        GAS_TO_FLUID(false, true),
+        BOTH(true, true);
+
+        private final boolean hasFluidToGas;
+        private final boolean hasGasToFluid;
+
+        RecipeDirection(boolean hasFluidToGas, boolean hasGasToFluid) {
+            this.hasFluidToGas = hasFluidToGas;
+            this.hasGasToFluid = hasGasToFluid;
+        }
+    }
+
     public class RotaryRecipeResult extends RecipeResult {
 
         protected RotaryRecipeResult(ResourceLocation id) {
@@ -78,20 +93,6 @@ public class RotaryRecipeBuilder extends MekanismRecipeBuilder<RotaryRecipeBuild
                 json.add(JsonConstants.GAS_INPUT, gasInput.serialize());
                 json.add(JsonConstants.FLUID_OUTPUT, SerializerHelper.serializeFluidStack(fluidOutput));
             }
-        }
-    }
-
-    private enum RecipeDirection {
-        FLUID_TO_GAS(true, false),
-        GAS_TO_FLUID(false, true),
-        BOTH(true, true);
-
-        private final boolean hasFluidToGas;
-        private final boolean hasGasToFluid;
-
-        RecipeDirection(boolean hasFluidToGas, boolean hasGasToFluid) {
-            this.hasFluidToGas = hasFluidToGas;
-            this.hasGasToFluid = hasGasToFluid;
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.api;
 
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.chemical.gas.EmptyGas;
 import com.qsoftware.forgemod.api.chemical.gas.Gas;
 import com.qsoftware.forgemod.api.chemical.infuse.EmptyInfuseType;
@@ -14,28 +13,16 @@ import net.minecraftforge.registries.RegistryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class MekanismAPI {
+import javax.annotation.Nonnull;
 
-    private MekanismAPI() {
-    }
+public class MekanismAPI {
 
     /**
      * The version of the api classes - may not always match the mod's version
      */
     public static final String API_VERSION = "10.0.14";
     public static final String MEKANISM_MODID = "mekanism";
-    /**
-     * QForgeUtils debug mode
-     */
-    public static boolean debug = false;
-
     public static final Logger logger = LogManager.getLogger(MEKANISM_MODID + "_api");
-
-    private static IForgeRegistry<Gas> GAS_REGISTRY;
-    private static IForgeRegistry<InfuseType> INFUSE_TYPE_REGISTRY;
-    private static IForgeRegistry<Pigment> PIGMENT_REGISTRY;
-    private static IForgeRegistry<Slurry> SLURRY_REGISTRY;
-
     //Note: None of the empty variants support registry replacement
     @Nonnull
     public static final Gas EMPTY_GAS = new EmptyGas();
@@ -45,6 +32,16 @@ public class MekanismAPI {
     public static final Pigment EMPTY_PIGMENT = new EmptyPigment();
     @Nonnull
     public static final Slurry EMPTY_SLURRY = new EmptySlurry();
+    /**
+     * QForgeUtils debug mode
+     */
+    public static boolean debug = false;
+    private static IForgeRegistry<Gas> GAS_REGISTRY;
+    private static IForgeRegistry<InfuseType> INFUSE_TYPE_REGISTRY;
+    private static IForgeRegistry<Pigment> PIGMENT_REGISTRY;
+    private static IForgeRegistry<Slurry> SLURRY_REGISTRY;
+    private MekanismAPI() {
+    }
 
     @Nonnull
     public static IForgeRegistry<Gas> gasRegistry() {

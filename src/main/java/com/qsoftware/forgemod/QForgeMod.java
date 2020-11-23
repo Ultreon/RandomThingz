@@ -1,12 +1,12 @@
 package com.qsoftware.forgemod;
 
+import com.qsoftware.forgemod.common.IHasRenderType;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.init.renew.ModBlocksNew;
 import com.qsoftware.forgemod.init.renew.ModItemsNew;
 import com.qsoftware.forgemod.init.types.ContainerTypesInit;
 import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
-import com.qsoftware.forgemod.common.IHasRenderType;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
 import com.qsoftware.forgemod.listener.GameOverlayListener;
 import com.qsoftware.forgemod.objects.entities.*;
@@ -43,13 +43,12 @@ import java.util.stream.Collectors;
  */
 @Mod("qforgemod")
 public class QForgeMod {
-    public static final Logger LOGGER = LogManager.getLogger(QForgeMod.MOD_ID);
+    // Mod Data
+    public static final String MOD_ID = "qforgemod";
 
     // Proxy
 //    public static final CommonProxy PROXY = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-
-    // Mod Data
-    public static final String MOD_ID = "qforgemod";
+    public static final Logger LOGGER = LogManager.getLogger(QForgeMod.MOD_ID);
     public static final String MOD_NAME = "QForgeUtils";
     @SuppressWarnings("unused")
     public static final String MOD_VERSION = "1.1-beta9";
@@ -75,24 +74,6 @@ public class QForgeMod {
      * Instance field, is protected.
      */
     protected static QForgeMod instance;
-
-    /**
-     * Get the QForgeUtils mod instance.
-     *
-     * @return the mod-instance.
-     */
-    public static QForgeMod getInstance() {
-        return instance;
-    }
-
-    public static ResourceLocation rl(String path) {
-        return new ResourceLocation(MOD_ID, path);
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    public static boolean isDevBuild() {
-        return "NONE".equals(MOD_VERSION);
-    }
 
     /**
      * The QForgeUtils constructor for mod-loading.
@@ -167,9 +148,26 @@ public class QForgeMod {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public void clientStart() {
-//        FMLJavaModLoadingContext.getModEventBus().addListener(QForgeUtils.this::clientOnlySetup);
+    /**
+     * Get the QForgeUtils mod instance.
+     *
+     * @return the mod-instance.
+     */
+    public static QForgeMod getInstance() {
+        return instance;
+    }
+
+    public static ResourceLocation rl(String path) {
+        return new ResourceLocation(MOD_ID, path);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public static boolean isDevBuild() {
+        return "NONE".equals(MOD_VERSION);
+    }
+
+    public static ResourceLocation getId(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 
     //    @SubscribeEvent
@@ -222,8 +220,12 @@ public class QForgeMod {
 //        event.getRegistry().register(DEATH_INFO_INVENTORY_CONTAINER);
 //    }
 
-    private void clientSetup(FMLClientSetupEvent event)
-    {
+    @OnlyIn(Dist.CLIENT)
+    public void clientStart() {
+//        FMLJavaModLoadingContext.getModEventBus().addListener(QForgeUtils.this::clientOnlySetup);
+    }
+
+    private void clientSetup(FMLClientSetupEvent event) {
 //        PROXY.onSetupClient();
 
         // do something that can only be done on the client
@@ -268,12 +270,15 @@ public class QForgeMod {
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
-        InterModComms.sendTo("qforgemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+        InterModComms.sendTo("qforgemod", "helloworld", () -> {
+            LOGGER.info("Hello world from the MDK");
+            return "Hello world";
+        });
     }
 
     private void processIMC(final InterModProcessEvent event) {
         LOGGER.info("Got IMC {}", event.getIMCStream().
-                map(m->m.getMessageSupplier()).
+                map(m -> m.getMessageSupplier()).
                 collect(Collectors.toList()));
     }
 
@@ -285,9 +290,5 @@ public class QForgeMod {
     private void loadComplete(FMLLoadCompleteEvent event) {
         LOGGER.info("LoadCompleteEvent: " + event);
         ModOreGen.generateOres();
-    }
-
-    public static ResourceLocation getId(String path) {
-        return new ResourceLocation(MOD_ID, path);
     }
 }

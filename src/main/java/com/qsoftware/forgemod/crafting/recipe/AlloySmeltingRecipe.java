@@ -19,8 +19,8 @@ import java.util.Map;
 
 public class AlloySmeltingRecipe implements IRecipe<IMachineInventory> {
     private final ResourceLocation recipeId;
-    private int processTime;
     private final Map<Ingredient, Integer> ingredients = new LinkedHashMap<>();
+    private int processTime;
     private ItemStack result;
 
     public AlloySmeltingRecipe(ResourceLocation recipeId) {
@@ -105,6 +105,17 @@ public class AlloySmeltingRecipe implements IRecipe<IMachineInventory> {
     }
 
     public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<AlloySmeltingRecipe> {
+        private static Ingredient deserializeIngredient(JsonElement element) {
+            if (element.isJsonObject()) {
+                JsonObject json = element.getAsJsonObject();
+                if (json.has("value"))
+                    return Ingredient.deserialize(json.get("value"));
+                if (json.has("values"))
+                    return Ingredient.deserialize(json.get("values"));
+            }
+            return Ingredient.deserialize(element);
+        }
+
         @Override
         public AlloySmeltingRecipe read(ResourceLocation recipeId, JsonObject json) {
             AlloySmeltingRecipe recipe = new AlloySmeltingRecipe(recipeId);
@@ -118,17 +129,6 @@ public class AlloySmeltingRecipe implements IRecipe<IMachineInventory> {
             });
 
             return recipe;
-        }
-
-        private static Ingredient deserializeIngredient(JsonElement element) {
-            if (element.isJsonObject()) {
-                JsonObject json = element.getAsJsonObject();
-                if (json.has("value"))
-                    return Ingredient.deserialize(json.get("value"));
-                if (json.has("values"))
-                    return Ingredient.deserialize(json.get("values"));
-            }
-            return Ingredient.deserialize(element);
         }
 
         @Override

@@ -1,10 +1,11 @@
 package com.qsoftware.forgemod.api.providers;
 
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.chemical.Chemical;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+
+import javax.annotation.Nonnull;
 
 public interface IChemicalProvider<CHEMICAL extends Chemical<CHEMICAL>> extends IBaseProvider {
 

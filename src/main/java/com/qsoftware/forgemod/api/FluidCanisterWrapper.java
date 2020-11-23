@@ -1,5 +1,7 @@
 package com.qsoftware.forgemod.api;
 
+import com.qsoftware.forgemod.init.ModItems;
+import com.qsoftware.forgemod.objects.items.fluid.CanisterItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
@@ -10,8 +12,6 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
-import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.objects.item.CanisterItem;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

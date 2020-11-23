@@ -19,9 +19,9 @@ import net.minecraftforge.registries.ForgeRegistries;
  * @author Qboi123
  */
 @SuppressWarnings({"unused", "RedundantSuppression", "ConstantConditions"})
-@Mod.EventBusSubscriber(modid= QForgeMod.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocksNew extends ObjectInit<Block> {
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Blocks     //
     ////////////////////
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, QForgeMod.MOD_ID);

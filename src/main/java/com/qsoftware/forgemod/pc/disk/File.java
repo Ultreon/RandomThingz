@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.pc.disk;
 
 import com.google.common.annotations.Beta;
-import com.qsoftware.forgemod.pc.Disk;
 
 @Beta
 public class File {

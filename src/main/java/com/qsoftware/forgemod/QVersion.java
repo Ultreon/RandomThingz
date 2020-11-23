@@ -1,8 +1,5 @@
 package com.qsoftware.forgemod;
 
-import com.sun.org.apache.xalan.internal.xsltc.runtime.InternalRuntimeError;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,13 +43,6 @@ public class QVersion {
         } else {
             throw new IllegalArgumentException("Invalid version,");
         }
-    }
-
-    public enum TYPE {
-        ALPHA,
-        BETA,
-        PRE,
-        RELEASE
     }
 
     public QVersion(int version, int subversion, TYPE type, int release) {
@@ -116,5 +106,12 @@ public class QVersion {
 
     public int getRelease() {
         return release;
+    }
+
+    public enum TYPE {
+        ALPHA,
+        BETA,
+        PRE,
+        RELEASE
     }
 }

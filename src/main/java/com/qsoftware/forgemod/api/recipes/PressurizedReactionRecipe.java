@@ -1,9 +1,5 @@
 package com.qsoftware.forgemod.api.recipes;
 
-import java.util.Collections;
-import java.util.List;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.gas.GasStack;
@@ -11,6 +7,7 @@ import com.qsoftware.forgemod.api.math.FloatingLong;
 import com.qsoftware.forgemod.api.recipes.inputs.FluidStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.ItemStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
@@ -18,6 +15,10 @@ import net.minecraftforge.common.util.TriPredicate;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.Contract;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collections;
+import java.util.List;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -33,7 +34,7 @@ public abstract class PressurizedReactionRecipe extends MekanismRecipe implement
     private final GasStack outputGas;
 
     public PressurizedReactionRecipe(ResourceLocation id, ItemStackIngredient inputSolid, FluidStackIngredient inputFluid, GasStackIngredient inputGas,
-          FloatingLong energyRequired, int duration, ItemStack outputItem, GasStack outputGas) {
+                                     FloatingLong energyRequired, int duration, ItemStack outputItem, GasStack outputGas) {
         super(id);
         this.inputSolid = inputSolid;
         this.inputFluid = inputFluid;

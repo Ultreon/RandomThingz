@@ -30,13 +30,13 @@ public class EnergyStorageWithBatteries<T extends TileEntity & IInventory> exten
         this.lazy = LazyOptional.of(() -> this);
     }
 
-    public int getInternalEnergyStored() {
-        return energyInternal;
-    }
-
     @SuppressWarnings("TypeMayBeWeakened")
     private static boolean isBattery(ItemStack stack) {
         return stack.getCapability(CapabilityEnergy.ENERGY).isPresent();
+    }
+
+    public int getInternalEnergyStored() {
+        return energyInternal;
     }
 
     private int getBatteryCount() {

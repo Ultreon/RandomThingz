@@ -1,6 +1,10 @@
 package com.qsoftware.forgemod.objects.block.wire;
 
 import com.google.common.collect.Maps;
+import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.api.ConnectionType;
+import com.qsoftware.forgemod.api.IWrenchable;
+import com.qsoftware.forgemod.util.EnergyUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SixWayBlock;
@@ -19,10 +23,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.IEnergyStorage;
-import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.api.ConnectionType;
-import com.qsoftware.forgemod.api.IWrenchable;
-import com.qsoftware.forgemod.util.EnergyUtils;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -52,6 +52,56 @@ public class WireBlock extends SixWayBlock implements IWrenchable {
                 .with(WEST, ConnectionType.NONE)
                 .with(UP, ConnectionType.NONE)
                 .with(DOWN, ConnectionType.NONE));
+    }
+
+    @Nullable
+    private static Direction getClickedConnection(Vector3d relative) {
+        if (relative.x < 0.25)
+            return Direction.WEST;
+        if (relative.x > 0.75)
+            return Direction.EAST;
+        if (relative.y < 0.25)
+            return Direction.DOWN;
+        if (relative.y > 0.75)
+            return Direction.UP;
+        if (relative.z < 0.25)
+            return Direction.NORTH;
+        if (relative.z > 0.75)
+            return Direction.SOUTH;
+        return null;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T extends Comparable<T>> BlockState cycleProperty(BlockState state, Property<T> propertyIn) {
+        T value = getAdjacentValue(propertyIn.getAllowedValues(), state.get(propertyIn));
+        if (value == ConnectionType.NONE)
+            value = (T) ConnectionType.IN;
+        return state.with(propertyIn, value);
+    }
+
+    private static <T> T getAdjacentValue(Iterable<T> p_195959_0_, @Nullable T p_195959_1_) {
+        return Util.getElementAfter(p_195959_0_, p_195959_1_);
+    }
+
+    private static ConnectionType createConnection(IBlockReader worldIn, BlockPos pos, Direction side, ConnectionType current) {
+        TileEntity tileEntity = worldIn.getTileEntity(pos.offset(side));
+        if (tileEntity instanceof WireTileEntity) {
+            return ConnectionType.BOTH;
+        } else if (tileEntity != null) {
+            IEnergyStorage energy = EnergyUtils.getEnergyFromSideOrNull(tileEntity, side.getOpposite());
+            if (energy != null) {
+                if (energy.canExtract()) {
+                    return current == ConnectionType.NONE ? ConnectionType.IN : current;
+                } else if (energy.canReceive()) {
+                    return current == ConnectionType.NONE ? ConnectionType.OUT : current;
+                }
+            }
+        }
+        return ConnectionType.NONE;
+    }
+
+    public static ConnectionType getConnection(BlockState state, Direction side) {
+        return state.get(FACING_TO_PROPERTY_MAP.get(side));
     }
 
     @Override
@@ -87,35 +137,6 @@ public class WireBlock extends SixWayBlock implements IWrenchable {
         return ActionResultType.PASS;
     }
 
-    @Nullable
-    private static Direction getClickedConnection(Vector3d relative) {
-        if (relative.x < 0.25)
-            return Direction.WEST;
-        if (relative.x > 0.75)
-            return Direction.EAST;
-        if (relative.y < 0.25)
-            return Direction.DOWN;
-        if (relative.y > 0.75)
-            return Direction.UP;
-        if (relative.z < 0.25)
-            return Direction.NORTH;
-        if (relative.z > 0.75)
-            return Direction.SOUTH;
-        return null;
-    }
-
-    @SuppressWarnings("unchecked")
-    private static <T extends Comparable<T>> BlockState cycleProperty(BlockState state, Property<T> propertyIn) {
-        T value = getAdjacentValue(propertyIn.getAllowedValues(), state.get(propertyIn));
-        if (value == ConnectionType.NONE)
-            value = (T) ConnectionType.IN;
-        return state.with(propertyIn, value);
-    }
-
-    private static <T> T getAdjacentValue(Iterable<T> p_195959_0_, @Nullable T p_195959_1_) {
-        return Util.getElementAfter(p_195959_0_, p_195959_1_);
-    }
-
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(NORTH, EAST, SOUTH, WEST, UP, DOWN);
@@ -136,23 +157,6 @@ public class WireBlock extends SixWayBlock implements IWrenchable {
                 .with(WEST, createConnection(worldIn, pos, Direction.WEST, ConnectionType.NONE));
     }
 
-    private static ConnectionType createConnection(IBlockReader worldIn, BlockPos pos, Direction side, ConnectionType current) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos.offset(side));
-        if (tileEntity instanceof WireTileEntity) {
-            return ConnectionType.BOTH;
-        } else if (tileEntity != null) {
-            IEnergyStorage energy = EnergyUtils.getEnergyFromSideOrNull(tileEntity, side.getOpposite());
-            if (energy != null) {
-                if (energy.canExtract()) {
-                    return current == ConnectionType.NONE ? ConnectionType.IN : current;
-                } else if (energy.canReceive()) {
-                    return current == ConnectionType.NONE ? ConnectionType.OUT : current;
-                }
-            }
-        }
-        return ConnectionType.NONE;
-    }
-
     @SuppressWarnings("deprecation")
     @Override
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -168,16 +172,12 @@ public class WireBlock extends SixWayBlock implements IWrenchable {
     protected int getShapeIndex(BlockState state) {
         int i = 0;
 
-        for(int j = 0; j < Direction.values().length; ++j) {
+        for (int j = 0; j < Direction.values().length; ++j) {
             if (state.get(FACING_TO_PROPERTY_MAP.get(Direction.values()[j])) != ConnectionType.NONE) {
                 i |= 1 << j;
             }
         }
 
         return i;
-    }
-
-    public static ConnectionType getConnection(BlockState state, Direction side) {
-        return state.get(FACING_TO_PROPERTY_MAP.get(side));
     }
 }

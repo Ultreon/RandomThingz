@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:infinity_ingot_from_infinity_block"
+    ]
+  },
+  "criteria": {
+    "has_infinity_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:infinity_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:infinity_ingot_from_infinity_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_infinity_block",
+      "has_the_recipe"
+    ]
+  ]
+}

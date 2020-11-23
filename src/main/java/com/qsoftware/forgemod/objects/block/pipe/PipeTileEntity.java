@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.objects.block.pipe;
 
+import com.qsoftware.forgemod.init.ModTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -7,7 +8,6 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import com.qsoftware.forgemod.init.ModTileEntities;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

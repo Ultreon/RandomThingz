@@ -10,8 +10,8 @@ package com.qsoftware.forgemod.world.biomes;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.world.biome.Biome;
-
 import org.jetbrains.annotations.Nullable;
+
 import java.util.Map;
 import java.util.function.BiFunction;
 
@@ -47,43 +47,36 @@ public class BiomeMetadata {
         this.waterColorFunction = waterColorFunction;
     }
 
-    public Map<BOPClimates, Integer> getWeightMap()
-    {
+    public Map<BOPClimates, Integer> getWeightMap() {
         return this.weightMap;
     }
 
     @Nullable
-    public RegistryKey<Biome> getBeachBiome()
-    {
+    public RegistryKey<Biome> getBeachBiome() {
         return this.beachBiome;
     }
 
     @Nullable
-    public RegistryKey<Biome> getRiverBiome()
-    {
+    public RegistryKey<Biome> getRiverBiome() {
         return this.riverBiome;
     }
 
     @Nullable
-    public BiFunction<Double, Double, Integer> getFoliageColorFunction()
-    {
+    public BiFunction<Double, Double, Integer> getFoliageColorFunction() {
         return this.foliageColorFunction;
     }
 
     @Nullable
-    public BiFunction<Double, Double, Integer> getGrassColorFunction()
-    {
+    public BiFunction<Double, Double, Integer> getGrassColorFunction() {
         return this.grassColorFunction;
     }
 
     @Nullable
-    public BiFunction<Double, Double, Integer> getWaterColorFunction()
-    {
+    public BiFunction<Double, Double, Integer> getWaterColorFunction() {
         return this.waterColorFunction;
     }
 
-    public boolean hasWeights()
-    {
+    public boolean hasWeights() {
         return !this.weightMap.isEmpty() && !this.weightMap.entrySet().stream().allMatch((entry) -> entry.getValue().equals(0));
     }
 }

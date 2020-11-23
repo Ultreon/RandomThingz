@@ -1,0 +1,14 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "woodcutter"
+    }
+  ],
+  "type": "woodcutter:woodcutting",
+  "ingredient": {
+    "item": "qforgemod:cherry_plank"
+  },
+  "result": "qforgemod:cherry_drying_rack",
+  "count": 1
+}

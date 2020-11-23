@@ -1,12 +1,12 @@
 package com.qsoftware.forgemod.objects.block.generator.coal;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.block.AbstractMachineBaseScreen;
 import com.qsoftware.forgemod.util.TextUtil;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 
 public class CoalGeneratorScreen extends AbstractMachineBaseScreen<CoalGeneratorContainer> {
     public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/coal_generator.png");

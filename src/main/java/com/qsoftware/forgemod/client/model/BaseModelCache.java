@@ -43,10 +43,9 @@ public class BaseModelCache {
 
     public static class ModelData {
 
-        protected IModelGeometry<?> model;
-
         protected final ResourceLocation rl;
         private final Map<IModelConfiguration, IBakedModel> bakedMap = new Object2ObjectOpenHashMap<>();
+        protected IModelGeometry<?> model;
 
         protected ModelData(ResourceLocation rl) {
             this.rl = rl;

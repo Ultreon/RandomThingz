@@ -2,18 +2,18 @@ package com.qsoftware.forgemod.objects.block;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
 import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.client.button.RedstoneModeButton;
 import com.qsoftware.forgemod.inventory.MachineUpgradeSlot;
 import com.qsoftware.forgemod.network.Network;
 import com.qsoftware.forgemod.network.SetRedstoneModePacket;
 import com.qsoftware.forgemod.util.TextUtil;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.Widget;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
 
 public abstract class AbstractMachineBaseScreen<C extends AbstractMachineBaseContainer<?>> extends ContainerScreen<C> {
     public AbstractMachineBaseScreen(C screenContainer, PlayerInventory inv, ITextComponent titleIn) {

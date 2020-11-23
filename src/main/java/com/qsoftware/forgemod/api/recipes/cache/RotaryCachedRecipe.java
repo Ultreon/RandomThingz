@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.cache;
 
-import java.util.function.BooleanSupplier;
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.gas.GasStack;
@@ -9,6 +7,9 @@ import com.qsoftware.forgemod.api.recipes.RotaryRecipe;
 import com.qsoftware.forgemod.api.recipes.inputs.IInputHandler;
 import com.qsoftware.forgemod.api.recipes.outputs.IOutputHandler;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.function.BooleanSupplier;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -21,7 +22,7 @@ public class RotaryCachedRecipe extends CachedRecipe<RotaryRecipe> {
     private final BooleanSupplier modeSupplier;
 
     public RotaryCachedRecipe(RotaryRecipe recipe, IInputHandler<@NonNull FluidStack> fluidInputHandler, IInputHandler<@NonNull GasStack> gasInputHandler,
-          IOutputHandler<@NonNull GasStack> gasOutputHandler, IOutputHandler<@NonNull FluidStack> fluidOutputHandler, BooleanSupplier modeSupplier) {
+                              IOutputHandler<@NonNull GasStack> gasOutputHandler, IOutputHandler<@NonNull FluidStack> fluidOutputHandler, BooleanSupplier modeSupplier) {
         super(recipe);
         this.fluidInputHandler = fluidInputHandler;
         this.gasInputHandler = gasInputHandler;

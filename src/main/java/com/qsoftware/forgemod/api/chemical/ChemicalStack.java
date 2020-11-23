@@ -1,29 +1,30 @@
 package com.qsoftware.forgemod.api.chemical;
 
-import java.util.Collection;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.api.chemical.attribute.ChemicalAttribute;
 import com.qsoftware.forgemod.api.text.IHasTextComponent;
 import com.qsoftware.forgemod.api.text.IHasTranslationKey;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.registries.IRegistryDelegate;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Collection;
+
 //TODO - 10.1: Make the subclasses of this final
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class ChemicalStack<CHEMICAL extends Chemical<CHEMICAL>> implements IHasTextComponent, IHasTranslationKey {
 
-    private boolean isEmpty;
-    private long amount;
     @Nonnull
     private final IRegistryDelegate<CHEMICAL> chemicalDelegate;
+    private boolean isEmpty;
+    private long amount;
 
     protected ChemicalStack(CHEMICAL chemical, long amount) {
         this.chemicalDelegate = getDelegate(chemical);
@@ -48,7 +49,6 @@ public abstract class ChemicalStack<CHEMICAL extends Chemical<CHEMICAL>> impleme
      * Whether or not this ChemicalStack's chemical type is equal to the other defined ChemicalStack.
      *
      * @param stack - ChemicalStack to check
-     *
      * @return if the ChemicalStacks contain the same chemical type
      */
     public boolean isTypeEqual(ChemicalStack<CHEMICAL> stack) {
@@ -72,7 +72,6 @@ public abstract class ChemicalStack<CHEMICAL extends Chemical<CHEMICAL>> impleme
      * Helper to get the tint of the stored chemical. This is equivalent to calling {@code getType().getTint()}
      *
      * @return The tint of the stored chemical.
-     *
      * @apiNote Does not have any special handling for when the stack is empty.
      */
     public int getChemicalTint() {
@@ -107,7 +106,6 @@ public abstract class ChemicalStack<CHEMICAL extends Chemical<CHEMICAL>> impleme
      * Grows this stack's amount by the given amount.
      *
      * @param amount The amount to grow this stack by.
-     *
      * @apiNote Negative values are valid and will instead shrink the stack.
      * @implNote No checks are made to ensure that the long does not overflow.
      */
@@ -119,7 +117,6 @@ public abstract class ChemicalStack<CHEMICAL extends Chemical<CHEMICAL>> impleme
      * Shrinks this stack's amount by the given amount.
      *
      * @param amount The amount to shrink this stack by.
-     *
      * @apiNote Negative values are valid and will instead grow the stack.
      * @implNote No checks are made to ensure that the long does not underflow.
      */
@@ -131,7 +128,6 @@ public abstract class ChemicalStack<CHEMICAL extends Chemical<CHEMICAL>> impleme
      * Whether this stack's chemical has an attribute of a certain type.
      *
      * @param type attribute type to check
-     *
      * @return if this chemical has the attribute
      */
     public boolean has(Class<? extends ChemicalAttribute> type) {
@@ -142,7 +138,6 @@ public abstract class ChemicalStack<CHEMICAL extends Chemical<CHEMICAL>> impleme
      * Gets the attribute instance of a certain type, or null if it doesn't exist.
      *
      * @param type attribute type to get
-     *
      * @return attribute instance
      */
     @Nullable
@@ -178,7 +173,7 @@ public abstract class ChemicalStack<CHEMICAL extends Chemical<CHEMICAL>> impleme
 
     /**
      * Default equality comparison for a ChemicalStack. Same functionality as isTypeEqual().
-     *
+     * <p>
      * This is included for use in data structures.
      */
     @Override
@@ -217,7 +212,6 @@ public abstract class ChemicalStack<CHEMICAL extends Chemical<CHEMICAL>> impleme
      * Determines if the chemicals and amounts are all equal.
      *
      * @param other - the ChemicalStack for comparison
-     *
      * @return true if the two ChemicalStacks are exactly the same
      */
     public boolean isStackIdentical(ChemicalStack<CHEMICAL> other) {
@@ -228,7 +222,6 @@ public abstract class ChemicalStack<CHEMICAL extends Chemical<CHEMICAL>> impleme
      * Writes this ChemicalStack to a defined tag compound.
      *
      * @param nbtTags - tag compound to write to
-     *
      * @return tag compound with this GasStack's data
      */
     public CompoundNBT write(CompoundNBT nbtTags) {

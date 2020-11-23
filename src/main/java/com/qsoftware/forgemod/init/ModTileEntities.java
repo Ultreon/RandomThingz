@@ -1,16 +1,5 @@
 package com.qsoftware.forgemod.init;
 
-import com.qsoftware.forgemod.objects.block.quarry.QuarryTileEntity;
-import net.minecraft.block.Block;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-import com.qsoftware.silent.lib.block.IBlockProvider;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxTileEntity;
 import com.qsoftware.forgemod.objects.block.compressor.CompressorTileEntity;
@@ -25,9 +14,20 @@ import com.qsoftware.forgemod.objects.block.infuser.InfuserTileEntity;
 import com.qsoftware.forgemod.objects.block.mixer.MixerTileEntity;
 import com.qsoftware.forgemod.objects.block.pipe.PipeTileEntity;
 import com.qsoftware.forgemod.objects.block.pump.PumpTileEntity;
+import com.qsoftware.forgemod.objects.block.quarry.QuarryTileEntity;
 import com.qsoftware.forgemod.objects.block.refinery.RefineryTileEntity;
 import com.qsoftware.forgemod.objects.block.solidifier.SolidifierTileEntity;
 import com.qsoftware.forgemod.objects.block.wire.WireTileEntity;
+import com.qsoftware.silent.lib.block.IBlockProvider;
+import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
@@ -48,7 +48,8 @@ public final class ModTileEntities {
     public static TileEntityType<SolidifierTileEntity> solidifier;
     public static TileEntityType<WireTileEntity> wire;
 
-    private ModTileEntities() {}
+    private ModTileEntities() {
+    }
 
     public static void registerAll(RegistryEvent.Register<TileEntityType<?>> event) {
         register("basic_alloy_smelter", MachineType.ALLOY_SMELTER.getBasicTileEntityType());

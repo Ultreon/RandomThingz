@@ -1,11 +1,12 @@
 package com.qsoftware.forgemod.api.fluid;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.Action;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.fluid.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
  * Extended version of {@link IFluidHandler} to make it easier to integrate with QForgeUtils
@@ -19,7 +20,6 @@ public interface IExtendedFluidHandler extends IFluidHandler {
      *
      * @param tank  Tank to modify
      * @param stack {@link FluidStack} to set tank to (may be empty).
-     *
      * @throws RuntimeException if the handler is called in a way that the handler was not expecting.
      **/
     void setFluidInTank(int tank, FluidStack stack);
@@ -33,7 +33,6 @@ public interface IExtendedFluidHandler extends IFluidHandler {
      * @param tank   Tank to insert to.
      * @param stack  {@link FluidStack} to insert. This must not be modified by the tank.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return The remaining {@link FluidStack} that was not inserted (if the entire stack is accepted, then return an empty {@link FluidStack}). May be the same as the
      * input {@link FluidStack} if unchanged, otherwise a new {@link FluidStack}. The returned {@link FluidStack} can be safely modified after
      */
@@ -48,7 +47,6 @@ public interface IExtendedFluidHandler extends IFluidHandler {
      * @param tank   Tank to extract from.
      * @param amount Amount to extract (may be greater than the current stack's amount or the tank's capacity)
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return {@link FluidStack} extracted from the tank, must be empty if nothing can be extracted. The returned {@link FluidStack} can be safely modified after, so the
      * tank should return a new or copied stack.
      */
@@ -63,10 +61,8 @@ public interface IExtendedFluidHandler extends IFluidHandler {
      *
      * @param stack  {@link FluidStack} to insert. This must not be modified by the handler.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return The remaining {@link FluidStack} that was not inserted (if the entire stack is accepted, then return an empty {@link FluidStack}). May be the same as the
      * input {@link FluidStack} if unchanged, otherwise a new {@link FluidStack}. The returned {@link FluidStack} can be safely modified after
-     *
      * @implNote The default implementation of this method, attempts to insert into tanks that contain the same type of fluid as the supplied type, and if it will not all
      * fit, falls back to inserting into any empty tanks.
      * @apiNote It is not guaranteed that the default implementation will be how this {@link IExtendedFluidHandler} ends up distributing the insertion.
@@ -83,10 +79,8 @@ public interface IExtendedFluidHandler extends IFluidHandler {
      *
      * @param amount Amount to extract (may be greater than the current stack's amount or the tank's capacity)
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return {@link FluidStack} extracted from the tank, must be empty if nothing can be extracted. The returned {@link FluidStack} can be safely modified after, so the
      * tank should return a new or copied stack.
-     *
      * @implNote The default implementation of this method, extracts across all tanks to try and reach the desired amount to extract. Once the first fluid that can be
      * extracted is found, all future extractions will make sure to also make sure they are for the same type of fluid.
      * @apiNote It is not guaranteed that the default implementation will be how this {@link IExtendedFluidHandler} ends up distributing the extraction.
@@ -103,10 +97,8 @@ public interface IExtendedFluidHandler extends IFluidHandler {
      *
      * @param stack  {@link FluidStack} representing the {@link Fluid} and maximum amount to be drained.
      * @param action The action to perform, either {@link Action#EXECUTE} or {@link Action#SIMULATE}
-     *
      * @return {@link FluidStack} extracted from the tank, must be empty if nothing can be extracted. The returned {@link FluidStack} can be safely modified after, so the
      * tank should return a new or copied stack.
-     *
      * @implNote The default implementation of this method, extracts across all tanks that contents match the type of fluid passed into this method.
      * @apiNote It is not guaranteed that the default implementation will be how this {@link IExtendedFluidHandler} ends up distributing the extraction.
      */
@@ -116,7 +108,7 @@ public interface IExtendedFluidHandler extends IFluidHandler {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Wrapped to properly use our method declarations
      */
     @Override
@@ -127,7 +119,7 @@ public interface IExtendedFluidHandler extends IFluidHandler {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Wrapped to properly use our method declarations
      */
     @Override
@@ -138,7 +130,7 @@ public interface IExtendedFluidHandler extends IFluidHandler {
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * Wrapped to properly use our method declarations
      */
     @Override

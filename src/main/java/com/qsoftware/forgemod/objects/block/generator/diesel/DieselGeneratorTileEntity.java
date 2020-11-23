@@ -1,5 +1,10 @@
 package com.qsoftware.forgemod.objects.block.generator.diesel;
 
+import com.qsoftware.forgemod.api.IFluidContainer;
+import com.qsoftware.forgemod.init.ModTileEntities;
+import com.qsoftware.forgemod.objects.block.generator.AbstractFluidFuelGeneratorTileEntity;
+import com.qsoftware.forgemod.util.InventoryUtils;
+import com.qsoftware.forgemod.util.TextUtil;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.Container;
@@ -11,11 +16,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import com.qsoftware.forgemod.api.IFluidContainer;
-import com.qsoftware.forgemod.objects.block.generator.AbstractFluidFuelGeneratorTileEntity;
-import com.qsoftware.forgemod.init.ModTileEntities;
-import com.qsoftware.forgemod.util.InventoryUtils;
-import com.qsoftware.forgemod.util.TextUtil;
 
 import javax.annotation.Nullable;
 

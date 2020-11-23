@@ -1,11 +1,12 @@
 package com.qsoftware.forgemod.api;
 
-import javax.annotation.Nonnull;
 import com.qsoftware.forgemod.api.math.MathUtils;
 import com.qsoftware.forgemod.api.text.APILang;
 import com.qsoftware.forgemod.api.text.IHasTranslationKey;
 import com.qsoftware.forgemod.api.text.ILangEntry;
 import net.minecraft.util.Direction;
+
+import javax.annotation.Nonnull;
 
 public enum RelativeSide implements IHasTranslationKey {
     FRONT(APILang.FRONT),
@@ -16,15 +17,50 @@ public enum RelativeSide implements IHasTranslationKey {
     BOTTOM(APILang.BOTTOM);
 
     private static final RelativeSide[] SIDES = values();
+    private final ILangEntry langEntry;
+
+    RelativeSide(ILangEntry langEntry) {
+        this.langEntry = langEntry;
+    }
 
     public static RelativeSide byIndex(int index) {
         return MathUtils.getByIndexMod(SIDES, index);
     }
 
-    private final ILangEntry langEntry;
-
-    RelativeSide(ILangEntry langEntry) {
-        this.langEntry = langEntry;
+    /**
+     * Gets the {@link RelativeSide} based on a side, and the facing direction of a block.
+     *
+     * @param facing The direction the block is facing.
+     * @param side   The side of the block we want to know what {@link RelativeSide} it is.
+     * @return the {@link RelativeSide} based on a side, and the facing direction of a block.
+     * @apiNote The calculations for what side is what when facing upwards or downwards, is done as if it was facing NORTH and rotated around the X-axis
+     */
+    public static RelativeSide fromDirections(@Nonnull Direction facing, @Nonnull Direction side) {
+        if (side == facing) {
+            return FRONT;
+        } else if (side == facing.getOpposite()) {
+            return BACK;
+        } else if (facing == Direction.DOWN || facing == Direction.UP) {
+            if (side == Direction.NORTH) {
+                return facing == Direction.DOWN ? TOP : BOTTOM;
+            } else if (side == Direction.SOUTH) {
+                return facing == Direction.DOWN ? BOTTOM : TOP;
+            } else if (side == Direction.WEST) {
+                return RIGHT;
+            } else if (side == Direction.EAST) {
+                return LEFT;
+            }
+        } else if (side == Direction.DOWN) {
+            return BOTTOM;
+        } else if (side == Direction.UP) {
+            return TOP;
+        } else if (side == facing.rotateYCCW()) {
+            return RIGHT;
+        } else if (side == facing.rotateY()) {
+            return LEFT;
+        }
+        //Fall back to front, should never get here
+        return FRONT;
     }
 
     @Override
@@ -36,7 +72,6 @@ public enum RelativeSide implements IHasTranslationKey {
      * Gets the {@link Direction} from the block based on what side it is facing.
      *
      * @param facing The direction the block is facing.
-     *
      * @return The direction representing which side of the block this RelativeSide is actually representing based on the direction it is facing.
      */
     public Direction getDirection(@Nonnull Direction facing) {
@@ -71,43 +106,5 @@ public enum RelativeSide implements IHasTranslationKey {
         }
         //Fallback to north though we should never get here
         return Direction.NORTH;
-    }
-
-    /**
-     * Gets the {@link RelativeSide} based on a side, and the facing direction of a block.
-     *
-     * @param facing The direction the block is facing.
-     * @param side   The side of the block we want to know what {@link RelativeSide} it is.
-     *
-     * @return the {@link RelativeSide} based on a side, and the facing direction of a block.
-     *
-     * @apiNote The calculations for what side is what when facing upwards or downwards, is done as if it was facing NORTH and rotated around the X-axis
-     */
-    public static RelativeSide fromDirections(@Nonnull Direction facing, @Nonnull Direction side) {
-        if (side == facing) {
-            return FRONT;
-        } else if (side == facing.getOpposite()) {
-            return BACK;
-        } else if (facing == Direction.DOWN || facing == Direction.UP) {
-            if (side == Direction.NORTH) {
-                return facing == Direction.DOWN ? TOP : BOTTOM;
-            } else if (side == Direction.SOUTH) {
-                return facing == Direction.DOWN ? BOTTOM : TOP;
-            } else if (side == Direction.WEST) {
-                return RIGHT;
-            } else if (side == Direction.EAST) {
-                return LEFT;
-            }
-        } else if (side == Direction.DOWN) {
-            return BOTTOM;
-        } else if (side == Direction.UP) {
-            return TOP;
-        } else if (side == facing.rotateYCCW()) {
-            return RIGHT;
-        } else if (side == facing.rotateY()) {
-            return LEFT;
-        }
-        //Fall back to front, should never get here
-        return FRONT;
     }
 }

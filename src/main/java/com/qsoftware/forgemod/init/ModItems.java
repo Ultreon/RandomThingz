@@ -2,13 +2,26 @@ package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.groups.Groups;
-import com.qsoftware.forgemod.objects.item.*;
-import com.qsoftware.forgemod.objects.items.*;
+import com.qsoftware.forgemod.objects.items.CraftingItems;
+import com.qsoftware.forgemod.objects.items.LegendaryEnderPearlItem;
 import com.qsoftware.forgemod.objects.items.advanced.AdvancedBowItem;
-import com.qsoftware.forgemod.objects.items.base.IngotOrDustItem;
-import com.qsoftware.forgemod.objects.items.base.IngredientItem;
-import com.qsoftware.forgemod.objects.items.base.KnifeItem;
-import com.qsoftware.forgemod.objects.items.base.SliceableItem;
+import com.qsoftware.forgemod.objects.items.debug.DebugItem;
+import com.qsoftware.forgemod.objects.items.energy.BatteryItem;
+import com.qsoftware.forgemod.objects.items.energy.WrenchItem;
+import com.qsoftware.forgemod.objects.items.fluid.CanisterItem;
+import com.qsoftware.forgemod.objects.items.fluid.EmptyCanisterItem;
+import com.qsoftware.forgemod.objects.items.fluid.HandPumpItem;
+import com.qsoftware.forgemod.objects.items.fluid.NoPlaceBucketItem;
+import com.qsoftware.forgemod.objects.items.overpowered.UnstableInfinityIngot;
+import com.qsoftware.forgemod.objects.items.specials.KillSwitchItem;
+import com.qsoftware.forgemod.objects.items.specials.KnifeItem;
+import com.qsoftware.forgemod.objects.items.specials.MagnetItem;
+import com.qsoftware.forgemod.objects.items.tools.*;
+import com.qsoftware.forgemod.objects.items.type.IngotOrDustItem;
+import com.qsoftware.forgemod.objects.items.type.IngredientItem;
+import com.qsoftware.forgemod.objects.items.type.SliceableItem;
+import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
+import com.qsoftware.forgemod.objects.items.wand.*;
 import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
 import com.qsoftware.forgemod.util.builder.ArmorMaterialBuilder;
 import com.qsoftware.forgemod.util.builder.ItemTierBuilder;
@@ -27,10 +40,10 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 
 import java.util.function.Supplier;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "OptionalGetWithoutIsPresent"})
 public final class ModItems {
     static {
-        Metals.registerItems();
+        OreMaterials.registerItems();
         CraftingItems.register();
         MachineUpgrades.register();
     }
@@ -43,7 +56,6 @@ public final class ModItems {
             new CanisterItem(new Item.Properties().group(Groups.MISC)));
     public static final ItemRegistryObject<EmptyCanisterItem> EMPTY_CANISTER = register("empty_canister", () ->
             new EmptyCanisterItem(new Item.Properties().group(Groups.MISC)));
-
     public static final ItemRegistryObject<BucketItem> OIL_BUCKET = register("oil_bucket", () ->
             createBucketItem(() -> ModFluids.OIL));
     public static final ItemRegistryObject<BucketItem> DIESEL_BUCKET = register("diesel_bucket", () ->
@@ -63,7 +75,7 @@ public final class ModItems {
     //     Miscellaneous     //
     ///////////////////////////
     public static final ItemRegistryObject<LegendaryEnderPearlItem> LEGENDARY_ENDER_PEARL = register("legendary_ender_pearl", () -> new LegendaryEnderPearlItem(new Item.Properties().group(Groups.MISC)));
-    public static final ItemRegistryObject<DynamiteItem> DYNAMITE = register("dynamite", () -> new DynamiteItem(new Item.Properties().group(Groups.MISC)));
+    public static final ItemRegistryObject<DynamiteItem> DYNAMITE = register("dynamite", () -> new DynamiteItem(new Item.Properties().group(Groups.MISC).rarity(Rarity.UNCOMMON)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Food     //
@@ -73,10 +85,14 @@ public final class ModItems {
     public static final ItemRegistryObject<SliceableItem> CHEESE = register("cheese", () -> new SliceableItem(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.3f).build()), (stack) -> new ItemStack(CHEESE_SLICE, stack.getCount() * 6)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //     Normal     //
+    //     Nature     //
     ////////////////////
     public static final ItemRegistryObject<Item> STICK_VARIANT_1 = register("stick_variant1", () -> new Item(new Item.Properties().group(Groups.NATURE)));
     public static final ItemRegistryObject<Item> STICK_VARIANT_2 = register("stick_variant2", () -> new Item(new Item.Properties().group(Groups.NATURE)));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //     Wood     //
+    ////////////////////
     public static final ItemRegistryObject<Item> EUCALYPTUS_PLANK = register("eucalyptus_plank", () -> new Item(new Item.Properties().group(Groups.WOOD)));
     public static final ItemRegistryObject<Item> EUCALYPTUS_LEAF = register("eucalyptus_leaf", () -> new Item(new Item.Properties()
             .group(Groups.NATURE)
@@ -85,9 +101,6 @@ public final class ModItems {
                     .saturation(0.2f)
                     .effect(() -> new EffectInstance(Effects.REGENERATION, 60, 1), 0.7f)
                     .build())));
-
-    public static final ItemRegistryObject<KnifeItem> KNIFE = register("knife", () -> new KnifeItem(new Item.Properties().group(Groups.SPECIALS).maxDamage(4)));
-    public static final ItemRegistryObject<MagnetItem> MAGNET = register("magnet", () -> new MagnetItem(new Item.Properties().group(Groups.SPECIALS).maxDamage(4)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Fletching     //
@@ -120,6 +133,9 @@ public final class ModItems {
     public static final ItemRegistryObject<IngredientItem> WHITE_SHARD = register("white_shard", IngredientItem::new);
     public static final ItemRegistryObject<IngredientItem> YELLOW_SHARD = register("yellow_shard", IngredientItem::new);
 
+    // Rods
+    public static final ItemRegistryObject<IngredientItem> URANIUM_ROD = register("uranium_rod", IngredientItem::new);
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Ingots or Dusts     //
     /////////////////////////////
@@ -133,18 +149,15 @@ public final class ModItems {
     public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_INGOT = register("tungsten_ingot", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_NUGGET = register("tungsten_nugget", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_DUST = register("tungsten_dust", IngotOrDustItem::new);
-
     // Metals - Ultrinium Level
     public static final ItemRegistryObject<IngotOrDustItem> ULTRINIUM_INGOT = register("ultrinium_ingot", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> ULTRINIUM_NUGGET = register("ultrinium_nugget", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> ULTRINIUM_DUST = register("ultrinium_dust", IngotOrDustItem::new);
-
     // Metals - Infinity Level
     public static final ItemRegistryObject<UnstableInfinityIngot> UNSTABLE_INFINITY_INGOT = register("unstable_infinity_ingot", UnstableInfinityIngot::new);
     public static final ItemRegistryObject<IngotOrDustItem> INFINITY_INGOT = register("infinity_ingot", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> INFINITY_NUGGET = register("infinity_nugget", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> INFINITY_DUST = register("infinity_dust", IngotOrDustItem::new);
-
     // Dusts
     public static final ItemRegistryObject<IngotOrDustItem> RUBY_DUST = register("ruby_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> AMETHYST_DUST = register("amethyst_dust", IngotOrDustItem::new);
@@ -155,8 +168,7 @@ public final class ModItems {
     public static final ItemRegistryObject<IngotOrDustItem> AMBER_DUST = register("amber_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> BERYL_DUST = register("beryl_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> DIAMOND_DUST = register("diamond_dust", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> TANZANITE_DUST = register("tanzanite_dustt", IngotOrDustItem::new);
-
+    public static final ItemRegistryObject<IngotOrDustItem> TANZANITE_DUST = register("tanzanite_dust", IngotOrDustItem::new);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Gems     //
     //////////////////
@@ -170,7 +182,6 @@ public final class ModItems {
     public static final ItemRegistryObject<Item> PERIDOT = register("peridot", () -> new Item(new Item.Properties().group(Groups.GEMS)));
     public static final ItemRegistryObject<Item> BERYL = register("beryl", () -> new Item(new Item.Properties().group(Groups.GEMS)));
     public static final ItemRegistryObject<Item> TANZANITE = register("tanzanite", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Icons     //
     ///////////////////
@@ -194,46 +205,48 @@ public final class ModItems {
     //     Specials     //
     //////////////////////
 
+    public static final ItemRegistryObject<KnifeItem> KNIFE = register("knife", () -> new KnifeItem(ItemTier.IRON, new Item.Properties().group(Groups.SPECIALS).maxDamage(4)));
+    public static final ItemRegistryObject<MagnetItem> MAGNET = register("magnet", () -> new MagnetItem(new Item.Properties().group(Groups.SPECIALS).maxDamage(4)));
+
     // Wands
     public static final ItemRegistryObject<FireWandItem> FIRE_STAFF = register("fire_staff", FireWandItem::new);
     public static final ItemRegistryObject<NatureStaffItem> NATURE_STAFF = register("nature_staff", NatureStaffItem::new);
     public static final ItemRegistryObject<TeleportStaffItem> TELEPORT_STAFF = register("teleport_staff", TeleportStaffItem::new);
 
     // Stone Level
-    public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordItem(ItemTier.STONE, 8, -2.0f, new Item.Properties().group(Groups.SPECIALS)));
+    public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordItem(ItemTier.STONE, 8, -2.0f, new Item.Properties().group(Groups.SPECIALS).rarity(Rarity.RARE)));
 
     // Iron Level
-    public static final ItemRegistryObject<AxeItem> EMERGENCY_FIRE_AXE = register("emergency_fire_axe", () -> new AxeItem(ItemTier.IRON, 2, -2.55f, new Item.Properties().group(Groups.SPECIALS)));
-    public static final ItemRegistryObject<FireSwordItem> FIRE_SWORD = register("fire_sword", () -> new FireSwordItem(ItemTier.IRON, 3, -3.5f, new Item.Properties().group(Groups.SPECIALS)));
-    public static final ItemRegistryObject<EnderSwordItem> ENDER_SWORD = register("ender_sword", () -> new EnderSwordItem(ItemTier.IRON, 3, -1.9f, new Item.Properties().group(Groups.SPECIALS)));
+    public static final ItemRegistryObject<AxeItem> EMERGENCY_FIRE_AXE = register("emergency_fire_axe", () -> new AxeItem(ItemTier.IRON, 2, -2.55f, new Item.Properties().group(Groups.SPECIALS).rarity(Rarity.UNCOMMON)));
+    public static final ItemRegistryObject<FireSwordItem> FIRE_SWORD = register("fire_sword", () -> new FireSwordItem(ItemTier.IRON, 3, -3.5f, new Item.Properties().group(Groups.SPECIALS).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<EnderSwordItem> ENDER_SWORD = register("ender_sword", () -> new EnderSwordItem(ItemTier.IRON, 3, -1.9f, new Item.Properties().group(Groups.SPECIALS).rarity(Rarity.EPIC)));
 
     // Diamond Level
     public static final ItemRegistryObject<AxeItem> LEVIATHAN_AXE = register("leviathan_axe", () -> new AxeItem(ItemTier.DIAMOND, 5, -2.55f, new Item.Properties().group(Groups.SPECIALS)));
     public static final ItemRegistryObject<AxeItem> ADAMANTANIUM_AXE_RED = register("adamantanium_axe_red", () -> new AxeItem(ItemTier.DIAMOND, 5, -1.875f, new Item.Properties().group(Groups.SPECIALS)));
-
     public static final ItemRegistryObject<SwordItem> DIAMOND_QUARTZ_SWORD = register("diamond_quartz_sword", () -> new SwordItem(ItemTier.DIAMOND, 6, -2.0f, new Item.Properties().group(Groups.SPECIALS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //     Armors     //
-    ////////////////////
+    //     Tools     //
+    ///////////////////
 
     /////////////////////////////
     //     Armor materials     //
     /////////////////////////////
     public static final IArmorMaterial copperArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":copper", 13, new int[]{2, 5, 6, 2}, 10, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(Metals.COPPER.getIngot().get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(OreMaterials.COPPER.getIngot().get())
     );
     public static final IArmorMaterial nickleArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":nickle", 13, new int[]{2, 5, 7, 3}, 16, 1f,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(ModItems.NICKLE_INGOT.get())
     );
     public static final IArmorMaterial steelArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":steel", 24, new int[]{3, 6, 8, 4}, 14, 4f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, () -> Ingredient.fromItems(Metals.STEEL.getIngot().get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, () -> Ingredient.fromItems(OreMaterials.STEEL.getIngot().get())
     );
     public static final IArmorMaterial tungstenArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":tungsten", 42, new int[]{4, 8, 12, 6}, 28, 5f,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(ModItems.TUNGSTEN_INGOT.get())
     );
     public static final IArmorMaterial uraniumArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":uranium", 11, new int[]{2, 4, 5, 2}, 4, 0.5f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(Metals.URANIUM.getIngot().get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(OreMaterials.URANIUM.getIngot().get())
     );
     public static final IArmorMaterial rubyArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":ruby", 24, new int[]{3, 6, 8, 4}, 14, 1f,
             SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ModItems.RUBY.get())
@@ -273,19 +286,19 @@ public final class ModItems {
     //     Item tiers     //
     ////////////////////////
     public static final IItemTier COPPER_ITEM_TIER = new ItemTierBuilder.Builder(2, 420, 5.3f, 1.4f, 10,
-            () -> Ingredient.fromItems(Metals.COPPER.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterials.COPPER.getIngot().get())
     );
     public static final IItemTier NICKLE_ITEM_TIER = new ItemTierBuilder.Builder(2, 480, 4.9f, 1.7f, 16,
             () -> Ingredient.fromItems(NICKLE_INGOT)
     );
     public static final IItemTier STEEL_ITEM_TIER = new ItemTierBuilder.Builder(3, 1465, 8.1f, 3.8f, 14,
-            () -> Ingredient.fromItems(Metals.STEEL.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterials.STEEL.getIngot().get())
     );
     public static final IItemTier TUNGSTEN_ITEM_TIER = new ItemTierBuilder.Builder(3, 3194, 9.4f, 4.7f, 28,
             () -> Ingredient.fromItems(TUNGSTEN_INGOT)
     );
     public static final IItemTier URANIUM_ITEM_TIER = new ItemTierBuilder.Builder(2, 730, 3.6f, 5.3f, 4,
-            () -> Ingredient.fromItems(Metals.URANIUM.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterials.URANIUM.getIngot().get())
     );
     public static final IItemTier RUBY_ITEM_TIER = new ItemTierBuilder.Builder(3, 970, 7.6f, 3.6f, 13,
             () -> Ingredient.fromItems(RUBY)
@@ -476,21 +489,21 @@ public final class ModItems {
     public static final ItemRegistryObject<HoeItem> TANZANITE_HOE = register("tanzanite_hoe", () -> new HoeItem(TANZANITE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Armors - Ultrinium
-    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_HELMET = register("ultrinium_helmet", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_CHESTPLATE = register("ultrinium_chestplate", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_LEGGINGS = register("ultrinium_leggings", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_BOOTS = register("ultrinium_boots", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> ULTRINIUM_SWORD = register("ultrinium_sword", () -> new SwordItem(ULTRINIUM_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> ULTRINIUM_PICKAXE = register("ultrinium_pickaxe", () -> new PickaxeItem(ULTRINIUM_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> ULTRINIUM_SHOVEL = register("ultrinium_shovel", () -> new ShovelItem(ULTRINIUM_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> ULTRINIUM_AXE = register("ultrinium_axe", () -> new AxeItem(ULTRINIUM_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> ULTRINIUM_HOE = register("ultrinium_hoe", () -> new HoeItem(ULTRINIUM_ITEM_TIER, 3955, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_HELMET = register("ultrinium_helmet", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_CHESTPLATE = register("ultrinium_chestplate", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_LEGGINGS = register("ultrinium_leggings", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_BOOTS = register("ultrinium_boots", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<SwordItem> ULTRINIUM_SWORD = register("ultrinium_sword", () -> new SwordItem(ULTRINIUM_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<PickaxeItem> ULTRINIUM_PICKAXE = register("ultrinium_pickaxe", () -> new PickaxeItem(ULTRINIUM_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ShovelItem> ULTRINIUM_SHOVEL = register("ultrinium_shovel", () -> new ShovelItem(ULTRINIUM_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<AxeItem> ULTRINIUM_AXE = register("ultrinium_axe", () -> new AxeItem(ULTRINIUM_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<HoeItem> ULTRINIUM_HOE = register("ultrinium_hoe", () -> new HoeItem(ULTRINIUM_ITEM_TIER, 3955, -2.0f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
 
     // Armors - Infinity
-    public static final ItemRegistryObject<ArmorItem> INFINITY_HELMET = register("infinity_helmet", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.OVERPOWERED)));
-    public static final ItemRegistryObject<ArmorItem> INFINITY_CHESTPLATE = register("infinity_chestplate", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.OVERPOWERED)));
-    public static final ItemRegistryObject<ArmorItem> INFINITY_LEGGINGS = register("infinity_leggings", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.OVERPOWERED)));
-    public static final ItemRegistryObject<ArmorItem> INFINITY_BOOTS = register("infinity_boots", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.OVERPOWERED)));
+    public static final ItemRegistryObject<ArmorItem> INFINITY_HELMET = register("infinity_helmet", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<ArmorItem> INFINITY_CHESTPLATE = register("infinity_chestplate", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<ArmorItem> INFINITY_LEGGINGS = register("infinity_leggings", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<ArmorItem> INFINITY_BOOTS = register("infinity_boots", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC)));
     public static final ItemRegistryObject<InfinitySwordItem> INFINITY_SWORD = register("infinity_sword", InfinitySwordItem::new);
     public static final ItemRegistryObject<InfinityPickaxeItem> INFINITY_PICKAXE = register("infinity_pickaxe", InfinityPickaxeItem::new);
     public static final ItemRegistryObject<InfinityShovelItem> INFINITY_SHOVEL = register("infinity_shovel", InfinityShovelItem::new);
@@ -501,9 +514,11 @@ public final class ModItems {
     //     Utility Methods     //
     /////////////////////////////
 
-    private ModItems() {}
+    private ModItems() {
+    }
 
-    static void register() {}
+    static void register() {
+    }
 
     @OnlyIn(Dist.CLIENT)
     public static void registerItemColors(ColorHandlerEvent.Item event) {

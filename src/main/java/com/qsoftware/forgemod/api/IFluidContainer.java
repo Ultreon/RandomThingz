@@ -11,24 +11,6 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public interface IFluidContainer {
     /**
-     * Gets the fluid stored in the item
-     *
-     * @param stack The fluid container
-     * @return The stored fluid
-     */
-    FluidStack getFluid(ItemStack stack);
-
-    /**
-     * Creates a fluid container filled with the given fluid. Should not modify the empty
-     * container.
-     *
-     * @param empty The empty fluid container
-     * @param fluid The fluid to store
-     * @return A new filled container
-     */
-    ItemStack fillWithFluid(ItemStack empty, FluidStack fluid);
-
-    /**
      * Convenience method to get the fluid of either a bucket or {@code IFluidContainer}.
      *
      * @param stack The bucket or fluid container item
@@ -67,4 +49,22 @@ public interface IFluidContainer {
         }
         return ItemStack.EMPTY;
     }
+
+    /**
+     * Gets the fluid stored in the item
+     *
+     * @param stack The fluid container
+     * @return The stored fluid
+     */
+    FluidStack getFluid(ItemStack stack);
+
+    /**
+     * Creates a fluid container filled with the given fluid. Should not modify the empty
+     * container.
+     *
+     * @param empty The empty fluid container
+     * @param fluid The fluid to store
+     * @return A new filled container
+     */
+    ItemStack fillWithFluid(ItemStack empty, FluidStack fluid);
 }

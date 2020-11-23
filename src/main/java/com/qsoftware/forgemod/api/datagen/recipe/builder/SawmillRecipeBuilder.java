@@ -1,16 +1,17 @@
 package com.qsoftware.forgemod.api.datagen.recipe.builder;
 
 import com.google.gson.JsonObject;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.JsonConstants;
 import com.qsoftware.forgemod.api.SerializerHelper;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.datagen.recipe.MekanismRecipeBuilder;
 import com.qsoftware.forgemod.api.recipes.inputs.ItemStackIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -64,6 +65,20 @@ public class SawmillRecipeBuilder extends MekanismRecipeBuilder<SawmillRecipeBui
         return new SawmillRecipeResult(id);
     }
 
+    private enum OutputType {
+        PRIMARY(true, false),
+        SECONDARY(false, true),
+        BOTH(true, true);
+
+        private final boolean hasPrimary;
+        private final boolean hasSecondary;
+
+        OutputType(boolean hasPrimary, boolean hasSecondary) {
+            this.hasPrimary = hasPrimary;
+            this.hasSecondary = hasSecondary;
+        }
+    }
+
     public class SawmillRecipeResult extends RecipeResult {
 
         protected SawmillRecipeResult(ResourceLocation id) {
@@ -80,20 +95,6 @@ public class SawmillRecipeBuilder extends MekanismRecipeBuilder<SawmillRecipeBui
                 json.add(JsonConstants.SECONDARY_OUTPUT, SerializerHelper.serializeItemStack(secondaryOutput));
                 json.addProperty(JsonConstants.SECONDARY_CHANCE, secondaryChance);
             }
-        }
-    }
-
-    private enum OutputType {
-        PRIMARY(true, false),
-        SECONDARY(false, true),
-        BOTH(true, true);
-
-        private final boolean hasPrimary;
-        private final boolean hasSecondary;
-
-        OutputType(boolean hasPrimary, boolean hasSecondary) {
-            this.hasPrimary = hasPrimary;
-            this.hasSecondary = hasSecondary;
         }
     }
 }

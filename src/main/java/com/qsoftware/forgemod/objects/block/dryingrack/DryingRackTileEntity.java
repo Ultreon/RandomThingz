@@ -1,5 +1,10 @@
 package com.qsoftware.forgemod.objects.block.dryingrack;
 
+import com.qsoftware.forgemod.crafting.recipe.DryingRecipe;
+import com.qsoftware.forgemod.init.ModRecipes;
+import com.qsoftware.forgemod.init.ModTileEntities;
+import com.qsoftware.forgemod.util.ParticleUtils;
+import com.qsoftware.silent.lib.util.PlayerUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
@@ -18,20 +23,14 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
-import com.qsoftware.silent.lib.util.PlayerUtils;
-import com.qsoftware.forgemod.crafting.recipe.DryingRecipe;
-import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.init.ModTileEntities;
-import com.qsoftware.forgemod.util.ParticleUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class DryingRackTileEntity extends TileEntity implements IInventory, ITickableTileEntity {
     private final NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
-    private int processTime;
-
     private final LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(() -> new InvWrapper(this));
+    private int processTime;
 
     public DryingRackTileEntity() {
         super(ModTileEntities.dryingRack);

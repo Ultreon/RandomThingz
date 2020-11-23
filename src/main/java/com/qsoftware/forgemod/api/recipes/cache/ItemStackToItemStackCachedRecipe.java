@@ -1,12 +1,13 @@
 package com.qsoftware.forgemod.api.recipes.cache;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.recipes.ItemStackToItemStackRecipe;
 import com.qsoftware.forgemod.api.recipes.inputs.IInputHandler;
 import com.qsoftware.forgemod.api.recipes.outputs.IOutputHandler;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -16,7 +17,7 @@ public class ItemStackToItemStackCachedRecipe extends CachedRecipe<ItemStackToIt
     private final IInputHandler<@NonNull ItemStack> inputHandler;
 
     public ItemStackToItemStackCachedRecipe(ItemStackToItemStackRecipe recipe, IInputHandler<@NonNull ItemStack> inputHandler,
-          IOutputHandler<@NonNull ItemStack> outputHandler) {
+                                            IOutputHandler<@NonNull ItemStack> outputHandler) {
         super(recipe);
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;

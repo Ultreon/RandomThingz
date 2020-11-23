@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.blocks;
 
-import com.qsoftware.forgemod.objects.items.base.FaceableBlock;
+import com.qsoftware.forgemod.objects.items.type.FaceableBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.util.math.BlockPos;

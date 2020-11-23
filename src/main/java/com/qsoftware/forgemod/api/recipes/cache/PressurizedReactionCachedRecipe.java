@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.api.recipes.cache;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.forgemod.api.annotations.NonNull;
 import com.qsoftware.forgemod.api.chemical.gas.GasStack;
@@ -10,6 +9,8 @@ import com.qsoftware.forgemod.api.recipes.outputs.IOutputHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import org.apache.commons.lang3.tuple.Pair;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -21,8 +22,8 @@ public class PressurizedReactionCachedRecipe extends CachedRecipe<PressurizedRea
     private final IInputHandler<@NonNull GasStack> gasInputHandler;
 
     public PressurizedReactionCachedRecipe(PressurizedReactionRecipe recipe, IInputHandler<@NonNull ItemStack> itemInputHandler,
-          IInputHandler<@NonNull FluidStack> fluidInputHandler, IInputHandler<@NonNull GasStack> gasInputHandler,
-          IOutputHandler<@NonNull Pair<@NonNull ItemStack, @NonNull GasStack>> outputHandler) {
+                                           IInputHandler<@NonNull FluidStack> fluidInputHandler, IInputHandler<@NonNull GasStack> gasInputHandler,
+                                           IOutputHandler<@NonNull Pair<@NonNull ItemStack, @NonNull GasStack>> outputHandler) {
         super(recipe);
         this.itemInputHandler = itemInputHandler;
         this.fluidInputHandler = fluidInputHandler;

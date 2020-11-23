@@ -65,13 +65,13 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
         super.onImpact(result);
         Entity entity = this.func_234616_v_();
 
-        for(int i = 0; i < 32; ++i) {
+        for (int i = 0; i < 32; ++i) {
             this.world.addParticle(ParticleTypes.PORTAL, this.getPosX(), this.getPosY() + this.rand.nextDouble() * 2.0D, this.getPosZ(), this.rand.nextGaussian(), 0.0D, this.rand.nextGaussian());
         }
 
         if (!this.world.isRemote && !this.removed) {
             if (entity instanceof ServerPlayerEntity) {
-                ServerPlayerEntity serverplayerentity = (ServerPlayerEntity)entity;
+                ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) entity;
                 if (serverplayerentity.connection.getNetworkManager().isChannelOpen() && serverplayerentity.world == this.world && !serverplayerentity.isSleeping()) {
                     net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(serverplayerentity, this.getPosX(), this.getPosY(), this.getPosZ(), 5.0F);
                     if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) { // Don't indent to lower patch size
@@ -109,7 +109,7 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
     public Entity changeDimension(@NotNull ServerWorld server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
         Entity entity = this.func_234616_v_();
         if (entity != null && entity.world.getDimensionKey() != server.getDimensionKey()) {
-            this.setShooter((Entity)null);
+            this.setShooter(null);
         }
 
         return super.changeDimension(server, teleporter);

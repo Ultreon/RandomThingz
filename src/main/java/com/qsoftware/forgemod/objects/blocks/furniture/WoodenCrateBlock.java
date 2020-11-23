@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.blocks.furniture;
 
 import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
-import com.qsoftware.forgemod.objects.items.base.FaceableBlock;
+import com.qsoftware.forgemod.objects.items.type.FaceableBlock;
 import com.qsoftware.forgemod.objects.tileentity.CrateTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,11 +28,10 @@ import javax.annotation.Nullable;
 /**
  * Wooden crate block class.
  *
- * @see CrateTileEntity
  * @author Qboi123
+ * @see CrateTileEntity
  */
 @SuppressWarnings("deprecation")
-@Deprecated
 public class WoodenCrateBlock extends FaceableBlock {
     public WoodenCrateBlock(Block.Properties properties) {
         super(properties);
@@ -55,7 +54,7 @@ public class WoodenCrateBlock extends FaceableBlock {
             TileEntity tile = worldIn.getTileEntity(pos);
 
             if (tile instanceof CrateTileEntity) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (CrateTileEntity)tile, pos);
+                NetworkHooks.openGui((ServerPlayerEntity) player, (CrateTileEntity) tile, pos);
                 return ActionResultType.SUCCESS;
             }
         }
@@ -68,7 +67,7 @@ public class WoodenCrateBlock extends FaceableBlock {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity te = worldIn.getTileEntity(pos);
             if (te instanceof CrateTileEntity) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, new Inventory(((CrateTileEntity)te).getItems().toArray(new ItemStack[]{})));
+                InventoryHelper.dropInventoryItems(worldIn, pos, new Inventory(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
             }
         }
     }
@@ -77,7 +76,7 @@ public class WoodenCrateBlock extends FaceableBlock {
     public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof CrateTileEntity) {
-            InventoryHelper.dropInventoryItems(world, pos, ((CrateTileEntity)te).getInventory());
+            InventoryHelper.dropInventoryItems(world, pos, ((CrateTileEntity) te).getInventory());
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
@@ -94,7 +93,7 @@ public class WoodenCrateBlock extends FaceableBlock {
 
         TileEntity te = worldIn.getTileEntity(pos);
         if (te instanceof CrateTileEntity) {
-            InventoryHelper.dropInventoryItems(worldIn, pos, new Inventory(((CrateTileEntity)te).getItems().toArray(new ItemStack[]{})));
+            InventoryHelper.dropInventoryItems(worldIn, pos, new Inventory(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
         }
     }
 }

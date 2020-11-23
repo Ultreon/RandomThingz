@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.api.crafting.recipe.fluid;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.silent.lib.util.NameUtils;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tags.FluidTags;
@@ -12,7 +13,6 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
-import com.qsoftware.silent.lib.util.NameUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,8 +29,10 @@ import java.util.stream.Collectors;
 public class FluidIngredient implements Predicate<FluidStack> {
     public static final FluidIngredient EMPTY = new FluidIngredient();
 
-    @Nullable private final ITag.INamedTag<Fluid> tag;
-    @Nullable private final Fluid fluid;
+    @Nullable
+    private final ITag.INamedTag<Fluid> tag;
+    @Nullable
+    private final Fluid fluid;
     private final int amount;
 
     public FluidIngredient(@Nonnull ITag.INamedTag<Fluid> tag) {
@@ -57,6 +59,47 @@ public class FluidIngredient implements Predicate<FluidStack> {
         this.tag = null;
         this.fluid = null;
         this.amount = 1000;
+    }
+
+    /**
+     * Deserialize a {@link FluidIngredient} from JSON.
+     *
+     * @param json The JSON object
+     * @return A new FluidIngredient
+     * @throws JsonSyntaxException If the JSON cannot be parsed
+     */
+    public static FluidIngredient deserialize(JsonObject json) {
+        if (json.has("tag") && json.has("fluid")) {
+            throw new JsonSyntaxException("Fluid ingredient should have 'tag' or 'fluid', not both");
+        }
+
+        int amount = JSONUtils.getInt(json, "amount", 1000);
+
+        if (json.has("tag")) {
+            ResourceLocation id = new ResourceLocation(JSONUtils.getString(json, "tag"));
+            return new FluidIngredient(FluidTags.makeWrapperTag(id.toString()), amount);
+        }
+        if (json.has("fluid")) {
+            ResourceLocation id = new ResourceLocation(JSONUtils.getString(json, "fluid"));
+            Fluid fluid = Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(id));
+            return new FluidIngredient(fluid, amount);
+        }
+        throw new JsonSyntaxException("Fluid ingredient should have either 'tag' or 'fluid'");
+    }
+
+    /**
+     * Reads a {@link FluidIngredient} from a packet buffer. Use with {@link #write(PacketBuffer)}.
+     *
+     * @param buffer The packet buffer
+     * @return A new FluidIngredient
+     */
+    public static FluidIngredient read(PacketBuffer buffer) {
+        boolean isTag = buffer.readBoolean();
+        ResourceLocation id = buffer.readResourceLocation();
+        int amount = buffer.readVarInt();
+        return isTag
+                ? new FluidIngredient(FluidTags.makeWrapperTag(id.toString()), amount)
+                : new FluidIngredient(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(id)), amount);
     }
 
     @Nullable
@@ -117,32 +160,6 @@ public class FluidIngredient implements Predicate<FluidStack> {
         return (tag != null && stack.getFluid().isIn(tag)) || (fluid != null && stack.getFluid() == fluid);
     }
 
-    /**
-     * Deserialize a {@link FluidIngredient} from JSON.
-     *
-     * @param json The JSON object
-     * @return A new FluidIngredient
-     * @throws JsonSyntaxException If the JSON cannot be parsed
-     */
-    public static FluidIngredient deserialize(JsonObject json) {
-        if (json.has("tag") && json.has("fluid")) {
-            throw new JsonSyntaxException("Fluid ingredient should have 'tag' or 'fluid', not both");
-        }
-
-        int amount = JSONUtils.getInt(json, "amount", 1000);
-
-        if (json.has("tag")) {
-            ResourceLocation id = new ResourceLocation(JSONUtils.getString(json, "tag"));
-            return new FluidIngredient(FluidTags.makeWrapperTag(id.toString()), amount);
-        }
-        if (json.has("fluid")) {
-            ResourceLocation id = new ResourceLocation(JSONUtils.getString(json, "fluid"));
-            Fluid fluid = Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(id));
-            return new FluidIngredient(fluid, amount);
-        }
-        throw new JsonSyntaxException("Fluid ingredient should have either 'tag' or 'fluid'");
-    }
-
     public JsonObject serialize() {
         JsonObject json = new JsonObject();
 
@@ -157,21 +174,6 @@ public class FluidIngredient implements Predicate<FluidStack> {
         json.addProperty("amount", this.amount);
 
         return json;
-    }
-
-    /**
-     * Reads a {@link FluidIngredient} from a packet buffer. Use with {@link #write(PacketBuffer)}.
-     *
-     * @param buffer The packet buffer
-     * @return A new FluidIngredient
-     */
-    public static FluidIngredient read(PacketBuffer buffer) {
-        boolean isTag = buffer.readBoolean();
-        ResourceLocation id = buffer.readResourceLocation();
-        int amount = buffer.readVarInt();
-        return isTag
-                ? new FluidIngredient(FluidTags.makeWrapperTag(id.toString()), amount)
-                : new FluidIngredient(Objects.requireNonNull(ForgeRegistries.FLUIDS.getValue(id)), amount);
     }
 
     /**

@@ -26,45 +26,6 @@ import java.util.Objects;
  */
 public interface IFluidRecipe<C extends IFluidInventory> extends IRecipe<C> {
     /**
-     * Get the fluids which result from this recipe. Similar to {@link
-     * #getCraftingResult(IFluidInventory)}.
-     *
-     * @param inv The inventory
-     * @return A list of fluids produced
-     */
-    List<FluidStack> getFluidResults(C inv);
-
-    /**
-     * Get the fluids which result from this recipe, ignoring the inventory. Similar to {@link
-     * #getRecipeOutput()}, needed for JEI support.
-     *
-     * @return A list of fluids produced
-     */
-    List<FluidStack> getFluidOutputs();
-
-    /**
-     * Get the fluid ingredients. Similar to {@link #getIngredients()}.
-     *
-     * @return A list of fluid ingredients which represent the inputs.
-     */
-    List<FluidIngredient> getFluidIngredients();
-
-    @Override
-    default ItemStack getCraftingResult(C inv) {
-        return getRecipeOutput();
-    }
-
-    @Override
-    default ItemStack getRecipeOutput() {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    default boolean canFit(int width, int height) {
-        return true;
-    }
-
-    /**
      * Deserialize a {@link FluidStack} from JSON, including a fluid amount.
      *
      * @param json The JSON object
@@ -104,10 +65,49 @@ public interface IFluidRecipe<C extends IFluidInventory> extends IRecipe<C> {
      * Writes a {@link FluidStack} to a packet buffer. Use with {@link #readFluid(PacketBuffer)}.
      *
      * @param buffer The packet buffer
-     * @param stack A new FluidStack
+     * @param stack  A new FluidStack
      */
     static void writeFluid(PacketBuffer buffer, FluidStack stack) {
         buffer.writeResourceLocation(Objects.requireNonNull(stack.getFluid().getRegistryName()));
         buffer.writeVarInt(stack.getAmount());
+    }
+
+    /**
+     * Get the fluids which result from this recipe. Similar to {@link
+     * #getCraftingResult(IFluidInventory)}.
+     *
+     * @param inv The inventory
+     * @return A list of fluids produced
+     */
+    List<FluidStack> getFluidResults(C inv);
+
+    /**
+     * Get the fluids which result from this recipe, ignoring the inventory. Similar to {@link
+     * #getRecipeOutput()}, needed for JEI support.
+     *
+     * @return A list of fluids produced
+     */
+    List<FluidStack> getFluidOutputs();
+
+    /**
+     * Get the fluid ingredients. Similar to {@link #getIngredients()}.
+     *
+     * @return A list of fluid ingredients which represent the inputs.
+     */
+    List<FluidIngredient> getFluidIngredients();
+
+    @Override
+    default ItemStack getCraftingResult(C inv) {
+        return getRecipeOutput();
+    }
+
+    @Override
+    default ItemStack getRecipeOutput() {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    default boolean canFit(int width, int height) {
+        return true;
     }
 }

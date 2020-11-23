@@ -1,5 +1,9 @@
 package com.qsoftware.forgemod.objects.block.generator.lava;
 
+import com.qsoftware.forgemod.init.ModContainers;
+import com.qsoftware.forgemod.objects.block.generator.AbstractFluidFuelGeneratorTileEntity;
+import com.qsoftware.forgemod.objects.block.generator.AbstractFluidGeneratorContainer;
+import com.qsoftware.silent.lib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
@@ -8,10 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
-import com.qsoftware.silent.lib.util.InventoryUtils;
-import com.qsoftware.forgemod.objects.block.generator.AbstractFluidFuelGeneratorTileEntity;
-import com.qsoftware.forgemod.objects.block.generator.AbstractFluidGeneratorContainer;
-import com.qsoftware.forgemod.init.ModContainers;
 
 public class LavaGeneratorContainer extends AbstractFluidGeneratorContainer<LavaGeneratorTileEntity> {
     public LavaGeneratorContainer(int id, PlayerInventory playerInventory) {
@@ -19,7 +19,7 @@ public class LavaGeneratorContainer extends AbstractFluidGeneratorContainer<Lava
     }
 
     public LavaGeneratorContainer(int id, PlayerInventory playerInventory, LavaGeneratorTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.lavaGenerator, id, tileEntity, fieldsIn);
+        super(ModContainers.LAVA_GENERATOR, id, tileEntity, fieldsIn);
 
         this.addSlot(new Slot(tileEntity, 0, 80, 16));
         this.addSlot(new Slot(tileEntity, 1, 80, 59));

@@ -1,15 +1,15 @@
 package com.qsoftware.forgemod.init;
 
+import com.qsoftware.forgemod.config.Config;
+import com.qsoftware.forgemod.config.OreConfig;
+import com.qsoftware.silent.lib.block.IBlockProvider;
+import com.qsoftware.silent.utils.Lazy;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
-import com.qsoftware.silent.lib.block.IBlockProvider;
-import com.qsoftware.forgemod.config.Config;
-import com.qsoftware.forgemod.config.OreConfig;
-import com.qsoftware.silent.utils.Lazy;
 
 import java.util.Locale;
 import java.util.Optional;
@@ -19,19 +19,19 @@ import java.util.function.Supplier;
  * Handles ore blocks and default ore configs
  */
 public enum Ores implements IBlockProvider {
-    COPPER(() -> Metals.COPPER, 3, 1, new DefaultOreConfigs(8, 8, 40, 90)),
-    TIN(() -> Metals.TIN, 3, 1, new DefaultOreConfigs(8, 8, 20, 80)),
-    SILVER(() -> Metals.SILVER, 4, 2, new DefaultOreConfigs(4, 8, 0, 40)),
-    LEAD(() -> Metals.LEAD, 4, 2, new DefaultOreConfigs(4, 8, 0, 30)),
-    NICKEL(() -> Metals.NICKEL, 5, 2, new DefaultOreConfigs(1, 6, 0, 24)),
-    PLATINUM(() -> Metals.PLATINUM, 5, 2, new DefaultOreConfigs(1, 8, 5, 20)),
-    ZINC(() -> Metals.ZINC, 3, 1, new DefaultOreConfigs(4, 8, 20, 60)),
-    BISMUTH(() -> Metals.BISMUTH, 3, 1, new DefaultOreConfigs(4, 8, 16, 64)),
-    BAUXITE(() -> Metals.ALUMINUM, 4, 1, new DefaultOreConfigs(6, 8, 15, 50)),
-    URANIUM(() -> Metals.URANIUM, 6, 2, new DefaultOreConfigs(1, 4, 0, 18)),
+    COPPER(() -> OreMaterials.COPPER, 3, 1, new DefaultOreConfigs(8, 8, 40, 90)),
+    TIN(() -> OreMaterials.TIN, 3, 1, new DefaultOreConfigs(8, 8, 20, 80)),
+    SILVER(() -> OreMaterials.SILVER, 4, 2, new DefaultOreConfigs(4, 8, 0, 40)),
+    LEAD(() -> OreMaterials.LEAD, 4, 2, new DefaultOreConfigs(4, 8, 0, 30)),
+    NICKEL(() -> OreMaterials.NICKEL, 5, 2, new DefaultOreConfigs(1, 6, 0, 24)),
+    PLATINUM(() -> OreMaterials.PLATINUM, 5, 2, new DefaultOreConfigs(1, 8, 5, 20)),
+    ZINC(() -> OreMaterials.ZINC, 3, 1, new DefaultOreConfigs(4, 8, 20, 60)),
+    BISMUTH(() -> OreMaterials.BISMUTH, 3, 1, new DefaultOreConfigs(4, 8, 16, 64)),
+    BAUXITE(() -> OreMaterials.ALUMINUM, 4, 1, new DefaultOreConfigs(6, 8, 15, 50)),
+    URANIUM(() -> OreMaterials.URANIUM, 6, 2, new DefaultOreConfigs(1, 4, 0, 18)),
     ;
 
-    private final Supplier<Metals> metal;
+    private final Supplier<OreMaterials> metal;
     private final DefaultOreConfigs defaultOreConfigs;
     private final int hardness;
     private final int harvestLevel;
@@ -45,12 +45,13 @@ public enum Ores implements IBlockProvider {
                 .func_242731_b(config.getVeinCount());
     });
 
-    Ores(Supplier<Metals> metal, int hardness, int harvestLevel, DefaultOreConfigs defaultOreConfigs) {
+    Ores(Supplier<OreMaterials> metal, int hardness, int harvestLevel, DefaultOreConfigs defaultOreConfigs) {
         this.metal = metal;
         this.defaultOreConfigs = defaultOreConfigs;
         this.hardness = hardness;
         this.harvestLevel = harvestLevel;
     }
+
     public String getName() {
         return name().toLowerCase(Locale.ROOT);
     }
@@ -75,6 +76,7 @@ public enum Ores implements IBlockProvider {
         return configuredFeature.get();
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Override
     public Block asBlock() {
         return metal.get().getOre().get();

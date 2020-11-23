@@ -1,5 +1,7 @@
 package com.qsoftware.forgemod.util;
 
+import com.qsoftware.forgemod.objects.block.refinery.RefineryTileEntity;
+import com.qsoftware.forgemod.objects.items.fluid.CanisterItem;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.BucketItem;
@@ -7,13 +9,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.ItemHandlerHelper;
-import com.qsoftware.forgemod.objects.block.refinery.RefineryTileEntity;
-import com.qsoftware.forgemod.objects.item.CanisterItem;
 
 import java.util.function.Predicate;
 
 public final class InventoryUtils {
-    private InventoryUtils() {throw new IllegalAccessError("Utility class");}
+    private InventoryUtils() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     /**
      * Gets the total number of matching items in all slots in the inventory.
@@ -37,9 +39,9 @@ public final class InventoryUtils {
      * Consumes (removes) items from the inventory. This is useful for machines, which may have
      * multiple input slots and recipes that consume multiple of one item.
      *
-     * @param inventory The inventory
+     * @param inventory  The inventory
      * @param ingredient The items to match ({@link net.minecraft.item.crafting.Ingredient}, etc.)
-     * @param amount The total number of items to remove
+     * @param amount     The total number of items to remove
      */
     public static void consumeItems(IInventory inventory, Predicate<ItemStack> ingredient, int amount) {
         int amountLeft = amount;
@@ -82,7 +84,7 @@ public final class InventoryUtils {
     public static boolean isFilledFluidContainer(ItemStack stack) {
         Item item = stack.getItem();
         return (item instanceof BucketItem && ((BucketItem) item).getFluid() != Fluids.EMPTY)
-        || (item instanceof CanisterItem && !((CanisterItem) item).getFluid(stack).isEmpty());
+                || (item instanceof CanisterItem && !((CanisterItem) item).getFluid(stack).isEmpty());
     }
 
     public static boolean isEmptyFluidContainer(ItemStack stack) {

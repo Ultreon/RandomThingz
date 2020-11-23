@@ -1,15 +1,16 @@
 package com.qsoftware.forgemod.api.chemical.pigment;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.MekanismAPI;
 import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.api.chemical.ChemicalStack;
 import com.qsoftware.forgemod.api.providers.IPigmentProvider;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.registries.IRegistryDelegate;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -31,26 +32,10 @@ public class PigmentStack extends ChemicalStack<Pigment> {
         this(stack.getType(), amount);
     }
 
-    @Override
-    protected IRegistryDelegate<Pigment> getDelegate(Pigment pigment) {
-        if (MekanismAPI.pigmentRegistry().getKey(pigment) == null) {
-            MekanismAPI.logger.fatal("Failed attempt to create a PigmentStack for an unregistered Pigment {} (type {})", pigment.getRegistryName(),
-                  pigment.getClass().getName());
-            throw new IllegalArgumentException("Cannot create a PigmentStack from an unregistered Pigment");
-        }
-        return pigment.delegate;
-    }
-
-    @Override
-    protected Pigment getEmptyChemical() {
-        return MekanismAPI.EMPTY_PIGMENT;
-    }
-
     /**
      * Returns the PigmentStack stored in the defined tag compound, or null if it doesn't exist.
      *
      * @param nbtTags - tag compound to read from
-     *
      * @return PigmentStack stored in the tag compound
      */
     public static PigmentStack readFromNBT(@Nullable CompoundNBT nbtTags) {
@@ -75,6 +60,21 @@ public class PigmentStack extends ChemicalStack<Pigment> {
             return EMPTY;
         }
         return new PigmentStack(pigment, amount);
+    }
+
+    @Override
+    protected IRegistryDelegate<Pigment> getDelegate(Pigment pigment) {
+        if (MekanismAPI.pigmentRegistry().getKey(pigment) == null) {
+            MekanismAPI.logger.fatal("Failed attempt to create a PigmentStack for an unregistered Pigment {} (type {})", pigment.getRegistryName(),
+                    pigment.getClass().getName());
+            throw new IllegalArgumentException("Cannot create a PigmentStack from an unregistered Pigment");
+        }
+        return pigment.delegate;
+    }
+
+    @Override
+    protected Pigment getEmptyChemical() {
+        return MekanismAPI.EMPTY_PIGMENT;
     }
 
     /**

@@ -38,18 +38,16 @@ import java.util.Objects;
 /**
  * Crate tile entity class.
  *
- * @see WoodenCrateBlock
  * @author Qboi123
+ * @see WoodenCrateBlock
  */
 public class CrateTileEntity extends LockableLootTileEntity {
-    // Chest contents.
-    private NonNullList<ItemStack> chestContents = NonNullList.withSize(36, ItemStack.EMPTY);
-
-    // Amount players using.
-    protected int numPlayersUsing;
-
     // Item handler.
     private final IItemHandlerModifiable items = createHandler();
+    // Amount players using.
+    protected int numPlayersUsing;
+    // Chest contents.
+    private NonNullList<ItemStack> chestContents = NonNullList.withSize(36, ItemStack.EMPTY);
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
     public CrateTileEntity(TileEntityType<?> typeIn) {
@@ -58,6 +56,13 @@ public class CrateTileEntity extends LockableLootTileEntity {
 
     public CrateTileEntity() {
         this(TileEntityTypesInit.EXAMPLE_CHEST.get());
+    }
+
+    @SuppressWarnings({"unused", "RedundantSuppression"})
+    public static void swapContents(CrateTileEntity te, CrateTileEntity otherTe) {
+        NonNullList<ItemStack> list = te.getItems();
+        te.setItems(otherTe.getItems());
+        otherTe.setItems(list);
     }
 
     @Override
@@ -70,13 +75,13 @@ public class CrateTileEntity extends LockableLootTileEntity {
         return this.chestContents;
     }
 
-    public IInventory getInventory() {
-        return new Inventory(getItems().toArray(new ItemStack[]{}));
-    }
-
     @Override
     public void setItems(NonNullList<ItemStack> items) {
         this.chestContents = items;
+    }
+
+    public IInventory getInventory() {
+        return new Inventory(getItems().toArray(new ItemStack[]{}));
     }
 
     @Override
@@ -110,9 +115,9 @@ public class CrateTileEntity extends LockableLootTileEntity {
 
     @SuppressWarnings({"unused", "RedundantSuppression"})
     private void playSound(SoundEvent sound) {
-        double dx = (double)this.pos.getX() + 0.5d;
-        double dy = (double)this.pos.getY() + 0.5d;
-        double dz = (double)this.pos.getZ() + 0.5d;
+        double dx = (double) this.pos.getX() + 0.5d;
+        double dy = (double) this.pos.getY() + 0.5d;
+        double dz = (double) this.pos.getZ() + 0.5d;
 
         Objects.requireNonNull(this.world).playSound(null, dx, dy, dz, sound, SoundCategory.BLOCKS, 0.5f, this.world.rand.nextFloat() * 0.1f + 0.9f);
     }
@@ -165,13 +170,6 @@ public class CrateTileEntity extends LockableLootTileEntity {
             }
         }
         return 0;
-    }
-
-    @SuppressWarnings({"unused", "RedundantSuppression"})
-    public static void swapContents(CrateTileEntity te, CrateTileEntity otherTe) {
-        NonNullList<ItemStack> list = te.getItems();
-        te.setItems(otherTe.getItems());
-        otherTe.setItems(list);
     }
 
     @Override

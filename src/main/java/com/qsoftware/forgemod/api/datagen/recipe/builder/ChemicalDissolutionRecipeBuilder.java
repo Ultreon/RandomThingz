@@ -1,9 +1,6 @@
 package com.qsoftware.forgemod.api.datagen.recipe.builder;
 
 import com.google.gson.JsonObject;
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
 import com.qsoftware.forgemod.api.JsonConstants;
 import com.qsoftware.forgemod.api.SerializerHelper;
 import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
@@ -12,7 +9,11 @@ import com.qsoftware.forgemod.api.chemical.merged.BoxedChemicalStack;
 import com.qsoftware.forgemod.api.datagen.recipe.MekanismRecipeBuilder;
 import com.qsoftware.forgemod.api.recipes.inputs.ItemStackIngredient;
 import com.qsoftware.forgemod.api.recipes.inputs.chemical.GasStackIngredient;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -24,7 +25,7 @@ public class ChemicalDissolutionRecipeBuilder extends MekanismRecipeBuilder<Chem
     private final BoxedChemicalStack output;
 
     protected ChemicalDissolutionRecipeBuilder(ResourceLocation serializerName, ItemStackIngredient itemInput, GasStackIngredient gasInput,
-          ChemicalStack<?> output) {
+                                               ChemicalStack<?> output) {
         super(serializerName);
         this.itemInput = itemInput;
         this.gasInput = gasInput;

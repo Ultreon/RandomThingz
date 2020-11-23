@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.api;
 
-import java.util.function.Predicate;
 import javax.annotation.Nonnull;
+import java.util.function.Predicate;
 
 /**
  * Interface for enum's to make them easily incremental
@@ -12,7 +12,6 @@ public interface IIncrementalEnum<TYPE extends Enum<TYPE> & IIncrementalEnum<TYP
      * Gets the next "valid" element
      *
      * @param isValid Predicate defining if an element is valid
-     *
      * @return The next "valid" element
      */
     @Nonnull
@@ -33,7 +32,6 @@ public interface IIncrementalEnum<TYPE extends Enum<TYPE> & IIncrementalEnum<TYP
      * Gets the previous "valid" element
      *
      * @param isValid Predicate defining if an element is valid
-     *
      * @return The previous "valid" element
      */
     @Nonnull
@@ -85,9 +83,7 @@ public interface IIncrementalEnum<TYPE extends Enum<TYPE> & IIncrementalEnum<TYP
      * Gets the "valid" element that is offset by the given shift
      *
      * @param shift Shift to perform, may be negative to indicate going backwards
-     *
      * @return The "valid" element that is offset by the given shift
-     *
      * @implNote Default implementation assumes all elements are "valid", override this if that is not the case.
      */
     @Nonnull

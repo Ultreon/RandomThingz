@@ -1,18 +1,38 @@
 package com.qsoftware.forgemod.init;
 
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.objects.block.AbstractMachineBlock;
+import com.qsoftware.forgemod.objects.block.MachineFrameBlock;
+import com.qsoftware.forgemod.objects.block.alloysmelter.AlloySmelterBlock;
+import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxBlock;
+import com.qsoftware.forgemod.objects.block.compressor.CompressorBlock;
+import com.qsoftware.forgemod.objects.block.crusher.CrusherBlock;
+import com.qsoftware.forgemod.objects.block.dryingrack.DryingRackBlock;
+import com.qsoftware.forgemod.objects.block.electricfurnace.ElectricFurnaceBlock;
+import com.qsoftware.forgemod.objects.block.generator.coal.CoalGeneratorBlock;
+import com.qsoftware.forgemod.objects.block.generator.diesel.DieselGeneratorBlock;
+import com.qsoftware.forgemod.objects.block.generator.lava.LavaGeneratorBlock;
+import com.qsoftware.forgemod.objects.block.infuser.InfuserBlock;
+import com.qsoftware.forgemod.objects.block.mixer.MixerBlock;
+import com.qsoftware.forgemod.objects.block.pipe.PipeBlock;
+import com.qsoftware.forgemod.objects.block.pump.PumpBlock;
 import com.qsoftware.forgemod.objects.block.quarry.QuarryBlock;
+import com.qsoftware.forgemod.objects.block.refinery.RefineryBlock;
+import com.qsoftware.forgemod.objects.block.solidifier.SolidifierBlock;
+import com.qsoftware.forgemod.objects.block.wire.WireBlock;
 import com.qsoftware.forgemod.objects.blocks.GamePcBlock;
 import com.qsoftware.forgemod.objects.blocks.customrender.CRDoorBlock;
 import com.qsoftware.forgemod.objects.blocks.customrender.CRFlowerBlock;
 import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
 import com.qsoftware.forgemod.objects.blocks.trees.CherryTree;
 import com.qsoftware.forgemod.objects.blocks.trees.EucalyptusTree;
-import com.qsoftware.forgemod.objects.items.base.FaceableBlock;
+import com.qsoftware.forgemod.objects.items.type.FaceableBlock;
+import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.silent.lib.registry.BlockRegistryObject;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.block.trees.OakTree;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.EntityType;
@@ -35,27 +55,6 @@ import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import com.qsoftware.silent.lib.registry.BlockRegistryObject;
-import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.objects.block.AbstractMachineBlock;
-import com.qsoftware.forgemod.objects.block.MachineFrameBlock;
-import com.qsoftware.forgemod.objects.block.alloysmelter.AlloySmelterBlock;
-import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxBlock;
-import com.qsoftware.forgemod.objects.block.compressor.CompressorBlock;
-import com.qsoftware.forgemod.objects.block.crusher.CrusherBlock;
-import com.qsoftware.forgemod.objects.block.dryingrack.DryingRackBlock;
-import com.qsoftware.forgemod.objects.block.electricfurnace.ElectricFurnaceBlock;
-import com.qsoftware.forgemod.objects.block.generator.coal.CoalGeneratorBlock;
-import com.qsoftware.forgemod.objects.block.generator.diesel.DieselGeneratorBlock;
-import com.qsoftware.forgemod.objects.block.generator.lava.LavaGeneratorBlock;
-import com.qsoftware.forgemod.objects.block.infuser.InfuserBlock;
-import com.qsoftware.forgemod.objects.block.mixer.MixerBlock;
-import com.qsoftware.forgemod.objects.block.pipe.PipeBlock;
-import com.qsoftware.forgemod.objects.block.pump.PumpBlock;
-import com.qsoftware.forgemod.objects.block.refinery.RefineryBlock;
-import com.qsoftware.forgemod.objects.block.solidifier.SolidifierBlock;
-import com.qsoftware.forgemod.objects.block.wire.WireBlock;
-import com.qsoftware.forgemod.util.MachineTier;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -63,23 +62,27 @@ import java.util.Collection;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public final class ModBlocks {
-    static {
-        Metals.registerBlocks();
-    }
-
+    ///////////////////
+    //     Racks     //
+    ///////////////////
     public static final BlockRegistryObject<DryingRackBlock> OAK_DRYING_RACK = registerMachine("oak_drying_rack", DryingRackBlock::new);
     public static final BlockRegistryObject<DryingRackBlock> BIRCH_DRYING_RACK = registerMachine("birch_drying_rack", DryingRackBlock::new);
     public static final BlockRegistryObject<DryingRackBlock> SPRUCE_DRYING_RACK = registerMachine("spruce_drying_rack", DryingRackBlock::new);
     public static final BlockRegistryObject<DryingRackBlock> JUNGLE_DRYING_RACK = registerMachine("jungle_drying_rack", DryingRackBlock::new);
     public static final BlockRegistryObject<DryingRackBlock> DARK_OAK_DRYING_RACK = registerMachine("dark_oak_drying_rack", DryingRackBlock::new);
     public static final BlockRegistryObject<DryingRackBlock> ACACIA_DRYING_RACK = registerMachine("acacia_drying_rack", DryingRackBlock::new);
+    public static final BlockRegistryObject<DryingRackBlock> EUCALYPTUS_DRYING_RACK = registerMachine("eucalyptus_drying_rack", DryingRackBlock::new);
+    public static final BlockRegistryObject<DryingRackBlock> CHERRY_DRYING_RACK = registerMachine("cherry_drying_rack", DryingRackBlock::new);
 
+    ////////////////////////
+    //     Processing     //
+    ////////////////////////
     public static final BlockRegistryObject<MachineFrameBlock> STONE_MACHINE_FRAME = registerMachine("stone_machine_frame", () ->
             new MachineFrameBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3, 10).sound(SoundType.STONE).notSolid()));
     public static final BlockRegistryObject<MachineFrameBlock> ALLOY_MACHINE_FRAME = registerMachine("alloy_machine_frame", () ->
             new MachineFrameBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(3, 10).sound(SoundType.METAL).notSolid()));
-
     public static final BlockRegistryObject<AlloySmelterBlock> BASIC_ALLOY_SMELTER = registerMachine("basic_alloy_smelter", () ->
             new AlloySmelterBlock(MachineTier.BASIC));
     public static final BlockRegistryObject<AlloySmelterBlock> ALLOY_SMELTER = registerMachine("alloy_smelter", () ->
@@ -96,19 +99,34 @@ public final class ModBlocks {
     public static final BlockRegistryObject<InfuserBlock> INFUSER = registerMachine("infuser", InfuserBlock::new);
     public static final BlockRegistryObject<PumpBlock> PUMP = registerMachine("pump", PumpBlock::new);
     public static final BlockRegistryObject<QuarryBlock> QUARRY = registerMachine("quarry", QuarryBlock::new);
+
+    ////////////////////////
+    //     Generators     //
+    ////////////////////////
     public static final BlockRegistryObject<CoalGeneratorBlock> COAL_GENERATOR = registerMachine("coal_generator", CoalGeneratorBlock::new);
     public static final BlockRegistryObject<LavaGeneratorBlock> LAVA_GENERATOR = registerMachine("lava_generator", LavaGeneratorBlock::new);
     public static final BlockRegistryObject<DieselGeneratorBlock> DIESEL_GENERATOR = registerMachine("diesel_generator", DieselGeneratorBlock::new);
-    public static final BlockRegistryObject<BatteryBoxBlock> BATTERY_BOX = registerMachine("battery_box", BatteryBoxBlock::new);
-    public static final BlockRegistryObject<WireBlock> WIRE = registerMachine("wire", () ->
-            new WireBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1, 5)));
-    public static final BlockRegistryObject<PipeBlock> PIPE = registerMachine("pipe", () ->
-            new PipeBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1, 5)));
 
+    ///////////////////////////
+    //     Battery boxes     //
+    ///////////////////////////
+    public static final BlockRegistryObject<BatteryBoxBlock> BATTERY_BOX = registerMachine("battery_box", BatteryBoxBlock::new);
+
+    ///////////////////////
+    //     Transport     //
+    ///////////////////////
+    public static final BlockRegistryObject<WireBlock> WIRE = registerMachine("wire", () -> new WireBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1, 5)));
+    public static final BlockRegistryObject<PipeBlock> PIPE = registerMachine("pipe", () -> new PipeBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1, 5)));
+
+    ////////////////////
+    //     Fluids     //
+    ////////////////////
     public static final BlockRegistryObject<FlowingFluidBlock> OIL = registerFluid("oil", () -> ModFluids.OIL);
     public static final BlockRegistryObject<FlowingFluidBlock> DIESEL = registerFluid("diesel", () -> ModFluids.DIESEL);
 
-    // Doors
+    /////////////////////
+    //     Flowers     //
+    /////////////////////
     public static final BlockRegistryObject<FlowerBlock> BUTTERCUP = register("buttercup", () -> new CRFlowerBlock(Effects.ABSORPTION, 8, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)) {
         @Override
         public RenderType getRenderType() {
@@ -116,7 +134,9 @@ public final class ModBlocks {
         }
     });
 
-    // Doors
+    ///////////////////
+    //     Doors     //
+    ///////////////////
     public static final BlockRegistryObject<DoorBlock> LAB_DOOR = registerRedstone("lab_door", () -> new CRDoorBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).hardnessAndResistance(5.0F).sound(SoundType.METAL).notSolid()) {
         @Override
         public RenderType getRenderType() {
@@ -142,9 +162,11 @@ public final class ModBlocks {
         }
     });
 
-    // Wood
+    //////////////////
+    //     Wood     //
+    //////////////////
     public static final BlockRegistryObject<Block> EUCALYPTUS_PLANKS = registerWood("eucalyptus_planks", () -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7f, 15.0f).sound(SoundType.WOOD)));
-    public static final BlockRegistryObject<Block> EUCALYPTUS_LOG = registerWood("eucalyptus_log", () -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.QUARTZ).hardnessAndResistance(2.0f).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+    public static final BlockRegistryObject<RotatedPillarBlock> EUCALYPTUS_LOG = registerWood("eucalyptus_log", () -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.QUARTZ).hardnessAndResistance(2.0f).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<LeavesBlock> EUCALYPTUS_LEAVES = register("eucalyptus_leaves", ModBlocks::createLeavesBlock);
     public static final BlockRegistryObject<SaplingBlock> EUCALYPTUS_SAPLING = register("eucalyptus_sapling", () -> new SaplingBlock(new EucalyptusTree(), AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().zeroHardnessAndResistance().sound(SoundType.PLANT)));
     public static final BlockRegistryObject<StairsBlock> EUCALYPTUS_STAIRS = registerShaped("eucalyptus_stairs", () -> new StairsBlock(EUCALYPTUS_PLANKS.get()::getDefaultState, Block.Properties.create(Material.WOOD).sound(SoundType.WOOD)));
@@ -153,7 +175,6 @@ public final class ModBlocks {
     public static final BlockRegistryObject<FenceGateBlock> EUCALYPTUS_FENCE_GATE = registerShaped("eucalyptus_fence_gate", () -> new FenceGateBlock(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<WoodButtonBlock> EUCALYPTUS_BUTTON = registerShaped("eucalyptus_button", () -> new WoodButtonBlock(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<PressurePlateBlock> EUCALYPTUS_PRESSURE_PLATE = registerShaped("eucalyptus_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).sound(SoundType.WOOD)));
-
     public static final BlockRegistryObject<Block> CHERRY_PLANKS = registerWood("cherry_planks", () -> new Block(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7f, 15.0f).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<Block> CHERRY_LOG = registerWood("cherry_log", () -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.QUARTZ).hardnessAndResistance(2.0f).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<LeavesBlock> CHERRY_LEAVES = register("cherry_leaves", ModBlocks::createLeavesBlock);
@@ -165,12 +186,15 @@ public final class ModBlocks {
     public static final BlockRegistryObject<WoodButtonBlock> CHERRY_BUTTON = registerShaped("cherry_button", () -> new WoodButtonBlock(Block.Properties.create(Material.WOOD).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<PressurePlateBlock> CHERRY_PRESSURE_PLATE = registerShaped("cherry_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).sound(SoundType.WOOD)));
 
-    // Furniture
-    public static final BlockRegistryObject<Block> MODERN_SOFA = registerFurniture("modern_sofa", () -> new FaceableBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(0.7f, 15.0f).sound(SoundType.WOOD)));
+    ///////////////////////
+    //     Furniture     //
+    ///////////////////////
     public static final BlockRegistryObject<Block> GAME_PC = registerFurniture("game_pc", () -> new GamePcBlock(Block.Properties.create(Material.ANVIL).hardnessAndResistance(4.7f).sound(SoundType.ANVIL)));
     public static final BlockRegistryObject<Block> ROUTER = registerFurniture("router", () -> new FaceableBlock(Block.Properties.create(Material.ANVIL).hardnessAndResistance(4.7f).sound(SoundType.ANVIL)));
 
-    // Tile entity
+    /////////////////////////
+    //     Tile entity     //
+    /////////////////////////
     public static final BlockRegistryObject<Block> WOODEN_CRATE = registerMachine("wooden_crate", () -> new WoodenCrateBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.9f).sound(SoundType.WOOD)));
 
     // Ore
@@ -185,7 +209,9 @@ public final class ModBlocks {
     public static final BlockRegistryObject<Block> ULTRINIUM_ORE = registerOre("ultrinium_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(12.9f, 9999999.9f).sound(SoundType.STONE).harvestLevel(3)));
     public static final BlockRegistryObject<Block> INFINITY_ORE = registerOverpowered("infinity_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(64.5f, Float.MAX_VALUE).sound(SoundType.STONE).harvestLevel(4)));
 
-    // Solid Gem / Metal block
+    /////////////////////////////////////
+    //     Solid Gem / Metal block     //
+    /////////////////////////////////////
     public static final BlockRegistryObject<Block> TUNGSTEN_BLOCK = registerOre("tungsten_block", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5.9875f, 6.5525f).sound(SoundType.STONE)));
     public static final BlockRegistryObject<Block> RUBY_BLOCK = registerOre("ruby_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(4.25f, 5.5f).sound(SoundType.STONE)));
     public static final BlockRegistryObject<Block> AMETHYST_BLOCK = registerOre("amethyst_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.875f, 4.0625f).sound(SoundType.STONE)));
@@ -196,68 +222,22 @@ public final class ModBlocks {
     public static final BlockRegistryObject<Block> ULTRINIUM_BLOCK = registerOre("ultrinium_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(12.9f, 99999999.9f).sound(SoundType.STONE)));
     public static final BlockRegistryObject<Block> INFINITY_BLOCK = registerOverpowered("infinity_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(64.5f, Float.MAX_VALUE).sound(SoundType.STONE)));
 
-    // TNT Blocks
-//    public static final RegistryObject<TNTBlock> TNT_5 = register(() -> new AdvancedTNTBlock("tnt_5", Block.Properties.create(Material.TNT).hardnessAndResistance(1.9f, 1.5f).sound(SoundType.PLANT)));
+    //////////////////////////////
+    //     Utility methods     //
+    //////////////////////////////
+    static {
+        OreMaterials.registerBlocks();
+    }
 
-//    // Flowers
-//    public static final RegistryObject<Item> BUTTERCUP_ITEM = registerItem("buttercup", () -> new BlockItem(BlockInit.BUTTERCUP.get(), new Item.Properties().group(Groups.NATURE)));
-
-//    // Wood
-//    public static final RegistryObject<Item> EUCALYPTUS_LOG_ITEM = registerItem("eucalyptus_log", () -> new BlockItem(BlockInit.EUCALYPTUS_LOG.get(), new Item.Properties().group(Groups.LOGS)));
-//    public static final RegistryObject<Item> EUCALYPTUS_PLANKS_ITEM = registerItem("eucalyptus_planks", () -> new BlockItem(BlockInit.EUCALYPTUS_PLANKS.get(), new Item.Properties().maxStackSize(16).group(Groups.WOOD)));
-
-//    // Doors Items
-//    public static final RegistryObject<Item> LAB_DOOR_ITEM = registerItem("lab_door", () -> new TallBlockItem(BlockInit.LAB_DOOR.get(), (new Item.Properties()).group(Groups.REDSTONE)));
-//    public static final RegistryObject<Item> SHOPPING_DOOR_ITEM = registerItem("shopping_door", () -> new TallBlockItem(BlockInit.SHOPPING_DOOR.get(), (new Item.Properties()).group(Groups.REDSTONE)));
-//    public static final RegistryObject<Item> IRON_GLASS_DOOR_ITEM = registerItem("iron_glass_door", () -> new TallBlockItem(BlockInit.IRON_GLASS_DOOR.get(), (new Item.Properties()).group(Groups.REDSTONE)));
-//    public static final RegistryObject<Item> IRON_BARRIER_DOOR_ITEM = registerItem("iron_barrier_door", () -> new TallBlockItem(BlockInit.IRON_BARRIER_DOOR.get(), (new Item.Properties()).group(Groups.REDSTONE)));
-
-//    // Furniture
-//    public static final RegistryObject<Item> MODERN_SOFA_ITEM = registerItem("modern_sofa", () -> new BlockItem(BlockInit.MODERN_SOFA.get(), new Item.Properties().maxStackSize(32).group(Groups.WOOD)));
-//    public static final RegistryObject<Item> GAME_PC_ITEM = registerItem("game_pc", () -> new BlockItem(BlockInit.GAME_PC.get(), new Item.Properties().maxStackSize(4).group(Groups.WOOD)));
-//    public static final RegistryObject<Item> ROUTER_ITEM = registerItem("router", () -> new BlockItem(BlockInit.ROUTER.get(), new Item.Properties().maxStackSize(6).group(Groups.WOOD)));
-
-//    // Stairs & Slabs
-//    public static final RegistryObject<Item> EUCALYPTUS_STAIRS_ITEM = registerItem("eucalyptus_stairs", () -> new BlockItem(BlockInit.EUCALYPTUS_STAIRS.get(), new Item.Properties().group(Groups.SHAPES)));
-//    public static final RegistryObject<Item> EUCALYPTUS_SLAB_ITEM = registerItem("eucalyptus_slab", () -> new BlockItem(BlockInit.EUCALYPTUS_SLAB.get(), new Item.Properties().group(Groups.SHAPES)));
-//
-//    // Fences
-//    public static final RegistryObject<Item> EUCALYPTUS_FENCE_ITEM = registerItem("eucalyptus_fence", () -> new BlockItem(BlockInit.EUCALYPTUS_FENCE.get(), new Item.Properties().group(Groups.SHAPES)));
-//    public static final RegistryObject<Item> EUCALYPTUS_FENCE_GATE_ITEM = registerItem("eucalyptus_fence_gate", () -> new BlockItem(BlockInit.EUCALYPTUS_FENCE_GATE.get(), new Item.Properties().group(Groups.SHAPES)));
-//
-//    // Buttons & Pressure plates
-//    public static final RegistryObject<Item> EUCALYPTUS_BUTTON_ITEM = registerItem("eucalyptus_button", () -> new BlockItem(BlockInit.EUCALYPTUS_BUTTON.get(), new Item.Properties().group(Groups.SHAPES)));
-//    public static final RegistryObject<Item> EUCALYPTUS_PRESSURE_PLATE_ITEM = registerItem("eucalyptus_pressure_plate", () -> new BlockItem(BlockInit.EUCALYPTUS_PRESSURE_PLATE.get(), new Item.Properties().group(Groups.SHAPES)));
-
-    // Tile entity
-//    public static final RegistryObject<Item> WOODEN_CRATE_ITEM = registerItem("wooden_crate", () -> new BlockItem(BlockInit.WOODEN_CRATE.get(), new Item.Properties().group(Groups.MACHINES)));
-
-    // Solid Ore & material
-//    public static final RegistryObject<Item> STEEL_ORE_ITEM = registerItem("steel_ore", () -> new BlockItem(BlockInit.STEEL_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> TUNGSTEN_ORE_ITEM = registerItem("tungsten_ore", () -> new BlockItem(BlockInit.TUNGSTEN_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> TUNGSTEN_BLOCK_ITEM = registerItem("tungsten_block", () -> new BlockItem(BlockInit.TUNGSTEN_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> RUBY_ORE_ITEM = registerItem("ruby_ore", () -> new BlockItem(BlockInit.RUBY_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> RUBY_BLOCK_ITEM = registerItem("ruby_block", () -> new BlockItem(BlockInit.RUBY_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> AMETHYST_ORE_ITEM = registerItem("amethyst_ore", () -> new BlockItem(BlockInit.AMETHYST_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> AMETHYST_BLOCK_ITEM = registerItem("amethyst_block", () -> new BlockItem(BlockInit.AMETHYST_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> AQUAMARINE_ORE_ITEM = registerItem("aquamarine_ore", () -> new BlockItem(BlockInit.AQUAMARINE_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> AQUAMARINE_BLOCK_ITEM = registerItem("aquamarine_block", () -> new BlockItem(BlockInit.AQUAMARINE_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> SAPHIRE_ORE_ITEM = registerItem("saphire_ore", () -> new BlockItem(BlockInit.SAPHIRE_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> SAPHIRE_BLOCK_ITEM = registerItem("saphire_block", () -> new BlockItem(BlockInit.SAPHIRE_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> MALACHITE_ORE_ITEM = registerItem("malachite_ore", () -> new BlockItem(BlockInit.MALACHITE_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> MALACHITE_BLOCK_ITEM = registerItem("malachite_block", () -> new BlockItem(BlockInit.MALACHITE_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> TANZANITE_ORE_ITEM = registerItem("tanzanite_ore", () -> new BlockItem(BlockInit.TANZANITE_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> TANZANITE_BLOCK_ITEM = registerItem("tanzanite_block", () -> new BlockItem(BlockInit.TANZANITE_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> ULTRINIUM_ORE_ITEM = registerItem("ultrinium_ore", () -> new BlockItem(BlockInit.ULTRINIUM_ORE.get(), new Item.Properties().group(Groups.ORES)));
-//    public static final RegistryObject<Item> ULTRINIUM_BLOCK_ITEM = registerItem("ultrinium_block", () -> new BlockItem(BlockInit.ULTRINIUM_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
+    private ModBlocks() {
+    }
 
     private static <T extends Item> RegistryObject<T> registerItem(String name, Supplier<T> supplier) {
         return Registration.ITEMS.register(name, supplier);
     }
 
-    private ModBlocks() {}
-
-    static void register() {}
+    static void register() {
+    }
 
     @OnlyIn(Dist.CLIENT)
     public static void registerRenderTypes(FMLClientSetupEvent event) {
@@ -371,14 +351,14 @@ public final class ModBlocks {
     }
 
     private static LeavesBlock createLeavesBlock() {
-        return new LeavesBlock(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid().setAllowsSpawn(ModBlocks::allowsSpawnOnLeaves).setSuffocates(ModBlocks::isntSolid).setBlocksVision(ModBlocks::isntSolid));
+        return new LeavesBlock(AbstractBlock.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid().setAllowsSpawn(ModBlocks::allowsSpawnOnLeaves).setSuffocates(ModBlocks::isNotSolid).setBlocksVision(ModBlocks::isNotSolid));
     }
 
     private static Boolean allowsSpawnOnLeaves(BlockState state, IBlockReader reader, BlockPos pos, EntityType<?> entity) {
         return entity == EntityType.OCELOT || entity == EntityType.PARROT;
     }
 
-    private static boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos) {
+    private static boolean isNotSolid(BlockState state, IBlockReader reader, BlockPos pos) {
         return false;
     }
 

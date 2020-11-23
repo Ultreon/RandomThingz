@@ -2,6 +2,9 @@ package com.qsoftware.forgemod.data.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.init.ModRecipes;
+import com.qsoftware.silent.lib.util.NameUtils;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,9 +13,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import com.qsoftware.silent.lib.util.NameUtils;
-import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.ModRecipes;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;

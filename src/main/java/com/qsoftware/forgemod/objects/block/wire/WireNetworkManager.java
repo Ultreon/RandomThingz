@@ -1,12 +1,12 @@
 package com.qsoftware.forgemod.objects.block.wire;
 
+import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import com.qsoftware.forgemod.QForgeMod;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -18,7 +18,9 @@ import java.util.stream.Collectors;
 public final class WireNetworkManager {
     private static final Collection<LazyOptional<WireNetwork>> NETWORK_LIST = Collections.synchronizedList(new ArrayList<>());
 
-    private WireNetworkManager() {throw new IllegalAccessError("Utility class");}
+    private WireNetworkManager() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     @SuppressWarnings("ConstantConditions")
     @Nullable

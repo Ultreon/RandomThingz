@@ -21,10 +21,10 @@ import net.minecraft.world.World;
  */
 public class Coord4D {//TODO - V11: Continue working on replacing uses of this with BlockPos/GlobalPos where appropriate
 
+    public final RegistryKey<World> dimension;
     private final int x;
     private final int y;
     private final int z;
-    public final RegistryKey<World> dimension;
 
     /**
      * Creates a Coord4D from an entity's position, rounded down.
@@ -70,7 +70,6 @@ public class Coord4D {//TODO - V11: Continue working on replacing uses of this w
      * Returns a new Coord4D from a defined TileEntity's x, y and z values.
      *
      * @param tile - TileEntity at the location that will represent this Coord4D
-     *
      * @return the Coord4D object from the TileEntity
      */
     public static Coord4D get(TileEntity tile) {
@@ -81,19 +80,17 @@ public class Coord4D {//TODO - V11: Continue working on replacing uses of this w
      * Returns a new Coord4D from a tag compound.
      *
      * @param tag - tag compound to read from
-     *
      * @return the Coord4D from the tag compound
      */
     public static Coord4D read(CompoundNBT tag) {
         return new Coord4D(tag.getInt(NBTConstants.X), tag.getInt(NBTConstants.Y), tag.getInt(NBTConstants.Z),
-              RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(tag.getString(NBTConstants.DIMENSION))));
+                RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(tag.getString(NBTConstants.DIMENSION))));
     }
 
     /**
      * Returns a new Coord4D from a PacketBuffer.
      *
      * @param dataStream - data input to read from
-     *
      * @return the Coord4D from the data input
      */
     public static Coord4D read(PacketBuffer dataStream) {
@@ -129,7 +126,6 @@ public class Coord4D {//TODO - V11: Continue working on replacing uses of this w
      * Writes this Coord4D's data to an CompoundNBT.
      *
      * @param nbtTags - tag compound to write to
-     *
      * @return the tag compound with this Coord4D's data
      */
     public CompoundNBT write(CompoundNBT nbtTags) {
@@ -157,7 +153,6 @@ public class Coord4D {//TODO - V11: Continue working on replacing uses of this w
      * @param x - x value to translate
      * @param y - y value to translate
      * @param z - z value to translate
-     *
      * @return translated Coord4D
      */
     public Coord4D translate(int x, int y, int z) {
@@ -168,7 +163,6 @@ public class Coord4D {//TODO - V11: Continue working on replacing uses of this w
      * Creates and returns a new Coord4D translated to the defined offsets of the side.
      *
      * @param side - side to translate this Coord4D to
-     *
      * @return translated Coord4D
      */
     public Coord4D offset(Direction side) {
@@ -180,7 +174,6 @@ public class Coord4D {//TODO - V11: Continue working on replacing uses of this w
      *
      * @param side   - side to translate this Coord4D to
      * @param amount - how far to translate this Coord4D
-     *
      * @return translated Coord4D
      */
     public Coord4D offset(Direction side, int amount) {
@@ -194,7 +187,6 @@ public class Coord4D {//TODO - V11: Continue working on replacing uses of this w
      * Gets the distance to a defined Coord4D.
      *
      * @param obj - the Coord4D to find the distance to
-     *
      * @return the distance to the defined Coord4D
      */
     public double distanceTo(Coord4D obj) {

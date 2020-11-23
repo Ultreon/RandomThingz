@@ -1,12 +1,13 @@
 package com.qsoftware.forgemod.api.fluid;
 
+import com.qsoftware.forgemod.api.Action;
+import com.qsoftware.forgemod.api.annotations.NonNull;
 import it.unimi.dsi.fastutil.ints.Int2ObjectFunction;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
-import java.util.function.IntSupplier;
-import com.qsoftware.forgemod.api.Action;
-import com.qsoftware.forgemod.api.annotations.NonNull;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.function.IntSupplier;
 
 public class ExtendedFluidHandlerUtils {
 

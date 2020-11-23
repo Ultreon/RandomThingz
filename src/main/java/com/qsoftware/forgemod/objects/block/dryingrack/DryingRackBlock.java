@@ -64,7 +64,7 @@ public class DryingRackBlock extends HorizontalBlock implements IWaterLoggable {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof IInventory) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory)tileentity);
+                InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileentity);
                 worldIn.updateComparatorOutputLevel(pos, this);
             }
 
@@ -77,11 +77,16 @@ public class DryingRackBlock extends HorizontalBlock implements IWaterLoggable {
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         Direction facing = state.get(FACING);
         switch (facing) {
-            case NORTH: return SHAPE_NORTH;
-            case SOUTH: return SHAPE_SOUTH;
-            case WEST: return SHAPE_WEST;
-            case EAST: return SHAPE_EAST;
-            default: return SHAPE_NORTH;
+            case NORTH:
+                return SHAPE_NORTH;
+            case SOUTH:
+                return SHAPE_SOUTH;
+            case WEST:
+                return SHAPE_WEST;
+            case EAST:
+                return SHAPE_EAST;
+            default:
+                return SHAPE_NORTH;
         }
     }
 

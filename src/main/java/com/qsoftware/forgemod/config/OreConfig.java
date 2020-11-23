@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
 import com.qsoftware.forgemod.init.Ores;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 public class OreConfig {
     private final ForgeConfigSpec.BooleanValue masterSwitch;

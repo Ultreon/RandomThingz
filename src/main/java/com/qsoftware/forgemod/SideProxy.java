@@ -5,6 +5,7 @@ import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.data.DataGenerators;
 import com.qsoftware.forgemod.init.*;
 import com.qsoftware.forgemod.network.Network;
+import com.qsoftware.silent.lib.event.Greetings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,7 +22,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import com.qsoftware.silent.lib.event.Greetings;
 
 import javax.annotation.Nullable;
 

@@ -12,8 +12,7 @@ package com.qsoftware.forgemod.world.biomes;
  *
  * @author Biomes 'o Plenty mod.
  */
-public enum BOPClimates
-{
+public enum BOPClimates {
     ICE_CAP,
     TUNDRA,
     WET_BOREAL,
@@ -28,5 +27,5 @@ public enum BOPClimates
     SAVANNA,
     HOT_DESERT,
     WASTELAND,
-    NETHER;
+    NETHER
 }
