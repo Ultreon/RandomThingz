@@ -25,9 +25,12 @@ import com.qsoftware.forgemod.objects.blocks.GamePcBlock;
 import com.qsoftware.forgemod.objects.blocks.customrender.CRDoorBlock;
 import com.qsoftware.forgemod.objects.blocks.customrender.CRFlowerBlock;
 import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
+import com.qsoftware.forgemod.objects.blocks.overpowered.InfinityBlock;
 import com.qsoftware.forgemod.objects.blocks.trees.CherryTree;
 import com.qsoftware.forgemod.objects.blocks.trees.EucalyptusTree;
+import com.qsoftware.forgemod.objects.blocks.overpowered.InfinityOreBlock;
 import com.qsoftware.forgemod.objects.items.type.FaceableBlock;
+import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
 import com.qsoftware.forgemod.util.MachineTier;
 import com.qsoftware.silent.lib.registry.BlockRegistryObject;
 import net.minecraft.block.*;
@@ -197,30 +200,35 @@ public final class ModBlocks {
     /////////////////////////
     public static final BlockRegistryObject<Block> WOODEN_CRATE = registerMachine("wooden_crate", () -> new WoodenCrateBlock(Block.Properties.create(Material.WOOD).hardnessAndResistance(2.9f).sound(SoundType.WOOD)));
 
-    // Ore
-    public static final BlockRegistryObject<Block> STEEL_ORE = registerOre("steel_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.125f, 3.375f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> TUNGSTEN_ORE = registerOre("tungsten_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(5.125f, 6.425f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> RUBY_ORE = registerOre("ruby_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.75f, 2.875f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> AMETHYST_ORE = registerOre("amethyst_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.25f, 2.375f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> AQUAMARINE_ORE = registerOre("aquamarine_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.155f, 2.4635f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> SAPHIRE_ORE = registerOre("saphire_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.363f, 2.8460f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> MALACHITE_ORE = registerOre("malachite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.263f, 3.7460f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> TANZANITE_ORE = registerOre("tanzanite_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> ULTRINIUM_ORE = registerOre("ultrinium_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(12.9f, 9999999.9f).sound(SoundType.STONE).harvestLevel(3)));
-    public static final BlockRegistryObject<Block> INFINITY_ORE = registerOverpowered("infinity_ore", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(64.5f, Float.MAX_VALUE).sound(SoundType.STONE).harvestLevel(4)));
+    ////////////////////////
+    //     Ore blocks     //
+    ////////////////////////
+    @Deprecated public static final BlockRegistryObject<OreBlock> STEEL_ORE = registerNoItem("steel_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.125f, 3.375f).sound(SoundType.STONE).harvestLevel(2)));
+    @Deprecated public static final BlockRegistryObject<OreBlock> TUNGSTEN_ORE = registerNoItem("tungsten_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(5.125f, 6.425f).sound(SoundType.STONE).harvestLevel(3)));
+    @Deprecated public static final ItemRegistryObject<BlockItem> STEEL_ORE_ITEM = registerItem("steel_ore", () -> new BlockItem(STEEL_ORE.get(), new Item.Properties()));
+    @Deprecated public static final ItemRegistryObject<BlockItem> TUNGSTEN_ORE_ITEM = registerItem("tungsten_ore", () -> new BlockItem(TUNGSTEN_ORE.get(), new Item.Properties()));
+
+    public static final BlockRegistryObject<OreBlock> RUBY_ORE = registerOre("ruby_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(2.75f, 2.875f).sound(SoundType.STONE).harvestLevel(2)));
+    public static final BlockRegistryObject<OreBlock> AMETHYST_ORE = registerOre("amethyst_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(2.25f, 2.375f).sound(SoundType.STONE).harvestLevel(2)));
+    public static final BlockRegistryObject<OreBlock> AQUAMARINE_ORE = registerOre("aquamarine_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(2.155f, 2.4635f).sound(SoundType.STONE).harvestLevel(2)));
+    public static final BlockRegistryObject<OreBlock> SAPHIRE_ORE = registerOre("saphire_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(2.363f, 2.8460f).sound(SoundType.STONE).harvestLevel(2)));
+    public static final BlockRegistryObject<OreBlock> MALACHITE_ORE = registerOre("malachite_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(3.263f, 3.7460f).sound(SoundType.STONE).hardnessAndResistance(2)));
+    public static final BlockRegistryObject<OreBlock> TANZANITE_ORE = registerOre("tanzanite_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE).harvestLevel(2)));
+    public static final BlockRegistryObject<OreBlock> ULTRINIUM_ORE = registerOre("ultrinium_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(12.9f, 9999999.9f).sound(SoundType.STONE).harvestLevel(4)));
+    public static final BlockRegistryObject<InfinityOreBlock> INFINITY_ORE = registerOverpowered("infinity_ore", () -> new InfinityOreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(2560f, Float.MAX_VALUE).sound(SoundType.STONE).harvestLevel(5)));
 
     /////////////////////////////////////
     //     Solid Gem / Metal block     //
     /////////////////////////////////////
-    public static final BlockRegistryObject<Block> TUNGSTEN_BLOCK = registerOre("tungsten_block", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5.9875f, 6.5525f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> RUBY_BLOCK = registerOre("ruby_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(4.25f, 5.5f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> AMETHYST_BLOCK = registerOre("amethyst_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.875f, 4.0625f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> AQUAMARINE_BLOCK = registerOre("aquamarine_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.995f, 4.1275f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> SAPHIRE_BLOCK = registerOre("saphire_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(4.120f, 4.5735f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> MALACHITE_BLOCK = registerOre("malachite_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(4.8914f, 5.06635f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> TANZANITE_BLOCK = registerOre("tanzanite_block", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(4.26f, 5.5f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> ULTRINIUM_BLOCK = registerOre("ultrinium_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(12.9f, 99999999.9f).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<Block> INFINITY_BLOCK = registerOverpowered("infinity_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(64.5f, Float.MAX_VALUE).sound(SoundType.STONE)));
+    public static final BlockRegistryObject<Block> TUNGSTEN_BLOCK = registerOre("tungsten_block", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5.9875f, 6.5525f).sound(SoundType.STONE).harvestLevel(3)));
+    public static final BlockRegistryObject<Block> RUBY_BLOCK = registerOre("ruby_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(4.25f, 5.5f).sound(SoundType.STONE).harvestLevel(2)));
+    public static final BlockRegistryObject<Block> AMETHYST_BLOCK = registerOre("amethyst_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.875f, 4.0625f).sound(SoundType.STONE).harvestLevel(1)));
+    public static final BlockRegistryObject<Block> AQUAMARINE_BLOCK = registerOre("aquamarine_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.995f, 4.1275f).sound(SoundType.STONE).harvestLevel(1)));
+    public static final BlockRegistryObject<Block> SAPHIRE_BLOCK = registerOre("saphire_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(4.120f, 4.5735f).sound(SoundType.STONE).harvestLevel(1)));
+    public static final BlockRegistryObject<Block> MALACHITE_BLOCK = registerOre("malachite_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(4.8914f, 5.06635f).sound(SoundType.STONE).harvestLevel(1)));
+    public static final BlockRegistryObject<Block> TANZANITE_BLOCK = registerOre("tanzanite_block", () -> new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(4.26f, 5.5f).sound(SoundType.STONE).harvestLevel(2)));
+    public static final BlockRegistryObject<Block> ULTRINIUM_BLOCK = registerOre("ultrinium_block", () -> new Block(Block.Properties.create(Material.ROCK).hardnessAndResistance(12.9f, 99999999.9f).sound(SoundType.STONE).harvestLevel(5)));
+    public static final BlockRegistryObject<InfinityBlock> INFINITY_BLOCK = registerOverpowered("infinity_block", () -> new InfinityBlock(Block.Properties.create(Material.IRON).hardnessAndResistance(64.5f, Float.MAX_VALUE).sound(SoundType.METAL).harvestLevel(6)));
 
     //////////////////////////////
     //     Utility methods     //
@@ -232,8 +240,8 @@ public final class ModBlocks {
     private ModBlocks() {
     }
 
-    private static <T extends Item> RegistryObject<T> registerItem(String name, Supplier<T> supplier) {
-        return Registration.ITEMS.register(name, supplier);
+    private static <T extends Item> ItemRegistryObject<T> registerItem(String name, Supplier<T> supplier) {
+        return new ItemRegistryObject<>(Registration.ITEMS.register(name, supplier));
     }
 
     static void register() {

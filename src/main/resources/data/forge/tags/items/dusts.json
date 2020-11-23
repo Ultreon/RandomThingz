@@ -1,5 +1,10 @@
 {
   "values": [
+    "#forge:dusts/aluminum",
+    "#forge:dusts/aluminum_steel",
+    "#forge:dusts/amber",
+    "#forge:dusts/amethyst",
+    "#forge:dusts/amethyst",
     "#forge:dusts/charcoal",
     "#forge:dusts/coal",
     "#forge:dusts/copper",
@@ -9,9 +14,24 @@
     "#forge:dusts/iron",
     "#forge:dusts/lapis_lazuli",
     "#forge:dusts/lithium",
+    "#forge:dusts/malachite",
+    "#forge:dusts/nickel",
+    "#forge:dusts/nickle",
     "#forge:dusts/obsidian",
+    "#forge:dusts/platinum",
+    "#forge:dusts/redstone",
     "#forge:dusts/salt",
+    "#forge:dusts/saphire",
+    "#forge:dusts/signalum",
+    "#forge:dusts/silver",
     "#forge:dusts/steel",
+    "#forge:dusts/tungsten",
+    "#forge:dusts/tanzanite",
+    "#forge:dusts/tin",
+    "#forge:dusts/topaz",
+    "#forge:dusts/ultrinium",
+    "#forge:dusts/uranium",
+    "#forge:dusts/zinc",
     "#forge:dusts/wood"
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:ores/obsidian"
+  },
+  "result": "minecraft:obsidian",
+  "experience": 1.0,
+  "cookingtime": 200
+}

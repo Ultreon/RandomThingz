@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c",
+    "s",
+    "s"
+  ],
+  "key": {
+    "c": {
+      "item": "minecraft:obsidian"
+    },
+    "s": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "qforgemod:obsidian_shovel"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "/",
+    "/"
+  ],
+  "key": {
+    "A": {
+      "item": "qforgemod:platinum_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:platinum_rod",
+    "count": 1
+  }
+}

@@ -1,15 +1,22 @@
 {
   "values": [
+    "#forge:ores/aluminum",
     "#forge:ores/amethyst",
     "#forge:ores/aquamarine",
+    "#forge:ores/bismuth",
     "#forge:ores/copper",
     "#forge:ores/infinity",
+    "#forge:ores/lead",
     "#forge:ores/malachite",
+    "#forge:ores/nickel",
+    "#forge:ores/platinum",
     "#forge:ores/ruby",
     "#forge:ores/saphire",
     "#forge:ores/steel",
+    "#forge:ores/tin",
     "#forge:ores/tungsten",
     "#forge:ores/ultrinium",
-    "#forge:ores/uranium"
+    "#forge:ores/uranium",
+    "#forge:ores/zinc"
   ]
 }

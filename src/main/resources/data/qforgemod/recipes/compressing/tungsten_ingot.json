@@ -1,0 +1,13 @@
+{
+  "type": "qforgemod:compressing",
+  "process_time": 800,
+  "ingredient": {
+    "value": {
+      "item": "qforgemod:steel_block"
+    },
+    "count": 1
+  },
+  "result": {
+    "item": "minecraft:tungsten_ingot"
+  }
+}

@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.util.builder;
 
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemTier;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +23,8 @@ public class ItemTierBuilder {
         protected LazyValue<Ingredient> repairMaterial;
 
         public Builder(int tier, int maxUses, float efficiency, float attackDamage, int enchantability, Supplier<Ingredient> repairMaterial) {
+            ItemTier
+
             this.tier = tier;
             this.maxUses = maxUses;
             this.efficiency = efficiency;

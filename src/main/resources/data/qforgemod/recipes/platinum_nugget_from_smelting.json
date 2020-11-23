@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "qforgemod:platinum_pickaxe"
+    },
+    {
+      "item": "qforgemod:platinum_shovel"
+    },
+    {
+      "item": "qforgemod:platinum_axe"
+    },
+    {
+      "item": "qforgemod:platinum_hoe"
+    },
+    {
+      "item": "qforgemod:platinum_sword"
+    },
+    {
+      "item": "qforgemod:platinum_helmet"
+    },
+    {
+      "item": "qforgemod:platinum_chestplate"
+    },
+    {
+      "item": "qforgemod:platinum_leggings"
+    },
+    {
+      "item": "qforgemod:platinum_boots"
+    }
+  ],
+  "result": "qforgemod:platinum_nugget",
+  "experience": 0.1,
+  "cookingtime": 200
+}

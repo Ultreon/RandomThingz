@@ -24,12 +24,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.codehaus.plexus.util.Os;
+import org.jline.utils.OSUtils;
 import org.lwjgl.glfw.GLFW;
 import sun.awt.OSInfo;
+import sun.misc.OSEnvironment;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -94,6 +98,7 @@ public class GameOverlayListener {
         }
     }
 
+    @SuppressWarnings("UnusedAssignment")
     @SubscribeEvent
     public static void renderGameOverlay(RenderGameOverlayEvent event) {
         if (event.getType() != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
@@ -112,8 +117,8 @@ public class GameOverlayListener {
         Monitor monitor = mainWindow.getMonitor();
         FontRenderer fontRenderer = mc.fontRenderer;
 
-        int width = mc.getMainWindow().getScaledWidth();
-        int height = mc.getMainWindow().getScaledHeight();
+        int width = mainWindow.getScaledWidth();
+        int height = mainWindow.getScaledHeight();
 
         int dw, dh;
         if (monitor != null) {
@@ -129,22 +134,89 @@ public class GameOverlayListener {
         }
 
         switch (DEBUG_PAGE) {
-            case WINDOW:
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "guiScaleFactor: " + mainWindow.getGuiScaleFactor() + "x", 12f, 12f, 0xffffff);
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "windowSizeScaled: " + width + "x" + height, 12f, 24f, 0xffffff);
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "windowSize: " + mainWindow.getWidth() + "x" + mainWindow.getHeight(), 12f, 36f, 0xffffff);
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "framebufferSize: " + mainWindow.getFramebufferWidth() + "x" + mainWindow.getFramebufferHeight(), 12f, 48f, 0xffffff);
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "windowHandle: " + mainWindow.getHandle(), 12f, 60f, 0xffffff);
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "refreshTate: " + mainWindow.getRefreshRate(), 12f, 72f, 0xffffff);
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "framerateLimit: " + mainWindow.getLimitFramerate(), 12f, 84f, 0xffffff);
-                drawRightString(matrixStack, "fullscreenMode: " + (mainWindow.isFullscreen() ? "on" : "off"), 12f, 12f, 0xffffff);
+            case WINDOW: {
+                int i = 0;
+                drawLeftTopString(matrixStack, "guiScaleFactor: " + mainWindow.getGuiScaleFactor() + "x", i++);
+                drawLeftTopString(matrixStack, "windowSizeScaled: " + mainWindow.getScaledWidth() + "x" + mainWindow.getScaledHeight(), i++);
+                drawLeftTopString(matrixStack, "windowSize: " + mainWindow.getWidth() + "x" + mainWindow.getHeight(), 2);
+                drawLeftTopString(matrixStack, "windowHandle: " + mainWindow.getHandle(), i++);
+                drawLeftTopString(matrixStack, "framebufferSize: " + mainWindow.getFramebufferWidth() + "x" + mainWindow.getFramebufferHeight(), i++);
+                drawLeftTopString(matrixStack, "refreshTate: " + mainWindow.getRefreshRate(), i++);
+                drawLeftTopString(matrixStack, "framerateLimit: " + mainWindow.getLimitFramerate(), i++);
+                
+                int j = 0;
+                drawRightTopString(matrixStack, "fullscreenMode: " + (mainWindow.isFullscreen() ? "on" : "off"), j++);
                 break;
-            case COMPUTER:
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "screenSize: " + dw + "x" + dh, 12f, 12f, 0xffffff);
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "osType: " + OSInfo.getOSType().name(), 12f, 24f, 0xffffff);
-                drawRightString(matrixStack, "isJava64bit: " + (mc.isJava64bit() ? "yes" : "no"), 12f, 12f, 0xffffff);
+            }
+            case COMPUTER: {
+                int i = 0;
+                if (monitor != null) {
+                    drawLeftTopString(matrixStack, "screenSize: " + dw + "x" + dh, i++);
+                }
+                drawLeftTopString(matrixStack, "osType: " + OSInfo.getOSType().name(), i++);
+                if (OSInfo.getWindowsVersion() != null) {
+                    try {
+                        drawLeftTopString(matrixStack, "windowsVersion: " + OSInfo.getWindowsVersion().toString(), i++);
+                    } catch (SecurityException ignored) {
+
+                    }
+                }
+                try {
+                    drawLeftTopString(matrixStack, "osVersion: " + System.getProperty("os.version"), i++);
+                } catch (SecurityException | IllegalArgumentException | NullPointerException ignored) {
+
+                }
+                try {
+                    drawLeftTopString(matrixStack, "osName: " + System.getProperty("os.name"), i++);
+                } catch (SecurityException | IllegalArgumentException | NullPointerException ignored) {
+
+                }
+                try {
+                    drawLeftTopString(matrixStack, "osArch: " + System.getProperty("os.arch"), i++);
+                } catch (SecurityException | IllegalArgumentException | NullPointerException ignored) {
+
+                }
+                try {
+                    drawLeftTopString(matrixStack, "javaVersion: " + System.getProperty("java.version"), i++);
+                } catch (SecurityException | IllegalArgumentException | NullPointerException ignored) {
+
+                }
+                try {
+                    drawLeftTopString(matrixStack, "javaVendor: " + System.getProperty("java.vendor"), i++);
+                } catch (SecurityException | IllegalArgumentException | NullPointerException ignored) {
+
+                }
+                try {
+                    drawLeftTopString(matrixStack, "javaVmVersion: " + System.getProperty("java.vm.version"), i++);
+                } catch (SecurityException | IllegalArgumentException | NullPointerException ignored) {
+
+                }
+                try {
+                    drawLeftTopString(matrixStack, "javaVmVendor: " + System.getProperty("java.vm.vendor"), i++);
+                } catch (SecurityException | IllegalArgumentException | NullPointerException ignored) {
+
+                }
+                try {
+                    drawLeftTopString(matrixStack, "javaVmVendor: " + System.getProperty("java.vm.name"), i++);
+                } catch (SecurityException | IllegalArgumentException | NullPointerException ignored) {
+
+                }
+                try {
+                    drawLeftTopString(matrixStack, "javaClassVersion: " + System.getProperty("java.class.version"), i++);
+                } catch (SecurityException | IllegalArgumentException | NullPointerException ignored) {
+
+                }
+                try {
+                    drawLeftTopString(matrixStack, "javaCompiler: " + System.getProperty("java.compiler"), i++);
+                } catch (SecurityException | IllegalArgumentException | NullPointerException ignored) {
+
+                }
+
+                i = 0;
+                drawRightTopString(matrixStack, "isJava64bit: " + (mc.isJava64bit() ? "yes" : "no"), i++);
                 break;
-            case ITEM:
+            }
+            case ITEM: {
                 if (Minecraft.getInstance().player != null) {
                     PlayerEntity player = Minecraft.getInstance().player;
                     ItemStack stack = player.getHeldItemMainhand();
@@ -166,7 +238,7 @@ public class GameOverlayListener {
                         drawLeftTopString(matrixStack, "foodSaturation: " + food.getSaturation(), i++);
                     }
                     if (group != null) {
-                        drawLeftTopString(matrixStack, "groupName: " + group.getGroupName(), i++);
+                        drawLeftTopString(matrixStack, "groupName: " + group.getGroupName().getString(), i++);
                     }
                     drawLeftTopString(matrixStack, "rarity: " + Objects.requireNonNull(item.getRarity(stack).name(), "null"), i++);
                     drawLeftTopString(matrixStack, "enchantability: " + item.getItemEnchantability(stack), i++);
@@ -179,119 +251,131 @@ public class GameOverlayListener {
                     drawLeftTopString(matrixStack, "useDuration: " + stack.getUseDuration(), i++);
                     drawLeftTopString(matrixStack, "xpRepairRation: " + stack.getXpRepairRatio(), i++);
 
-                    i = 0;
-                    drawRightTopString(matrixStack, "complex: " + item.isComplex(), i++);
-                    drawRightTopString(matrixStack, "immuneToFire: " + item.isImmuneToFire(), i++);
-                    drawRightTopString(matrixStack, "enchantable: " + item.isEnchantable(stack), i++);
-                    drawRightTopString(matrixStack, "empty: " + stack.isEmpty(), i++);
-                    drawRightTopString(matrixStack, "isPiglinCurrency: " + stack.isPiglinCurrency(), i++);
-                    drawRightTopString(matrixStack, "repairable: " + stack.isRepairable(), i++);
-                    drawRightTopString(matrixStack, "stackable: " + stack.isStackable(), i++);
-                    drawRightTopString(matrixStack, "sliceable: " + (item instanceof Sliceable), i++);
-                    drawRightTopString(matrixStack, "damageable: " + item.isDamageable(), i++);
-                    drawRightTopString(matrixStack, "damaged: " + item.isDamaged(stack), i++);
+                    int j = 0;
+                    drawRightTopString(matrixStack, "complex: " + item.isComplex(), j++);
+                    drawRightTopString(matrixStack, "immuneToFire: " + item.isImmuneToFire(), j++);
+                    drawRightTopString(matrixStack, "enchantable: " + item.isEnchantable(stack), j++);
+                    drawRightTopString(matrixStack, "empty: " + stack.isEmpty(), j++);
+                    drawRightTopString(matrixStack, "isPiglinCurrency: " + stack.isPiglinCurrency(), j++);
+                    drawRightTopString(matrixStack, "repairable: " + stack.isRepairable(), j++);
+                    drawRightTopString(matrixStack, "stackable: " + stack.isStackable(), j++);
+                    drawRightTopString(matrixStack, "sliceable: " + (item instanceof Sliceable), j++);
+                    drawRightTopString(matrixStack, "damageable: " + item.isDamageable(), j++);
+                    drawRightTopString(matrixStack, "damaged: " + item.isDamaged(stack), j++);
                 }
                 break;
-            case MINECRAFT:
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "version: " + mc.getVersion(), 12f, 12f, 0xffffff);
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "versionType: " + mc.getVersionType(), 12f, 24f, 0xffffff);
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "name: " + mc.getName(), 12f, 36f, 0xffffff);
-                mc.fontRenderer.drawStringWithShadow(matrixStack, "forceUnicodeFont: " + mc.getForceUnicodeFont(), 12f, 48f, 0xffffff);
-                drawRightString(matrixStack, "demoMode: " + (mc.isDemo() ? "on" : "off"), 12f, 12f, 0xffffff);
-                drawRightString(matrixStack, "isChatEnabled: " + (mc.isChatEnabled() ? "yes" : "no"), 12f, 24f, 0xffffff);
-                drawRightString(matrixStack, "isFocused: " + (mc.isGameFocused() ? "yes" : "no"), 12f, 36f, 0xffffff);
-                drawRightString(matrixStack, "isGamePaused: " + (mc.isGamePaused() ? "yes" : "no"), 12f, 48f, 0xffffff);
-                drawRightString(matrixStack, "isIntegratedServerRunning: " + (mc.isIntegratedServerRunning() ? "yes" : "no"), 12f, 60f, 0xffffff);
+            } case MINECRAFT: {
+                int i = 0;
+                drawLeftTopString(matrixStack, "version: " + mc.getVersion(), i++);
+                drawLeftTopString(matrixStack, "versionType: " + mc.getVersionType(), i++);
+                drawLeftTopString(matrixStack, "name: " + mc.getName(), i++);
+                drawLeftTopString(matrixStack, "forceUnicodeFont: " + mc.getForceUnicodeFont(), i++);
+
+                int j = 0;
+                drawRightTopString(matrixStack, "demoMode: " + (mc.isDemo() ? "on" : "off"), j++);
+                drawRightTopString(matrixStack, "isChatEnabled: " + (mc.isChatEnabled() ? "yes" : "no"), j++);
+                drawRightTopString(matrixStack, "isFocused: " + (mc.isGameFocused() ? "yes" : "no"), j++);
+                drawRightTopString(matrixStack, "isGamePaused: " + (mc.isGamePaused() ? "yes" : "no"), j++);
+                drawRightTopString(matrixStack, "isIntegratedServerRunning: " + (mc.isIntegratedServerRunning() ? "yes" : "no"), j++);
                 break;
-            case WORLD:
+            } case WORLD: {
                 if (Minecraft.getInstance().world != null) {
                     ClientWorld world = Minecraft.getInstance().world;
-                    
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "timeLightningFlash: " + world.getTimeLightningFlash(), 12f, 12f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "providerName: " + world.getProviderName(), 12f, 24f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "loadedEntities: " + world.getCountLoadedEntities(), 12f, 36f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "nextMapId: " + world.getNextMapId(), 12f, 48f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "dayTime: " + world.getDayTime(), 12f, 60f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "gameTime: " + world.getGameTime(), 12f, 72f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "difficulty: " + world.getDifficulty().getDisplayName().getString(), 12f, 84f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "dimensionLocation: " + world.getDimensionKey().getLocation(), 12f, 96f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "dimensionRegistryName: " + world.getDimensionKey().getRegistryName(), 12f, 108f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "seaLevel: " + world.getSeaLevel(), 12f, 120f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "moonPhase: " + world.getMoonPhase(), 12f, 132f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "cloudColor: " + world.getCloudColor(mc.getRenderPartialTicks()), 12f, 144f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "starBrightness: " + world.getStarBrightness(mc.getRenderPartialTicks()), 12f, 156f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "sunBrightness: " + world.getSunBrightness(mc.getRenderPartialTicks()), 12f, 168f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "spawnAngle: " + world.getWorldInfo().getSpawnAngle(), 12f, 180f, 0xffffff);
-                    drawRightString(matrixStack, "isDaytime: " + (world.isDaytime() ? "yes" : "no"), 12f, 12f, 0xffffff);
-                    drawRightString(matrixStack, "isNightTime: " + (world.isNightTime() ? "yes" : "no"), 12f, 24f, 0xffffff);
-                    drawRightString(matrixStack, "isRaining: " + (world.isRaining() ? "yes" : "no"), 12f, 36f, 0xffffff);
-                    drawRightString(matrixStack, "isThundering: " + (world.isThundering() ? "yes" : "no"), 12f, 48f, 0xffffff);
-                    drawRightString(matrixStack, "isSaveDisabled: " + (world.isSaveDisabled() ? "yes" : "no"), 12f, 60f, 0xffffff);
-                    drawRightString(matrixStack, "debug: " + (world.isDebug() ? "on" : "off"), 12f, 72f, 0xffffff);
 
+                    int i = 0;
+                    drawLeftTopString(matrixStack, "timeLightningFlash: " + world.getTimeLightningFlash(), i++);
+                    drawLeftTopString(matrixStack, "providerName: " + world.getProviderName(), i++);
+                    drawLeftTopString(matrixStack, "loadedEntities: " + world.getCountLoadedEntities(), i++);
+                    drawLeftTopString(matrixStack, "nextMapId: " + world.getNextMapId(), i++);
+                    drawLeftTopString(matrixStack, "difficulty: " + world.getDifficulty().getDisplayName().getString(), i++);
+                    drawLeftTopString(matrixStack, "seaLevel: " + world.getSeaLevel(), i++);
+                    drawLeftTopString(matrixStack, "moonPhase: " + world.getMoonPhase(), i++);
+                    drawLeftTopString(matrixStack, "spawnAngle: " + world.getWorldInfo().getSpawnAngle(), i++);
+                    drawLeftTopString(matrixStack, "dimensionLocation: " + world.getDimensionKey().getLocation(), i++);
+                    drawLeftTopString(matrixStack, "dayTime: " + world.getDayTime(), i++);
+                    drawLeftTopString(matrixStack, "gameTime: " + world.getGameTime(), i++);
+                    drawLeftTopString(matrixStack, "cloudColor: " + world.getCloudColor(mc.getRenderPartialTicks()), i++);
                     if (Minecraft.getInstance().player != null) {
                         ClientPlayerEntity player = Minecraft.getInstance().player;
-
-                        drawRightString(matrixStack, "skyColor: " + world.getSkyColor(player.getPosition(), mc.getRenderPartialTicks()), 12f, height - 30f, 0xffffff);
-                        drawRightString(matrixStack, "isAreaLoaded: " + (world.isAreaLoaded(player.getPosition(), 1) ? "on" : "off"), 12f, height - 18f, 0xffffff);
+                        drawLeftTopString(matrixStack, "skyColor: " + world.getSkyColor(player.getPosition(), mc.getRenderPartialTicks()), i++);
                     }
+                    drawLeftTopString(matrixStack, "starBrightness: " + world.getStarBrightness(mc.getRenderPartialTicks()), i++);
+                    drawLeftTopString(matrixStack, "sunBrightness: " + world.getSunBrightness(mc.getRenderPartialTicks()), i++);
+
+                    int j = 0;
+                    drawRightTopString(matrixStack, "isDaytime: " + (world.isDaytime() ? "yes" : "no"), j++);
+                    drawRightTopString(matrixStack, "isNightTime: " + (world.isNightTime() ? "yes" : "no"), j++);
+                    drawRightTopString(matrixStack, "isRaining: " + (world.isRaining() ? "yes" : "no"), j++);
+                    drawRightTopString(matrixStack, "isThundering: " + (world.isThundering() ? "yes" : "no"), j++);
+                    drawRightTopString(matrixStack, "isSaveDisabled: " + (world.isSaveDisabled() ? "yes" : "no"), j++);
+                    if (Minecraft.getInstance().player != null) {
+                        ClientPlayerEntity player = Minecraft.getInstance().player;
+                        drawRightTopString(matrixStack, "isAreaLoaded: " + (world.isAreaLoaded(player.getPosition(), 1) ? "on" : "off"), j++);
+                    }
+                    drawRightTopString(matrixStack, "debug: " + (world.isDebug() ? "on" : "off"), j++);
                 }
                 break;
-            case WORLD_INFO:
+            } case WORLD_INFO: {
                 if (Minecraft.getInstance().world != null) {
                     ClientWorld.ClientWorldInfo worldInfo = Minecraft.getInstance().world.getWorldInfo();
 
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "spawnAngle: " + worldInfo.getSpawnAngle(), 12f, 12f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "difficulty: " + worldInfo.getDifficulty().name(), 12f, 24f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "dayTime: " + worldInfo.getDayTime(), 12f, 36f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "gameTime: " + worldInfo.getGameTime(), 12f, 48f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "fogDistance: " + worldInfo.getFogDistance(), 12f, 60f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "spawnX: " + worldInfo.getSpawnX(), 12f, 72f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "spawnY: " + worldInfo.getSpawnY(), 12f, 84f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "spawnZ: " + worldInfo.getSpawnZ(), 12f, 96f, 0xffffff);
-                    drawRightString(matrixStack, "isDifficultyLocked " + (worldInfo.isDifficultyLocked() ? "yes" : "no"), 12f, 12f, 0xffffff);
-                    drawRightString(matrixStack, "isHardcore " + (worldInfo.isHardcore() ? "yes" : "no"), 12f, 24f, 0xffffff);
-                    drawRightString(matrixStack, "isRaining: " + (worldInfo.isRaining() ? "yes" : "no"), 12f, 36f, 0xffffff);
-                    drawRightString(matrixStack, "isThundering: " + (worldInfo.isThundering() ? "yes" : "no"), 12f, 48f, 0xffffff);
+                    int i = 0;
+                    drawLeftTopString(matrixStack, "spawnAngle: " + worldInfo.getSpawnAngle(), i++);
+                    drawLeftTopString(matrixStack, "difficulty: " + worldInfo.getDifficulty().name(), i++);
+                    drawLeftTopString(matrixStack, "dayTime: " + worldInfo.getDayTime(), i++);
+                    drawLeftTopString(matrixStack, "gameTime: " + worldInfo.getGameTime(), i++);
+                    drawLeftTopString(matrixStack, "fogDistance: " + worldInfo.getFogDistance(), i++);
+                    drawLeftTopString(matrixStack, "spawnX: " + worldInfo.getSpawnX(), i++);
+                    drawLeftTopString(matrixStack, "spawnY: " + worldInfo.getSpawnY(), i++);
+                    drawLeftTopString(matrixStack, "spawnZ: " + worldInfo.getSpawnZ(), i++);
+
+                    int j = 0;
+                    drawRightTopString(matrixStack, "isDifficultyLocked " + (worldInfo.isDifficultyLocked() ? "yes" : "no"), j++);
+                    drawRightTopString(matrixStack, "isHardcore " + (worldInfo.isHardcore() ? "yes" : "no"), j++);
+                    drawRightTopString(matrixStack, "isRaining: " + (worldInfo.isRaining() ? "yes" : "no"), j++);
+                    drawRightTopString(matrixStack, "isThundering: " + (worldInfo.isThundering() ? "yes" : "no"), j++);
                 }
                 break;
-            case PLAYER_2:
+            } case PLAYER_2: {
                 if (Minecraft.getInstance().player != null) {
                     PlayerEntity player = Minecraft.getInstance().player;
                     Team team = player.getTeam();
 
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "idleTime: " + player.getIdleTime(), 12f, 12f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "motion: " + player.getMotion(), 12f, 24f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "team: " + (team != null ? team.getName() : ""), 12f, 36f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "xpSeed: " + player.getXPSeed(), 12f, 48f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "yOffset: " + player.getYOffset(), 12f, 60f, 0xffffff);
+                    int i = 0;
+                    drawLeftTopString(matrixStack, "idleTime: " + player.getIdleTime(), i++);
+                    drawLeftTopString(matrixStack, "motion: " + player.getMotion(), i++);
+                    drawLeftTopString(matrixStack, "team: " + (team != null ? team.getName() : ""), i++);
+                    drawLeftTopString(matrixStack, "xpSeed: " + player.getXPSeed(), i++);
+                    drawLeftTopString(matrixStack, "yOffset: " + player.getYOffset(), i++);
 
-                    drawRightString(matrixStack, "glowing: " + player.isGlowing(), 12f, 12f, 0xffffff);
-                    drawRightString(matrixStack, "invisible: " + player.isInvisible(), 12f, 24f, 0xffffff);
-                    drawRightString(matrixStack, "onGround: " + player.isOnGround(), 12f, 36f, 0xffffff);
-                    drawRightString(matrixStack, "onLadder: " + player.isOnLadder(), 12f, 48f, 0xffffff);
+                    int j = 0;
+                    drawRightTopString(matrixStack, "glowing: " + player.isGlowing(), j++);
+                    drawRightTopString(matrixStack, "invisible: " + player.isInvisible(), j++);
+                    drawRightTopString(matrixStack, "onGround: " + player.isOnGround(), j++);
+                    drawRightTopString(matrixStack, "onLadder: " + player.isOnLadder(), j++);
                 }
                 break;
-            case PLAYER_1:
+            } case PLAYER_1: {
                 if (Minecraft.getInstance().player != null) {
                     PlayerEntity player = Minecraft.getInstance().player;
 
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "luck: " + player.getLuck(), 12f, 12f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "speed: " + player.getAIMoveSpeed(), 12f, 24f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "score: " + player.getScore(), 12f, 36f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "totalArmorValue: " + player.getTotalArmorValue(), 12f, 48f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "health: " + player.getHealth(), 12f, 60f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "absorptionAmount: " + player.getAbsorptionAmount(), 12f, 72f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "hunger: " + player.getFoodStats().getFoodLevel(), 12f, 84f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "saturation: " + player.getFoodStats().getSaturationLevel(), 12f, 96f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "air: " + player.getAir(), 12f, 108f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "positionBlock: " + player.getPosition().getCoordinatesAsString(), 12f, 120f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "position: " + player.getPositionVec().toString(), 12f, 132f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "pitchYaw: " + player.getPitchYaw().x + ", " + player.getPitchYaw().y, 12f, 144f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "sleepTimer: " + player.getSleepTimer(), 12f, 156f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "fireTimer: " + player.getFireTimer(), 12f, 168f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "brightness: " + player.getBrightness(), 12f, 180f, 0xffffff);
-                    mc.fontRenderer.drawStringWithShadow(matrixStack, "beeStingCount: " + player.getBeeStingCount(), 12f, 192f, 0xffffff);
+                    int i = 0;
+                    drawLeftTopString(matrixStack, "luck: " + player.getLuck(), i++);
+                    drawLeftTopString(matrixStack, "speed: " + player.getAIMoveSpeed(), i++);
+                    drawLeftTopString(matrixStack, "score: " + player.getScore(), i++);
+                    drawLeftTopString(matrixStack, "totalArmorValue: " + player.getTotalArmorValue(), i++);
+                    drawLeftTopString(matrixStack, "health: " + player.getHealth(), i++);
+                    drawLeftTopString(matrixStack, "absorptionAmount: " + player.getAbsorptionAmount(), i++);
+                    drawLeftTopString(matrixStack, "hunger: " + player.getFoodStats().getFoodLevel(), i++);
+                    drawLeftTopString(matrixStack, "saturation: " + player.getFoodStats().getSaturationLevel(), i++);
+                    drawLeftTopString(matrixStack, "air: " + player.getAir(), i++);
+                    drawLeftTopString(matrixStack, "positionBlock: " + player.getPosition().getCoordinatesAsString(), i++);
+                    drawLeftTopString(matrixStack, "position: " + player.getPositionVec().toString(), i++);
+                    drawLeftTopString(matrixStack, "pitchYaw: " + player.getPitchYaw().x + ", " + player.getPitchYaw().y, i++);
+                    drawLeftTopString(matrixStack, "sleepTimer: " + player.getSleepTimer(), i++);
+                    drawLeftTopString(matrixStack, "fireTimer: " + player.getFireTimer(), i++);
+                    drawLeftTopString(matrixStack, "brightness: " + player.getBrightness(), i++);
+                    drawLeftTopString(matrixStack, "beeStingCount: " + player.getBeeStingCount(), i++);
 
                     // String to be scanned to find the pattern.
                     String pattern = "[a-zA-Z0-9_]*";
@@ -302,28 +386,25 @@ public class GameOverlayListener {
                     // Now create matcher object.
                     Matcher m = r.matcher(player.getName().getString());
 
-                    if (m.find()) {
-                        drawRightString(matrixStack, "legalUsername: true", 12f, 12f, 0xffffff);
-                    } else {
-                        drawRightString(matrixStack, "legalUsername: false", 12f, 12f, 0xffffff);
-                    }
+                    int j = 0;
+                    drawRightTopString(matrixStack, "legalUsername: " + m.find(), j++);
+                    drawRightTopString(matrixStack, "isJumping: " + player.isJumping, j++);
+                    drawRightTopString(matrixStack, "isSneaking: " + player.isSneaking(), j++);
+                    drawRightTopString(matrixStack, "isSwimming: " + player.isSwimming(), j++);
+                    drawRightTopString(matrixStack, "isSleeping: " + player.isSleeping(), j++);
+                    drawRightTopString(matrixStack, "isSprinting: " + player.isSprinting(), j++);
+                    drawRightTopString(matrixStack, "isSilent: " + player.isSilent(), j++);
+                    drawRightTopString(matrixStack, "isSwingInProgress: " + player.isSwingInProgress, j++);
+                    drawRightTopString(matrixStack, "isUser: " + player.isUser(), j++);
+                    drawRightTopString(matrixStack, "isAlive: " + player.isAlive(), j++);
+                    drawRightTopString(matrixStack, "isBurning " + player.isBurning(), j++);
+                    drawRightTopString(matrixStack, "isWet " + player.isWet(), j++);
+                    drawRightTopString(matrixStack, "creative: " + player.isCreative(), j++);
+                    drawRightTopString(matrixStack, "invulnerable: " + player.isInvulnerable(), j++);
+                    drawRightTopString(matrixStack, "spectator: " + player.isSpectator(), j++);
+                    drawRightTopString(matrixStack, "allowEdit: " + player.isAllowEdit(), j++);
 
-                    drawRightString(matrixStack, "isJumping: " + player.isJumping, 12f, 24f, 0xffffff);
-                    drawRightString(matrixStack, "isSneaking: " + player.isSneaking(), 12f, 36f, 0xffffff);
-                    drawRightString(matrixStack, "isSwimming: " + player.isSwimming(), 12f, 48f, 0xffffff);
-                    drawRightString(matrixStack, "isSleeping: " + player.isSleeping(), 12f, 60f, 0xffffff);
-                    drawRightString(matrixStack, "isSprinting: " + player.isSprinting(), 12f, 72f, 0xffffff);
-                    drawRightString(matrixStack, "isSilent: " + player.isSilent(), 12f, 84f, 0xffffff);
-                    drawRightString(matrixStack, "isSwingInProgress: " + player.isSwingInProgress, 12f, 96f, 0xffffff);
-                    drawRightString(matrixStack, "isUser: " + player.isUser(), 12f, 108f, 0xffffff);
-                    drawRightString(matrixStack, "isAlive: " + player.isAlive(), 12f, 120f, 0xffffff);
-                    drawRightString(matrixStack, "isBurning " + player.isBurning(), 12f, 132f, 0xffffff);
-                    drawRightString(matrixStack, "isWet " + player.isWet(), 12f, 144f, 0xffffff);
-                    drawRightString(matrixStack, "creative: " + player.isCreative(), 12f, 156f, 0xffffff);
-                    drawRightString(matrixStack, "invulnerable: " + player.isInvulnerable(), 12f, 168f, 0xffffff);
-                    drawRightString(matrixStack, "spectator: " + player.isSpectator(), 12f, 180f, 0xffffff);
-                    drawRightString(matrixStack, "allowEdit: " + player.isAllowEdit(), 12f, 192f, 0xffffff);
-
+                    int k = 0;
                     {
                         float f = player.rotationPitch;
                         float f1 = player.rotationYaw;
@@ -350,10 +431,12 @@ public class GameOverlayListener {
 
                                 // now the coordinates you want are in pos. Example of use:
                                 BlockState blockState = Minecraft.getInstance().player.getEntityWorld().getBlockState(pos);
-                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, blockState.getBlock().getTranslatedName(), width / 2, height / 2 - 16, 0xffffff);
+                                drawTopString(matrixStack, "-== Block ==-", k++);
+                                drawTopString(matrixStack, blockState.getBlock().getTranslatedName().getString(), k++);
+                                k++;
                             } else {
                                 // not looking at a block, or too far away from one to tell
-                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 16, 0xff0000);
+//                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 16, 0xff0000);
                             }
                             lookingAt = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
                             if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
@@ -363,10 +446,12 @@ public class GameOverlayListener {
                                 BlockState blockState = Minecraft.getInstance().player.getEntityWorld().getBlockState(pos);
                                 FluidState fluidState = blockState.getFluidState();
                                 if (!fluidState.isEmpty()) {
-                                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, blockState.getBlock().getTranslatedName(), width / 2, height / 2 - 32, 0x0033ff);
+                                    drawTopString(matrixStack, "-== Fluid ==-", k++);
+                                    drawTopString(matrixStack, blockState.getBlock().getTranslatedName().getString(), k++);
+                                    k++;
                                 } else {
                                     // not looking at a fluid, or too far away from one to tell
-                                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 32, 0xff0000);
+//                                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 32, 0xff0000);
                                 }
                             } else {
                                 // not looking at a fluid, or too far away from one to tell
@@ -407,18 +492,22 @@ public class GameOverlayListener {
                             }
                             if (raytraceresult.getType() == RayTraceResult.Type.ENTITY) {
                                 @SuppressWarnings("ConstantConditions") EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) raytraceresult;
-                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationKey()), width / 2, height / 2 - 48, 0x00bf00);
+
+                                drawTopString(matrixStack, "-== Entity ==-", k++);
+                                drawTopString(matrixStack, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationKey()), k++);
+                                k++;
+//                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationKey()), width / 2, height / 2 - 48, 0x00bf00);
                             } else {
                                 // not looking at a block, or too far away from one to tell
-                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 48, 0xff0000);
+//                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 48, 0xff0000);
                             }
                         }
                     }
                 } else {
-                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<Invalid>", width / 2, height / 2 - 16, 0xbf0000);
+//                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<Invalid>", width / 2, height / 2 - 16, 0xbf0000);
                 }
                 break;
-            default:
+            } default:
                 break;
         }
     }
@@ -429,7 +518,7 @@ public class GameOverlayListener {
         int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f,  5 + (line * 12), 0xffffff);
+        fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f,  12f + (line * 12), 0xffffff);
     }
     
     private static void drawLeftTopString(MatrixStack matrixStack, String text, int line) {
@@ -437,7 +526,7 @@ public class GameOverlayListener {
         FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, 5,  5 + (line * 12), 0xffffff);
+        fontRenderer.drawStringWithShadow(matrixStack, text, 12f,  12f + (line * 12), 0xffffff);
     }
 
     private static void drawRightTopString(MatrixStack matrixStack, String text, int line) {
@@ -446,7 +535,7 @@ public class GameOverlayListener {
         int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width - 5 - fontRenderer.getStringWidth(text), 5 + (line * 12), 0xffffff);
+        fontRenderer.drawStringWithShadow(matrixStack, text, width - 12 - fontRenderer.getStringWidth(text), 12f + (line * 12), 0xffffff);
     }
 
     private static void drawBottomString(MatrixStack matrixStack, String text, int line) {
@@ -456,7 +545,7 @@ public class GameOverlayListener {
         int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f,  height - 28f - (line * 12), 0xffffff);
+        fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f,  height - 29f - (line * 12), 0xffffff);
     }
 
     private static void drawLeftBottomString(MatrixStack matrixStack, String text, int line) {
@@ -465,7 +554,7 @@ public class GameOverlayListener {
         int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, 5, height - 28f - (line * 12), 0xffffff);
+        fontRenderer.drawStringWithShadow(matrixStack, text, 12, height - 29f - (line * 12), 0xffffff);
     }
 
     private static void drawRightBottomString(MatrixStack matrixStack, String text, int line) {
@@ -475,7 +564,7 @@ public class GameOverlayListener {
         int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width - 5 - fontRenderer.getStringWidth(text), height - 28f - (line * 12), 0xffffff);
+        fontRenderer.drawStringWithShadow(matrixStack, text, width - 12 - fontRenderer.getStringWidth(text), height - 29f - (line * 12), 0xffffff);
     }
 
     private static void drawRightString(MatrixStack matrixStack, String text, float mx, float y, int color) {

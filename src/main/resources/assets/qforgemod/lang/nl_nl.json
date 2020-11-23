@@ -341,6 +341,7 @@
   "death.attack.infinity_sword.item": "%1$s is doormidden gesneden, alsof het taart is. Met %2$s",
   "death.attack.infinity_sword.player": "%1$s is doormidden gesneden, tijden het bevechten van %2$s",
   "death.attack.infinity_sword.player.item": "%1$s is doormidden gesneden, tijdens het bevechten %2$s. Met %3$s",
+  "death.attack.mine_infinity_ore": "%1$s heeft zichzelf in stukken geslagen met oneinidigheids erts",
 
   "container.wooden_crate": "Krat",
 
