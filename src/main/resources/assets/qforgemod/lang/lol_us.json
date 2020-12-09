@@ -559,6 +559,5 @@
   "misc.qforgemod.pc.storage.usb": "USB Drive",
   "misc.qforgemod.pc.storage.usb.short": "USB",
 
-  "key.qforgemod.debug_screen": "Show / Hide Debug Screen",
-  "key.categories.qforgmod": "QForgeMod keys"
+  "key.qforgemod.debug_screen": "Show / Hide Debug Screen"
 }
