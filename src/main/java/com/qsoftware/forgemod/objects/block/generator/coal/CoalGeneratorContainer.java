@@ -19,7 +19,7 @@ public class CoalGeneratorContainer extends AbstractMachineBaseContainer<CoalGen
     }
 
     public CoalGeneratorContainer(int id, PlayerInventory playerInventory, CoalGeneratorTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.COAL_GENERATOR, id, tileEntity, fieldsIn);
+        super(ModContainers.coalGenerator, id, tileEntity, fieldsIn);
         this.tileEntity = tileEntity;
 
         this.addSlot(new Slot(this.tileEntity, 0, 80, 33));

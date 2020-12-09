@@ -18,7 +18,7 @@ public class ElectricFurnaceContainer extends AbstractMachineContainer<ElectricF
     }
 
     public ElectricFurnaceContainer(int id, PlayerInventory playerInventory, ElectricFurnaceTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.ELECTRIC_FURNACE, id, tileEntity, fieldsIn);
+        super(ModContainers.electricFurnace, id, tileEntity, fieldsIn);
 
         this.addSlot(new Slot(this.tileEntity, 0, 56, 35));
         this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 117, 35));

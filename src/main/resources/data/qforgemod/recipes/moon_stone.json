@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "qforgemod:moon_stone_ore"
-  },
-  "result": "qforgemod:moon_stone",
-  "experience": 0.7,
-  "cookingtime": 200
-}

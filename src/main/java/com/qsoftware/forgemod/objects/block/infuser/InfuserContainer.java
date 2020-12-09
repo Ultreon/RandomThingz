@@ -20,7 +20,7 @@ public class InfuserContainer extends AbstractMachineBaseContainer<InfuserTileEn
     }
 
     public InfuserContainer(int id, PlayerInventory playerInventory, InfuserTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.INFUSER, id, tileEntity, fieldsIn);
+        super(ModContainers.infuser, id, tileEntity, fieldsIn);
 
         this.addSlot(new Slot(this.tileEntity, InfuserTileEntity.SLOT_FLUID_CONTAINER_IN, 8, 16));
         this.addSlot(new SlotOutputOnly(this.tileEntity, InfuserTileEntity.SLOT_FLUID_CONTAINER_OUT, 8, 59));

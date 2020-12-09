@@ -21,6 +21,7 @@ public class ModTags {
         public static final ITag.INamedTag<Block> DRYING_RACKS = mod("drying_racks");
 
         private Blocks() {
+
         }
 
         private static ITag.INamedTag<Block> forge(String path) {
@@ -42,6 +43,7 @@ public class ModTags {
         public static final ITag.INamedTag<Item> STEELS = mod("ingots/steels");
 
         private Items() {
+
         }
 
         private static ITag.INamedTag<Item> forge(String path) {

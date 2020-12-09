@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:cooked_meatball"
+    ]
+  },
+  "criteria": {
+    "has_meatball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:meatball"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:cooked_meatball"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_meatball",
+      "has_the_recipe"
+    ]
+  ]
+}

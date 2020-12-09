@@ -2,19 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "XXX",
-    " # ",
-    " # "
+    " / ",
+    " / "
   ],
   "key": {
     "X": {
       "item": "qforgemod:malachite"
     },
-    "#": {
+    "/": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "qforgemod:malachite_sword",
+    "item": "qforgemod:malachite_pickaxe",
     "count": 1
   }
 }

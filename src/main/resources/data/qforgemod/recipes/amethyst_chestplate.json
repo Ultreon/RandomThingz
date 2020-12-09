@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "A A",
-    "AAA",
-    "AAA"
+    "X X",
+    "XXX",
+    "XXX"
   ],
   "key": {
-    "A": {
+    "X": {
       "item": "qforgemod:amethyst"
     }
   },

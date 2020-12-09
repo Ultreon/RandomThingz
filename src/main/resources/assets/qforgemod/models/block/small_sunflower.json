@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "qforgemod:blocks/small_sunflower"
+  }
+}

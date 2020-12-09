@@ -2,7 +2,12 @@ package com.qsoftware.forgemod.objects.items.type;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.capability.EnergyStorageItemImpl;
+import com.qsoftware.forgemod.hud.HudItem;
+import com.qsoftware.forgemod.util.GraphicsUtils;
 import com.qsoftware.forgemod.util.TextUtil;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -24,7 +29,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class EnergyStoringItem extends Item {
+public class EnergyStoringItem extends HudItem {
     public static final ResourceLocation CHARGE = new ResourceLocation(QForgeMod.MOD_ID, "charge");
 
     private final int maxEnergy;
@@ -106,5 +111,46 @@ public class EnergyStoringItem extends Item {
     @Override
     public int getRGBDurabilityForDisplay(ItemStack stack) {
         return MathHelper.hsvToRGB((1 + getChargeRatio(stack)) / 3.0F, 1.0F, 1.0F);
+    }
+
+    @Override
+    public void renderHud(GraphicsUtils gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
+        // Apparently, addInformation can be called before caps are initialized
+        if (CapabilityEnergy.ENERGY == null) return;
+
+        int height = mc.getMainWindow().getScaledHeight();
+
+        World worldIn = player.getEntityWorld();
+
+        stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
+            int val;
+
+            int maxEnergy = e.getMaxEnergyStored();
+
+            if (maxEnergy == 0) {
+                val = 0;
+            }
+
+            val = (int)(64d * e.getEnergyStored() / maxEnergy);
+
+            TextureManager textureManager = mc.getTextureManager();
+            textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/energy_item/background.png"));
+            gu.blit(0, height - 64, 128, 64, 0, 0, 128, 64, 128, 64);
+
+            textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/energy_item/bar.png"));
+            gu.blit(33, height - 11, 64, 2, 0, 2, 64, 1, 64, 3);
+
+            textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/energy_item/bar.png"));
+            gu.blit(32, height - 12, 64, 2, 0, 1, 64, 1, 64, 3);
+
+            textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/energy_item/bar.png"));
+            gu.blit(33, height - 11, val, 2, 0, 1, val, 1, 64, 3);
+
+            textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/energy_item/bar.png"));
+            gu.blit(32, height - 12, val, 2, 0, 0, val, 1, 64, 3);
+
+            gu.drawItemStack(stack, 56, height - 60, "");
+            gu.drawCenteredString(Math.round(e.getEnergyStored()) + " / " + Math.round(e.getMaxEnergyStored()), 64, height - 24, 0xff7f7f);
+        });
     }
 }

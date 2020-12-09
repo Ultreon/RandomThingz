@@ -2,19 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "XXX",
-    " # ",
-    " # "
+    " / ",
+    " / "
   ],
   "key": {
     "X": {
       "item": "qforgemod:tanzanite"
     },
-    "#": {
+    "/": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "qforgemod:tanzanite_sword",
+    "item": "qforgemod:tanzanite_pickaxe",
     "count": 1
   }
 }

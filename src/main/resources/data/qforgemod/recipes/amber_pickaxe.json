@@ -2,19 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "XXX",
-    " # ",
-    " # "
+    " / ",
+    " / "
   ],
   "key": {
     "X": {
       "item": "qforgemod:amber"
     },
-    "#": {
+    "/": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "qforgemod:amber_sword",
+    "item": "qforgemod:amber_pickaxe",
     "count": 1
   }
 }

@@ -1,7 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {"item": "qforgemod:amethyst_block"}
+    {
+      "item": "qforgemod:amethyst_block"
+    }
   ],
   "result": {
     "item": "qforgemod:amethyst",

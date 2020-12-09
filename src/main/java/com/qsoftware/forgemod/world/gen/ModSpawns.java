@@ -28,9 +28,13 @@ public class ModSpawns {
         }
 
         // Overworld mobs
-        if (event.getName().getPath().equals("flower_forest")) {
-            List<MobSpawnInfo.Spawners> monsterSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
-            monsterSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.MOOBLOOM.get(), 4, 2, 5));
+        if (event.getCategory() == Biome.Category.FOREST ||
+                event.getCategory() == Biome.Category.PLAINS ||
+                event.getCategory() == Biome.Category.JUNGLE ||
+                event.getCategory() == Biome.Category.NETHER ||
+                event.getCategory() == Biome.Category.SWAMP) {
+            List<MobSpawnInfo.Spawners> creatureSpawns = event.getSpawns().getSpawner(EntityClassification.CREATURE);
+            creatureSpawns.add(new MobSpawnInfo.Spawners(EntityTypeInit.MOOBLOOM.get(), 4, 1, 3));
             QForgeMod.LOGGER.debug("Added Moobloom to " + event.getName());
         }
         if (event.getCategory() != Biome.Category.OCEAN && event.getCategory() != Biome.Category.RIVER && event.getCategory() != Biome.Category.BEACH) {

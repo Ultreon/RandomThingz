@@ -27,5 +27,6 @@ public class Groups {
     public static final RedstoneItemGroup REDSTONE = RedstoneItemGroup.instance;
     public static final FoodItemGroup FOOD = FoodItemGroup.instance;
     public static final FluidItemGroup FLUIDS = FluidItemGroup.instance;
+    public static final BookshelfsItemGroup BOOKSHELFS = BookshelfsItemGroup.instance;
     public static final OverpoweredItemGroup OVERPOWERED = OverpoweredItemGroup.instance;
 }

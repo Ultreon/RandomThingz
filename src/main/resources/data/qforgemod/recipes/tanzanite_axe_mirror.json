@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "/X",
+    "/ "
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:tanzanite"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:tanzanite_axe",
+    "count": 1
+  }
+}

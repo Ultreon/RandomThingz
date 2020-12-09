@@ -1,8 +1,10 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.common.TextColors;
 import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.objects.items.CraftingItems;
+import com.qsoftware.forgemod.objects.items.EucalyptusLeafItem;
 import com.qsoftware.forgemod.objects.items.LegendaryEnderPearlItem;
 import com.qsoftware.forgemod.objects.items.advanced.AdvancedBowItem;
 import com.qsoftware.forgemod.objects.items.debug.DebugItem;
@@ -26,18 +28,28 @@ import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
 import com.qsoftware.forgemod.util.builder.ArmorMaterialBuilder;
 import com.qsoftware.forgemod.util.builder.ItemTierBuilder;
 import com.qsoftware.forgemod.util.color.ColorGetter;
+import com.qsoftware.forgemod.util.helpers.KeyboardHelper;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.function.Supplier;
 
 import static net.minecraft.item.Items.OBSIDIAN;
@@ -85,6 +97,20 @@ public final class ModItems {
     public static final ItemRegistryObject<Item> CHEESE_BURGER = register("cheese_burger", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.2f).effect(() -> new EffectInstance(Effects.REGENERATION, 60, 1), 0.7f).build())));
     public static final ItemRegistryObject<Item> CHEESE_SLICE = register("cheese_slice", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.2f).build())));
     public static final ItemRegistryObject<SliceableItem> CHEESE = register("cheese", () -> new SliceableItem(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.3f).build()), (stack) -> new ItemStack(CHEESE_SLICE, stack.getCount() * 6)));
+    public static final ItemRegistryObject<Item> COOKED_CARROT = register("cooked_carrot", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(3).saturation(0.25f).build())));
+    public static final ItemRegistryObject<Item> BAKED_APPLE = register("baked_apple", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(4).saturation(0.3f).build())));
+    public static final ItemRegistryObject<Item> FLOUR = register("flour", () -> new Item(new Item.Properties().group(Groups.FOOD)));
+    public static final ItemRegistryObject<Item> DOUGH = register("dough", () -> new Item(new Item.Properties().group(Groups.FOOD)));
+    public static final ItemRegistryObject<Item> CHICKEN_LEG = register("chicken_leg", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.1f).build())));
+    public static final ItemRegistryObject<Item> COOKED_CHICKEN_LEG = register("cooked_chicken_leg", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(4).saturation(0.35f).build())));
+    public static final ItemRegistryObject<Item> MEATBALL = register("meatball", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.15f).effect(() -> new EffectInstance(Effects.HUNGER, 100, 1), 1).build())));
+    public static final ItemRegistryObject<Item> COOKED_MEATBALL = register("cooked_meatball", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(3).saturation(0.225f).build())));
+    public static final ItemRegistryObject<Item> SHOARMA = register("shoarma", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.15f).build())));
+    public static final ItemRegistryObject<Item> COOKED_SHOARMA = register("cooked_shoarma", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(6).saturation(0.45f).build())));
+    public static final ItemRegistryObject<Item> PORK_SHANK = register("pork_shank", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.15f).build())));
+    public static final ItemRegistryObject<Item> COOKED_PORK_SHANK = register("cooked_pork_shank", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(5).saturation(0.375f).build())));
+    public static final ItemRegistryObject<Item> TOMAHAWK = register("tomahawk", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.215f).build())));
+    public static final ItemRegistryObject<Item> COOKED_TOMAHAWK = register("cooked_tomahawk", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(6).saturation(0.415f).build())));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Nature     //
@@ -96,8 +122,9 @@ public final class ModItems {
     //     Wood     //
     ////////////////////
     public static final ItemRegistryObject<Item> EUCALYPTUS_PLANK = register("eucalyptus_plank", () -> new Item(new Item.Properties().group(Groups.WOOD)));
-    public static final ItemRegistryObject<Item> EUCALYPTUS_LEAF = register("eucalyptus_leaf", () -> new Item(new Item.Properties()
+    public static final ItemRegistryObject<Item> EUCALYPTUS_LEAF = register("eucalyptus_leaf", () -> new EucalyptusLeafItem(new Item.Properties()
             .group(Groups.NATURE)
+            .maxStackSize(128)
             .food(new Food.Builder()
                     .hunger(1)
                     .saturation(0.2f)
@@ -192,10 +219,188 @@ public final class ModItems {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Dungeons     //
     //////////////////////
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_DIAMOND_AXE = register("dungeons_diamond_axe", () -> new AxeItem(ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)));
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_DIAMOND_SWORD = register("dungeons_diamond_sword", () -> new SwordItem(ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)));
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_IRON_SWORD = register("dungeons_iron_sword", () -> new SwordItem(ItemTier.IRON, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)));
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_BROADSWORD = register("dungeons_broadsword", () -> new SwordItem(ItemTier.IRON, 5, -3.75f, new Item.Properties().group(Groups.DUNGEONS)));
+    public static final ItemRegistryObject<AdvancedBowItem> DUNGEONS_HUNTERS_BOW = register("hunters_bow", () -> new AdvancedBowItem(new Item.Properties().group(Groups.DUNGEONS), 4.0f, 1.0f, 1.75d) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_DIAMOND_PICKAXE = register("dungeons_diamond_pickaxe", () -> new PickaxeItem(ItemTier.STONE, 3, -2.1f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_DIAMOND_AXE = register("dungeons_diamond_axe", () -> new AxeItem(ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_AXE = register("dungeons_axe", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_CURSED_AXE = register("cursed_axe", () -> new AxeItem(ItemTier.GOLD, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_FIREBRAND = register("firebrand", () -> new AxeItem(ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_HIGHLAND_AXE = register("highland_axe", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_WHIRLWIND = register("whirlwind", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_DAGGER = register("dungeons_dagger", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_ETERNAL_KNIFE = register("eternal_knife", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_FANGS_OF_FROST = register("fangs_of_frost", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_MOON_DAGGER = register("moon_dagger", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_NIGHTMARES_BITE = register("nightmares_bite", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_SPIRIT_KNIFE = register("spirit_knife", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.0f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_GOLD = register("the_last_laugh_gold", () -> new SwordItem(ItemTier.GOLD, 3, -0.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_SILVER = register("the_last_laugh_silver", () -> new SwordItem(ItemTier.IRON, 2, -0.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_DIAMOND_SWORD = register("dungeons_diamond_sword", () -> new SwordItem(ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_IRON_SWORD = register("dungeons_iron_sword", () -> new SwordItem(ItemTier.IRON, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_BROADSWORD = register("dungeons_broadsword", () -> new SwordItem(ItemTier.IRON, 5, -3.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_STORMLANDER = register("stormlander", () -> new PickaxeItem(ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_GREAT_HAMMER = register("great_hammer", () -> new PickaxeItem(ItemTier.IRON, 6, -2.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_HAMMER_OF_GRAVITY = register("hammer_of_gravity", () -> new PickaxeItem(ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_FLAIL = register("flail", () -> new SwordItem(ItemTier.STONE, 5, -3.0f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_SUNS_GRACE = register("suns_grace", () -> new SwordItem(ItemTier.STONE, 5, -3.0f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<HoeItem> DUNGEONS_FROST_SCYTHE = register("frost_scythe", () -> new HoeItem(ItemTier.STONE, 6, -2.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
+    public static final ItemRegistryObject<HoeItem> DUNGEONS_JAILORS_SCYTHE = register("jailors_scythe", () -> new HoeItem(ItemTier.STONE, 6, -2.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+        @Override
+        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+            tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
+            super.addInformation(stack, worldIn, tooltip, flagIn);
+        }
+    });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Overpowered     //
@@ -238,8 +443,11 @@ public final class ModItems {
     public static final IArmorMaterial copperArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":copper", 13, new int[]{2, 5, 6, 2}, 10, 1f,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(OreMaterials.COPPER.getIngot().get())
     );
-    public static final IArmorMaterial nickleArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":nickle", 13, new int[]{2, 5, 7, 3}, 16, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(ModItems.NICKLE_INGOT.get())
+    public static final IArmorMaterial redstoneArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":redstone", 8, new int[]{1, 4, 3, 2}, 5, 0.2f,
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.5F, () -> Ingredient.fromItems(OreMaterials.REDSTONE_ALLOY.getIngot().get())
+    );
+    public static final IArmorMaterial nickleArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":nickel", 13, new int[]{2, 5, 7, 3}, 16, 1f,
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(OreMaterials.NICKEL.getIngot().get())
     );
     public static final IArmorMaterial steelArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":steel", 24, new int[]{3, 6, 8, 4}, 14, 4f,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, () -> Ingredient.fromItems(OreMaterials.STEEL.getIngot().get())
@@ -296,6 +504,9 @@ public final class ModItems {
     public static final IItemTier COPPER_ITEM_TIER = new ItemTierBuilder.Builder(2, 420, 5.3f, 1.4f, 10,
             () -> Ingredient.fromItems(OreMaterials.COPPER.getIngot().get())
     );
+    public static final IItemTier REDSTONE_ITEM_TIER = new ItemTierBuilder.Builder(0, 230, 2.3f, 1.2f, 5,
+            () -> Ingredient.fromItems(OreMaterials.REDSTONE_ALLOY.getIngot().get())
+    );
     public static final IItemTier NICKLE_ITEM_TIER = new ItemTierBuilder.Builder(2, 480, 4.9f, 1.7f, 16,
             () -> Ingredient.fromItems(NICKLE_INGOT)
     );
@@ -338,7 +549,7 @@ public final class ModItems {
     public static final IItemTier TANZANITE_ITEM_TIER = new ItemTierBuilder.Builder(3, 1090, 7.7125f, 3.5f, 48,
             () -> Ingredient.fromItems(TANZANITE)
     );
-    public static final IItemTier OBSIDIAN_ITEM_TIER = new ItemTierBuilder.Builder(5, 3953, 53.7125f, 7.5f, 19,
+    public static final IItemTier OBSIDIAN_ITEM_TIER = new ItemTierBuilder.Builder(5, 3953, 53.7125f, 12.5f, 19,
             () -> Ingredient.fromItems(OBSIDIAN)
     );
     public static final IItemTier ULTRINIUM_ITEM_TIER = new ItemTierBuilder.Builder(6, 952530, 7403.0f, 237.4f, 375,
@@ -358,6 +569,17 @@ public final class ModItems {
     public static final ItemRegistryObject<ShovelItem> COPPER_SHOVEL = register("copper_shovel", () -> new ShovelItem(COPPER_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
     public static final ItemRegistryObject<AxeItem> COPPER_AXE = register("copper_axe", () -> new AxeItem(COPPER_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
     public static final ItemRegistryObject<HoeItem> COPPER_HOE = register("copper_hoe", () -> new HoeItem(COPPER_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+
+    // Armors - Redstone
+    public static final ItemRegistryObject<ArmorItem> REDSTONE_HELMET = register("redstone_helmet", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> REDSTONE_CHESTPLATE = register("redstone_chestplate", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> REDSTONE_LEGGINGS = register("redstone_leggings", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> REDSTONE_BOOTS = register("redstone_boots", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> REDSTONE_SWORD = register("redstone_sword", () -> new SwordItem(REDSTONE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> REDSTONE_PICKAXE = register("redstone_pickaxe", () -> new PickaxeItem(REDSTONE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> REDSTONE_SHOVEL = register("redstone_shovel", () -> new ShovelItem(REDSTONE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> REDSTONE_AXE = register("redstone_axe", () -> new AxeItem(REDSTONE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> REDSTONE_HOE = register("redstone_hoe", () -> new HoeItem(REDSTONE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
 
     // Armors - Nickle
     public static final ItemRegistryObject<ArmorItem> NICKLE_HELMET = register("nickle_helmet", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));

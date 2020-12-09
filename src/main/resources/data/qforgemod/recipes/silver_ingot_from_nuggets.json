@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ccc",
-    "ccc",
-    "ccc"
+    "XXX",
+    "XXX",
+    "XXX"
   ],
   "key": {
-    "c": {
+    "X": {
       "item": "qforgemod:silver_nugget"
     }
   },

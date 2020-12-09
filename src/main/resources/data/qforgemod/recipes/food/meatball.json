@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "X#X",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:steak"
+    },
+    "#": {
+      "item": "qforgemod:flour"
+    }
+  },
+  "result": {
+    "item": "qforgemod:meatball",
+    "count": 8
+  }
+}

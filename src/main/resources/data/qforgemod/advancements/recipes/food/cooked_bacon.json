@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:cooked_bacon"
+    ]
+  },
+  "criteria": {
+    "has_bacon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:bacon"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:cooked_bacon"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bacon",
+      "has_the_recipe"
+    ]
+  ]
+}

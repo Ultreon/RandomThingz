@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qforgemod:redstone_block"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:redstone",
+    "count": 9
+  }
+}

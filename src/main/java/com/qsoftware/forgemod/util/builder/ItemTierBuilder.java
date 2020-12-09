@@ -23,8 +23,6 @@ public class ItemTierBuilder {
         protected LazyValue<Ingredient> repairMaterial;
 
         public Builder(int tier, int maxUses, float efficiency, float attackDamage, int enchantability, Supplier<Ingredient> repairMaterial) {
-            ItemTier
-
             this.tier = tier;
             this.maxUses = maxUses;
             this.efficiency = efficiency;

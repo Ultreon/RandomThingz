@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "qforgemod:meatball"
+  },
+  "result": "qforgemod:cooked_meatball",
+  "experience": 0.35,
+  "cookingtime": 100
+}

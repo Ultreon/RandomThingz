@@ -1,0 +1,35 @@
+{
+  "parent": "item/generated",
+  "defaults": {
+    "textures": {
+      "layer0": "qforgemod:items/cooked_chicken_leg"
+    },
+    "variants": {
+      "normal": {
+        "textures": {
+          "layer0": "qforgemod:items/cooked_chicken_leg"
+        }
+      },
+      "inventory": {
+        "textures": {
+          "layer0": "qforgemod:items/cooked_chicken_leg"
+        }
+      }
+    }
+  },
+  "textures": {
+    "layer0": "qforgemod:items/cooked_chicken_leg"
+  },
+  "variants": {
+    "normal": {
+      "textures": {
+        "layer0": "qforgemod:items/cooked_chicken_leg"
+      }
+    },
+    "inventory": {
+      "textures": {
+        "layer0": "qforgemod:items/cooked_chicken_leg"
+      }
+    }
+  }
+}

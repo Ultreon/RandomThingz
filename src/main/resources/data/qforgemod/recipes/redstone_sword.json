@@ -1,19 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "c",
-    "c",
-    "s"
+    "X",
+    "X",
+    "/"
   ],
   "key": {
-    "c": {
-      "item": "minecraft:redstone"
+    "X": {
+      "item": "qforgemod:redstone"
     },
-    "s": {
+    "/": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "qforgemod:redstone_sword"
+    "item": "qforgemod:redstone_sword",
+    "count": 1
   }
 }

@@ -1,19 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "cc",
-    " s",
-    " s"
+    "XX",
+    " /",
+    " /"
   ],
   "key": {
-    "c": {
-      "item": "minecraft:redstone"
+    "X": {
+      "item": "qforgemod:redstone"
     },
-    "s": {
+    "/": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "qforgemod:redstone_hoe"
+    "item": "qforgemod:redstone_hoe",
+    "count": 1
   }
 }

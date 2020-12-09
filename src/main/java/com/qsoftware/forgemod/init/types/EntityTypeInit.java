@@ -48,4 +48,8 @@ public class EntityTypeInit extends ObjectInit<EntityType<?>> {
     private static <T extends Entity> EntityTypeRegistryObject<T> register(String name, EntityType.Builder<T> builder) {
         return ENTITY_TYPES.register(name, builder);
     }
+
+    private static <T extends Entity> EntityTypeRegistryObject<T> register(String name, EntityType<T> builder) {
+        return ENTITY_TYPES.register(name, builder);
+    }
 }

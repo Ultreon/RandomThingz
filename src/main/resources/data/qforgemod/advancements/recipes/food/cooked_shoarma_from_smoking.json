@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:cooked_shoarma_from_smoking"
+    ]
+  },
+  "criteria": {
+    "has_shoarma": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:shoarma"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:cooked_shoarma_from_smoking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_shoarma",
+      "has_the_recipe"
+    ]
+  ]
+}

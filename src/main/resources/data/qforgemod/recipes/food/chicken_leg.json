@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "minecraft:chicken"},
+    {"item": "qforgemod:knife"}
+  ],
+  "result": {
+    "item": "qforgemod:chicken_leg",
+    "count": 2
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "minecraft:porkchop"},
+    {"item": "qforgemod:knife"}
+  ],
+  "result": {
+    "item": "qforgemod:bacon",
+    "count": 8
+  }
+}

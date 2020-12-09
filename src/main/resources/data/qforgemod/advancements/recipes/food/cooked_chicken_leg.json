@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:cooked_chicken_leg"
+    ]
+  },
+  "criteria": {
+    "has_chicken_leg": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:chicken_leg"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:cooked_chicken_leg"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chicken_leg",
+      "has_the_recipe"
+    ]
+  ]
+}

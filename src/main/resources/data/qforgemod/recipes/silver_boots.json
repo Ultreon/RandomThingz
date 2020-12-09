@@ -1,11 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "c c",
-    "c c"
+    "X X",
+    "X X"
   ],
   "key": {
-    "c": {
+    "X": {
       "item": "qforgemod:silver_ingot"
     }
   },

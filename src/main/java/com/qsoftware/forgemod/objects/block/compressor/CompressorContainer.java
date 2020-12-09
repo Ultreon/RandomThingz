@@ -18,7 +18,7 @@ public class CompressorContainer extends AbstractMachineContainer<CompressorTile
     }
 
     public CompressorContainer(int id, PlayerInventory playerInventory, CompressorTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.COMPRESSOR, id, tileEntity, fieldsIn);
+        super(ModContainers.compressor, id, tileEntity, fieldsIn);
 
         this.addSlot(new Slot(this.tileEntity, 0, 56, 35));
         this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 117, 35));

@@ -1,19 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "c",
-    "s",
-    "s"
+    "X",
+    "/",
+    "/"
   ],
   "key": {
-    "c": {
-      "item": "minecraft:redstone"
+    "X": {
+      "item": "qforgemod:redstone"
     },
-    "s": {
+    "/": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "qforgemod:redstone_shovel"
+    "item": "qforgemod:redstone_shovel",
+    "count": 1
   }
 }

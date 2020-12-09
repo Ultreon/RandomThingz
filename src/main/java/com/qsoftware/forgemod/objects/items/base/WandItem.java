@@ -1,17 +1,24 @@
 package com.qsoftware.forgemod.objects.items.base;
 
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.RomanNumber;
 import com.qsoftware.forgemod.common.TextColors;
+import com.qsoftware.forgemod.hud.HudItem;
+import com.qsoftware.forgemod.util.GraphicsUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
@@ -20,9 +27,12 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-public abstract class WandItem extends Item {
+import static net.minecraft.client.gui.AbstractGui.blit;
+
+public abstract class WandItem extends HudItem {
     private final int maxMana;
     private final int chargeTime;
+    private ItemRenderer itemRenderer;
 
     public WandItem(int maxMana, int chargeTime, Properties properties) {
         super(properties);
@@ -244,4 +254,70 @@ public abstract class WandItem extends Item {
         tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Strength: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + RomanNumber.toRoman(strength)));
     }
 
+    @Override
+    public void renderHud(GraphicsUtils gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
+        int height = mc.getMainWindow().getScaledHeight();
+
+        World worldIn = player.getEntityWorld();
+
+        CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
+        if (worldIn == null) {
+            return;
+        }
+
+        if (!nbt.contains("mana", 5)) {
+//            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
+//            super.addInformation(stack, worldIn, tooltip, flagIn);
+            return;
+        }
+
+        if (!nbt.contains("maxMana", 3)) {
+//            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
+//            super.addInformation(stack, worldIn, tooltip, flagIn);
+            return;
+        }
+
+        if (!nbt.contains("chargeTime", 3)) {
+//            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
+//            super.addInformation(stack, worldIn, tooltip, flagIn);
+            return;
+        }
+
+        if (!nbt.contains("strength", 3)) {
+//            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
+//            super.addInformation(stack, worldIn, tooltip, flagIn);
+            return;
+        }
+
+        float mana = nbt.getFloat("mana");
+        int maxMana = nbt.getInt("maxMana");
+        int chargeTime = nbt.getInt("chargeTime");
+        int strength = nbt.getInt("strength");
+
+        int val;
+        if (maxMana == 0) {
+            val = 0;
+        }
+
+        val = (int)(64d * mana / maxMana);
+
+        TextureManager textureManager = mc.getTextureManager();
+        textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wand/background.png"));
+        gu.blit(0, height - 64, 128, 64, 0, 0, 128, 64, 128, 64);
+
+        textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wand/bar.png"));
+        gu.blit(33, height - 11, 64, 2, 0, 2, 64, 1, 64, 3);
+
+        textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wand/bar.png"));
+        gu.blit(32, height - 12, 64, 2, 0, 1, 64, 1, 64, 3);
+
+        textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wand/bar.png"));
+        gu.blit(33, height - 11, val, 2, 0, 1, val, 1, 64, 3);
+
+        textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wand/bar.png"));
+        gu.blit(32, height - 12, val, 2, 0, 0, val, 1, 64, 3);
+
+        gu.drawItemStack(stack, 56, height - 60, "");
+        gu.drawCenteredString(Math.round(mana) + " / " + Math.round(maxMana), 64, height - 24, 0xe97fff);
+    }
 }

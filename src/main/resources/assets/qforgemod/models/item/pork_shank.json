@@ -1,0 +1,35 @@
+{
+  "parent": "item/generated",
+  "defaults": {
+    "textures": {
+      "layer0": "qforgemod:items/pork_shank"
+    },
+    "variants": {
+      "normal": {
+        "textures": {
+          "layer0": "qforgemod:items/pork_shank"
+        }
+      },
+      "inventory": {
+        "textures": {
+          "layer0": "qforgemod:items/pork_shank"
+        }
+      }
+    }
+  },
+  "textures": {
+    "layer0": "qforgemod:items/pork_shank"
+  },
+  "variants": {
+    "normal": {
+      "textures": {
+        "layer0": "qforgemod:items/pork_shank"
+      }
+    },
+    "inventory": {
+      "textures": {
+        "layer0": "qforgemod:items/pork_shank"
+      }
+    }
+  }
+}

@@ -2,18 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "XX",
-    "#X",
-    "# "
+    "/X",
+    "/ "
   ],
   "key": {
     "X": {
-      "item": "minecraft:redstone"
+      "item": "qforgemod:redstone"
     },
-    "#": {
+    "/": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "qforgemod:redstone_axe"
+    "item": "qforgemod:redstone_axe",
+    "count": 1
   }
 }

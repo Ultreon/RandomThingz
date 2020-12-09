@@ -51,7 +51,7 @@ public class QForgeMod {
     public static final Logger LOGGER = LogManager.getLogger(QForgeMod.MOD_ID);
     public static final String MOD_NAME = "QForgeUtils";
     @SuppressWarnings("unused")
-    public static final String MOD_VERSION = "1.1-beta9";
+    public static final String MOD_VERSION = "1.1-beta12";
     @SuppressWarnings("unused")
     public static final QVersion VERSION = new QVersion(MOD_VERSION);
 
@@ -89,43 +89,20 @@ public class QForgeMod {
         // Assign instance.
         instance = this;
 
-        // Register registration.
-//        Registration.register();
-
-        // Register pre-configs.
-
-
-        // Cursor registration.
         MinecraftForge.EVENT_BUS.register(this);
-//        config = new Configuration();
-
-//        modLoadingContext.registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> (mc, parent) -> new GuiConfig(parent));
-//        registerCursor(currentCursorType = CursorType.POINTER, CursorType.HAND, CursorType.HAND_GRAB, CursorType.BEAM, CursorType.CROSS);
-
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
         // Register generic listeners.
-//        modEventBus.addGenericListener(Block.class, this::registerBlocks);
-//        modEventBus.addGenericListener(Item.class, this::registerItems);
-//        modEventBus.addGenericListener(TileEntityType.class, this::registerTileEntities);
-//        modEventBus.addGenericListener(EntityType.class, this::registerEntities);
-//        modEventBus.addGenericListener(ContainerType.class, this::registerContainers);
-
-//        ModBlocks.BLOCKS.register(modEventBus);
-//        ModBlocks.ITEMS.register(modEventBus);
         ModBlocksNew.BLOCKS.register(modEventBus);
         ModBlocksNew.ITEMS.register(modEventBus);
-//        ModItems.ITEMS.register(modEventBus);
         ModItemsNew.ITEMS.register(modEventBus);
         EntityTypeInit.ENTITY_TYPES.register(modEventBus);
         ContainerTypesInit.CONTAINER_TYPES.register(modEventBus);
         TileEntityTypesInit.TILE_ENTITY_TYPES.register(modEventBus);
 
         // Register listeners.
-//        modEventBus.addListener(ClientSetup::init);
         modEventBus.addListener(this::loadComplete);
         modEventBus.addListener(this::commonSetup);
-//        modEventBus.addListener(this::configEvent);
         modEventBus.addListener(this::enqueueIMC);
         modEventBus.addListener(this::processIMC);
 
@@ -134,15 +111,6 @@ public class QForgeMod {
             //noinspection Convert2MethodRef
             clientStart();
         });
-
-        // Register init classes.
-//        ModBlocksNew.BLOCKS.register(modEventBus);
-//        ModItemsNew.BLOCK_ITEMS.register(modEventBus);
-//        ModItemsNew.ITEMS.register(modEventBus);
-//        TileEntityTypesInit.TILE_ENTITY_TYPES.register(modEventBus);
-//        ContainerTypesInit.CONTAINER_TYPES.register(modEventBus);
-//        BiomeInit.BIOMES.register(modEventBus);
-//        EntityTypeInit.ENTITY_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -170,64 +138,12 @@ public class QForgeMod {
         return new ResourceLocation(MOD_ID, path);
     }
 
-    //    @SubscribeEvent
-//    @OnlyIn(Dist.CLIENT)
-//    public void clientOnlySetup(FMLClientSetupEvent event) {
-//        ClientRegistry.bindTileEntityRenderer(GRAVESTONE_TILEENTITY, GravestoneRenderer::new);
-//
-//        ScreenManager.IScreenFactory<DeathItemsContainer, DeathItemsScreen> factory = (container, playerInventory, name) -> new DeathItemsScreen(playerInventory, container, name);
-//        ScreenManager.registerFactory(QForgeUtils.DEATH_INFO_INVENTORY_CONTAINER, factory);
-//
-//        RenderingRegistry.registerEntityRenderingHandler(GHOST, PlayerGhostRenderer::new);
-//    }
-//
-//    @SubscribeEvent
-//    public void registerBlocks(RegistryEvent.Register<Block> event) {
-//        event.getRegistry().registerAll(
-//                GRAVESTONE = new GraveStoneBlock()
-//        );
-//    }
-//
-//    @SubscribeEvent
-//    public void registerItems(RegistryEvent.Register<Item> event) {
-//        event.getRegistry().registerAll(
-//                GRAVESTONE_ITEM = GRAVESTONE.toItem(),
-//                DEATHINFO = new DeathInfoItem()
-//        );
-//    }
-//
-//    @SuppressWarnings("ConstantConditions")
-//    @SubscribeEvent
-//    public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-//        GRAVESTONE_TILEENTITY = TileEntityType.Builder.create(GraveStoneTileEntity::new, GRAVESTONE).build(null);
-//        GRAVESTONE_TILEENTITY.setRegistryName(new ResourceLocation(MOD_ID, "gravestone"));
-//        event.getRegistry().register(GRAVESTONE_TILEENTITY);
-//    }
-//
-//    @SubscribeEvent
-//    public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-//        GHOST = EntityType.Builder.<GhostPlayerEntity>create(GhostPlayerEntity::new, EntityClassification.MONSTER)
-//                .size(0.6F, 1.95F)
-//                .build(QForgeUtils.MOD_ID + ":player_ghost");
-//        GHOST.setRegistryName(new ResourceLocation(QForgeUtils.MOD_ID, "player_ghost"));
-//        event.getRegistry().register(GHOST);
-//    }
-//
-//    @SubscribeEvent
-//    public void registerContainers(RegistryEvent.Register<ContainerType<?>> event) {
-//        DEATH_INFO_INVENTORY_CONTAINER = new ContainerType<>(DeathItemsContainer::new);
-//        DEATH_INFO_INVENTORY_CONTAINER.setRegistryName(new ResourceLocation(QForgeUtils.MOD_ID, "death_items"));
-//        event.getRegistry().register(DEATH_INFO_INVENTORY_CONTAINER);
-//    }
-
     @OnlyIn(Dist.CLIENT)
     public void clientStart() {
-//        FMLJavaModLoadingContext.getModEventBus().addListener(QForgeUtils.this::clientOnlySetup);
+
     }
 
     private void clientSetup(FMLClientSetupEvent event) {
-//        PROXY.onSetupClient();
-
         // do something that can only be done on the client
         for (Block block : Registration.getBlocks()) {
             if (block instanceof IHasRenderType) {
@@ -241,27 +157,24 @@ public class QForgeMod {
             GameOverlayListener.DEBUG_PAGE = GameOverlayListener.PAGE.PLAYER_1;
         }
 
-//        RenderTypeLookup.setRenderLayer(ModBlocks.LAB_DOOR.get(), RenderType.getTranslucent());
-//        RenderTypeLookup.setRenderLayer(ModBlocks.SHOPPING_DOOR.get(), RenderType.getTranslucent());
-//        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_GLASS_DOOR.get(), RenderType.getTranslucent());
-//        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_BARRIER_DOOR.get(), RenderType.getTranslucent());
-//        RenderTypeLookup.setRenderLayer(ModBlocks.BUTTERCUP.get(), RenderType.getTranslucent());
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            // Baby variants.
             GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_CREEPER.get(), EntityBabyCreeper.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_ENDERMAN.get(), EntityBabyEnderman.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_SKELETON.get(), EntityBabySkeleton.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_STRAY.get(), EntityBabyStray.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_WITHER_SKELETON.get(), EntityBabyWitherSkeleton.registerAttributes().create());
 
+            // Normal variants.
             GlobalEntityTypeAttributes.put(EntityTypeInit.OX.get(), OxEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.HOG.get(), HogEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK.get(), DuckEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.BISON.get(), BisonEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM.get(), MoobloomEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM.get(), MoobloomEntityOld.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.WARTHOG.get(), WarthogEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN.get(), IceEndermanEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER.get(), FireCreeperEntity.registerAttributes().create());
@@ -289,6 +202,6 @@ public class QForgeMod {
 
     private void loadComplete(FMLLoadCompleteEvent event) {
         LOGGER.info("LoadCompleteEvent: " + event);
-        ModOreGen.generateOres();
+        ModOreGen.createOresFeatures();
     }
 }

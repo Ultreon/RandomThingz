@@ -1,19 +1,20 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ccc",
-    " s ",
-    " s "
+    "XXX",
+    " / ",
+    " / "
   ],
   "key": {
-    "c": {
-      "item": "minecraft:redstone"
+    "X": {
+      "item": "qforgemod:redstone"
     },
-    "s": {
+    "/": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "qforgemod:redstone_pickaxe"
+    "item": "qforgemod:redstone_pickaxe",
+    "count": 1
   }
 }

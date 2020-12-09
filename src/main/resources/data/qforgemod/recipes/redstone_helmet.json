@@ -1,15 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ccc",
-    "c c"
+    "XXX",
+    "X X"
   ],
   "key": {
-    "c": {
-      "item": "minecraft:redstone"
+    "X": {
+      "item": "qforgemod:redstone"
     }
   },
   "result": {
-    "item": "qforgemod:redstone_helmet"
+    "item": "qforgemod:redstone_helmet",
+    "count": 1
   }
 }

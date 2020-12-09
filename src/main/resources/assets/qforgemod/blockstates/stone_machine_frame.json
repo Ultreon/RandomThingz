@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "qforgemod:block/stone_machine_frame"
+    }
+  }
+}

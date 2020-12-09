@@ -2,19 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "XXX",
-    " # ",
-    " # "
+    " / ",
+    " / "
   ],
   "key": {
     "X": {
       "item": "qforgemod:beryl"
     },
-    "#": {
+    "/": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "qforgemod:beryl_sword",
+    "item": "qforgemod:beryl_pickaxe",
     "count": 1
   }
 }

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "qforgemod:morganite_ore"
-  },
-  "result": "qforgemod:morganite",
-  "experience": 0.7,
-  "cookingtime": 100
-}

@@ -1,8 +1,6 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.container.CrateContainer;
-import com.qsoftware.forgemod.objects.block.alloysmelter.AlloySmelterContainer;
 import com.qsoftware.forgemod.objects.block.alloysmelter.AlloySmelterScreen;
 import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxContainer;
 import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxScreen;
@@ -35,26 +33,22 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.function.Supplier;
-
 public final class ModContainers {
     public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, QForgeMod.MOD_ID);
 
-    public static ContainerType<BatteryBoxContainer> BATTERY_BOX;
-    public static ContainerType<CoalGeneratorContainer> COAL_GENERATOR;
-    public static ContainerType<CompressorContainer> COMPRESSOR;
-    public static ContainerType<DieselGeneratorContainer> DIESEL_GENERATOR;
-    public static ContainerType<ElectricFurnaceContainer> ELECTRIC_FURNACE;
-    public static ContainerType<InfuserContainer> INFUSER;
-    public static ContainerType<LavaGeneratorContainer> LAVA_GENERATOR;
-    public static ContainerType<MixerContainer> MIXER;
+    public static ContainerType<BatteryBoxContainer> batteryBox;
+    public static ContainerType<CoalGeneratorContainer> coalGenerator;
+    public static ContainerType<CompressorContainer> compressor;
+    public static ContainerType<DieselGeneratorContainer> dieselGenerator;
+    public static ContainerType<ElectricFurnaceContainer> electricFurnace;
+    public static ContainerType<InfuserContainer> infuser;
+    public static ContainerType<LavaGeneratorContainer> lavaGenerator;
+    public static ContainerType<MixerContainer> mixer;
     public static ContainerType<PumpContainer> pump;
     public static ContainerType<QuarryContainer> quarry;
     public static ContainerType<RefineryContainer> refinery;
@@ -66,16 +60,16 @@ public final class ModContainers {
     public static void registerAll(RegistryEvent.Register<ContainerType<?>> event) {
         register("basic_alloy_smelter", MachineType.ALLOY_SMELTER.getContainerType(MachineTier.BASIC));
         register("alloy_smelter", MachineType.ALLOY_SMELTER.getContainerType(MachineTier.STANDARD));
-        BATTERY_BOX = register("battery_box", BatteryBoxContainer::new);
-        COAL_GENERATOR = register("coal_generator", CoalGeneratorContainer::new);
-        COMPRESSOR = register("compressor", CompressorContainer::new);
+        batteryBox = register("battery_box", BatteryBoxContainer::new);
+        coalGenerator = register("coal_generator", CoalGeneratorContainer::new);
+        compressor = register("compressor", CompressorContainer::new);
         register("basic_crusher", MachineType.CRUSHER.getContainerType(MachineTier.BASIC));
         register("crusher", MachineType.CRUSHER.getContainerType(MachineTier.STANDARD));
-        DIESEL_GENERATOR = register("diesel_generator", DieselGeneratorContainer::new);
-        ELECTRIC_FURNACE = register("electric_furnace", ElectricFurnaceContainer::new);
-        INFUSER = register("infuser", InfuserContainer::new);
-        LAVA_GENERATOR = register("lava_generator", LavaGeneratorContainer::new);
-        MIXER = register("mixer", MixerContainer::new);
+        dieselGenerator = register("diesel_generator", DieselGeneratorContainer::new);
+        electricFurnace = register("electric_furnace", ElectricFurnaceContainer::new);
+        infuser = register("infuser", InfuserContainer::new);
+        lavaGenerator = register("lava_generator", LavaGeneratorContainer::new);
+        mixer = register("mixer", MixerContainer::new);
         pump = register("pump", PumpContainer::new);
         quarry = register("quarry", QuarryContainer::new);
         refinery = register("refinery", RefineryContainer::new);
@@ -86,16 +80,16 @@ public final class ModContainers {
     public static void registerScreens(FMLClientSetupEvent event) {
         ScreenManager.registerFactory(MachineType.ALLOY_SMELTER.getContainerType(MachineTier.BASIC), AlloySmelterScreen::new);
         ScreenManager.registerFactory(MachineType.ALLOY_SMELTER.getContainerType(MachineTier.STANDARD), AlloySmelterScreen::new);
-        ScreenManager.registerFactory(BATTERY_BOX, BatteryBoxScreen::new);
-        ScreenManager.registerFactory(COAL_GENERATOR, CoalGeneratorScreen::new);
-        ScreenManager.registerFactory(COMPRESSOR, CompressorScreen::new);
+        ScreenManager.registerFactory(batteryBox, BatteryBoxScreen::new);
+        ScreenManager.registerFactory(coalGenerator, CoalGeneratorScreen::new);
+        ScreenManager.registerFactory(compressor, CompressorScreen::new);
         ScreenManager.registerFactory(MachineType.CRUSHER.getContainerType(MachineTier.BASIC), CrusherScreen::new);
         ScreenManager.registerFactory(MachineType.CRUSHER.getContainerType(MachineTier.STANDARD), CrusherScreen::new);
-        ScreenManager.registerFactory(DIESEL_GENERATOR, DieselGeneratorScreen::new);
-        ScreenManager.registerFactory(ELECTRIC_FURNACE, ElectricFurnaceScreen::new);
-        ScreenManager.registerFactory(INFUSER, InfuserScreen::new);
-        ScreenManager.registerFactory(LAVA_GENERATOR, LavaGeneratorScreen::new);
-        ScreenManager.registerFactory(MIXER, MixerScreen::new);
+        ScreenManager.registerFactory(dieselGenerator, DieselGeneratorScreen::new);
+        ScreenManager.registerFactory(electricFurnace, ElectricFurnaceScreen::new);
+        ScreenManager.registerFactory(infuser, InfuserScreen::new);
+        ScreenManager.registerFactory(lavaGenerator, LavaGeneratorScreen::new);
+        ScreenManager.registerFactory(mixer, MixerScreen::new);
         ScreenManager.registerFactory(pump, PumpScreen::new);
         ScreenManager.registerFactory(quarry, QuarryScreen::new);
         ScreenManager.registerFactory(refinery, RefineryScreen::new);

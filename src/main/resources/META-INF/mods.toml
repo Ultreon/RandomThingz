@@ -20,12 +20,12 @@ loaderVersion="[34,)" #mandatory This is typically bumped every Minecraft versio
 
 [[mods]] #mandatory
 modId="qforgemod" #mandatory
-version="1.1-beta9" #mandatory
+version="1.1-beta10" #mandatory
 displayName="QForgeMod: Main Module" #mandatory
 #updateJSONURL="http://myurl.me/" #optional
 displayURL="https://quintenjungblut.wixsite.com/qplaysoftware/" #optional
 #logoFile="qforgemod.png" #optional
-credits="Qboi123 (Also known as Qplay123, Xineon)." #optional
+credits="Qboi123" #optional
 authors="Qboi123" #optional
 description='''
 §nThe§r§o mod for all your needs!§r
@@ -58,34 +58,63 @@ description='''
   §l"Wooden Box" by F1ash (Crate)§r
   §oAvailable for download at https://blockmodels.com.com/model/330/ §r
 
+  §l"Minecraft Dungeons Textures for Minecraft Java Edition" by Kai1907 and Shadow_236§r
+  §oAvailable for download at https://www.planetminecraft.com/texture-pack/minecraft-dungeons-textures-for-minecraft-java-edition/ §r
+
+  §l"Fresh CIT v1.2" by FreshLX§r
+  §oAvailable for download at https://www.planetminecraft.com/texture-pack/fresh-cit-v1-0/ §r
+
+  §l"GearPlus 1.16!" by Nate the Penguin§r
+  §oAvailable for download at https://www.planetminecraft.com/texture-pack/vanilla-more-items-armor-shields-and-more/ §r
+
+  §l"GearPlus - Terraria Edition" by Nate the Penguin§r
+  §oAvailable for download at https://www.planetminecraft.com/texture-pack/gearplus-terraria-edition/ §r
+
+  §l"Cocoa Cake" by The Sailor§r
+  §oAvailable for download at https://www.planetminecraft.com/texture-pack/cocoa-cake/ §r
+
+  §l"Bone meal into Fertilizer" by Sucro120§r
+  §oAvailable for download at https://www.planetminecraft.com/texture-pack/bone-meal-into-fertilizer/ §r
+
+  §l"ActuallyAssets - Hypixel Skyblock v1.6.6" by MotorGorilla1§r
+  §oAvailable for download at https://www.planetminecraft.com/texture-pack/actuallyassets-hypixel-skyblock-v-10/ §r
+
+  §l"MoobLoom Update(Optifine)" by un_roman§r
+  §oAvailable for download at https://www.planetminecraft.com/texture-pack/moobloom-update/ §r
+
+  §l"Avocados" by kekkman§r
+  §oAvailable for download at https://www.planetminecraft.com/texture-pack/avocados-4860171/ §r
+
+  §l"Vanilla+ | 225 Custom Bookshelves Add-On" by sirkomplete, Etaris and Robert0213§r
+  §oAvailable for download at https://www.planetminecraft.com/texture-pack/vanilla-225-custom-bookshelves-add-on/ §r
+
+
 §b§l§nOther Mods:§r
   §l=--------------------------=§r
-  §oMr. Crayfish Furniture Mod§r
+  §oSilent's Mechanisms§r
   §l§n=--------------------------=§r
   §lGitHub:§r
-   §o https://github.com/MrCrayfish/MrCrayfishFurnitureMod/tree/3a2a73eb43a8fa72b6f621175f7ad84b7ba5306b §r
+   §o https://github.com/SilentChaos512/Silents-Mechanisms/tree/f8abec8f42cb0d2e2b799f7b4ff8f17eb33b7e69 §r
   §lCurseForge:§r
-   §o https://www.curseforge.com/minecraft/mc-mods/mrcrayfish-furniture-mod §r
+   §o https://www.curseforge.com/minecraft/mc-mods/silents-mechanisms §r
   §lCurseForge Download:§r
-   §o https://www.curseforge.com/minecraft/mc-mods/mrcrayfish-furniture-mod/files/2853267 §r
+   §o https://www.curseforge.com/minecraft/mc-mods/silents-mechanisms/files/3105339 §r
 
   §l=--------------------------=§r
-  §oQForgeUtils 10§r
+  §oQForgeUtils 1.0§r
   §l§n=--------------------------=§r
   §lGitHub:§r
-   §o https://github.com/mekanism/QForgeUtils/tree/f1b7f47dd784649366233ae707f9eef2a2cfe7fb §r
-  §lCurseForge:§r
-   §o https://www.curseforge.com/minecraft/mc-mods/mekanism §r
-  §lCurseForge Download:§r
-   §o https://www.curseforge.com/minecraft/mc-mods/mekanism/files/2996531 §r
+   §o https://github.com/Qboi123/QForgeUtils §r
 '''
 
 [[mods]]
 modId="qsilentlib"
 version="4.9"
 displayName="QForgeMod: Silent Library"
-updateJSONURL="https://raw.githubusercontent.com/SilentChaos512/SilentLib/1.14/update.json"
+# updateJSONURL="https://raw.githubusercontent.com/SilentChaos512/SilentLib/1.14/update.json"
 description='''
+    Forked from https://github.com/SilentChaos512/SilentLib/tree/ef258b04897296131e3e1f439df8b5c1425fc453
+
     Shared library for Silent's mods
     '''
 [[mods]] #mandatory
@@ -105,14 +134,15 @@ credits="Thanks for many help goes to McJty and the Forge Forum Team" #optional
 authors="PianoManu, Qboi123" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This Mod is forked from: https://github.com/PianoManu/BlockCarpentry
+This Mod is partially forked from: https://github.com/PianoManu/BlockCarpentry
+The mod was merged after the base essentials of QForgeMod were created.
 
 Original description:
 Fork Mod of Carpenter's Blocks Mod created by Mineshopper (owner of the idea) for older versions of Minecraft.
 I created this fork because friends of mine would like to play this mod on 1.15 (and me too).
 
 Right now there is no guide for this mod, so here is one in small form:
-- Rightclick on a frame block to give it the texture of the block you clicked it with
+- Right-Click on a frame block to give it the texture of the block you clicked it with
 - Right-Click with the hammer to get the block back out of the frame (you can change this feature in the config file, so that you only need an empty hand and Sneak-Rightclick)
 - For blocks with different textures on each side, you can select the texture you want using the texture wrench
 - Let the blocks glow by right-clicking them with glowstone dust or coal/charcoal

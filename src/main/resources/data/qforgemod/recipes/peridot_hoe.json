@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "XX ",
-    " # ",
-    " # "
+    "XX",
+    " /",
+    " /"
   ],
   "key": {
     "X": {
       "item": "qforgemod:peridot"
     },
-    "#": {
+    "/": {
       "item": "minecraft:stick"
     }
   },

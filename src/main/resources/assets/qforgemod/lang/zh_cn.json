@@ -224,8 +224,5 @@
   "misc.qforgemod.fluidWithMax": "%s: %s / %s mB",
   "misc.qforgemod.redstoneMode": "红石模式：%s",
   "misc.qforgemod.timeInSeconds": "时间：%ss",
-  "misc.qforgemod.upgradeSlot": "升级插槽",
-  "part.qforgemod.main.compressed_iron": "压缩铁",
-  "part.qforgemod.main.redstone_alloy": "红石合金",
-  "part.qforgemod.main.refined_iron": "精炼铁"
+  "misc.qforgemod.upgradeSlot": "升级插槽"
 }

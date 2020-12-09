@@ -20,7 +20,7 @@ public class BatteryBoxContainer extends AbstractEnergyStorageContainer {
     }
 
     public BatteryBoxContainer(int id, PlayerInventory playerInventory, BatteryBoxTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.BATTERY_BOX, id, tileEntity, fieldsIn);
+        super(ModContainers.batteryBox, id, tileEntity, fieldsIn);
         this.tileEntity = tileEntity;
 
         this.addSlot(new Slot(this.tileEntity, 0, 71, 19));

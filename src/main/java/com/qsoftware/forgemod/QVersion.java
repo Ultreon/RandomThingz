@@ -1,9 +1,11 @@
 package com.qsoftware.forgemod;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class QVersion {
+public class QVersion implements Comparable<QVersion> {
     private final int version;
     private final int subversion;
     private final TYPE type;
@@ -106,6 +108,26 @@ public class QVersion {
 
     public int getRelease() {
         return release;
+    }
+
+    @Override
+    public int compareTo(@NotNull QVersion o) {
+        int cmp = Integer.compare(this.version, o.version);
+        if (cmp == 0) {
+            int cmp1 = Integer.compare(this.subversion, o.subversion);
+            if (cmp1 == 0) {
+                int cmp2 = this.type.compareTo(o.type);
+                if (cmp2 == 0) {
+                    return Integer.compare(this.release, o.release);
+                } else {
+                    return cmp2;
+                }
+            } else {
+                return cmp1;
+            }
+        } else {
+            return cmp;
+        }
     }
 
     public enum TYPE {

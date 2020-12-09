@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "qforgemod:blocks/gilded_dirt",
+    "all": "qforgemod:blocks/gilded_dirt"
+  }
+}

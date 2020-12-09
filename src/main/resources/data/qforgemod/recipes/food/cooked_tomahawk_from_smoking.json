@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "qforgemod:tomahawk"
+  },
+  "result": "qforgemod:cooked_tomahawk",
+  "experience": 0.35,
+  "cookingtime": 100
+}

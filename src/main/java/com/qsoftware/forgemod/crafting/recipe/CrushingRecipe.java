@@ -63,7 +63,7 @@ public class CrushingRecipe implements IRecipe<IInventory> {
      */
     public List<ItemStack> getResults(IInventory inv) {
         int outputUpgrades = inv instanceof AbstractMachineTileEntity
-                ? ((AbstractMachineTileEntity) inv).getUpgradeCount(MachineUpgrades.OUTPUT_CHANCE)
+                ? ((AbstractMachineTileEntity<?>) inv).getUpgradeCount(MachineUpgrades.OUTPUT_CHANCE)
                 : 0;
         return results.entrySet().stream()
                 .filter(e -> {
@@ -81,7 +81,7 @@ public class CrushingRecipe implements IRecipe<IInventory> {
      * @param inv The crusher
      * @return All possible results of crushing
      */
-    public Set<ItemStack> getPossibleResults(IInventory inv) {
+    public Set<ItemStack> getPossibleResults(@SuppressWarnings("unused") IInventory inv) {
         return results.keySet();
     }
 

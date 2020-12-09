@@ -20,7 +20,7 @@ public class MixerContainer extends AbstractMachineBaseContainer<MixerTileEntity
     }
 
     public MixerContainer(int id, PlayerInventory player, MixerTileEntity tileEntity, IIntArray fields) {
-        super(ModContainers.MIXER, id, tileEntity, fields);
+        super(ModContainers.mixer, id, tileEntity, fields);
 
         this.addSlot(new Slot(this.tileEntity, 0, 8, 16));
         this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 8, 59));

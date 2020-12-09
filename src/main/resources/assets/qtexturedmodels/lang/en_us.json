@@ -37,5 +37,12 @@
   "item.qtexturedmodels.chisel": "Chisel",
   "item.qtexturedmodels.paintbrush": "Paintbrush",
 
-  "itemGroup.qtexturedmodels": "BlockCarpentry"
+  "itemGroup.qtexturedmodels": "BlockCarpentry",
+
+  "advancements.qtexturedmodels.root.title": "QTexturedModels",
+  "advancements.qtexturedmodels.root.description": "The basics",
+  "advancements.qtexturedmodels.basic_frame_block.title": "Basic Frame Block",
+  "advancements.qtexturedmodels.basic_frame_block.description": "Create a basic frame block.",
+  "advancements.qtexturedmodels.the_scam.title": "The Scam",
+  "advancements.qtexturedmodels.the_scam.description": "Create a frame block which you can walk thru."
 }

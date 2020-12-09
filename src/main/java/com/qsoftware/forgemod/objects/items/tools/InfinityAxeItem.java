@@ -28,27 +28,27 @@ public class InfinityAxeItem extends AxeItem {
         super(new IItemTier() {
             @Override
             public int getMaxUses() {
-                return 99999;
+                return Integer.MAX_VALUE;
             }
 
             @Override
             public float getEfficiency() {
-                return 99999;
+                return Float.POSITIVE_INFINITY;
             }
 
             @Override
             public float getAttackDamage() {
-                return 1;
+                return Float.POSITIVE_INFINITY;
             }
 
             @Override
             public int getHarvestLevel() {
-                return 99999;
+                return Integer.MAX_VALUE;
             }
 
             @Override
             public int getEnchantability() {
-                return 99999;
+                return Integer.MAX_VALUE;
             }
 
             @Override
@@ -60,6 +60,11 @@ public class InfinityAxeItem extends AxeItem {
 
     @Override
     public boolean hasEffect(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
         return false;
     }
 

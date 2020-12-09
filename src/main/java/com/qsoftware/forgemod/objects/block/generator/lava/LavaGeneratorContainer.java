@@ -19,7 +19,7 @@ public class LavaGeneratorContainer extends AbstractFluidGeneratorContainer<Lava
     }
 
     public LavaGeneratorContainer(int id, PlayerInventory playerInventory, LavaGeneratorTileEntity tileEntity, IIntArray fieldsIn) {
-        super(ModContainers.LAVA_GENERATOR, id, tileEntity, fieldsIn);
+        super(ModContainers.lavaGenerator, id, tileEntity, fieldsIn);
 
         this.addSlot(new Slot(tileEntity, 0, 80, 16));
         this.addSlot(new Slot(tileEntity, 1, 80, 59));

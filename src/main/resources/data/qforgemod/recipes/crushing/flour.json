@@ -1,0 +1,13 @@
+{
+  "type": "qforgemod:crushing",
+  "process_time": 100,
+  "ingredient": {
+    "tag": "minecraft:wheat"
+  },
+  "results": [
+    {
+      "item": "qforgemod:flour",
+      "count": 2
+    }
+  ]
+}

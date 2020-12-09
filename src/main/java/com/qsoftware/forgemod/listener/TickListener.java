@@ -1,5 +1,19 @@
 package com.qsoftware.forgemod.listener;
 
+import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.objects.entities.GlowSquidEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+import java.util.UUID;
+
 /**
  * Tick listener.
  *
@@ -13,20 +27,11 @@ public class TickListener {
 //    @SubscribeEvent
 //    public static void worldTick(TickEvent.WorldTickEvent event) {
 //        tick++;
-//        if (tick >= 20) {
-//            // Create entity
-//            GlowSquidEntity squidEntity = new GlowSquidEntity(EntityTypeInit.GLOW_SQUID.get(), event.world);
+//        if (tick >= 40) {
+//            ClientPlayerEntity player = Minecraft.getInstance().player;
 //
-//            // Get height at 0,0.
-//            int y = event.world.getHeight(Heightmap.Type.WORLD_SURFACE, 0, 0);
-//
-//            // Spawn at location 0,0. 50 blocks above surface.
-//            squidEntity.setPosition(0.5, y + 15, 0.5);
-//            event.world.addEntity(squidEntity);
-//
-////            event.world.setBlockState(new BlockPos(0.5, y - 1, 0.5), Blocks.LAVA.getDefaultState());
-//
-//            // Reset tick counter.
+//            if (player != null) {
+//            }
 //            tick = 0;
 //        }
 //    }

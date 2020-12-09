@@ -18,7 +18,7 @@ public class DieselGeneratorContainer extends AbstractFluidGeneratorContainer<Di
     }
 
     public DieselGeneratorContainer(int id, PlayerInventory player, DieselGeneratorTileEntity tileEntity, IIntArray fields) {
-        super(ModContainers.DIESEL_GENERATOR, id, tileEntity, fields);
+        super(ModContainers.dieselGenerator, id, tileEntity, fields);
 
         this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
         this.addSlot(new Slot(this.tileEntity, 1, 80, 59));
