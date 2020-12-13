@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.ModEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,7 +24,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.Effect;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
@@ -297,7 +296,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
    }
 
    public MoobloomEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
-      MoobloomEntity mooshroomentity = EntityTypeInit.MOOBLOOM.get().create(p_241840_1_);
+      MoobloomEntity mooshroomentity = ModEntities.MOOBLOOM.get().create(p_241840_1_);
       assert mooshroomentity != null;
       mooshroomentity.setMoobloomType(this.func_213445_a((MoobloomEntity)p_241840_2_));
       return mooshroomentity;

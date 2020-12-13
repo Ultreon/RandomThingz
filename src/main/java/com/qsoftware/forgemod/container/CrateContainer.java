@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.container;
 
 import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.init.types.ContainerTypesInit;
+import com.qsoftware.forgemod.init.types.ModContainers;
 import com.qsoftware.forgemod.objects.tileentity.CrateTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -25,7 +25,7 @@ public class CrateContainer extends Container {
     private final IWorldPosCallable canInteractWithCallable;
 
     public CrateContainer(final int windowId, final PlayerInventory playerInventory, final CrateTileEntity tileEntity) {
-        super(ContainerTypesInit.WOODEN_CRATE.get(), windowId);
+        super(ModContainers.WOODEN_CRATE.get(), windowId);
         this.tileEntity = tileEntity;
         this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getWorld()), tileEntity.getPos());
 

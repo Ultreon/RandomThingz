@@ -1,5 +1,7 @@
 package com.qsoftware.forgemod.objects.blocks.overpowered;
 
+import com.qsoftware.forgemod.common.IHasOreProperties;
+import com.qsoftware.forgemod.common.OreProperties;
 import com.qsoftware.forgemod.init.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.OreBlock;
@@ -10,6 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -17,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
+@SuppressWarnings("deprecation")
 public class InfinityOreBlock extends OreBlock {
     public InfinityOreBlock(Properties properties) {
         super(properties);

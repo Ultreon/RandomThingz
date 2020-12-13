@@ -4,7 +4,7 @@ import net.minecraft.client.gui.widget.button.CheckboxButton;
 import net.minecraft.util.text.ITextComponent;
 
 /**
- * Hog entity model class.
+ * Functional Checkbox gui element.
  */
 public class FunctionalCheckbox extends CheckboxButton {
 

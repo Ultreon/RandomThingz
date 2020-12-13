@@ -707,5 +707,10 @@
   "misc.qforgemod.pc.storage.usb.short": "USB",
 
   "key.qforgemod.debug_screen": "Show / Hide Debug Screen",
-  "key.categories.qforgemod": "QForgeMod keys"
+  "key.categories.qforgemod": "QForgeMod keys",
+
+  "msg.qforgemod.confirm_exit.title": "Exit Confirmation",
+  "msg.qforgemod.confirm_exit.description": "Are you sure you want to exit Minecraft?",
+
+  "button.qforgemod.confirm_exit.shutdown_pc": "Shutdown PC"
 }

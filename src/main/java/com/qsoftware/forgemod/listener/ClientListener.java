@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.listener;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.IFOVUpdateItem;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -12,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
  *
  * @author (partial) CoFH - https://github.com/CoFH
  */
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ClientListener {
     @SubscribeEvent
     public static void handleFOVUpdateEvent(FOVUpdateEvent event) {

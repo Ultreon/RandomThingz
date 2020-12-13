@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.blocks.furniture;
 
-import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
+import com.qsoftware.forgemod.init.types.ModTileEntities;
 import com.qsoftware.forgemod.objects.items.type.FaceableBlock;
 import com.qsoftware.forgemod.objects.tileentity.CrateTileEntity;
 import net.minecraft.block.Block;
@@ -45,7 +45,7 @@ public class WoodenCrateBlock extends FaceableBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return TileEntityTypesInit.EXAMPLE_CHEST.get().create();
+        return ModTileEntities.EXAMPLE_CHEST.get().create();
     }
 
     @Override

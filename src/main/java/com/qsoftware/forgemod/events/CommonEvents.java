@@ -13,7 +13,7 @@ public class CommonEvents {
     @SubscribeEvent
     public static void onAttachItemCaps(AttachCapabilitiesEvent<Item> event) {
         if (event.getObject() instanceof BatteryItem) {
-            event.addCapability(QForgeMod.getId("energy"), new EnergyStorageImplBase(500_000, 10_000, 10_000));
+            event.addCapability(QForgeMod.rl("energy"), new EnergyStorageImplBase(500_000, 10_000, 10_000));
         }
     }
 }

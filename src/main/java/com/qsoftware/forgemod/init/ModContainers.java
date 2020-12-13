@@ -102,7 +102,7 @@ public final class ModContainers {
     }
 
     private static <C extends Container> ContainerType<C> register(String name, ContainerType<C> containerType) {
-        containerType.setRegistryName(QForgeMod.getId(name));
+        containerType.setRegistryName(QForgeMod.rl(name));
         ForgeRegistries.CONTAINERS.register(containerType);
         return containerType;
     }

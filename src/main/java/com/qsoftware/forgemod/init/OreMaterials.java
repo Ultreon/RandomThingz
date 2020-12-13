@@ -282,7 +282,7 @@ public enum OreMaterials {
 
         Builder chunks() {
             this.chunks = () -> new Item(new Item.Properties().group(Groups.METAL_CRAFTABLES));
-            this.chunksTag = itemTag(QForgeMod.getId("chunks/" + name));
+            this.chunksTag = itemTag(QForgeMod.rl("chunks/" + name));
             return this;
         }
 

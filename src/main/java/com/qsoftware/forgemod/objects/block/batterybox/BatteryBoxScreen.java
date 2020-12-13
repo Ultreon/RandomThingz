@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class BatteryBoxScreen extends ContainerScreen<BatteryBoxContainer> {
-    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/battery_box.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/battery_box.png");
 
     public BatteryBoxScreen(BatteryBoxContainer containerIn, PlayerInventory playerInventoryIn, ITextComponent titleIn) {
         super(containerIn, playerInventoryIn, titleIn);

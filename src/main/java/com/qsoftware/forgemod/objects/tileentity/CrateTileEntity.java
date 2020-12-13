@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.tileentity;
 
 import com.qsoftware.forgemod.container.CrateContainer;
-import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
+import com.qsoftware.forgemod.init.types.ModTileEntities;
 import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -55,7 +55,7 @@ public class CrateTileEntity extends LockableLootTileEntity {
     }
 
     public CrateTileEntity() {
-        this(TileEntityTypesInit.EXAMPLE_CHEST.get());
+        this(ModTileEntities.EXAMPLE_CHEST.get());
     }
 
     @SuppressWarnings({"unused", "RedundantSuppression"})

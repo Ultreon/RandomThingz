@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class SolidifierScreen extends AbstractMachineBaseScreen<SolidifierContainer> {
-    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/solidifier.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/solidifier.png");
 
     public SolidifierScreen(SolidifierContainer container, PlayerInventory playerInventory, ITextComponent titleIn) {
         super(container, playerInventory, titleIn);

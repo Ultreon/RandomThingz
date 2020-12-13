@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.objects.entities;
 
 import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerBlock;

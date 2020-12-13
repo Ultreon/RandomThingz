@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("ConstantConditions")
 //@ObjectHolder(QForgeUtils.MOD_ID)
 //@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
-public class TileEntityTypesInit extends ObjectInit<TileEntityType<?>> {
+public class ModTileEntities extends ObjectInit<TileEntityType<?>> {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, QForgeMod.MOD_ID);
 
     @SuppressWarnings("ConstantConditions")

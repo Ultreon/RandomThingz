@@ -4,7 +4,7 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.renderer.*;
 import com.qsoftware.forgemod.client.renderer.entity.RenderBabyCreeper;
 import com.qsoftware.forgemod.client.renderer.entity.RenderBabyEnderman;
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.ModEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
@@ -32,23 +32,23 @@ public class ClientEventBusSubscriber {
         // Entity renderers.
 
         // Baby variants
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.BABY_CREEPER.get(), RenderBabyCreeper::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.BABY_ENDERMAN.get(), RenderBabyEnderman::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.BABY_SKELETON.get(), SkeletonRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.BABY_STRAY.get(), StrayRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.BABY_WITHER_SKELETON.get(), WitherSkeletonRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BABY_CREEPER.get(), RenderBabyCreeper::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BABY_ENDERMAN.get(), RenderBabyEnderman::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BABY_SKELETON.get(), SkeletonRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BABY_STRAY.get(), StrayRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BABY_WITHER_SKELETON.get(), WitherSkeletonRenderer::new);
 
         // Entities
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.HOG.get(), HogRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.WARTHOG.get(), WarthogRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.BISON.get(), BisonRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.OX.get(), OxRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.DUCK.get(), DuckRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.MOOBLOOM.get(), MoobloomRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.ICE_ENDERMAN.get(), IceEndermanRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.FIRE_CREEPER.get(), FireCreeperRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.GLOW_SQUID.get(), GlowSquidRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.LEGENDARY_ENDER_PEARL.get(), manager -> new SpriteRenderer<>(Minecraft.getInstance().getRenderManager(), Minecraft.getInstance().getItemRenderer()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityTypeInit.DYNAMITE.get(), manager -> new SpriteRenderer<>(Minecraft.getInstance().getRenderManager(), Minecraft.getInstance().getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.HOG.get(), HogRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.WARTHOG.get(), WarthogRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BISON.get(), BisonRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.OX.get(), OxRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.DUCK.get(), DuckRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MOOBLOOM.get(), MoobloomRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_ENDERMAN.get(), IceEndermanRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.FIRE_CREEPER.get(), FireCreeperRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.GLOW_SQUID.get(), GlowSquidRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LEGENDARY_ENDER_PEARL.get(), manager -> new SpriteRenderer<>(Minecraft.getInstance().getRenderManager(), Minecraft.getInstance().getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.DYNAMITE.get(), manager -> new SpriteRenderer<>(Minecraft.getInstance().getRenderManager(), Minecraft.getInstance().getItemRenderer()));
     }
 }

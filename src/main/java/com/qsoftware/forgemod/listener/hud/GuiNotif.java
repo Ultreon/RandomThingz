@@ -5,6 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.text.StringTextComponent;
 
+@SuppressWarnings("ALL")
+@Deprecated
 public class GuiNotif extends Screen {
     String text = "Hello world!";
 

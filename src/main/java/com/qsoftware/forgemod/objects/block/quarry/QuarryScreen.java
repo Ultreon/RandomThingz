@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
-    private static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/quarry.png");
+    private static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/quarry.png");
 
     public QuarryScreen(QuarryContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);

@@ -10,7 +10,7 @@ import com.qsoftware.forgemod.common.client.ClientRegistrationUtil;
 import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.init.renew.ModItemsNew;
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.ModEntities;
 import com.qsoftware.forgemod.objects.items.base.DyeColorizedItem;
 import com.qsoftware.forgemod.objects.items.base.MaterialColorizedItem;
 import com.qsoftware.forgemod.objects.items.spawnegg.CustomSpawnEggItem;
@@ -42,11 +42,11 @@ public class AdditionsClientRegistration {
 //        new AdditionsKeyHandler();
 
         //Register entity rendering handlers
-        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInit.BABY_CREEPER, RenderBabyCreeper::new);
-        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInit.BABY_ENDERMAN, RenderBabyEnderman::new);
-        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInit.BABY_SKELETON, SkeletonRenderer::new);
-        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInit.BABY_STRAY, StrayRenderer::new);
-        ClientRegistrationUtil.registerEntityRenderingHandler(EntityTypeInit.BABY_WITHER_SKELETON, WitherSkeletonRenderer::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_CREEPER, RenderBabyCreeper::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_ENDERMAN, RenderBabyEnderman::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_SKELETON, SkeletonRenderer::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_STRAY, StrayRenderer::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_WITHER_SKELETON, WitherSkeletonRenderer::new);
     }
 
     @SubscribeEvent

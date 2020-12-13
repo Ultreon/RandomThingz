@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class MachinePeripheral implements IPeripheral {
-    private static final String TYPE = QForgeMod.getId("machine").toString();
+    private static final String TYPE = QForgeMod.rl("machine").toString();
 
     private final AbstractMachineBaseTileEntity machine;
 

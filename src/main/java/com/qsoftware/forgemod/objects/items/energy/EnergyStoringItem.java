@@ -18,6 +18,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
@@ -31,7 +33,7 @@ import java.util.List;
 import static net.minecraft.client.gui.AbstractGui.blit;
 
 public abstract class EnergyStoringItem extends HudItem {
-    public static final ResourceLocation CHARGE = QForgeMod.getId("charge");
+    public static final ResourceLocation CHARGE = QForgeMod.rl("charge");
 
     private final int maxEnergy;
     private final int maxReceive;
@@ -106,6 +108,7 @@ public abstract class EnergyStoringItem extends HudItem {
         return MathHelper.hsvToRGB((1 + getChargeRatio(stack)) / 3.0F, 1.0F, 1.0F);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void renderHud(GraphicsUtils gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
         // Apparently, addInformation can be called before caps are initialized

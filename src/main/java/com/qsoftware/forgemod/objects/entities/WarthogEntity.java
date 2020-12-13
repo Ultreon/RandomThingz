@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.entities;
 
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.ModEntities;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -30,6 +30,6 @@ public class WarthogEntity extends HogEntity {
     @Override
     @ParametersAreNonnullByDefault
     public WarthogEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.WARTHOG.get().create(this.world);
+        return ModEntities.WARTHOG.get().create(this.world);
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class CrusherScreen extends AbstractMachineScreen<CrusherContainer> {
-    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/crusher.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/crusher.png");
 
     public CrusherScreen(CrusherContainer containerIn, PlayerInventory playerInventoryIn, ITextComponent titleIn) {
         super(containerIn, playerInventoryIn, titleIn);

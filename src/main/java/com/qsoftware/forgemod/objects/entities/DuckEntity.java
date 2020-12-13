@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.entities;
 
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.ModEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -62,7 +62,7 @@ public class DuckEntity extends ChickenEntity {
     @Override
     @ParametersAreNonnullByDefault
     public DuckEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.DUCK.get().create(this.world);
+        return ModEntities.DUCK.get().create(this.world);
     }
 
     @Nullable

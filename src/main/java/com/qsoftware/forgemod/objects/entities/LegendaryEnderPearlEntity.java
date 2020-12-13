@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.entities;
 
 import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.ModEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -34,11 +34,11 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
     }
 
     public LegendaryEnderPearlEntity(World worldIn, LivingEntity throwerIn) {
-        super(EntityTypeInit.LEGENDARY_ENDER_PEARL.getEntityType(), throwerIn, worldIn);
+        super(ModEntities.LEGENDARY_ENDER_PEARL.getEntityType(), throwerIn, worldIn);
     }
 
     public LegendaryEnderPearlEntity(World worldIn, double x, double y, double z) {
-        super(EntityTypeInit.LEGENDARY_ENDER_PEARL.getEntityType(), x, y, z, worldIn);
+        super(ModEntities.LEGENDARY_ENDER_PEARL.getEntityType(), x, y, z, worldIn);
     }
 
     protected @NotNull Item getDefaultItem() {

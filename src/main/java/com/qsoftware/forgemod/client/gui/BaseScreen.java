@@ -14,13 +14,13 @@ import java.util.Objects;
 /**
  * Hog entity model class.
  */
-public abstract class ScreenBase<T extends Container> extends ContainerScreen<T> {
+public abstract class BaseScreen<T extends Container> extends ContainerScreen<T> {
 
     protected static final int FONT_COLOR = 4210752;
 
     protected ResourceLocation texture;
 
-    public ScreenBase(ResourceLocation texture, T inventorySlotsIn, PlayerInventory playerInventory, ITextComponent name) {
+    public BaseScreen(ResourceLocation texture, T inventorySlotsIn, PlayerInventory playerInventory, ITextComponent name) {
         super(inventorySlotsIn, playerInventory, name);
         this.texture = texture;
     }

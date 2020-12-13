@@ -84,7 +84,7 @@ public final class ModTileEntities {
 
     private static <T extends TileEntity> TileEntityType<T> register(String name, TileEntityType<T> type) {
         if (type.getRegistryName() == null) {
-            type.setRegistryName(QForgeMod.getId(name));
+            type.setRegistryName(QForgeMod.rl(name));
         }
         ForgeRegistries.TILE_ENTITIES.register(type);
         return type;

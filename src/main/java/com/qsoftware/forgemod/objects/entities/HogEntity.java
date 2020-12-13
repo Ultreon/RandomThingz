@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.entities;
 
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.ModEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.AgeableEntity;
@@ -101,7 +101,7 @@ public class HogEntity extends PigEntity {
     @Override
     @ParametersAreNonnullByDefault
     public HogEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.HOG.get().create(this.world);
+        return ModEntities.HOG.get().create(this.world);
     }
 
     @Override

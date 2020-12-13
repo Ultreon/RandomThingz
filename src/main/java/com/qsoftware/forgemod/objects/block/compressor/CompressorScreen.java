@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class CompressorScreen extends AbstractMachineScreen<CompressorContainer> {
-    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/compressor.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/compressor.png");
 
     public CompressorScreen(CompressorContainer containerIn, PlayerInventory playerInventoryIn, ITextComponent titleIn) {
         super(containerIn, playerInventoryIn, titleIn);

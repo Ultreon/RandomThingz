@@ -4,14 +4,14 @@ import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.util.ResourceLocation;
 
 public final class Constants {
-    public static final ResourceLocation ALLOY_SMELTING = QForgeMod.getId("alloy_smelting");
-    public static final ResourceLocation COMPRESSING = QForgeMod.getId("compressing");
-    public static final ResourceLocation CRUSHING = QForgeMod.getId("crushing");
-    public static final ResourceLocation DRYING = QForgeMod.getId("drying");
-    public static final ResourceLocation INFUSING = QForgeMod.getId("infusing");
-    public static final ResourceLocation MIXING = QForgeMod.getId("mixing");
-    public static final ResourceLocation REFINING = QForgeMod.getId("refining");
-    public static final ResourceLocation SOLIDIFYING = QForgeMod.getId("solidifying");
+    public static final ResourceLocation ALLOY_SMELTING = QForgeMod.rl("alloy_smelting");
+    public static final ResourceLocation COMPRESSING = QForgeMod.rl("compressing");
+    public static final ResourceLocation CRUSHING = QForgeMod.rl("crushing");
+    public static final ResourceLocation DRYING = QForgeMod.rl("drying");
+    public static final ResourceLocation INFUSING = QForgeMod.rl("infusing");
+    public static final ResourceLocation MIXING = QForgeMod.rl("mixing");
+    public static final ResourceLocation REFINING = QForgeMod.rl("refining");
+    public static final ResourceLocation SOLIDIFYING = QForgeMod.rl("solidifying");
 
     // Machine upgrades
     public static final int UPGRADES_PER_SLOT = 1;

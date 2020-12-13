@@ -22,6 +22,7 @@ public final class ModFluids {
     private ModFluids() {
     }
 
+    @SuppressWarnings({"Convert2MethodRef", "FunctionalExpressionCanBeFolded"}) // Did this because IntelliJ thought it would be possible to do that, but then it will cause a crash.
     public static void registerFluids(RegistryEvent.Register<Fluid> event) {
         ForgeFlowingFluid.Properties oilProps = properties("oil", () -> OIL, () -> FLOWING_OIL)
                 .block(() -> ModBlocks.OIL.get())
@@ -44,7 +45,7 @@ public final class ModFluids {
     }
 
     private static <T extends Fluid> T register(String name, T fluid) {
-        ResourceLocation id = QForgeMod.getId(name);
+        ResourceLocation id = QForgeMod.rl(name);
         fluid.setRegistryName(id);
         ForgeRegistries.FLUIDS.register(fluid);
         return fluid;
@@ -52,12 +53,12 @@ public final class ModFluids {
 
     private static ForgeFlowingFluid.Properties properties(String name, Supplier<Fluid> still, Supplier<Fluid> flowing) {
         String tex = "block/" + name;
-        return new ForgeFlowingFluid.Properties(still, flowing, FluidAttributes.builder(QForgeMod.getId(tex + "_still"), QForgeMod.getId(tex + "_flowing")));
+        return new ForgeFlowingFluid.Properties(still, flowing, FluidAttributes.builder(QForgeMod.rl(tex + "_still"), QForgeMod.rl(tex + "_flowing")));
     }
 
     private static ForgeFlowingFluid.Properties propertiesGas(String name, Supplier<Fluid> still) {
         String tex = "block/" + name;
         //noinspection ReturnOfNull -- null-returning Supplier for flowing fluid
-        return new ForgeFlowingFluid.Properties(still, () -> null, FluidAttributes.builder(QForgeMod.getId(tex), QForgeMod.getId(tex)).gaseous());
+        return new ForgeFlowingFluid.Properties(still, () -> null, FluidAttributes.builder(QForgeMod.rl(tex), QForgeMod.rl(tex)).gaseous());
     }
 }

@@ -8,16 +8,19 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public abstract class HudItem extends Item {
     public HudItem(Properties properties) {
         super(properties);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void renderGameOverlay(RenderGameOverlayEvent event) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
@@ -38,6 +41,7 @@ public abstract class HudItem extends Item {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     public abstract void renderHud(GraphicsUtils gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player);
 
 //    protected final void drawCenteredString(MatrixStack matrixStack, FontRenderer fontRenderer, String text, float x, float y, int color) {

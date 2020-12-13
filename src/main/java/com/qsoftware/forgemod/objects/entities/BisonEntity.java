@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.entities;
 
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.ModEntities;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -31,6 +31,6 @@ public class BisonEntity extends CowEntity {
     @Override
     @ParametersAreNonnullByDefault
     public BisonEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.BISON.get().create(this.world);
+        return ModEntities.BISON.get().create(this.world);
     }
 }

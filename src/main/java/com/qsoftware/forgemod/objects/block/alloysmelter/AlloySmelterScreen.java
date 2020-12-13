@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class AlloySmelterScreen extends AbstractMachineScreen<AlloySmelterContainer> {
-    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/alloy_smelter.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/alloy_smelter.png");
 
     public AlloySmelterScreen(AlloySmelterContainer containerIn, PlayerInventory playerInventoryIn, ITextComponent titleIn) {
         super(containerIn, playerInventoryIn, titleIn);

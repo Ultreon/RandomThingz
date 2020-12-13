@@ -13,7 +13,7 @@ public final class Network {
     public static SimpleChannel channel;
 
     static {
-        channel = NetworkRegistry.ChannelBuilder.named(QForgeMod.getId("network"))
+        channel = NetworkRegistry.ChannelBuilder.named(QForgeMod.rl("network"))
                 .clientAcceptedVersions(s -> Objects.equals(s, VERSION))
                 .serverAcceptedVersions(s -> Objects.equals(s, VERSION))
                 .networkProtocolVersion(() -> VERSION)

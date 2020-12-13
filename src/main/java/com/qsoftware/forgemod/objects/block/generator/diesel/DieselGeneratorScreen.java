@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class DieselGeneratorScreen extends AbstractMachineBaseScreen<DieselGeneratorContainer> {
-    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/fluid_generator.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/fluid_generator.png");
 
     public DieselGeneratorScreen(DieselGeneratorContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);

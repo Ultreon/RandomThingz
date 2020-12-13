@@ -15,7 +15,7 @@ import net.minecraft.entity.EntityType;
  *
  * @author Qboi123
  */
-public class EntityTypeInit extends ObjectInit<EntityType<?>> {
+public class ModEntities extends ObjectInit<EntityType<?>> {
     public static final EntityTypeDeferredRegister ENTITY_TYPES = new EntityTypeDeferredRegister(QForgeMod.MOD_ID);
     public static final EntityTypeRegistryObject<EntityBabyCreeper> BABY_CREEPER = register("baby_creeper", EntityType.Builder.create(EntityBabyCreeper::new, EntityClassification.MONSTER).size(0.6F, 1.7F));
     public static final EntityTypeRegistryObject<EntityBabyEnderman> BABY_ENDERMAN = register("baby_enderman", EntityType.Builder.create(EntityBabyEnderman::new, EntityClassification.MONSTER).size(0.6F, 2.9F));
@@ -34,7 +34,7 @@ public class EntityTypeInit extends ObjectInit<EntityType<?>> {
     // Sprites
     public static final EntityTypeRegistryObject<LegendaryEnderPearlEntity> LEGENDARY_ENDER_PEARL = register("legendary_ender_pearl", EntityType.Builder.<LegendaryEnderPearlEntity>create(LegendaryEnderPearlEntity::new, EntityClassification.MISC).size(1.0f, 1.0f));
     public static final EntityTypeRegistryObject<DynamiteEntity> DYNAMITE = register("dynamite", EntityType.Builder.<DynamiteEntity>create(DynamiteEntity::new, EntityClassification.MISC).size(1.0f, 1.0f));
-    private EntityTypeInit() {
+    private ModEntities() {
     }
 
     /**

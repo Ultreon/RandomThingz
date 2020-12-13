@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.entities;
 
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.ModEntities;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -31,6 +31,6 @@ public class OxEntity extends CowEntity {
     @Override
     @ParametersAreNonnullByDefault
     public OxEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return EntityTypeInit.OX.get().create(this.world);
+        return ModEntities.OX.get().create(this.world);
     }
 }

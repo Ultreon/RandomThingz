@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 
 @JeiPlugin
 public class SMechanismsJeiPlugin implements IModPlugin {
-    private static final ResourceLocation PLUGIN_UID = QForgeMod.getId("plugin/main");
+    private static final ResourceLocation PLUGIN_UID = QForgeMod.rl("plugin/main");
 
     private static List<IRecipe<?>> getRecipesOfType(IRecipeType<?> recipeType) {
         assert Minecraft.getInstance().world != null;

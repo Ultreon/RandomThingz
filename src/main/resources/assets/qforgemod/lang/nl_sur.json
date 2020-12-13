@@ -707,5 +707,10 @@
   "misc.qforgemod.pc.storage.usb.short": "USB",
 
   "key.qforgemod.debug_screen": "Toon / verberg debug scherm",
-  "key.categories.qforgemod": "QForgeMod toetsen"
+  "key.categories.qforgemod": "QForgeMod toetsen",
+
+  "msg.qforgemod.confirm_exit.title": "Sluit bevestiging",
+  "msg.qforgemod.confirm_exit.description": "Weet je zeker dat je Minecraft wilt afsluiten?",
+
+  "button.qforgemod.confirm_exit.shutdown_pc": "Computer afsluiten"
 }

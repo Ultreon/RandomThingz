@@ -22,6 +22,7 @@ import com.qsoftware.forgemod.objects.block.refinery.RefineryBlock;
 import com.qsoftware.forgemod.objects.block.solidifier.SolidifierBlock;
 import com.qsoftware.forgemod.objects.block.wire.WireBlock;
 import com.qsoftware.forgemod.objects.blocks.GamePcBlock;
+import com.qsoftware.forgemod.objects.blocks.custom.CustomButtonBlock;
 import com.qsoftware.forgemod.objects.blocks.customrender.CRDoorBlock;
 import com.qsoftware.forgemod.objects.blocks.customrender.CRFlowerBlock;
 import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
@@ -47,6 +48,9 @@ import net.minecraft.loot.LootTableManager;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -57,6 +61,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -130,30 +135,35 @@ public final class ModBlocks {
     //     Flowers     //
     /////////////////////
     public static final BlockRegistryObject<FlowerBlock> BUTTERCUP = register("buttercup", () -> new CRFlowerBlock(Effects.ABSORPTION, 200, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)) {
+        @OnlyIn(Dist.CLIENT)
         @Override
         public RenderType getRenderType() {
             return RenderType.getCutout();
         }
     });
     public static final BlockRegistryObject<FlowerBlock> SMALL_SUNFLOWER = register("small_sunflower", () -> new CRFlowerBlock(Effects.GLOWING, 60, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)) {
+        @OnlyIn(Dist.CLIENT)
         @Override
         public RenderType getRenderType() {
             return RenderType.getCutout();
         }
     });
     public static final BlockRegistryObject<FlowerBlock> SMALL_LILAC = register("small_lilac", () -> new CRFlowerBlock(Effects.HASTE, 220, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)) {
+        @OnlyIn(Dist.CLIENT)
         @Override
         public RenderType getRenderType() {
             return RenderType.getCutout();
         }
     });
     public static final BlockRegistryObject<FlowerBlock> SMALL_PEONY = register("small_peony", () -> new CRFlowerBlock(Effects.SPEED, 160, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)) {
+        @OnlyIn(Dist.CLIENT)
         @Override
         public RenderType getRenderType() {
             return RenderType.getCutout();
         }
     });
     public static final BlockRegistryObject<FlowerBlock> SMALL_ROSE_BUSH = register("small_rose_bush", () -> new CRFlowerBlock(Effects.HEALTH_BOOST, 220, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)) {
+        @OnlyIn(Dist.CLIENT)
         @Override
         public RenderType getRenderType() {
             return RenderType.getCutout();
@@ -164,24 +174,28 @@ public final class ModBlocks {
     //     Doors     //
     ///////////////////
     public static final BlockRegistryObject<DoorBlock> LAB_DOOR = registerRedstone("lab_door", () -> new CRDoorBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5.0F).sound(SoundType.METAL).notSolid()) {
+        @OnlyIn(Dist.CLIENT)
         @Override
         public RenderType getRenderType() {
             return RenderType.getCutout();
         }
     });
     public static final BlockRegistryObject<DoorBlock> SHOPPING_DOOR = registerRedstone("shopping_door", () -> new CRDoorBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.7F).sound(SoundType.METAL).notSolid()) {
+        @OnlyIn(Dist.CLIENT)
         @Override
         public RenderType getRenderType() {
             return RenderType.getCutout();
         }
     });
     public static final BlockRegistryObject<DoorBlock> IRON_GLASS_DOOR = registerRedstone("iron_glass_door", () -> new CRDoorBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.7F).sound(SoundType.METAL).notSolid()) {
+        @OnlyIn(Dist.CLIENT)
         @Override
         public RenderType getRenderType() {
             return RenderType.getCutout();
         }
     });
     public static final BlockRegistryObject<DoorBlock> IRON_BARRIER_DOOR = registerRedstone("iron_barrier_door", () -> new CRDoorBlock(Block.Properties.create(Material.IRON, MaterialColor.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.7F).sound(SoundType.METAL).notSolid()) {
+        @OnlyIn(Dist.CLIENT)
         @Override
         public RenderType getRenderType() {
             return RenderType.getCutout();
@@ -204,8 +218,6 @@ public final class ModBlocks {
     public static final BlockRegistryObject<SlabBlock> EUCALYPTUS_SLAB = registerShaped("eucalyptus_slab", () -> new SlabBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<FenceBlock> EUCALYPTUS_FENCE = registerShaped("eucalyptus_fence", () -> new FenceBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<FenceGateBlock> EUCALYPTUS_FENCE_GATE = registerShaped("eucalyptus_fence_gate", () -> new FenceGateBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
-    public static final BlockRegistryObject<WoodButtonBlock> EUCALYPTUS_BUTTON = registerShaped("eucalyptus_button", () -> new WoodButtonBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
-    public static final BlockRegistryObject<PressurePlateBlock> EUCALYPTUS_PRESSURE_PLATE = registerShaped("eucalyptus_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<Block> CHERRY_PLANKS = registerWood("cherry_planks", () -> new Block(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).hardnessAndResistance(0.7f, 15.0f).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<Block> CHERRY_LOG = registerWood("cherry_log", () -> new RotatedPillarBlock(Block.Properties.create(Material.WOOD, MaterialColor.WOOD).harvestTool(ToolType.AXE).hardnessAndResistance(2.0f).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<LeavesBlock> CHERRY_LEAVES = register("cherry_leaves", ModBlocks::createLeavesBlock);
@@ -214,41 +226,31 @@ public final class ModBlocks {
     public static final BlockRegistryObject<SlabBlock> CHERRY_SLAB = registerShaped("cherry_slab", () -> new SlabBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<FenceBlock> CHERRY_FENCE = registerShaped("cherry_fence", () -> new FenceBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<FenceGateBlock> CHERRY_FENCE_GATE = registerShaped("cherry_fence_gate", () -> new FenceGateBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
-    public static final BlockRegistryObject<WoodButtonBlock> CHERRY_BUTTON = registerShaped("cherry_button", () -> new WoodButtonBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
-    public static final BlockRegistryObject<PressurePlateBlock> CHERRY_PRESSURE_PLATE = registerShaped("cherry_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
 
-    public static final BlockRegistryObject<StoneButtonBlock> DIAMOND_BUTTON = registerShaped("diamond_button", () -> new StoneButtonBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) {
-        @Override
-        public int getActiveDuration() {
-            return 60;
-        }
-    });
-
-    public static final BlockRegistryObject<StoneButtonBlock> IRON_BUTTON = registerShaped("iron_button", () -> new StoneButtonBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) {
-        @Override
-        public int getActiveDuration() {
-            return 40;
-        }
-    });
-    public static final BlockRegistryObject<StoneButtonBlock> GOLD_BUTTON = registerShaped("gold_button", () -> new StoneButtonBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) {
-        @Override
-        public int getActiveDuration() {
-            return 10;
-        }
-    });
-
-    public static final BlockRegistryObject<StoneButtonBlock> QUARTZ_BUTTON = registerShaped("quartz_button", () -> new StoneButtonBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)) {
-        @Override
-        public int getActiveDuration() {
-            return 5;
-        }
-    });
+    //////////////////////
+    //     Redstone     //
+    /////////////////////.
+    public static final BlockRegistryObject<WoodButtonBlock> EUCALYPTUS_BUTTON = registerRedstone("eucalyptus_button", () -> new WoodButtonBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+    public static final BlockRegistryObject<WoodButtonBlock> CHERRY_BUTTON = registerRedstone("cherry_button", () -> new WoodButtonBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+    public static final BlockRegistryObject<StoneButtonBlock> DIAMOND_BUTTON = registerRedstone("diamond_button", () -> new CustomButtonBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.AXE).sound(SoundType.STONE), 100));
+    public static final BlockRegistryObject<StoneButtonBlock> IRON_BUTTON = registerRedstone("iron_button", () -> new CustomButtonBlock(Block.Properties.create(Material.IRON).harvestTool(ToolType.AXE).sound(SoundType.METAL), 60));
+    public static final BlockRegistryObject<StoneButtonBlock> GOLD_BUTTON = registerRedstone("gold_button", () -> new CustomButtonBlock(Block.Properties.create(Material.IRON).harvestTool(ToolType.AXE).sound(SoundType.METAL), 10));
+    public static final BlockRegistryObject<StoneButtonBlock> QUARTZ_BUTTON = registerRedstone("quartz_button", () -> new CustomButtonBlock(Block.Properties.create(Material.ROCK).harvestTool(ToolType.AXE).sound(SoundType.STONE), 5));
+    public static final BlockRegistryObject<PressurePlateBlock> EUCALYPTUS_PRESSURE_PLATE = registerRedstone("eucalyptus_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
+    public static final BlockRegistryObject<PressurePlateBlock> CHERRY_PRESSURE_PLATE = registerRedstone("cherry_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).sound(SoundType.WOOD)));
 
     ///////////////////////
-    //     Furniture     //
+    //     Furniture     /4
     ///////////////////////
     public static final BlockRegistryObject<Block> GAME_PC = registerFurniture("game_pc", () -> new GamePcBlock(Block.Properties.create(Material.ANVIL).hardnessAndResistance(4.7f).sound(SoundType.ANVIL)));
-    public static final BlockRegistryObject<Block> ROUTER = registerFurniture("router", () -> new FaceableBlock(Block.Properties.create(Material.ANVIL).hardnessAndResistance(4.7f).sound(SoundType.ANVIL)));
+    public static final BlockRegistryObject<Block> ROUTER = registerFurniture("router", () -> new FaceableBlock(Block.Properties.create(Material.ANVIL).hardnessAndResistance(4.7f).sound(SoundType.ANVIL)) {
+        private final VoxelShape SHAPE = VoxelShapes.create(2d / 16, 0d / 16, 2d / 16, 14d / 16, 2.2d / 16, 14d / 16);
+
+        @Override
+        public @NotNull VoxelShape getShape(BlockState state, @NotNull IBlockReader worldIn, @NotNull BlockPos pos, @NotNull ISelectionContext context) {
+            return SHAPE;
+        }
+    });
 
     /////////////////////////
     //     Tile entity     //
@@ -340,6 +342,7 @@ public final class ModBlocks {
         return register(name, block, ModBlocks::item);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static <T extends Block> BlockRegistryObject<T> registerMiscellaneous(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::miscellaneousItem);
     }
@@ -466,7 +469,7 @@ public final class ModBlocks {
     @Nullable
     public static ITextComponent checkForMissingLootTables(PlayerEntity player) {
         // Checks for missing block loot tables, but only in dev
-        if (!(player.world instanceof ServerWorld) || !QForgeMod.isDevBuild()) return null;
+        if (!(player.world instanceof ServerWorld) || !QForgeMod.isDevState()) return null;
 
         LootTableManager lootTableManager = ((ServerWorld) player.world).getServer().getLootTableManager();
         Collection<String> missing = new ArrayList<>();

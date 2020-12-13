@@ -20,7 +20,7 @@ import java.util.function.Supplier;
  *
  * @author Qboi123
  */
-public class ContainerTypesInit extends ObjectInit<ContainerType<?>> {
+public class ModContainers extends ObjectInit<ContainerType<?>> {
     public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, QForgeMod.MOD_ID);
 
     // Example Chest

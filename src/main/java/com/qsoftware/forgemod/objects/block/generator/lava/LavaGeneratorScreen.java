@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class LavaGeneratorScreen extends AbstractMachineBaseScreen<LavaGeneratorContainer> {
-    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/fluid_generator.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/fluid_generator.png");
 
     public LavaGeneratorScreen(LavaGeneratorContainer container, PlayerInventory playerInventory, ITextComponent titleIn) {
         super(container, playerInventory, titleIn);

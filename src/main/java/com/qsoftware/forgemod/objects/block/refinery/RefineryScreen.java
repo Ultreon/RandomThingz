@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class RefineryScreen extends AbstractMachineBaseScreen<RefineryContainer> {
-    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/refinery.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/refinery.png");
 
     public RefineryScreen(RefineryContainer container, PlayerInventory playerInventory, ITextComponent titleIn) {
         super(container, playerInventory, titleIn);

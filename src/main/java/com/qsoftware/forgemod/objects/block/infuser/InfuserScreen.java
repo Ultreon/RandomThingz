@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class InfuserScreen extends AbstractMachineBaseScreen<InfuserContainer> {
-    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/infuser.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/infuser.png");
 
     public InfuserScreen(InfuserContainer container, PlayerInventory playerInventory, ITextComponent titleIn) {
         super(container, playerInventory, titleIn);

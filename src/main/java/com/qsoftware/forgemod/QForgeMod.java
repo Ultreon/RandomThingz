@@ -1,21 +1,11 @@
 package com.qsoftware.forgemod;
 
-import com.qsoftware.forgemod.common.IHasRenderType;
-import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.init.renew.ModBlocksNew;
 import com.qsoftware.forgemod.init.renew.ModItemsNew;
-import com.qsoftware.forgemod.init.types.ContainerTypesInit;
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
-import com.qsoftware.forgemod.init.types.TileEntityTypesInit;
-import com.qsoftware.forgemod.keybinds.KeyBindingList;
-import com.qsoftware.forgemod.listener.GameOverlayListener;
-import com.qsoftware.forgemod.objects.entities.*;
-import com.qsoftware.forgemod.objects.entities.baby.*;
-import com.qsoftware.forgemod.world.gen.ModOreGen;
-import net.minecraft.block.Block;
+import com.qsoftware.forgemod.init.types.ModContainers;
+import com.qsoftware.forgemod.init.types.ModEntities;
+import com.qsoftware.forgemod.init.types.ModTileEntities;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -42,79 +32,29 @@ import java.util.stream.Collectors;
  * @author Qboi123
  */
 @Mod("qforgemod")
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class QForgeMod {
     // Mod Data
     public static final String MOD_ID = "qforgemod";
-
-    // Proxy
-//    public static final CommonProxy PROXY = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
-    public static final Logger LOGGER = LogManager.getLogger(QForgeMod.MOD_ID);
-    public static final String MOD_NAME = "QForgeUtils";
-    @SuppressWarnings("unused")
-    public static final String MOD_VERSION = "1.1-beta12";
-    @SuppressWarnings("unused")
+    public static final String MOD_NAME = "QForgeMod";
+    public static final String MOD_VERSION = "1.1-beta14";
     public static final QVersion VERSION = new QVersion(MOD_VERSION);
 
-    // Other
-//    @SuppressWarnings({"unused", "RedundantSuppression"})
-//    public static IProxy proxy = DistExecutor.runForDist(() -> com.qsoftware.forgemod.setup.ClientProxy::new, () -> ServerProxy::new);
+    /**
+     * QForgeMod's Logger
+     */
+    public static final Logger LOGGER = LogManager.getLogger(QForgeMod.MOD_ID);
 
-//    public static ModSetup setup = new ModSetup();
-
-    @SuppressWarnings({"unused", "RedundantSuppression"})
-    public static final String MOD_GUI_FACTORY = "fr.atesab.customqforgemod.gui.GuiFactoryCursorMod";
-    public static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(QForgeMod.MOD_NAME);
-
+    /**
+     * Unused.
+     */
+    @SuppressWarnings("unused")
     public static final Random RANDOM = new Random();
 
-    public static QForgeMod INSTANCE;
-    public static IProxy PROXY;
-
-    /**
-     * Instance field, is protected.
-     */
-    protected static QForgeMod instance;
-
-    /**
-     * The QForgeUtils constructor for mod-loading.
-     */
-    public QForgeMod() {
-        INSTANCE = this;
-        PROXY = DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);
-
-        // Final fields.
-        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        final ModLoadingContext modLoadingContext = ModLoadingContext.get();
-
-        // Assign instance.
-        instance = this;
-
-        MinecraftForge.EVENT_BUS.register(this);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-
-        // Register generic listeners.
-        ModBlocksNew.BLOCKS.register(modEventBus);
-        ModBlocksNew.ITEMS.register(modEventBus);
-        ModItemsNew.ITEMS.register(modEventBus);
-        EntityTypeInit.ENTITY_TYPES.register(modEventBus);
-        ContainerTypesInit.CONTAINER_TYPES.register(modEventBus);
-        TileEntityTypesInit.TILE_ENTITY_TYPES.register(modEventBus);
-
-        // Register listeners.
-        modEventBus.addListener(this::loadComplete);
-        modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::enqueueIMC);
-        modEventBus.addListener(this::processIMC);
-
-        // Client-start.
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-            //noinspection Convert2MethodRef
-            clientStart();
-        });
-
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+    // Class static fields.
+    private static QForgeMod instance;
+    private static IProxy proxy;
+    private static Initialization init;
 
     /**
      * Get the QForgeUtils mod instance.
@@ -125,63 +65,112 @@ public class QForgeMod {
         return instance;
     }
 
+    /**
+     * Get QForgeMod's proxy.
+     *
+     * @return the proxy.
+     */
+    @SuppressWarnings("unused")
+    public static IProxy getProxy() {
+        return proxy;
+    }
+
+    /**
+     * Get initialization object.
+     *
+     * @return the initialization object.
+     */
+    public static Initialization getInit() {
+        return init;
+    }
+
+    /**
+     * The QForgeUtils constructor for mod-loading.
+     *
+     * @since 1.0-alpha1
+     * @see Mod
+     */
+    public QForgeMod() {
+        // Constants.
+        instance = this;
+        proxy = DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);
+        init = new Initialization(this);
+
+        // Assign constants.
+        Constants.logger = LOGGER;
+        Constants.qforgemod = this;
+        Constants.proxy = proxy;
+
+        // Final fields.
+        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        // Register forge event bus listener(s).
+        MinecraftForge.EVENT_BUS.register(this);
+
+        // Register mod event bus listeners.
+        modEventBus.addListener(init::clientSetup);
+        modEventBus.addListener(init::commonSetup);
+        modEventBus.addListener(init::loadComplete);
+        modEventBus.addListener(this::enqueueIMC);
+        modEventBus.addListener(this::processIMC);
+
+        // Register generic listeners.
+        ModBlocksNew.BLOCKS.register(modEventBus);
+        ModBlocksNew.ITEMS.register(modEventBus);
+        ModItemsNew.ITEMS.register(modEventBus);
+        ModEntities.ENTITY_TYPES.register(modEventBus);
+        ModContainers.CONTAINER_TYPES.register(modEventBus);
+        ModTileEntities.TILE_ENTITY_TYPES.register(modEventBus);
+
+        // Client-start.
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+            init.clientStart();
+        });
+    }
+
+    /**
+     * Get the resource location based on QForgeMod's id.
+     *
+     * @param path the resource path.
+     * @return a resource location.
+     */
     public static ResourceLocation rl(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
 
-    @SuppressWarnings("ConstantConditions")
-    public static boolean isDevBuild() {
-        return "NONE".equals(MOD_VERSION);
-    }
-
-    public static ResourceLocation getId(String path) {
-        return new ResourceLocation(MOD_ID, path);
-    }
-
     @OnlyIn(Dist.CLIENT)
-    public void clientStart() {
-
+    private static boolean isDevState0() {
+        return Minecraft.getInstance().getVersion().equals("MOD_DEV");
     }
 
-    private void clientSetup(FMLClientSetupEvent event) {
-        // do something that can only be done on the client
-        for (Block block : Registration.getBlocks()) {
-            if (block instanceof IHasRenderType) {
-                IHasRenderType hasRenderType = (IHasRenderType) block;
-                RenderTypeLookup.setRenderLayer(block, hasRenderType.getRenderType());
-            }
+    /**
+     * Check if QForgeMod is currently a development build.
+     *
+     * @return a boolean.
+     */
+    public static boolean isDevState() {
+        try {
+            return isDevState0();
+        } catch (NoSuchMethodError error) {
+            return false;
         }
-
-        KeyBindingList.register();
-        if (Minecraft.getInstance().getVersion().equals("MOD_DEV")) {
-            GameOverlayListener.DEBUG_PAGE = GameOverlayListener.PAGE.PLAYER_1;
-        }
-
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> {
-            // Baby variants.
-            GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_CREEPER.get(), EntityBabyCreeper.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_ENDERMAN.get(), EntityBabyEnderman.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_SKELETON.get(), EntityBabySkeleton.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_STRAY.get(), EntityBabyStray.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.BABY_WITHER_SKELETON.get(), EntityBabyWitherSkeleton.registerAttributes().create());
-
-            // Normal variants.
-            GlobalEntityTypeAttributes.put(EntityTypeInit.OX.get(), OxEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.HOG.get(), HogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.DUCK.get(), DuckEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.BISON.get(), BisonEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.MOOBLOOM.get(), MoobloomEntityOld.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.WARTHOG.get(), WarthogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.ICE_ENDERMAN.get(), IceEndermanEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.FIRE_CREEPER.get(), FireCreeperEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(EntityTypeInit.GLOW_SQUID.get(), GlowSquidEntity.registerAttributes().create());
-        });
+    /**
+     * Event handler for server starting.
+     *
+     * @param event a {@link FMLServerStartingEvent} object.
+     */
+    @SubscribeEvent
+    public void onServerStarting(FMLServerStartingEvent event) {
+        init.serverStart(event);
     }
 
+    /**
+     * Event handler for Inter-Mod Communication enqueue. (IMC enqueue)
+     *
+     * @param event a {@link InterModEnqueueEvent} object.
+     */
     private void enqueueIMC(final InterModEnqueueEvent event) {
         InterModComms.sendTo("qforgemod", "helloworld", () -> {
             LOGGER.info("Hello world from the MDK");
@@ -189,19 +178,15 @@ public class QForgeMod {
         });
     }
 
+    /**
+     * Event handler for Inter-Mod Communication process. (IMC process)
+     *
+     * @param event a {@link InterModProcessEvent} object.
+     */
     private void processIMC(final InterModProcessEvent event) {
         LOGGER.info("Got IMC {}", event.getIMCStream().
                 map(m -> m.getMessageSupplier()).
                 collect(Collectors.toList()));
     }
 
-    @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
-        LOGGER.info("Hello from QForgeUtils: Hello server!");
-    }
-
-    private void loadComplete(FMLLoadCompleteEvent event) {
-        LOGGER.info("LoadCompleteEvent: " + event);
-        ModOreGen.createOresFeatures();
-    }
 }

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.entities;
 
 import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.init.types.EntityTypeInit;
+import com.qsoftware.forgemod.init.types.ModEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -33,11 +33,11 @@ public class DynamiteEntity extends ProjectileItemEntity {
     }
 
     public DynamiteEntity(World worldIn, LivingEntity throwerIn) {
-        super(EntityTypeInit.DYNAMITE.getEntityType(), throwerIn, worldIn);
+        super(ModEntities.DYNAMITE.getEntityType(), throwerIn, worldIn);
     }
 
     public DynamiteEntity(World worldIn, double x, double y, double z) {
-        super(EntityTypeInit.DYNAMITE.getEntityType(), x, y, z, worldIn);
+        super(ModEntities.DYNAMITE.getEntityType(), x, y, z, worldIn);
     }
 
     protected @NotNull Item getDefaultItem() {

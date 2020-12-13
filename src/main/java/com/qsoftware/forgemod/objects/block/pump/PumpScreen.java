@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class PumpScreen extends AbstractMachineBaseScreen<PumpContainer> {
-    private static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/pump.png");
+    private static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/pump.png");
 
     public PumpScreen(PumpContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);

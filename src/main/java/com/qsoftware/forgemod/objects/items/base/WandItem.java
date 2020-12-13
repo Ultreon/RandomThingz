@@ -22,6 +22,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -254,6 +256,7 @@ public abstract class WandItem extends HudItem {
         tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Strength: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + RomanNumber.toRoman(strength)));
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void renderHud(GraphicsUtils gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
         int height = mc.getMainWindow().getScaledHeight();

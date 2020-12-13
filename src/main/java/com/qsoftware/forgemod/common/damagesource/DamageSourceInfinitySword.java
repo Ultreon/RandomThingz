@@ -34,6 +34,11 @@ public class DamageSourceInfinitySword extends EntityDamageSource {
     }
 
     @Override
+    public boolean isUnblockable() {
+        return true;
+    }
+
+    @Override
     public boolean isDifficultyScaled() {
         return false;
     }

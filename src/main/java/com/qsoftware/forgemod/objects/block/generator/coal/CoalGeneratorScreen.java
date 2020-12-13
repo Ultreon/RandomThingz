@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class CoalGeneratorScreen extends AbstractMachineBaseScreen<CoalGeneratorContainer> {
-    public static final ResourceLocation TEXTURE = QForgeMod.getId("textures/gui/coal_generator.png");
+    public static final ResourceLocation TEXTURE = QForgeMod.rl("textures/gui/coal_generator.png");
 
     public CoalGeneratorScreen(CoalGeneratorContainer container, PlayerInventory playerInventory, ITextComponent titleIn) {
         super(container, playerInventory, titleIn);
