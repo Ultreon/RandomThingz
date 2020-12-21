@@ -1,6 +1,6 @@
 package com.qsoftware.texturedmodels.block;
 
-import com.qsoftware.texturedmodels.BlockCarpentryMain;
+import com.qsoftware.texturedmodels.QTextureModels;
 import com.qsoftware.texturedmodels.setup.Registration;
 import com.qsoftware.texturedmodels.setup.config.BCModConfig;
 import com.qsoftware.texturedmodels.tileentity.FrameBlockTile;
@@ -75,7 +75,7 @@ public class FenceFrameBlock extends FenceBlock {
                 return LeadItem.bindPlayerMobs(player, world, pos);
             } else {
                 if (item.getItem() instanceof BlockItem) {
-                    if (state.get(BCBlockStateProperties.CONTAINS_BLOCK) || Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(BlockCarpentryMain.MOD_ID)) {
+                    if (state.get(BCBlockStateProperties.CONTAINS_BLOCK) || Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) {
                         return ActionResultType.PASS;
                     }
                     TileEntity tileEntity = world.getTileEntity(pos);

@@ -20,7 +20,7 @@ loaderVersion="[34,)" #mandatory This is typically bumped every Minecraft versio
 
 [[mods]] #mandatory
 modId="qforgemod" #mandatory
-version="1.1-beta10" #mandatory
+version="1.1-release1" #mandatory
 displayName="QForgeMod: Main Module" #mandatory
 #updateJSONURL="http://myurl.me/" #optional
 displayURL="https://quintenjungblut.wixsite.com/qplaysoftware/" #optional
@@ -28,35 +28,51 @@ displayURL="https://quintenjungblut.wixsite.com/qplaysoftware/" #optional
 credits="Qboi123" #optional
 authors="Qboi123" #optional
 description='''
-§nThe§r§o mod for all your needs!§r
+§l§nQForgeMod§r
+  §7§oProbably just another random things mod.§r
 
-§mHello, this is a description, and I do not know what to write here...§r
+  §7§lStatus:§r §o§aRelease§r
 
-§mYou don't have to be sad, have some lorem ipsum.§r
+  §oFor some of you, knows the The World Items mod and it's versions 1, 2 and 3.§r
+  §oBut now knowing more about creating mods, there's a new new version of the mod with a brand new name.§r
+  §oThe mod has been rewritten in pure Java. And adding already more things that before: The QForgeMod Project!§r
 
-§mLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sagittis luctus odio eu tempus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque volutpat ligula eget lacus auctor sagittis. In hac habitasse platea dictumst. Nunc gravida elit vitae sem vehicula efficitur. Donec mattis ipsum et arcu lobortis, eleifend sagittis sem rutrum. Cras pharetra quam eget posuere fermentum. Sed id tincidunt justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.§r
+§l§nLinks:§r
+  §lDiscord server coming soon!§r
+  QSoftware home page: https://quintenjungblut.wixsite.com/qplaysoftware
 
-§b§l§nCredits:§r
+§l§nSource code:§r
+  https://www.curseforge.com/linkout?remoteUrl=https%253a%252f%252fgitlab.com%252fqsoftware2%252fqforgemod
+
+§l§nBugs / Feature requests§r
+  §cIn Alpha / Beta releases stuff might change or break, it's recommended to use them for testing purposes only.§r
+  If there's a problem with the mod: don't post the crash report in the comments, but post it on the issue tracker here.
+  If there's no crash report but it still crashes, post the debug.log file in your .minecraft/logs folder to the issue tracker.
+  If there's no crash report and there's no crash in the debug.log, then there's probably a problem with your Java / Computer.
+
+  If you want to request a feature you can also do it here.
+
+§l§nCredits:§r
   §l"Modern Sofa" by JustinRustin (Modern Sofa)§r
-  Available for download at §nhttps://blockmodelsmodel.com.com//361/ §r
+  Available for download at https://blockmodels.com/361/ §r
 
   §l"Club" by Gengar (Club)§r
-  §oAvailable for download at https://blockmodels.com.com/model/496/ §r
+  §oAvailable for download at https://blockmodels.com/model/496/ §r
 
   §l"Table with tablecloth" by Miep_HD (Table)§r
-  §oAvailable for download at https://blockmodels.com.com/model/668/ §r
+  §oAvailable for download at https://blockmodels.com/model/668/ §r
 
   §l"Healing Potion" by Gengar (Healing Potion)§r
-  §oAvailable for download at https://blockmodels.com.com/model/531/ §r
+  §oAvailable for download at https://blockmodels.com/model/531/ §r
 
   §l"Improved PC Gamer" by Giovanni_5656 (Game PC)§r
-  §oAvailable for download at https://blockmodels.com.com/model/339/ §r
+  §oAvailable for download at https://blockmodels.com/model/339/ §r
 
   §l"Router" by F1ash (Router)§r
-  §oAvailable for download at https://blockmodels.com.com/model/331/ §r
+  §oAvailable for download at https://blockmodels.com/model/331/ §r
 
   §l"Wooden Box" by F1ash (Crate)§r
-  §oAvailable for download at https://blockmodels.com.com/model/330/ §r
+  §oAvailable for download at https://blockmodels.com/model/330/ §r
 
   §l"Minecraft Dungeons Textures for Minecraft Java Edition" by Kai1907 and Shadow_236§r
   §oAvailable for download at https://www.planetminecraft.com/texture-pack/minecraft-dungeons-textures-for-minecraft-java-edition/ §r
@@ -89,7 +105,7 @@ description='''
   §oAvailable for download at https://www.planetminecraft.com/texture-pack/vanilla-225-custom-bookshelves-add-on/ §r
 
 
-§b§l§nOther Mods:§r
+§l§nOther Mods:§r
   §l=--------------------------=§r
   §oSilent's Mechanisms§r
   §l§n=--------------------------=§r
@@ -101,10 +117,19 @@ description='''
    §o https://www.curseforge.com/minecraft/mc-mods/silents-mechanisms/files/3105339 §r
 
   §l=--------------------------=§r
-  §oQForgeUtils 1.0§r
+  §oSilent Lib§r
   §l§n=--------------------------=§r
   §lGitHub:§r
-   §o https://github.com/Qboi123/QForgeUtils §r
+   §o https://github.com/SilentChaos512/SilentLib/tree/ef258b04897296131e3e1f439df8b5c1425fc453 §r
+  §lCurseForge:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/silent-lib §r
+  §lCurseForge Download:§r
+   §o https://www.curseforge.com/minecraft/mc-mods/silent-lib/files/3103851 §r
+
+  §l=--------------------------=§r
+  §oQForgeUtils 1.0§r
+  §l§n=--------------------------=§r
+  §oDownload not available!§r
 '''
 
 [[mods]]
@@ -134,7 +159,7 @@ credits="Thanks for many help goes to McJty and the Forge Forum Team" #optional
 authors="PianoManu, Qboi123" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This Mod is partially forked from: https://github.com/PianoManu/BlockCarpentry
+This Mod is partially forked from: https://github.com/PianoManu/QTextureModels
 The mod was merged after the base essentials of QForgeMod were created.
 
 Original description:

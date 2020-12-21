@@ -5,11 +5,11 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.crafting.recipe.InfusingRecipe;
 import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.objects.block.infuser.InfuserScreen;
-import com.qsoftware.forgemod.objects.block.infuser.InfuserTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.infuser.InfuserScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.infuser.InfuserTileEntity;
 import com.qsoftware.forgemod.objects.items.fluid.CanisterItem;
 import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.forgemod.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -43,7 +43,7 @@ public class InfusingRecipeCategory implements IRecipeCategory<InfusingRecipe> {
         icon = guiHelper.createDrawableIngredient(new ItemStack(ModBlocks.INFUSER));
         arrow = guiHelper.drawableBuilder(InfuserScreen.TEXTURE, 176, 14, 24, 17)
                 .buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
-        localizedName = TextUtil.translate("jei", "category.infusing").getString();
+        localizedName = TextUtils.translate("jei", "category.infusing").getString();
     }
 
     private static void addFluidContainers(Collection<ItemStack> list, Fluid fluid) {

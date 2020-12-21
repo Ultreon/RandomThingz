@@ -7,6 +7,7 @@ import com.qsoftware.forgemod.objects.items.spawnegg.CustomSpawnEggItem;
 import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
 import com.qsoftware.forgemod.registration.impl.ItemDeferredRegister;
 import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 
@@ -34,4 +35,9 @@ public class ModItemsNew extends ObjectInit<Item> {
         //Note: We are required to use a custom item as we cannot use the base SpawnEggItem due to the entity type not being initialized yet
         return ITEMS.register(entityTypeProvider.getInternalRegistryName() + "_spawn_egg", () -> new CustomSpawnEggItem<>(entityTypeProvider, primaryColor, secondaryColor));
     }
+
+    private ModItemsNew() {
+        throw ExceptionUtil.utilityConstructor();
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
@@ -46,7 +47,7 @@ public final class Registration {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
 
     private Registration() {
-        throw new IllegalAccessError("Utility class");
+        throw ExceptionUtil.utilityConstructor();
     }
 
     public static void register() {

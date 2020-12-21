@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
@@ -15,6 +16,10 @@ public class ModTags {
 
     private static ResourceLocation modId(String path) {
         return new ResourceLocation(QForgeMod.MOD_ID, path);
+    }
+
+    private ModTags() {
+        throw ExceptionUtil.utilityConstructor();
     }
 
     public static final class Blocks {

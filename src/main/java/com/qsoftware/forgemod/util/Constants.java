@@ -21,6 +21,7 @@ public final class Constants {
     public static final int UPGRADE_RANGE_AMOUNT = 2;
 
     private Constants() {
-        throw new IllegalAccessError("Utility class");
+        throw ExceptionUtil.utilityConstructor();
     }
+
 }

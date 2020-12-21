@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.client.renderer;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.client.renderer.layers.MoobloomFlowerLayerOld;
 import com.qsoftware.forgemod.objects.entities.MoobloomEntityOld;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

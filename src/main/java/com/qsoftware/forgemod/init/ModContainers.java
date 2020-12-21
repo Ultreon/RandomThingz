@@ -1,32 +1,33 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.objects.block.alloysmelter.AlloySmelterScreen;
-import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxContainer;
-import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxScreen;
-import com.qsoftware.forgemod.objects.block.compressor.CompressorContainer;
-import com.qsoftware.forgemod.objects.block.compressor.CompressorScreen;
-import com.qsoftware.forgemod.objects.block.crusher.CrusherScreen;
-import com.qsoftware.forgemod.objects.block.electricfurnace.ElectricFurnaceContainer;
-import com.qsoftware.forgemod.objects.block.electricfurnace.ElectricFurnaceScreen;
-import com.qsoftware.forgemod.objects.block.generator.coal.CoalGeneratorContainer;
-import com.qsoftware.forgemod.objects.block.generator.coal.CoalGeneratorScreen;
-import com.qsoftware.forgemod.objects.block.generator.diesel.DieselGeneratorContainer;
-import com.qsoftware.forgemod.objects.block.generator.diesel.DieselGeneratorScreen;
-import com.qsoftware.forgemod.objects.block.generator.lava.LavaGeneratorContainer;
-import com.qsoftware.forgemod.objects.block.generator.lava.LavaGeneratorScreen;
-import com.qsoftware.forgemod.objects.block.infuser.InfuserContainer;
-import com.qsoftware.forgemod.objects.block.infuser.InfuserScreen;
-import com.qsoftware.forgemod.objects.block.mixer.MixerContainer;
-import com.qsoftware.forgemod.objects.block.mixer.MixerScreen;
-import com.qsoftware.forgemod.objects.block.pump.PumpContainer;
-import com.qsoftware.forgemod.objects.block.pump.PumpScreen;
-import com.qsoftware.forgemod.objects.block.quarry.QuarryContainer;
-import com.qsoftware.forgemod.objects.block.quarry.QuarryScreen;
-import com.qsoftware.forgemod.objects.block.refinery.RefineryContainer;
-import com.qsoftware.forgemod.objects.block.refinery.RefineryScreen;
-import com.qsoftware.forgemod.objects.block.solidifier.SolidifierContainer;
-import com.qsoftware.forgemod.objects.block.solidifier.SolidifierScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.alloysmelter.AlloySmelterScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.batterybox.BatteryBoxContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.batterybox.BatteryBoxScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.compressor.CompressorContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.compressor.CompressorScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.crusher.CrusherScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.electricfurnace.ElectricFurnaceContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.electricfurnace.ElectricFurnaceScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.generator.coal.CoalGeneratorContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.generator.coal.CoalGeneratorScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.generator.diesel.DieselGeneratorContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.generator.diesel.DieselGeneratorScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.generator.lava.LavaGeneratorContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.generator.lava.LavaGeneratorScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.infuser.InfuserContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.infuser.InfuserScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.mixer.MixerContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.mixer.MixerScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.pump.PumpContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.pump.PumpScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.quarry.QuarryContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.quarry.QuarryScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.refinery.RefineryContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.refinery.RefineryScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.solidifier.SolidifierContainer;
+import com.qsoftware.forgemod.objects.blocks.machines.solidifier.SolidifierScreen;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.forgemod.util.MachineTier;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.Container;
@@ -55,6 +56,7 @@ public final class ModContainers {
     public static ContainerType<SolidifierContainer> solidifier;
 
     private ModContainers() {
+        throw ExceptionUtil.utilityConstructor();
     }
 
     public static void registerAll(RegistryEvent.Register<ContainerType<?>> event) {

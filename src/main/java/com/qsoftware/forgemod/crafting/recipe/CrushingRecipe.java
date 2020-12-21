@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.objects.block.AbstractMachineTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineTileEntity;
 import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.silent.utils.MathUtils;

@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.groups.Groups;
-import com.qsoftware.forgemod.objects.block.MetalBlock;
+import com.qsoftware.forgemod.objects.blocks.machines.MetalBlock;
 import com.qsoftware.silent.lib.registry.BlockRegistryObject;
 import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 import net.minecraft.block.AbstractBlock;

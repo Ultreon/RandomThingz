@@ -1,6 +1,6 @@
 package com.qsoftware.texturedmodels.bakedmodels;
 
-import com.qsoftware.texturedmodels.BlockCarpentryMain;
+import com.qsoftware.texturedmodels.QTextureModels;
 import com.qsoftware.texturedmodels.block.FrameBlock;
 import com.qsoftware.texturedmodels.tileentity.ChestFrameTileEntity;
 import com.qsoftware.texturedmodels.util.ModelHelper;
@@ -65,9 +65,9 @@ public class IllusionChestBakedModel implements IDynamicBakedModel {
         if (mimic != null && state != null) {
             List<TextureAtlasSprite> designTextureList = new ArrayList<>(TextureHelper.getMetalTextures());
             designTextureList.add(Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/shulker_box")));
-            TextureAtlasSprite chestFront = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(BlockCarpentryMain.MOD_ID, "block/chest_front"));
-            TextureAtlasSprite chestSide = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(BlockCarpentryMain.MOD_ID, "block/chest_side"));
-            TextureAtlasSprite chestTop = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(BlockCarpentryMain.MOD_ID, "block/chest_top"));
+            TextureAtlasSprite chestFront = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_front"));
+            TextureAtlasSprite chestSide = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_side"));
+            TextureAtlasSprite chestTop = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_top"));
             int tintIndex = -1;
             if (mimic.getBlock() instanceof GrassBlock) {
                 tintIndex = 1;

@@ -36,28 +36,28 @@ public class FireSwordItem extends SwordItem {
      * Called when this item is used when targetting a Block
      */
     public @NotNull ActionResultType onItemUse(ItemUseContext context) {
-        PlayerEntity playerentity = context.getPlayer();
+        PlayerEntity player = context.getPlayer();
         World world = context.getWorld();
-        BlockPos blockpos = context.getPos();
-        BlockState blockstate = world.getBlockState(blockpos);
-        if (CampfireBlock.canBeLit(blockstate)) {
-            world.playSound(playerentity, blockpos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
-            world.setBlockState(blockpos, blockstate.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
-            if (playerentity != null) {
-                context.getItem().damageItem(1, playerentity, (p_219999_1_) -> p_219999_1_.sendBreakAnimation(context.getHand()));
+        BlockPos position = context.getPos();
+        BlockState state = world.getBlockState(position);
+        if (CampfireBlock.canBeLit(state)) {
+            world.playSound(player, position, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+            world.setBlockState(position, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
+            if (player != null) {
+                context.getItem().damageItem(1, player, (playerEntity) -> playerEntity.sendBreakAnimation(context.getHand()));
             }
 
             return ActionResultType.func_233537_a_(world.isRemote());
         } else {
-            BlockPos blockPos1 = blockpos.offset(context.getFace());
-            if (AbstractFireBlock.canLightBlock(world, blockPos1, context.getPlacementHorizontalFacing())) {
-                world.playSound(playerentity, blockPos1, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
-                BlockState blockState1 = AbstractFireBlock.getFireForPlacement(world, blockPos1);
-                world.setBlockState(blockPos1, blockState1, 11);
-                ItemStack itemStack = context.getItem();
-                if (playerentity instanceof ServerPlayerEntity) {
-                    CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) playerentity, blockPos1, itemStack);
-                    itemStack.damageItem(1, playerentity, (p_219998_1_) -> p_219998_1_.sendBreakAnimation(context.getHand()));
+            BlockPos offsetPos = position.offset(context.getFace());
+            if (AbstractFireBlock.canLightBlock(world, offsetPos, context.getPlacementHorizontalFacing())) {
+                world.playSound(player, offsetPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
+                BlockState blockState1 = AbstractFireBlock.getFireForPlacement(world, offsetPos);
+                world.setBlockState(offsetPos, blockState1, 11);
+                ItemStack stack = context.getItem();
+                if (player instanceof ServerPlayerEntity) {
+                    CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) player, offsetPos, stack);
+                    stack.damageItem(1, player, (playerEntity) -> playerEntity.sendBreakAnimation(context.getHand()));
                 }
 
                 return ActionResultType.func_233537_a_(world.isRemote());

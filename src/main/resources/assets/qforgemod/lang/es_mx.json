@@ -7,9 +7,9 @@
   "item.qforgemod.cheese_slice": "Cheese Slice",
   "item.qforgemod.cheese_burger": "Cheeseburger",
 
-  "item.qforgemod.walking_staff": "Varita para caminar",
-  "item.qforgemod.lightning_staff": "Varita relámpago",
-  "item.qforgemod.nature_staff": "Varita de la naturaleza",
+  "item.qforgemod.walking_wand": "Varita para caminar",
+  "item.qforgemod.lightning_wand": "Varita relámpago",
+  "item.qforgemod.nature_wand": "Varita de la naturaleza",
 
   "item.qforgemod.fire_sword": "Espada de fuego",
   "item.qforgemod.emergency_fire_axe": "Emergency Fire Axe",

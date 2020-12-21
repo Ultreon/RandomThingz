@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.client.renderer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.model.FreeCreeperModel;
+import com.qsoftware.forgemod.client.renderer.layers.CustomCreeperChargeLayer;
 import com.qsoftware.forgemod.objects.entities.FireCreeperEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -24,7 +25,7 @@ public class FireCreeperRenderer extends MobRenderer<FireCreeperEntity, FreeCree
 
     public FireCreeperRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new FreeCreeperModel<>(), 0.5F);
-        this.addLayer(new FreeCreeperChargeLayer<>(this, entityModel));
+        this.addLayer(new CustomCreeperChargeLayer<>(this, entityModel));
     }
 
     @Override

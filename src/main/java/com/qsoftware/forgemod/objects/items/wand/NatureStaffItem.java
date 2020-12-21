@@ -5,11 +5,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DeadCoralWallFanBlock;
 import net.minecraft.block.IGrowable;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.item.Rarity;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -165,6 +167,11 @@ public class NatureStaffItem extends Item {
         if (applyBonemeal(context.getItem(), world, blockPos, context.getPlayer())) {
             if (!world.isRemote) {
                 world.playEvent(2005, blockPos, 0);
+
+                PlayerEntity player = context.getPlayer();
+                if (player != null) {
+                    player.addStat(Stats.ITEM_USED.get(this));
+                }
             }
 
             return ActionResultType.func_233537_a_(world.isRemote);
@@ -174,6 +181,11 @@ public class NatureStaffItem extends Item {
             if (flag && growSeagrass(context.getItem(), world, blockPos1, context.getFace())) {
                 if (!world.isRemote) {
                     world.playEvent(2005, blockPos1, 0);
+
+                    PlayerEntity player = context.getPlayer();
+                    if (player != null) {
+                        player.addStat(Stats.ITEM_USED.get(this));
+                    }
                 }
 
                 return ActionResultType.func_233537_a_(world.isRemote);

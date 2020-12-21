@@ -37,7 +37,8 @@ public class QForgeMod {
     // Mod Data
     public static final String MOD_ID = "qforgemod";
     public static final String MOD_NAME = "QForgeMod";
-    public static final String MOD_VERSION = "1.1-beta14";
+    public static final String NBT_NAME = "QForgeMod";
+    public static final String MOD_VERSION = "1.1-release1";
     public static final QVersion VERSION = new QVersion(MOD_VERSION);
 
     /**

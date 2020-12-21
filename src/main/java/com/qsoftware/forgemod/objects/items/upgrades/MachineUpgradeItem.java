@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.objects.items.upgrades;
 
 import com.qsoftware.forgemod.api.IMachineUpgrade;
 import com.qsoftware.forgemod.groups.Groups;
-import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.forgemod.util.TextUtils;
 import com.qsoftware.silent.utils.MathUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
@@ -39,7 +39,7 @@ public class MachineUpgradeItem extends Item {
             String str = String.format("%d", (int) (100 * energyCost));
             if (energyCost > 0)
                 str = "+" + str;
-            tooltip.add(TextUtil.translate("item", "machine_upgrade.energy", str));
+            tooltip.add(TextUtils.translate("item", "machine_upgrade.energy", str));
         }
     }
 }

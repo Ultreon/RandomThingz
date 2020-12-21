@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -51,6 +52,8 @@ public class FireWandItem extends WandItem {
             l.setShooter(player);
 
             world.addEntity(l);
+
+            player.addStat(Stats.ITEM_USED.get(this));
         }
     }
 }

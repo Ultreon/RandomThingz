@@ -1,23 +1,24 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.objects.block.batterybox.BatteryBoxTileEntity;
-import com.qsoftware.forgemod.objects.block.compressor.CompressorTileEntity;
-import com.qsoftware.forgemod.objects.block.dryingrack.DryingRackBlock;
-import com.qsoftware.forgemod.objects.block.dryingrack.DryingRackTileEntity;
-import com.qsoftware.forgemod.objects.block.dryingrack.DryingRackTileEntityRenderer;
-import com.qsoftware.forgemod.objects.block.electricfurnace.ElectricFurnaceTileEntity;
-import com.qsoftware.forgemod.objects.block.generator.coal.CoalGeneratorTileEntity;
-import com.qsoftware.forgemod.objects.block.generator.diesel.DieselGeneratorTileEntity;
-import com.qsoftware.forgemod.objects.block.generator.lava.LavaGeneratorTileEntity;
-import com.qsoftware.forgemod.objects.block.infuser.InfuserTileEntity;
-import com.qsoftware.forgemod.objects.block.mixer.MixerTileEntity;
-import com.qsoftware.forgemod.objects.block.pipe.PipeTileEntity;
-import com.qsoftware.forgemod.objects.block.pump.PumpTileEntity;
-import com.qsoftware.forgemod.objects.block.quarry.QuarryTileEntity;
-import com.qsoftware.forgemod.objects.block.refinery.RefineryTileEntity;
-import com.qsoftware.forgemod.objects.block.solidifier.SolidifierTileEntity;
-import com.qsoftware.forgemod.objects.block.wire.WireTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.batterybox.BatteryBoxTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.compressor.CompressorTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.dryingrack.DryingRackBlock;
+import com.qsoftware.forgemod.objects.blocks.machines.dryingrack.DryingRackTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.dryingrack.DryingRackTileEntityRenderer;
+import com.qsoftware.forgemod.objects.blocks.machines.electricfurnace.ElectricFurnaceTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.generator.coal.CoalGeneratorTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.generator.diesel.DieselGeneratorTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.generator.lava.LavaGeneratorTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.infuser.InfuserTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.mixer.MixerTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.pipe.PipeTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.pump.PumpTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.quarry.QuarryTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.refinery.RefineryTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.solidifier.SolidifierTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.wire.WireTileEntity;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.silent.lib.block.IBlockProvider;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
@@ -49,6 +50,7 @@ public final class ModTileEntities {
     public static TileEntityType<WireTileEntity> wire;
 
     private ModTileEntities() {
+        throw ExceptionUtil.utilityConstructor();
     }
 
     public static void registerAll(RegistryEvent.Register<TileEntityType<?>> event) {

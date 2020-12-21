@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "qforgemod:items/firebrand"
+		"layer0": "qforgemod:items/whirlwind"
 	},
 	"gui_light": "front",
 	"display": {

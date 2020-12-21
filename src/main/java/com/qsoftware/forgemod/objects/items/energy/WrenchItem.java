@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.state.Property;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
@@ -47,6 +48,7 @@ public class WrenchItem extends Item {
         if (player.isCrouching() && state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
             BlockState state1 = cycleProperty(state, BlockStateProperties.HORIZONTAL_FACING);
             world.setBlockState(pos, state1, 18);
+            player.addStat(Stats.ITEM_USED.get(this));
             return ActionResultType.SUCCESS;
         }
 

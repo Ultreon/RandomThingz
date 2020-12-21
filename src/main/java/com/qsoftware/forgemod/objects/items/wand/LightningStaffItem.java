@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceContext;
@@ -38,7 +39,7 @@ public class LightningStaffItem extends WandItem {
         float f5 = MathHelper.sin(-f * ((float) Math.PI / 180F));
         float f6 = f3 * f4;
         float f7 = f2 * f4;
-        double d0 = 128; // Todo: test value, if it will lag again, then lower the value. ( Possible not needed ;) )
+        double d0 = 128;
         Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
         return worldIn.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
     }
@@ -63,6 +64,8 @@ public class LightningStaffItem extends WandItem {
             l.setPosition(posX, posY, posZ);
             l.setEffectOnly(false);
             world.addEntity(l);
+
+            playerIn.addStat(Stats.ITEM_USED.get(this));
         }
     }
 }

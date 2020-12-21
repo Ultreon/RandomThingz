@@ -31,10 +31,10 @@ public class DynamiteItem extends EnderPearlItem {
         worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
         playerIn.getCooldownTracker().setCooldown(this, 5);
         if (!worldIn.isRemote) {
-            DynamiteEntity enderPearlEntity = new DynamiteEntity(worldIn, playerIn);
-            enderPearlEntity.setItem(itemstack);
-            enderPearlEntity.func_234612_a_(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-            worldIn.addEntity(enderPearlEntity);
+            DynamiteEntity dynamiteEntity = new DynamiteEntity(worldIn, playerIn);
+            dynamiteEntity.setItem(itemstack);
+            dynamiteEntity.func_234612_a_(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+            worldIn.addEntity(dynamiteEntity);
         }
 
         playerIn.addStat(Stats.ITEM_USED.get(this));

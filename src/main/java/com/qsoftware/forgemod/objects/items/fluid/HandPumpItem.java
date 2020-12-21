@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.math.BlockPos;
@@ -81,7 +82,6 @@ public class HandPumpItem extends EnergyStoringItem {
         if (energy == null) return ActionResultType.PASS;
 
         if (energy.getEnergyStored() < ENERGY_PER_OPERATION) {
-            // TODO: Notify player?
             player.sendStatusMessage(new StringTextComponent(TextColors.RED + "No energy left!"), true);
             return ActionResultType.FAIL;
         }
@@ -111,6 +111,7 @@ public class HandPumpItem extends EnergyStoringItem {
                 FluidStack fluidStack = new FluidStack(fluid, 1000);
                 if (!fluidStack.isEmpty()) {
                     giveFilledContainer(player, energy, emptyContainer, fluidStack);
+                    player.addStat(Stats.ITEM_USED.get(this));
                     return ActionResultType.SUCCESS;
                 }
             }

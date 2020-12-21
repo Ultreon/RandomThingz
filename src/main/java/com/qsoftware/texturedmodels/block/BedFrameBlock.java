@@ -1,6 +1,6 @@
 package com.qsoftware.texturedmodels.block;
 
-import com.qsoftware.texturedmodels.BlockCarpentryMain;
+import com.qsoftware.texturedmodels.QTextureModels;
 import com.qsoftware.texturedmodels.setup.Registration;
 import com.qsoftware.texturedmodels.setup.config.BCModConfig;
 import com.qsoftware.texturedmodels.tileentity.BedFrameTile;
@@ -75,7 +75,7 @@ public class BedFrameBlock extends BedBlock {
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
         ItemStack item = player.getHeldItem(hand);
         if (!world.isRemote) {
-            if ((state.get(CONTAINS_BLOCK) && !item.getItem().isIn(Tags.Items.DYES) && !item.getItem().getRegistryName().getNamespace().equals(BlockCarpentryMain.MOD_ID)) || item.isEmpty()) {
+            if ((state.get(CONTAINS_BLOCK) && !item.getItem().isIn(Tags.Items.DYES) && !item.getItem().getRegistryName().getNamespace().equals(QTextureModels.MOD_ID)) || item.isEmpty()) {
                 //Taken from BedBlock, should work similar to vanilla beds
                 if (state.get(PART) != BedPart.HEAD) {
                     pos = pos.offset(state.get(HORIZONTAL_FACING));

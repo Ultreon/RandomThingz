@@ -4,7 +4,7 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.RomanNumber;
 import com.qsoftware.forgemod.common.TextColors;
 import com.qsoftware.forgemod.hud.HudItem;
-import com.qsoftware.forgemod.util.GraphicsUtils;
+import com.qsoftware.forgemod.util.GraphicsUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -258,7 +258,7 @@ public abstract class WandItem extends HudItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void renderHud(GraphicsUtils gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
+    public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
         int height = mc.getMainWindow().getScaledHeight();
 
         World worldIn = player.getEntityWorld();

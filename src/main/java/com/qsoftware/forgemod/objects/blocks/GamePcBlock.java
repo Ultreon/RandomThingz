@@ -46,13 +46,13 @@ public class GamePcBlock extends FaceableBlock {
         return 0.6f;
     }
 
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        if (context.getPos().equals(new BlockPos(0, 255, 0))) {
-            return super.getStateForPlacement(context);
-        } else {
-            return context.getWorld().getBlockState(context.getPos());
-        }
-    }
+//    @Nullable
+//    @Override
+//    public BlockState getStateForPlacement(BlockItemUseContext context) {
+//        if (context.getPos().equals(new BlockPos(0, 255, 0))) {
+//            return super.getStateForPlacement(context);
+//        } else {
+//            return context.getWorld().getBlockState(context.getPos());
+//        }
+//    }
 }

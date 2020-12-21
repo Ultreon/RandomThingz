@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod;
 
 import com.qsoftware.forgemod.common.IHasRenderType;
+import com.qsoftware.forgemod.init.ModStats;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.init.types.ModEntities;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;

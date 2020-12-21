@@ -1,6 +1,6 @@
 package com.qsoftware.texturedmodels.setup;
 
-import com.qsoftware.texturedmodels.BlockCarpentryMain;
+import com.qsoftware.texturedmodels.QTextureModels;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
  * @author PianoManu
  * @version 1.2 09/30/20
  */
-@Mod.EventBusSubscriber(modid = BlockCarpentryMain.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = QTextureModels.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class TextureSetup {
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -24,7 +24,7 @@ public class TextureSetup {
     public static void onStitchEvent(TextureStitchEvent.Pre event) {
         ResourceLocation stitching = event.getMap().getTextureLocation();
         if (stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
-            LOGGER.info("Stitching textures from BlockCarpentry");
+            LOGGER.info("Stitching textures from QTextureModels");
             event.addSprite(loc("block/chest_front"));
             event.addSprite(loc("block/chest_side"));
             event.addSprite(loc("block/chest_top"));
@@ -36,12 +36,12 @@ public class TextureSetup {
             event.addSprite(loc("block/chiseled_sandstone_overlay"));
             event.addSprite(loc("block/boundary_overlay"));
             event.addSprite(loc("block/chiseled_stone_overlay"));
-            LOGGER.info("Stitched all textures from BlockCarpentry");
+            LOGGER.info("Stitched all textures from QTextureModels");
         }
     }
 
     private static ResourceLocation loc(String name) {
-        return new ResourceLocation(BlockCarpentryMain.MOD_ID, name);
+        return new ResourceLocation(QTextureModels.MOD_ID, name);
     }
 }
 //========SOLI DEO GLORIA========//

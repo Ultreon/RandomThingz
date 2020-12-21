@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.init;
 
 import com.google.common.collect.ImmutableList;
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.loot.LootEntry;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.TableLootEntry;
@@ -23,6 +24,7 @@ public class ModLoot {
 //			"village_blacksmith");
 
     private ModLoot() {
+        throw ExceptionUtil.utilityConstructor();
     }
 
     @SuppressWarnings("unused") //used in event

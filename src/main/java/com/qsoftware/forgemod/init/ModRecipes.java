@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.crafting.recipe.*;
 import com.qsoftware.forgemod.util.Constants;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
@@ -20,7 +21,9 @@ public final class ModRecipes {
     public static final RegistryObject<IRecipeSerializer<?>> MIXING = registerSerializer(Constants.MIXING, MixingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> REFINING = registerSerializer(Constants.REFINING, RefiningRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> SOLIDIFYING = registerSerializer(Constants.SOLIDIFYING, SolidifyingRecipe.Serializer::new);
+
     private ModRecipes() {
+        throw ExceptionUtil.utilityConstructor();
     }
 
     static void register() {

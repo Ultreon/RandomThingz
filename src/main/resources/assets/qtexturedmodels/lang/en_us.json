@@ -1,5 +1,6 @@
 {
   "block.qtexturedmodels.frameblock": "Frame",
+  "block.qtexturedmodels.frame_walk_thru": "Hidden Entrance Frame",
   "block.qtexturedmodels.frame_slab": "Frame Slab",
   "block.qtexturedmodels.falling_frameblock": "Frame (affected by Gravity - WIP)",
   "block.qtexturedmodels.frame_button": "Wooden Frame Button",
@@ -37,7 +38,7 @@
   "item.qtexturedmodels.chisel": "Chisel",
   "item.qtexturedmodels.paintbrush": "Paintbrush",
 
-  "itemGroup.qtexturedmodels": "BlockCarpentry",
+  "itemGroup.qtexturedmodels": "QTextureModels",
 
   "advancements.qtexturedmodels.root.title": "QTexturedModels",
   "advancements.qtexturedmodels.root.description": "The basics",

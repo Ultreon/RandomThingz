@@ -1,21 +1,25 @@
 package com.qsoftware.forgemod.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("ALL")
+@Deprecated
 public class TestScreen extends Screen {
+    @Deprecated
     private static int i;
+    @Deprecated
     private Button testButton;
 
+    @Deprecated
     public TestScreen() {
         super(new StringTextComponent("Test Screen"));
     }
 
+    @Deprecated
     @Override
     protected void init() {
         super.init();
@@ -25,11 +29,13 @@ public class TestScreen extends Screen {
         }));
     }
 
+    @Deprecated
     @Override
     public void tick() {
         super.tick();
     }
 
+    @Deprecated
     @Override
     public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         renderBackground(matrixStack);

@@ -1,6 +1,6 @@
 package com.qsoftware.texturedmodels.block;
 
-import com.qsoftware.texturedmodels.BlockCarpentryMain;
+import com.qsoftware.texturedmodels.QTextureModels;
 import com.qsoftware.texturedmodels.setup.Registration;
 import com.qsoftware.texturedmodels.setup.config.BCModConfig;
 import com.qsoftware.texturedmodels.tileentity.FrameBlockTile;
@@ -86,7 +86,7 @@ public class DoorFrameBlock extends DoorBlock {
                     return ActionResultType.SUCCESS;
                 }
             }
-            if (!item.getItem().getRegistryName().getNamespace().equals(BlockCarpentryMain.MOD_ID)) {
+            if (!item.getItem().getRegistryName().getNamespace().equals(QTextureModels.MOD_ID)) {
                 if (state.get(DoorBlock.OPEN)) {
                     state = state.with(OPEN, false);
                 } else {

@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.util.ResourceLocation;
@@ -20,6 +21,7 @@ public final class ModFluids {
     public static Fluid POLYETHYLENE;
 
     private ModFluids() {
+        throw ExceptionUtil.utilityConstructor();
     }
 
     @SuppressWarnings({"Convert2MethodRef", "FunctionalExpressionCanBeFolded"}) // Did this because IntelliJ thought it would be possible to do that, but then it will cause a crash.

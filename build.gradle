@@ -16,7 +16,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.1-beta14'
+version = '1.1-release1'
 group = 'com.qsoftware.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'QForgeMod'
 
@@ -212,7 +212,7 @@ jar {
         attributes([
                 "Specification-Title": "qforgemod",
                 "Specification-Vendor": "qsoftware",
-                "Specification-Version": "1.1-beta14",
+                "Specification-Version": "1.1-release1",
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"qsoftware",

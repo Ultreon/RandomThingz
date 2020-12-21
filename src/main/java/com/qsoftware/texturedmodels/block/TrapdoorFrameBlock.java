@@ -1,6 +1,6 @@
 package com.qsoftware.texturedmodels.block;
 
-import com.qsoftware.texturedmodels.BlockCarpentryMain;
+import com.qsoftware.texturedmodels.QTextureModels;
 import com.qsoftware.texturedmodels.setup.Registration;
 import com.qsoftware.texturedmodels.setup.config.BCModConfig;
 import com.qsoftware.texturedmodels.tileentity.FrameBlockTile;
@@ -84,7 +84,7 @@ public class TrapdoorFrameBlock extends TrapDoorBlock {
                     return ActionResultType.SUCCESS;
                 }
             }
-            if (!item.getItem().getRegistryName().getNamespace().equals(BlockCarpentryMain.MOD_ID)) {
+            if (!item.getItem().getRegistryName().getNamespace().equals(QTextureModels.MOD_ID)) {
                 if (state.get(OPEN)) {
                     state = state.with(OPEN, false);
                     world.playEvent(null, 1007, pos, 0);

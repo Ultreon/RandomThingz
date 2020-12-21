@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.util.helpers;
 
-import com.qsoftware.forgemod.objects.block.quarry.QuarryTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.quarry.QuarryTileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;

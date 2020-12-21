@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.client;
 
 import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.objects.items.energy.EnergyStoringItem;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.IItemProvider;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 public final class ModModelProperties {
     private ModModelProperties() {
+        throw ExceptionUtil.utilityConstructor();
     }
 
     public static void register(FMLClientSetupEvent event) {

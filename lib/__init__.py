@@ -11,7 +11,7 @@ __os.chdir(PROJECT_FOLDER)
 BUILD_OUTPUT: list = ["build/libs"]
 LIVE_RELEASES: str = "server/data/upload/live-releases"
 MODS_FOLDER: str = "run/mods"
-VERSION: str = "1.1-beta14"
+VERSION: str = "1.1-release1"
 
 
 def log(*args, sep: str = " ", end: str = __os.linesep, file: __io.StringIO = __sys.stdout, flush: bool = True):

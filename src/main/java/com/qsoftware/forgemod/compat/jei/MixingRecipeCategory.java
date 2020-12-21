@@ -6,11 +6,11 @@ import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.forgemod.crafting.recipe.MixingRecipe;
 import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.objects.block.mixer.MixerScreen;
-import com.qsoftware.forgemod.objects.block.mixer.MixerTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.mixer.MixerScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.mixer.MixerTileEntity;
 import com.qsoftware.forgemod.objects.items.fluid.CanisterItem;
 import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.forgemod.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -45,7 +45,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
         icon = guiHelper.createDrawableIngredient(new ItemStack(ModBlocks.MIXER));
         arrow = guiHelper.drawableBuilder(MixerScreen.TEXTURE, 176, 14, 24, 17)
                 .buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
-        localizedName = TextUtil.translate("jei", "category.mixing").getString();
+        localizedName = TextUtils.translate("jei", "category.mixing").getString();
     }
 
     private static void addFluidContainers(Collection<ItemStack> list, Fluid fluid) {

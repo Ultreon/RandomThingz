@@ -2,10 +2,9 @@ package com.qsoftware.forgemod.hud;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.util.GraphicsUtils;
+import com.qsoftware.forgemod.util.GraphicsUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -34,7 +33,7 @@ public abstract class HudItem extends Item {
                 Item item = stack.getItem();
                 if (item instanceof HudItem) {
                     HudItem hudItem = (HudItem) item;
-                    GraphicsUtils gu = new GraphicsUtils(mc.getItemRenderer(), matrixStack, mc.fontRenderer);
+                    GraphicsUtil gu = new GraphicsUtil(mc.getItemRenderer(), matrixStack, mc.fontRenderer);
                     hudItem.renderHud(gu, mc, stack, player);
                 }
             }
@@ -42,7 +41,7 @@ public abstract class HudItem extends Item {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public abstract void renderHud(GraphicsUtils gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player);
+    public abstract void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player);
 
 //    protected final void drawCenteredString(MatrixStack matrixStack, FontRenderer fontRenderer, String text, float x, float y, int color) {
 //        drawCenteredString(matrixStack, fontRenderer, text, x, y, color, false);

@@ -5,11 +5,11 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.crafting.recipe.RefiningRecipe;
 import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.objects.block.refinery.RefineryScreen;
-import com.qsoftware.forgemod.objects.block.refinery.RefineryTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.refinery.RefineryScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.refinery.RefineryTileEntity;
 import com.qsoftware.forgemod.objects.items.fluid.CanisterItem;
 import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.forgemod.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -44,7 +44,7 @@ public class RefiningRecipeCategory implements IRecipeCategory<RefiningRecipe> {
         icon = guiHelper.createDrawableIngredient(new ItemStack(ModBlocks.REFINERY));
         arrow = guiHelper.drawableBuilder(RefineryScreen.TEXTURE, 176, 14, 24, 17)
                 .buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
-        localizedName = TextUtil.translate("jei", "category.refining").getString();
+        localizedName = TextUtils.translate("jei", "category.refining").getString();
     }
 
     private static void addFluidContainers(Collection<ItemStack> list, Fluid fluid) {

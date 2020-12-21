@@ -3,9 +3,9 @@ package com.qsoftware.forgemod.compat.jei;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.crafting.recipe.DryingRecipe;
 import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.objects.block.compressor.CompressorScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.compressor.CompressorScreen;
 import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.forgemod.util.TextUtils;
 import com.qsoftware.silent.lib.util.TextRenderUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -41,7 +41,7 @@ public class DryingRecipeCategoryJei implements IRecipeCategory<DryingRecipe> {
         icon = guiHelper.createDrawableIngredient(new ItemStack(ModBlocks.OAK_DRYING_RACK));
         arrow = guiHelper.drawableBuilder(CompressorScreen.TEXTURE, 176, 14, 24, 17)
                 .buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
-        localizedName = TextUtil.translate("jei", "category.drying").getString();
+        localizedName = TextUtils.translate("jei", "category.drying").getString();
     }
 
     @Override
@@ -89,7 +89,7 @@ public class DryingRecipeCategoryJei implements IRecipeCategory<DryingRecipe> {
     public void draw(DryingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 79 - GUI_START_X, 35 - GUI_START_Y);
         FontRenderer font = Minecraft.getInstance().fontRenderer;
-        ITextComponent text = TextUtil.translate("misc", "timeInSeconds", recipe.getProcessTime() / 20);
+        ITextComponent text = TextUtils.translate("misc", "timeInSeconds", recipe.getProcessTime() / 20);
         TextRenderUtils.renderScaled(matrixStack, font, text.func_241878_f(), 24, 20, 0.67f, 0xFFFFFF, true);
     }
 }

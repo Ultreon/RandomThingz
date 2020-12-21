@@ -3,6 +3,8 @@ package com.qsoftware.forgemod.client.renderer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.model.FreeEndermanModel;
+import com.qsoftware.forgemod.client.renderer.layers.CustomEndermanEyesLayer;
+import com.qsoftware.forgemod.client.renderer.layers.CustomHeldBlockLayer;
 import com.qsoftware.forgemod.objects.entities.IceEndermanEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -33,8 +35,8 @@ public class IceEndermanRenderer extends MobRenderer<IceEndermanEntity, FreeEnde
     public IceEndermanRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new FreeEndermanModel<>(0.0F), 0.5F);
 
-        this.addLayer(new FreeEndermanEyesLayer<>(this, RENDER_TYPE));
-        this.addLayer(new FreeHeldBlockLayer<>(this));
+        this.addLayer(new CustomEndermanEyesLayer<>(this, RENDER_TYPE));
+        this.addLayer(new CustomHeldBlockLayer<>(this));
     }
 
     @Override

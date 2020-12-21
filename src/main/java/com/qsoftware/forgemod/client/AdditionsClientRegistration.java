@@ -15,6 +15,7 @@ import com.qsoftware.forgemod.objects.items.base.DyeColorizedItem;
 import com.qsoftware.forgemod.objects.items.base.MaterialColorizedItem;
 import com.qsoftware.forgemod.objects.items.spawnegg.CustomSpawnEggItem;
 import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.StrayRenderer;
@@ -33,8 +34,8 @@ import java.util.Collection;
 
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AdditionsClientRegistration {
-
     private AdditionsClientRegistration() {
+        throw ExceptionUtil.utilityConstructor();
     }
 
     @SubscribeEvent

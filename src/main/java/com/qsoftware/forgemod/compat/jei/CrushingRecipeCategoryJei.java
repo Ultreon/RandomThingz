@@ -4,9 +4,9 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.datafixers.util.Pair;
 import com.qsoftware.forgemod.crafting.recipe.CrushingRecipe;
 import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.objects.block.crusher.CrusherScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.crusher.CrusherScreen;
 import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.forgemod.util.TextUtils;
 import com.qsoftware.silent.lib.util.TextRenderUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -44,7 +44,7 @@ public class CrushingRecipeCategoryJei implements IRecipeCategory<CrushingRecipe
         icon = guiHelper.createDrawableIngredient(new ItemStack(ModBlocks.CRUSHER));
         arrow = guiHelper.drawableBuilder(CrusherScreen.TEXTURE, 176, 14, 24, 17)
                 .buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
-        localizedName = TextUtil.translate("jei", "category.crushing").getString();
+        localizedName = TextUtils.translate("jei", "category.crushing").getString();
     }
 
     @Override

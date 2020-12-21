@@ -1,9 +1,10 @@
 package com.qsoftware.forgemod.objects.items.debug;
 
-import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.forgemod.util.TextUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -30,7 +31,7 @@ public class DebugItem extends Item {
         TileEntity tileEntity = world.getTileEntity(pos);
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
-                ITextComponent energyText = TextUtil.energyWithMax(e.getEnergyStored(), e.getMaxEnergyStored());
+                ITextComponent energyText = TextUtils.energyWithMax(e.getEnergyStored(), e.getMaxEnergyStored());
                 player.sendMessage(new StringTextComponent("Energy: ").append(energyText), Util.DUMMY_UUID);
                 player.sendMessage(new StringTextComponent("Receive/Extract: " + e.canReceive() + "/" + e.canExtract()), Util.DUMMY_UUID);
                 player.sendMessage(new StringTextComponent(e.getClass().getName()).mergeStyle(TextFormatting.ITALIC), Util.DUMMY_UUID);
@@ -44,6 +45,8 @@ public class DebugItem extends Item {
                     });
                 }
             }
+
+            player.addStat(Stats.ITEM_USED.get(this));
 
             return ActionResultType.SUCCESS;
         }

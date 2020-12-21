@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.init.renew;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.init.ObjectInit;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -39,4 +40,9 @@ public class ModBlocksNew extends ObjectInit<Block> {
     public static final RegistryObject<Item> AMBER_BLOCK_ITEM = ITEMS.register("amber_block", () -> new BlockItem(AMBER_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
     public static final RegistryObject<Item> BERYL_ORE_ITEM = ITEMS.register("beryl_ore", () -> new BlockItem(BERYL_ORE.get(), new Item.Properties().group(Groups.ORES)));
     public static final RegistryObject<Item> BERYL_BLOCK_ITEM = ITEMS.register("beryl_block", () -> new BlockItem(BERYL_BLOCK.get(), new Item.Properties().group(Groups.ORES)));
+
+    private ModBlocksNew() {
+        throw ExceptionUtil.utilityConstructor();
+    }
+
 }

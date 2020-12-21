@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.forgemod.init.ModTags;
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.objects.block.dryingrack.DryingRackBlock;
+import com.qsoftware.forgemod.objects.blocks.machines.dryingrack.DryingRackBlock;
 import net.minecraft.block.Block;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;

@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "contains_block=true": { "model": "qtexturedmodels:block/frameblock" },
-    "contains_block=false": { "model": "qtexturedmodels:block/frameblock_empty" }
-  }
-}

@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.common.TextColors;
 import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.objects.items.CraftingItems;
 import com.qsoftware.forgemod.objects.items.EucalyptusLeafItem;
@@ -25,22 +24,20 @@ import com.qsoftware.forgemod.objects.items.type.SliceableItem;
 import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
 import com.qsoftware.forgemod.objects.items.wand.*;
 import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.forgemod.util.builder.ArmorMaterialBuilder;
-import com.qsoftware.forgemod.util.builder.ItemTierBuilder;
+import com.qsoftware.forgemod.util.builder.ItemTierBuilder1;
 import com.qsoftware.forgemod.util.color.ColorGetter;
-import com.qsoftware.forgemod.util.helpers.KeyboardHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -121,7 +118,7 @@ public final class ModItems {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Wood     //
     ////////////////////
-    public static final ItemRegistryObject<Item> EUCALYPTUS_PLANK = register("eucalyptus_plank", () -> new Item(new Item.Properties().group(Groups.WOOD)));
+//    public static final ItemRegistryObject<Item> EUCALYPTUS_PLANK = register("eucalyptus_plank", () -> new Item(new Item.Properties().group(Groups.WOOD)));
     public static final ItemRegistryObject<Item> EUCALYPTUS_LEAF = register("eucalyptus_leaf", () -> new EucalyptusLeafItem(new Item.Properties()
             .group(Groups.NATURE)
             .maxStackSize(128)
@@ -405,8 +402,8 @@ public final class ModItems {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Overpowered     //
     /////////////////////////
-    public static final ItemRegistryObject<WalkingStaffItem> WALKING_STAFF = register("walking_staff", WalkingStaffItem::new);
-    public static final ItemRegistryObject<LightningStaffItem> LIGHTNING_STAFF = register("lightning_staff", LightningStaffItem::new);
+    public static final ItemRegistryObject<WalkingStaffItem> WALKING_STAFF = register("walking_wand", WalkingStaffItem::new);
+    public static final ItemRegistryObject<LightningStaffItem> LIGHTNING_STAFF = register("lightning_wand", LightningStaffItem::new);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Specials     //
@@ -416,9 +413,9 @@ public final class ModItems {
     public static final ItemRegistryObject<MagnetItem> MAGNET = register("magnet", () -> new MagnetItem(new Item.Properties().group(Groups.SPECIALS).maxDamage(4)));
 
     // Wands
-    public static final ItemRegistryObject<FireWandItem> FIRE_STAFF = register("fire_staff", FireWandItem::new);
-    public static final ItemRegistryObject<NatureStaffItem> NATURE_STAFF = register("nature_staff", NatureStaffItem::new);
-    public static final ItemRegistryObject<TeleportStaffItem> TELEPORT_STAFF = register("teleport_staff", TeleportStaffItem::new);
+    public static final ItemRegistryObject<FireWandItem> FIRE_STAFF = register("fire_wand", FireWandItem::new);
+    public static final ItemRegistryObject<NatureStaffItem> NATURE_STAFF = register("nature_wand", NatureStaffItem::new);
+    public static final ItemRegistryObject<TeleportStaffItem> TELEPORT_STAFF = register("teleport_wand", TeleportStaffItem::new);
 
     // Stone Level
     public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordItem(ItemTier.STONE, 8, -2.0f, new Item.Properties().group(Groups.SPECIALS).rarity(Rarity.RARE)));
@@ -501,61 +498,61 @@ public final class ModItems {
     ////////////////////////
     //     Item tiers     //
     ////////////////////////
-    public static final IItemTier COPPER_ITEM_TIER = new ItemTierBuilder.Builder(2, 420, 5.3f, 1.4f, 10,
+    public static final IItemTier COPPER_ITEM_TIER = new ItemTierBuilder1(2, 420, 5.3f, 1.4f, 10,
             () -> Ingredient.fromItems(OreMaterials.COPPER.getIngot().get())
     );
-    public static final IItemTier REDSTONE_ITEM_TIER = new ItemTierBuilder.Builder(0, 230, 2.3f, 1.2f, 5,
+    public static final IItemTier REDSTONE_ITEM_TIER = new ItemTierBuilder1(0, 230, 2.3f, 1.2f, 5,
             () -> Ingredient.fromItems(OreMaterials.REDSTONE_ALLOY.getIngot().get())
     );
-    public static final IItemTier NICKLE_ITEM_TIER = new ItemTierBuilder.Builder(2, 480, 4.9f, 1.7f, 16,
+    public static final IItemTier NICKLE_ITEM_TIER = new ItemTierBuilder1(2, 480, 4.9f, 1.7f, 16,
             () -> Ingredient.fromItems(NICKLE_INGOT)
     );
-    public static final IItemTier STEEL_ITEM_TIER = new ItemTierBuilder.Builder(3, 1465, 8.1f, 3.8f, 14,
+    public static final IItemTier STEEL_ITEM_TIER = new ItemTierBuilder1(3, 1465, 8.1f, 3.8f, 14,
             () -> Ingredient.fromItems(OreMaterials.STEEL.getIngot().get())
     );
-    public static final IItemTier TUNGSTEN_ITEM_TIER = new ItemTierBuilder.Builder(4, 2994, 9.4f, 4.7f, 28,
+    public static final IItemTier TUNGSTEN_ITEM_TIER = new ItemTierBuilder1(4, 2994, 9.4f, 4.7f, 28,
             () -> Ingredient.fromItems(TUNGSTEN_INGOT)
     );
-    public static final IItemTier URANIUM_ITEM_TIER = new ItemTierBuilder.Builder(3, 340, 3.6f, 6.3f, 4,
+    public static final IItemTier URANIUM_ITEM_TIER = new ItemTierBuilder1(3, 340, 3.6f, 6.3f, 4,
             () -> Ingredient.fromItems(OreMaterials.URANIUM.getIngot().get())
     );
-    public static final IItemTier PLATINUM_ITEM_TIER = new ItemTierBuilder.Builder(3, 1294, 7.5f, 4f, 12,
+    public static final IItemTier PLATINUM_ITEM_TIER = new ItemTierBuilder1(3, 1294, 7.5f, 4f, 12,
             () -> Ingredient.fromItems(OreMaterials.URANIUM.getIngot().get())
     );
-    public static final IItemTier RUBY_ITEM_TIER = new ItemTierBuilder.Builder(3, 970, 7.6f, 3.6f, 13,
+    public static final IItemTier RUBY_ITEM_TIER = new ItemTierBuilder1(3, 970, 7.6f, 3.6f, 13,
             () -> Ingredient.fromItems(RUBY)
     );
-    public static final IItemTier AMETHYST_ITEM_TIER = new ItemTierBuilder.Builder(2, 650, 7.3f, 3.1f, 31,
+    public static final IItemTier AMETHYST_ITEM_TIER = new ItemTierBuilder1(2, 650, 7.3f, 3.1f, 31,
             () -> Ingredient.fromItems(AMETHYST)
     );
-    public static final IItemTier AQUAMARINE_ITEM_TIER = new ItemTierBuilder.Builder(2, 740, 5.3f, 2.6f, 23,
+    public static final IItemTier AQUAMARINE_ITEM_TIER = new ItemTierBuilder1(2, 740, 5.3f, 2.6f, 23,
             () -> Ingredient.fromItems(AQUAMARINE)
     );
-    public static final IItemTier SAPHIRE_ITEM_TIER = new ItemTierBuilder.Builder(2, 810, 5.2f, 2.5f, 29,
+    public static final IItemTier SAPHIRE_ITEM_TIER = new ItemTierBuilder1(2, 810, 5.2f, 2.5f, 29,
             () -> Ingredient.fromItems(SAPHIRE)
     );
-    public static final IItemTier MALACHITE_ITEM_TIER = new ItemTierBuilder.Builder(2, 670, 4.3f, 3.2f, 12,
+    public static final IItemTier MALACHITE_ITEM_TIER = new ItemTierBuilder1(2, 670, 4.3f, 3.2f, 12,
             () -> Ingredient.fromItems(MALACHITE)
     );
-    public static final IItemTier TOPAZ_ITEM_TIER = new ItemTierBuilder.Builder(1, 665, 4.4f, 3.9f, 17,
+    public static final IItemTier TOPAZ_ITEM_TIER = new ItemTierBuilder1(1, 665, 4.4f, 3.9f, 17,
             () -> Ingredient.fromItems(TOPAZ)
     );
-    public static final IItemTier AMBER_ITEM_TIER = new ItemTierBuilder.Builder(2, 670, 3.9f, 3.1f, 16,
+    public static final IItemTier AMBER_ITEM_TIER = new ItemTierBuilder1(2, 670, 3.9f, 3.1f, 16,
             () -> Ingredient.fromItems(AMBER)
     );
-    public static final IItemTier BERYL_ITEM_TIER = new ItemTierBuilder.Builder(2, 730, 4.8f, 3.5f, 11,
+    public static final IItemTier BERYL_ITEM_TIER = new ItemTierBuilder1(2, 730, 4.8f, 3.5f, 11,
             () -> Ingredient.fromItems(BERYL)
     );
-    public static final IItemTier TANZANITE_ITEM_TIER = new ItemTierBuilder.Builder(3, 1090, 7.7125f, 3.5f, 48,
+    public static final IItemTier TANZANITE_ITEM_TIER = new ItemTierBuilder1(3, 1090, 7.7125f, 3.5f, 48,
             () -> Ingredient.fromItems(TANZANITE)
     );
-    public static final IItemTier OBSIDIAN_ITEM_TIER = new ItemTierBuilder.Builder(5, 3953, 53.7125f, 12.5f, 19,
+    public static final IItemTier OBSIDIAN_ITEM_TIER = new ItemTierBuilder1(5, 3953, 53.7125f, 12.5f, 19,
             () -> Ingredient.fromItems(OBSIDIAN)
     );
-    public static final IItemTier ULTRINIUM_ITEM_TIER = new ItemTierBuilder.Builder(6, 952530, 7403.0f, 237.4f, 375,
+    public static final IItemTier ULTRINIUM_ITEM_TIER = new ItemTierBuilder1(6, 952530, 7403.0f, 237.4f, 375,
             () -> Ingredient.fromItems(ULTRINIUM_INGOT)
     );
-    public static final IItemTier INFINITY = new ItemTierBuilder.Builder(7, (int) Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, (int) Float.POSITIVE_INFINITY,
+    public static final IItemTier INFINITY = new ItemTierBuilder1(7, (int) Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, (int) Float.POSITIVE_INFINITY,
             () -> Ingredient.fromItems(INFINITY_INGOT)
     );
 
@@ -773,6 +770,7 @@ public final class ModItems {
     /////////////////////////////
 
     private ModItems() {
+        throw ExceptionUtil.utilityConstructor();
     }
 
     static void register() {

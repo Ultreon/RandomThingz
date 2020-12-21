@@ -46,7 +46,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.lwjgl.glfw.GLFW;
-import sun.awt.OSInfo;
 
 import java.awt.*;
 import java.util.*;
@@ -259,7 +258,6 @@ public class GameOverlayListener {
                 if (monitor != null) {
                     drawLeftTopString(matrixStack, "screenSize", i++, dw, dh);
                 }
-                drawLeftTopString(matrixStack, "osType", i++, OSInfo.getOSType());
 //                if (OSInfo.getWindowsVersion() != null) {
 //                    try {
 //                        drawLeftTopString(matrixStack, "windowsVersion", i++, OSInfo.getWindowsVersion().toString());

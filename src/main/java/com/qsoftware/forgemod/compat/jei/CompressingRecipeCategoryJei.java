@@ -3,9 +3,9 @@ package com.qsoftware.forgemod.compat.jei;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.crafting.recipe.CompressingRecipe;
 import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.objects.block.compressor.CompressorScreen;
+import com.qsoftware.forgemod.objects.blocks.machines.compressor.CompressorScreen;
 import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.forgemod.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -38,7 +38,7 @@ public class CompressingRecipeCategoryJei implements IRecipeCategory<Compressing
         icon = guiHelper.createDrawableIngredient(new ItemStack(ModBlocks.COMPRESSOR));
         arrow = guiHelper.drawableBuilder(CompressorScreen.TEXTURE, 176, 14, 24, 17)
                 .buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
-        localizedName = TextUtil.translate("jei", "category.compressing").getString();
+        localizedName = TextUtils.translate("jei", "category.compressing").getString();
     }
 
     @Override

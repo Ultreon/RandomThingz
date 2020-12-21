@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.util;
 
-import com.qsoftware.forgemod.objects.block.refinery.RefineryTileEntity;
+import com.qsoftware.forgemod.objects.blocks.machines.refinery.RefineryTileEntity;
 import com.qsoftware.forgemod.objects.items.fluid.CanisterItem;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.IInventory;
@@ -13,8 +13,9 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import java.util.function.Predicate;
 
 public final class InventoryUtils {
+
     private InventoryUtils() {
-        throw new IllegalAccessError("Utility class");
+        throw ExceptionUtil.utilityConstructor();
     }
 
     /**

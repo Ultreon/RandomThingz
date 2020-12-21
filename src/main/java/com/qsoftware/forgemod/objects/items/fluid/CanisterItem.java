@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.objects.items.fluid;
 
 import com.qsoftware.forgemod.api.IFluidContainer;
 import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.forgemod.util.TextUtils;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -72,7 +72,7 @@ public class CanisterItem extends Item implements IFluidContainer {
     @Override
     public ITextComponent getDisplayName(ItemStack stack) {
         FluidStack fluid = getFluid(stack);
-        ITextComponent fluidText = fluid.isEmpty() ? TextUtil.translate("misc", "empty") : fluid.getDisplayName();
+        ITextComponent fluidText = fluid.isEmpty() ? TextUtils.translate("misc", "empty") : fluid.getDisplayName();
         return new TranslationTextComponent(this.getTranslationKey(), fluidText);
     }
 

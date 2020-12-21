@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qtexturedmodels:frameblock",
+      "count": 1
+    },
+    {
+      "item": "minecraft:structure_void",
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "qtexturedmodels:frame_walk_thru",
+    "count": 8
+  }
+}

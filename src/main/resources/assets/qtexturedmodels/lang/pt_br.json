@@ -37,5 +37,5 @@
 	"item.qtexturedmodels.chisel": "Formão",
 	"item.qtexturedmodels.paintbrush": "Pincel",
 
-	"itemGroup.qtexturedmodels": "BlockCarpentry"
+	"itemGroup.qtexturedmodels": "QTextureModels"
 }

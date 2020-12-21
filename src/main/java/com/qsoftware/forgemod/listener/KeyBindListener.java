@@ -3,9 +3,9 @@ package com.qsoftware.forgemod.listener;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.ConfirmExitScreen;
 import com.qsoftware.forgemod.client.gui.TestScreen;
+import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.DemoScreen;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
@@ -34,7 +34,7 @@ public class KeyBindListener {
         Minecraft mc = Minecraft.getInstance();
         if (mc.currentScreen instanceof MainMenuScreen) {
             if (event.getAction() == GLFW.GLFW_PRESS) {
-                if (event.getKey() == 256)
+                if (event.getKey() == 256 && Config.closePrompt.get())
                     if (!press_1) {
                         press_1 = true;
                         mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));

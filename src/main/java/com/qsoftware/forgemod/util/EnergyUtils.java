@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.util;
 
-import com.qsoftware.forgemod.objects.block.IEnergyHandler;
+import com.qsoftware.forgemod.objects.blocks.machines.IEnergyHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 
 public final class EnergyUtils {
     private EnergyUtils() {
-        throw new IllegalAccessError("Utility class");
+        throw ExceptionUtil.utilityConstructor();
     }
 
     public static void trySendToNeighbors(IBlockReader world, BlockPos pos, IEnergyHandler energyHandler, int maxSend) {

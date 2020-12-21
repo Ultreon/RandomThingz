@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.objects.items.tools;
 import com.qsoftware.forgemod.common.damagesource.DamageSourceInfinitySword;
 import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.init.ModItems;
+import com.qsoftware.forgemod.init.ModStats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -148,8 +149,7 @@ public class InfinityPickaxeItem extends PickaxeItem {
                 victim.getCombatTracker().trackDamage(new DamageSourceInfinitySword(player), victim.getHealth(), victim.getHealth());
                 victim.setHealth(0);
                 victim.onDeath(new EntityDamageSource("infinity", player));
-                //TODO
-                //player.addStat(Achievements.creative_kill, 1);
+                player.addStat(ModStats.INFINITY_KILL, 1);
                 return true;
             }
         }

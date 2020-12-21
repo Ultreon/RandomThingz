@@ -1,6 +1,6 @@
 package com.qsoftware.texturedmodels.block;
 
-import com.qsoftware.texturedmodels.BlockCarpentryMain;
+import com.qsoftware.texturedmodels.QTextureModels;
 import com.qsoftware.texturedmodels.setup.Registration;
 import com.qsoftware.texturedmodels.setup.config.BCModConfig;
 import com.qsoftware.texturedmodels.tileentity.ChestFrameTileEntity;
@@ -120,7 +120,7 @@ public class ChestFrameBlock extends FrameBlock implements IWaterLoggable {
             BlockAppearanceHelper.setDesign(world, pos, player, item);
             BlockAppearanceHelper.setDesignTexture(world, pos, player, item);
             if (tileEntity instanceof ChestFrameTileEntity && state.get(CONTAINS_BLOCK)) {
-                if (!(Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(BlockCarpentryMain.MOD_ID))) {
+                if (!(Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID))) {
                     NetworkHooks.openGui((ServerPlayerEntity) player, (ChestFrameTileEntity) tileEntity, pos);
                     return ActionResultType.SUCCESS;
                 }

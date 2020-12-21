@@ -3,13 +3,12 @@ package com.qsoftware.forgemod.objects.items.type;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.capability.EnergyStorageItemImpl;
 import com.qsoftware.forgemod.hud.HudItem;
-import com.qsoftware.forgemod.util.GraphicsUtils;
-import com.qsoftware.forgemod.util.TextUtil;
+import com.qsoftware.forgemod.util.GraphicsUtil;
+import com.qsoftware.forgemod.util.TextUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -86,7 +85,7 @@ public class EnergyStoringItem extends HudItem {
         if (CapabilityEnergy.ENERGY == null) return;
 
         stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(e ->
-                tooltip.add(TextUtil.energyWithMax(e.getEnergyStored(), e.getMaxEnergyStored())));
+                tooltip.add(TextUtils.energyWithMax(e.getEnergyStored(), e.getMaxEnergyStored())));
     }
 
     @Override
@@ -117,7 +116,7 @@ public class EnergyStoringItem extends HudItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void renderHud(GraphicsUtils gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
+    public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
         // Apparently, addInformation can be called before caps are initialized
         if (CapabilityEnergy.ENERGY == null) return;
 
