@@ -1,12 +1,12 @@
 package com.qsoftware.silent.lib.network.internal;
 
+import com.qsoftware.silent.lib.client.gui.nbt.DisplayNBTScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.network.NetworkEvent;
-import com.qsoftware.silent.lib.client.gui.nbt.DisplayNBTScreen;
 
 import java.util.function.Supplier;
 

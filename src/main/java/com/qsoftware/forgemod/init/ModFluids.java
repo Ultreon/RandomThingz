@@ -24,7 +24,8 @@ public final class ModFluids {
         throw ExceptionUtil.utilityConstructor();
     }
 
-    @SuppressWarnings({"Convert2MethodRef", "FunctionalExpressionCanBeFolded"}) // Did this because IntelliJ thought it would be possible to do that, but then it will cause a crash.
+    @SuppressWarnings({"Convert2MethodRef", "FunctionalExpressionCanBeFolded"})
+    // Did this because IntelliJ thought it would be possible to do that, but then it will cause a crash.
     public static void registerFluids(RegistryEvent.Register<Fluid> event) {
         ForgeFlowingFluid.Properties oilProps = properties("oil", () -> OIL, () -> FLOWING_OIL)
                 .block(() -> ModBlocks.OIL.get())

@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Moobloom entity renderer class.
  *
- * @deprecated Use {@link MoobloomRenderer} instead.
  * @author Qboi123
+ * @deprecated Use {@link MoobloomRenderer} instead.
  */
 @Deprecated
 @OnlyIn(Dist.CLIENT)

@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.tools;
 
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class UraniumSwordItem extends SwordItem {
     public UraniumSwordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn) {
-        super(tier, attackDamageIn, attackSpeedIn, new Properties().group(Groups.TOOLS));
+        super(tier, attackDamageIn, attackSpeedIn, new Properties().group(ModItemGroups.TOOLS));
     }
 
     @Override

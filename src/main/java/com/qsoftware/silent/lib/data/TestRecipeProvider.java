@@ -2,6 +2,7 @@ package com.qsoftware.silent.lib.data;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.qsoftware.silent.lib.SilentLib;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
@@ -9,7 +10,6 @@ import net.minecraft.data.RecipeProvider;
 import net.minecraft.item.Items;
 import net.minecraft.util.JSONUtils;
 import net.minecraftforge.common.Tags;
-import com.qsoftware.silent.lib.SilentLib;
 
 import java.util.function.Consumer;
 

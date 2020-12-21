@@ -183,6 +183,7 @@ public final class NBTConstants {
     public static final String UPGRADES = "upgrades";
     public static final String USED_NODES = "usedNodes";
     public static final String WORLD_GEN_VERSION = "worldGenVersion";
+
     private NBTConstants() {
     }
 }

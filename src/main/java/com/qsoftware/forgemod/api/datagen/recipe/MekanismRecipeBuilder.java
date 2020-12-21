@@ -34,6 +34,7 @@ public abstract class MekanismRecipeBuilder<BUILDER extends MekanismRecipeBuilde
     protected final List<ICondition> conditions = new ArrayList<>();
     protected final Advancement.Builder advancementBuilder = Advancement.Builder.builder();
     protected final ResourceLocation serializerName;
+
     protected MekanismRecipeBuilder(ResourceLocation serializerName) {
         this.serializerName = serializerName;
     }
@@ -46,11 +47,13 @@ public abstract class MekanismRecipeBuilder<BUILDER extends MekanismRecipeBuilde
         return addCriterion(criterion.name, criterion.criterion);
     }
 
+    @SuppressWarnings("unchecked")
     public BUILDER addCriterion(String name, ICriterionInstance criterion) {
         advancementBuilder.withCriterion(name, criterion);
         return (BUILDER) this;
     }
 
+    @SuppressWarnings("unchecked")
     public BUILDER addCondition(ICondition condition) {
         conditions.add(condition);
         return (BUILDER) this;
@@ -98,6 +101,7 @@ public abstract class MekanismRecipeBuilder<BUILDER extends MekanismRecipeBuilde
             return jsonObject;
         }
 
+        @SuppressWarnings("ConstantConditions")
         @Nonnull
         @Override
         public IRecipeSerializer<?> getSerializer() {

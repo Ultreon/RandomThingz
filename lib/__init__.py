@@ -9,7 +9,7 @@ __os.chdir(PROJECT_FOLDER)
 
 # BUILD_OUTPUT: list = ["build/libs", "qaddons/build/libs"]
 BUILD_OUTPUT: list = ["build/libs"]
-LIVE_RELEASES: str = "server/data/upload/live-releases"
+LIVE_RELEASES: str = "releases/live-releases"
 MODS_FOLDER: str = "run/mods"
 VERSION: str = "1.1-release1"
 

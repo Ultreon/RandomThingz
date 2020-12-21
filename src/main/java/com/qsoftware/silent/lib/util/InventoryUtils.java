@@ -32,7 +32,9 @@ import java.util.Collection;
 import java.util.function.Predicate;
 
 public final class InventoryUtils {
-    private InventoryUtils() {throw new IllegalAccessError("Utility class");}
+    private InventoryUtils() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     /**
      * Creates slots for the player's inventory for a {@link Container}. Convenience method to
@@ -86,6 +88,7 @@ public final class InventoryUtils {
         return ItemStack.EMPTY;
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static ItemStack mergeItem(IInventory inventory, int slotStart, int slotEndExclusive, ItemStack stack) {
         if (inventory == null || stack.isEmpty()) {
             return stack;
@@ -116,6 +119,7 @@ public final class InventoryUtils {
         return stack;
     }
 
+    @SuppressWarnings("ConstantConditions")
     public static Collection<ItemStack> mergeItems(IInventory inventory, int slotStart, int slotEndExclusive, Collection<ItemStack> stacks) {
         if (inventory == null && stacks.isEmpty()) {
             return ImmutableList.of();

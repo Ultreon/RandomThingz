@@ -4,7 +4,9 @@ import javax.annotation.Nullable;
 import java.util.function.Function;
 
 public final class EnumUtils {
-    private EnumUtils() {throw new IllegalAccessError("Utility class");}
+    private EnumUtils() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     /**
      * Get an enum constant that produces the given value from {@code getter}. Returns the first

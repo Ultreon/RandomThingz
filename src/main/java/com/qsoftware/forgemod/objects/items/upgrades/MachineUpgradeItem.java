@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items.upgrades;
 
 import com.qsoftware.forgemod.api.IMachineUpgrade;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.util.TextUtils;
 import com.qsoftware.silent.utils.MathUtils;
 import net.minecraft.client.util.ITooltipFlag;
@@ -18,7 +18,7 @@ public class MachineUpgradeItem extends Item {
     private final IMachineUpgrade upgrade;
 
     public MachineUpgradeItem(IMachineUpgrade upgrade) {
-        super(new Properties().group(Groups.MISC));
+        super(new Properties().group(ModItemGroups.MISC));
         this.upgrade = upgrade;
     }
 

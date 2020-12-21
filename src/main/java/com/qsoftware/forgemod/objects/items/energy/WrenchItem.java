@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items.energy;
 
 import com.qsoftware.forgemod.api.IWrenchable;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 
 public class WrenchItem extends Item {
     public WrenchItem() {
-        super(new Properties().group(Groups.SPECIALS).maxStackSize(1));
+        super(new Properties().group(ModItemGroups.SPECIALS).maxStackSize(1));
     }
 
     private static <T extends Comparable<T>> BlockState cycleProperty(BlockState state, Property<T> propertyIn) {

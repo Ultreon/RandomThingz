@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.qsoftware.silent.lib.crafting.recipe.ExtendedShapedRecipe;
+import com.qsoftware.silent.lib.util.NameUtils;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.ICriterionInstance;
@@ -17,7 +18,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ITag;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import com.qsoftware.silent.lib.util.NameUtils;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -139,7 +139,7 @@ public class ExtendedShapedRecipeBuilder {
                     .withRewards(AdvancementRewards.Builder.recipe(id))
                     .withRequirementsStrategy(IRequirementsStrategy.OR);
         }
-        ResourceLocation advancementId = new ResourceLocation(id.getNamespace(), "recipes/" + this.result.getGroup().getPath() + "/" + id.getPath());
+        ResourceLocation advancementId = new ResourceLocation(id.getNamespace(), "recipes/" + Objects.requireNonNull(this.result.getGroup()).getPath() + "/" + id.getPath());
         consumer.accept(new Result(id, this, advancementId));
     }
 

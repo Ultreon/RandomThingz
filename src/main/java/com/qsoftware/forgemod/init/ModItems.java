@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.objects.items.CraftingItems;
 import com.qsoftware.forgemod.objects.items.EucalyptusLeafItem;
 import com.qsoftware.forgemod.objects.items.LegendaryEnderPearlItem;
@@ -64,9 +63,9 @@ public final class ModItems {
     public static final ItemRegistryObject<BatteryItem> BATTERY = register("battery", BatteryItem::new);
     public static final ItemRegistryObject<HandPumpItem> HAND_PUMP = register("hand_pump", HandPumpItem::new);
     public static final ItemRegistryObject<CanisterItem> CANISTER = register("canister", () ->
-            new CanisterItem(new Item.Properties().group(Groups.MISC)));
+            new CanisterItem(new Item.Properties().group(ModItemGroups.MISC)));
     public static final ItemRegistryObject<EmptyCanisterItem> EMPTY_CANISTER = register("empty_canister", () ->
-            new EmptyCanisterItem(new Item.Properties().group(Groups.MISC)));
+            new EmptyCanisterItem(new Item.Properties().group(ModItemGroups.MISC)));
     public static final ItemRegistryObject<BucketItem> OIL_BUCKET = register("oil_bucket", () ->
             createBucketItem(() -> ModFluids.OIL));
     public static final ItemRegistryObject<BucketItem> DIESEL_BUCKET = register("diesel_bucket", () ->
@@ -76,51 +75,51 @@ public final class ModItems {
     public static final ItemRegistryObject<NoPlaceBucketItem> POLYETHYLENE_BUCKET = register("polyethylene_bucket", () ->
             createNoPlaceBucketItem(() -> ModFluids.POLYETHYLENE));
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Overpowered     //
     /////////////////////////
     public static final ItemRegistryObject<KillSwitchItem> KILL_SWITCH = register("kill_switch", KillSwitchItem::new);
     public static final ItemRegistryObject<BanHammerItem> BAN_HAMMER = register("ban_hammer", BanHammerItem::new);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Miscellaneous     //
     ///////////////////////////
-    public static final ItemRegistryObject<LegendaryEnderPearlItem> LEGENDARY_ENDER_PEARL = register("legendary_ender_pearl", () -> new LegendaryEnderPearlItem(new Item.Properties().group(Groups.MISC)));
-    public static final ItemRegistryObject<DynamiteItem> DYNAMITE = register("dynamite", () -> new DynamiteItem(new Item.Properties().group(Groups.MISC).rarity(Rarity.UNCOMMON)));
+    public static final ItemRegistryObject<LegendaryEnderPearlItem> LEGENDARY_ENDER_PEARL = register("legendary_ender_pearl", () -> new LegendaryEnderPearlItem(new Item.Properties().group(ModItemGroups.MISC)));
+    public static final ItemRegistryObject<DynamiteItem> DYNAMITE = register("dynamite", () -> new DynamiteItem(new Item.Properties().group(ModItemGroups.MISC).rarity(Rarity.UNCOMMON)));
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Food     //
     //////////////////
-    public static final ItemRegistryObject<Item> CHEESE_BURGER = register("cheese_burger", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.2f).effect(() -> new EffectInstance(Effects.REGENERATION, 60, 1), 0.7f).build())));
-    public static final ItemRegistryObject<Item> CHEESE_SLICE = register("cheese_slice", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.2f).build())));
-    public static final ItemRegistryObject<SliceableItem> CHEESE = register("cheese", () -> new SliceableItem(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.3f).build()), (stack) -> new ItemStack(CHEESE_SLICE, stack.getCount() * 6)));
-    public static final ItemRegistryObject<Item> COOKED_CARROT = register("cooked_carrot", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(3).saturation(0.25f).build())));
-    public static final ItemRegistryObject<Item> BAKED_APPLE = register("baked_apple", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(4).saturation(0.3f).build())));
-    public static final ItemRegistryObject<Item> FLOUR = register("flour", () -> new Item(new Item.Properties().group(Groups.FOOD)));
-    public static final ItemRegistryObject<Item> DOUGH = register("dough", () -> new Item(new Item.Properties().group(Groups.FOOD)));
-    public static final ItemRegistryObject<Item> CHICKEN_LEG = register("chicken_leg", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.1f).build())));
-    public static final ItemRegistryObject<Item> COOKED_CHICKEN_LEG = register("cooked_chicken_leg", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(4).saturation(0.35f).build())));
-    public static final ItemRegistryObject<Item> MEATBALL = register("meatball", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(1).saturation(0.15f).effect(() -> new EffectInstance(Effects.HUNGER, 100, 1), 1).build())));
-    public static final ItemRegistryObject<Item> COOKED_MEATBALL = register("cooked_meatball", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(3).saturation(0.225f).build())));
-    public static final ItemRegistryObject<Item> SHOARMA = register("shoarma", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.15f).build())));
-    public static final ItemRegistryObject<Item> COOKED_SHOARMA = register("cooked_shoarma", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(6).saturation(0.45f).build())));
-    public static final ItemRegistryObject<Item> PORK_SHANK = register("pork_shank", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.15f).build())));
-    public static final ItemRegistryObject<Item> COOKED_PORK_SHANK = register("cooked_pork_shank", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(5).saturation(0.375f).build())));
-    public static final ItemRegistryObject<Item> TOMAHAWK = register("tomahawk", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(2).saturation(0.215f).build())));
-    public static final ItemRegistryObject<Item> COOKED_TOMAHAWK = register("cooked_tomahawk", () -> new Item(new Item.Properties().group(Groups.FOOD).food(new Food.Builder().hunger(6).saturation(0.415f).build())));
+    public static final ItemRegistryObject<Item> CHEESE_BURGER = register("cheese_burger", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(1).saturation(0.2f).effect(() -> new EffectInstance(Effects.REGENERATION, 60, 1), 0.7f).build())));
+    public static final ItemRegistryObject<Item> CHEESE_SLICE = register("cheese_slice", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(1).saturation(0.2f).build())));
+    public static final ItemRegistryObject<SliceableItem> CHEESE = register("cheese", () -> new SliceableItem(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(2).saturation(0.3f).build()), (stack) -> new ItemStack(CHEESE_SLICE, stack.getCount() * 6)));
+    public static final ItemRegistryObject<Item> COOKED_CARROT = register("cooked_carrot", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(3).saturation(0.25f).build())));
+    public static final ItemRegistryObject<Item> BAKED_APPLE = register("baked_apple", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(4).saturation(0.3f).build())));
+    public static final ItemRegistryObject<Item> FLOUR = register("flour", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD)));
+    public static final ItemRegistryObject<Item> DOUGH = register("dough", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD)));
+    public static final ItemRegistryObject<Item> CHICKEN_LEG = register("chicken_leg", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(1).saturation(0.1f).build())));
+    public static final ItemRegistryObject<Item> COOKED_CHICKEN_LEG = register("cooked_chicken_leg", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(4).saturation(0.35f).build())));
+    public static final ItemRegistryObject<Item> MEATBALL = register("meatball", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(1).saturation(0.15f).effect(() -> new EffectInstance(Effects.HUNGER, 100, 1), 1).build())));
+    public static final ItemRegistryObject<Item> COOKED_MEATBALL = register("cooked_meatball", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(3).saturation(0.225f).build())));
+    public static final ItemRegistryObject<Item> SHOARMA = register("shoarma", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(2).saturation(0.15f).build())));
+    public static final ItemRegistryObject<Item> COOKED_SHOARMA = register("cooked_shoarma", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(6).saturation(0.45f).build())));
+    public static final ItemRegistryObject<Item> PORK_SHANK = register("pork_shank", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(2).saturation(0.15f).build())));
+    public static final ItemRegistryObject<Item> COOKED_PORK_SHANK = register("cooked_pork_shank", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(5).saturation(0.375f).build())));
+    public static final ItemRegistryObject<Item> TOMAHAWK = register("tomahawk", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(2).saturation(0.215f).build())));
+    public static final ItemRegistryObject<Item> COOKED_TOMAHAWK = register("cooked_tomahawk", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(6).saturation(0.415f).build())));
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Nature     //
     ////////////////////
-    public static final ItemRegistryObject<Item> STICK_VARIANT_1 = register("stick_variant1", () -> new Item(new Item.Properties().group(Groups.NATURE)));
-    public static final ItemRegistryObject<Item> STICK_VARIANT_2 = register("stick_variant2", () -> new Item(new Item.Properties().group(Groups.NATURE)));
+    public static final ItemRegistryObject<Item> STICK_VARIANT_1 = register("stick_variant1", () -> new Item(new Item.Properties().group(ModItemGroups.NATURE)));
+    public static final ItemRegistryObject<Item> STICK_VARIANT_2 = register("stick_variant2", () -> new Item(new Item.Properties().group(ModItemGroups.NATURE)));
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Wood     //
     ////////////////////
-//    public static final ItemRegistryObject<Item> EUCALYPTUS_PLANK = register("eucalyptus_plank", () -> new Item(new Item.Properties().group(Groups.WOOD)));
+//    public static final ItemRegistryObject<Item> EUCALYPTUS_PLANK = register("eucalyptus_plank", () -> new Item(new Item.Properties().group(ModItemGroups.WOOD)));
     public static final ItemRegistryObject<Item> EUCALYPTUS_LEAF = register("eucalyptus_leaf", () -> new EucalyptusLeafItem(new Item.Properties()
-            .group(Groups.NATURE)
+            .group(ModItemGroups.NATURE)
             .maxStackSize(128)
             .food(new Food.Builder()
                     .hunger(1)
@@ -133,8 +132,8 @@ public final class ModItems {
     ///////////////////////
 
     // Bows
-    public static final ItemRegistryObject<AdvancedBowItem> BLAZE_BOW = register("blaze_bow", () -> new AdvancedBowItem(new Item.Properties().group(Groups.FLETCHING), 6.25f, 1.0f, 6, 1, true));
-    public static final ItemRegistryObject<AdvancedBowItem> ICE_BOW = register("ice_bow", () -> new AdvancedBowItem(new Item.Properties().group(Groups.FLETCHING), 2f, 1.0f, 8, 2));
+    public static final ItemRegistryObject<AdvancedBowItem> BLAZE_BOW = register("blaze_bow", () -> new AdvancedBowItem(new Item.Properties().group(ModItemGroups.FLETCHING), 6.25f, 1.0f, 6, 1, true));
+    public static final ItemRegistryObject<AdvancedBowItem> ICE_BOW = register("ice_bow", () -> new AdvancedBowItem(new Item.Properties().group(ModItemGroups.FLETCHING), 2f, 1.0f, 8, 2));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Ingredients     //
@@ -195,203 +194,203 @@ public final class ModItems {
     public static final ItemRegistryObject<IngotOrDustItem> BERYL_DUST = register("beryl_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> DIAMOND_DUST = register("diamond_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> TANZANITE_DUST = register("tanzanite_dust", IngotOrDustItem::new);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Gems     //
     //////////////////
-    public static final ItemRegistryObject<Item> RUBY = register("ruby", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-    public static final ItemRegistryObject<Item> AMETHYST = register("amethyst", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-    public static final ItemRegistryObject<Item> AQUAMARINE = register("aquamarine", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-    public static final ItemRegistryObject<Item> SAPHIRE = register("saphire", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-    public static final ItemRegistryObject<Item> MALACHITE = register("malachite", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-    public static final ItemRegistryObject<Item> TOPAZ = register("topaz", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-    public static final ItemRegistryObject<Item> AMBER = register("amber", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-    public static final ItemRegistryObject<Item> PERIDOT = register("peridot", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-    public static final ItemRegistryObject<Item> BERYL = register("beryl", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-    public static final ItemRegistryObject<Item> TANZANITE = register("tanzanite", () -> new Item(new Item.Properties().group(Groups.GEMS)));
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static final ItemRegistryObject<Item> RUBY = register("ruby", () -> new Item(new Item.Properties().group(ModItemGroups.GEMS)));
+    public static final ItemRegistryObject<Item> AMETHYST = register("amethyst", () -> new Item(new Item.Properties().group(ModItemGroups.GEMS)));
+    public static final ItemRegistryObject<Item> AQUAMARINE = register("aquamarine", () -> new Item(new Item.Properties().group(ModItemGroups.GEMS)));
+    public static final ItemRegistryObject<Item> SAPHIRE = register("saphire", () -> new Item(new Item.Properties().group(ModItemGroups.GEMS)));
+    public static final ItemRegistryObject<Item> MALACHITE = register("malachite", () -> new Item(new Item.Properties().group(ModItemGroups.GEMS)));
+    public static final ItemRegistryObject<Item> TOPAZ = register("topaz", () -> new Item(new Item.Properties().group(ModItemGroups.GEMS)));
+    public static final ItemRegistryObject<Item> AMBER = register("amber", () -> new Item(new Item.Properties().group(ModItemGroups.GEMS)));
+    public static final ItemRegistryObject<Item> PERIDOT = register("peridot", () -> new Item(new Item.Properties().group(ModItemGroups.GEMS)));
+    public static final ItemRegistryObject<Item> BERYL = register("beryl", () -> new Item(new Item.Properties().group(ModItemGroups.GEMS)));
+    public static final ItemRegistryObject<Item> TANZANITE = register("tanzanite", () -> new Item(new Item.Properties().group(ModItemGroups.GEMS)));
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Icons     //
     ///////////////////
     public static final ItemRegistryObject<Item> DUNGEONS = register("dungeons", () -> new SwordItem(ItemTier.DIAMOND, 0, 0f, new Item.Properties().setNoRepair().maxStackSize(1)));
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Dungeons     //
     //////////////////////
-    public static final ItemRegistryObject<AdvancedBowItem> DUNGEONS_HUNTERS_BOW = register("hunters_bow", () -> new AdvancedBowItem(new Item.Properties().group(Groups.DUNGEONS), 4.0f, 1.0f, 1.75d) {
+    public static final ItemRegistryObject<AdvancedBowItem> DUNGEONS_HUNTERS_BOW = register("hunters_bow", () -> new AdvancedBowItem(new Item.Properties().group(ModItemGroups.DUNGEONS), 4.0f, 1.0f, 1.75d) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_DIAMOND_PICKAXE = register("dungeons_diamond_pickaxe", () -> new PickaxeItem(ItemTier.STONE, 3, -2.1f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_DIAMOND_PICKAXE = register("dungeons_diamond_pickaxe", () -> new PickaxeItem(ItemTier.STONE, 3, -2.1f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_DIAMOND_AXE = register("dungeons_diamond_axe", () -> new AxeItem(ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_DIAMOND_AXE = register("dungeons_diamond_axe", () -> new AxeItem(ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_AXE = register("dungeons_axe", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_AXE = register("dungeons_axe", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_CURSED_AXE = register("cursed_axe", () -> new AxeItem(ItemTier.GOLD, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_CURSED_AXE = register("cursed_axe", () -> new AxeItem(ItemTier.GOLD, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_FIREBRAND = register("firebrand", () -> new AxeItem(ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_FIREBRAND = register("firebrand", () -> new AxeItem(ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_HIGHLAND_AXE = register("highland_axe", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_HIGHLAND_AXE = register("highland_axe", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_WHIRLWIND = register("whirlwind", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_WHIRLWIND = register("whirlwind", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_DAGGER = register("dungeons_dagger", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_DAGGER = register("dungeons_dagger", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_ETERNAL_KNIFE = register("eternal_knife", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_ETERNAL_KNIFE = register("eternal_knife", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_FANGS_OF_FROST = register("fangs_of_frost", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_FANGS_OF_FROST = register("fangs_of_frost", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_MOON_DAGGER = register("moon_dagger", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_MOON_DAGGER = register("moon_dagger", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_NIGHTMARES_BITE = register("nightmares_bite", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_NIGHTMARES_BITE = register("nightmares_bite", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_SPIRIT_KNIFE = register("spirit_knife", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.0f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_SPIRIT_KNIFE = register("spirit_knife", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_GOLD = register("the_last_laugh_gold", () -> new SwordItem(ItemTier.GOLD, 3, -0.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_GOLD = register("the_last_laugh_gold", () -> new SwordItem(ItemTier.GOLD, 3, -0.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_SILVER = register("the_last_laugh_silver", () -> new SwordItem(ItemTier.IRON, 2, -0.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_SILVER = register("the_last_laugh_silver", () -> new SwordItem(ItemTier.IRON, 2, -0.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_DIAMOND_SWORD = register("dungeons_diamond_sword", () -> new SwordItem(ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_DIAMOND_SWORD = register("dungeons_diamond_sword", () -> new SwordItem(ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_IRON_SWORD = register("dungeons_iron_sword", () -> new SwordItem(ItemTier.IRON, 4, -2.0f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_IRON_SWORD = register("dungeons_iron_sword", () -> new SwordItem(ItemTier.IRON, 4, -2.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_BROADSWORD = register("dungeons_broadsword", () -> new SwordItem(ItemTier.IRON, 5, -3.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_BROADSWORD = register("dungeons_broadsword", () -> new SwordItem(ItemTier.IRON, 5, -3.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_STORMLANDER = register("stormlander", () -> new PickaxeItem(ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_STORMLANDER = register("stormlander", () -> new PickaxeItem(ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_GREAT_HAMMER = register("great_hammer", () -> new PickaxeItem(ItemTier.IRON, 6, -2.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_GREAT_HAMMER = register("great_hammer", () -> new PickaxeItem(ItemTier.IRON, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_HAMMER_OF_GRAVITY = register("hammer_of_gravity", () -> new PickaxeItem(ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_HAMMER_OF_GRAVITY = register("hammer_of_gravity", () -> new PickaxeItem(ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_FLAIL = register("flail", () -> new SwordItem(ItemTier.STONE, 5, -3.0f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_FLAIL = register("flail", () -> new SwordItem(ItemTier.STONE, 5, -3.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_SUNS_GRACE = register("suns_grace", () -> new SwordItem(ItemTier.STONE, 5, -3.0f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_SUNS_GRACE = register("suns_grace", () -> new SwordItem(ItemTier.STONE, 5, -3.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<HoeItem> DUNGEONS_FROST_SCYTHE = register("frost_scythe", () -> new HoeItem(ItemTier.STONE, 6, -2.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<HoeItem> DUNGEONS_FROST_SCYTHE = register("frost_scythe", () -> new HoeItem(ItemTier.STONE, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<HoeItem> DUNGEONS_JAILORS_SCYTHE = register("jailors_scythe", () -> new HoeItem(ItemTier.STONE, 6, -2.5f, new Item.Properties().group(Groups.DUNGEONS)) {
+    public static final ItemRegistryObject<HoeItem> DUNGEONS_JAILORS_SCYTHE = register("jailors_scythe", () -> new HoeItem(ItemTier.STONE, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
@@ -399,7 +398,7 @@ public final class ModItems {
         }
     });
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Overpowered     //
     /////////////////////////
     public static final ItemRegistryObject<WalkingStaffItem> WALKING_STAFF = register("walking_wand", WalkingStaffItem::new);
@@ -409,8 +408,8 @@ public final class ModItems {
     //     Specials     //
     //////////////////////
 
-    public static final ItemRegistryObject<KnifeItem> KNIFE = register("knife", () -> new KnifeItem(ItemTier.IRON, new Item.Properties().group(Groups.SPECIALS).maxDamage(4)));
-    public static final ItemRegistryObject<MagnetItem> MAGNET = register("magnet", () -> new MagnetItem(new Item.Properties().group(Groups.SPECIALS).maxDamage(4)));
+    public static final ItemRegistryObject<KnifeItem> KNIFE = register("knife", () -> new KnifeItem(ItemTier.IRON, new Item.Properties().group(ModItemGroups.SPECIALS).maxDamage(4)));
+    public static final ItemRegistryObject<MagnetItem> MAGNET = register("magnet", () -> new MagnetItem(new Item.Properties().group(ModItemGroups.SPECIALS).maxDamage(4)));
 
     // Wands
     public static final ItemRegistryObject<FireWandItem> FIRE_STAFF = register("fire_wand", FireWandItem::new);
@@ -418,17 +417,17 @@ public final class ModItems {
     public static final ItemRegistryObject<TeleportStaffItem> TELEPORT_STAFF = register("teleport_wand", TeleportStaffItem::new);
 
     // Stone Level
-    public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordItem(ItemTier.STONE, 8, -2.0f, new Item.Properties().group(Groups.SPECIALS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordItem(ItemTier.STONE, 8, -2.0f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE)));
 
     // Iron Level
-    public static final ItemRegistryObject<AxeItem> EMERGENCY_FIRE_AXE = register("emergency_fire_axe", () -> new AxeItem(ItemTier.IRON, 2, -2.55f, new Item.Properties().group(Groups.SPECIALS).rarity(Rarity.UNCOMMON)));
-    public static final ItemRegistryObject<FireSwordItem> FIRE_SWORD = register("fire_sword", () -> new FireSwordItem(ItemTier.IRON, 3, -3.5f, new Item.Properties().group(Groups.SPECIALS).rarity(Rarity.EPIC)));
-    public static final ItemRegistryObject<EnderSwordItem> ENDER_SWORD = register("ender_sword", () -> new EnderSwordItem(ItemTier.IRON, 3, -1.9f, new Item.Properties().group(Groups.SPECIALS).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<AxeItem> EMERGENCY_FIRE_AXE = register("emergency_fire_axe", () -> new AxeItem(ItemTier.IRON, 2, -2.55f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.UNCOMMON)));
+    public static final ItemRegistryObject<FireSwordItem> FIRE_SWORD = register("fire_sword", () -> new FireSwordItem(ItemTier.IRON, 3, -3.5f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<EnderSwordItem> ENDER_SWORD = register("ender_sword", () -> new EnderSwordItem(ItemTier.IRON, 3, -1.9f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.EPIC)));
 
     // Diamond Level
-    public static final ItemRegistryObject<AxeItem> LEVIATHAN_AXE = register("leviathan_axe", () -> new AxeItem(ItemTier.DIAMOND, 5, -2.55f, new Item.Properties().group(Groups.SPECIALS)));
-    public static final ItemRegistryObject<AxeItem> ADAMANTANIUM_AXE_RED = register("adamantanium_axe_red", () -> new AxeItem(ItemTier.DIAMOND, 5, -1.875f, new Item.Properties().group(Groups.SPECIALS)));
-    public static final ItemRegistryObject<SwordItem> DIAMOND_QUARTZ_SWORD = register("diamond_quartz_sword", () -> new SwordItem(ItemTier.DIAMOND, 6, -2.0f, new Item.Properties().group(Groups.SPECIALS)));
+    public static final ItemRegistryObject<AxeItem> LEVIATHAN_AXE = register("leviathan_axe", () -> new AxeItem(ItemTier.DIAMOND, 5, -2.55f, new Item.Properties().group(ModItemGroups.SPECIALS)));
+    public static final ItemRegistryObject<AxeItem> ADAMANTANIUM_AXE_RED = register("adamantanium_axe_red", () -> new AxeItem(ItemTier.DIAMOND, 5, -1.875f, new Item.Properties().group(ModItemGroups.SPECIALS)));
+    public static final ItemRegistryObject<SwordItem> DIAMOND_QUARTZ_SWORD = register("diamond_quartz_sword", () -> new SwordItem(ItemTier.DIAMOND, 6, -2.0f, new Item.Properties().group(ModItemGroups.SPECIALS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Tools     //
@@ -557,208 +556,208 @@ public final class ModItems {
     );
 
     // Armors - Copper
-    public static final ItemRegistryObject<ArmorItem> COPPER_HELMET = register("copper_helmet", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> COPPER_CHESTPLATE = register("copper_chestplate", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> COPPER_LEGGINGS = register("copper_leggings", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> COPPER_BOOTS = register("copper_boots", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> COPPER_SWORD = register("copper_sword", () -> new SwordItem(COPPER_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> COPPER_PICKAXE = register("copper_pickaxe", () -> new PickaxeItem(COPPER_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> COPPER_SHOVEL = register("copper_shovel", () -> new ShovelItem(COPPER_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> COPPER_AXE = register("copper_axe", () -> new AxeItem(COPPER_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> COPPER_HOE = register("copper_hoe", () -> new HoeItem(COPPER_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> COPPER_HELMET = register("copper_helmet", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> COPPER_CHESTPLATE = register("copper_chestplate", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> COPPER_LEGGINGS = register("copper_leggings", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> COPPER_BOOTS = register("copper_boots", () -> new ArmorItem(copperArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> COPPER_SWORD = register("copper_sword", () -> new SwordItem(COPPER_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> COPPER_PICKAXE = register("copper_pickaxe", () -> new PickaxeItem(COPPER_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> COPPER_SHOVEL = register("copper_shovel", () -> new ShovelItem(COPPER_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> COPPER_AXE = register("copper_axe", () -> new AxeItem(COPPER_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> COPPER_HOE = register("copper_hoe", () -> new HoeItem(COPPER_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Redstone
-    public static final ItemRegistryObject<ArmorItem> REDSTONE_HELMET = register("redstone_helmet", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> REDSTONE_CHESTPLATE = register("redstone_chestplate", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> REDSTONE_LEGGINGS = register("redstone_leggings", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> REDSTONE_BOOTS = register("redstone_boots", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> REDSTONE_SWORD = register("redstone_sword", () -> new SwordItem(REDSTONE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> REDSTONE_PICKAXE = register("redstone_pickaxe", () -> new PickaxeItem(REDSTONE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> REDSTONE_SHOVEL = register("redstone_shovel", () -> new ShovelItem(REDSTONE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> REDSTONE_AXE = register("redstone_axe", () -> new AxeItem(REDSTONE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> REDSTONE_HOE = register("redstone_hoe", () -> new HoeItem(REDSTONE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> REDSTONE_HELMET = register("redstone_helmet", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> REDSTONE_CHESTPLATE = register("redstone_chestplate", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> REDSTONE_LEGGINGS = register("redstone_leggings", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> REDSTONE_BOOTS = register("redstone_boots", () -> new ArmorItem(redstoneArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> REDSTONE_SWORD = register("redstone_sword", () -> new SwordItem(REDSTONE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> REDSTONE_PICKAXE = register("redstone_pickaxe", () -> new PickaxeItem(REDSTONE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> REDSTONE_SHOVEL = register("redstone_shovel", () -> new ShovelItem(REDSTONE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> REDSTONE_AXE = register("redstone_axe", () -> new AxeItem(REDSTONE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> REDSTONE_HOE = register("redstone_hoe", () -> new HoeItem(REDSTONE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Nickle
-    public static final ItemRegistryObject<ArmorItem> NICKLE_HELMET = register("nickle_helmet", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> NICKLE_CHESTPLATE = register("nickle_chestplate", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> NICKLE_LEGGINGS = register("nickle_leggings", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> NICKLE_BOOTS = register("nickle_boots", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> NICKLE_SWORD = register("nickle_sword", () -> new SwordItem(NICKLE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> NICKLE_PICKAXE = register("nickle_pickaxe", () -> new PickaxeItem(NICKLE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> NICKLE_SHOVEL = register("nickle_shovel", () -> new ShovelItem(NICKLE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> NICKLE_AXE = register("nickle_axe", () -> new AxeItem(NICKLE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> NICKLE_HOE = register("nickle_hoe", () -> new HoeItem(NICKLE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> NICKLE_HELMET = register("nickle_helmet", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> NICKLE_CHESTPLATE = register("nickle_chestplate", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> NICKLE_LEGGINGS = register("nickle_leggings", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> NICKLE_BOOTS = register("nickle_boots", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> NICKLE_SWORD = register("nickle_sword", () -> new SwordItem(NICKLE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> NICKLE_PICKAXE = register("nickle_pickaxe", () -> new PickaxeItem(NICKLE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> NICKLE_SHOVEL = register("nickle_shovel", () -> new ShovelItem(NICKLE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> NICKLE_AXE = register("nickle_axe", () -> new AxeItem(NICKLE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> NICKLE_HOE = register("nickle_hoe", () -> new HoeItem(NICKLE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Steel
-    public static final ItemRegistryObject<ArmorItem> STEEL_HELMET = register("steel_helmet", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> STEEL_CHESTPLATE = register("steel_chestplate", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> STEEL_LEGGINGS = register("steel_leggings", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> STEEL_BOOTS = register("steel_boots", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> STEEL_SWORD = register("steel_sword", () -> new SwordItem(STEEL_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> STEEL_PICKAXE = register("steel_pickaxe", () -> new PickaxeItem(STEEL_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> STEEL_SHOVEL = register("steel_shovel", () -> new ShovelItem(STEEL_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> STEEL_AXE = register("steel_axe", () -> new AxeItem(STEEL_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> STEEL_HOE = register("steel_hoe", () -> new HoeItem(STEEL_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> STEEL_HELMET = register("steel_helmet", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> STEEL_CHESTPLATE = register("steel_chestplate", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> STEEL_LEGGINGS = register("steel_leggings", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> STEEL_BOOTS = register("steel_boots", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> STEEL_SWORD = register("steel_sword", () -> new SwordItem(STEEL_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> STEEL_PICKAXE = register("steel_pickaxe", () -> new PickaxeItem(STEEL_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> STEEL_SHOVEL = register("steel_shovel", () -> new ShovelItem(STEEL_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> STEEL_AXE = register("steel_axe", () -> new AxeItem(STEEL_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> STEEL_HOE = register("steel_hoe", () -> new HoeItem(STEEL_ITEM_TIER, 2, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Tungsten Steel
-    public static final ItemRegistryObject<ArmorItem> TUNGSTEN_HELMET = register("tungsten_helmet", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> TUNGSTEN_CHESTPLATE = register("tungsten_chestplate", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> TUNGSTEN_LEGGINGS = register("tungsten_leggings", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> TUNGSTEN_BOOTS = register("tungsten_boots", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> TUNGSTEN_SWORD = register("tungsten_sword", () -> new SwordItem(TUNGSTEN_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> TUNGSTEN_PICKAXE = register("tungsten_pickaxe", () -> new PickaxeItem(TUNGSTEN_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> TUNGSTEN_SHOVEL = register("tungsten_shovel", () -> new ShovelItem(TUNGSTEN_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> TUNGSTEN_AXE = register("tungsten_axe", () -> new AxeItem(TUNGSTEN_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> TUNGSTEN_HOE = register("tungsten_hoe", () -> new HoeItem(TUNGSTEN_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TUNGSTEN_HELMET = register("tungsten_helmet", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TUNGSTEN_CHESTPLATE = register("tungsten_chestplate", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TUNGSTEN_LEGGINGS = register("tungsten_leggings", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TUNGSTEN_BOOTS = register("tungsten_boots", () -> new ArmorItem(tungstenArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> TUNGSTEN_SWORD = register("tungsten_sword", () -> new SwordItem(TUNGSTEN_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> TUNGSTEN_PICKAXE = register("tungsten_pickaxe", () -> new PickaxeItem(TUNGSTEN_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> TUNGSTEN_SHOVEL = register("tungsten_shovel", () -> new ShovelItem(TUNGSTEN_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> TUNGSTEN_AXE = register("tungsten_axe", () -> new AxeItem(TUNGSTEN_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> TUNGSTEN_HOE = register("tungsten_hoe", () -> new HoeItem(TUNGSTEN_ITEM_TIER, 2, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Uranium
-    public static final ItemRegistryObject<ArmorItem> URANIUM_HELMET = register("uranium_helmet", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> URANIUM_CHESTPLATE = register("uranium_chestplate", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> URANIUM_LEGGINGS = register("uranium_leggings", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> URANIUM_BOOTS = register("uranium_boots", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> URANIUM_HELMET = register("uranium_helmet", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> URANIUM_CHESTPLATE = register("uranium_chestplate", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> URANIUM_LEGGINGS = register("uranium_leggings", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> URANIUM_BOOTS = register("uranium_boots", () -> new ArmorItem(uraniumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
     public static final ItemRegistryObject<UraniumSwordItem> URANIUM_SWORD = register("uranium_sword", () -> new UraniumSwordItem(URANIUM_ITEM_TIER, 3, -2.0f));
-    public static final ItemRegistryObject<PickaxeItem> URANIUM_PICKAXE = register("uranium_pickaxe", () -> new PickaxeItem(URANIUM_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> URANIUM_SHOVEL = register("uranium_shovel", () -> new ShovelItem(URANIUM_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> URANIUM_AXE = register("uranium_axe", () -> new AxeItem(URANIUM_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> URANIUM_HOE = register("uranium_hoe", () -> new HoeItem(URANIUM_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> URANIUM_PICKAXE = register("uranium_pickaxe", () -> new PickaxeItem(URANIUM_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> URANIUM_SHOVEL = register("uranium_shovel", () -> new ShovelItem(URANIUM_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> URANIUM_AXE = register("uranium_axe", () -> new AxeItem(URANIUM_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> URANIUM_HOE = register("uranium_hoe", () -> new HoeItem(URANIUM_ITEM_TIER, 2, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Platinum
-    public static final ItemRegistryObject<ArmorItem> PLATINUM_HELMET = register("platinum_helmet", () -> new ArmorItem(platinumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> PLATINUM_CHESTPLATE = register("platinum_chestplate", () -> new ArmorItem(platinumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> PLATINUM_LEGGINGS = register("platinum_leggings", () -> new ArmorItem(platinumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> PLATINUM_BOOTS = register("platinum_boots", () -> new ArmorItem(platinumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> PLATINUM_SWORD = register("platinum_sword", () -> new SwordItem(PLATINUM_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> PLATINUM_PICKAXE = register("platinum_pickaxe", () -> new PickaxeItem(PLATINUM_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> PLATINUM_SHOVEL = register("platinum_shovel", () -> new ShovelItem(PLATINUM_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> PLATINUM_AXE = register("platinum_axe", () -> new AxeItem(PLATINUM_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> PLATINUM_HOE = register("platinum_hoe", () -> new HoeItem(PLATINUM_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> PLATINUM_HELMET = register("platinum_helmet", () -> new ArmorItem(platinumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> PLATINUM_CHESTPLATE = register("platinum_chestplate", () -> new ArmorItem(platinumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> PLATINUM_LEGGINGS = register("platinum_leggings", () -> new ArmorItem(platinumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> PLATINUM_BOOTS = register("platinum_boots", () -> new ArmorItem(platinumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> PLATINUM_SWORD = register("platinum_sword", () -> new SwordItem(PLATINUM_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> PLATINUM_PICKAXE = register("platinum_pickaxe", () -> new PickaxeItem(PLATINUM_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> PLATINUM_SHOVEL = register("platinum_shovel", () -> new ShovelItem(PLATINUM_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> PLATINUM_AXE = register("platinum_axe", () -> new AxeItem(PLATINUM_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> PLATINUM_HOE = register("platinum_hoe", () -> new HoeItem(PLATINUM_ITEM_TIER, 2, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Ruby
-    public static final ItemRegistryObject<ArmorItem> RUBY_HELMET = register("ruby_helmet", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> RUBY_CHESTPLATE = register("ruby_chestplate", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> RUBY_LEGGINGS = register("ruby_leggings", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> RUBY_BOOTS = register("ruby_boots", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> RUBY_SWORD = register("ruby_sword", () -> new SwordItem(RUBY_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> RUBY_PICKAXE = register("ruby_pickaxe", () -> new PickaxeItem(RUBY_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> RUBY_SHOVEL = register("ruby_shovel", () -> new ShovelItem(RUBY_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> RUBY_AXE = register("ruby_axe", () -> new AxeItem(RUBY_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> RUBY_HOE = register("ruby_hoe", () -> new HoeItem(RUBY_ITEM_TIER, 2, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> RUBY_HELMET = register("ruby_helmet", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> RUBY_CHESTPLATE = register("ruby_chestplate", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> RUBY_LEGGINGS = register("ruby_leggings", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> RUBY_BOOTS = register("ruby_boots", () -> new ArmorItem(rubyArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> RUBY_SWORD = register("ruby_sword", () -> new SwordItem(RUBY_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> RUBY_PICKAXE = register("ruby_pickaxe", () -> new PickaxeItem(RUBY_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> RUBY_SHOVEL = register("ruby_shovel", () -> new ShovelItem(RUBY_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> RUBY_AXE = register("ruby_axe", () -> new AxeItem(RUBY_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> RUBY_HOE = register("ruby_hoe", () -> new HoeItem(RUBY_ITEM_TIER, 2, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Amethyst
-    public static final ItemRegistryObject<ArmorItem> AMETHYST_HELMET = register("amethyst_helmet", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> AMETHYST_CHESTPLATE = register("amethyst_chestplate", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> AMETHYST_LEGGINGS = register("amethyst_leggings", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> AMETHYST_BOOTS = register("amethyst_boots", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> AMETHYST_SWORD = register("amethyst_sword", () -> new SwordItem(AMETHYST_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> AMETHYST_PICKAXE = register("amethyst_pickaxe", () -> new PickaxeItem(AMETHYST_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> AMETHYST_SHOVEL = register("amethyst_shovel", () -> new ShovelItem(AMETHYST_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> AMETHYST_AXE = register("amethyst_axe", () -> new AxeItem(AMETHYST_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> AMETHYST_HOE = register("amethyst_hoe", () -> new HoeItem(AMETHYST_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AMETHYST_HELMET = register("amethyst_helmet", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AMETHYST_CHESTPLATE = register("amethyst_chestplate", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AMETHYST_LEGGINGS = register("amethyst_leggings", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AMETHYST_BOOTS = register("amethyst_boots", () -> new ArmorItem(amethystArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> AMETHYST_SWORD = register("amethyst_sword", () -> new SwordItem(AMETHYST_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> AMETHYST_PICKAXE = register("amethyst_pickaxe", () -> new PickaxeItem(AMETHYST_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> AMETHYST_SHOVEL = register("amethyst_shovel", () -> new ShovelItem(AMETHYST_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> AMETHYST_AXE = register("amethyst_axe", () -> new AxeItem(AMETHYST_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> AMETHYST_HOE = register("amethyst_hoe", () -> new HoeItem(AMETHYST_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Aquamarine
-    public static final ItemRegistryObject<ArmorItem> AQUAMARINE_HELMET = register("aquamarine_helmet", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> AQUAMARINE_CHESTPLATE = register("aquamarine_chestplate", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> AQUAMARINE_LEGGINGS = register("aquamarine_leggings", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> AQUAMARINE_BOOTS = register("aquamarine_boots", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> AQUAMARINE_SWORD = register("aquamarine_sword", () -> new SwordItem(AQUAMARINE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> AQUAMARINE_PICKAXE = register("aquamarine_pickaxe", () -> new PickaxeItem(AQUAMARINE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> AQUAMARINE_SHOVEL = register("aquamarine_shovel", () -> new ShovelItem(AQUAMARINE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> AQUAMARINE_AXE = register("aquamarine_axe", () -> new AxeItem(AQUAMARINE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> AQUAMARINE_HOE = register("aquamarine_hoe", () -> new HoeItem(AQUAMARINE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AQUAMARINE_HELMET = register("aquamarine_helmet", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AQUAMARINE_CHESTPLATE = register("aquamarine_chestplate", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AQUAMARINE_LEGGINGS = register("aquamarine_leggings", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AQUAMARINE_BOOTS = register("aquamarine_boots", () -> new ArmorItem(aquamarineArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> AQUAMARINE_SWORD = register("aquamarine_sword", () -> new SwordItem(AQUAMARINE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> AQUAMARINE_PICKAXE = register("aquamarine_pickaxe", () -> new PickaxeItem(AQUAMARINE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> AQUAMARINE_SHOVEL = register("aquamarine_shovel", () -> new ShovelItem(AQUAMARINE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> AQUAMARINE_AXE = register("aquamarine_axe", () -> new AxeItem(AQUAMARINE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> AQUAMARINE_HOE = register("aquamarine_hoe", () -> new HoeItem(AQUAMARINE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Saphire
-    public static final ItemRegistryObject<ArmorItem> SAPHIRE_HELMET = register("saphire_helmet", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> SAPHIRE_CHESTPLATE = register("saphire_chestplate", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> SAPHIRE_LEGGINGS = register("saphire_leggings", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> SAPHIRE_BOOTS = register("saphire_boots", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> SAPHIRE_SWORD = register("saphire_sword", () -> new SwordItem(SAPHIRE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> SAPHIRE_PICKAXE = register("saphire_pickaxe", () -> new PickaxeItem(SAPHIRE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> SAPHIRE_SHOVEL = register("saphire_shovel", () -> new ShovelItem(SAPHIRE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> SAPHIRE_AXE = register("saphire_axe", () -> new AxeItem(SAPHIRE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> SAPHIRE_HOE = register("saphire_hoe", () -> new HoeItem(SAPHIRE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> SAPHIRE_HELMET = register("saphire_helmet", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> SAPHIRE_CHESTPLATE = register("saphire_chestplate", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> SAPHIRE_LEGGINGS = register("saphire_leggings", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> SAPHIRE_BOOTS = register("saphire_boots", () -> new ArmorItem(saphireArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> SAPHIRE_SWORD = register("saphire_sword", () -> new SwordItem(SAPHIRE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> SAPHIRE_PICKAXE = register("saphire_pickaxe", () -> new PickaxeItem(SAPHIRE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> SAPHIRE_SHOVEL = register("saphire_shovel", () -> new ShovelItem(SAPHIRE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> SAPHIRE_AXE = register("saphire_axe", () -> new AxeItem(SAPHIRE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> SAPHIRE_HOE = register("saphire_hoe", () -> new HoeItem(SAPHIRE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Malachite
-    public static final ItemRegistryObject<ArmorItem> MALACHITE_HELMET = register("malachite_helmet", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> MALACHITE_CHESTPLATE = register("malachite_chestplate", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> MALACHITE_LEGGINGS = register("malachite_leggings", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> MALACHITE_BOOTS = register("malachite_boots", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> MALACHITE_SWORD = register("malachite_sword", () -> new SwordItem(MALACHITE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> MALACHITE_PICKAXE = register("malachite_pickaxe", () -> new PickaxeItem(MALACHITE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> MALACHITE_SHOVEL = register("malachite_shovel", () -> new ShovelItem(MALACHITE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> MALACHITE_AXE = register("malachite_axe", () -> new AxeItem(MALACHITE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> MALACHITE_HOE = register("malachite_hoe", () -> new HoeItem(MALACHITE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> MALACHITE_HELMET = register("malachite_helmet", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> MALACHITE_CHESTPLATE = register("malachite_chestplate", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> MALACHITE_LEGGINGS = register("malachite_leggings", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> MALACHITE_BOOTS = register("malachite_boots", () -> new ArmorItem(malachiteArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> MALACHITE_SWORD = register("malachite_sword", () -> new SwordItem(MALACHITE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> MALACHITE_PICKAXE = register("malachite_pickaxe", () -> new PickaxeItem(MALACHITE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> MALACHITE_SHOVEL = register("malachite_shovel", () -> new ShovelItem(MALACHITE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> MALACHITE_AXE = register("malachite_axe", () -> new AxeItem(MALACHITE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> MALACHITE_HOE = register("malachite_hoe", () -> new HoeItem(MALACHITE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Topaz
-    public static final ItemRegistryObject<ArmorItem> TOPAZ_HELMET = register("topaz_helmet", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> TOPAZ_CHESTPLATE = register("topaz_chestplate", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> TOPAZ_LEGGINGS = register("topaz_leggings", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> TOPAZ_BOOTS = register("topaz_boots", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> TOPAZ_SWORD = register("topaz_sword", () -> new SwordItem(TOPAZ_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> TOPAZ_PICKAXE = register("topaz_pickaxe", () -> new PickaxeItem(TOPAZ_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> TOPAZ_SHOVEL = register("topaz_shovel", () -> new ShovelItem(TOPAZ_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> TOPAZ_AXE = register("topaz_axe", () -> new AxeItem(TOPAZ_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> TOPAZ_HOE = register("topaz_hoe", () -> new HoeItem(TOPAZ_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TOPAZ_HELMET = register("topaz_helmet", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TOPAZ_CHESTPLATE = register("topaz_chestplate", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TOPAZ_LEGGINGS = register("topaz_leggings", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TOPAZ_BOOTS = register("topaz_boots", () -> new ArmorItem(topazArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> TOPAZ_SWORD = register("topaz_sword", () -> new SwordItem(TOPAZ_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> TOPAZ_PICKAXE = register("topaz_pickaxe", () -> new PickaxeItem(TOPAZ_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> TOPAZ_SHOVEL = register("topaz_shovel", () -> new ShovelItem(TOPAZ_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> TOPAZ_AXE = register("topaz_axe", () -> new AxeItem(TOPAZ_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> TOPAZ_HOE = register("topaz_hoe", () -> new HoeItem(TOPAZ_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Amber
-    public static final ItemRegistryObject<ArmorItem> AMBER_HELMET = register("amber_helmet", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> AMBER_CHESTPLATE = register("amber_chestplate", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> AMBER_LEGGINGS = register("amber_leggings", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> AMBER_BOOTS = register("amber_boots", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> AMBER_SWORD = register("amber_sword", () -> new SwordItem(AMBER_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> AMBER_PICKAXE = register("amber_pickaxe", () -> new PickaxeItem(AMBER_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> AMBER_SHOVEL = register("amber_shovel", () -> new ShovelItem(AMBER_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> AMBER_AXE = register("amber_axe", () -> new AxeItem(AMBER_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> AMBER_HOE = register("amber_hoe", () -> new HoeItem(AMBER_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AMBER_HELMET = register("amber_helmet", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AMBER_CHESTPLATE = register("amber_chestplate", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AMBER_LEGGINGS = register("amber_leggings", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> AMBER_BOOTS = register("amber_boots", () -> new ArmorItem(amberArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> AMBER_SWORD = register("amber_sword", () -> new SwordItem(AMBER_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> AMBER_PICKAXE = register("amber_pickaxe", () -> new PickaxeItem(AMBER_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> AMBER_SHOVEL = register("amber_shovel", () -> new ShovelItem(AMBER_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> AMBER_AXE = register("amber_axe", () -> new AxeItem(AMBER_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> AMBER_HOE = register("amber_hoe", () -> new HoeItem(AMBER_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Beryl
-    public static final ItemRegistryObject<ArmorItem> BERYL_HELMET = register("beryl_helmet", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> BERYL_CHESTPLATE = register("beryl_chestplate", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> BERYL_LEGGINGS = register("beryl_leggings", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> BERYL_BOOTS = register("beryl_boots", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> BERYL_SWORD = register("beryl_sword", () -> new SwordItem(BERYL_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> BERYL_PICKAXE = register("beryl_pickaxe", () -> new PickaxeItem(BERYL_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> BERYL_SHOVEL = register("beryl_shovel", () -> new ShovelItem(BERYL_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> BERYL_AXE = register("beryl_axe", () -> new AxeItem(BERYL_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> BERYL_HOE = register("beryl_hoe", () -> new HoeItem(BERYL_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> BERYL_HELMET = register("beryl_helmet", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> BERYL_CHESTPLATE = register("beryl_chestplate", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> BERYL_LEGGINGS = register("beryl_leggings", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> BERYL_BOOTS = register("beryl_boots", () -> new ArmorItem(berylArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> BERYL_SWORD = register("beryl_sword", () -> new SwordItem(BERYL_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> BERYL_PICKAXE = register("beryl_pickaxe", () -> new PickaxeItem(BERYL_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> BERYL_SHOVEL = register("beryl_shovel", () -> new ShovelItem(BERYL_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> BERYL_AXE = register("beryl_axe", () -> new AxeItem(BERYL_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> BERYL_HOE = register("beryl_hoe", () -> new HoeItem(BERYL_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Tanzanite
-    public static final ItemRegistryObject<ArmorItem> TANZANITE_HELMET = register("tanzanite_helmet", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> TANZANITE_CHESTPLATE = register("tanzanite_chestplate", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> TANZANITE_LEGGINGS = register("tanzanite_leggings", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> TANZANITE_BOOTS = register("tanzanite_boots", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> TANZANITE_SWORD = register("tanzanite_sword", () -> new SwordItem(TANZANITE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> TANZANITE_PICKAXE = register("tanzanite_pickaxe", () -> new PickaxeItem(TANZANITE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> TANZANITE_SHOVEL = register("tanzanite_shovel", () -> new ShovelItem(TANZANITE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> TANZANITE_AXE = register("tanzanite_axe", () -> new AxeItem(TANZANITE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(Groups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> TANZANITE_HOE = register("tanzanite_hoe", () -> new HoeItem(TANZANITE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(Groups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TANZANITE_HELMET = register("tanzanite_helmet", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TANZANITE_CHESTPLATE = register("tanzanite_chestplate", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TANZANITE_LEGGINGS = register("tanzanite_leggings", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> TANZANITE_BOOTS = register("tanzanite_boots", () -> new ArmorItem(tanzaniteArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> TANZANITE_SWORD = register("tanzanite_sword", () -> new SwordItem(TANZANITE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> TANZANITE_PICKAXE = register("tanzanite_pickaxe", () -> new PickaxeItem(TANZANITE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> TANZANITE_SHOVEL = register("tanzanite_shovel", () -> new ShovelItem(TANZANITE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> TANZANITE_AXE = register("tanzanite_axe", () -> new AxeItem(TANZANITE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> TANZANITE_HOE = register("tanzanite_hoe", () -> new HoeItem(TANZANITE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Obsidian
-    public static final ItemRegistryObject<ArmorItem> OBSIDIAN_HELMET = register("obsidian_helmet", () -> new ArmorItem(obsidianArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<ArmorItem> OBSIDIAN_CHESTPLATE = register("obsidian_chestplate", () -> new ArmorItem(obsidianArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<ArmorItem> OBSIDIAN_LEGGINGS = register("obsidian_leggings", () -> new ArmorItem(obsidianArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<ArmorItem> OBSIDIAN_BOOTS = register("obsidian_boots", () -> new ArmorItem(obsidianArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<SwordItem> OBSIDIAN_SWORD = register("obsidian_sword", () -> new SwordItem(OBSIDIAN_ITEM_TIER, 3, -2.8f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<PickaxeItem> OBSIDIAN_PICKAXE = register("obsidian_pickaxe", () -> new PickaxeItem(OBSIDIAN_ITEM_TIER, 1, -2.9f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<ShovelItem> OBSIDIAN_SHOVEL = register("obsidian_shovel", () -> new ShovelItem(OBSIDIAN_ITEM_TIER, 1.5F, -2.8f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<AxeItem> OBSIDIAN_AXE = register("obsidian_axe", () -> new AxeItem(OBSIDIAN_ITEM_TIER, 7.0F, -3.1f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<HoeItem> OBSIDIAN_HOE = register("obsidian_hoe", () -> new HoeItem(OBSIDIAN_ITEM_TIER, 2, -2.9f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> OBSIDIAN_HELMET = register("obsidian_helmet", () -> new ArmorItem(obsidianArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> OBSIDIAN_CHESTPLATE = register("obsidian_chestplate", () -> new ArmorItem(obsidianArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> OBSIDIAN_LEGGINGS = register("obsidian_leggings", () -> new ArmorItem(obsidianArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> OBSIDIAN_BOOTS = register("obsidian_boots", () -> new ArmorItem(obsidianArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<SwordItem> OBSIDIAN_SWORD = register("obsidian_sword", () -> new SwordItem(OBSIDIAN_ITEM_TIER, 3, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<PickaxeItem> OBSIDIAN_PICKAXE = register("obsidian_pickaxe", () -> new PickaxeItem(OBSIDIAN_ITEM_TIER, 1, -2.9f, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ShovelItem> OBSIDIAN_SHOVEL = register("obsidian_shovel", () -> new ShovelItem(OBSIDIAN_ITEM_TIER, 1.5F, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<AxeItem> OBSIDIAN_AXE = register("obsidian_axe", () -> new AxeItem(OBSIDIAN_ITEM_TIER, 7.0F, -3.1f, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<HoeItem> OBSIDIAN_HOE = register("obsidian_hoe", () -> new HoeItem(OBSIDIAN_ITEM_TIER, 2, -2.9f, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
 
     // Armors - Ultrinium
-    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_HELMET = register("ultrinium_helmet", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_CHESTPLATE = register("ultrinium_chestplate", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_LEGGINGS = register("ultrinium_leggings", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_BOOTS = register("ultrinium_boots", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<SwordItem> ULTRINIUM_SWORD = register("ultrinium_sword", () -> new SwordItem(ULTRINIUM_ITEM_TIER, 3, -3.0f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<PickaxeItem> ULTRINIUM_PICKAXE = register("ultrinium_pickaxe", () -> new PickaxeItem(ULTRINIUM_ITEM_TIER, 1, -3.2f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<ShovelItem> ULTRINIUM_SHOVEL = register("ultrinium_shovel", () -> new ShovelItem(ULTRINIUM_ITEM_TIER, 1.5F, -3.0f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<AxeItem> ULTRINIUM_AXE = register("ultrinium_axe", () -> new AxeItem(ULTRINIUM_ITEM_TIER, 6.0F, -3.5f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
-    public static final ItemRegistryObject<HoeItem> ULTRINIUM_HOE = register("ultrinium_hoe", () -> new HoeItem(ULTRINIUM_ITEM_TIER, 23, -3.2f, new Item.Properties().group(Groups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_HELMET = register("ultrinium_helmet", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_CHESTPLATE = register("ultrinium_chestplate", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_LEGGINGS = register("ultrinium_leggings", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ArmorItem> ULTRINIUM_BOOTS = register("ultrinium_boots", () -> new ArmorItem(ultriniumArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<SwordItem> ULTRINIUM_SWORD = register("ultrinium_sword", () -> new SwordItem(ULTRINIUM_ITEM_TIER, 3, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<PickaxeItem> ULTRINIUM_PICKAXE = register("ultrinium_pickaxe", () -> new PickaxeItem(ULTRINIUM_ITEM_TIER, 1, -3.2f, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<ShovelItem> ULTRINIUM_SHOVEL = register("ultrinium_shovel", () -> new ShovelItem(ULTRINIUM_ITEM_TIER, 1.5F, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<AxeItem> ULTRINIUM_AXE = register("ultrinium_axe", () -> new AxeItem(ULTRINIUM_ITEM_TIER, 6.0F, -3.5f, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<HoeItem> ULTRINIUM_HOE = register("ultrinium_hoe", () -> new HoeItem(ULTRINIUM_ITEM_TIER, 23, -3.2f, new Item.Properties().group(ModItemGroups.TOOLS).rarity(Rarity.RARE)));
 
     // Armors - Infinity
-    public static final ItemRegistryObject<ArmorItem> INFINITY_HELMET = register("infinity_helmet", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC)));
-    public static final ItemRegistryObject<ArmorItem> INFINITY_CHESTPLATE = register("infinity_chestplate", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC)));
-    public static final ItemRegistryObject<ArmorItem> INFINITY_LEGGINGS = register("infinity_leggings", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC)));
-    public static final ItemRegistryObject<ArmorItem> INFINITY_BOOTS = register("infinity_boots", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<ArmorItem> INFINITY_HELMET = register("infinity_helmet", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<ArmorItem> INFINITY_CHESTPLATE = register("infinity_chestplate", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<ArmorItem> INFINITY_LEGGINGS = register("infinity_leggings", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<ArmorItem> INFINITY_BOOTS = register("infinity_boots", () -> new ArmorItem(infinityArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC)));
     public static final ItemRegistryObject<InfinitySwordItem> INFINITY_SWORD = register("infinity_sword", InfinitySwordItem::new);
     public static final ItemRegistryObject<InfinityPickaxeItem> INFINITY_PICKAXE = register("infinity_pickaxe", InfinityPickaxeItem::new);
     public static final ItemRegistryObject<InfinityShovelItem> INFINITY_SHOVEL = register("infinity_shovel", InfinityShovelItem::new);
@@ -787,11 +786,11 @@ public final class ModItems {
     }
 
     private static BucketItem createBucketItem(Supplier<FlowingFluid> fluid) {
-        return new BucketItem(fluid, new Item.Properties().group(Groups.FLUIDS).maxStackSize(1).containerItem(Items.BUCKET));
+        return new BucketItem(fluid, new Item.Properties().group(ModItemGroups.FLUIDS).maxStackSize(1).containerItem(Items.BUCKET));
     }
 
     private static NoPlaceBucketItem createNoPlaceBucketItem(Supplier<Fluid> fluid) {
-        return new NoPlaceBucketItem(fluid, new Item.Properties().group(Groups.FLUIDS).maxStackSize(1).containerItem(Items.BUCKET));
+        return new NoPlaceBucketItem(fluid, new Item.Properties().group(ModItemGroups.FLUIDS).maxStackSize(1).containerItem(Items.BUCKET));
     }
 
     private static <T extends Item> ItemRegistryObject<T> register(String name, Supplier<T> item) {

@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items;
 
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 import net.minecraft.item.Food;
@@ -52,9 +52,9 @@ public enum CraftingItems implements IItemProvider {
 
     private static Item.Properties createProperties(@Nullable Food food) {
         if (food != null) {
-            return new Item.Properties().group(Groups.FOOD).food(food);
+            return new Item.Properties().group(ModItemGroups.FOOD).food(food);
         }
-        return new Item.Properties().group(Groups.MISC);
+        return new Item.Properties().group(ModItemGroups.MISC);
     }
 
     public String getName() {

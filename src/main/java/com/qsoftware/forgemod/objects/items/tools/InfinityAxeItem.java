@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items.tools;
 
 import com.qsoftware.forgemod.common.damagesource.DamageSourceInfinitySword;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.init.ModStats;
 import net.minecraft.entity.Entity;
@@ -56,7 +56,7 @@ public class InfinityAxeItem extends AxeItem {
             public @NotNull Ingredient getRepairMaterial() {
                 return Ingredient.fromItems(ModItems.INFINITY_INGOT.get());
             }
-        }, 1, -0.0f, new Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC));
+        }, 1, -0.0f, new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override
@@ -75,6 +75,7 @@ public class InfinityAxeItem extends AxeItem {
         return false;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public boolean hitEntity(ItemStack stack, LivingEntity victim, LivingEntity player) {
 

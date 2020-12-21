@@ -2,18 +2,12 @@ package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.util.ExceptionUtil;
-import net.minecraft.block.Block;
 import net.minecraft.stats.IStatFormatter;
-import net.minecraft.stats.StatType;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.DefaultedRegistry;
 import net.minecraft.util.registry.Registry;
-import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 public class ModStats {
     private static final HashMap<String, IStatFormatter> PRE_REGISTER = new HashMap<>();

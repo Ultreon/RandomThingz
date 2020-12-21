@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.type;
 
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import net.minecraft.item.Item;
 
 /**
@@ -10,6 +10,6 @@ import net.minecraft.item.Item;
  */
 public class IngredientItem extends Item {
     public IngredientItem() {
-        super(new Properties().group(Groups.INGREDIENTS));
+        super(new Properties().group(ModItemGroups.INGREDIENTS));
     }
 }

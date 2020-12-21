@@ -1,5 +1,6 @@
 package com.qsoftware.silent.lib.crafting.recipe;
 
+import com.qsoftware.silent.lib.SilentLib;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -7,7 +8,6 @@ import net.minecraft.item.crafting.ShapelessRecipe;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import com.qsoftware.silent.lib.SilentLib;
 
 public class DamageItemRecipe extends ExtendedShapelessRecipe {
     public static final Serializer<DamageItemRecipe> SERIALIZER = new Serializer<>(

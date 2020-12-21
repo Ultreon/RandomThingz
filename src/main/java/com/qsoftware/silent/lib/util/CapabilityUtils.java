@@ -7,7 +7,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import javax.annotation.Nullable;
 
 public final class CapabilityUtils {
-    private CapabilityUtils() {throw new IllegalAccessError("Utility class");}
+    private CapabilityUtils() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     @Nullable
     public static <T> T getOrNull(ICapabilityProvider provider, Capability<T> cap) {

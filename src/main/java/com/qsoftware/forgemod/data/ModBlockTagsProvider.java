@@ -3,8 +3,8 @@ package com.qsoftware.forgemod.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.forgemod.init.ModTags;
+import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.objects.blocks.machines.dryingrack.DryingRackBlock;
 import net.minecraft.block.Block;
@@ -15,6 +15,7 @@ import net.minecraft.tags.ITag;
 import net.minecraftforge.common.Tags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
+@SuppressWarnings("deprecation")
 public class ModBlockTagsProvider extends BlockTagsProvider {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
@@ -32,6 +34,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         super(gen);
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Override
     protected void registerTags() {
         getOrCreateBuilder(ModTags.Blocks.DRYING_RACKS).add(Registration.getBlocks(DryingRackBlock.class).toArray(new Block[0]));
@@ -55,12 +58,13 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "QForgeMod - Block Tags";
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public void act(DirectoryCache cache) {
+    public void act(@NotNull DirectoryCache cache) {
         // Temp fix that removes the broken safety check
         this.tagToBuilder.clear();
         this.registerTags();

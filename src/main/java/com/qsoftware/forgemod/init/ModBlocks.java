@@ -1,7 +1,12 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.objects.blocks.AtomicTNTBlock;
+import com.qsoftware.forgemod.objects.blocks.GamePcBlock;
+import com.qsoftware.forgemod.objects.blocks.custom.CustomButtonBlock;
+import com.qsoftware.forgemod.objects.blocks.custom.render.CRDoorBlock;
+import com.qsoftware.forgemod.objects.blocks.custom.render.CRFlowerBlock;
+import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
 import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineBlock;
 import com.qsoftware.forgemod.objects.blocks.machines.MachineFrameBlock;
 import com.qsoftware.forgemod.objects.blocks.machines.alloysmelter.AlloySmelterBlock;
@@ -21,12 +26,6 @@ import com.qsoftware.forgemod.objects.blocks.machines.quarry.QuarryBlock;
 import com.qsoftware.forgemod.objects.blocks.machines.refinery.RefineryBlock;
 import com.qsoftware.forgemod.objects.blocks.machines.solidifier.SolidifierBlock;
 import com.qsoftware.forgemod.objects.blocks.machines.wire.WireBlock;
-import com.qsoftware.forgemod.objects.blocks.AtomicTNTBlock;
-import com.qsoftware.forgemod.objects.blocks.GamePcBlock;
-import com.qsoftware.forgemod.objects.blocks.custom.CustomButtonBlock;
-import com.qsoftware.forgemod.objects.blocks.custom.render.CRDoorBlock;
-import com.qsoftware.forgemod.objects.blocks.custom.render.CRFlowerBlock;
-import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
 import com.qsoftware.forgemod.objects.blocks.overpowered.InfinityBlock;
 import com.qsoftware.forgemod.objects.blocks.overpowered.InfinityOreBlock;
 import com.qsoftware.forgemod.objects.blocks.trees.CherryTree;
@@ -253,6 +252,7 @@ public final class ModBlocks {
     public static final BlockRegistryObject<Block> ROUTER = registerFurniture("router", () -> new FaceableBlock(Block.Properties.create(Material.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(2).hardnessAndResistance(4.0f).sound(SoundType.METAL)) {
         private final VoxelShape SHAPE = VoxelShapes.create(2d / 16, 0d / 16, 2d / 16, 14d / 16, 2.2d / 16, 14d / 16);
 
+        @SuppressWarnings("deprecation")
         @Override
         public @NotNull VoxelShape getShape(BlockState state, @NotNull IBlockReader worldIn, @NotNull BlockPos pos, @NotNull ISelectionContext context) {
             return SHAPE;
@@ -267,10 +267,14 @@ public final class ModBlocks {
     ////////////////////////
     //     Ore blocks     //
     ////////////////////////
-    @Deprecated public static final BlockRegistryObject<OreBlock> STEEL_ORE = registerNoItem("steel_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.25f, 3.45f).sound(SoundType.STONE).harvestLevel(2)));
-    @Deprecated public static final BlockRegistryObject<OreBlock> TUNGSTEN_ORE = registerNoItem("tungsten_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5.25f, 6.5f).sound(SoundType.STONE).harvestLevel(3)));
-    @Deprecated public static final ItemRegistryObject<BlockItem> STEEL_ORE_ITEM = registerItem("steel_ore", () -> new BlockItem(STEEL_ORE.get(), new Item.Properties()));
-    @Deprecated public static final ItemRegistryObject<BlockItem> TUNGSTEN_ORE_ITEM = registerItem("tungsten_ore", () -> new BlockItem(TUNGSTEN_ORE.get(), new Item.Properties()));
+    @Deprecated
+    public static final BlockRegistryObject<OreBlock> STEEL_ORE = registerNoItem("steel_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.25f, 3.45f).sound(SoundType.STONE).harvestLevel(2)));
+    @Deprecated
+    public static final BlockRegistryObject<OreBlock> TUNGSTEN_ORE = registerNoItem("tungsten_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5.25f, 6.5f).sound(SoundType.STONE).harvestLevel(3)));
+    @Deprecated
+    public static final ItemRegistryObject<BlockItem> STEEL_ORE_ITEM = registerItem("steel_ore", () -> new BlockItem(STEEL_ORE.get(), new Item.Properties()));
+    @Deprecated
+    public static final ItemRegistryObject<BlockItem> TUNGSTEN_ORE_ITEM = registerItem("tungsten_ore", () -> new BlockItem(TUNGSTEN_ORE.get(), new Item.Properties()));
 
     public static final BlockRegistryObject<OreBlock> GILDED_DIRT = registerOre("gilded_dirt", () -> new OreBlock(Block.Properties.create(Material.EARTH, MaterialColor.DIRT).setRequiresTool().harvestTool(ToolType.SHOVEL).hardnessAndResistance(0.5f).sound(SoundType.GROUND)));
     public static final BlockRegistryObject<OreBlock> RUBY_ORE = registerOre("ruby_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.75f, 2.875f).sound(SoundType.STONE).harvestLevel(2)));
@@ -415,51 +419,51 @@ public final class ModBlocks {
     }
 
     private static <T extends Block> Supplier<BlockItem> miscellaneousItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.MISC));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.MISC));
     }
 
     private static <T extends Block> Supplier<BlockItem> natureItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.NATURE));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.NATURE));
     }
 
     private static <T extends Block> Supplier<BlockItem> redstoneItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.REDSTONE));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.REDSTONE));
     }
 
     private static <T extends Block> Supplier<BlockItem> machineItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.MACHINES));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.MACHINES));
     }
 
     private static <T extends Block> Supplier<BlockItem> ingredientItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.INGREDIENTS));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.INGREDIENTS));
     }
 
     private static <T extends Block> Supplier<BlockItem> specialItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.SPECIALS));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.SPECIALS));
     }
 
     private static <T extends Block> Supplier<BlockItem> oreItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.ORES));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.ORES));
     }
 
     private static <T extends Block> Supplier<BlockItem> woodItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.WOOD));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.WOOD));
     }
 
     private static <T extends Block> Supplier<BlockItem> shapedItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.SHAPES));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.SHAPES));
     }
 
     private static <T extends Block> Supplier<BlockItem> godItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.OVERPOWERED));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.OVERPOWERED));
     }
 
     private static <T extends Block> Supplier<BlockItem> furnitureItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.FURNITURE));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.FURNITURE));
     }
 
     private static <T extends Block> Supplier<BlockItem> bookshelfItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(Groups.BOOKSHELFS));
+        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.BOOKSHELFS));
     }
 
     private static LeavesBlock createLeavesBlock() {

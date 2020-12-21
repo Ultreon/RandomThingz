@@ -6,6 +6,7 @@ import com.qsoftware.silent.lib.command.internal.DisplayNBTCommand;
 import com.qsoftware.silent.lib.command.internal.TeleportCommand;
 import com.qsoftware.silent.lib.crafting.recipe.DamageItemRecipe;
 import com.qsoftware.silent.lib.data.TestRecipeProvider;
+import com.qsoftware.silent.lib.item.ILeftClickItem;
 import com.qsoftware.silent.lib.network.internal.SilentLibNetwork;
 import net.minecraft.command.CommandSource;
 import net.minecraft.data.DataGenerator;
@@ -15,7 +16,6 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import com.qsoftware.silent.lib.item.ILeftClickItem;
 
 class SideProxy {
     SideProxy() {
@@ -37,11 +37,14 @@ class SideProxy {
         gen.addProvider(new TestRecipeProvider(gen));
     }
 
-    private void commonSetup(FMLCommonSetupEvent event) {}
+    private void commonSetup(FMLCommonSetupEvent event) {
+    }
 
-    private void imcEnqueue(InterModEnqueueEvent event) {}
+    private void imcEnqueue(InterModEnqueueEvent event) {
+    }
 
-    private void imcProcess(InterModProcessEvent event) {}
+    private void imcProcess(InterModProcessEvent event) {
+    }
 
     private void onRegisterCommands(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSource> dispatcher = event.getDispatcher();
@@ -58,7 +61,8 @@ class SideProxy {
             FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         }
 
-        private void clientSetup(FMLClientSetupEvent event) {}
+        private void clientSetup(FMLClientSetupEvent event) {
+        }
     }
 
     static class Server extends SideProxy {
@@ -66,6 +70,7 @@ class SideProxy {
             FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
         }
 
-        private void serverSetup(FMLDedicatedServerSetupEvent event) {}
+        private void serverSetup(FMLDedicatedServerSetupEvent event) {
+        }
     }
 }

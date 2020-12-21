@@ -10,7 +10,8 @@ import net.minecraftforge.fml.common.Mod;
 public final class LibPlacements {
     public static final Placement<DimensionFilterConfig> DIMENSION_FILTER = new DimensionFilterPlacement(DimensionFilterConfig.CODEC);
 
-    private LibPlacements() {}
+    private LibPlacements() {
+    }
 
     @SubscribeEvent
     public static void register(RegistryEvent.Register<Placement<?>> event) {

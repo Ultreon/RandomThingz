@@ -3,6 +3,8 @@ package com.qsoftware.silent.lib.command.internal;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.qsoftware.silent.lib.util.DimensionId;
+import com.qsoftware.silent.lib.util.TeleportUtils;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;
@@ -12,11 +14,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
-import com.qsoftware.silent.lib.util.DimensionId;
-import com.qsoftware.silent.lib.util.TeleportUtils;
 
 public final class TeleportCommand {
-    private TeleportCommand() {}
+    private TeleportCommand() {
+    }
 
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
         dispatcher.register(Commands.literal("sl_tp")

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items.overpowered;
 
 import com.qsoftware.forgemod.common.TextColors;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class UnstableInfinityIngot extends Item {
     public UnstableInfinityIngot() {
-        super(new Properties().group(Groups.OVERPOWERED).rarity(Rarity.RARE));
+        super(new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.RARE));
     }
 
     @Override

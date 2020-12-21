@@ -13,7 +13,9 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 @SuppressWarnings("MethodWithTooManyParameters")
 public final class TextRenderUtils {
-    private TextRenderUtils() { throw new IllegalAccessError("Utility class"); }
+    private TextRenderUtils() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     public static FontRenderer getFontRenderer() {
         return Minecraft.getInstance().fontRenderer;

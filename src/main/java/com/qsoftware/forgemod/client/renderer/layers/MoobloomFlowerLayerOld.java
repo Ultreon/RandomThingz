@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.client.renderer.layers;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.client.renderer.layers.MoobloomFlowerLayer;
 import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.objects.entities.MoobloomEntityOld;
 import net.minecraft.block.BlockState;
@@ -20,8 +19,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Moobloom flower layer class.
  *
- * @deprecated Use {@link MoobloomFlowerLayer} instead.
  * @author Qboi123
+ * @deprecated Use {@link MoobloomFlowerLayer} instead.
  */
 @Deprecated
 @OnlyIn(Dist.CLIENT)

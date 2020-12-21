@@ -42,17 +42,18 @@ public final class GraphicsUtil {
 
     public final void drawCenteredString(String text, float x, float y, int color, boolean shadow) {
         if (shadow) {
-            fontRenderer.drawStringWithShadow(matrixStack, text, (float) (x - fontRenderer.getStringWidth(text) / 2), y, color);
+            fontRenderer.drawStringWithShadow(matrixStack, text, x - (int)((float)fontRenderer.getStringWidth(text) / 2), y, color);
         } else {
-            fontRenderer.drawString(matrixStack, text, (float) (x - fontRenderer.getStringWidth(text) / 2), y, color);
+            fontRenderer.drawString(matrixStack, text, x - (int)((float)fontRenderer.getStringWidth(text) / 2), y, color);
         }
     }
 
     /**
      * Draws an ItemStack.
-     *
+     * <p>
      * The z index is increased by 32 (and not decreased afterwards), and the item is then rendered at z=200.
      */
+    @SuppressWarnings("deprecation")
     public final void drawItemStack(ItemStack stack, int x, int y, String altText) {
         RenderSystem.translatef(0.0F, 0.0F, 32.0F);
 //        this.setBlitOffset(200);

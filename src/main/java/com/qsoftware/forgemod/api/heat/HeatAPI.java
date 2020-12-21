@@ -22,6 +22,7 @@ public class HeatAPI {
      * Default inverse insulation coefficient
      */
     public static final double DEFAULT_INVERSE_INSULATION = 0;
+
     private HeatAPI() {
     }
 

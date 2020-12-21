@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.wand;
 
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DeadCoralWallFanBlock;
@@ -37,7 +37,7 @@ import java.util.Optional;
  */
 public class NatureStaffItem extends Item {
     public NatureStaffItem() {
-        super(new Item.Properties().group(Groups.SPECIALS).rarity(Rarity.RARE));
+        super(new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE));
     }
 
     @Deprecated //Forge: Use Player/Hand version
@@ -164,7 +164,12 @@ public class NatureStaffItem extends Item {
         World world = context.getWorld();
         BlockPos blockPos = context.getPos();
         BlockPos blockPos1 = blockPos.offset(context.getFace());
-        if (applyBonemeal(context.getItem(), world, blockPos, context.getPlayer())) {
+        PlayerEntity player = context.getPlayer();
+        if (player == null) {
+            return ActionResultType.FAIL;
+        }
+
+        if (applyBonemeal(context.getItem(), world, blockPos, player)) {
             if (!world.isRemote) {
                 world.playEvent(2005, blockPos, 0);
 

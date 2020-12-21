@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.groups.Groups;
 import com.qsoftware.forgemod.objects.blocks.machines.MetalBlock;
 import com.qsoftware.silent.lib.registry.BlockRegistryObject;
 import com.qsoftware.silent.lib.registry.ItemRegistryObject;
@@ -112,7 +111,7 @@ public enum OreMaterials {
                 String name = metal.oreName + "_ore";
                 metal.ore = new BlockRegistryObject<>(Registration.BLOCKS.register(name, metal.oreSupplier));
                 Registration.ITEMS.register(name, () ->
-                        new BlockItem(metal.ore.get(), new Item.Properties().group(Groups.ORES)));
+                        new BlockItem(metal.ore.get(), new Item.Properties().group(ModItemGroups.ORES)));
             }
         }
         for (OreMaterials metal : values()) {
@@ -120,7 +119,7 @@ public enum OreMaterials {
                 String name = metal.getName() + "_block";
                 metal.storageBlock = new BlockRegistryObject<>(Registration.BLOCKS.register(name, metal.storageBlockSupplier));
                 Registration.ITEMS.register(name, () ->
-                        new BlockItem(metal.storageBlock.get(), new Item.Properties().group(Groups.ORES)));
+                        new BlockItem(metal.storageBlock.get(), new Item.Properties().group(ModItemGroups.ORES)));
             }
         }
     }
@@ -281,19 +280,19 @@ public enum OreMaterials {
         }
 
         Builder chunks() {
-            this.chunks = () -> new Item(new Item.Properties().group(Groups.METAL_CRAFTABLES));
+            this.chunks = () -> new Item(new Item.Properties().group(ModItemGroups.METAL_CRAFTABLES));
             this.chunksTag = itemTag(QForgeMod.rl("chunks/" + name));
             return this;
         }
 
         Builder dust() {
-            this.dust = () -> new Item(new Item.Properties().group(Groups.METAL_CRAFTABLES));
+            this.dust = () -> new Item(new Item.Properties().group(ModItemGroups.METAL_CRAFTABLES));
             this.dustTag = itemTag("dusts/" + name);
             return this;
         }
 
         Builder ingot() {
-            this.ingot = () -> new Item(new Item.Properties().group(Groups.METAL_CRAFTABLES));
+            this.ingot = () -> new Item(new Item.Properties().group(ModItemGroups.METAL_CRAFTABLES));
             this.ingotTag = itemTag("ingots/" + name);
             return this;
         }
@@ -304,7 +303,7 @@ public enum OreMaterials {
         }
 
         Builder nugget() {
-            this.nugget = () -> new Item(new Item.Properties().group(Groups.METAL_CRAFTABLES));
+            this.nugget = () -> new Item(new Item.Properties().group(ModItemGroups.METAL_CRAFTABLES));
             this.nuggetTag = itemTag("nuggets/" + name);
             return this;
         }

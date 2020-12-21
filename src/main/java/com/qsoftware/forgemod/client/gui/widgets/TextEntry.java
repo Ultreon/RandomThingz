@@ -1,11 +1,9 @@
 package com.qsoftware.forgemod.client.gui.widgets;
 
 import com.google.common.annotations.Beta;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.graphics.MCGraphics;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import org.jetbrains.annotations.Nullable;

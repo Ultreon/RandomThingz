@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items.tools;
 
 import com.qsoftware.forgemod.common.damagesource.DamageSourceInfinitySword;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.init.ModStats;
 import mcp.MethodsReturnNonnullByDefault;
@@ -59,7 +59,7 @@ public class InfinityHoeItem extends HoeItem {
             public @NotNull Ingredient getRepairMaterial() {
                 return Ingredient.fromItems(ModItems.INFINITY_INGOT.get());
             }
-        }, Integer.MAX_VALUE, -0.0f, new Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC));
+        }, Integer.MAX_VALUE, -0.0f, new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override

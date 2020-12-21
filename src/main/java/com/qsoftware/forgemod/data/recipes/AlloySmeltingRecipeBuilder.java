@@ -4,8 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.forgemod.init.ModRecipes;
+import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.silent.lib.util.NameUtils;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
@@ -35,6 +35,7 @@ public class AlloySmeltingRecipeBuilder {
         return new AlloySmeltingRecipeBuilder(result, count, processTime);
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public static AlloySmeltingRecipeBuilder builder(OreMaterials result, int count, int processTime) {
         return builder(result.getIngot().get(), count, processTime);
     }

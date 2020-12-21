@@ -63,8 +63,10 @@ public interface ILeftClickItem {
     final class EventHandler {
         private static EventHandler INSTANCE;
 
-        private EventHandler() { }
+        private EventHandler() {
+        }
 
+        @SuppressWarnings("InstantiationOfUtilityClass")
         public static void init() {
             if (INSTANCE != null) return;
             INSTANCE = new EventHandler();

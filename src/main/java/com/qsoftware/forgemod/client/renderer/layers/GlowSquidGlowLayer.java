@@ -1,11 +1,8 @@
 package com.qsoftware.forgemod.client.renderer.layers;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.model.FreeEndermanModel;
-import com.qsoftware.forgemod.client.model.ModelBabyEnderman;
 import com.qsoftware.forgemod.client.renderer.GlowSquidRenderer;
 import com.qsoftware.forgemod.objects.entities.GlowSquidEntity;
-import com.qsoftware.forgemod.objects.entities.baby.EntityBabyEnderman;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.AbstractEyesLayer;
@@ -23,7 +20,6 @@ public class GlowSquidGlowLayer<T extends GlowSquidEntity, M extends SquidModel<
     private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(QForgeMod.MOD_ID, "textures/entity/squid/glow_squid_e.png"));
 
     /**
-     *
      * @param entityRenderer the {@link GlowSquidRenderer glow squid renderer}.
      */
     public GlowSquidGlowLayer(IEntityRenderer<T, M> entityRenderer) {

@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.wand;
 
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.objects.items.base.WandItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class TeleportStaffItem extends WandItem {
     public TeleportStaffItem() {
-        super(420, 20, new Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(420, 20, new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override

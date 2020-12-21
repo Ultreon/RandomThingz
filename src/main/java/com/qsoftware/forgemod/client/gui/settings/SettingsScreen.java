@@ -12,7 +12,6 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -57,7 +56,8 @@ public class SettingsScreen extends Screen {
 //        this.testSwitch = addButton(new SwitchWidget(width / 2 - 40 / 2, height / 2 - 20 / 2, false));
         this.quitSettings = addButton(new Button(width / 2 - 155, height / 6 - 6, 150, 20,
                 Translations.getScreen("settings", "quit_settings").appendString(closePrompt ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), (button) -> {
-            if (this.minecraft != null) this.minecraft.displayGuiScreen(new QuitSettingsScreen(this, new StringTextComponent("")));
+            if (this.minecraft != null)
+                this.minecraft.displayGuiScreen(new QuitSettingsScreen(this, new StringTextComponent("")));
         }));
         this.allowShutdownPCButton = addButton(new Button(width / 2 + 5, height / 6 - 6, 150, 20,
                 Translations.getScreen("settings", "allow_shutdown_pc").appendString(allowShutdownPC ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleAllowShutdownPC, this::tooltip));
@@ -83,7 +83,7 @@ public class SettingsScreen extends Screen {
                     // Declare variables for tooltip rendering.
                     String message =
                             "Allow QForgeMod to shutdown your pc for specific things.\n" +
-                            "Like the Kill Switch or the button on the exit confirm screen.";
+                                    "Like the Kill Switch or the button on the exit confirm screen.";
                     List<IReorderingProcessor> iReorderingProcessors = this.minecraft.fontRenderer.trimStringToWidth(new StringTextComponent(message), Math.max(this.width / 2 + 75, 170));
 
                     // Render tooltip.

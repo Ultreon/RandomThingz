@@ -3,8 +3,8 @@ package com.qsoftware.forgemod.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.forgemod.init.ModTags;
+import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.forgemod.objects.items.CraftingItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
@@ -17,6 +17,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -27,6 +28,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
+@SuppressWarnings("deprecation")
 public class ModItemTagsProvider extends ItemTagsProvider {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
@@ -43,6 +45,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         return new ResourceLocation("forge", path);
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Override
     protected void registerTags() {
         // Empties
@@ -106,12 +109,13 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "QForgeMod - Item Tags";
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    public void act(DirectoryCache cache) {
+    public void act(@NotNull DirectoryCache cache) {
         // Temp fix that removes the broken safety check
         this.tagToBuilder.clear();
         this.registerTags();
@@ -123,7 +127,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
             try {
                 String s = GSON.toJson(jsonobject);
-                String s1 = HASH_FUNCTION.hashUnencodedChars(s).toString();
+                @SuppressWarnings("UnstableApiUsage") String s1 = HASH_FUNCTION.hashUnencodedChars(s).toString();
                 if (!Objects.equals(cache.getPreviousHash(path), s1) || !Files.exists(path)) {
                     Files.createDirectories(path.getParent());
 

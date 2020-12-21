@@ -40,6 +40,7 @@ public class MekanismAPI {
     private static IForgeRegistry<InfuseType> INFUSE_TYPE_REGISTRY;
     private static IForgeRegistry<Pigment> PIGMENT_REGISTRY;
     private static IForgeRegistry<Slurry> SLURRY_REGISTRY;
+
     private MekanismAPI() {
     }
 

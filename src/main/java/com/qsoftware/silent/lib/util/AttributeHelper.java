@@ -34,7 +34,9 @@ import java.util.UUID;
  * @since 2.3.2
  */
 public final class AttributeHelper {
-    private AttributeHelper() {throw new IllegalAccessError("Utility class");}
+    private AttributeHelper() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     public static void apply(LivingEntity entity, Attribute attribute, AttributeModifier modifier) {
         ModifiableAttributeInstance instance = entity.getAttribute(attribute);

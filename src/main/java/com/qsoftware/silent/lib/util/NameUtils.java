@@ -12,7 +12,9 @@ import java.util.regex.Pattern;
 public final class NameUtils {
     private static final Pattern PATTERN = Pattern.compile("([a-z0-9._-]+:)?[a-z0-9/._-]+");
 
-    private NameUtils() { throw new IllegalAccessError("Utility class"); }
+    private NameUtils() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     public static boolean isValid(CharSequence name) {
         return PATTERN.matcher(name).matches();

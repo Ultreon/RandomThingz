@@ -12,7 +12,9 @@ import java.time.format.DateTimeFormatter;
 public final class NBTToJson {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    private NBTToJson() {throw new IllegalAccessError("Utility class");}
+    private NBTToJson() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     public static JsonElement toJson(INBT nbt) {
         //noinspection ChainOfInstanceofChecks

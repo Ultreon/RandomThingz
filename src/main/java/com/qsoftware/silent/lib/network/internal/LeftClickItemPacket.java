@@ -1,13 +1,13 @@
 package com.qsoftware.silent.lib.network.internal;
 
+import com.qsoftware.silent.lib.SilentLib;
+import com.qsoftware.silent.lib.item.ILeftClickItem;
+import com.qsoftware.silent.utils.EnumUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Hand;
 import net.minecraftforge.fml.network.NetworkEvent;
-import com.qsoftware.silent.lib.SilentLib;
-import com.qsoftware.silent.lib.item.ILeftClickItem;
-import com.qsoftware.silent.utils.EnumUtils;
 
 import java.util.function.Supplier;
 

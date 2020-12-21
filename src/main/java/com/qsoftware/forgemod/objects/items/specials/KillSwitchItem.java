@@ -1,8 +1,7 @@
 package com.qsoftware.forgemod.objects.items.specials;
 
-import com.qsoftware.forgemod.common.TextColors;
 import com.qsoftware.forgemod.common.text.Translations;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.util.Utils;
 import com.sun.jna.Platform;
 import net.minecraft.client.util.ITooltipFlag;
@@ -12,16 +11,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -31,7 +25,7 @@ import java.util.List;
  */
 public final class KillSwitchItem extends Item {
     public KillSwitchItem() {
-        super(new Item.Properties().group(Groups.OVERPOWERED));
+        super(new Item.Properties().group(ModItemGroups.OVERPOWERED));
     }
 
     @Override

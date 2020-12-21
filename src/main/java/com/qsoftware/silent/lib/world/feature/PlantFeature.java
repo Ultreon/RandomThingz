@@ -30,7 +30,7 @@ public class PlantFeature extends FlowersFeature<NoFeatureConfig> {
         int placedCount = 0;
 
         // Same as super, but different number of iterations and a placement count cap
-        for(int j = 0; j < this.tryCount && placedCount < this.maxCount; ++j) {
+        for (int j = 0; j < this.tryCount && placedCount < this.maxCount; ++j) {
             BlockPos pos1 = pos.add(
                     rand.nextInt(8) - rand.nextInt(8),
                     rand.nextInt(4) - rand.nextInt(4),

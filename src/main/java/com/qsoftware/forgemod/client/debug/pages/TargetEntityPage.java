@@ -103,7 +103,7 @@ public class TargetEntityPage extends DebugPage {
         } else {
             debugText.addLeftText("error", "No entity targeted.");
         }
-        
+
         return debugText;
     }
 }

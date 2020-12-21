@@ -1,9 +1,9 @@
 package com.qsoftware.forgemod.data.client;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.ModItems;
+import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.objects.items.CraftingItems;
 import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
@@ -15,6 +15,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
@@ -24,7 +25,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "QForgeMod - Item Models";
     }
 

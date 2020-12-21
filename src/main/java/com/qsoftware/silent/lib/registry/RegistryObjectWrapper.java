@@ -56,7 +56,7 @@ public class RegistryObjectWrapper<T extends IForgeRegistryEntry<? super T>> imp
         return registryObject.flatMap(mapper);
     }
 
-    public<U> Supplier<U> lazyMap(Function<? super T, ? extends U> mapper) {
+    public <U> Supplier<U> lazyMap(Function<? super T, ? extends U> mapper) {
         return registryObject.lazyMap(mapper);
     }
 
@@ -75,7 +75,7 @@ public class RegistryObjectWrapper<T extends IForgeRegistryEntry<? super T>> imp
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj instanceof RegistryObjectWrapper) {
-            return Objects.equals(((RegistryObjectWrapper<?>)obj).getId(), getId());
+            return Objects.equals(((RegistryObjectWrapper<?>) obj).getId(), getId());
         }
         return false;
     }

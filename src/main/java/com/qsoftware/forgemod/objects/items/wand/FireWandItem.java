@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.wand;
 
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.objects.items.base.WandItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class FireWandItem extends WandItem {
     public FireWandItem() {
-        super(80, 20, new Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(80, 20, new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override

@@ -19,6 +19,7 @@
 package com.qsoftware.silent.lib.advancements;
 
 import com.google.gson.JsonObject;
+import com.qsoftware.silent.lib.SilentLib;
 import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.advancements.criterion.CriterionInstance;
@@ -28,7 +29,6 @@ import net.minecraft.loot.ConditionArrayParser;
 import net.minecraft.loot.ConditionArraySerializer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
-import com.qsoftware.silent.lib.SilentLib;
 
 import java.util.*;
 

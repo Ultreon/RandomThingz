@@ -3,6 +3,8 @@ package com.qsoftware.silent.lib.command.internal;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.qsoftware.silent.lib.network.internal.DisplayNBTPacket;
+import com.qsoftware.silent.lib.network.internal.SilentLibNetwork;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;
@@ -18,8 +20,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkDirection;
-import com.qsoftware.silent.lib.network.internal.DisplayNBTPacket;
-import com.qsoftware.silent.lib.network.internal.SilentLibNetwork;
 
 import javax.annotation.Nullable;
 

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items.spawnegg;
 
 import com.qsoftware.forgemod.api.NBTConstants;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
 import com.qsoftware.forgemod.registration.impl.ItemDeferredRegister;
 import net.minecraft.entity.EntityType;
@@ -26,7 +26,7 @@ public class AdditionsSpawnEggItem extends SpawnEggItem {
     @SuppressWarnings("ConstantConditions")
     public AdditionsSpawnEggItem(EntityTypeRegistryObject<?> entityTypeRO, int primaryColor, int secondaryColor) {
         //Note: We pass null for now so that it does not override "pick block" on skeletons or some other existing type
-        super(null, primaryColor, secondaryColor, ItemDeferredRegister.getMekBaseProperties().group(Groups.SPAWN_EGGS));
+        super(null, primaryColor, secondaryColor, ItemDeferredRegister.getMekBaseProperties().group(ModItemGroups.SPAWN_EGGS));
         this.entityTypeRO = entityTypeRO;
     }
 

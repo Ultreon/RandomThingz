@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.wand;
 
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.objects.items.base.WandItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class LightningStaffItem extends WandItem {
     public LightningStaffItem() {
-        super(5, 1, new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(5, 1, new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     protected static BlockRayTraceResult rayTrace(World worldIn, PlayerEntity player, RayTraceContext.@NotNull FluidMode fluidMode) {

@@ -30,7 +30,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public final class PlayerUtils {
-    private PlayerUtils() {}
+    private PlayerUtils() {
+    }
 
     /**
      * Gives the player an item. If it can't be given directly, it spawns an EntityItem. Spawns 1

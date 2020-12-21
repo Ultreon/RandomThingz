@@ -12,7 +12,9 @@ import java.util.function.BiFunction;
 
 @SuppressWarnings("unused")
 public final class WorldUtils {
-    private WorldUtils() {throw new IllegalAccessError("Utility class");}
+    private WorldUtils() {
+        throw new IllegalAccessError("Utility class");
+    }
 
     /**
      * Gets blocks in a cube with sides of length {@code 2 * range + 1} and centered on pos.

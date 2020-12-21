@@ -68,6 +68,7 @@ public abstract class DebugRenderOverlay extends AbstractGui {
     /**
      * Gets the text to display, one line per element in the array. Lines containing a single '=' will be split into two
      * columns.
+     *
      * @return The list of lines to display, or an empty array.
      */
     @Nonnull
@@ -75,6 +76,7 @@ public abstract class DebugRenderOverlay extends AbstractGui {
 
     /**
      * Gets the scale of the text, where 1 would be default size. Must be greater than zero.
+     *
      * @return The text scale
      */
     public abstract float getTextScale();
@@ -89,6 +91,7 @@ public abstract class DebugRenderOverlay extends AbstractGui {
 
     /**
      * The frequency (in ticks) that the debug text should be updated. Higher numbers mean less frequent.
+     *
      * @return The delay in ticks between text updates
      */
     @Nonnegative
@@ -103,6 +106,7 @@ public abstract class DebugRenderOverlay extends AbstractGui {
 
     /**
      * Determine if the overlay is displayed or not.
+     *
      * @return True if the overlay should not be displayed, false if it should.
      */
     public abstract boolean isHidden();

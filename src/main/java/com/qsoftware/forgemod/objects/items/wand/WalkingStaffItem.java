@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items.wand;
 
 import com.qsoftware.forgemod.common.TextColors;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.util.helpers.KeyboardHelper;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.util.ITooltipFlag;
@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class WalkingStaffItem extends Item {
     public WalkingStaffItem() {
-        super(new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override

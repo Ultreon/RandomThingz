@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
 public final class BiomeUtils {
     private static final Pattern CATEGORY_PATTERN = Pattern.compile("#", Pattern.LITERAL);
 
-    private BiomeUtils() {}
+    private BiomeUtils() {
+    }
 
     public static boolean matches(Biome biome, String input) {
         if (biome == from(input))

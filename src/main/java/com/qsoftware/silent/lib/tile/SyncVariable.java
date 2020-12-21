@@ -71,9 +71,10 @@ public @interface SyncVariable {
      * @since 2.1.1
      */
     final class Helper {
-        static final Map<Class, NBTSerializer> SERIALIZERS = new HashMap<>();
+        static final Map<Class<?>, NBTSerializer<?>> SERIALIZERS = new HashMap<>();
 
-        private Helper() {}
+        private Helper() {
+        }
 
         public static <T> void registerSerializer(Class<T> clazz, Function<CompoundNBT, T> reader, BiConsumer<CompoundNBT, T> writer) {
             SERIALIZERS.put(clazz, new NBTSerializer<T>() {
@@ -127,7 +128,7 @@ public @interface SyncVariable {
                             else if (field.getType() == byte.class)
                                 field.setByte(obj, tags.getByte(name));
                             else if (SERIALIZERS.containsKey(field.getType())) {
-                                NBTSerializer serializer = SERIALIZERS.get(field.getType());
+                                NBTSerializer<?> serializer = SERIALIZERS.get(field.getType());
                                 CompoundNBT compound = tags.getCompound(name);
                                 field.set(obj, serializer.read(compound));
                             } else
@@ -186,7 +187,7 @@ public @interface SyncVariable {
                                     tags.putByte(name, field.getByte(obj));
                                 else if (SERIALIZERS.containsKey(field.getType())) {
                                     CompoundNBT compound = new CompoundNBT();
-                                    NBTSerializer serializer = SERIALIZERS.get(field.getType());
+                                    NBTSerializer<?> serializer = SERIALIZERS.get(field.getType());
                                     serializer.write(compound, field.get(obj));
                                     tags.put(name, compound);
                                 } else

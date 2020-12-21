@@ -1,9 +1,9 @@
 package com.qsoftware.silent.lib.network.internal;
 
+import com.qsoftware.silent.lib.SilentLib;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
-import com.qsoftware.silent.lib.SilentLib;
 
 import java.util.Objects;
 

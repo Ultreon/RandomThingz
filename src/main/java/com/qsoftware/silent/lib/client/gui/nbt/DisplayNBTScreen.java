@@ -3,6 +3,7 @@ package com.qsoftware.silent.lib.client.gui.nbt;
 import com.google.gson.JsonObject;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.silent.lib.util.NBTToJson;
+import com.qsoftware.silent.lib.util.TextRenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -10,7 +11,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
-import com.qsoftware.silent.lib.util.TextRenderUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class DisplayNBTScreen extends Screen {
     }
 
     @Override
-    public void render(MatrixStack matrix, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull MatrixStack matrix, int mouseX, int mouseY, float partialTicks) {
         assert minecraft != null;
         this.displayList.render(matrix, mouseX, mouseY, partialTicks);
         String titleStr = this.header.getString();
@@ -75,7 +76,7 @@ public class DisplayNBTScreen extends Screen {
         if (nbt instanceof CompoundNBT) {
             formatCompound(key, (CompoundNBT) nbt, depth, list, indentStr);
         } else if (nbt instanceof CollectionNBT) {
-            formatList(key, (CollectionNBT) nbt, depth, list, indentStr);
+            formatList(key, (CollectionNBT<?>) nbt, depth, list, indentStr);
         } else if (nbt instanceof NumberNBT) {
             formatNumber(key, (NumberNBT) nbt, list, indentStr);
         } else if (nbt instanceof StringNBT) {
@@ -96,7 +97,7 @@ public class DisplayNBTScreen extends Screen {
         }
     }
 
-    private static void formatList(String key, CollectionNBT nbt, int depth, List<String> list, String indentStr) {
+    private static void formatList(String key, CollectionNBT<?> nbt, int depth, List<String> list, String indentStr) {
         if (nbt.isEmpty()) {
             list.add(indentStr + format(key, "[]", TextFormatting.RESET));
         } else {

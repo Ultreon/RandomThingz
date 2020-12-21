@@ -46,8 +46,9 @@ public class LogUtils {
         logger.error("********************************************************************************");
     }
 
+    @SuppressWarnings("deprecation")
     private static List<String> wrapString(String string, int lnLength, boolean wrapLongWords, List<String> list) {
-        final String lines[] = WordUtils.wrap(string, lnLength, null, wrapLongWords).split(SystemUtils.LINE_SEPARATOR);
+        final String[] lines = WordUtils.wrap(string, lnLength, null, wrapLongWords).split(SystemUtils.LINE_SEPARATOR);
         Collections.addAll(list, lines);
         return list;
     }

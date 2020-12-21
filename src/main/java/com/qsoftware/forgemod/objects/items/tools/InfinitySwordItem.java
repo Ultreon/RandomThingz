@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items.tools;
 
 import com.qsoftware.forgemod.common.damagesource.DamageSourceInfinitySword;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.init.ModStats;
 import net.minecraft.entity.Entity;
@@ -52,7 +52,7 @@ public class InfinitySwordItem extends SwordItem {
             public @NotNull Ingredient getRepairMaterial() {
                 return Ingredient.fromItems(ModItems.INFINITY_INGOT.get());
             }
-        }, 1, -0.0f, new Item.Properties().group(Groups.OVERPOWERED).rarity(Rarity.EPIC));
+        }, 1, -0.0f, new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override

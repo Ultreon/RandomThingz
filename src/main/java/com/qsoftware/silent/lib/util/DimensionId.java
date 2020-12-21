@@ -57,7 +57,9 @@ public class DimensionId {
     }
 
     // Is this a good way to get the dimension name?
-    public String getName() { return id.getLocation().getPath(); }
+    public String getName() {
+        return id.getLocation().getPath();
+    }
 
     public boolean isOverworld() {
         return id.equals(World.OVERWORLD);
@@ -68,6 +70,7 @@ public class DimensionId {
         buf.writeResourceLocation(id.getLocation());
     }
 
+    @SuppressWarnings("ConstantConditions")
     public ServerWorld loadWorld() {
         // Worlds in 1.16 are always loaded
         MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
@@ -75,14 +78,16 @@ public class DimensionId {
     }
 
     // Do not load the world if it is not there
+    @SuppressWarnings("ConstantConditions")
     public ServerWorld getWorld() {
         MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
         return server.getWorld(id);
     }
 
+    @SuppressWarnings("ConstantConditions")
     public ServerWorld loadWorld(World otherWorld) {
         // Worlds in 1.16 are always loaded
-        return otherWorld.getServer().getWorld(id);
+        return Objects.requireNonNull(otherWorld.getServer()).getWorld(id);
     }
 
     public static boolean sameDimension(World world1, World world2) {

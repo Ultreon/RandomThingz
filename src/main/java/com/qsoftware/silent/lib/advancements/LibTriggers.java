@@ -41,7 +41,8 @@ public final class LibTriggers {
      */
     public static final GenericIntTrigger GENERIC_INT = CriteriaTriggers.register(new GenericIntTrigger());
 
-    private LibTriggers() {}
+    private LibTriggers() {
+    }
 
     public static void init() {
         EventHandler.init();
@@ -50,8 +51,10 @@ public final class LibTriggers {
     static final class EventHandler {
         private static EventHandler INSTANCE;
 
-        private EventHandler() { }
+        private EventHandler() {
+        }
 
+        @SuppressWarnings("InstantiationOfUtilityClass")
         static void init() {
             if (INSTANCE != null) return;
             INSTANCE = new EventHandler();

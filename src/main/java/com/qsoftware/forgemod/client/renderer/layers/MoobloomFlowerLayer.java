@@ -1,9 +1,7 @@
 package com.qsoftware.forgemod.client.renderer.layers;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.objects.entities.MoobloomEntity;
-import com.qsoftware.forgemod.objects.entities.MoobloomEntityOld;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;

@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.objects.items.fluid;
 
 import com.qsoftware.forgemod.api.IFluidContainer;
 import com.qsoftware.forgemod.common.TextColors;
-import com.qsoftware.forgemod.groups.Groups;
+import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.objects.items.energy.EnergyStoringItem;
 import com.qsoftware.forgemod.util.EnergyUtils;
 import com.qsoftware.forgemod.util.InventoryUtils;
@@ -31,7 +31,7 @@ public class HandPumpItem extends EnergyStoringItem {
     private static final int ENERGY_PER_OPERATION = 500;
 
     public HandPumpItem() {
-        super(new Properties().group(Groups.SPECIALS).maxStackSize(1), MAX_ENERGY, MAX_RECEIVE, ENERGY_PER_OPERATION);
+        super(new Properties().group(ModItemGroups.SPECIALS).maxStackSize(1), MAX_ENERGY, MAX_RECEIVE, ENERGY_PER_OPERATION);
     }
 
     private static ActionResultType tryExtractFromTank(PlayerEntity player, IEnergyStorage energy, IFluidHandler fluidHandler) {

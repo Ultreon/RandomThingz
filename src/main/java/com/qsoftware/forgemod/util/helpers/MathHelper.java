@@ -1,8 +1,6 @@
 package com.qsoftware.forgemod.util.helpers;
 
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.concurrent.ThreadLocalRandom;
 
 public final class MathHelper extends UtilityClass {
     public static int getDecimalPlaces(Float d) {
@@ -14,6 +12,7 @@ public final class MathHelper extends UtilityClass {
 
         return split[1].length();
     }
+
     public static int getDecimalPlaces(Double d) {
         String s = d.toString();
         String[] split = s.split("\\.");
@@ -23,6 +22,7 @@ public final class MathHelper extends UtilityClass {
 
         return split[1].length();
     }
+
     public static int getDecimalPlaces(BigDecimal d) {
         String s = d.toString();
         String[] split = s.split("\\.");

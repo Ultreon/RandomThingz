@@ -2,15 +2,9 @@ package com.qsoftware.forgemod.util;
 
 import com.qsoftware.forgemod.config.Config;
 import com.sun.jna.Platform;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 
-import java.awt.*;
 import java.io.IOException;
 
 public final class Utils {

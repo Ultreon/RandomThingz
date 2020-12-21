@@ -1,22 +1,16 @@
 package com.qsoftware.forgemod.client.gui.settings;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.widgets.SwitchWidget;
 import com.qsoftware.forgemod.common.text.Translations;
 import com.qsoftware.forgemod.config.Config;
 import net.minecraft.client.gui.DialogTexts;
-import net.minecraft.client.gui.screen.OptionsScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -37,7 +31,7 @@ public class QuitSettingsScreen extends Screen {
     private Button allowShutdownPCButton;
     private Button quitOnEscInTitleButton;
     private Button closePromptIngameButton;
-    private Button closePromptQuitButtonButton;;
+    private Button closePromptQuitButtonButton;
 
     protected QuitSettingsScreen(Screen back, ITextComponent titleIn) {
         super(titleIn);
@@ -104,7 +98,7 @@ public class QuitSettingsScreen extends Screen {
             closePromptQuitButtonButton.setMessage(Translations.getScreen("quit_settings", "close_prompt_quit_button").appendString(closePromptQuitButton ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()));
         }
     }
-    
+
     private void toggleExitOnEscInTitle(Button button) {
         if (button == this.quitOnEscInTitleButton) {
             // Invert boolean.

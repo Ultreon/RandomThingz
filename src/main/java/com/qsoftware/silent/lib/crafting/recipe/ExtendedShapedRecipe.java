@@ -42,9 +42,12 @@ public abstract class ExtendedShapedRecipe extends ShapedRecipe {
 
     public static class Serializer<T extends ExtendedShapedRecipe> extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<T> {
         private final Function<ShapedRecipe, T> recipeFactory;
-        @Nullable private final BiConsumer<JsonObject, T> readJson;
-        @Nullable private final BiConsumer<PacketBuffer, T> readBuffer;
-        @Nullable private final BiConsumer<PacketBuffer, T> writeBuffer;
+        @Nullable
+        private final BiConsumer<JsonObject, T> readJson;
+        @Nullable
+        private final BiConsumer<PacketBuffer, T> readBuffer;
+        @Nullable
+        private final BiConsumer<PacketBuffer, T> writeBuffer;
 
         public Serializer(Function<ShapedRecipe, T> recipeFactory,
                           @Nullable BiConsumer<JsonObject, T> readJson,

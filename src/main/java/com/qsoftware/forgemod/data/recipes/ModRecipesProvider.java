@@ -2,10 +2,10 @@ package com.qsoftware.forgemod.data.recipes;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
-import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.init.ModTags;
+import com.qsoftware.forgemod.init.OreMaterials;
 import com.qsoftware.forgemod.objects.items.CraftingItems;
 import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
 import com.qsoftware.silent.lib.data.ExtendedShapedRecipeBuilder;
@@ -107,6 +107,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .build(consumer);
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     private static void registerCrushingRecipes(Consumer<IFinishedRecipe> consumer) {
         for (OreMaterials metal : OreMaterials.values()) {
             if (metal.getOreItemTag().isPresent() && metal.getChunks().isPresent()) {
@@ -283,6 +284,7 @@ public class ModRecipesProvider extends RecipeProvider {
         }
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     private void registerBlockCrafting(Consumer<IFinishedRecipe> consumer) {
         ExtendedShapedRecipeBuilder.vanillaBuilder(ModBlocks.ACACIA_DRYING_RACK)
                 .patternLine("###")
@@ -561,6 +563,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .build(consumer);
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     private void registerItemCrafting(Consumer<IFinishedRecipe> consumer) {
         ShapedRecipeBuilder.shapedRecipe(CraftingItems.CIRCUIT_BOARD, 3)
                 .patternLine("/G/")
