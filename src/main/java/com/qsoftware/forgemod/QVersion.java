@@ -21,7 +21,7 @@ public class QVersion implements IVersion {
      */
     public QVersion(String s) {
         // String to be scanned to find the pattern.
-        String pattern = "([0-9]*)\\.([0-9]*)-(alpha|beta|release)([0-9]*)"; // 1.0-alpha4 // 5.4-release-7
+        String pattern = "([0-9]*)\\.([0-9]*)-(alpha|beta|pre|release)([0-9]*)"; // 1.0-alpha4 // 5.4-release-7
 
         // Create a Pattern object
         Pattern r = Pattern.compile(pattern);
