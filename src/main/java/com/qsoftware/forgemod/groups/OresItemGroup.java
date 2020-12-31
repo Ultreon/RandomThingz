@@ -7,7 +7,7 @@ import net.minecraft.util.NonNullList;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Ores item group.
+ * Ore item group.
  *
  * @author Qboi123
  */

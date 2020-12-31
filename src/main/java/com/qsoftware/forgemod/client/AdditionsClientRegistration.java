@@ -1,12 +1,12 @@
 package com.qsoftware.forgemod.client;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.model.AdditionsModelCache;
+import com.qsoftware.forgemod.client.model.entity.AdditionsModelCache;
 import com.qsoftware.forgemod.client.renderer.entity.RenderBabyCreeper;
 import com.qsoftware.forgemod.client.renderer.entity.RenderBabyEnderman;
-import com.qsoftware.forgemod.common.IHasDyeColor;
-import com.qsoftware.forgemod.common.IHasMaterialColor;
 import com.qsoftware.forgemod.common.client.ClientRegistrationUtil;
+import com.qsoftware.forgemod.common.interfaces.IHasDyeColor;
+import com.qsoftware.forgemod.common.interfaces.IHasMaterialColor;
 import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.init.renew.ModItemsNew;
@@ -14,8 +14,8 @@ import com.qsoftware.forgemod.init.types.ModEntities;
 import com.qsoftware.forgemod.objects.items.base.DyeColorizedItem;
 import com.qsoftware.forgemod.objects.items.base.MaterialColorizedItem;
 import com.qsoftware.forgemod.objects.items.spawnegg.CustomSpawnEggItem;
-import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
 import com.qsoftware.forgemod.util.ExceptionUtil;
+import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.StrayRenderer;
@@ -65,6 +65,7 @@ public class AdditionsClientRegistration {
                 ModItemsNew.BABY_STRAY_SPAWN_EGG,
                 ModItemsNew.BABY_WITHER_SKELETON_SPAWN_EGG,
                 ModItemsNew.DUCK_SPAWN_EGG,
+                ModItemsNew.CLUCKSHROOM_SPAWN_EGG,
                 ModItemsNew.HOG_SPAWN_EGG,
                 ModItemsNew.WARTHOG_SPAWN_EGG,
                 ModItemsNew.BISON_SPAWN_EGG,
@@ -74,6 +75,22 @@ public class AdditionsClientRegistration {
                 ModItemsNew.MOOBLOOM_SPAWN_EGG,
                 ModItemsNew.OX_SPAWN_EGG
         );
+
+//        List<IItemProvider> spawnEggItems = Registration.ITEMS.getAllItems();
+//        for (IItemProvider spawnEggItem : spawnEggItems) {
+//            if (spawnEggItem instanceof ItemRegistryObject) {
+//                try {
+//                    @SuppressWarnings("unchecked") ItemRegistryObject<CustomSpawnEggItem<?>> spawnEgg = (ItemRegistryObject<CustomSpawnEggItem<?>>) spawnEggItem;
+//                    if (spawnEgg.getItem() instanceof CustomSpawnEggItem<?>) {
+//                        ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, tintIndex) -> {
+//                            return spawnEgg.getItem().getColor(tintIndex);
+//                        }, spawnEgg);
+//                    }
+//                } catch (ClassCastException ignored) {
+//
+//                }
+//            }
+//        }
 
         Collection<Item> dyeColorItems = Registration.getItems((item) -> item instanceof IHasDyeColor);
         for (Item dyeColorItem : dyeColorItems) {

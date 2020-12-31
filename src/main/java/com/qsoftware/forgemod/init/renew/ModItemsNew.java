@@ -4,9 +4,9 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ObjectInit;
 import com.qsoftware.forgemod.init.types.ModEntities;
 import com.qsoftware.forgemod.objects.items.spawnegg.CustomSpawnEggItem;
-import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
-import com.qsoftware.forgemod.registration.impl.ItemDeferredRegister;
-import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
+import com.qsoftware.silent.lib.registry.EntityTypeRegistryObject;
+import com.qsoftware.silent.lib.registry.ItemDeferredRegister;
+import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -15,7 +15,8 @@ import net.minecraft.item.Item;
 public class ModItemsNew extends ObjectInit<Item> {
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.MOD_ID);
 
-    public static final ItemRegistryObject<CustomSpawnEggItem<?>> DUCK_SPAWN_EGG = registerSpawnEgg(ModEntities.DUCK, 0x4680e, 0xe4b50f);
+    public static final ItemRegistryObject<CustomSpawnEggItem<?>> DUCK_SPAWN_EGG = registerSpawnEgg(ModEntities.DUCK, 0x04680e, 0xe4b50f);
+    public static final ItemRegistryObject<CustomSpawnEggItem<?>> CLUCKSHROOM_SPAWN_EGG = registerSpawnEgg(ModEntities.CLUCKSHROOM, 0x730000, 0xe70000);
     public static final ItemRegistryObject<CustomSpawnEggItem<?>> HOG_SPAWN_EGG = registerSpawnEgg(ModEntities.HOG, 0x541500, 0xa6673d);
     public static final ItemRegistryObject<CustomSpawnEggItem<?>> WARTHOG_SPAWN_EGG = registerSpawnEgg(ModEntities.WARTHOG, 0xb76f3c, 0x945a31);
     public static final ItemRegistryObject<CustomSpawnEggItem<?>> BISON_SPAWN_EGG = registerSpawnEgg(ModEntities.BISON, 0x4f2b05, 0xb49538);

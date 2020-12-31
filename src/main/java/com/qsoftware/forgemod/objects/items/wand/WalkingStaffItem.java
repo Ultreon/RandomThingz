@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.wand;
 
-import com.qsoftware.forgemod.common.TextColors;
+import com.qsoftware.forgemod.common.enums.TextColors;
 import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.util.helpers.KeyboardHelper;
 import net.minecraft.block.Blocks;

@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod;
 
-import com.qsoftware.forgemod.common.IHasRenderType;
-import com.qsoftware.forgemod.init.ModStats;
-import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.filters.Filters;
+import com.qsoftware.forgemod.common.interfaces.IHasRenderType;
+import com.qsoftware.forgemod.init.*;
 import com.qsoftware.forgemod.init.types.ModEntities;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
 import com.qsoftware.forgemod.listener.GameOverlayListener;
@@ -11,11 +11,14 @@ import com.qsoftware.forgemod.objects.entities.baby.*;
 import com.qsoftware.forgemod.objects.items.advanced.AdvancedBowItem;
 import com.qsoftware.forgemod.world.gen.ModOreGen;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -61,6 +64,7 @@ public class Initialization {
             GlobalEntityTypeAttributes.put(ModEntities.OX.get(), OxEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.HOG.get(), HogEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.DUCK.get(), DuckEntity.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntities.CLUCKSHROOM.get(), CluckshroomEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.BISON.get(), BisonEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.MOOBLOOM.get(), MoobloomEntityOld.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.WARTHOG.get(), WarthogEntity.registerAttributes().create());
@@ -103,10 +107,38 @@ public class Initialization {
                 }
             });
 
-            ItemModelsProperties.registerProperty(item, new ResourceLocation("pulling"), (p_239428_0_, p_239428_1_, p_239428_2_) -> {
-                return p_239428_2_ != null && p_239428_2_.isHandActive() && p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F;
-            });
+            ItemModelsProperties.registerProperty(item, new ResourceLocation("pulling"), (p_239428_0_, p_239428_1_, p_239428_2_) -> p_239428_2_ != null && p_239428_2_.isHandActive() && p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F);
         }
+
+        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("forge", "dusts"), new ItemStack(OreMaterial.IRON.getDust().orElse(Items.AIR)));
+        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("forge", "nuggets"), new ItemStack(Items.IRON_NUGGET));
+        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("forge", "ingots"), new ItemStack(Items.IRON_INGOT));
+        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("qforgemod", "chunks"), new ItemStack(OreMaterial.IRON.getChunks().orElse(Items.AIR)));
+
+        Filters.get().register(ModItemGroups.NATURE, new ResourceLocation("qforgemod", "nature/flowers"), new ItemStack(Items.POPPY));
+        Filters.get().register(ModItemGroups.NATURE, new ResourceLocation("qforgemod", "nature/saplings"), new ItemStack(Items.OAK_SAPLING));
+        Filters.get().register(ModItemGroups.NATURE, new ResourceLocation("qforgemod", "nature/leaves"), new ItemStack(Items.OAK_LEAVES));
+
+        Filters.get().register(ModItemGroups.FLUIDS, new ResourceLocation("qforgemod", "fluids/liquid"), new ItemStack(ModItems.OIL_BUCKET));
+        Filters.get().register(ModItemGroups.FLUIDS, new ResourceLocation("qforgemod", "fluids/gas"), new ItemStack(ModItems.ETHANE_BUCKET));
+
+        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("qforgemod", "dungeons/knifes"), new ItemStack(ModItems.DUNGEONS_ETERNAL_KNIFE));
+        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("qforgemod", "dungeons/swords"), new ItemStack(ModItems.DUNGEONS_DIAMOND_SWORD));
+        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("qforgemod", "dungeons/axes"), new ItemStack(ModItems.DUNGEONS_DIAMOND_AXE));
+        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("qforgemod", "dungeons/pickaxes"), new ItemStack(ModItems.DUNGEONS_DIAMOND_PICKAXE));
+        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("qforgemod", "dungeons/hammers"), new ItemStack(ModItems.DUNGEONS_GREAT_HAMMER));
+        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("qforgemod", "dungeons/scythes"), new ItemStack(ModItems.DUNGEONS_FROST_SCYTHE));
+        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("qforgemod", "dungeons/flails"), new ItemStack(ModItems.DUNGEONS_FLAIL));
+        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("qforgemod", "dungeons/bows"), new ItemStack(ModItems.DUNGEONS_HUNTERS_BOW));
+
+        Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("qforgemod", "machines/basic"), new ItemStack(Blocks.STONE));
+        Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("qforgemod", "machines/advanced"), new ItemStack(Blocks.IRON_BLOCK));
+        Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("qforgemod", "machines/drying_rack"), new ItemStack(ModBlocks.OAK_DRYING_RACK));
+        Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("qforgemod", "machines/storage"), new ItemStack(ModItems.BATTERY));
+
+        Filters.get().register(ModItemGroups.OVERPOWERED, new ResourceLocation("qforgemod", "overpowered/infinity"), new ItemStack(ModItems.INFINITY_AXE));
+        Filters.get().register(ModItemGroups.OVERPOWERED, new ResourceLocation("qforgemod", "overpowered/tools"), new ItemStack(ModItems.KILL_SWITCH));
+        Filters.get().register(ModItemGroups.OVERPOWERED, new ResourceLocation("qforgemod", "overpowered/wands"), new ItemStack(ModItems.WALKING_STAFF));
 
 //        logger.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }

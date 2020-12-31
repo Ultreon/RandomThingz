@@ -12,11 +12,11 @@ if __name__ == '__main__':
                (str(ct.tm_min) if ct.tm_min >= 10 else "0" + str(ct.tm_min)) + "." + \
                (str(ct.tm_sec) if ct.tm_sec >= 10 else "0" + str(ct.tm_sec))
 
-    out1 = os.path.join(LIVE_RELEASES, "BUILD " + str(ct.tm_year) + "." + \
-                        (str(ct.tm_mon) if ct.tm_mon >= 10 else "0" + str(ct.tm_mon)) + "." + \
-                        (str(ct.tm_mday) if ct.tm_mday >= 10 else "0" + str(ct.tm_mday)) + " " + \
-                        (str(ct.tm_hour) if ct.tm_hour >= 10 else "0" + str(ct.tm_hour)) + "." + \
-                        (str(ct.tm_min) if ct.tm_min >= 10 else "0" + str(ct.tm_min)) + "." + \
+    out1 = os.path.join(LIVE_RELEASES, "BUILD " + str(ct.tm_year) + "." +
+                        (str(ct.tm_mon) if ct.tm_mon >= 10 else "0" + str(ct.tm_mon)) + "." +
+                        (str(ct.tm_mday) if ct.tm_mday >= 10 else "0" + str(ct.tm_mday)) + " " +
+                        (str(ct.tm_hour) if ct.tm_hour >= 10 else "0" + str(ct.tm_hour)) + "." +
+                        (str(ct.tm_min) if ct.tm_min >= 10 else "0" + str(ct.tm_min)) + "." +
                         (str(ct.tm_sec) if ct.tm_sec >= 10 else "0" + str(ct.tm_sec)))
 
     if not os.path.exists(out1):

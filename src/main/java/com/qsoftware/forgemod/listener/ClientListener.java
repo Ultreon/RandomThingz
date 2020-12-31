@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.listener;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.common.IFOVUpdateItem;
+import com.qsoftware.forgemod.common.interfaces.IFOVUpdateItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.FOVUpdateEvent;

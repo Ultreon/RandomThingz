@@ -24,7 +24,7 @@ public final class ModFeatures {
         throw ExceptionUtil.utilityConstructor();
     }
 
-    // Ores
+    // Ore
     public static final ConfiguredFeature<?, ?> ORE_RUBY = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.RUBY_BLOCK.get().getDefaultState(), 8)).range(16).square());
 
     // Trees

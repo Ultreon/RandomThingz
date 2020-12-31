@@ -2,8 +2,8 @@ package com.qsoftware.forgemod.objects.items.spawnegg;
 
 import com.qsoftware.forgemod.api.NBTConstants;
 import com.qsoftware.forgemod.init.ModItemGroups;
-import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
-import com.qsoftware.forgemod.registration.impl.ItemDeferredRegister;
+import com.qsoftware.silent.lib.registry.EntityTypeRegistryObject;
+import com.qsoftware.silent.lib.registry.ItemDeferredRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.SpawnEggItem;

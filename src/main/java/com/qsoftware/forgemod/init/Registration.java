@@ -1,6 +1,8 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.api.providers.IItemProvider;
+import com.qsoftware.silent.lib.registry.ItemDeferredRegister;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -33,7 +35,7 @@ public final class Registration {
     public static final DeferredRegister<Block> BLOCKS = create(ForgeRegistries.BLOCKS);
     public static final DeferredRegister<Fluid> FLUIDS = create(ForgeRegistries.FLUIDS);
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = create(ForgeRegistries.CONTAINERS);
-    public static final DeferredRegister<Item> ITEMS = create(ForgeRegistries.ITEMS);
+    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.MOD_ID);
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = create(ForgeRegistries.ENCHANTMENTS);
     public static final DeferredRegister<PaintingType> PAINTINGS = create(ForgeRegistries.PAINTING_TYPES);
     public static final DeferredRegister<Potion> POTION_TYPES = create(ForgeRegistries.POTION_TYPES);
@@ -84,16 +86,16 @@ public final class Registration {
 
     @SuppressWarnings("unchecked")
     public static <T extends Item> Collection<T> getItems(Class<T> clazz) {
-        return ITEMS.getEntries().stream()
-                .map(RegistryObject::get)
+        return ITEMS.getAllItems().stream()
+                .map(IItemProvider::getItem)
                 .filter(clazz::isInstance)
                 .map(item -> (T) item)
                 .collect(Collectors.toList());
     }
 
     public static Collection<Item> getItems(Predicate<Item> predicate) {
-        return ITEMS.getEntries().stream()
-                .map(RegistryObject::get)
+        return ITEMS.getAllItems().stream()
+                .map(IItemProvider::getItem)
                 .filter(predicate)
                 .collect(Collectors.toList());
     }

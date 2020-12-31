@@ -150,7 +150,7 @@ public @interface SyncVariable {
          * @param syncType The sync type (WRITE or PACKET).
          * @return The modified tags.
          */
-        @SuppressWarnings("unchecked") // from serializer
+        @SuppressWarnings({"unchecked", "rawtypes"}) // from serializer
         public static CompoundNBT writeSyncVars(Object obj, CompoundNBT tags, Type syncType) {
 
             // Try to write to NBT for fields marked with SyncVariable.
@@ -187,7 +187,7 @@ public @interface SyncVariable {
                                     tags.putByte(name, field.getByte(obj));
                                 else if (SERIALIZERS.containsKey(field.getType())) {
                                     CompoundNBT compound = new CompoundNBT();
-                                    NBTSerializer<?> serializer = SERIALIZERS.get(field.getType());
+                                    NBTSerializer serializer = SERIALIZERS.get(field.getType());
                                     serializer.write(compound, field.get(obj));
                                     tags.put(name, compound);
                                 } else

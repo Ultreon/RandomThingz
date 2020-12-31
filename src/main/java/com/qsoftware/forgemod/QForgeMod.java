@@ -56,6 +56,7 @@ public class QForgeMod {
     private static QForgeMod instance;
     private static IProxy proxy;
     private static Initialization init;
+    private static final boolean testPhaseOn = true;
 
     /**
      * Get the QForgeUtils mod instance.
@@ -155,6 +156,10 @@ public class QForgeMod {
         } catch (NoSuchMethodError error) {
             return false;
         }
+    }
+
+    public static boolean isTestPhase() {
+        return isDevState() || testPhaseOn;
     }
 
     /**

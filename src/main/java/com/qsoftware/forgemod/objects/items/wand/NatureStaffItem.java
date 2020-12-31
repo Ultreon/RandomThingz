@@ -172,11 +172,7 @@ public class NatureStaffItem extends Item {
         if (applyBonemeal(context.getItem(), world, blockPos, player)) {
             if (!world.isRemote) {
                 world.playEvent(2005, blockPos, 0);
-
-                PlayerEntity player = context.getPlayer();
-                if (player != null) {
-                    player.addStat(Stats.ITEM_USED.get(this));
-                }
+                player.addStat(Stats.ITEM_USED.get(this));
             }
 
             return ActionResultType.func_233537_a_(world.isRemote);
@@ -186,11 +182,7 @@ public class NatureStaffItem extends Item {
             if (flag && growSeagrass(context.getItem(), world, blockPos1, context.getFace())) {
                 if (!world.isRemote) {
                     world.playEvent(2005, blockPos1, 0);
-
-                    PlayerEntity player = context.getPlayer();
-                    if (player != null) {
-                        player.addStat(Stats.ITEM_USED.get(this));
-                    }
+                    player.addStat(Stats.ITEM_USED.get(this));
                 }
 
                 return ActionResultType.func_233537_a_(world.isRemote);

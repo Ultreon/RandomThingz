@@ -46,7 +46,7 @@ public enum CraftingItems implements IItemProvider {
 
     public static void register() {
         for (CraftingItems item : values()) {
-            item.item = new ItemRegistryObject<>(Registration.ITEMS.register(item.getName(), () -> new Item(createProperties(item.food))));
+            item.item = Registration.ITEMS.register(item.getName(), () -> new Item(createProperties(item.food)));
         }
     }
 

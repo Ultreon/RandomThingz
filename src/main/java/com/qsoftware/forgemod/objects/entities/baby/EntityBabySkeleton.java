@@ -75,7 +75,7 @@ public class EntityBabySkeleton extends SkeletonEntity implements IBabyEntity {
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return ModItemsNew.BABY_SKELETON_SPAWN_EGG.getItemStack();
+        return new ItemStack(ModItemsNew.BABY_SKELETON_SPAWN_EGG.asItem());
     }
 
     @Nonnull

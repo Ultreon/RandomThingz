@@ -1,12 +1,14 @@
 package com.qsoftware.forgemod.client.gui.settings;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.client.gui.widgets.SwitchWidget;
 import com.qsoftware.forgemod.common.text.Translations;
 import com.qsoftware.forgemod.config.Config;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -14,6 +16,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 public class QuitSettingsScreen extends Screen {
     private int ticks;
@@ -25,10 +28,7 @@ public class QuitSettingsScreen extends Screen {
     private static boolean quitOnEscInTitle;
     private static boolean closePromptQuitButton;
     private static boolean closePromptIngame;
-    private Button doneButton;
-    private Button cancelButton;
     private Button closePromptButton;
-    private Button allowShutdownPCButton;
     private Button quitOnEscInTitleButton;
     private Button closePromptIngameButton;
     private Button closePromptQuitButtonButton;
@@ -48,6 +48,12 @@ public class QuitSettingsScreen extends Screen {
     protected void init() {
         super.init();
 
+        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
+
+        if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
+            Narrator.getNarrator().say("Settings for closing minecraft.", true);
+        }
+
         quitOnEscInTitle = Config.quitOnEscInTitle.get();
         closePrompt = Config.closePrompt.get();
         closePromptIngame = Config.closePromptIngame.get();
@@ -63,9 +69,9 @@ public class QuitSettingsScreen extends Screen {
                 Translations.getScreen("quit_settings", "close_prompt_ingame").appendString(closePromptIngame ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleClosePromptIngame, this::tooltip));
         this.closePromptQuitButtonButton = addButton(new Button(width / 2 - 105, height / 6 + 60 - 6, 200, 20,
                 Translations.getScreen("quit_settings", "close_prompt_quit_button").appendString(closePromptQuitButton ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleClosePromptQuitButton, this::tooltip));
-        this.doneButton = addButton(new Button(width / 2 - 155, height / 6 + 120 - 6, 150, 20,
+        addButton(new Button(width / 2 - 155, height / 6 + 120 - 6, 150, 20,
                 DialogTexts.GUI_DONE, this::saveAndGoBack));
-        this.cancelButton = addButton(new Button(width / 2 + 5, height / 6 + 120 - 6, 150, 20,
+        addButton(new Button(width / 2 + 5, height / 6 + 120 - 6, 150, 20,
                 DialogTexts.GUI_CANCEL, this::goBack));
     }
 
@@ -114,7 +120,7 @@ public class QuitSettingsScreen extends Screen {
             return;
         }
 
-        if (button == allowShutdownPCButton) {
+        /*if (button == allowShutdownPCButton) {
             // Button for allowing shutdown the PC.
             if (this.allowShutdownPCButton.isHovered()) {
                 if (this.minecraft != null) {
@@ -128,7 +134,7 @@ public class QuitSettingsScreen extends Screen {
                     this.renderTooltip(matrixStack, iReorderingProcessors, mouseX, mouseY);
                 }
             }
-        } else if (button == quitOnEscInTitleButton) {
+        } else*/ if (button == quitOnEscInTitleButton) {
             TranslationTextComponent message = Translations.getScreen("quit_settings", "quit_on_esc_in_title", "tooltip");
             List<IReorderingProcessor> iReorderingProcessors = this.minecraft.fontRenderer.trimStringToWidth(message, Math.max(this.width / 2 + 75, 170));
             this.renderTooltip(matrixStack, iReorderingProcessors, mouseX, mouseY);

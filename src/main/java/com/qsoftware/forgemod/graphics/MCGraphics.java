@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.graphics;
 import com.google.common.annotations.Beta;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.qsoftware.forgemod.common.Size;
+import com.qsoftware.forgemod.client.gui.AdvancedScreen;
 import com.qsoftware.forgemod.common.geom.RectangleUV;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -11,11 +11,14 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
-import org.w3c.dom.css.Rect;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.common.MinecraftForge;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
+import java.util.List;
 
 /**
  * @author Qboi123
@@ -33,8 +36,8 @@ public class MCGraphics {
     public MCGraphics(MatrixStack matrixStack, FontRenderer font, Screen gui) {
         this.matrixStack = matrixStack;
         this.font = font;
-        this.gui = gui;
         this.mc = Minecraft.getInstance();
+        this.gui = gui == null ? this.mc.currentScreen : gui;
         this.textureManager = this.mc.getTextureManager();
         this.itemRenderer = this.mc.getItemRenderer();
     }
@@ -80,8 +83,7 @@ public class MCGraphics {
     }
 
     public void drawTexture(int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, ResourceLocation resource) {
-        textureManager.bindTexture(resource);
-        gui.blit(matrixStack, x, y, uOffset, vOffset, uWidth, vHeight);
+        this.drawTexture(x, y, (float)uOffset, (float)vOffset, uWidth, vHeight, 256, 256, resource);
     }
 
     public void drawTexture(int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight,  int textureWidth, int textureHeight, ResourceLocation resource) {
@@ -99,8 +101,16 @@ public class MCGraphics {
         Screen.blit(matrixStack, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureHeight, textureWidth);
     }
 
+    public final void drawCenteredString(ITextComponent text, float x, float y, Color color) {
+        drawCenteredString(text.getString(), x, y, color);
+    }
+
     public final void drawCenteredString(String text, float x, float y, Color color) {
         drawCenteredString(text, x, y, color, false);
+    }
+
+    public final void drawCenteredString(ITextComponent text, float x, float y, Color color, boolean shadow) {
+        drawCenteredString(text.getString(), x, y, color, shadow);
     }
 
     @SuppressWarnings("RedundantCast")
@@ -150,5 +160,32 @@ public class MCGraphics {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void renderBackground(boolean forceTransparent) {
+        if (forceTransparent) {
+            gui.fillGradient(matrixStack, 0, 0, gui.width, gui.height, -1072689136, -804253680);
+            MinecraftForge.EVENT_BUS.post(new GuiScreenEvent.BackgroundDrawnEvent(gui, matrixStack));
+        } else {
+            gui.renderBackground(this.matrixStack);
+        }
+    }
+
+    public void renderTooltip(ItemStack stack, Point point) {
+        if (gui instanceof AdvancedScreen) {
+            ((AdvancedScreen)gui).renderTooltip(matrixStack, stack, point.x, point.y);
+        }
+    }
+
+    public void renderTooltip(ITextComponent text, Point point) {
+        gui.renderTooltip(matrixStack, text, point.x, point.y);
+    }
+
+    public void renderTooltip(List<? extends IReorderingProcessor> tooltips, Point point) {
+        gui.renderTooltip(matrixStack, tooltips, point.x, point.y);
+    }
+
+    public MatrixStack getMatrixStack() {
+        return matrixStack;
     }
 }

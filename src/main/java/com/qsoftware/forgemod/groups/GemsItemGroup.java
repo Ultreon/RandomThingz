@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
+@Deprecated
 public class GemsItemGroup extends ItemGroup {
     public static final GemsItemGroup instance = new GemsItemGroup(ItemGroup.GROUPS.length, "qforgemod_gems");
 

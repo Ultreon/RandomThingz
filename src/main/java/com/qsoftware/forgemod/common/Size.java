@@ -1,8 +1,9 @@
 package com.qsoftware.forgemod.common;
 
+import com.qsoftware.forgemod.common.interfaces.Formattable;
 import net.minecraft.util.text.TextFormatting;
 
-public class Size implements IFormattable {
+public class Size implements Formattable {
     private final int width;
     private final int height;
 

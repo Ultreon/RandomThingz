@@ -53,6 +53,11 @@ public final class ModTileEntities {
         throw ExceptionUtil.utilityConstructor();
     }
 
+    /**
+     * Register all tile entities of this mod.
+     *
+     * @param event registry event.
+     */
     public static void registerAll(RegistryEvent.Register<TileEntityType<?>> event) {
         register("basic_alloy_smelter", MachineType.ALLOY_SMELTER.getBasicTileEntityType());
         register("alloy_smelter", MachineType.ALLOY_SMELTER.getStandardTileEntityType());

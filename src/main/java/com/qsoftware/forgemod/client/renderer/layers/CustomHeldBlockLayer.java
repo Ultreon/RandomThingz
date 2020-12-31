@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.client.renderer.layers;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.client.model.FreeEndermanModel;
+import com.qsoftware.forgemod.client.model.entity.FreeEndermanModel;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

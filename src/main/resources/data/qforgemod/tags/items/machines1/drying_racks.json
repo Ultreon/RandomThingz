@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:oak_drying_rack",
+    "qforgemod:birch_drying_rack",
+    "qforgemod:spruce_drying_rack",
+    "qforgemod:jungle_drying_rack",
+    "qforgemod:acacia_drying_rack",
+    "qforgemod:dark_oak_drying_rack",
+    "qforgemod:eucalyptus_drying_rack",
+    "qforgemod:cherry_drying_rack"
+  ]
+}

@@ -1,14 +1,19 @@
 package com.qsoftware.forgemod.client.gui.settings;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.client.gui.update.UpdateScreen;
 import com.qsoftware.forgemod.client.gui.widgets.SwitchWidget;
+import com.qsoftware.forgemod.client.gui.widgets.UpdateButton;
 import com.qsoftware.forgemod.common.text.Translations;
+import com.qsoftware.forgemod.common.updater.Updater;
 import com.qsoftware.forgemod.config.Config;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.OptionsScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -19,10 +24,10 @@ import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class SettingsScreen extends Screen {
-    private int ticks;
 
     @SuppressWarnings("FieldCanBeLocal")
     private SwitchWidget testSwitch;
@@ -49,21 +54,31 @@ public class SettingsScreen extends Screen {
     protected void init() {
         super.init();
 
+        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
+
+        if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
+            Narrator.getNarrator().say("Q Forge Mod Settings Screen, such as settings for closing minecraft, and allowing Q Forge Mod to shutdown your computer.", true);
+        }
+
         closePrompt = Config.closePrompt.get();
         allowShutdownPC = Config.allowShutdownPC.get();
 
-        this.ticks = 0;
-//        this.testSwitch = addButton(new SwitchWidget(width / 2 - 40 / 2, height / 2 - 20 / 2, false));
-        this.quitSettings = addButton(new Button(width / 2 - 155, height / 6 - 6, 150, 20,
-                Translations.getScreen("settings", "quit_settings").appendString(closePrompt ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), (button) -> {
+        int dy = 0;
+        addButton(new UpdateButton(Updater.getQFMInstance(), width / 2 - 75, height / 6 + dy - 6, 150));
+
+        dy += 30;
+        this.quitSettings = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
+                Translations.getScreen("settings", "quit_settings"), (button) -> {
             if (this.minecraft != null)
                 this.minecraft.displayGuiScreen(new QuitSettingsScreen(this, new StringTextComponent("")));
         }));
-        this.allowShutdownPCButton = addButton(new Button(width / 2 + 5, height / 6 - 6, 150, 20,
+        this.allowShutdownPCButton = addButton(new Button(width / 2 + 5, height / 6 + dy - 6, 150, 20,
                 Translations.getScreen("settings", "allow_shutdown_pc").appendString(allowShutdownPC ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleAllowShutdownPC, this::tooltip));
-        this.doneButton = addButton(new Button(width / 2 - 155, height / 6 + 30 - 6, 150, 20,
+
+        dy += 30;
+        this.doneButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
                 DialogTexts.GUI_DONE, this::saveAndGoBack));
-        this.cancelButton = addButton(new Button(width / 2 + 5, height / 6 + 30 - 6, 150, 20,
+        this.cancelButton = addButton(new Button(width / 2 + 5, height / 6 + dy - 6, 150, 20,
                 DialogTexts.GUI_CANCEL, this::goBack));
     }
 
@@ -72,7 +87,6 @@ public class SettingsScreen extends Screen {
         super.tick();
 
         // Advance in ticks.
-        this.ticks++;
     }
 
     public void tooltip(Button button, MatrixStack matrixStack, int mouseX, int mouseY) {

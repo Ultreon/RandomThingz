@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.client.renderer.layers;
 
-import com.qsoftware.forgemod.client.model.FreeCreeperModel;
+import com.qsoftware.forgemod.client.model.entity.FreeCreeperModel;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.EnergyLayer;
 import net.minecraft.client.renderer.entity.model.CreeperModel;

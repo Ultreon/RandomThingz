@@ -79,7 +79,7 @@ public final class NBTConstants {
     public static final String ENERGY_STORED = "energy";
     public static final String ENERGY_USAGE = "energyUsage";
     public static final String FILTER = "filter";
-    public static final String FILTERS = "filters";
+    public static final String FILTERS = "assets/filters";
     public static final String FINISHED = "finished";
     public static final String FLUID_STORED = "fluid";
     public static final String FLUID_TANKS = "FluidTanks";

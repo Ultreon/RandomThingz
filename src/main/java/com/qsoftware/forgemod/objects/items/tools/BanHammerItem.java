@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items.tools;
 
 import com.mojang.authlib.GameProfile;
-import com.qsoftware.forgemod.common.TextColors;
+import com.qsoftware.forgemod.common.enums.TextColors;
 import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.util.Targeter;
 import net.minecraft.entity.Entity;

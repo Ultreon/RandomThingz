@@ -1,5 +1,6 @@
 package com.qsoftware.silent.lib.registry;
 
+import com.qsoftware.forgemod.registration.INamedEntry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -12,7 +13,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public class RegistryObjectWrapper<T extends IForgeRegistryEntry<? super T>> implements Supplier<T> {
+public class RegistryObjectWrapper<T extends IForgeRegistryEntry<? super T>> implements Supplier<T>, INamedEntry {
     protected final RegistryObject<T> registryObject;
 
     public RegistryObjectWrapper(RegistryObject<T> registryObject) {
@@ -78,6 +79,11 @@ public class RegistryObjectWrapper<T extends IForgeRegistryEntry<? super T>> imp
             return Objects.equals(((RegistryObjectWrapper<?>) obj).getId(), getId());
         }
         return false;
+    }
+
+    @Override
+    public String getInternalRegistryName() {
+        return registryObject.getId().getPath();
     }
 
     @Override

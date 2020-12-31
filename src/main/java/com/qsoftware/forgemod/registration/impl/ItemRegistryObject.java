@@ -7,6 +7,7 @@ import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nonnull;
 
+@Deprecated
 public class ItemRegistryObject<ITEM extends Item> extends WrappedRegistryObject<ITEM> implements IItemProvider {
 
     public ItemRegistryObject(RegistryObject<ITEM> registryObject) {

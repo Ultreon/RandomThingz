@@ -2,9 +2,9 @@ package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.items.spawnegg.CustomSpawnEggItem;
-import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
-import com.qsoftware.forgemod.registration.impl.ItemDeferredRegister;
-import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
+import com.qsoftware.silent.lib.registry.EntityTypeRegistryObject;
+import com.qsoftware.silent.lib.registry.ItemDeferredRegister;
+import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 
@@ -44,6 +44,6 @@ public class ItemInit extends ObjectInit<Item> {
      */
     private static <ENTITY extends Entity> ItemRegistryObject<CustomSpawnEggItem<ENTITY>> registerSpawnEgg(EntityTypeRegistryObject<ENTITY> entityTypeProvider, int primaryColor, int secondaryColor) {
         //Note: We are required to use a custom item as we cannot use the base SpawnEggItem due to the entity type not being initialized yet
-        return ITEMS.register(entityTypeProvider.getInternalRegistryName() + "_spawn_egg", () -> new CustomSpawnEggItem<>(entityTypeProvider, primaryColor, secondaryColor));
+        return ITEMS.register(entityTypeProvider.getName() + "_spawn_egg", () -> new CustomSpawnEggItem<>(entityTypeProvider, primaryColor, secondaryColor));
     }
 }

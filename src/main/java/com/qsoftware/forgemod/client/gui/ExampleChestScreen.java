@@ -51,8 +51,8 @@ public class ExampleChestScreen extends ContainerScreen<CrateContainer> {
         super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY);
 
         // Draw inventory names.
-        this.font.drawString(matrixStack, this.title.getString(), 8.0f, 6.0f, 4210725);
-        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(), 8.0f, 90.0f, 4210725);
+        this.font.drawString(matrixStack, this.title.getString(), 8.0f, 6.0f, 0x404025);
+        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(), 8.0f, 90.0f, 0x404025);
     }
 
     @Override

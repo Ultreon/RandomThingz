@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.qsoftware.forgemod.api.RedstoneMode;
 import com.qsoftware.forgemod.client.button.RedstoneModeButton;
-import com.qsoftware.forgemod.inventory.MachineUpgradeSlot;
+import com.qsoftware.forgemod.common.gui.MachineUpgradeSlot;
 import com.qsoftware.forgemod.network.Network;
 import com.qsoftware.forgemod.network.SetRedstoneModePacket;
 import com.qsoftware.forgemod.util.TextUtils;

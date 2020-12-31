@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.common.client;
 
 import com.qsoftware.forgemod.api.providers.IBlockProvider;
 import com.qsoftware.forgemod.api.providers.IItemProvider;
-import com.qsoftware.forgemod.registration.impl.EntityTypeRegistryObject;
+import com.qsoftware.silent.lib.registry.EntityTypeRegistryObject;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;

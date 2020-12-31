@@ -1,8 +1,9 @@
 package com.qsoftware.forgemod.common;
 
+import com.qsoftware.forgemod.common.interfaces.Formattable;
 import net.minecraft.util.text.TextFormatting;
 
-public class Percentage implements IFormattable {
+public class Percentage implements Formattable {
     private final double percentage;
 
     public Percentage(double value) {

@@ -1,11 +1,12 @@
 package com.qsoftware.forgemod.registration.impl;
 
-import com.qsoftware.forgemod.registration.WrappedDeferredRegister;
+import com.qsoftware.forgemod.registration.DeferredRegisterWrapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class EntityTypeDeferredRegister extends WrappedDeferredRegister<EntityType<?>> {
+@Deprecated
+public class EntityTypeDeferredRegister extends DeferredRegisterWrapper<EntityType<?>> {
 
     public EntityTypeDeferredRegister(String modid) {
         super(modid, ForgeRegistries.ENTITIES);

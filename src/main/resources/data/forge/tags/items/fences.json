@@ -1,6 +1,7 @@
 {
-    "replace": false,
-    "values": [
-        "qforgemod:eucalyptus_fence"
-    ]
+  "replace": false,
+  "values": [
+    "qforgemod:eucalyptus_fence",
+    "qforgemod:cherry_fence"
+  ]
 }

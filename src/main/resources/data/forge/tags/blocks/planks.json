@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:eucalyptus_planks",
-    "qforgemod:cherry_planks"
+    "#forge:planks/eucalyptus",
+    "#forge:planks/cherry"
   ]
 }

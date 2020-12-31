@@ -1,73 +1,50 @@
 package com.qsoftware.forgemod.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import com.qsoftware.forgemod.graphics.MCGraphics;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.button.AbstractButton;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.awt.*;
 
-/**
- * Advanced screen class.
- *
- * @author Qboi123
- */
-public abstract class AdvancedScreen<T extends Container> extends ContainerScreen<T> {
-    private final CopyOnWriteArrayList<Widget> widgets = new CopyOnWriteArrayList<>();
-
-    public AdvancedScreen(T screenContainer, PlayerInventory inv, ITextComponent titleIn) {
-        super(screenContainer, inv, titleIn);
+public abstract class AdvancedScreen extends Screen {
+    protected AdvancedScreen(ITextComponent titleIn) {
+        super(titleIn);
     }
 
-    public void add(Widget widget) {
-        if (widget instanceof AbstractButton) {
-            addButton((AbstractButton) widget);
-        }
+    protected boolean isPointInRegion(int x, int y, int width, int height, double mouseX, double mouseY) {
+        return mouseX >= (double)(x - 1) && mouseX < (double)(x + width + 1) && mouseY >= (double)(y - 1) && mouseY < (double)(y + height + 1);
+    }
 
-        this.widgets.add(widget);
+    protected boolean isPointInRegion(int x, int y, int width, int height, Point mouse) {
+        return mouse.x >= (double)(x - 1) && mouse.x < (double)(x + width + 1) && mouse.y >= (double)(y - 1) && mouse.y < (double)(y + height + 1);
+    }
+
+    public <T extends Widget> T add(T widget) {
+        return addButton(widget);
     }
 
     @Override
-    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        // Render background.
-        renderBackground(matrixStack);
-
-        // Super call.
+    public final void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        this.render(new MCGraphics(matrixStack, font, this), new Point(mouseX, mouseY));
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-
-        // Render tooltip.
-        renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(@NotNull MatrixStack matrixStack, int mouseX, int mouseY) {
-        // Super call.
-        super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY);
+    public void fillGradient(@NotNull MatrixStack matrixStack, int x1, int y1, int x2, int y2, int colorFrom, int colorTo) {
+        super.fillGradient(matrixStack, x1, y1, x2, y2, colorFrom, colorTo);
+    }
 
-        // Draw inventory names.
-        this.font.drawString(matrixStack, this.title.getString(), 8.0f, 6.0f, 4210725);
-        this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(), 8.0f, 90.0f, 4210725);
+    @SuppressWarnings("unused")
+    protected void render(MCGraphics mcg, Point point) {
+        mcg.renderBackground(false);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(@NotNull MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        // Set color.
-        //noinspection deprecation
-        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 0.5f);
-        if (this.minecraft != null) {
-            for (Widget widget : widgets) {
-                widget.render(matrixStack, mouseX, mouseY, partialTicks);
-            }
-        }
-    }
-
-    public List<Widget> getWidgets() {
-        return widgets;
+    public final void renderTooltip(@NotNull MatrixStack matrixStack, @NotNull ItemStack itemStack, int mouseX, int mouseY) {
+        super.renderTooltip(matrixStack, itemStack, mouseX, mouseY);
     }
 }

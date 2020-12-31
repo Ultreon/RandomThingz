@@ -2,10 +2,14 @@ package com.qsoftware.forgemod.objects.blocks.machines.quarry;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.client.button.RedstoneModeButton;
 import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineBaseScreen;
 import com.qsoftware.forgemod.util.TextUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
@@ -19,6 +23,12 @@ public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
     @Override
     public ResourceLocation getGuiTexture() {
         return TEXTURE;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        this.buttons.removeIf((widget) -> widget instanceof RedstoneModeButton);
     }
 
     @Override
@@ -50,22 +60,67 @@ public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
             blit(matrixStack, xPos + 154, yPos + 68 - energyBarHeight, 176, 31, 12, energyBarHeight);
         }
 
+        FontRenderer fontRenderer = minecraft.fontRenderer;
+        ItemRenderer itemRenderer = minecraft.getItemRenderer();
+
         QuarryTileEntity quarry = container.getTileEntity();
-        if (quarry.isInitialized()) {
-            if (container.isIllegalPosition()) {
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "  Illegal Position, move to above y=5", xPos + 5, yPos + 48, 0xbf0000);
-            } else if (container.isDone()) {
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Done!", xPos + 5, yPos + 36, 0x007f00);
-            } else {
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Mining...", xPos + 5, yPos + 36, 0x3f3f3f);
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Total blocks: " + container.getTotalBlocks(), xPos + 5, yPos + 48, 0x7f7f7f);
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Remaining: " + container.getBlocksRemaining(), xPos + 5, yPos + 60, 0x7f7f7f);
-                Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Y: " + container.getCurrentY(), xPos + 5, yPos + 72, 0x7f7f7f);
+        switch (container.getStatus()) {
+            case NOT_INITIALIZED: {
+                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+                fontRenderer.drawString(matrixStack, "  Not initialized yet", xPos + 5, yPos + 48, 0xbf0000);
+                break;
+            } case ILLEGAL_POSITION: {
+                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+                fontRenderer.drawString(matrixStack, "  Illegal Position, move to above y=5", xPos + 5, yPos + 48, 0xbf0000);
+                break;
+            } case NOT_ENOUGH_ENERGY: {
+                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+                fontRenderer.drawString(matrixStack, "  No energy", xPos + 5, yPos + 48, 0xbf0000);
+                break;
+            } case UNIDENTIFIED_WORLD: {
+                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+                fontRenderer.drawString(matrixStack, "  Unidentified world", xPos + 5, yPos + 48, 0xbf0000);
+                break;
+            } case PAUSED: {
+                fontRenderer.drawString(matrixStack, "Paused", xPos + 5, yPos + 48, 0xbf5f00);
+                if (minecraft.world != null) {
+                    itemRenderer.renderItemIntoGUI(new ItemStack(minecraft.world.getBlockState(container.getCurrentPos()).getBlock()), xPos + xSize - 33, yPos + 17);
+                }
+                break;
+            } case DONE: {
+                fontRenderer.drawString(matrixStack, "Done", xPos + 5, yPos + 36, 0x007f00);
+                break;
+            } case NO_PROBLEM: {
+                fontRenderer.drawString(matrixStack, "Mining...", xPos + 5, yPos + 36, 0x3f3f3f);
+                fontRenderer.drawString(matrixStack, "Total blocks: " + container.getTotalBlocks(), xPos + 5, yPos + 48, 0x7f7f7f);
+                fontRenderer.drawString(matrixStack, "Remaining: " + container.getBlocksRemaining(), xPos + 5, yPos + 60, 0x7f7f7f);
+                fontRenderer.drawString(matrixStack, "Y: " + container.getCurrentY(), xPos + 5, yPos + 72, 0x7f7f7f);
+                if (minecraft.world != null) {
+                    itemRenderer.renderItemIntoGUI(new ItemStack(minecraft.world.getBlockState(container.getCurrentPos()).getBlock()), xPos + xSize - 33, yPos + 17);
+                }
+                break;
+            } default: {
+                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+                fontRenderer.drawString(matrixStack, "  Unknown error", xPos + 5, yPos + 48, 0xbf0000);
+                break;
             }
-        } else {
-            Minecraft.getInstance().fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
-            Minecraft.getInstance().fontRenderer.drawString(matrixStack, "  Not initialized yet.", xPos + 5, yPos + 48, 0xbf0000);
         }
+
+//        if (container.isInitialized()) {
+//            if (container.isIllegalPosition()) {
+//                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+//                fontRenderer.drawString(matrixStack, "  Illegal Position, move to above y=5", xPos + 5, yPos + 48, 0xbf0000);
+//            } else if (container.isDone()) {
+//                fontRenderer.drawString(matrixStack, "Done!", xPos + 5, yPos + 36, 0x007f00);
+//            } else {
+//                fontRenderer.drawString(matrixStack, "Mining...", xPos + 5, yPos + 36, 0x3f3f3f);
+//                fontRenderer.drawString(matrixStack, "Total blocks: " + container.getTotalBlocks(), xPos + 5, yPos + 48, 0x7f7f7f);
+//                fontRenderer.drawString(matrixStack, "Remaining: " + container.getBlocksRemaining(), xPos + 5, yPos + 60, 0x7f7f7f);
+//                fontRenderer.drawString(matrixStack, "Y: " + container.getCurrentY(), xPos + 5, yPos + 72, 0x7f7f7f);
+//            }
+//        } else {
+//            fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+//            fontRenderer.drawString(matrixStack, "  Not initialized yet.", xPos + 5, yPos + 48, 0xbf0000);
+//        }
     }
 }

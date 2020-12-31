@@ -19,7 +19,7 @@
 package com.qsoftware.silent.lib.util;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.commons.lang3.text.WordUtils;
+import org.apache.commons.text.WordUtils;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
@@ -27,12 +27,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class LogUtils {
-    public void noticableWarning(Logger logger, boolean trace, List<String> lines) {
+    public void noticeableWarning(Logger logger, boolean trace, List<String> lines) {
         logger.error("********************************************************************************");
 
         for (final String line : lines) {
-            for (final String subline : wrapString(line, 78, false, new ArrayList<>())) {
-                logger.error("* " + subline);
+            for (final String subLine : wrapString(line, 78, false, new ArrayList<>())) {
+                logger.error("* " + subLine);
             }
         }
 
@@ -46,7 +46,7 @@ public class LogUtils {
         logger.error("********************************************************************************");
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings("SameParameterValue")
     private static List<String> wrapString(String string, int lnLength, boolean wrapLongWords, List<String> list) {
         final String[] lines = WordUtils.wrap(string, lnLength, null, wrapLongWords).split(SystemUtils.LINE_SEPARATOR);
         Collections.addAll(list, lines);

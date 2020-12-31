@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.blocks.custom.render;
 
-import com.qsoftware.forgemod.common.IHasRenderType;
+import com.qsoftware.forgemod.common.interfaces.IHasRenderType;
 import net.minecraft.block.DoorBlock;
 
 /**

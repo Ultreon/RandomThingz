@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.base;
 
-import com.qsoftware.forgemod.common.IHasMaterialColor;
+import com.qsoftware.forgemod.common.interfaces.IHasMaterialColor;
 import net.minecraft.item.Item;
 
 public abstract class MaterialColorizedItem extends Item implements IHasMaterialColor {

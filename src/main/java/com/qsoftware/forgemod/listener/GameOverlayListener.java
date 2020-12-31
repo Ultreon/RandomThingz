@@ -3,6 +3,9 @@ package com.qsoftware.forgemod.listener;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.*;
+import com.qsoftware.forgemod.common.enums.MoonPhase;
+import com.qsoftware.forgemod.common.interfaces.Formattable;
+import com.qsoftware.forgemod.common.interfaces.Sliceable;
 import com.qsoftware.forgemod.hud.HudItems;
 import com.qsoftware.forgemod.hud.IHasHud;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
@@ -22,7 +25,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.Food;
@@ -707,23 +709,23 @@ public class GameOverlayListener {
         }
     }
 
-    private static IFormattable getFormatted(String s) {
+    private static Formattable getFormatted(String s) {
         return () -> s;
     }
 
-    private static IFormattable getMultiplier(double multiplier) {
+    private static Formattable getMultiplier(double multiplier) {
         return new Multiplier(multiplier);
     }
 
-    private static IFormattable getSize(int w, int h) {
+    private static Formattable getSize(int w, int h) {
         return new Size(w, h);
     }
 
-    private static IFormattable getSize(float w, float h) {
+    private static Formattable getSize(float w, float h) {
         return () -> TextFormatting.GOLD.toString() + w + TextFormatting.GRAY + " x " + TextFormatting.GOLD + h;
     }
 
-    private static IFormattable getPercentage(double value) {
+    private static Formattable getPercentage(double value) {
         return new Percentage(value);
     }
 
@@ -735,15 +737,15 @@ public class GameOverlayListener {
         return new Color(rgb);
     }
 
-    private static IFormattable getAngle(double angle) {
+    private static Formattable getAngle(double angle) {
         return new Angle(angle * 360.0d);
     }
 
-    private static IFormattable getRadians(double angle) {
+    private static Formattable getRadians(double angle) {
         return new Angle(Math.toDegrees(angle));
     }
 
-    private static IFormattable getDegrees(double angle) {
+    private static Formattable getDegrees(double angle) {
         return new Angle(angle);
     }
 
@@ -969,8 +971,8 @@ public class GameOverlayListener {
             ItemStack e = (ItemStack) obj;
             sb.append(TextFormatting.BLUE).append(e.getItem().getRegistryName()).append(" ");
             sb.append(TextFormatting.GRAY).append(e.getCount()).append("x");
-        } else if (obj instanceof IFormattable) {
-            IFormattable e = (IFormattable) obj;
+        } else if (obj instanceof Formattable) {
+            Formattable e = (Formattable) obj;
             sb.append(e.toFormattedString());
         } else if (obj instanceof IForgeRegistryEntry<?>) {
             IForgeRegistryEntry<?> ifrEntry = (IForgeRegistryEntry<?>) obj;

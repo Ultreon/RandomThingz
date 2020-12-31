@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.client.renderer.entity;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.client.model.ModelBabyEnderman;
+import com.qsoftware.forgemod.client.model.entity.ModelBabyEnderman;
 import com.qsoftware.forgemod.client.renderer.entity.layer.BabyEndermanEyesLayer;
 import com.qsoftware.forgemod.client.renderer.entity.layer.BabyEndermanHeldBlockLayer;
 import com.qsoftware.forgemod.objects.entities.baby.EntityBabyEnderman;

@@ -1,8 +1,9 @@
 package com.qsoftware.forgemod.common;
 
+import com.qsoftware.forgemod.common.interfaces.Formattable;
 import net.minecraft.util.text.TextFormatting;
 
-public class FormattableObject implements IFormattable {
+public class FormattableObject implements Formattable {
     @Override
     public String toFormattedString() {
         return TextFormatting.AQUA + getClass().getPackage().getName().replaceAll("\\.", TextFormatting.GRAY + "." + TextFormatting.AQUA) +

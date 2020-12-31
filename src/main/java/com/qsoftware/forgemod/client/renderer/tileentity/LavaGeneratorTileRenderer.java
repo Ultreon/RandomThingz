@@ -5,6 +5,7 @@ import com.qsoftware.forgemod.objects.blocks.machines.generator.lava.LavaGenerat
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import org.jetbrains.annotations.NotNull;
 
 public class LavaGeneratorTileRenderer extends TileEntityRenderer<LavaGeneratorTileEntity> {
     public LavaGeneratorTileRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
@@ -12,6 +13,6 @@ public class LavaGeneratorTileRenderer extends TileEntityRenderer<LavaGeneratorT
     }
 
     @Override
-    public void render(LavaGeneratorTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(@NotNull LavaGeneratorTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
     }
 }

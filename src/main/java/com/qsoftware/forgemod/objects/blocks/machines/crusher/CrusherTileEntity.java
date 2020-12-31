@@ -39,6 +39,11 @@ public class CrusherTileEntity extends AbstractMachineTileEntity<CrushingRecipe>
     }
 
     @Override
+    public void tick() {
+        super.tick();
+    }
+
+    @Override
     protected int getEnergyUsedPerTick() {
         return ENERGY_USED_PER_TICK;
     }

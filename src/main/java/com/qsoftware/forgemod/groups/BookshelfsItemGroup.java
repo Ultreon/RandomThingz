@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.groups;
 
+import com.qsoftware.forgemod.common.QItemGroup;
 import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.silent.lib.registry.BlockRegistryObject;
 import net.minecraft.block.Block;
@@ -7,6 +8,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -16,11 +18,11 @@ import java.util.ArrayList;
  *
  * @author Qboi123
  */
-public class BookshelfsItemGroup extends ItemGroup {
-    public static final BookshelfsItemGroup instance = new BookshelfsItemGroup(ItemGroup.GROUPS.length, "qforgemod_bookshelfs");
+public class BookshelfsItemGroup extends QItemGroup {
+    public static final BookshelfsItemGroup instance = new BookshelfsItemGroup();
 
-    public BookshelfsItemGroup(int index, String label) {
-        super(index, label);
+    public BookshelfsItemGroup() {
+        super(new ResourceLocation("bookshelfs"), ModBlocks.BOOKSHELFS.get(0).get());
     }
 
     @Override

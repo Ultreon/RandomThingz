@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.blocks.base;
 
-import com.qsoftware.forgemod.common.IHasOreProperties;
+import com.qsoftware.forgemod.common.interfaces.IHasOreProperties;
 import com.qsoftware.forgemod.common.OreProperties;
 import net.minecraft.block.OreBlock;
 

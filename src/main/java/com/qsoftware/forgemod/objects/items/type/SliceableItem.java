@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.type;
 
-import com.qsoftware.forgemod.common.Sliceable;
+import com.qsoftware.forgemod.common.interfaces.Sliceable;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

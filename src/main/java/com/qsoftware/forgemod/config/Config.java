@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.config;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.Ores;
+import com.qsoftware.forgemod.init.Ore;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,7 +26,7 @@ public final class Config {
     public static final ForgeConfigSpec.IntValue fluidGeneratorInjectionVolume;
     private static final ForgeConfigSpec commonSpec;
     private static final ForgeConfigSpec.BooleanValue oreWorldGenMasterSwitch;
-    private static final Map<Ores, OreConfig> oreConfigs = new EnumMap<>(Ores.class);
+    private static final Map<Ore, OreConfig> oreConfigs = new EnumMap<>(Ore.class);
 
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
@@ -58,7 +58,7 @@ public final class Config {
                         "A generator with less fluid in the tank will not be able to run.")
                 .defineInRange("machine.fluidGenerators.injectionVolume", 100, 1, 1000);
 
-        // World Gen/Ores
+        // World Gen/Ore
         {
             builder.push("world");
             oreWorldGenMasterSwitch = builder
@@ -74,7 +74,7 @@ public final class Config {
 
             builder.comment("Configs for specific ores. Set veinCount to zero to disable an ore.");
             builder.push("ores");
-            Arrays.stream(Ores.values()).forEach(ore -> oreConfigs.put(ore, new OreConfig(ore, builder, oreWorldGenMasterSwitch)));
+            Arrays.stream(Ore.values()).forEach(ore -> oreConfigs.put(ore, new OreConfig(ore, builder, oreWorldGenMasterSwitch)));
 
             builder.pop(2);
         }
@@ -86,7 +86,7 @@ public final class Config {
         throw ExceptionUtil.utilityConstructor();
     }
 
-    public static Optional<OreConfig> getOreConfig(Ores ore) {
+    public static Optional<OreConfig> getOreConfig(Ore ore) {
         return Optional.ofNullable(oreConfigs.getOrDefault(ore, null));
     }
 

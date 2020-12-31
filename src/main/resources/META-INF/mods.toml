@@ -175,6 +175,38 @@ Right now there is no guide for this mod, so here is one in small form:
 
 Have fun!
 '''
+
+[[mods]]
+modId="qfilters"
+version="1.3.0"
+displayName="QForgeMod: Filters Module"
+license="""
+GNU LESSER GENERAL PUBLIC LICENSE, Version 2.1
+https://raw.githubusercontent.com/MrCrayfish/Filters/master/LICENSE.txt
+
+Forked fro here:
+"""
+logoFile="filters.png"
+credits=""
+authors="MrCrayfish, Qboi123"
+description='''
+A mod that improves the Creative GUI by introducing filters based on tags
+Ported to 1.16.3 by Qboi123.
+'''
+
+[[dependencies.qfilters]] #optional
+modId="forge"
+mandatory=true
+versionRange="[34,)"
+ordering="NONE"
+side="CLIENT"
+[[dependencies.qfilters]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.3]"
+ordering="NONE"
+side="BOTH"
+
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.qtexturedmodels]] #optional
 # the modid of the dependency
@@ -210,6 +242,12 @@ ordering="NONE"
 side="BOTH"
 
 # QForgeUtils dependencies.
+[[dependencies.qforgemod]]
+modId="filters"
+mandatory=false
+versionRange="1.3.0"
+ordering="BEFORE"
+side="CLIENT"
 [[dependencies.qforgemod]]
 modId="qsilentlib"
 mandatory=true

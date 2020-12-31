@@ -1,7 +1,10 @@
 package com.qsoftware.forgemod.objects.items.upgrades;
 
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.api.IMachineUpgrade;
+import com.qsoftware.forgemod.common.interfaces.Translatable;
 import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.forgemod.objects.common.INamed;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 import net.minecraft.item.Item;
@@ -9,7 +12,7 @@ import net.minecraft.util.IItemProvider;
 
 import java.util.Locale;
 
-public enum MachineUpgrades implements IItemProvider, IMachineUpgrade {
+public enum MachineUpgrades implements IItemProvider, IMachineUpgrade, INamed, Translatable {
     PROCESSING_SPEED(Constants.UPGRADE_PROCESSING_SPEED_AMOUNT, 0.5f),
     OUTPUT_CHANCE(Constants.UPGRADE_SECONDARY_OUTPUT_AMOUNT, 0.25f),
     ENERGY_CAPACITY(0, 0.0f, false),
@@ -34,8 +37,8 @@ public enum MachineUpgrades implements IItemProvider, IMachineUpgrade {
 
     public static void register() {
         for (MachineUpgrades value : values()) {
-            value.item = new ItemRegistryObject<>(Registration.ITEMS.register(value.getName(), () ->
-                    new MachineUpgradeItem(value)));
+            value.item = Registration.ITEMS.register(value.getName(), () ->
+                    new MachineUpgradeItem(value));
         }
     }
 
@@ -54,6 +57,7 @@ public enum MachineUpgrades implements IItemProvider, IMachineUpgrade {
         return displayValueAsPercentage;
     }
 
+    @Override
     public String getName() {
         return name().toLowerCase(Locale.ROOT) + "_upgrade";
     }
@@ -61,5 +65,10 @@ public enum MachineUpgrades implements IItemProvider, IMachineUpgrade {
     @Override
     public Item asItem() {
         return item.get();
+    }
+
+    @Override
+    public String getTranslationKey() {
+        return "upgrade." + QForgeMod.MOD_ID + "." + getName();
     }
 }

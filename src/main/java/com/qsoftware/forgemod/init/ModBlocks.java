@@ -1,7 +1,9 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.init.types.ModTileEntities;
 import com.qsoftware.forgemod.objects.blocks.AtomicTNTBlock;
+import com.qsoftware.forgemod.objects.blocks.ChristmasChestBlock;
 import com.qsoftware.forgemod.objects.blocks.GamePcBlock;
 import com.qsoftware.forgemod.objects.blocks.custom.CustomButtonBlock;
 import com.qsoftware.forgemod.objects.blocks.custom.render.CRDoorBlock;
@@ -31,7 +33,7 @@ import com.qsoftware.forgemod.objects.blocks.overpowered.InfinityOreBlock;
 import com.qsoftware.forgemod.objects.blocks.trees.CherryTree;
 import com.qsoftware.forgemod.objects.blocks.trees.EucalyptusTree;
 import com.qsoftware.forgemod.objects.items.type.FaceableBlock;
-import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
+import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.forgemod.util.MachineTier;
 import com.qsoftware.silent.lib.registry.BlockRegistryObject;
@@ -263,6 +265,7 @@ public final class ModBlocks {
     //     Tile entity     //
     /////////////////////////
     public static final BlockRegistryObject<Block> WOODEN_CRATE = registerMachine("wooden_crate", () -> new WoodenCrateBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).hardnessAndResistance(2.0f, 3.0f).sound(SoundType.WOOD)));
+    public static final BlockRegistryObject<ChristmasChestBlock> CHRISTMAS_CHEST = registerMachine("christmas_chest", () -> new ChristmasChestBlock(Block.Properties.create(Material.WOOD).harvestTool(ToolType.AXE).hardnessAndResistance(2.0f, 3.0f).sound(SoundType.WOOD), ModTileEntities.CHRISTMAS_CHEST::get));
 
     ////////////////////////
     //     Ore blocks     //
@@ -324,7 +327,7 @@ public final class ModBlocks {
     //     Utility methods     //
     //////////////////////////////
     static {
-        OreMaterials.registerBlocks();
+        OreMaterial.registerBlocks();
     }
 
     private ModBlocks() {
@@ -332,7 +335,7 @@ public final class ModBlocks {
     }
 
     private static <T extends Item> ItemRegistryObject<T> registerItem(String name, Supplier<T> supplier) {
-        return new ItemRegistryObject<>(Registration.ITEMS.register(name, supplier));
+        return Registration.ITEMS.register(name, supplier);
     }
 
     static void register() {

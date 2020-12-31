@@ -75,7 +75,7 @@ public class EntityBabyEnderman extends EndermanEntity implements IBabyEntity {
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return ModItemsNew.BABY_ENDERMAN_SPAWN_EGG.getItemStack();
+        return new ItemStack(ModItemsNew.BABY_ENDERMAN_SPAWN_EGG.asItem());
     }
 
     @Nonnull

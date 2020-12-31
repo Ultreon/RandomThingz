@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:dungeons_diamond_sword",
+    "qforgemod:dungeons_iron_sword",
+    "qforgemod:dungeons_broadsword"
+  ]
+}

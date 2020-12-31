@@ -92,7 +92,7 @@ public class EntityBabyCreeper extends CreeperEntity implements IBabyEntity {
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return ModItemsNew.BABY_CREEPER_SPAWN_EGG.getItemStack();
+        return new ItemStack(ModItemsNew.BABY_CREEPER_SPAWN_EGG.asItem());
     }
 
     @Nonnull

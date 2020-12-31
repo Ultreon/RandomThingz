@@ -1,16 +1,24 @@
 package com.qsoftware.forgemod;
 
+import com.qsoftware.forgemod.common.IVersion;
+import net.minecraft.client.resources.I18n;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class QVersion implements Comparable<QVersion> {
+public class QVersion implements IVersion {
     private final int version;
     private final int subversion;
     private final TYPE type;
     private final int release;
+    public static final QVersion EMPTY = new QVersion(0, 0, TYPE.BETA, 0);
 
+    /**
+     * 
+     * @throws IllegalArgumentException when an invalid version has given.
+     * @param s the version to parse.
+     */
     public QVersion(String s) {
         // String to be scanned to find the pattern.
         String pattern = "([0-9]*)\\.([0-9]*)-(alpha|beta|release)([0-9]*)"; // 1.0-alpha4 // 5.4-release-7
@@ -66,6 +74,7 @@ public class QVersion implements Comparable<QVersion> {
         return type;
     }
 
+    @Override
     public boolean isStable() {
         return type == TYPE.RELEASE;
     }
@@ -89,15 +98,15 @@ public class QVersion implements Comparable<QVersion> {
 
         switch (type) {
             case ALPHA:
-                sb.append("Alpha");
+                sb.append(I18n.format("misc.qforgemod.version.alpha"));
             case BETA:
-                sb.append("Beta");
+                sb.append(I18n.format("misc.qforgemod.version.beta"));
             case PRE:
-                sb.append("Pre Release");
+                sb.append(I18n.format("misc.qforgemod.version.pre"));
             case RELEASE:
-                sb.append("Release");
+                sb.append(I18n.format("misc.qforgemod.version.release"));
             default:
-                sb.append("UNKNOWN");
+                sb.append(I18n.format("misc.qforgemod.unknown"));
         }
 
         sb.append(' ');
@@ -111,14 +120,20 @@ public class QVersion implements Comparable<QVersion> {
     }
 
     @Override
-    public int compareTo(@NotNull QVersion o) {
-        int cmp = Integer.compare(this.version, o.version);
+    public int compareTo(@NotNull IVersion o) {
+        if (!(o instanceof QVersion)) {
+            throw new IllegalArgumentException("Can't compare other than QVersion");
+        }
+
+        QVersion version = (QVersion) o;
+
+        int cmp = Integer.compare(this.version, version.version);
         if (cmp == 0) {
-            int cmp1 = Integer.compare(this.subversion, o.subversion);
+            int cmp1 = Integer.compare(this.subversion, version.subversion);
             if (cmp1 == 0) {
-                int cmp2 = this.type.compareTo(o.type);
+                int cmp2 = this.type.compareTo(version.type);
                 if (cmp2 == 0) {
-                    return Integer.compare(this.release, o.release);
+                    return Integer.compare(this.release, version.release);
                 } else {
                     return cmp2;
                 }

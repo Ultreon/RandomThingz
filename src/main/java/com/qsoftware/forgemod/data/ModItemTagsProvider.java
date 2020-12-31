@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.init.ModTags;
-import com.qsoftware.forgemod.init.OreMaterials;
+import com.qsoftware.forgemod.init.OreMaterial;
 import com.qsoftware.forgemod.objects.items.CraftingItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
@@ -55,9 +55,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         getOrCreateBuilder(ModTags.Items.PLASTIC).add(CraftingItems.PLASTIC_SHEET.asItem());
 
         getOrCreateBuilder(ModTags.Items.STEELS)
-                .addTag(OreMaterials.ALUMINUM_STEEL.getIngotTag().get())
-                .addTag(OreMaterials.BISMUTH_STEEL.getIngotTag().get())
-                .addTag(OreMaterials.STEEL.getIngotTag().get());
+                .addTag(OreMaterial.ALUMINUM_STEEL.getIngotTag().get())
+                .addTag(OreMaterial.BISMUTH_STEEL.getIngotTag().get())
+                .addTag(OreMaterial.STEEL.getIngotTag().get());
         getOrCreateBuilder(ModTags.Items.COAL_GENERATOR_FUELS)
                 .addTag(ItemTags.COALS)
                 .addTag(itemTag(forgeId("nuggets/coal")))
@@ -67,7 +67,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         getOrCreateBuilder(ModTags.Items.DUSTS_COAL).add(CraftingItems.COAL_DUST.asItem());
 
-        for (OreMaterials metal : OreMaterials.values()) {
+        for (OreMaterial metal : OreMaterial.values()) {
             metal.getOreTag().ifPresent(tag ->
                     copy(tag, metal.getOreItemTag().get()));
             metal.getStorageBlockTag().ifPresent(tag ->
@@ -86,17 +86,17 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         copy(Tags.Blocks.ORES, Tags.Items.ORES);
         copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
-        groupBuilder(ModTags.Items.CHUNKS, OreMaterials::getChunksTag);
-        groupBuilder(Tags.Items.DUSTS, OreMaterials::getDustTag,
+        groupBuilder(ModTags.Items.CHUNKS, OreMaterial::getChunksTag);
+        groupBuilder(Tags.Items.DUSTS, OreMaterial::getDustTag,
                 ModTags.Items.DUSTS_COAL);
-        groupBuilder(Tags.Items.INGOTS, OreMaterials::getIngotTag);
-        groupBuilder(Tags.Items.NUGGETS, OreMaterials::getNuggetTag);
+        groupBuilder(Tags.Items.INGOTS, OreMaterial::getIngotTag);
+        groupBuilder(Tags.Items.NUGGETS, OreMaterial::getNuggetTag);
     }
 
     @SafeVarargs
-    private final void groupBuilder(ITag.INamedTag<Item> tag, Function<OreMaterials, Optional<ITag.INamedTag<Item>>> tagGetter, ITag.INamedTag<Item>... extras) {
+    private final void groupBuilder(ITag.INamedTag<Item> tag, Function<OreMaterial, Optional<ITag.INamedTag<Item>>> tagGetter, ITag.INamedTag<Item>... extras) {
         Builder<Item> builder = getOrCreateBuilder(tag);
-        for (OreMaterials metal : OreMaterials.values()) {
+        for (OreMaterial metal : OreMaterial.values()) {
             tagGetter.apply(metal).ifPresent(builder::addTag);
         }
         for (ITag.INamedTag<Item> extraTag : extras) {

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.init.ModTags;
-import com.qsoftware.forgemod.init.OreMaterials;
+import com.qsoftware.forgemod.init.OreMaterial;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.objects.blocks.machines.dryingrack.DryingRackBlock;
 import net.minecraft.block.Block;
@@ -39,20 +39,20 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     protected void registerTags() {
         getOrCreateBuilder(ModTags.Blocks.DRYING_RACKS).add(Registration.getBlocks(DryingRackBlock.class).toArray(new Block[0]));
 
-        for (OreMaterials metal : OreMaterials.values()) {
+        for (OreMaterial metal : OreMaterial.values()) {
             metal.getOreTag().ifPresent(tag ->
                     getOrCreateBuilder(tag).add(metal.getOre().get()));
             metal.getStorageBlockTag().ifPresent(tag ->
                     getOrCreateBuilder(tag).add(metal.getStorageBlock().get()));
         }
 
-        groupBuilder(Tags.Blocks.ORES, OreMaterials::getOreTag);
-        groupBuilder(Tags.Blocks.STORAGE_BLOCKS, OreMaterials::getStorageBlockTag);
+        groupBuilder(Tags.Blocks.ORES, OreMaterial::getOreTag);
+        groupBuilder(Tags.Blocks.STORAGE_BLOCKS, OreMaterial::getStorageBlockTag);
     }
 
-    private void groupBuilder(ITag.INamedTag<Block> tag, Function<OreMaterials, Optional<ITag.INamedTag<Block>>> tagGetter) {
+    private void groupBuilder(ITag.INamedTag<Block> tag, Function<OreMaterial, Optional<ITag.INamedTag<Block>>> tagGetter) {
         Builder<Block> builder = getOrCreateBuilder(tag);
-        for (OreMaterials metal : OreMaterials.values()) {
+        for (OreMaterial metal : OreMaterial.values()) {
             tagGetter.apply(metal).ifPresent(builder::addTag);
         }
     }

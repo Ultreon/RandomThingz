@@ -84,7 +84,7 @@ public class EntityBabyStray extends StrayEntity implements IBabyEntity {
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return ModItemsNew.BABY_STRAY_SPAWN_EGG.getItemStack();
+        return new ItemStack(ModItemsNew.BABY_STRAY_SPAWN_EGG.asItem());
     }
 
     @Nonnull

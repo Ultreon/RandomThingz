@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.objects.items.base;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.RomanNumber;
-import com.qsoftware.forgemod.common.TextColors;
+import com.qsoftware.forgemod.common.enums.TextColors;
 import com.qsoftware.forgemod.hud.HudItem;
 import com.qsoftware.forgemod.util.GraphicsUtil;
 import net.minecraft.client.Minecraft;

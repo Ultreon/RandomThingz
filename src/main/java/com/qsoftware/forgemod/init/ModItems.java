@@ -22,7 +22,7 @@ import com.qsoftware.forgemod.objects.items.type.IngredientItem;
 import com.qsoftware.forgemod.objects.items.type.SliceableItem;
 import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
 import com.qsoftware.forgemod.objects.items.wand.*;
-import com.qsoftware.forgemod.registration.impl.ItemRegistryObject;
+import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.forgemod.util.builder.ArmorMaterialBuilder;
 import com.qsoftware.forgemod.util.builder.ItemTierBuilder1;
@@ -53,7 +53,7 @@ import static net.minecraft.item.Items.OBSIDIAN;
 @SuppressWarnings({"unused", "OptionalGetWithoutIsPresent"})
 public final class ModItems {
     static {
-        OreMaterials.registerItems();
+        OreMaterial.registerItems();
         CraftingItems.register();
         MachineUpgrades.register();
     }
@@ -222,7 +222,7 @@ public final class ModItems {
             super.addInformation(stack, worldIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_DIAMOND_PICKAXE = register("dungeons_diamond_pickaxe", () -> new PickaxeItem(ItemTier.STONE, 3, -2.1f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_DIAMOND_PICKAXE = register("dungeons_diamond_pickaxe", () -> new PickaxeItem(ItemTier.DIAMOND, 3, -2.1f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
@@ -437,25 +437,25 @@ public final class ModItems {
     //     Armor materials     //
     /////////////////////////////
     public static final IArmorMaterial copperArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":copper", 13, new int[]{2, 5, 6, 2}, 10, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(OreMaterials.COPPER.getIngot().get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(OreMaterial.COPPER.getIngot().get())
     );
     public static final IArmorMaterial redstoneArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":redstone", 8, new int[]{1, 4, 3, 2}, 5, 0.2f,
-            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.5F, () -> Ingredient.fromItems(OreMaterials.REDSTONE_ALLOY.getIngot().get())
+            SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.5F, () -> Ingredient.fromItems(OreMaterial.REDSTONE_ALLOY.getIngot().get())
     );
     public static final IArmorMaterial nickleArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":nickel", 13, new int[]{2, 5, 7, 3}, 16, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(OreMaterials.NICKEL.getIngot().get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(OreMaterial.NICKEL.getIngot().get())
     );
     public static final IArmorMaterial steelArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":steel", 24, new int[]{3, 6, 8, 4}, 14, 4f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, () -> Ingredient.fromItems(OreMaterials.STEEL.getIngot().get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0F, () -> Ingredient.fromItems(OreMaterial.STEEL.getIngot().get())
     );
     public static final IArmorMaterial tungstenArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":tungsten", 42, new int[]{4, 8, 12, 6}, 28, 5f,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(ModItems.TUNGSTEN_INGOT.get())
     );
     public static final IArmorMaterial uraniumArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":uranium", 11, new int[]{2, 4, 5, 2}, 4, 0.5f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(OreMaterials.URANIUM.getIngot().get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(OreMaterial.URANIUM.getIngot().get())
     );
     public static final IArmorMaterial platinumArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":platinum", 46, new int[]{3, 6, 8, 4}, 4, 1f,
-            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(OreMaterials.PLATINUM.getIngot().get())
+            SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, () -> Ingredient.fromItems(OreMaterial.PLATINUM.getIngot().get())
     );
     public static final IArmorMaterial rubyArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":ruby", 24, new int[]{3, 6, 8, 4}, 14, 1f,
             SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ModItems.RUBY.get())
@@ -485,7 +485,7 @@ public final class ModItems {
             SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> Ingredient.fromItems(ModItems.TANZANITE.get())
     );
     public static final IArmorMaterial obsidianArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":obsidian", 42, new int[]{9, 18, 24, 7}, 19, 9f,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 0.0F, () -> Ingredient.fromItems(OreMaterials.COPPER.getIngot().get())
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 0.0F, () -> Ingredient.fromItems(OreMaterial.COPPER.getIngot().get())
     );
     public static final IArmorMaterial ultriniumArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":ultrinium", 95250, new int[]{2375, 5643, 6485, 1947}, 375, 3854f,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 290.0F, () -> Ingredient.fromItems(ModItems.ULTRINIUM_INGOT.get())
@@ -498,25 +498,25 @@ public final class ModItems {
     //     Item tiers     //
     ////////////////////////
     public static final IItemTier COPPER_ITEM_TIER = new ItemTierBuilder1(2, 420, 5.3f, 1.4f, 10,
-            () -> Ingredient.fromItems(OreMaterials.COPPER.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterial.COPPER.getIngot().get())
     );
     public static final IItemTier REDSTONE_ITEM_TIER = new ItemTierBuilder1(0, 230, 2.3f, 1.2f, 5,
-            () -> Ingredient.fromItems(OreMaterials.REDSTONE_ALLOY.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterial.REDSTONE_ALLOY.getIngot().get())
     );
     public static final IItemTier NICKLE_ITEM_TIER = new ItemTierBuilder1(2, 480, 4.9f, 1.7f, 16,
             () -> Ingredient.fromItems(NICKLE_INGOT)
     );
     public static final IItemTier STEEL_ITEM_TIER = new ItemTierBuilder1(3, 1465, 8.1f, 3.8f, 14,
-            () -> Ingredient.fromItems(OreMaterials.STEEL.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterial.STEEL.getIngot().get())
     );
     public static final IItemTier TUNGSTEN_ITEM_TIER = new ItemTierBuilder1(4, 2994, 9.4f, 4.7f, 28,
             () -> Ingredient.fromItems(TUNGSTEN_INGOT)
     );
     public static final IItemTier URANIUM_ITEM_TIER = new ItemTierBuilder1(3, 340, 3.6f, 6.3f, 4,
-            () -> Ingredient.fromItems(OreMaterials.URANIUM.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterial.URANIUM.getIngot().get())
     );
     public static final IItemTier PLATINUM_ITEM_TIER = new ItemTierBuilder1(3, 1294, 7.5f, 4f, 12,
-            () -> Ingredient.fromItems(OreMaterials.URANIUM.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterial.URANIUM.getIngot().get())
     );
     public static final IItemTier RUBY_ITEM_TIER = new ItemTierBuilder1(3, 970, 7.6f, 3.6f, 13,
             () -> Ingredient.fromItems(RUBY)
@@ -794,6 +794,6 @@ public final class ModItems {
     }
 
     private static <T extends Item> ItemRegistryObject<T> register(String name, Supplier<T> item) {
-        return new ItemRegistryObject<>(Registration.ITEMS.register(name, item));
+        return Registration.ITEMS.register(name, item);
     }
 }

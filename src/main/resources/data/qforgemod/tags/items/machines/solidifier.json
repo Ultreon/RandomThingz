@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:basic_solidifier",
+    "qforgemod:solidifier"
+  ]
+}

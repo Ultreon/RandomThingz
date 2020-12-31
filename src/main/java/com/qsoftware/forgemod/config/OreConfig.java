@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.config;
 
-import com.qsoftware.forgemod.init.Ores;
+import com.qsoftware.forgemod.init.Ore;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class OreConfig {
@@ -10,7 +10,7 @@ public class OreConfig {
     private final ForgeConfigSpec.IntValue minHeight;
     private final ForgeConfigSpec.IntValue maxHeight;
 
-    public OreConfig(Ores ore, ForgeConfigSpec.Builder builder, ForgeConfigSpec.BooleanValue masterSwitch) {
+    public OreConfig(Ore ore, ForgeConfigSpec.Builder builder, ForgeConfigSpec.BooleanValue masterSwitch) {
         this.masterSwitch = masterSwitch;
         this.veinCount = builder
                 .comment("Number of veins per chunk")

@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.specials;
 
-import com.qsoftware.forgemod.common.TextColors;
+import com.qsoftware.forgemod.common.enums.TextColors;
 import com.qsoftware.forgemod.objects.items.type.EnergyStoringItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.items.fluid;
 
 import com.qsoftware.forgemod.api.IFluidContainer;
-import com.qsoftware.forgemod.common.TextColors;
+import com.qsoftware.forgemod.common.enums.TextColors;
 import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.objects.items.energy.EnergyStoringItem;
 import com.qsoftware.forgemod.util.EnergyUtils;

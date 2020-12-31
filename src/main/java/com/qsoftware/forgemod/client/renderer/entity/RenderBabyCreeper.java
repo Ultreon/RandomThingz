@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.client.renderer.entity;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.client.model.ModelBabyCreeper;
+import com.qsoftware.forgemod.client.model.entity.ModelBabyCreeper;
 import com.qsoftware.forgemod.client.renderer.entity.layer.BabyCreeperChargeLayer;
 import com.qsoftware.forgemod.objects.entities.baby.EntityBabyCreeper;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

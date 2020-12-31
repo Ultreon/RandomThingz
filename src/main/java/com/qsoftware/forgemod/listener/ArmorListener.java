@@ -31,7 +31,7 @@ public class ArmorListener {
 
             // Check Armor
             if (!armor.isEmpty()) {
-                if (armor.get(0).getItem().getRegistryName() == ModItems.INFINITY_BOOTS.getItem().getRegistryName()) {
+                if (armor.get(0).getItem().getRegistryName() == ModItems.INFINITY_BOOTS.get().getRegistryName()) {
                     if (armor.get(1).getItem().getRegistryName() == ModItems.INFINITY_LEGGINGS.get().getRegistryName()) {
                         if (armor.get(2).getItem().getRegistryName() == ModItems.INFINITY_CHESTPLATE.get().getRegistryName()) {
                             if (armor.get(3).getItem().getRegistryName() == ModItems.INFINITY_HELMET.get().getRegistryName()) {

@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.data.client;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.init.OreMaterials;
+import com.qsoftware.forgemod.init.OreMaterial;
 import com.qsoftware.forgemod.objects.blocks.machines.dryingrack.DryingRackBlock;
 import com.qsoftware.silent.lib.util.NameUtils;
 import net.minecraft.data.DataGenerator;
@@ -27,7 +27,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        Arrays.stream(OreMaterials.values()).forEach(metal -> {
+        Arrays.stream(OreMaterial.values()).forEach(metal -> {
             metal.getOre().ifPresent(this::simpleBlock);
             metal.getStorageBlock().ifPresent(this::simpleBlock);
         });

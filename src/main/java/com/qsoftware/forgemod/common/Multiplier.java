@@ -1,9 +1,10 @@
 package com.qsoftware.forgemod.common;
 
+import com.qsoftware.forgemod.common.interfaces.Formattable;
 import com.qsoftware.forgemod.util.helpers.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 
-public class Multiplier implements IFormattable {
+public class Multiplier implements Formattable {
     private final double multiplier;
 
     public Multiplier(double multiplier) {

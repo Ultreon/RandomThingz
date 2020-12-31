@@ -50,7 +50,7 @@ public class CrateContainer extends Container {
 //            }
 //        }
 
-//        // This is for fullt automate calculation:
+//        // This is for full automate calculation:
 //        int slotWidth = 16;
 //        int slotHeight = 16;
 //        int slotBorderX = 1;

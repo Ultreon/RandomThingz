@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.client.renderer.layers;
 
-import com.qsoftware.forgemod.client.model.FreeEndermanModel;
+import com.qsoftware.forgemod.client.model.entity.FreeEndermanModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.AbstractEyesLayer;

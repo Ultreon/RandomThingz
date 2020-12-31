@@ -30,10 +30,7 @@ public class NBTHelper {
 
     private static CompoundNBT writeQuarry(QuarryTileEntity o) {
         CompoundNBT compound = new CompoundNBT();
-        compound.putInt("x", o.x);
-        compound.putInt("y", o.y);
-        compound.putInt("z", o.z);
-        return compound;
+        return o.write(compound);
     }
 
     @SuppressWarnings("ConstantConditions")

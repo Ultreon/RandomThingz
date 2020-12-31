@@ -3,12 +3,13 @@ package com.qsoftware.forgemod.registration.impl;
 import com.qsoftware.forgemod.api.providers.IItemProvider;
 import com.qsoftware.forgemod.api.text.EnumColor;
 import com.qsoftware.forgemod.api.text.TextComponentUtil;
-import com.qsoftware.forgemod.registration.WrappedDeferredRegister;
+import com.qsoftware.forgemod.registration.DeferredRegisterWrapper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.registries.ForgeRegistries;
+import com.qsoftware.silent.lib.registry.ItemRegistryObject;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -16,7 +17,8 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class ItemDeferredRegister extends WrappedDeferredRegister<Item> {
+@Deprecated
+public class ItemDeferredRegister extends DeferredRegisterWrapper<Item> {
 
     private final List<IItemProvider> allItems = new ArrayList<>();
 
@@ -60,7 +62,7 @@ public class ItemDeferredRegister extends WrappedDeferredRegister<Item> {
 
     public <ITEM extends Item> ItemRegistryObject<ITEM> register(String name, Supplier<? extends ITEM> sup) {
         ItemRegistryObject<ITEM> registeredItem = register(name, sup, ItemRegistryObject::new);
-        allItems.add(registeredItem);
+        allItems.add((IItemProvider) registeredItem);
         return registeredItem;
     }
 

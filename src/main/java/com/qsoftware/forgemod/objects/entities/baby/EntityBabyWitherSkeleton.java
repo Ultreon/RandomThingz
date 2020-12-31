@@ -75,7 +75,7 @@ public class EntityBabyWitherSkeleton extends WitherSkeletonEntity implements IB
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return ModItemsNew.BABY_WITHER_SKELETON_SPAWN_EGG.getItemStack();
+        return new ItemStack(ModItemsNew.BABY_WITHER_SKELETON_SPAWN_EGG.asItem());
     }
 
     @Nonnull

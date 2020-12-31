@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.client.renderer.layers;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.renderer.GlowSquidRenderer;
+import com.qsoftware.forgemod.client.renderer.entity.GlowSquidRenderer;
 import com.qsoftware.forgemod.objects.entities.GlowSquidEntity;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.IEntityRenderer;

@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.util.Utils;
@@ -13,6 +14,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.WorldLoadProgressScreen;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
+import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -49,6 +52,12 @@ public class ConfirmExitScreen extends Screen {
 
     protected void init() {
         super.init();
+
+        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
+
+        if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
+            Narrator.getNarrator().say("Are you sure you want to exit Minecraft?", true);
+        }
 
         this.buttons.clear();
         this.children.clear();
@@ -113,6 +122,42 @@ public class ConfirmExitScreen extends Screen {
         return false;
     }
 
+//    @SubscribeEvent
+//    public static void onWindowClose(WindowCloseEvent event) {
+//        Minecraft mc = Minecraft.getInstance();
+//
+//        if (event.getSource() == WindowCloseEvent.Source.GENERIC) {
+//            if (mc.world == null && mc.currentScreen == null) {
+//                event.setCanceled(true);
+//                return;
+//            }
+//
+//            if (mc.currentScreen instanceof WorldLoadProgressScreen) {
+//                event.setCanceled(true);
+//                return;
+//            }
+//
+//            if (Config.closePrompt.get()) {
+//                if (mc.world != null && !Config.closePromptIngame.get()) {
+//                    mc.close();
+//                    return;
+//                }
+//                event.setCanceled(true);
+//                if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
+//                    mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+//                }
+//            } else {
+//                mc.close();
+//            }
+//        } else if (event.getSource() == WindowCloseEvent.Source.QUIT_BUTTON) {
+//            if (Config.closePrompt.get() && Config.closePromptQuitButton.get() && !(mc.currentScreen instanceof ConfirmExitScreen)) {
+//                mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+//            } else if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
+//                mc.close();
+//            }
+//        }
+//    }
+
     @SubscribeEvent
     public static void onOptionsScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
@@ -135,18 +180,16 @@ public class ConfirmExitScreen extends Screen {
 
                     if (Config.closePrompt.get()) {
                         if (mc.world != null && !Config.closePromptIngame.get()) {
-                            mc.close();
                             return;
                         }
                         GLFW.glfwSetWindowShouldClose(window, false);
                         if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
                             mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
                         }
-                    } else {
-                        mc.close();
                     }
                 });
             }
+
             MainMenuScreen mainMenu = (MainMenuScreen) gui;
             List<Widget> buttons = mainMenu.buttons;
             Button widget = (Button) buttons.get(buttons.size() - 2);
@@ -154,7 +197,7 @@ public class ConfirmExitScreen extends Screen {
                 if (Config.closePrompt.get() && Config.closePromptQuitButton.get() && !(mc.currentScreen instanceof ConfirmExitScreen)) {
                     mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
                 } else if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
-                    mc.close();
+                    mc.getMainWindow().close();
                 }
             };
         }

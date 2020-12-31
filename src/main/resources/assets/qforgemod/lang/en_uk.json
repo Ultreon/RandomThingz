@@ -808,17 +808,42 @@
   "misc.qforgemod.pc.storage.usb": "USB Drive",
   "misc.qforgemod.pc.storage.usb.short": "USB",
 
+  "misc.qforgemod.version.alpha": "Alpha ",
+  "misc.qforgemod.version.beta": "Beta ",
+  "misc.qforgemod.version.rc": "Release Candidate ",
+  "misc.qforgemod.version.pre": "Pre Release ",
+  "misc.qforgemod.version.snapshot": "Snapshot ",
+  "misc.qforgemod.version.stable": "Stable ",
+  "misc.qforgemod.version.unstable": "Unstable ",
+  "misc.qforgemod.version.release": "Release ",
+
+  "misc.qforgemod.unknown": "UNKNOWN",
+
   "key.qforgemod.debug_screen": "Show / Hide Debug Screen",
   "key.categories.qforgemod": "QForgeMod keys",
 
   "msg.qforgemod.confirm_exit.title": "Exit Confirmation",
   "msg.qforgemod.confirm_exit.description": "Are you sure you want to exit Minecraft?",
 
+  "msg.qforgemod.update_available.title": "Update Available for QForgeMod",
+  "msg.qforgemod.update_available.description": "Do you want to download the update?",
+  "msg.qforgemod.update_available.help": "This message get you when there's an update available for QForgeMod.\nClick yes to download it, no, to continue.\nNew version: %s",
+
+  "msg.qforgemod.downloading_update.title": "Downloading Update",
+  "msg.qforgemod.downloading_update.description": "Downloaded %1$s of %2$s, %3$s complete.",
+
+  "msg.qforgemod.update_downloaded.title": "Update Downloaded",
+  "msg.qforgemod.update_downloaded.description": "Do you want to open the update folder?",
+
+  "msg.qforgemod.test_phase.title": "§6§lWarning",
+  "msg.qforgemod.test_phase.description": "§eQForgeMod mod is currently in a test phase, stuff might break or change.",
+
   "button.qforgemod.confirm_exit.shutdown_pc": "Shutdown PC",
 
   "tooltip.qforgemod.kill_switch.warning": "§6Warning: §e§oThis item will shutdown your computer when you use it!",
   "tooltip.qforgemod.kill_switch.not_supported": "§4Error: §c§oThis item works only on Windows or Linux computers!",
 
+  "screen.qforgemod.settings.download_update": "Download Update",
   "screen.qforgemod.settings.quit_settings": "Quit Settings",
   "screen.qforgemod.settings.allow_shutdown_pc": "Allow Shutdown PC: %1$s",
 
@@ -829,5 +854,12 @@
   "screen.qforgemod.quit_settings.close_prompt_ingame": "In-Game Close Prompt: %1$s",
   "screen.qforgemod.quit_settings.close_prompt_ingame.tooltip": "Show close prompt when playing.",
   "screen.qforgemod.quit_settings.close_prompt_quit_button": "Quit Button Close Prompt: %1$s",
-  "screen.qforgemod.quit_settings.close_prompt_quit_button.tooltip": "Show an prompt when pressed on Quit in title screen."
+  "screen.qforgemod.quit_settings.close_prompt_quit_button.tooltip": "Show an prompt when pressed on Quit in title screen.",
+
+  "gui.tag_filter.forge.dusts": "Dusts",
+  "gui.tag_filter.forge.ingots": "Ingots",
+  "gui.tag_filter.forge.nuggets": "Nuggets",
+  "gui.tag_filter.qforgemod.chunks": "Ore chunks",
+
+  "toasts.qforgemod.update_available.title": "Update Available"
 }

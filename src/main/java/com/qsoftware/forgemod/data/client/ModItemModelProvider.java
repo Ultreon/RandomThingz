@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.data.client;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.init.OreMaterials;
+import com.qsoftware.forgemod.init.OreMaterial;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.objects.items.CraftingItems;
 import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
@@ -36,7 +36,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
 
         //noinspection OverlyLongLambda
-        Arrays.stream(OreMaterials.values()).forEach(metal -> {
+        Arrays.stream(OreMaterial.values()).forEach(metal -> {
             metal.getOre().ifPresent(this::blockBuilder);
             metal.getStorageBlock().ifPresent(this::blockBuilder);
             metal.getChunks().ifPresent(item -> builder(item, itemGenerated));
