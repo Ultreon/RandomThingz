@@ -27,7 +27,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 //apply plugin: "io.freefair.lombok"
 
-version = '1.1-release1'
+version = '1.2-alpha1'
 group = 'com.qsoftware.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'QForgeMod'
 
@@ -234,7 +234,7 @@ jar {
         attributes([
                 "Specification-Title": "qforgemod",
                 "Specification-Vendor": "qsoftware",
-                "Specification-Version": "1.1-release1",
+                "Specification-Version": "1.2-alpha1",
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"qsoftware",
