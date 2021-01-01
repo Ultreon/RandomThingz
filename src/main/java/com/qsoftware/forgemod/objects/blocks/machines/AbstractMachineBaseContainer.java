@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.objects.blocks.machines;
 
-import com.qsoftware.forgemod.api.RedstoneMode;
+import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.forgemod.common.gui.MachineUpgradeSlot;
-import com.qsoftware.silent.utils.EnumUtils;
+import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.IIntArray;
 

@@ -2,11 +2,10 @@ package com.qsoftware.forgemod.client.gui.widgets;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.client.gui.update.UpdateScreen;
-import com.qsoftware.forgemod.common.updater.Updater;
+import com.qsoftware.forgemod.common.updates.Updater;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import org.jetbrains.annotations.NotNull;
 
 public class UpdateButton extends BetterButton {
     private final Updater<?> updater;
@@ -31,7 +30,7 @@ public class UpdateButton extends BetterButton {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.active = this.updater.hasUpdate();
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }

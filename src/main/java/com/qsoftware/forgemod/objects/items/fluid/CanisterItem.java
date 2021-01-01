@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.items.fluid;
 
-import com.qsoftware.forgemod.api.IFluidContainer;
+import com.qsoftware.modlib.api.IFluidContainer;
 import com.qsoftware.forgemod.init.ModItems;
 import com.qsoftware.forgemod.util.TextUtils;
 import net.minecraft.fluid.Fluid;

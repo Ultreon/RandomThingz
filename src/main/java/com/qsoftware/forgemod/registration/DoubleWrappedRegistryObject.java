@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.registration;
 
-import com.qsoftware.forgemod.api.annotations.FieldsAreNonnullByDefault;
+import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 

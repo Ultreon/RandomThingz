@@ -1,9 +1,9 @@
 package com.qsoftware.forgemod.objects.blocks.machines.generator;
 
-import com.qsoftware.forgemod.api.RedstoneMode;
+import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineBaseTileEntity;
 import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.silent.utils.EnumUtils;
+import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;

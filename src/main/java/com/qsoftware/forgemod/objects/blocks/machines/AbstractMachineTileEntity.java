@@ -1,12 +1,12 @@
 package com.qsoftware.forgemod.objects.blocks.machines;
 
-import com.qsoftware.forgemod.api.RedstoneMode;
+import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.forgemod.capability.EnergyStorageImpl;
 import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.InventoryUtils;
 import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.silent.utils.EnumUtils;
+import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;

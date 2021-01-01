@@ -5,7 +5,7 @@ import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.data.DataGenerators;
 import com.qsoftware.forgemod.init.*;
 import com.qsoftware.forgemod.network.Network;
-import com.qsoftware.silent.lib.event.Greetings;
+import com.qsoftware.modlib.silentlib.event.Greetings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -81,6 +81,7 @@ class SideProxy implements com.qsoftware.forgemod.IProxy {
 
     static class Client extends SideProxy {
         Client() {
+            super();
             FMLJavaModLoadingContext.get().getModEventBus().addListener(ModItems::registerItemColors);
             FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
@@ -122,6 +123,7 @@ class SideProxy implements com.qsoftware.forgemod.IProxy {
 
     static class Server extends SideProxy {
         Server() {
+            super();
             FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
         }
 

@@ -19,7 +19,7 @@ import com.qsoftware.forgemod.objects.blocks.machines.refinery.RefineryTileEntit
 import com.qsoftware.forgemod.objects.blocks.machines.solidifier.SolidifierTileEntity;
 import com.qsoftware.forgemod.objects.blocks.machines.wire.WireTileEntity;
 import com.qsoftware.forgemod.util.ExceptionUtil;
-import com.qsoftware.silent.lib.block.IBlockProvider;
+import com.qsoftware.modlib.silentlib.block.IBlockProvider;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;

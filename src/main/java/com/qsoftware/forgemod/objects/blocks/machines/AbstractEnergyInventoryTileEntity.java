@@ -2,8 +2,8 @@ package com.qsoftware.forgemod.objects.blocks.machines;
 
 import com.qsoftware.forgemod.capability.EnergyStorageImpl;
 import com.qsoftware.forgemod.util.EnergyUtils;
-import com.qsoftware.silent.lib.tile.LockableSidedInventoryTileEntity;
-import com.qsoftware.silent.lib.tile.SyncVariable;
+import com.qsoftware.modlib.silentlib.tile.LockableSidedInventoryTileEntity;
+import com.qsoftware.modlib.silentlib.tile.SyncVariable;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;

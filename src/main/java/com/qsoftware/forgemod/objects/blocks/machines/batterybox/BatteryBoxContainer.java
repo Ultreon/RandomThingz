@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.objects.blocks.machines.batterybox;
 import com.qsoftware.forgemod.init.ModContainers;
 import com.qsoftware.forgemod.objects.blocks.machines.AbstractEnergyStorageContainer;
 import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineBaseTileEntity;
-import com.qsoftware.silent.lib.util.InventoryUtils;
+import com.qsoftware.modlib.silentlib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;

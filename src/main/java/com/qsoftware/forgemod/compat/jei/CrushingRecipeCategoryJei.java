@@ -7,7 +7,7 @@ import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.objects.blocks.machines.crusher.CrusherScreen;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.TextUtils;
-import com.qsoftware.silent.lib.util.TextRenderUtils;
+import com.qsoftware.modlib.silentlib.util.TextRenderUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;

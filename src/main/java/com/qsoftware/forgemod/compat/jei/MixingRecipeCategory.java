@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.compat.jei;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
+import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.forgemod.crafting.recipe.MixingRecipe;
 import com.qsoftware.forgemod.init.ModBlocks;
 import com.qsoftware.forgemod.init.ModItems;

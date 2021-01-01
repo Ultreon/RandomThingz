@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.objects.blocks.machines.quarry;
 
 import com.qsoftware.forgemod.init.ModContainers;
 import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineBaseContainer;
-import com.qsoftware.silent.lib.util.InventoryUtils;
+import com.qsoftware.modlib.silentlib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.config;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.Ore;
+import com.qsoftware.forgemod.init.variants.Ore;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

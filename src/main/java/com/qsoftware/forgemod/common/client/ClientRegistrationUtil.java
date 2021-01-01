@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.common.client;
 
-import com.qsoftware.forgemod.api.providers.IBlockProvider;
-import com.qsoftware.forgemod.api.providers.IItemProvider;
-import com.qsoftware.silent.lib.registry.EntityTypeRegistryObject;
+import com.qsoftware.modlib.api.providers.IBlockProvider;
+import com.qsoftware.modlib.api.providers.IItemProvider;
+import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;
@@ -32,39 +32,39 @@ public class ClientRegistrationUtil {
 //    }
 
     public static void setPropertyOverride(IItemProvider itemProvider, ResourceLocation override, IItemPropertyGetter propertyGetter) {
-        ItemModelsProperties.registerProperty(itemProvider.getItem(), override, propertyGetter);
+        ItemModelsProperties.registerProperty(itemProvider.asItem(), override, propertyGetter);
     }
 
     public static void registerItemColorHandler(ItemColors colors, IItemColor itemColor, IItemProvider... items) {
         for (IItemProvider itemProvider : items) {
-            colors.register(itemColor, itemProvider.getItem());
+            colors.register(itemColor, itemProvider.asItem());
         }
     }
 
     public static void registerBlockColorHandler(BlockColors blockColors, IBlockColor blockColor, IBlockProvider... blocks) {
         for (IBlockProvider blockProvider : blocks) {
-            blockColors.register(blockColor, blockProvider.getBlock());
+            blockColors.register(blockColor, blockProvider.asBlock());
         }
     }
 
     public static void registerBlockColorHandler(BlockColors blockColors, ItemColors itemColors, IBlockColor blockColor, IItemColor itemColor, IBlockProvider... blocks) {
         for (IBlockProvider blockProvider : blocks) {
-            blockColors.register(blockColor, blockProvider.getBlock());
-            itemColors.register(itemColor, blockProvider.getItem());
+            blockColors.register(blockColor, blockProvider.asBlock());
+            itemColors.register(itemColor, blockProvider.asItem());
         }
     }
 
 //    public static void registerIColoredBlockHandler(BlockColors blockColors, ItemColors itemColors, IBlockProvider... blocks) {
 //        ClientRegistrationUtil.registerBlockColorHandler(blockColors, itemColors, (state, world, pos, tintIndex) -> {
-//            Block block = state.getBlock();
+//            Block block = state.asBlock();
 //            if (block instanceof IColoredBlock) {
 //                return QForgeUtilsRenderer.getColorARGB(((IColoredBlock) block).getColor(), 1);
 //            }
 //            return -1;
 //        }, (stack, tintIndex) -> {
-//            Item item = stack.getItem();
+//            Item item = stack.asItem();
 //            if (item instanceof BlockItem) {
-//                Block block = ((BlockItem) item).getBlock();
+//                Block block = ((BlockItem) item).asBlock();
 //                if (block instanceof IColoredBlock) {
 //                    return QForgeUtilsRenderer.getColorARGB(((IColoredBlock) block).getColor(), 1);
 //                }
@@ -75,13 +75,13 @@ public class ClientRegistrationUtil {
 
     public static void setRenderLayer(RenderType type, IBlockProvider... blockProviders) {
         for (IBlockProvider blockProvider : blockProviders) {
-            RenderTypeLookup.setRenderLayer(blockProvider.getBlock(), type);
+            RenderTypeLookup.setRenderLayer(blockProvider.asBlock(), type);
         }
     }
 
     public static synchronized void setRenderLayer(Predicate<RenderType> predicate, IBlockProvider... blockProviders) {
         for (IBlockProvider blockProvider : blockProviders) {
-            RenderTypeLookup.setRenderLayer(blockProvider.getBlock(), predicate);
+            RenderTypeLookup.setRenderLayer(blockProvider.asBlock(), predicate);
         }
     }
 

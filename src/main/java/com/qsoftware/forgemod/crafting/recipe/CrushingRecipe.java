@@ -8,7 +8,7 @@ import com.qsoftware.forgemod.init.ModRecipes;
 import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineTileEntity;
 import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
 import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.silent.utils.MathUtils;
+import com.qsoftware.modlib.silentutils.MathUtils;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

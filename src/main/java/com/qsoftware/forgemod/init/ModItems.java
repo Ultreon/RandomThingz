@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.init.variants.OreMaterial;
 import com.qsoftware.forgemod.objects.items.CraftingItems;
 import com.qsoftware.forgemod.objects.items.EucalyptusLeafItem;
 import com.qsoftware.forgemod.objects.items.LegendaryEnderPearlItem;
@@ -22,7 +23,7 @@ import com.qsoftware.forgemod.objects.items.type.IngredientItem;
 import com.qsoftware.forgemod.objects.items.type.SliceableItem;
 import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
 import com.qsoftware.forgemod.objects.items.wand.*;
-import com.qsoftware.silent.lib.registry.ItemRegistryObject;
+import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.forgemod.util.builder.ArmorMaterialBuilder;
 import com.qsoftware.forgemod.util.builder.ItemTierBuilder1;

@@ -2,8 +2,8 @@ package com.qsoftware.forgemod.objects.blocks.machines.solidifier;
 
 import com.qsoftware.forgemod.init.ModContainers;
 import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineBaseContainer;
-import com.qsoftware.silent.lib.inventory.SlotOutputOnly;
-import com.qsoftware.silent.lib.util.InventoryUtils;
+import com.qsoftware.modlib.silentlib.inventory.SlotOutputOnly;
+import com.qsoftware.modlib.silentlib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluid;

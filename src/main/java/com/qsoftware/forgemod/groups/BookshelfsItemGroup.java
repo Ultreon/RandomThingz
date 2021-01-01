@@ -1,11 +1,10 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.common.QItemGroup;
+import com.qsoftware.forgemod.common.BetterItemGroup;
 import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.silent.lib.registry.BlockRegistryObject;
+import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author Qboi123
  */
-public class BookshelfsItemGroup extends QItemGroup {
+public class BookshelfsItemGroup extends BetterItemGroup {
     public static final BookshelfsItemGroup instance = new BookshelfsItemGroup();
 
     public BookshelfsItemGroup() {

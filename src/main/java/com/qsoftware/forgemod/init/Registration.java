@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.api.providers.IItemProvider;
-import com.qsoftware.silent.lib.registry.ItemDeferredRegister;
+import com.qsoftware.modlib.api.providers.IItemProvider;
+import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -57,6 +57,7 @@ public final class Registration {
         BLOCKS.register(modEventBus);
         CONTAINERS.register(modEventBus);
         ITEMS.register(modEventBus);
+        POTIONS.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
         TILE_ENTITIES.register(modEventBus);
 
@@ -87,7 +88,7 @@ public final class Registration {
     @SuppressWarnings("unchecked")
     public static <T extends Item> Collection<T> getItems(Class<T> clazz) {
         return ITEMS.getAllItems().stream()
-                .map(IItemProvider::getItem)
+                .map(IItemProvider::asItem)
                 .filter(clazz::isInstance)
                 .map(item -> (T) item)
                 .collect(Collectors.toList());
@@ -95,7 +96,7 @@ public final class Registration {
 
     public static Collection<Item> getItems(Predicate<Item> predicate) {
         return ITEMS.getAllItems().stream()
-                .map(IItemProvider::getItem)
+                .map(IItemProvider::asItem)
                 .filter(predicate)
                 .collect(Collectors.toList());
     }

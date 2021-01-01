@@ -4,8 +4,9 @@ import com.qsoftware.filters.Filters;
 import com.qsoftware.forgemod.common.interfaces.IHasRenderType;
 import com.qsoftware.forgemod.init.*;
 import com.qsoftware.forgemod.init.types.ModEntities;
+import com.qsoftware.forgemod.init.variants.OreMaterial;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
-import com.qsoftware.forgemod.listener.GameOverlayListener;
+import com.qsoftware.forgemod.client.gui.hud.DebugScreen;
 import com.qsoftware.forgemod.objects.entities.*;
 import com.qsoftware.forgemod.objects.entities.baby.*;
 import com.qsoftware.forgemod.objects.items.advanced.AdvancedBowItem;
@@ -95,7 +96,7 @@ public class Initialization {
         logger.info("Registering keybindings");
         KeyBindingList.register();
         if (Minecraft.getInstance().getVersion().equals("MOD_DEV")) {
-            GameOverlayListener.DEBUG_PAGE = GameOverlayListener.PAGE.PLAYER_1;
+            DebugScreen.DEBUG_PAGE = DebugScreen.PAGE.PLAYER_1;
         }
 
         for (Item item : Registration.getItems((item) -> item instanceof AdvancedBowItem)) {

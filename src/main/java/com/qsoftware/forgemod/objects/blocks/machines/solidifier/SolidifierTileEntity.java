@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.blocks.machines.solidifier;
 
-import com.qsoftware.forgemod.api.IFluidContainer;
+import com.qsoftware.modlib.api.IFluidContainer;
 import com.qsoftware.forgemod.crafting.recipe.SolidifyingRecipe;
 import com.qsoftware.forgemod.init.ModRecipes;
 import com.qsoftware.forgemod.init.ModTileEntities;

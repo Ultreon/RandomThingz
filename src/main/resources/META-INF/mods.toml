@@ -24,7 +24,7 @@ version="1.2-alpha1" #mandatory
 displayName="QForgeMod: Main Module" #mandatory
 #updateJSONURL="http://myurl.me/" #optional
 displayURL="https://quintenjungblut.wixsite.com/qplaysoftware/" #optional
-#logoFile="qforgemod.png" #optional
+logoFile="qfm.png" #optional
 credits="Qboi123" #optional
 authors="Qboi123" #optional
 description='''
@@ -132,16 +132,16 @@ description='''
   §oDownload not available!§r
 '''
 
-[[mods]]
-modId="qsilentlib"
-version="4.9"
-displayName="QForgeMod: Silent Library"
-# updateJSONURL="https://raw.githubusercontent.com/SilentChaos512/SilentLib/1.14/update.json"
-description='''
-    Forked from https://github.com/SilentChaos512/SilentLib/tree/ef258b04897296131e3e1f439df8b5c1425fc453
-
-    Shared library for Silent's mods
-    '''
+#[[mods]]
+#modId="qsilentlib"
+#version="4.9"
+#displayName="QForgeMod: Silent Library"
+## updateJSONURL="https://raw.githubusercontent.com/SilentChaos512/SilentLib/1.14/update.json"
+#description='''
+#    Forked from https://github.com/SilentChaos512/SilentLib/tree/ef258b04897296131e3e1f439df8b5c1425fc453
+#
+#    Shared library for Silent's mods
+#    '''
 [[mods]] #mandatory
 # The modid of the mod
 modId="qtexturedmodels" #mandatory
@@ -227,19 +227,19 @@ versionRange="[1.16.3]"
 ordering="NONE"
 side="BOTH"
 
-# Silent Lib dependencies
-[[dependencies.qsilentlib]]
-modId="forge"
-mandatory=true
-versionRange="[33,)"
-ordering="NONE"
-side="BOTH"
-[[dependencies.qsilentlib]]
-modId="minecraft"
-mandatory=true
-versionRange="[1.16.2,)"
-ordering="NONE"
-side="BOTH"
+## Silent Lib dependencies
+#[[dependencies.qsilentlib]]
+#modId="forge"
+#mandatory=true
+#versionRange="[33,)"
+#ordering="NONE"
+#side="BOTH"
+#[[dependencies.qsilentlib]]
+#modId="minecraft"
+#mandatory=true
+#versionRange="[1.16.2,)"
+#ordering="NONE"
+#side="BOTH"
 
 # QForgeUtils dependencies.
 [[dependencies.qforgemod]]
@@ -249,9 +249,9 @@ versionRange="1.3.0"
 ordering="BEFORE"
 side="CLIENT"
 [[dependencies.qforgemod]]
-modId="qsilentlib"
+modId="qmodlib"
 mandatory=true
-versionRange="4.9"
+versionRange="[1.0-beta1,)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.qforgemod]] #optional

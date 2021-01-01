@@ -6,6 +6,7 @@ import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.util.Utils;
+import com.qsoftware.modlib.event.WindowCloseEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IBidiRenderer;
@@ -34,7 +35,6 @@ import java.util.Objects;
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ConfirmExitScreen extends Screen {
     private static boolean initialized = false;
-    private static boolean isSaving;
     private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
     private final ITextComponent shutdownPcText;
     private final ITextComponent yesButtonText;
@@ -64,8 +64,7 @@ public class ConfirmExitScreen extends Screen {
 
         this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (p_213006_1_) -> {
             if (this.minecraft != null) {
-                this.minecraft.close();
-                System.exit(0);
+                this.minecraft.shutdown();
             }
         }));
         this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
@@ -122,86 +121,86 @@ public class ConfirmExitScreen extends Screen {
         return false;
     }
 
-//    @SubscribeEvent
-//    public static void onWindowClose(WindowCloseEvent event) {
-//        Minecraft mc = Minecraft.getInstance();
-//
-//        if (event.getSource() == WindowCloseEvent.Source.GENERIC) {
-//            if (mc.world == null && mc.currentScreen == null) {
-//                event.setCanceled(true);
-//                return;
-//            }
-//
-//            if (mc.currentScreen instanceof WorldLoadProgressScreen) {
-//                event.setCanceled(true);
-//                return;
-//            }
-//
-//            if (Config.closePrompt.get()) {
-//                if (mc.world != null && !Config.closePromptIngame.get()) {
-//                    mc.close();
-//                    return;
-//                }
-//                event.setCanceled(true);
-//                if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
-//                    mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
-//                }
-//            } else {
-//                mc.close();
-//            }
-//        } else if (event.getSource() == WindowCloseEvent.Source.QUIT_BUTTON) {
-//            if (Config.closePrompt.get() && Config.closePromptQuitButton.get() && !(mc.currentScreen instanceof ConfirmExitScreen)) {
-//                mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
-//            } else if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
-//                mc.close();
-//            }
-//        }
-//    }
-
     @SubscribeEvent
-    public static void onOptionsScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
+    public static void onWindowClose(WindowCloseEvent event) {
         Minecraft mc = Minecraft.getInstance();
-        Screen gui = event.getGui();
-        if (gui instanceof MainMenuScreen) {
-            if (!initialized) {
-                initialized = true;
 
-                long handle = mc.getMainWindow().getHandle();
-                GLFW.glfwSetWindowCloseCallback(handle, window -> {
-                    if (mc.world == null && mc.currentScreen == null) {
-                        GLFW.glfwSetWindowShouldClose(window, false);
-                        return;
-                    }
-
-                    if (mc.currentScreen instanceof WorldLoadProgressScreen) {
-                        GLFW.glfwSetWindowShouldClose(window, false);
-                        return;
-                    }
-
-                    if (Config.closePrompt.get()) {
-                        if (mc.world != null && !Config.closePromptIngame.get()) {
-                            return;
-                        }
-                        GLFW.glfwSetWindowShouldClose(window, false);
-                        if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
-                            mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
-                        }
-                    }
-                });
+        if (event.getSource() == WindowCloseEvent.Source.GENERIC) {
+            if (mc.world == null && mc.currentScreen == null) {
+                event.setCanceled(true);
+                return;
             }
 
-            MainMenuScreen mainMenu = (MainMenuScreen) gui;
-            List<Widget> buttons = mainMenu.buttons;
-            Button widget = (Button) buttons.get(buttons.size() - 2);
-            widget.onPress = (button) -> {
-                if (Config.closePrompt.get() && Config.closePromptQuitButton.get() && !(mc.currentScreen instanceof ConfirmExitScreen)) {
-                    mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
-                } else if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
-                    mc.getMainWindow().close();
+            if (mc.currentScreen instanceof WorldLoadProgressScreen) {
+                event.setCanceled(true);
+                return;
+            }
+
+            if (Config.closePrompt.get()) {
+                if (mc.world != null && !Config.closePromptIngame.get()) {
+                    mc.shutdown();
+                    return;
                 }
-            };
+                event.setCanceled(true);
+                if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
+                    mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+                }
+            } else {
+                mc.shutdown();
+            }
+        } else if (event.getSource() == WindowCloseEvent.Source.QUIT_BUTTON) {
+            if (Config.closePrompt.get() && Config.closePromptQuitButton.get() && !(mc.currentScreen instanceof ConfirmExitScreen)) {
+                mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+            } else if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
+                mc.shutdown();
+            }
         }
     }
+
+//    @SubscribeEvent
+//    public static void onOptionsScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
+//        Minecraft mc = Minecraft.getInstance();
+//        Screen gui = event.getGui();
+//        if (gui instanceof MainMenuScreen) {
+//            if (!initialized) {
+//                initialized = true;
+//
+//                long handle = mc.getMainWindow().getHandle();
+//                GLFW.glfwSetWindowCloseCallback(handle, window -> {
+//                    if (mc.world == null && mc.currentScreen == null) {
+//                        GLFW.glfwSetWindowShouldClose(window, false);
+//                        return;
+//                    }
+//
+//                    if (mc.currentScreen instanceof WorldLoadProgressScreen) {
+//                        GLFW.glfwSetWindowShouldClose(window, false);
+//                        return;
+//                    }
+//
+//                    if (Config.closePrompt.get()) {
+//                        if (mc.world != null && !Config.closePromptIngame.get()) {
+//                            return;
+//                        }
+//                        GLFW.glfwSetWindowShouldClose(window, false);
+//                        if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
+//                            mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+//                        }
+//                    }
+//                });
+//            }
+//
+//            MainMenuScreen mainMenu = (MainMenuScreen) gui;
+//            List<Widget> buttons = mainMenu.buttons;
+//            Button widget = (Button) buttons.get(buttons.size() - 2);
+//            widget.onPress = (button) -> {
+//                if (Config.closePrompt.get() && Config.closePromptQuitButton.get() && !(mc.currentScreen instanceof ConfirmExitScreen)) {
+//                    mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+//                } else if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
+//                    mc.getMainWindow().close();
+//                }
+//            };
+//        }
+//    }
 
     public static boolean isConfirmExitScreenInitialized() {
         return initialized;

@@ -6,7 +6,7 @@ import com.qsoftware.forgemod.common.interfaces.Translatable;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.objects.common.INamed;
 import com.qsoftware.forgemod.util.Constants;
-import com.qsoftware.silent.lib.registry.ItemRegistryObject;
+import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import net.minecraft.item.Item;
 import net.minecraft.util.IItemProvider;
 

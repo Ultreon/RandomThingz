@@ -4,7 +4,7 @@ import com.qsoftware.forgemod.crafting.recipe.DryingRecipe;
 import com.qsoftware.forgemod.init.ModRecipes;
 import com.qsoftware.forgemod.init.ModTileEntities;
 import com.qsoftware.forgemod.util.ParticleUtils;
-import com.qsoftware.silent.lib.util.PlayerUtils;
+import com.qsoftware.modlib.silentlib.util.PlayerUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;

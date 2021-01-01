@@ -20,6 +20,12 @@ import java.util.List;
  */
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ArmorListener {
+    /**
+     * Event handler for living entity damage.
+     * Used for cancel damage when having infinity armor.
+     *
+     * @param event a {@link LivingDamageEvent living damage event} object.
+     */
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onPlayerDamage(LivingDamageEvent event) {
         if (event.getEntityLiving() instanceof PlayerEntity) {
@@ -46,6 +52,9 @@ public class ArmorListener {
         }
     }
 
+    /**
+     * @param event a {@link LivingAttackEvent living attack event} object.
+     */
     @SubscribeEvent
     public static void onPlayerAttacked(LivingAttackEvent event) {
         if (event.getEntityLiving() instanceof PlayerEntity) {
@@ -72,6 +81,9 @@ public class ArmorListener {
         }
     }
 
+    /**
+     * @param event a {@link LivingHurtEvent living hurt event} object.
+     */
     @SubscribeEvent
     public static void onPlayerHurt(LivingHurtEvent event) {
         if (event.getEntityLiving() instanceof PlayerEntity) {

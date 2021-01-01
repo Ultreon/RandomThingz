@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.objects.items.upgrades;
 import com.qsoftware.forgemod.api.IMachineUpgrade;
 import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.util.TextUtils;
-import com.qsoftware.silent.utils.MathUtils;
+import com.qsoftware.modlib.silentutils.MathUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

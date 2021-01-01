@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.init.ModTags;
-import com.qsoftware.forgemod.init.OreMaterial;
+import com.qsoftware.forgemod.init.variants.OreMaterial;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.objects.blocks.machines.dryingrack.DryingRackBlock;
 import net.minecraft.block.Block;

@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.blocks.machines.wire;
 
-import com.qsoftware.forgemod.api.ConnectionType;
+import com.qsoftware.modlib.api.ConnectionType;
 import com.qsoftware.forgemod.util.EnergyUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;

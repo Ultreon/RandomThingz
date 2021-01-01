@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.config;
 
-import com.qsoftware.forgemod.init.Ore;
+import com.qsoftware.forgemod.init.variants.Ore;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class OreConfig {

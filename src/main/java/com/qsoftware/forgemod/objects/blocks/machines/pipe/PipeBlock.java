@@ -2,8 +2,8 @@ package com.qsoftware.forgemod.objects.blocks.machines.pipe;
 
 import com.google.common.collect.Maps;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.api.ConnectionType;
 import com.qsoftware.forgemod.api.IWrenchable;
+import com.qsoftware.modlib.api.ConnectionType;
 import com.qsoftware.forgemod.util.EnergyUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

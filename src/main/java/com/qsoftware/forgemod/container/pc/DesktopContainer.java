@@ -14,7 +14,6 @@ public class DesktopContainer extends Container {
         super(type, id);
     }
 
-
     @Override
     public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
         return false;  // Todo: change to use with ownership.

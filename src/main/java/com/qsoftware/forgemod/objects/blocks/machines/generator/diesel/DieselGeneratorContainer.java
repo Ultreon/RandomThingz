@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.blocks.machines.generator.diesel;
 
-import com.qsoftware.forgemod.api.IFluidContainer;
+import com.qsoftware.modlib.api.IFluidContainer;
 import com.qsoftware.forgemod.init.ModContainers;
 import com.qsoftware.forgemod.objects.blocks.machines.generator.AbstractFluidFuelGeneratorTileEntity;
 import com.qsoftware.forgemod.objects.blocks.machines.generator.AbstractFluidGeneratorContainer;
@@ -23,7 +23,7 @@ public class DieselGeneratorContainer extends AbstractFluidGeneratorContainer<Di
         this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
         this.addSlot(new Slot(this.tileEntity, 1, 80, 59));
 
-        com.qsoftware.silent.lib.util.InventoryUtils.createPlayerSlots(player, 8, 84).forEach(this::addSlot);
+        com.qsoftware.modlib.silentlib.util.InventoryUtils.createPlayerSlots(player, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
     }

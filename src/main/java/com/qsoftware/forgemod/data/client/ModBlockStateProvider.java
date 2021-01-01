@@ -2,9 +2,9 @@ package com.qsoftware.forgemod.data.client;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.init.OreMaterial;
+import com.qsoftware.forgemod.init.variants.OreMaterial;
 import com.qsoftware.forgemod.objects.blocks.machines.dryingrack.DryingRackBlock;
-import com.qsoftware.silent.lib.util.NameUtils;
+import com.qsoftware.modlib.silentlib.util.NameUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.Direction;
 import net.minecraftforge.client.model.generators.BlockStateProvider;

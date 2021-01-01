@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.blocks.machines.pipe;
 
-import com.qsoftware.forgemod.api.ConnectionType;
+import com.qsoftware.modlib.api.ConnectionType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;

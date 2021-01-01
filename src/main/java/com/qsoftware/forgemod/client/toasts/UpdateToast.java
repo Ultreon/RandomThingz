@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.client.toasts;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.qsoftware.forgemod.common.updater.Updater;
+import com.qsoftware.forgemod.common.updates.Updater;
 import net.minecraft.client.gui.toasts.IToast;
 import net.minecraft.client.gui.toasts.ToastGui;
 import net.minecraft.util.IReorderingProcessor;

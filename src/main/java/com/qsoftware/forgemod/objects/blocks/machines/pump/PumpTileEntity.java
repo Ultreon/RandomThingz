@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.objects.blocks.machines.pump;
 
-import com.qsoftware.forgemod.api.IFluidContainer;
-import com.qsoftware.forgemod.api.RedstoneMode;
+import com.qsoftware.modlib.api.IFluidContainer;
+import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.forgemod.init.ModTileEntities;
 import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineBaseTileEntity;
 import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
@@ -9,8 +9,8 @@ import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.InventoryUtils;
 import com.qsoftware.forgemod.util.MachineTier;
 import com.qsoftware.forgemod.util.TextUtils;
-import com.qsoftware.silent.lib.util.TimeUtils;
-import com.qsoftware.silent.utils.EnumUtils;
+import com.qsoftware.modlib.silentlib.util.TimeUtils;
+import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.entity.player.PlayerInventory;

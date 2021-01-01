@@ -2,9 +2,9 @@ package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.objects.items.spawnegg.CustomSpawnEggItem;
-import com.qsoftware.silent.lib.registry.EntityTypeRegistryObject;
-import com.qsoftware.silent.lib.registry.ItemDeferredRegister;
-import com.qsoftware.silent.lib.registry.ItemRegistryObject;
+import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
+import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
+import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 

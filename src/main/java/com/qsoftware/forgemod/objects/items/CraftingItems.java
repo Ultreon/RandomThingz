@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.objects.items;
 
 import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.silent.lib.registry.ItemRegistryObject;
+import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import net.minecraft.item.Food;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;

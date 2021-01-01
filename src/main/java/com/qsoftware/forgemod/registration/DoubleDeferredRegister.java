@@ -10,6 +10,11 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+/**
+ *
+ * @param <PRIMARY>
+ * @param <SECONDARY>
+ */
 public class DoubleDeferredRegister<PRIMARY extends IForgeRegistryEntry<PRIMARY>, SECONDARY extends IForgeRegistryEntry<SECONDARY>> {
 
     private final DeferredRegister<PRIMARY> primaryRegister;

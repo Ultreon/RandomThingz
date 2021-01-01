@@ -15,7 +15,7 @@ import com.qsoftware.forgemod.objects.items.base.DyeColorizedItem;
 import com.qsoftware.forgemod.objects.items.base.MaterialColorizedItem;
 import com.qsoftware.forgemod.objects.items.spawnegg.CustomSpawnEggItem;
 import com.qsoftware.forgemod.util.ExceptionUtil;
-import com.qsoftware.silent.lib.registry.ItemRegistryObject;
+import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.StrayRenderer;
@@ -81,9 +81,9 @@ public class AdditionsClientRegistration {
 //            if (spawnEggItem instanceof ItemRegistryObject) {
 //                try {
 //                    @SuppressWarnings("unchecked") ItemRegistryObject<CustomSpawnEggItem<?>> spawnEgg = (ItemRegistryObject<CustomSpawnEggItem<?>>) spawnEggItem;
-//                    if (spawnEgg.getItem() instanceof CustomSpawnEggItem<?>) {
+//                    if (spawnEgg.asItem() instanceof CustomSpawnEggItem<?>) {
 //                        ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, tintIndex) -> {
-//                            return spawnEgg.getItem().getColor(tintIndex);
+//                            return spawnEgg.asItem().getColor(tintIndex);
 //                        }, spawnEgg);
 //                    }
 //                } catch (ClassCastException ignored) {
@@ -115,21 +115,21 @@ public class AdditionsClientRegistration {
     @SafeVarargs
     private static void registerSpawnEggColorHandler(ItemColors colors, ItemRegistryObject<CustomSpawnEggItem<?>>... spawnEggs) {
         for (ItemRegistryObject<CustomSpawnEggItem<?>> spawnEgg : spawnEggs) {
-            ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.getItem().getColor(tintIndex), spawnEgg);
+            ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.asItem().getColor(tintIndex), spawnEgg);
         }
     }
 
     @SafeVarargs
     private static void registerDyeColorHandler(ItemColors colors, ItemRegistryObject<DyeColorizedItem>... spawnEggs) {
         for (ItemRegistryObject<DyeColorizedItem> spawnEgg : spawnEggs) {
-            ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.getItem().getDyeColor().getColorValue(), spawnEgg);
+            ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.asItem().getDyeColor().getColorValue(), spawnEgg);
         }
     }
 
     @SafeVarargs
     private static void registerMaterialColorHandler(ItemColors colors, ItemRegistryObject<MaterialColorizedItem>... spawnEggs) {
         for (ItemRegistryObject<MaterialColorizedItem> spawnEgg : spawnEggs) {
-            ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.getItem().getMaterialColor().colorValue, spawnEgg);
+            ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.asItem().getMaterialColor().colorValue, spawnEgg);
         }
     }
 

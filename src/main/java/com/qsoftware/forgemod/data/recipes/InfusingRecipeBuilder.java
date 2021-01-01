@@ -2,9 +2,9 @@ package com.qsoftware.forgemod.data.recipes;
 
 import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
+import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.silent.lib.util.NameUtils;
+import com.qsoftware.modlib.silentlib.util.NameUtils;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

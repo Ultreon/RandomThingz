@@ -2,9 +2,9 @@ package com.qsoftware.forgemod.crafting.recipe;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidInventory;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidRecipe;
+import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
+import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidInventory;
+import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
 import com.qsoftware.forgemod.init.ModRecipes;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;

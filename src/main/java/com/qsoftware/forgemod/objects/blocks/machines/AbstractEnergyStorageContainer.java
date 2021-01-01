@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.blocks.machines;
 
-import com.qsoftware.silent.utils.MathUtils;
+import com.qsoftware.modlib.silentutils.MathUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;

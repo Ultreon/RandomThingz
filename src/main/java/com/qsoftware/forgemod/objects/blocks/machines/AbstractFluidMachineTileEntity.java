@@ -1,11 +1,11 @@
 package com.qsoftware.forgemod.objects.blocks.machines;
 
-import com.qsoftware.forgemod.api.RedstoneMode;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.FluidIngredient;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidInventory;
-import com.qsoftware.forgemod.api.crafting.recipe.fluid.IFluidRecipe;
+import com.qsoftware.modlib.api.RedstoneMode;
+import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
+import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidInventory;
+import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
 import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.silent.utils.EnumUtils;
+import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;

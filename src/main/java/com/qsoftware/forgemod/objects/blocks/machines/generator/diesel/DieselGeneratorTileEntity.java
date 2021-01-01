@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.objects.blocks.machines.generator.diesel;
 
-import com.qsoftware.forgemod.api.IFluidContainer;
+import com.qsoftware.modlib.api.IFluidContainer;
 import com.qsoftware.forgemod.init.ModTileEntities;
 import com.qsoftware.forgemod.objects.blocks.machines.generator.AbstractFluidFuelGeneratorTileEntity;
 import com.qsoftware.forgemod.util.InventoryUtils;

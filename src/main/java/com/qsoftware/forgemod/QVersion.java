@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod;
 
-import com.qsoftware.forgemod.common.IVersion;
+import com.qsoftware.forgemod.common.interfaces.IVersion;
 import net.minecraft.client.resources.I18n;
 import org.jetbrains.annotations.NotNull;
 

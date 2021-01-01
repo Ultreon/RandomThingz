@@ -6,7 +6,7 @@ import com.qsoftware.forgemod.objects.blocks.machines.alloysmelter.AlloySmelterT
 import com.qsoftware.forgemod.objects.blocks.machines.crusher.CrusherContainer;
 import com.qsoftware.forgemod.objects.blocks.machines.crusher.CrusherTileEntity;
 import com.qsoftware.forgemod.util.MachineTier;
-import com.qsoftware.silent.lib.util.Lazy;
+import com.qsoftware.modlib.silentlib.util.Lazy;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.tileentity.TileEntityType;
