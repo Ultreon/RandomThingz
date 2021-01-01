@@ -149,7 +149,7 @@ repositories {
         dirs 'D:\\Github\\QForgeMod\\libs'
     }
     maven {
-        url 'file://D:/Maven'
+        url "file://${local_maven}"
     }
 }
 
