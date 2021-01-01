@@ -1,5 +1,8 @@
 # QForgeMod  
-  
+
+***
+## Pages
+The GitHub pages are here: https://qboi123.github.io/QForgeMod/.
 ***
 ## Planned features.
  - [ ] Spell checking in the chat, based on current selected language, uses libreoffice `.dic` files.
