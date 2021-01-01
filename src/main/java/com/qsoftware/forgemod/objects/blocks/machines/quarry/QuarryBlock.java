@@ -36,6 +36,11 @@ public class QuarryBlock extends AbstractMachineBlock {
         return SHAPE;
     }
 
+    @Override
+    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+        return 0;
+    }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
