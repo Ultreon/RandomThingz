@@ -1,7 +1,8 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:wooden_crate",
-    "qforgemod:battery"
+    "qforgemod:coal_generator",
+    "qforgemod:diesel_generator",
+    "qforgemod:lava_generator"
   ]
 }

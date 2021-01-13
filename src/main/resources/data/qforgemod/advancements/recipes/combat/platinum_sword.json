@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:platinum_sword"
+      "qforgemod:platinum_sword"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_ingot"
+            "item": "qforgemod:platinum_ingot"
           }
         ]
       }

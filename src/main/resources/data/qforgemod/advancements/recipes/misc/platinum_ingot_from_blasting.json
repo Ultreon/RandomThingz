@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:platinum_ingot_from_blasting"
+      "qforgemod:platinum_ingot_from_blasting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_ore"
+            "item": "qforgemod:platinum_ore"
           }
         ]
       }

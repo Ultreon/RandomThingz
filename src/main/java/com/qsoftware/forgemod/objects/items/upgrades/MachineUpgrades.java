@@ -37,7 +37,7 @@ public enum MachineUpgrades implements IItemProvider, IMachineUpgrade, INamed, T
 
     public static void register() {
         for (MachineUpgrades value : values()) {
-            value.item = Registration.ITEMS.register(value.getName(), () ->
+            value.item = Registration.ITEMS.register(value.getStringName(), () ->
                     new MachineUpgradeItem(value));
         }
     }
@@ -58,7 +58,7 @@ public enum MachineUpgrades implements IItemProvider, IMachineUpgrade, INamed, T
     }
 
     @Override
-    public String getName() {
+    public String getStringName() {
         return name().toLowerCase(Locale.ROOT) + "_upgrade";
     }
 
@@ -69,6 +69,6 @@ public enum MachineUpgrades implements IItemProvider, IMachineUpgrade, INamed, T
 
     @Override
     public String getTranslationKey() {
-        return "upgrade." + QForgeMod.MOD_ID + "." + getName();
+        return "upgrade." + QForgeMod.MOD_ID + "." + getStringName();
     }
 }

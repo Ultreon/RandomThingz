@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:block/uranium_block"
+    "all": "qforgemod:blocks/uranium_block"
   }
 }

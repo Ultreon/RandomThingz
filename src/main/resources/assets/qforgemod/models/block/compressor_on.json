@@ -8,12 +8,12 @@
         }
     },
     "textures": {
-        "particle": "qforgemod:block/compressor/front_on",
-        "down": "qforgemod:block/compressor/bottom",
-        "up": "qforgemod:block/compressor/top_on",
-        "north": "qforgemod:block/compressor/front_on",
-        "east": "qforgemod:block/compressor/side",
-        "south": "qforgemod:block/compressor/back",
-        "west": "qforgemod:block/compressor/side"
+        "particle": "qforgemod:blocks/compressor/front_on",
+        "down": "qforgemod:blocks/compressor/bottom",
+        "up": "qforgemod:blocks/compressor/top_on",
+        "north": "qforgemod:blocks/compressor/front_on",
+        "east": "qforgemod:blocks/compressor/side",
+        "south": "qforgemod:blocks/compressor/back",
+        "west": "qforgemod:blocks/compressor/side"
     }
 }

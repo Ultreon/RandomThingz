@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:block/bismuth_steel_block"
+    "all": "qforgemod:blocks/bismuth_steel_block"
   }
 }

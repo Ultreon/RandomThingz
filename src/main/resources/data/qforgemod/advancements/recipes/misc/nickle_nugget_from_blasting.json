@@ -2,106 +2,96 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:nickle_nugget_from_blasting"
+      "minecraft:nickel_nugget_from_blasting"
     ]
   },
   "criteria": {
-    "has_nickle_pickaxe": {
+    "has_nickel_pickaxe": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_pickaxe"
+            "item": "qforgemod:nickel_pickaxe"
           }
         ]
       }
     },
-    "has_nickle_shovel": {
+    "has_nickel_shovel": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_shovel"
+            "item": "qforgemod:nickel_shovel"
           }
         ]
       }
     },
-    "has_nickle_axe": {
+    "has_nickel_axe": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_axe"
+            "item": "qforgemod:nickel_axe"
           }
         ]
       }
     },
-    "has_nickle_hoe": {
+    "has_nickel_hoe": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_hoe"
+            "item": "qforgemod:nickel_hoe"
           }
         ]
       }
     },
-    "has_nickle_sword": {
+    "has_nickel_sword": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_sword"
+            "item": "qforgemod:nickel_sword"
           }
         ]
       }
     },
-    "has_nickle_helmet": {
+    "has_nickel_helmet": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_helmet"
+            "item": "qforgemod:nickel_helmet"
           }
         ]
       }
     },
-    "has_nickle_chestplate": {
+    "has_nickel_chestplate": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_chestplate"
+            "item": "qforgemod:nickel_chestplate"
           }
         ]
       }
     },
-    "has_nickle_leggings": {
+    "has_nickel_leggings": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_leggings"
+            "item": "qforgemod:nickel_leggings"
           }
         ]
       }
     },
-    "has_nickle_boots": {
+    "has_nickel_boots": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_boots"
-          }
-        ]
-      }
-    },
-    "has_nickle_horse_armor": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "qforgemod:nickle_horse_armor"
+            "item": "qforgemod:nickel_boots"
           }
         ]
       }
@@ -149,22 +139,22 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "item": "qforgemod:nickle_nugget_from_blasting"
+        "item": "qforgemod:nickel_nugget_from_blasting"
       }
     }
   },
   "requirements": [
     [
-      "has_nickle_pickaxe",
-      "has_nickle_shovel",
-      "has_nickle_axe",
-      "has_nickle_hoe",
-      "has_nickle_sword",
-      "has_nickle_helmet",
-      "has_nickle_chestplate",
-      "has_nickle_leggings",
-      "has_nickle_boots",
-      "has_nickle_horse_armor",
+      "has_nickel_pickaxe",
+      "has_nickel_shovel",
+      "has_nickel_axe",
+      "has_nickel_hoe",
+      "has_nickel_sword",
+      "has_nickel_helmet",
+      "has_nickel_chestplate",
+      "has_nickel_leggings",
+      "has_nickel_boots",
+      "has_nickel_horse_armor",
       "has_chainmail_helmet",
       "has_chainmail_chestplate",
       "has_chainmail_leggings",

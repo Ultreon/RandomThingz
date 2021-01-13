@@ -3,8 +3,8 @@
 	"parent": "block/cube",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "qforgemod:block/pump/pump",
-		"particle": "qforgemod:block/pump/pump"
+		"0": "qforgemod:blocks/pump/pump",
+		"particle": "qforgemod:blocks/pump/pump"
 	},
 	"elements": [
 		{

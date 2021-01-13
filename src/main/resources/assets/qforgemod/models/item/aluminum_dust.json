@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/aluminum_dust"
+    "layer0": "qforgemod:items/aluminum_dust"
   }
 }

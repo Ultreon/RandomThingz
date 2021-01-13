@@ -98,6 +98,8 @@ public final class ModItems {
     public static final ItemRegistryObject<Item> BAKED_APPLE = register("baked_apple", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(4).saturation(0.3f).build())));
     public static final ItemRegistryObject<Item> FLOUR = register("flour", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD)));
     public static final ItemRegistryObject<Item> DOUGH = register("dough", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD)));
+    public static final ItemRegistryObject<Item> BACON = register("bacon", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(1).saturation(0.13f).build())));
+    public static final ItemRegistryObject<Item> COOKED_BACON = register("cooked_bacon", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(5).saturation(0.40f).build())));
     public static final ItemRegistryObject<Item> CHICKEN_LEG = register("chicken_leg", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(1).saturation(0.1f).build())));
     public static final ItemRegistryObject<Item> COOKED_CHICKEN_LEG = register("cooked_chicken_leg", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(4).saturation(0.35f).build())));
     public static final ItemRegistryObject<Item> MEATBALL = register("meatball", () -> new Item(new Item.Properties().group(ModItemGroups.FOOD).food(new Food.Builder().hunger(1).saturation(0.15f).effect(() -> new EffectInstance(Effects.HUNGER, 100, 1), 1).build())));
@@ -117,8 +119,7 @@ public final class ModItems {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Wood     //
-    ////////////////////
-//    public static final ItemRegistryObject<Item> EUCALYPTUS_PLANK = register("eucalyptus_plank", () -> new Item(new Item.Properties().group(ModItemGroups.WOOD)));
+    //////////////////
     public static final ItemRegistryObject<Item> EUCALYPTUS_LEAF = register("eucalyptus_leaf", () -> new EucalyptusLeafItem(new Item.Properties()
             .group(ModItemGroups.NATURE)
             .maxStackSize(128)
@@ -165,11 +166,6 @@ public final class ModItems {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Ingots or Dusts     //
     /////////////////////////////
-
-    // Metals - Copper Level
-    public static final ItemRegistryObject<IngotOrDustItem> NICKLE_INGOT = register("nickle_ingot", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> NICKLE_NUGGET = register("nickle_nugget", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> NICKLE_DUST = register("nickle_dust", IngotOrDustItem::new);
 
     // Metals - Tungsten Steel Level
     public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_INGOT = register("tungsten_ingot", IngotOrDustItem::new);
@@ -443,7 +439,7 @@ public final class ModItems {
     public static final IArmorMaterial redstoneArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":redstone", 8, new int[]{1, 4, 3, 2}, 5, 0.2f,
             SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 0.5F, () -> Ingredient.fromItems(OreMaterial.REDSTONE_ALLOY.getIngot().get())
     );
-    public static final IArmorMaterial nickleArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":nickel", 13, new int[]{2, 5, 7, 3}, 16, 1f,
+    public static final IArmorMaterial nickelArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":nickel", 13, new int[]{2, 5, 7, 3}, 16, 1f,
             SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> Ingredient.fromItems(OreMaterial.NICKEL.getIngot().get())
     );
     public static final IArmorMaterial steelArmorMaterial = new ArmorMaterialBuilder.Builder(QForgeMod.MOD_ID + ":steel", 24, new int[]{3, 6, 8, 4}, 14, 4f,
@@ -499,25 +495,25 @@ public final class ModItems {
     //     Item tiers     //
     ////////////////////////
     public static final IItemTier COPPER_ITEM_TIER = new ItemTierBuilder1(2, 420, 5.3f, 1.4f, 10,
-            () -> Ingredient.fromItems(OreMaterial.COPPER.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterial.COPPER.getIngot().orElseThrow(() -> new NullPointerException("Copper ingot not found in OreMaterial class.")))
     );
     public static final IItemTier REDSTONE_ITEM_TIER = new ItemTierBuilder1(0, 230, 2.3f, 1.2f, 5,
-            () -> Ingredient.fromItems(OreMaterial.REDSTONE_ALLOY.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterial.REDSTONE_ALLOY.getIngot().orElseThrow(() -> new NullPointerException("Redstone Alloy ingot not found in OreMaterial class.")))
     );
     public static final IItemTier NICKLE_ITEM_TIER = new ItemTierBuilder1(2, 480, 4.9f, 1.7f, 16,
-            () -> Ingredient.fromItems(NICKLE_INGOT)
+            () -> Ingredient.fromItems(OreMaterial.NICKEL.getIngot().orElseThrow(() -> new NullPointerException("Nickel ingot not found in OreMaterial class.")))
     );
     public static final IItemTier STEEL_ITEM_TIER = new ItemTierBuilder1(3, 1465, 8.1f, 3.8f, 14,
-            () -> Ingredient.fromItems(OreMaterial.STEEL.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterial.STEEL.getIngot().orElseThrow(() -> new NullPointerException("Steel ingot not found in OreMaterial class.")))
     );
     public static final IItemTier TUNGSTEN_ITEM_TIER = new ItemTierBuilder1(4, 2994, 9.4f, 4.7f, 28,
             () -> Ingredient.fromItems(TUNGSTEN_INGOT)
     );
     public static final IItemTier URANIUM_ITEM_TIER = new ItemTierBuilder1(3, 340, 3.6f, 6.3f, 4,
-            () -> Ingredient.fromItems(OreMaterial.URANIUM.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterial.URANIUM.getIngot().orElseThrow(() -> new NullPointerException("Uranium ingot not found in OreMaterial class.")))
     );
     public static final IItemTier PLATINUM_ITEM_TIER = new ItemTierBuilder1(3, 1294, 7.5f, 4f, 12,
-            () -> Ingredient.fromItems(OreMaterial.URANIUM.getIngot().get())
+            () -> Ingredient.fromItems(OreMaterial.PLATINUM.getIngot().orElseThrow(() -> new NullPointerException("Platinum ingot not found in OreMaterial class.")))
     );
     public static final IItemTier RUBY_ITEM_TIER = new ItemTierBuilder1(3, 970, 7.6f, 3.6f, 13,
             () -> Ingredient.fromItems(RUBY)
@@ -579,15 +575,15 @@ public final class ModItems {
     public static final ItemRegistryObject<HoeItem> REDSTONE_HOE = register("redstone_hoe", () -> new HoeItem(REDSTONE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Nickle
-    public static final ItemRegistryObject<ArmorItem> NICKLE_HELMET = register("nickle_helmet", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> NICKLE_CHESTPLATE = register("nickle_chestplate", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> NICKLE_LEGGINGS = register("nickle_leggings", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<ArmorItem> NICKLE_BOOTS = register("nickle_boots", () -> new ArmorItem(nickleArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<SwordItem> NICKLE_SWORD = register("nickle_sword", () -> new SwordItem(NICKLE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<PickaxeItem> NICKLE_PICKAXE = register("nickle_pickaxe", () -> new PickaxeItem(NICKLE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<ShovelItem> NICKLE_SHOVEL = register("nickle_shovel", () -> new ShovelItem(NICKLE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> NICKLE_AXE = register("nickle_axe", () -> new AxeItem(NICKLE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<HoeItem> NICKLE_HOE = register("nickle_hoe", () -> new HoeItem(NICKLE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> NICKLE_HELMET = register("nickel_helmet", () -> new ArmorItem(nickelArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> NICKLE_CHESTPLATE = register("nickel_chestplate", () -> new ArmorItem(nickelArmorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> NICKLE_LEGGINGS = register("nickel_leggings", () -> new ArmorItem(nickelArmorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ArmorItem> NICKLE_BOOTS = register("nickel_boots", () -> new ArmorItem(nickelArmorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<SwordItem> NICKLE_SWORD = register("nickel_sword", () -> new SwordItem(NICKLE_ITEM_TIER, 3, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<PickaxeItem> NICKLE_PICKAXE = register("nickel_pickaxe", () -> new PickaxeItem(NICKLE_ITEM_TIER, 1, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<ShovelItem> NICKLE_SHOVEL = register("nickel_shovel", () -> new ShovelItem(NICKLE_ITEM_TIER, 1.5F, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> NICKLE_AXE = register("nickel_axe", () -> new AxeItem(NICKLE_ITEM_TIER, 6.0F, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HoeItem> NICKLE_HOE = register("nickel_hoe", () -> new HoeItem(NICKLE_ITEM_TIER, 1, -2.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
     // Armors - Steel
     public static final ItemRegistryObject<ArmorItem> STEEL_HELMET = register("steel_helmet", () -> new ArmorItem(steelArmorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)));

@@ -20,12 +20,12 @@
         }
     },
     "textures": {
-        "particle": "qforgemod:block/mixer/front",
-        "down": "qforgemod:block/mixer/bottom",
-        "up": "qforgemod:block/mixer/top",
-        "north": "qforgemod:block/mixer/front",
-        "east": "qforgemod:block/mixer/side",
-        "south": "qforgemod:block/mixer/back",
-        "west": "qforgemod:block/mixer/side"
+        "particle": "qforgemod:blocks/mixer/front",
+        "down": "qforgemod:blocks/mixer/bottom",
+        "up": "qforgemod:blocks/mixer/top",
+        "north": "qforgemod:blocks/mixer/front",
+        "east": "qforgemod:blocks/mixer/side",
+        "south": "qforgemod:blocks/mixer/back",
+        "west": "qforgemod:blocks/mixer/side"
     }
 }

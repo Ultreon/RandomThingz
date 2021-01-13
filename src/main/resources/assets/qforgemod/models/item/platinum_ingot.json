@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/platinum_ingot"
+    "layer0": "qforgemod:items/platinum_ingot"
   }
 }

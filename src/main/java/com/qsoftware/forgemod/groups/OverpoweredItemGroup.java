@@ -22,19 +22,4 @@ public class OverpoweredItemGroup extends ItemGroup {
     public @NotNull ItemStack createIcon() {
         return new ItemStack(Blocks.COMMAND_BLOCK);
     }
-
-    @Override
-    public void fill(NonNullList<ItemStack> items) {
-        super.fill(items);
-        items.add(new ItemStack(Blocks.COMMAND_BLOCK));
-        items.add(new ItemStack(Blocks.CHAIN_COMMAND_BLOCK));
-        items.add(new ItemStack(Blocks.REPEATING_COMMAND_BLOCK));
-        items.add(new ItemStack(Blocks.BARRIER));
-        items.add(new ItemStack(Blocks.STRUCTURE_VOID));
-        items.add(new ItemStack(Blocks.STRUCTURE_BLOCK));
-        items.add(new ItemStack(Blocks.JIGSAW));
-        items.add(new ItemStack(Blocks.SPAWNER));
-        items.add(new ItemStack(Blocks.DRAGON_EGG));
-        items.add(new ItemStack(Blocks.PETRIFIED_OAK_SLAB));
-    }
 }

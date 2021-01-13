@@ -1,5 +1,5 @@
 {
-    "parent": "qforgemod:item/fridge_light",
+    "parent": "qforgemod:items/fridge_light",
     "textures": {
         "base": "minecraft:block/gray_concrete"
     }

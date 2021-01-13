@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:block/bauxite_ore"
+    "all": "qforgemod:blocks/bauxite_ore"
   }
 }

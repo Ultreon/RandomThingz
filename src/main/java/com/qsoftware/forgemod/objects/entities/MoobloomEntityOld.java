@@ -37,8 +37,10 @@ import java.util.function.Predicate;
  * Moobloom entity class.
  *
  * @author Qboi123
+ * @deprecated Use {@link MoobloomEntity} instead.
  */
-@SuppressWarnings("deprecation")
+@Deprecated
+@SuppressWarnings("ALL")
 public class MoobloomEntityOld extends CowEntity implements IShearable, net.minecraftforge.common.IForgeShearable {
     private Effect hasStewEffect;
     private int effectDuration;
@@ -249,6 +251,7 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
         return java.util.Collections.emptyList();
     }
 
+    @Deprecated
     static class TargetPredicate implements Predicate<LivingEntity> {
         private final MoobloomEntityOld parentEntity;
 

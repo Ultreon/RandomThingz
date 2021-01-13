@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.effects;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -7,13 +8,16 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.DamageSource;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Random;
 import java.util.UUID;
 
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class CurseEffect extends Effect {
     public CurseEffect() {
         super(EffectType.HARMFUL, 0xff00ff);
-        this.addAttributesModifier(Attributes.LUCK, "CURSED!!!"/*""CC5AF142-2BD2-4215-B636-2605AED11727"*/, -1.5D, AttributeModifier.Operation.ADDITION);
+        this.addAttributesModifier(Attributes.LUCK, UUID.nameUUIDFromBytes("CURSED!!!".getBytes()).toString()/*""CC5AF142-2BD2-4215-B636-2605AED11727"*/, -1.5D, AttributeModifier.Operation.ADDITION);
     }
 
     @Override

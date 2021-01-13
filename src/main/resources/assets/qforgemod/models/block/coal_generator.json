@@ -8,12 +8,12 @@
         }
     },
     "textures": {
-        "particle": "qforgemod:block/coal_generator/front",
-        "down": "qforgemod:block/coal_generator/bottom",
-        "up": "qforgemod:block/coal_generator/top",
-        "north": "qforgemod:block/coal_generator/front",
-        "east": "qforgemod:block/coal_generator/side",
-        "south": "qforgemod:block/coal_generator/back",
-        "west": "qforgemod:block/coal_generator/side"
+        "particle": "qforgemod:blocks/coal_generator/front",
+        "down": "qforgemod:blocks/coal_generator/bottom",
+        "up": "qforgemod:blocks/coal_generator/top",
+        "north": "qforgemod:blocks/coal_generator/front",
+        "east": "qforgemod:blocks/coal_generator/side",
+        "south": "qforgemod:blocks/coal_generator/back",
+        "west": "qforgemod:blocks/coal_generator/side"
     }
 }

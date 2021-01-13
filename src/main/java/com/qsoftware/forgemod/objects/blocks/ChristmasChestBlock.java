@@ -8,6 +8,11 @@ import net.minecraft.world.IBlockReader;
 
 import java.util.function.Supplier;
 
+/**
+ * Christmas chest block.
+ *
+ * @author Qboi123
+ */
 public class ChristmasChestBlock extends ChestBlock {
     public ChristmasChestBlock(Properties builder, Supplier<TileEntityType<? extends ChestTileEntity>> tileEntityTypeIn) {
         super(builder, tileEntityTypeIn);

@@ -3,17 +3,23 @@ package com.qsoftware.forgemod.config;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.variants.Ore;
 import com.qsoftware.forgemod.util.ExceptionUtil;
+import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@FieldsAreNonnullByDefault
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class Config {
     public static final ForgeConfigSpec.BooleanValue showBetaWelcomeMessage;
@@ -22,6 +28,8 @@ public final class Config {
     public static final ForgeConfigSpec.BooleanValue closePromptQuitButton;
     public static final ForgeConfigSpec.BooleanValue quitOnEscInTitle;
     public static final ForgeConfigSpec.BooleanValue allowShutdownPC;
+    public static final ForgeConfigSpec.BooleanValue searchUpdatesOnStartup;
+    public static final ForgeConfigSpec.BooleanValue searchForUnstableReleases;
     public static final ForgeConfigSpec.IntValue worldGenOilLakeChance;
     public static final ForgeConfigSpec.IntValue fluidGeneratorInjectionVolume;
     private static final ForgeConfigSpec commonSpec;
@@ -31,9 +39,12 @@ public final class Config {
     static {
         ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
+        // Beta welcome message.
         showBetaWelcomeMessage = builder
                 .comment("Shows a message in chat warning the player that the mod is early in development")
                 .define("general.showBetaWelcomeMessage", true);
+
+        // Close prompt
         closePrompt = builder
                 .comment("Shows an exit confirm screen when closing window.")
                 .define("quit.closePrompt", true);
@@ -46,12 +57,27 @@ public final class Config {
         quitOnEscInTitle = builder
                 .comment("Shows an exit confirm screen when pressed ESC in the title screen.")
                 .define("quit.quitOnEscInTitle", true);
+
+        // Permissions.
         allowShutdownPC = builder
                 .comment("Allow QForgeMod to shutdown your pc on specific things.")
                 .comment("Places:")
                 .comment("  ITEM:   Kill switch")
                 .comment("  BUTTON: In the exit confirm screen")
                 .define("general.allowShutdownPC", false);
+
+        // Updates
+        searchUpdatesOnStartup = builder
+                .comment("Search for updates on startup.")
+                .define("updates.searchOnStartup", false);
+        searchForUnstableReleases = builder
+                .comment("Search for unstable updates.")
+                .comment("Places:")
+                .comment("  ITEM:   Kill switch")
+                .comment("  BUTTON: In the exit confirm screen")
+                .define("updates.searchForUnstable", !QForgeMod.VERSION.isStable());
+
+        // ?
         fluidGeneratorInjectionVolume = builder
                 .comment("The amount of fluid (in milliBuckets, or mB) fluid generators consume at once.",
                         "Lower values reduce waste, but may cause lag as the generator more frequently turns on/off.",

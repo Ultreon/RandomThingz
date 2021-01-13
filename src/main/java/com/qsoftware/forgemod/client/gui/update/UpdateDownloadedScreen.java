@@ -11,7 +11,6 @@ import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.util.Util;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -21,22 +20,33 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.util.Objects;
 
+/**
+ * Update downloaded screen.
+ * Shown when a update was downloaded.
+ * 
+ * @author Qboi123
+ */
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class UpdateDownloadedScreen extends Screen {
-    private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
-    private final ITextComponent yesButtonText;
-    private final ITextComponent noButtonText;
+    private final IBidiRenderer bidiRenderer = IBidiRenderer.field_243257_a;
     private final Screen backScreen;
     private int ticksUntilEnable;
 
+    /**
+     * Update downloaded screen: class constructor.
+     *
+     * @param backScreen the screen to show when closing this screen.
+     */
     public UpdateDownloadedScreen(Screen backScreen) {
         super(new TranslationTextComponent("msg.qforgemod.update_downloaded.title"));
         this.backScreen = backScreen;
-        this.yesButtonText = DialogTexts.GUI_YES;
-        this.noButtonText = DialogTexts.GUI_NO;
     }
 
+    /**
+     * Initialize the screen.
+     * Uses narrator, clears buttons and other widgets, adds the buttons and sets the button delay.
+     */
     @SuppressWarnings("ResultOfMethodCallIgnored")
     protected void init() {
         super.init();
@@ -72,6 +82,14 @@ public class UpdateDownloadedScreen extends Screen {
 
     }
 
+    /**
+     * The render method for the screen.
+     * 
+     * @param matrixStack the matrix-stack for rendering.
+     * @param mouseX the x position of the mouse pointer.
+     * @param mouseY the y position of the mouse pointer.
+     * @param partialTicks the render partial ticks.
+     */
     public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         if (this.minecraft == null) {
@@ -80,13 +98,14 @@ public class UpdateDownloadedScreen extends Screen {
 
         drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 70, 0xffffff);
         drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.qforgemod.update_downloaded.description"), this.width / 2, 90, 0xbfbfbf);
-        this.field_243276_q.func_241863_a(matrixStack, this.width / 2, 90);
+        this.bidiRenderer.func_241863_a(matrixStack, this.width / 2, 90);
 
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
     /**
      * Sets the number of ticks to wait before enabling the buttons.
+     * @param ticksUntilEnableIn ticks until enabling.
      */
     public void setButtonDelay(int ticksUntilEnableIn) {
         this.ticksUntilEnable = ticksUntilEnableIn;
@@ -97,6 +116,10 @@ public class UpdateDownloadedScreen extends Screen {
 
     }
 
+    /**
+     * Ticking the screen.
+     * Checks for the button delay to be done.
+     */
     public void tick() {
         super.tick();
         if (this.ticksUntilEnable > 0) {
@@ -111,6 +134,11 @@ public class UpdateDownloadedScreen extends Screen {
         }
     }
 
+    /**
+     * Should not close when button delay isn't done.
+     *
+     * @return if the button delay is done.
+     */
     public boolean shouldCloseOnEsc() {
         return --this.ticksUntilEnable <= 0;
     }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/tin_chunks"
+    "layer0": "qforgemod:items/tin_chunks"
   }
 }

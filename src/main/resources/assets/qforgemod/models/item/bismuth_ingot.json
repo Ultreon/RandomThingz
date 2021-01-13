@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/bismuth_ingot"
+    "layer0": "qforgemod:items/bismuth_ingot"
   }
 }

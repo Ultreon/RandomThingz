@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:eucalyptus_button",
+    "qforgemod:cherry_button",
+    "qforgemod:diamond_button",
+    "qforgemod:gold_button",
+    "qforgemod:iron_button",
+    "qforgemod:quartz_button"
+  ]
+}

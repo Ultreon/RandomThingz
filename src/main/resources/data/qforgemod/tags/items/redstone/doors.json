@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:lab_door",
+    "qforgemod:shopping_door",
+    "qforgemod:iron_glass_door",
+    "qforgemod:iron_barrier_door"
+  ]
+}

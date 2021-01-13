@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:nickle_ingot_from_blasting"
+      "minecraft:nickel_ingot_from_blasting"
     ]
   },
   "criteria": {
-    "has_nickle_ore": {
+    "has_nickel_ore": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_ore"
+            "item": "qforgemod:nickel_ore"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "item": "qforgemod:nickle_ingot_from_blasting"
+        "item": "qforgemod:nickel_ingot_from_blasting"
       }
     }
   },
   "requirements": [
     [
-      "has_nickle_ore",
+      "has_nickel_ore",
       "has_the_recipe"
     ]
   ]

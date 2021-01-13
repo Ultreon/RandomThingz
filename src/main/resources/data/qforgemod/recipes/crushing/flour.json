@@ -2,7 +2,7 @@
   "type": "qforgemod:crushing",
   "process_time": 100,
   "ingredient": {
-    "tag": "minecraft:wheat"
+    "item": "minecraft:wheat"
   },
   "results": [
     {

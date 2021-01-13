@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/tin_nugget"
+    "layer0": "qforgemod:items/tin_nugget"
   }
 }

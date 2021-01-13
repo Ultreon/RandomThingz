@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/copper_chunks"
+    "layer0": "qforgemod:items/copper_chunks"
   }
 }

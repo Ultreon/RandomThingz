@@ -27,16 +27,16 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Author: MrCrayfish
+ * @author MrCrayfish
  */
 public class Events
 {
     private static final ResourceLocation ICONS = new ResourceLocation(Reference.MOD_ID, "textures/gui/icons.png");
-    private static Map<ItemGroup, Integer> scrollMap = new HashMap<>();
+    private static final Map<ItemGroup, Integer> scrollMap = new HashMap<>();
 
     private boolean updatedFilters;
-    private List<TagButton> buttons = new ArrayList<>();
-    private Map<ItemGroup, FilterEntry> miscFilterMap = new HashMap<>();
+    private final List<TagButton> buttons = new ArrayList<>();
+    private final Map<ItemGroup, FilterEntry> miscFilterMap = new HashMap<>();
     private Button btnScrollUp;
     private Button btnScrollDown;
     private Button btnEnableAll;
@@ -53,12 +53,9 @@ public class Events
     }
 
     @SubscribeEvent
-    public void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event)
-    {
-        if(event.getGui() instanceof CreativeScreen)
-        {
-            if(!this.updatedFilters)
-            {
+    public void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
+        if(event.getGui() instanceof CreativeScreen) {
+            if(!this.updatedFilters) {
                 this.updateFilters();
                 this.updatedFilters = true;
             }
@@ -90,19 +87,14 @@ public class Events
     }
 
     @SubscribeEvent
-    public void onScreenClick(GuiScreenEvent.MouseClickedEvent.Pre event)
-    {
+    public void onScreenClick(GuiScreenEvent.MouseClickedEvent.Pre event) {
         if(event.getButton() != GLFW.GLFW_MOUSE_BUTTON_LEFT)
             return;
 
-        if(event.getGui() instanceof CreativeScreen)
-        {
-            for(Button button : this.buttons)
-            {
-                if(button.isMouseOver(event.getMouseX(), event.getMouseY()))
-                {
-                    if(button.mouseClicked(event.getMouseX(), event.getMouseY(), event.getButton()))
-                    {
+        if(event.getGui() instanceof CreativeScreen) {
+            for(Button button : this.buttons) {
+                if(button.isMouseOver(event.getMouseX(), event.getMouseY())) {
+                    if(button.mouseClicked(event.getMouseX(), event.getMouseY(), event.getButton())) {
                         return;
                     }
                 }

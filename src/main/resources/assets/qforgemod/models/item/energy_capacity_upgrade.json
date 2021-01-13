@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/energy_capacity_upgrade"
+    "layer0": "qforgemod:items/energy_capacity_upgrade"
   }
 }

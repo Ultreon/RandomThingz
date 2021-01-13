@@ -3,8 +3,8 @@
 	"parent": "block/cube",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "qforgemod:block/mixer/mixer",
-		"particle": "qforgemod:block/mixer/mixer"
+		"0": "qforgemod:blocks/mixer/mixer",
+		"particle": "qforgemod:blocks/mixer/mixer"
 	},
 	"elements": [
 		{

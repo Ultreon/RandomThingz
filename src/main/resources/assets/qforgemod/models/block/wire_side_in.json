@@ -3,8 +3,8 @@
 	"parent": "block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "qforgemod:block/wire",
-		"particle": "qforgemod:block/wire"
+		"0": "qforgemod:blocks/wire",
+		"particle": "qforgemod:blocks/wire"
 	},
 	"elements": [
 		{

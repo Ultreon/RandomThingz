@@ -20,12 +20,12 @@
         }
     },
     "textures": {
-        "particle": "qforgemod:block/diesel_generator/front_on",
-        "down": "qforgemod:block/diesel_generator/bottom",
-        "up": "qforgemod:block/diesel_generator/top",
-        "north": "qforgemod:block/diesel_generator/front_on",
-        "east": "qforgemod:block/diesel_generator/side",
-        "south": "qforgemod:block/diesel_generator/back",
-        "west": "qforgemod:block/diesel_generator/side"
+        "particle": "qforgemod:blocks/diesel_generator/front_on",
+        "down": "qforgemod:blocks/diesel_generator/bottom",
+        "up": "qforgemod:blocks/diesel_generator/top",
+        "north": "qforgemod:blocks/diesel_generator/front_on",
+        "east": "qforgemod:blocks/diesel_generator/side",
+        "south": "qforgemod:blocks/diesel_generator/back",
+        "west": "qforgemod:blocks/diesel_generator/side"
     }
 }

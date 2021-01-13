@@ -43,6 +43,11 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
 
+/**
+ * Moobloom entity.
+ * 
+ * @author Qboi123
+ */
 public class MoobloomEntity extends CowEntity implements IShearable, net.minecraftforge.common.IForgeShearable {
    private static final DataParameter<String> MOOBLOOM_TYPE = EntityDataManager.createKey(MoobloomEntity.class, DataSerializers.STRING);
    private Effect hasStewEffect;
@@ -54,6 +59,13 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
       super(type, worldIn);
    }
 
+   /**
+    * 
+    * 
+    * @param pos the block position.
+    * @param worldIn the world reader.
+    * @return ...
+    */
    public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
       return worldIn.getBlockState(pos.down()).isIn(Blocks.MYCELIUM) ? 10.0F : worldIn.getBrightness(pos) - 0.5F;
    }
@@ -72,11 +84,24 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
 //
 //   }
 
+   /**
+    * Register data entries in the data manager.
+    */
    protected void registerData() {
       super.registerData();
       this.dataManager.register(MOOBLOOM_TYPE, MoobloomEntity.Type.BUTTERCUP.name);
    }
 
+   /**
+    * On initial spawn.
+    * 
+    * @param worldIn the world where to spawn.
+    * @param difficultyIn the difficulty.
+    * @param reason the spawn reason.
+    * @param spawnDataIn the spawn data.
+    * @param dataTag the data tag.
+    * @return the requested spawning entity.
+    */
    @Nullable
    public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
       if (reason == SpawnReason.SPAWN_EGG || reason == SpawnReason.MOB_SUMMONED) {
@@ -156,8 +181,16 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
       return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
    }
 
-   public ActionResultType func_230254_b_(PlayerEntity p_230254_1_, Hand p_230254_2_) {
-      ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
+   /**
+    * On entity right click.
+    * 
+    * @param playerIn the player that right clicks.
+    * @param handIn the hand used by the player.
+    * @return the action result (type).
+    */
+   @Override
+   public ActionResultType func_230254_b_(PlayerEntity playerIn, Hand handIn) {
+      ItemStack itemstack = playerIn.getHeldItem(handIn);
       if (itemstack.getItem() == Items.BOWL && !this.isChild()) {
          boolean flag = false;
          ItemStack itemstack1;
@@ -171,8 +204,8 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
             itemstack1 = new ItemStack(Items.MUSHROOM_STEW);
          }
 
-         ItemStack itemstack2 = DrinkHelper.fill(itemstack, p_230254_1_, itemstack1, false);
-         p_230254_1_.setHeldItem(p_230254_2_, itemstack2);
+         ItemStack itemstack2 = DrinkHelper.fill(itemstack, playerIn, itemstack1, false);
+         playerIn.setHeldItem(handIn, itemstack2);
          SoundEvent soundevent;
          if (flag) {
             soundevent = SoundEvents.ENTITY_MOOSHROOM_SUSPICIOUS_MILK;
@@ -194,7 +227,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
             }
 
             Pair<Effect, Integer> pair = optional.get();
-            if (!p_230254_1_.abilities.isCreativeMode) {
+            if (!playerIn.abilities.isCreativeMode) {
                itemstack.shrink(1);
             }
 
@@ -209,10 +242,16 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
 
          return ActionResultType.func_233537_a_(this.world.isRemote);
       } else {
-         return super.func_230254_b_(p_230254_1_, p_230254_2_);
+         return super.func_230254_b_(playerIn, handIn);
       }
    }
 
+   /**
+    * Shear method.
+    *
+    * @param category
+    */
+   @Override
    @SuppressWarnings("deprecation")
    public void shear(SoundCategory category) {
       this.world.playMovingSound(null, this, SoundEvents.ENTITY_MOOSHROOM_SHEAR, category, 1.0F, 1.0F);
@@ -243,11 +282,21 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
 
    }
 
+   /**
+    * Check if shearable.
+    *
+    * @return true if shearable.
+    */
    @SuppressWarnings("deprecation")
    public boolean isShearable() {
       return this.isAlive() && !this.isChild();
    }
 
+   /**
+    * Write additional data.
+    *
+    * @param compound the nbt compound.
+    */
    public void writeAdditional(CompoundNBT compound) {
       super.writeAdditional(compound);
       compound.putString("Type", this.getMoobloomType().name);

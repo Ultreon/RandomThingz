@@ -1,5 +1,5 @@
 {
-    "parent": "qforgemod:item/ice_bow",
+    "parent": "qforgemod:items/ice_bow",
     "textures": {
         "layer0": "qforgemod:items/ice_bow_pulling_1"
     }

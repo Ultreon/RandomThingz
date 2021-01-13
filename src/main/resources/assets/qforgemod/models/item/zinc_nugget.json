@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/zinc_nugget"
+    "layer0": "qforgemod:items/zinc_nugget"
   }
 }

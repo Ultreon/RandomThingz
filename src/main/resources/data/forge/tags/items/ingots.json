@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "#forge:ingots/aluminum",
     "#forge:ingots/aluminum_steel",
@@ -11,10 +12,8 @@
     "#forge:ingots/copper",
     "#forge:ingots/electrum",
     "#forge:ingots/enderium",
-    "#forge:ingots/gold",
     "#forge:ingots/infinity",
     "#forge:ingots/invar",
-    "#forge:ingots/iron",
     "#forge:ingots/lead",
     "#forge:ingots/lumium",
     "#forge:ingots/nickel",

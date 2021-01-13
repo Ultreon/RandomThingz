@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "qforgemod:alloy_smelter",
+    "qforgemod:battery_box",
+    "qforgemod:compressor",
     "qforgemod:crusher",
     "qforgemod:quarry",
     "qforgemod:lava_generator",

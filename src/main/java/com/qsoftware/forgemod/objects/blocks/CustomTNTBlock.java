@@ -17,7 +17,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public class CustomTNTBlock<T extends CustomTNTBlock<T>> extends TNTBlock {
+/**
+ * Custom TNT block
+ *
+ * @param <T> the super block.
+ * @author Qboi123
+ */
+public abstract class CustomTNTBlock<T extends CustomTNTBlock<T>> extends TNTBlock {
     private final TNTProperties tntProperties;
 
     public CustomTNTBlock(Properties properties, TNTProperties tntProperties) {

@@ -1,5 +1,13 @@
 package com.qsoftware.forgemod.objects.common;
 
+/**
+ * Interface for a named object.
+ */
 public interface INamed {
-    String getName();
+    /**
+     * Get string name.
+     *
+     * @return the name of the object,
+     */
+    String getStringName();
 }

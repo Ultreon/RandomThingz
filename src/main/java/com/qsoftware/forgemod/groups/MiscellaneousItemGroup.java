@@ -23,11 +23,4 @@ public class MiscellaneousItemGroup extends ItemGroup {
     public @NotNull ItemStack createIcon() {
         return new ItemStack(ModItems.LEGENDARY_ENDER_PEARL.get());
     }
-
-    @Override
-    public void fill(NonNullList<ItemStack> items) {
-        super.fill(items);
-        items.add(new ItemStack(Items.ENDER_PEARL));
-        items.add(new ItemStack(Items.ENDER_EYE));
-    }
 }

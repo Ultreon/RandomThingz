@@ -74,13 +74,6 @@
     },
     {
       "rolls": 1,
-      "entries": [
-        {
-          "type": "item",
-          "name": "xreliquary:catalyzing_gland",
-          "weight": 1
-        }
-      ],
       "conditions": [
         {
           "condition": "forge:mod_loaded",
@@ -94,17 +87,17 @@
           "chance": 0.1,
           "looting_multiplier": 0.05
         }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "xreliquary:catalyzing_gland",
+          "weight": 1
+        }
       ]
     },
     {
       "rolls": 1,
-      "entries": [
-        {
-          "type": "item",
-          "name": "xreliquary:eye_of_the_storm",
-          "weight": 1
-        }
-      ],
       "conditions": [
         {
           "condition": "forge:mod_loaded",
@@ -124,6 +117,13 @@
           "condition": "random_chance_with_looting",
           "chance": 0.1,
           "looting_multiplier": 0.05
+        }
+      ],
+      "entries": [
+        {
+          "type": "item",
+          "name": "xreliquary:eye_of_the_storm",
+          "weight": 1
         }
       ]
     }

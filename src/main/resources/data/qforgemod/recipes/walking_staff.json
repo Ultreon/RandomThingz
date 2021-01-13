@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "/X/",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "/": {
+      "tag": "ingots/copper"
+    },
+    "X": {
+      "tag": "gems/ruby"
+    },
+    "#": {
+      "tag": "sticks"
+    }
+  },
+  "result": {
+    "item": "qforgemod:walking_staff"
+  }
+}

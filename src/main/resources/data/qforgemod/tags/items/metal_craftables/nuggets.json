@@ -1,0 +1,30 @@
+{
+  "values": [
+    "qforgemod:aluminum_nugget",
+    "qforgemod:aluminum_steel_nugget",
+    "qforgemod:bismuth_nugget",
+    "qforgemod:bismuth_brass_nugget",
+    "qforgemod:bismuth_steel_nugget",
+    "qforgemod:brass_nugget",
+    "qforgemod:bronze_nugget",
+    "qforgemod:copper_nugget",
+    "qforgemod:electrum_nugget",
+    "qforgemod:enderium_nugget",
+    "qforgemod:infinity_nugget",
+    "qforgemod:invar_nugget",
+    "qforgemod:lead_nugget",
+    "qforgemod:lumium_nugget",
+    "qforgemod:nickel_nugget",
+    "qforgemod:nickle_nugget",
+    "qforgemod:platinum_nugget",
+    "qforgemod:redstone_alloy_nugget",
+    "qforgemod:signalum_nugget",
+    "qforgemod:silver_nugget",
+    "qforgemod:steel_nugget",
+    "qforgemod:tin_nugget",
+    "qforgemod:tungsten_nugget",
+    "qforgemod:uranium_nugget",
+    "qforgemod:ultrinium_nugget",
+    "qforgemod:zinc_nugget"
+  ]
+}

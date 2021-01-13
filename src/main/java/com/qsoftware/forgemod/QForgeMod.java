@@ -5,6 +5,8 @@ import com.qsoftware.forgemod.init.renew.ModItemsNew;
 import com.qsoftware.forgemod.init.types.ModContainers;
 import com.qsoftware.forgemod.init.types.ModEntities;
 import com.qsoftware.forgemod.init.types.ModTileEntities;
+import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,14 +16,17 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.*;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -31,6 +36,10 @@ import java.util.stream.Collectors;
  *
  * @author Qboi123
  */
+@SuppressWarnings("unused")
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+@FieldsAreNonnullByDefault
 @Mod("qforgemod")
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class QForgeMod {
@@ -53,8 +62,11 @@ public class QForgeMod {
     public static final Random RANDOM = new Random();
 
     // Class static fields.
+    @Nullable
     private static QForgeMod instance;
+    @Nullable
     private static IProxy proxy;
+    @Nullable
     private static Initialization init;
     private static final boolean testPhaseOn = true;
 
@@ -63,7 +75,7 @@ public class QForgeMod {
      *
      * @return the mod-instance.
      */
-    public static QForgeMod getInstance() {
+    public static @Nullable QForgeMod getInstance() {
         return instance;
     }
 
@@ -73,7 +85,7 @@ public class QForgeMod {
      * @return the proxy.
      */
     @SuppressWarnings("unused")
-    public static IProxy getProxy() {
+    public static @Nullable IProxy getProxy() {
         return proxy;
     }
 
@@ -82,7 +94,7 @@ public class QForgeMod {
      *
      * @return the initialization object.
      */
-    public static Initialization getInit() {
+    public static @Nullable Initialization getInit() {
         return init;
     }
 
@@ -94,9 +106,9 @@ public class QForgeMod {
      */
     public QForgeMod() {
         // Constants.
-        instance = this;
-        proxy = DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);
-        init = new Initialization(this);
+        QForgeMod.instance = this;
+        QForgeMod.proxy = DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);
+        QForgeMod.init = new Initialization(this);
 
         // Assign constants.
         Constants.logger = LOGGER;
@@ -110,9 +122,9 @@ public class QForgeMod {
         MinecraftForge.EVENT_BUS.register(this);
 
         // Register mod event bus listeners.
-        modEventBus.addListener(init::clientSetup);
-        modEventBus.addListener(init::commonSetup);
-        modEventBus.addListener(init::loadComplete);
+        modEventBus.addListener(QForgeMod.init::clientSetup);
+        modEventBus.addListener(QForgeMod.init::commonSetup);
+        modEventBus.addListener(QForgeMod.init::loadComplete);
         modEventBus.addListener(this::enqueueIMC);
         modEventBus.addListener(this::processIMC);
 
@@ -125,9 +137,7 @@ public class QForgeMod {
         ModTileEntities.TILE_ENTITY_TYPES.register(modEventBus);
 
         // Client-start.
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-            init.clientStart();
-        });
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> QForgeMod.init.clientStart());
     }
 
     /**
@@ -140,6 +150,11 @@ public class QForgeMod {
         return new ResourceLocation(MOD_ID, path);
     }
 
+    /**
+     * Internal method.
+     *
+     * @return boolean.
+     */
     @OnlyIn(Dist.CLIENT)
     private static boolean isDevState0() {
         return Minecraft.getInstance().getVersion().equals("MOD_DEV");
@@ -148,7 +163,7 @@ public class QForgeMod {
     /**
      * Check if QForgeMod is currently a development build.
      *
-     * @return a boolean.
+     * @return the QFM dev-state..
      */
     public static boolean isDevState() {
         try {
@@ -158,6 +173,11 @@ public class QForgeMod {
         }
     }
 
+    /**
+     * Check test phase.
+     *
+     * @return true if QForgeMod is in test phase, false otherwise.
+     */
     public static boolean isTestPhase() {
         return isDevState() || testPhaseOn;
     }
@@ -169,7 +189,7 @@ public class QForgeMod {
      */
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
-        init.serverStart(event);
+        Objects.requireNonNull(init).serverStart(event);
     }
 
     /**
@@ -191,7 +211,7 @@ public class QForgeMod {
      */
     private void processIMC(final InterModProcessEvent event) {
         LOGGER.info("Got IMC {}", event.getIMCStream().
-                map(m -> m.getMessageSupplier()).
+                map(InterModComms.IMCMessage::getMessageSupplier).
                 collect(Collectors.toList()));
     }
 

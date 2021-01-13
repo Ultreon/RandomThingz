@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/obsidian_dust"
+    "layer0": "qforgemod:items/obsidian_dust"
   }
 }

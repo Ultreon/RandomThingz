@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:nickel_block"
+    ]
+  },
+  "criteria": {
+    "has_nickel_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:nickel_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "item": "qforgemod:nickel_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nickel_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -8,12 +8,12 @@
         }
     },
     "textures": {
-        "particle": "qforgemod:block/electric_furnace/front_on",
-        "down": "qforgemod:block/electric_furnace/bottom",
-        "up": "qforgemod:block/electric_furnace/top_on",
-        "north": "qforgemod:block/electric_furnace/front_on",
-        "east": "qforgemod:block/electric_furnace/side_on",
-        "south": "qforgemod:block/electric_furnace/back",
-        "west": "qforgemod:block/electric_furnace/side_on"
+        "particle": "qforgemod:blocks/electric_furnace/front_on",
+        "down": "qforgemod:blocks/electric_furnace/bottom",
+        "up": "qforgemod:blocks/electric_furnace/top_on",
+        "north": "qforgemod:blocks/electric_furnace/front_on",
+        "east": "qforgemod:blocks/electric_furnace/side_on",
+        "south": "qforgemod:blocks/electric_furnace/back",
+        "west": "qforgemod:blocks/electric_furnace/side_on"
     }
 }

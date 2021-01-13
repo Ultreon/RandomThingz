@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:nickle_nugget"
+      "minecraft:nickel_nugget"
     ]
   },
   "criteria": {
-    "has_nickle_ingot": {
+    "has_nickel_ingot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickle_ingot"
+            "item": "qforgemod:nickel_ingot"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "item": "qforgemod:nickle_nugget"
+        "item": "qforgemod:nickel_nugget"
       }
     }
   },
   "requirements": [
     [
-      "has_nickle_ingot",
+      "has_nickel_ingot",
       "has_the_recipe"
     ]
   ]

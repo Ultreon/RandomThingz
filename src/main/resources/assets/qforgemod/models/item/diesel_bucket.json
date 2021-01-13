@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "qforgemod:item/diesel_bucket"
+    "layer0": "qforgemod:items/diesel_bucket"
   }
 }

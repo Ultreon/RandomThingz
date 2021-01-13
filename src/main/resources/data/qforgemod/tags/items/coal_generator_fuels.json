@@ -2,6 +2,6 @@
   "replace": false,
   "values": [
     "#minecraft:coals",
-    "#forge:storage_blocks/coal"
+    "#qforgemod:storage_blocks/coal"
   ]
 }

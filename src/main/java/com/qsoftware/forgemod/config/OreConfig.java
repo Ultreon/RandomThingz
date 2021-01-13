@@ -1,8 +1,15 @@
 package com.qsoftware.forgemod.config;
 
 import com.qsoftware.forgemod.init.variants.Ore;
+import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraftforge.common.ForgeConfigSpec;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
+@FieldsAreNonnullByDefault
 public class OreConfig {
     private final ForgeConfigSpec.BooleanValue masterSwitch;
     private final ForgeConfigSpec.IntValue veinCount;

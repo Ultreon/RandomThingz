@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/output_chance_upgrade"
+    "layer0": "qforgemod:items/output_chance_upgrade"
   }
 }

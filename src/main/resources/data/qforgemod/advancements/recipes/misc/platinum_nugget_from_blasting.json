@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:platinum_nugget_from_blasting"
+      "qforgemod:platinum_nugget_from_blasting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_pickaxe"
+            "item": "qforgemod:platinum_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_shovel"
+            "item": "qforgemod:platinum_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_axe"
+            "item": "qforgemod:platinum_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_hoe"
+            "item": "qforgemod:platinum_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_sword"
+            "item": "qforgemod:platinum_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_helmet"
+            "item": "qforgemod:platinum_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_chestplate"
+            "item": "qforgemod:platinum_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_leggings"
+            "item": "qforgemod:platinum_leggings"
           }
         ]
       }
@@ -91,17 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:platinum_boots"
-          }
-        ]
-      }
-    },
-    "has_platinum_horse_armor": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:platinum_horse_armor"
+            "item": "qforgemod:platinum_boots"
           }
         ]
       }

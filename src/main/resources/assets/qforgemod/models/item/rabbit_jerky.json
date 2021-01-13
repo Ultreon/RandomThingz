@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:item/rabbit_jerky"
+    "layer0": "qforgemod:items/rabbit_jerky"
   }
 }

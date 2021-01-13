@@ -2,25 +2,32 @@ package com.qsoftware.forgemod.pc.disk;
 
 import com.google.common.annotations.Beta;
 import com.qsoftware.forgemod.pc.Disk;
+import io.netty.buffer.ByteBuf;
 import org.jetbrains.annotations.NotNull;
+import sun.misc.IOUtils;
+
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.util.UUID;
 
 @Beta
 public class Partition {
     private final Disk disk;
-    private final FileSystem fileSystem;
-    private final char driveLetter;
+    private final long offset;
+    private final long length;
+    private final UUID id;
 
-    public Partition(Disk disk, FileSystem fileSystem, char driveLetter) {
+    public Partition(Disk disk, long offset, long length) throws IOException {
         this.disk = disk;
-        this.fileSystem = fileSystem;
-        this.driveLetter = driveLetter;
+
+        this.offset = offset;
+        this.length = length;
+
+        disk.getChannel().position(offset);
+        this.id = disk.readUUID();
     }
 
-    public FileSystem getFileSystem() {
-        return fileSystem;
-    }
-
-    public File getFile() {
+    public AbstractFile getFile() {
         return null;
     }
 
@@ -28,8 +35,15 @@ public class Partition {
         return disk;
     }
 
-    @NotNull
-    public Character getDriveLetter() {
-        return driveLetter;
+    public long getOffset() {
+        return offset;
+    }
+
+    public long getLength() {
+        return length;
+    }
+
+    public UUID getId() {
+        return id;
     }
 }

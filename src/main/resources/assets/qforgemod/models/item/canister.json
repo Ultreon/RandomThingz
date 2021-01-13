@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "qforgemod:item/canister",
-    "layer1": "qforgemod:item/canister_fluid"
+    "layer0": "qforgemod:items/canister",
+    "layer1": "qforgemod:items/canister_fluid"
   }
 }

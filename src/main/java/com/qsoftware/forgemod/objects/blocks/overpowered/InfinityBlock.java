@@ -12,6 +12,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Infinity block.
+ *
+ * @author Qboi123
+ */
 public class InfinityBlock extends Block {
     public InfinityBlock(Properties properties) {
         super(properties);

@@ -96,16 +96,6 @@
         ]
       }
     },
-    "has_uranium_horse_armor": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "qforgemod:uranium_horse_armor"
-          }
-        ]
-      }
-    },
     "has_chainmail_helmet": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
