@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "qforgemod:aquamarine_ore"
-  },
-  "result": "qforgemod:aquamarine",
-  "experience": 0.7,
-  "cookingtime": 100
-}

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "qforgemod:pork_shank"
-  },
-  "result": "qforgemod:cooked_pork_shank",
-  "experience": 0.35,
-  "cookingtime": 100
-}

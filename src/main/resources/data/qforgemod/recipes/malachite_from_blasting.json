@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "qforgemod:malachite_ore"
-  },
-  "result": "qforgemod:malachite",
-  "experience": 0.7,
-  "cookingtime": 100
-}

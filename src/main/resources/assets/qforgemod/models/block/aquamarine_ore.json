@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "particle": "qforgemod:blocks/aquamarine_ore",
-    "all": "qforgemod:blocks/aquamarine_ore"
-  }
-}

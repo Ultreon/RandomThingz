@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "powered=false": { "model": "qforgemod:block/eucalyptus_pressure_plate" },
-        "powered=true": { "model": "qforgemod:block/eucalyptus_pressure_plate_down" }
-    }
-}

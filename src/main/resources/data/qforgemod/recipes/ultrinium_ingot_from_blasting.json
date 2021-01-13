@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "qforgemod:ultrinium_ore"
-  },
-  "result": "qforgemod:ultrinium_ingot",
-  "experience": 0.7,
-  "cookingtime": 500
-}

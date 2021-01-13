@@ -1,8 +1,0 @@
-{
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "qforgemod:blocks/cherry_planks",
-        "top": "qforgemod:blocks/cherry_planks",
-        "side": "qforgemod:blocks/cherry_planks"
-    }
-}

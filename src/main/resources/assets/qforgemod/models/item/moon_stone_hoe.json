@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "qforgemod:items/moon_stone_hoe"
-  }
-}

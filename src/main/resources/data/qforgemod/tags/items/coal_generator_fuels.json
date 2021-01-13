@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#minecraft:coals",
-    "#forge:storage_blocks/coal"
-  ]
-}

@@ -1,8 +1,0 @@
-{
-    "parent": "block/slab",
-    "textures": {
-        "bottom": "qforgemod:blocks/eucalyptus_planks",
-        "top": "qforgemod:blocks/eucalyptus_planks",
-        "side": "qforgemod:blocks/eucalyptus_planks"
-    }
-}

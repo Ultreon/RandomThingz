@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "tag": "forge:dusts/aluminum_steel"
-  },
-  "result": "qforgemod:aluminum_steel_ingot",
-  "experience": 1.0,
-  "cookingtime": 100
-}

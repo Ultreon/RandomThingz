@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "qforgemod:amethyst_ore"
-  },
-  "result": "qforgemod:amethyst",
-  "experience": 0.7,
-  "cookingtime": 100
-}

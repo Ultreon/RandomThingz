@@ -1,6 +1,0 @@
-{
-  "parent": "qforgemod:block/drying_rack",
-  "textures": {
-    "wood": "qforgemod:block/dark_cherry_planks"
-  }
-}

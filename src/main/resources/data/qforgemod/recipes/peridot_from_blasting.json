@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "qforgemod:peridot_ore"
-  },
-  "result": "qforgemod:peridot",
-  "experience": 0.7,
-  "cookingtime": 100
-}

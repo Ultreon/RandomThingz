@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "qforgemod:chicken_leg"
-  },
-  "result": "qforgemod:cooked_chicken_leg",
-  "experience": 0.35,
-  "cookingtime": 100
-}

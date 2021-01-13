@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "tag": "forge:dusts/bismuth_steel"
-  },
-  "result": "qforgemod:bismuth_steel_ingot",
-  "experience": 1.0,
-  "cookingtime": 200
-}

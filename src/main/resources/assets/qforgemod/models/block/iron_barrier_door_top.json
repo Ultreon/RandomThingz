@@ -1,7 +1,0 @@
-{
-    "parent": "block/door_top",
-    "textures": {
-        "bottom": "qforgemod:blocks/iron_barrier_door_bottom",
-        "top": "qforgemod:blocks/iron_barrier_door_top"
-    }
-}
