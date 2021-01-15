@@ -229,6 +229,11 @@ public class UpdateAvailableScreen extends AdvancedScreen {
      * @param gui the current gui.
      */
     private static void checkUpdates(Minecraft mc, Screen gui) {
+        if (QForgeMod.isDevtest()) {
+            Updater.DEBUG = false;
+            return;
+        }
+
         // Get QForgeMod updater instance.
         Updater<QVersion> updater = Updater.getQFMInstance();
 

@@ -8,7 +8,9 @@ public class QFSFile extends AbstractFile {
     public QFSFile(Partition partition, String path) {
         super(partition, path);
 
-        if (partition.getFileSystem() instanceof QFileSystem)
+        if (partition.getFileSystem() instanceof QFileSystem) {
+
+        }
     }
 
     @Override

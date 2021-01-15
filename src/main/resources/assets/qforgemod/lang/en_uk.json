@@ -836,9 +836,11 @@
   "msg.qforgemod.update_downloaded.description": "Do you want to open the update folder?",
 
   "msg.qforgemod.test_phase.title": "§6§lWarning",
-  "msg.qforgemod.test_phase.description": "§eQForgeMod mod is currently in a test phase, stuff might break or change.",
+  "msg.qforgemod.test_phase.description": "Are you sure you want to continue?.",
+  "msg.qforgemod.test_phase.description.1": "You're using a Development Test version of QForgeMod.",
 
   "button.qforgemod.confirm_exit.shutdown_pc": "Shutdown PC",
+  "button.qforgemod.update": "Download Update for QForgeMod",
 
   "tooltip.qforgemod.kill_switch.warning": "§6Warning: §e§oThis item will shutdown your computer when you use it!",
   "tooltip.qforgemod.kill_switch.not_supported": "§4Error: §c§oThis item works only on Windows or Linux computers!",

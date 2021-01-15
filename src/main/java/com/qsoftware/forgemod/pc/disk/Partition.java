@@ -16,6 +16,7 @@ public class Partition {
     private final long offset;
     private final long length;
     private final UUID id;
+    private FileSystem fileSystem;
 
     public Partition(Disk disk, long offset, long length) throws IOException {
         this.disk = disk;
@@ -45,5 +46,9 @@ public class Partition {
 
     public UUID getId() {
         return id;
+    }
+
+    public FileSystem getFileSystem() {
+        return fileSystem;
     }
 }

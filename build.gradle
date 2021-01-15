@@ -27,9 +27,9 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 //apply plugin: "io.freefair.lombok"
 
-version = '1.2-alpha1'
+version = '1.2-alpha1-DEVTEST'
 group = 'com.qsoftware.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'QForgeMod'
+archivesBaseName = 'qforgemod'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -186,8 +186,6 @@ dependencies {
     compile group: 'xml-resolver', name: 'xml-resolver', version: '1.2'
     compile group: 'org.yaml', name: 'snakeyaml', version: '1.26'
 
-//    runtimeOnly "net.silentchaos512:silent-gear-${project.mc_version}:1.+"
-
     // JEI
     if (project.hasProperty("jei_version")) {
         // compile against the JEI API but do not include it at runtime
@@ -195,11 +193,6 @@ dependencies {
         // at runtime, use the full JEI jar
         runtimeOnly fg.deobf("mezz.jei:jei-${project.jei_version}")
     }
-
-//    // HWYLA
-//    if (project.hasProperty("hwyla_version")) {
-//        compileOnly "mcp.mobius.waila:Hwyla:${project.hwyla_version}"
-//    }
 
     // CC Tweaked
     if (project.hasProperty("cctweaked_version")) {
@@ -209,8 +202,7 @@ dependencies {
     if (project.hasProperty("refined_storage_version")) {
         compile fg.deobf("com.raoulvdberge:refinedstorage:${project.refined_storage_version}")
     }
-//    implementation fileTree(dir: 'qaddons/build/libs', include: ['*.jar'])
-    
+
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
     // compile "some.group:artifact:version"
@@ -237,7 +229,7 @@ jar {
         attributes([
                 "Specification-Title": "qforgemod",
                 "Specification-Vendor": "qsoftware",
-                "Specification-Version": "1.2-alpha1",
+                "Specification-Version": "1.2-alpha1-DEVTEST",
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"qsoftware",
@@ -252,3 +244,30 @@ jar {
 jar.finalizedBy('reobfJar')
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 //publish.dependsOn('reobfJar')
+
+task("uploadJars", dependsOn: "build") {
+    description = "uploads JARs"
+
+    if (project.hasProperty("local_maven") || project.hasProperty("sftp_maven")) {
+        apply plugin: 'maven'
+        uploadArchives {
+            repositories {
+                if (project.hasProperty("local_maven")) {
+                    mavenDeployer {
+                        repository(url: "file://${local_maven}")
+                    }
+                }
+                if (project.hasProperty("sftp_maven")) {
+                    repositories.mavenDeployer {
+                        configuration = configurations.deployerJars
+                        repository(url: "sftp://${sftp_maven}") {
+                            authentication(userName: "${sftp_username}", privateKey: "${sftp_key}")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+jar.finalizedBy('uploadJars')

@@ -47,8 +47,9 @@ public class QForgeMod {
     public static final String MOD_ID = "qforgemod";
     public static final String MOD_NAME = "QForgeMod";
     public static final String NBT_NAME = "QForgeMod";
-    public static final String MOD_VERSION = "1.2-alpha1";
+    public static final String MOD_VERSION = "1.2-alpha1-DEVTEST";
     public static final QVersion VERSION = new QVersion(MOD_VERSION);
+    private static final boolean IS_DEVTEST = VERSION.isDevTest();
 
     /**
      * QForgeMod's Logger
@@ -180,6 +181,13 @@ public class QForgeMod {
      */
     public static boolean isTestPhase() {
         return isDevState() || testPhaseOn;
+    }
+
+    /**
+     *
+     */
+    public static boolean isDevtest() {
+        return IS_DEVTEST;
     }
 
     /**

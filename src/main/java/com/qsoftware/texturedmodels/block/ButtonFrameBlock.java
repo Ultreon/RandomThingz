@@ -28,6 +28,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -66,7 +67,7 @@ public class ButtonFrameBlock extends WoodButtonBlock {
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
+    public @NotNull ActionResultType onBlockActivated(@NotNull BlockState state, World world, @NotNull BlockPos pos, PlayerEntity player, @NotNull Hand hand, @NotNull BlockRayTraceResult trace) {
         ItemStack item = player.getHeldItem(hand);
         if (!world.isRemote) {
             BlockAppearanceHelper.setLightLevel(item, state, world, pos, player, hand);
@@ -74,7 +75,8 @@ public class ButtonFrameBlock extends WoodButtonBlock {
             BlockAppearanceHelper.setDesign(world, pos, player, item);
             BlockAppearanceHelper.setDesignTexture(world, pos, player, item);
             BlockAppearanceHelper.setOverlay(world, pos, player, item);
-            //TODO clean up
+
+            // TODO clean up
             if (!state.get(CONTAINS_BLOCK)) {
                 if (item.getItem() instanceof BlockItem) {
                     TileEntity tileEntity = world.getTileEntity(pos);
@@ -140,7 +142,7 @@ public class ButtonFrameBlock extends WoodButtonBlock {
     }
 
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, @NotNull World worldIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             dropContainedBlock(worldIn, pos);
 

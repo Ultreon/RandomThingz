@@ -836,18 +836,20 @@
   "msg.qforgemod.update_downloaded.description": "Wil je de update map openen?",
 
   "msg.qforgemod.test_phase.title": "§6§lWaarschuwing",
-  "msg.qforgemod.test_phase.description": "§eQForgeMod is momenteel in een test fase, onderdelen kunnen kapot gaan, of veranderen.",
+  "msg.qforgemod.test_phase.description": "Weet je zeker dat je wilt doorgaan?",
+  "msg.qforgemod.test_phase.description.1": "Je gebruikt een testversie van QForgeMod.",
 
   "button.qforgemod.confirm_exit.shutdown_pc": "Computer afsluiten",
+  "button.qforgemod.update": "Download update voor QForgeMod",
 
   "tooltip.qforgemod.kill_switch.warning": "§6Waarschuwing: §e§oDit voorwerp sluit je computer af als je het gebruikt!",
   "tooltip.qforgemod.kill_switch.not_supported": "§4Fout: §c§oDit voorwerp werkt alleen op Windows of Linux computers!",
 
   "screen.qforgemod.settings.download_update": "Download de update",
-  "screen.qforgemod.settings.quit_settings": "Afsluit Instellingen",
+  "screen.qforgemod.settings.quit_settings": "Afsluit instellingen",
   "screen.qforgemod.settings.allow_shutdown_pc": "PC afsluiten toestaan: %1$s",
 
-  "screen.qforgemod.quit_settings.quit_on_esc_in_title": "Sluit waneer ESC in titel: %1$s",
+  "screen.qforgemod.quit_settings.quit_on_esc_in_title": "Sluit wanneer ESC in titel: %1$s",
   "screen.qforgemod.quit_settings.quit_on_esc_in_title.tooltip": "Sluit Minecraft af als er op ESC\nwordt gedrukt in het titel scherm.",
   "screen.qforgemod.quit_settings.close_prompt": "Sluit bevestiging: %1$s",
   "screen.qforgemod.quit_settings.close_prompt.tooltip": "Geef een bevestiging weer als het venster wordt afgesloten.",

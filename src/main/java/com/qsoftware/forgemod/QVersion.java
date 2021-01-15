@@ -13,6 +13,7 @@ public class QVersion implements IVersion {
     private final TYPE type;
     private final int release;
     public static final QVersion EMPTY = new QVersion(0, 0, TYPE.BETA, 0);
+    private final boolean isDevTest;
 
     /**
      * 
@@ -21,7 +22,7 @@ public class QVersion implements IVersion {
      */
     public QVersion(String s) {
         // String to be scanned to find the pattern.
-        String pattern = "([0-9]*)\\.([0-9]*)-(alpha|beta|pre|release)([0-9]*)"; // 1.0-alpha4 // 5.4-release-7
+        String pattern = "([0-9]*)\\.([0-9]*)-(alpha|beta|pre|release)([0-9]*)(-DEVTEST|)"; // 1.0-alpha4 // 5.4-release-7
 
         // Create a Pattern object
         Pattern r = Pattern.compile(pattern);
@@ -50,16 +51,22 @@ public class QVersion implements IVersion {
             }
 
             release = Integer.parseInt(m.group(4));
+            isDevTest = !m.group(5).equals("");
         } else {
             throw new IllegalArgumentException("Invalid version,");
         }
     }
 
     public QVersion(int version, int subversion, TYPE type, int release) {
+        this(version, subversion, type, release, false);
+    }
+
+    public QVersion(int version, int subversion, TYPE type, int release, boolean isDevTest) {
         this.version = version;
         this.subversion = subversion;
         this.type = type;
         this.release = release;
+        this.isDevTest = isDevTest;
     }
 
     public int getVersion() {
@@ -76,17 +83,25 @@ public class QVersion implements IVersion {
 
     @Override
     public boolean isStable() {
-        return type == TYPE.RELEASE;
+        return type == TYPE.RELEASE && !isDevTest;
+    }
+
+    public boolean isDevTest() {
+        return isDevTest;
     }
 
     public String toString() {
-        String sb = String.valueOf(version) +
-                '.' +
-                subversion +
-                '-' +
-                type.name().toLowerCase() +
-                release;
-        return sb;
+        StringBuilder sb = new StringBuilder();
+        sb.append(version);
+        sb.append('.');
+        sb.append(subversion);
+        sb.append('-');
+        sb.append(type.name().toLowerCase());
+        sb.append(release);
+        if (isDevTest) {
+            sb.append("-DEVTEST");
+        }
+        return sb.toString();
     }
 
     public String toLocalizedString() {
@@ -111,6 +126,9 @@ public class QVersion implements IVersion {
 
         sb.append(' ');
         sb.append(release);
+        if (isDevTest) {
+            sb.append(" Dev-Test");
+        }
 
         return sb.toString();
     }

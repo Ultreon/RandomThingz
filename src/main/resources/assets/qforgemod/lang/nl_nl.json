@@ -836,9 +836,11 @@
   "msg.qforgemod.update_downloaded.description": "Wil je de update map openen?",
 
   "msg.qforgemod.test_phase.title": "§6§lWaarschuwing",
-  "msg.qforgemod.test_phase.description": "§eQForgeMod is momenteel in een test fase, onderdelen kunnen kapot gaan, of veranderen.",
+  "msg.qforgemod.test_phase.description": "Weet je zeker dat je wilt doorgaan?",
+  "msg.qforgemod.test_phase.description.1": "Je gebruikt een testversie van QForgeMod.",
 
   "button.qforgemod.confirm_exit.shutdown_pc": "Computer afsluiten",
+  "button.qforgemod.update": "Download update voor QForgeMod",
 
   "tooltip.qforgemod.kill_switch.warning": "§6Waarschuwing: §e§oDit voorwerp sluit je computer af als je het gebruikt!",
   "tooltip.qforgemod.kill_switch.not_supported": "§4Fout: §c§oDit voorwerp werkt alleen op Windows of Linux computers!",

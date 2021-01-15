@@ -4,6 +4,8 @@ import com.qsoftware.forgemod.pc.Disk;
 import com.qsoftware.forgemod.pc.disk.AbstractFile;
 import com.qsoftware.forgemod.pc.disk.FileSystem;
 
+import java.io.IOException;
+
 public class QFileSystem extends FileSystem {
     private final Disk disk;
     private int pos;
@@ -24,8 +26,9 @@ public class QFileSystem extends FileSystem {
     }
 
     @Override
-    protected void write(byte data) {
-        this.disk.
+    protected void write(byte data) throws IOException {
+        this.disk.getChannel().position(getPos());
+        this.disk.getOutput().write(data);
     }
 
     @Override

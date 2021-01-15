@@ -37,7 +37,7 @@ public class TargetEntityPage extends DebugPage {
             float f6 = f3 * f4;
             float f7 = f2 * f4;
 
-            double d0 = 16; // Todo: test value, if it will lag, then lower the value. ( Possible not needed ;) )
+            double d0 = 16;
 
             Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 

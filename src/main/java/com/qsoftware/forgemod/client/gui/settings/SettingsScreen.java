@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("FieldCanBeLocal")
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class SettingsScreen extends Screen {
 
@@ -63,7 +64,7 @@ public class SettingsScreen extends Screen {
         allowShutdownPC = Config.allowShutdownPC.get();
 
         int dy = 0;
-        addButton(new UpdateButton(Updater.getQFMInstance(), width / 2 - 75, height / 6 + dy - 6, 150));
+        addButton(new UpdateButton(Updater.getQFMInstance(), width / 2 - 155, height / 6 + dy - 6, 310));
 
         dy += 30;
         this.quitSettings = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,

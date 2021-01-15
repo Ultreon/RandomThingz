@@ -80,6 +80,7 @@ public class ModTestPhaseScreen extends Screen {
         this.renderBackground(matrixStack);
         drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 70, 0xffffff);
         drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.qforgemod.test_phase.description"), this.width / 2, 90, 0xbfbfbf);
+        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.qforgemod.test_phase.description.1"), this.width / 2, 100, 0xbfbfbf);
         this.field_243276_q.func_241863_a(matrixStack, this.width / 2, 90);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
@@ -118,17 +119,16 @@ public class ModTestPhaseScreen extends Screen {
         return initializedAlready;
     }
 
-//    @SubscribeEvent
-//    public static void onMainScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
-//        Minecraft mc = Minecraft.getInstance();
-//        Screen gui = event.getGui();
-//        if (QForgeMod.isTestPhase()) {
-//            if (gui instanceof MainMenuScreen) {
-//                if (!isInitializedAlready()) {
-//                    mc.displayGuiScreen(new ModTestPhaseScreen(mc.currentScreen));
-//                }
-//            }
-//        }
-//    }
-
+    @SubscribeEvent
+    public static void onMainScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
+        Minecraft mc = Minecraft.getInstance();
+        Screen gui = event.getGui();
+        if (gui instanceof MainMenuScreen) {
+            if (QForgeMod.isDevtest()) {
+                if (!isInitializedAlready()) {
+                    mc.displayGuiScreen(new ModTestPhaseScreen(mc.currentScreen));
+                }
+            }
+        }
+    }
 }

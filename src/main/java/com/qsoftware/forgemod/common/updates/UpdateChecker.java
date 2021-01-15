@@ -24,6 +24,10 @@ public class UpdateChecker {
 
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event) {
+        if (QForgeMod.isDevtest()) {
+            return;
+        }
+
         Minecraft mc = Minecraft.getInstance();
         Screen gui = mc.currentScreen;
 
