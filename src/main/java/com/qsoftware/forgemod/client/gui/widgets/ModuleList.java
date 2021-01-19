@@ -173,16 +173,16 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
 
          this.mc.getTextureManager().bindTexture(MODULE_OVERLAYS);
          if (this.module.isCore()) {
-            AbstractGui.blit(matrixStack, subX, subY, 0.0F, 0.0F, 32, 32, 32, 32);
-            AbstractGui.blit(matrixStack, subX + 16, subY + 16, 64.0F, 0.0F, 16, 16, 32, 32);
+            AbstractGui.blit(matrixStack, subX, subY, 0.0F, 0.0F, 32, 32, 256, 256);
+            AbstractGui.blit(matrixStack, subX + 16, subY + 16, 64.0F, 0.0F, 16, 16, 256, 256);
          }
 
          if (compatibility != ModuleCompatibility.FULL) {
-            AbstractGui.blit(matrixStack, subX, subY, 0.0F, 0.0F, 32, 32, 32, 32);
+            AbstractGui.blit(matrixStack, subX, subY, 0.0F, 0.0F, 32, 32, 256, 256);
             if (compatibility == ModuleCompatibility.NONE) {
-               AbstractGui.blit(matrixStack, subX + 16, subY + 16, 48.0F, 0.0F, 16, 16, 32, 32);
+               AbstractGui.blit(matrixStack, subX + 16, subY + 16, 48.0F, 0.0F, 16, 16, 256, 256);
             } else if (compatibility == ModuleCompatibility.PARTIAL) {
-               AbstractGui.blit(matrixStack, subX + 16, subY + 16, 32.0F, 0.0F, 16, 16, 32, 32);
+               AbstractGui.blit(matrixStack, subX + 16, subY + 16, 32.0F, 0.0F, 16, 16, 256, 256);
             }
          }
 
