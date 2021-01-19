@@ -1,8 +1,7 @@
 package com.qsoftware.forgemod.config;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.common.interfaces.Module;
+import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.java.maps.SequencedHashMap;
 import com.qsoftware.forgemod.init.variants.Ore;
 import com.qsoftware.forgemod.util.ExceptionUtil;
@@ -142,21 +141,5 @@ public final class Config {
 
     public static ForgeConfigSpec.BooleanValue getModuleSpec(Module module) {
         return modules.get(module);
-    }
-
-    public static void registerModuleConfig(Module module) {
-        ForgeConfigSpec.BooleanValue value = builder.comment("Search for unstable updates.")
-                .comment("Places:")
-                .comment("  ITEM:   Kill switch")
-                .comment("  BUTTON: In the exit confirm screen")
-                .define("modules." + module.getName(), module.isCompatible() && (module.isDefaultEnabled() || !module.canDisable()));
-        modules.put(module, value);
-    }
-
-    public static Boolean getModuleValue(Module module) {
-        return getModuleSpec(module).get();
-    }
-    public static void setModuleValue(Module module) {
-        boolean enabled = ModuleManager.getInstance().isEnabled(module);
     }
 }

@@ -203,6 +203,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
     static void checkUpdates(Minecraft mc, Screen gui) {
         if (QForgeMod.isDevtest()) {
             AbstractUpdater.DEBUG = false;
+            initializedBefore = true;
             return;
         }
 

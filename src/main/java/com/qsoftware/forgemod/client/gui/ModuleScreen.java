@@ -6,7 +6,7 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.widgets.ModuleList;
 import com.qsoftware.forgemod.client.toasts.ErrorToast;
 import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.common.interfaces.Module;
+import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.graphics.MCGraphics;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.Screen;
@@ -125,8 +125,8 @@ public class ModuleScreen extends Screen {
       list.getEventListeners().clear();
       
       // Add challenge entries.
-      for (Module challenge : modules) {
-         list.getEventListeners().add(new ModuleList.ModuleEntry(Objects.requireNonNull(this.minecraft), list, this, challenge));
+      for (Module module : modules) {
+         list.getEventListeners().add(new ModuleList.ModuleEntry(Objects.requireNonNull(this.minecraft), list, this, module));
       }
    }
 

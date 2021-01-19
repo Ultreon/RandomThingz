@@ -1,13 +1,16 @@
 package com.qsoftware.forgemod.modules.pcShutdown;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.common.interfaces.Module;
+import com.qsoftware.forgemod.client.gui.widgets.ModuleCompatibility;
+import com.qsoftware.forgemod.common.Module;
+import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.config.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 public class PCShutdownModule extends Module {
@@ -31,13 +34,19 @@ public class PCShutdownModule extends Module {
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "pc_shutdown";
     }
 
     @Override
-    public boolean isCompatible() {
-        return QForgeMod.isClientSide();
+    public @NotNull ModuleCompatibility getCompatibility() {
+        if (QForgeMod.isClientSide()) {
+            return ModuleCompatibility.FULL;
+        } else if (QForgeMod.isServerSide()) {
+            return ModuleCompatibility.PARTIAL;
+        } else {
+            return ModuleCompatibility.NONE;
+        }
     }
 
     @Override

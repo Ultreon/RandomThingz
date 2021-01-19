@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod;
 
+import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.common.interfaces.Module;
 import com.qsoftware.forgemod.init.renew.ModBlocksNew;
 import com.qsoftware.forgemod.init.renew.ModItemsNew;
 import com.qsoftware.forgemod.init.types.ModContainers;

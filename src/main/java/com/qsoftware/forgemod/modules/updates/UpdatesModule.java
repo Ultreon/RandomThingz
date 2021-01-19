@@ -1,25 +1,54 @@
 package com.qsoftware.forgemod.modules.updates;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.client.gui.widgets.ModuleCompatibility;
+import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.Ticker;
 import com.qsoftware.forgemod.common.interfaces.IVersion;
-import com.qsoftware.forgemod.common.interfaces.Module;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
+/**
+ * The updates module.
+ * This module is used for showing update notifications, and downloading updates.
+ *
+ * @author Qboi123
+ */
 public class UpdatesModule extends Module {
     private final UpdateChecker updateChecker = new UpdateChecker(this);
-    private final ServerSide serverSide = new ServerSide();
-    private final ClientSide clientSide = new ClientSide();
+
+    /**
+     * Server side instance.
+     */
+    private final ServerSide serverSide;
+
+    /**
+     * Client side instance.
+     */
+    private final ClientSide clientSide;
+
+    /**
+     * Updates module: Constructor
+     */
+    public UpdatesModule() {
+        if (QForgeMod.isClientSide()) {
+            clientSide = new ClientSide();
+            serverSide = null;
+        } else if (QForgeMod.isServerSide()) {
+            clientSide = null;
+            serverSide = new ServerSide();
+        } else {
+            throw new IllegalStateException("Minecraft isn't either on client or server side.");
+        }
+    }
 
     @Override
     public void onEnable() {
@@ -41,19 +70,30 @@ public class UpdatesModule extends Module {
         }
     }
 
+    /**
+     * This module can be disabled.
+     *
+     * @return true.
+     */
     @Override
     public boolean canDisable() {
         return true;
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "updates";
     }
 
     @Override
-    public boolean isCompatible() {
-        return true;
+    public @NotNull ModuleCompatibility getCompatibility() {
+        if (QForgeMod.isClientSide()) {
+            return ModuleCompatibility.FULL;
+        } else if (QForgeMod.isServerSide()) {
+            return ModuleCompatibility.PARTIAL;
+        } else {
+            return ModuleCompatibility.NONE;
+        }
     }
 
     @Override
@@ -61,7 +101,6 @@ public class UpdatesModule extends Module {
         return true;
     }
 
-    @OnlyIn(Dist.CLIENT)
     private static class ClientSide extends Module.ClientSide {
         /**
          * On screen initialize event.
@@ -88,7 +127,6 @@ public class UpdatesModule extends Module {
         }
     }
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
     private static class ServerSide extends Module.ServerSide {
         private static final int delay = 10;
         private static final int tickDelay = 20 * delay;

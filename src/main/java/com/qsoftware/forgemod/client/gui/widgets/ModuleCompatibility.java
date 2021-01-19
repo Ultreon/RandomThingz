@@ -1,23 +1,31 @@
 package com.qsoftware.forgemod.client.gui.widgets;
 
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
 /**
  * The module compatibility class.
  *
  * @author Qboi123
  */
-public class ModuleCompatibility {
+public enum ModuleCompatibility {
+    FULL(true, true, new StringTextComponent("")),
+    PARTIAL(false, true, new StringTextComponent("")),
+    NONE(false, false, new StringTextComponent("")),
+    ;
+
+    private final boolean fullyCompatible;
     private final boolean compatible;
     private final ITextComponent confirmMessage;
 
     /**
      * Module compatibility: Constructor.
      *
-     * @param compatible is the module compatible?
+     * @param fullyCompatible is the module compatible?
      * @param confirmMessage the confirm message.
      */
-    public ModuleCompatibility(boolean compatible, ITextComponent confirmMessage) {
+    ModuleCompatibility(boolean fullyCompatible, boolean compatible, ITextComponent confirmMessage) {
+        this.fullyCompatible = fullyCompatible;
         this.compatible = compatible;
         this.confirmMessage = confirmMessage;
     }
@@ -25,6 +33,10 @@ public class ModuleCompatibility {
     /**
      * @return true if compatible, false otherwise.
      */
+    public boolean isFullyCompatible() {
+        return fullyCompatible;
+    }
+
     public boolean isCompatible() {
         return compatible;
     }
@@ -35,4 +47,5 @@ public class ModuleCompatibility {
     public ITextComponent getConfirmMessage() {
         return confirmMessage;
     }
+
 }

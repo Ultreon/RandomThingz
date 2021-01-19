@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.common;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.common.interfaces.Module;
 import com.qsoftware.forgemod.init.Modules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundNBT;

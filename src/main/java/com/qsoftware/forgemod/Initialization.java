@@ -6,7 +6,7 @@ import com.qsoftware.forgemod.init.*;
 import com.qsoftware.forgemod.init.types.ModEntities;
 import com.qsoftware.forgemod.init.variants.OreMaterial;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
-import com.qsoftware.forgemod.client.gui.hud.DebugScreen;
+import com.qsoftware.forgemod.modules.debugMenu.DebugScreen;
 import com.qsoftware.forgemod.objects.entities.*;
 import com.qsoftware.forgemod.objects.entities.baby.*;
 import com.qsoftware.forgemod.objects.items.advanced.AdvancedBowItem;

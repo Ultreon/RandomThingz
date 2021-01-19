@@ -4,8 +4,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.ModuleScreen;
+import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.common.interfaces.Module;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -13,7 +13,6 @@ import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.list.ExtendedList;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.resources.PackCompatibility;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.*;
@@ -101,6 +100,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
    @SuppressWarnings("deprecation")
    @OnlyIn(Dist.CLIENT)
    public static class ModuleEntry extends ExtendedList.AbstractListEntry<ModuleEntry> {
+      private static final ResourceLocation MODULE_OVERLAYS = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/overlays/modules.png");
       private final ModuleList list;
       protected final Minecraft mc;
       protected final Screen screen;
@@ -157,14 +157,35 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
        */
       public void render(MatrixStack matrixStack, int unknown1, int subY, int subX, int x, int y, int mouseX, int mouseY, boolean p_230432_9_, float partialTicks) {
          ModuleCompatibility compatibility = this.module.getCompatibility();
-         if (!compatibility.isCompatible()) {
+         if (compatibility == ModuleCompatibility.NONE) {
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-            AbstractGui.fill(matrixStack, subX - 1, subY - 1, subX + x - 9, subY + y + 1, -8978432);
+            AbstractGui.fill(matrixStack, subX - 1, subY - 1, subX + x - 9, subY + y + 1, 0xff770000);
+         }
+         if (compatibility == ModuleCompatibility.PARTIAL) {
+            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            AbstractGui.fill(matrixStack, subX - 1, subY - 1, subX + x - 9, subY + y + 1, 0xff773a00);
          }
 
+         // Icon
          this.mc.getTextureManager().bindTexture(this.module.getTextureLocation());
          RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
          AbstractGui.blit(matrixStack, subX, subY, 0.0F, 0.0F, 32, 32, 32, 32);
+
+         this.mc.getTextureManager().bindTexture(MODULE_OVERLAYS);
+         if (this.module.isCore()) {
+            AbstractGui.blit(matrixStack, subX, subY, 0.0F, 0.0F, 32, 32, 32, 32);
+            AbstractGui.blit(matrixStack, subX + 16, subY + 16, 64.0F, 0.0F, 16, 16, 32, 32);
+         }
+
+         if (compatibility != ModuleCompatibility.FULL) {
+            AbstractGui.blit(matrixStack, subX, subY, 0.0F, 0.0F, 32, 32, 32, 32);
+            if (compatibility == ModuleCompatibility.NONE) {
+               AbstractGui.blit(matrixStack, subX + 16, subY + 16, 48.0F, 0.0F, 16, 16, 32, 32);
+            } else if (compatibility == ModuleCompatibility.PARTIAL) {
+               AbstractGui.blit(matrixStack, subX + 16, subY + 16, 32.0F, 0.0F, 16, 16, 32, 32);
+            }
+         }
+
          IReorderingProcessor reorderingLocalizedName = this.reorderingLocalizedName;
          if (this.mc.gameSettings.touchscreen || p_230432_9_) {
             this.mc.getTextureManager().bindTexture(ModuleList.ICONS);
@@ -206,7 +227,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
          if (deltaX <= 32.0D) {
             if (this.manager.isUnsavedDisabled(this.module)) {
                ModuleCompatibility compatibility = this.module.getCompatibility();
-               if (compatibility.isCompatible()) {
+               if (compatibility.isFullyCompatible()) {
                   this.manager.enable(this.module);
                } else {
                   ITextComponent itextcomponent = compatibility.getConfirmMessage();
