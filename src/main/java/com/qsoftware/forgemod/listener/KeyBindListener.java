@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.listener;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.gui.ConfirmExitScreen;
+import com.qsoftware.forgemod.modules.confirmExit.ConfirmExitScreen;
 import com.qsoftware.forgemod.client.gui.TestScreen;
 import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;

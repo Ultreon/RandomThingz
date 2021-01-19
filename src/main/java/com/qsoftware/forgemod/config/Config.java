@@ -1,6 +1,9 @@
 package com.qsoftware.forgemod.config;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.common.ModuleManager;
+import com.qsoftware.forgemod.common.interfaces.Module;
+import com.qsoftware.forgemod.common.java.maps.SequencedHashMap;
 import com.qsoftware.forgemod.init.variants.Ore;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
@@ -12,10 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -36,9 +36,12 @@ public final class Config {
     private static final ForgeConfigSpec.BooleanValue oreWorldGenMasterSwitch;
     private static final Map<Ore, OreConfig> oreConfigs = new EnumMap<>(Ore.class);
 
-    static {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+    private static final Map<Module, ForgeConfigSpec.BooleanValue> modules = new SequencedHashMap<>();
 
+    private static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+
+
+    static {
         // Beta welcome message.
         showBetaWelcomeMessage = builder
                 .comment("Shows a message in chat warning the player that the mod is early in development")
@@ -135,5 +138,25 @@ public final class Config {
 
     public static void save() {
         commonSpec.save();
+    }
+
+    public static ForgeConfigSpec.BooleanValue getModuleSpec(Module module) {
+        return modules.get(module);
+    }
+
+    public static void registerModuleConfig(Module module) {
+        ForgeConfigSpec.BooleanValue value = builder.comment("Search for unstable updates.")
+                .comment("Places:")
+                .comment("  ITEM:   Kill switch")
+                .comment("  BUTTON: In the exit confirm screen")
+                .define("modules." + module.getName(), module.isCompatible() && (module.isDefaultEnabled() || !module.canDisable()));
+        modules.put(module, value);
+    }
+
+    public static Boolean getModuleValue(Module module) {
+        return getModuleSpec(module).get();
+    }
+    public static void setModuleValue(Module module) {
+        boolean enabled = ModuleManager.getInstance().isEnabled(module);
     }
 }

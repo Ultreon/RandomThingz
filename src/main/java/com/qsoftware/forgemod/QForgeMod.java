@@ -1,5 +1,7 @@
 package com.qsoftware.forgemod;
 
+import com.qsoftware.forgemod.common.ModuleManager;
+import com.qsoftware.forgemod.common.interfaces.Module;
 import com.qsoftware.forgemod.init.renew.ModBlocksNew;
 import com.qsoftware.forgemod.init.renew.ModItemsNew;
 import com.qsoftware.forgemod.init.types.ModContainers;
@@ -8,6 +10,9 @@ import com.qsoftware.forgemod.init.types.ModTileEntities;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
+import net.minecraft.crash.CrashReport;
+import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.crash.ReportedException;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -26,6 +31,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -71,6 +77,30 @@ public class QForgeMod {
     private static Initialization init;
     private static final boolean testPhaseOn = true;
 
+    private static final boolean isClientSide;
+
+    private static final boolean isServerSide;
+
+    static {
+        boolean c;
+        try {
+            Class.forName("net.minecraft.client.Minecraft");
+            c = true;
+        } catch (ClassNotFoundException e) {
+            c = false;
+        }
+        isClientSide = c;
+
+        boolean s;
+        try {
+            Class.forName("net.minecraft.server.Main");
+            s = true;
+        } catch (ClassNotFoundException e) {
+            s = false;
+        }
+        isServerSide = s;
+    }
+
     /**
      * Get the QForgeUtils mod instance.
      *
@@ -110,6 +140,24 @@ public class QForgeMod {
         QForgeMod.instance = this;
         QForgeMod.proxy = DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);
         QForgeMod.init = new Initialization(this);
+
+        try {
+            ModuleManager.getInstance().init();
+        } catch (IOException e) {
+            CrashReport report = new CrashReport("QFM Modules being initialized", e);
+            CrashReportCategory reportCategory = report.makeCategory("Module details");
+            try {
+                ModuleManager manager = ModuleManager.getInstance();
+                Module currentModule = manager.getCurrentModule();
+
+                reportCategory.addDetail("Module Name", currentModule::getName);
+                reportCategory.addDetail("Enabled", () -> manager.isEnabledInConfig(currentModule) ? "Yes" : "No");
+            } catch (Throwable ignored) {
+
+            }
+
+            throw new ReportedException(report);
+        }
 
         // Assign constants.
         Constants.logger = LOGGER;
@@ -172,6 +220,14 @@ public class QForgeMod {
         } catch (NoSuchMethodError error) {
             return false;
         }
+    }
+
+    public static boolean isClientSide() {
+        return QForgeMod.isClientSide;
+    }
+
+    public static boolean isServerSide() {
+        return QForgeMod.isServerSide;
     }
 
     /**

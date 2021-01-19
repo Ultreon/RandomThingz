@@ -15,11 +15,11 @@ public abstract class AdvancedScreen extends Screen {
         super(titleIn);
     }
 
-    protected boolean isPointInRegion(int x, int y, int width, int height, double mouseX, double mouseY) {
+    protected static boolean isPointInRegion(int x, int y, int width, int height, double mouseX, double mouseY) {
         return mouseX >= (double)(x - 1) && mouseX < (double)(x + width + 1) && mouseY >= (double)(y - 1) && mouseY < (double)(y + height + 1);
     }
 
-    protected boolean isPointInRegion(int x, int y, int width, int height, Point mouse) {
+    protected static boolean isPointInRegion(int x, int y, int width, int height, Point mouse) {
         return mouse.x >= (double)(x - 1) && mouse.x < (double)(x + width + 1) && mouse.y >= (double)(y - 1) && mouse.y < (double)(y + height + 1);
     }
 

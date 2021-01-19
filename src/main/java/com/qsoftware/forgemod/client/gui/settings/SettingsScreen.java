@@ -3,10 +3,11 @@ package com.qsoftware.forgemod.client.gui.settings;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.client.gui.ModuleScreen;
 import com.qsoftware.forgemod.client.gui.widgets.SwitchWidget;
 import com.qsoftware.forgemod.client.gui.widgets.UpdateButton;
 import com.qsoftware.forgemod.common.text.Translations;
-import com.qsoftware.forgemod.common.updates.Updater;
+import com.qsoftware.forgemod.modules.updates.AbstractUpdater;
 import com.qsoftware.forgemod.config.Config;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.OptionsScreen;
@@ -16,6 +17,7 @@ import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings("FieldCanBeLocal")
+@SuppressWarnings({"FieldCanBeLocal", "unused"})
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class SettingsScreen extends Screen {
 
@@ -38,6 +40,7 @@ public class SettingsScreen extends Screen {
     private Button cancelButton;
     private Button quitSettings;
     private Button allowShutdownPCButton;
+    private Button modulesButton;
 
     protected SettingsScreen(Screen back, ITextComponent titleIn) {
         super(titleIn);
@@ -64,7 +67,7 @@ public class SettingsScreen extends Screen {
         allowShutdownPC = Config.allowShutdownPC.get();
 
         int dy = 0;
-        addButton(new UpdateButton(Updater.getQFMInstance(), width / 2 - 155, height / 6 + dy - 6, 310));
+        addButton(new UpdateButton(AbstractUpdater.getQFMInstance(), width / 2 - 155, height / 6 + dy - 6, 310));
 
         dy += 30;
         this.quitSettings = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
@@ -76,10 +79,18 @@ public class SettingsScreen extends Screen {
                 Translations.getScreen("settings", "allow_shutdown_pc").appendString(allowShutdownPC ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleAllowShutdownPC, this::tooltip));
 
         dy += 30;
+        this.modulesButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 310, 20,
+                Translations.getScreen("settings", "modules"), this::openModulesScreen, this::tooltip));
+
+        dy += 30;
         this.doneButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
                 DialogTexts.GUI_DONE, this::saveAndGoBack));
         this.cancelButton = addButton(new Button(width / 2 + 5, height / 6 + dy - 6, 150, 20,
                 DialogTexts.GUI_CANCEL, this::goBack));
+    }
+
+    private void openModulesScreen(Button button) {
+        Objects.requireNonNull(this.minecraft).displayGuiScreen(new ModuleScreen(this, new TranslationTextComponent("screen.qforgemod.modules")));
     }
 
     @Override

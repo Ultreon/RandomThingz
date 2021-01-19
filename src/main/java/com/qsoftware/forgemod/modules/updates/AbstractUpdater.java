@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.common.updates;
+package com.qsoftware.forgemod.modules.updates;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -21,22 +21,22 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Updater<T extends IVersion> {
+public abstract class AbstractUpdater<T extends IVersion> {
     private static final String qfmUpdateUrl = "https://raw.githubusercontent.com/Qboi123/QForgeMod/master/update.json";
-    private static final List<Updater<?>> INSTANCES = new ArrayList<>();
+    private static final List<AbstractUpdater<?>> INSTANCES = new ArrayList<>();
     public static boolean DEBUG = true;
     private final URL updateUrl;
     private final ModContainer modContainer;
     private T latestVersion = null;
     private URL releaseUrl;
 
-    private static final Updater<QVersion> QFM_INSTANCE;
+    private static final AbstractUpdater<QVersion> QFM_INSTANCE;
 
     static {
         URL updateUrl;
         try {
             updateUrl = new URL(qfmUpdateUrl);
-            QFM_INSTANCE = new Updater<QVersion>(updateUrl, QForgeMod.MOD_ID) {
+            QFM_INSTANCE = new AbstractUpdater<QVersion>(updateUrl, QForgeMod.MOD_ID) {
                 @Override
                 public QVersion parseVersion(String version) {
                     return new QVersion(version);
@@ -49,13 +49,13 @@ public abstract class Updater<T extends IVersion> {
             };
         } catch (MalformedURLException e) {
             CrashReport crashreport = CrashReport.makeCrashReport(e, "Invalid update URL.");
-            CrashReportCategory crashreportcategory = crashreport.makeCategory("Updater being initialized.");
+            CrashReportCategory crashreportcategory = crashreport.makeCategory("AbstractUpdater being initialized.");
             crashreportcategory.addDetail("Url", qfmUpdateUrl);
             throw new ReportedException(crashreport);
         }
     }
 
-    public Updater(URL url, String modId) {
+    public AbstractUpdater(URL url, String modId) {
         String modIdRepr = modId
                 .replaceAll("\n", "\\n")
                 .replaceAll("\r", "\\r")
@@ -72,12 +72,12 @@ public abstract class Updater<T extends IVersion> {
     ///////////////
     // Instances //
     ///////////////
-    public static Updater<QVersion> getQFMInstance() {
+    public static AbstractUpdater<QVersion> getQFMInstance() {
         return QFM_INSTANCE;
     }
 
-    public static Updater<?>[] getInstances() {
-        return INSTANCES.toArray(new Updater[0]);
+    public static AbstractUpdater<?>[] getInstances() {
+        return INSTANCES.toArray(new AbstractUpdater[0]);
     }
 
     ///////////
@@ -113,7 +113,7 @@ public abstract class Updater<T extends IVersion> {
     // Has update. / Is up to date //
     /////////////////////////////////
     public boolean hasUpdate() {
-        return getCurrentModVersion().compareTo(latestVersion) < 0;
+        return latestVersion != null && getCurrentModVersion().compareTo(latestVersion) < 0;
     }
 
     public boolean isUpToDate(T version) {

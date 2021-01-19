@@ -2,12 +2,8 @@ package com.qsoftware.forgemod.pc.disk;
 
 import com.google.common.annotations.Beta;
 import com.qsoftware.forgemod.pc.Disk;
-import io.netty.buffer.ByteBuf;
-import org.jetbrains.annotations.NotNull;
-import sun.misc.IOUtils;
 
-import java.io.*;
-import java.nio.ByteBuffer;
+import java.io.IOException;
 import java.util.UUID;
 
 @Beta

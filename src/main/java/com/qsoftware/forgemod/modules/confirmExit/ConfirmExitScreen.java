@@ -1,18 +1,16 @@
-package com.qsoftware.forgemod.client.gui;
+package com.qsoftware.forgemod.modules.confirmExit;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.config.Config;
-import com.qsoftware.forgemod.util.Utils;
-import com.qsoftware.modlib.event.WindowCloseEvent;
-import net.minecraft.client.Minecraft;
+import com.qsoftware.forgemod.init.Modules;
+import com.qsoftware.forgemod.modules.pcShutdown.ConfirmShutdownScreen;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IBidiRenderer;
-import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.WorldLoadProgressScreen;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.settings.NarratorStatus;
@@ -20,15 +18,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.BackgroundDrawnEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
-import org.lwjgl.glfw.GLFW;
 
-import java.util.List;
 import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
@@ -72,8 +66,8 @@ public class ConfirmExitScreen extends Screen {
                 this.minecraft.displayGuiScreen(backScreen);
             }
         }));
-        if (Config.allowShutdownPC.get()) {
-            this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 210, 20, this.shutdownPcText, (p_213006_1_) -> Utils.shutdown()));
+        if (Config.allowShutdownPC.get() && ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN)) {
+            this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 210, 20, this.shutdownPcText, (p_213006_1_) -> ConfirmShutdownScreen.show()));
         }
 
         setButtonDelay(10);
@@ -119,42 +113,6 @@ public class ConfirmExitScreen extends Screen {
 
     public boolean shouldCloseOnEsc() {
         return false;
-    }
-
-    @SubscribeEvent
-    public static void onWindowClose(WindowCloseEvent event) {
-        Minecraft mc = Minecraft.getInstance();
-
-        if (event.getSource() == WindowCloseEvent.Source.GENERIC) {
-            if (mc.world == null && mc.currentScreen == null) {
-                event.setCanceled(true);
-                return;
-            }
-
-            if (mc.currentScreen instanceof WorldLoadProgressScreen) {
-                event.setCanceled(true);
-                return;
-            }
-
-            if (Config.closePrompt.get()) {
-                if (mc.world != null && !Config.closePromptIngame.get()) {
-                    mc.shutdown();
-                    return;
-                }
-                event.setCanceled(true);
-                if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
-                    mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
-                }
-            } else {
-                mc.shutdown();
-            }
-        } else if (event.getSource() == WindowCloseEvent.Source.QUIT_BUTTON) {
-            if (Config.closePrompt.get() && Config.closePromptQuitButton.get() && !(mc.currentScreen instanceof ConfirmExitScreen)) {
-                mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
-            } else if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
-                mc.shutdown();
-            }
-        }
     }
 
 //    @SubscribeEvent

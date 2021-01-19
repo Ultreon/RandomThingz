@@ -1,15 +1,13 @@
-package com.qsoftware.forgemod.client.gui.update;
+package com.qsoftware.forgemod.modules.updates;
 
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.QVersion;
 import com.qsoftware.forgemod.client.gui.AdvancedScreen;
-import com.qsoftware.forgemod.common.updates.Updater;
 import com.qsoftware.forgemod.graphics.MCGraphics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IBidiRenderer;
-import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
@@ -19,8 +17,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.awt.*;
@@ -36,7 +32,7 @@ import java.util.Objects;
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class UpdateAvailableScreen extends AdvancedScreen {
     // Icons.
-    private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/screens/icons.png");
+    private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/icons.png");
 
     // Flags.
     private static boolean initializedBefore = false;
@@ -51,8 +47,8 @@ public class UpdateAvailableScreen extends AdvancedScreen {
     // Back screen.
     private final Screen backScreen;
 
-    // Updater.
-    private final Updater<?> updater;
+    // AbstractUpdater.
+    private final AbstractUpdater<?> updater;
 
     // Values.
     private int ticksUntilEnable;
@@ -63,7 +59,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
      * @param backScreen the screen to show after closing this screen.
      * @param updater the updater.
      */
-    public UpdateAvailableScreen(Screen backScreen, Updater<?> updater) {
+    public UpdateAvailableScreen(Screen backScreen, AbstractUpdater<?> updater) {
         // Super call
         super(new TranslationTextComponent("msg.qforgemod.update_available.title"));
 
@@ -133,7 +129,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         this.field_243276_q.func_241863_a(mcg.getMatrixStack(), this.width / 2, 90);
 
         // Draw help icon.
-        mcg.drawTexture(1, 1, 0, 0, 16, 16, SCREEN_ICONS);
+        mcg.drawTexture(1, 1, 64, 15, 16, 16, SCREEN_ICONS);
 
         // Draw help message if mouse pointer is on the help icon.
         if (isPointInRegion(1, 1, 17, 17, mouse)) {
@@ -199,49 +195,25 @@ public class UpdateAvailableScreen extends AdvancedScreen {
     }
 
     /**
-     * On screen initialize event.
-     * Catches the main menu initialization.
-     *
-     * @param event a {@link GuiScreenEvent.InitGuiEvent.Post} event.
-     */
-    @SubscribeEvent
-    public static void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
-        // Get gui and the Minecraft instance.
-        Minecraft mc = Minecraft.getInstance();
-        Screen gui = event.getGui();
-
-        // Return if already initialized.
-        if (isInitializedBefore()) {
-            return;
-        }
-
-        // Is the gui the main menu?
-        if (gui instanceof MainMenuScreen) {
-            // Check for updates.
-            checkUpdates(mc, gui);
-        }
-    }
-
-    /**
      * Check for QForgeMod updates, then show the update available screen.
      *
      * @param mc the minecraft instance.
      * @param gui the current gui.
      */
-    private static void checkUpdates(Minecraft mc, Screen gui) {
+    static void checkUpdates(Minecraft mc, Screen gui) {
         if (QForgeMod.isDevtest()) {
-            Updater.DEBUG = false;
+            AbstractUpdater.DEBUG = false;
             return;
         }
 
         // Get QForgeMod updater instance.
-        Updater<QVersion> updater = Updater.getQFMInstance();
+        AbstractUpdater<QVersion> updater = AbstractUpdater.getQFMInstance();
 
         // Check for QForgeMod updates.
-        Updater.UpdateInfo updateInfo = updater.checkForUpdates();
+        AbstractUpdater.UpdateInfo updateInfo = updater.checkForUpdates();
 
         // Is there a update available?
-        if (updateInfo.getStatus() == Updater.UpdateStatus.UPDATE_AVAILABLE) {
+        if (updateInfo.getStatus() == AbstractUpdater.UpdateStatus.UPDATE_AVAILABLE) {
             // If yes: is the update available screen initialized before?
             if (!UpdateAvailableScreen.isInitializedBefore()) {
                 // Show the update available screen.
@@ -253,6 +225,6 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         }
 
         // Set updater debug to false.
-        Updater.DEBUG = false;
+        AbstractUpdater.DEBUG = false;
     }
 }

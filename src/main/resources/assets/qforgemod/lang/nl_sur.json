@@ -819,15 +819,24 @@
 
   "misc.qforgemod.unknown": "ONBEKEND",
 
+  "misc.qforgemod.error": "Foutmelding",
+  "misc.qforgemod.failed_save": "Opslaan van %s gefaald!",
+  "misc.qforgemod.modules": "Module Config",
+
   "key.qforgemod.debug_screen": "Toon / verberg debug scherm",
   "key.categories.qforgemod": "QForgeMod toetsen",
 
   "msg.qforgemod.confirm_exit.title": "Sluit bevestiging",
   "msg.qforgemod.confirm_exit.description": "Weet je zeker dat je Minecraft wilt afsluiten?",
 
+  "msg.qforgemod.confirm_shutdown.title": "Shutdown Confirmation",
+  "msg.qforgemod.confirm_shutdown.description": "Are you sure you want to shutdown your computer?",
+
   "msg.qforgemod.update_available.title": "Update beschikbaar for QForgeMod",
   "msg.qforgemod.update_available.description": "Wil je deze update downloaden?",
   "msg.qforgemod.update_available.help": "Dit bericht geeft aan wanneer er een update beschikbaar is voor QForgeMod.\nKlik op ja om het te downloaden, nee om door te gaan.\nNieuwe versie: %s",
+
+  "msg.qforgemod.modules.help": "Dit scherm is bedoeld for het beheren van modules in QForgeMod.",
 
   "msg.qforgemod.downloading_update.title": "Downloaded van update.",
   "msg.qforgemod.downloading_update.description": "%1$s van %2$s gedownload, %3$s voltooid.",
@@ -848,6 +857,7 @@
   "screen.qforgemod.settings.download_update": "Download de update",
   "screen.qforgemod.settings.quit_settings": "Afsluit instellingen",
   "screen.qforgemod.settings.allow_shutdown_pc": "PC afsluiten toestaan: %1$s",
+  "screen.qforgemod.settings.modules": "Beheer modules",
 
   "screen.qforgemod.quit_settings.quit_on_esc_in_title": "Sluit wanneer ESC in titel: %1$s",
   "screen.qforgemod.quit_settings.quit_on_esc_in_title.tooltip": "Sluit Minecraft af als er op ESC\nwordt gedrukt in het titel scherm.",
@@ -862,6 +872,11 @@
   "gui.tag_filter.forge.ingots": "Ingots",
   "gui.tag_filter.forge.nuggets": "Nuggets",
   "gui.tag_filter.qforgemod.chunks": "Ore chunks",
+
+  "module.qforgemod.main": "Kern Module",
+  "module.qforgemod.confirm_exit": "Sluit Bevestiging Module",
+  "module.qforgemod.pc_shutdown": "PC Afsluit Module",
+  "module.qforgemod.updates": "Updates Module",
 
   "toasts.qforgemod.update_available.title": "Update beschikbaar"
 }

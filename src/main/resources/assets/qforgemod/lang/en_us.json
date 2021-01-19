@@ -819,15 +819,24 @@
 
   "misc.qforgemod.unknown": "UNKNOWN",
 
+  "misc.qforgemod.error": "Error",
+  "misc.qforgemod.failed_save": "Failed to save %s!",
+  "misc.qforgemod.modules": "Module Config",
+
   "key.qforgemod.debug_screen": "Show / Hide Debug Screen",
   "key.categories.qforgemod": "QForgeMod keys",
 
   "msg.qforgemod.confirm_exit.title": "Exit Confirmation",
   "msg.qforgemod.confirm_exit.description": "Are you sure you want to exit Minecraft?",
 
+  "msg.qforgemod.confirm_shutdown.title": "Shutdown Confirmation",
+  "msg.qforgemod.confirm_shutdown.description": "Are you sure you want to shutdown your computer?",
+
   "msg.qforgemod.update_available.title": "Update Available for QForgeMod",
   "msg.qforgemod.update_available.description": "Do you want to download the update?",
   "msg.qforgemod.update_available.help": "This message get you when there's an update available for QForgeMod.\nClick yes to download it, no, to continue.\nNew version: %s",
+
+  "msg.qforgemod.modules.help": "This screen is for managing modules in QForgeMod.",
 
   "msg.qforgemod.downloading_update.title": "Downloading Update",
   "msg.qforgemod.downloading_update.description": "Downloaded %1$s of %2$s, %3$s complete.",
@@ -848,6 +857,7 @@
   "screen.qforgemod.settings.download_update": "Download Update",
   "screen.qforgemod.settings.quit_settings": "Quit Settings",
   "screen.qforgemod.settings.allow_shutdown_pc": "Allow Shutdown PC: %1$s",
+  "screen.qforgemod.settings.modules": "Manage Modules",
 
   "screen.qforgemod.quit_settings.quit_on_esc_in_title": "Quit On ESC in Title: %1$s",
   "screen.qforgemod.quit_settings.quit_on_esc_in_title.tooltip": "Quit the game when pressing esc in title screen.",
@@ -862,6 +872,11 @@
   "gui.tag_filter.forge.ingots": "Ingots",
   "gui.tag_filter.forge.nuggets": "Nuggets",
   "gui.tag_filter.qforgemod.chunks": "Ore chunks",
+
+  "module.qforgemod.main": "Core Module",
+  "module.qforgemod.confirm_exit": "Exit Confirmation Module",
+  "module.qforgemod.pc_shutdown": "PC Shutdown Module",
+  "module.qforgemod.updates": "Updates Module",
 
   "toasts.qforgemod.update_available.title": "Update Available"
 }

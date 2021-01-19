@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.client.gui.update;
+package com.qsoftware.forgemod.modules.updates;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;

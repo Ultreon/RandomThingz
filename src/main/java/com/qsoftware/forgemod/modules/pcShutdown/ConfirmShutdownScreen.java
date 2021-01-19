@@ -1,8 +1,10 @@
-package com.qsoftware.forgemod.client.gui.update;
+package com.qsoftware.forgemod.modules.pcShutdown;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.util.Utils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IBidiRenderer;
 import net.minecraft.client.gui.screen.Screen;
@@ -18,79 +20,57 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-/**
- * Update failed screen.
- * Shows when the update was failed after downloading.
- * 
- * @author Qboi123
- */
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class UpdateFailedScreen extends Screen {
-    // Bidi Renderer.
-    private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
-    
-    // Back screen.
+public class ConfirmShutdownScreen extends Screen {
+    private final IBidiRenderer bidiRenderer = IBidiRenderer.field_243257_a;
+    private final ITextComponent yesButtonText;
+    private final ITextComponent noButtonText;
     private final Screen backScreen;
-    
-    // Values.
     private int ticksUntilEnable;
 
-    /**
-     * Update-failed-screen: class constructor.
-     * 
-     * @param backScreen the back screen.
-     */
-    public UpdateFailedScreen(Screen backScreen) {
-        super(new TranslationTextComponent("msg.qforgemod.update_failed.title"));
+    public ConfirmShutdownScreen(Screen backScreen) {
+        super(new TranslationTextComponent("msg.qforgemod.confirm_shutdown.title"));
         this.backScreen = backScreen;
+        this.yesButtonText = DialogTexts.GUI_YES;
+        this.noButtonText = DialogTexts.GUI_NO;
     }
 
-    /**
-     * Screen initialization.
-     */
+    public static void show() {
+        Minecraft mc = Minecraft.getInstance();
+        mc.displayGuiScreen(new ConfirmShutdownScreen(mc.currentScreen));
+    }
+
     protected void init() {
         super.init();
 
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
-            Narrator.getNarrator().say("Downloading of Update has Failed", true);
+            Narrator.getNarrator().say("Are you sure you want to shutdown your computer?", true);
         }
 
         this.buttons.clear();
         this.children.clear();
 
-        this.addButton(new Button(this.width / 2 - 50, this.height / 6 + 96, 100, 20, DialogTexts.GUI_DONE, (p_213004_1_) -> {
-            if (this.minecraft != null) {
-                this.minecraft.displayGuiScreen(backScreen);
-            }
-        }));
+        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 100, 20, this.yesButtonText, (p_213006_1_) -> Utils.shutdown()));
+        this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 126, 100, 20, this.noButtonText, (p_213006_1_) -> Minecraft.getInstance().displayGuiScreen(backScreen)));
 
         setButtonDelay(10);
-
     }
 
-    /**
-     * Render the screen.
-     * 
-     * @param matrixStack the render matrix stack.
-     * @param mouseX the mouse pointer x position.
-     * @param mouseY the mouse pointer y position.
-     * @param partialTicks the render partial ticks.
-     */
     public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
+
         drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 70, 0xffffff);
-        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.qforgemod.update_failed.description"), this.width / 2, 90, 0xbfbfbf);
-        this.field_243276_q.func_241863_a(matrixStack, this.width / 2, 90);
+        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.qforgemod.confirm_shutdown.description"), this.width / 2, 90, 0xbfbfbf);
+
+        this.bidiRenderer.func_241863_a(matrixStack, this.width / 2, 90);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
     /**
      * Sets the number of ticks to wait before enabling the buttons.
-     * 
-     * @param ticksUntilEnableIn ticks until enable widgets.
      */
     public void setButtonDelay(int ticksUntilEnableIn) {
         this.ticksUntilEnable = ticksUntilEnableIn;
@@ -101,17 +81,10 @@ public class UpdateFailedScreen extends Screen {
 
     }
 
-    /**
-     * Tick the screen.
-     */
     public void tick() {
         super.tick();
-        if (this.ticksUntilEnable > 0) {
-            --this.ticksUntilEnable;
-        } else {
-            this.ticksUntilEnable = 0;
-        }
-        if (this.ticksUntilEnable == 0) {
+
+        if (--this.ticksUntilEnable == 0) {
             for (Widget widget : this.buttons) {
                 widget.active = true;
             }
@@ -119,6 +92,6 @@ public class UpdateFailedScreen extends Screen {
     }
 
     public boolean shouldCloseOnEsc() {
-        return --this.ticksUntilEnable <= 0;
+        return true;
     }
 }

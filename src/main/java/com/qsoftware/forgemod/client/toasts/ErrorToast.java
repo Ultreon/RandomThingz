@@ -3,28 +3,25 @@ package com.qsoftware.forgemod.client.toasts;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.qsoftware.forgemod.common.updates.Updater;
 import net.minecraft.client.gui.toasts.IToast;
 import net.minecraft.client.gui.toasts.ToastGui;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class UpdateToast implements IToast {
+public class ErrorToast implements IToast {
     private ImmutableList<IReorderingProcessor> subtitle;
     private ITextComponent title;
     private final int fadeOutTicks;
 
     private long firstDrawTime;
     private boolean newDisplay;
-    
-    public UpdateToast(Updater updater) {
-        this.title = new TranslationTextComponent("toasts.qforgemod.update_available.title");
-        this.subtitle = func_238537_a_(new StringTextComponent(updater.getModInfo().getDisplayName()));
+
+    public ErrorToast(ITextComponent title, ITextComponent subtitle) {
+        this.title = title;
+        this.subtitle = func_238537_a_(subtitle);
         this.fadeOutTicks = 160;
     }
 
@@ -73,7 +70,7 @@ public class UpdateToast implements IToast {
             }
         }
 
-        return ticks - this.firstDrawTime < 5000L ? IToast.Visibility.SHOW : IToast.Visibility.HIDE;
+        return ticks - this.firstDrawTime < 5000L ? Visibility.SHOW : Visibility.HIDE;
     }
 
     private void blitTextures(MatrixStack p_238533_1_, ToastGui p_238533_2_, int p_238533_3_, int p_238533_4_, int p_238533_5_, int p_238533_6_) {
