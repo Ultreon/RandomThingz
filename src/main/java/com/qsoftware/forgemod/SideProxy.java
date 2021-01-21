@@ -4,6 +4,10 @@ import com.qsoftware.forgemod.client.ModModelProperties;
 import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.data.DataGenerators;
 import com.qsoftware.forgemod.init.*;
+import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.items.ModItems;
+import com.qsoftware.forgemod.modules.tileentities.ModMachineTileEntities;
+import com.qsoftware.forgemod.modules.ui.ModMachineContainers;
 import com.qsoftware.forgemod.network.Network;
 import com.qsoftware.modlib.silentlib.event.Greetings;
 import net.minecraft.block.Block;
@@ -40,9 +44,9 @@ class SideProxy implements com.qsoftware.forgemod.IProxy {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::imcProcess);
 
         // Add listeners for registry events
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(ContainerType.class, ModContainers::registerAll);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(ContainerType.class, ModMachineContainers::registerAll);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Fluid.class, ModFluids::registerFluids);
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, ModTileEntities::registerAll);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, ModMachineTileEntities::registerAll);
 
         // Other events
         MinecraftForge.EVENT_BUS.addListener(this::serverAboutToStart);
@@ -90,8 +94,8 @@ class SideProxy implements com.qsoftware.forgemod.IProxy {
 
         private void clientSetup(FMLClientSetupEvent event) {
             ModBlocks.registerRenderTypes(event);
-            ModContainers.registerScreens(event);
-            ModTileEntities.registerRenderers(event);
+            ModMachineContainers.registerScreens(event);
+            ModMachineTileEntities.registerRenderers(event);
             ModModelProperties.register(event);
         }
 

@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.modules.updates;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.gui.widgets.Progressbar;
+import com.qsoftware.forgemod.modules.ui.widgets.Progressbar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IBidiRenderer;

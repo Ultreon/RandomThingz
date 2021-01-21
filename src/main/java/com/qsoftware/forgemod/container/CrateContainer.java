@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.container;
 
-import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.init.types.ModContainers;
-import com.qsoftware.forgemod.objects.tileentity.CrateTileEntity;
+import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.ui.ModContainers;
+import com.qsoftware.forgemod.modules.tileentities.objects.CrateTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

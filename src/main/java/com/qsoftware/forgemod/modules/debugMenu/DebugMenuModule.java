@@ -1,8 +1,7 @@
 package com.qsoftware.forgemod.modules.debugMenu;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.gui.widgets.ModuleCompatibility;
-import com.qsoftware.forgemod.common.Module;
+import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -27,12 +26,12 @@ public class DebugMenuModule extends Module {
 
     @SubscribeEvent
     public void onKeyReleased(InputEvent.KeyInputEvent event) {
-        DebugScreen.onKeyReleased(event);
+        DebugMenu.onKeyReleased(event);
     }
 
     @SubscribeEvent
     public void renderGameOverlay(RenderGameOverlayEvent event) {
-        DebugScreen.renderGameOverlay(event);
+        DebugMenu.renderGameOverlay(event);
     }
 
     @Override

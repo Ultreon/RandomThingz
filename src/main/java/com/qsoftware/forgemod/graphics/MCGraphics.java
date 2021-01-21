@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.graphics;
 import com.google.common.annotations.Beta;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.qsoftware.forgemod.client.gui.AdvancedScreen;
+import com.qsoftware.forgemod.modules.ui.screens.AdvancedScreen;
 import com.qsoftware.forgemod.common.geom.RectangleUV;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

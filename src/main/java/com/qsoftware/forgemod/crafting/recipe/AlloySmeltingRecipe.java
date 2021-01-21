@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.objects.blocks.machines.IMachineInventory;
+import com.qsoftware.forgemod.modules.blocks.objects.machines.IMachineInventory;
 import com.qsoftware.forgemod.util.InventoryUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;

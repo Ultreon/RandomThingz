@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.common.gui;
 
-import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgradeItem;
+import com.qsoftware.forgemod.modules.items.objects.upgrades.MachineUpgradeItem;
 import com.qsoftware.forgemod.util.Constants;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;

@@ -2,11 +2,11 @@ package com.qsoftware.forgemod;
 
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.init.renew.ModBlocksNew;
-import com.qsoftware.forgemod.init.renew.ModItemsNew;
-import com.qsoftware.forgemod.init.types.ModContainers;
-import com.qsoftware.forgemod.init.types.ModEntities;
-import com.qsoftware.forgemod.init.types.ModTileEntities;
+import com.qsoftware.forgemod.modules.blocks.ModBlocksNew;
+import com.qsoftware.forgemod.modules.items.ModItemsNew;
+import com.qsoftware.forgemod.modules.ui.ModContainers;
+import com.qsoftware.forgemod.modules.entities.ModEntities;
+import com.qsoftware.forgemod.modules.tileentities.ModTileEntities;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -101,6 +101,12 @@ public class QForgeMod {
         isServerSide = s;
     }
 
+    private final IEventBus modEventBus;
+
+    public IEventBus getModEventBus() {
+        return modEventBus;
+    }
+
     /**
      * Get the QForgeUtils mod instance.
      *
@@ -166,6 +172,8 @@ public class QForgeMod {
 
         // Final fields.
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        this.modEventBus = modEventBus;
 
         // Register forge event bus listener(s).
         MinecraftForge.EVENT_BUS.register(this);

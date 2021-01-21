@@ -1,8 +1,7 @@
 package com.qsoftware.forgemod.modules.pcShutdown;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.gui.widgets.ModuleCompatibility;
-import com.qsoftware.forgemod.common.Module;
+import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.config.Config;
 import net.minecraft.client.Minecraft;
@@ -65,7 +64,7 @@ public class PCShutdownModule extends Module {
         boolean k4 = InputMappings.isKeyDown(win, GLFW.GLFW_KEY_RIGHT_ALT);
         boolean k5 = InputMappings.isKeyDown(win, GLFW.GLFW_KEY_INSERT);
 
-        if ((k1 || k2) && (k3 || k4) && k5 && Config.allowShutdownPC.get() && !(mc.currentScreen instanceof ConfirmShutdownScreen)) {
+        if ((k1 || k2) && (k3 || k4) && k5 && !(mc.currentScreen instanceof ConfirmShutdownScreen)) {
             mc.displayGuiScreen(new ConfirmShutdownScreen(mc.currentScreen));
         }
     }

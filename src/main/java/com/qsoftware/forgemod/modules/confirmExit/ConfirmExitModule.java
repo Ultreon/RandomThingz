@@ -1,21 +1,57 @@
 package com.qsoftware.forgemod.modules.confirmExit;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.gui.widgets.ModuleCompatibility;
+import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
-import com.qsoftware.forgemod.config.Config;
+import com.qsoftware.forgemod.common.ModuleManager;
+import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.modlib.event.WindowCloseEvent;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.MainMenuScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.WorldLoadProgressScreen;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.jetbrains.annotations.NotNull;
+import org.lwjgl.glfw.GLFW;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@FieldsAreNonnullByDefault
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class ConfirmExitModule extends Module {
+    private boolean closePrompt;
+    private boolean closePromptIngame;
+    private boolean closePromptQuitButton;
+    private boolean escPress = false;
+
     public ConfirmExitModule() {
 
     }
 
+    @SubscribeEvent
+    public synchronized void onKeyInput(InputEvent.KeyInputEvent event) {
+        Minecraft mc = Minecraft.getInstance();
+
+        if (event.getAction() == GLFW.GLFW_PRESS) {
+            if (event.getKey() == 256 && closePrompt) {
+                if (!escPress) {
+                    escPress = true;
+                    if (mc.currentScreen instanceof MainMenuScreen) {
+                        mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+                    }
+                }
+            }
+        }
+        if (event.getAction() == GLFW.GLFW_RELEASE) {
+            if (event.getKey() == 256) {
+                escPress = false;
+            }
+        }
+    }
     @SubscribeEvent
     public void onWindowClose(WindowCloseEvent event) {
         Minecraft mc = Minecraft.getInstance();
@@ -31,8 +67,8 @@ public class ConfirmExitModule extends Module {
                 return;
             }
 
-            if (Config.closePrompt.get()) {
-                if (mc.world != null && !Config.closePromptIngame.get()) {
+            if (closePrompt) {
+                if (mc.world != null && !closePromptIngame) {
                     return;
                 }
                 event.setCanceled(true);
@@ -41,7 +77,7 @@ public class ConfirmExitModule extends Module {
                 }
             }
         } else if (event.getSource() == WindowCloseEvent.Source.QUIT_BUTTON) {
-            if (Config.closePrompt.get() && Config.closePromptQuitButton.get() && !(mc.currentScreen instanceof ConfirmExitScreen)) {
+            if (closePrompt && closePromptQuitButton && !(mc.currentScreen instanceof ConfirmExitScreen)) {
                 mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
             }
         }
@@ -71,12 +107,12 @@ public class ConfirmExitModule extends Module {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "confirm_exit";
     }
 
     @Override
-    public @NotNull ModuleCompatibility getCompatibility() {
+    public ModuleCompatibility getCompatibility() {
         if (QForgeMod.isClientSide()) {
             return ModuleCompatibility.FULL;
         } else if (QForgeMod.isServerSide()) {
@@ -84,5 +120,35 @@ public class ConfirmExitModule extends Module {
         } else {
             return ModuleCompatibility.NONE;
         }
+    }
+
+    @Override
+    public boolean hasOptions() {
+        return true;
+    }
+
+    @Override
+    public void showOptions(Screen backScreen) {
+        Minecraft mc = Minecraft.getInstance();
+        mc.displayGuiScreen(new ConfirmExitOptions(backScreen, this));
+    }
+
+    @Override
+    public CompoundNBT getTag() {
+        this.tag.putBoolean("ClosePrompt", this.closePrompt);
+        this.tag.putBoolean("ClosePromptIngame", this.closePromptIngame);
+        this.tag.putBoolean("ClosePromptQuitButton", this.closePromptQuitButton);
+
+        return tag;
+    }
+
+    @Override
+    public void setTag(CompoundNBT tag) {
+        this.closePrompt = tag.getBoolean("ClosePrompt");
+        this.closePromptIngame = tag.getBoolean("ClosePromptIngame");
+        this.closePromptQuitButton = tag.getBoolean("ClosePromptQuitButton");
+
+        this.tag = tag;
+        ModuleManager.getInstance().setSaveSchedule(this);
     }
 }

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.listener;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.ModItems;
+import com.qsoftware.forgemod.modules.items.ModItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;

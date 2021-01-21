@@ -1,12 +1,12 @@
 package com.qsoftware.forgemod.data.client;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.init.ModItems;
-import com.qsoftware.forgemod.init.variants.OreMaterial;
+import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.items.ModItems;
+import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.objects.items.CraftingItems;
-import com.qsoftware.forgemod.objects.items.upgrades.MachineUpgrades;
+import com.qsoftware.forgemod.modules.items.objects.CraftingItems;
+import com.qsoftware.forgemod.modules.items.objects.upgrades.MachineUpgrades;
 import com.qsoftware.modlib.silentlib.block.IBlockProvider;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import net.minecraft.block.Block;

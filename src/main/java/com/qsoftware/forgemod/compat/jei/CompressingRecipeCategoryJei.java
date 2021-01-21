@@ -2,8 +2,8 @@ package com.qsoftware.forgemod.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.crafting.recipe.CompressingRecipe;
-import com.qsoftware.forgemod.init.ModBlocks;
-import com.qsoftware.forgemod.objects.blocks.machines.compressor.CompressorScreen;
+import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.blocks.objects.machines.compressor.CompressorScreen;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;

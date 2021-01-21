@@ -1,10 +1,11 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.objects.blocks.GamePcBlock;
-import com.qsoftware.forgemod.objects.blocks.base.*;
-import com.qsoftware.forgemod.objects.blocks.furniture.WoodenCrateBlock;
-import com.qsoftware.forgemod.objects.items.type.FaceableBlock;
+import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.blocks.objects.GamePcBlock;
+import com.qsoftware.forgemod.modules.blocks.objects.base.*;
+import com.qsoftware.forgemod.modules.blocks.objects.furniture.WoodenCrateBlock;
+import com.qsoftware.forgemod.modules.items.objects.type.FaceableBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;

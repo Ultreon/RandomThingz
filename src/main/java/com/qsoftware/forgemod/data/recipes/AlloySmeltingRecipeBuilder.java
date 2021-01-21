@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.init.variants.OreMaterial;
+import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;

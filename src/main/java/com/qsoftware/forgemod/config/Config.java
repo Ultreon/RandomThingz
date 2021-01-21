@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.config;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.java.maps.SequencedHashMap;
-import com.qsoftware.forgemod.init.variants.Ore;
+import com.qsoftware.forgemod.modules.ores.Ore;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
@@ -22,11 +22,11 @@ import java.util.*;
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class Config {
     public static final ForgeConfigSpec.BooleanValue showBetaWelcomeMessage;
-    public static final ForgeConfigSpec.BooleanValue closePrompt;
-    public static final ForgeConfigSpec.BooleanValue closePromptIngame;
-    public static final ForgeConfigSpec.BooleanValue closePromptQuitButton;
-    public static final ForgeConfigSpec.BooleanValue quitOnEscInTitle;
-    public static final ForgeConfigSpec.BooleanValue allowShutdownPC;
+//    public static final ForgeConfigSpec.BooleanValue closePrompt;
+//    public static final ForgeConfigSpec.BooleanValue closePromptIngame;
+//    public static final ForgeConfigSpec.BooleanValue closePromptQuitButton;
+//    public static final ForgeConfigSpec.BooleanValue quitOnEscInTitle;
+//    public static final ForgeConfigSpec.BooleanValue allowShutdownPC;
     public static final ForgeConfigSpec.BooleanValue searchUpdatesOnStartup;
     public static final ForgeConfigSpec.BooleanValue searchForUnstableReleases;
     public static final ForgeConfigSpec.IntValue worldGenOilLakeChance;
@@ -46,27 +46,27 @@ public final class Config {
                 .comment("Shows a message in chat warning the player that the mod is early in development")
                 .define("general.showBetaWelcomeMessage", true);
 
-        // Close prompt
-        closePrompt = builder
-                .comment("Shows an exit confirm screen when closing window.")
-                .define("quit.closePrompt", true);
-        closePromptIngame = builder
-                .comment("Shows an exit confirm screen when closing window ingame.")
-                .define("quit.closePromptIngame", true);
-        closePromptQuitButton = builder
-                .comment("Shows an exit confirm screen when pressing quit button in the title screen.")
-                .define("quit.closePromptQuitButton", true);
-        quitOnEscInTitle = builder
-                .comment("Shows an exit confirm screen when pressed ESC in the title screen.")
-                .define("quit.quitOnEscInTitle", true);
-
-        // Permissions.
-        allowShutdownPC = builder
-                .comment("Allow QForgeMod to shutdown your pc on specific things.")
-                .comment("Places:")
-                .comment("  ITEM:   Kill switch")
-                .comment("  BUTTON: In the exit confirm screen")
-                .define("general.allowShutdownPC", false);
+//        // Close prompt
+//        closePrompt = builder
+//                .comment("Shows an exit confirm screen when closing window.")
+//                .define("quit.closePrompt", true);
+//        closePromptIngame = builder
+//                .comment("Shows an exit confirm screen when closing window ingame.")
+//                .define("quit.closePromptIngame", true);
+//        closePromptQuitButton = builder
+//                .comment("Shows an exit confirm screen when pressing quit button in the title screen.")
+//                .define("quit.closePromptQuitButton", true);
+//        quitOnEscInTitle = builder
+//                .comment("Shows an exit confirm screen when pressed ESC in the title screen.")
+//                .define("quit.quitOnEscInTitle", true);
+//
+//        // Permissions.
+//        allowShutdownPC = builder
+//                .comment("Allow QForgeMod to shutdown your pc on specific things.")
+//                .comment("Places:")
+//                .comment("  ITEM:   Kill switch")
+//                .comment("  BUTTON: In the exit confirm screen")
+//                .define("general.allowShutdownPC", false);
 
         // Updates
         searchUpdatesOnStartup = builder

@@ -1,21 +1,18 @@
 package com.qsoftware.forgemod.util.eventbus;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.gui.ExampleChestScreen;
-import com.qsoftware.forgemod.client.renderer.entity.*;
-import com.qsoftware.forgemod.client.renderer.tileentity.ChristmasChestTileEntityRenderer;
-import com.qsoftware.forgemod.init.types.ModContainers;
-import com.qsoftware.forgemod.init.types.ModEntities;
-import com.qsoftware.forgemod.init.types.ModTileEntities;
+import com.qsoftware.forgemod.modules.ui.screens.ExampleChestScreen;
+import com.qsoftware.forgemod.modules.tileentities.renderer.ChristmasChestTileEntityRenderer;
+import com.qsoftware.forgemod.modules.ui.ModContainers;
+import com.qsoftware.forgemod.modules.entities.ModEntities;
+import com.qsoftware.forgemod.modules.tileentities.ModTileEntities;
+import com.qsoftware.forgemod.modules.entities.renderer.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.SpriteRenderer;
 import net.minecraft.client.renderer.entity.StrayRenderer;
 import net.minecraft.client.renderer.entity.WitherSkeletonRenderer;
-import net.minecraft.client.renderer.tileentity.ChestTileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;

@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.network;
 
 import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineBaseContainer;
-import com.qsoftware.forgemod.objects.blocks.machines.AbstractMachineBaseTileEntity;
+import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseContainer;
+import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseTileEntity;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;

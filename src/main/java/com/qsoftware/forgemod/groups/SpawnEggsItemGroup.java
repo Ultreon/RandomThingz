@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.renew.ModItemsNew;
+import com.qsoftware.forgemod.modules.items.ModItemsNew;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;

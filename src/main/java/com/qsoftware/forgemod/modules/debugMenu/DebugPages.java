@@ -11,7 +11,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class DebugPages {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
-        DebugScreen.registerPage(new WindowPage(QForgeMod.MOD_ID, "window"));
+        DebugMenu.registerPage(new WindowPage(QForgeMod.MOD_ID, "window"));
 //        DebugScreen.registerPage(new PlayerPage1(QForgeMod.MOD_ID, "player1"));
     }
 }

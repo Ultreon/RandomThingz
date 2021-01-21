@@ -1,6 +1,11 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.modules.biomes.ModBiomes;
+import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.items.ModItems;
+import com.qsoftware.forgemod.modules.tileentities.ModMachineTileEntities;
+import com.qsoftware.forgemod.modules.ui.ModMachineContainers;
 import com.qsoftware.modlib.api.providers.IItemProvider;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import com.qsoftware.forgemod.util.ExceptionUtil;
@@ -40,7 +45,6 @@ public final class Registration {
     public static final DeferredRegister<PaintingType> PAINTINGS = create(ForgeRegistries.PAINTING_TYPES);
     public static final DeferredRegister<Potion> POTION_TYPES = create(ForgeRegistries.POTION_TYPES);
     public static final DeferredRegister<Effect> POTIONS = create(ForgeRegistries.POTIONS);
-    public static final DeferredRegister<Biome> BIOMES = create(ForgeRegistries.BIOMES);
     public static final DeferredRegister<Feature<?>> FEATURES = create(ForgeRegistries.FEATURES);
     public static final DeferredRegister<ParticleType<?>> PARTICLES = create(ForgeRegistries.PARTICLE_TYPES);
     public static final DeferredRegister<EntityType<?>> ENTITIES = create(ForgeRegistries.ENTITIES);
@@ -59,13 +63,15 @@ public final class Registration {
         ITEMS.register(modEventBus);
         POTIONS.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
-        TILE_ENTITIES.register(modEventBus);
 
         ModBlocks.register();
-//        ModContainers.register();
+        ModEffects.register();
+        ModFluids.register();
+        ModStats.register();
+        ModMachineContainers.register();
         ModItems.register();
         ModRecipes.register();
-//        ModTileEntities.register();
+        ModMachineTileEntities.register();
     }
 
     @SuppressWarnings("unchecked")

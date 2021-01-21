@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.util;
 
-import com.qsoftware.forgemod.objects.blocks.machines.refinery.RefineryTileEntity;
-import com.qsoftware.forgemod.objects.items.fluid.CanisterItem;
+import com.qsoftware.forgemod.modules.blocks.objects.machines.refinery.RefineryTileEntity;
+import com.qsoftware.forgemod.modules.items.objects.fluid.CanisterItem;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.BucketItem;

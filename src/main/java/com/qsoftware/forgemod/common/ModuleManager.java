@@ -10,14 +10,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+@SuppressWarnings({"UnusedAssignment", "unused"})
 public final class ModuleManager {
     private static final ModuleManager INSTANCE = new ModuleManager();
-    private final Set<Module> enabled = new HashSet<>();
-    private final Set<Module> disabled = new HashSet<>();
-    private final Set<Module> modules = new HashSet<>();
-    private Set<Module> unsavedEnabled = new HashSet<>();
-    private Set<Module> unsavedDisabled = new HashSet<>();
-    private final Map<Module, Boolean> toSave = new HashMap<>();
+    private final List<Module> enabled = new ArrayList<>();
+    private final List<Module> disabled = new ArrayList<>();
+    private final List<Module> modules = new ArrayList<>();
+    private List<Module> unsavedEnabled = new ArrayList<>();
+    private List<Module> unsavedDisabled = new ArrayList<>();
+    private final Map<Module, Boolean> unsavedModules = new HashMap<>();
     private boolean initialized = false;
     private CompoundNBT modulesNbt;
     private Module currentModule = null;
@@ -39,50 +40,55 @@ public final class ModuleManager {
     }
 
     public void saveChanges() throws IOException {
-        if (this.toSave.entrySet().size() == 0) {
-            QForgeMod.LOGGER.info("Skipped saving module changes because there's nothing to save.");
+        if (this.unsavedModules.entrySet().size() == 0) {
+            QForgeMod.LOGGER.info("Skipping save module changes because there's nothing to save.");
             return;
         }
 
-        QForgeMod.LOGGER.debug("modules="+this.modules);
-        QForgeMod.LOGGER.debug("enabled="+this.enabled);
-        QForgeMod.LOGGER.debug("disabled="+this.disabled);
-        QForgeMod.LOGGER.debug("unsavedEnabled="+this.unsavedEnabled);
-        QForgeMod.LOGGER.debug("unsavedDisabled="+this.unsavedDisabled);
-        QForgeMod.LOGGER.debug("toSave="+this.toSave);
+//        QForgeMod.LOGGER.debug("modules="+this.modules);
+//        QForgeMod.LOGGER.debug("enabled="+this.enabled);
+//        QForgeMod.LOGGER.debug("disabled="+this.disabled);
+//        QForgeMod.LOGGER.debug("unsavedEnabled="+this.unsavedEnabled);
+//        QForgeMod.LOGGER.debug("unsavedDisabled="+this.unsavedDisabled);
+//        QForgeMod.LOGGER.debug("toSave="+this.unsavedModules);
 
-        QForgeMod.LOGGER.info("Saving " + this.toSave.entrySet().size() + " module changes.");
+        QForgeMod.LOGGER.info("Saving " + this.unsavedModules.entrySet().size() + " module changes.");
 
         // Loop module to value mapping.
-        for (Map.Entry<Module, Boolean> entry : this.toSave.entrySet()) {
+        for (Map.Entry<Module, Boolean> entry : this.unsavedModules.entrySet()) {
 
             // Get key and value.
-            Module key = entry.getKey();
-            Boolean value = entry.getValue();
+            Module module = entry.getKey();
+            Boolean setEnabled = entry.getValue();
 
             // Set module state.
-            CompoundNBT moduleCompound = this.modulesNbt.getCompound(key.getName());
-            moduleCompound.putBoolean("Enabled", value);
-            moduleCompound.put("Tag", key.getTag());
-            this.modulesNbt.put(key.getName(), moduleCompound);
+            CompoundNBT moduleCompound = this.modulesNbt.getCompound(module.getName());
+            moduleCompound.putBoolean("Enabled", setEnabled);
+            moduleCompound.put("Tag", module.getTag());
+            this.modulesNbt.put(module.getName(), moduleCompound);
 
-            if (value) {
+            // Disable module itself.
+            if (setEnabled && this.disabled.contains(module) || setEnabled && !this.enabled.contains(module)) {
                 // Enable module itself.
-                QForgeMod.LOGGER.info("Enabling module: " + key.getName());
-                this.disabled.remove(key);
-                this.enabled.add(key);
-                key.onEnable();
-            } else {
+                QForgeMod.LOGGER.info("Enabling module: " + module.getName());
+                this.disabled.remove(module);
+                this.enabled.add(module);
+                module.onEnable();
+            } else if (!setEnabled && this.enabled.contains(module) || !setEnabled && !this.disabled.contains(module)) {
                 // Disable module itself.
-                QForgeMod.LOGGER.info("Disabling module: " + key.getName());
-                this.enabled.remove(key);
-                this.disabled.add(key);
-                key.onDisable();
+                QForgeMod.LOGGER.info("Disabling module: " + module.getName());
+                this.enabled.remove(module);
+                this.disabled.add(module);
+                module.onDisable();
+            } else if (setEnabled) {
+                QForgeMod.LOGGER.info("Skipped enabling module " + module.getName() + " because it's already enabled.");
+            } else {
+                QForgeMod.LOGGER.info("Skipped disabling module " + module.getName() + " because it's already disabled.");
             }
         }
 
         // Clear save cache.
-        this.toSave.clear();
+        this.unsavedModules.clear();
 
         // Write changes.
         QForgeMod.LOGGER.info("Saving module data...");
@@ -92,7 +98,7 @@ public final class ModuleManager {
 
     public void enable(Module module) {
         // Update lists, and add save cache.
-        this.toSave.put(module, true);
+        this.unsavedModules.put(module, true);
         this.unsavedDisabled.remove(module);
         this.unsavedEnabled.add(module);
         QForgeMod.LOGGER.debug("Module enable is scheduled for: " + module.getName());
@@ -100,7 +106,7 @@ public final class ModuleManager {
 
     public void disable(Module module) {
         // Update lists, and add save cache.
-        this.toSave.put(module, false);
+        this.unsavedModules.put(module, false);
         this.unsavedEnabled.remove(module);
         this.unsavedDisabled.add(module);
         QForgeMod.LOGGER.debug("Module enable is scheduled for: " + module.getName());
@@ -114,24 +120,24 @@ public final class ModuleManager {
         return this.disabled.contains(module);
     }
 
-    public Set<Module> getEnabled() {
-        return Collections.unmodifiableSet(this.enabled);
+    public List<Module> getEnabled() {
+        return Collections.unmodifiableList(this.enabled);
     }
 
-    public Set<Module> getDisabled() {
-        return Collections.unmodifiableSet(this.disabled);
+    public List<Module> getDisabled() {
+        return Collections.unmodifiableList(this.disabled);
     }
 
-    public Set<Module> getModules() {
-        return Collections.unmodifiableSet(this.modules);
+    public List<Module> getModules() {
+        return Collections.unmodifiableList(this.modules);
     }
 
-    public Set<Module> getUnsavedEnabled() {
-        return Collections.unmodifiableSet(this.unsavedEnabled);
+    public List<Module> getUnsavedEnabled() {
+        return Collections.unmodifiableList(this.unsavedEnabled);
     }
 
-    public Set<Module> getUnsavedDisabled() {
-        return Collections.unmodifiableSet(this.unsavedDisabled);
+    public List<Module> getUnsavedDisabled() {
+        return Collections.unmodifiableList(this.unsavedDisabled);
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -163,8 +169,6 @@ public final class ModuleManager {
                 wasValid = true;
             }
         } catch (IOException e) {
-//            CrashReport crashReport = new CrashReport("Loading QFM Modules data", e);
-//            throw new ReportedException(crashReport);
             a = new CompoundNBT();
             wasValid = false;
         }
@@ -198,7 +202,7 @@ public final class ModuleManager {
     }
 
     public void discardChanges() {
-        this.toSave.clear();
+        this.unsavedModules.clear();
         this.unsavedEnabled = enabled;
         this.unsavedDisabled = disabled;
     }
@@ -208,8 +212,8 @@ public final class ModuleManager {
     }
 
     public void setSaveSchedule(Module module) {
-        if (!toSave.containsKey(module)) {
-            this.toSave.put(module, isEnabled(module));
+        if (!unsavedModules.containsKey(module)) {
+            this.unsavedModules.put(module, isUnsavedEnabled(module));
         }
     }
 

@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.modules.updates;
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.QVersion;
-import com.qsoftware.forgemod.client.gui.AdvancedScreen;
+import com.qsoftware.forgemod.modules.ui.screens.AdvancedScreen;
 import com.qsoftware.forgemod.graphics.MCGraphics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
@@ -18,6 +18,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.Objects;
@@ -25,6 +26,7 @@ import java.util.Objects;
 /**
  * Update available screen.
  * Will show after loading when there's an update available for QForgeMod.
+ * Can be used for other mods using their own implementation of {@link AbstractUpdater}.
  * 
  * @author Qboi123
  */
@@ -57,7 +59,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
      * Update available screen: class constructor.
      * 
      * @param backScreen the screen to show after closing this screen.
-     * @param updater the updater.
+     * @param updater the updater where the update is available.
      */
     public UpdateAvailableScreen(Screen backScreen, AbstractUpdater<?> updater) {
         // Super call
@@ -72,6 +74,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
     /**
      * Screen initialization.
+     * Initializes the update available screen, called internally in MC Forge.
      */
     protected void init() {
         super.init();
@@ -81,7 +84,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
         // Narrate if narrator is on.
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
-            Narrator.getNarrator().say("Update Available for Q Forge Mod", true);
+            Narrator.getNarrator().say("Update Available for " + this.updater.getModInfo().getDisplayName(), true);
         }
 
         // Clear widgets.
@@ -114,7 +117,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
      * @param mouse the position of the mouse pointer.
      */
     @Override
-    protected void render(MCGraphics mcg, Point mouse) {
+    protected void render(@NotNull MCGraphics mcg, @NotNull Point mouse) {
         super.render(mcg, mouse);
 
         // Return if minecraft instance is null.
@@ -208,7 +211,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         }
 
         // Get QForgeMod updater instance.
-        AbstractUpdater<QVersion> updater = AbstractUpdater.getQFMInstance();
+        AbstractUpdater<QVersion> updater = AbstractUpdater.getQFMUpdater();
 
         // Check for QForgeMod updates.
         AbstractUpdater.UpdateInfo updateInfo = updater.checkForUpdates();

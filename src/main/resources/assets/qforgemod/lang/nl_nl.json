@@ -873,10 +873,17 @@
   "gui.tag_filter.forge.nuggets": "Nuggets",
   "gui.tag_filter.qforgemod.chunks": "Ore chunks",
 
-  "module.qforgemod.main": "Kern Module",
-  "module.qforgemod.confirm_exit": "Sluit Bevestiging Module",
-  "module.qforgemod.pc_shutdown": "PC Afsluit Module",
-  "module.qforgemod.updates": "Updates Module",
+  "module.qforgemod.main": "Interne module",
+  "module.qforgemod.blocks": "Blokken module",
+  "module.qforgemod.items": "Voorwerpen module",
+  "module.qforgemod.entities": "Entiteiten module",
+  "module.qforgemod.tile_entities": "Blok entiteiten module",
+  "module.qforgemod.biomes": "Klimaten module",
+  "module.qforgemod.user_interface": "Gebruikersomgeving module",
+  "module.qforgemod.confirm_exit": "Sluit bevestiging module",
+  "module.qforgemod.pc_shutdown": "PC Energiestand module",
+  "module.qforgemod.updates": "Updates module",
+  "module.qforgemod.debug_menu": "Debug-menu module",
 
   "toasts.qforgemod.update_available.title": "Update beschikbaar"
 }

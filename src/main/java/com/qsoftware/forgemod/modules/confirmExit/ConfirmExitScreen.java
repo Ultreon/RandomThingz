@@ -66,7 +66,7 @@ public class ConfirmExitScreen extends Screen {
                 this.minecraft.displayGuiScreen(backScreen);
             }
         }));
-        if (Config.allowShutdownPC.get() && ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN)) {
+        if (ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN)) {
             this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 210, 20, this.shutdownPcText, (p_213006_1_) -> ConfirmShutdownScreen.show()));
         }
 

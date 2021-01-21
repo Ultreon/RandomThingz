@@ -3,9 +3,10 @@ package com.qsoftware.forgemod.client.gui.settings;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.gui.ModuleScreen;
-import com.qsoftware.forgemod.client.gui.widgets.SwitchWidget;
-import com.qsoftware.forgemod.client.gui.widgets.UpdateButton;
+import com.qsoftware.forgemod.client.gui.modules.ModuleScreen;
+import com.qsoftware.forgemod.modules.confirmExit.ConfirmExitOptions;
+import com.qsoftware.forgemod.modules.ui.widgets.SwitchWidget;
+import com.qsoftware.forgemod.modules.updates.UpdateButton;
 import com.qsoftware.forgemod.common.text.Translations;
 import com.qsoftware.forgemod.modules.updates.AbstractUpdater;
 import com.qsoftware.forgemod.config.Config;
@@ -63,20 +64,20 @@ public class SettingsScreen extends Screen {
             Narrator.getNarrator().say("Q Forge Mod Settings Screen, such as settings for closing minecraft, and allowing Q Forge Mod to shutdown your computer.", true);
         }
 
-        closePrompt = Config.closePrompt.get();
-        allowShutdownPC = Config.allowShutdownPC.get();
+//        closePrompt = Config.closePrompt.get();
+//        allowShutdownPC = Config.allowShutdownPC.get();
 
         int dy = 0;
-        addButton(new UpdateButton(AbstractUpdater.getQFMInstance(), width / 2 - 155, height / 6 + dy - 6, 310));
+        addButton(new UpdateButton(AbstractUpdater.getQFMUpdater(), width / 2 - 155, height / 6 + dy - 6, 310));
 
         dy += 30;
-        this.quitSettings = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
-                Translations.getScreen("settings", "quit_settings"), (button) -> {
-            if (this.minecraft != null)
-                this.minecraft.displayGuiScreen(new QuitSettingsScreen(this, new StringTextComponent("")));
-        }));
-        this.allowShutdownPCButton = addButton(new Button(width / 2 + 5, height / 6 + dy - 6, 150, 20,
-                Translations.getScreen("settings", "allow_shutdown_pc").appendString(allowShutdownPC ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleAllowShutdownPC, this::tooltip));
+//        this.quitSettings = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
+//                Translations.getScreen("settings", "quit_settings"), (button) -> {
+//            if (this.minecraft != null)
+//                this.minecraft.displayGuiScreen(new ConfirmExitOptions(this, new StringTextComponent("")));
+//        }));
+//        this.allowShutdownPCButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 310, 20,
+//                Translations.getScreen("settings", "allow_shutdown_pc").appendString(allowShutdownPC ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleAllowShutdownPC, this::tooltip));
 
         dy += 30;
         this.modulesButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 310, 20,
@@ -130,8 +131,8 @@ public class SettingsScreen extends Screen {
 
     public void saveAndGoBack(Button button) {
         // Set config variables.
-        Config.closePrompt.set(closePrompt);
-        Config.allowShutdownPC.set(allowShutdownPC);
+//        Config.closePrompt.set(closePrompt);
+//        Config.allowShutdownPC.set(allowShutdownPC);
 
         // Save config.
         Config.save();

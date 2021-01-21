@@ -1,6 +1,8 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
@@ -63,5 +65,9 @@ public final class ModFluids {
         String tex = "block/" + name;
         //noinspection ReturnOfNull -- null-returning Supplier for flowing fluid
         return new ForgeFlowingFluid.Properties(still, () -> null, FluidAttributes.builder(QForgeMod.rl(tex), QForgeMod.rl(tex)).gaseous());
+    }
+
+    public static void register() {
+
     }
 }

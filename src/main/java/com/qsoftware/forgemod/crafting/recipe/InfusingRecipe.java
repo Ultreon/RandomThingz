@@ -5,7 +5,7 @@ import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidInventory;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.objects.blocks.machines.infuser.InfuserTileEntity;
+import com.qsoftware.forgemod.modules.blocks.objects.machines.infuser.InfuserTileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;

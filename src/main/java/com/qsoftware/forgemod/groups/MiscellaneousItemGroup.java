@@ -1,10 +1,8 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.init.ModItems;
+import com.qsoftware.forgemod.modules.items.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.NonNullList;
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -874,9 +874,16 @@
   "gui.tag_filter.qforgemod.chunks": "Ore chunks",
 
   "module.qforgemod.main": "Core Module",
+  "module.qforgemod.blocks": "Blocks Module",
+  "module.qforgemod.items": "Items Module",
+  "module.qforgemod.entities": "Entities Module",
+  "module.qforgemod.tile_entities": "Tile Entities Module",
+  "module.qforgemod.biomes": "Biomes Module",
+  "module.qforgemod.user_interface": "User Interface Module",
   "module.qforgemod.confirm_exit": "Exit Confirmation Module",
   "module.qforgemod.pc_shutdown": "PC Shutdown Module",
   "module.qforgemod.updates": "Updates Module",
+  "module.qforgemod.debug_menu": "Debug Menu Module",
 
   "toasts.qforgemod.update_available.title": "Update Available"
 }

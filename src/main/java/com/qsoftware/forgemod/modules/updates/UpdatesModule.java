@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.updates;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.gui.widgets.ModuleCompatibility;
+import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.Ticker;
 import com.qsoftware.forgemod.common.interfaces.IVersion;
@@ -12,6 +12,10 @@ import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -48,6 +52,30 @@ public class UpdatesModule extends Module {
         } else {
             throw new IllegalStateException("Minecraft isn't either on client or server side.");
         }
+    }
+
+    public AbstractUpdater<?> getUpdater(String modId) {
+        return AbstractUpdater.getUpdater(modId);
+    }
+
+    public AbstractUpdater<?> getUpdater(Mod mod) {
+        return AbstractUpdater.getUpdater(mod.value());
+    }
+
+    public AbstractUpdater<?> getUpdater(ModContainer container) {
+        return AbstractUpdater.getUpdater(container.getModId());
+    }
+
+    public AbstractUpdater<?> getUpdater(ModInfo info) {
+        return AbstractUpdater.getUpdater(info.getModId());
+    }
+
+    public AbstractUpdater<?> getUpdater(Object modObject) {
+        ModList modList = ModList.get();
+        ModContainer container = modList
+                .getModContainerByObject(modObject)
+                .orElseThrow(() -> new IllegalArgumentException("Object is not registered as Mod."));
+        return this.getUpdater(container);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.util;
 
-import com.qsoftware.forgemod.objects.blocks.machines.IEnergyHandler;
+import com.qsoftware.forgemod.modules.blocks.objects.machines.IEnergyHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
