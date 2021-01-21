@@ -191,7 +191,7 @@ public class QForgeMod {
         ModItemsNew.ITEMS.register(modEventBus);
         ModEntities.ENTITY_TYPES.register(modEventBus);
         ModContainers.CONTAINER_TYPES.register(modEventBus);
-        ModTileEntities.TILE_ENTITY_TYPES.register(modEventBus);
+//        ModTileEntities.TILE_ENTITY_TYPES.register(modEventBus);
 
         // Client-start.
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> QForgeMod.init.clientStart());

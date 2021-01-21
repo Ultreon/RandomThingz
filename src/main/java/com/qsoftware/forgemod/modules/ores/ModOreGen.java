@@ -37,10 +37,18 @@ import static net.minecraft.world.gen.feature.OreFeatureConfig.FillerBlockType.B
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
 public final class ModOreGen {
     private static final ConcurrentHashMap<ResourceLocation, ArrayList<HashMap.SimpleEntry<GenerationStage.Decoration, ConfiguredFeature<?, ?>>>> oreMap = new ConcurrentHashMap<>();
     private static final ArrayList<Pair<Predicate<BiomeLoadingEvent>, ConfiguredFeature<?, ?>>> ores = new ArrayList<>();
+    private static final ModOreGen INSTANCE = new ModOreGen();
+
+    public static ModOreGen getInstance() {
+        return INSTANCE;
+    }
+
+    private ModOreGen() {
+
+    }
 
     @SuppressWarnings("unused")
     public static class OreProps {
@@ -101,7 +109,7 @@ public final class ModOreGen {
      *
      * @see #onBiomeLoading(BiomeLoadingEvent)
      */
-    public static void createOresFeatures() {
+    public void createOresFeatures() {
         // Started generating ores.
         QForgeMod.LOGGER.info("-===========- Create Ore Features [START] -===========-");
 
@@ -131,6 +139,10 @@ public final class ModOreGen {
                 (b) -> b.getClimate().temperature >= 1.0f
         );
 
+        for (Ore ore : Ore.values()) {
+            addOreFeature(ore);
+        }
+
         // Ended generating ores.
         QForgeMod.LOGGER.info("-===========- Create Ore Features [ END ] -===========-");
     }
@@ -145,6 +157,14 @@ public final class ModOreGen {
 
         // Add ore to list.
         ores.add(new Pair<>(biome, configuredFeature));
+    }
+
+    public static void addOreFeature(Ore ore) {
+        // Get configured feature.
+        ConfiguredFeature<?, ?> configuredFeature = ore.getConfiguredFeature();
+
+        // Add ore to list.
+        ores.add(new Pair<>((o) -> true, configuredFeature));
     }
 
     @SuppressWarnings("unused")

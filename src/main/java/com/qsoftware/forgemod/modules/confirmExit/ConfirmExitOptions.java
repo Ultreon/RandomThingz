@@ -5,14 +5,12 @@ import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.client.gui.modules.ModuleOptionsScreen;
 import com.qsoftware.forgemod.modules.ui.widgets.SwitchWidget;
 import com.qsoftware.forgemod.common.text.Translations;
-import com.qsoftware.forgemod.config.Config;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.IReorderingProcessor;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,14 +56,15 @@ public class ConfirmExitOptions extends ModuleOptionsScreen<ConfirmExitModule> {
             Narrator.getNarrator().say("Settings for closing minecraft.", true);
         }
 
-        CompoundNBT tag = this.module.getTag();
+        CompoundNBT tag = this.module.writeTag();
 
-        quitOnEscInTitle = tag.getBoolean("QuitOnEscInTitle");
-        closePrompt = tag.getBoolean("ClosePrompt");
-        closePromptIngame = tag.getBoolean("ClosePromptIngame");
-        closePromptQuitButton = tag.getBoolean("ClosePromptQuitButton");
+        ConfirmExitOptions.quitOnEscInTitle = tag.getBoolean("QuitOnEscInTitle");
+        ConfirmExitOptions.closePrompt = tag.getBoolean("ClosePrompt");
+        ConfirmExitOptions.closePromptIngame = tag.getBoolean("ClosePromptIngame");
+        ConfirmExitOptions.closePromptQuitButton = tag.getBoolean("ClosePromptQuitButton");
 
 //        this.testSwitch = addButton(new SwitchWidget(width / 2 - 40 / 2, height / 2 - 20 / 2, false));
+        // Options for Confirm Exit screen.
         this.quitOnEscInTitleButton = addButton(new Button(width / 2 - 105, height / 6 - 6, 200, 20,
                 Translations.getScreen("quit_settings", "quit_on_esc_in_title").appendString(quitOnEscInTitle ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleExitOnEscInTitle, this::tooltip));
         this.closePromptButton = addButton(new Button(width / 2 - 105, height / 6 + 30 - 6, 200, 20,
@@ -74,6 +73,8 @@ public class ConfirmExitOptions extends ModuleOptionsScreen<ConfirmExitModule> {
                 Translations.getScreen("quit_settings", "close_prompt_ingame").appendString(closePromptIngame ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleClosePromptIngame, this::tooltip));
         this.closePromptQuitButtonButton = addButton(new Button(width / 2 - 105, height / 6 + 60 - 6, 200, 20,
                 Translations.getScreen("quit_settings", "close_prompt_quit_button").appendString(closePromptQuitButton ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleClosePromptQuitButton, this::tooltip));
+
+        // Done and Cancel buttons.
         addButton(new Button(width / 2 - 155, height / 6 + 120 - 6, 150, 20,
                 DialogTexts.GUI_DONE, this::saveAndGoBack));
         addButton(new Button(width / 2 + 5, height / 6 + 120 - 6, 150, 20,
@@ -121,23 +122,28 @@ public class ConfirmExitOptions extends ModuleOptionsScreen<ConfirmExitModule> {
     }
 
     public void tooltip(Button button, MatrixStack matrixStack, int mouseX, int mouseY) {
+        // Return if the Minecraft instance is null.
         if (this.minecraft == null) {
             return;
         }
 
         if (button == quitOnEscInTitleButton) {
+            // Quit when pressed escape in the main menu screen.
             TranslationTextComponent message = Translations.getScreen("quit_settings", "quit_on_esc_in_title", "tooltip");
             List<IReorderingProcessor> iReorderingProcessors = this.minecraft.fontRenderer.trimStringToWidth(message, Math.max(this.width / 2 + 75, 170));
             this.renderTooltip(matrixStack, iReorderingProcessors, mouseX, mouseY);
         } else if (button == closePromptButton) {
+            // Trigger close prompt when closing window / pressing on Windows: Alt+F4 or on Mac: Cmd+Q.
             TranslationTextComponent message = Translations.getScreen("quit_settings", "close_prompt", "tooltip");
             List<IReorderingProcessor> iReorderingProcessors = this.minecraft.fontRenderer.trimStringToWidth(message, Math.max(this.width / 2 + 75, 170));
             this.renderTooltip(matrixStack, iReorderingProcessors, mouseX, mouseY);
         } else if (button == closePromptIngameButton) {
+            // Allow showing close prompt when playing.
             TranslationTextComponent message = Translations.getScreen("quit_settings", "close_prompt_ingame", "tooltip");
             List<IReorderingProcessor> iReorderingProcessors = this.minecraft.fontRenderer.trimStringToWidth(message, Math.max(this.width / 2 + 75, 170));
             this.renderTooltip(matrixStack, iReorderingProcessors, mouseX, mouseY);
         } else if (button == closePromptQuitButtonButton) {
+            // Show close prompt when clicking on the quit button on the main menu.
             TranslationTextComponent message = Translations.getScreen("quit_settings", "close_prompt_quit_button", "tooltip");
             List<IReorderingProcessor> iReorderingProcessors = this.minecraft.fontRenderer.trimStringToWidth(message, Math.max(this.width / 2 + 75, 170));
             this.renderTooltip(matrixStack, iReorderingProcessors, mouseX, mouseY);
@@ -145,23 +151,21 @@ public class ConfirmExitOptions extends ModuleOptionsScreen<ConfirmExitModule> {
     }
 
     public void saveAndGoBack(Button button) {
-        // Get compound tag.
-        CompoundNBT tag = this.module.getTag();
-
         // Set config variables.
-        tag.putBoolean("QuitOnEscInTitle", quitOnEscInTitle);
-        tag.putBoolean("ClosePrompt", closePrompt);
-        tag.putBoolean("ClosePromptIngame", closePromptIngame);
-        tag.putBoolean("ClosePromptQuitButton", closePromptQuitButton);
+        this.module.setQuitOnEscInTitle(quitOnEscInTitle);
+        this.module.setClosePrompt(closePrompt);
+        this.module.setClosePromptIngame(closePromptIngame);
+        this.module.setClosePromptQuitButton(closePromptQuitButton);
 
-        // Set tag to set unsaved flag.
-        this.module.setTag(tag);
+        // Mark dirty, so it will be saved.
+        this.module.markDirty();
 
         // Go back.
         goBack(button);
     }
 
     public void goBack(Button button) {
+        // Check if the minecraft instance isn't null.
         if (minecraft != null) {
             // Display previous screen.
             minecraft.displayGuiScreen(back);

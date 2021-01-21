@@ -11,9 +11,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class OresModule extends CoreModule {
+    private final ModOreGen oreGen = ModOreGen.getInstance();
+
     @Override
     public void onEnable() {
-        // Todo: implement ore loader event handling here (in module).
+        this.modEventBus.register(new OresInitializer(this.oreGen));
+        this.forgeEventBus.register(this.oreGen);
     }
 
     @Override

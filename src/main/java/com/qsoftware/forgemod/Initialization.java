@@ -2,17 +2,17 @@ package com.qsoftware.forgemod;
 
 import com.qsoftware.filters.Filters;
 import com.qsoftware.forgemod.common.interfaces.IHasRenderType;
-import com.qsoftware.forgemod.init.*;
-import com.qsoftware.forgemod.modules.entities.ModEntities;
-import com.qsoftware.forgemod.modules.entities.objects.*;
-import com.qsoftware.forgemod.modules.items.ModItems;
-import com.qsoftware.forgemod.modules.items.OreMaterial;
+import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
+import com.qsoftware.forgemod.modules.entities.ModEntities;
+import com.qsoftware.forgemod.modules.entities.objects.*;
 import com.qsoftware.forgemod.modules.entities.objects.baby.*;
+import com.qsoftware.forgemod.modules.items.ModItems;
+import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.forgemod.modules.items.objects.advanced.AdvancedBowItem;
-import com.qsoftware.forgemod.modules.ores.ModOreGen;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -46,7 +46,7 @@ public class Initialization {
      */
     Initialization(QForgeMod mod) {
         this.mod = mod;
-        logger = QForgeMod.LOGGER;
+        this.logger = QForgeMod.LOGGER;
     }
 
     /**
@@ -75,8 +75,6 @@ public class Initialization {
             GlobalEntityTypeAttributes.put(ModEntities.FIRE_CREEPER.get(), FireCreeperEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.GLOW_SQUID.get(), GlowSquidEntity.registerAttributes().create());
         });
-
-        ModOreGen.createOresFeatures();
     }
 
     /**
@@ -87,7 +85,7 @@ public class Initialization {
     void clientSetup(@SuppressWarnings("unused") FMLClientSetupEvent event) {
         // do something that can only be done on the client
 
-        logger.info("Setting render layers for blocks.");
+        this.logger.info("Setting render layers for blocks.");
         for (Block block : Registration.getBlocks()) {
             if (block instanceof IHasRenderType) {
                 IHasRenderType hasRenderType = (IHasRenderType) block;
@@ -95,7 +93,7 @@ public class Initialization {
             }
         }
 
-        logger.info("Registering keybindings");
+        this.logger.info("Registering keybindings");
         KeyBindingList.register();
         if (Minecraft.getInstance().getVersion().equals("MOD_DEV")) {
             DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.PLAYER_1;

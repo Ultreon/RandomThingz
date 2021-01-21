@@ -27,6 +27,7 @@ public class ConfirmExitModule extends Module {
     private boolean closePromptIngame;
     private boolean closePromptQuitButton;
     private boolean escPress = false;
+    private boolean quitOnEscInTitle;
 
     public ConfirmExitModule() {
 
@@ -37,7 +38,7 @@ public class ConfirmExitModule extends Module {
         Minecraft mc = Minecraft.getInstance();
 
         if (event.getAction() == GLFW.GLFW_PRESS) {
-            if (event.getKey() == 256 && closePrompt) {
+            if (event.getKey() == 256 && closePrompt && quitOnEscInTitle) {
                 if (!escPress) {
                     escPress = true;
                     if (mc.currentScreen instanceof MainMenuScreen) {
@@ -134,7 +135,8 @@ public class ConfirmExitModule extends Module {
     }
 
     @Override
-    public CompoundNBT getTag() {
+    public CompoundNBT writeTag() {
+        this.tag.putBoolean("QuitOnEscInTitle", this.quitOnEscInTitle);
         this.tag.putBoolean("ClosePrompt", this.closePrompt);
         this.tag.putBoolean("ClosePromptIngame", this.closePromptIngame);
         this.tag.putBoolean("ClosePromptQuitButton", this.closePromptQuitButton);
@@ -143,12 +145,45 @@ public class ConfirmExitModule extends Module {
     }
 
     @Override
-    public void setTag(CompoundNBT tag) {
+    public void readTag(CompoundNBT tag) {
+        this.quitOnEscInTitle = tag.getBoolean("QuitOnEscInTitle");
         this.closePrompt = tag.getBoolean("ClosePrompt");
         this.closePromptIngame = tag.getBoolean("ClosePromptIngame");
         this.closePromptQuitButton = tag.getBoolean("ClosePromptQuitButton");
 
         this.tag = tag;
         ModuleManager.getInstance().setSaveSchedule(this);
+    }
+
+    public boolean getClosePrompt() {
+        return closePrompt;
+    }
+
+    public void setClosePrompt(boolean closePrompt) {
+        this.closePrompt = closePrompt;
+    }
+
+    public boolean getClosePromptIngame() {
+        return closePromptIngame;
+    }
+
+    public void setClosePromptIngame(boolean closePromptIngame) {
+        this.closePromptIngame = closePromptIngame;
+    }
+
+    public boolean getClosePromptQuitButton() {
+        return closePromptQuitButton;
+    }
+
+    public void setClosePromptQuitButton(boolean closePromptQuitButton) {
+        this.closePromptQuitButton = closePromptQuitButton;
+    }
+
+    public boolean getQuitOnEscInTitle() {
+        return quitOnEscInTitle;
+    }
+
+    public void setQuitOnEscInTitle(boolean quitOnEscInTitle) {
+        this.quitOnEscInTitle = quitOnEscInTitle;
     }
 }

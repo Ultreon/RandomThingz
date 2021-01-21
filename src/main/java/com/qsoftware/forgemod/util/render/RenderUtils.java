@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.client.renderer.utils;
+package com.qsoftware.forgemod.util.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;

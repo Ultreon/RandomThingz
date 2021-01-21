@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.common;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.Modules;
+import com.qsoftware.forgemod.Modules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompressedStreamTools;
@@ -64,7 +64,7 @@ public final class ModuleManager {
             // Set module state.
             CompoundNBT moduleCompound = this.modulesNbt.getCompound(module.getName());
             moduleCompound.putBoolean("Enabled", setEnabled);
-            moduleCompound.put("Tag", module.getTag());
+            moduleCompound.put("Tag", module.writeTag());
             this.modulesNbt.put(module.getName(), moduleCompound);
 
             // Disable module itself.
@@ -182,7 +182,7 @@ public final class ModuleManager {
             if (this.modulesNbt.contains(name, 10)) {
                 CompoundNBT moduleInfo = this.modulesNbt.getCompound(name);
                 enabled = moduleInfo.getBoolean("Enabled");
-                module.setTag(moduleInfo.getCompound("Tag"));
+                module.readTag(moduleInfo.getCompound("Tag"));
             } else {
                 enabled = module.isDefaultEnabled();
             }

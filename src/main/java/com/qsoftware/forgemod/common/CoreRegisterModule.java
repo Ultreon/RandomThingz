@@ -13,8 +13,6 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import java.util.function.Supplier;
 
 public abstract class CoreRegisterModule<T extends IForgeRegistryEntry<T>> extends CoreModule {
-    protected final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
     protected static <T extends IForgeRegistryEntry<T>> DeferredRegister<T> create(IForgeRegistry<T> registry) {
         return DeferredRegister.create(registry, QForgeMod.MOD_ID);
     }

@@ -13,4 +13,12 @@ public class Angle implements Formattable {
     public String toFormattedString() {
         return TextFormatting.BLUE.toString() + this.degrees + ((char)0xb0);
     }
+
+    public double getRadians() {
+        return Math.toRadians(this.degrees);
+    }
+
+    public double getDegrees() {
+        return degrees;
+    }
 }

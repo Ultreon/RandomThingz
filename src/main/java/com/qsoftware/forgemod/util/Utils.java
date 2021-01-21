@@ -1,8 +1,7 @@
 package com.qsoftware.forgemod.util;
 
 import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.config.Config;
-import com.qsoftware.forgemod.init.Modules;
+import com.qsoftware.forgemod.Modules;
 import com.sun.jna.Platform;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;

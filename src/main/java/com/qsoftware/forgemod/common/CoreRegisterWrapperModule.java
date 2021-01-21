@@ -15,10 +15,18 @@ import java.util.function.Supplier;
 public abstract class CoreRegisterWrapperModule<T extends IForgeRegistryEntry<T>> extends CoreModule {
     protected final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-    protected static <T extends IForgeRegistryEntry<T>> DeferredRegister<T> create(IForgeRegistry<T> registry) {
-        return DeferredRegister.create(registry, QForgeMod.MOD_ID);
-    }
-
+    /**
+     * @return the deferred register wrapper.
+     */
     public abstract DeferredRegisterWrapper<T> getDeferredRegister();
+
+    /**
+     * Register an object.
+     *
+     * @param name the name of the object to register.
+     * @param supplier an supplier containing the object.
+     * @param <O> the object to register..
+     * @return an registry object containing the registered object.
+     */
     public abstract <O extends T> RegistryObjectWrapper<O> register(String name, Supplier<O> supplier);
 }

@@ -1,5 +1,13 @@
 package com.qsoftware.forgemod.common;
 
+import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
+import mcp.MethodsReturnNonnullByDefault;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@FieldsAreNonnullByDefault
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public abstract class DummyModule extends Module {
     @Override
     public final void onEnable() {

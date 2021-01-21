@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.modules.blocks.objects.machines.pump;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.client.renderer.utils.RenderUtils;
+import com.qsoftware.forgemod.util.render.RenderUtils;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseScreen;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.refinery.RefineryTileEntity;
 import com.qsoftware.forgemod.util.TextUtils;

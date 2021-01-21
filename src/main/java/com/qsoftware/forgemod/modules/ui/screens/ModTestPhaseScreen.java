@@ -59,7 +59,7 @@ public class ModTestPhaseScreen extends Screen {
         }));
         this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
             if (this.minecraft != null) {
-                this.minecraft.close();
+                this.minecraft.shutdown();
             }
         }));
 
