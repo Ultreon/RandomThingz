@@ -4,7 +4,7 @@ import com.qsoftware.forgemod.modules.tileentities.ModMachineTileEntities;
 import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseTileEntity;
 import com.qsoftware.forgemod.modules.items.objects.upgrades.MachineUpgrades;
-import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.util.TextUtils;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.block.AbstractFurnaceBlock;

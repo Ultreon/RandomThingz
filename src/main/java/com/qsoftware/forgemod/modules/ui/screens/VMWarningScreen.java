@@ -1,13 +1,8 @@
 package com.qsoftware.forgemod.modules.ui.screens;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.text2speech.Narrator;
-import com.qsoftware.forgemod.Modules;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.modules.pcShutdown.ConfirmShutdownScreen;
-import com.qsoftware.forgemod.util.VMType;
+import com.qsoftware.forgemod.util.vm.VMType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IBidiRenderer;
@@ -15,17 +10,13 @@ import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class VMWarningScreen extends Screen {

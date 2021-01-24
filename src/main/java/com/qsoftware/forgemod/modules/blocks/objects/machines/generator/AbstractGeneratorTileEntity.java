@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.modules.blocks.objects.machines.generator;
 
 import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseTileEntity;
-import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;

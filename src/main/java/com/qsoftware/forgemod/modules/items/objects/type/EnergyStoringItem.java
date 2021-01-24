@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.modules.items.objects.type;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.capability.EnergyStorageItemImpl;
 import com.qsoftware.forgemod.hud.HudItem;
-import com.qsoftware.forgemod.util.GraphicsUtil;
+import com.qsoftware.forgemod.util.GraphicsUtils;
 import com.qsoftware.forgemod.util.TextUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -116,7 +116,7 @@ public class EnergyStoringItem extends HudItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
+    public void renderHud(GraphicsUtils gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
         // Apparently, addInformation can be called before caps are initialized
         if (CapabilityEnergy.ENERGY == null) return;
 

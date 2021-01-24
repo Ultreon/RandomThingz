@@ -18,7 +18,7 @@ public abstract class CoreModule extends Module {
      * Core modules should not be disabled.
      */
     @Override
-    public final void onDisable() {
+    public void onDisable() {
         // Do nothing
     }
 

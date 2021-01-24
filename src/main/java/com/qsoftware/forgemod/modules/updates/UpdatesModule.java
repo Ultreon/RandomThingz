@@ -5,6 +5,7 @@ import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.Ticker;
 import com.qsoftware.forgemod.common.interfaces.IVersion;
+import com.qsoftware.forgemod.modules.ui.screens.ModTestPhaseScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -134,10 +135,10 @@ public class UpdatesModule extends Module {
          * On screen initialize event.
          * Catches the main menu initialization.
          *
-         * @param event a {@link GuiScreenEvent.InitGuiEvent.Post} event.
+         * @param event a {@link GuiScreenEvent.InitGuiEvent.Pre} event.
          */
         @SubscribeEvent
-        public void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
+        public void onScreenInit(GuiScreenEvent.InitGuiEvent.Pre event) {
             // Get gui and the Minecraft instance.
             Minecraft mc = Minecraft.getInstance();
             Screen gui = event.getGui();
@@ -148,8 +149,9 @@ public class UpdatesModule extends Module {
             }
 
             // Is the gui the main menu?
-            if (gui instanceof MainMenuScreen) {
+            if (gui instanceof MainMenuScreen && ModTestPhaseScreen.isInitializedBefore()) {
                 // Check for updates.
+                event.setCanceled(true);
                 UpdateAvailableScreen.checkUpdates(mc, gui);
             }
         }

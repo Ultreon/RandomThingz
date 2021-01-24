@@ -25,7 +25,7 @@ import java.util.Objects;
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ModTestPhaseScreen extends Screen {
-    private static boolean initializedAlready = false;
+    private static boolean initializedBefore = false;
     private static boolean isSaving;
     private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
     private final ITextComponent yesButtonText;
@@ -65,7 +65,7 @@ public class ModTestPhaseScreen extends Screen {
 
         setButtonDelay(10);
 
-        initializedAlready = true;
+        initializedBefore = true;
     }
 
     @SuppressWarnings("deprecation")
@@ -108,17 +108,18 @@ public class ModTestPhaseScreen extends Screen {
         return --this.ticksUntilEnable <= 0;
     }
 
-    public static boolean isInitializedAlready() {
-        return initializedAlready;
+    public static boolean isInitializedBefore() {
+        return initializedBefore;
     }
 
     @SubscribeEvent
-    public static void onMainScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
+    public static void onMainScreenInit(GuiScreenEvent.InitGuiEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
         Screen gui = event.getGui();
         if (gui instanceof MainMenuScreen) {
+            event.setCanceled(true);
             if (QForgeMod.isDevtest()) {
-                if (!isInitializedAlready()) {
+                if (!isInitializedBefore()) {
                     mc.displayGuiScreen(new ModTestPhaseScreen(mc.currentScreen));
                 }
             }
