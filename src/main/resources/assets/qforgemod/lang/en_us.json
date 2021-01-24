@@ -859,6 +859,10 @@
   "screen.qforgemod.settings.allow_shutdown_pc": "Allow Shutdown PC: %1$s",
   "screen.qforgemod.settings.modules": "Manage Modules",
 
+  "screen.qforgemod.vm_warning.title": "Detected a Virtual Machine",
+  "screen.qforgemod.vm_warning.description.1": "QForgeMod detected you are using a %s virtual machine.",
+  "screen.qforgemod.vm_warning.description.2": "Note that QForgeMod is not supported with virtual machines, and can make Minecraft unplayable.",
+
   "screen.qforgemod.quit_settings.quit_on_esc_in_title": "Quit On ESC in Title: %1$s",
   "screen.qforgemod.quit_settings.quit_on_esc_in_title.tooltip": "Quit the game when pressing esc in title screen.",
   "screen.qforgemod.quit_settings.close_prompt": "Close Prompt: %1$s",

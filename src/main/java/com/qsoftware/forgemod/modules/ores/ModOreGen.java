@@ -109,7 +109,7 @@ public final class ModOreGen {
      *
      * @see #onBiomeLoading(BiomeLoadingEvent)
      */
-    public void createOresFeatures() {
+    public void addOresFeatures() {
         // Started generating ores.
         QForgeMod.LOGGER.info("-===========- Create Ore Features [START] -===========-");
 
@@ -135,7 +135,7 @@ public final class ModOreGen {
         addOreFeature((a) -> a.count(2).range(11, 8), 1, BASE_STONE_OVERWORLD, ModBlocks.ULTRINIUM_ORE.get(),
                 (b) -> b.getClimate().temperature >= 1.0f
         );
-        addOreFeature((a) -> a.chance(64).count(1).range(7, 8), 1, BASE_STONE_OVERWORLD, ModBlocks.INFINITY_ORE.get(),
+        addOreFeature((a) -> a.chance(128).count(1).range(48, 0), 1, BASE_STONE_OVERWORLD, ModBlocks.INFINITY_ORE.get(),
                 (b) -> b.getClimate().temperature >= 1.0f
         );
 
@@ -159,53 +159,12 @@ public final class ModOreGen {
         ores.add(new Pair<>(biome, configuredFeature));
     }
 
-    public static void addOreFeature(Ore ore) {
+    private static void addOreFeature(Ore ore) {
         // Get configured feature.
         ConfiguredFeature<?, ?> configuredFeature = ore.getConfiguredFeature();
 
         // Add ore to list.
         ores.add(new Pair<>((o) -> true, configuredFeature));
-    }
-
-    @SuppressWarnings("unused")
-    @Deprecated
-    protected static void createOreFeature(int count, int bottomOffset, int topOffset, int maximum, int size, RuleTest filler, Block ore, Biome[] biomes) {
-        // Ore Feature
-        BlockState blockState = ore.getDefaultState();
-        OreFeatureConfig oreFeatureConfig = new OreFeatureConfig(filler, blockState, size);
-
-        // Configured Feature
-        ConfiguredFeature<?, ?> configuredFeature = Feature.ORE.withConfiguration(oreFeatureConfig).range(maximum - topOffset).square().func_242731_b(count);
-
-        // Add feature
-        for (Biome biome : biomes) {
-            QForgeMod.LOGGER.info("Adding Ore Mapping for: '" + ore.getRegistryName() + "' to biome: " + biome.getRegistryName());
-            addOreMapping(biome.getRegistryName(), new HashMap.SimpleEntry<>(GenerationStage.Decoration.UNDERGROUND_ORES, configuredFeature));
-        }
-    }
-
-    @SuppressWarnings("unused")
-    @Deprecated
-    protected static void createOreFeature(int count, int bottomOffset, int topOffset, int maximum, int size, RuleTest filler, Block ore, Biome biome) {
-        // Ore Feature
-        BlockState blockState = ore.getDefaultState();
-        OreFeatureConfig oreFeatureConfig = new OreFeatureConfig(filler, blockState, size);
-
-        // Configured Feature
-        ConfiguredFeature<?, ?> configuredFeature = Feature.ORE.withConfiguration(oreFeatureConfig).range(maximum - topOffset).square().func_242731_b(count);
-
-        // Add feature
-        QForgeMod.LOGGER.info("Adding Ore Mapping for: '" + ore.getRegistryName() + "' to biome: " + biome.getRegistryName());
-        addOreMapping(biome.getRegistryName(), new HashMap.SimpleEntry<>(GenerationStage.Decoration.UNDERGROUND_ORES, configuredFeature));
-    }
-
-    @Deprecated
-    private static void addOreMapping(ResourceLocation registryName, AbstractMap.SimpleEntry<GenerationStage.Decoration, ConfiguredFeature<?, ?>> configEntry) {
-        if (!oreMap.containsKey(registryName)) {
-            oreMap.put(registryName, new ArrayList<>());
-        }
-
-        oreMap.get(registryName).add(configEntry);
     }
 
     /**

@@ -12,6 +12,10 @@ public class OresInitializer {
 
     @SubscribeEvent
     public void commonSetup(FMLCommonSetupEvent event) {
-        oreGen.createOresFeatures();
+        oreGen.addOresFeatures();
+    }
+
+    public ModOreGen getOreGen() {
+        return oreGen;
     }
 }
