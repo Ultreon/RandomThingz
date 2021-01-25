@@ -40,20 +40,20 @@ public class UserInterfaceModule extends CoreModule {
 
     @Override
     public void onEnable() {
-        if (QForgeMod.isClientSide()) {
-            MinecraftForge.EVENT_BUS.register(this);
-        }
+//        if (QForgeMod.isClientSide()) {
+//            MinecraftForge.EVENT_BUS.register(this);
+//        }
         this.minecraft = Minecraft.getInstance();
     }
 
     @Override
     public void onDisable() {
-        if (QForgeMod.isClientSide()) {
-            MinecraftForge.EVENT_BUS.unregister(this);
-        }
+//        if (QForgeMod.isClientSide()) {
+//            MinecraftForge.EVENT_BUS.unregister(this);
+//        }
     }
 
-    @SubscribeEvent
+//    @SubscribeEvent
     public void onMainMenuInit(GuiScreenEvent.InitGuiEvent.Post event) {
         if (event.getGui() instanceof MainMenuScreen) {
             this.pinging = true;
@@ -70,7 +70,7 @@ public class UserInterfaceModule extends CoreModule {
         this.pinging = false;
     }
 
-    @SubscribeEvent
+//    @SubscribeEvent
     public void onMainMenuRender(GuiScreenEvent.DrawScreenEvent.Post event) {
         if (event.getGui() instanceof MainMenuScreen) {
             this.renderMainMenu(event.getMatrixStack(), event.getMouseX(), event.getMouseY(), event.getRenderPartialTicks());
@@ -97,7 +97,7 @@ public class UserInterfaceModule extends CoreModule {
         Screen.blit(matrixStack, 0, 0, 24, 24, 0, 0, 24, 24, 24, 24);
     }
 
-    @SubscribeEvent
+//    @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent event) {
         this.ticks++;
         if (ticks % 5 == 0) {
