@@ -12,7 +12,7 @@ import com.qsoftware.forgemod.modules.items.ItemsModule;
 import com.qsoftware.forgemod.modules.ores.OresModule;
 import com.qsoftware.forgemod.modules.pcShutdown.PCShutdownModule;
 import com.qsoftware.forgemod.modules.tileentities.TileEntitiesModule;
-import com.qsoftware.forgemod.modules.ui.UserInterfaceModule;
+//import com.qsoftware.forgemod.modules.ui.UserInterfaceModule;
 import com.qsoftware.forgemod.modules.updates.UpdatesModule;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class Modules {
     public static final TileEntitiesModule TILE_ENTITIES = new TileEntitiesModule();
     public static final BiomesModule BIOMES = new BiomesModule();
     public static final OresModule ORES = new OresModule();
-    public static final UserInterfaceModule USER_INTERFACE = new UserInterfaceModule();
+//    public static final UserInterfaceModule USER_INTERFACE = new UserInterfaceModule();
     public static final ConfirmExitModule CONFIRM_EXIT = new ConfirmExitModule();
     public static final PCShutdownModule PC_SHUTDOWN = new PCShutdownModule();
     public static final UpdatesModule UPDATES = new UpdatesModule();
@@ -42,7 +42,7 @@ public class Modules {
         manager.register(TILE_ENTITIES);
         manager.register(BIOMES);
         manager.register(ORES);
-        manager.register(USER_INTERFACE);
+//        manager.register(USER_INTERFACE);
         manager.register(CONFIRM_EXIT);
         manager.register(PC_SHUTDOWN);
         manager.register(UPDATES);
