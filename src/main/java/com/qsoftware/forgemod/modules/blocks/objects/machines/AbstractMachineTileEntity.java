@@ -5,7 +5,7 @@ import com.qsoftware.forgemod.capability.EnergyStorageImpl;
 import com.qsoftware.forgemod.modules.items.objects.upgrades.MachineUpgrades;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.InventoryUtils;
-import com.qsoftware.forgemod.common.enums.MachineTier;
+import com.qsoftware.forgemod.util.MachineTier;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;

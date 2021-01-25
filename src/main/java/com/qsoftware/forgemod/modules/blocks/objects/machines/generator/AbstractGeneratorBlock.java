@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.blocks.objects.machines.generator;
 
 import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBlock;
-import com.qsoftware.forgemod.common.enums.MachineTier;
+import com.qsoftware.forgemod.util.MachineTier;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;

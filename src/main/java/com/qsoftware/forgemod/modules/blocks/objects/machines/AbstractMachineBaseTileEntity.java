@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.modules.blocks.objects.machines;
 
 import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.forgemod.modules.items.objects.upgrades.MachineUpgradeItem;
-import com.qsoftware.forgemod.common.enums.MachineTier;
+import com.qsoftware.forgemod.util.MachineTier;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;

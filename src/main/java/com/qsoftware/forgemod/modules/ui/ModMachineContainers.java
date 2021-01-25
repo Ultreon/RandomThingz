@@ -29,7 +29,7 @@ import com.qsoftware.forgemod.modules.blocks.objects.machines.refinery.RefineryS
 import com.qsoftware.forgemod.modules.blocks.objects.machines.solidifier.SolidifierContainer;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.solidifier.SolidifierScreen;
 import com.qsoftware.forgemod.util.ExceptionUtil;
-import com.qsoftware.forgemod.common.enums.MachineTier;
+import com.qsoftware.forgemod.util.MachineTier;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;

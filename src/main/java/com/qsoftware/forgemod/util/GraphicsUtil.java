@@ -9,12 +9,12 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.ItemStack;
 
-public final class GraphicsUtils {
+public final class GraphicsUtil {
     private final ItemRenderer itemRenderer;
     private final MatrixStack matrixStack;
     private final FontRenderer fontRenderer;
 
-    public GraphicsUtils(ItemRenderer itemRenderer, MatrixStack matrixStack, FontRenderer fontRenderer) {
+    public GraphicsUtil(ItemRenderer itemRenderer, MatrixStack matrixStack, FontRenderer fontRenderer) {
         this.itemRenderer = itemRenderer;
         this.matrixStack = matrixStack;
         this.fontRenderer = fontRenderer;

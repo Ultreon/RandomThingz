@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.util.vm;
+package com.qsoftware.forgemod.util;
 
 import org.jetbrains.annotations.Nullable;
 import oshi.SystemInfo;

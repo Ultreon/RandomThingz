@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.modules.blocks.objects.machines.electricfurnace;
 import com.google.common.collect.ImmutableList;
 import com.qsoftware.forgemod.modules.tileentities.ModMachineTileEntities;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineTileEntity;
-import com.qsoftware.forgemod.common.enums.MachineTier;
+import com.qsoftware.forgemod.util.MachineTier;
 import com.qsoftware.forgemod.util.TextUtils;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

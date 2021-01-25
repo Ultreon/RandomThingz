@@ -7,7 +7,7 @@ import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBas
 import com.qsoftware.forgemod.modules.items.objects.upgrades.MachineUpgrades;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.InventoryUtils;
-import com.qsoftware.forgemod.common.enums.MachineTier;
+import com.qsoftware.forgemod.util.MachineTier;
 import com.qsoftware.forgemod.util.TextUtils;
 import com.qsoftware.modlib.silentlib.util.TimeUtils;
 import com.qsoftware.modlib.silentutils.EnumUtils;
