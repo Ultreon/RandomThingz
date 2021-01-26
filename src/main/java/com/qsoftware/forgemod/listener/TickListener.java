@@ -34,8 +34,6 @@ public class TickListener {
     public static void onClientPlayerTick(TickEvent.ClientTickEvent event) {
         ControllerState currState = controllers.getState(0);
 
-//        System.out.println(currState.isConnected);
-
         Minecraft mc = Minecraft.getInstance();
         ClientPlayerEntity player = mc.player;
         if (player == null) {

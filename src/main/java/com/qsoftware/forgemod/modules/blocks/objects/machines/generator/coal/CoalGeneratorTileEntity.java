@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.modules.blocks.objects.machines.generator.coal;
 import com.qsoftware.forgemod.init.ModTags;
 import com.qsoftware.forgemod.modules.tileentities.ModMachineTileEntities;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.AbstractGeneratorTileEntity;
-import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.util.TextUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;

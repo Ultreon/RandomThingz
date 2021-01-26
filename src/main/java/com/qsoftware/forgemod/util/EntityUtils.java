@@ -1,6 +1,8 @@
 package com.qsoftware.forgemod.util;
 
 import com.google.common.annotations.Beta;
+import com.qsoftware.forgemod.util.helpers.MathHelper;
+import com.qsoftware.modlib.silentutils.MathUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
 
@@ -51,5 +53,14 @@ public final class EntityUtils {
 //        entity.getCombatTracker().trackDamage(damageSrc, currentHealth, currentHealth); // QSoftware: changed f2 to currentHealth for instant kill
 //        entity.setHealth(0f); // Forge: moved to fix MC-121048; QSoftware: changed to 0f for instant kill
 //        entity.setAbsorptionAmount(0f); // QSoftware: changed to 0f for number compatibility
+    }
+
+    /**
+     * Heal the given entity to max health.
+     *
+     * @param entity the entity to heal.
+     */
+    public static void fullHeal(LivingEntity entity) {
+        entity.heal(entity.getMaxHealth() - entity.getHealth());
     }
 }

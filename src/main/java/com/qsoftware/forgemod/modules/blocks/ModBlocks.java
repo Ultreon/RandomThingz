@@ -39,7 +39,7 @@ import com.qsoftware.forgemod.modules.blocks.objects.trees.EucalyptusTree;
 import com.qsoftware.forgemod.modules.items.objects.type.FaceableBlock;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.qsoftware.forgemod.util.ExceptionUtil;
-import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;

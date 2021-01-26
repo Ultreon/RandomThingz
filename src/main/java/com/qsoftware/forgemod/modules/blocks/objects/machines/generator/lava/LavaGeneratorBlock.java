@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.blocks.objects.machines.generator.lava;
 
 import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.AbstractGeneratorBlock;
-import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

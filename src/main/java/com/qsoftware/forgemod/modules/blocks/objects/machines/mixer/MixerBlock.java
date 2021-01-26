@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.blocks.objects.machines.mixer;
 
 import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBlock;
-import com.qsoftware.forgemod.util.MachineTier;
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;

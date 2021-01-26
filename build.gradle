@@ -27,7 +27,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 //apply plugin: "io.freefair.lombok"
 
-version = '1.2-alpha1-DEVTEST'
+version = '1.2-alpha2'
 group = 'com.qsoftware.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'qforgemod'
 
@@ -212,10 +212,6 @@ dependencies {
     implementation group: 'xml-resolver', name: 'xml-resolver', version: '1.2'
     implementation group: 'org.yaml', name: 'snakeyaml', version: '1.26'
 
-    // OSHi (For system info in crash reports)
-    extraLibs 'com.github.oshi:oshi-core:5.3.7'
-    implementation 'com.github.oshi:oshi-core:5.3.7'
-
     // Bson library.
     extraLibs group: 'org.mongodb', name: 'bson', version: '4.1.1'
     implementation group: 'org.mongodb', name: 'bson', version: '4.1.1'
@@ -267,9 +263,10 @@ dependencies {
 jar {
     manifest {
         attributes([
+                "Main-Class": "com.qsoftware.forgemod.Main",
                 "Specification-Title": "qforgemod",
                 "Specification-Vendor": "qsoftware",
-                "Specification-Version": "1.2-alpha1-DEVTEST",
+                "Specification-Version": "1.2-alpha2",
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"qsoftware",

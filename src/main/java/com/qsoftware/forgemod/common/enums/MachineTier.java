@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.util;
+package com.qsoftware.forgemod.common.enums;
 
 public enum MachineTier {
     BASIC(0, 10_000, 1.0f),

@@ -1,7 +1,7 @@
-package com.qsoftware.forgemod.util;
+package com.qsoftware.forgemod.common.enums;
 
 import org.jetbrains.annotations.Nullable;
-import oshi.SystemInfo;
+//import oshi.SystemInfo;
 
 public enum VMType {
     VMWARE("VMware, Inc.", "VMware");
@@ -24,18 +24,18 @@ public enum VMType {
         return null;
     }
 
-    @Nullable
-    public static VMType getFromSystemInfo(SystemInfo systemInfo) {
-        return getFromManufacturer(systemInfo.getHardware().getComputerSystem().getManufacturer());
-    }
+//    @Nullable
+//    public static VMType getFromSystemInfo(SystemInfo systemInfo) {
+//        return getFromManufacturer(systemInfo.getHardware().getComputerSystem().getManufacturer());
+//    }
 
-    public static boolean isGuestVM() {
-        return getFromSystem() != null;
-    }
+//    public static boolean isGuestVM() {
+//        return getFromSystem() != null;
+//    }
 
-    public static VMType getFromSystem() {
-        return getFromSystemInfo(new SystemInfo());
-    }
+//    public static VMType getFromSystem() {
+//        return getFromSystemInfo(new SystemInfo());
+//    }
 
     public String getName() {
         return this.name;

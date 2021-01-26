@@ -14,9 +14,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.lwjgl.glfw.GLFW;
 
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@SuppressWarnings("unused")
+@Deprecated
 public class KeyBindListener {
-    @SubscribeEvent
+    @Deprecated
     public static void clientTick(TickEvent.ClientTickEvent event) {
         Minecraft mc = Minecraft.getInstance();
 

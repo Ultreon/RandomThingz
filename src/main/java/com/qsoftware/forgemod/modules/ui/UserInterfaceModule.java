@@ -14,6 +14,7 @@ public class UserInterfaceModule extends CoreModule {
     @Override
     public void onEnable() {
         // Todo: add enabling for Main Module.
+        ModContainers.CONTAINER_TYPES.register(modEventBus);
     }
 
     @Override
