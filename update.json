@@ -39,7 +39,7 @@
           "dependencies": {
             "qmodlib": {
               "download": "https://github.com/Qboi123/QModLib/releases/download/1.0-beta1/qmodlib-1.0-beta1.jar",
-              "name": "QModLib"
+              "name": "QModLib",
               "older_versions": [
                 
               ]
