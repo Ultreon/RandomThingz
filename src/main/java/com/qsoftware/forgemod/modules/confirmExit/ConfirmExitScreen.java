@@ -6,6 +6,7 @@ import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.Modules;
+import com.qsoftware.forgemod.modules.pcCrash.ConfirmCrashScreen;
 import com.qsoftware.forgemod.modules.pcShutdown.ConfirmShutdownScreen;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IBidiRenderer;
@@ -34,6 +35,7 @@ public class ConfirmExitScreen extends Screen {
     private final ITextComponent noButtonText;
     private final Screen backScreen;
     private int ticksUntilEnable;
+    private ITextComponent crashPcText;
 
     public ConfirmExitScreen(Screen backScreen) {
         super(new TranslationTextComponent("msg.qforgemod.confirm_exit.title"));
@@ -41,6 +43,7 @@ public class ConfirmExitScreen extends Screen {
         this.yesButtonText = DialogTexts.GUI_YES;
         this.noButtonText = DialogTexts.GUI_NO;
         this.shutdownPcText = new TranslationTextComponent("button.qforgemod.confirm_exit.shutdown_pc");
+        this.crashPcText = new TranslationTextComponent("button.qforgemod.confirm_exit.crash_pc");
     }
 
     protected void init() {
@@ -67,6 +70,9 @@ public class ConfirmExitScreen extends Screen {
         }));
         if (ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN)) {
             this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 210, 20, this.shutdownPcText, (p_213006_1_) -> ConfirmShutdownScreen.show()));
+            if (ModuleManager.getInstance().isEnabled(Modules.PC_CRASH)) {
+                this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 156, 210, 20, this.crashPcText, (p_213006_1_) -> ConfirmCrashScreen.show()));
+            }
         }
 
         setButtonDelay(10);

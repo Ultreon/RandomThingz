@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:zinc_ingot_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_zinc_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:zinc_ingot_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_zinc_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

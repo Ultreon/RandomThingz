@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:aluminum_steel_nugget"
+    }
+  },
+  "result": {
+    "item": "qforgemod:aluminum_steel_ingot"
+  }
+}

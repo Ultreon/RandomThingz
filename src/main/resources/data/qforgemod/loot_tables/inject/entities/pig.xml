@@ -1,0 +1,47 @@
+<loot-table>
+  <pools>
+    <pool name="main">
+      <rolls>1</rolls>
+      <entries>
+        <entry type="minecraft:item">
+          <functions>
+            <function name="minecraft:set_count">
+              <count type="minecraft:uniform">
+                <min type="float">0.0</min>
+                <max type="float">1.0</max>
+              </count>
+            </function>
+            <function name="minecraft:looting_enchant">
+              <count>
+                <min type="float">0.0</min>
+                <max type="float">0.5</max>
+              </count>
+            </function>
+          </functions>
+          <name>qforgemod:pork_shank</name>
+        </entry>
+      </entries>
+    <pool name="main">
+      <rolls>1</rolls>
+      <entries>
+        <entry type="minecraft:item">
+          <functions>
+            <function name="minecraft:set_count">
+              <count type="minecraft:uniform">
+                <min type="float">0.0</min>
+                <max type="float">2.0</max>
+              </count>
+            </function>
+            <function name="minecraft:looting_enchant">
+              <count>
+                <min type="float">0.0</min>
+                <max type="float">0.5</max>
+              </count>
+            </function>
+          </functions>
+          <name>qforgemod:bacon</name>
+        </entry>
+      </entries>
+    </pool>
+  </pools>
+</loot-table>

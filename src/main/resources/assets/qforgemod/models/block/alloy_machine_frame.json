@@ -1,5 +1,5 @@
 {
-  "parent": "qforgemod:blocks/machine_frame",
+  "parent": "qforgemod:block/machine_frame",
   "textures": {
     "all": "qforgemod:blocks/machine_frame/alloy"
   }

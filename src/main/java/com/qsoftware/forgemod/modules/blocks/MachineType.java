@@ -1,11 +1,11 @@
 package com.qsoftware.forgemod.modules.blocks;
 
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseTileEntity;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.alloysmelter.AlloySmelterContainer;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.alloysmelter.AlloySmelterTileEntity;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.crusher.CrusherContainer;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.crusher.CrusherTileEntity;
-import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.modlib.silentlib.util.Lazy;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
@@ -27,6 +27,9 @@ public class MachineType<T extends AbstractMachineBaseTileEntity, B extends T, S
             (id, inv) -> new CrusherContainer(id, inv, MachineTier.BASIC),
             (id, inv) -> new CrusherContainer(id, inv, MachineTier.STANDARD)
     );
+//    public static final MachineType<AbstractMachineBaseTileEntity, T, T, Container> ENCHANTER = new MachineType<>(
+//            () -> TileEntityType.Builder.create(EnchanterTileEntity.Basic::new, ModBlocks.BASIC_ALLOY_SMELTER.get()),
+//    );
 
     private final Lazy<TileEntityType<B>> basicTileEntityType;
     private final Lazy<TileEntityType<S>> standardTileEntityType;

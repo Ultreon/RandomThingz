@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:silver_sword"
+    ]
+  },
+  "criteria": {
+    "has_silver_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:silver_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:silver_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_silver_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "qforgemod:crushing",
+  "process_time": 300,
+  "ingredient": {
+    "tag": "qforgemod:chunks/enderium"
+  },
+  "results": [
+    {
+      "item": "qforgemod:enderium_dust"
+    },
+    {
+      "item": "qforgemod:enderium_dust",
+      "chance": 0.1
+    }
+  ]
+}

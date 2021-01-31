@@ -1,5 +1,5 @@
 {
-  "parent": "qforgemod:blocks/drying_rack",
+  "parent": "qforgemod:block/drying_rack",
   "textures": {
     "wood": "minecraft:block/birch_planks"
   }

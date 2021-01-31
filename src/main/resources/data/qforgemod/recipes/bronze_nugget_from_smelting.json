@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "qforgemod:bronze_pickaxe"
+    },
+    {
+      "item": "qforgemod:bronze_shovel"
+    },
+    {
+      "item": "qforgemod:bronze_axe"
+    },
+    {
+      "item": "qforgemod:bronze_hoe"
+    },
+    {
+      "item": "qforgemod:bronze_sword"
+    },
+    {
+      "item": "qforgemod:bronze_helmet"
+    },
+    {
+      "item": "qforgemod:bronze_chestplate"
+    },
+    {
+      "item": "qforgemod:bronze_leggings"
+    },
+    {
+      "item": "qforgemod:bronze_boots"
+    }
+  ],
+  "result": "qforgemod:bronze_nugget",
+  "experience": 0.1,
+  "cookingtime": 200
+}

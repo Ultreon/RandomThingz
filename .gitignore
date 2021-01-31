@@ -29,6 +29,7 @@ run
 # Files from Forge MDK
 forge*changelog.txt
 
+/local/
 /server/
 /mods_items.pik
 /quark/
@@ -36,6 +37,6 @@ forge*changelog.txt
 /mekanism/
 /logs/
 /.vscode/
-ideas/Rebearth+-+v3.0.zip
-ideas/mooblooms-e2601.zip
+/ideas/Rebearth+-+v3.0.zip
+/ideas/mooblooms-e2601.zip
 /releases/

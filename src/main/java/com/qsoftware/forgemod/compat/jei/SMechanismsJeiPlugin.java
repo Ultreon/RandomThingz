@@ -1,10 +1,9 @@
 package com.qsoftware.forgemod.compat.jei;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
-import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.init.ModRecipes;
 import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.alloysmelter.AlloySmelterContainer;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.alloysmelter.AlloySmelterScreen;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.compressor.CompressorContainer;
@@ -18,6 +17,7 @@ import com.qsoftware.forgemod.modules.blocks.objects.machines.infuser.InfuserScr
 import com.qsoftware.forgemod.modules.blocks.objects.machines.mixer.MixerScreen;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.refinery.RefineryScreen;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.solidifier.SolidifierScreen;
+import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.items.objects.fluid.CanisterItem;
 import com.qsoftware.forgemod.util.Constants;
 import mezz.jei.api.IModPlugin;
@@ -54,6 +54,7 @@ public class SMechanismsJeiPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(new AlloySmeltingRecipeCategoryJei(guiHelper));
+//        registration.addRecipeCategories(new EnchanterRecipeCategoryJei(guiHelper));
         registration.addRecipeCategories(new CompressingRecipeCategoryJei(guiHelper));
         registration.addRecipeCategories(new CrushingRecipeCategoryJei(guiHelper));
         registration.addRecipeCategories(new DryingRecipeCategoryJei(guiHelper));
@@ -66,6 +67,7 @@ public class SMechanismsJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(getRecipesOfType(ModRecipes.Types.ALLOY_SMELTING), Constants.ALLOY_SMELTING);
+//        registration.addRecipes(getRecipesOfType(ModRecipes.Types.ENCHANTING), Constants.ENCHANTING);
         registration.addRecipes(getRecipesOfType(ModRecipes.Types.COMPRESSING), Constants.COMPRESSING);
         registration.addRecipes(getRecipesOfType(ModRecipes.Types.CRUSHING), Constants.CRUSHING);
         registration.addRecipes(getRecipesOfType(ModRecipes.Types.DRYING), Constants.DRYING);
@@ -78,6 +80,7 @@ public class SMechanismsJeiPlugin implements IModPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(AlloySmelterScreen.class, 90, 32, 28, 23, Constants.ALLOY_SMELTING);
+//        registration.addRecipeClickArea(EnchanterScreen.class, 90, 32, 28, 23, Constants.ENCHANTING);
         registration.addRecipeClickArea(CompressorScreen.class, 78, 32, 28, 23, Constants.COMPRESSING);
         registration.addRecipeClickArea(CrusherScreen.class, 45, 32, 28, 23, Constants.CRUSHING);
         registration.addRecipeClickArea(ElectricFurnaceScreen.class, 78, 32, 28, 23,
@@ -91,6 +94,7 @@ public class SMechanismsJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         registration.addRecipeTransferHandler(AlloySmelterContainer.class, Constants.ALLOY_SMELTING, 0, 4, 5, 36);
+//        registration.addRecipeTransferHandler(EnchanterContainer.class, Constants.ENCHANTING, 0, 4, 5, 36);
         registration.addRecipeTransferHandler(CompressorContainer.class, Constants.COMPRESSING, 0, 1, 2, 36);
         registration.addRecipeTransferHandler(CrusherContainer.class, Constants.CRUSHING, 0, 1, 5, 36);
         registration.addRecipeTransferHandler(ElectricFurnaceContainer.class, Constants.REFINING, 0, 1, 2, 36);

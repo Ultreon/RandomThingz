@@ -4,6 +4,7 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ModFluids;
 import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.forgemod.modules.blocks.objects.machines.alloysmelter.AlloySmelterBlock;
 import com.qsoftware.forgemod.modules.tileentities.ModTileEntities;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.forgemod.modules.blocks.objects.AtomicTNTBlock;
@@ -15,7 +16,6 @@ import com.qsoftware.forgemod.modules.blocks.objects.custom.render.CRFlowerBlock
 import com.qsoftware.forgemod.modules.blocks.objects.furniture.WoodenCrateBlock;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBlock;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.MachineFrameBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.alloysmelter.AlloySmelterBlock;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.batterybox.BatteryBoxBlock;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.compressor.CompressorBlock;
 import com.qsoftware.forgemod.modules.blocks.objects.machines.crusher.CrusherBlock;

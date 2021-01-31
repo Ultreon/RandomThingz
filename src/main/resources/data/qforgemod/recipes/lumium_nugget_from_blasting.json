@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "qforgemod:lumium_pickaxe"
+    },
+    {
+      "item": "qforgemod:lumium_shovel"
+    },
+    {
+      "item": "qforgemod:lumium_axe"
+    },
+    {
+      "item": "qforgemod:lumium_hoe"
+    },
+    {
+      "item": "qforgemod:lumium_sword"
+    },
+    {
+      "item": "qforgemod:lumium_helmet"
+    },
+    {
+      "item": "qforgemod:lumium_chestplate"
+    },
+    {
+      "item": "qforgemod:lumium_leggings"
+    },
+    {
+      "item": "qforgemod:lumium_boots"
+    }
+  ],
+  "result": "qforgemod:lumium_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

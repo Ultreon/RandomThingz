@@ -1,0 +1,160 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:zinc_nugget_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_zinc_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_zinc_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_shovel"
+          }
+        ]
+      }
+    },
+    "has_zinc_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_axe"
+          }
+        ]
+      }
+    },
+    "has_zinc_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_hoe"
+          }
+        ]
+      }
+    },
+    "has_zinc_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_sword"
+          }
+        ]
+      }
+    },
+    "has_zinc_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_helmet"
+          }
+        ]
+      }
+    },
+    "has_zinc_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_chestplate"
+          }
+        ]
+      }
+    },
+    "has_zinc_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_leggings"
+          }
+        ]
+      }
+    },
+    "has_zinc_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_boots"
+          }
+        ]
+      }
+    },
+    "has_chainmail_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_helmet"
+          }
+        ]
+      }
+    },
+    "has_chainmail_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_chestplate"
+          }
+        ]
+      }
+    },
+    "has_chainmail_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_leggings"
+          }
+        ]
+      }
+    },
+    "has_chainmail_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_boots"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:zinc_nugget_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_zinc_pickaxe",
+      "has_zinc_shovel",
+      "has_zinc_axe",
+      "has_zinc_hoe",
+      "has_zinc_sword",
+      "has_zinc_helmet",
+      "has_zinc_chestplate",
+      "has_zinc_leggings",
+      "has_zinc_boots",
+      "has_the_recipe"
+    ]
+  ]
+}

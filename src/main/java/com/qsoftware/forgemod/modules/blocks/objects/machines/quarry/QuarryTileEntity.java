@@ -10,11 +10,17 @@ import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ChestBlock;
+import net.minecraft.client.renderer.FaceDirection;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameters;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SChangeBlockPacket;
@@ -23,13 +29,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Quarry Tile Entity.
@@ -349,6 +362,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
             // Create result
             breakProgress = 0;
             destroyBlock(posToBreak, true, null);
+            System.out.println("destroyBlock(" + posToBreak + ", true, null");
 
             this.x++;
             if (this.x > this.pos.getX() + 1) {
@@ -365,8 +379,8 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
             breakProcessTime = blockState.getBlockHardness(world, pos);
         } else {
             int i = (int) ((breakProcessTime / breakProgress) * 10.0F);
-            world.sendBlockBreakProgress(-1, posToBreak, i);
-            breakProgress += 0.04f * getUpgradeCount(MachineUpgrades.PROCESSING_SPEED);
+            world.sendBlockBreakProgress(this.pos.hashCode(), posToBreak, i);
+            breakProgress += 0.1f * (getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) + 1);
         }
 
         // Process
@@ -480,7 +494,40 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
             this.world.playEvent(2001, pos, Block.getStateId(blockState));
             if (dropBlock) {
                 TileEntity tileEntity = blockState.hasTileEntity() ? this.world.getTileEntity(pos) : null;
-                Block.spawnDrops(blockState, this.world, pos.add(0, 1.5, 0), tileEntity, entity, ItemStack.EMPTY);
+                BlockPos up = this.pos.up();
+                TileEntity upTe = this.world.getTileEntity(up);
+                if (upTe != null) {
+                    LazyOptional<IItemHandler> capability = upTe.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.SOUTH);
+                    LootContext.Builder builder = new LootContext.Builder((ServerWorld) this.world).withRandom(this.world.rand).withParameter(LootParameters.field_237457_g_, Vector3d.copyCentered(pos)).withParameter(LootParameters.TOOL, ItemStack.EMPTY).withNullableParameter(LootParameters.BLOCK_ENTITY, this).withNullableParameter(LootParameters.THIS_ENTITY, null);
+                    if (capability.isPresent() && capability.resolve().isPresent()) {
+                        IItemHandler itemHandler = capability.resolve().get();
+                        List<ItemStack> stacks = new ArrayList<>();
+                        for (ItemStack stack : blockState.getDrops(builder)) {
+                            for (int i = 0; i < itemHandler.getSlots(); i++) {
+                                stack = itemHandler.insertItem(i, stack, false);
+                            }
+                            stacks.add(stack);
+                        }
+                        for (ItemStack stack : stacks) {
+                            if (stack.isEmpty()) {
+                                continue;
+                            }
+                            if (!this.world.isRemote && !stack.isEmpty() && this.world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS) && !this.world.restoringBlockSnapshots) {
+                                float f = 0.5F;
+                                double d0 = (double) (this.world.rand.nextFloat() * 0.5F) + 0.25D;
+                                double d1 = (double) (this.world.rand.nextFloat() * 0.5F) + 0.25D;
+                                double d2 = (double) (this.world.rand.nextFloat() * 0.5F) + 0.25D;
+                                ItemEntity itementity = new ItemEntity(this.world, (double) this.pos.getX() + d0, (double) this.pos.getY() + 2.5d + d1, (double) this.pos.getZ() + d2, stack);
+                                itementity.setDefaultPickupDelay();
+                                this.world.addEntity(itementity);
+                            }
+                        }
+                    } else {
+                        Block.spawnDrops(blockState, this.world, this.pos.add(0, 1.5, 0), tileEntity, entity, ItemStack.EMPTY);
+                    }
+                } else {
+                    Block.spawnDrops(blockState, this.world, this.pos.add(0, 1.5, 0), tileEntity, entity, ItemStack.EMPTY);
+                }
 
 //                BlockPos above = this.pos.add(0, 1, 0);
 //                @Nullable TileEntity aboveTE = this.world.getTileEntity(above);

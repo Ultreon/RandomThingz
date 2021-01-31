@@ -22,13 +22,8 @@ public class UraniumSwordItem extends SwordItem {
     }
 
     @Override
-    public boolean hasEffect(@NotNull ItemStack stack) {
-        return false;
-    }
-
-    @Override
     public boolean hitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, @NotNull LivingEntity player) {
-        victim.addPotionEffect(new EffectInstance(Effects.POISON, ThreadLocalRandom.current().nextInt(50, 120), 2, true, false));
+        victim.addPotionEffect(new EffectInstance(Effects.WITHER, ThreadLocalRandom.current().nextInt(50, 120), 2, true, false));
         return true;
     }
 }

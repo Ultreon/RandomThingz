@@ -19,17 +19,4 @@ import net.minecraftforge.fml.common.Mod;
  */
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, value = Dist.CLIENT)
 public class EntityListener {
-    @SubscribeEvent
-    public static void onDeath(LivingDeathEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
-            Entity source = event.getSource().getTrueSource();
-            if (player.getUniqueID().toString().equals("43e3b67b-688b-4dae-b2f2-4e986c951ce0")) {
-                if (source instanceof LivingEntity) {
-                    LivingEntity entity = (LivingEntity) source;
-                    entity.addPotionEffect(new EffectInstance(ModEffects.CURSE.orElseThrow(() -> new IllegalArgumentException("The curse effect could not be applied, this Minecraft instance is possible cursed.")), Integer.MAX_VALUE, 5, false, false));
-                }
-            }
-        }
-    }
 }

@@ -71,61 +71,6 @@
           "name": "qforgemod:coal_dust"
         }
       ]
-    },
-    {
-      "rolls": 1,
-      "conditions": [
-        {
-          "condition": "forge:mod_loaded",
-          "modid": "xreliquary"
-        },
-        {
-          "condition": "killed_by_player"
-        },
-        {
-          "condition": "random_chance_with_looting",
-          "chance": 0.1,
-          "looting_multiplier": 0.05
-        }
-      ],
-      "entries": [
-        {
-          "type": "item",
-          "name": "xreliquary:catalyzing_gland",
-          "weight": 1
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "conditions": [
-        {
-          "condition": "forge:mod_loaded",
-          "modid": "xreliquary"
-        },
-        {
-          "condition": "killed_by_player"
-        },
-        {
-          "condition": "entity_properties",
-          "entity": "this",
-          "predicate": {
-            "nbt": "{\"powered\": true}"
-          }
-        },
-        {
-          "condition": "random_chance_with_looting",
-          "chance": 0.1,
-          "looting_multiplier": 0.05
-        }
-      ],
-      "entries": [
-        {
-          "type": "item",
-          "name": "xreliquary:eye_of_the_storm",
-          "weight": 1
-        }
-      ]
     }
   ]
 }

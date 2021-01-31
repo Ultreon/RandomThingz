@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:silver_ingot_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_silver_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:silver_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:silver_ingot_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_silver_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

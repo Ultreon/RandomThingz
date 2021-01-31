@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:zinc_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:zinc_block"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qforgemod:lumium_block"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:lumium_ingot",
+    "count": 9
+  }
+}

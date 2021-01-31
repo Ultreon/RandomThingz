@@ -20,6 +20,7 @@ import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Objects;
+import java.util.Set;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -28,6 +29,7 @@ public class UpdateScreen extends Screen {
     private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
     private final Screen backScreen;
     private final URL downloadUrl;
+    private final Set<Dependency> dependencies;
     private int ticksUntilEnable;
     private long downloaded;
     private long totalSize = -1L;
@@ -38,10 +40,11 @@ public class UpdateScreen extends Screen {
 
     private boolean failed = false;
 
-    public UpdateScreen(Screen backScreen, URL downloadUrl) {
+    public UpdateScreen(Screen backScreen, URL downloadUrl, Dependencies dependencies) {
         super(new TranslationTextComponent("msg.qforgemod.downloading_update.title"));
         this.backScreen = backScreen;
         this.downloadUrl = downloadUrl;
+        this.dependencies = dependencies.getAll();
     }
 
     protected void init() {
@@ -52,7 +55,6 @@ public class UpdateScreen extends Screen {
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
             Narrator.getNarrator().say("Downloading Update", true);
         }
-
 
         this.buttons.clear();
         this.children.clear();
@@ -74,11 +76,21 @@ public class UpdateScreen extends Screen {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private void downloadThread() {
+        download(downloadUrl);
+
+        for (Dependency dependency : this.dependencies) {
+            download(dependency.getDownload());
+        }
+        this.done.active = true;
+    }
+    
+    private void download(URL url) {
+
         OutputStream updateStream = null;
         InputStream inputStream = null;
         try {
             QForgeMod.LOGGER.info("Opening connection to the update file.");
-            URLConnection urlConnection = downloadUrl.openConnection();
+            URLConnection urlConnection = url.openConnection();
 //            urlConnection.connect();
 
             String headerField = urlConnection.getHeaderField("Content-Length");
@@ -98,7 +110,7 @@ public class UpdateScreen extends Screen {
             }
 
             // Update file.
-            String[] split = downloadUrl.getPath().split("/");
+            String[] split = url.getPath().split("/");
             File updateFile = new File(updateFolder.getAbsolutePath(), split[split.length - 1]);
             if (updateFile.exists()) {
                 QForgeMod.LOGGER.info("Update file already exists, deleting...");
@@ -186,8 +198,6 @@ public class UpdateScreen extends Screen {
                 }
             }
         }
-
-        this.done.active = true;
     }
 
     public int read(InputStream stream, byte[] b, int len) throws IOException {

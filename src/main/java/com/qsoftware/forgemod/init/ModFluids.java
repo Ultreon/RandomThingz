@@ -57,12 +57,12 @@ public final class ModFluids {
     }
 
     private static ForgeFlowingFluid.Properties properties(String name, Supplier<Fluid> still, Supplier<Fluid> flowing) {
-        String tex = "block/" + name;
+        String tex = "blocks/" + name;
         return new ForgeFlowingFluid.Properties(still, flowing, FluidAttributes.builder(QForgeMod.rl(tex + "_still"), QForgeMod.rl(tex + "_flowing")));
     }
 
     private static ForgeFlowingFluid.Properties propertiesGas(String name, Supplier<Fluid> still) {
-        String tex = "block/" + name;
+        String tex = "blocks/" + name;
         //noinspection ReturnOfNull -- null-returning Supplier for flowing fluid
         return new ForgeFlowingFluid.Properties(still, () -> null, FluidAttributes.builder(QForgeMod.rl(tex), QForgeMod.rl(tex)).gaseous());
     }

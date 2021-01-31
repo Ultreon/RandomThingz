@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "qforgemod:enderium_pickaxe"
+    },
+    {
+      "item": "qforgemod:enderium_shovel"
+    },
+    {
+      "item": "qforgemod:enderium_axe"
+    },
+    {
+      "item": "qforgemod:enderium_hoe"
+    },
+    {
+      "item": "qforgemod:enderium_sword"
+    },
+    {
+      "item": "qforgemod:enderium_helmet"
+    },
+    {
+      "item": "qforgemod:enderium_chestplate"
+    },
+    {
+      "item": "qforgemod:enderium_leggings"
+    },
+    {
+      "item": "qforgemod:enderium_boots"
+    }
+  ],
+  "result": "qforgemod:enderium_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

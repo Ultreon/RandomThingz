@@ -16,7 +16,7 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
 public class ModLoot {
     private static final List<String> ENTITY_TABLES = ImmutableList.of(
-            "enderman");
+            "enderman", "chicken", "pig", "sheep");
 
 //	private static final List<String> CHEST_TABLES = ImmutableList.of(
 //			"abandoned_mineshaft", "desert_pyramid", "end_city_treasure", "igloo_chest", "jungle_temple",

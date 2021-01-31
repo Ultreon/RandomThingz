@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "c c"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:lumium_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:lumium_helmet"
+  }
+}

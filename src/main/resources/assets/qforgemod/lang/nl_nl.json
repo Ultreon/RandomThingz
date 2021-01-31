@@ -829,8 +829,11 @@
   "msg.qforgemod.confirm_exit.title": "Sluit bevestiging",
   "msg.qforgemod.confirm_exit.description": "Weet je zeker dat je Minecraft wilt afsluiten?",
 
-  "msg.qforgemod.confirm_shutdown.title": "Shutdown Confirmation",
-  "msg.qforgemod.confirm_shutdown.description": "Are you sure you want to shutdown your computer?",
+  "msg.qforgemod.confirm_shutdown.title": "Computer afsluiten bevestiging",
+  "msg.qforgemod.confirm_shutdown.description": "Weet je zeker dat je je computer wilt afsluiten?",
+
+  "msg.qforgemod.confirm_crash.title": "Crash Computer bevestiging",
+  "msg.qforgemod.confirm_crash.description": "Weet je zeker dat je je computer wilt laten crashen? (Dit zal je computer niet beschadigen)",
 
   "msg.qforgemod.update_available.title": "Update beschikbaar for QForgeMod",
   "msg.qforgemod.update_available.description": "Wil je deze update downloaden?",
@@ -849,6 +852,7 @@
   "msg.qforgemod.test_phase.description.1": "Je gebruikt een testversie van QForgeMod.",
 
   "button.qforgemod.confirm_exit.shutdown_pc": "Computer afsluiten",
+  "button.qforgemod.confirm_exit.crash_pc": "Crash computer (Je computer zal niet beschadigd worden.)",
   "button.qforgemod.update": "Download update voor QForgeMod",
 
   "tooltip.qforgemod.kill_switch.warning": "§6Waarschuwing: §e§oDit voorwerp sluit je computer af als je het gebruikt!",
@@ -858,6 +862,10 @@
   "screen.qforgemod.settings.quit_settings": "Afsluit instellingen",
   "screen.qforgemod.settings.allow_shutdown_pc": "PC afsluiten toestaan: %1$s",
   "screen.qforgemod.settings.modules": "Beheer modules",
+
+  "screen.qforgemod.vm_warning.title": "Detected a Virtual Machine",
+  "screen.qforgemod.vm_warning.description.1": "QForgeMod detected you are using a %s virtual machine.",
+  "screen.qforgemod.vm_warning.description.2": "Note that QForgeMod is not supported with virtual machines, and can make Minecraft unplayable.",
 
   "screen.qforgemod.quit_settings.quit_on_esc_in_title": "Sluit wanneer ESC in titel: %1$s",
   "screen.qforgemod.quit_settings.quit_on_esc_in_title.tooltip": "Sluit Minecraft af als er op ESC\nwordt gedrukt in het titel scherm.",
@@ -881,7 +889,8 @@
   "module.qforgemod.biomes": "Klimaten module",
   "module.qforgemod.user_interface": "Gebruikersomgeving module",
   "module.qforgemod.confirm_exit": "Sluit bevestiging module",
-  "module.qforgemod.pc_shutdown": "PC Energiestand module",
+  "module.qforgemod.pc_shutdown": "PC energiestand module",
+  "module.qforgemod.pc_crash": "PC crash module",
   "module.qforgemod.updates": "Updates module",
   "module.qforgemod.debug_menu": "Debug-menu module",
 

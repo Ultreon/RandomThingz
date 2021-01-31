@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 
 public final class ModRecipes {
     public static final RegistryObject<IRecipeSerializer<?>> ALLOY_SMELTING = registerSerializer(Constants.ALLOY_SMELTING, AlloySmeltingRecipe.Serializer::new);
+    public static final RegistryObject<IRecipeSerializer<?>> ENCHANTING = registerSerializer(Constants.ENCHANTING, EnchantingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> COMPRESSING = registerSerializer(Constants.COMPRESSING, CompressingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> CRUSHING = registerSerializer(Constants.CRUSHING, CrushingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> DRYING = registerSerializer(Constants.DRYING, DryingRecipe.Serializer::new);
@@ -44,6 +45,7 @@ public final class ModRecipes {
 
     public static final class Types {
         public static final IRecipeType<AlloySmeltingRecipe> ALLOY_SMELTING = registerType(Constants.ALLOY_SMELTING);
+        public static final IRecipeType<EnchantingRecipe> ENCHANTING = registerType(Constants.ENCHANTING);
         public static final IRecipeType<CompressingRecipe> COMPRESSING = registerType(Constants.ALLOY_SMELTING);
         public static final IRecipeType<CrushingRecipe> CRUSHING = registerType(Constants.ALLOY_SMELTING);
         public static final IRecipeType<DryingRecipe> DRYING = registerType(Constants.ALLOY_SMELTING);

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c",
+    "c",
+    "s"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:zinc_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:zinc_sword"
+  }
+}

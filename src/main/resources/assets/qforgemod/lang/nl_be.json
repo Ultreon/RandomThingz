@@ -859,6 +859,10 @@
   "screen.qforgemod.settings.allow_shutdown_pc": "PC afsluiten toestaan: %1$s",
   "screen.qforgemod.settings.modules": "Beheer modules",
 
+  "screen.qforgemod.vm_warning.title": "Detected a Virtual Machine",
+  "screen.qforgemod.vm_warning.description.1": "QForgeMod detected you are using a %s virtual machine.",
+  "screen.qforgemod.vm_warning.description.2": "Note that QForgeMod is not supported with virtual machines, and can make Minecraft unplayable.",
+
   "screen.qforgemod.quit_settings.quit_on_esc_in_title": "Sluit wanneer ESC in titel: %1$s",
   "screen.qforgemod.quit_settings.quit_on_esc_in_title.tooltip": "Sluit Minecraft af als er op ESC\nwordt gedrukt in het titel scherm.",
   "screen.qforgemod.quit_settings.close_prompt": "Sluit bevestiging: %1$s",
@@ -877,11 +881,14 @@
   "module.qforgemod.blocks": "Blokken module",
   "module.qforgemod.items": "Voorwerpen module",
   "module.qforgemod.entities": "Entiteiten module",
+  "module.qforgemod.tile_entities": "Blok entiteiten module",
   "module.qforgemod.biomes": "Klimaten module",
   "module.qforgemod.user_interface": "Gebruikersomgeving module",
   "module.qforgemod.confirm_exit": "Sluit bevestiging module",
-  "module.qforgemod.pc_shutdown": "PC Energiestand module",
+  "module.qforgemod.pc_shutdown": "PC energiestand module",
+  "module.qforgemod.pc_crash": "PC crash module",
   "module.qforgemod.updates": "Updates module",
+  "module.qforgemod.debug_menu": "Debug-menu module",
 
   "toasts.qforgemod.update_available.title": "Update beschikbaar"
 }

@@ -1,13 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ccc",
-    "c c",
-    "c c"
+    "XXX",
+    "XOX",
+    "X X"
   ],
   "key": {
-    "c": {
+    "X": {
       "item": "minecraft:obsidian"
+    },
+    "O": {
+      "item": "minecraft:blaze_rod"
     }
   },
   "result": {

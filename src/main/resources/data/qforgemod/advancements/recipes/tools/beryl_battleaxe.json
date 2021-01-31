@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:beryl_battleaxe"
+    ]
+  },
+  "criteria": {
+    "has_beryl": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:beryl"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:beryl_battleaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_beryl",
+      "has_the_recipe"
+    ]
+  ]
+}

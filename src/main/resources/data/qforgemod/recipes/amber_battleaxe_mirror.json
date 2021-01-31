@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "/X ",
+    "X/ ",
+    "  /"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:amber"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:amber_battleaxe",
+    "count": 1
+  }
+}

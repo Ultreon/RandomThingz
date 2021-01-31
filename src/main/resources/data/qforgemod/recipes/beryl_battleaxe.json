@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X/",
+    " /X",
+    "/  "
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:beryl"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:beryl_battleaxe",
+    "count": 1
+  }
+}

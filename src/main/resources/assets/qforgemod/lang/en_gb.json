@@ -832,6 +832,9 @@
   "msg.qforgemod.confirm_shutdown.title": "Shutdown Confirmation",
   "msg.qforgemod.confirm_shutdown.description": "Are you sure you want to shutdown your computer?",
 
+  "msg.qforgemod.confirm_crash.title": "Crash Computer Confirmation",
+  "msg.qforgemod.confirm_crash.description": "Are you sure you want to crash your computer? (It will not damage your computer)",
+
   "msg.qforgemod.update_available.title": "Update Available for QForgeMod",
   "msg.qforgemod.update_available.description": "Do you want to download the update?",
   "msg.qforgemod.update_available.help": "This message get you when there's an update available for QForgeMod.\nClick yes to download it, no, to continue.\nNew version: %s",
@@ -849,6 +852,7 @@
   "msg.qforgemod.test_phase.description.1": "You're using a Development Test version of QForgeMod.",
 
   "button.qforgemod.confirm_exit.shutdown_pc": "Shutdown PC",
+  "button.qforgemod.confirm_exit.crash_pc": "Crash PC (Your computer will not be damaged)",
   "button.qforgemod.update": "Download Update for QForgeMod",
 
   "tooltip.qforgemod.kill_switch.warning": "§6Warning: §e§oThis item will shutdown your computer when you use it!",
@@ -858,6 +862,10 @@
   "screen.qforgemod.settings.quit_settings": "Quit Settings",
   "screen.qforgemod.settings.allow_shutdown_pc": "Allow Shutdown PC: %1$s",
   "screen.qforgemod.settings.modules": "Manage Modules",
+
+  "screen.qforgemod.vm_warning.title": "Detected a Virtual Machine",
+  "screen.qforgemod.vm_warning.description.1": "QForgeMod detected you are using a %s virtual machine.",
+  "screen.qforgemod.vm_warning.description.2": "Note that QForgeMod is not supported with virtual machines, and can make Minecraft unplayable.",
 
   "screen.qforgemod.quit_settings.quit_on_esc_in_title": "Quit On ESC in Title: %1$s",
   "screen.qforgemod.quit_settings.quit_on_esc_in_title.tooltip": "Quit the game when pressing esc in title screen.",
@@ -882,6 +890,7 @@
   "module.qforgemod.user_interface": "User Interface Module",
   "module.qforgemod.confirm_exit": "Exit Confirmation Module",
   "module.qforgemod.pc_shutdown": "PC Shutdown Module",
+  "module.qforgemod.pc_crash": "PC Crash Module",
   "module.qforgemod.updates": "Updates Module",
   "module.qforgemod.debug_menu": "Debug Menu Module",
 

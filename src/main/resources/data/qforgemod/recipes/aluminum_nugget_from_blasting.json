@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "qforgemod:aluminum_pickaxe"
+    },
+    {
+      "item": "qforgemod:aluminum_shovel"
+    },
+    {
+      "item": "qforgemod:aluminum_axe"
+    },
+    {
+      "item": "qforgemod:aluminum_hoe"
+    },
+    {
+      "item": "qforgemod:aluminum_sword"
+    },
+    {
+      "item": "qforgemod:aluminum_helmet"
+    },
+    {
+      "item": "qforgemod:aluminum_chestplate"
+    },
+    {
+      "item": "qforgemod:aluminum_leggings"
+    },
+    {
+      "item": "qforgemod:aluminum_boots"
+    }
+  ],
+  "result": "qforgemod:aluminum_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:bronze_boots"
+    ]
+  },
+  "criteria": {
+    "has_bronze_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:bronze_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:bronze_boots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bronze_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

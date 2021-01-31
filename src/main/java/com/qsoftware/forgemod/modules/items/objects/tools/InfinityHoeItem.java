@@ -63,11 +63,6 @@ public class InfinityHoeItem extends HoeItem {
     }
 
     @Override
-    public boolean hasEffect(ItemStack stack) {
-        return false;
-    }
-
-    @Override
     public boolean isEnchantable(ItemStack stack) {
         return false;
     }

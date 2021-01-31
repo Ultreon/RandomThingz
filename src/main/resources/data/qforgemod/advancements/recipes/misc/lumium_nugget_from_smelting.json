@@ -1,0 +1,160 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:lumium_nugget_from_smelting"
+    ]
+  },
+  "criteria": {
+    "has_lumium_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:lumium_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_lumium_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:lumium_shovel"
+          }
+        ]
+      }
+    },
+    "has_lumium_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:lumium_axe"
+          }
+        ]
+      }
+    },
+    "has_lumium_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:lumium_hoe"
+          }
+        ]
+      }
+    },
+    "has_lumium_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:lumium_sword"
+          }
+        ]
+      }
+    },
+    "has_lumium_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:lumium_helmet"
+          }
+        ]
+      }
+    },
+    "has_lumium_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:lumium_chestplate"
+          }
+        ]
+      }
+    },
+    "has_lumium_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:lumium_leggings"
+          }
+        ]
+      }
+    },
+    "has_lumium_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:lumium_boots"
+          }
+        ]
+      }
+    },
+    "has_chainmail_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_helmet"
+          }
+        ]
+      }
+    },
+    "has_chainmail_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_chestplate"
+          }
+        ]
+      }
+    },
+    "has_chainmail_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_leggings"
+          }
+        ]
+      }
+    },
+    "has_chainmail_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_boots"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:lumium_nugget_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lumium_pickaxe",
+      "has_lumium_shovel",
+      "has_lumium_axe",
+      "has_lumium_hoe",
+      "has_lumium_sword",
+      "has_lumium_helmet",
+      "has_lumium_chestplate",
+      "has_lumium_leggings",
+      "has_lumium_boots",
+      "has_the_recipe"
+    ]
+  ]
+}

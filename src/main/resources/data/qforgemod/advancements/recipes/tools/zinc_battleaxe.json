@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:zinc_battleaxe"
+    ]
+  },
+  "criteria": {
+    "has_zinc_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:zinc_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:zinc_battleaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_zinc_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

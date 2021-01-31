@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.modules.items.objects.tools;
 import com.qsoftware.forgemod.modules.entities.objects.DynamiteEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderPearlItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
@@ -17,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class DynamiteItem extends EnderPearlItem {
+public class DynamiteItem extends Item {
     public DynamiteItem(Properties builder) {
         super(builder);
     }

@@ -18,6 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Infinity axe item class.
@@ -57,11 +58,6 @@ public class InfinityAxeItem extends AxeItem {
                 return Ingredient.fromItems(ModItems.INFINITY_INGOT.get());
             }
         }, 1, -0.0f, new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
-    }
-
-    @Override
-    public boolean hasEffect(ItemStack stack) {
-        return false;
     }
 
     @Override
@@ -179,5 +175,15 @@ public class InfinityAxeItem extends AxeItem {
 //        }
 //        return false;
 //        return super.onLeftClickEntity(stack, player, entity);
+    }
+
+    @Override
+    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
+        return 0;
+    }
+
+    @Override
+    public void setDamage(ItemStack stack, int damage) {
+
     }
 }

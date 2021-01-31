@@ -1,0 +1,35 @@
+{
+  "parent": "item/handheld",
+  "defaults": {
+    "textures": {
+      "layer0": "qforgemod:items/aquamarine_battleaxe"
+    },
+    "variants": {
+      "normal": {
+        "textures": {
+          "layer0": "qforgemod:items/aquamarine_battleaxe"
+        }
+      },
+      "inventory": {
+        "textures": {
+          "layer0": "qforgemod:items/aquamarine_battleaxe"
+        }
+      }
+    }
+  },
+  "textures": {
+    "layer0": "qforgemod:items/aquamarine_battleaxe"
+  },
+  "variants": {
+    "normal": {
+      "textures": {
+        "layer0": "qforgemod:items/aquamarine_battleaxe"
+      }
+    },
+    "inventory": {
+      "textures": {
+        "layer0": "qforgemod:items/aquamarine_battleaxe"
+      }
+    }
+  }
+}

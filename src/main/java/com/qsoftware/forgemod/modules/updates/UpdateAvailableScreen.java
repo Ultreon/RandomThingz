@@ -94,7 +94,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         // Add buttons.
         this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (p_213006_1_) -> {
             if (this.minecraft != null) {
-                this.minecraft.displayGuiScreen(new UpdateScreen(backScreen, updater.getReleaseUrl()));
+                this.minecraft.displayGuiScreen(new UpdateScreen(backScreen, updater.getReleaseUrl(), updater.getDependencies()));
             }
         }));
         this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {

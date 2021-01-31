@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "minecraft:egg"
+  },
+  "result": "qforgemod:fried_egg",
+  "experience": 0.4,
+  "cookingtime": 50
+}

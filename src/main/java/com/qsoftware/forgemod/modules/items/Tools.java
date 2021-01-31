@@ -34,6 +34,8 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public enum Tools implements INamed, Translatable {
     COPPER(OreMaterial.COPPER, 80f, 4.6f, 5.8f, 0.5f, 15, 2),
+    TIN(OreMaterial.TIN, 90f, 4.6f, 5.8f, 0.5f, 15, 2),
+    SILVER(OreMaterial.SILVER, 95f, 4.6f, 5.8f, 0.5f, 15, 2),
     PLATINUM(OreMaterial.PLATINUM, 400f, 4.6f, 5.8f, 0.2f, 17, 3),
     OBSIDIAN(OreMaterial.OBSIDIAN, 800f, 14.0f, 20.0f, 0.0f, 6, 5),
     ALUMINUM(OreMaterial.ALUMINUM, 40f, 6.0f, 6.5f, 0.5f, 12, 2),
@@ -78,6 +80,7 @@ public enum Tools implements INamed, Translatable {
         }
     },
     LEAD(OreMaterial.LEAD, 1_600f, 3.0f, 9.0f, 0.05f, 34, 4, (entity) -> new EffectInstance(Effects.POISON, ThreadLocalRandom.current().nextInt(400, 800), 1, false, false), null),
+    LUMIUM(OreMaterial.LUMIUM, 50f, .0f, 9.0f, 0.05f, 34, 4, (entity) -> new EffectInstance(Effects.POISON, ThreadLocalRandom.current().nextInt(400, 800), 1, false, false), null),
     ;
 
 //    private final int baseDurability;
@@ -95,7 +98,7 @@ public enum Tools implements INamed, Translatable {
     private final SoundEvent armorSound;
     private final IItemTier itemTier;
     private final IArmorMaterial armorMaterial;
-    private final OreMaterial material;
+    private final IOreMaterial material;
     private final Supplier<Ingredient> repairMaterialSupplier;
     private final Function<LivingEntity, EffectInstance> attackEffect;
     private final Function<LivingEntity, EffectInstance> defenseEffect;
@@ -223,7 +226,7 @@ public enum Tools implements INamed, Translatable {
      * @param enchantability the enchantability of the tool / armor piece.
      * @param harvestLevel the harvest level for the tools.
      */
-    Tools(OreMaterial material, float weight, float resistance, float sharpness, float flexibility, int enchantability, int harvestLevel) {
+    Tools(IOreMaterial material, float weight, float resistance, float sharpness, float flexibility, int enchantability, int harvestLevel) {
         this(material, weight, resistance, sharpness, flexibility, enchantability, harvestLevel, null);
     }
 
@@ -294,7 +297,7 @@ public enum Tools implements INamed, Translatable {
      * @param harvestLevel the harvest level for the tools.
      * @param effect the effect for attack and on armor tick.
      */
-    Tools(OreMaterial material, float weight, float resistance, float sharpness, float flexibility, int enchantability, int harvestLevel, @Nullable Function<LivingEntity, EffectInstance> effect) {
+    Tools(IOreMaterial material, float weight, float resistance, float sharpness, float flexibility, int enchantability, int harvestLevel, @Nullable Function<LivingEntity, EffectInstance> effect) {
         this(material, weight, resistance, sharpness, flexibility, enchantability, harvestLevel, effect, effect);
     }
 
@@ -366,7 +369,7 @@ public enum Tools implements INamed, Translatable {
      * @param attackEffect the effect to give at attack to the victim.
      * @param defenseEffect the effect to give on armor tick.
      */
-    Tools(OreMaterial material, float weight, float resistance, float sharpness, float flexibility, int enchantability, int harvestLevel, @Nullable Function<LivingEntity, EffectInstance> attackEffect, @Nullable Function<LivingEntity, EffectInstance> defenseEffect) {
+    Tools(IOreMaterial material, float weight, float resistance, float sharpness, float flexibility, int enchantability, int harvestLevel, @Nullable Function<LivingEntity, EffectInstance> attackEffect, @Nullable Function<LivingEntity, EffectInstance> defenseEffect) {
         this.material = material;
         this.resistance = resistance;
         this.sharpness = sharpness;
@@ -847,7 +850,7 @@ public enum Tools implements INamed, Translatable {
      *
      * @return the ore material.
      */
-    public OreMaterial getMaterial() {
+    public IOreMaterial getMaterial() {
         return material;
     }
 

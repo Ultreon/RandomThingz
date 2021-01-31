@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.modules.updates;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.qsoftware.forgemod.QForgeMod;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +44,8 @@ public abstract class AbstractUpdater<T extends IVersion> {
     private final ModContainer modContainer;
     private T latestVersion = null;
     private URL releaseUrl;
+    private Dependencies dependencies = new Dependencies();
+    private Release release;
 
     /**
      * Get a mod container from an instance of an {@link Mod @Mod} annotated class.
@@ -212,26 +216,32 @@ public abstract class AbstractUpdater<T extends IVersion> {
                 // Get Minecraft versions.
                 JsonObject mcVersions = gson.fromJson(targetReader, JsonObject.class).get("mc_versions").getAsJsonObject();
                 if (DEBUG) {
-                    QForgeMod.LOGGER.info("===================================================");
-                    QForgeMod.LOGGER.info("Update Data:");
-                    QForgeMod.LOGGER.info("---------------------------------------------------");
-                    QForgeMod.LOGGER.info(mcVersions.toString());
-                    QForgeMod.LOGGER.info("===================================================");
+                    QForgeMod.LOGGER.debug("===================================================");
+                    QForgeMod.LOGGER.debug("Update Data:");
+                    QForgeMod.LOGGER.debug("---------------------------------------------------");
+                    QForgeMod.LOGGER.debug(mcVersions.toString());
+                    QForgeMod.LOGGER.debug("===================================================");
                 }
 
                 // Get latest Mod version.
-                JsonObject versionIndex = mcVersions.get(id).getAsJsonObject();
-                JsonObject releaseIndex = versionIndex.get(QForgeMod.VERSION.isStable() ? "stable" : "unstable").getAsJsonObject();
-                JsonPrimitive latestJson = releaseIndex.get("version").getAsJsonPrimitive();
+                JsonObject versionIndex = mcVersions.getAsJsonObject(id);
+                JsonObject releaseIndex = versionIndex.getAsJsonObject(QForgeMod.VERSION.isStable() ? "stable" : "unstable");
+                JsonPrimitive latestJson = releaseIndex.getAsJsonPrimitive("version");
 
                 // Get version download url.
-                JsonPrimitive downloadJson = releaseIndex.get("download").getAsJsonPrimitive();
+                JsonPrimitive downloadJson = releaseIndex.getAsJsonPrimitive("download");
+                if (releaseIndex.has("dependencies")) {
+                    JsonObject dependenciesJson = releaseIndex.getAsJsonObject("dependencies");
+                    this.dependencies = getDependencies(dependenciesJson);
+                }
                 T latestVersion = parseVersion(latestJson.getAsString());
                 URL url = new URL(downloadJson.getAsString());
 
                 // Assign values to fields.
                 this.latestVersion = latestVersion;
                 this.releaseUrl = url;
+
+                this.release = new Release(this, modContainer.getModInfo().getDisplayName(), url, this.dependencies);
 
                 // Check if up to date.
                 if (getCurrentModVersion().compareTo(latestVersion) < 0) {
@@ -257,6 +267,38 @@ public abstract class AbstractUpdater<T extends IVersion> {
             // The server / computer if offline.
             return new UpdateInfo(UpdateStatus.OFFLINE, e);
         }
+    }
+
+    private Dependencies getDependencies(JsonObject dependenciesJson) throws MalformedURLException {
+        Dependencies dependencies = new Dependencies();
+
+        for (Map.Entry<String, JsonElement> entry : dependenciesJson.entrySet()) {
+            String modId = entry.getKey();
+            JsonElement dependencyJson = entry.getValue();
+
+            if (dependencyJson instanceof JsonObject) {
+                JsonObject dependencyObject = (JsonObject) dependencyJson;
+                URL download = new URL(dependencyObject.getAsJsonPrimitive("download").getAsString());
+                String name = dependencyObject.getAsJsonPrimitive("name").getAsString();
+                if (dependencyObject.has("dependencies")) {
+                    Dependencies subDependencies = getDependencies(dependencyObject.getAsJsonObject("dependencies"));
+                    dependencies.add(new Dependency(modId, name, download, subDependencies));
+                    continue;
+                }
+                dependencies.add(new Dependency(modId, name, download));
+            }
+        }
+
+        dependencies.lock();
+        return dependencies;
+    }
+
+    public Dependencies getDependencies() {
+        return dependencies;
+    }
+
+    public Release getRelease() {
+        return release;
     }
 
     /**

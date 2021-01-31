@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:bronze_nugget"
+    }
+  },
+  "result": {
+    "item": "qforgemod:bronze_ingot"
+  }
+}

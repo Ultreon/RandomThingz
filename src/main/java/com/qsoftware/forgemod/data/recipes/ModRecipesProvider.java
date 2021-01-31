@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.data.recipes;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.modules.items.ModItems;
@@ -318,6 +319,15 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("###")
                 .key('#', ModBlocks.CHERRY_SLAB)
                 .build(consumer);
+
+        for (com.qsoftware.modlib.api.providers.IItemProvider item : Registration.ITEMS.getAllItems()) {
+            ExtendedShapedRecipeBuilder.vanillaBuilder(ModBlocks.CHERRY_DRYING_RACK)
+                    .patternLine("XXX")
+                    .patternLine(" / ")
+                    .patternLine(" / ")
+                    .key('X', ModBlocks.CHERRY_SLAB)
+                    .build(consumer);
+        }
 
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.STONE_MACHINE_FRAME, 2)
                 .patternLine("/#/")

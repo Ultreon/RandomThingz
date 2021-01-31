@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "O#O",
+    "#$#",
+    "O#O"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:smooth_stone"
+    },
+    "#": {
+      "item": "minecraft:glass"
+    },
+    "$": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "qforgemod:stone_machine_frame",
+    "count": 2
+  }
+}

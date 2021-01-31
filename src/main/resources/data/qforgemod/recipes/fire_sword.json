@@ -3,13 +3,13 @@
   "pattern": [
     " X ",
     " X ",
-    " # "
+    " / "
   ],
   "key": {
     "X": {
       "item": "minecraft:magma_block"
     },
-    "#": {
+    "/": {
       "item": "minecraft:stick"
     }
   },

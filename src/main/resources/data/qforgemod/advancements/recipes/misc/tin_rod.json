@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:tin_rod"
+    ]
+  },
+  "criteria": {
+    "has_tin_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:tin_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:tin_rod"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tin_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

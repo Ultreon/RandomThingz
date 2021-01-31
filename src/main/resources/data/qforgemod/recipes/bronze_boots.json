@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c c",
+    "c c"
+  ],
+  "key": {
+    "c": {
+      "item": "qforgemod:bronze_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:bronze_boots"
+  }
+}

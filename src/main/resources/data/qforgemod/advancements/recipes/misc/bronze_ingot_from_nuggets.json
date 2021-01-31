@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:bronze_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_bronze_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:bronze_nugget"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:bronze_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bronze_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

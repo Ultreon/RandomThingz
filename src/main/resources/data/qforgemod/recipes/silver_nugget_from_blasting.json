@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "qforgemod:silver_pickaxe"
+    },
+    {
+      "item": "qforgemod:silver_shovel"
+    },
+    {
+      "item": "qforgemod:silver_axe"
+    },
+    {
+      "item": "qforgemod:silver_hoe"
+    },
+    {
+      "item": "qforgemod:silver_sword"
+    },
+    {
+      "item": "qforgemod:silver_helmet"
+    },
+    {
+      "item": "qforgemod:silver_chestplate"
+    },
+    {
+      "item": "qforgemod:silver_leggings"
+    },
+    {
+      "item": "qforgemod:silver_boots"
+    }
+  ],
+  "result": "qforgemod:silver_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

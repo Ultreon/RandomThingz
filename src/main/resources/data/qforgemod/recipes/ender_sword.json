@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    " X ",
+    " / "
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:legendary_ender_pearl"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "qforgemod:ender_sword",
+    "count": 1
+  }
+}

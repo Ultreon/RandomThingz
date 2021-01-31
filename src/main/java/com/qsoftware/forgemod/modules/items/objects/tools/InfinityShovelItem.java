@@ -60,11 +60,6 @@ public class InfinityShovelItem extends ShovelItem {
     }
 
     @Override
-    public boolean hasEffect(@NotNull ItemStack stack) {
-        return false;
-    }
-
-    @Override
     public boolean isEnchantable(ItemStack stack) {
         return false;
     }

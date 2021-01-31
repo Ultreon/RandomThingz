@@ -10,6 +10,7 @@ import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
 import com.qsoftware.forgemod.modules.MainModule;
 import com.qsoftware.forgemod.modules.items.ItemsModule;
 import com.qsoftware.forgemod.modules.ores.OresModule;
+import com.qsoftware.forgemod.modules.pcCrash.PCCrashModule;
 import com.qsoftware.forgemod.modules.pcShutdown.PCShutdownModule;
 import com.qsoftware.forgemod.modules.tileentities.TileEntitiesModule;
 import com.qsoftware.forgemod.modules.updates.UpdatesModule;
@@ -29,6 +30,7 @@ public class Modules {
     public static final OresModule ORES = new OresModule();
     public static final ConfirmExitModule CONFIRM_EXIT = new ConfirmExitModule();
     public static final PCShutdownModule PC_SHUTDOWN = new PCShutdownModule();
+    public static final PCCrashModule PC_CRASH = new PCCrashModule();
     public static final UpdatesModule UPDATES = new UpdatesModule();
     public static final DebugMenuModule DEBUG_MENU = new DebugMenuModule();
 
@@ -42,6 +44,7 @@ public class Modules {
         manager.register(ORES);
         manager.register(CONFIRM_EXIT);
         manager.register(PC_SHUTDOWN);
+        manager.register(PC_CRASH);
         manager.register(UPDATES);
         manager.register(DEBUG_MENU);
     }

@@ -26,7 +26,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public enum OreMaterial {
+public enum OreMaterial implements IOreMaterial {
     // Metals
     REDSTONE_ALLOY(builderAlloy("redstone_alloy")),
     REFINED_IRON(builder("refined_iron").ingot()),
@@ -184,66 +184,82 @@ public enum OreMaterial {
         return builder(name).storageBlock().ore(ore).dust().gem();
     }
 
+    @Override
     public String getName() {
         return name().toLowerCase(Locale.ROOT);
     }
 
+    @Override
     public Optional<Block> getOre() {
         return ore != null ? Optional.of(ore.get()) : Optional.empty();
     }
 
+    @Override
     public Optional<Block> getStorageBlock() {
         return storageBlock != null ? Optional.of(storageBlock.get()) : Optional.empty();
     }
 
+    @Override
     public Optional<Item> getChunks() {
         return chunks != null ? Optional.of(chunks.get()) : Optional.empty();
     }
 
+    @Override
     public Optional<Item> getDust() {
         return dust != null ? Optional.of(dust.get()) : Optional.empty();
     }
 
+    @Override
     public Optional<Item> getIngot() {
         return ingot != null ? Optional.of(ingot.get()) : Optional.empty();
     }
 
+    @Override
     public Optional<Item> getGem() {
         return gem != null ? Optional.of(gem.get()) : Optional.empty();
     }
 
+    @Override
     public Optional<Item> getNugget() {
         return nugget != null ? Optional.of(nugget.get()) : Optional.empty();
     }
 
+    @Override
     public Optional<ITag.INamedTag<Block>> getOreTag() {
         return oreTag != null ? Optional.of(oreTag) : Optional.empty();
     }
 
+    @Override
     public Optional<ITag.INamedTag<Block>> getStorageBlockTag() {
         return storageBlockTag != null ? Optional.of(storageBlockTag) : Optional.empty();
     }
 
+    @Override
     public Optional<ITag.INamedTag<Item>> getOreItemTag() {
         return oreItemTag != null ? Optional.of(oreItemTag) : Optional.empty();
     }
 
+    @Override
     public Optional<ITag.INamedTag<Item>> getStorageBlockItemTag() {
         return storageBlockItemTag != null ? Optional.of(storageBlockItemTag) : Optional.empty();
     }
 
+    @Override
     public Optional<ITag.INamedTag<Item>> getChunksTag() {
         return chunksTag != null ? Optional.of(chunksTag) : Optional.empty();
     }
 
+    @Override
     public Optional<ITag.INamedTag<Item>> getDustTag() {
         return dustTag != null ? Optional.of(dustTag) : Optional.empty();
     }
 
+    @Override
     public Optional<ITag.INamedTag<Item>> getIngotTag() {
         return ingotTag != null ? Optional.of(ingotTag) : Optional.empty();
     }
 
+    @Override
     public Optional<ITag.INamedTag<Item>> getNuggetTag() {
         return nuggetTag != null ? Optional.of(nuggetTag) : Optional.empty();
     }
@@ -279,6 +295,8 @@ public enum OreMaterial {
         ITag.INamedTag<Item> gemTag;
         ITag.INamedTag<Item> nuggetTag;
 
+        Supplier<Tools> tools;
+
         Builder(String name) {
             this.name = name;
         }
@@ -303,6 +321,11 @@ public enum OreMaterial {
                     .hardnessAndResistance(ore.getHardness(), 3)
                     .sound(SoundType.STONE));
             this.oreTag = blockTag("ores/" + name);
+            return this;
+        }
+
+        Builder tools(Supplier<Tools> tools) {
+            this.tools = tools;
             return this;
         }
 

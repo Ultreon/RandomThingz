@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qforgemod:enderium_block"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:enderium_ingot",
+    "count": 9
+  }
+}
