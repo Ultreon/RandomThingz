@@ -886,7 +886,7 @@
   "module.qforgemod.items": "Items Module",
   "module.qforgemod.entities": "Entities Module",
   "module.qforgemod.tile_entities": "Tile Entities Module",
-  "module.qforgemod.biomes": "Biomes Module",
+  "module.qforgemod.world_gen": "World Generation Module",
   "module.qforgemod.user_interface": "User Interface Module",
   "module.qforgemod.confirm_exit": "Exit Confirmation Module",
   "module.qforgemod.pc_shutdown": "PC Shutdown Module",

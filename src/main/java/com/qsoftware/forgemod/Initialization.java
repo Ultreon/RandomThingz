@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod;
 
 import com.qsoftware.filters.Filters;
+import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.common.interfaces.IHasRenderType;
 import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
@@ -84,6 +85,8 @@ public class Initialization {
      */
     void clientSetup(@SuppressWarnings("unused") FMLClientSetupEvent event) {
         // do something that can only be done on the client
+
+        ModuleManager.getInstance().clientSetup();
 
         this.logger.info("Setting render layers for blocks.");
         for (Block block : Registration.getBlocks()) {

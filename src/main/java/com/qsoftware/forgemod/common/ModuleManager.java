@@ -5,12 +5,13 @@ import com.qsoftware.forgemod.Modules;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompressedStreamTools;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-@SuppressWarnings({"UnusedAssignment", "unused"})
+@SuppressWarnings({"unused"})
 public final class ModuleManager {
     private static final ModuleManager INSTANCE = new ModuleManager();
     private final List<Module> enabled = new ArrayList<>();
@@ -18,11 +19,23 @@ public final class ModuleManager {
     private final List<Module> modules = new ArrayList<>();
     private List<Module> unsavedEnabled = new ArrayList<>();
     private List<Module> unsavedDisabled = new ArrayList<>();
-    private final Map<Module, Boolean> unsavedModules = new HashMap<>();
+    private Map<Module, Boolean> unsavedModules = new HashMap<>();
     private boolean initialized = false;
     private CompoundNBT modulesNbt;
     private Module currentModule = null;
     private File dataFile;
+
+    @Nullable
+    private final Module parent;
+
+    private ModuleManager(@Nullable Module module) {
+        this.parent = module;
+    }
+
+    @Nullable
+    public Module getParent() {
+        return parent;
+    }
 
     public static ModuleManager getInstance() {
         return INSTANCE;
@@ -30,9 +43,20 @@ public final class ModuleManager {
 
     private ModuleManager() {
         Modules.init(this);
+        this.parent = null;
+    }
+
+    public static ModuleManager createSubmoduleManager(Module module) {
+        return new ModuleManager(module);
     }
 
     public <T extends Module> T register(T module) {
+        if (this.parent != null) {
+            module.setParent(this.parent);
+        }
+
+        module.setManager(this);
+
         this.modules.add(module);
         this.disabled.add(module);
         this.unsavedDisabled.add(module);
@@ -164,13 +188,9 @@ public final class ModuleManager {
             a = CompressedStreamTools.readCompressed(this.dataFile);
             if (a == null) {
                 a = new CompoundNBT();
-                wasValid = false;
-            } else {
-                wasValid = true;
             }
         } catch (IOException e) {
             a = new CompoundNBT();
-            wasValid = false;
         }
 
         this.modulesNbt = a;
@@ -202,7 +222,7 @@ public final class ModuleManager {
     }
 
     public void discardChanges() {
-        this.unsavedModules.clear();
+        this.unsavedModules = new HashMap<>();
         this.unsavedEnabled = enabled;
         this.unsavedDisabled = disabled;
     }
@@ -235,5 +255,11 @@ public final class ModuleManager {
 
     public boolean isUnsavedEnabled(Module module) {
         return this.unsavedEnabled.contains(module);
+    }
+
+    public void clientSetup() {
+        for (Module module : enabled) {
+            module.clientSetup();
+        }
     }
 }

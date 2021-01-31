@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.modules.blocks.objects.trees;
 
-import com.qsoftware.forgemod.init.ModFeatures;
+import com.qsoftware.forgemod.modules.worldgen.ModFeatures;
 import net.minecraft.block.trees.Tree;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;

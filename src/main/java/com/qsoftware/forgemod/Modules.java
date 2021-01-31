@@ -2,7 +2,8 @@ package com.qsoftware.forgemod;
 
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.modules.biomes.BiomesModule;
+import com.qsoftware.forgemod.modules.client.ClientModule;
+import com.qsoftware.forgemod.modules.worldgen.WorldGenerationModule;
 import com.qsoftware.forgemod.modules.entities.EntitiesModule;
 import com.qsoftware.forgemod.modules.blocks.BlocksModule;
 import com.qsoftware.forgemod.modules.confirmExit.ConfirmExitModule;
@@ -22,11 +23,12 @@ import java.util.List;
 public class Modules {
     public static final List<Module> MODULES = new ArrayList<>();
     public static final MainModule MAIN = new MainModule();
+    public static final ClientModule CLIENT = new ClientModule();
     public static final BlocksModule BLOCKS = new BlocksModule();
     public static final ItemsModule ITEMS = new ItemsModule();
     public static final EntitiesModule ENTITIES = new EntitiesModule();
     public static final TileEntitiesModule TILE_ENTITIES = new TileEntitiesModule();
-    public static final BiomesModule BIOMES = new BiomesModule();
+    public static final WorldGenerationModule BIOMES = new WorldGenerationModule();
     public static final OresModule ORES = new OresModule();
     public static final ConfirmExitModule CONFIRM_EXIT = new ConfirmExitModule();
     public static final PCShutdownModule PC_SHUTDOWN = new PCShutdownModule();
@@ -36,6 +38,9 @@ public class Modules {
 
     public static void init(ModuleManager manager) {
         manager.register(MAIN);
+        if (QForgeMod.isClientSide()) {
+            manager.register(CLIENT);
+        }
         manager.register(BLOCKS);
         manager.register(ITEMS);
         manager.register(ENTITIES);

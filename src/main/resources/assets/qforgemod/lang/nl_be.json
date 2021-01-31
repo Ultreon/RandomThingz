@@ -882,7 +882,7 @@
   "module.qforgemod.items": "Voorwerpen module",
   "module.qforgemod.entities": "Entiteiten module",
   "module.qforgemod.tile_entities": "Blok entiteiten module",
-  "module.qforgemod.biomes": "Klimaten module",
+  "module.qforgemod.world_gen": "Wereld generatie module",
   "module.qforgemod.user_interface": "Gebruikersomgeving module",
   "module.qforgemod.confirm_exit": "Sluit bevestiging module",
   "module.qforgemod.pc_shutdown": "PC energiestand module",

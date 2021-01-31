@@ -25,12 +25,15 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -74,11 +77,11 @@ public class QForgeMod {
     private static IProxy proxy;
     @Nullable
     private static Initialization init;
-    private static final boolean testPhaseOn = true;
+    private static final boolean TEST_PHASE_ON = true;
 
-    private static final boolean isClientSide;
-
-    private static final boolean isServerSide;
+    private static final boolean IS_CLIENT_SIDE;
+    private static final boolean IS_SERVER_SIDE;
+    private static final int BUILD_NUMBER;
 
     static {
         boolean c;
@@ -88,7 +91,7 @@ public class QForgeMod {
         } catch (ClassNotFoundException e) {
             c = false;
         }
-        isClientSide = c;
+        IS_CLIENT_SIDE = c;
 
         boolean s;
         try {
@@ -97,7 +100,17 @@ public class QForgeMod {
         } catch (ClassNotFoundException e) {
             s = false;
         }
-        isServerSide = s;
+        IS_SERVER_SIDE = s;
+
+        int a;
+        InputStream resourceAsStream = QForgeMod.class.getResourceAsStream("/META-INF/buildnumber.txt");
+        try {
+            String buildNrString = IOUtils.toString(new InputStreamReader(resourceAsStream));
+            a = Integer.parseInt(buildNrString);
+        } catch (IOException e) {
+            throw new RuntimeException("Couldn't read buildnumber", e);
+        }
+        BUILD_NUMBER = a;
     }
 
     private final IEventBus modEventBus;
@@ -141,6 +154,7 @@ public class QForgeMod {
      * @see Mod
      */
     public QForgeMod() {
+
         // Constants.
         QForgeMod.instance = this;
         QForgeMod.proxy = DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);
@@ -230,11 +244,11 @@ public class QForgeMod {
     }
 
     public static boolean isClientSide() {
-        return QForgeMod.isClientSide;
+        return QForgeMod.IS_CLIENT_SIDE;
     }
 
     public static boolean isServerSide() {
-        return QForgeMod.isServerSide;
+        return QForgeMod.IS_SERVER_SIDE;
     }
 
     /**
@@ -243,7 +257,7 @@ public class QForgeMod {
      * @return true if QForgeMod is in test phase, false otherwise.
      */
     public static boolean isTestPhase() {
-        return isDevState() || testPhaseOn;
+        return isDevState() || TEST_PHASE_ON;
     }
 
     /**
@@ -286,4 +300,7 @@ public class QForgeMod {
                 collect(Collectors.toList()));
     }
 
+    public static int getBuildNumber() {
+        return BUILD_NUMBER;
+    }
 }

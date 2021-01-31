@@ -1,10 +1,8 @@
 package com.qsoftware.forgemod.modules.debugMenu;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.common.Angle;
-import com.qsoftware.forgemod.common.Multiplier;
-import com.qsoftware.forgemod.common.Percentage;
-import com.qsoftware.forgemod.common.Size;
+import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.common.*;
 import com.qsoftware.forgemod.common.enums.MoonPhase;
 import com.qsoftware.forgemod.common.interfaces.Formattable;
 import com.qsoftware.forgemod.common.interfaces.Sliceable;
@@ -42,12 +40,14 @@ import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.math.vector.Vector4f;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.lwjgl.glfw.GLFW;
 
+import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
@@ -700,8 +700,61 @@ public class DebugMenu {
 //                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<Invalid>", width / 2, height / 2 - 16, 0xbf0000);
                 }
                 break;
-            } default:
+            } case NONE: {
+                ClientWorld world = Minecraft.getInstance().world;
+                ClientPlayerEntity player = Minecraft.getInstance().player;
+                if (world != null && player != null) {
+                    String dayTimeStr = Long.toString(world.getDayTime() % 24000);
+                    StringBuilder timeText = new StringBuilder();
+                    if (dayTimeStr.length() == 1) {
+                        timeText.append("0:00,").append(dayTimeStr);
+                    } else if (dayTimeStr.length() == 2) {
+                        timeText.append("0:0").append(dayTimeStr.charAt(0)).append(",").append(dayTimeStr.substring(1));
+                    } else if (dayTimeStr.length() == 3) {
+                        timeText.append("0:").append(dayTimeStr, 0, 2).append(",").append(dayTimeStr.substring(2));
+                    } else if (dayTimeStr.length() == 4) {
+                        timeText.append(dayTimeStr.charAt(0)).append(":").append(dayTimeStr, 1, 3).append(",").append(dayTimeStr.substring(3));
+                    } else if (dayTimeStr.length() == 5) {
+                        timeText.append(dayTimeStr, 0, 2).append(":").append(dayTimeStr, 2, 4).append(",").append(dayTimeStr.substring(4));
+                    } else {
+                        timeText.append("OVERFLOW");
+                    }
+
+                    int i = 0;
+
+                    drawLeftTopString(matrixStack, "QFM Build", i++, new Formatted(QForgeMod.getBuildNumber()));
+                    drawLeftTopString(matrixStack, "Time", i++, new Formatted(timeText.toString()));
+
+                    long dayTime = world.getDayTime() % 24000;
+
+                    String timePhase;
+                    if (dayTime < 3000 || dayTime > 21000) {
+                        timePhase = "Evening";
+                    } else if (dayTime > 3000 && dayTime < 9000) {
+                        timePhase = "Noon";
+                    } else if (dayTime > 9000 && dayTime < 15000) {
+                        timePhase = "Afternoon";
+                    } else if (dayTime > 15000 && dayTime < 21000) {
+                        timePhase = "Night";
+                    } else {
+                        timePhase = "UNKNOWN";
+                    }
+
+                    drawLeftTopString(matrixStack, "Time Phase", i++, new Formatted(timePhase));
+
+                    if (!world.isRemote) {
+                        Biome biome = world.getBiome(player.getPosition());
+                        ResourceLocation location = biome.getRegistryName();
+                        if (location != null) {
+                            @Nonnull ResourceLocation registryName = location;
+                            drawLeftTopString(matrixStack, "Current Biome", i++, new Formatted(I18n.format("biome." + registryName.getNamespace() + "." + registryName.getPath())));
+                        }
+                    }
+                    drawLeftTopString(matrixStack, "Current Pos", i++, new Formatted(player.getPosition().getCoordinatesAsString()));
+                }
+            } default: {
                 break;
+            }
         }
     }
 

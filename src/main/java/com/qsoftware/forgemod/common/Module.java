@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
@@ -21,12 +22,23 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public abstract class Module {
     protected CompoundNBT tag = new CompoundNBT();
+    protected final ModuleManager submoduleManager = ModuleManager.createSubmoduleManager(this);
+    private ModuleManager manager;
 
     public abstract void onEnable();
+
+    public void clientSetup() {
+        this.submoduleManager.clientSetup();
+    }
+
     public abstract void onDisable();
     public abstract boolean canDisable();
     public abstract String getName();
     public abstract boolean isDefaultEnabled();
+    private boolean submodulesEnabled = false;
+
+    @Nullable
+    private Module parent;
 
     /**
      * Module constructor.
@@ -35,13 +47,26 @@ public abstract class Module {
         Modules.MODULES.add(this);
     }
 
+    protected void setParent(@Nullable Module parent) {
+        this.parent = parent;
+    }
+
+    @Nullable
+    public Module getParent() {
+        return parent;
+    }
+
+    public void enableSubmodules() {
+        submodulesEnabled = true;
+    }
+
     // Default values
 
     /**
      * @return an text component containing the localized name of the module/
      */
     public final ITextComponent getLocalizedName() {
-        return new TranslationTextComponent("module.qforgemod." + getName());
+        return new TranslationTextComponent("module.qforgemod." + getName().replaceAll("/", "."));
     }
 
     /**
@@ -101,10 +126,35 @@ public abstract class Module {
         ModuleManager.getInstance().setSaveSchedule(this);
     }
 
+    void setManager(ModuleManager manager) {
+        this.manager = manager;
+    }
+
+    public ModuleManager getManager() {
+        return manager;
+    }
+
     protected static abstract class ClientSide {
 
     }
 
     protected static abstract class ServerSide {
+    }
+
+    public boolean requiresRestart() {
+        return false;
+    }
+
+    public boolean areSubmodulesEnabled() {
+        return submodulesEnabled;
+    }
+
+    @Nullable
+    public ModuleManager getSubmoduleManager() {
+        if (!areSubmodulesEnabled()) {
+            return null;
+        }
+
+        return submoduleManager;
     }
 }

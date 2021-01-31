@@ -1,3 +1,6 @@
+import org.apache.commons.io.FileUtils
+import sun.misc.IOUtils 
+
 buildscript {
     repositories {
         mavenLocal()
@@ -17,6 +20,7 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
         classpath "io.freefair.gradle:lombok-plugin:4.1.6"
+        classpath group: 'commons-io', name: 'commons-io', version: '2.8.0'
     }
 }
 
@@ -40,6 +44,23 @@ mixin {
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 println("OS: " + System.getProperty("os.name") + " Version: " + System.getProperty("os.version"))
 
+// Read build number file.
+FileInputStream fileInputStream = new FileInputStream("buildnumber.txt")
+String buildNrString = new String(IOUtils.readAllBytes(fileInputStream))
+fileInputStream.close()
+Integer build = Integer.valueOf(buildNrString)
+
+// Advance build number.
+build++
+println("New buildnumber: " + build)
+String newBuild = build.toString()
+
+// Write new build number.
+FileOutputStream output = new FileOutputStream("buildnumber.txt")
+output.write(newBuild.getBytes())
+output.flush()
+output.close()
+
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   Snapshot are built nightly.
@@ -55,6 +76,7 @@ minecraft {
     // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
+            //noinspection GroovyAssignabilityCheck
             workingDirectory project.file('run')
             arg "-mixin.config=qforgemod.mixins.json"
 
@@ -65,13 +87,15 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                qforgemod {
+                    //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
                 }
             }
         }
 
         server {
+            //noinspection GroovyAssignabilityCheck
             workingDirectory project.file('run')
             arg "-mixin.config=qforgemod.mixins.json"
 
@@ -82,13 +106,15 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                examplemod {
+                qforgemod {
+                    //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
                 }
             }
         }
 
         data {
+            //noinspection GroovyAssignabilityCheck
             workingDirectory project.file('run')
 
             // Recommended logging data for a userdev environment
@@ -98,10 +124,11 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the forgemod for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'qforgemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                examplemod {
+                qforgemod {
+                    //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
                 }
             }
@@ -115,17 +142,6 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 repositories {
     jcenter()
     mavenLocal()
-//    maven {
-//        url "http://dl.bintray.com/silentchaos512/silent-utils"
-//    }
-//    // Silent Lib
-//    maven {
-//        url "http://dl.bintray.com/silentchaos512/silent-lib"
-//    }
-//    // Silent Gear
-//    maven {
-//        url "http://dl.bintray.com/silentchaos512/silent-gear"
-//    }
     maven {
         // location of the maven that hosts JEI files
         name = "Progwml6 maven"
@@ -161,6 +177,7 @@ configurations {
     extraLibs
 }
 
+// Dependencies
 dependencies {
     // Jetbrains Annotations
     implementation 'org.jetbrains:annotations:19.0.0'
@@ -168,10 +185,8 @@ dependencies {
     // Jamepad for Gamepads including XInput.
     // https://mvnrepository.com/artifact/com.github.WilliamAHartman/Jamepad
     compile group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
-//    compileOnly fg.deobf(name: "filters-1.3.0-1.16.3")
-//    runtimeOnly fg.deobf(name: "filters-1.3.0-1.16.3")
-//    compileOnly fileTree(dir: 'D:\\Github\\QForgeMod\\libs', include: ['*.jar'])
-//    runtimeOnly fileTree(dir: 'D:\\Github\\QForgeMod\\libs', include: ['*.jar'])
+
+    // QModLib - Qboi's Library Mod.
     compileOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0-beta1")
     runtimeOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0-beta1")
 
@@ -180,6 +195,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
+    // Apache dependencies.
     extraLibs group: 'org.apache.lucene', name: 'lucene-core', version: '8.7.0'
     extraLibs group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: '8.7.0'
     extraLibs group: 'commons-io', name: 'commons-io', version: '2.8.0'
@@ -195,7 +211,6 @@ dependencies {
     extraLibs group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
     extraLibs group: 'xml-resolver', name: 'xml-resolver', version: '1.2'
     extraLibs group: 'org.yaml', name: 'snakeyaml', version: '1.26'
-
     implementation group: 'org.apache.lucene', name: 'lucene-core', version: '8.7.0'
     implementation group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: '8.7.0'
     implementation group: 'commons-io', name: 'commons-io', version: '2.8.0'
@@ -216,12 +231,6 @@ dependencies {
     extraLibs group: 'org.mongodb', name: 'bson', version: '4.1.1'
     implementation group: 'org.mongodb', name: 'bson', version: '4.1.1'
 
-//    extraLibs 'edu.uw.apl.commons:vmvols-parent:1.0.0'
-//    implementation 'edu.uw.apl.commons:vmvols-parent:1.0.0'
-//
-//    extraLibs 'commons-cli:commons-cli'
-//    implementation 'commons-cli:commons-cli'
-
     // JEI
     if (project.hasProperty("jei_version")) {
         // compile against the JEI API but do not include it at runtime
@@ -238,25 +247,6 @@ dependencies {
     if (project.hasProperty("refined_storage_version")) {
         compile fg.deobf("com.raoulvdberge:refinedstorage:${project.refined_storage_version}")
     }
-
-    // You may put jars on which you depend on in ./libs or you may define them like so..
-    // compile "some.group:artifact:version:classifier"
-    // compile "some.group:artifact:version"
-
-    // Real examples
-    // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
-    // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // These dependencies get remapped to your current MCP mappings
-    // deobf 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // For more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -271,7 +261,8 @@ jar {
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"qsoftware",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "qforgemod.mixins.json"
+                "MixinConfigs": "qforgemod.mixins.json",
+                "Build-Number": build.toString()
         ])
     }
     from {
@@ -282,22 +273,47 @@ jar {
 // Example configuration to allow publishing using the maven-publish task
 // This is the preferred method to reobfuscate your jar file
 jar.finalizedBy('reobfJar')
+
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 //publish.dependsOn('reobfJar')
 
+/**
+ * Copy build-number task, used to copy the build number when jar fill is being generated, reducing build time for testing only.
+ */
+task("copyBuildNumber") {
+    FileInputStream fis = new FileInputStream("buildnumber.txt")
+    FileUtils.copyToFile(fis, new File("src/main/resources/META-INF/buildnumber.txt"))
+    fis.close()
+}
+
+/**
+ * Upload jars to local or ftp maven repository.
+ */
 task("uploadJars", dependsOn: "build") {
+    // Set description.
     description = "uploads JARs"
 
+    // Has local or sftp maven property.
     if (project.hasProperty("local_maven") || project.hasProperty("sftp_maven")) {
+        // Apply plugins.
         apply plugin: 'maven'
+
+        // Upload archives.
         uploadArchives {
+            // Repositories.
             repositories {
+                // Has local maven property.
                 if (project.hasProperty("local_maven")) {
+                    // Maven deployer for local repos.
                     mavenDeployer {
+                        // Local maven repository url (in local filesystem).
                         repository(url: "file://${local_maven}")
                     }
                 }
+
+                // Has sftp maven property.
                 if (project.hasProperty("sftp_maven")) {
+                    // Maven deployer for sftp.
                     repositories.mavenDeployer {
                         configuration = configurations.deployerJars
                         repository(url: "sftp://${sftp_maven}") {
@@ -310,4 +326,8 @@ task("uploadJars", dependsOn: "build") {
     }
 }
 
+// Copy build number from project root to the jar.
+jar.dependsOn("copyBuildNumber")
+
+// Upload jars to local of sftp maven.
 jar.finalizedBy('uploadJars')

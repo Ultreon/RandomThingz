@@ -54,12 +54,17 @@ import java.util.Objects;
 public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     // Constants
     public static final int DEPTH = 5;
-    public static final int ENERGY_PER_TICK = 19;
+    public static final int ENERGY_PER_TICK = 15;
     public static final int FIELDS_COUNT = 22;
+
     // Fields
     private int x;
     private int y;
     private int z;
+
+    private float breakProgress;
+    private float breakProcessTime;
+
     private Status status = Status.NOT_INITIALIZED;
 
     // Protected fields.
@@ -172,8 +177,6 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
             return FIELDS_COUNT;
         }
     };
-    private float breakProgress;
-    private float breakProcessTime;
 
     public float getBreakProgress() {
         return breakProgress;
@@ -361,16 +364,15 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         if (breakProgress >= breakProcessTime) {
             // Create result
             breakProgress = 0;
-            destroyBlock(posToBreak, true, null);
-            System.out.println("destroyBlock(" + posToBreak + ", true, null");
+            destroyBlock(posToBreak, true, null)
 
             this.x++;
-            if (this.x > this.pos.getX() + 1) {
-                this.x = this.pos.getX() - 1;
+            if (this.x > this.pos.getX() + (1 + (getUpgradeCount(MachineUpgrades.RANGE)))) {
+                this.x = this.pos.getX() - (1 + (getUpgradeCount(MachineUpgrades.RANGE)));
                 this.z++;
             }
-            if (this.z > this.pos.getZ() + 1) {
-                this.z = this.pos.getZ() - 1;
+            if (this.z > this.pos.getZ() + (1 + (getUpgradeCount(MachineUpgrades.RANGE)))) {
+                this.z = this.pos.getZ() - (1 + (getUpgradeCount(MachineUpgrades.RANGE)));
                 this.y--;
             }
 
@@ -380,7 +382,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         } else {
             int i = (int) ((breakProcessTime / breakProgress) * 10.0F);
             world.sendBlockBreakProgress(this.pos.hashCode(), posToBreak, i);
-            breakProgress += 0.1f * (getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) + 1);
+            breakProgress += 0.175f * (getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) + 1);
         }
 
         // Process
