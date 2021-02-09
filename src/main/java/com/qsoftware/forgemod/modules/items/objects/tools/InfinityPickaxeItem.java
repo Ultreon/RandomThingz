@@ -1,9 +1,9 @@
 package com.qsoftware.forgemod.modules.items.objects.tools;
 
 import com.qsoftware.forgemod.common.damagesource.DamageSourceInfinitySword;
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.modules.items.ModItems;
-import com.qsoftware.forgemod.init.ModStats;
+import com.qsoftware.forgemod.modules.ui.ModStats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

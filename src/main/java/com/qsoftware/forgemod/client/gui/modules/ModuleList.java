@@ -33,7 +33,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @OnlyIn(Dist.CLIENT)
 public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
    private static final ResourceLocation ICONS = new ResourceLocation("textures/gui/resource_packs.png");
-   private static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(QForgeMod.MOD_ID, "textures/empty.png");
+   private static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(QForgeMod.modId, "textures/empty.png");
    private static final ITextComponent INCOMPATIBLE_TEXT = new TranslationTextComponent("challenges.incompatible");
    private static final ITextComponent INCOMPATIBLE_CONFIRM_TITLE = new TranslationTextComponent("challenges.incompatible.confirm.title");
    private final ITextComponent title;
@@ -101,8 +101,8 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
    @SuppressWarnings("deprecation")
    @OnlyIn(Dist.CLIENT)
    public static class ModuleEntry extends ExtendedList.AbstractListEntry<ModuleEntry> {
-      private static final ResourceLocation MODULE_OVERLAYS = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/overlays/modules.png");
-      private static final ResourceLocation OPTIONS_BUTTON = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/modules/buttons/options.png");
+      private static final ResourceLocation MODULE_OVERLAYS = new ResourceLocation(QForgeMod.modId, "textures/gui/overlays/modules.png");
+      private static final ResourceLocation OPTIONS_BUTTON = new ResourceLocation(QForgeMod.modId, "textures/gui/modules/buttons/options.png");
       private final ModuleList list;
       protected final Minecraft mc;
       protected final Screen screen;

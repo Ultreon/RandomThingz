@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.util;
 
+import lombok.experimental.UtilityClass;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
@@ -10,11 +11,9 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
+@Deprecated
+@UtilityClass
 public final class ChatUtils {
-    private ChatUtils() {
-        throw ExceptionUtil.utilityConstructor();
-    }
-
     public static void broadcastMessage(@NotNull World worldIn, @NotNull ITextComponent msg) {
         if (worldIn.getServer() != null) {
             for (PlayerEntity player : worldIn.getServer().getPlayerList().getPlayers()) {

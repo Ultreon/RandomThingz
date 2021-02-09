@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.modules.items.objects.energy;
 
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import net.minecraft.item.Rarity;
 
 public class BatteryItem extends EnergyStoringItem {

@@ -3,12 +3,16 @@ package com.qsoftware.forgemod.common;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.Modules;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -31,13 +35,23 @@ public abstract class Module {
         this.submoduleManager.clientSetup();
     }
 
+    public void commonSetup() {
+        this.submoduleManager.commonSetup();
+    }
+
+    public void serverSetup() {
+        this.submoduleManager.serverSetup();
+    }
+
     public abstract void onDisable();
     public abstract boolean canDisable();
     public abstract String getName();
     public abstract boolean isDefaultEnabled();
-    private boolean submodulesEnabled = false;
+    private boolean subManagerEnabled = false;
 
     @Nullable
+    @Getter
+    @Setter(AccessLevel.PROTECTED)
     private Module parent;
 
     /**
@@ -47,17 +61,8 @@ public abstract class Module {
         Modules.MODULES.add(this);
     }
 
-    protected void setParent(@Nullable Module parent) {
-        this.parent = parent;
-    }
-
-    @Nullable
-    public Module getParent() {
-        return parent;
-    }
-
-    public void enableSubmodules() {
-        submodulesEnabled = true;
+    public void enableSubManager() {
+        subManagerEnabled = true;
     }
 
     // Default values
@@ -73,7 +78,7 @@ public abstract class Module {
      * @return a resource location targeting the icon for the module in the module screen.
      */
     public final ResourceLocation getTextureLocation() {
-        return new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/modules/" + getName() + ".png");
+        return new ResourceLocation(QForgeMod.modId, "textures/gui/modules/" + getName() + ".png");
     }
 
     /**
@@ -134,6 +139,10 @@ public abstract class Module {
         return manager;
     }
 
+    public void discardChanges() {
+
+    }
+
     protected static abstract class ClientSide {
 
     }
@@ -145,16 +154,20 @@ public abstract class Module {
         return false;
     }
 
-    public boolean areSubmodulesEnabled() {
-        return submodulesEnabled;
+    public boolean isSubManagerEnabled() {
+        return subManagerEnabled;
     }
 
     @Nullable
     public ModuleManager getSubmoduleManager() {
-        if (!areSubmodulesEnabled()) {
+        if (!isSubManagerEnabled()) {
             return null;
         }
 
         return submoduleManager;
+    }
+
+    public DistCompatibility getSides() {
+        return DistCompatibility.builder().client(true).server(true).build();
     }
 }

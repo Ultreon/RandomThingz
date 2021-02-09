@@ -4,8 +4,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.IMachineInventory;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.IMachineInventory;
 import com.qsoftware.forgemod.util.InventoryUtils;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.*;
@@ -19,26 +21,15 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+@RequiredArgsConstructor
 public class EnchantingRecipe implements IRecipe<IMachineInventory> {
     private final ResourceLocation recipeId;
-    private Item input;
-    private int processTime;
+    @Getter private Item input;
+    @Getter private int processTime;
     private Enchantment result;
-
-    public EnchantingRecipe(ResourceLocation recipeId) {
-        this.recipeId = recipeId;
-    }
-
-    public int getProcessTime() {
-        return processTime;
-    }
 
     public void consumeIngredients(IMachineInventory inv) {
         InventoryUtils.consumeItems(inv, (stack) -> stack.getItem() == input, 1);
-    }
-
-    public Item getInput() {
-        return input;
     }
 
     @Override

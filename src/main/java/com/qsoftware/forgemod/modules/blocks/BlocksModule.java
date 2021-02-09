@@ -6,12 +6,16 @@ import com.qsoftware.forgemod.common.CoreRegisterWrapperModule;
 import com.qsoftware.modlib.silentlib.registry.BlockDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import net.minecraft.block.Block;
+import net.minecraft.fluid.Fluid;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
 public class BlocksModule extends CoreRegisterWrapperModule<Block> {
-    public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(QForgeMod.MOD_ID);
+    public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(QForgeMod.modId);
+    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, QForgeMod.modId);
 
     @Override
     public void onEnable() {

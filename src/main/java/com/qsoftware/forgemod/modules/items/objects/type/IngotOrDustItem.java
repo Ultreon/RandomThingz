@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.modules.items.objects.type;
 
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.groups.MetalCraftablesItemGroup;
 import net.minecraft.item.Item;
 

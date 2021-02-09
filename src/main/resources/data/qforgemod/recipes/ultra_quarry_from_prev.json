@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XoX"
+  ],
+  "key": {
+    "X": {
+      "tag": "ingots/platinum"
+    },
+    "o": {
+      "item": "qforgemod:quarry"
+    }
+  },
+  "result": {
+    "item": "qforgemod:ultra_quarry"
+  }
+}

@@ -7,11 +7,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class DebugPages {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
-        DebugMenu.registerPage(new WindowPage(QForgeMod.MOD_ID, "window"));
+        DebugMenu.registerPage(new WindowPage(QForgeMod.modId, "window"));
 //        DebugScreen.registerPage(new PlayerPage1(QForgeMod.MOD_ID, "player1"));
     }
 }

@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.modules.ui.button;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBaseContainer;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.Button;

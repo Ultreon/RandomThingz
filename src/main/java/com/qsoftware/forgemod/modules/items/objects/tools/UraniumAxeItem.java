@@ -1,14 +1,10 @@
 package com.qsoftware.forgemod.modules.items.objects.tools;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.ModItemGroups;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraftforge.event.world.BlockEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId)
 public class UraniumAxeItem extends AxeItem {
     public UraniumAxeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder);

@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.util.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
@@ -15,11 +16,8 @@ import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 
+@UtilityClass
 public final class RenderUtils {
-    private RenderUtils() {
-        throw new IllegalAccessError("Utility class");
-    }
-
     public static void renderGuiTank(IFluidHandler fluidHandler, int tank, double x, double y, double zLevel, double width, double height) {
         FluidStack stack = fluidHandler.getFluidInTank(tank);
         int tankCapacity = fluidHandler.getTankCapacity(tank);

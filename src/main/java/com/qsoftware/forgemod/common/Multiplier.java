@@ -2,14 +2,15 @@ package com.qsoftware.forgemod.common;
 
 import com.qsoftware.forgemod.common.interfaces.Formattable;
 import com.qsoftware.forgemod.util.helpers.MathHelper;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.util.text.TextFormatting;
 
+@EqualsAndHashCode
+@RequiredArgsConstructor
 public class Multiplier implements Formattable {
-    private final double value;
-
-    public Multiplier(double value) {
-        this.value = value;
-    }
+    @Getter private final double value;
 
     @Override
     public String toFormattedString() {
@@ -19,11 +20,7 @@ public class Multiplier implements Formattable {
 
         return TextFormatting.GOLD.toString() + value + TextFormatting.GRAY + "x";
     }
-
-    public double getValue() {
-        return value;
-    }
-
+    
     public Percentage toPercentage() {
         return new Percentage(value);
     }

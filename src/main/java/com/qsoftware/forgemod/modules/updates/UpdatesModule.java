@@ -177,7 +177,7 @@ public class UpdatesModule extends Module {
 
             ticker.advance();
 
-            if (ticker.getTicks() >= (tickDelay)) {
+            if (ticker.getCurrentTicks() >= (tickDelay)) {
                 ticker.reset();
 
                 QForgeMod.LOGGER.info("Checking for mod updates...");

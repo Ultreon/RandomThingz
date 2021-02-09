@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.util;
 
+import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
@@ -9,12 +10,8 @@ import org.lwjgl.opengl.GL11;
  * @author MrCrayfish
  */
 @SuppressWarnings("unused")
+@UtilityClass
 public final class RenderUtils {
-    private RenderUtils() {
-        throw ExceptionUtil.utilityConstructor();
-    }
-
-
     public static void scissor(int x, int y, int width, int height) {
         Minecraft mc = Minecraft.getInstance();
         int scale = (int) mc.getMainWindow().getGuiScaleFactor();

@@ -5,6 +5,7 @@ import com.qsoftware.forgemod.config.OreConfig;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.modlib.silentlib.block.IBlockProvider;
 import com.qsoftware.modlib.silentutils.Lazy;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;

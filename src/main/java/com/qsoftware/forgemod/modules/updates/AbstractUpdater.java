@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.QVersion;
+import com.qsoftware.forgemod.QFMVersion;
 import com.qsoftware.forgemod.common.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.ModContainer;
@@ -31,7 +31,7 @@ import java.util.Map;
  * An abstract updater used for checking for updates.
  * Other modders can use this to create their own updaters.
  * They need to create an implementation of {@link IVersion} to make it work with their own version systems -
- * Or use {@link QVersion} if modders want to use the QSoftware / QTech version system.
+ * Or use {@link QFMVersion} if modders want to use the QSoftware / QTech version system.
  *
  * @param <T> an implementation of {@link IVersion}.
  */
@@ -225,7 +225,7 @@ public abstract class AbstractUpdater<T extends IVersion> {
 
                 // Get latest Mod version.
                 JsonObject versionIndex = mcVersions.getAsJsonObject(id);
-                JsonObject releaseIndex = versionIndex.getAsJsonObject(QForgeMod.VERSION.isStable() ? "stable" : "unstable");
+                JsonObject releaseIndex = versionIndex.getAsJsonObject(QForgeMod.version.isStable() ? "stable" : "unstable");
                 JsonPrimitive latestJson = releaseIndex.getAsJsonPrimitive("version");
 
                 // Get version download url.

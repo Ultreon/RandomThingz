@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.items.objects.overpowered;
 
 import com.qsoftware.forgemod.common.enums.TextColors;
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;

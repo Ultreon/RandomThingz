@@ -47,7 +47,7 @@ public class VariantBeeRenderer extends BeeRenderer {
 					type = "nectar";
 				
 				String path = String.format("textures/model/entity/variants/bees/%s/%s.png", name, type);
-				return new ResourceLocation(QForgeMod.MOD_ID, path);
+				return new ResourceLocation(QForgeMod.modId, path);
 			}
 		}
 		

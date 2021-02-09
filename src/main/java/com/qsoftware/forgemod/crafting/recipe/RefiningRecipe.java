@@ -6,6 +6,8 @@ import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidInventory;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
 import com.qsoftware.forgemod.init.ModRecipes;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.network.PacketBuffer;
@@ -20,23 +22,12 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
+@RequiredArgsConstructor
 public class RefiningRecipe implements IFluidRecipe<IFluidInventory> {
     private final ResourceLocation recipeId;
     private final List<FluidStack> outputs = NonNullList.create();
-    private int processTime;
-    private FluidIngredient ingredient;
-
-    public RefiningRecipe(ResourceLocation recipeId) {
-        this.recipeId = recipeId;
-    }
-
-    public FluidIngredient getIngredient() {
-        return ingredient;
-    }
-
-    public int getProcessTime() {
-        return processTime;
-    }
+    @Getter private int processTime;
+    @Getter private FluidIngredient ingredient;
 
     @Override
     public boolean matches(IFluidInventory inv, World worldIn) {

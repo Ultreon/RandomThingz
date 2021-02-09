@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.modules.items.objects;
 
-import com.qsoftware.forgemod.modules.entities.objects.LegendaryEnderPearlEntity;
+import com.qsoftware.forgemod.modules.environment.entities.LegendaryEnderPearlEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderPearlItem;
 import net.minecraft.item.ItemStack;

@@ -1,21 +1,19 @@
 package com.qsoftware.forgemod.util;
 
 import com.qsoftware.forgemod.QForgeMod;
+import lombok.experimental.UtilityClass;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
+@UtilityClass
 public final class TextUtils {
-    private TextUtils() {
-        throw ExceptionUtil.utilityConstructor();
-    }
-
     private static final String ENERGY_FORMAT = "%,d";
 
     public static IFormattableTextComponent translate(String prefix, String suffix, Object... params) {
-        String key = String.format("%s.%s.%s", prefix, QForgeMod.MOD_ID, suffix);
+        String key = String.format("%s.%s.%s", prefix, QForgeMod.modId, suffix);
         return new TranslationTextComponent(key, params);
     }
 

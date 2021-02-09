@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.modules.debugMenu;
 import com.qsoftware.forgemod.common.Angle;
 import com.qsoftware.forgemod.common.Multiplier;
 import com.qsoftware.forgemod.common.Percentage;
-import com.qsoftware.forgemod.common.Size;
+import com.qsoftware.forgemod.common.IntSize;
 import com.qsoftware.forgemod.common.enums.MoonPhase;
 import com.qsoftware.forgemod.common.interfaces.Formattable;
 import net.minecraft.client.MainWindow;
@@ -63,7 +63,7 @@ public abstract class DebugPage {
     }
 
     protected static Formattable getSize(int w, int h) {
-        return new Size(w, h);
+        return new IntSize(w, h);
     }
 
     protected static Formattable getSize(float w, float h) {

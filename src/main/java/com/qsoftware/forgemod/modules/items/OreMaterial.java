@@ -1,10 +1,10 @@
 package com.qsoftware.forgemod.modules.items;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.modules.ores.Ore;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.MetalBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.MetalBlock;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import net.minecraft.block.AbstractBlock;
@@ -295,7 +295,7 @@ public enum OreMaterial implements IOreMaterial {
         ITag.INamedTag<Item> gemTag;
         ITag.INamedTag<Item> nuggetTag;
 
-        Supplier<Tools> tools;
+        Supplier<ToolsOld> tools;
 
         Builder(String name) {
             this.name = name;
@@ -324,7 +324,7 @@ public enum OreMaterial implements IOreMaterial {
             return this;
         }
 
-        Builder tools(Supplier<Tools> tools) {
+        Builder tools(Supplier<ToolsOld> tools) {
             this.tools = tools;
             return this;
         }

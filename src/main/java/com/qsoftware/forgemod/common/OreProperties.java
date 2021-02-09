@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.common;
 
+import com.qsoftware.forgemod.modules.ores.ModOreGen;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.ConfiguredFeature;

@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.util.helpers;
 
+import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.api.distmarker.Dist;
@@ -12,6 +13,8 @@ import org.lwjgl.glfw.GLFW;
  *
  * @author Qboi123
  */
+@SuppressWarnings("unused")
+@UtilityClass
 public class KeyboardHelper {
     private static final long WINDOW = Minecraft.getInstance().getMainWindow().getHandle();
 

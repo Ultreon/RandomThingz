@@ -305,19 +305,19 @@ public abstract class WandItem extends HudItem {
         val = (int)(64d * mana / maxMana);
 
         TextureManager textureManager = mc.getTextureManager();
-        textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wand/background.png"));
+        textureManager.bindTexture(new ResourceLocation(QForgeMod.modId, "textures/gui/wand/background.png"));
         gu.blit(0, height - 64, 128, 64, 0, 0, 128, 64, 128, 64);
 
-        textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wand/bar.png"));
+        textureManager.bindTexture(new ResourceLocation(QForgeMod.modId, "textures/gui/wand/bar.png"));
         gu.blit(33, height - 11, 64, 2, 0, 2, 64, 1, 64, 3);
 
-        textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wand/bar.png"));
+        textureManager.bindTexture(new ResourceLocation(QForgeMod.modId, "textures/gui/wand/bar.png"));
         gu.blit(32, height - 12, 64, 2, 0, 1, 64, 1, 64, 3);
 
-        textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wand/bar.png"));
+        textureManager.bindTexture(new ResourceLocation(QForgeMod.modId, "textures/gui/wand/bar.png"));
         gu.blit(33, height - 11, val, 2, 0, 1, val, 1, 64, 3);
 
-        textureManager.bindTexture(new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wand/bar.png"));
+        textureManager.bindTexture(new ResourceLocation(QForgeMod.modId, "textures/gui/wand/bar.png"));
         gu.blit(32, height - 12, val, 2, 0, 0, val, 1, 64, 3);
 
         gu.drawItemStack(stack, 56, height - 60, "");

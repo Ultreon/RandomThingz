@@ -27,7 +27,7 @@ import java.util.List;
  * @author Qboi123
  */
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId)
 public class SilverArmorItem extends ArmorItem {
     public SilverArmorItem(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builderIn) {
         super(materialIn, slot, builderIn);

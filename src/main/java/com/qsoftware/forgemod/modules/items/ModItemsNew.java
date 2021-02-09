@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.modules.items;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ObjectInit;
-import com.qsoftware.forgemod.modules.entities.ModEntities;
+import com.qsoftware.forgemod.modules.environment.ModEntities;
 import com.qsoftware.forgemod.modules.items.objects.spawnegg.CustomSpawnEggItem;
 import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 
 @SuppressWarnings("unused")
 public class ModItemsNew extends ObjectInit<Item> {
-    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.MOD_ID);
+    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.modId);
 
     public static final ItemRegistryObject<CustomSpawnEggItem<?>> DUCK_SPAWN_EGG = registerSpawnEgg(ModEntities.DUCK, 0x04680e, 0xe4b50f);
     public static final ItemRegistryObject<CustomSpawnEggItem<?>> CLUCKSHROOM_SPAWN_EGG = registerSpawnEgg(ModEntities.CLUCKSHROOM, 0x730000, 0xe70000);

@@ -30,7 +30,7 @@ import java.util.List;
 @OnlyIn(Dist.CLIENT)
 public class ModuleScreen extends Screen {
    // Icons
-   private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/icons.png");
+   private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(QForgeMod.modId, "textures/gui/icons.png");
 
    // Drop info.
    private static final ITextComponent DROP_INFO = (new TranslationTextComponent("pack.dropInfo")).mergeStyle(TextFormatting.GRAY);

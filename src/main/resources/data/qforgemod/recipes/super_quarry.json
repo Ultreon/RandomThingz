@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XVX",
+    "XoX",
+    "XTX"
+  ],
+  "key": {
+    "X": {
+      "tag": "ingots/aluminum"
+    },
+    "o": {
+      "tag": "dusts/redstone"
+    },
+    "T": {
+      "item": "minecraft:diamond_pickaxe"
+    },
+    "V": {
+      "item": "minecraft:hopper"
+    }
+  },
+  "result": {
+    "item": "qforgemod:super_quarry"
+  }
+}

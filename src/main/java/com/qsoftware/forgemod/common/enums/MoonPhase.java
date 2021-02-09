@@ -1,7 +1,10 @@
 package com.qsoftware.forgemod.common.enums;
 
 import com.qsoftware.forgemod.common.interfaces.Indexable;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public enum MoonPhase implements Indexable {
     FULL(0),
     WANING_GIBBOUS(1),
@@ -12,11 +15,7 @@ public enum MoonPhase implements Indexable {
     FIRST_QUARTER(6),
     WAXING_GIBBOUS(7);
 
-    private final int index;
-
-    MoonPhase(int index) {
-        this.index = index;
-    }
+    @Getter private final int index;
 
     public static MoonPhase fromIndex(int index) {
         MoonPhase[] values = MoonPhase.values();
@@ -28,10 +27,5 @@ public enum MoonPhase implements Indexable {
         }
 
         return null;
-    }
-
-    @Override
-    public int getIndex() {
-        return index;
     }
 }

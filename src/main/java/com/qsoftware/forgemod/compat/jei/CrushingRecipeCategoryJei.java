@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.datafixers.util.Pair;
 import com.qsoftware.forgemod.crafting.recipe.CrushingRecipe;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.crusher.CrusherScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher.CrusherScreen;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.TextUtils;
 import com.qsoftware.modlib.silentlib.util.TextRenderUtils;

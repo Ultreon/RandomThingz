@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.util.helpers;
 
+import lombok.experimental.UtilityClass;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -13,6 +14,8 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author Qboi123
  */
+@SuppressWarnings("unused")
+@UtilityClass
 public class VoxelShapeHelper {
     public static VoxelShape combineAll(Collection<VoxelShape> shapes) {
         VoxelShape result = VoxelShapes.empty();

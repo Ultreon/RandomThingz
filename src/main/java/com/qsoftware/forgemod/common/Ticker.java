@@ -1,31 +1,30 @@
 package com.qsoftware.forgemod.common;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Ticker {
-    private int ticks;
+    @Getter private int currentTicks;
     private final Predicate<Ticker> autoReset;
     private final Consumer<Ticker> onTick;
 
-    public Ticker(int startValue) {
-        this(startValue, (ticker) -> false);
+    public Ticker(int currentTicks) {
+        this(currentTicks, (ticker) -> false);
     }
 
-    public Ticker(int startValue, @NotNull Predicate<Ticker> autoReset) {
-        this(startValue, autoReset, (ticker) -> {});
+    public Ticker(int currentTicks, @NotNull Predicate<Ticker> autoReset) {
+        this(currentTicks, autoReset, (ticker) -> {});
     }
 
-    public Ticker(int startValue, @NotNull Predicate<Ticker> autoReset, @NotNull Consumer<Ticker> onTick) {
-        this.ticks = startValue;
-        this.autoReset = autoReset;
-        this.onTick = onTick;
-    }
-    
     public void advance() {
-        this.ticks++;
+        this.currentTicks++;
         onTick.accept(this);
         if (autoReset.test(this)) {
             reset();
@@ -33,10 +32,6 @@ public class Ticker {
     }
     
     public void reset() {
-        this.ticks = 0;
-    }
-
-    public int getTicks() {
-        return ticks;
+        this.currentTicks = 0;
     }
 }

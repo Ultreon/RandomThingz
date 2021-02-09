@@ -15,7 +15,7 @@ public class ModTags {
     }
 
     private static ResourceLocation modId(String path) {
-        return new ResourceLocation(QForgeMod.MOD_ID, path);
+        return new ResourceLocation(QForgeMod.modId, path);
     }
 
     private ModTags() {

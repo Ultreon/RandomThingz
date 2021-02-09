@@ -2,6 +2,8 @@ package com.qsoftware.forgemod.crafting.recipe;
 
 import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.init.ModRecipes;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
@@ -11,23 +13,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+@RequiredArgsConstructor
 public class DryingRecipe implements IRecipe<IInventory> {
     private final ResourceLocation recipeId;
-    private int processTime;
-    private Ingredient ingredient;
+    @Getter private int processTime;
+    @Getter private Ingredient ingredient;
     private ItemStack result;
-
-    public DryingRecipe(ResourceLocation recipeId) {
-        this.recipeId = recipeId;
-    }
-
-    public int getProcessTime() {
-        return processTime;
-    }
-
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
 
     @Override
     public boolean matches(IInventory inv, World worldIn) {

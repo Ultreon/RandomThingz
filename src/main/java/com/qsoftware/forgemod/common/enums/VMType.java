@@ -1,18 +1,18 @@
 package com.qsoftware.forgemod.common.enums;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.Nullable;
 //import oshi.SystemInfo;
 
+@RequiredArgsConstructor
 public enum VMType {
     VMWARE("VMware, Inc.", "VMware");
 
+    @Getter
     private final String manufacturer;
+    @Getter
     private final String name;
-
-    VMType(String manufacturer, String name) {
-        this.manufacturer = manufacturer;
-        this.name = name;
-    }
 
     @Nullable
     public static VMType getFromManufacturer(String manufacturer) {
@@ -36,8 +36,4 @@ public enum VMType {
 //    public static VMType getFromSystem() {
 //        return getFromSystemInfo(new SystemInfo());
 //    }
-
-    public String getName() {
-        return this.name;
-    }
 }

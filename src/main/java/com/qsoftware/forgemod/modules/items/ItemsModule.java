@@ -24,7 +24,7 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class ItemsModule extends CoreRegisterWrapperModule<Item> {
-    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.MOD_ID);
+    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.modId);
 
     @SubscribeEvent
     public void registerItemColorHandlers(ColorHandlerEvent.Item event) {

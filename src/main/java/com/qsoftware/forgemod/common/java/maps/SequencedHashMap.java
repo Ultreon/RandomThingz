@@ -63,6 +63,8 @@ package com.qsoftware.forgemod.common.java.maps;
  *
  */
 
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Externalizable;
@@ -832,26 +834,18 @@ public class SequencedHashMap<K, V> implements Map<K, V>, Cloneable, Externaliza
         // the case with SequencedHashMap)? It's impossible to know in the clone
         // when to stop cloning, and thus you end up in a recursive loop,
         // continuously cloning the "next" in the list.
+        @Getter
         private final K key;
         // package private to allow the SequencedHashMap to access and manipulate
         // them.
         Entry<K, V> next = null;
         Entry<K, V> prev = null;
+        @Getter
         private V value;
 
         public Entry(K key, V value) {
             this.key = key;
             this.value = value;
-        }
-
-        // per Map.Entry.getKey()
-        public K getKey() {
-            return this.key;
-        }
-
-        // per Map.Entry.getValue()
-        public V getValue() {
-            return this.value;
         }
 
         // per Map.Entry.setValue()

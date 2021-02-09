@@ -1,11 +1,11 @@
 package com.qsoftware.forgemod.modules.blocks;
 
 import com.qsoftware.forgemod.common.enums.MachineTier;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseTileEntity;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.alloysmelter.AlloySmelterContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.alloysmelter.AlloySmelterTileEntity;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.crusher.CrusherContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.crusher.CrusherTileEntity;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBaseTileEntity;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterTileEntity;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher.CrusherContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher.CrusherTileEntity;
 import com.qsoftware.modlib.silentlib.util.Lazy;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;

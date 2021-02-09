@@ -1,0 +1,35 @@
+{
+   "flags": {
+      "dev_test": true
+   },
+   "version": {
+      "name": "2.0.191-a1",
+      "version": 2,
+      "release": 0,
+      "build": 191,
+      "stage": "a",
+      "stage_release": 1
+   },
+   "build_info": {
+      "date": "2021-02-01T21:54:43.013",
+      "compile": {
+         "name": "compileJava",
+         "source_compat": "1.8",
+         "target_compat": "1.8",
+         "gradle": {
+            "version": "5.6.4"
+         }
+      },
+      "project": {
+         "name": "QForgeMod",
+         "display_name": "root project \u0027QForgeMod\u0027",
+         "minecraft": {
+            "mappings_version": "20201028-1.16.3",
+            "mappings_channel": "snapshot",
+            "mappings": "snapshot_20201028-1.16.3",
+            "version": "1.16.4",
+            "forge_version": "35.1.16"
+         }
+      }
+   }
+}

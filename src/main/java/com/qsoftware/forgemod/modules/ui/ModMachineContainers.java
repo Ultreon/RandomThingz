@@ -2,34 +2,34 @@ package com.qsoftware.forgemod.modules.ui;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.blocks.MachineType;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.alloysmelter.AlloySmelterScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.batterybox.BatteryBoxContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.batterybox.BatteryBoxScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.compressor.CompressorContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.compressor.CompressorScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.crusher.CrusherScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.electricfurnace.ElectricFurnaceContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.electricfurnace.ElectricFurnaceScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.coal.CoalGeneratorContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.coal.CoalGeneratorScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.diesel.DieselGeneratorContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.diesel.DieselGeneratorScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.lava.LavaGeneratorContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.lava.LavaGeneratorScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.infuser.InfuserContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.infuser.InfuserScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.mixer.MixerContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.mixer.MixerScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.pump.PumpContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.pump.PumpScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.quarry.QuarryContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.quarry.QuarryScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.refinery.RefineryContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.refinery.RefineryScreen;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.solidifier.SolidifierContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.solidifier.SolidifierScreen;
-import com.qsoftware.forgemod.util.ExceptionUtil;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.batterybox.BatteryBoxContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.batterybox.BatteryBoxScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.compressor.CompressorContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.compressor.CompressorScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher.CrusherScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.electricfurnace.ElectricFurnaceContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.electricfurnace.ElectricFurnaceScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.generator.coal.CoalGeneratorContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.generator.coal.CoalGeneratorScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.generator.diesel.DieselGeneratorContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.generator.diesel.DieselGeneratorScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.generator.lava.LavaGeneratorContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.generator.lava.LavaGeneratorScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.infuser.InfuserContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.infuser.InfuserScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.mixer.MixerContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.mixer.MixerScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.pump.PumpContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.pump.PumpScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.quarry.QuarryContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.quarry.QuarryScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.refinery.RefineryContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.refinery.RefineryScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.solidifier.SolidifierContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.solidifier.SolidifierScreen;
 import com.qsoftware.forgemod.common.enums.MachineTier;
+import lombok.experimental.UtilityClass;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
@@ -40,8 +40,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+@UtilityClass
 public final class ModMachineContainers {
-    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, QForgeMod.MOD_ID);
+    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, QForgeMod.modId);
 
     public static ContainerType<BatteryBoxContainer> batteryBox;
     public static ContainerType<CoalGeneratorContainer> coalGenerator;
@@ -55,10 +56,6 @@ public final class ModMachineContainers {
     public static ContainerType<QuarryContainer> quarry;
     public static ContainerType<RefineryContainer> refinery;
     public static ContainerType<SolidifierContainer> solidifier;
-
-    private ModMachineContainers() {
-        throw ExceptionUtil.utilityConstructor();
-    }
 
     public static void registerAll(RegistryEvent.Register<ContainerType<?>> event) {
         register("basic_alloy_smelter", MachineType.ALLOY_SMELTER.getContainerType(MachineTier.BASIC));

@@ -5,10 +5,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineTileEntity;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineTileEntity;
 import com.qsoftware.forgemod.modules.items.objects.upgrades.MachineUpgrades;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.modlib.silentutils.MathUtils;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,33 +28,12 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 public class CrushingRecipe implements IRecipe<IInventory> {
     private final ResourceLocation recipeId;
     private final Map<ItemStack, Float> results = new LinkedHashMap<>();
-    private int processTime;
-    private Ingredient ingredient;
-
-    public CrushingRecipe(ResourceLocation recipeId) {
-        this.recipeId = recipeId;
-    }
-
-    /**
-     * Get the time (in ticks) required to crush one ingredient
-     *
-     * @return The process time in ticks
-     */
-    public int getProcessTime() {
-        return processTime;
-    }
-
-    /**
-     * Get the input ingredient for the recipe
-     *
-     * @return The input ingredient
-     */
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
+    @Getter private int processTime;
+    @Getter private Ingredient ingredient;
 
     /**
      * Get results of crushing. Some results may have a limited chance of being produced, and this

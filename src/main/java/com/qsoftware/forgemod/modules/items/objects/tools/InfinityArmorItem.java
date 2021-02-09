@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.damagesource.DamageSourceInfinitySword;
-import com.qsoftware.forgemod.init.ModStats;
+import com.qsoftware.forgemod.modules.ui.ModStats;
 import com.qsoftware.forgemod.modules.items.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -24,10 +24,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId)
 public class InfinityArmorItem extends ArmorItem {
     private UUID uuid;
 
@@ -115,7 +114,7 @@ public class InfinityArmorItem extends ArmorItem {
         attrs.putAll(attrsOld);
 
         if (equipmentSlot == EquipmentSlotType.FEET && slot == EquipmentSlotType.FEET) {
-            attrs.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(uuid, "Movement Speed", 2.0d, AttributeModifier.Operation.ADDITION));
+            attrs.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(uuid, "Movement Speed", 2.0d, AttributeModifier.Operation.MULTIPLY_TOTAL));
         }
         if (equipmentSlot == EquipmentSlotType.CHEST && slot == EquipmentSlotType.CHEST) {
             attrs.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(uuid, "Attack Knockback", 10.0d, AttributeModifier.Operation.ADDITION));

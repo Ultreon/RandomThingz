@@ -722,7 +722,7 @@ public class DebugMenu {
 
                     int i = 0;
 
-                    drawLeftTopString(matrixStack, "QFM Build", i++, new Formatted(QForgeMod.getBuildNumber()));
+                    drawLeftTopString(matrixStack, "QFM Build", i++, new Formatted(QForgeMod.getModArgs().getVersion().getBuild()));
                     drawLeftTopString(matrixStack, "Time", i++, new Formatted(timeText.toString()));
 
                     long dayTime = world.getDayTime() % 24000;
@@ -767,7 +767,7 @@ public class DebugMenu {
     }
 
     private static Formattable getSize(int w, int h) {
-        return new Size(w, h);
+        return new IntSize(w, h);
     }
 
     private static Formattable getSize(float w, float h) {

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.items.objects.wand;
 
 import com.qsoftware.forgemod.common.enums.TextColors;
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.util.helpers.KeyboardHelper;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.util.ITooltipFlag;

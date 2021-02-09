@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.items.objects.upgrades;
 
 import com.qsoftware.forgemod.api.IMachineUpgrade;
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.util.TextUtils;
 import com.qsoftware.modlib.silentutils.MathUtils;
 import net.minecraft.client.util.ITooltipFlag;

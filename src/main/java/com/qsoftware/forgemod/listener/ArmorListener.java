@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.listener;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.items.ModItems;
+import lombok.experimental.UtilityClass;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -18,7 +19,8 @@ import java.util.List;
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@UtilityClass
 public class ArmorListener {
     /**
      * Event handler for living entity damage.

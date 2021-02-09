@@ -1,12 +1,16 @@
 package com.qsoftware.forgemod;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
+import com.qsoftware.forgemod.internal.QfmArgs;
 import com.qsoftware.forgemod.modules.blocks.ModBlocksNew;
-import com.qsoftware.forgemod.modules.entities.ModEntities;
+import com.qsoftware.forgemod.modules.environment.ModEntities;
 import com.qsoftware.forgemod.modules.items.ModItemsNew;
 import com.qsoftware.forgemod.modules.ui.ModContainers;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
+import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.crash.CrashReport;
@@ -25,12 +29,12 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -49,20 +53,12 @@ import java.util.stream.Collectors;
 @ParametersAreNonnullByDefault
 @FieldsAreNonnullByDefault
 @Mod("qforgemod")
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class QForgeMod {
-    // Mod Data
-    public static final String MOD_ID = "qforgemod";
-    public static final String MOD_NAME = "QForgeMod";
-    public static final String NBT_NAME = "QForgeMod";
-    public static final String MOD_VERSION = "1.2-alpha3-DEVTEST";
-    public static final QVersion VERSION = new QVersion(MOD_VERSION);
-    private static final boolean IS_DEVTEST = VERSION.isDevTest();
-
     /**
      * QForgeMod's Logger
      */
-    public static final Logger LOGGER = LogManager.getLogger(QForgeMod.MOD_ID);
+    public static final Logger LOGGER = LogManager.getLogger(QForgeMod.modId);
 
     /**
      * Unused.
@@ -71,19 +67,31 @@ public class QForgeMod {
     public static final Random RANDOM = new Random();
 
     // Class static fields.
-    @Nullable
-    private static QForgeMod instance;
-    @Nullable
-    private static IProxy proxy;
-    @Nullable
-    private static Initialization init;
+    @Getter @Nullable private static QForgeMod instance;
+    @Getter @Nullable private static IProxy proxy;
+    @Getter @Nullable private static Initialization init;
     private static final boolean TEST_PHASE_ON = true;
 
-    private static final boolean IS_CLIENT_SIDE;
-    private static final boolean IS_SERVER_SIDE;
-    private static final int BUILD_NUMBER;
+    @Getter private static final boolean isClientSide;
+    @Getter private static final boolean isServerSide;
+    @Deprecated
+    @Getter private static final int buildNumber;
+
+//    private static final Optional<? extends ModContainer> MOD_CONTAINER = ModList.get().getModContainerById(MOD_ID);
+
+    // Mod Data
+    @Getter public static final String modId = "qforgemod";
+    @Getter public static final String modName = "QForgeMod";
+    @Getter public static final String nbtName = "QForgeMod";
+    @Getter public static final String modVersion;
+    @Getter public static final QFMVersion version;
+    @Getter private static final QfmArgs modArgs;
 
     static {
+        if (new File("/mnt/chromeos").exists()) {
+            throw new UnsupportedOperationException("Tried to run QForgeMod on Chrome OS (Linux subsystem), this is unsupported.");
+        }
+
         boolean c;
         try {
             Class.forName("net.minecraft.client.Minecraft");
@@ -91,7 +99,7 @@ public class QForgeMod {
         } catch (ClassNotFoundException e) {
             c = false;
         }
-        IS_CLIENT_SIDE = c;
+        isClientSide = c;
 
         boolean s;
         try {
@@ -100,52 +108,38 @@ public class QForgeMod {
         } catch (ClassNotFoundException e) {
             s = false;
         }
-        IS_SERVER_SIDE = s;
+        isServerSide = s;
 
-        int a;
-        InputStream resourceAsStream = QForgeMod.class.getResourceAsStream("/META-INF/buildnumber.txt");
-        try {
-            String buildNrString = IOUtils.toString(new InputStreamReader(resourceAsStream));
-            a = Integer.parseInt(buildNrString);
-        } catch (IOException e) {
-            throw new RuntimeException("Couldn't read buildnumber", e);
-        }
-        BUILD_NUMBER = a;
+//        int a;
+//        InputStream resourceAsStream = QForgeMod.class.getResourceAsStream("/META-INF/buildnumber.txt");
+//        try {
+//            String buildNrString = IOUtils.toString(new InputStreamReader(resourceAsStream));
+//            a = Integer.parseInt(buildNrString);
+//        } catch (IOException e) {
+//            throw new RuntimeException("Couldn't read buildnumber", e);
+//        }
+//        buildNumber = a;
+
+        // Create gson instance.
+        Gson gson = new Gson();
+
+        // Get stream.
+        InputStream qfmArgsStream = QForgeMod.class.getResourceAsStream("/META-INF/qfm_args.json");
+        Objects.requireNonNull(qfmArgsStream, "Couldn't get QForgeMod Args file.");
+
+        // Get data.
+        InputStreamReader isr = new InputStreamReader(qfmArgsStream);
+        JsonObject o = gson.fromJson(isr, JsonObject.class);
+
+        modArgs = new QfmArgs(o);
+        modVersion = modArgs.getVersion().getName();
+        version = modArgs.getVersion().toVersionObject();
+
+        buildNumber = modArgs.getVersion().getBuild();
     }
 
-    private final IEventBus modEventBus;
-
-    public IEventBus getModEventBus() {
-        return modEventBus;
-    }
-
-    /**
-     * Get the QForgeUtils mod instance.
-     *
-     * @return the mod-instance.
-     */
-    public static @Nullable QForgeMod getInstance() {
-        return instance;
-    }
-
-    /**
-     * Get QForgeMod's proxy.
-     *
-     * @return the proxy.
-     */
-    @SuppressWarnings("unused")
-    public static @Nullable IProxy getProxy() {
-        return proxy;
-    }
-
-    /**
-     * Get initialization object.
-     *
-     * @return the initialization object.
-     */
-    public static @Nullable Initialization getInit() {
-        return init;
-    }
+    // Getters
+    @Getter private final IEventBus modEventBus;
 
     /**
      * The QForgeUtils constructor for mod-loading.
@@ -217,7 +211,7 @@ public class QForgeMod {
      * @return a resource location.
      */
     public static ResourceLocation rl(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        return new ResourceLocation(modId, path);
     }
 
     /**
@@ -243,14 +237,6 @@ public class QForgeMod {
         }
     }
 
-    public static boolean isClientSide() {
-        return QForgeMod.IS_CLIENT_SIDE;
-    }
-
-    public static boolean isServerSide() {
-        return QForgeMod.IS_SERVER_SIDE;
-    }
-
     /**
      * Check test phase.
      *
@@ -264,7 +250,7 @@ public class QForgeMod {
      *
      */
     public static boolean isDevtest() {
-        return IS_DEVTEST;
+        return modArgs.getFlags().isDevTest();
     }
 
     /**
@@ -300,7 +286,4 @@ public class QForgeMod {
                 collect(Collectors.toList()));
     }
 
-    public static int getBuildNumber() {
-        return BUILD_NUMBER;
-    }
 }

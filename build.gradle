@@ -1,5 +1,11 @@
+import com.google.gson.*
+import com.google.gson.stream.*;
+import com.google.gson.stream.JsonWriter;
 import org.apache.commons.io.FileUtils
-import sun.misc.IOUtils 
+import sun.misc.IOUtils
+
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 buildscript {
     repositories {
@@ -19,47 +25,68 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
-        classpath "io.freefair.gradle:lombok-plugin:4.1.6"
         classpath group: 'commons-io', name: 'commons-io', version: '2.8.0'
+        classpath group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+        classpath "io.freefair.gradle:lombok-plugin:4.1.6"
     }
 }
 
+// Forge Gradle (REQUIRED)
 apply plugin: 'net.minecraftforge.gradle'
+
+// Other plugins.
+apply plugin: 'maven'
 apply plugin: 'org.spongepowered.mixin'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-//apply plugin: "io.freefair.lombok"
-
-version = '1.2-alpha3-DEVTEST'
-group = 'com.qsoftware.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'qforgemod'
-
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-
-mixin {
-    add sourceSets.main, "qforgemod.refmap.json"
-}
+apply plugin: "io.freefair.lombok"
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 println("OS: " + System.getProperty("os.name") + " Version: " + System.getProperty("os.version"))
 
 // Read build number file.
+int vers = Integer.parseInt(project.property("version").toString())
+int release = Integer.parseInt(project.property("versionRelease").toString())
+String stage = project.property("versionStage").toString()
+int stageRelease = Integer.parseInt(project.property("versionStageRelease").toString())
+String isDevTestString = project.property("isDevTest").toString()
+
 FileInputStream fileInputStream = new FileInputStream("buildnumber.txt")
 String buildNrString = new String(IOUtils.readAllBytes(fileInputStream))
 fileInputStream.close()
-Integer build = Integer.valueOf(buildNrString)
+Integer buildNumber = Integer.valueOf(buildNrString)
 
 // Advance build number.
-build++
-println("New buildnumber: " + build)
-String newBuild = build.toString()
+buildNumber++
+println("Executing build " + buildNumber)
+String newBuild = buildNumber.toString()
 
 // Write new build number.
 FileOutputStream output = new FileOutputStream("buildnumber.txt")
 output.write(newBuild.getBytes())
 output.flush()
 output.close()
+
+boolean isDevTest = Boolean.parseBoolean(isDevTestString)
+
+version = vers + "." + release + '.' + buildNumber + "-" + stage + stageRelease
+group = 'com.qsoftware.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'qforgemod'
+jar.version = version
+jar.archiveVersion.set(version)
+
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
+//GroovyShell shell = new GroovyShell(this.getClass().getClassLoader(), this.binding);
+//shell.run(file, arguments);
+
+println("Current version: " + version)
+println("Project: " + group + ":" + archivesBaseName)
+println("Bulding a Java " + compileJava.targetCompatibility + " project...")
+
+mixin {
+    add sourceSets.main, "qforgemod.refmap.json"
+}
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
@@ -190,10 +217,20 @@ dependencies {
     compileOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0-beta1")
     runtimeOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0-beta1")
 
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.16'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+
+    // https://mvnrepository.com/artifact/io.kaitai/kaitai-struct-runtime
+    extraLibs group: 'io.kaitai', name: 'kaitai-struct-runtime', version: '0.9'
+    compile group: 'io.kaitai', name: 'kaitai-struct-runtime', version: '0.9'
 
     // Apache dependencies.
     extraLibs group: 'org.apache.lucene', name: 'lucene-core', version: '8.7.0'
@@ -249,6 +286,57 @@ dependencies {
     }
 }
 
+// process mods.toml to inject variables
+def modsTomlSpec = copySpec{
+    from(sourceSets.main.resources) {
+        include 'META-INF/mods.toml'
+    }
+}
+// need to copy into each build directory, unfortunately does not seem easy to do this automatically
+def buildPaths = [
+        "$rootDir/out/production/resources", // IDEA
+        "$rootDir/bin", // Eclipse
+]
+
+// task to add mods.toml to all relevant folders
+task replaceResources(type: Copy) {
+    from("src/main/resources/META-INF/mods.toml")
+    outputs.upToDateWhen {
+        false
+    }
+
+//    File modsToml = new File("src/main/resources/META-INF/mods.toml")
+//
+//    FileReader reader = new FileReader(modsToml)
+//    char[] buffer = new char[modsToml.length()]
+//    reader.read(buffer)
+//    reader.close()
+//
+//    String text = new String(buffer);
+//    text = text.replaceAll('\\\$\\\$QFM_VERSION\\\$\\\$', version.toString())
+//
+//    char[] out = text.getChars();
+//
+//    File outputToml = new File(processResources.destinationDir, "META-INF/mods.toml")
+//    if (outputToml.exists()) {
+//        outputToml.delete()
+//    }
+//    outputToml.createNewFile()
+//
+//    FileWriter writer = new FileWriter(outputToml)
+//    writer.write(text)
+//    writer.flush()
+//    writer.close()
+
+    filter { line -> line.replaceAll('\\\$\\\$QFM_VERSION\\\$\\\$', version.toString()) }
+    into new File(processResources.destinationDir, "META-INF")
+}
+
+processResources {
+    exclude 'META-INF/mods.toml'
+    finalizedBy replaceResources
+}
+
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
@@ -256,7 +344,7 @@ jar {
                 "Main-Class": "com.qsoftware.forgemod.Main",
                 "Specification-Title": "qforgemod",
                 "Specification-Vendor": "qsoftware",
-                "Specification-Version": "1.2-alpha3-DEVTEST",
+                "Specification-Version": version,
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"qsoftware",
@@ -276,15 +364,6 @@ jar.finalizedBy('reobfJar')
 
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 //publish.dependsOn('reobfJar')
-
-/**
- * Copy build-number task, used to copy the build number when jar fill is being generated, reducing build time for testing only.
- */
-task("copyBuildNumber") {
-    FileInputStream fis = new FileInputStream("buildnumber.txt")
-    FileUtils.copyToFile(fis, new File("src/main/resources/META-INF/buildnumber.txt"))
-    fis.close()
-}
 
 /**
  * Upload jars to local or ftp maven repository.
@@ -326,8 +405,65 @@ task("uploadJars", dependsOn: "build") {
     }
 }
 
-// Copy build number from project root to the jar.
-jar.dependsOn("copyBuildNumber")
-
 // Upload jars to local of sftp maven.
-jar.finalizedBy('uploadJars')
+jar.finalizedBy(uploadJars)
+
+Gson gson = new Gson()
+JsonObject json = new JsonObject();
+
+// \version
+JsonObject versionJ = new JsonObject()
+versionJ.addProperty "name", version.toString()
+versionJ.addProperty "version", vers
+versionJ.addProperty "release", release
+versionJ.addProperty "build", buildNumber
+versionJ.addProperty "stage", stage
+versionJ.addProperty "stage_release", stageRelease
+
+// \flags
+JsonObject flagsJ = new JsonObject()
+flagsJ.addProperty "dev_test", isDevTest
+json.add("flags", flagsJ)
+JsonObject buildInfoJ = new JsonObject()
+buildInfoJ.addProperty("date", LocalDateTime.now(ZoneId.systemDefault()).toString())
+
+// \compile
+JsonObject compileJ = new JsonObject()
+compileJ.addProperty "name", compileJava.name
+compileJ.addProperty "source_compat", compileJava.sourceCompatibility
+compileJ.addProperty "target_compat", compileJava.targetCompatibility
+
+// \project
+JsonObject projectJ = new JsonObject()
+projectJ.addProperty "name", project.name != null ? project.name : ""
+projectJ.addProperty "display_name", project.displayName != null ? project.displayName : ""
+
+JsonObject minecraftJ = new JsonObject();
+minecraftJ.addProperty "mappings_version", "${project.mappingsVersion}"
+minecraftJ.addProperty "mappings_channel", "${project.mappingsChannel}"
+minecraftJ.addProperty "mappings", "${project.mappingsChannel}_${project.mappingsVersion}"
+minecraftJ.addProperty "version", "${project.mc_version}"
+minecraftJ.addProperty "forge_version", "${project.forge_version}"
+
+// \project\gradle
+JsonObject gradleJ = new JsonObject();
+gradleJ.addProperty "version", gradle.gradleVersion
+
+compileJ  .add "gradle",     gradleJ
+projectJ  .add "minecraft",  minecraftJ
+buildInfoJ.add "compile",    compileJ
+buildInfoJ.add "project",    projectJ
+json      .add "version",    versionJ
+json      .add "build_info", buildInfoJ
+
+File qfmArgsFile = new File("src/main/resources/META-INF/qfm_args.json")
+//File qfmArgsFile = new File("qfm_args.json")
+if (qfmArgsFile.exists()) {
+    qfmArgsFile.delete()
+}
+FileWriter fileWriter = new FileWriter(qfmArgsFile)
+JsonWriter jsonWriter = new JsonWriter(fileWriter)
+jsonWriter.setIndent("   ")
+gson.toJson(json, jsonWriter)
+fileWriter.flush()
+fileWriter.close()

@@ -19,7 +19,7 @@ import java.util.*;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class Config {
     public static final ForgeConfigSpec.BooleanValue showBetaWelcomeMessage;
 //    public static final ForgeConfigSpec.BooleanValue closePrompt;
@@ -77,7 +77,7 @@ public final class Config {
                 .comment("Places:")
                 .comment("  ITEM:   Kill switch")
                 .comment("  BUTTON: In the exit confirm screen")
-                .define("updates.searchForUnstable", !QForgeMod.VERSION.isStable());
+                .define("updates.searchForUnstable", !QForgeMod.version.isStable());
 
         // ?
         fluidGeneratorInjectionVolume = builder

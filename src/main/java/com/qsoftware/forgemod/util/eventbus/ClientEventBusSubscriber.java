@@ -2,11 +2,12 @@ package com.qsoftware.forgemod.util.eventbus;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.ui.screens.ExampleChestScreen;
-import com.qsoftware.forgemod.modules.tileentities.renderer.ChristmasChestTileEntityRenderer;
+import com.qsoftware.forgemod.modules.blocks.tileentities.renderer.ChristmasChestTileEntityRenderer;
 import com.qsoftware.forgemod.modules.ui.ModContainers;
-import com.qsoftware.forgemod.modules.entities.ModEntities;
-import com.qsoftware.forgemod.modules.tileentities.ModTileEntities;
-import com.qsoftware.forgemod.modules.entities.renderer.*;
+import com.qsoftware.forgemod.modules.environment.ModEntities;
+import com.qsoftware.forgemod.modules.blocks.ModTileEntities;
+import com.qsoftware.forgemod.modules.environment.client.renderer.*;
+import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
@@ -26,7 +27,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@UtilityClass
+@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
     /**
      * Client setup event for client side render registration.

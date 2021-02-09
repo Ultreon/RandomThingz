@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.listener;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.modules.items.ModItems;
+import lombok.experimental.UtilityClass;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -12,7 +13,8 @@ import net.minecraftforge.fml.common.Mod;
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@UtilityClass
 public class ItemListener {
     @SubscribeEvent
     public static void onItem(ItemEvent event) {

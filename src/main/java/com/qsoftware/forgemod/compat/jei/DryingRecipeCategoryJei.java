@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.compat.jei;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.crafting.recipe.DryingRecipe;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.compressor.CompressorScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.compressor.CompressorScreen;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.TextUtils;
 import com.qsoftware.modlib.silentlib.util.TextRenderUtils;

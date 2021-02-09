@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.util.helpers;
 
+import lombok.experimental.UtilityClass;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -12,6 +13,8 @@ import net.minecraftforge.common.util.Constants;
  *
  * @author MrCrayfish
  */
+@SuppressWarnings("unused")
+@UtilityClass
 public class ItemStackHelper {
     public static CompoundNBT saveAllItems(String key, CompoundNBT tag, NonNullList<ItemStack> list) {
         return saveAllItems(key, tag, list, true);

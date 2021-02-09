@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.pc.disk.qfs;
 
-import com.qsoftware.forgemod.common.Size;
+import com.qsoftware.forgemod.common.IntSize;
 import com.qsoftware.forgemod.pc.disk.AbstractFile;
 import com.qsoftware.forgemod.pc.disk.Partition;
 
@@ -19,7 +19,7 @@ public class QFSFile extends AbstractFile {
     }
 
     @Override
-    public void create(Size size) {
+    public void create(IntSize size) {
 
     }
 }

@@ -5,6 +5,7 @@ import com.qsoftware.forgemod.modules.confirmExit.ConfirmExitScreen;
 import com.qsoftware.forgemod.modules.ui.screens.TestScreen;
 import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
+import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,6 +17,7 @@ import org.lwjgl.glfw.GLFW;
 
 @SuppressWarnings("unused")
 @Deprecated
+@UtilityClass
 public class KeyBindListener {
     @Deprecated
     public static void clientTick(TickEvent.ClientTickEvent event) {

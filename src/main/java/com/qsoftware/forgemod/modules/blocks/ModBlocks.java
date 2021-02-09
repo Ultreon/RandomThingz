@@ -1,41 +1,39 @@
 package com.qsoftware.forgemod.modules.blocks;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.ModFluids;
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.alloysmelter.AlloySmelterBlock;
-import com.qsoftware.forgemod.modules.tileentities.ModTileEntities;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterBlock;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
-import com.qsoftware.forgemod.modules.blocks.objects.AtomicTNTBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.ChristmasChestBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.GamePcBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.custom.CustomButtonBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.custom.render.CRDoorBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.custom.render.CRFlowerBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.furniture.WoodenCrateBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.MachineFrameBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.batterybox.BatteryBoxBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.compressor.CompressorBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.crusher.CrusherBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.dryingrack.DryingRackBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.electricfurnace.ElectricFurnaceBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.coal.CoalGeneratorBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.diesel.DieselGeneratorBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.generator.lava.LavaGeneratorBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.infuser.InfuserBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.mixer.MixerBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.pipe.PipeBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.pump.PumpBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.quarry.QuarryBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.refinery.RefineryBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.solidifier.SolidifierBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.wire.WireBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.overpowered.InfinityBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.overpowered.InfinityOreBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.trees.CherryTree;
-import com.qsoftware.forgemod.modules.blocks.objects.trees.EucalyptusTree;
+import com.qsoftware.forgemod.modules.blocks.blocks.AtomicTNTBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.ChristmasChestBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.GamePcBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.custom.CustomButtonBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.custom.render.CRDoorBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.custom.render.CRFlowerBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.furniture.WoodenCrateBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.MachineFrameBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.batterybox.BatteryBoxBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.compressor.CompressorBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher.CrusherBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.dryingrack.DryingRackBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.electricfurnace.ElectricFurnaceBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.generator.coal.CoalGeneratorBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.generator.diesel.DieselGeneratorBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.generator.lava.LavaGeneratorBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.infuser.InfuserBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.mixer.MixerBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.pipe.PipeBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.pump.PumpBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.quarry.QuarryBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.refinery.RefineryBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.solidifier.SolidifierBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.wire.WireBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.overpowered.InfinityBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.overpowered.InfinityOreBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.trees.CherryTree;
+import com.qsoftware.forgemod.modules.blocks.blocks.trees.EucalyptusTree;
 import com.qsoftware.forgemod.modules.items.objects.type.FaceableBlock;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.qsoftware.forgemod.util.ExceptionUtil;
@@ -113,7 +111,11 @@ public final class ModBlocks {
     public static final BlockRegistryObject<SolidifierBlock> SOLIDIFIER = registerMachine("solidifier", SolidifierBlock::new);
     public static final BlockRegistryObject<InfuserBlock> INFUSER = registerMachine("infuser", InfuserBlock::new);
     public static final BlockRegistryObject<PumpBlock> PUMP = registerMachine("pump", PumpBlock::new);
-    public static final BlockRegistryObject<QuarryBlock> QUARRY = registerMachine("quarry", QuarryBlock::new);
+    public static final BlockRegistryObject<QuarryBlock> QUARRY = registerMachine("quarry", () -> new QuarryBlock(MachineTier.STANDARD));
+    public static final BlockRegistryObject<QuarryBlock> HEAVY_QUARRY = registerMachine("heavy_quarry", () -> new QuarryBlock(MachineTier.HEAVY));
+    public static final BlockRegistryObject<QuarryBlock> SUPER_QUARRY = registerMachine("super_quarry", () -> new QuarryBlock(MachineTier.SUPER));
+    public static final BlockRegistryObject<QuarryBlock> EXTREME_QUARRY = registerMachine("extreme_quarry", () -> new QuarryBlock(MachineTier.EXTREME));
+    public static final BlockRegistryObject<QuarryBlock> ULTRA_QUARRY = registerMachine("ultra_quarry", () -> new QuarryBlock(MachineTier.ULTRA));
 
     ////////////////////////
     //     Generators     //
@@ -496,7 +498,7 @@ public final class ModBlocks {
         for (Block block : ForgeRegistries.BLOCKS.getValues()) {
             ResourceLocation lootTable = block.getLootTable();
             // The AirBlock check filters out removed blocks
-            if (lootTable.getNamespace().equals(QForgeMod.MOD_ID) && !(block instanceof AirBlock) && !lootTableManager.getLootTableKeys().contains(lootTable)) {
+            if (lootTable.getNamespace().equals(QForgeMod.modId) && !(block instanceof AirBlock) && !lootTableManager.getLootTableKeys().contains(lootTable)) {
                 QForgeMod.LOGGER.error("Missing block loot table '{}' for {}", lootTable, block.getRegistryName());
                 missing.add(lootTable.toString());
             }

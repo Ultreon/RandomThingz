@@ -16,11 +16,11 @@ import java.util.function.Supplier;
  * @deprecated Use {@link ModItems} instead.
  */
 @Deprecated
-@SuppressWarnings({"unused", "NumericOverflow"})
+@SuppressWarnings({"unused"})
 //@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 //@ObjectHolder(QForgeUtils.MOD_ID)
 public class ItemInit extends ObjectInit<Item> {
-    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.MOD_ID);
+    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.modId);
 
     /**
      * Register item.

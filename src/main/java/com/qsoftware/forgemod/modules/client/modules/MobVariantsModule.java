@@ -5,14 +5,12 @@ import com.google.common.collect.Multimaps;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
-import com.qsoftware.forgemod.modules.client.ClientModule;
 import com.qsoftware.forgemod.modules.client.modules.render.variant.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import org.jetbrains.annotations.NotNull;
 
@@ -133,7 +131,7 @@ public class MobVariantsModule extends Module {
     private static void registerTextures(VariantTextureType type, int count, ResourceLocation vanilla) {
         String name = type.name().toLowerCase(Locale.ROOT);
         for(int i = 1; i < count + 1; i++)
-            textures.put(type, new ResourceLocation(QForgeMod.MOD_ID, String.format("textures/model/entity/variants/%s%d.png", name, i)));
+            textures.put(type, new ResourceLocation(QForgeMod.modId, String.format("textures/model/entity/variants/%s%d.png", name, i)));
 
         if(vanilla != null)
             textures.put(type, vanilla);
@@ -141,7 +139,7 @@ public class MobVariantsModule extends Module {
     }
 
     private static void registerShiny(VariantTextureType type) {
-        shinyTextures.put(type, new ResourceLocation(QForgeMod.MOD_ID, String.format("textures/model/entity/variants/%s_shiny.png", type.name().toLowerCase(Locale.ROOT))));
+        shinyTextures.put(type, new ResourceLocation(QForgeMod.modId, String.format("textures/model/entity/variants/%s_shiny.png", type.name().toLowerCase(Locale.ROOT))));
     }
 
     @Override

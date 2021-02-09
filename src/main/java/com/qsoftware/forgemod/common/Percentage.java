@@ -1,10 +1,13 @@
 package com.qsoftware.forgemod.common;
 
 import com.qsoftware.forgemod.common.interfaces.Formattable;
+import lombok.Data;
+import lombok.Getter;
 import net.minecraft.util.text.TextFormatting;
 
+@Data
 public class Percentage implements Formattable {
-    private double percentage;
+    @Getter private double percentage;
 
     public Percentage(double value) {
         this.percentage = value * 100;
@@ -17,10 +20,6 @@ public class Percentage implements Formattable {
     @Override
     public String toFormattedString() {
         return TextFormatting.BLUE.toString() + Math.round(percentage) + "%";
-    }
-
-    public double getPercentage() {
-        return percentage;
     }
 
     public double getValue() {

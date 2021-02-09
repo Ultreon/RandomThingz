@@ -3,6 +3,9 @@ package com.qsoftware.forgemod.modules.ores;
 import com.mojang.datafixers.util.Pair;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.val;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,9 +24,7 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,14 +41,12 @@ import static net.minecraft.world.gen.feature.OreFeatureConfig.FillerBlockType.B
 public final class ModOreGen {
     private static final ConcurrentHashMap<ResourceLocation, ArrayList<HashMap.SimpleEntry<GenerationStage.Decoration, ConfiguredFeature<?, ?>>>> oreMap = new ConcurrentHashMap<>();
     private static final ArrayList<Pair<Predicate<BiomeLoadingEvent>, ConfiguredFeature<?, ?>>> ores = new ArrayList<>();
-    private static final ModOreGen INSTANCE = new ModOreGen();
 
-    public static ModOreGen getInstance() {
-        return INSTANCE;
-    }
+    @Getter
+    private static final ModOreGen instance = new ModOreGen();
 
     private ModOreGen() {
-
+        val windows = 3;
     }
 
     @SuppressWarnings("unused")

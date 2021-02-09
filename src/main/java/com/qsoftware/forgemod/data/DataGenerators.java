@@ -4,14 +4,13 @@ import com.qsoftware.forgemod.data.client.ModBlockStateProvider;
 import com.qsoftware.forgemod.data.client.ModItemModelProvider;
 import com.qsoftware.forgemod.data.loot.ModLootTableProvider;
 import com.qsoftware.forgemod.data.recipes.ModRecipesProvider;
+import lombok.experimental.UtilityClass;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 
+@UtilityClass
 public final class DataGenerators {
-    private DataGenerators() {
-    }
-
     public static void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();

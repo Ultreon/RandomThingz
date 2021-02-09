@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.items.objects.energy;
 
 import com.qsoftware.forgemod.api.IWrenchable;
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

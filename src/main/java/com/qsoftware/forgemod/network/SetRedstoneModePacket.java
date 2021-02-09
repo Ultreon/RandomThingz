@@ -1,12 +1,11 @@
 package com.qsoftware.forgemod.network;
 
 import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseContainer;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseTileEntity;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBaseContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBaseTileEntity;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -36,9 +35,9 @@ public class SetRedstoneModePacket {
     private static void handlePacket(SetRedstoneModePacket packet, ServerPlayerEntity player) {
         if (player != null) {
             if (player.openContainer instanceof AbstractMachineBaseContainer) {
-                TileEntity tileEntity = ((AbstractMachineBaseContainer) player.openContainer).getTileEntity();
+                AbstractMachineBaseTileEntity tileEntity = ((AbstractMachineBaseContainer<?>) player.openContainer).getTileEntity();
                 if (tileEntity instanceof AbstractMachineBaseTileEntity) {
-                    ((AbstractMachineBaseTileEntity) tileEntity).setRedstoneMode(packet.mode);
+                    tileEntity.setRedstoneMode(packet.mode);
                 }
             }
         }

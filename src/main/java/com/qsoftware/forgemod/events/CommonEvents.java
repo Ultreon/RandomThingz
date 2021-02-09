@@ -8,7 +8,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId)
 public class CommonEvents {
     @SubscribeEvent
     public static void onAttachItemCaps(AttachCapabilitiesEvent<Item> event) {

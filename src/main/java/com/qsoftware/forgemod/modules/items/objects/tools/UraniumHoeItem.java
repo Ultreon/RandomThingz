@@ -1,11 +1,9 @@
 package com.qsoftware.forgemod.modules.items.objects.tools;
 
-import com.qsoftware.forgemod.init.ModItemGroups;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.PickaxeItem;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import org.jetbrains.annotations.NotNull;

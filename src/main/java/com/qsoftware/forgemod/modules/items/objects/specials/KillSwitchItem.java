@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.items.objects.specials;
 
 import com.qsoftware.forgemod.common.text.Translations;
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.util.Utils;
 import com.sun.jna.Platform;
 import net.minecraft.client.util.ITooltipFlag;

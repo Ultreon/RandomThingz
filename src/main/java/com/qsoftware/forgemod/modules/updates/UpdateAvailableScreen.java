@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.modules.updates;
 
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.QVersion;
+import com.qsoftware.forgemod.QFMVersion;
 import com.qsoftware.forgemod.modules.ui.screens.AdvancedScreen;
 import com.qsoftware.forgemod.graphics.MCGraphics;
 import net.minecraft.client.Minecraft;
@@ -31,10 +31,10 @@ import java.util.Objects;
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class UpdateAvailableScreen extends AdvancedScreen {
     // Icons.
-    private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/icons.png");
+    private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(QForgeMod.modId, "textures/gui/icons.png");
 
     // Flags.
     private static boolean initializedBefore = false;
@@ -211,7 +211,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         }
 
         // Get QForgeMod updater instance.
-        AbstractUpdater<QVersion> updater = AbstractUpdater.getQFMUpdater();
+        AbstractUpdater<QFMVersion> updater = AbstractUpdater.getQFMUpdater();
 
         // Check for QForgeMod updates.
         AbstractUpdater.UpdateInfo updateInfo = updater.checkForUpdates();

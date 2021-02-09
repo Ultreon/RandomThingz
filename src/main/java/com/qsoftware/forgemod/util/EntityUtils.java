@@ -1,8 +1,7 @@
 package com.qsoftware.forgemod.util;
 
 import com.google.common.annotations.Beta;
-import com.qsoftware.forgemod.util.helpers.MathHelper;
-import com.qsoftware.modlib.silentutils.MathUtils;
+import lombok.experimental.UtilityClass;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
 
@@ -12,11 +11,8 @@ import net.minecraft.util.DamageSource;
  * @author Qboi123
  */
 @Beta
+@UtilityClass
 public final class EntityUtils {
-    private EntityUtils() {
-        throw ExceptionUtil.utilityConstructor();
-    }
-
     /**
      * Instant kills an living entity.
      *

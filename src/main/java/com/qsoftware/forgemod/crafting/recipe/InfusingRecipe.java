@@ -5,7 +5,8 @@ import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidInventory;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.infuser.InfuserTileEntity;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.infuser.InfuserTileEntity;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
@@ -22,20 +23,13 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
+@RequiredArgsConstructor
 public class InfusingRecipe implements IFluidRecipe<IFluidInventory> {
     private final ResourceLocation recipeId;
     private final int processTime;
     private final Ingredient ingredient;
     private final FluidIngredient fluid;
     private final ItemStack result;
-
-    public InfusingRecipe(ResourceLocation recipeId, int processTime, Ingredient ingredient, FluidIngredient fluid, ItemStack result) {
-        this.recipeId = recipeId;
-        this.processTime = processTime;
-        this.ingredient = ingredient;
-        this.fluid = fluid;
-        this.result = result;
-    }
 
     public int getProcessTime() {
         return processTime;

@@ -4,8 +4,10 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.IMachineInventory;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.IMachineInventory;
 import com.qsoftware.forgemod.util.InventoryUtils;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraft.network.PacketBuffer;
@@ -17,19 +19,12 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@RequiredArgsConstructor
 public class AlloySmeltingRecipe implements IRecipe<IMachineInventory> {
     private final ResourceLocation recipeId;
     private final Map<Ingredient, Integer> ingredients = new LinkedHashMap<>();
-    private int processTime;
-    private ItemStack result;
-
-    public AlloySmeltingRecipe(ResourceLocation recipeId) {
-        this.recipeId = recipeId;
-    }
-
-    public int getProcessTime() {
-        return processTime;
-    }
+    @Getter private int processTime;
+    @Getter private ItemStack result;
 
     public void consumeIngredients(IMachineInventory inv) {
         ingredients.forEach(((ingredient, count) -> InventoryUtils.consumeItems(inv, ingredient, count)));

@@ -6,10 +6,8 @@ import com.qsoftware.forgemod.common.Ticker;
 import com.qsoftware.forgemod.common.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.HashMap;
 
@@ -44,7 +42,7 @@ public class UpdateChecker {
 
         ticker.advance();
 
-        if (ticker.getTicks() >= (tickDelay)) {
+        if (ticker.getCurrentTicks() >= (tickDelay)) {
             ticker.reset();
             AbstractUpdater<?>[] updaters = AbstractUpdater.getInstances();
             for (AbstractUpdater<?> updater : updaters) {

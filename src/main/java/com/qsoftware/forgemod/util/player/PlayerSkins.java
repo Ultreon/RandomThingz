@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.util.player;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
+import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.tileentity.SkullTileEntity;
@@ -17,8 +18,8 @@ import java.util.UUID;
  *
  * @author Gravestone Mod
  */
+@UtilityClass
 public class PlayerSkins {
-
     private static final HashMap<String, GameProfile> players = new HashMap<String, GameProfile>();
 
     public static ResourceLocation getSkin(UUID uuid, String name) {

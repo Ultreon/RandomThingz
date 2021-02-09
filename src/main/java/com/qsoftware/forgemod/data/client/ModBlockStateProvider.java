@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.data.client;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
-import com.qsoftware.forgemod.modules.blocks.objects.machines.dryingrack.DryingRackBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.dryingrack.DryingRackBlock;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.Direction;
@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, QForgeMod.MOD_ID, exFileHelper);
+        super(gen, QForgeMod.modId, exFileHelper);
     }
 
     @Nonnull

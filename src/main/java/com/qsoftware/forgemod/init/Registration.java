@@ -2,9 +2,12 @@ package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.blocks.ModFluids;
+import com.qsoftware.forgemod.modules.environment.ModEffects;
 import com.qsoftware.forgemod.modules.items.ModItems;
-import com.qsoftware.forgemod.modules.tileentities.ModMachineTileEntities;
+import com.qsoftware.forgemod.modules.blocks.ModMachineTileEntities;
 import com.qsoftware.forgemod.modules.ui.ModMachineContainers;
+import com.qsoftware.forgemod.modules.ui.ModStats;
 import com.qsoftware.modlib.api.providers.IItemProvider;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import com.qsoftware.forgemod.util.ExceptionUtil;
@@ -38,7 +41,7 @@ public final class Registration {
     public static final DeferredRegister<Block> BLOCKS = create(ForgeRegistries.BLOCKS);
     public static final DeferredRegister<Fluid> FLUIDS = create(ForgeRegistries.FLUIDS);
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = create(ForgeRegistries.CONTAINERS);
-    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.MOD_ID);
+    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.modId);
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = create(ForgeRegistries.ENCHANTMENTS);
     public static final DeferredRegister<PaintingType> PAINTINGS = create(ForgeRegistries.PAINTING_TYPES);
     public static final DeferredRegister<Potion> POTION_TYPES = create(ForgeRegistries.POTION_TYPES);
@@ -106,6 +109,6 @@ public final class Registration {
     }
 
     private static <T extends IForgeRegistryEntry<T>> DeferredRegister<T> create(IForgeRegistry<T> registry) {
-        return DeferredRegister.create(registry, QForgeMod.MOD_ID);
+        return DeferredRegister.create(registry, QForgeMod.modId);
     }
 }

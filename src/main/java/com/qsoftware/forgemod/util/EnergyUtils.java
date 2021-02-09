@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.util;
 
-import com.qsoftware.forgemod.modules.blocks.objects.machines.IEnergyHandler;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.IEnergyHandler;
+import lombok.experimental.UtilityClass;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -13,11 +14,8 @@ import net.minecraftforge.energy.IEnergyStorage;
 
 import javax.annotation.Nullable;
 
+@UtilityClass
 public final class EnergyUtils {
-    private EnergyUtils() {
-        throw ExceptionUtil.utilityConstructor();
-    }
-
     public static void trySendToNeighbors(IBlockReader world, BlockPos pos, IEnergyHandler energyHandler, int maxSend) {
         for (Direction side : Direction.values()) {
             if (energyHandler.getEnergyStored() == 0) {

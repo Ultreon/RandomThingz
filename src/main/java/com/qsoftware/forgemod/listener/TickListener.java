@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.listener;
 
 import com.studiohartman.jamepad.*;
+import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.util.math.vector.Vector2f;
@@ -16,6 +17,7 @@ import org.jline.utils.ShutdownHooks;
  * @author Qboi123
  */
 //@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@UtilityClass
 public class TickListener {
     private static boolean attackBusy = false;
     private static boolean useBusy = false;

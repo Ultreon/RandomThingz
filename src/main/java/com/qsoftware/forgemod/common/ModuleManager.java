@@ -2,14 +2,19 @@ package com.qsoftware.forgemod.common;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.Modules;
+import lombok.Getter;
+import lombok.NonNull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompressedStreamTools;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Pattern;
 
 @SuppressWarnings({"unused"})
 public final class ModuleManager {
@@ -26,15 +31,12 @@ public final class ModuleManager {
     private File dataFile;
 
     @Nullable
+    @Getter
     private final Module parent;
+    private final HashMap<String, Module> moduleRegistry = new HashMap<>();
 
     private ModuleManager(@Nullable Module module) {
         this.parent = module;
-    }
-
-    @Nullable
-    public Module getParent() {
-        return parent;
     }
 
     public static ModuleManager getInstance() {
@@ -46,17 +48,18 @@ public final class ModuleManager {
         this.parent = null;
     }
 
-    public static ModuleManager createSubmoduleManager(Module module) {
+    public static ModuleManager createSubmoduleManager(@Nonnull Module module) {
         return new ModuleManager(module);
     }
 
-    public <T extends Module> T register(T module) {
+    public <T extends Module> T register(@Nonnull T module) {
         if (this.parent != null) {
             module.setParent(this.parent);
         }
 
         module.setManager(this);
 
+        this.moduleRegistry.put(module.getName(), module);
         this.modules.add(module);
         this.disabled.add(module);
         this.unsavedDisabled.add(module);
@@ -68,13 +71,6 @@ public final class ModuleManager {
             QForgeMod.LOGGER.info("Skipping save module changes because there's nothing to save.");
             return;
         }
-
-//        QForgeMod.LOGGER.debug("modules="+this.modules);
-//        QForgeMod.LOGGER.debug("enabled="+this.enabled);
-//        QForgeMod.LOGGER.debug("disabled="+this.disabled);
-//        QForgeMod.LOGGER.debug("unsavedEnabled="+this.unsavedEnabled);
-//        QForgeMod.LOGGER.debug("unsavedDisabled="+this.unsavedDisabled);
-//        QForgeMod.LOGGER.debug("toSave="+this.unsavedModules);
 
         QForgeMod.LOGGER.info("Saving " + this.unsavedModules.entrySet().size() + " module changes.");
 
@@ -120,7 +116,7 @@ public final class ModuleManager {
         QForgeMod.LOGGER.info("Module data saved!");
     }
 
-    public void enable(Module module) {
+    public void enable(@Nonnull Module module) {
         // Update lists, and add save cache.
         this.unsavedModules.put(module, true);
         this.unsavedDisabled.remove(module);
@@ -128,7 +124,7 @@ public final class ModuleManager {
         QForgeMod.LOGGER.debug("Module enable is scheduled for: " + module.getName());
     }
 
-    public void disable(Module module) {
+    public void disable(@NonNull Module module) {
         // Update lists, and add save cache.
         this.unsavedModules.put(module, false);
         this.unsavedEnabled.remove(module);
@@ -136,11 +132,11 @@ public final class ModuleManager {
         QForgeMod.LOGGER.debug("Module enable is scheduled for: " + module.getName());
     }
 
-    public boolean isEnabled(Module module) {
+    public boolean isEnabled(@Nonnull Module module) {
         return this.enabled.contains(module);
     }
 
-    public boolean isDisabled(Module module) {
+    public boolean isDisabled(@Nonnull Module module) {
         return this.disabled.contains(module);
     }
 
@@ -183,7 +179,7 @@ public final class ModuleManager {
 
         CompoundNBT a;
         boolean wasValid;
-        this.dataFile = new File(configFolder, "modules.nbt");
+        this.dataFile = new File(configFolder, getDataPrefix() + "modules.nbt");
         try {
             a = CompressedStreamTools.readCompressed(this.dataFile);
             if (a == null) {
@@ -198,6 +194,10 @@ public final class ModuleManager {
         for (Module module : this.modules) {
             this.currentModule = module;
             String name = module.getName();
+            if (!Pattern.compile("[a-z_]*").matcher(name).find()) {
+                throw new IllegalArgumentException("The name of module " + module.getName() + " contains illegal symbols.");
+            }
+
             boolean enabled;
             if (this.modulesNbt.contains(name, 10)) {
                 CompoundNBT moduleInfo = this.modulesNbt.getCompound(name);
@@ -205,6 +205,9 @@ public final class ModuleManager {
                 module.readTag(moduleInfo.getCompound("Tag"));
             } else {
                 enabled = module.isDefaultEnabled();
+            }
+            if (module.isSubManagerEnabled()) {
+                module.getSubmoduleManager().init();
             }
             if (enabled) {
                 this.enable(module);
@@ -217,11 +220,28 @@ public final class ModuleManager {
         this.initialized = true;
     }
 
+    private @NotNull String getDataPrefix() {
+        if (parent == null) {
+            return "";
+        }
+
+        String parentPrefix = parent.getManager().getDataPrefix();
+
+        if (parentPrefix.isEmpty()) {
+            return parent.getName() + ".";
+        }
+        return parentPrefix + parent.getName() + ".";
+    }
+
     public boolean isInitialized() {
         return this.initialized;
     }
 
     public void discardChanges() {
+        for (Module module : unsavedModules.keySet()) {
+            module.discardChanges();
+        }
+
         this.unsavedModules = new HashMap<>();
         this.unsavedEnabled = enabled;
         this.unsavedDisabled = disabled;
@@ -261,5 +281,22 @@ public final class ModuleManager {
         for (Module module : enabled) {
             module.clientSetup();
         }
+    }
+
+    public void commonSetup() {
+        for (Module module : enabled) {
+            module.commonSetup();
+        }
+    }
+
+    public void serverSetup() {
+        for (Module module : enabled) {
+            module.serverSetup();
+        }
+    }
+
+    @Nullable
+    public Module getModule(@NonNull String name) {
+        return moduleRegistry.get(name);
     }
 }

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.pc.disk;
 
 import com.google.common.annotations.Beta;
-import com.qsoftware.forgemod.common.Size;
+import com.qsoftware.forgemod.common.IntSize;
 
 @Beta
 public abstract class AbstractFile
@@ -19,7 +19,7 @@ public abstract class AbstractFile
     }
 
     public abstract void rename(String to);
-    public abstract void create(Size size);
+    public abstract void create(IntSize size);
 
     public String getFileName() {
         String[] split = path.split("/");

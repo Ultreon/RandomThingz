@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.util;
 
+import lombok.experimental.UtilityClass;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -16,11 +17,8 @@ import java.util.stream.Stream;
  *
  * @author MrCrayfish
  */
+@UtilityClass
 public final class TileEntityUtils {
-    private TileEntityUtils() {
-        throw ExceptionUtil.utilityConstructor();
-    }
-
     /**
      * Sends an update packet to clients tracking a tile entity.
      *

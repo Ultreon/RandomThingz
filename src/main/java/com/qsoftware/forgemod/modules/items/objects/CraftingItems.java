@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.modules.items.objects;
 
-import com.qsoftware.forgemod.init.ModItemGroups;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import net.minecraft.item.Food;

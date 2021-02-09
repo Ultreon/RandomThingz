@@ -2,9 +2,9 @@ package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
-import com.qsoftware.forgemod.modules.blocks.objects.GamePcBlock;
-import com.qsoftware.forgemod.modules.blocks.objects.base.*;
-import com.qsoftware.forgemod.modules.blocks.objects.furniture.WoodenCrateBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.GamePcBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.base.*;
+import com.qsoftware.forgemod.modules.blocks.blocks.furniture.WoodenCrateBlock;
 import com.qsoftware.forgemod.modules.items.objects.type.FaceableBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -26,7 +26,7 @@ import java.util.function.Supplier;
 @Deprecated
 @SuppressWarnings("unused")
 public class BlockInit extends ObjectInit<Block> {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, QForgeMod.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, QForgeMod.modId);
 
     // Doors
     public static final RegistryObject<FlowerBlock> BUTTERCUP = register("buttercup", () -> new FlowerBlock(Effects.ABSORPTION, 8, Block.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.PLANT)));

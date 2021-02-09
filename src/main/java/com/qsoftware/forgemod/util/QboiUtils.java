@@ -1,10 +1,10 @@
 package com.qsoftware.forgemod.util;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.ModEffects;
+import com.qsoftware.forgemod.modules.environment.ModEffects;
+import lombok.experimental.UtilityClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
@@ -15,7 +15,8 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Objects;
 
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId)
+@UtilityClass
 public class QboiUtils {
     @SubscribeEvent
     public static void onQboiTick(TickEvent.PlayerTickEvent event) {

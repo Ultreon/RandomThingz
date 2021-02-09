@@ -1,7 +1,8 @@
 package com.qsoftware.forgemod.util;
 
-import com.qsoftware.forgemod.modules.blocks.objects.machines.refinery.RefineryTileEntity;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.refinery.RefineryTileEntity;
 import com.qsoftware.forgemod.modules.items.objects.fluid.CanisterItem;
+import lombok.experimental.UtilityClass;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.BucketItem;
@@ -12,12 +13,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 import java.util.function.Predicate;
 
+@UtilityClass
 public final class InventoryUtils {
-
-    private InventoryUtils() {
-        throw ExceptionUtil.utilityConstructor();
-    }
-
     /**
      * Gets the total number of matching items in all slots in the inventory.
      *

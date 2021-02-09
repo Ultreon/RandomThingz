@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.compat.computercraft;
 
-import com.qsoftware.forgemod.modules.blocks.objects.machines.AbstractMachineBaseTileEntity;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBaseTileEntity;
 import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import net.minecraft.tileentity.TileEntity;

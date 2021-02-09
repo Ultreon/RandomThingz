@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.ItemStack;
 
+@Deprecated
 public final class GraphicsUtil {
     private final ItemRenderer itemRenderer;
     private final MatrixStack matrixStack;

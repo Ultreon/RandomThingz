@@ -1,12 +1,12 @@
 package com.qsoftware.forgemod.modules.updates;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.QVersion;
+import com.qsoftware.forgemod.QFMVersion;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class QFMUpdater extends AbstractUpdater<QVersion> {
+public class QFMUpdater extends AbstractUpdater<QFMVersion> {
     private static final String UPDATE_URL = "https://raw.githubusercontent.com/Qboi123/QForgeMod/master/update.json";
     private static final QFMUpdater INSTANCE = new QFMUpdater();
 
@@ -28,12 +28,12 @@ public class QFMUpdater extends AbstractUpdater<QVersion> {
     }
 
     @Override
-    public QVersion parseVersion(String version) {
-        return new QVersion(version);
+    public QFMVersion parseVersion(String version) {
+        return new QFMVersion(version);
     }
 
     @Override
-    public QVersion getCurrentModVersion() {
-        return QForgeMod.VERSION;
+    public QFMVersion getCurrentModVersion() {
+        return QForgeMod.version;
     }
 }

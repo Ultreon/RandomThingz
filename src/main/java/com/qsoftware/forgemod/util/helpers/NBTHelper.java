@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.util.helpers;
 
-import com.qsoftware.forgemod.modules.blocks.objects.machines.quarry.QuarryTileEntity;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.quarry.QuarryTileEntity;
+import lombok.experimental.UtilityClass;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -15,6 +16,8 @@ import javax.annotation.Nullable;
  *
  * @author Qboi123
  */
+@SuppressWarnings("unused")
+@UtilityClass
 public class NBTHelper {
     public static CompoundNBT toNBT(Object o) {
         if (o instanceof ItemStack) {

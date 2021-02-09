@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class ExampleChestScreen extends ContainerScreen<CrateContainer> {
-    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/wooden_crate.png");
+    private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(QForgeMod.modId, "textures/gui/wooden_crate.png");
 
     @SuppressWarnings("unused")
     private final Button BUTTON = new Button(20, 128, 20, 20, new StringTextComponent("TestButton"), this::onClick);

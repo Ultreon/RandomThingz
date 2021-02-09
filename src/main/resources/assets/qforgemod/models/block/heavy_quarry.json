@@ -1,0 +1,19 @@
+{
+  "parent": "block/cube",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [ 0, 135, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.40, 0.40, 0.40 ]
+    }
+  },
+  "textures": {
+    "particle": "qforgemod:blocks/heavy_quarry/front",
+    "down": "qforgemod:blocks/heavy_quarry/bottom",
+    "up": "qforgemod:blocks/heavy_quarry/top",
+    "north": "qforgemod:blocks/heavy_quarry/front",
+    "east": "qforgemod:blocks/heavy_quarry/side",
+    "south": "qforgemod:blocks/heavy_quarry/back",
+    "west": "qforgemod:blocks/heavy_quarry/side"
+  }
+}

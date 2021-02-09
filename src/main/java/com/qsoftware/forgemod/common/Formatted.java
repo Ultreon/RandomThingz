@@ -1,45 +1,47 @@
 package com.qsoftware.forgemod.common;
 
 import com.qsoftware.forgemod.common.interfaces.Formattable;
+import lombok.Getter;
 import net.minecraft.util.text.TextFormatting;
 
+@SuppressWarnings("unused")
 public class Formatted implements Formattable {
-    private final String s;
+    @Getter private final String string;
 
-    public Formatted(String s) {
-        this.s = s;
+    public Formatted(String string) {
+        this.string = string;
     }
 
-    public Formatted(Object o) {
-        this.s = o.toString();
+    public Formatted(Object object) {
+        this.string = object.toString();
     }
 
     public Formatted(char c) {
-        this.s = Character.toString(c);
+        this.string = Character.toString(c);
     }
 
     public Formatted(byte b) {
-        this.s = Byte.toString(b);
+        this.string = Byte.toString(b);
     }
 
     public Formatted(short s) {
-        this.s = Short.toString(s);
+        this.string = Short.toString(s);
     }
 
     public Formatted(int i) {
-        this.s = Integer.toString(i);
+        this.string = Integer.toString(i);
     }
 
     public Formatted(long l) {
-        this.s = Long.toString(l);
+        this.string = Long.toString(l);
     }
 
     public Formatted(boolean b) {
-        this.s = Boolean.toString(b);
+        this.string = Boolean.toString(b);
     }
 
     @Override
     public String toFormattedString() {
-        return TextFormatting.WHITE + s;
+        return TextFormatting.WHITE + string;
     }
 }

@@ -2,9 +2,9 @@ package com.qsoftware.forgemod;
 
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.modules.client.ClientModule;
-import com.qsoftware.forgemod.modules.worldgen.WorldGenerationModule;
-import com.qsoftware.forgemod.modules.entities.EntitiesModule;
+import com.qsoftware.forgemod.modules.client.ClientTweaksModule;
+import com.qsoftware.forgemod.modules.environment.WorldGenerationModule;
+import com.qsoftware.forgemod.modules.environment.EntitiesModule;
 import com.qsoftware.forgemod.modules.blocks.BlocksModule;
 import com.qsoftware.forgemod.modules.confirmExit.ConfirmExitModule;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
@@ -13,7 +13,7 @@ import com.qsoftware.forgemod.modules.items.ItemsModule;
 import com.qsoftware.forgemod.modules.ores.OresModule;
 import com.qsoftware.forgemod.modules.pcCrash.PCCrashModule;
 import com.qsoftware.forgemod.modules.pcShutdown.PCShutdownModule;
-import com.qsoftware.forgemod.modules.tileentities.TileEntitiesModule;
+import com.qsoftware.forgemod.modules.blocks.TileEntitiesModule;
 import com.qsoftware.forgemod.modules.updates.UpdatesModule;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import java.util.List;
 public class Modules {
     public static final List<Module> MODULES = new ArrayList<>();
     public static final MainModule MAIN = new MainModule();
-    public static final ClientModule CLIENT = new ClientModule();
+    public static final ClientTweaksModule CLIENT = new ClientTweaksModule();
     public static final BlocksModule BLOCKS = new BlocksModule();
     public static final ItemsModule ITEMS = new ItemsModule();
     public static final EntitiesModule ENTITIES = new EntitiesModule();

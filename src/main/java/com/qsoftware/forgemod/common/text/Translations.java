@@ -2,10 +2,11 @@ package com.qsoftware.forgemod.common.text;
 
 import com.qsoftware.forgemod.QForgeMod;
 import joptsimple.internal.Strings;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.ContainerType;
@@ -15,8 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
-
+@RequiredArgsConstructor
 public enum Translations {
     YES("misc.yes"),
     NO("misc.no"),
@@ -29,13 +29,10 @@ public enum Translations {
     ENABLE("misc.enable"),
     DISABLE("misc.disable");
 
+    @Getter
     private final String translationKey;
 
-    Translations(String translationKey) {
-        this.translationKey = translationKey;
-    }
-
-    public static String get(Translations key, Object... params) {
+    public static String get(Translations key, java.lang.Object... params) {
         String translationKey = key.getTranslationKey();
         return I18n.format(translationKey, params);
     }
@@ -46,12 +43,12 @@ public enum Translations {
 
     public static String getKey(String type, String object, String... strings) {
         if (strings.length == 0) {
-            return getKey0(type, QForgeMod.MOD_ID, object);
+            return getKey0(type, QForgeMod.modId, object);
         }
-        return getKey0(type, QForgeMod.MOD_ID, object) + "." + Strings.join(strings, ".");
+        return getKey0(type, QForgeMod.modId, object) + "." + Strings.join(strings, ".");
     }
 
-    public enum OBJECT {
+    public enum object {
         BLOCK("block", Block.class),
         ITEM("item", Item.class),
         FLUID("fluid", Fluid.class),
@@ -63,7 +60,7 @@ public enum Translations {
         private final String name;
         private final Class<?> clazz;
 
-        OBJECT(String name, @Nullable Class<?> clazz) {
+        object(String name, @Nullable Class<?> clazz) {
             this.name = name;
             this.clazz = clazz;
         }
@@ -82,7 +79,7 @@ public enum Translations {
         return new TranslationTextComponent(object + "." + resource.getNamespace() + "." + resource.getPath().replaceAll("/", "."));
     }
 
-    public static TranslationTextComponent get(OBJECT object, ResourceLocation resource) {
+    public static TranslationTextComponent get(object object, ResourceLocation resource) {
         return new TranslationTextComponent(object.getName() + "." + resource.getNamespace() + "." + resource.getPath().replaceAll("/", "."));
     }
 
@@ -116,9 +113,5 @@ public enum Translations {
 
     public static TranslationTextComponent getMisc(String object, String... path) {
         return new TranslationTextComponent(getKey("misc", object, path));
-    }
-
-    public String getTranslationKey() {
-        return translationKey;
     }
 }

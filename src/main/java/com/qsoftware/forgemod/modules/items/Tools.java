@@ -1,982 +1,633 @@
 package com.qsoftware.forgemod.modules.items;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.common.interfaces.Translatable;
-import com.qsoftware.forgemod.init.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.common.interfaces.INamed;
-import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
+import com.qsoftware.forgemod.modules.items.objects.tools.*;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
+import com.qsoftware.forgemod.util.builder.ArmorMaterial;
+import com.qsoftware.forgemod.util.builder.ItemTier;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import lombok.Getter;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.util.SoundEvents;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
-@SuppressWarnings("unused")
-public enum Tools implements INamed, Translatable {
-    COPPER(OreMaterial.COPPER, 80f, 4.6f, 5.8f, 0.5f, 15, 2),
-    TIN(OreMaterial.TIN, 90f, 4.6f, 5.8f, 0.5f, 15, 2),
-    SILVER(OreMaterial.SILVER, 95f, 4.6f, 5.8f, 0.5f, 15, 2),
-    PLATINUM(OreMaterial.PLATINUM, 400f, 4.6f, 5.8f, 0.2f, 17, 3),
-    OBSIDIAN(OreMaterial.OBSIDIAN, 800f, 14.0f, 20.0f, 0.0f, 6, 5),
-    ALUMINUM(OreMaterial.ALUMINUM, 40f, 6.0f, 6.5f, 0.5f, 12, 2),
-    ALUMINUM_STEEL(OreMaterial.ALUMINUM_STEEL, 40f, 6.0f, 6.5f, 0.4f, 11, 2),
-    BRONZE(OreMaterial.BRONZE, 90f, 6.0f, 6.5f, 0.45f, 14, 2),
-    ELECTRUM(OreMaterial.ELECTRUM, 120f, 3.8f, 6.5f, 0.65f, 44, 1),
-    ENDERIUM(OreMaterial.ENDERIUM, 600f, 8.0f, 9.0f, 0.05f, 34, 4) {
-        @Override
-        public ActionResultType onItemUse(ItemUseContext context) {
-            PlayerEntity playerEntity = context.getPlayer();
-            World world = context.getWorld();
-
-            if (playerEntity != null && world instanceof ServerWorld) {
-                if (context.getHand() == Hand.MAIN_HAND) {
-                    ItemStack item = context.getItem();
-                    BlockRayTraceResult blockRayTraceResult = rayTrace(context.getWorld(), playerEntity, RayTraceContext.FluidMode.NONE);
-                    BlockPos add = blockRayTraceResult.getPos().add(blockRayTraceResult.getFace().getDirectionVec());
-
-                    playerEntity.teleportKeepLoaded(add.getX(), add.getY(), add.getZ());
-
-                    item.damageItem(2, playerEntity, (player) -> {
-                        player.sendBreakAnimation(context.getHand());
-                    });
-                }
-            }
-            return super.onItemUse(context);
-        }
-
-        protected BlockRayTraceResult rayTrace(World worldIn, PlayerEntity player, RayTraceContext.FluidMode fluidMode) {
-            float f = player.rotationPitch;
-            float f1 = player.rotationYaw;
-            Vector3d vector3d = player.getEyePosition(1.0F);
-            float f2 = MathHelper.cos(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
-            float f3 = MathHelper.sin(-f1 * ((float)Math.PI / 180F) - (float)Math.PI);
-            float f4 = -MathHelper.cos(-f * ((float)Math.PI / 180F));
-            float f5 = MathHelper.sin(-f * ((float)Math.PI / 180F));
-            float f6 = f3 * f4;
-            float f7 = f2 * f4;
-            double d0 = player.getAttribute(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get()).getValue();;
-            Vector3d vector3d1 = vector3d.add((double)f6 * d0, (double)f5 * d0, (double)f7 * d0);
-            return worldIn.rayTraceBlocks(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.COLLIDER, fluidMode, player));
-        }
-    },
-    LEAD(OreMaterial.LEAD, 1_600f, 3.0f, 9.0f, 0.05f, 34, 4, (entity) -> new EffectInstance(Effects.POISON, ThreadLocalRandom.current().nextInt(400, 800), 1, false, false), null),
-    LUMIUM(OreMaterial.LUMIUM, 50f, .0f, 9.0f, 0.05f, 34, 4, (entity) -> new EffectInstance(Effects.POISON, ThreadLocalRandom.current().nextInt(400, 800), 1, false, false), null),
+@SuppressWarnings("OptionalGetWithoutIsPresent")
+public enum Tools {
+    // Metals
+    REDSTONE(builder("redstone")
+            .material(() -> OreMaterial.REDSTONE_ALLOY.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":redstone")
+                    .maxDamageFactor(8)
+                    .damageReduction(new int[]{1, 4, 3, 2})
+                    .enchantability(5)
+                    .knockbackResistance(-0.8f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND)
+                    .toughness(0.5F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.REDSTONE_ALLOY.getIngot().get()))
+                    .build())
+            .tools(() ->  ItemTier.builder()
+                    .tier(0).maxUses(230).efficiency(2.3f).attackDamage(1.2f).enchantability(7).build())),
+    COPPER(builder("copper")
+            .material(() -> OreMaterial.COPPER.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":copper")
+                    .maxDamageFactor(13)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(10)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.COPPER.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(11)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.COPPER.getIngot().orElseThrow(() -> new NullPointerException("Copper ingot not found in OreMaterial class.")))).build())),
+    TIN(builder("tin")
+            .material(() -> OreMaterial.TIN.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":tin")
+                    .maxDamageFactor(14)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(10)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.TIN.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(11)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.TIN.getIngot().orElseThrow(() -> new NullPointerException("Tin ingot not found in OreMaterial class.")))).build())),
+    COMPRESSED_IRON(builder("compressed_iron")
+            .material(() -> OreMaterial.COMPRESSED_IRON.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":compressed_iron")
+                    .maxDamageFactor(17)
+                    .damageReduction(new int[]{3, 6, 7, 3})
+                    .enchantability(9)
+                    .knockbackResistance(0.05f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.5F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.COMPRESSED_IRON.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(350).efficiency(7.0f).attackDamage(2.5f).enchantability(10)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.COPPER.getIngot().orElseThrow(() -> new NullPointerException("Copper ingot not found in OreMaterial class.")))).build())),
+    OBSIDIAN(builder("obsidian")
+            .material(() -> Items.OBSIDIAN, () -> Items.BLAZE_ROD, () -> Items.BLAZE_ROD)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":obsidian")
+                    .maxDamageFactor(72)
+                    .damageReduction(new int[]{467, 853, 787, 326})
+                    .enchantability(17)
+                    .knockbackResistance(0.2f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE)
+                    .toughness(8.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(Items.OBSIDIAN))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(5).maxUses(4738).efficiency(63.0f).attackDamage(18f).enchantability(17)
+                    .repairMaterial(() -> Ingredient.fromItems(Items.OBSIDIAN)).build())),
+//    SILVER(builder("silver")
+//            .material(() -> OreMaterial.SILVER.getIngot().get(), () -> Items.STICK)
+//            .armor(() -> ArmorMaterial.builder()
+//                    .name(QForgeMod.modId + ":silver")
+//                    .maxDamageFactor(14)
+//                    .damageReduction(new int[]{2, 5, 6, 2})
+//                    .enchantability(10)
+//                    .knockbackResistance(0f)
+//                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+//                    .toughness(0.0F)
+//                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.SILVER.getIngot().get()))
+//                    .build())
+//            .tools(() -> ItemTier.builder()
+//                    .tier(2).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(11)
+//                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.SILVER.getIngot().orElseThrow(() -> new NullPointerException("Silver ingot not found in OreMaterial class.")))).build())),
+    LEAD(builder("lead")
+            .material(() -> OreMaterial.LEAD.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":lead")
+                    .maxDamageFactor(14)
+                    .damageReduction(new int[]{2, 5, 8, 3})
+                    .enchantability(7)
+                    .knockbackResistance(0.1f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.LEAD.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(450).efficiency(7.0f).attackDamage(3.0f).enchantability(7)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.LEAD.getIngot().orElseThrow(() -> new NullPointerException("Lead ingot not found in OreMaterial class.")))).build())),
+//    TUNGSTEN(builder("tungsten")
+//            .material(ModItems.TUNGSTEN_INGOT::get, () -> Items.STICK)
+//            .armor(() -> ArmorMaterial.builder()
+//                    .name(QForgeMod.modId + ":tungsten")
+//                    .maxDamageFactor(21)
+//                    .damageReduction(new int[]{3, 6, 8, 3})
+//                    .enchantability(10)
+//                    .knockbackResistance(0f)
+//                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+//                    .toughness(0.0F)
+//                    .repairMaterial(() -> Ingredient.fromItems(ModItems.TUNGSTEN_INGOT))
+//                    .build())
+//            .tools(() -> ItemTier.builder()
+//                    .tier(3).maxUses(760).efficiency(7.5f).attackDamage(3.0f).enchantability(9)
+//                    .repairMaterial(() -> Ingredient.fromItems(ModItems.TUNGSTEN_INGOT)).build())),
+    NICKEL(builder("nickel")
+            .material(() -> OreMaterial.NICKEL.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":nickel")
+                    .maxDamageFactor(13)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(10)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.NICKEL.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(260).efficiency(5.5f).attackDamage(1.8f).enchantability(10)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.NICKEL.getIngot().orElseThrow(() -> new NullPointerException("Nickel ingot not found in OreMaterial class.")))).build())),
+    PLATINUM(builder("platinum")
+            .material(() -> OreMaterial.PLATINUM.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":platinum")
+                    .maxDamageFactor(38)
+                    .damageReduction(new int[]{3, 6, 8, 3})
+                    .enchantability(14)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.PLATINUM.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(4).maxUses(1240).efficiency(8.0f).attackDamage(5.0f).enchantability(14)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.PLATINUM.getIngot().orElseThrow(() -> new NullPointerException("Platinum ingot not found in OreMaterial class.")))).build())),
+    ZINC(builder("zinc")
+            .material(() -> OreMaterial.ZINC.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":zinc")
+                    .maxDamageFactor(6)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(10)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ZINC.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(170).efficiency(6.2f).attackDamage(2.5f).enchantability(6)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ZINC.getIngot().orElseThrow(() -> new NullPointerException("Zinc ingot not found in OreMaterial class.")))).build())),
+    BISMUTH(builder("bismuth")
+            .material(() -> OreMaterial.BISMUTH.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":bismuth")
+                    .maxDamageFactor(14)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(10)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.BISMUTH.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(230).efficiency(5.3f).attackDamage(1.4f).enchantability(14)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.BISMUTH.getIngot().orElseThrow(() -> new NullPointerException("Bismuth ingot not found in OreMaterial class.")))).build())),
+    ALUMINUM(builder("aluminum")
+            .material(() -> OreMaterial.ALUMINUM.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":aluminum")
+                    .maxDamageFactor(13)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(10)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ALUMINUM.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(180).efficiency(5.6f).attackDamage(3.0f).enchantability(9)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ALUMINUM.getIngot().orElseThrow(() -> new NullPointerException("Aluminum ingot not found in OreMaterial class.")))).build())),
+//    URANIUM(builder("uranium")
+//            .material(() -> OreMaterial.URANIUM.getIngot().get(), () -> Items.STICK)
+//            .armor(() -> ArmorMaterial.builder()
+//                    .name(QForgeMod.modId + ":uranium")
+//                    .maxDamageFactor(14)
+//                    .damageReduction(new int[]{2, 5, 6, 2})
+//                    .enchantability(10)
+//                    .knockbackResistance(0f)
+//                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+//                    .toughness(0.0F)
+//                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.URANIUM.getIngot().get()))
+//                    .build())
+//            .tools(() -> ItemTier.builder()
+//                    .tier(2).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(11)
+//                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.URANIUM.getIngot().orElseThrow(() -> new NullPointerException("Uranium ingot not found in OreMaterial class.")))).build())),
+    BRONZE(builder("bronze")
+            .material(() -> OreMaterial.BRONZE.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":bronze")
+                    .maxDamageFactor(14)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(9)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.BRONZE.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(9)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.BRONZE.getIngot().orElseThrow(() -> new NullPointerException("Bronze ingot not found in OreMaterial class.")))).build())),
+    BRASS(builder("brass")
+            .material(() -> OreMaterial.BRASS.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":brass")
+                    .maxDamageFactor(14)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(9)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.BRASS.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(9)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.BRASS.getIngot().orElseThrow(() -> new NullPointerException("Brass ingot not found in OreMaterial class.")))).build())),
+    INVAR(builder("invar")
+            .material(() -> OreMaterial.INVAR.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":invar")
+                    .maxDamageFactor(14)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(9)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.INVAR.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(9)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.INVAR.getIngot().orElseThrow(() -> new NullPointerException("Invar ingot not found in OreMaterial class.")))).build())),
+    ELECTRUM(builder("electrum")
+            .material(() -> OreMaterial.ELECTRUM.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":electrum")
+                    .maxDamageFactor(14)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(11)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ELECTRUM.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(1).maxUses(220).efficiency(4.5f).attackDamage(2.0f).enchantability(11)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ELECTRUM.getIngot().orElseThrow(() -> new NullPointerException("Electrum ingot not found in OreMaterial class.")))).build())),
+    STEEL(builder("steel")
+            .material(() -> OreMaterial.STEEL.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":steel")
+                    .maxDamageFactor(19)
+                    .damageReduction(new int[]{2, 6, 8, 3})
+                    .enchantability(9)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.STEEL.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(570).efficiency(7.1f).attackDamage(1.4f).enchantability(9)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.STEEL.getIngot().orElseThrow(() -> new NullPointerException("Steel ingot not found in OreMaterial class.")))).build())),
+    BISMUTH_BRASS(builder("bismuth_brass")
+            .material(() -> OreMaterial.BISMUTH_BRASS.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":bismuth_brass")
+                    .maxDamageFactor(16)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(10)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.BISMUTH_BRASS.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(300).efficiency(5.3f).attackDamage(1.4f).enchantability(10)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.BISMUTH_BRASS.getIngot().orElseThrow(() -> new NullPointerException("Bismuth Brass ingot not found in OreMaterial class.")))).build())),
+    ALUMINUM_STEEL(builder("aluminum_steel")
+            .material(() -> OreMaterial.ALUMINUM_STEEL.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":aluminum_steel")
+                    .maxDamageFactor(17)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(9)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ALUMINUM_STEEL.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(340).efficiency(6.5f).attackDamage(1.4f).enchantability(9)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ALUMINUM_STEEL.getIngot().orElseThrow(() -> new NullPointerException("Aluminum Steel ingot not found in OreMaterial class.")))).build())),
+    BISMUTH_STEEL(builder("bismuth_steel")
+            .material(() -> OreMaterial.BISMUTH_STEEL.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":bismuth_steel")
+                    .maxDamageFactor(18)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(10)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.BISMUTH_STEEL.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(11)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.BISMUTH_STEEL.getIngot().orElseThrow(() -> new NullPointerException("Bismuth Steel ingot not found in OreMaterial class.")))).build())),
+    SIGNALUM(builder("signalum")
+            .material(() -> OreMaterial.SIGNALUM.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":signalum")
+                    .maxDamageFactor(14)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(10)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.SIGNALUM.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(11)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.SIGNALUM.getIngot().orElseThrow(() -> new NullPointerException("Signalum ingot not found in OreMaterial class.")))).build())),
+    LUMIUM(builder("lumium")
+            .material(() -> OreMaterial.LUMIUM.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":lumium")
+                    .maxDamageFactor(12)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(36)
+                    .knockbackResistance(0f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.LUMIUM.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(200).efficiency(5.0f).attackDamage(2.7f).enchantability(36)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.LUMIUM.getIngot().orElseThrow(() -> new NullPointerException("Lumium ingot not found in OreMaterial class.")))).build())),
+    ENDERIUM(builder("enderium")
+            .material(() -> OreMaterial.ENDERIUM.getIngot().get(), () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(QForgeMod.modId + ":enderium")
+                    .maxDamageFactor(42)
+                    .damageReduction(new int[]{2, 5, 6, 2})
+                    .enchantability(56)
+                    .knockbackResistance(0.2f)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_IRON)
+                    .toughness(0.0F)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ENDERIUM.getIngot().get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(2).maxUses(2340).efficiency(9.0f).attackDamage(7.0f).enchantability(56)
+                    .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ENDERIUM.getIngot().orElseThrow(() -> new NullPointerException("Enderium ingot not found in OreMaterial class.")))).build())),
     ;
+    //    IRON(builder("iron").chunks().dust().ingotTagOnly().nuggetTagOnly()),
+//    GOLD(builder("gold").chunks().dust().ingotTagOnly().nuggetTagOnly()),
+//    COPPER(builderBaseWithOre("copper", Ore.COPPER)),
+//    // Gems
+//    RUBY(builderGem("ruby", Ore.RUBY)),
+//    BERYL(builderGem("beryl", Ore.BERYL)),
+//    MALACHITE(builderGem("malachite", Ore.MALACHITE)),
+//    PERIDOT(builderGem("peridot", Ore.PERIDOT)),
+//    AMBER(builderGem("amber", Ore.AMBER)),
+//    SAPPHIRE(builderGem("sapphire", Ore.SAPPHIRE)),
+//    AMETHYST(builderGem("amethyst", Ore.AMETHYST)),
+//    TANZANITE(builderGem("tanzanite", Ore.TANZANITE)),
+//    ;
 
-//    private final int baseDurability;
-//    private final int baseDamage;
+    private final String toolName;
 
-    // Registry
-    private final ItemDeferredRegister registry;
-
-    // Flags
-    private final boolean isMetal;
-    private final boolean isMetalGem;
-    private final boolean isGem;
-
-    // Types
-    private final SoundEvent armorSound;
-    private final IItemTier itemTier;
-    private final IArmorMaterial armorMaterial;
-    private final IOreMaterial material;
-    private final Supplier<Ingredient> repairMaterialSupplier;
-    private final Function<LivingEntity, EffectInstance> attackEffect;
-    private final Function<LivingEntity, EffectInstance> defenseEffect;
-
-    // Input values.
-    private final float resistance;
-    private final float sharpness;
-    private final float weight;
-
-    // Convert values.
-    private final double baseDurability;
-    private final double toolDurability;
-    private final double armorDurabilityFactor;
-
-    // Output values.
-    private final float knockbackResistance;
-    private final float maxDamageFactor;
-    private final float attackDamage;
-
-    // Direct values.
-    private final int efficiency;
-    private final int enchantability;
-    private final int harvestLevel;
-
-    // Output items.
-    // Items: Armors.
-    private ArmorItem helmet;
-    private ArmorItem chestplate;
-    private ArmorItem leggings;
-    private ArmorItem boots;
-
-    // Items: Tools.
-    private SwordItem sword;
-    private AxeItem axe;
-    private PickaxeItem pickaxe;
-    private ShovelItem shovel;
-    private HoeItem hoe;
-
-    // Registry objects.
-    // RO: Armors.
-    private ItemRegistryObject<ArmorItem> helmetProvider;
-    private ItemRegistryObject<ArmorItem> chestplateProvider;
-    private ItemRegistryObject<ArmorItem> leggingsProvider;
-    private ItemRegistryObject<ArmorItem> bootsProvider;
-
-    // RO: Tools.
-    private ItemRegistryObject<SwordItem> swordProvider;
-    private ItemRegistryObject<AxeItem> axeProvider;
-    private ItemRegistryObject<PickaxeItem> pickaxeProvider;
-    private ItemRegistryObject<ShovelItem> shovelProvider;
-    private ItemRegistryObject<HoeItem> hoeProvider;
-
-    // Arrays
-    private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
-    private static final float[] DAMAGE_REDUCTION_ARRAY = new float[]{2.5f, 5.0f, 7.5f, 3.75f};
-
-    // Runnables
-    private Runnable onArmorTick;
-    private Runnable onAttack;
-
-    /**
-     * Weight equals weight in grams.
-     *
-     * Charcoal:
-     *  - Weight = 2f (0.002 KG -> 0.0005 Knockback Resistance)
-     *  - Resistance = ca. 0.8f
-     *  - Sharpness = 1.0f
-     *  - Enchantability = 2
-     * Charcoal:
-     *  - Weight = 20f (0.02 KG -> 0.005 Knockback Resistance)
-     *  - Resistance = ca. 0.85f
-     *  - Sharpness = 1.2f
-     *  - Enchantability = 3
-     * Wood:
-     *  - Weight = 15f (0.015 KG -> 0.00375 Knockback Resistance)
-     *  - Resistance = ca. 1.3f
-     *  - Sharpness = 2.0f
-     *  - Enchantability = 15
-     * Stone:
-     *  - Weight = 80f (0.08 KG -> 0.02 Knockback Resistance)
-     *  - Resistance = ca. 2.325f
-     *  - Sharpness = 4.0f
-     *  - Enchantability = 5
-     * Gold:
-     *  - Weight = 250f (0.25 KG -> 0.0625 Knockback Resistance)
-     *  - Resistance = 3.0f
-     *  - Flexibility = 0.8f
-     *  - Sharpness = 6.0f
-     *  - Enchantability = 22
-     * Copper:
-     *  - Weight = 150f (0.15 KG -> 0.0375 Knockback Resistance)
-     *  - Resistance = ca. 4.8f
-     *  - Sharpness = 5.9f
-     *  - Enchantability = 15
-     * Iron:
-     *  - Weight = 200f (0.2 KG -> 0.0500 Knockback Resistance)
-     *  - Resistance = ca. 5.0f
-     *  - Sharpness = 6.0f
-     *  - Enchantability = 14
-     * Diamond:
-     *  - Weight = 20f (0.02 KG -> 0.0050 Knockback Resistance)
-     *  - Resistance = ca. 8.0f
-     *  - Sharpness = 8.0f
-     *  - Enchantability = 10
-     * Netherite:
-     *  - Weight = 400f (0.4 KG -> 0.1 Knockback Resistance)
-     *  - Resistance = ca. 14.0f
-     *  - Sharpness = 9.0f
-     *  - Enchantability = 15
-     * Obsidian:
-     *  - Weight = 800f (0.8 KG -> 0.2 Knockback Resistance)
-     *  - Resistance = ca. 14.0f
-     *  - Sharpness = 20.0f
-     *  - Enchantability = 6
-     * Lead:
-     *  - Weight = 1'600f (1.6 KG -> 0.4 Knockback Resistance)
-     *  - Resistance = ca. 8.0f
-     *  - Sharpness = 5.0f
-     *  - Enchantability = 5
-     *  @param material the ore material, used for repair material.
-     * @param weight the weight in grams per cubic centimeter, will be used for knockback resistance.
-     * @param resistance the resistance, will be calculated into durability, armor toughness and armor points.
-     * @param sharpness the sharpness, will be calculated into efficiency and attack damage.
-     * @param flexibility the flexibility. will be calculated into durability with resistance and bow draw speed.
-     * @param enchantability the enchantability of the tool / armor piece.
-     * @param harvestLevel the harvest level for the tools.
-     */
-    Tools(IOreMaterial material, float weight, float resistance, float sharpness, float flexibility, int enchantability, int harvestLevel) {
-        this(material, weight, resistance, sharpness, flexibility, enchantability, harvestLevel, null);
-    }
-
-    /**
-     * Weight equals weight in grams.
-     *
-     * Charcoal:
-     *  - Weight = 2f (0.002 KG -> 0.0005 Knockback Resistance)
-     *  - Resistance = ca. 0.8f
-     *  - Sharpness = 1.0f
-     *  - Enchantability = 2
-     * Charcoal:
-     *  - Weight = 20f (0.02 KG -> 0.005 Knockback Resistance)
-     *  - Resistance = ca. 0.85f
-     *  - Sharpness = 1.2f
-     *  - Enchantability = 3
-     * Wood:
-     *  - Weight = 15f (0.015 KG -> 0.00375 Knockback Resistance)
-     *  - Resistance = ca. 1.3f
-     *  - Sharpness = 2.0f
-     *  - Enchantability = 15
-     * Stone:
-     *  - Weight = 80f (0.08 KG -> 0.02 Knockback Resistance)
-     *  - Resistance = ca. 2.325f
-     *  - Sharpness = 4.0f
-     *  - Enchantability = 5
-     * Gold:
-     *  - Weight = 250f (0.25 KG -> 0.0625 Knockback Resistance)
-     *  - Resistance = ca. 1.865f
-     *  - Sharpness = 6.0f
-     *  - Enchantability = 22
-     * Copper:
-     *  - Weight = 150f (0.15 KG -> 0.0375 Knockback Resistance)
-     *  - Resistance = ca. 4.8f
-     *  - Sharpness = 5.9f
-     *  - Enchantability = 15
-     * Iron:
-     *  - Weight = 200f (0.2 KG -> 0.0500 Knockback Resistance)
-     *  - Resistance = ca. 5.0f
-     *  - Sharpness = 6.0f
-     *  - Enchantability = 14
-     * Diamond:
-     *  - Weight = 20f (0.02 KG -> 0.0050 Knockback Resistance)
-     *  - Resistance = ca. 8.0f
-     *  - Sharpness = 8.0f
-     *  - Enchantability = 10
-     * Netherite:
-     *  - Weight = 400f (0.4 KG -> 0.1 Knockback Resistance)
-     *  - Resistance = ca. 14.0f
-     *  - Sharpness = 9.0f
-     *  - Enchantability = 15
-     * Obsidian:
-     *  - Weight = 800f (0.8 KG -> 0.2 Knockback Resistance)
-     *  - Resistance = ca. 14.0f
-     *  - Sharpness = 20.0f
-     *  - Enchantability = 6
-     * Lead:
-     *  - Weight = 1'600f (1.6 KG -> 0.4 Knockback Resistance)
-     *  - Resistance = ca. 8.0f
-     *  - Sharpness = 5.0f
-     *  - Enchantability = 5
-     * @param material the ore material, used for repair material.
-     * @param weight the weight in grams per cubic centimeter, will be used for knockback resistance.
-     * @param resistance the resistance, will be calculated into durability with flexibility, armor toughness and armor points.
-     * @param sharpness the sharpness, will be calculated into efficiency and attack damage.
-     * @param flexibility the flexibility. will be calculated into durability with resistance and bow draw speed.
-     * @param enchantability the enchantability of the tool / armor piece.
-     * @param harvestLevel the harvest level for the tools.
-     * @param effect the effect for attack and on armor tick.
-     */
-    Tools(IOreMaterial material, float weight, float resistance, float sharpness, float flexibility, int enchantability, int harvestLevel, @Nullable Function<LivingEntity, EffectInstance> effect) {
-        this(material, weight, resistance, sharpness, flexibility, enchantability, harvestLevel, effect, effect);
-    }
-
-    /**
-     * Weight equals weight in grams.
-     *
-     * Charcoal:
-     *  - Weight = 2f (0.002 KG -> 0.0005 Knockback Resistance)
-     *  - Resistance = ca. 0.8f
-     *  - Sharpness = 1.0f
-     *  - Enchantability = 2
-     * Charcoal:
-     *  - Weight = 20f (0.02 KG -> 0.005 Knockback Resistance)
-     *  - Resistance = ca. 0.85f
-     *  - Sharpness = 1.2f
-     *  - Enchantability = 3
-     * Wood:
-     *  - Weight = 15f (0.015 KG -> 0.00375 Knockback Resistance)
-     *  - Resistance = ca. 1.3f
-     *  - Sharpness = 2.0f
-     *  - Enchantability = 15
-     * Stone:
-     *  - Weight = 80f (0.08 KG -> 0.02 Knockback Resistance)
-     *  - Resistance = ca. 2.325f
-     *  - Sharpness = 4.0f
-     *  - Enchantability = 5
-     * Gold:
-     *  - Weight = 250f (0.25 KG -> 0.0625 Knockback Resistance)
-     *  - Resistance = ca. 1.865f
-     *  - Sharpness = 6.0f
-     *  - Enchantability = 22
-     * Copper:
-     *  - Weight = 150f (0.15 KG -> 0.0375 Knockback Resistance)
-     *  - Resistance = ca. 4.8f
-     *  - Sharpness = 5.9f
-     *  - Enchantability = 15
-     * Iron:
-     *  - Weight = 200f (0.2 KG -> 0.0500 Knockback Resistance)
-     *  - Resistance = ca. 5.0f
-     *  - Sharpness = 6.0f
-     *  - Enchantability = 14
-     * Diamond:
-     *  - Weight = 20f (0.02 KG -> 0.0050 Knockback Resistance)
-     *  - Resistance = ca. 8.0f
-     *  - Sharpness = 8.0f
-     *  - Enchantability = 10
-     * Netherite:
-     *  - Weight = 400f (0.4 KG -> 0.1 Knockback Resistance)
-     *  - Resistance = ca. 14.0f
-     *  - Sharpness = 9.0f
-     *  - Enchantability = 15
-     * Obsidian:
-     *  - Weight = 800f (0.8 KG -> 0.2 Knockback Resistance)
-     *  - Resistance = ca. 14.0f
-     *  - Sharpness = 20.0f
-     *  - Enchantability = 6
-     * Lead:
-     *  - Weight = 1'600f (1.6 KG -> 0.4 Knockback Resistance)
-     *  - Resistance = ca. 8.0f
-     *  - Sharpness = 5.0f
-     *  - Enchantability = 5
-     * @param material the ore material, used for repair material.
-     * @param weight the weight in grams per cubic centimeter, will be used for knockback resistance.
-     * @param resistance the resistance, will be calculated into durability, armor toughness and armor points.
-     * @param sharpness the sharpness, will be calculated into efficiency and attack damage.
-     * @param flexibility the flexibility. will be calculated into durability with resistance and bow draw speed.
-     * @param enchantability the enchantability of the tool / armor piece.
-     * @param harvestLevel the harvest level for the tools.
-     * @param attackEffect the effect to give at attack to the victim.
-     * @param defenseEffect the effect to give on armor tick.
-     */
-    Tools(IOreMaterial material, float weight, float resistance, float sharpness, float flexibility, int enchantability, int harvestLevel, @Nullable Function<LivingEntity, EffectInstance> attackEffect, @Nullable Function<LivingEntity, EffectInstance> defenseEffect) {
-        this.material = material;
-        this.resistance = resistance;
-        this.sharpness = sharpness;
-        this.weight = weight;
-        this.attackEffect = attackEffect;
-        this.defenseEffect = defenseEffect;
-        this.efficiency = (int) sharpness;
-        this.attackDamage = (sharpness - 2) / 2;
-        this.enchantability = enchantability;
-        this.harvestLevel = harvestLevel;
-        this.maxDamageFactor = this.resistance * 4;
-        this.baseDurability = Math.pow(this.resistance * (Math.PI / 2 * 100), (1f / (100f / 3f) + 1f));
-        this.toolDurability = baseDurability / ((flexibility + 1) / 2 + 0.5);
-        this.armorDurabilityFactor = this.baseDurability * (100d / 3d) / (Math.PI * ((5d / 9d + 5d) * 100d));
-        this.repairMaterialSupplier = () -> Ingredient.fromItems(material.getIngot().orElse(material.getGem().orElseThrow(() -> new IllegalArgumentException("Repair material was not found."))));
-        this.knockbackResistance = weight / 4_000;
-
-        this.isMetal = material.getIngot().isPresent() && !material.getGem().isPresent();
-        this.isMetalGem = material.getIngot().isPresent() && material.getGem().isPresent();
-        this.isGem = !material.getIngot().isPresent() && material.getGem().isPresent();
-
-        if (isMetal) {
-            this.armorSound = SoundEvents.ITEM_ARMOR_EQUIP_IRON;
-        } else if (isMetalGem) {
-            this.armorSound = SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE;
-        } else if (isGem) {
-            this.armorSound = SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND;
-        } else {
-            this.armorSound = SoundEvents.ITEM_ARMOR_EQUIP_LEATHER;
-        }
-        
-        this.itemTier = new IItemTier() {
-            @Override
-            public int getMaxUses() {
-//                return (int) Math.pow(resistance * (Math.PI / 2 * 100), Math.PI / 3);
-//                return resistance * (resistance ^ pi) / resistance * 5
-                return (int) baseDurability;
-            }
-
-            @Override
-            public float getEfficiency() {
-                return sharpness;
-            }
-
-            @Override
-            public float getAttackDamage() {
-                return (sharpness - 2) / 2;
-            }
-
-            @Override
-            public int getHarvestLevel() {
-                return harvestLevel;
-            }
-
-            @Override
-            public int getEnchantability() {
-                return enchantability;
-            }
-
-            @Override
-            public Ingredient getRepairMaterial() {
-                return repairMaterialSupplier.get();
-            }
-        };
-
-        this.armorMaterial = new IArmorMaterial() {
-            @Override
-            public int getDurability(EquipmentSlotType slotIn) {
-                return (int) (MAX_DAMAGE_ARRAY[slotIn.getIndex()] * armorDurabilityFactor);
-            }
-
-            @Override
-            public int getDamageReductionAmount(EquipmentSlotType slotIn) {
-                return (int) (DAMAGE_REDUCTION_ARRAY[slotIn.getIndex()] * (resistance / 5f));
-            }
-
-            @Override
-            public int getEnchantability() {
-                return enchantability;
-            }
-
-            @Override
-            public SoundEvent getSoundEvent() {
-                return armorSound;
-            }
-
-            @Override
-            public Ingredient getRepairMaterial() {
-                return repairMaterialSupplier.get();
-            }
-
-            @Override
-            public String getName() {
-                return name().toLowerCase(Locale.ROOT);
-            }
-
-            @Override
-            public float getToughness() {
-                return Math.max(resistance / 7f - 1f, 0f);
-            }
-
-            @Override
-            public float getKnockbackResistance() {
-                return knockbackResistance;
-            }
-        };
-
-        // Registry.
-        this.registry = Registration.ITEMS;
-    }
-    
-    public static void register() {
-        for (Tools tools : Tools.values()) {
-            // Armor pieces
-            tools.helmetProvider = tools.registry.register(tools.name() + "_helmet", () -> new ArmorItem(tools.armorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)) {
-                @Override
-                public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-                    tools.doArmorTick(stack, world, player);
-                }
-            });
-            tools.chestplateProvider = tools.registry.register(tools.name() + "_chestplate", () -> new ArmorItem(tools.armorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)) {
-                @Override
-                public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-                    tools.doArmorTick(stack, world, player);
-                }
-            });
-            tools.leggingsProvider = tools.registry.register(tools.name() + "_leggings", () -> new ArmorItem(tools.armorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)) {
-                @Override
-                public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-                    tools.doArmorTick(stack, world, player);
-                }
-            });
-            tools.bootsProvider = tools.registry.register(tools.name() + "_boots", () -> new ArmorItem(tools.armorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)) {
-                @Override
-                public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-                    tools.doArmorTick(stack, world, player);
-                }
-            });
-
-            // Tools.
-            tools.swordProvider = tools.registry.register(tools.name() + "_sword", () -> new SwordItem(tools.itemTier, 3, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)) {
-                @Override
-                public ActionResultType onItemUse(ItemUseContext context) {
-                    return tools.onItemUse(context);
-                }
-
-                @Override
-                public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-                    return tools.onHitEntity(stack, target, attacker);
-                }
-
-                @Override
-                public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-                    if (entity instanceof LivingEntity) {
-                        return tools.onHitEntity(stack, (LivingEntity) entity, player);
-                    }
-                    return super.onLeftClickEntity(stack, player, entity);
-                }
-            });
-            tools.axeProvider = tools.registry.register(tools.name() + "_axe", () -> new AxeItem(tools.itemTier, 5.0f, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS)) {
-                @Override
-                public ActionResultType onItemUse(ItemUseContext context) {
-                    return tools.onItemUse(context);
-                }
-
-                @Override
-                public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-                    return tools.onHitEntity(stack, target, attacker);
-                }
-
-                @Override
-                public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-                    if (entity instanceof LivingEntity) {
-                        return tools.onHitEntity(stack, (LivingEntity) entity, player);
-                    }
-                    return super.onLeftClickEntity(stack, player, entity);
-                }
-            });
-            tools.pickaxeProvider = tools.registry.register(tools.name() + "_pickaxe", () -> new PickaxeItem(tools.itemTier, 1, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS)) {
-                @Override
-                public ActionResultType onItemUse(ItemUseContext context) {
-                    return tools.onItemUse(context);
-                }
-
-                @Override
-                public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-                    return tools.onHitEntity(stack, target, attacker);
-                }
-
-                @Override
-                public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-                    if (entity instanceof LivingEntity) {
-                        return tools.onHitEntity(stack, (LivingEntity) entity, player);
-                    }
-                    return super.onLeftClickEntity(stack, player, entity);
-                }
-            });
-            tools.shovelProvider = tools.registry.register(tools.name() + "_shovel", () -> new ShovelItem(tools.itemTier, 1.5f, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS)) {
-                @Override
-                public ActionResultType onItemUse(ItemUseContext context) {
-                    return tools.onItemUse(context);
-                }
-
-                @Override
-                public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-                    return tools.onHitEntity(stack, target, attacker);
-                }
-
-                @Override
-                public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-                    if (entity instanceof LivingEntity) {
-                        return tools.onHitEntity(stack, (LivingEntity) entity, player);
-                    }
-                    return super.onLeftClickEntity(stack, player, entity);
-                }
-            });
-            tools.hoeProvider = tools.registry.register(tools.name() + "_hoe", () -> new HoeItem(tools.itemTier, -3, -0.0f, new Item.Properties().group(ModItemGroups.TOOLS)) {
-                @Override
-                public ActionResultType onItemUse(ItemUseContext context) {
-                    return tools.onItemUse(context);
-                }
-
-                @Override
-                public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-                    return tools.onHitEntity(stack, target, attacker);
-                }
-
-                @Override
-                public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-                    if (entity instanceof LivingEntity) {
-                        return tools.onHitEntity(stack, (LivingEntity) entity, player);
-                    }
-                    return super.onLeftClickEntity(stack, player, entity);
-                }
-            });
-        }
-    }
-
-    private boolean onHitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        return false;
-    }
-
-    /**
-     * Get the repair material.
-     * 
-     * @return the repair material or null if it failed to get the repair material.
-     */
+    @Getter private final Supplier<Item> baseMaterial;
+    @Getter private final Supplier<Item> handleMaterial;
     @Nullable
-    public Ingredient getRepairMaterial() {
-        try {
-            return repairMaterialSupplier.get();
-        } catch (Throwable t) {
-            return null;
-        }
+    @Getter private final Supplier<Item> armorSubMaterial;
+
+    @Getter private final Supplier<IArmorMaterial> armorMaterial;
+    @Getter private final Supplier<IItemTier> itemTier;
+
+    private final Supplier<ArmorItem> helmetSupplier;
+    private final Supplier<ArmorItem> chestplateSupplier;
+    private final Supplier<ArmorItem> leggingsSupplier;
+    private final Supplier<ArmorItem> bootsSupplier;
+    private final Supplier<SwordItem> swordSupplier;
+    private final Supplier<AxeItem> axeSupplier;
+    private final Supplier<PickaxeItem> pickaxeSupplier;
+    private final Supplier<ShovelItem> shovelSupplier;
+    private final Supplier<HoeItem> hoeSupplier;
+
+    private final Supplier<LongswordItem> longswordSupplier;
+    private final Supplier<KatanaItem> katanaSupplier;
+    private final Supplier<BroadswordItem> broadswordSupplier;
+    private final Supplier<LumberAxeItem> lumberAxeSupplier;
+    private final Supplier<BattleaxeItem> battleaxeSupplier;
+    private final Supplier<HammerItem> hammerSupplier;
+    private final Supplier<ExcavatorItem> excavatorSupplier;
+
+    @Getter private ItemRegistryObject<ArmorItem> helmet;
+    @Getter private ItemRegistryObject<ArmorItem> chestplate;
+    @Getter private ItemRegistryObject<ArmorItem> leggings;
+    @Getter private ItemRegistryObject<ArmorItem> boots;
+    @Getter private ItemRegistryObject<SwordItem> sword;
+    @Getter private ItemRegistryObject<AxeItem> axe;
+    @Getter private ItemRegistryObject<PickaxeItem> pickaxe;
+    @Getter private ItemRegistryObject<ShovelItem> shovel;
+    @Getter private ItemRegistryObject<HoeItem> hoe;
+    @Getter private ItemRegistryObject<LongswordItem> longsword;
+    @Getter private ItemRegistryObject<KatanaItem> katana;
+    @Getter private ItemRegistryObject<BroadswordItem> broadsword;
+    @Getter private ItemRegistryObject<LumberAxeItem> lumberAxe;
+    @Getter private ItemRegistryObject<BattleaxeItem> battleaxe;
+    @Getter private ItemRegistryObject<HammerItem> hammer;
+    @Getter private ItemRegistryObject<ExcavatorItem> excavator;
+
+    Tools(Builder builder) {
+        this(builder, builder.name);
     }
 
-    /**
-     * Get the helmet item.
-     *
-     * @return the helmet item or null if it failed to get it.
-     */
-    @Nullable
-    public ArmorItem getHelmet() {
-        try {
-            if (helmet == null) {
-                helmet = helmetProvider.asItem();
+    Tools(Builder builder, String toolName) {
+        if (!builder.name.equals(this.getName())) {
+            throw new IllegalArgumentException("Builder name is incorrect, should be " + this.getName());
+        }
+        this.toolName = toolName;
+        this.baseMaterial = builder.baseMaterial;
+        this.handleMaterial = builder.handleMaterial;
+        this.armorSubMaterial = builder.armorSubMaterial;
+
+        this.armorMaterial = builder.armorMaterial;
+        this.itemTier = builder.itemTier;
+
+        this.helmetSupplier = builder.helmet;
+        this.chestplateSupplier = builder.chestplate;
+        this.leggingsSupplier = builder.leggings;
+        this.bootsSupplier = builder.boots;
+        this.swordSupplier = builder.sword;
+        this.axeSupplier = builder.axe;
+        this.pickaxeSupplier = builder.pickaxe;
+        this.shovelSupplier = builder.shovel;
+        this.hoeSupplier = builder.hoe;
+        this.longswordSupplier = builder.longsword;
+        this.katanaSupplier = builder.katana;
+        this.broadswordSupplier = builder.broadsword;
+        this.lumberAxeSupplier = builder.lumberAxe;
+        this.battleaxeSupplier = builder.battleaxe;
+        this.hammerSupplier = builder.hammer;
+        this.excavatorSupplier = builder.excavator;
+    }
+
+    public static void registerItems() {
+        for (Tools metal : values()) {
+            if (metal.helmetSupplier != null) {
+                metal.helmet = Registration.ITEMS.register(
+                        metal.toolName + "_helmet", metal.helmetSupplier);
             }
-            return helmet;
-        } catch (Throwable t) {
-            return null;
-        }
-    }
-
-    /**
-     * Get the chestplate item.
-     *
-     * @return the chestplate item or null if it failed to get it.
-     */
-    @Nullable
-    public ArmorItem getChestplate() {
-        try {
-            if (chestplate == null) {
-                chestplate = chestplateProvider.asItem();
+            if (metal.chestplateSupplier != null) {
+                metal.chestplate = Registration.ITEMS.register(
+                        metal.toolName + "_chestplate", metal.chestplateSupplier);
             }
-            return chestplate;
-        } catch (Throwable t) {
-            return null;
-        }
-    }
-
-    /**
-     * Get the leggings item.
-     *
-     * @return the leggings item or null if it failed to get it.
-     */
-    @Nullable
-    public ArmorItem getLeggings() {
-        try {
-            if (leggings == null) {
-                leggings = leggingsProvider.asItem();
+            if (metal.leggingsSupplier != null) {
+                metal.leggings = Registration.ITEMS.register(
+                        metal.toolName + "_leggings", metal.leggingsSupplier);
             }
-            return leggings;
-        } catch (Throwable t) {
-            return null;
-        }
-    }
-
-    /**
-     * Get the boots item.
-     *
-     * @return the boots item or null if it failed to get it.
-     */
-    @Nullable
-    public ArmorItem getBoots() {
-        try {
-            if (boots == null) {
-                boots = bootsProvider.asItem();
+            if (metal.bootsSupplier != null) {
+                metal.boots = Registration.ITEMS.register(
+                        metal.toolName + "_boots", metal.bootsSupplier);
             }
-            return boots;
-        } catch (Throwable t) {
-            return null;
-        }
-    }
-
-    /**
-     * Get the sword item.
-     * 
-     * @return the sword item or null if it failed to get it.
-     */
-    @Nullable
-    public SwordItem getSword() {
-        try {
-            if (sword == null) {
-                sword = swordProvider.asItem();
+            if (metal.swordSupplier != null) {
+                metal.sword = Registration.ITEMS.register(
+                        metal.toolName + "_sword", metal.swordSupplier);
             }
-            return sword;
-        } catch (Throwable t) {
-            return null;
-        }
-    }
-
-    /**
-     * Get the axe item.
-     *
-     * @return the axe item or null if it failed to get it.
-     */
-    @Nullable
-    public AxeItem getAxe() {
-        try {
-            if (axe == null) {
-                axe = axeProvider.asItem();
+            if (metal.longswordSupplier != null) {
+                metal.longsword = Registration.ITEMS.register(
+                        metal.toolName + "_longsword", metal.longswordSupplier);
             }
-            return axe;
-        } catch (Throwable t) {
-            return null;
-        }
-    }
-
-    /**
-     * Get the pickaxe item.
-     *
-     * @return the pickaxe item or null if it failed to get it.
-     */
-    @Nullable
-    public PickaxeItem getPickaxe() {
-        try {
-            if (pickaxe == null) {
-                pickaxe = pickaxeProvider.asItem();
+            if (metal.katanaSupplier != null) {
+                metal.katana = Registration.ITEMS.register(
+                        metal.toolName + "_katana", metal.katanaSupplier);
             }
-            return pickaxe;
-        } catch (Throwable t) {
-            return null;
-        }
-    }
-
-    /**
-     * Get the shovel item.
-     *
-     * @return the shovel item or null if it failed to get it.
-     */
-    @Nullable
-    public ShovelItem getShovel() {
-        try {
-            if (shovel == null) {
-                shovel = shovelProvider.asItem();
+            if (metal.broadswordSupplier != null) {
+                metal.broadsword = Registration.ITEMS.register(
+                        metal.toolName + "_broadsword", metal.broadswordSupplier);
             }
-            return shovel;
-        } catch (Throwable t) {
-            return null;
-        }
-    }
-
-    /**
-     * Get the hoe item.
-     *
-     * @return the hoe item or null if it failed to get it.
-     */
-    @Nullable
-    public HoeItem getHoe() {
-        try {
-            if (hoe == null) {
-                hoe = hoeProvider.asItem();
+            if (metal.axeSupplier != null) {
+                metal.axe = Registration.ITEMS.register(
+                        metal.toolName + "_axe", metal.axeSupplier);
             }
-            return hoe;
-        } catch (Throwable t) {
-            return null;
-        }
-    }
-
-    /**
-     * Get the material resistance.
-     *
-     * @return the material resistance.
-     */
-    public float getResistance() {
-        return resistance;
-    }
-
-    /**
-     * Get the weight.
-     *
-     * @return the weight.
-     */
-    public float getWeight() {
-        return weight;
-    }
-
-    public boolean isMetal() {
-        return isMetal;
-    }
-
-    public boolean isMetalGem() {
-        return isMetalGem;
-    }
-
-    public boolean isGem() {
-        return isGem;
-    }
-
-    /**
-     * Get the armor durability factor.
-     *
-     * @return the armor durability factor.
-     */
-    public double getArmorDurabilityFactor() {
-        return armorDurabilityFactor;
-    }
-
-    /**
-     * Get the tool sharpness.
-     *
-     * @return the tool sharpness.
-     */
-    public float getSharpness() {
-        return sharpness;
-    }
-
-    /**
-     * Get maximum damage factor.
-     *
-     * @return the maximum damage factor.
-     */
-    public float getMaxDamageFactor() {
-        return maxDamageFactor;
-    }
-
-    /**
-     * Get the tool item tier.
-     *
-     * @return the tool item tier.
-     */
-    public IItemTier getItemTier() {
-        return itemTier;
-    }
-
-    /**
-     * Get the ore material.
-     *
-     * @return the ore material.
-     */
-    public IOreMaterial getMaterial() {
-        return material;
-    }
-
-    /**
-     * Get the base durability.
-     *
-     * @return the base durability.
-     */
-    public double getBaseDurability() {
-        return baseDurability;
-    }
-
-    /**
-     * Get the tool durability.
-     *
-     * @return the tool durability.
-     */
-    public double getToolDurability() {
-        return toolDurability;
-    }
-    /**
-     * Get mining efficiency.
-     *
-     * @return the mining efficiency.
-     */
-    public int getEfficiency() {
-        return efficiency;
-    }
-
-    /**
-     * Get enchantability.
-     *
-     * @return the enchantability.
-     */
-    public int getEnchantability() {
-        return enchantability;
-    }
-
-    /**
-     * Get the harvest level.
-     *
-     * @return the harvest level.
-     */
-    public int getHarvestLevel() {
-        return harvestLevel;
-    }
-
-    /**
-     * Get the attack damage.
-     *
-     * @return the attack damage.
-     */
-    public float getAttackDamage() {
-        return attackDamage;
-    }
-
-    /**
-     * Get armor equip sound.
-     * 
-     * @return the armor equip {@link SoundEvent sound event}.
-     * @see SoundEvents
-     */
-    public SoundEvent getArmorSound() {
-        return armorSound;
-    }
-
-    /**
-     * Get the armor material.
-     *
-     * @return the {@link IArmorMaterial armor material}.
-     */
-    public IArmorMaterial getArmorMaterial() {
-        return armorMaterial;
-    }
-
-    public float getKnockbackResistance() {
-        return knockbackResistance;
-    }
-
-    /**
-     * Get attack effect.
-     *
-     * @return the attack effect got from a supplier, null, if no effect.
-     * @param player the player entity for the effect.
-     */
-    @Nullable
-    public EffectInstance getAttackEffect(LivingEntity player) {
-        return attackEffect != null ? attackEffect.apply(player) : null;
-    }
-
-    /**
-     * Get defense effect.
-     *
-     * @return the defense effect got from a supplier.
-     * @param player the player entity for the effect.
-     */
-    @Nullable
-    public EffectInstance getDefenseEffect(ServerPlayerEntity player) {
-        return defenseEffect != null ? defenseEffect.apply(player) : null;
-    }
-
-    public ActionResultType onItemUse(ItemUseContext context) {
-        return ActionResultType.PASS;
-    }
-
-    public final void doArmorTick(ItemStack stack, World world, PlayerEntity playerEntity) {
-        if (playerEntity instanceof ServerPlayerEntity) {
-            EffectInstance defenseEffect = getDefenseEffect((ServerPlayerEntity) playerEntity);
-            if (defenseEffect != null) {
-                playerEntity.addPotionEffect(defenseEffect);
+            if (metal.pickaxeSupplier != null) {
+                metal.pickaxe = Registration.ITEMS.register(
+                        metal.toolName + "_pickaxe", metal.pickaxeSupplier);
+            }
+            if (metal.shovelSupplier != null) {
+                metal.shovel = Registration.ITEMS.register(
+                        metal.toolName + "_shovel", metal.shovelSupplier);
+            }
+            if (metal.hoeSupplier != null) {
+                metal.hoe = Registration.ITEMS.register(
+                        metal.toolName + "_hoe", metal.hoeSupplier);
+            }
+            if (metal.lumberAxeSupplier != null) {
+                metal.lumberAxe = Registration.ITEMS.register(
+                        metal.toolName + "_lumber_axe", metal.lumberAxeSupplier);
+            }
+            if (metal.battleaxeSupplier != null) {
+                metal.battleaxe = Registration.ITEMS.register(
+                        metal.toolName + "_battleaxe", metal.battleaxeSupplier);
+            }
+            if (metal.hammerSupplier != null) {
+                metal.hammer = Registration.ITEMS.register(
+                        metal.toolName + "_hammer", metal.hammerSupplier);
+            }
+            if (metal.excavatorSupplier != null) {
+                metal.excavator = Registration.ITEMS.register(
+                        metal.toolName + "_excavator", metal.excavatorSupplier);
             }
         }
-        this.onArmorTick(stack, world, playerEntity);
     }
 
-    private void onArmorTick(ItemStack stack, World world, PlayerEntity playerEntity) {
-
+    private static Builder builder(String name) {
+        return new Builder(name);
     }
 
-    @Override
-    public String getStringName() {
+    public String getName() {
         return name().toLowerCase(Locale.ROOT);
     }
 
-    @Override
-    public String getTranslationKey() {
-        return "tool_material." + QForgeMod.MOD_ID + "." + getStringName();
+    private static class Builder {
+        final String name;
+        private Supplier<Item> baseMaterial;
+        private Supplier<Item> handleMaterial;
+        private @Nullable Supplier<Item> armorSubMaterial;
+        private Supplier<IArmorMaterial> armorMaterial;
+        private Supplier<IItemTier> itemTier;
+        private Supplier<ArmorItem> helmet;
+        private Supplier<ArmorItem> chestplate;
+        private Supplier<ArmorItem> leggings;
+        private Supplier<ArmorItem> boots;
+        private Supplier<SwordItem> sword;
+        private Supplier<AxeItem> axe;
+        private Supplier<PickaxeItem> pickaxe;
+        private Supplier<ShovelItem> shovel;
+        private Supplier<HoeItem> hoe;
+        private Supplier<LongswordItem> longsword;
+        private Supplier<KatanaItem> katana;
+        private Supplier<BroadswordItem> broadsword;
+        private Supplier<LumberAxeItem> lumberAxe;
+        private Supplier<BattleaxeItem> battleaxe;
+        private Supplier<HammerItem> hammer;
+        private Supplier<ExcavatorItem> excavator;
+
+        Builder(String name) {
+            this.name = name;
+        }
+
+        Builder material(Supplier<Item> material, Supplier<Item> handleMaterial) {
+            return material(material, handleMaterial, null);
+        }
+
+        Builder material(Supplier<Item> material, Supplier<Item> handleMaterial, @Nullable Supplier<Item> armorSubMaterial) {
+            this.baseMaterial = material;
+            this.handleMaterial = handleMaterial;
+            this.armorSubMaterial = armorSubMaterial;
+            return this;
+        }
+
+        Builder armor(Supplier<IArmorMaterial> armorMaterial) {
+            this.armorMaterial = armorMaterial;
+            this.helmet = () -> new ArmorItem(armorMaterial.get(), EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.chestplate = () -> new ArmorItem(armorMaterial.get(), EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.leggings = () -> new ArmorItem(armorMaterial.get(), EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.boots = () -> new ArmorItem(armorMaterial.get(), EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS));
+            return this;
+        }
+
+        Builder tools(Supplier<IItemTier> itemTier) {
+            this.itemTier = itemTier;
+            this.sword = () -> new SwordItem(itemTier.get(), 3, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.axe = () -> new AxeItem(itemTier.get(), 5.0f, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.pickaxe = () -> new PickaxeItem(itemTier.get(), 1, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.shovel = () -> new ShovelItem(itemTier.get(), 1.5f, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.hoe = () -> new HoeItem(itemTier.get(), (int) -(itemTier.get().getAttackDamage() - 1), -1.0f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.longsword = () -> new LongswordItem(itemTier.get(), 3, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.broadsword = () -> new BroadswordItem(itemTier.get(), 4, -2.5f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.katana = () -> new KatanaItem(itemTier.get(), 3, -1.0f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.lumberAxe = () -> new LumberAxeItem(itemTier.get(), 5.5f, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.battleaxe = () -> new BattleaxeItem(itemTier.get(), 6.5f, -2.7f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.hammer = () -> new HammerItem(itemTier.get(), 4, -2.7f, new Item.Properties().group(ModItemGroups.TOOLS));
+            this.excavator = () -> new ExcavatorItem(itemTier.get(), 2.0f, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS));
+            return this;
+        }
     }
 }

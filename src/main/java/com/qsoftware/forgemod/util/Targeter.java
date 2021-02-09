@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.util;
 
 
 import com.google.common.annotations.Beta;
+import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,11 +21,8 @@ import org.jetbrains.annotations.Nullable;
  * @author Qboi123
  */
 @Beta
+@UtilityClass
 public final class Targeter {
-    private Targeter() {
-        throw new UnsupportedOperationException("Not allowed to initialize constructor.");
-    }
-
     @Nullable
     public static <T extends Entity> Entity getTarget(PlayerEntity player) {
         float f = player.rotationPitch;

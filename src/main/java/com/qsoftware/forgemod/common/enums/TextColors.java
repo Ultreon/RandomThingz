@@ -1,10 +1,14 @@
 package com.qsoftware.forgemod.common.enums;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 /**
  * Text colors class.
  *
  * @author Qboi123
  */
+@RequiredArgsConstructor
 public enum TextColors {
     // Colors
     RED("4"),
@@ -40,11 +44,8 @@ public enum TextColors {
     UNDERLINE("n"),
     RESET("r");
 
+    @Getter
     private final String code;
-
-    TextColors(String code) {
-        this.code = code;
-    }
 
     @Override
     public String toString() {

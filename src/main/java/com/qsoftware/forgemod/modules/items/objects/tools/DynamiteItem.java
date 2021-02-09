@@ -1,8 +1,7 @@
 package com.qsoftware.forgemod.modules.items.objects.tools;
 
-import com.qsoftware.forgemod.modules.entities.objects.DynamiteEntity;
+import com.qsoftware.forgemod.modules.environment.entities.DynamiteEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.EnderPearlItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;

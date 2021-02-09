@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.common;
 
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import lombok.Getter;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.crash.ReportedException;
@@ -19,33 +18,25 @@ import java.util.function.Function;
 
 public class BetterItemGroup extends ItemGroup {
     private final ItemStack icon;
-    private final ResourceLocation rl;
-    private final String labelName;
+    @Getter private final ResourceLocation location;
+    @Getter private final String labelName;
 
-    public BetterItemGroup(ResourceLocation rl, ItemStack icon) {
-        super(rl.getNamespace() + "_" + rl.getPath().replaceAll("[/.]", "_"));
+    public BetterItemGroup(ResourceLocation location, ItemStack icon) {
+        super(location.getNamespace() + "_" + location.getPath().replaceAll("[/.]", "_"));
         this.icon = icon;
-        this.rl = rl;
-        this.labelName = rl.getPath().replaceAll("[/.]", "_");
+        this.location = location;
+        this.labelName = location.getPath().replaceAll("[/.]", "_");
     }
 
-    public BetterItemGroup(ResourceLocation rl, IItemProvider itemProvider) {
-        super(rl.getNamespace() + "_" + rl.getPath().replaceAll("[/.]", "_"));
+    public BetterItemGroup(ResourceLocation location, IItemProvider itemProvider) {
+        super(location.getNamespace() + "_" + location.getPath().replaceAll("[/.]", "_"));
         this.icon = new ItemStack(itemProvider);
-        this.rl = rl;
-        this.labelName = rl.getPath().replaceAll("[/.]", "_");
-    }
-
-    public ResourceLocation getLocation() {
-        return this.rl;
-    }
-
-    public String getLabelName() {
-        return this.labelName;
+        this.location = location;
+        this.labelName = location.getPath().replaceAll("[/.]", "_");
     }
 
     public String getModID() {
-        return this.rl.getNamespace();
+        return this.location.getNamespace();
     }
 
     @Override

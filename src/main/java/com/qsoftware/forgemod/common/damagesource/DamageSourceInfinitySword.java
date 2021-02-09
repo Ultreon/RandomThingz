@@ -42,5 +42,4 @@ public class DamageSourceInfinitySword extends EntityDamageSource {
     public boolean isDifficultyScaled() {
         return false;
     }
-
 }

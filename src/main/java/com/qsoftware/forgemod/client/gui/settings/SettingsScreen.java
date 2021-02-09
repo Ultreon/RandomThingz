@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleScreen;
-import com.qsoftware.forgemod.modules.confirmExit.ConfirmExitOptions;
+import com.qsoftware.forgemod.modules.ui.screens.ScreenshotsScreen;
 import com.qsoftware.forgemod.modules.ui.widgets.SwitchWidget;
 import com.qsoftware.forgemod.modules.updates.UpdateButton;
 import com.qsoftware.forgemod.common.text.Translations;
@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
-@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class SettingsScreen extends Screen {
 
     @SuppressWarnings("FieldCanBeLocal")
@@ -67,7 +67,7 @@ public class SettingsScreen extends Screen {
 //        closePrompt = Config.closePrompt.get();
 //        allowShutdownPC = Config.allowShutdownPC.get();
 
-        int dy = 0;
+        int dy = -30;
         addButton(new UpdateButton(AbstractUpdater.getQFMUpdater(), width / 2 - 155, height / 6 + dy - 6, 310));
 
         dy += 30;
@@ -78,6 +78,10 @@ public class SettingsScreen extends Screen {
 //        }));
 //        this.allowShutdownPCButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 310, 20,
 //                Translations.getScreen("settings", "allow_shutdown_pc").appendString(allowShutdownPC ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()), this::toggleAllowShutdownPC, this::tooltip));
+
+        dy += 30;
+        this.modulesButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 310, 20,
+                Translations.getScreen("settings", "screenshots"), this::openScreenshotsScreen, this::tooltip));
 
         dy += 30;
         this.modulesButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 310, 20,
@@ -92,6 +96,10 @@ public class SettingsScreen extends Screen {
 
     private void openModulesScreen(Button button) {
         Objects.requireNonNull(this.minecraft).displayGuiScreen(new ModuleScreen(this, new TranslationTextComponent("screen.qforgemod.modules")));
+    }
+
+    private void openScreenshotsScreen(Button button) {
+        Objects.requireNonNull(this.minecraft).displayGuiScreen(new ScreenshotsScreen(this, new TranslationTextComponent("screen.qforgemod.modules")));
     }
 
     @Override
