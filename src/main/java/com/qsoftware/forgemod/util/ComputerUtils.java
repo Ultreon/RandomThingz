@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.util;
 
 import com.qsoftware.forgemod.Modules;
-import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.ModuleManager;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.SystemUtils;

@@ -91,6 +91,10 @@ public class ConfirmShutdownScreen extends Screen {
         }
     }
 
+    public void goBack() {
+        Minecraft.getInstance().displayGuiScreen(backScreen);
+    }
+
     public boolean shouldCloseOnEsc() {
         return true;
     }

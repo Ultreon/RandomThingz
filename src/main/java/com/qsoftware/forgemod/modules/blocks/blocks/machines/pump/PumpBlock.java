@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.blocks.blocks.machines.pump;
 
-import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBlock;
 import com.qsoftware.forgemod.common.enums.MachineTier;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

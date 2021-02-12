@@ -5,8 +5,11 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.modules.pcShutdown.ConfirmShutdownScreen;
 import com.qsoftware.forgemod.util.ComputerUtils;
+import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.common.MinecraftForge;
@@ -15,6 +18,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@FieldsAreNonnullByDefault
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class PCCrashModule extends Module {
     @Override
     public void onEnable() {
@@ -28,6 +36,11 @@ public class PCCrashModule extends Module {
         if (QForgeMod.isClientSide()) {
             MinecraftForge.EVENT_BUS.unregister(this);
         }
+    }
+
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.EXPERIMENTAL;
     }
 
     @Override

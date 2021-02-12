@@ -29,8 +29,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-import static net.minecraft.client.gui.AbstractGui.blit;
-
 public abstract class WandItem extends HudItem {
     private final int maxMana;
     private final int chargeTime;

@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.modules.MainModule;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.modules.ui.screens.AdvancedScreen;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -160,6 +160,8 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
        */
       public void render(MatrixStack matrixStack, int listIndex, int scroll, int xOffset, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean isHovered, float partialTicks) {
          ModuleCompatibility compatibility = this.module.getCompatibility();
+         ModuleSecurity security = this.module.getSecurity();
+
          if (compatibility == ModuleCompatibility.NONE) {
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
             AbstractGui.fill(matrixStack, xOffset - 1, scroll - 1, xOffset + rowWidth - 9, scroll + rowHeight + 1, 0xff770000);
@@ -178,19 +180,38 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
          RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
          AbstractGui.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 32, 32);
 
+         int dx = 36 + xOffset + 8;
+
          this.mc.getTextureManager().bindTexture(MODULE_OVERLAYS);
-         if (this.module.isCore() && !(this.module instanceof MainModule)) {
-            AbstractGui.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 256, 256);
-            AbstractGui.blit(matrixStack, xOffset + 16, scroll + 16, 64.0F, 0.0F, 16, 16, 256, 256);
+         if (this.module.isCore()) {
+            dx += 18;
+            AbstractGui.blit(matrixStack, dx, scroll + 14, 64.0F, 0.0F, 16, 16, 256, 256);
          }
 
-         if (compatibility != ModuleCompatibility.FULL) {
-            AbstractGui.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 256, 256);
-            if (compatibility == ModuleCompatibility.NONE) {
-               AbstractGui.blit(matrixStack, xOffset + 16, scroll + 16, 48.0F, 0.0F, 16, 16, 256, 256);
-            } else if (compatibility == ModuleCompatibility.PARTIAL) {
-               AbstractGui.blit(matrixStack, xOffset + 16, scroll + 16, 32.0F, 0.0F, 16, 16, 256, 256);
-            }
+         switch (security) {
+            case EXPERIMENTAL:
+               dx += 18;
+               AbstractGui.blit(matrixStack, dx, scroll + 14, 80.0F, 0.0F, 16, 16, 256, 256);
+               break;
+            case RISC:
+               dx += 18;
+               AbstractGui.blit(matrixStack, dx, scroll + 14, 96.0F, 0.0F, 16, 16, 256, 256);
+               break;
+            case SAFE:
+               break;
+         }
+
+         switch (compatibility) {
+            case NONE:
+               dx += 18;
+               AbstractGui.blit(matrixStack, dx, scroll + 14, 48.0F, 0.0F, 16, 16, 256, 256);
+               break;
+            case PARTIAL:
+               dx += 18;
+               AbstractGui.blit(matrixStack, dx, scroll + 14, 32.0F, 0.0F, 16, 16, 256, 256);
+               break;
+            case FULL:
+               break;
          }
 
          IReorderingProcessor reorderingLocalizedName = this.reorderingLocalizedName;

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.items.objects.spawnegg;
 
-import com.qsoftware.modlib.api.NBTConstants;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
+import com.qsoftware.modlib.api.NBTConstants;
 import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import net.minecraft.entity.Entity;

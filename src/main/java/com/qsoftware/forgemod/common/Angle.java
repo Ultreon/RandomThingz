@@ -3,7 +3,6 @@ package com.qsoftware.forgemod.common;
 import com.qsoftware.forgemod.common.interfaces.Formattable;
 import lombok.Data;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import net.minecraft.util.text.TextFormatting;
 
 @Data

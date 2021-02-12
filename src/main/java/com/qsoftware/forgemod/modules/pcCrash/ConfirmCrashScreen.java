@@ -47,7 +47,7 @@ public class ConfirmCrashScreen extends Screen {
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
-            Narrator.getNarrator().say("Are you sure you want to shutdown your computer?", true);
+            Narrator.getNarrator().say("Are you sure you want to crash your computer?", true);
         }
 
         this.buttons.clear();

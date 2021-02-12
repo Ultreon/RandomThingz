@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.modules.ores;
+package com.qsoftware.forgemod.modules.environment;
 
 import lombok.AccessLevel;
 import lombok.Getter;

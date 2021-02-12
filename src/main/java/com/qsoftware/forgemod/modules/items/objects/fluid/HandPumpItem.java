@@ -1,11 +1,11 @@
 package com.qsoftware.forgemod.modules.items.objects.fluid;
 
-import com.qsoftware.modlib.api.IFluidContainer;
 import com.qsoftware.forgemod.common.enums.TextColors;
-import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.modules.items.objects.energy.EnergyStoringItem;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.util.EnergyUtils;
 import com.qsoftware.forgemod.util.InventoryUtils;
+import com.qsoftware.modlib.api.IFluidContainer;
 import com.qsoftware.modlib.silentlib.util.PlayerUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IBucketPickupHandler;

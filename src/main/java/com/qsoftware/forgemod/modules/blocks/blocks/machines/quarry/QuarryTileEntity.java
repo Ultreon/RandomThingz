@@ -1,11 +1,11 @@
 package com.qsoftware.forgemod.modules.blocks.blocks.machines.quarry;
 
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.modules.blocks.ModMachineTileEntities;
-import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBaseTileEntity;
 import com.qsoftware.forgemod.modules.items.objects.upgrades.MachineUpgrades;
-import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.util.TextUtils;
+import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;

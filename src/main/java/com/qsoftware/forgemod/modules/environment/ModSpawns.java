@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.modules.environment;
 
 import com.qsoftware.forgemod.QForgeMod;
+import lombok.experimental.UtilityClass;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
@@ -16,6 +17,7 @@ import java.util.List;
  * @author Qboi123
  */
 @Mod.EventBusSubscriber(modid = QForgeMod.modId)
+@UtilityClass
 public class ModSpawns {
     @SubscribeEvent
     public static void spawnEntities(BiomeLoadingEvent event) {

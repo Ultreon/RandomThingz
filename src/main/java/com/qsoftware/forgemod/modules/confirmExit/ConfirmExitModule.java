@@ -4,6 +4,7 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.modlib.event.WindowCloseEvent;
 import mcp.MethodsReturnNonnullByDefault;
@@ -110,6 +111,11 @@ public class ConfirmExitModule extends Module {
     @Override
     public String getName() {
         return "confirm_exit";
+    }
+
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
     }
 
     @Override

@@ -2,15 +2,15 @@ package com.qsoftware.forgemod.compat.jei;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.forgemod.crafting.recipe.MixingRecipe;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
-import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.mixer.MixerScreen;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.mixer.MixerTileEntity;
+import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.items.objects.fluid.CanisterItem;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.TextUtils;
+import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;

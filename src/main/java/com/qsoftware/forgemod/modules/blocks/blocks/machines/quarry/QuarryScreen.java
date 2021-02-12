@@ -2,8 +2,8 @@ package com.qsoftware.forgemod.modules.blocks.blocks.machines.quarry;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.ui.button.RedstoneModeButton;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBaseScreen;
+import com.qsoftware.forgemod.modules.ui.button.RedstoneModeButton;
 import com.qsoftware.forgemod.util.TextUtils;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.ItemRenderer;

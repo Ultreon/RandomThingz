@@ -1,15 +1,14 @@
 package com.qsoftware.forgemod.data.recipes;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.modules.items.Tools;
-import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
+import com.qsoftware.forgemod.init.ModTags;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.modules.items.ModItems;
-import com.qsoftware.forgemod.init.ModTags;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
+import com.qsoftware.forgemod.modules.items.Tools;
 import com.qsoftware.forgemod.modules.items.objects.CraftingItems;
 import com.qsoftware.forgemod.modules.items.objects.upgrades.MachineUpgrades;
+import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.modlib.silentlib.data.ExtendedShapedRecipeBuilder;
 import com.qsoftware.modlib.silentlib.data.ExtendedShapelessRecipeBuilder;
 import net.minecraft.block.Blocks;

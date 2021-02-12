@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.common;
 
-import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.Modules;
+import com.qsoftware.forgemod.QForgeMod;
 import lombok.Getter;
 import lombok.NonNull;
 import net.minecraft.client.Minecraft;

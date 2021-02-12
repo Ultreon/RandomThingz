@@ -2,8 +2,6 @@ package com.qsoftware.forgemod.common;
 
 import com.qsoftware.forgemod.common.interfaces.Formattable;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import net.minecraft.util.text.TextFormatting;
 
 @AllArgsConstructor

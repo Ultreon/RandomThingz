@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.common;
 
+import com.qsoftware.forgemod.Modules;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
-import com.qsoftware.forgemod.Modules;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.api.distmarker.Dist;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -142,6 +141,12 @@ public abstract class Module {
     public void discardChanges() {
 
     }
+
+    public boolean isUnsafe() {
+        return false;
+    }
+
+    public abstract ModuleSecurity getSecurity();
 
     protected static abstract class ClientSide {
 

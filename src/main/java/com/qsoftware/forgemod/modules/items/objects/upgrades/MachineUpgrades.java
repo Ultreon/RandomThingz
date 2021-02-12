@@ -2,9 +2,9 @@ package com.qsoftware.forgemod.modules.items.objects.upgrades;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.api.IMachineUpgrade;
+import com.qsoftware.forgemod.common.interfaces.INamed;
 import com.qsoftware.forgemod.common.interfaces.Translatable;
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.common.interfaces.INamed;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import net.minecraft.item.Item;

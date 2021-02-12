@@ -1,15 +1,15 @@
 package com.qsoftware.forgemod.modules.ui.widgets;
 
+import com.google.common.annotations.Beta;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.BossInfo;
 import org.jetbrains.annotations.NotNull;
 
+@Beta
 public class Progressbar extends Widget {
     private static final ResourceLocation GUI_ICONS = new ResourceLocation("textures/gui/icons.png");
     private long value;

@@ -2,9 +2,9 @@ package com.qsoftware.forgemod.modules.blocks.blocks.machines.wire;
 
 import com.google.common.collect.Maps;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.modlib.api.ConnectionType;
 import com.qsoftware.forgemod.api.IWrenchable;
 import com.qsoftware.forgemod.util.EnergyUtils;
+import com.qsoftware.modlib.api.ConnectionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SixWayBlock;

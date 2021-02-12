@@ -9,6 +9,7 @@ import com.qsoftware.forgemod.modules.environment.entities.custom.CustomTNTEntit
 import com.qsoftware.modlib.silentlib.registry.EntityTypeDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
 import com.qsoftware.forgemod.util.ExceptionUtil;
+import lombok.experimental.UtilityClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -18,6 +19,7 @@ import net.minecraft.entity.EntityType;
  *
  * @author Qboi123
  */
+@UtilityClass
 public class ModEntities extends ObjectInit<EntityType<?>> {
     public static final EntityTypeDeferredRegister ENTITY_TYPES = new EntityTypeDeferredRegister(QForgeMod.modId);
     public static final EntityTypeRegistryObject<EntityBabyCreeper> BABY_CREEPER = register("baby_creeper", EntityType.Builder.create(EntityBabyCreeper::new, EntityClassification.MONSTER).size(0.6F, 1.7F));
@@ -39,10 +41,6 @@ public class ModEntities extends ObjectInit<EntityType<?>> {
     public static final EntityTypeRegistryObject<LegendaryEnderPearlEntity> LEGENDARY_ENDER_PEARL = register("legendary_ender_pearl", EntityType.Builder.<LegendaryEnderPearlEntity>create(LegendaryEnderPearlEntity::new, EntityClassification.MISC).size(1.0f, 1.0f));
     public static final EntityTypeRegistryObject<CustomTNTEntity> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<CustomTNTEntity>create((entityType, world) -> new CustomTNTEntity(ModBlocks.ATOMIC_TNT.get().getDefaultState(), world), EntityClassification.MISC).size(1.0f, 1.0f));
     public static final EntityTypeRegistryObject<DynamiteEntity> DYNAMITE = register("dynamite", EntityType.Builder.<DynamiteEntity>create(DynamiteEntity::new, EntityClassification.MISC).size(1.0f, 1.0f));
-
-    private ModEntities() {
-        throw ExceptionUtil.utilityConstructor();
-    }
 
     /**
      * Register an entity type.

@@ -2,13 +2,12 @@ package com.qsoftware.forgemod.modules.ui.widgets;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.FloatSize;
-import com.qsoftware.forgemod.modules.ui.common.AspectRatio;
+import com.qsoftware.forgemod.modules.ui.common.Resizer;
 import com.qsoftware.forgemod.modules.ui.common.Screenshot;
 import com.qsoftware.forgemod.modules.ui.screens.ScreenshotsScreen;
+import lombok.Getter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.widget.list.ExtendedList;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.ResourceLocation;
@@ -25,19 +24,20 @@ import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
 public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionList.Entry> {
-   private static final ResourceLocation field_214378_c = new ResourceLocation("textures/misc/unknown_server.png");
+   private static final ResourceLocation UNKNOWN_IMAGE = new ResourceLocation("textures/misc/unknown_server.png");
    private final ScreenshotsScreen gui;
    private List<Screenshot> screenshots;
 
-   public ScreenshotSelectionList(ScreenshotsScreen gui, Minecraft minecraft, int widthIn, int heightIn, int topIn, int bottomIn, int slotHeightIn, @Nullable ScreenshotSelectionList parent) {
-      super(minecraft, widthIn, heightIn, topIn, bottomIn, slotHeightIn);
+   public ScreenshotSelectionList(ScreenshotsScreen gui, Minecraft minecraft, int widthIn, int heightIn, int topIn, int bottomIn, @Nullable ScreenshotSelectionList parent) {
+      super(minecraft, widthIn, heightIn, topIn, bottomIn, 26);
       this.gui = gui;
 
       if (parent != null) {
          this.screenshots = parent.screenshots;
       }
 
-      this.loadScreenshots();
+      this.x0 = 10;
+      this.x1 = 210;
    }
 
    public void loadScreenshots() {
@@ -47,19 +47,36 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
          this.screenshots = this.gui.getScreenshots();
       }
 
-      for(Screenshot screenshot : this.screenshots) {
-         this.addEntry(new Entry(this, screenshot));
+      List<Screenshot> screenshotList = this.screenshots;
+      for (int i = 0; i < screenshotList.size(); i++) {
+         Screenshot screenshot = screenshotList.get(i);
+         this.addScreenshot(screenshot, i);
+//         this.addEntry(new Entry(this, screenshot, i));
       }
+   }
+
+   public void addScreenshot(Screenshot screenshot, int index) {
+      this.addEntry(new Entry(this, screenshot, index));
+   }
+
+   @Override
+   public int addEntry(@NotNull ScreenshotSelectionList.Entry entry) {
+      return super.addEntry(entry);
    }
 
    @Override
    protected int getScrollbarPosition() {
-      return 150;
+      return 200;
    }
 
    @Override
    public int getRowWidth() {
-      return 150;
+      return 200;
+   }
+
+   @Override
+   public int getRowLeft() {
+      return 12;
    }
 
    @Override
@@ -79,23 +96,25 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
    public final class Entry extends ExtendedList.AbstractListEntry<ScreenshotSelectionList.Entry> implements AutoCloseable {
       private final Minecraft minecraft;
       private final ScreenshotsScreen gui;
+      @Getter private final int index;
+      @Getter private final Screenshot screenshot;
+      private final DynamicTexture texture;
       private final ResourceLocation textureLocation;
       private File file;
-      @Nullable
-      private final DynamicTexture texture;
       private long lastClick;
 
-      public Entry(ScreenshotSelectionList list, Screenshot screenshot) {
+      public Entry(ScreenshotSelectionList list, Screenshot screenshot, int index) {
          this.gui = list.getGuiScreenshots();
+         this.index = index;
          this.minecraft = Minecraft.getInstance();
-         String s = screenshot.getFile().getName();
-         this.textureLocation = new ResourceLocation(QForgeMod.modId, "screenshots/" + s);
          this.file = screenshot.getFile();
          if (!this.file.isFile()) {
             this.file = null;
          }
 
-         this.texture = screenshot.getTexture();
+         this.screenshot = screenshot;
+         this.texture = this.screenshot.getTexture();
+         this.textureLocation = this.screenshot.getResourceLocation();
       }
 
       @SuppressWarnings("deprecation")
@@ -103,19 +122,20 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
       public void render(@NotNull MatrixStack matrixStack, int p_230432_2_, int scroll, int xOffset, int p_230432_5_, int p_230432_6_, int p_230432_7_, int p_230432_8_, boolean p_230432_9_, float p_230432_10_) {
          String name = this.file.getName();
          String size;
+
          if (this.texture != null && this.texture.getTextureData() != null) {
-            size = this.texture.getTextureData().getWidth() + "×" + this.texture.getTextureData().getHeight();
+            size = this.texture.getTextureData().getWidth() + "x" + this.texture.getTextureData().getHeight();
          } else {
             size = "Invalid screenshot.";
          }
 
          StringTextComponent description = new StringTextComponent("");
 
-         this.minecraft.fontRenderer.drawString(matrixStack, name, (float)(xOffset + 32 + 3), (float)(scroll + 1), 16777215);
-         this.minecraft.fontRenderer.drawString(matrixStack, size, (float)(xOffset + 32 + 3), (float)(scroll + 9 + 3), 8421504);
-         this.minecraft.fontRenderer.func_243248_b(matrixStack, description, (float)(xOffset + 32 + 3), (float)(scroll + 9 + 9 + 3), 8421504);
+         this.minecraft.fontRenderer.drawString(matrixStack, name, (float)(xOffset + 32 + 3), (float)(scroll + 1), 0xffffff);
+         this.minecraft.fontRenderer.drawString(matrixStack, size, (float)(xOffset + 32 + 3), (float)(scroll + 9 + 3), 0x808080);
+         this.minecraft.fontRenderer.func_243248_b(matrixStack, description, (float)(xOffset + 32 + 3), (float)(scroll + 9 + 9 + 3), 0x808080);
          RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-         this.minecraft.getTextureManager().bindTexture(this.texture != null ? this.textureLocation : ScreenshotSelectionList.field_214378_c);
+         this.minecraft.getTextureManager().bindTexture(this.texture != null ? this.textureLocation : ScreenshotSelectionList.UNKNOWN_IMAGE);
          RenderSystem.enableBlend();
 //         AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0.0F, 0.0F, 32, 32, 32, 32);
 
@@ -123,15 +143,15 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
             int imgWidth = this.texture.getTextureData().getWidth();
             int imgHeight = this.texture.getTextureData().getHeight();
 
-            AspectRatio aspectRatio = new AspectRatio(imgWidth, imgHeight);
-            FloatSize size1 = aspectRatio.thumbnail(32f, 32f);
+            Resizer resizer = new Resizer(imgWidth, imgHeight);
+            FloatSize size1 = resizer.thumbnail(32f, 22f);
 
             int width = (int) size1.width;
             int height = (int) size1.height;
 
-            blit(matrixStack, xOffset, scroll, 0, 0, width, height, width, height);
+            blit(matrixStack, xOffset, scroll, 0f, 0f, width, height, width, height);
          } else {
-            AbstractGui.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 32, 32);
+            blit(matrixStack, xOffset, scroll, 0f, 0f, 32, 32, 32, 32);
          }
 
          RenderSystem.disableBlend();
@@ -169,7 +189,7 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
       @Override
       public boolean mouseClicked(double mouseX, double mouseY, int button) {
          ScreenshotSelectionList.this.setSelected(this);
-         this.gui.refreshFromList(ScreenshotSelectionList.this.func_214376_a().isPresent());
+         this.gui.refresh();
          if (mouseX - (double) ScreenshotSelectionList.this.getRowLeft() <= 32.0D) {
 //            this.openScreenshot();
             return true;
@@ -183,9 +203,6 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
       }
 
       public void close() {
-         if (this.texture != null) {
-            this.texture.close();
-         }
 
       }
    }

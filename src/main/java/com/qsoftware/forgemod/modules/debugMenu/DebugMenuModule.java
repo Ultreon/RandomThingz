@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.modules.debugMenu;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -10,6 +11,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class DebugMenuModule extends Module {
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
+    }
+
     @Override
     public void onEnable() {
         if (QForgeMod.isClientSide()) {

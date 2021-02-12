@@ -4,14 +4,17 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.ClientRegistrationUtil;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.CoreRegisterWrapperModule;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.common.interfaces.IHasDyeColor;
 import com.qsoftware.forgemod.common.interfaces.IHasMaterialColor;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.modules.items.objects.base.DyeColorizedItem;
 import com.qsoftware.forgemod.modules.items.objects.base.MaterialColorizedItem;
 import com.qsoftware.forgemod.modules.items.objects.spawnegg.CustomSpawnEggItem;
+import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
@@ -19,12 +22,21 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Collection;
 import java.util.function.Supplier;
 
+@FieldsAreNonnullByDefault
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 @SuppressWarnings("unused")
 public class ItemsModule extends CoreRegisterWrapperModule<Item> {
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.modId);
+
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
+    }
 
     @SubscribeEvent
     public void registerItemColorHandlers(ColorHandlerEvent.Item event) {

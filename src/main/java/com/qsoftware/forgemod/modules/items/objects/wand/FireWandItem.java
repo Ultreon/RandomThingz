@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.items.objects.wand;
 
-import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.modules.items.objects.base.WandItem;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.pc.disk;
 
 import com.google.common.annotations.Beta;
-import com.qsoftware.forgemod.pc.Disk;
 
 import java.io.IOException;
 

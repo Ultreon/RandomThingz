@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.config;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.java.maps.SequencedHashMap;
-import com.qsoftware.forgemod.modules.ores.Ore;
+import com.qsoftware.forgemod.modules.environment.Ore;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
@@ -14,7 +14,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.*;
+import java.util.Arrays;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Optional;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault

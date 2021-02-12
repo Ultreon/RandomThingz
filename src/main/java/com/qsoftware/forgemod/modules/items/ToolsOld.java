@@ -1,10 +1,10 @@
 package com.qsoftware.forgemod.modules.items;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.common.interfaces.Translatable;
-import com.qsoftware.forgemod.modules.ui.ModItemGroups;
-import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.common.interfaces.INamed;
+import com.qsoftware.forgemod.common.interfaces.Translatable;
+import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import net.minecraft.entity.Entity;
@@ -16,7 +16,10 @@ import net.minecraft.item.*;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;

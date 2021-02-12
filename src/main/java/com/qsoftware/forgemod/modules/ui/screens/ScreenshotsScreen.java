@@ -1,19 +1,26 @@
 package com.qsoftware.forgemod.modules.ui.screens;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.FloatSize;
-import com.qsoftware.forgemod.modules.ui.common.AspectRatio;
+import com.qsoftware.forgemod.modules.ui.common.Resizer;
 import com.qsoftware.forgemod.modules.ui.common.Screenshot;
 import com.qsoftware.forgemod.modules.ui.widgets.ScreenshotSelectionList;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
+import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.Widget;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.client.renderer.texture.Texture;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.client.event.InputEvent;
@@ -27,21 +34,26 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+@SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = QForgeMod.modId)
 public class ScreenshotsScreen extends AdvancedScreen {
     // No getter / setter.
-    private final List<File> files;
+    private final List<File> files = new ArrayList<>();
     private final List<Screenshot> screenshots = new ArrayList<>();
 
     // Getter only.
     @Getter private final Screen backScreen;
-    @Getter private AspectRatio.Orientation orientation;
-    @Getter private Screenshot current;
+    @Getter private Screenshot currentScreenshot;
 
     // Getter & setter.
-    @Getter @Setter private int index;
-    private ScreenshotSelectionList list;
+    @Getter private int index;
+    @Getter private ScreenshotSelectionList list;
+    @Getter private Thread loadThread;
+    @Getter private int currentIndex = -1;
+    @Getter private int total;
+    @Getter private int loaded;
 
 
     /**
@@ -54,45 +66,94 @@ public class ScreenshotsScreen extends AdvancedScreen {
         super(titleIn);
         this.backScreen = backScreen;
 
+        this.reload();
+    }
+
+    private void reload() {
         File dir = new File(Minecraft.getInstance().gameDir, "screenshots");
-        this.files = Arrays.asList(dir.listFiles());
+        this.files.addAll(Arrays.asList(dir.listFiles()));
+        this.total = this.files.size();
         this.index = 0;
 
+        this.screenshots.clear();
+
+        this.loadThread = new Thread(this::loadShots, "ScreenshotLoader");
+        this.loadThread.start();
+    }
+
+    @SuppressWarnings("BusyWait")
+    @SneakyThrows
+    private void loadShots() {
+        this.loaded = 0;
 
         QForgeMod.LOGGER.info("Refreshing screenshot cache.");
+        AtomicBoolean active = new AtomicBoolean(true);
         for (File file : this.files) {
-            ResourceLocation location = new ResourceLocation(QForgeMod.modId, "screenshots_screen/" + file.getName());
-            Texture texture0 = Minecraft.getInstance().getTextureManager().getTexture(location);
+            active.set(true);
+            RenderSystem.recordRenderCall(() -> {
+                ResourceLocation location = new ResourceLocation(QForgeMod.modId, "screenshots_screen/" + file.getName().toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9/._-]", "_"));
+                Texture texture0 = Minecraft.getInstance().getTextureManager().getTexture(location);
 
-            DynamicTexture texture;
+                DynamicTexture texture;
 
-            if (texture0 == null) {
-                QForgeMod.LOGGER.info("Loading texture from file @ " + file.getPath());
-                QForgeMod.LOGGER.info("Loading texture to " + location);
-                texture = this.loadTexture(location, file);
+                if (texture0 == null) {
+                    texture = this.loadTexture(location, file);
 
-                if (texture == null) {
-                    location = null;
-                }
-            } else {
-                if (texture0 instanceof DynamicTexture) {
-                    texture = (DynamicTexture) texture0;
+                    if (texture == null) {
+                        location = null;
+                    }
                 } else {
-                    texture = null;
-                    location = null;
+                    if (texture0 instanceof DynamicTexture) {
+                        texture = (DynamicTexture) texture0;
+                    } else {
+                        texture = null;
+                        location = null;
+                    }
                 }
-            }
-            Screenshot screenshot = new Screenshot(file, texture, location);
-            screenshots.add(screenshot);
-        }
+                Screenshot screenshot = new Screenshot(file, texture, location);
+                screenshots.add(screenshot);
+                this.loaded++;
+                active.set(false);
+            });
 
-        this.refresh();
+            while (active.get()) {
+                Thread.sleep(50);
+            }
+        }
+        while (this.files.size() != this.screenshots.size()) {
+            Thread.sleep(50);
+        }
+        this.list.loadScreenshots();
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+
+        this.list = this.addListener(new ScreenshotSelectionList(this, Minecraft.getInstance(),
+                200, this.height - 50, 10, this.height - 40, null));
+        this.addButton(new Button(10, this.height - 30, 200, 20, DialogTexts.GUI_BACK, (btn) -> this.goBack()));
     }
 
     /**
      * Refresh the screen shot cache.
      */
-    protected void refresh() {
+    public void refresh() {
+        ScreenshotSelectionList.Entry selected = this.list.getSelected();
+        int index;
+        if (selected == null) {
+            this.currentScreenshot = null;
+            this.index = -1;
+        } else if ((selected.getIndex()) != currentIndex) {
+            index = selected.getIndex();
+            this.currentIndex = index;
+            this.currentScreenshot = screenshots.get(index);
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -102,11 +163,42 @@ public class ScreenshotsScreen extends AdvancedScreen {
 
         super.render(matrixStack, mouseX, mouseY, partialTicks);
 
-        fill(matrixStack, 160, 10, width - 20, height - 10, 0x7f000000);
+        this.list.render(matrixStack, mouseX, mouseY, partialTicks);
 
-        if (current != null) {
-            DynamicTexture texture = current.getTexture();
-            ResourceLocation location = current.getResourceLocation();
+        // Buffer and tessellator.
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+
+        // Dirt texture.
+        this.minecraft.getTextureManager().bindTexture(BACKGROUND_LOCATION);
+
+        // Color.
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+
+        // Render dirt.
+        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+        bufferbuilder.pos(0.0D, this.height, 0.0D).tex(0.0F, (float)this.height  / 32.0F).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(224, this.height, 0.0D).tex((float)224 / 32.0F, (float)this.height  / 32.0F).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(224, this.height - 40d, 0.0D).tex((float)224 / 32.0F, ((float)this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(0.0D, this.height - 40d, 0.0D).tex(0.0F, ((float)this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
+
+        // Draw
+        tessellator.draw();
+
+        // Render all children.
+        for (Widget child : this.buttons) {
+            child.render(matrixStack, mouseX, mouseY, partialTicks);
+        }
+
+        if (this.loaded != this.total) {
+            drawString(matrixStack, font, "Loaded screenshot " + loaded + " of " + total, 20, 20, 0xffffffff);
+        }
+
+        fill(matrixStack, 220, 10, width - 10, height - 10, 0x7f000000);
+
+        if (currentScreenshot != null) {
+            DynamicTexture texture = currentScreenshot.getTexture();
+            ResourceLocation location = currentScreenshot.getResourceLocation();
 
             this.minecraft.textureManager.bindTexture(location);
 
@@ -150,17 +242,17 @@ public class ScreenshotsScreen extends AdvancedScreen {
 //                }
 //            }
 
-                AspectRatio aspectRatio = new AspectRatio(imgWidth, imgHeight);
-                FloatSize size = aspectRatio.thumbnail(this.width - 20 - 160, this.height - 20);
+                Resizer resizer = new Resizer(imgWidth, imgHeight);
+                FloatSize size = resizer.thumbnail(this.width - 10 - 220, this.height - 20);
 
                 int centerX = this.width / 2;
                 int centerY = this.height / 2;
                 int width = (int) size.width;
                 int height = (int) size.height;
 
-                blit(matrixStack, centerX - width / 2 + 160, centerY / height / 2, 0, 0, width, height, width, height);
+                blit(matrixStack, 210 / 2 + centerX - width / 2, centerY - height / 2, 0, 0, width, height, width, height);
             } else {
-                blit(matrixStack, 10, 10, width - 20, height - 20, 0, 0, 2, 2, 2, 2);
+                blit(matrixStack, 220, 10, width - 20, height - 20, 0, 0, 2, 2, 2, 2);
             }
         }
     }
@@ -183,8 +275,6 @@ public class ScreenshotsScreen extends AdvancedScreen {
             Minecraft mc = Minecraft.getInstance();
 
             mc.getTextureManager().loadTexture(location, texture);
-            QForgeMod.LOGGER.info("Loaded texture for screenshot: " + location);
-            QForgeMod.LOGGER.info("File: " + file);
             return texture;
         } catch (Throwable t) {
             QForgeMod.LOGGER.error("Couldn't read image: {}", file.getAbsolutePath(), t);
@@ -252,10 +342,6 @@ public class ScreenshotsScreen extends AdvancedScreen {
         this.goBack();
     }
 
-    public void refreshFromList(boolean present) {
-        refresh();
-    }
-
     public List<File> getFiles() {
         return Collections.unmodifiableList(this.files);
     }
@@ -264,4 +350,34 @@ public class ScreenshotsScreen extends AdvancedScreen {
     public List<Screenshot> getScreenshots() {
         return Collections.unmodifiableList(this.screenshots);
     }
+
+//    @Override
+//    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+//        return this.list.mouseClicked(mouseX, mouseY, button);
+//    }
+//    @Override
+//    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+//        return this.list.mouseReleased(mouseX, mouseY, button);
+//    }
+//    @Override
+//    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+//        return this.list.mouseDragged(mouseX, mouseY, button, dragX, dragY);
+//    }
+//    @Override
+//    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+//        return this.list.mouseScrolled(mouseX, mouseY, delta);
+//    }
+//    @Override
+//    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+//        super.keyPressed(keyCode, s)
+//        return this.list.keyPressed(keyCode, scanCode, modifiers);
+//    }
+//    @Override
+//    public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
+//        return this.list.keyReleased(keyCode, scanCode, modifiers);
+//    }
+//    @Override
+//    public boolean charTyped(char codePoint, int modifiers) {
+//        return this.list.charTyped(codePoint, modifiers);
+//    }
 }

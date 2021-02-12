@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.modules.items.objects.tools;
 
-import com.google.common.collect.ImmutableSet;
 import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CampfireBlock;
@@ -9,10 +8,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.multiplayer.PlayerController;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.*;
@@ -26,8 +23,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
-import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = QForgeMod.modId)
 public class HammerItem extends PickaxeItem {

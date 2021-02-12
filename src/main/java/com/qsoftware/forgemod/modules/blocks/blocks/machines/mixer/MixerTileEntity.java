@@ -1,13 +1,13 @@
 package com.qsoftware.forgemod.modules.blocks.blocks.machines.mixer;
 
-import com.qsoftware.forgemod.modules.blocks.ModMachineTileEntities;
-import com.qsoftware.modlib.api.IFluidContainer;
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.crafting.recipe.MixingRecipe;
 import com.qsoftware.forgemod.init.ModRecipes;
+import com.qsoftware.forgemod.modules.blocks.ModMachineTileEntities;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractFluidMachineTileEntity;
 import com.qsoftware.forgemod.util.InventoryUtils;
-import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.util.TextUtils;
+import com.qsoftware.modlib.api.IFluidContainer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;

@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.modules.updates;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.common.Ticker;
 import com.qsoftware.forgemod.common.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
@@ -52,6 +53,11 @@ public class UpdatesModule extends Module {
         } else {
             throw new IllegalStateException("Minecraft isn't either on client or server side.");
         }
+    }
+
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
     }
 
     public AbstractUpdater<?> getUpdater(String modId) {

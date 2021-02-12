@@ -3,7 +3,6 @@ package com.qsoftware.forgemod.modules.ui;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.container.CrateContainer;
 import com.qsoftware.forgemod.init.ObjectInit;
-import com.qsoftware.forgemod.util.ExceptionUtil;
 import lombok.experimental.UtilityClass;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.common.extensions.IForgeContainerType;

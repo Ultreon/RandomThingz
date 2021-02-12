@@ -1,9 +1,8 @@
-package com.qsoftware.forgemod.modules.ores;
+package com.qsoftware.forgemod.modules.environment;
 
 import com.mojang.datafixers.util.Pair;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.val;
 import net.minecraft.block.Block;
@@ -38,6 +37,7 @@ import static net.minecraft.world.gen.feature.OreFeatureConfig.FillerBlockType.B
  *
  * @author Qboi123
  */
+@SuppressWarnings("unused")
 public final class ModOreGen {
     private static final ConcurrentHashMap<ResourceLocation, ArrayList<HashMap.SimpleEntry<GenerationStage.Decoration, ConfiguredFeature<?, ?>>>> oreMap = new ConcurrentHashMap<>();
     private static final ArrayList<Pair<Predicate<BiomeLoadingEvent>, ConfiguredFeature<?, ?>>> ores = new ArrayList<>();
@@ -106,7 +106,7 @@ public final class ModOreGen {
     /**
      * Create ore features.
      *
-     * @see #onBiomeLoading(BiomeLoadingEvent)
+     * @see #loadOreFeatures(BiomeLoadingEvent)
      */
     public void addOresFeatures() {
         // Started generating ores.
@@ -173,7 +173,7 @@ public final class ModOreGen {
      */
     @SuppressWarnings("CommentedOutCode")
     @SubscribeEvent
-    public void onBiomeLoading(BiomeLoadingEvent event) {
+    public void loadOreFeatures(BiomeLoadingEvent event) {
         int i = 0;
 //        if (oreMap.containsKey(event.getName())) {
 //            ArrayList<AbstractMap.SimpleEntry<GenerationStage.Decoration, ConfiguredFeature<?, ?>>> list = oreMap.get(event.getName());

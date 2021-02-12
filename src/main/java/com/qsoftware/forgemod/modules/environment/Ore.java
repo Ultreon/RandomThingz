@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.modules.ores;
+package com.qsoftware.forgemod.modules.environment;
 
 import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.config.OreConfig;

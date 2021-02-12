@@ -7,11 +7,12 @@ import com.qsoftware.forgemod.modules.items.objects.spawnegg.CustomSpawnEggItem;
 import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
-import com.qsoftware.forgemod.util.ExceptionUtil;
+import lombok.experimental.UtilityClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 
 @SuppressWarnings("unused")
+@UtilityClass
 public class ModItemsNew extends ObjectInit<Item> {
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.modId);
 
@@ -35,10 +36,6 @@ public class ModItemsNew extends ObjectInit<Item> {
                                                                                                       int primaryColor, int secondaryColor) {
         //Note: We are required to use a custom item as we cannot use the base SpawnEggItem due to the entity type not being initialized yet
         return ITEMS.register(entityTypeProvider.getInternalRegistryName() + "_spawn_egg", () -> new CustomSpawnEggItem<>(entityTypeProvider, primaryColor, secondaryColor));
-    }
-
-    private ModItemsNew() {
-        throw ExceptionUtil.utilityConstructor();
     }
 
     public static void register() {

@@ -12,7 +12,7 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.IntArray;
 import net.minecraftforge.energy.CapabilityEnergy;
 
-public class BatteryBoxContainer extends AbstractEnergyStorageContainer {
+public class BatteryBoxContainer extends AbstractEnergyStorageContainer<BatteryBoxTileEntity> {
     final BatteryBoxTileEntity tileEntity;
 
     public BatteryBoxContainer(int id, PlayerInventory playerInventory) {
@@ -35,46 +35,46 @@ public class BatteryBoxContainer extends AbstractEnergyStorageContainer {
 
     @Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        ItemStack itemstack = ItemStack.EMPTY;
+        ItemStack stackCopy = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
         if (slot != null && slot.getHasStack()) {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
+            ItemStack stack = slot.getStack();
+            stackCopy = stack.copy();
 
             final int inventorySize = BatteryBoxTileEntity.INVENTORY_SIZE;
             final int playerInventoryEnd = inventorySize + 27;
             final int playerHotbarEnd = playerInventoryEnd + 9;
 
             if (index >= inventorySize) {
-                if (this.isBattery(itemstack1)) {
-                    if (!this.mergeItemStack(itemstack1, 0, inventorySize, false)) {
+                if (this.isBattery(stack)) {
+                    if (!this.mergeItemStack(stack, 0, inventorySize, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (index < playerInventoryEnd) {
-                    if (!this.mergeItemStack(itemstack1, playerInventoryEnd, playerHotbarEnd, false)) {
+                    if (!this.mergeItemStack(stack, playerInventoryEnd, playerHotbarEnd, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < playerHotbarEnd && !this.mergeItemStack(itemstack1, inventorySize, playerInventoryEnd, false)) {
+                } else if (index < playerHotbarEnd && !this.mergeItemStack(stack, inventorySize, playerInventoryEnd, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, inventorySize, playerHotbarEnd, false)) {
+            } else if (!this.mergeItemStack(stack, inventorySize, playerHotbarEnd, false)) {
                 return ItemStack.EMPTY;
             }
 
-            if (itemstack1.isEmpty()) {
+            if (stack.isEmpty()) {
                 slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();
             }
 
-            if (itemstack1.getCount() == itemstack.getCount()) {
+            if (stack.getCount() == stackCopy.getCount()) {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(playerIn, itemstack1);
+            slot.onTake(playerIn, stack);
         }
 
-        return itemstack;
+        return stackCopy;
     }
 
     private boolean isBattery(ItemStack stack) {

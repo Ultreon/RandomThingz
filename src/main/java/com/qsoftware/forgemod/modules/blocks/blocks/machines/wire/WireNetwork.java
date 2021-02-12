@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.blocks.blocks.machines.wire;
 
-import com.qsoftware.modlib.api.ConnectionType;
 import com.qsoftware.forgemod.util.EnergyUtils;
+import com.qsoftware.modlib.api.ConnectionType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;

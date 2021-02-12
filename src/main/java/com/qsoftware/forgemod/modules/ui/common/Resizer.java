@@ -3,29 +3,29 @@ package com.qsoftware.forgemod.modules.ui.common;
 import com.qsoftware.forgemod.common.FloatSize;
 import lombok.Getter;
 
-public class AspectRatio {
+public class Resizer {
     @Getter private final float ratio;
     @Getter private final float relativeRatio;
     @Getter private final Orientation orientation;
     @Getter private final float sourceWidth;
     @Getter private final float sourceHeight;
 
-    public AspectRatio(float width, float height) {
-        this.ratio = width / height;
+    public Resizer(float srcWidth, float srcHeight) {
+        this.ratio = srcWidth / srcHeight;
         
-        if (width > height) {
-            this.relativeRatio = width / height;
+        if (srcWidth > srcHeight) {
+            this.relativeRatio = srcWidth / srcHeight;
             this.orientation = Orientation.LANDSCAPE;
-        } else if (width < height) {
-            this.relativeRatio = height / width;
+        } else if (srcWidth < srcHeight) {
+            this.relativeRatio = srcHeight / srcWidth;
             this.orientation = Orientation.PORTRAIT;
         } else {
             this.relativeRatio = 1;
             this.orientation = Orientation.SQUARE;
         }
         
-        this.sourceWidth = width;
-        this.sourceHeight = height;
+        this.sourceWidth = srcWidth;
+        this.sourceHeight = srcHeight;
     }
     
     public FloatSize thumbnail(float maxWidth, float maxHeight) {

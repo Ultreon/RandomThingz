@@ -1,8 +1,5 @@
 package com.qsoftware.filters;
 
-import com.qsoftware.filters.FilterEntry;
-import com.qsoftware.filters.Filters;
-import com.qsoftware.filters.Reference;
 import com.qsoftware.filters.gui.widget.button.IconButton;
 import com.qsoftware.filters.gui.widget.button.TagButton;
 import net.minecraft.block.Blocks;

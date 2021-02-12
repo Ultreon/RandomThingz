@@ -1,9 +1,9 @@
 package com.qsoftware.forgemod.client;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.modules.environment.ModEntities;
 import com.qsoftware.forgemod.modules.environment.client.renderer.RenderBabyCreeper;
 import com.qsoftware.forgemod.modules.environment.client.renderer.RenderBabyEnderman;
-import com.qsoftware.forgemod.modules.environment.ModEntities;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.StrayRenderer;

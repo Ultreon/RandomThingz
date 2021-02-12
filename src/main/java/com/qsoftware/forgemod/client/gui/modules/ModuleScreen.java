@@ -3,11 +3,11 @@ package com.qsoftware.forgemod.client.gui.modules;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.ui.toasts.ErrorToast;
-import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.common.Module;
+import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.graphics.MCGraphics;
 import com.qsoftware.forgemod.modules.ui.screens.AdvancedScreen;
+import com.qsoftware.forgemod.modules.ui.toasts.ErrorToast;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -23,8 +23,9 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.awt.*;
 import java.io.IOException;
-import java.util.*;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @SuppressWarnings({"unused"})
 @OnlyIn(Dist.CLIENT)

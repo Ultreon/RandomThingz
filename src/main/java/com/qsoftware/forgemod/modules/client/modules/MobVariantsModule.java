@@ -5,6 +5,7 @@ import com.google.common.collect.Multimaps;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.modules.client.modules.render.variant.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -35,6 +36,11 @@ public class MobVariantsModule extends Module {
 
     public MobVariantsModule() {
 
+    }
+
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
     }
 
     @Override

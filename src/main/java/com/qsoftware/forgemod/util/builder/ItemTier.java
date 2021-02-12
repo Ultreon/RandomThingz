@@ -3,7 +3,6 @@ package com.qsoftware.forgemod.util.builder;
 import lombok.Builder;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyValue;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;

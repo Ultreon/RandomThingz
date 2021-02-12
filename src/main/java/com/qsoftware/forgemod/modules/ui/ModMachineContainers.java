@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.modules.ui;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.modules.blocks.MachineType;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterScreen;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.batterybox.BatteryBoxContainer;
@@ -28,7 +29,6 @@ import com.qsoftware.forgemod.modules.blocks.blocks.machines.refinery.RefineryCo
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.refinery.RefineryScreen;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.solidifier.SolidifierContainer;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.solidifier.SolidifierScreen;
-import com.qsoftware.forgemod.common.enums.MachineTier;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.inventory.container.Container;

@@ -1,9 +1,9 @@
 package com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher;
 
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.modules.blocks.MachineType;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineContainer;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineTileEntity;
-import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.modlib.silentlib.inventory.SlotOutputOnly;
 import com.qsoftware.modlib.silentlib.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;

@@ -2,9 +2,6 @@ package com.qsoftware.filters;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.qsoftware.filters.Events;
-import com.qsoftware.filters.FilterEntry;
-import com.qsoftware.filters.Reference;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;

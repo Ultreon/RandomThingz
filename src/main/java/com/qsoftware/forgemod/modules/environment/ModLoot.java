@@ -42,7 +42,7 @@ public class ModLoot {
     }
 
     private static LootPool getInjectPool(String entryName) {
-        return LootPool.builder().addEntry(getInjectEntry(entryName)).bonusRolls(0, 1).name("xreliquary_inject_pool").build();
+        return LootPool.builder().addEntry(getInjectEntry(entryName)).bonusRolls(0, 1).name("qforgemod_inject_pool").build();
     }
 
     private static LootEntry.Builder<?> getInjectEntry(String name) {

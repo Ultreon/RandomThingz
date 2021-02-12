@@ -1,10 +1,10 @@
 package com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher;
 
-import com.qsoftware.forgemod.crafting.recipe.CrushingRecipe;
-import com.qsoftware.forgemod.modules.blocks.MachineType;
-import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineTileEntity;
 import com.qsoftware.forgemod.common.enums.MachineTier;
+import com.qsoftware.forgemod.crafting.recipe.CrushingRecipe;
+import com.qsoftware.forgemod.init.ModRecipes;
+import com.qsoftware.forgemod.modules.blocks.MachineType;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineTileEntity;
 import com.qsoftware.forgemod.util.TextUtils;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

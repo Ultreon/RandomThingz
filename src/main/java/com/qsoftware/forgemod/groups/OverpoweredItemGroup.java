@@ -3,7 +3,6 @@ package com.qsoftware.forgemod.groups;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -2,7 +2,9 @@ package com.qsoftware.forgemod.modules.items.objects.tools;
 
 import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraftforge.fml.common.Mod;

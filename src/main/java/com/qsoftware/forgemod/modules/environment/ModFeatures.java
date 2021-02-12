@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.modules.environment;
 import com.qsoftware.forgemod.modules.blocks.ModFluids;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.util.ExceptionUtil;
+import lombok.experimental.UtilityClass;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.Heightmap;
@@ -23,11 +24,8 @@ import java.util.OptionalInt;
  * @author Qboi123
  */
 @SuppressWarnings("unused")
+@UtilityClass
 public final class ModFeatures {
-    private ModFeatures() {
-        throw ExceptionUtil.utilityConstructor();
-    }
-
     // Ore
     public static final ConfiguredFeature<?, ?> ORE_RUBY = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.RUBY_BLOCK.asBlockState(), 8)).range(16).square());
 

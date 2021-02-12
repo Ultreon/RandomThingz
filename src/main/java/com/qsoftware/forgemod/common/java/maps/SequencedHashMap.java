@@ -64,7 +64,6 @@ package com.qsoftware.forgemod.common.java.maps;
  */
 
 import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Externalizable;

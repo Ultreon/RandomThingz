@@ -30,8 +30,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static net.minecraft.client.gui.AbstractGui.blit;
-
 public abstract class EnergyStoringItem extends HudItem {
     public static final ResourceLocation CHARGE = QForgeMod.rl("charge");
 

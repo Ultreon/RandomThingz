@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.modules.blocks;
 
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.CoreRegisterModule;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -12,6 +13,11 @@ import java.util.function.Supplier;
 
 public class TileEntitiesModule extends CoreRegisterModule<TileEntityType<?>> {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
+
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
+    }
 
     @Override
     public void onEnable() {

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.blocks.blocks.base;
 
-import com.qsoftware.forgemod.common.interfaces.IHasOreProperties;
 import com.qsoftware.forgemod.common.OreProperties;
+import com.qsoftware.forgemod.common.interfaces.IHasOreProperties;
 import net.minecraft.block.OreBlock;
 
 public class BaseOreBlock extends OreBlock implements IHasOreProperties {

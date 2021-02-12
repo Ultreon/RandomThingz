@@ -4,6 +4,7 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.modules.client.modules.MobVariantsModule;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import lombok.NonNull;
@@ -22,6 +23,11 @@ public class ClientTweaksModule extends Module {
         super();
 
         enableSubManager();
+    }
+
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
     }
 
     @Override

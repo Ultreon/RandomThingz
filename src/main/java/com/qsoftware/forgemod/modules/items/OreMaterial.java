@@ -1,10 +1,10 @@
 package com.qsoftware.forgemod.modules.items;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.modules.ores.Ore;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.MetalBlock;
+import com.qsoftware.forgemod.modules.environment.Ore;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import net.minecraft.block.AbstractBlock;

@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.modules.environment;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.CoreRegisterModule;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -17,6 +18,11 @@ import java.util.function.Supplier;
 
 public class WorldGenerationModule extends CoreRegisterModule<Biome> {
     public static final DeferredRegister<Biome> BIOMES = create(ForgeRegistries.BIOMES);
+
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
+    }
 
     @Override
     public void onEnable() {

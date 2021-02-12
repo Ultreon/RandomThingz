@@ -1,11 +1,13 @@
 package com.qsoftware.forgemod.modules.ui.common;
 
-import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.NativeImage;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class LocalTexture extends DynamicTexture {
     public LocalTexture(File file) throws IOException {

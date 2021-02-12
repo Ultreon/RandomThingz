@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.modules.environment;
 
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.CoreRegisterModule;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.modules.environment.client.model.AdditionsModelCache;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -16,6 +17,11 @@ import java.util.function.Supplier;
 
 public class EntitiesModule extends CoreRegisterModule<EntityType<?>> {
     public final DeferredRegister<EntityType<?>> ENTITIES = create(ForgeRegistries.ENTITIES);
+
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
+    }
 
     @SubscribeEvent
     public void modelRegEvent(ModelRegistryEvent event) {

@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.modules.ui;
 
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.CoreModule;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.init.Registration;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.fml.RegistryObject;
@@ -11,6 +12,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 
 public class UserInterfaceModule extends CoreModule {
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
+    }
+
     @Override
     public void onEnable() {
         // Todo: add enabling for Main Module.

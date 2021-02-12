@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.modules.ui;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.util.ExceptionUtil;
 import lombok.experimental.UtilityClass;
 import net.minecraft.stats.IStatFormatter;
 import net.minecraft.stats.Stats;

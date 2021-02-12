@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher;
 
+import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.modules.blocks.MachineType;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBlock;
-import com.qsoftware.forgemod.common.enums.MachineTier;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;

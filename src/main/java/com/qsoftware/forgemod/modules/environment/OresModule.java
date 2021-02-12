@@ -1,7 +1,8 @@
-package com.qsoftware.forgemod.modules.ores;
+package com.qsoftware.forgemod.modules.environment;
 
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.CoreModule;
+import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 
@@ -12,6 +13,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class OresModule extends CoreModule {
     private final ModOreGen oreGen = ModOreGen.getInstance();
+
+    @Override
+    public ModuleSecurity getSecurity() {
+        return ModuleSecurity.SAFE;
+    }
 
     @Override
     public void onEnable() {
