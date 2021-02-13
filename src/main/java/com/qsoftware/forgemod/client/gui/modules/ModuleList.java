@@ -181,7 +181,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
          RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
          AbstractGui.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 32, 32);
 
-         int dx = 72 + xOffset + 8;
+         int dx = 64 + xOffset + 8;
 
          this.mc.getTextureManager().bindTexture(MODULE_OVERLAYS);
          if (this.module.isCore()) {
@@ -276,13 +276,13 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
          }
          this.mc.getTextureManager().bindTexture(MANAGER_BUTTON);
          if (this.module.isSubManagerEnabled()) {
-            if (AdvancedScreen.isPointInRegion(btnX, btnY, 19, 20, i, j)) {
-               blit(matrixStack, btnSubX + 36, btnSubY, 19, 20, 0, 40, 19, 20, 19, 60);
+            if (AdvancedScreen.isPointInRegion(btnX + 22, btnY, 19, 20, i, j)) {
+               blit(matrixStack, btnSubX + 22, btnSubY, 19, 20, 0, 40, 19, 20, 19, 60);
             } else {
-               blit(matrixStack, btnSubX + 36, btnSubY, 19, 20, 0, 20, 19, 20, 19, 60);
+               blit(matrixStack, btnSubX + 22, btnSubY, 19, 20, 0, 20, 19, 20, 19, 60);
             }
          } else {
-            blit(matrixStack, btnSubX + 36, btnSubY, 19, 20, 0, 0, 19, 20, 19, 60);
+            blit(matrixStack, btnSubX + 22, btnSubY, 19, 20, 0, 0, 19, 20, 19, 60);
          }
       }
 
@@ -307,7 +307,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
          if (this.module.hasOptions() && AdvancedScreen.isPointInRegion(btnX, btnY, 19, 20, deltaX, deltaY)) {
             this.module.showOptions(this.screen);
          }
-         if (this.module.isSubManagerEnabled() && AdvancedScreen.isPointInRegion(btnX + 36, btnY, 19, 20, deltaX, deltaY)) {
+         if (this.module.isSubManagerEnabled() && AdvancedScreen.isPointInRegion(btnX + 22, btnY, 19, 20, deltaX, deltaY)) {
             Minecraft.getInstance().displayGuiScreen(new ModuleScreen(this.screen, this.module.getSubmoduleManager(), this.screen.getTitle()));
          }
          // Check if is on arrow button.

@@ -7,6 +7,9 @@ import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.modules.client.modules.render.variant.*;
+import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
+import mcp.MethodsReturnNonnullByDefault;
+import mezz.jei.collect.ListMultiMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -14,22 +17,36 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.function.Supplier;
 
+@FieldsAreNonnullByDefault
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class MobVariantsModule extends Module {
-    public static boolean enableCow;
-    public static boolean enablePig;
-    public static boolean enableChicken;
-    public static boolean enableShinyRabbit;
-    public static boolean enableShinyLlama;
-    public static boolean enableLGBTBees;
+    public static boolean enableCow = true;
+    public static boolean enablePig = true;
+    public static boolean enableChicken = true;
+    public static boolean enableCreeper = true;
+    public static boolean enableZombie = true;
+    public static boolean enableShinyRabbit = true;
+    public static boolean enableShinyLlama = true;
+    public static boolean enableLGBTBees = true;
 
-    private static ListMultimap<VariantTextureType, ResourceLocation> textures;
-    private static Map<VariantTextureType, ResourceLocation> shinyTextures;
+    private static ListMultimap<VariantTextureType, ResourceLocation> textures = Multimaps.newListMultimap(new EnumMap<>(VariantTextureType.class), ArrayList::new);
+    private static ListMultimap<VariantTextureType, ResourceLocation> shinyTextures = Multimaps.newListMultimap(new EnumMap<>(VariantTextureType.class), ArrayList::new);
 
     private static final int COW_COUNT = 4;
+    private static final int CREEPER_COUNT = 2;
+    private static final int ZOMBIE_COUNT = 6;
+    private static final int SHINY_COW_COUNT = 2;
+    private static final int SHINY_CREEPER_COUNT = 1;
+    private static final int SHINY_ZOMBIE_COUNT = 1;
+    private static final int SHINY_PIG_COUNT = 2;
+    private static final int SHINY_CHICKEN_COUNT = 2;
     private static final int PIG_COUNT = 3;
     private static final int CHICKEN_COUNT = 6;
     public static int shinyAnimalChance = 2048;
@@ -53,13 +70,18 @@ public class MobVariantsModule extends Module {
         super.clientSetup();
 
         textures = Multimaps.newListMultimap(new EnumMap<>(VariantTextureType.class), ArrayList::new);
-        shinyTextures = new HashMap<>();
+        shinyTextures = Multimaps.newListMultimap(new EnumMap<>(VariantTextureType.class), ArrayList::new);
 
-        registerTextures(VariantTextureType.COW, COW_COUNT, new ResourceLocation("textures/entity/cow/cow.png"));
-        registerTextures(VariantTextureType.PIG, PIG_COUNT, new ResourceLocation("textures/entity/pig/pig.png"));
-        registerTextures(VariantTextureType.CHICKEN, CHICKEN_COUNT, new ResourceLocation("textures/entity/chicken.png"));
-        registerShiny(VariantTextureType.RABBIT);
-        registerShiny(VariantTextureType.LLAMA);
+        QForgeMod.LOGGER.debug("Registering textures.");
+        registerTextures(VariantTextureType.COW, COW_COUNT, SHINY_COW_COUNT, new ResourceLocation("textures/entity/cow/cow.png"));
+        registerTextures(VariantTextureType.PIG, PIG_COUNT, SHINY_PIG_COUNT, new ResourceLocation("textures/entity/pig/pig.png"));
+        registerTextures(VariantTextureType.CHICKEN, CHICKEN_COUNT, SHINY_CHICKEN_COUNT, new ResourceLocation("textures/entity/chicken.png"));
+        registerTextures(VariantTextureType.CREEPER, CREEPER_COUNT, SHINY_CREEPER_COUNT, new ResourceLocation("textures/entity/creeper/creeper.png"));
+        registerTextures(VariantTextureType.ZOMBIE, ZOMBIE_COUNT, SHINY_ZOMBIE_COUNT, new ResourceLocation("textures/entity/creeper.png"));
+
+        QForgeMod.LOGGER.debug("Registering shiny textures.");
+        registerShiny(VariantTextureType.RABBIT, 1);
+        registerShiny(VariantTextureType.LLAMA, 1);
 
         if(enableCow)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.COW, VariantCowRenderer::new);
@@ -67,6 +89,10 @@ public class MobVariantsModule extends Module {
             RenderingRegistry.registerEntityRenderingHandler(EntityType.PIG, VariantPigRenderer::new);
         if(enableChicken)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.CHICKEN, VariantChickenRenderer::new);
+        if(enableCreeper)
+            RenderingRegistry.registerEntityRenderingHandler(EntityType.CREEPER, VariantCreeperRenderer::new);
+        if(enableZombie)
+            RenderingRegistry.registerEntityRenderingHandler(EntityType.ZOMBIE, VariantZombieRenderer::new);
         if(enableShinyRabbit)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.RABBIT, VariantRabbitRenderer::new);
         if(enableShinyLlama)
@@ -115,8 +141,12 @@ public class MobVariantsModule extends Module {
     public static ResourceLocation getTextureOrShiny(Entity e, VariantTextureType type, Supplier<ResourceLocation> nonShiny) {
         UUID id = e.getUniqueID();
         long most = id.getMostSignificantBits();
-        if(shinyAnimalChance > 0 && (most % shinyAnimalChance) == 0)
-            return shinyTextures.get(type);
+        long least = id.getLeastSignificantBits();
+        List<ResourceLocation> styles = shinyTextures.get(type);
+        if(shinyAnimalChance > 0 && (most % shinyAnimalChance) == 0) {
+            int choice = Math.abs((int) (least % styles.size()));
+            return styles.get(choice);
+        }
 
         return nonShiny.get();
     }
@@ -134,18 +164,21 @@ public class MobVariantsModule extends Module {
     }
 
     @OnlyIn(Dist.CLIENT)
-    private static void registerTextures(VariantTextureType type, int count, ResourceLocation vanilla) {
+    private static void registerTextures(VariantTextureType type, int count, int shinyCount, @Nullable ResourceLocation vanilla) {
         String name = type.name().toLowerCase(Locale.ROOT);
         for(int i = 1; i < count + 1; i++)
-            textures.put(type, new ResourceLocation(QForgeMod.modId, String.format("textures/model/entity/variants/%s%d.png", name, i)));
+            textures.put(type, new ResourceLocation(QForgeMod.modId, String.format("textures/entity/variants/%s%d.png", name, i)));
 
         if(vanilla != null)
             textures.put(type, vanilla);
-        registerShiny(type);
+        registerShiny(type, shinyCount);
     }
 
-    private static void registerShiny(VariantTextureType type) {
-        shinyTextures.put(type, new ResourceLocation(QForgeMod.modId, String.format("textures/model/entity/variants/%s_shiny.png", type.name().toLowerCase(Locale.ROOT))));
+    private static void registerShiny(VariantTextureType type, int count) {
+        String name = type.name().toLowerCase(Locale.ROOT);
+//        shinyTextures.put(type, new ResourceLocation(QForgeMod.modId, String.format("textures/entity/variants/%s_shiny.png", name)));
+        for(int i = 1; i < count + 1; i++)
+            textures.put(type, new ResourceLocation(QForgeMod.modId, String.format("textures/entity/variants/%s_shiny%d.png", name, i)));
     }
 
     @Override
@@ -154,6 +187,6 @@ public class MobVariantsModule extends Module {
     }
 
     public enum VariantTextureType {
-        COW, PIG, CHICKEN, LLAMA, RABBIT
+        COW, PIG, CHICKEN, LLAMA, CREEPER, ZOMBIE, RABBIT
     }
 }
