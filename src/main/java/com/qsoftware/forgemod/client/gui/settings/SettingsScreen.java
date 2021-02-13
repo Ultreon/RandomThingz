@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleScreen;
+import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.common.text.Translations;
 import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.forgemod.modules.ui.screens.ScreenshotsScreen;
@@ -84,7 +85,7 @@ public class SettingsScreen extends Screen {
     }
 
     private void openModulesScreen(Button button) {
-        Objects.requireNonNull(this.minecraft).displayGuiScreen(new ModuleScreen(this, new TranslationTextComponent("screen.qforgemod.modules")));
+        Objects.requireNonNull(this.minecraft).displayGuiScreen(new ModuleScreen(this, ModuleManager.getInstance(), new TranslationTextComponent("screen.qforgemod.modules")));
     }
 
     private void openScreenshotsScreen(Button button) {

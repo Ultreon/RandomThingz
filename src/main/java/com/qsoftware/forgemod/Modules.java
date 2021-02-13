@@ -15,11 +15,13 @@ import com.qsoftware.forgemod.modules.pcCrash.PCCrashModule;
 import com.qsoftware.forgemod.modules.pcShutdown.PCShutdownModule;
 import com.qsoftware.forgemod.modules.blocks.TileEntitiesModule;
 import com.qsoftware.forgemod.modules.updates.UpdatesModule;
+import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
+@UtilityClass
 public class Modules {
     public static final List<Module> MODULES = new ArrayList<>();
     public static final MainModule MAIN = new MainModule();

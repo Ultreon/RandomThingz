@@ -26,6 +26,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import org.apache.logging.log4j.Logger;
@@ -55,7 +56,18 @@ public class Initialization {
      *
      * @param event a {@link FMLCommonSetupEvent} object.
      */
+    void serverSetup(FMLDedicatedServerSetupEvent event) {
+        ModuleManager.getInstance().serverSetup();
+    }
+
+    /**
+     * Setup server side components.
+     *
+     * @param event a {@link FMLCommonSetupEvent} object.
+     */
     void commonSetup(FMLCommonSetupEvent event) {
+        ModuleManager.getInstance().commonSetup();
+
         event.enqueueWork(() -> {
             // Baby variants.
             GlobalEntityTypeAttributes.put(ModEntities.BABY_CREEPER.get(), EntityBabyCreeper.registerAttributes().create());
@@ -159,6 +171,7 @@ public class Initialization {
      */
     void serverStart(@SuppressWarnings("unused") FMLServerStartingEvent event) {
         logger.info("Hello server!");
+        ModuleManager.getInstance().serverStart();
     }
 
     /**
@@ -166,6 +179,7 @@ public class Initialization {
      */
     void clientStart() {
         logger.info("Hello client!");
+        ModuleManager.getInstance().clientStart();
     }
 
     /**
@@ -175,6 +189,7 @@ public class Initialization {
      */
     void loadComplete(FMLLoadCompleteEvent event) {
         logger.info("LoadCompleteEvent: " + event);
+        ModuleManager.getInstance().loadComplete();
     }
 
     public QForgeMod getMod() {

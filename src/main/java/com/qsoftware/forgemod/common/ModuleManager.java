@@ -299,4 +299,22 @@ public final class ModuleManager {
     public Module getModule(@NonNull String name) {
         return moduleRegistry.get(name);
     }
+
+    public void serverStart() {
+        for (Module module : enabled) {
+            module.serverStart();
+        }
+    }
+
+    public void clientStart() {
+        for (Module module : enabled) {
+            module.clientStart();
+        }
+    }
+
+    public void loadComplete() {
+        for (Module module : enabled) {
+            module.loadComplete();
+        }
+    }
 }

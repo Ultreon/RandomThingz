@@ -33,13 +33,20 @@ public abstract class Module {
     public void clientSetup() {
         this.submoduleManager.clientSetup();
     }
-
     public void commonSetup() {
         this.submoduleManager.commonSetup();
     }
-
     public void serverSetup() {
         this.submoduleManager.serverSetup();
+    }
+    public void serverStart() {
+        this.submoduleManager.serverStart();
+    }
+    public void clientStart() {
+        this.submoduleManager.clientStart();
+    }
+    public void loadComplete() {
+        this.submoduleManager.loadComplete();
     }
 
     public abstract void onDisable();
@@ -64,8 +71,8 @@ public abstract class Module {
         subManagerEnabled = true;
     }
 
-    // Default values
 
+    // Default values
     /**
      * @return an text component containing the localized name of the module/
      */
@@ -150,11 +157,11 @@ public abstract class Module {
 
     protected static abstract class ClientSide {
 
-    }
 
+    }
     protected static abstract class ServerSide {
-    }
 
+    }
     public boolean requiresRestart() {
         return false;
     }

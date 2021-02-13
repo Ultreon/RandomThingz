@@ -47,16 +47,17 @@ public class ModuleScreen extends Screen {
    private final Map<String, ResourceLocation> field_243394_y = Maps.newHashMap();
 
    // Modules.
-   private final ModuleManager manager = ModuleManager.getInstance();
+   private ModuleManager manager;
    private List<Module> enabled;
    private List<Module> disabled;
 
-   public ModuleScreen(@Nullable Screen backScreen, ITextComponent p_i242060_5_) {
+   public ModuleScreen(@Nullable Screen backScreen, ModuleManager manager, ITextComponent p_i242060_5_) {
       // Super call.
       super(p_i242060_5_);
 
       // Assign back screen.
       this.backScreen = backScreen;
+      this.manager = manager;
    }
 
    @Override

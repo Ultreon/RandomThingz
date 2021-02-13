@@ -172,6 +172,7 @@ public class QForgeMod {
 
         // Register mod event bus listeners.
         modEventBus.addListener(QForgeMod.init::clientSetup);
+        modEventBus.addListener(QForgeMod.init::serverSetup);
         modEventBus.addListener(QForgeMod.init::commonSetup);
         modEventBus.addListener(QForgeMod.init::loadComplete);
         modEventBus.addListener(this::enqueueIMC);
