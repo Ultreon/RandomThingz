@@ -52,32 +52,29 @@ import java.util.stream.Collectors;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 @FieldsAreNonnullByDefault
-@Mod("qforgemod")
+@Mod(QForgeMod.modId)
 @Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class QForgeMod {
     /**
      * QForgeMod's Logger
      */
-    public static final Logger LOGGER = LogManager.getLogger(QForgeMod.modId);
+    public static final Logger LOGGER = LogManager.getLogger(QForgeMod.modName);
 
     /**
      * Unused.
      */
     @SuppressWarnings("unused")
+    @Deprecated
     public static final Random RANDOM = new Random();
+    private static final boolean MOD_TEST_PHASE = false;
 
     // Class static fields.
     @Getter @Nullable private static QForgeMod instance;
     @Getter @Nullable private static IProxy proxy;
     @Getter @Nullable private static Initialization init;
-    private static final boolean TEST_PHASE_ON = true;
 
-    @Getter private static final boolean isClientSide;
-    @Getter private static final boolean isServerSide;
-    @Deprecated
-    @Getter private static final int buildNumber;
-
-//    private static final Optional<? extends ModContainer> MOD_CONTAINER = ModList.get().getModContainerById(MOD_ID);
+    @Getter private static final boolean clientSide;
+    @Getter private static final boolean serverSide;
 
     // Mod Data
     @Getter public static final String modId = "qforgemod";
@@ -99,7 +96,7 @@ public class QForgeMod {
         } catch (ClassNotFoundException e) {
             c = false;
         }
-        isClientSide = c;
+        clientSide = c;
 
         boolean s;
         try {
@@ -108,17 +105,7 @@ public class QForgeMod {
         } catch (ClassNotFoundException e) {
             s = false;
         }
-        isServerSide = s;
-
-//        int a;
-//        InputStream resourceAsStream = QForgeMod.class.getResourceAsStream("/META-INF/buildnumber.txt");
-//        try {
-//            String buildNrString = IOUtils.toString(new InputStreamReader(resourceAsStream));
-//            a = Integer.parseInt(buildNrString);
-//        } catch (IOException e) {
-//            throw new RuntimeException("Couldn't read buildnumber", e);
-//        }
-//        buildNumber = a;
+        serverSide = s;
 
         // Create gson instance.
         Gson gson = new Gson();
@@ -134,8 +121,6 @@ public class QForgeMod {
         modArgs = new QfmArgs(o);
         modVersion = modArgs.getVersion().getName();
         version = modArgs.getVersion().toVersionObject();
-
-        buildNumber = modArgs.getVersion().getBuild();
     }
 
     // Getters
@@ -243,7 +228,7 @@ public class QForgeMod {
      * @return true if QForgeMod is in test phase, false otherwise.
      */
     public static boolean isTestPhase() {
-        return isDevState() || TEST_PHASE_ON;
+        return isDevState() || MOD_TEST_PHASE;
     }
 
     /**

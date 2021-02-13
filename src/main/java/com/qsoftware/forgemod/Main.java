@@ -26,10 +26,6 @@ public class Main {
             return;
         }
 
-//        String message = "\"You tried to open QForgeMod itself.\"\n"
-//                + "You should place this file in the mods folder of your Minecraft instance.\n"
-//                + path;
-
         String message = "Do you want to install QForgeMod?\n";
         final boolean pressedYes = JOptionPane.showConfirmDialog(new Frame(), message, "QForgeMod installation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0;
 
@@ -53,76 +49,4 @@ public class Main {
 
         System.exit(0);
     }
-
-//    public static OS getOSType() {
-//        String s = System.getProperty("os.name").toLowerCase(Locale.ROOT);
-//        if (s.contains("win")) {
-//            return OS.WINDOWS;
-//        } else if (s.contains("mac")) {
-//            return OS.OSX;
-//        } else if (s.contains("solaris")) {
-//            return OS.SOLARIS;
-//        } else if (s.contains("sunos")) {
-//            return OS.SOLARIS;
-//        } else if (s.contains("linux")) {
-//            return OS.LINUX;
-//        } else {
-//            return s.contains("unix") ? OS.LINUX : OS.UNKNOWN;
-//        }
-//    }
-//
-//    public enum OS {
-//        LINUX,
-//        SOLARIS,
-//        WINDOWS {
-//            protected String[] getOpenCommandLine(URL url) {
-//                return new String[]{"rundll32", "url.dll,FileProtocolHandler", url.toString()};
-//            }
-//        },
-//        OSX {
-//            protected String[] getOpenCommandLine(URL url) {
-//                return new String[]{"open", url.toString()};
-//            }
-//        },
-//        UNKNOWN;
-//
-//        OS() {
-//        }
-//
-//        public void openURL(URL url) {
-//            try {
-//                Process process = AccessController.doPrivileged((PrivilegedExceptionAction<Process>)(() -> Runtime.getRuntime().exec(this.getOpenCommandLine(url))));
-//
-//                for(String s : IOUtils.readLines(process.getErrorStream())) {
-//                    System.err.println(s);
-//                }
-//
-//                process.getInputStream().close();
-//                process.getErrorStream().close();
-//                process.getOutputStream().close();
-//            } catch (IOException | PrivilegedActionException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-//
-//        public void openFile(File fileIn) {
-//            try {
-//                this.openURL(fileIn.toURI().toURL());
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            }
-//
-//        }
-//
-//        protected String[] getOpenCommandLine(URL url) {
-//            String s = url.toString();
-//            if ("file".equals(url.getProtocol())) {
-//                s = s.replace("file:", "file://");
-//            }
-//
-//            return new String[]{"xdg-open", s};
-//        }
-//
-//    }
 }

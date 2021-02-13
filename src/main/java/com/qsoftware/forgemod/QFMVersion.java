@@ -23,7 +23,7 @@ public class QFMVersion implements IVersion {
      */
     public QFMVersion(String s) {
         // String to be scanned to find the pattern.
-        String pattern = "([0-9]*)\\.([0-9]*)\\.([0-9]*).(a|alpha|b|beta|rc|pre|r|release)([0-9]*)"; // 1.0-alpha4 // 5.4-release-7
+        String pattern = "([0-9]*)\\.([0-9]*)\\.([0-9]*)-(a|alpha|b|beta|rc|pre|r|release)([0-9]*)"; // 1.0-alpha4 // 5.4-release-7
 
         // Create a Pattern object
         Pattern r = Pattern.compile(pattern);
@@ -108,6 +108,8 @@ public class QFMVersion implements IVersion {
         sb.append(version);
         sb.append('.');
         sb.append(release);
+        sb.append('.');
+        sb.append(buildNumber);
         sb.append('-');
         sb.append(stage.name().toLowerCase());
         sb.append(stageRelease);
@@ -122,7 +124,9 @@ public class QFMVersion implements IVersion {
         sb.append(version);
         sb.append('.');
         sb.append(release);
-        sb.append(' ');
+        sb.append(" (Build ");
+        sb.append(buildNumber);
+        sb.append(") ");
 
         switch (stage) {
             case ALPHA:
@@ -154,22 +158,24 @@ public class QFMVersion implements IVersion {
 
         QFMVersion version = (QFMVersion) o;
 
-        int cmp = Integer.compare(this.version, version.version);
-        if (cmp == 0) {
-            int cmp1 = Integer.compare(this.release, version.release);
-            if (cmp1 == 0) {
-                int cmp2 = this.stage.compareTo(version.stage);
-                if (cmp2 == 0) {
-                    return Integer.compare(this.stageRelease, version.stageRelease);
-                } else {
-                    return cmp2;
-                }
-            } else {
-                return cmp1;
-            }
-        } else {
-            return cmp;
-        }
+        return Integer.compare(this.buildNumber, version.buildNumber);
+        
+//        int cmp = Integer.compare(this.version, version.version);
+//        if (cmp == 0) {
+//            int cmp1 = Integer.compare(this.release, version.release);
+//            if (cmp1 == 0) {
+//                int cmp2 = this.stage.compareTo(version.stage);
+//                if (cmp2 == 0) {
+//                    return Integer.compare(this.stageRelease, version.stageRelease);
+//                } else {
+//                    return cmp2;
+//                }
+//            } else {
+//                return cmp1;
+//            }
+//        } else {
+//            return cmp;
+//        }
     }
 
     public enum Stage {

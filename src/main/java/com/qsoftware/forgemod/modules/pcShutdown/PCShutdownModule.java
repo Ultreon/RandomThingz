@@ -1,12 +1,9 @@
 package com.qsoftware.forgemod.modules.pcShutdown;
 
-import com.qsoftware.forgemod.Modules;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
-import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.common.ModuleSecurity;
-import com.qsoftware.forgemod.config.Config;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
