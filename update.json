@@ -1,5 +1,23 @@
 {
   "mc_versions": {
+    "1.16.4": {
+      "stable": {
+        "version": "1.1-release1",
+        "download": "https://github.com/Qboi123/QForgeMod/releases/download/1.1-release1/QForgeMod-1.1-release1.jar",
+        "changelog": "",
+        "dependencies": {
+          
+        }
+      },
+      "unstable": {
+        "version": "2.0.679-b1",
+        "download": "https://github.com/Qboi123/QForgeMod/releases/download/2.0.679-b1/qforgemod-2.0.697-b1.jar",
+        "changelog": "",
+        "dependencies": {
+
+        }
+      }
+    },
     "1.16.3": {
       "stable": {
         "version": "1.1-release1",
