@@ -53,7 +53,7 @@ public class UpdateChecker {
                 }
                 IVersion latestKnown = latestKnownMap.get(updater);
                 if (latestKnown == null || latest == null) {
-                    continue;
+                    continue;  // Todo: show error notification.
                 }
 
                 if (latestKnown.compareTo(latest) < 0) {
