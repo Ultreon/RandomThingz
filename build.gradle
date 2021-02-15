@@ -407,6 +407,7 @@ task("uploadJars", dependsOn: "build") {
 
 // Upload jars to local of sftp maven.
 jar.finalizedBy(uploadJars)
+jar.finalizedBy(uploadArchives)
 
 Gson gson = new Gson()
 JsonObject json = new JsonObject();

@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class UnstableInfinityIngot extends Item {
     public UnstableInfinityIngot() {
-        super(new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.RARE));
+        super(new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.RARE).maxStackSize(4));
     }
 
     @Override

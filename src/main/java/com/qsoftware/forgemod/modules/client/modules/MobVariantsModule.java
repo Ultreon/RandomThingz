@@ -77,7 +77,7 @@ public class MobVariantsModule extends Module {
         registerTextures(VariantTextureType.PIG, PIG_COUNT, SHINY_PIG_COUNT, new ResourceLocation("textures/entity/pig/pig.png"));
         registerTextures(VariantTextureType.CHICKEN, CHICKEN_COUNT, SHINY_CHICKEN_COUNT, new ResourceLocation("textures/entity/chicken.png"));
         registerTextures(VariantTextureType.CREEPER, CREEPER_COUNT, SHINY_CREEPER_COUNT, new ResourceLocation("textures/entity/creeper/creeper.png"));
-        registerTextures(VariantTextureType.ZOMBIE, ZOMBIE_COUNT, SHINY_ZOMBIE_COUNT, new ResourceLocation("textures/entity/creeper.png"));
+        registerTextures(VariantTextureType.ZOMBIE, ZOMBIE_COUNT, SHINY_ZOMBIE_COUNT, new ResourceLocation("textures/entity/zombie/zombie.png"));
 
         QForgeMod.LOGGER.debug("Registering shiny textures.");
         registerShiny(VariantTextureType.RABBIT, 1);

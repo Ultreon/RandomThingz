@@ -1,0 +1,29 @@
+{
+  "credits": [
+    {
+      "name": "Blazing Wither Skeleton",
+      "source": {
+        "type": "planet_minecraft",
+        "name": "Blazing wither skeleton",
+        "url": "https://www.planetminecraft.com/mob-skin/blazing-wither-skeleton/",
+        "user": "FmWild57",
+        "modified": true,
+        "sources": [
+          {
+            "type": "planet_minecraft",
+            "name": "Soul Charged Wither Skeleton",
+            "url": "https://www.planetminecraft.com/mob-skin/soul-charged-wither-skeleton/",
+            "user": "wjrowan",
+            "modified": false
+          }
+        ]
+      },
+      "use": {
+        "module": "client/mob_variants",
+        "type": "minecraft:entity",
+        "entity": "minecraft:wither_skeleton"
+      },
+      "modified": false
+    }
+  ]
+}

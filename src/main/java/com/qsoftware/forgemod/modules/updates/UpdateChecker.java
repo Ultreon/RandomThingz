@@ -52,6 +52,10 @@ public class UpdateChecker {
                     latestKnownMap.put(updater, updater.getCurrentModVersion());
                 }
                 IVersion latestKnown = latestKnownMap.get(updater);
+                if (latestKnown == null || latest == null) {
+                    continue;
+                }
+
                 if (latestKnown.compareTo(latest) < 0) {
                     latestKnownMap.put(updater, latest);
 

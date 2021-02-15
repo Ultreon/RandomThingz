@@ -50,7 +50,7 @@ public class AdvancedBowItem extends BowItem {
     }
 
     public AdvancedBowItem(Properties builder, float velocity, float inaccuracy, double arrowAttackDamage, int knockback, boolean defaultFlame) {
-        super(builder);
+        super(builder.maxStackSize(1));
 
         this.velocity = velocity;
         this.inaccuracy = inaccuracy;
