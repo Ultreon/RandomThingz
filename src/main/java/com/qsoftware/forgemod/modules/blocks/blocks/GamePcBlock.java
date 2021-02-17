@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.modules.blocks.blocks;
 
 import com.qsoftware.forgemod.modules.items.objects.type.FaceableBlock;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -9,11 +10,15 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 /**
  * Game PC block class.
  *
  * @author Qboi123
  */
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
 public class GamePcBlock extends FaceableBlock {
     private static final VoxelShape SHAPE_E = VoxelShapes.create(-3d / 16, 0.25d / 16, 2d / 16, 18d / 16, 22.25d / 16, 13d / 16);

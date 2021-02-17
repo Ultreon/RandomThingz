@@ -1,0 +1,19 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+      " XX",
+      "XXX",
+      "/X "
+   ],
+   "key": {
+      "X": {
+         "item": "qforgemod:enderium_ingot"
+      },
+      "/": {
+         "item": "minecraft:stick"
+      }
+   },
+   "result": {
+      "item": "qforgemod:enderium_broadsword"
+   }
+}

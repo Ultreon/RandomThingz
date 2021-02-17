@@ -1,20 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "X",
-    "X",
-    "/"
-  ],
-  "key": {
-    "X": {
-      "item": "qforgemod:topaz"
-    },
-    "/": {
-      "item": "minecraft:stick"
-    }
-  },
-  "result": {
-    "item": "qforgemod:topaz_sword",
-    "count": 1
-  }
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+      "X",
+      "X",
+      "/"
+   ],
+   "key": {
+      "X": {
+         "item": "qforgemod:topaz"
+      },
+      "/": {
+         "item": "minecraft:stick"
+      }
+   },
+   "result": {
+      "item": "qforgemod:topaz_sword"
+   }
 }

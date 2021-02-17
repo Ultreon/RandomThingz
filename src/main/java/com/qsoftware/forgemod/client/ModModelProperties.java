@@ -9,6 +9,7 @@ import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
+@SuppressWarnings("SameParameterValue")
 public final class ModModelProperties {
     private ModModelProperties() {
         throw ExceptionUtil.utilityConstructor();

@@ -196,6 +196,10 @@ public class UpdatesModule extends Module {
                         latestKnownMap.put(updater, updater.getCurrentModVersion());
                     }
                     IVersion latestKnown = latestKnownMap.get(updater);
+                    if (latestKnown == null || latest == null) {
+                        continue;  // Todo: show error notification.
+                    }
+
                     if (latestKnown.compareTo(latest) < 0) {
                         latestKnownMap.put(updater, latest);
 

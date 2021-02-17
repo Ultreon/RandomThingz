@@ -1,0 +1,19 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+      "XX ",
+      "X/ ",
+      "  /"
+   ],
+   "key": {
+      "X": {
+         "item": "qforgemod:silver_ingot"
+      },
+      "/": {
+         "item": "minecraft:stick"
+      }
+   },
+   "result": {
+      "item": "qforgemod:silver_excavator"
+   }
+}

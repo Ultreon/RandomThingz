@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 public final class Constants {
     // Recipe resource locations.
     public static final ResourceLocation ALLOY_SMELTING = QForgeMod.rl("alloy_smelting");
+    public static final ResourceLocation ARCANE_ESCALATING = QForgeMod.rl("arcane_escalating");
     public static final ResourceLocation ENCHANTING = QForgeMod.rl("enchanting");
     public static final ResourceLocation COMPRESSING = QForgeMod.rl("compressing");
     public static final ResourceLocation CRUSHING = QForgeMod.rl("crushing");

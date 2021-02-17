@@ -1,0 +1,19 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+      "XXX",
+      "X/ ",
+      " / "
+   ],
+   "key": {
+      "X": {
+         "item": "qforgemod:tungsten_ingot"
+      },
+      "/": {
+         "item": "minecraft:stick"
+      }
+   },
+   "result": {
+      "item": "qforgemod:tungsten_lumber_axe"
+   }
+}

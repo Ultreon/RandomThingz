@@ -1,0 +1,13 @@
+{
+  "type": "qforgemod:crushing",
+  "process_time": 100,
+  "ingredient": {
+    "item": "minecraft:glowstone"
+  },
+  "results": [
+    {
+      "item": "minecraft:glowstone_dust",
+      "count": 4
+    }
+  ]
+}

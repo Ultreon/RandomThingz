@@ -6,6 +6,8 @@ import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterContainer;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.arcaneescalator.ArcaneEscalatorContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.arcaneescalator.ArcaneEscalatorScreen;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.compressor.CompressorContainer;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.compressor.CompressorScreen;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher.CrusherContainer;
@@ -54,6 +56,7 @@ public class SMechanismsJeiPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(new AlloySmeltingRecipeCategoryJei(guiHelper));
+        registration.addRecipeCategories(new ArcaneEscalatorRecipeCategoryJei(guiHelper));
 //        registration.addRecipeCategories(new EnchanterRecipeCategoryJei(guiHelper));
         registration.addRecipeCategories(new CompressingRecipeCategoryJei(guiHelper));
         registration.addRecipeCategories(new CrushingRecipeCategoryJei(guiHelper));
@@ -67,6 +70,7 @@ public class SMechanismsJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         registration.addRecipes(getRecipesOfType(ModRecipes.Types.ALLOY_SMELTING), Constants.ALLOY_SMELTING);
+        registration.addRecipes(getRecipesOfType(ModRecipes.Types.ARCANE_ESCALATING), Constants.ARCANE_ESCALATING);
 //        registration.addRecipes(getRecipesOfType(ModRecipes.Types.ENCHANTING), Constants.ENCHANTING);
         registration.addRecipes(getRecipesOfType(ModRecipes.Types.COMPRESSING), Constants.COMPRESSING);
         registration.addRecipes(getRecipesOfType(ModRecipes.Types.CRUSHING), Constants.CRUSHING);
@@ -80,6 +84,7 @@ public class SMechanismsJeiPlugin implements IModPlugin {
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         registration.addRecipeClickArea(AlloySmelterScreen.class, 90, 32, 28, 23, Constants.ALLOY_SMELTING);
+        registration.addRecipeClickArea(ArcaneEscalatorScreen.class, 90, 32, 28, 23, Constants.ARCANE_ESCALATING);
 //        registration.addRecipeClickArea(EnchanterScreen.class, 90, 32, 28, 23, Constants.ENCHANTING);
         registration.addRecipeClickArea(CompressorScreen.class, 78, 32, 28, 23, Constants.COMPRESSING);
         registration.addRecipeClickArea(CrusherScreen.class, 45, 32, 28, 23, Constants.CRUSHING);
@@ -94,6 +99,7 @@ public class SMechanismsJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         registration.addRecipeTransferHandler(AlloySmelterContainer.class, Constants.ALLOY_SMELTING, 0, 4, 5, 36);
+        registration.addRecipeTransferHandler(ArcaneEscalatorContainer.class, Constants.ARCANE_ESCALATING, 0, 4, 5, 36);
 //        registration.addRecipeTransferHandler(EnchanterContainer.class, Constants.ENCHANTING, 0, 4, 5, 36);
         registration.addRecipeTransferHandler(CompressorContainer.class, Constants.COMPRESSING, 0, 1, 2, 36);
         registration.addRecipeTransferHandler(CrusherContainer.class, Constants.CRUSHING, 0, 1, 5, 36);
@@ -104,6 +110,8 @@ public class SMechanismsJeiPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.ALLOY_SMELTER), Constants.ALLOY_SMELTING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BASIC_ALLOY_SMELTER), Constants.ALLOY_SMELTING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.ARCANE_ESCALATOR), Constants.ARCANE_ESCALATING);
+        registration.addRecipeCatalyst(new ItemStack(ModBlocks.BASIC_ARCANE_ESCALATOR), Constants.ARCANE_ESCALATING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.COMPRESSOR), Constants.COMPRESSING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.CRUSHER), Constants.CRUSHING);
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.BASIC_CRUSHER), Constants.CRUSHING);

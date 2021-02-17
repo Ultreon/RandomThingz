@@ -1,0 +1,19 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+      "XX ",
+      "XXX",
+      " X/"
+   ],
+   "key": {
+      "X": {
+         "item": "qforgemod:amber"
+      },
+      "/": {
+         "item": "minecraft:stick"
+      }
+   },
+   "result": {
+      "item": "qforgemod:amber_broadsword"
+   }
+}

@@ -57,7 +57,7 @@ public class EucalyptusLeafItem extends Item {
      * returns the action that specifies what animation to play when the items is being used
      */
     public UseAction getUseAction(ItemStack stack) {
-        return UseAction.DRINK;
+        return UseAction.EAT;
     }
 
     /**

@@ -21,8 +21,8 @@ public enum CraftingItems implements IItemProvider {
     PLASTIC_PELLETS,
     PLASTIC_SHEET,
     UPGRADE_CASE,
-    // Others
     ZOMBIE_LEATHER,
+    // Others
     BEEF_JERKY(Foods.COOKED_BEEF),
     PORK_JERKY(Foods.COOKED_PORKCHOP),
     CHICKEN_JERKY(Foods.COOKED_CHICKEN),

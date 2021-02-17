@@ -1,0 +1,19 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+      "XXX",
+      "XXX",
+      " / "
+   ],
+   "key": {
+      "X": {
+         "item": "qforgemod:saphire"
+      },
+      "/": {
+         "item": "minecraft:stick"
+      }
+   },
+   "result": {
+      "item": "qforgemod:saphire_hammer"
+   }
+}

@@ -1,6 +1,8 @@
 package com.qsoftware.forgemod.modules.blocks;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.arcaneescalator.ArcaneEscalatorBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.itempipe.ItemPipeBlock;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterBlock;
@@ -39,6 +41,7 @@ import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
+import lombok.experimental.UtilityClass;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -74,6 +77,7 @@ import java.util.Collection;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@UtilityClass
 @SuppressWarnings("unused")
 public final class ModBlocks {
 
@@ -100,6 +104,10 @@ public final class ModBlocks {
             new AlloySmelterBlock(MachineTier.BASIC));
     public static final BlockRegistryObject<AlloySmelterBlock> ALLOY_SMELTER = registerMachine("alloy_smelter", () ->
             new AlloySmelterBlock(MachineTier.STANDARD));
+    public static final BlockRegistryObject<ArcaneEscalatorBlock> BASIC_ARCANE_ESCALATOR = registerMachine("basic_arcane_escalator", () ->
+            new ArcaneEscalatorBlock(MachineTier.BASIC));
+    public static final BlockRegistryObject<ArcaneEscalatorBlock> ARCANE_ESCALATOR = registerMachine("arcane_escalator", () ->
+            new ArcaneEscalatorBlock(MachineTier.STANDARD));
     public static final BlockRegistryObject<CrusherBlock> BASIC_CRUSHER = registerMachine("basic_crusher", () ->
             new CrusherBlock(MachineTier.BASIC));
     public static final BlockRegistryObject<CrusherBlock> CRUSHER = registerMachine("crusher", () ->
@@ -134,6 +142,7 @@ public final class ModBlocks {
     ///////////////////////
     public static final BlockRegistryObject<WireBlock> WIRE = registerMachine("wire", () -> new WireBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1.0f, 5.0f)));
     public static final BlockRegistryObject<PipeBlock> PIPE = registerMachine("pipe", () -> new PipeBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1.0f, 5.0f)));
+    public static final BlockRegistryObject<ItemPipeBlock> ITEM_PIPE = registerMachine("item_pipe", () -> new ItemPipeBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(1.0f, 5.0f)));
 
     ////////////////////
     //     Fluids     //
@@ -334,10 +343,6 @@ public final class ModBlocks {
     //////////////////////////////
     static {
         OreMaterial.registerBlocks();
-    }
-
-    private ModBlocks() {
-        throw ExceptionUtil.utilityConstructor();
     }
 
     private static <T extends Item> ItemRegistryObject<T> registerItem(String name, Supplier<T> supplier) {

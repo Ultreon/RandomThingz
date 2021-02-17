@@ -62,6 +62,8 @@ public final class ModMachineTileEntities {
     public static void registerAll(RegistryEvent.Register<TileEntityType<?>> event) {
         register("basic_alloy_smelter", MachineType.ALLOY_SMELTER.getBasicTileEntityType());
         register("alloy_smelter", MachineType.ALLOY_SMELTER.getStandardTileEntityType());
+        register("basic_arcane_escalator", MachineType.ARCANE_ESCALATOR.getBasicTileEntityType());
+        register("arcane_escalator", MachineType.ARCANE_ESCALATOR.getStandardTileEntityType());
         register("basic_crusher", MachineType.CRUSHER.getBasicTileEntityType());
         register("crusher", MachineType.CRUSHER.getStandardTileEntityType());
         batteryBox = register("battery_box", BatteryBoxTileEntity::new, ModBlocks.BATTERY_BOX);

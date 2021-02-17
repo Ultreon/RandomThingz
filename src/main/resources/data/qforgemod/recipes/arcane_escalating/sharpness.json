@@ -1,0 +1,6 @@
+{
+  "type": "qforgemod:arcane_escalating",
+
+  "input": "minecraft:rose_bush",
+  "result": "minecraft:sharpness"
+}

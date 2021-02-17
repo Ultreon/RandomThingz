@@ -1,13 +1,13 @@
 package com.qsoftware.forgemod.modules.blocks.blocks.machines.pipe;
 
 import com.qsoftware.modlib.api.ConnectionType;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -15,8 +15,11 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public final class PipeNetwork implements IFluidHandler {
     private final IWorldReader world;
     private final Map<BlockPos, Set<Connection>> connections = new HashMap<>();
@@ -101,7 +104,7 @@ public final class PipeNetwork implements IFluidHandler {
         Set<Connection> connections = new HashSet<>();
         for (Direction direction : Direction.values()) {
             TileEntity te = world.getTileEntity(pos.offset(direction));
-            if (te != null && !(te instanceof PipeTileEntity) && te.getCapability(CapabilityEnergy.ENERGY).isPresent()) {
+            if (te != null && !(te instanceof PipeTileEntity) && te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).isPresent()) {
                 ConnectionType type = PipeBlock.getConnection(world.getBlockState(pos), direction);
                 connections.add(new Connection(this, direction, type));
             }

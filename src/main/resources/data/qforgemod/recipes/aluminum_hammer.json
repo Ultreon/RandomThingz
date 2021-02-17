@@ -1,0 +1,19 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+      "XXX",
+      "XXX",
+      " / "
+   ],
+   "key": {
+      "X": {
+         "item": "qforgemod:aluminum_ingot"
+      },
+      "/": {
+         "item": "minecraft:stick"
+      }
+   },
+   "result": {
+      "item": "qforgemod:aluminum_hammer"
+   }
+}

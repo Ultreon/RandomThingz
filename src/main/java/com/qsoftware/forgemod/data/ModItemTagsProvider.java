@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.init.ModTags;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.forgemod.modules.items.objects.CraftingItems;
+import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.ItemTagsProvider;
@@ -15,9 +16,11 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -35,6 +38,10 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     public ModItemTagsProvider(DataGenerator generatorIn, ModBlockTagsProvider blockTags) {
         super(generatorIn, blockTags);
+    }
+
+    public ModItemTagsProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagProvider, String modId, @Nullable ExistingFileHelper existingFileHelper) {
+        super(dataGenerator, blockTagProvider, modId, existingFileHelper);
     }
 
     private static ITag.INamedTag<Item> itemTag(ResourceLocation id) {

@@ -13,9 +13,11 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.tags.ITag;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -32,6 +34,10 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     public ModBlockTagsProvider(DataGenerator gen) {
         super(gen);
+    }
+
+    public ModBlockTagsProvider(DataGenerator generatorIn, String modId, @Nullable ExistingFileHelper existingFileHelper) {
+        super(generatorIn, modId, existingFileHelper);
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")

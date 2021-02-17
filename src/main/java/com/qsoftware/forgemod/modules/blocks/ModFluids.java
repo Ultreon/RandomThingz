@@ -5,6 +5,7 @@ import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.modules.blocks.fluids.OilFluid;
 import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.util.ExceptionUtil;
+import lombok.experimental.UtilityClass;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.util.ResourceLocation;
@@ -15,19 +16,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
+@UtilityClass
 @SuppressWarnings("SameParameterValue")
-public final class
-ModFluids {
+public final class ModFluids {
     public static FlowingFluid FLOWING_OIL;
     public static FlowingFluid OIL;
     public static FlowingFluid FLOWING_DIESEL;
     public static FlowingFluid DIESEL;
     public static Fluid ETHANE;
     public static Fluid POLYETHYLENE;
-
-    private ModFluids() {
-        throw ExceptionUtil.utilityConstructor();
-    }
 
     @SuppressWarnings({"Convert2MethodRef", "FunctionalExpressionCanBeFolded"})
     // Did this because IntelliJ thought it would be possible to do that, but then it will cause a crash.

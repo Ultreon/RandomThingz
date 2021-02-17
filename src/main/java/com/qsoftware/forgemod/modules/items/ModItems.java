@@ -30,7 +30,6 @@ import com.qsoftware.forgemod.util.color.ColorGetter;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
@@ -68,8 +67,8 @@ public final class ModItems {
     public static final ItemRegistryObject<EmptyCanisterItem> EMPTY_CANISTER = register("empty_canister", () -> new EmptyCanisterItem(new Item.Properties().group(ModItemGroups.MISC)));
     public static final ItemRegistryObject<BucketItem> OIL_BUCKET = register("oil_bucket", () -> createBucketItem(() -> ModFluids.OIL));
     public static final ItemRegistryObject<BucketItem> DIESEL_BUCKET = register("diesel_bucket", () -> createBucketItem(() -> ModFluids.DIESEL));
-    public static final ItemRegistryObject<NoPlaceBucketItem> ETHANE_BUCKET = register("ethane_bucket", () -> createNoPlaceBucketItem(() -> ModFluids.ETHANE));
-    public static final ItemRegistryObject<NoPlaceBucketItem> POLYETHYLENE_BUCKET = register("polyethylene_bucket", () -> createNoPlaceBucketItem(() -> ModFluids.POLYETHYLENE));
+    public static final ItemRegistryObject<BucketItem> ETHANE_BUCKET = register("ethane_bucket", () -> createBucketItem(() -> ModFluids.ETHANE));
+    public static final ItemRegistryObject<BucketItem> POLYETHYLENE_BUCKET = register("polyethylene_bucket", () -> createBucketItem(() -> ModFluids.POLYETHYLENE));
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Overpowered     //
@@ -138,23 +137,23 @@ public final class ModItems {
     /////////////////////////
 
     // Glass shards
-    public static final ItemRegistryObject<IngredientItem> CLEAR_SHARD = register("clear_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> BLACK_SHARD = register("black_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> BLUE_SHARD = register("blue_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> BROWN_SHARD = register("brown_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> CYAN_SHARD = register("cyan_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> GRAY_SHARD = register("gray_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> GREEN_SHARD = register("green_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> LIGHT_BLUE_SHARD = register("light_blue_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> LIGHT_GRAY_SHARD = register("light_gray_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> LIME_SHARD = register("lime_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> MAGENTA_SHARD = register("magenta_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> ORANGE_SHARD = register("orange_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> PINK_SHARD = register("pink_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> PURPLE_SHARD = register("purple_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> RED_SHARD = register("red_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> WHITE_SHARD = register("white_shard", IngredientItem::new);
-    public static final ItemRegistryObject<IngredientItem> YELLOW_SHARD = register("yellow_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> CLEAR_SHARD = register("clear_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> BLACK_SHARD = register("black_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> BLUE_SHARD = register("blue_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> BROWN_SHARD = register("brown_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> CYAN_SHARD = register("cyan_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> GRAY_SHARD = register("gray_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> GREEN_SHARD = register("green_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> LIGHT_BLUE_SHARD = register("light_blue_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> LIGHT_GRAY_SHARD = register("light_gray_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> LIME_SHARD = register("lime_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> MAGENTA_SHARD = register("magenta_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> ORANGE_SHARD = register("orange_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> PINK_SHARD = register("pink_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> PURPLE_SHARD = register("purple_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> RED_SHARD = register("red_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> WHITE_SHARD = register("white_shard", IngredientItem::new);
+//    public static final ItemRegistryObject<IngredientItem> YELLOW_SHARD = register("yellow_shard", IngredientItem::new);
 
     // Rods
     public static final ItemRegistryObject<IngredientItem> URANIUM_ROD = register("uranium_rod", IngredientItem::new);
@@ -1097,11 +1096,11 @@ public final class ModItems {
         }, CANISTER);
     }
 
-    private static BucketItem createBucketItem(Supplier<FlowingFluid> fluid) {
+    private static BucketItem createBucketItem(Supplier<? extends Fluid> fluid) {
         return new BucketItem(fluid, new Item.Properties().group(ModItemGroups.FLUIDS).maxStackSize(1).containerItem(Items.BUCKET));
     }
 
-    private static NoPlaceBucketItem createNoPlaceBucketItem(Supplier<Fluid> fluid) {
+    private static NoPlaceBucketItem createNoPlaceBucketItem(Supplier<? extends Fluid> fluid) {
         return new NoPlaceBucketItem(fluid, new Item.Properties().group(ModItemGroups.FLUIDS).maxStackSize(1).containerItem(Items.BUCKET));
     }
 

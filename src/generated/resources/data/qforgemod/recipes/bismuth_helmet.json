@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:bismuth_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:bismuth_helmet"
+  }
+}

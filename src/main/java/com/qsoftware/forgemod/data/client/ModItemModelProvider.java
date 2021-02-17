@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.data.client;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.common.interfaces.IMachine;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.modules.items.ModItems;
@@ -32,7 +33,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        Registration.BLOCKS.getEntries().forEach(block -> blockBuilder(block.get()));
+        Registration.BLOCKS.getEntries().stream().filter((block) -> block.get().getClass().getPackage().getName().startsWith("com.qsoftware.forgemod.modules.blocks.blocks.machines")).forEach(block -> blockBuilder(block.get()));
 
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
 
@@ -87,12 +88,18 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     private void builder(IItemProvider item, ModelFile parent) {
         String name = NameUtils.fromItem(item).getPath();
-        builder(item, parent, "item/" + name);
+        builder(item, parent, "items/" + name);
     }
 
     private void builder(IItemProvider item, ModelFile parent, String texture) {
-        getBuilder(NameUtils.fromItem(item).getPath())
-                .parent(parent)
-                .texture("layer0", modLoc(texture));
+        try {
+            getBuilder(NameUtils.fromItem(item).getPath())
+                    .parent(parent)
+                    .texture("layer0", modLoc(texture));
+        } catch (IllegalArgumentException e) {
+            getBuilder(NameUtils.fromItem(item).getPath())
+                    .parent(parent)
+                    .texture("layer0", modLoc("default"));
+        }
     }
 }

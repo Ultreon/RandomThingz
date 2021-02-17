@@ -157,8 +157,8 @@ public abstract class Module {
 
     protected static abstract class ClientSide {
 
-
     }
+
     protected static abstract class ServerSide {
 
     }

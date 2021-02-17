@@ -40,6 +40,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.Random;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -84,19 +86,21 @@ public class QForgeMod {
     @Getter public static final QFMVersion version;
     @Getter private static final QfmArgs modArgs;
 
+    @SuppressWarnings("ConstantConditions")
+    private static final Supplier<Boolean> getClientSide = () -> {
+        try {
+            return Minecraft.getInstance() != null; // This is null when running runData.
+        } catch (Throwable t) {
+            return false;
+        }
+    };
+
     static {
         if (new File("/mnt/chromeos").exists()) {
             throw new UnsupportedOperationException("Tried to run QForgeMod on Chrome OS (Linux subsystem), this is unsupported.");
         }
 
-        boolean c;
-        try {
-            Class.forName("net.minecraft.client.Minecraft");
-            c = true;
-        } catch (ClassNotFoundException e) {
-            c = false;
-        }
-        clientSide = c;
+        clientSide = getClientSide.get();
 
         boolean s;
         try {

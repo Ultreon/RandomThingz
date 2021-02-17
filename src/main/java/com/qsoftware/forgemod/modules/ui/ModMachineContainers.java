@@ -4,6 +4,7 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.modules.blocks.MachineType;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterScreen;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.arcaneescalator.ArcaneEscalatorScreen;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.batterybox.BatteryBoxContainer;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.batterybox.BatteryBoxScreen;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.compressor.CompressorContainer;
@@ -60,6 +61,8 @@ public final class ModMachineContainers {
     public static void registerAll(RegistryEvent.Register<ContainerType<?>> event) {
         register("basic_alloy_smelter", MachineType.ALLOY_SMELTER.getContainerType(MachineTier.BASIC));
         register("alloy_smelter", MachineType.ALLOY_SMELTER.getContainerType(MachineTier.STANDARD));
+        register("basic_arcane_escalator", MachineType.ARCANE_ESCALATOR.getContainerType(MachineTier.BASIC));
+        register("arcane_escalator", MachineType.ARCANE_ESCALATOR.getContainerType(MachineTier.STANDARD));
         batteryBox = register("battery_box", BatteryBoxContainer::new);
         coalGenerator = register("coal_generator", CoalGeneratorContainer::new);
         compressor = register("compressor", CompressorContainer::new);
@@ -80,6 +83,8 @@ public final class ModMachineContainers {
     public static void registerScreens(FMLClientSetupEvent event) {
         ScreenManager.registerFactory(MachineType.ALLOY_SMELTER.getContainerType(MachineTier.BASIC), AlloySmelterScreen::new);
         ScreenManager.registerFactory(MachineType.ALLOY_SMELTER.getContainerType(MachineTier.STANDARD), AlloySmelterScreen::new);
+        ScreenManager.registerFactory(MachineType.ARCANE_ESCALATOR.getContainerType(MachineTier.BASIC), ArcaneEscalatorScreen::new);
+        ScreenManager.registerFactory(MachineType.ARCANE_ESCALATOR.getContainerType(MachineTier.STANDARD), ArcaneEscalatorScreen::new);
         ScreenManager.registerFactory(batteryBox, BatteryBoxScreen::new);
         ScreenManager.registerFactory(coalGenerator, CoalGeneratorScreen::new);
         ScreenManager.registerFactory(compressor, CompressorScreen::new);

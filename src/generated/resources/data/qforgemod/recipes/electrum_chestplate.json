@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "qforgemod:electrum_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:electrum_chestplate"
+  }
+}

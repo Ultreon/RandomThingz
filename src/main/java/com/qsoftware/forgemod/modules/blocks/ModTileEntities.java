@@ -4,25 +4,20 @@ import com.qsoftware.forgemod.init.ObjectInit;
 import com.qsoftware.forgemod.modules.blocks.tileentities.ChristmasChestTileEntity;
 import com.qsoftware.forgemod.modules.blocks.tileentities.CrateTileEntity;
 import com.qsoftware.forgemod.util.ExceptionUtil;
+import lombok.experimental.UtilityClass;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.function.Supplier;
 
+@UtilityClass
 @SuppressWarnings("ConstantConditions")
-//@ObjectHolder(QForgeUtils.MOD_ID)
-//@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModTileEntities extends ObjectInit<TileEntityType<?>> {
 
     @SuppressWarnings("ConstantConditions")
-//    public static final RegistryObject<TileEntityType<QuarryTileEntity>> QUARRY = register("quarry", () -> TileEntityType.Builder.create(QuarryTileEntity::new, ModBlocks.QUARRY_BLOCK.get()).build(null));
     public static final RegistryObject<TileEntityType<CrateTileEntity>> EXAMPLE_CHEST = register("example_chest", () -> TileEntityType.Builder.create(CrateTileEntity::new, ModBlocks.WOODEN_CRATE.get()).build(null));
     public static final RegistryObject<TileEntityType<ChristmasChestTileEntity>> CHRISTMAS_CHEST = register("christmas_chest", () -> TileEntityType.Builder.create(ChristmasChestTileEntity::new, ModBlocks.CHRISTMAS_CHEST.get()).build(null));
-
-    private ModTileEntities() {
-        throw ExceptionUtil.utilityConstructor();
-    }
 
     /**
      * Register tile entity.
@@ -33,10 +28,7 @@ public class ModTileEntities extends ObjectInit<TileEntityType<?>> {
      * @return an registry object of the tile-entity type.
      */
     private static <T extends TileEntity> RegistryObject<TileEntityType<T>> register(String name, Supplier<TileEntityType<T>> supplier) {
-//        if (TileEntitiesModule.TILE_ENTITIES.getEntries().stream().filter((ro) -> ro.getId().getPath().equals(name) || ro.getId().toString().equals(name)).collect(Collectors.toList()).size() == 0) {
-            return TileEntitiesModule.TILE_ENTITIES.register(name, supplier);
-//        }
-//        return null;
+        return TileEntitiesModule.TILE_ENTITIES.register(name, supplier);
     }
 
     public static void register() {

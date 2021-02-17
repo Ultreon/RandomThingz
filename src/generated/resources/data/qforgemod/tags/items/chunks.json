@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "#qforgemod:chunks/iron",
+    "#qforgemod:chunks/gold",
+    "#qforgemod:chunks/copper",
+    "#qforgemod:chunks/tin",
+    "#qforgemod:chunks/silver",
+    "#qforgemod:chunks/lead",
+    "#qforgemod:chunks/nickel",
+    "#qforgemod:chunks/platinum",
+    "#qforgemod:chunks/zinc",
+    "#qforgemod:chunks/bismuth",
+    "#qforgemod:chunks/aluminum",
+    "#qforgemod:chunks/uranium"
+  ]
+}

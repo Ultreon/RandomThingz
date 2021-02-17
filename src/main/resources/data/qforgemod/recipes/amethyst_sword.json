@@ -1,20 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "X",
-    "X",
-    "/"
-  ],
-  "key": {
-    "X": {
-      "item": "qforgemod:amethyst"
-    },
-    "/": {
-      "item": "minecraft:stick"
-    }
-  },
-  "result": {
-    "item": "qforgemod:amethyst_sword",
-    "count": 1
-  }
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+      "X",
+      "X",
+      "/"
+   ],
+   "key": {
+      "X": {
+         "item": "qforgemod:amethyst"
+      },
+      "/": {
+         "item": "minecraft:stick"
+      }
+   },
+   "result": {
+      "item": "qforgemod:amethyst_sword"
+   }
 }

@@ -4,6 +4,8 @@ import com.qsoftware.forgemod.common.enums.MachineTier;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.AbstractMachineBaseTileEntity;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterContainer;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterTileEntity;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.arcaneescalator.ArcaneEscalatorContainer;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.arcaneescalator.ArcaneEscalatorTileEntity;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher.CrusherContainer;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.crusher.CrusherTileEntity;
 import com.qsoftware.modlib.silentlib.util.Lazy;
@@ -15,6 +17,12 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public class MachineType<T extends AbstractMachineBaseTileEntity, B extends T, S extends T, C extends Container> {
+    public static final MachineType<ArcaneEscalatorTileEntity, ArcaneEscalatorTileEntity.Basic, ArcaneEscalatorTileEntity, ArcaneEscalatorContainer> ARCANE_ESCALATOR = new MachineType<>(
+            () -> TileEntityType.Builder.create(ArcaneEscalatorTileEntity.Basic::new, ModBlocks.BASIC_ARCANE_ESCALATOR.get()),
+            () -> TileEntityType.Builder.create(ArcaneEscalatorTileEntity::new, ModBlocks.ARCANE_ESCALATOR.get()),
+            (id, inv) -> new ArcaneEscalatorContainer(id, inv, MachineTier.BASIC),
+            (id, inv) -> new ArcaneEscalatorContainer(id, inv, MachineTier.STANDARD)
+    );
     public static final MachineType<AlloySmelterTileEntity, AlloySmelterTileEntity.Basic, AlloySmelterTileEntity, AlloySmelterContainer> ALLOY_SMELTER = new MachineType<>(
             () -> TileEntityType.Builder.create(AlloySmelterTileEntity.Basic::new, ModBlocks.BASIC_ALLOY_SMELTER.get()),
             () -> TileEntityType.Builder.create(AlloySmelterTileEntity::new, ModBlocks.ALLOY_SMELTER.get()),

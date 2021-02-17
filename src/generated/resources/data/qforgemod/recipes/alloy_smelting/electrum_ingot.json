@@ -1,0 +1,38 @@
+{
+  "type": "qforgemod:alloy_smelting",
+  "process_time": 400,
+  "ingredients": [
+    {
+      "value": [
+        {
+          "tag": "forge:ingots/gold"
+        },
+        {
+          "tag": "qforgemod:chunks/gold"
+        },
+        {
+          "tag": "forge:dusts/gold"
+        }
+      ],
+      "count": 1
+    },
+    {
+      "value": [
+        {
+          "tag": "forge:ingots/silver"
+        },
+        {
+          "tag": "qforgemod:chunks/silver"
+        },
+        {
+          "tag": "forge:dusts/silver"
+        }
+      ],
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "qforgemod:electrum_ingot",
+    "count": 2
+  }
+}

@@ -5,6 +5,7 @@ import com.qsoftware.forgemod.modules.environment.ModEntities;
 import com.qsoftware.forgemod.modules.environment.client.renderer.RenderBabyCreeper;
 import com.qsoftware.forgemod.modules.environment.client.renderer.RenderBabyEnderman;
 import com.qsoftware.forgemod.util.ExceptionUtil;
+import lombok.experimental.UtilityClass;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.StrayRenderer;
 import net.minecraft.client.renderer.entity.WitherSkeletonRenderer;
@@ -13,12 +14,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
+@UtilityClass
 @Mod.EventBusSubscriber(modid = QForgeMod.modId, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AdditionsClientRegistration {
-    private AdditionsClientRegistration() {
-        throw ExceptionUtil.utilityConstructor();
-    }
-
     @SubscribeEvent
     public static void init(FMLClientSetupEvent event) {
 //        new AdditionsKeyHandler();

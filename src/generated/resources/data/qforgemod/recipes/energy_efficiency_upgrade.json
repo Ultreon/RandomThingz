@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qforgemod:upgrade_case"
+    },
+    {
+      "item": "minecraft:glowstone"
+    },
+    {
+      "tag": "forge:ingots/electrum"
+    },
+    {
+      "tag": "forge:ingots/electrum"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:energy_efficiency_upgrade"
+  }
+}

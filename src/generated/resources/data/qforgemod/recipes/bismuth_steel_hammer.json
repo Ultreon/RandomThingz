@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    " / "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "qforgemod:bismuth_steel_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:bismuth_steel_hammer"
+  }
+}

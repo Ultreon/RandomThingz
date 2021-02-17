@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.modules.blocks.blocks.machines.pipe;
 
 import com.qsoftware.forgemod.modules.blocks.ModMachineTileEntities;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -12,7 +13,10 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class PipeTileEntity extends TileEntity {
     public PipeTileEntity() {
         super(ModMachineTileEntities.pipe);

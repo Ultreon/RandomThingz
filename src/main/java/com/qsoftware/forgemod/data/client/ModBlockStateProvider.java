@@ -4,15 +4,20 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.blocks.ModBlocks;
 import com.qsoftware.forgemod.modules.blocks.blocks.machines.dryingrack.DryingRackBlock;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
+import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
@@ -52,13 +57,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
         dryingRack(ModBlocks.JUNGLE_DRYING_RACK.get(), "block/jungle_planks");
         dryingRack(ModBlocks.OAK_DRYING_RACK.get(), "block/oak_planks");
         dryingRack(ModBlocks.SPRUCE_DRYING_RACK.get(), "block/spruce_planks");
+        dryingRack(ModBlocks.EUCALYPTUS_DRYING_RACK.get(), "qforgemod:blocks/eucalyptus_planks");
+        dryingRack(ModBlocks.CHERRY_DRYING_RACK.get(), "qforgemod:blocks/cherry_planks");
 
         simpleBlock(ModBlocks.STONE_MACHINE_FRAME.get(), models()
                 .withExistingParent("stone_machine_frame", modLoc("block/machine_frame"))
-                .texture("all", "block/machine_frame/stone"));
+                .texture("all", "qforgemod:blocks/machine_frame/stone"));
         simpleBlock(ModBlocks.ALLOY_MACHINE_FRAME.get(), models()
                 .withExistingParent("alloy_machine_frame", modLoc("block/machine_frame"))
-                .texture("all", "block/machine_frame/alloy"));
+                .texture("all", "qforgemod:blocks/machine_frame/alloy"));
+        for (BlockRegistryObject<Block> block : ModBlocks.BOOKSHELFS) {
+            QForgeMod.LOGGER.info("Generating block state and model for " + block.getRegistryName());
+            simpleBlock(block.get(), models()
+                    .withExistingParent(block.getName(), mcLoc("block/cube_column"))
+                    .texture("end", "minecraft:block/oak_planks")
+                    .texture("side", "qforgemod:blocks/bookshelfs/" + block.getName()));
+        }
     }
 
     private void dryingRack(DryingRackBlock block, String texture) {
@@ -71,5 +85,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .rotationY((int) state.get(DryingRackBlock.FACING).getHorizontalAngle())
                     .build();
         }, DryingRackBlock.WATERLOGGED);
+    }
+
+    public ResourceLocation blockTexture(Block block) {
+        ResourceLocation name = block.getRegistryName();
+        return new ResourceLocation(Objects.requireNonNull(name).getNamespace(), "blocks/" + name.getPath());
     }
 }

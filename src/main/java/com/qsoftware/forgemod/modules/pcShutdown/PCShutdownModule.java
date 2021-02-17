@@ -4,6 +4,9 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleSecurity;
+import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
+import com.qsoftware.forgemod.modules.actionmenu.MainActionMenu;
+import com.qsoftware.forgemod.modules.actionmenu.MenuHandler;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -20,6 +23,22 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class PCShutdownModule extends Module {
+    private static final AbstractActionMenu COMPUTER_MENU = new ComputerMenu();
+
+    public PCShutdownModule() {
+        MainActionMenu.registerHandler(new MenuHandler() {
+            @Override
+            public AbstractActionMenu getMenu() {
+                return COMPUTER_MENU;
+            }
+
+            @Override
+            public boolean isEnabled() {
+                return true;
+            }
+        });
+    }
+
     @Override
     public void onEnable() {
         if (QForgeMod.isClientSide()) {

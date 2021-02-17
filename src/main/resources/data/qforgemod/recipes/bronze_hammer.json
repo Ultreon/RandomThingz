@@ -1,0 +1,19 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+      "XXX",
+      "XXX",
+      " / "
+   ],
+   "key": {
+      "X": {
+         "item": "qforgemod:bronze_ingot"
+      },
+      "/": {
+         "item": "minecraft:stick"
+      }
+   },
+   "result": {
+      "item": "qforgemod:bronze_hammer"
+   }
+}

@@ -20,6 +20,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
@@ -662,6 +663,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .build(consumer);
 
         for (Tools tools : Tools.values()) {
+            QForgeMod.LOGGER.info("Loading recipe for tool: " + tools.getName());
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getSword())
                     .patternLine("X")
                     .patternLine("X")
@@ -682,7 +684,7 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine("/ ")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer);
+                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getAxe().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getShovel())
                     .patternLine("X")
                     .patternLine("/")
@@ -710,21 +712,21 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine("/ ")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer);
-            ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getKatana())
-                    .patternLine("X ")
-                    .patternLine("X ")
-                    .patternLine("/X")
-                    .key('/', () -> tools.getHandleMaterial().get())
-                    .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer);
+                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getHoe().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getKatana())
                     .patternLine(" X")
-                    .patternLine(" X")
+                    .patternLine("X ")
                     .patternLine("X/")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
                     .build(consumer);
+            ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getKatana())
+                    .patternLine("X ")
+                    .patternLine(" X")
+                    .patternLine("/X")
+                    .key('/', () -> tools.getHandleMaterial().get())
+                    .key('X', () -> tools.getBaseMaterial().get())
+                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getKatana().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getLongsword())
                     .patternLine("X ")
                     .patternLine("X ")
@@ -738,7 +740,7 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine("/X")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer);
+                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getLongsword().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBroadsword())
                     .patternLine("XX")
                     .patternLine("XX")
@@ -752,11 +754,11 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine(" /")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer);
+                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getBroadsword().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHammer())
                     .patternLine("XXX")
                     .patternLine("XXX")
-                    .patternLine(" /")
+                    .patternLine(" / ")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
                     .build(consumer);
@@ -773,7 +775,7 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine("/  ")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer);
+                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getExcavator().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBattleaxe())
                     .patternLine("XXX")
                     .patternLine("X/X")
@@ -794,29 +796,29 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine(" / ")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer);
-            if (tools.getArmorMaterial() != null) {
+                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getLumberAxe().getName() + "_mirror"));
+            if (tools.getArmorSubMaterial() != null) {
                 ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHelmet())
                         .patternLine("XXX")
                         .patternLine("XOX")
                         .key('O', () -> tools.getArmorSubMaterial().get())
                         .key('X', () -> tools.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHelmet())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getChestplate())
                         .patternLine("XOX")
                         .patternLine("XXX")
                         .patternLine("XXX")
                         .key('O', () -> tools.getArmorSubMaterial().get())
                         .key('X', () -> tools.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHelmet())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getLeggings())
                         .patternLine("XXX")
                         .patternLine("XOX")
                         .patternLine("X X")
                         .key('O', () -> tools.getArmorSubMaterial().get())
                         .key('X', () -> tools.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHelmet())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBoots())
                         .patternLine("X X")
                         .patternLine("XOX")
                         .key('O', () -> tools.getArmorSubMaterial().get())
@@ -828,19 +830,19 @@ public class ModRecipesProvider extends RecipeProvider {
                         .patternLine("X X")
                         .key('X', () -> tools.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHelmet())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getChestplate())
                         .patternLine("X X")
                         .patternLine("XXX")
                         .patternLine("XXX")
                         .key('X', () -> tools.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHelmet())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getLeggings())
                         .patternLine("XXX")
                         .patternLine("X X")
                         .patternLine("X X")
                         .key('X', () -> tools.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHelmet())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBoots())
                         .patternLine("X X")
                         .patternLine("X X")
                         .key('X', () -> tools.getBaseMaterial().get())

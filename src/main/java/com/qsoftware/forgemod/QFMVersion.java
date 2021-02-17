@@ -2,6 +2,7 @@ package com.qsoftware.forgemod;
 
 import com.qsoftware.forgemod.common.interfaces.IVersion;
 import lombok.Getter;
+import lombok.NonNull;
 import net.minecraft.client.resources.I18n;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,7 +57,7 @@ public class QFMVersion implements IVersion {
                     throw new InternalError("Regex has invalid output.");
             }
 
-            stageRelease = Integer.parseInt(m.group(4));
+            stageRelease = Integer.parseInt(m.group(5));
         } else {
             throw new IllegalArgumentException("Invalid version,");
         }
@@ -151,7 +152,7 @@ public class QFMVersion implements IVersion {
     }
 
     @Override
-    public int compareTo(@NotNull IVersion o) {
+    public int compareTo(@NonNull IVersion o) {
         if (!(o instanceof QFMVersion)) {
             throw new IllegalArgumentException("Can't compare other than QVersion");
         }

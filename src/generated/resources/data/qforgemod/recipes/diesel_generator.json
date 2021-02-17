@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#C#",
+    "/X/",
+    "#B#"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/steel"
+    },
+    "C": {
+      "item": "qforgemod:circuit_board"
+    },
+    "/": [
+      {
+        "tag": "forge:nuggets/platinum"
+      },
+      {
+        "tag": "forge:ingots/silver"
+      }
+    ],
+    "X": {
+      "item": "qforgemod:alloy_machine_frame"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "qforgemod:diesel_generator"
+  }
+}

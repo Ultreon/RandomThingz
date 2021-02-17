@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.init;
 import com.qsoftware.forgemod.crafting.recipe.*;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.ExceptionUtil;
+import lombok.experimental.UtilityClass;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
@@ -12,8 +13,10 @@ import net.minecraftforge.fml.RegistryObject;
 
 import java.util.function.Supplier;
 
+@UtilityClass
 public final class ModRecipes {
     public static final RegistryObject<IRecipeSerializer<?>> ALLOY_SMELTING = registerSerializer(Constants.ALLOY_SMELTING, AlloySmeltingRecipe.Serializer::new);
+    public static final RegistryObject<IRecipeSerializer<?>> ARCANE_ESCALATING = registerSerializer(Constants.ARCANE_ESCALATING, ArcaneEscalatingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> ENCHANTING = registerSerializer(Constants.ENCHANTING, EnchantingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> COMPRESSING = registerSerializer(Constants.COMPRESSING, CompressingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> CRUSHING = registerSerializer(Constants.CRUSHING, CrushingRecipe.Serializer::new);
@@ -22,10 +25,6 @@ public final class ModRecipes {
     public static final RegistryObject<IRecipeSerializer<?>> MIXING = registerSerializer(Constants.MIXING, MixingRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> REFINING = registerSerializer(Constants.REFINING, RefiningRecipe.Serializer::new);
     public static final RegistryObject<IRecipeSerializer<?>> SOLIDIFYING = registerSerializer(Constants.SOLIDIFYING, SolidifyingRecipe.Serializer::new);
-
-    private ModRecipes() {
-        throw ExceptionUtil.utilityConstructor();
-    }
 
     static void register() {
     }
@@ -45,6 +44,7 @@ public final class ModRecipes {
 
     public static final class Types {
         public static final IRecipeType<AlloySmeltingRecipe> ALLOY_SMELTING = registerType(Constants.ALLOY_SMELTING);
+        public static final IRecipeType<ArcaneEscalatingRecipe> ARCANE_ESCALATING = registerType(Constants.ARCANE_ESCALATING);
         public static final IRecipeType<EnchantingRecipe> ENCHANTING = registerType(Constants.ENCHANTING);
         public static final IRecipeType<CompressingRecipe> COMPRESSING = registerType(Constants.ALLOY_SMELTING);
         public static final IRecipeType<CrushingRecipe> CRUSHING = registerType(Constants.ALLOY_SMELTING);

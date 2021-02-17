@@ -3,8 +3,12 @@ package com.qsoftware.forgemod.modules.blocks.blocks.machines.pipe;
 import com.google.common.collect.Maps;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.api.IWrenchable;
-import com.qsoftware.forgemod.util.EnergyUtils;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.itempipe.ItemPipeBlock;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.itempipe.ItemPipeNetworkManager;
+import com.qsoftware.forgemod.modules.blocks.blocks.machines.itempipe.ItemPipeTileEntity;
+import com.qsoftware.forgemod.util.FluidUtils;
 import com.qsoftware.modlib.api.ConnectionType;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SixWayBlock;
@@ -22,11 +26,15 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Map;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class PipeBlock extends SixWayBlock implements IWrenchable {
     public static final EnumProperty<ConnectionType> NORTH = EnumProperty.create("north", ConnectionType.class);
     public static final EnumProperty<ConnectionType> EAST = EnumProperty.create("east", ConnectionType.class);
@@ -88,13 +96,9 @@ public class PipeBlock extends SixWayBlock implements IWrenchable {
         if (tileEntity instanceof PipeTileEntity) {
             return ConnectionType.BOTH;
         } else if (tileEntity != null) {
-            IEnergyStorage energy = EnergyUtils.getEnergyFromSideOrNull(tileEntity, side.getOpposite());
-            if (energy != null) {
-                if (energy.canExtract()) {
-                    return current == ConnectionType.NONE ? ConnectionType.IN : current;
-                } else if (energy.canReceive()) {
-                    return current == ConnectionType.NONE ? ConnectionType.OUT : current;
-                }
+            IFluidHandler fluid = FluidUtils.getFluidFromSideOrNull(tileEntity, side.getOpposite());
+            if (fluid != null) {
+                return current == ConnectionType.NONE ? ConnectionType.BOTH : current;
             }
         }
         return ConnectionType.NONE;
@@ -126,11 +130,14 @@ public class PipeBlock extends SixWayBlock implements IWrenchable {
         Direction side = getClickedConnection(relative);
         if (side != null) {
             TileEntity other = world.getTileEntity(pos.offset(side));
-            if (!(other instanceof PipeTileEntity)) {
+            Block otherBlock = world.getBlockState(pos.offset(side)).getBlock();
+            if (!(other instanceof ItemPipeTileEntity) && !(otherBlock instanceof ItemPipeBlock)) {
                 BlockState state1 = cycleProperty(state, FACING_TO_PROPERTY_MAP.get(side));
-                world.setBlockState(pos, state1, 18);
-                PipeNetworkManager.invalidateNetwork(world, pos);
-                return ActionResultType.SUCCESS;
+                if (other != null && other.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).isPresent()) {
+                    world.setBlockState(pos, state1, 18);
+                    ItemPipeNetworkManager.invalidateNetwork(world, pos);
+                    return ActionResultType.SUCCESS;
+                }
             }
         }
 

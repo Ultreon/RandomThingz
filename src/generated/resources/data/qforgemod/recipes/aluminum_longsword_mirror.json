@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X",
+    " X",
+    "/X"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "qforgemod:aluminum_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:aluminum_longsword"
+  }
+}

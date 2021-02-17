@@ -1,0 +1,19 @@
+{
+   "type": "minecraft:crafting_shaped",
+   "pattern": [
+      "XXX",
+      "XXX",
+      " / "
+   ],
+   "key": {
+      "X": {
+         "item": "qforgemod:amethyst"
+      },
+      "/": {
+         "item": "minecraft:stick"
+      }
+   },
+   "result": {
+      "item": "qforgemod:amethyst_hammer"
+   }
+}

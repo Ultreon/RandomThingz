@@ -14,10 +14,10 @@ public final class DataGenerators {
     public static void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-
-        ModBlockTagsProvider blockTags = new ModBlockTagsProvider(gen);
+//
+        ModBlockTagsProvider blockTags = new ModBlockTagsProvider(gen, event.getModContainer().getModId(), event.getExistingFileHelper());
         gen.addProvider(blockTags);
-        gen.addProvider(new ModItemTagsProvider(gen, blockTags));
+        gen.addProvider(new ModItemTagsProvider(gen, blockTags, event.getModContainer().getModId(), event.getExistingFileHelper()));
         gen.addProvider(new ModRecipesProvider(gen));
         gen.addProvider(new ModLootTableProvider(gen));
 

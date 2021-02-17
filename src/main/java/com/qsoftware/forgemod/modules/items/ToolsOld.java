@@ -35,12 +35,13 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
+@Deprecated
 public enum ToolsOld implements INamed, Translatable {
     COPPER(OreMaterial.COPPER, 80f, 4.6f, 5.8f, 0.5f, 15, 2),
     TIN(OreMaterial.TIN, 90f, 4.6f, 5.8f, 0.5f, 15, 2),
     SILVER(OreMaterial.SILVER, 95f, 4.6f, 5.8f, 0.5f, 15, 2),
     PLATINUM(OreMaterial.PLATINUM, 400f, 4.6f, 5.8f, 0.2f, 17, 3),
-    OBSIDIAN(OreMaterial.OBSIDIAN, 800f, 14.0f, 20.0f, 0.0f, 6, 5),
+//    OBSIDIAN(OreMaterial.OBSIDIAN, 800f, 14.0f, 20.0f, 0.0f, 6, 5),
     ALUMINUM(OreMaterial.ALUMINUM, 40f, 6.0f, 6.5f, 0.5f, 12, 2),
     ALUMINUM_STEEL(OreMaterial.ALUMINUM_STEEL, 40f, 6.0f, 6.5f, 0.4f, 11, 2),
     BRONZE(OreMaterial.BRONZE, 90f, 6.0f, 6.5f, 0.45f, 14, 2),
@@ -403,7 +404,7 @@ public enum ToolsOld implements INamed, Translatable {
         } else {
             this.armorSound = SoundEvents.ITEM_ARMOR_EQUIP_LEATHER;
         }
-        
+
         this.itemTier = new IItemTier() {
             @Override
             public int getMaxUses() {
@@ -483,7 +484,7 @@ public enum ToolsOld implements INamed, Translatable {
         // Registry.
         this.registry = Registration.ITEMS;
     }
-    
+
     public static void register() {
         for (ToolsOld toolsOld : ToolsOld.values()) {
             // Armor pieces
@@ -617,7 +618,7 @@ public enum ToolsOld implements INamed, Translatable {
 
     /**
      * Get the repair material.
-     * 
+     *
      * @return the repair material or null if it failed to get the repair material.
      */
     @Nullable
@@ -699,7 +700,7 @@ public enum ToolsOld implements INamed, Translatable {
 
     /**
      * Get the sword item.
-     * 
+     *
      * @return the sword item or null if it failed to get it.
      */
     @Nullable
@@ -912,7 +913,7 @@ public enum ToolsOld implements INamed, Translatable {
 
     /**
      * Get armor equip sound.
-     * 
+     *
      * @return the armor equip {@link SoundEvent sound event}.
      * @see SoundEvents
      */

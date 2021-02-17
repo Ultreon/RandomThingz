@@ -2,6 +2,7 @@ package com.qsoftware.forgemod;
 
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
+import com.qsoftware.forgemod.modules.actionmenu.ActionMenuModule;
 import com.qsoftware.forgemod.modules.client.ClientTweaksModule;
 import com.qsoftware.forgemod.modules.environment.WorldGenerationModule;
 import com.qsoftware.forgemod.modules.environment.EntitiesModule;
@@ -37,12 +38,10 @@ public class Modules {
     public static final PCCrashModule PC_CRASH = new PCCrashModule();
     public static final UpdatesModule UPDATES = new UpdatesModule();
     public static final DebugMenuModule DEBUG_MENU = new DebugMenuModule();
+    public static final ActionMenuModule ACTION_MENU = new ActionMenuModule();
 
     public static void init(ModuleManager manager) {
         manager.register(MAIN);
-        if (QForgeMod.isClientSide()) {
-            manager.register(CLIENT);
-        }
         manager.register(BLOCKS);
         manager.register(ITEMS);
         manager.register(ENTITIES);
@@ -53,6 +52,10 @@ public class Modules {
         manager.register(PC_SHUTDOWN);
         manager.register(PC_CRASH);
         manager.register(UPDATES);
+        if (QForgeMod.isClientSide()) {
+            manager.register(CLIENT);
+        }
         manager.register(DEBUG_MENU);
+        manager.register(ACTION_MENU);
     }
 }

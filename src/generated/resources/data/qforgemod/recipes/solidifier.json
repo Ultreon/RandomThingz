@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#C#",
+    "/X/",
+    "OHO"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/steel"
+    },
+    "C": {
+      "item": "qforgemod:circuit_board"
+    },
+    "/": {
+      "item": "qforgemod:empty_canister"
+    },
+    "X": {
+      "item": "qforgemod:alloy_machine_frame"
+    },
+    "O": {
+      "tag": "forge:ingots/silver"
+    },
+    "H": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "result": {
+    "item": "qforgemod:solidifier"
+  }
+}
