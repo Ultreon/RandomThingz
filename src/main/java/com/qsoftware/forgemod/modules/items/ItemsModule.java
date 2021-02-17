@@ -112,21 +112,21 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
     }
 
     private void registerGenericColorHandler(ItemColors colors) {
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.RED.getColorValue(), ModItems.RED_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.BROWN.getColorValue(), ModItems.BROWN_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.ORANGE.getColorValue(), ModItems.ORANGE_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.YELLOW.getColorValue(), ModItems.YELLOW_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.LIME.getColorValue(), ModItems.LIME_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.GREEN.getColorValue(), ModItems.GREEN_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.CYAN.getColorValue(), ModItems.CYAN_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.LIGHT_BLUE.getColorValue(), ModItems.LIGHT_BLUE_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.BLUE.getColorValue(), ModItems.BLUE_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.PURPLE.getColorValue(), ModItems.PURPLE_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.PINK.getColorValue(), ModItems.PINK_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.WHITE.getColorValue(), ModItems.WHITE_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.LIGHT_GRAY.getColorValue(), ModItems.LIGHT_GRAY_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.GRAY.getColorValue(), ModItems.GRAY_SHARD);
-        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.BLACK.getColorValue(), ModItems.BLACK_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.RED.getColorValue(), ModItems.RED_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.BROWN.getColorValue(), ModItems.BROWN_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.ORANGE.getColorValue(), ModItems.ORANGE_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.YELLOW.getColorValue(), ModItems.YELLOW_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.LIME.getColorValue(), ModItems.LIME_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.GREEN.getColorValue(), ModItems.GREEN_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.CYAN.getColorValue(), ModItems.CYAN_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.LIGHT_BLUE.getColorValue(), ModItems.LIGHT_BLUE_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.BLUE.getColorValue(), ModItems.BLUE_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.PURPLE.getColorValue(), ModItems.PURPLE_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.PINK.getColorValue(), ModItems.PINK_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.WHITE.getColorValue(), ModItems.WHITE_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.LIGHT_GRAY.getColorValue(), ModItems.LIGHT_GRAY_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.GRAY.getColorValue(), ModItems.GRAY_SHARD);
+//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.BLACK.getColorValue(), ModItems.BLACK_SHARD);
     }
 
     @Override

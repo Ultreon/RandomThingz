@@ -21,25 +21,25 @@ import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class ConfirmShutdownScreen extends Screen {
+public class ConfirmRebootScreen extends Screen {
     private final IBidiRenderer bidiRenderer = IBidiRenderer.field_243257_a;
     private final ITextComponent yesButtonText;
     private final ITextComponent noButtonText;
     private final Screen backScreen;
-    private Runnable shutdown;
+    private final Runnable reboot;
     private int ticksUntilEnable;
 
-    public ConfirmShutdownScreen(Screen backScreen, Runnable shutdown) {
-        super(new TranslationTextComponent("msg.qforgemod.confirm_shutdown.title"));
+    public ConfirmRebootScreen(Screen backScreen, Runnable reboot) {
+        super(new TranslationTextComponent("msg.qforgemod.confirm_reboot.title"));
         this.backScreen = backScreen;
-        this.shutdown = shutdown;
+        this.reboot = reboot;
         this.yesButtonText = DialogTexts.GUI_YES;
         this.noButtonText = DialogTexts.GUI_NO;
     }
 
-    public static void show(Runnable shutdown) {
+    public static void show(Runnable runnable) {
         Minecraft mc = Minecraft.getInstance();
-        mc.displayGuiScreen(new ConfirmShutdownScreen(mc.currentScreen, shutdown));
+        mc.displayGuiScreen(new ConfirmRebootScreen(mc.currentScreen, runnable));
     }
 
     protected void init() {
@@ -48,13 +48,13 @@ public class ConfirmShutdownScreen extends Screen {
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
-            Narrator.getNarrator().say("Are you sure you want to shutdown your computer?", true);
+            Narrator.getNarrator().say("Are you sure you want to reboot your computer?", true);
         }
 
         this.buttons.clear();
         this.children.clear();
 
-        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 100, 20, this.yesButtonText, (p_213006_1_) -> shutdown.run()));
+        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 100, 20, this.yesButtonText, (p_213006_1_) -> reboot.run()));
         this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 126, 100, 20, this.noButtonText, (p_213006_1_) -> Minecraft.getInstance().displayGuiScreen(backScreen)));
 
         setButtonDelay(10);
@@ -64,7 +64,7 @@ public class ConfirmShutdownScreen extends Screen {
         this.renderBackground(matrixStack);
 
         drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 70, 0xffffff);
-        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.qforgemod.confirm_shutdown.description"), this.width / 2, 90, 0xbfbfbf);
+        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.qforgemod.confirm_reboot.description"), this.width / 2, 90, 0xbfbfbf);
 
         this.bidiRenderer.func_241863_a(matrixStack, this.width / 2, 90);
         super.render(matrixStack, mouseX, mouseY, partialTicks);

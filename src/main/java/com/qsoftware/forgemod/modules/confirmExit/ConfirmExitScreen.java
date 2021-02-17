@@ -3,11 +3,10 @@ package com.qsoftware.forgemod.modules.confirmExit;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.text2speech.Narrator;
+import com.qsoftware.forgemod.Modules;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.Modules;
-import com.qsoftware.forgemod.modules.pcCrash.ConfirmCrashScreen;
-import com.qsoftware.forgemod.modules.pcShutdown.ConfirmShutdownScreen;
+import com.qsoftware.forgemod.util.ComputerUtils;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IBidiRenderer;
 import net.minecraft.client.gui.screen.Screen;
@@ -25,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+@SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal"})
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ConfirmExitScreen extends Screen {
@@ -69,9 +69,9 @@ public class ConfirmExitScreen extends Screen {
             }
         }));
         if (ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN)) {
-            this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 210, 20, this.shutdownPcText, (p_213006_1_) -> ConfirmShutdownScreen.show()));
+            this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 210, 20, this.shutdownPcText, (p_213006_1_) -> ComputerUtils.shutdown()));
             if (ModuleManager.getInstance().isEnabled(Modules.PC_CRASH)) {
-                this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 156, 210, 20, this.crashPcText, (p_213006_1_) -> ConfirmCrashScreen.show()));
+                this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 156, 210, 20, this.crashPcText, (p_213006_1_) -> ComputerUtils.crash()));
             }
         }
 

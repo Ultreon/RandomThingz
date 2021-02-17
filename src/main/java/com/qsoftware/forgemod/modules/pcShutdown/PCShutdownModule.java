@@ -7,10 +7,13 @@ import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.MainActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.MenuHandler;
+import com.qsoftware.forgemod.util.ComputerUtils;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.InputMappings;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,6 +38,11 @@ public class PCShutdownModule extends Module {
             @Override
             public boolean isEnabled() {
                 return true;
+            }
+
+            @Override
+            public ITextComponent getText() {
+                return new StringTextComponent("Computer");
             }
         });
     }
@@ -96,7 +104,7 @@ public class PCShutdownModule extends Module {
         boolean k5 = InputMappings.isKeyDown(win, GLFW.GLFW_KEY_INSERT);
 
         if ((k1 || k2) && (k3 || k4) && k5 && !(mc.currentScreen instanceof ConfirmShutdownScreen)) {
-            mc.displayGuiScreen(new ConfirmShutdownScreen(mc.currentScreen));
+            ComputerUtils.shutdown();
         }
     }
 }

@@ -12,6 +12,8 @@ import com.qsoftware.forgemod.modules.client.modules.MobVariantsModule;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import lombok.NonNull;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
@@ -37,6 +39,11 @@ public class ClientTweaksModule extends Module {
             @Override
             public boolean isEnabled() {
                 return true;
+            }
+
+            @Override
+            public ITextComponent getText() {
+                return new StringTextComponent("Minecraft");
             }
         });
     }

@@ -1,7 +1,10 @@
 package com.qsoftware.forgemod.modules.items.objects.specials;
 
+import com.qsoftware.forgemod.Modules;
+import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.common.text.Translations;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
+import com.qsoftware.forgemod.util.ComputerUtils;
 import com.qsoftware.forgemod.util.Utils;
 import com.sun.jna.Platform;
 import net.minecraft.client.util.ITooltipFlag;
@@ -30,14 +33,16 @@ public final class KillSwitchItem extends Item {
 
     @Override
     public @NotNull ActionResultType onItemUse(@NotNull ItemUseContext context) {
-        ActionResultType actionResultType = Utils.shutdown();
-        if (actionResultType == ActionResultType.SUCCESS || actionResultType == ActionResultType.PASS) {
+        if (ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN)) {
+            ComputerUtils.shutdown();
             PlayerEntity player = context.getPlayer();
             if (player != null) {
                 player.addStat(Stats.ITEM_USED.get(this));
+                return ActionResultType.SUCCESS;
             }
+            return ActionResultType.PASS;
         }
-        return actionResultType;
+        return ActionResultType.FAIL;
     }
 
     @Override

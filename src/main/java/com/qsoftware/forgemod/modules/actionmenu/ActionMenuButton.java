@@ -34,8 +34,13 @@ public class ActionMenuButton extends Button {
 
         fill(matrixStack, x, y, x + width, y + height, 0x7f000000);
 
-        int j = getFGColor();
-        drawCenteredString(matrixStack, fontrenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, j | MathHelper.ceil(this.alpha * 255.0F) << 24);
+        int j = this.active ? (isHovered() ? 0xffff7f : 0xffffff) : 0xa0a0a0; // White : Light Grey
+
+        if (isHovered()) {
+            drawCenteredString(matrixStack, fontrenderer, this.getMessage(), (this.x + this.width / 2) + 1, (this.y + (this.height - 8) / 2) + 1, j | MathHelper.ceil(this.alpha * 255.0F) << 24);
+        } else {
+            drawCenteredString(matrixStack, fontrenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, j | MathHelper.ceil(this.alpha * 255.0F) << 24);
+        }
 
         if (this.isHovered()) {
             this.renderToolTip(matrixStack, mouseX, mouseY);

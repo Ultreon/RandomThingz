@@ -829,8 +829,14 @@
   "msg.qforgemod.confirm_exit.title": "Sluit bevestiging",
   "msg.qforgemod.confirm_exit.description": "Weet je zeker dat je Minecraft wilt afsluiten?",
 
-  "msg.qforgemod.confirm_shutdown.title": "Computer afsluiten bevestiging",
+  "msg.qforgemod.confirm_shutdown.title": "Computer afsluit bevestiging",
   "msg.qforgemod.confirm_shutdown.description": "Weet je zeker dat je je computer wilt afsluiten?",
+
+  "msg.qforgemod.confirm_hibernate.title": "Sluimerstand bevestiging",
+  "msg.qforgemod.confirm_hibernate.description": "Weet je zeker dat je je computer op sluimerstand wilt zetten?",
+
+  "msg.qforgemod.confirm_reboot.title": "Computer herstart bevestiging",
+  "msg.qforgemod.confirm_reboot.description": "Weet je zeker dat je je computer wilt herstarten?",
 
   "msg.qforgemod.confirm_crash.title": "Crash Computer bevestiging",
   "msg.qforgemod.confirm_crash.description": "Weet je zeker dat je je computer wilt laten crashen? (Dit zal je computer niet beschadigen)",

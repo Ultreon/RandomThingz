@@ -8,15 +8,11 @@ import com.qsoftware.forgemod.keybinds.KeyBindingList;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.MainMenuScreen;
-import net.minecraft.client.util.InputMappings;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import javax.swing.*;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -90,8 +86,8 @@ public class ActionMenuModule extends Module {
 
         @SubscribeEvent
         public void clientTick(TickEvent.ClientTickEvent event) {
-            if (KeyBindingList.ACTION_MENU.isPressed()) {
-                Minecraft mc = Minecraft.getInstance();
+            Minecraft mc = Minecraft.getInstance();
+            if (KeyBindingList.ACTION_MENU.isPressed() && !(mc.currentScreen instanceof ActionMenuScreen)) {
                 mc.displayGuiScreen(new ActionMenuScreen(mc.currentScreen, MainActionMenu.INSTANCE));
             }
         }

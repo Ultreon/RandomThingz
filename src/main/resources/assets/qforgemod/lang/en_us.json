@@ -832,6 +832,12 @@
   "msg.qforgemod.confirm_shutdown.title": "Shutdown Confirmation",
   "msg.qforgemod.confirm_shutdown.description": "Are you sure you want to shutdown your computer?",
 
+  "msg.qforgemod.confirm_hibernate.title": "Hibernate Confirmation",
+  "msg.qforgemod.confirm_hibernate.description": "Are you sure you want to hibernate your computer?",
+
+  "msg.qforgemod.confirm_reboot.title": "Reboot Confirmation",
+  "msg.qforgemod.confirm_reboot.description": "Are you sure you want to reboot your computer?",
+
   "msg.qforgemod.confirm_crash.title": "Crash Computer Confirmation",
   "msg.qforgemod.confirm_crash.description": "Are you sure you want to crash your computer? (It will not damage your computer)",
 

@@ -19,7 +19,8 @@ public class ActionMenuScreen extends Screen {
 
         int y = height - 16;
         for (IActionMenuItem item : menu.getItems()) {
-            addButton(new ActionMenuButton(item, 0, y, 80, 16));
+            ActionMenuButton actionMenuButton = addButton(new ActionMenuButton(item, 0, y, 80, 16));
+            actionMenuButton.active = item.isEnabled();
 
             y -= 17;
         }

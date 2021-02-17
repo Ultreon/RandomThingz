@@ -4,8 +4,7 @@ import com.qsoftware.forgemod.Modules;
 import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.IActionMenuItem;
-import com.qsoftware.forgemod.modules.pcCrash.ConfirmCrashScreen;
-import net.minecraft.client.Minecraft;
+import com.qsoftware.forgemod.util.ComputerUtils;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -14,8 +13,7 @@ public class ComputerMenu extends AbstractActionMenu {
         addItem(new IActionMenuItem() {
             @Override
             public void onActivate() {
-                Minecraft mc = Minecraft.getInstance();
-                mc.displayGuiScreen(new ConfirmShutdownScreen(mc.currentScreen));
+                ComputerUtils.shutdown();
             }
 
             @Override
@@ -31,18 +29,49 @@ public class ComputerMenu extends AbstractActionMenu {
         addItem(new IActionMenuItem() {
             @Override
             public void onActivate() {
-                Minecraft mc = Minecraft.getInstance();
-                mc.displayGuiScreen(new ConfirmCrashScreen(mc.currentScreen));
+                ComputerUtils.hibernate();
             }
 
             @Override
             public ITextComponent getText() {
-                return new StringTextComponent("Shutdown");
+                return new StringTextComponent("Hibernate");
             }
 
             @Override
             public boolean isEnabled() {
-                return ModuleManager.getInstance().isEnabled(Modules.PC_CRASH);
+                return ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN) && ComputerUtils.supportsHibernate();
+            }
+        });
+        addItem(new IActionMenuItem() {
+            @Override
+            public void onActivate() {
+                ComputerUtils.reboot();
+            }
+
+            @Override
+            public ITextComponent getText() {
+                return new StringTextComponent("Reboot");
+            }
+
+            @Override
+            public boolean isEnabled() {
+                return ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN) && ComputerUtils.supportsReboot();
+            }
+        });
+        addItem(new IActionMenuItem() {
+            @Override
+            public void onActivate() {
+                ComputerUtils.crash();
+            }
+
+            @Override
+            public ITextComponent getText() {
+                return new StringTextComponent("Crash");
+            }
+
+            @Override
+            public boolean isEnabled() {
+                return ModuleManager.getInstance().isEnabled(Modules.PC_CRASH) && ComputerUtils.supportsCrash();
             }
         });
     }
