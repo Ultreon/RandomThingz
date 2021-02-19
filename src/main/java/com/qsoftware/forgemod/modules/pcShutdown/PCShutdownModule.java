@@ -1,11 +1,15 @@
 package com.qsoftware.forgemod.modules.pcShutdown;
 
+import com.qsoftware.forgemod.Main;
+import com.qsoftware.forgemod.Modules;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
+import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.MainActionMenu;
+import com.qsoftware.forgemod.modules.actionmenu.IMenuHandler;
 import com.qsoftware.forgemod.modules.actionmenu.MenuHandler;
 import com.qsoftware.forgemod.util.ComputerUtils;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
@@ -26,25 +30,14 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class PCShutdownModule extends Module {
-    private static final AbstractActionMenu COMPUTER_MENU = new ComputerMenu();
+    private static final AbstractActionMenu computerMenu = new ComputerMenu();
 
     public PCShutdownModule() {
-        MainActionMenu.registerHandler(new MenuHandler() {
-            @Override
-            public AbstractActionMenu getMenu() {
-                return COMPUTER_MENU;
-            }
+        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Computer"), computerMenu, this::enableMenu));
+    }
 
-            @Override
-            public boolean isEnabled() {
-                return true;
-            }
-
-            @Override
-            public ITextComponent getText() {
-                return new StringTextComponent("Computer");
-            }
-        });
+    private boolean enableMenu() {
+        return ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN) || ModuleManager.getInstance().isEnabled(Modules.PC_CRASH);
     }
 
     @Override

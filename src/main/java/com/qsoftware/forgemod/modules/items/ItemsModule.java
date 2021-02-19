@@ -8,6 +8,10 @@ import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.common.interfaces.IHasDyeColor;
 import com.qsoftware.forgemod.common.interfaces.IHasMaterialColor;
 import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
+import com.qsoftware.forgemod.modules.actionmenu.MainActionMenu;
+import com.qsoftware.forgemod.modules.actionmenu.IMenuHandler;
+import com.qsoftware.forgemod.modules.actionmenu.MenuHandler;
 import com.qsoftware.forgemod.modules.items.objects.base.DyeColorizedItem;
 import com.qsoftware.forgemod.modules.items.objects.base.MaterialColorizedItem;
 import com.qsoftware.forgemod.modules.items.objects.spawnegg.CustomSpawnEggItem;
@@ -16,8 +20,9 @@ import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
@@ -32,6 +37,11 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class ItemsModule extends CoreRegisterWrapperModule<Item> {
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.modId);
+    private static final ItemMenu itemMenu = new ItemMenu();
+
+    public ItemsModule() {
+        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Item"), itemMenu));
+    }
 
     @Override
     public ModuleSecurity getSecurity() {

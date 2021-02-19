@@ -4,7 +4,9 @@ import com.qsoftware.forgemod.Modules;
 import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.IActionMenuItem;
+import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
 import com.qsoftware.forgemod.util.ComputerUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -72,6 +74,23 @@ public class ComputerMenu extends AbstractActionMenu {
             @Override
             public boolean isEnabled() {
                 return ModuleManager.getInstance().isEnabled(Modules.PC_CRASH) && ComputerUtils.supportsCrash();
+            }
+        });
+        addItem(new IActionMenuItem() {
+            @Override
+            public void onActivate() {
+                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.COMPUTER;
+            }
+
+            @Override
+            public ITextComponent getText() {
+                return new StringTextComponent("Set Debug Page");
+            }
+
+            @Override
+            public boolean isEnabled() {
+                Minecraft mc = Minecraft.getInstance();
+                return mc.player != null && mc.world != null && mc.playerController != null;
             }
         });
     }

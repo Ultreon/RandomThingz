@@ -88,7 +88,7 @@ public class ActionMenuModule extends Module {
         public void clientTick(TickEvent.ClientTickEvent event) {
             Minecraft mc = Minecraft.getInstance();
             if (KeyBindingList.ACTION_MENU.isPressed() && !(mc.currentScreen instanceof ActionMenuScreen)) {
-                mc.displayGuiScreen(new ActionMenuScreen(mc.currentScreen, MainActionMenu.INSTANCE));
+                mc.displayGuiScreen(new ActionMenuScreen(mc.currentScreen, MainActionMenu.INSTANCE, 0));
             }
         }
     }

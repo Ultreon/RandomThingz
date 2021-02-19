@@ -144,6 +144,12 @@ public class MobVariantsModule extends Module {
         long least = id.getLeastSignificantBits();
         List<ResourceLocation> styles = shinyTextures.get(type);
         if(shinyAnimalChance > 0 && (most % shinyAnimalChance) == 0) {
+            if (styles.size() == 0) {
+                return new ResourceLocation(QForgeMod.modId, "textures/default.png");
+            }
+            if (least == 0) {
+                return styles.get(0);
+            }
             int choice = Math.abs((int) (least % styles.size()));
             return styles.get(choice);
         }

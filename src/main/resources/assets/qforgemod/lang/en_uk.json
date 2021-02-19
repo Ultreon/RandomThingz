@@ -900,5 +900,9 @@
   "module.qforgemod.updates": "Updates Module",
   "module.qforgemod.debug_menu": "Debug Menu Module",
 
-  "toasts.qforgemod.update_available.title": "Update Available"
+  "toasts.qforgemod.update_available.title": "Update Available",
+
+  "action.qforgemod.window.close": "Close",
+  "action.qforgemod.window.fullscreen": "Toggle Fullscreen",
+  "action.qforgemod.set_debug_page": "Set Debug Page"
 }

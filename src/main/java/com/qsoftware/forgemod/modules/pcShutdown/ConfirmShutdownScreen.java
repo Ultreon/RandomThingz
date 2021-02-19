@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.modules.pcShutdown;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.util.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IBidiRenderer;
@@ -54,8 +55,19 @@ public class ConfirmShutdownScreen extends Screen {
         this.buttons.clear();
         this.children.clear();
 
-        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 100, 20, this.yesButtonText, (p_213006_1_) -> shutdown.run()));
-        this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 126, 100, 20, this.noButtonText, (p_213006_1_) -> Minecraft.getInstance().displayGuiScreen(backScreen)));
+        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 100, 20, this.yesButtonText, (btn) -> {
+            if (this.minecraft.world != null) {
+                btn.active = false;
+                WorldUtils.saveWorldThen(shutdown);
+                return;
+            }
+
+            shutdown.run();
+        }));
+        this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 126, 100, 20, this.noButtonText, (btn) -> {
+            btn.active = false;
+            goBack();
+        }));
 
         setButtonDelay(10);
     }
@@ -94,6 +106,11 @@ public class ConfirmShutdownScreen extends Screen {
 
     public void goBack() {
         Minecraft.getInstance().displayGuiScreen(backScreen);
+    }
+
+    @Override
+    public void closeScreen() {
+        goBack();
     }
 
     public boolean shouldCloseOnEsc() {

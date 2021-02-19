@@ -900,5 +900,9 @@
   "module.qforgemod.updates": "Updates module",
   "module.qforgemod.debug_menu": "Debug-menu module",
 
-  "toasts.qforgemod.update_available.title": "Update beschikbaar"
+  "toasts.qforgemod.update_available.title": "Update beschikbaar",
+
+  "action.qforgemod.window.close": "Sluit",
+  "action.qforgemod.window.fullscreen": "Volledig scherm aan/uit zetten",
+  "action.qforgemod.set_debug_page": "Stel debugpagina in op dit"
 }

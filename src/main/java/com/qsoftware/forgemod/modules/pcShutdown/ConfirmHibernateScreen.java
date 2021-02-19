@@ -56,8 +56,13 @@ public class ConfirmHibernateScreen extends Screen {
         this.buttons.clear();
         this.children.clear();
 
-        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 100, 20, this.yesButtonText, (p_213006_1_) -> hibernate.run()));
-        this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 126, 100, 20, this.noButtonText, (p_213006_1_) -> Minecraft.getInstance().displayGuiScreen(backScreen)));
+        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 100, 20, this.yesButtonText, (p_213006_1_) -> {
+            hibernate.run();
+            goBack();
+        }));
+        this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 126, 100, 20, this.noButtonText, (p_213006_1_) -> {
+            goBack();
+        }));
 
         setButtonDelay(10);
     }
@@ -96,6 +101,11 @@ public class ConfirmHibernateScreen extends Screen {
 
     public void goBack() {
         Minecraft.getInstance().displayGuiScreen(backScreen);
+    }
+
+    @Override
+    public void closeScreen() {
+        goBack();
     }
 
     public boolean shouldCloseOnEsc() {

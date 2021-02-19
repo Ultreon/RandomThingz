@@ -7,6 +7,7 @@ import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.MainActionMenu;
+import com.qsoftware.forgemod.modules.actionmenu.IMenuHandler;
 import com.qsoftware.forgemod.modules.actionmenu.MenuHandler;
 import com.qsoftware.forgemod.modules.client.modules.MobVariantsModule;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
@@ -24,28 +25,15 @@ import java.util.Objects;
 public class ClientTweaksModule extends Module {
     public final MobVariantsModule MOB_VARIANTS = submoduleManager.register(new MobVariantsModule());
     private static final MinecraftMenu minecraftMenu = new MinecraftMenu();
+    private static final WindowMenu windowMenu = new WindowMenu();
 
     public ClientTweaksModule() {
         super();
 
         enableSubManager();
 
-        MainActionMenu.registerHandler(new MenuHandler() {
-            @Override
-            public AbstractActionMenu getMenu() {
-                return minecraftMenu;
-            }
-
-            @Override
-            public boolean isEnabled() {
-                return true;
-            }
-
-            @Override
-            public ITextComponent getText() {
-                return new StringTextComponent("Minecraft");
-            }
-        });
+        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Minecraft"), minecraftMenu));
+        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Window"), windowMenu));
     }
 
     @Override
