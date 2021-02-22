@@ -3,8 +3,10 @@ package com.qsoftware.forgemod.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ModTags;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
+import com.qsoftware.forgemod.modules.items.Tools;
 import com.qsoftware.forgemod.modules.items.objects.CraftingItems;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -98,9 +100,37 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 ModTags.Items.DUSTS_COAL);
         groupBuilder(Tags.Items.INGOTS, OreMaterial::getIngotTag);
         groupBuilder(Tags.Items.NUGGETS, OreMaterial::getNuggetTag);
+
+        Builder<Item> swords = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/swords")));
+        Builder<Item> axes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/axes")));
+        Builder<Item> pickaxes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/pickaxes")));
+        Builder<Item> shovels = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/shovels")));
+        Builder<Item> hoes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/hoes")));
+        Builder<Item> longswords = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/longswords")));
+        Builder<Item> broadswords = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/broadswords")));
+        Builder<Item> katanas = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/katanas")));
+        Builder<Item> battleaxes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/battleaxes")));
+        Builder<Item> lumberAxes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/lumber_axes")));
+        Builder<Item> excavators = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/excavators")));
+        Builder<Item> hammers = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/hammers")));
+        for (Tools tools : Tools.values()) {
+            swords.add(tools.getSword().get());
+            axes.add(tools.getAxe().get());
+            pickaxes.add(tools.getPickaxe().get());
+            shovels.add(tools.getShovel().get());
+            hoes.add(tools.getHoe().get());
+            longswords.add(tools.getLongsword().get());
+            broadswords.add(tools.getBroadsword().get());
+            katanas.add(tools.getKatana().get());
+            battleaxes.add(tools.getBattleaxe().get());
+            lumberAxes.add(tools.getLumberAxe().get());
+            excavators.add(tools.getExcavator().get());
+            hammers.add(tools.getHammer().get());
+        }
     }
 
     @SafeVarargs
+
     private final void groupBuilder(ITag.INamedTag<Item> tag, Function<OreMaterial, Optional<ITag.INamedTag<Item>>> tagGetter, ITag.INamedTag<Item>... extras) {
         Builder<Item> builder = getOrCreateBuilder(tag);
         for (OreMaterial metal : OreMaterial.values()) {
@@ -149,5 +179,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             }
 
         });
+    }
+
+    private static ITag.INamedTag<Item> itemTag(String path) {
+        return ItemTags.makeWrapperTag(new ResourceLocation(QForgeMod.modId, path).toString());
     }
 }

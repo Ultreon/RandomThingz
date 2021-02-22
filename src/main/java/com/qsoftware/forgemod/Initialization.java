@@ -3,6 +3,7 @@ package com.qsoftware.forgemod;
 import com.qsoftware.filters.Filters;
 import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.common.interfaces.IHasRenderType;
+import com.qsoftware.forgemod.modules.items.Tools;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
@@ -160,6 +161,19 @@ public class Initialization {
         Filters.get().register(ModItemGroups.REDSTONE, new ResourceLocation("qforgemod", "redstone/doors"), new ItemStack(ModBlocks.SHOPPING_DOOR));
         Filters.get().register(ModItemGroups.REDSTONE, new ResourceLocation("qforgemod", "redstone/buttons"), new ItemStack(ModBlocks.EUCALYPTUS_BUTTON));
         Filters.get().register(ModItemGroups.REDSTONE, new ResourceLocation("qforgemod", "redstone/pressure_plates"), new ItemStack(ModBlocks.EUCALYPTUS_PRESSURE_PLATE));
+
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/swords"), new ItemStack(Tools.COPPER.getSword()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/axes"), new ItemStack(Tools.COPPER.getAxe()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/pickaxes"), new ItemStack(Tools.COPPER.getPickaxe()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/shovels"), new ItemStack(Tools.COPPER.getShovel()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/hoes"), new ItemStack(Tools.COPPER.getHoe()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/longswords"), new ItemStack(Tools.COPPER.getLongsword()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/broadswords"), new ItemStack(Tools.COPPER.getBroadsword()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/katanas"), new ItemStack(Tools.COPPER.getKatana()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/battleaxes"), new ItemStack(Tools.COPPER.getBattleaxe()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/lumber_axes"), new ItemStack(Tools.COPPER.getLumberAxe()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/excavators"), new ItemStack(Tools.COPPER.getExcavator()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("qforgemod", "tools/hammers"), new ItemStack(Tools.COPPER.getHammer()));
 
 //        logger.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }

@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "qforgemod:item/handheld_double_size",
   "textures": {
-    "layer0": "qforgemod:default"
+    "layer0": "qforgemod:items/obsidian_longsword"
   }
 }

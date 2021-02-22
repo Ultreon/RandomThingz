@@ -44,14 +44,6 @@ public class DynamiteEntity extends ProjectileItemEntity {
         return ModItems.LEGENDARY_ENDER_PEARL.get();
     }
 
-    /**
-     * Called when the arrow hits an entity
-     */
-    protected void onEntityHit(@NotNull EntityRayTraceResult p_213868_1_) {
-        super.onEntityHit(p_213868_1_);
-        p_213868_1_.getEntity().attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), 0.0F);
-    }
-
     @Override
     public @NotNull IPacket<?> createSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);

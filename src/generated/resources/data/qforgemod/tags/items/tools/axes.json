@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:redstone_axe",
+    "qforgemod:copper_axe",
+    "qforgemod:tin_axe",
+    "qforgemod:compressed_iron_axe",
+    "qforgemod:obsidian_axe",
+    "qforgemod:lead_axe",
+    "qforgemod:nickel_axe",
+    "qforgemod:platinum_axe",
+    "qforgemod:zinc_axe",
+    "qforgemod:bismuth_axe",
+    "qforgemod:aluminum_axe",
+    "qforgemod:bronze_axe",
+    "qforgemod:brass_axe",
+    "qforgemod:invar_axe",
+    "qforgemod:electrum_axe",
+    "qforgemod:steel_axe",
+    "qforgemod:bismuth_brass_axe",
+    "qforgemod:aluminum_steel_axe",
+    "qforgemod:bismuth_steel_axe",
+    "qforgemod:signalum_axe",
+    "qforgemod:lumium_axe",
+    "qforgemod:enderium_axe"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:redstone_longsword",
+    "qforgemod:copper_longsword",
+    "qforgemod:tin_longsword",
+    "qforgemod:compressed_iron_longsword",
+    "qforgemod:obsidian_longsword",
+    "qforgemod:lead_longsword",
+    "qforgemod:nickel_longsword",
+    "qforgemod:platinum_longsword",
+    "qforgemod:zinc_longsword",
+    "qforgemod:bismuth_longsword",
+    "qforgemod:aluminum_longsword",
+    "qforgemod:bronze_longsword",
+    "qforgemod:brass_longsword",
+    "qforgemod:invar_longsword",
+    "qforgemod:electrum_longsword",
+    "qforgemod:steel_longsword",
+    "qforgemod:bismuth_brass_longsword",
+    "qforgemod:aluminum_steel_longsword",
+    "qforgemod:bismuth_steel_longsword",
+    "qforgemod:signalum_longsword",
+    "qforgemod:lumium_longsword",
+    "qforgemod:enderium_longsword"
+  ]
+}

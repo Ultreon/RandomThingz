@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:redstone_sword",
+    "qforgemod:copper_sword",
+    "qforgemod:tin_sword",
+    "qforgemod:compressed_iron_sword",
+    "qforgemod:obsidian_sword",
+    "qforgemod:lead_sword",
+    "qforgemod:nickel_sword",
+    "qforgemod:platinum_sword",
+    "qforgemod:zinc_sword",
+    "qforgemod:bismuth_sword",
+    "qforgemod:aluminum_sword",
+    "qforgemod:bronze_sword",
+    "qforgemod:brass_sword",
+    "qforgemod:invar_sword",
+    "qforgemod:electrum_sword",
+    "qforgemod:steel_sword",
+    "qforgemod:bismuth_brass_sword",
+    "qforgemod:aluminum_steel_sword",
+    "qforgemod:bismuth_steel_sword",
+    "qforgemod:signalum_sword",
+    "qforgemod:lumium_sword",
+    "qforgemod:enderium_sword"
+  ]
+}

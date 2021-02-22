@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:redstone_pickaxe",
+    "qforgemod:copper_pickaxe",
+    "qforgemod:tin_pickaxe",
+    "qforgemod:compressed_iron_pickaxe",
+    "qforgemod:obsidian_pickaxe",
+    "qforgemod:lead_pickaxe",
+    "qforgemod:nickel_pickaxe",
+    "qforgemod:platinum_pickaxe",
+    "qforgemod:zinc_pickaxe",
+    "qforgemod:bismuth_pickaxe",
+    "qforgemod:aluminum_pickaxe",
+    "qforgemod:bronze_pickaxe",
+    "qforgemod:brass_pickaxe",
+    "qforgemod:invar_pickaxe",
+    "qforgemod:electrum_pickaxe",
+    "qforgemod:steel_pickaxe",
+    "qforgemod:bismuth_brass_pickaxe",
+    "qforgemod:aluminum_steel_pickaxe",
+    "qforgemod:bismuth_steel_pickaxe",
+    "qforgemod:signalum_pickaxe",
+    "qforgemod:lumium_pickaxe",
+    "qforgemod:enderium_pickaxe"
+  ]
+}

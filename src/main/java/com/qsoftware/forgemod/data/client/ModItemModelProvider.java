@@ -36,6 +36,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         Registration.BLOCKS.getEntries().stream().filter((block) -> block.get().getClass().getPackage().getName().startsWith("com.qsoftware.forgemod.modules.blocks.blocks.machines")).forEach(block -> blockBuilder(block.get()));
 
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
+        ModelFile itemHandheld = getExistingFile(mcLoc("item/handheld"));
+        ModelFile itemHandheldDouble = getExistingFile(modLoc("item/handheld_double_size"));
 
         //noinspection OverlyLongLambda
         Arrays.stream(OreMaterial.values()).forEach(metal -> {
@@ -47,22 +49,22 @@ public class ModItemModelProvider extends ItemModelProvider {
             metal.getNugget().ifPresent(item -> builder(item, itemGenerated));
         });
         Arrays.stream(Tools.values()).forEach(metal -> {
-            metal.getHelmet().ifPresent(item -> builder(item, itemGenerated));
-            metal.getChestplate().ifPresent(item -> builder(item, itemGenerated));
-            metal.getLeggings().ifPresent(item -> builder(item, itemGenerated));
-            metal.getBoots().ifPresent(item -> builder(item, itemGenerated));
-            metal.getSword().ifPresent(item -> builder(item, itemGenerated));
-            metal.getAxe().ifPresent(item -> builder(item, itemGenerated));
-            metal.getPickaxe().ifPresent(item -> builder(item, itemGenerated));
-            metal.getShovel().ifPresent(item -> builder(item, itemGenerated));
-            metal.getHoe().ifPresent(item -> builder(item, itemGenerated));
-            metal.getLongsword().ifPresent(item -> builder(item, itemGenerated));
-            metal.getKatana().ifPresent(item -> builder(item, itemGenerated));
-            metal.getBroadsword().ifPresent(item -> builder(item, itemGenerated));
-            metal.getLumberAxe().ifPresent(item -> builder(item, itemGenerated));
-            metal.getBattleaxe().ifPresent(item -> builder(item, itemGenerated));
-            metal.getHammer().ifPresent(item -> builder(item, itemGenerated));
-            metal.getExcavator().ifPresent(item -> builder(item, itemGenerated));
+            metal.getHelmet().ifPresent(item -> builder(item, itemHandheld));
+            metal.getChestplate().ifPresent(item -> builder(item, itemHandheld));
+            metal.getLeggings().ifPresent(item -> builder(item, itemHandheld));
+            metal.getBoots().ifPresent(item -> builder(item, itemHandheld));
+            metal.getSword().ifPresent(item -> builder(item, itemHandheld));
+            metal.getAxe().ifPresent(item -> builder(item, itemHandheld));
+            metal.getPickaxe().ifPresent(item -> builder(item, itemHandheld));
+            metal.getShovel().ifPresent(item -> builder(item, itemHandheld));
+            metal.getHoe().ifPresent(item -> builder(item, itemHandheld));
+            metal.getLongsword().ifPresent(item -> builder(item, itemHandheldDouble));
+            metal.getKatana().ifPresent(item -> builder(item, itemHandheld));
+            metal.getBroadsword().ifPresent(item -> builder(item, itemHandheld));
+            metal.getLumberAxe().ifPresent(item -> builder(item, itemHandheld));
+            metal.getBattleaxe().ifPresent(item -> builder(item, itemHandheld));
+            metal.getHammer().ifPresent(item -> builder(item, itemHandheld));
+            metal.getExcavator().ifPresent(item -> builder(item, itemHandheld));
         });
         Arrays.stream(CraftingItems.values()).forEach(item -> builder(item, itemGenerated));
         Arrays.stream(MachineUpgrades.values()).forEach(item -> builder(item, itemGenerated));
@@ -78,11 +80,15 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     private void blockBuilder(Block block) {
-        String name = NameUtils.from(block).getPath();
-        if (block == ModBlocks.BATTERY_BOX.get()) {
-            withExistingParent(name, modLoc("block/" + name + "_6"));
-        } else {
-            withExistingParent(name, modLoc("block/" + name));
+        try {
+            String name = NameUtils.from(block).getPath();
+            if (block == ModBlocks.BATTERY_BOX.get()) {
+                withExistingParent(name, modLoc("block/" + name + "_6"));
+            } else {
+                withExistingParent(name, modLoc("block/" + name));
+            }
+        } catch (IllegalStateException ignored) {
+
         }
     }
 
@@ -98,7 +104,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                     .texture("layer0", modLoc(texture));
         } catch (IllegalArgumentException e) {
             getBuilder(NameUtils.fromItem(item).getPath())
-                    .parent(parent)
+                    .parent(getExistingFile(mcLoc("item/generated")))
                     .texture("layer0", modLoc("default"));
         }
     }

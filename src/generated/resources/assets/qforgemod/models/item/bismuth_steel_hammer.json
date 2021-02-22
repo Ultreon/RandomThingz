@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:default"
+    "layer0": "qforgemod:items/bismuth_steel_hammer"
   }
 }

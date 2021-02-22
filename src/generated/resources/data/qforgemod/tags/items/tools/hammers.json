@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:redstone_hammer",
+    "qforgemod:copper_hammer",
+    "qforgemod:tin_hammer",
+    "qforgemod:compressed_iron_hammer",
+    "qforgemod:obsidian_hammer",
+    "qforgemod:lead_hammer",
+    "qforgemod:nickel_hammer",
+    "qforgemod:platinum_hammer",
+    "qforgemod:zinc_hammer",
+    "qforgemod:bismuth_hammer",
+    "qforgemod:aluminum_hammer",
+    "qforgemod:bronze_hammer",
+    "qforgemod:brass_hammer",
+    "qforgemod:invar_hammer",
+    "qforgemod:electrum_hammer",
+    "qforgemod:steel_hammer",
+    "qforgemod:bismuth_brass_hammer",
+    "qforgemod:aluminum_steel_hammer",
+    "qforgemod:bismuth_steel_hammer",
+    "qforgemod:signalum_hammer",
+    "qforgemod:lumium_hammer",
+    "qforgemod:enderium_hammer"
+  ]
+}

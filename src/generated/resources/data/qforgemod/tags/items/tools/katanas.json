@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:redstone_katana",
+    "qforgemod:copper_katana",
+    "qforgemod:tin_katana",
+    "qforgemod:compressed_iron_katana",
+    "qforgemod:obsidian_katana",
+    "qforgemod:lead_katana",
+    "qforgemod:nickel_katana",
+    "qforgemod:platinum_katana",
+    "qforgemod:zinc_katana",
+    "qforgemod:bismuth_katana",
+    "qforgemod:aluminum_katana",
+    "qforgemod:bronze_katana",
+    "qforgemod:brass_katana",
+    "qforgemod:invar_katana",
+    "qforgemod:electrum_katana",
+    "qforgemod:steel_katana",
+    "qforgemod:bismuth_brass_katana",
+    "qforgemod:aluminum_steel_katana",
+    "qforgemod:bismuth_steel_katana",
+    "qforgemod:signalum_katana",
+    "qforgemod:lumium_katana",
+    "qforgemod:enderium_katana"
+  ]
+}

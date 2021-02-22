@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:redstone_excavator",
+    "qforgemod:copper_excavator",
+    "qforgemod:tin_excavator",
+    "qforgemod:compressed_iron_excavator",
+    "qforgemod:obsidian_excavator",
+    "qforgemod:lead_excavator",
+    "qforgemod:nickel_excavator",
+    "qforgemod:platinum_excavator",
+    "qforgemod:zinc_excavator",
+    "qforgemod:bismuth_excavator",
+    "qforgemod:aluminum_excavator",
+    "qforgemod:bronze_excavator",
+    "qforgemod:brass_excavator",
+    "qforgemod:invar_excavator",
+    "qforgemod:electrum_excavator",
+    "qforgemod:steel_excavator",
+    "qforgemod:bismuth_brass_excavator",
+    "qforgemod:aluminum_steel_excavator",
+    "qforgemod:bismuth_steel_excavator",
+    "qforgemod:signalum_excavator",
+    "qforgemod:lumium_excavator",
+    "qforgemod:enderium_excavator"
+  ]
+}

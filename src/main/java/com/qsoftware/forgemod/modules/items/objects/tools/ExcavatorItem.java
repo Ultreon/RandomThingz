@@ -230,8 +230,9 @@ public class ExcavatorItem extends ShovelItem {
     }
 
     /**
-     * Called when this item is used when targetting a Block
+     * Called when this item is used when targeting a Block
      */
+    @Override
     public ActionResultType onItemUse(ItemUseContext context) {
         World world = context.getWorld();
         BlockPos blockpos = context.getPos();
