@@ -275,5 +275,4 @@ public class QForgeMod {
                 map(InterModComms.IMCMessage::getMessageSupplier).
                 collect(Collectors.toList()));
     }
-
 }

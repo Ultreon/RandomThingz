@@ -802,7 +802,7 @@ public class DebugMenu {
         return MoonPhase.fromIndex(index);
     }
 
-    private static String format(String text, Object obj, Object... objects) {
+    public static String format(String text, Object obj, Object... objects) {
         StringBuilder sb = new StringBuilder();
 
 //        sb.append(TextFormatting.DARK_AQUA).append(text);
@@ -818,7 +818,7 @@ public class DebugMenu {
         return sb.toString();
     }
 
-    private static String format(Object obj) {
+    public static String format(Object obj) {
         StringBuilder sb = new StringBuilder();
 
         if (obj == null) {
