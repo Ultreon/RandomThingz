@@ -4,7 +4,6 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.CoreRegisterWrapperModule;
 import com.qsoftware.forgemod.common.ModuleSecurity;
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.modlib.silentlib.registry.BlockDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import mcp.MethodsReturnNonnullByDefault;
@@ -12,7 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
@@ -26,7 +24,7 @@ public class BlocksModule extends CoreRegisterWrapperModule<Block> {
     @Override
     public void onEnable() {
         ModBlocks.register();
-        ModBlocksNew.register();
+        ModBlocksAlt.register();
 
         BLOCKS.register(modEventBus);
     }

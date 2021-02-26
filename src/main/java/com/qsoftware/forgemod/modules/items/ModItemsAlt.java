@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 
 @SuppressWarnings("unused")
 @UtilityClass
-public class ModItemsNew extends ObjectInit<Item> {
+public class ModItemsAlt extends ObjectInit<Item> {
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.modId);
 
     public static final ItemRegistryObject<CustomSpawnEggItem<?>> DUCK_SPAWN_EGG = registerSpawnEgg(ModEntities.DUCK, 0x04680e, 0xe4b50f);

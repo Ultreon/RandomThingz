@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.modules.ui.screens;
+package com.qsoftware.forgemod.script.js.ui;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
@@ -29,7 +29,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @OnlyIn(Dist.CLIENT)
-public class NewScriptGui extends AbstractGui {
+public class ScriptJSGui extends AbstractGui {
    private final Minecraft mc;
    /** A list of messages previously sent through the chat GUI */
    private final List<String> sentMessages = Lists.newArrayList();
@@ -42,12 +42,12 @@ public class NewScriptGui extends AbstractGui {
    private boolean isScrolled;
    private long field_238490_l_ = 0L;
 
-   private static final Logger LOGGER = LogManager.getLogger("QFM:Script:Gui");
+   private static final Logger LOGGER = LogManager.getLogger("QFM:ScriptJS:Gui");
 
    @Getter
-   private static final NewScriptGui instance = new NewScriptGui(Minecraft.getInstance());
+   private static final ScriptJSGui instance = new ScriptJSGui(Minecraft.getInstance());
 
-   private NewScriptGui(Minecraft mcIn) {
+   private ScriptJSGui(Minecraft mcIn) {
       this.mc = mcIn;
    }
 
@@ -179,7 +179,7 @@ public class NewScriptGui extends AbstractGui {
     */
    private void printScriptMessageWithOptionalDeletion(ITextComponent chatComponent, int chatLineId) {
       this.func_238493_a_(chatComponent, chatLineId, this.mc.ingameGUI.getTicks(), true);
-      LOGGER.info("[CHAT] {}", chatComponent.getString().replaceAll("\r", "\\\\r").replaceAll("\n", "\\\\n"));
+      LOGGER.info("[STDOUT/STDERR] {}", chatComponent.getString().replaceAll("\r", "\\\\r").replaceAll("\n", "\\\\n"));
    }
 
    private void func_238493_a_(ITextComponent p_238493_1_, int p_238493_2_, int p_238493_3_, boolean p_238493_4_) {
@@ -306,7 +306,7 @@ public class NewScriptGui extends AbstractGui {
     * Returns true if the chat GUI is open
     */
    private boolean getScriptOpen() {
-      return this.mc.currentScreen instanceof ScriptScreen;
+      return this.mc.currentScreen instanceof ScriptJSScreen;
    }
 
    /**

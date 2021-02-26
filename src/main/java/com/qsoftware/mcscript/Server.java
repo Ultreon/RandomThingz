@@ -1,12 +1,11 @@
 package com.qsoftware.mcscript;
 
-import com.qsoftware.forgemod.script.ServerScriptUtils;
+import com.qsoftware.forgemod.script.js.ServerScriptUtils;
 import lombok.Getter;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.GameType;
 
-import javax.script.ScriptEngineManager;
 import java.util.Locale;
 
 @SuppressWarnings("unused")

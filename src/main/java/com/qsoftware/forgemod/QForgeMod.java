@@ -5,9 +5,9 @@ import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.internal.QfmArgs;
-import com.qsoftware.forgemod.modules.blocks.ModBlocksNew;
+import com.qsoftware.forgemod.modules.blocks.ModBlocksAlt;
 import com.qsoftware.forgemod.modules.environment.ModEntities;
-import com.qsoftware.forgemod.modules.items.ModItemsNew;
+import com.qsoftware.forgemod.modules.items.ModItemsAlt;
 import com.qsoftware.forgemod.modules.ui.ModContainers;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import lombok.Getter;
@@ -40,15 +40,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.Random;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
- * Mod class.
- * Here is everything started.
+ * The main mod class.
+ * Here's everything started.
  *
  * @author Qboi123
+ * @see #QForgeMod() 
+ * @see Mod
+ * @see Mod.EventBusSubscriber
  */
 @SuppressWarnings("unused")
 @MethodsReturnNonnullByDefault
@@ -60,7 +62,7 @@ public class QForgeMod {
     /**
      * QForgeMod's Logger
      */
-    public static final Logger LOGGER = LogManager.getLogger(QForgeMod.modName);
+    public static final Logger LOGGER = LogManager.getLogger("QFM:Generic");
 
     /**
      * Unused.
@@ -135,6 +137,7 @@ public class QForgeMod {
      *
      * @since 1.0-alpha1
      * @see Mod
+     * @see QForgeMod
      */
     public QForgeMod() {
 
@@ -183,9 +186,9 @@ public class QForgeMod {
         modEventBus.addListener(this::processIMC);
 
         // Register generic listeners.
-        ModBlocksNew.BLOCKS.register(modEventBus);
-        ModBlocksNew.ITEMS.register(modEventBus);
-        ModItemsNew.ITEMS.register(modEventBus);
+        ModBlocksAlt.BLOCKS.register(modEventBus);
+        ModBlocksAlt.ITEMS.register(modEventBus);
+        ModItemsAlt.ITEMS.register(modEventBus);
         ModEntities.ENTITY_TYPES.register(modEventBus);
         ModContainers.CONTAINER_TYPES.register(modEventBus);
 //        ModTileEntities.TILE_ENTITY_TYPES.register(modEventBus);
@@ -237,7 +240,7 @@ public class QForgeMod {
     }
 
     /**
-     *
+     * @return true if QForgeMod is a dev test version, false otherwise.
      */
     public static boolean isDevtest() {
         return modArgs.getFlags().isDevTest();

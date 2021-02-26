@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.script;
+package com.qsoftware.forgemod.script.js;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 
@@ -6,8 +6,8 @@ import java.io.PrintWriter;
 
 public class SystemOverride {
     public SystemOverride(ServerPlayerEntity player) {
-        out = new ScriptPrintStream(player, false);
-        err = new ScriptPrintStream(player, true);
+        out = new ScriptJSPrintStream(player, false);
+        err = new ScriptJSPrintStream(player, true);
     }
 
     public final PrintWriter out;

@@ -7,6 +7,8 @@ import lombok.NonNull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.CompressedStreamTools;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,6 +20,7 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings({"unused"})
 public final class ModuleManager {
+    private static final Logger LOGGER = LogManager.getLogger("QFM:Modules:Manager");
     private static final ModuleManager INSTANCE = new ModuleManager();
     private final List<Module> enabled = new ArrayList<>();
     private final List<Module> disabled = new ArrayList<>();

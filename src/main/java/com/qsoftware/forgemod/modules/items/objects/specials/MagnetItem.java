@@ -25,7 +25,7 @@ import java.util.Objects;
  */
 public class MagnetItem extends EnergyStoringItem {
     public MagnetItem(Properties properties) {
-        super(properties, 1000, 1);
+        super(properties, 10_000, 1);
     }
 
     @Override

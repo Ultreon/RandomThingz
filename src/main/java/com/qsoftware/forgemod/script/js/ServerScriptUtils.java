@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.script;
+package com.qsoftware.forgemod.script.js;
 
 import com.qsoftware.forgemod.QForgeMod;
 import net.minecraft.server.MinecraftServer;

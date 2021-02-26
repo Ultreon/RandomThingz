@@ -8,9 +8,7 @@ import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.common.interfaces.IHasDyeColor;
 import com.qsoftware.forgemod.common.interfaces.IHasMaterialColor;
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.MainActionMenu;
-import com.qsoftware.forgemod.modules.actionmenu.IMenuHandler;
 import com.qsoftware.forgemod.modules.actionmenu.MenuHandler;
 import com.qsoftware.forgemod.modules.items.objects.base.DyeColorizedItem;
 import com.qsoftware.forgemod.modules.items.objects.base.MaterialColorizedItem;
@@ -21,7 +19,6 @@ import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.Item;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -52,21 +49,21 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
     public void registerItemColorHandlers(ColorHandlerEvent.Item event) {
         ItemColors itemColors = event.getItemColors();
         registerSpawnEggColorHandler(itemColors,
-                ModItemsNew.BABY_CREEPER_SPAWN_EGG,
-                ModItemsNew.BABY_ENDERMAN_SPAWN_EGG,
-                ModItemsNew.BABY_SKELETON_SPAWN_EGG,
-                ModItemsNew.BABY_STRAY_SPAWN_EGG,
-                ModItemsNew.BABY_WITHER_SKELETON_SPAWN_EGG,
-                ModItemsNew.DUCK_SPAWN_EGG,
-                ModItemsNew.CLUCKSHROOM_SPAWN_EGG,
-                ModItemsNew.HOG_SPAWN_EGG,
-                ModItemsNew.WARTHOG_SPAWN_EGG,
-                ModItemsNew.BISON_SPAWN_EGG,
-                ModItemsNew.FIRE_CREEPER_SPAWN_EGG,
-                ModItemsNew.ICE_ENDERMAN_SPAWN_EGG,
-                ModItemsNew.GLOW_SQUID_SPAWN_EGG,
-                ModItemsNew.MOOBLOOM_SPAWN_EGG,
-                ModItemsNew.OX_SPAWN_EGG
+                ModItemsAlt.BABY_CREEPER_SPAWN_EGG,
+                ModItemsAlt.BABY_ENDERMAN_SPAWN_EGG,
+                ModItemsAlt.BABY_SKELETON_SPAWN_EGG,
+                ModItemsAlt.BABY_STRAY_SPAWN_EGG,
+                ModItemsAlt.BABY_WITHER_SKELETON_SPAWN_EGG,
+                ModItemsAlt.DUCK_SPAWN_EGG,
+                ModItemsAlt.CLUCKSHROOM_SPAWN_EGG,
+                ModItemsAlt.HOG_SPAWN_EGG,
+                ModItemsAlt.WARTHOG_SPAWN_EGG,
+                ModItemsAlt.BISON_SPAWN_EGG,
+                ModItemsAlt.FIRE_CREEPER_SPAWN_EGG,
+                ModItemsAlt.ICE_ENDERMAN_SPAWN_EGG,
+                ModItemsAlt.GLOW_SQUID_SPAWN_EGG,
+                ModItemsAlt.MOOBLOOM_SPAWN_EGG,
+                ModItemsAlt.OX_SPAWN_EGG
         );
 
 //        List<IItemProvider> spawnEggItems = Registration.ITEMS.getAllItems();
@@ -142,7 +139,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
     @Override
     public void onEnable() {
         ModItems.register();
-        ModItemsNew.register();
+        ModItemsAlt.register();
 
         ITEMS.register(modEventBus);
         modEventBus.register(this);

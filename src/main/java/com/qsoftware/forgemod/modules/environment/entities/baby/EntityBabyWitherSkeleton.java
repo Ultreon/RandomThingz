@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.modules.environment.entities.baby;
 
-import com.qsoftware.forgemod.modules.items.ModItemsNew;
+import com.qsoftware.forgemod.modules.items.ModItemsAlt;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;
@@ -75,7 +75,7 @@ public class EntityBabyWitherSkeleton extends WitherSkeletonEntity implements IB
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return new ItemStack(ModItemsNew.BABY_WITHER_SKELETON_SPAWN_EGG.asItem());
+        return new ItemStack(ModItemsAlt.BABY_WITHER_SKELETON_SPAWN_EGG.asItem());
     }
 
     @Nonnull

@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.script;
+package com.qsoftware.forgemod.script.js;
 
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
 import com.qsoftware.forgemod.network.Network;
@@ -11,12 +11,12 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.io.Writer;
 
-public class ScriptOutputWriter extends Writer {
+public class ScriptJSOutputWriter extends Writer {
     private char[] cache = new char[65536];
     private final ServerPlayerEntity player;
     private boolean isErr;
 
-    public ScriptOutputWriter(ServerPlayerEntity player, boolean isErr) {
+    public ScriptJSOutputWriter(ServerPlayerEntity player, boolean isErr) {
 
         this.player = player;
         this.isErr = isErr;
@@ -29,7 +29,7 @@ public class ScriptOutputWriter extends Writer {
 
     @Override
     public void flush() {
-        Network.channel.send(PacketDistributor.PLAYER.with(() -> player), new ScriptResponsePacket((isErr ? TextFormatting.RED.toString() : "") + new String(cache)));
+        Network.channel.send(PacketDistributor.PLAYER.with(() -> player), new ScriptResponsePacket((isErr ? TextFormatting.RED.toString() : "") + new String(cache).replaceAll("\u0000", "")));
         cache = new char[]{};
     }
 

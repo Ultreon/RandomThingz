@@ -23,7 +23,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @UtilityClass
 @SuppressWarnings({"unused", "RedundantSuppression", "ConstantConditions"})
 @Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModBlocksNew extends ObjectInit<Block> {
+public class ModBlocksAlt extends ObjectInit<Block> {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Blocks     //
     ////////////////////

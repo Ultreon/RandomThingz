@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.script;
+package com.qsoftware.forgemod.script.js;
 
 import com.qsoftware.forgemod.QForgeMod;
 import lombok.SneakyThrows;
@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
-import javax.script.ScriptEngine;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,8 +15,8 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 @SuppressWarnings({"ResultOfMethodCallIgnored", "unused"})
-public class Script {
-    private static final Logger LOGGER = LogManager.getLogger("QFM:Script");
+public class ScriptJS {
+    private static final Logger LOGGER = LogManager.getLogger("QFM:ScriptJS");
     private static final File scriptDir;
 
     static {
@@ -33,19 +32,28 @@ public class Script {
         scriptDir = dir;
     }
 
-    private final ScriptEngine engine;
+    private final ScriptJSInstance scriptJS;
 
     @NotNull
     private static File dir() {
         return new File(ServerScriptUtils.getServer().getFile(QForgeMod.getModId()), "scripts");
     }
 
-    Script(ScriptEngine engine) {
-        this.engine = engine;
+    ScriptJS(ScriptJSInstance scriptJS) {
+        this.scriptJS = scriptJS;
+    }
+
+    public void runFile(String file, String... args) {
+        ScriptJSInstance subInstance = new ScriptJSInstance(this.scriptJS.getPlayer(), this.scriptJS.getEngine());
+        this.run(subInstance, file, args);
+    }
+
+    public void importFile(String file, String... args) {
+        this.run(this.scriptJS, file, args);
     }
 
     @SneakyThrows
-    public void runFile(String file, String... args) {
+    void run(ScriptJSInstance scriptJS, String file, String... args) {
         if (new File(file).isAbsolute()) {
             throw new IllegalArgumentException("Given file is absolute, expected an relative path.");
         }
@@ -73,11 +81,12 @@ public class Script {
             LOGGER.debug("// END SCRIPT " + file + " //");
 
             // Evaluate code using the script engine.
-            engine.eval(new String(cache));
+            scriptJS.eval(new String(cache));
         } catch (Exception e) {
             // ERROR!!!
             e.printStackTrace();
         }
+
         fileReader.close();
     }
 

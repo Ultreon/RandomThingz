@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.modules.environment.entities.baby;
 
-import com.qsoftware.forgemod.modules.items.ModItemsNew;
+import com.qsoftware.forgemod.modules.items.ModItemsAlt;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;
@@ -92,7 +92,7 @@ public class EntityBabyCreeper extends CreeperEntity implements IBabyEntity {
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return new ItemStack(ModItemsNew.BABY_CREEPER_SPAWN_EGG.asItem());
+        return new ItemStack(ModItemsAlt.BABY_CREEPER_SPAWN_EGG.asItem());
     }
 
     @Nonnull

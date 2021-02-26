@@ -2,7 +2,7 @@ package com.qsoftware.mcscript;
 
 import com.mojang.authlib.GameProfile;
 import com.qsoftware.forgemod.common.enums.TextColors;
-import com.qsoftware.forgemod.script.ServerScriptUtils;
+import com.qsoftware.forgemod.script.js.ServerScriptUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;

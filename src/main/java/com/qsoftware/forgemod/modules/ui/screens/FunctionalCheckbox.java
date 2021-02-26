@@ -8,22 +8,24 @@ import net.minecraft.util.text.ITextComponent;
  */
 public class FunctionalCheckbox extends CheckboxButton {
 
-    private final Toggleable onPress;
+    private final Toggleable onToggle;
 
-    FunctionalCheckbox(int xIn, int yIn, int widthIn, int heightIn, ITextComponent msg, boolean defaultValue, Toggleable onPress) {
+    FunctionalCheckbox(int xIn, int yIn, int widthIn, int heightIn, ITextComponent msg, boolean defaultValue, Toggleable onToggle) {
         super(xIn, yIn, widthIn, heightIn, msg, defaultValue);
 
-        this.onPress = onPress;
+        this.onToggle = onToggle;
     }
 
     @Override
     public void onPress() {
         super.onPress();
-        onPress.onPress(isChecked());
+        if (active) {
+            onToggle.onToggle(isChecked());
+        }
     }
 
     @FunctionalInterface
     public interface Toggleable {
-        void onPress(boolean value);
+        void onToggle(boolean value);
     }
 }

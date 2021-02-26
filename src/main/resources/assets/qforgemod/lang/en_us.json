@@ -819,6 +819,14 @@
 
   "misc.qforgemod.unknown": "UNKNOWN",
 
+  "misc.qforgemod.security.safe": "This feature is safe.",
+  "misc.qforgemod.security.risc": "This feature has a risc of light damage.",
+  "misc.qforgemod.security.experimental": "This feature has a risc of unrecoverable damage.",
+
+  "misc.qforgemod.security.safe": "This feature is safe.",
+  "misc.qforgemod.security.risc": "This feature has a risc of light damage.",
+  "misc.qforgemod.security.experimental": "This feature has a risc of unrecoverable damage.",
+
   "misc.qforgemod.error": "Error",
   "misc.qforgemod.failed_save": "Failed to save %s!",
   "misc.qforgemod.modules": "Module Config",
