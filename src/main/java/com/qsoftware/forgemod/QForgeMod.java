@@ -106,7 +106,7 @@ public class QForgeMod {
 
         boolean s;
         try {
-            Class.forName("net.minecraft.server.Main");
+            Class.forName("net.minecraft.server.MinecraftServer");
             s = true;
         } catch (ClassNotFoundException e) {
             s = false;

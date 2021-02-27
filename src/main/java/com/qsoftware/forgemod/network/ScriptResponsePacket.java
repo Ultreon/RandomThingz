@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.network;
 
-import com.qsoftware.forgemod.script.js.ui.ScriptJSGui;
+import com.qsoftware.forgemod.script.js.ui.ScriptJSServerGui;
 import lombok.Getter;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.StringTextComponent;
@@ -34,7 +34,7 @@ public class ScriptResponsePacket {
     }
 
     private static void handlePacket(ScriptResponsePacket packet) {
-        ScriptJSGui.getInstance().printScriptMessage(new StringTextComponent(packet.getMessage().replaceAll("\r", "")));
+        ScriptJSServerGui.getInstance().printScriptMessage(new StringTextComponent(packet.getMessage().replaceAll("\r", "")));
     }
 
     public void toBytes(PacketBuffer buffer) {

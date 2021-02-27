@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.script.js;
 
+import com.google.common.annotations.Beta;
 import com.qsoftware.forgemod.util.StringTransformer;
 import net.minecraft.util.text.TextFormatting;
 import org.apache.logging.log4j.LogManager;
@@ -8,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Beta
 public class ScriptJSFormatter {
     private static final Logger LOGGER = LogManager.getLogger("QFM:ScriptJS:Formatter");
 

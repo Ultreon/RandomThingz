@@ -1,19 +1,25 @@
 package com.qsoftware.forgemod.script.js;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.network.Network;
-import com.qsoftware.forgemod.network.ScriptResponsePacket;
-import com.qsoftware.mcscript.*;
 import com.qsoftware.modlib.common.geom.RectangleUV;
 import com.qsoftware.modlib.common.maps.SequencedHashMap;
+import com.qsoftware.scriptjs.Server;
+import com.qsoftware.scriptjs.World;
 import jdk.nashorn.api.scripting.ClassFilter;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
+import mezz.jei.events.PlayerJoinedWorldEvent;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.script.ScriptEngine;
 import java.awt.*;
@@ -22,13 +28,18 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.*;
 
+@Mod.EventBusSubscriber(modid = QForgeMod.modId)
+@SuppressWarnings({"UnusedReturnValue", "unused"})
 public class ScriptJSManager {
-    private static final HashMap<UUID, ScriptJSInstance> mapping = new HashMap<>();
-    private static final NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
+    static final NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
+
+    private static final Logger LOGGER = LogManager.getLogger("QFM:ScriptJS:Manager");
+    private static final HashMap<UUID, ServerScriptJSInstance> mapping = new HashMap<>();
     private static final List<Class<?>> classes = new ArrayList<>();
     private static final UUID CHAT_UUID = UUID.nameUUIDFromBytes(ScriptJSManager.class.getName().getBytes());
     private static final Set<String> exclusions = new HashSet<>();
     private static final Set<String> packages = new HashSet<>();
+    private static ClientScriptJSInstance clientInstance;
 
     static {
         registerScriptClass(World.class);
@@ -55,16 +66,9 @@ public class ScriptJSManager {
         registerScriptClass(BlockPos.class);
         registerScriptClass(ResourceLocation.class);
 
-        registerScriptPackage("java.lang");
-        registerScriptPackage("java.util");
-        registerScriptPackage("com.qsoftware.forgemod.common.geom");
-        registerScriptPackage("com.qsoftware.modlib.common.geom");
-        registerScriptPackage("com.qsoftware.mcscript");
-        registerScriptPackage("net.minecraft.util.math");
-        registerScriptPackage("net.minecraft.util.text");
-
         addClassExclusion(System.class);
         addClassExclusion(Runtime.class);
+        addClassExclusion(Class.class);
     }
 
     private static void addClassExclusion(Class<?> clazz) {
@@ -83,7 +87,11 @@ public class ScriptJSManager {
         packages.add(s);
     }
 
-    static class MyCF implements ClassFilter {
+    public static ClientScriptJSInstance getClientInstance() {
+        return clientInstance;
+    }
+
+    static class QFMClassFilter implements ClassFilter {
         @Override
         public boolean exposeToScripts(String s) {
             if (exclusions.contains(s)) {
@@ -95,45 +103,24 @@ public class ScriptJSManager {
                     return true;
                 }
             }
-            if (s.startsWith("java.util.")) {
-                return true;
+            for (String package_ : packages) {
+                if (s.startsWith(package_ + ".")) {
+                    return true;
+                }
             }
-            if (s.startsWith("java.lang.")) {
-                return true;
-            }
-            if (s.startsWith("com.qsoftware.forgemod.common.geom.")) {
-                return true;
-            }
-            if (s.startsWith("com.qsoftware.modlib.common.geom.")) {
-                return true;
-            }
-            if (s.startsWith("com.google.common.collect.")) {
-                return true;
-            }
-            if (s.startsWith("net.minecraft.util.math.")) {
-                return true;
-            }
-            if (s.startsWith("net.minecraft.util.text.")) {
-                return true;
-            }
-            return s.startsWith("org.apache.commons.collections.");
+            return false;
         }
     }
 
-    public static ScriptJSInstance getOrCreateInstance(ServerPlayerEntity player) {
-        ScriptJSInstance scriptEngine;
+    public static ServerScriptJSInstance getOrCreateInstance(ServerPlayerEntity player) {
+        ServerScriptJSInstance scriptEngine;
         if (!mapping.containsKey(player.getUniqueID())) {
             QForgeMod.LOGGER.debug("Script engine not created yet, creating new one.");
-            ScriptEngine engine = factory.getScriptEngine(new String[]{}, Player.class.getClassLoader(), new MyCF());
+            ScriptEngine engine = factory.getScriptEngine(new String[]{}, ScriptJSManager.class.getClassLoader(), new QFMClassFilter());
 
-            scriptEngine = new ScriptJSInstance(player, engine);
+            scriptEngine = new ServerScriptJSInstance(player, engine);
 
             QForgeMod.LOGGER.debug("Evaluating startup script.");
-            scriptEngine.eval(getStartupScript(player)).ifLeft((e) -> {
-                QForgeMod.LOGGER.debug("Startup script exception occurred:");
-                e.printStackTrace();
-                Network.channel.send(PacketDistributor.PLAYER.with(() -> player), new ScriptResponsePacket(TextFormatting.RED + e.getMessage()));
-            });
             mapping.put(player.getUniqueID(), scriptEngine);
         } else {
             QForgeMod.LOGGER.debug("Getting last used script engine.");
@@ -142,44 +129,35 @@ public class ScriptJSManager {
         return scriptEngine;
     }
 
-    @SuppressWarnings("StringBufferReplaceableByString")
     private static String getStartupScript(PlayerEntity player) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("var byte = Java.type(\"java.lang.Byte\");");
-        sb.append("var short = Java.type(\"java.lang.Short\");");
-        sb.append("var int = Java.type(\"java.lang.Integer\");");
-        sb.append("var integer = Java.type(\"java.lang.Integer\");");
-        sb.append("var long = Java.type(\"java.lang.Long\");");
-        sb.append("var int8 = Java.type(\"java.lang.Byte\");");
-        sb.append("var int16 = Java.type(\"java.lang.Short\");");
-        sb.append("var int32 = Java.type(\"java.lang.Integer\");");
-        sb.append("var int64 = Java.type(\"java.lang.Long\");");
-        sb.append("var double = Java.type(\"java.lang.Double\");");
-        sb.append("var float = Java.type(\"java.lang.Float\");");
-        sb.append("var float32 = Java.type(\"java.lang.Float\");");
-        sb.append("var float64 = Java.type(\"java.lang.Double\");");
-        sb.append("var string = Java.type(\"java.lang.String\");");
-        sb.append("var str = Java.type(\"java.lang.String\");");
-        sb.append("var character = Java.type(\"java.lang.Character\");");
-        sb.append("var char = Java.type(\"java.lang.Character\");");
-        sb.append("var UUID = Java.type(\"java.util.UUID\");");
-        sb.append("var HashMap = Java.type(\"java.util.HashMap\");");
-        sb.append("var Map = Java.type(\"java.util.Map\");");
-        sb.append("var Maps = Java.type(\"com.google.common.collect.Maps\");");
-        sb.append("var HashSet = Java.type(\"java.util.HashSet\");");
-        sb.append("var Set = Java.type(\"java.util.Set\");");
-        sb.append("var Sets = Java.type(\"com.google.common.collect.Sets\");");
-        sb.append("var ArrayList = Java.type(\"java.util.ArrayList\");");
-        sb.append("var List = Java.type(\"java.util.List\");");
-        sb.append("var Lists = Java.type(\"com.google.common.collect.Lists\");");
-        sb.append("var Arrays = Java.type(\"java.util.Arrays\");");
-        sb.append("var Collection = Java.type(\"java.util.Collection\");");
-        sb.append("var Collections = Java.type(\"java.util.Collections\");");
-        return sb.toString();
+        return null;
     }
 
     public static <T> Class<T> registerScriptClass(Class<T> clazz) {
         classes.add(clazz);
         return clazz;
+    }
+
+    @SubscribeEvent
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        if (QForgeMod.isClientSide()) {
+            if (clientInstance == null) {
+                generateClientInstance();
+            }
+        }
+    }
+
+    private static void generateClientInstance() {
+        ClientPlayerEntity player = Minecraft.getInstance().player;
+        if (player == null) {
+            return;
+        }
+
+        ClientScriptJSInstance jsInstance;
+        QForgeMod.LOGGER.debug("Script engine not created yet, creating new one.");
+        ScriptEngine engine = factory.getScriptEngine(new String[]{}, ScriptJSManager.class.getClassLoader(), new QFMClassFilter());
+
+        jsInstance = new ClientScriptJSInstance(player, engine);
+        clientInstance = jsInstance;
     }
 }

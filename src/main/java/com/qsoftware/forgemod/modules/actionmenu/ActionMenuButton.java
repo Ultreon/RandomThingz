@@ -3,6 +3,7 @@ package com.qsoftware.forgemod.modules.actionmenu;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.modules.ui.widgets.TransparentButton;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -15,7 +16,7 @@ import java.awt.*;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ActionMenuButton extends Button implements IActionMenuIndexable {
+public class ActionMenuButton extends TransparentButton implements IActionMenuIndexable {
     private static final ResourceLocation ICONS = new ResourceLocation(QForgeMod.modId, "textures/gui/icons/action_menu.png");
     @Getter private final IActionMenuItem item;
     @Getter private final ActionMenuScreen screen;
@@ -52,9 +53,9 @@ public class ActionMenuButton extends Button implements IActionMenuIndexable {
         int nrm;
         int dis;
         if (screen.getActiveItem() == this) {
-            hov = new Color(255, 255, 0, (int) Math.max((int) Math.min(255 - (51.2 * (menuIndex - 1)), 255), 1)).getRGB();
-            nrm = new Color(255, 255, 255, (int) Math.max((int) Math.min(255 - (51.2 * (menuIndex - 1)), 255), 1)).getRGB();
-            dis = new Color(160, 160, 160, (int) Math.max((int) Math.min(255 - (51.2 * (menuIndex - 1)), 255), 1)).getRGB();
+            hov = new Color(255, 255, 0, Math.max((int) Math.min(255 - (51.2 * (menuIndex - 1)), 255), 1)).getRGB();
+            nrm = new Color(255, 255, 255, Math.max((int) Math.min(255 - (51.2 * (menuIndex - 1)), 255), 1)).getRGB();
+            dis = new Color(160, 160, 160, Math.max((int) Math.min(255 - (51.2 * (menuIndex - 1)), 255), 1)).getRGB();
         } else {
             hov = new Color(255, 255, 0, (int) Math.max(Math.min(255 - (51.2 * (menuIndex)), 255), 1)).getRGB();
             nrm = new Color(255, 255, 255, (int) Math.max(Math.min(255 - (51.2 * (menuIndex)), 255), 1)).getRGB();

@@ -88,6 +88,24 @@ mixin {
     add sourceSets.main, "qforgemod.refmap.json"
 }
 
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Qboi123/QForgeMod")
+            credentials {
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   Snapshot are built nightly.
@@ -212,6 +230,7 @@ dependencies {
     // Jamepad for Gamepads including XInput.
     // https://mvnrepository.com/artifact/com.github.WilliamAHartman/Jamepad
     compile group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
+    extraLibs group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
 
     // QModLib - Qboi's Library Mod.
     compileOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0-beta1")
@@ -239,8 +258,8 @@ dependencies {
     extraLibs group: 'commons-codec', name: 'commons-codec', version: '1.15'
     extraLibs group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
     extraLibs group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
-    extraLibs group: 'org.apache.commons', name: 'commons-compress', version: '+'
-    extraLibs group: 'org.apache.commons', name: 'commons-math3', version: '3.+'
+    extraLibs group: 'org.apache.commons', name: 'commons-compress', version: '1.21-SNAPSHOT'
+    extraLibs group: 'org.apache.commons', name: 'commons-math3', version: '3.6.2-SNAPSHOT'
     extraLibs group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
     extraLibs group: 'org.apache.commons', name: 'commons-text', version: '1.9'
     extraLibs group: 'org.apache.commons', name: 'commons-configuration2', version: '2.7'
@@ -254,8 +273,8 @@ dependencies {
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
     implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.4'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
-    implementation group: 'org.apache.commons', name: 'commons-compress', version: '+'
-    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.+'
+    implementation group: 'org.apache.commons', name: 'commons-compress', version: '1.21-SNAPSHOT'
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.2-SNAPSHOT'
     implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
     implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
     implementation group: 'org.apache.commons', name: 'commons-configuration2', version: '2.7'

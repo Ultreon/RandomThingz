@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.network;
 
-import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
-import com.qsoftware.forgemod.script.js.ScriptJSInstance;
+import com.qsoftware.forgemod.script.js.CommonScriptJSUtils;
+import com.qsoftware.forgemod.script.js.ServerScriptJSInstance;
 import com.qsoftware.forgemod.script.js.ScriptJSManager;
 import lombok.Getter;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -57,9 +57,9 @@ public class ScriptPacket {
         }
 
         if (player.hasPermissionLevel(3)) {
-            ScriptJSInstance scriptEngine = ScriptJSManager.getOrCreateInstance(player);
+            ServerScriptJSInstance scriptJSInstance = ScriptJSManager.getOrCreateInstance(player);
             LOGGER.info(TextFormatting.DARK_AQUA + "Player " + TextFormatting.AQUA + player.getName().getString() + TextFormatting.DARK_AQUA + " executed script command: " + TextFormatting.AQUA + packet.command);
-            scriptEngine.eval(packet.command).ifLeft((e) -> {
+            scriptJSInstance.eval(packet.command).ifLeft((e) -> {
                 e.printStackTrace();
                 if (e instanceof ScriptException) {
                     Network.channel.send(PacketDistributor.PLAYER.with(() -> player), new ScriptResponsePacket(TextFormatting.RED + e.getMessage()));
@@ -69,11 +69,11 @@ public class ScriptPacket {
                     e.printStackTrace(writer1);
                     String s = writer.toString();
                     for (String s1 : s.split("(\r\n|\r|\n)")) {
-                        Network.channel.send(PacketDistributor.PLAYER.with(() -> player), new ScriptResponsePacket(TextFormatting.RED + s1));
+                        Network.channel.send(PacketDistributor.PLAYER.with(() -> player), new ScriptResponsePacket(TextFormatting.RED + s1.replaceAll("\r", "")));
                     }
                 }
             }).ifRight((eval) -> {
-                Network.channel.send(PacketDistributor.PLAYER.with(() -> player), new ScriptResponsePacket(TextFormatting.GRAY.toString() + TextFormatting.BOLD + "= " + TextFormatting.RESET + DebugMenu.format(eval)));
+                Network.channel.send(PacketDistributor.PLAYER.with(() -> player), new ScriptResponsePacket(TextFormatting.GRAY.toString() + TextFormatting.BOLD + "= " + TextFormatting.RESET + CommonScriptJSUtils.format(eval)));
             });
         } else {
             Network.channel.send(PacketDistributor.PLAYER.with(() -> player), new ScriptResponsePacket(TextFormatting.RED + "You don't have permission to use scripts!"));

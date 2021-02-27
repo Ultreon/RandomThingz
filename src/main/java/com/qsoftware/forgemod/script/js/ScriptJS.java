@@ -2,6 +2,8 @@ package com.qsoftware.forgemod.script.js;
 
 import com.qsoftware.forgemod.QForgeMod;
 import lombok.SneakyThrows;
+import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -32,28 +34,38 @@ public class ScriptJS {
         scriptDir = dir;
     }
 
-    private final ScriptJSInstance scriptJS;
+    private final AbstractScriptJSInstance scriptJS;
 
     @NotNull
     private static File dir() {
-        return new File(ServerScriptUtils.getServer().getFile(QForgeMod.getModId()), "scripts");
+        return new File(ServerScriptJSUtils.getServer().getFile(QForgeMod.getModId()), "scripts");
     }
 
-    ScriptJS(ScriptJSInstance scriptJS) {
+    ScriptJS(AbstractScriptJSInstance scriptJS) {
         this.scriptJS = scriptJS;
     }
 
     public void runFile(String file, String... args) {
-        ScriptJSInstance subInstance = new ScriptJSInstance(this.scriptJS.getPlayer(), this.scriptJS.getEngine());
-        this.run(subInstance, file, args);
+        if (scriptJS instanceof ClientScriptJSInstance) {
+            ClientScriptJSInstance scriptJS = (ClientScriptJSInstance) this.scriptJS;
+            ClientScriptJSInstance subInstance = new ClientScriptJSInstance((ClientPlayerEntity) scriptJS.getPlayer(),
+                    ScriptJSManager.factory.getScriptEngine(args, ScriptJS.class.getClassLoader(), new ScriptJSManager.QFMClassFilter()));
+            this.run(subInstance, file, args);
+        }
+        if (scriptJS instanceof ServerScriptJSInstance) {
+            ServerScriptJSInstance scriptJS = (ServerScriptJSInstance) this.scriptJS;
+            ServerScriptJSInstance subInstance = new ServerScriptJSInstance((ServerPlayerEntity) scriptJS.getPlayer(),
+                    ScriptJSManager.factory.getScriptEngine(args, ScriptJS.class.getClassLoader(), new ScriptJSManager.QFMClassFilter()));
+            this.run(subInstance, file, args);
+        }
     }
 
-    public void importFile(String file, String... args) {
-        this.run(this.scriptJS, file, args);
+    public void importFile(String file) {
+        this.run(this.scriptJS, file);
     }
 
     @SneakyThrows
-    void run(ScriptJSInstance scriptJS, String file, String... args) {
+    void run(AbstractScriptJSInstance scriptJS, String file, String... args) {
         if (new File(file).isAbsolute()) {
             throw new IllegalArgumentException("Given file is absolute, expected an relative path.");
         }

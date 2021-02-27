@@ -4,9 +4,12 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
+import com.qsoftware.forgemod.modules.ui.widgets.TransparentButton;
 import com.qsoftware.forgemod.network.Network;
 import com.qsoftware.forgemod.network.ScriptPacket;
 import com.qsoftware.forgemod.script.js.ScriptJSFormatter;
+import com.qsoftware.forgemod.script.js.ScriptJSManager;
+import com.qsoftware.forgemod.script.js.CommonScriptJSUtils;
 import com.qsoftware.forgemod.util.TextUtils;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -26,9 +29,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import javax.script.ScriptException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Objects;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "unused"})
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @OnlyIn(Dist.CLIENT)
@@ -36,6 +42,7 @@ import java.util.Objects;
 public class ScriptJSScreen extends Screen {
    private static final Logger LOGGER = LogManager.getLogger("QFM:ScriptJS:Screen");
    private String historyBuffer = "";
+   private Dist executeDist = Dist.DEDICATED_SERVER;
 
    /**
     * keeps position of which chat message you will select when you press up, (does not increase for duplicated messages
@@ -47,6 +54,8 @@ public class ScriptJSScreen extends Screen {
    /** is the text that appears when you press the chat key and the input box appears pre-filled */
    private final String defaultInputFieldText;
    private boolean textLock;
+   private TransparentButton serverButton;
+   private TransparentButton clientButton;
    //   private CommandSuggestionHelper commandSuggestionHelper;
 
    public ScriptJSScreen(String defaultText) {
@@ -56,21 +65,43 @@ public class ScriptJSScreen extends Screen {
 
    protected void init() {
       Objects.requireNonNull(this.minecraft).keyboardListener.enableRepeatEvents(true);
-      this.sentHistoryCursor = ScriptJSGui.getInstance().getSentMessages().size();
+      this.sentHistoryCursor = ScriptJSServerGui.getInstance().getSentMessages().size();
       this.inputField = new ScriptJSTextWidget(this.font, 4, this.height - 12, this.width - 4, 12, new TranslationTextComponent("chat.editBox")) {
 //         protected IFormattableTextComponent getNarrationMessage() {
 //            return super.getNarrationMessage().appendString(ChatScreen.this.commandSuggestionHelper.getSuggestionMessage());
 //         }
       };
+      this.serverButton = this.addButton(new TransparentButton(4, height - 40, 40, 20, new TranslationTextComponent("misc.server"), (btn) -> {
+         this.executeDist = Dist.DEDICATED_SERVER;
+         this.redirectServer();
+      }));
+      this.clientButton = this.addButton(new TransparentButton(4, height - 40, 40, 20, new TranslationTextComponent("misc.client"), (btm) -> {
+         this.executeDist = Dist.CLIENT;
+         this.redirectClient();
+      }));
 //      this.inputField.setTextFormatter((p_195610_0_, p_195610_1_) -> (p_242236_0_) -> false);
       this.inputField.setMaxStringLength(256);
       this.inputField.setEnableBackgroundDrawing(false);
       this.inputField.setText(this.defaultInputFieldText);
       this.inputField.setResponder(this::textChanged);
       this.children.add(this.inputField);
+      this.children.add(this.serverButton);
+      this.buttons.add(this.serverButton);
 //      this.commandSuggestionHelper = new CommandSuggestionHelper(this.minecraft, this, this.inputField, this.font, false, false, 1, 10, true, -805306368);
 //      this.commandSuggestionHelper.init();
       this.setFocusedDefault(this.inputField);
+
+      this.serverButton.setWidth(Minecraft.getInstance().fontRenderer.getStringWidth(serverButton.getMessage().getString()) + 4);
+      this.clientButton.setWidth(Minecraft.getInstance().fontRenderer.getStringWidth(clientButton.getMessage().getString()) + 4);
+      this.clientButton.x = 4 + Minecraft.getInstance().fontRenderer.getStringWidth(serverButton.getMessage().getString()) + 8;
+   }
+
+   private void redirectClient() {
+
+   }
+
+   private void redirectServer() {
+
    }
 
    public void resize(Minecraft minecraft, int width, int height) {
@@ -82,11 +113,14 @@ public class ScriptJSScreen extends Screen {
 
    public void onClose() {
       Objects.requireNonNull(this.minecraft).keyboardListener.enableRepeatEvents(false);
-      ScriptJSGui.getInstance().resetScroll();
+      ScriptJSServerGui.getInstance().resetScroll();
    }
 
    public void tick() {
       this.inputField.tick();
+      this.serverButton.setWidth(Minecraft.getInstance().fontRenderer.getStringWidth(serverButton.getMessage().getString()) + 4);
+      this.clientButton.setWidth(Minecraft.getInstance().fontRenderer.getStringWidth(clientButton.getMessage().getString()) + 4);
+      this.clientButton.x = 4 + Minecraft.getInstance().fontRenderer.getStringWidth(serverButton.getMessage().getString()) + 8;
    }
 
    private void textChanged(String p_212997_1_) {
@@ -110,7 +144,16 @@ public class ScriptJSScreen extends Screen {
       return ScriptJSFormatter.instance().format(s);
    }
 
+   @SuppressWarnings("CodeBlock2Expr")
    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+      AbstractScriptJSGui jsGui;
+      if (executeDist == Dist.DEDICATED_SERVER) {
+         jsGui = ScriptJSServerGui.getInstance();
+      } else if (executeDist == Dist.CLIENT) {
+         jsGui = ScriptJSClientGui.getInstance();
+      } else {
+         throw new IllegalStateException("Invalid dist: " + executeDist);
+      }
       if (this.minecraft == null) {
          return true;
       }
@@ -130,24 +173,42 @@ public class ScriptJSScreen extends Screen {
             this.getSentHistory(1);
             return true;
          } else if (keyCode == 266) {
-            ScriptJSGui.getInstance().addScrollPos(ScriptJSGui.getInstance().getLineCount() - 1);
+            jsGui.addScrollPos(ScriptJSServerGui.getInstance().getLineCount() - 1);
             return true;
          } else if (keyCode == 267) {
-            ScriptJSGui.getInstance().addScrollPos(-ScriptJSGui.getInstance().getLineCount() + 1);
+            jsGui.addScrollPos(-ScriptJSServerGui.getInstance().getLineCount() + 1);
             return true;
          } else {
             return false;
          }
       } else {
          String s = TextUtils.stripFormatting(this.inputField.getText().trim());
+         jsGui.addToSentCommands(s);
+         jsGui.printScriptMessage(new StringTextComponent(TextFormatting.GRAY.toString() + TextFormatting.BOLD.toString() + TextFormatting.UNDERLINE + "$ " + TextFormatting.RESET + TextFormatting.WHITE.toString() + TextFormatting.UNDERLINE + s));
+
          if (!s.isEmpty()) {
-            if (this.minecraft != null && this.minecraft.player != null) {
+            if (executeDist == Dist.DEDICATED_SERVER) {
                Network.channel.sendToServer(new ScriptPacket(s));
+            } else if (executeDist == Dist.CLIENT) {
+               ScriptJSManager.getClientInstance().eval(s).ifLeft((e) -> {
+                  e.printStackTrace();
+                  if (e instanceof ScriptException) {
+                     jsGui.printScriptMessage(new StringTextComponent(TextFormatting.RED + e.getMessage()));
+                  } else {
+                     StringWriter writer = new StringWriter();
+                     PrintWriter writer1 = new PrintWriter(writer);
+                     e.printStackTrace(writer1);
+                     String s1 = writer.toString();
+                     for (String s2 : s1.split("(\r\n|\r|\n)")) {
+                        jsGui.printScriptMessage(new StringTextComponent(TextFormatting.RED + s2.replaceAll("\r", "")));
+                     }
+                  }
+               }).ifRight((eval) -> {
+                  jsGui.printScriptMessage(new StringTextComponent(TextFormatting.GRAY.toString() + TextFormatting.BOLD + "= " + TextFormatting.RESET + CommonScriptJSUtils.format(eval)));
+               });
+               ScriptJSManager.getClientInstance().eval(s);
             }
          }
-
-         ScriptJSGui.getInstance().addToSentMessages(s);
-         ScriptJSGui.getInstance().printScriptMessage(new StringTextComponent(TextFormatting.GRAY.toString() + TextFormatting.BOLD.toString() + TextFormatting.UNDERLINE + "$ " + TextFormatting.RESET + TextFormatting.WHITE.toString() + TextFormatting.UNDERLINE + s));
 
          this.inputField.setText("");
 
@@ -156,6 +217,14 @@ public class ScriptJSScreen extends Screen {
    }
 
    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+      AbstractScriptJSGui jsGui;
+      if (executeDist == Dist.DEDICATED_SERVER) {
+         jsGui = ScriptJSServerGui.getInstance();
+      } else if (executeDist == Dist.CLIENT) {
+         jsGui = ScriptJSClientGui.getInstance();
+      } else {
+         throw new IllegalStateException("Invalid dist: " + executeDist);
+      }
 //      if (delta > 1.0D) {
 //         delta = 1.0D;
 //      }
@@ -166,12 +235,13 @@ public class ScriptJSScreen extends Screen {
 
       /*if (this.commandSuggestionHelper.onScroll(delta)) {
          return true;
-      } else */{
+      } else */
+      {
          if (!hasShiftDown()) {
             delta *= 7.0D;
          }
 
-         ScriptJSGui.getInstance().addScrollPos(delta);
+         jsGui.addScrollPos(delta);
          return true;
       }
    }
@@ -181,7 +251,7 @@ public class ScriptJSScreen extends Screen {
          return true;
       } else */{
          if (button == 0) {
-            ScriptJSGui newScriptGui = ScriptJSGui.getInstance();
+            ScriptJSServerGui newScriptGui = ScriptJSServerGui.getInstance();
             if (newScriptGui.func_238491_a_(mouseX, mouseY)) {
                return true;
             }
@@ -210,8 +280,16 @@ public class ScriptJSScreen extends Screen {
     * message from the current cursor position
     */
    public void getSentHistory(int msgPos) {
+      AbstractScriptJSGui jsGui;
+      if (executeDist == Dist.DEDICATED_SERVER) {
+         jsGui = ScriptJSServerGui.getInstance();
+      } else if (executeDist == Dist.CLIENT) {
+         jsGui = ScriptJSClientGui.getInstance();
+      } else {
+         throw new IllegalStateException("Invalid dist: " + executeDist);
+      }
       int i = this.sentHistoryCursor + msgPos;
-      int j = ScriptJSGui.getInstance().getSentMessages().size();
+      int j = jsGui.getSentMessages().size();
       i = MathHelper.clamp(i, 0, j);
       if (i != this.sentHistoryCursor) {
          if (i == j) {
@@ -222,7 +300,7 @@ public class ScriptJSScreen extends Screen {
                this.historyBuffer = this.inputField.getText();
             }
 
-            this.inputField.setText(ScriptJSGui.getInstance().getSentMessages().get(i));
+            this.inputField.setText(jsGui.getSentMessages().get(i));
 //            this.commandSuggestionHelper.shouldAutoSuggest(false);
             this.sentHistoryCursor = i;
          }
@@ -234,7 +312,14 @@ public class ScriptJSScreen extends Screen {
       RenderSystem.disableAlphaTest();
       RenderSystem.pushMatrix();
       RenderSystem.translatef(0.0F, (float)(this.height - 48), 0.0F);
-      ScriptJSGui.getInstance().render(matrixStack, Objects.requireNonNull(this.minecraft).ingameGUI.getTicks());
+
+      if (executeDist == Dist.DEDICATED_SERVER) {
+         ScriptJSServerGui.getInstance().render(matrixStack, Objects.requireNonNull(this.minecraft).ingameGUI.getTicks());
+      } else if (executeDist == Dist.CLIENT) {
+         ScriptJSClientGui.getInstance().render(matrixStack, Objects.requireNonNull(this.minecraft).ingameGUI.getTicks());
+      } else {
+         throw new IllegalStateException("Invalid dist: " + executeDist);
+      }
       RenderSystem.popMatrix();
 
       this.setListener(this.inputField);
@@ -247,7 +332,7 @@ public class ScriptJSScreen extends Screen {
       // Command suggestions. Todo: add command suggestions.
 //      this.commandSuggestionHelper.drawSuggestionList(matrixStack, mouseX, mouseY);
 
-      Style style = ScriptJSGui.getInstance().getStyleAt(mouseX, mouseY);
+      Style style = ScriptJSServerGui.getInstance().getStyleAt(mouseX, mouseY);
       if (style != null && style.getHoverEvent() != null) {
          this.renderComponentHoverEffect(matrixStack, style, mouseX, mouseY);
       }

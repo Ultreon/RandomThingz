@@ -819,13 +819,16 @@
 
   "misc.qforgemod.unknown": "UNKNOWN",
 
-  "misc.qforgemod.security.safe": "This feature is safe.",
-  "misc.qforgemod.security.risc": "This feature has a risc of light damage.",
-  "misc.qforgemod.security.experimental": "This feature has a risc of unrecoverable damage.",
+  "misc.client": "Client",
+  "misc.server": "Server",
 
   "misc.qforgemod.security.safe": "This feature is safe.",
   "misc.qforgemod.security.risc": "This feature has a risc of light damage.",
   "misc.qforgemod.security.experimental": "This feature has a risc of unrecoverable damage.",
+
+  "misc.qforgemod.compatibility.full": "This feature has full compatibility.",
+  "misc.qforgemod.compatibility.partial": "This feature has partial compatibility.",
+  "misc.qforgemod.compatibility.none": "This feature has no compatibility.",
 
   "misc.qforgemod.error": "Error",
   "misc.qforgemod.failed_save": "Failed to save %s!",
