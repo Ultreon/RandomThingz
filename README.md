@@ -46,7 +46,6 @@ The GitHub pages are here: https://qboi123.github.io/QForgeMod/.
 ## Planned features.
  - [ ] Spell checking in the chat, based on current selected language, uses libreoffice `.dic` files.
  - [ ] Blaze knight.
- - [ ] Javascript console ingame. (An alternative to commands)
 
     
 ### Planned but not sure.
@@ -59,3 +58,4 @@ The GitHub pages are here: https://qboi123.github.io/QForgeMod/.
  - [x] Multiple moobloom variants.
  - [x] Cluckshroom.
  - [x] Mod updater for **QForgeMod** including api.
+ - [x] Javascript console ingame. (An alternative to commands)
