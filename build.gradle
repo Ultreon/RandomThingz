@@ -70,7 +70,7 @@ output.close()
 boolean isDevTest = Boolean.parseBoolean(isDevTestString)
 
 version = vers + "." + release + '.' + buildNumber + "-" + stage + stageRelease
-group = 'com.qsoftware.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'com.qsoftware' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'qforgemod'
 jar.version = version
 jar.archiveVersion.set(version)
@@ -209,6 +209,14 @@ repositories {
     flatDir {
         dirs 'D:\\Github\\QForgeMod\\libs'
     }
+//    maven {
+//        name = "GitHubPackages"
+//        url = uri("https://maven.pkg.github.com/Qboi123/QForgeMod")
+//        credentials {
+//            username = System.getenv("GITHUB_USERNAME")
+//            password = System.getenv("GITHUB_TOKEN")
+//        }
+//    }
     maven {
         url "file://${local_maven}"
     }
@@ -233,8 +241,8 @@ dependencies {
     extraLibs group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
 
     // QModLib - Qboi's Library Mod.
-    compileOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0-beta1")
-    runtimeOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0-beta1")
+    compileOnly( fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.+"))
+    runtimeOnly( fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.+"))
 
     compileOnly 'org.projectlombok:lombok:1.18.16'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
@@ -245,7 +253,9 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    minecraft(group: "net.minecraftforge", name: "forge", version: "${mc_version}-${forge_version}"){
+        force = true
+    }
 
     // https://mvnrepository.com/artifact/io.kaitai/kaitai-struct-runtime
     extraLibs group: 'io.kaitai', name: 'kaitai-struct-runtime', version: '0.9'
