@@ -1,7 +1,7 @@
 package com.qsoftware.scriptjs;
 
 import com.qsoftware.forgemod.common.interfaces.Formattable;
-import com.qsoftware.forgemod.script.js.CommonScriptJSUtils;
+import com.qsoftware.forgemod.script.CommonScriptJSUtils;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.GameRules;

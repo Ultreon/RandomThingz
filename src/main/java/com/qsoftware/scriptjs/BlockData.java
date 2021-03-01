@@ -1,7 +1,7 @@
 package com.qsoftware.scriptjs;
 
 import com.qsoftware.forgemod.common.interfaces.Formattable;
-import com.qsoftware.forgemod.script.js.CommonScriptJSUtils;
+import com.qsoftware.forgemod.script.CommonScriptJSUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

@@ -3,6 +3,8 @@ package com.qsoftware.forgemod;
 import com.qsoftware.filters.Filters;
 import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.common.interfaces.IHasRenderType;
+import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
+import com.qsoftware.forgemod.modules.debugMenu.ModDebugPages;
 import com.qsoftware.forgemod.modules.items.Tools;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
@@ -112,7 +114,7 @@ public class Initialization {
         this.logger.info("Registering keybindings");
         KeyBindingList.register();
         if (Minecraft.getInstance().getVersion().equals("MOD_DEV")) {
-            DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.PLAYER_1;
+            DebugMenuModule.getDebugMenu().setPage(ModDebugPages.DEFAULT_PAGE.get());
         }
 
         for (Item item : Registration.getItems((item) -> item instanceof AdvancedBowItem)) {

@@ -4,23 +4,25 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleSecurity;
-import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.MainActionMenu;
-import com.qsoftware.forgemod.modules.actionmenu.IMenuHandler;
 import com.qsoftware.forgemod.modules.actionmenu.MenuHandler;
-import net.minecraft.util.text.ITextComponent;
+import lombok.Getter;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class DebugMenuModule extends Module {
-    private static final DebugMenuMenu debugMenuMenu = new DebugMenuMenu();
+    @Getter private static final DebugMenuMenu debugMenuMenu = new DebugMenuMenu();
+    @Getter private static final DebugMenu     debugMenu     = new DebugMenu();
 
     public DebugMenuModule() {
-
         MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Debug Menu"), debugMenuMenu));
     }
 
@@ -44,13 +46,13 @@ public class DebugMenuModule extends Module {
     }
 
     @SubscribeEvent
-    public void onKeyReleased(InputEvent.KeyInputEvent event) {
-        DebugMenu.onKeyReleased(event);
+    public void onClientTick(TickEvent.ClientTickEvent event) {
+        debugMenu.onClientTick(event);
     }
 
     @SubscribeEvent
     public void renderGameOverlay(RenderGameOverlayEvent event) {
-        DebugMenu.renderGameOverlay(event);
+        debugMenu.renderGameOverlay(event);
     }
 
     @Override
@@ -59,12 +61,12 @@ public class DebugMenuModule extends Module {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "debug_menu";
     }
 
     @Override
-    public @NotNull ModuleCompatibility getCompatibility() {
+    public ModuleCompatibility getCompatibility() {
         if (QForgeMod.isClientSide()) {
             return ModuleCompatibility.FULL;
         } else if (QForgeMod.isServerSide()) {

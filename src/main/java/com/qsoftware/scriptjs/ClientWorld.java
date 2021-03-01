@@ -1,7 +1,7 @@
 package com.qsoftware.scriptjs;
 
 import com.qsoftware.forgemod.common.interfaces.Formattable;
-import com.qsoftware.forgemod.script.js.CommonScriptJSUtils;
+import com.qsoftware.forgemod.script.CommonScriptJSUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 import net.minecraft.client.entity.player.ClientPlayerEntity;

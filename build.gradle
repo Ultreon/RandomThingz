@@ -209,17 +209,14 @@ repositories {
     flatDir {
         dirs 'D:\\Github\\QForgeMod\\libs'
     }
-//    maven {
-//        name = "GitHubPackages"
-//        url = uri("https://maven.pkg.github.com/Qboi123/QForgeMod")
-//        credentials {
-//            username = System.getenv("GITHUB_USERNAME")
-//            password = System.getenv("GITHUB_TOKEN")
-//        }
-//    }
     maven {
         url "file://${local_maven}"
     }
+}
+
+compileJava {
+    exclude("com/qsoftware/forgemod/script")
+    exclude("com/qsoftware/scriptjs")
 }
 
 ////////////////////////////
@@ -241,11 +238,12 @@ dependencies {
     extraLibs group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
 
     // QModLib - Qboi's Library Mod.
-    compileOnly( fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.+"))
-    runtimeOnly( fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.+"))
+    compileOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.32-b2")
+    runtimeOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.32-b2")
 
     compileOnly 'org.projectlombok:lombok:1.18.16'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor "org.graalvm.truffle:truffle-dsl-processor:19.3.5"
 
     testCompileOnly 'org.projectlombok:lombok:1.18.16'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
@@ -292,6 +290,51 @@ dependencies {
     implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
     implementation group: 'xml-resolver', name: 'xml-resolver', version: '1.2'
     implementation group: 'org.yaml', name: 'snakeyaml', version: '1.26'
+
+//    extraLibs 'org.antlr:antlr4-runtime:4.7'
+//    implementation 'org.antlr:antlr4-runtime:4.7'
+//
+//    extraLibs group: 'org.graalvm.js', name: 'js', version: '19.3.5'
+//    extraLibs group: 'org.graalvm.js', name: 'js-scriptengine', version: '19.3.5'
+//    extraLibs group: 'org.graalvm.js', name: 'js-launcher', version: '19.3.5'
+//    implementation group: 'org.graalvm.js', name: 'js', version: '19.3.5'
+//    implementation group: 'org.graalvm.js', name: 'js-scriptengine', version: '19.3.5'
+//    implementation group: 'org.graalvm.js', name: 'js-launcher', version: '19.3.5'
+//
+//    extraLibs "org.graalvm.truffle:truffle-dsl-processor:19.3.5"
+//    extraLibs "org.graalvm.truffle:truffle-tck:19.3.5"
+//
+//    extraLibs "org.graalvm.truffle:truffle-api:19.3.5"
+//    extraLibs "org.graalvm.truffle:truffle-nfi:19.3.5"
+//    extraLibs "org.graalvm.truffle:truffle-nfi-native-linux-amd64:19.3.5"
+//    extraLibs "org.graalvm.truffle:truffle-nfi-native-darwin-amd64:19.3.5"
+//    extraLibs "org.graalvm.truffle:truffle-sl-launcher:19.3.5"
+//    extraLibs "org.graalvm.truffle:truffle-sl:19.3.5"
+//    extraLibs "org.graalvm.truffle:truffle-tck-instrumentation:19.3.5"
+//    extraLibs "org.graalvm.truffle:truffle-tck-common:19.3.5"
+//    extraLibs "org.graalvm.truffle:truffle-tck:19.3.5"
+//    implementation "org.graalvm.truffle:truffle-api:19.3.5"
+//    implementation "org.graalvm.truffle:truffle-nfi:19.3.5"
+//    implementation "org.graalvm.truffle:truffle-nfi-native-linux-amd64:19.3.5"
+//    implementation "org.graalvm.truffle:truffle-nfi-native-darwin-amd64:19.3.5"
+//    implementation "org.graalvm.truffle:truffle-sl-launcher:19.3.5"
+//    implementation "org.graalvm.truffle:truffle-sl:19.3.5"
+//    implementation "org.graalvm.truffle:truffle-tck-instrumentation:19.3.5"
+//    implementation "org.graalvm.truffle:truffle-tck-common:19.3.5"
+//    implementation "org.graalvm.truffle:truffle-tck:19.3.5"
+//
+//    extraLibs "org.graalvm.compiler:compiler:19.3.5"
+//    implementation "org.graalvm.compiler:compiler:19.3.5"
+//
+//    extraLibs "org.graalvm.regex:regex:19.3.5"
+//    implementation "org.graalvm.regex:regex:19.3.5"
+//
+//    extraLibs group: 'org.graalvm.sdk', name: 'graal-sdk', version: '19.3.5'
+//    extraLibs group: 'org.graalvm.sdk', name: 'polyglot-tck', version: '19.3.5'
+//    implementation group: 'org.graalvm.sdk', name: 'graal-sdk', version: '19.3.5'
+//    implementation group: 'org.graalvm.sdk', name: 'polyglot-tck', version: '19.3.5'
+//
+//    compileOnly "org.graalvm.truffle:truffle-tck:19.3.5"
 
     // Bson library.
     extraLibs group: 'org.mongodb', name: 'bson', version: '4.1.1'
@@ -383,8 +426,18 @@ jar {
         ])
     }
     from {
-        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.extraLibs.collect {
+            if (it.getName().endsWith(".zip") || it.getName().endsWith(".jar")) {
+                try {
+                    it.isDirectory() ? it : zipTree(it)
+                } catch (Exception e) {
+                    System.out.println("Error occurred when expanding zip: " + it.getPath())
+                    e.printStackTrace();
+                }
+            }
+        }
     }
+    zip64 = true;
 }
 
 // Example configuration to allow publishing using the maven-publish task

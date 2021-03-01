@@ -1,8 +1,8 @@
 package com.qsoftware.scriptjs;
 
 import com.qsoftware.forgemod.common.interfaces.Formattable;
-import com.qsoftware.forgemod.script.js.CommonScriptJSUtils;
-import com.qsoftware.forgemod.script.js.ServerScriptJSUtils;
+import com.qsoftware.forgemod.script.CommonScriptJSUtils;
+import com.qsoftware.forgemod.script.ServerScriptJSUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.util.math.EntityRayTraceResult;

@@ -5,6 +5,8 @@ import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.IActionMenuItem;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
+import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
+import com.qsoftware.forgemod.modules.debugMenu.ModDebugPages;
 import com.qsoftware.forgemod.util.ComputerUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.ITextComponent;
@@ -79,7 +81,7 @@ public class ComputerMenu extends AbstractActionMenu {
         addItem(new IActionMenuItem() {
             @Override
             public void onActivate() {
-                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.COMPUTER;
+                DebugMenuModule.getDebugMenu().setPage(ModDebugPages.COMPUTER_PAGE.get());
             }
 
             @Override

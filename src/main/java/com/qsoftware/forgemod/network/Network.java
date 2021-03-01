@@ -37,16 +37,18 @@ public final class Network {
                 .encoder(ModuleChangePacket::toBytes)
                 .consumer(ModuleChangePacket::handle)
                 .add();
-        channel.messageBuilder(ScriptPacket.class, id++)
-                .decoder(ScriptPacket::fromBytes)
-                .encoder(ScriptPacket::toBytes)
-                .consumer(ScriptPacket::handle)
-                .add();
-        channel.messageBuilder(ScriptResponsePacket.class, id++)
-                .decoder(ScriptResponsePacket::fromBytes)
-                .encoder(ScriptResponsePacket::toBytes)
-                .consumer(ScriptResponsePacket::handle)
-                .add();
+        id++;
+        id++;
+//        channel.messageBuilder(ScriptPacket.class, id++)
+//                .decoder(ScriptPacket::fromBytes)
+//                .encoder(ScriptPacket::toBytes)
+//                .consumer(ScriptPacket::handle)
+//                .add();
+//        channel.messageBuilder(ScriptResponsePacket.class, id++)
+//                .decoder(ScriptResponsePacket::fromBytes)
+//                .encoder(ScriptResponsePacket::toBytes)
+//                .consumer(ScriptResponsePacket::handle)
+//                .add();
     }
 
     private Network() {

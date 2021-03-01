@@ -1,8 +1,8 @@
 package com.qsoftware.scriptjs;
 
 import com.qsoftware.forgemod.common.interfaces.Formattable;
-import com.qsoftware.forgemod.script.js.CommonScriptJSUtils;
-import com.qsoftware.forgemod.script.js.ServerScriptJSUtils;
+import com.qsoftware.forgemod.script.CommonScriptJSUtils;
+import com.qsoftware.forgemod.script.ServerScriptJSUtils;
 import lombok.Getter;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;

@@ -1,9 +1,8 @@
 package com.qsoftware.scriptjs;
 
 import com.qsoftware.forgemod.common.interfaces.Formattable;
-import com.qsoftware.forgemod.script.js.CommonScriptJSUtils;
+import com.qsoftware.forgemod.script.CommonScriptJSUtils;
 import net.minecraft.client.MainWindow;
-import org.lwjgl.glfw.GLFW;
 
 @SuppressWarnings("unused")
 public class GameWindow implements Formattable {

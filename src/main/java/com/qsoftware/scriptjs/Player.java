@@ -5,7 +5,7 @@ import com.mojang.datafixers.util.Either;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.enums.TextColors;
 import com.qsoftware.forgemod.common.interfaces.Formattable;
-import com.qsoftware.forgemod.script.js.CommonScriptJSUtils;
+import com.qsoftware.forgemod.script.CommonScriptJSUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.item.ItemEntity;

@@ -2,7 +2,7 @@ package com.qsoftware.scriptjs;
 
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.qsoftware.forgemod.common.interfaces.Formattable;
-import com.qsoftware.forgemod.script.js.CommonScriptJSUtils;
+import com.qsoftware.forgemod.script.CommonScriptJSUtils;
 import net.minecraft.client.network.play.NetworkPlayerInfo;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;

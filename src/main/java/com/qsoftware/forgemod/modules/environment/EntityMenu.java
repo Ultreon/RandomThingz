@@ -3,18 +3,15 @@ package com.qsoftware.forgemod.modules.environment;
 import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.IActionMenuItem;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
+import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
+import com.qsoftware.forgemod.modules.debugMenu.ModDebugPages;
 import com.qsoftware.forgemod.util.Targeter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.multiplayer.PlayerController;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.projectile.ProjectileHelper;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -81,7 +78,7 @@ public class EntityMenu extends AbstractActionMenu {
         addItem(new IActionMenuItem() {
             @Override
             public void onActivate() {
-                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.ENTITY;
+                DebugMenuModule.getDebugMenu().setPage(ModDebugPages.ENTITY_PAGE.get());
             }
 
             @Override
