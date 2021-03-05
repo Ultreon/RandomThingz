@@ -16,6 +16,7 @@ public class OreConfig {
     private final ForgeConfigSpec.IntValue veinSize;
     private final ForgeConfigSpec.IntValue minHeight;
     private final ForgeConfigSpec.IntValue maxHeight;
+    private final ForgeConfigSpec.IntValue chunkChance;
 
     public OreConfig(Ore ore, ForgeConfigSpec.Builder builder, ForgeConfigSpec.BooleanValue masterSwitch) {
         this.masterSwitch = masterSwitch;
@@ -31,6 +32,9 @@ public class OreConfig {
         this.maxHeight = builder
                 .comment("Maximum Y-coordinate (highest level) of veins")
                 .defineInRange(ore.getName() + ".maxHeight", ore.getDefaultOreConfigs().getMaxHeight(), 0, 255);
+        this.chunkChance = builder
+                .comment("Chance per chunk.")
+                .defineInRange(ore.getName() + ".maxHeight", ore.getDefaultOreConfigs().getChunkChance(), 0, 255);
     }
 
     public boolean isEnabled() {
@@ -51,5 +55,9 @@ public class OreConfig {
 
     public int getMaxHeight() {
         return maxHeight.get();
+    }
+
+    public int getChunkChance() {
+        return chunkChance.get();
     }
 }

@@ -5,11 +5,14 @@ import com.qsoftware.forgemod.config.OreConfig;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.modlib.silentlib.block.IBlockProvider;
 import com.qsoftware.modlib.silentutils.Lazy;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 
@@ -31,7 +34,7 @@ public enum Ore implements IBlockProvider {
     BISMUTH(() -> OreMaterial.BISMUTH, 3, 1, new DefaultOreConfigs(4, 8, 16, 64)),
     BAUXITE(() -> OreMaterial.ALUMINUM, 4, 1, new DefaultOreConfigs(6, 8, 15, 50)),
     URANIUM(() -> OreMaterial.URANIUM, 6, 2, new DefaultOreConfigs(1, 4, 0, 18)),
-    ;
+    ULTRINIUM(() -> OreMaterial.ULTRINIUM, 125, 5, new );
 
     private final Supplier<OreMaterial> metal;
     private final DefaultOreConfigs defaultOreConfigs;
@@ -43,6 +46,7 @@ public enum Ore implements IBlockProvider {
         return Feature.ORE
                 .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, this.asBlockState(), config.getVeinSize()))
                 .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
+                .withPlacement(Placement.CHANCE.configure(new ChanceConfig(config.getChunkChance())))
                 .square()
                 .func_242731_b(config.getVeinCount());
     });
@@ -84,33 +88,17 @@ public enum Ore implements IBlockProvider {
         return metal.get().getOre().get();
     }
 
+    @Getter
+    @AllArgsConstructor
     public static class DefaultOreConfigs {
         private final int veinCount;
         private final int veinSize;
         private final int minHeight;
         private final int maxHeight;
+        private final int chunkChance;
 
         public DefaultOreConfigs(int veinCount, int veinSize, int minHeight, int maxHeight) {
-            this.veinCount = veinCount;
-            this.veinSize = veinSize;
-            this.minHeight = minHeight;
-            this.maxHeight = maxHeight;
-        }
-
-        public int getVeinCount() {
-            return veinCount;
-        }
-
-        public int getVeinSize() {
-            return veinSize;
-        }
-
-        public int getMinHeight() {
-            return minHeight;
-        }
-
-        public int getMaxHeight() {
-            return maxHeight;
+            this(veinCount, veinSize, minHeight, maxHeight, 1);
         }
     }
 }

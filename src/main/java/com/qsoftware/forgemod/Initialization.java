@@ -72,7 +72,7 @@ public class Initialization {
 
         event.enqueueWork(() -> {
             // Baby variants.
-            GlobalEntityTypeAttributes.put(ModEntities.BABY_CREEPER.get(), EntityBabyCreeper.registerAttributes().create());
+            GlobalEntityTypeAttributes.put(ModEntities.BABY_CREEPER.get(), BabyCreeperEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.BABY_ENDERMAN.get(), EntityBabyEnderman.func_234287_m_().create());
             GlobalEntityTypeAttributes.put(ModEntities.BABY_SKELETON.get(), EntityBabySkeleton.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.BABY_STRAY.get(), EntityBabyStray.registerAttributes().create());

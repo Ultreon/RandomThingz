@@ -53,7 +53,7 @@ public enum OreMaterial implements IOreMaterial {
     BISMUTH_STEEL(builderAlloy("bismuth_steel")),
     SIGNALUM(builderAlloy("signalum")),
     LUMIUM(builderAlloy("lumium")),
-    ENDERIUM(builderAlloy("enderium"));
+    ENDERIUM(builderAlloy("enderium")), ULTRINIUM(builderBaseWithOre("ultrinium", Ore.ULTRINIUM));
 //    OBSIDIAN(builder("obsidian").dust().ingot().ingotTagOnly());
 
 //    // Gems

@@ -1,12 +1,11 @@
 package com.qsoftware.forgemod.modules.debugMenu;
 
-import com.qsoftware.filters.Filters;
-import com.qsoftware.forgemod.common.Angle;
-import com.qsoftware.forgemod.common.Multiplier;
-import com.qsoftware.forgemod.common.Percentage;
 import com.qsoftware.forgemod.common.IntSize;
 import com.qsoftware.forgemod.common.enums.MoonPhase;
-import com.qsoftware.forgemod.common.interfaces.Formattable;
+import com.qsoftware.modlib.common.Angle;
+import com.qsoftware.modlib.common.Multiplier;
+import com.qsoftware.modlib.common.Percentage;
+import com.qsoftware.modlib.common.interfaces.Formattable;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
@@ -20,9 +19,8 @@ import org.jetbrains.annotations.Nullable;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"ConstantConditions", "unused"})
 public abstract class DebugPage implements IForgeRegistryEntry<DebugPage> {
     private final List<DebugEntry> linesLeft = new ArrayList<>();
     private final List<DebugEntry> linesRight = new ArrayList<>();

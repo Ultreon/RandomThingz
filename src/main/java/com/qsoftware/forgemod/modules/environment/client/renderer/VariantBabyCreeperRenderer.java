@@ -1,6 +1,7 @@
 package com.qsoftware.forgemod.modules.environment.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.qsoftware.forgemod.modules.client.modules.MobVariantsModule;
 import com.qsoftware.forgemod.modules.environment.client.model.BabyCreeperModel;
 import com.qsoftware.forgemod.modules.environment.client.renderer.layers.BabyCreeperChargeLayer;
 import com.qsoftware.forgemod.modules.environment.entities.baby.BabyCreeperEntity;
@@ -14,11 +15,11 @@ import javax.annotation.Nonnull;
 /**
  * Copy of vanilla's creeper render, modified to use our own model/layer that is properly scaled
  */
-public class RenderBabyCreeper extends MobRenderer<BabyCreeperEntity, BabyCreeperModel> {
+public class VariantBabyCreeperRenderer extends MobRenderer<BabyCreeperEntity, BabyCreeperModel> {
 
     private static final ResourceLocation CREEPER_TEXTURES = new ResourceLocation("textures/entity/creeper/creeper.png");
 
-    public RenderBabyCreeper(EntityRendererManager renderManagerIn) {
+    public VariantBabyCreeperRenderer(EntityRendererManager renderManagerIn) {
         super(renderManagerIn, new BabyCreeperModel(), 0.5F);
         this.addLayer(new BabyCreeperChargeLayer(this));
     }
@@ -44,6 +45,6 @@ public class RenderBabyCreeper extends MobRenderer<BabyCreeperEntity, BabyCreepe
     @Nonnull
     @Override
     public ResourceLocation getEntityTexture(@Nonnull BabyCreeperEntity entity) {
-        return CREEPER_TEXTURES;
+        return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.CREEPER, MobVariantsModule.enableCreeper);
     }
 }

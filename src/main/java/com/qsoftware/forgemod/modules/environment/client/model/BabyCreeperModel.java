@@ -1,14 +1,14 @@
 package com.qsoftware.forgemod.modules.environment.client.model;
 
 import com.google.common.collect.ImmutableList;
-import com.qsoftware.forgemod.modules.environment.entities.baby.EntityBabyCreeper;
+import com.qsoftware.forgemod.modules.environment.entities.baby.BabyCreeperEntity;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
 
 import javax.annotation.Nonnull;
 
-public class ModelBabyCreeper extends AgeableModel<EntityBabyCreeper> {
+public class BabyCreeperModel extends AgeableModel<BabyCreeperEntity> {
 
     private final ModelRenderer head;
     private final ModelRenderer body;
@@ -17,11 +17,11 @@ public class ModelBabyCreeper extends AgeableModel<EntityBabyCreeper> {
     private final ModelRenderer leg3;
     private final ModelRenderer leg4;
 
-    public ModelBabyCreeper() {
+    public BabyCreeperModel() {
         this(0);
     }
 
-    public ModelBabyCreeper(float size) {
+    public BabyCreeperModel(float size) {
         this.head = new ModelRenderer(this, 0, 0);
         this.head.addBox(-4, -8, -4, 8, 8, 8, size);
         //Only real difference between this model and the vanilla creeper model is the "fix" for the head's rotation point
@@ -57,7 +57,7 @@ public class ModelBabyCreeper extends AgeableModel<EntityBabyCreeper> {
     }
 
     @Override
-    public void setRotationAngles(@Nonnull EntityBabyCreeper creeper, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setRotationAngles(@Nonnull BabyCreeperEntity creeper, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
         this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
         this.leg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;

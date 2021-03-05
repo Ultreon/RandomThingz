@@ -24,11 +24,11 @@ import javax.annotation.Nonnull;
  *
  * @author QForgeUtils community.
  */
-public class EntityBabyCreeper extends CreeperEntity implements IBabyEntity {
+public class BabyCreeperEntity extends CreeperEntity implements IBabyEntity {
 
-    private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(EntityBabyCreeper.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(BabyCreeperEntity.class, DataSerializers.BOOLEAN);
 
-    public EntityBabyCreeper(EntityType<EntityBabyCreeper> type, World world) {
+    public BabyCreeperEntity(EntityType<BabyCreeperEntity> type, World world) {
         super(type, world);
         setChild(true);
     }
