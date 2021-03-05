@@ -1,9 +1,8 @@
 package com.qsoftware.forgemod.data.client;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.common.interfaces.IMachine;
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
 import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.forgemod.modules.items.Tools;

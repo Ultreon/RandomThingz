@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.util.eventbus;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.blocks.ModTileEntities;
-import com.qsoftware.forgemod.modules.blocks.tileentities.renderer.ChristmasChestTileEntityRenderer;
+import com.qsoftware.forgemod.modules.tiles.ModTileEntities;
+import com.qsoftware.forgemod.modules.tiles.tileentities.renderer.ChristmasChestTileEntityRenderer;
 import com.qsoftware.forgemod.modules.environment.ModEntities;
 import com.qsoftware.forgemod.modules.environment.client.renderer.*;
 import com.qsoftware.forgemod.modules.ui.ModContainers;

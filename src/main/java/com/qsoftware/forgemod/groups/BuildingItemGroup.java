@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.groups;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.common.BetterItemGroup;
+import com.qsoftware.modlib.common.BetterItemGroup;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

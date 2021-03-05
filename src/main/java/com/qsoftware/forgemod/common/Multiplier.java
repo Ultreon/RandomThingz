@@ -1,12 +1,13 @@
 package com.qsoftware.forgemod.common;
 
-import com.qsoftware.forgemod.common.interfaces.Formattable;
 import com.qsoftware.forgemod.util.helpers.MathHelper;
+import com.qsoftware.modlib.common.interfaces.Formattable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.util.text.TextFormatting;
 
+@Deprecated
 @EqualsAndHashCode
 @RequiredArgsConstructor
 public class Multiplier implements Formattable {

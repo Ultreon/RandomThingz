@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.modules.environment.entities;
 import java.util.Optional;
 import java.util.UUID;
 
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
 import com.qsoftware.forgemod.modules.environment.ModEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -4,7 +4,7 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleSecurity;
-import com.qsoftware.forgemod.keybinds.KeyBindingList;
+import com.qsoftware.forgemod.keybinds.KeybindingList;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -87,7 +87,7 @@ public class ActionMenuModule extends Module {
         @SubscribeEvent
         public void clientTick(TickEvent.ClientTickEvent event) {
             Minecraft mc = Minecraft.getInstance();
-            if (KeyBindingList.ACTION_MENU.isPressed() && !(mc.currentScreen instanceof ActionMenuScreen)) {
+            if (KeybindingList.ACTION_MENU.isPressed() && !(mc.currentScreen instanceof ActionMenuScreen)) {
                 mc.displayGuiScreen(new ActionMenuScreen(mc.currentScreen, MainActionMenu.INSTANCE, 0));
             }
         }

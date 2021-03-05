@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.modules.blocks.blocks.machines.IMachineInventory;
+import com.qsoftware.forgemod.modules.tiles.blocks.machines.IMachineInventory;
 import com.qsoftware.forgemod.util.InventoryUtils;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

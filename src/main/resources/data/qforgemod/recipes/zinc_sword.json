@@ -10,7 +10,7 @@
       "item": "qforgemod:zinc_ingot"
     },
     "s": {
-      "item": "minecraft:stick"
+      "tag": "forge:sticks"
     }
   },
   "result": {

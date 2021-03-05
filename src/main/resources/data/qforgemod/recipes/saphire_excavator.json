@@ -10,7 +10,7 @@
          "item": "qforgemod:saphire"
       },
       "/": {
-         "item": "minecraft:stick"
+         "tag": "forge:sticks"
       }
    },
    "result": {

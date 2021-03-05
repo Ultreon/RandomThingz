@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "qforgemod:speed_rail"
+    ]
+  },
+  "criteria": {
+    "has_rail": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "qforgemod:empowered_rail"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "qforgemod:speed_rail"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rail",
+      "has_the_recipe"
+    ]
+  ]
+}

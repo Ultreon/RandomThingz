@@ -10,7 +10,7 @@
       "item": "qforgemod:tanzanite"
     },
     "/": {
-      "item": "minecraft:stick"
+      "tag": "forge:sticks"
     }
   },
   "result": {

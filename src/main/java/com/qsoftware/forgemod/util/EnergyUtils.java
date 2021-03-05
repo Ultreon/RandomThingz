@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.util;
 
-import com.qsoftware.forgemod.modules.blocks.blocks.machines.IEnergyHandler;
+import com.qsoftware.forgemod.modules.tiles.blocks.machines.IEnergyHandler;
 import lombok.experimental.UtilityClass;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;

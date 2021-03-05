@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Author: Ocelot
+ * @author Ocelot
  */
 @JeiPlugin
 public class FiltersJeiPlugin implements IModPlugin

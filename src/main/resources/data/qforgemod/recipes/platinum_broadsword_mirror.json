@@ -10,7 +10,7 @@
          "item": "qforgemod:platinum_ingot"
       },
       "/": {
-         "item": "minecraft:stick"
+         "tag": "forge:sticks"
       }
    },
    "result": {

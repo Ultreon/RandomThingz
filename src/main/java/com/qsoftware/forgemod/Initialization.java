@@ -2,21 +2,20 @@ package com.qsoftware.forgemod;
 
 import com.qsoftware.filters.Filters;
 import com.qsoftware.forgemod.common.ModuleManager;
-import com.qsoftware.forgemod.common.interfaces.IHasRenderType;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
 import com.qsoftware.forgemod.modules.debugMenu.ModDebugPages;
 import com.qsoftware.forgemod.modules.items.Tools;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.keybinds.KeyBindingList;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
-import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
+import com.qsoftware.forgemod.keybinds.KeybindingList;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
 import com.qsoftware.forgemod.modules.environment.ModEntities;
 import com.qsoftware.forgemod.modules.environment.entities.*;
 import com.qsoftware.forgemod.modules.environment.entities.baby.*;
 import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.forgemod.modules.items.objects.advanced.AdvancedBowItem;
+import com.qsoftware.modlib.common.interfaces.IHasRenderType;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -112,7 +111,7 @@ public class Initialization {
         }
 
         this.logger.info("Registering keybindings");
-        KeyBindingList.register();
+        KeybindingList.register();
         if (Minecraft.getInstance().getVersion().equals("MOD_DEV")) {
             DebugMenuModule.getDebugMenu().setPage(ModDebugPages.DEFAULT_PAGE.get());
         }
@@ -134,9 +133,9 @@ public class Initialization {
         Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("qforgemod", "metal_craftables/ingots"), new ItemStack(Items.IRON_INGOT));
         Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("qforgemod", "metal_craftables/chunks"), new ItemStack(OreMaterial.IRON.getChunks().orElse(Items.AIR)));
 
-        Filters.get().register(ModItemGroups.NATURE, new ResourceLocation("qforgemod", "nature/flowers"), new ItemStack(Items.POPPY));
-        Filters.get().register(ModItemGroups.NATURE, new ResourceLocation("qforgemod", "nature/saplings"), new ItemStack(Items.OAK_SAPLING));
-        Filters.get().register(ModItemGroups.NATURE, new ResourceLocation("qforgemod", "nature/leaves"), new ItemStack(Items.OAK_LEAVES));
+//        Filters.get().register(ModItemGroups.NATURE, new ResourceLocation("qforgemod", "nature/flowers"), new ItemStack(Items.POPPY));
+//        Filters.get().register(ModItemGroups.NATURE, new ResourceLocation("qforgemod", "nature/saplings"), new ItemStack(Items.OAK_SAPLING));
+//        Filters.get().register(ModItemGroups.NATURE, new ResourceLocation("qforgemod", "nature/leaves"), new ItemStack(Items.OAK_LEAVES));
 
         Filters.get().register(ModItemGroups.FLUIDS, new ResourceLocation("qforgemod", "fluids/liquid"), new ItemStack(ModItems.OIL_BUCKET));
         Filters.get().register(ModItemGroups.FLUIDS, new ResourceLocation("qforgemod", "fluids/gas"), new ItemStack(ModItems.ETHANE_BUCKET));

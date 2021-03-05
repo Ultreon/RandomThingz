@@ -1,16 +1,14 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
-import com.qsoftware.forgemod.modules.blocks.ModFluids;
-import com.qsoftware.forgemod.modules.blocks.ModMachineTileEntities;
-import com.qsoftware.forgemod.modules.debugMenu.DebugPage;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
+import com.qsoftware.forgemod.modules.tiles.ModFluids;
+import com.qsoftware.forgemod.modules.tiles.ModMachineTileEntities;
 import com.qsoftware.forgemod.modules.debugMenu.ModDebugPages;
 import com.qsoftware.forgemod.modules.environment.ModEffects;
 import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.ui.ModMachineContainers;
 import com.qsoftware.forgemod.modules.ui.ModStats;
-import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.modlib.api.providers.IItemProvider;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import lombok.experimental.UtilityClass;
@@ -27,7 +25,6 @@ import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;

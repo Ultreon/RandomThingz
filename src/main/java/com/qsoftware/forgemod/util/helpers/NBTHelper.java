@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.util.helpers;
 
-import com.qsoftware.forgemod.modules.blocks.blocks.machines.quarry.QuarryTileEntity;
+import com.qsoftware.forgemod.modules.tiles.blocks.machines.quarry.QuarryTileEntity;
 import lombok.experimental.UtilityClass;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

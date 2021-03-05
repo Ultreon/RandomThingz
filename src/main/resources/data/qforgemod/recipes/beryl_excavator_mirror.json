@@ -10,7 +10,7 @@
          "item": "qforgemod:beryl"
       },
       "/": {
-         "item": "minecraft:stick"
+         "tag": "forge:sticks"
       }
    },
    "result": {

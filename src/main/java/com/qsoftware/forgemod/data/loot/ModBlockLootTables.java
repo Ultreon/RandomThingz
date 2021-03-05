@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.data.loot;
 
 import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;

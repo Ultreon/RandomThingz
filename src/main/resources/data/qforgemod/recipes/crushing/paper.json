@@ -14,11 +14,11 @@
       "chance": 0.25
     },
     {
-      "item": "minecraft:stick",
+      "tag": "forge:sticks",
       "chance": 0.25
     },
     {
-      "item": "minecraft:stick",
+      "tag": "forge:sticks",
       "chance": 0.25
     }
   ]

@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.util;
 
-import com.qsoftware.forgemod.modules.blocks.blocks.machines.refinery.RefineryTileEntity;
+import com.qsoftware.forgemod.modules.tiles.blocks.machines.refinery.RefineryTileEntity;
 import com.qsoftware.forgemod.modules.items.objects.fluid.CanisterItem;
 import lombok.experimental.UtilityClass;
 import net.minecraft.fluid.Fluids;

@@ -6,7 +6,7 @@ import com.qsoftware.forgemod.modules.actionmenu.ActionMenuModule;
 import com.qsoftware.forgemod.modules.client.ClientTweaksModule;
 import com.qsoftware.forgemod.modules.environment.WorldGenerationModule;
 import com.qsoftware.forgemod.modules.environment.EntitiesModule;
-import com.qsoftware.forgemod.modules.blocks.BlocksModule;
+import com.qsoftware.forgemod.modules.tiles.BlocksModule;
 import com.qsoftware.forgemod.modules.confirmExit.ConfirmExitModule;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
 import com.qsoftware.forgemod.modules.MainModule;
@@ -14,7 +14,7 @@ import com.qsoftware.forgemod.modules.items.ItemsModule;
 import com.qsoftware.forgemod.modules.environment.OresModule;
 import com.qsoftware.forgemod.modules.pcCrash.PCCrashModule;
 import com.qsoftware.forgemod.modules.pcShutdown.PCShutdownModule;
-import com.qsoftware.forgemod.modules.blocks.TileEntitiesModule;
+import com.qsoftware.forgemod.modules.tiles.TileEntitiesModule;
 import com.qsoftware.forgemod.modules.updates.UpdatesModule;
 import lombok.experimental.UtilityClass;
 

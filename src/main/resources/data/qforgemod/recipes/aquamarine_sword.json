@@ -10,7 +10,7 @@
       "item": "qforgemod:aquamarine"
     },
     "/": {
-      "item": "minecraft:stick"
+      "tag": "forge:sticks"
     }
   },
   "result": {

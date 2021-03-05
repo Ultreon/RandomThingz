@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.data.recipes;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.ModTags;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
 import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.forgemod.modules.items.Tools;

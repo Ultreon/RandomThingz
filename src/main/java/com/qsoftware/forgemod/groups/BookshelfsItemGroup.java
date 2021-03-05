@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.groups;
 
-import com.qsoftware.forgemod.common.BetterItemGroup;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
+import com.qsoftware.modlib.common.BetterItemGroup;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

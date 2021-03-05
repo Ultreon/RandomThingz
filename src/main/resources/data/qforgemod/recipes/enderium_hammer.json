@@ -10,7 +10,7 @@
          "item": "qforgemod:enderium_ingot"
       },
       "/": {
-         "item": "minecraft:stick"
+         "tag": "forge:sticks"
       }
    },
    "result": {

@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.listener;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
 import com.qsoftware.forgemod.modules.items.ModItems;
 import lombok.experimental.UtilityClass;
 import net.minecraftforge.event.entity.item.ItemEvent;

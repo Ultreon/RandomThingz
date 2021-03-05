@@ -2,7 +2,7 @@ package com.qsoftware.forgemod.modules.environment;
 
 import com.mojang.datafixers.util.Pair;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
 import lombok.Getter;
 import lombok.val;
 import net.minecraft.block.Block;

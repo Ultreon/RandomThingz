@@ -10,7 +10,7 @@
          "item": "qforgemod:peridot"
       },
       "/": {
-         "item": "minecraft:stick"
+         "tag": "forge:sticks"
       }
    },
    "result": {

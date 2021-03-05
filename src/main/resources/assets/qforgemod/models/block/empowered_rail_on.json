@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/rail_flat",
+  "textures": {
+    "rail": "qforgemod:blocks/empowered_rail_on"
+  }
+}

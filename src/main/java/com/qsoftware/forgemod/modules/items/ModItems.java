@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.modules.items;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.blocks.ModFluids;
+import com.qsoftware.forgemod.modules.tiles.ModFluids;
 import com.qsoftware.forgemod.modules.items.objects.CraftingItems;
 import com.qsoftware.forgemod.modules.items.objects.EucalyptusLeafItem;
 import com.qsoftware.forgemod.modules.items.objects.LegendaryEnderPearlItem;
@@ -111,6 +111,10 @@ public final class ModItems {
     ////////////////////
     public static final ItemRegistryObject<Item> STICK_VARIANT_1 = register("stick_variant1", () -> new Item(new Item.Properties().group(ModItemGroups.NATURE)));
     public static final ItemRegistryObject<Item> STICK_VARIANT_2 = register("stick_variant2", () -> new Item(new Item.Properties().group(ModItemGroups.NATURE)));
+    public static final ItemRegistryObject<Item> STICK_VARIANT_3 = register("stick_variant3", () -> new Item(new Item.Properties().group(ModItemGroups.NATURE)));
+    public static final ItemRegistryObject<Item> STICK_VARIANT_4 = register("stick_variant4", () -> new Item(new Item.Properties().group(ModItemGroups.NATURE)));
+    public static final ItemRegistryObject<Item> STICK_VARIANT_5 = register("stick_variant5", () -> new Item(new Item.Properties().group(ModItemGroups.NATURE)));
+    public static final ItemRegistryObject<Item> STICK_VARIANT_6 = register("stick_variant6", () -> new Item(new Item.Properties().group(ModItemGroups.NATURE)));
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Wood     //

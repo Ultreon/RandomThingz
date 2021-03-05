@@ -11,7 +11,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Author: MrCrayfish
+ * @author MrCrayfish
  */
 @SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)

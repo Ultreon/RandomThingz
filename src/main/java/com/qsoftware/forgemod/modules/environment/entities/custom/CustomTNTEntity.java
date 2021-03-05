@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.modules.environment.entities.custom;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.TNTProperties;
 import com.qsoftware.forgemod.modules.environment.ModEntities;
-import com.qsoftware.forgemod.modules.blocks.blocks.CustomTNTBlock;
+import com.qsoftware.forgemod.modules.tiles.blocks.CustomTNTBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

@@ -10,7 +10,7 @@
          "item": "qforgemod:amber"
       },
       "/": {
-         "item": "minecraft:stick"
+         "tag": "forge:sticks"
       }
    },
    "result": {

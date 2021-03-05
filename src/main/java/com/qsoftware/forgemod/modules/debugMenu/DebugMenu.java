@@ -1,17 +1,16 @@
 package com.qsoftware.forgemod.modules.debugMenu;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.common.Angle;
 import com.qsoftware.forgemod.common.IntSize;
-import com.qsoftware.forgemod.common.Multiplier;
-import com.qsoftware.forgemod.common.Percentage;
 import com.qsoftware.forgemod.common.enums.MoonPhase;
-import com.qsoftware.forgemod.common.interfaces.Formattable;
 import com.qsoftware.forgemod.hud.HudItems;
 import com.qsoftware.forgemod.hud.IHasHud;
-import com.qsoftware.forgemod.init.Registration;
-import com.qsoftware.forgemod.keybinds.KeyBindingList;
+import com.qsoftware.forgemod.keybinds.KeybindingList;
 import com.qsoftware.forgemod.modules.debugMenu.pages.DefaultPage;
+import com.qsoftware.modlib.common.Angle;
+import com.qsoftware.modlib.common.Multiplier;
+import com.qsoftware.modlib.common.Percentage;
+import com.qsoftware.modlib.common.interfaces.Formattable;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.MainWindow;
@@ -107,7 +106,7 @@ public final class DebugMenu {
 //            }
 //        }
 
-        if (KeyBindingList.DEBUG_SCREEN.isPressed()) {
+        if (KeybindingList.DEBUG_SCREEN.isPressed()) {
             Minecraft mc = Minecraft.getInstance();
             mc.displayGuiScreen(new DebugChoiceScreen(new TranslationTextComponent("screen.qforgemod.debug_choice")));
         }

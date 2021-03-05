@@ -10,7 +10,7 @@
       "item": "qforgemod:malachite"
     },
     "/": {
-      "item": "minecraft:stick"
+      "tag": "forge:sticks"
     }
   },
   "result": {

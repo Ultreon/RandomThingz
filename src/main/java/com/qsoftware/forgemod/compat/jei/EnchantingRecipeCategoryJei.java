@@ -2,8 +2,8 @@ package com.qsoftware.forgemod.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.crafting.recipe.AlloySmeltingRecipe;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
-import com.qsoftware.forgemod.modules.blocks.blocks.machines.alloysmelter.AlloySmelterScreen;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
+import com.qsoftware.forgemod.modules.tiles.blocks.machines.alloysmelter.AlloySmelterScreen;
 import com.qsoftware.forgemod.util.Constants;
 import com.qsoftware.forgemod.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;

@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.internal.QfmArgs;
-import com.qsoftware.forgemod.modules.blocks.ModBlocksAlt;
+import com.qsoftware.forgemod.modules.tiles.ModBlocksAlt;
 import com.qsoftware.forgemod.modules.environment.ModEntities;
 import com.qsoftware.forgemod.modules.items.ModItemsAlt;
 import com.qsoftware.forgemod.modules.ui.ModContainers;

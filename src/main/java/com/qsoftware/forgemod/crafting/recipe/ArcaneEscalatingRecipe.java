@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.crafting.recipe;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
 import com.qsoftware.forgemod.init.ModRecipes;
-import com.qsoftware.forgemod.modules.blocks.blocks.machines.IMachineInventory;
+import com.qsoftware.forgemod.modules.tiles.blocks.machines.IMachineInventory;
 import com.qsoftware.forgemod.util.InventoryUtils;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.qsoftware.filters;
 
 /**
- * Author: MrCrayfish
+ * @author MrCrayfish
  */
 public class Reference
 {

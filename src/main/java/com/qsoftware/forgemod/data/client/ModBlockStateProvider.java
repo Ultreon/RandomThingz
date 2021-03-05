@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.data.client;
 
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.blocks.ModBlocks;
-import com.qsoftware.forgemod.modules.blocks.blocks.machines.dryingrack.DryingRackBlock;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
+import com.qsoftware.forgemod.modules.tiles.blocks.machines.dryingrack.DryingRackBlock;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
@@ -12,7 +12,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;

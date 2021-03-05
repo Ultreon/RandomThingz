@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
+@SuppressWarnings("ConstantConditions")
 public abstract class DebugPage implements IForgeRegistryEntry<DebugPage> {
     private final List<DebugEntry> linesLeft = new ArrayList<>();
     private final List<DebugEntry> linesRight = new ArrayList<>();
@@ -32,7 +33,11 @@ public abstract class DebugPage implements IForgeRegistryEntry<DebugPage> {
 
     public DebugPage() {
         this.minecraft = Minecraft.getInstance();
-        this.mainWindow = this.minecraft.getMainWindow();
+        if (this.minecraft != null) {
+            this.mainWindow = this.minecraft.getMainWindow();
+        } else {
+            this.mainWindow = null;
+        }
     }
 
     public void init() {
