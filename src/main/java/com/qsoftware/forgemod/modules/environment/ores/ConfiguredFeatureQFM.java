@@ -27,7 +27,7 @@ public class ConfiguredFeatureQFM<FC extends IFeatureConfig, F extends Feature<F
 
     @Override
     public boolean generate(@Nonnull ISeedReader reader, @Nonnull ChunkGenerator chunkGenerator, @Nonnull Random rand, @Nonnull BlockPos pos) {
-
+        rand.nextFloat();
         if (rand.nextFloat() < chance) {
             return super.generate(reader, chunkGenerator, rand, pos);
         }

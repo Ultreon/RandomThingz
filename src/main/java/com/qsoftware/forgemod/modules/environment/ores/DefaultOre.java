@@ -9,9 +9,8 @@ import com.qsoftware.modlib.silentutils.Lazy;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.block.Blocks;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -64,6 +63,13 @@ public class DefaultOre implements IBlockProvider, IOre {
     public ConfiguredFeature<?, ?> generate() {
         DefaultOreConfig config = this.config;
         int bottom = config.getMinHeight();
+        if (config.getVeinSize() < 2) {
+            return Feature.EMERALD_ORE
+                    .withConfiguration(new ReplaceBlockConfig(Blocks.STONE.getDefaultState(), this.asBlockState()))
+                    .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
+                    .square()
+                    .func_242731_b(config.getVeinCount());
+        }
         return Feature.ORE
                 .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, this.asBlockState(), config.getVeinSize()))
                 .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))

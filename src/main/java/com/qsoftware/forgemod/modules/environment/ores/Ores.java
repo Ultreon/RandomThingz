@@ -19,7 +19,7 @@ public final class Ores {
     public static final DefaultOre BAUXITE = new DefaultOre("bauxite", () -> OreMaterial.ALUMINUM, 4, 1, new DefaultOreConfig(6, 8, 15, 50));
     public static final DefaultOre URANIUM = new DefaultOre("uranium", () -> OreMaterial.URANIUM, 6, 2, new DefaultOreConfig(1, 4, 0, 18));
     public static final NetherOre COBALT = new NetherOre("cobalt", () -> OreMaterial.COBALT, 20, 4, new DefaultOreConfig(1, 2, 0, 48));
-    public static final ChancedOre INFINITY = new ChancedOre("infinity", () -> OreMaterial.INFINITY, 8192, 6, new ChancedOreConfigs(1, 1, 0, 64, 2), (b) -> b.getClimate().temperature >= 2.0);
-    public static final ChancedOre ULTRINIUM = new ChancedOre("ultrinium", () -> OreMaterial.ULTRINIUM, 512, 5, new ChancedOreConfigs(1, 1, 0, 64, 1), (b) -> b.getClimate().temperature >= 1.0);
+    public static final ChancedOre INFINITY = new ChancedOre("infinity", () -> OreMaterial.INFINITY, 8192, 6, new ChancedOreConfigs(1, 1, 0, 64, 512), (b) -> b.getClimate().temperature >= 2.0);
+    public static final ChancedOre ULTRINIUM = new ChancedOre("ultrinium", () -> OreMaterial.ULTRINIUM, 512, 5, new ChancedOreConfigs(1, 1, 0, 64, 16), (b) -> b.getClimate().temperature >= 1.0);
 
 }
