@@ -6,12 +6,14 @@
     "qforgemod:tin_shovel",
     "qforgemod:compressed_iron_shovel",
     "qforgemod:obsidian_shovel",
+    "qforgemod:silver_shovel",
     "qforgemod:lead_shovel",
     "qforgemod:nickel_shovel",
     "qforgemod:platinum_shovel",
     "qforgemod:zinc_shovel",
     "qforgemod:bismuth_shovel",
     "qforgemod:aluminum_shovel",
+    "qforgemod:uranium_shovel",
     "qforgemod:bronze_shovel",
     "qforgemod:brass_shovel",
     "qforgemod:invar_shovel",
@@ -22,6 +24,9 @@
     "qforgemod:bismuth_steel_shovel",
     "qforgemod:signalum_shovel",
     "qforgemod:lumium_shovel",
-    "qforgemod:enderium_shovel"
+    "qforgemod:enderium_shovel",
+    "qforgemod:cobalt_shovel",
+    "qforgemod:ultrinium_shovel",
+    "qforgemod:infinity_shovel"
   ]
 }

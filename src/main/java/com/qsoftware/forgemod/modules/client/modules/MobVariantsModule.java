@@ -7,10 +7,9 @@ import com.qsoftware.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleSecurity;
 import com.qsoftware.forgemod.modules.client.modules.render.variant.*;
-import com.qsoftware.forgemod.modules.environment.ModEntities;
-import com.qsoftware.forgemod.modules.environment.client.renderer.VariantBabyCreeperRenderer;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
+import mezz.jei.collect.ListMultiMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -19,7 +18,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.CallbackI;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
@@ -93,7 +91,6 @@ public class MobVariantsModule extends Module {
             RenderingRegistry.registerEntityRenderingHandler(EntityType.CHICKEN, VariantChickenRenderer::new);
         if(enableCreeper)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.CREEPER, VariantCreeperRenderer::new);
-            RenderingRegistry.registerEntityRenderingHandler(ModEntities.BABY_CREEPER.getEntityType(), VariantBabyCreeperRenderer::new);
         if(enableZombie)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.ZOMBIE, VariantZombieRenderer::new);
         if(enableShinyRabbit)
@@ -143,20 +140,17 @@ public class MobVariantsModule extends Module {
     @OnlyIn(Dist.CLIENT)
     public static ResourceLocation getTextureOrShiny(Entity e, VariantTextureType type, Supplier<ResourceLocation> nonShiny) {
         UUID id = e.getUniqueID();
+        long most = id.getMostSignificantBits();
         long least = id.getLeastSignificantBits();
         List<ResourceLocation> styles = shinyTextures.get(type);
-        if(shinyAnimalChance > 0 && (least % shinyAnimalChance) == 0) {
-            System.out.println(shinyAnimalChance);
-            System.out.println(least);
-            System.out.println("===================");
+        if(shinyAnimalChance > 0 && (most % shinyAnimalChance) == 0) {
             if (styles.size() == 0) {
                 return new ResourceLocation(QForgeMod.modId, "textures/default.png");
             }
             if (least == 0) {
                 return styles.get(0);
             }
-            long num = new Random(least).nextLong();
-            int choice = Math.abs((int) (num % styles.size()));
+            int choice = Math.abs((int) (least % styles.size()));
             return styles.get(choice);
         }
 

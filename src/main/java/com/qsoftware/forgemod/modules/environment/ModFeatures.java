@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.modules.environment;
 
 import com.qsoftware.forgemod.modules.tiles.ModFluids;
 import com.qsoftware.forgemod.modules.tiles.ModBlocks;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import lombok.experimental.UtilityClass;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;

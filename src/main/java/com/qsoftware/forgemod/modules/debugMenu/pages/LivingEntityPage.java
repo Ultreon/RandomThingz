@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LivingEntityPage extends EntityPage {
+    public LivingEntityPage(String modId, String name) {
+        super(modId, name);
+    }
+
     @Override
     public List<DebugEntry> getLinesRight() {
         List<DebugEntry> list = new ArrayList<>();

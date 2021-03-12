@@ -1,8 +1,8 @@
 package com.qsoftware.forgemod.modules.environment.client.renderer.layers;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.forgemod.modules.environment.client.model.ModelBabyEnderman;
-import com.qsoftware.forgemod.modules.environment.entities.baby.EntityBabyEnderman;
+import com.qsoftware.forgemod.modules.environment.client.model.BabyEnderman;
+import com.qsoftware.forgemod.modules.environment.entities.baby.BabyEndermanEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -13,14 +13,14 @@ import net.minecraft.util.math.vector.Vector3f;
 
 import javax.annotation.Nonnull;
 
-public class BabyEndermanHeldBlockLayer extends LayerRenderer<EntityBabyEnderman, ModelBabyEnderman> {
+public class BabyEndermanHeldBlockLayer extends LayerRenderer<BabyEndermanEntity, BabyEnderman> {
 
-    public BabyEndermanHeldBlockLayer(IEntityRenderer<EntityBabyEnderman, ModelBabyEnderman> renderer) {
+    public BabyEndermanHeldBlockLayer(IEntityRenderer<BabyEndermanEntity, BabyEnderman> renderer) {
         super(renderer);
     }
 
     @Override
-    public void render(@Nonnull MatrixStack matrix, @Nonnull IRenderTypeBuffer renderer, int light, EntityBabyEnderman enderman, float limbSwing, float limbSwingAmount,
+    public void render(@Nonnull MatrixStack matrix, @Nonnull IRenderTypeBuffer renderer, int light, BabyEndermanEntity enderman, float limbSwing, float limbSwingAmount,
                        float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         BlockState blockstate = enderman.getHeldBlockState();
         if (blockstate != null) {

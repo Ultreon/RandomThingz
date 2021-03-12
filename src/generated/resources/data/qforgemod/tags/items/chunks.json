@@ -12,6 +12,9 @@
     "#qforgemod:chunks/zinc",
     "#qforgemod:chunks/bismuth",
     "#qforgemod:chunks/aluminum",
-    "#qforgemod:chunks/uranium"
+    "#qforgemod:chunks/uranium",
+    "#qforgemod:chunks/cobalt",
+    "#qforgemod:chunks/ultrinium",
+    "#qforgemod:chunks/infinity"
   ]
 }

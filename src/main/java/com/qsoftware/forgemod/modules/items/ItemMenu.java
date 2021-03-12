@@ -3,8 +3,6 @@ package com.qsoftware.forgemod.modules.items;
 import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.IActionMenuItem;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
-import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
-import com.qsoftware.forgemod.modules.debugMenu.ModDebugPages;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.screen.Screen;
@@ -104,7 +102,7 @@ public class ItemMenu extends AbstractActionMenu {
         addItem(new IActionMenuItem() {
             @Override
             public void onActivate() {
-                DebugMenuModule.getDebugMenu().setPage(ModDebugPages.ITEM_PAGE.get());
+                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.ITEM;
             }
 
             @Override

@@ -1,17 +1,19 @@
 package com.qsoftware.forgemod.modules.client;
 
+import com.qsoftware.forgemod.Modules;
+import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.IActionMenuItem;
 import com.qsoftware.forgemod.modules.actionmenu.MenuHandler;
 import com.qsoftware.forgemod.modules.actionmenu.SubmenuItem;
+import com.qsoftware.forgemod.modules.confirmExit.ConfirmExitScreen;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
-import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
-import com.qsoftware.forgemod.modules.debugMenu.ModDebugPages;
 import com.qsoftware.forgemod.util.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.advancements.AdvancementsScreen;
 import net.minecraft.client.gui.screen.*;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class MinecraftMenu extends AbstractActionMenu {
@@ -95,7 +97,7 @@ public class MinecraftMenu extends AbstractActionMenu {
         addItem(new IActionMenuItem() {
             @Override
             public void onActivate() {
-                DebugMenuModule.getDebugMenu().setPage(ModDebugPages.MINECRAFT_PAGE.get());
+                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.MINECRAFT;
             }
 
             @Override

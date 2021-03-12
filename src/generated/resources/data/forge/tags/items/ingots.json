@@ -26,6 +26,9 @@
     "#forge:ingots/bismuth_steel",
     "#forge:ingots/signalum",
     "#forge:ingots/lumium",
-    "#forge:ingots/enderium"
+    "#forge:ingots/enderium",
+    "#forge:ingots/cobalt",
+    "#forge:ingots/ultrinium",
+    "#forge:ingots/infinity"
   ]
 }

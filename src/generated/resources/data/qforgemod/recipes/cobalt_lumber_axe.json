@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X/ ",
+    " / "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "qforgemod:cobalt_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:cobalt_lumber_axe"
+  }
+}

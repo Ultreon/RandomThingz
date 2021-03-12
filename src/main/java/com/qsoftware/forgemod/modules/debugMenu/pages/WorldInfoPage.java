@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorldInfoPage extends DebugPage {
+    public WorldInfoPage(String modId, String name) {
+        super(modId, name);
+    }
+
     @Override
     public List<DebugEntry> getLinesLeft() {
         List<DebugEntry> list = new ArrayList<>();

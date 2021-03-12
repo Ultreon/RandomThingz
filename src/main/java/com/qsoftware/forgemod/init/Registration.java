@@ -1,17 +1,17 @@
 package com.qsoftware.forgemod.init;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.modules.items.tools.ModTraits;
 import com.qsoftware.forgemod.modules.tiles.ModBlocks;
 import com.qsoftware.forgemod.modules.tiles.ModFluids;
 import com.qsoftware.forgemod.modules.tiles.ModMachineTileEntities;
-import com.qsoftware.forgemod.modules.debugMenu.ModDebugPages;
 import com.qsoftware.forgemod.modules.environment.ModEffects;
 import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.ui.ModMachineContainers;
 import com.qsoftware.forgemod.modules.ui.ModStats;
+import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.modlib.api.providers.IItemProvider;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
-import lombok.experimental.UtilityClass;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
@@ -26,20 +26,18 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.*;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.Collection;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-@UtilityClass
-@Mod.EventBusSubscriber(modid = QForgeMod.modId)
 public final class Registration {
     public static final DeferredRegister<Block> BLOCKS = create(ForgeRegistries.BLOCKS);
     public static final DeferredRegister<Fluid> FLUIDS = create(ForgeRegistries.FLUIDS);
@@ -56,20 +54,19 @@ public final class Registration {
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = create(ForgeRegistries.RECIPE_SERIALIZERS);
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
 
+    private Registration() {
+        throw ExceptionUtil.utilityConstructor();
+    }
+
     public static void register() {
-        // Event bus
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(modEventBus);
         CONTAINERS.register(modEventBus);
         ITEMS.register(modEventBus);
         POTIONS.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
-//        DEBUG_PAGE.register(modEventBus);
+        ModTraits.REGISTRY.register(modEventBus);
 
-        // Event bus - Custom
-        ModDebugPages.REGISTRY.register(modEventBus);
-
-        // Register
         ModBlocks.register();
         ModEffects.register();
         ModFluids.register();
@@ -78,17 +75,7 @@ public final class Registration {
         ModItems.register();
         ModRecipes.register();
         ModMachineTileEntities.register();
-
-        // Register - Custom
-        ModDebugPages.register();
-    }
-
-    /**
-     * Name was chosen when I was hyper.
-     *  - Qboi123
-     */
-    @SubscribeEvent
-    public static void onWhenANewRegistryWillBeCreatedEventHandler(RegistryEvent.NewRegistry eventOS) {
+        ModTraits.register();
     }
 
     @SuppressWarnings("unchecked")
@@ -126,9 +113,5 @@ public final class Registration {
 
     private static <T extends IForgeRegistryEntry<T>> DeferredRegister<T> create(IForgeRegistry<T> registry) {
         return DeferredRegister.create(registry, QForgeMod.modId);
-    }
-
-    private static <T extends IForgeRegistryEntry<T>> DeferredRegister<T> create(Class<T> clazz) {
-        return DeferredRegister.create(clazz, QForgeMod.modId);
     }
 }

@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MinecraftPage extends DebugPage {
+    public MinecraftPage(String modId, String name) {
+        super(modId, name);
+    }
+
     @Override
     public List<DebugEntry> getLinesLeft() {
         List<DebugEntry> list = new ArrayList<>();

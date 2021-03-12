@@ -1,4 +1,5 @@
 package com.qsoftware.forgemod.modules.debugMenu;
+/*
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.forgemod.QForgeMod;
@@ -91,3 +92,4 @@ public class DebugChoiceScreen extends Screen {
         }
     }
 }
+*/

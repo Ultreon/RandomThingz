@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:iron_chunks",
+    "qforgemod:gold_chunks",
+    "qforgemod:copper_chunks",
+    "qforgemod:tin_chunks",
+    "qforgemod:silver_chunks",
+    "qforgemod:lead_chunks",
+    "qforgemod:nickel_chunks",
+    "qforgemod:platinum_chunks",
+    "qforgemod:zinc_chunks",
+    "qforgemod:bismuth_chunks",
+    "qforgemod:bauxite_chunks",
+    "qforgemod:uranium_chunks",
+    "qforgemod:cobalt_chunks",
+    "qforgemod:ultrinium_chunks",
+    "qforgemod:infinity_chunks"
+  ]
+}

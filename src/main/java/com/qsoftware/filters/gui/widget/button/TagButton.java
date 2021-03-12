@@ -16,7 +16,7 @@ import net.minecraft.util.text.StringTextComponent;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author MrCrayfish
+ * Author: MrCrayfish
  */
 @SuppressWarnings({"SameParameterValue", "deprecation"})
 public class TagButton extends Button

@@ -11,7 +11,7 @@ import com.qsoftware.forgemod.modules.confirmExit.ConfirmExitModule;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
 import com.qsoftware.forgemod.modules.MainModule;
 import com.qsoftware.forgemod.modules.items.ItemsModule;
-import com.qsoftware.forgemod.modules.environment.OresModule;
+import com.qsoftware.forgemod.modules.environment.ores.OresModule;
 import com.qsoftware.forgemod.modules.pcCrash.PCCrashModule;
 import com.qsoftware.forgemod.modules.pcShutdown.PCShutdownModule;
 import com.qsoftware.forgemod.modules.tiles.TileEntitiesModule;

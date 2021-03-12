@@ -1,0 +1,6 @@
+{
+  "parent": "qforgemod:item/handheld_double_size",
+  "textures": {
+    "layer0": "qforgemod:items/ultrinium_longsword"
+  }
+}

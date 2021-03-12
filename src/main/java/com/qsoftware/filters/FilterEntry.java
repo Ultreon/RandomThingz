@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author MrCrayfish
+ * Author: MrCrayfish
  */
 public class FilterEntry
 {

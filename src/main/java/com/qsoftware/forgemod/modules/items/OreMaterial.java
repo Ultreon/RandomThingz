@@ -3,7 +3,9 @@ package com.qsoftware.forgemod.modules.items;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.modules.tiles.blocks.machines.MetalBlock;
-import com.qsoftware.forgemod.modules.environment.Ore;
+import com.qsoftware.forgemod.modules.environment.ores.DefaultOre;
+import com.qsoftware.forgemod.modules.environment.ores.IOre;
+import com.qsoftware.forgemod.modules.environment.ores.Ores;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
@@ -28,32 +30,35 @@ import java.util.stream.Stream;
 
 public enum OreMaterial implements IOreMaterial {
     // Metals
-    REDSTONE_ALLOY(builderAlloy("redstone_alloy")),
+    REDSTONE_ALLOY(builderAlloy("redstone_alloy", 2)),
     REFINED_IRON(builder("refined_iron").ingot()),
     COMPRESSED_IRON(builder("compressed_iron").ingot()),
     IRON(builder("iron").chunks().dust().ingotTagOnly().nuggetTagOnly()),
     GOLD(builder("gold").chunks().dust().ingotTagOnly().nuggetTagOnly()),
-    COPPER(builderBaseWithOre("copper", Ore.COPPER)),
-    TIN(builderBaseWithOre("tin", Ore.TIN)),
-    SILVER(builderBaseWithOre("silver", Ore.SILVER)),
-    LEAD(builderBaseWithOre("lead", Ore.LEAD)),
-    NICKEL(builderBaseWithOre("nickel", Ore.NICKEL)),
-    PLATINUM(builderBaseWithOre("platinum", Ore.PLATINUM)),
-    ZINC(builderBaseWithOre("zinc", Ore.ZINC)),
-    BISMUTH(builderBaseWithOre("bismuth", Ore.BISMUTH)),
-    ALUMINUM(builderBaseWithOre("aluminum", Ore.BAUXITE), "bauxite"),
-    URANIUM(builderBaseWithOre("uranium", Ore.URANIUM)),
-    BRONZE(builderAlloy("bronze")),
-    BRASS(builderAlloy("brass")),
-    INVAR(builderAlloy("invar")),
-    ELECTRUM(builderAlloy("electrum")),
-    STEEL(builderAlloy("steel")),
-    BISMUTH_BRASS(builderAlloy("bismuth_brass")),
-    ALUMINUM_STEEL(builderAlloy("aluminum_steel")),
-    BISMUTH_STEEL(builderAlloy("bismuth_steel")),
-    SIGNALUM(builderAlloy("signalum")),
-    LUMIUM(builderAlloy("lumium")),
-    ENDERIUM(builderAlloy("enderium")), ULTRINIUM(builderBaseWithOre("ultrinium", Ore.ULTRINIUM));
+    COPPER(builderBaseWithOre("copper", Ores.COPPER, 1)),
+    TIN(builderBaseWithOre("tin", Ores.TIN, 1)),
+    SILVER(builderBaseWithOre("silver", Ores.SILVER, 1)),
+    LEAD(builderBaseWithOre("lead", Ores.LEAD, 1)),
+    NICKEL(builderBaseWithOre("nickel", Ores.NICKEL, 1)),
+    PLATINUM(builderBaseWithOre("platinum", Ores.PLATINUM, 2)),
+    ZINC(builderBaseWithOre("zinc", Ores.ZINC, 1)),
+    BISMUTH(builderBaseWithOre("bismuth", Ores.BISMUTH, 1)),
+    ALUMINUM(builderBaseWithOre("aluminum", Ores.BAUXITE, 1), "bauxite"),
+    URANIUM(builderBaseWithOre("uranium", Ores.URANIUM, 2)),
+    BRONZE(builderAlloy("bronze", 1)),
+    BRASS(builderAlloy("brass", 1)),
+    INVAR(builderAlloy("invar", 1)),
+    ELECTRUM(builderAlloy("electrum", 1)),
+    STEEL(builderAlloy("steel", 1)),
+    BISMUTH_BRASS(builderAlloy("bismuth_brass", 1)),
+    ALUMINUM_STEEL(builderAlloy("aluminum_steel", 1)),
+    BISMUTH_STEEL(builderAlloy("bismuth_steel", 1)),
+    SIGNALUM(builderAlloy("signalum", 1)),
+    LUMIUM(builderAlloy("lumium", 1)),
+    ENDERIUM(builderAlloy("enderium", 3)),
+    COBALT(builderBaseWithOre("cobalt", Ores.COBALT, 4)),
+    ULTRINIUM(builderBaseWithOre("ultrinium", Ores.ULTRINIUM, 5)),
+    INFINITY(builderBaseWithOre("infinity", Ores.INFINITY, 6));
 //    OBSIDIAN(builder("obsidian").dust().ingot().ingotTagOnly());
 
 //    // Gems
@@ -172,16 +177,16 @@ public enum OreMaterial implements IOreMaterial {
         return new Builder(name);
     }
 
-    private static Builder builderBaseWithOre(String name, Ore ore) {
-        return builder(name).storageBlock().ore(ore).chunks().dust().ingot().nugget();
+    private static Builder builderBaseWithOre(String name, IOre ore, int harvestLevel) {
+        return builder(name).storageBlock(harvestLevel).ore(ore).chunks().dust().ingot().nugget();
     }
 
-    private static Builder builderAlloy(String name) {
-        return builder(name).storageBlock().dust().ingot().nugget();
+    private static Builder builderAlloy(String name, int harvestLevel) {
+        return builder(name).storageBlock(harvestLevel).dust().ingot().nugget();
     }
 
-    private static Builder builderGem(String name, Ore ore) {
-        return builder(name).storageBlock().ore(ore).dust().gem();
+    private static Builder builderGem(String name, DefaultOre ore, int harvestLevel) {
+        return builder(name).storageBlock(harvestLevel).ore(ore).dust().gem();
     }
 
     @Override
@@ -313,7 +318,7 @@ public enum OreMaterial implements IOreMaterial {
             return ItemTags.makeWrapperTag(tag.toString());
         }
 
-        Builder ore(Ore ore) {
+        Builder ore(IOre ore) {
             this.ore = () -> new OreBlock(AbstractBlock.Properties.create(Material.ROCK)
                     .setRequiresTool()
                     .harvestTool(ToolType.PICKAXE)
@@ -329,8 +334,8 @@ public enum OreMaterial implements IOreMaterial {
             return this;
         }
 
-        Builder storageBlock() {
-            this.storageBlock = MetalBlock::new;
+        Builder storageBlock(int harvestLevel) {
+            this.storageBlock = () -> new MetalBlock(harvestLevel);
             this.storageBlockTag = blockTag("storage_blocks/" + name);
             return this;
         }

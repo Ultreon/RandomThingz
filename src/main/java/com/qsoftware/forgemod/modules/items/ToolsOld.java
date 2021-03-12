@@ -7,6 +7,7 @@ import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,12 +30,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "ConstantConditions", "SameParameterValue"})
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 @Deprecated
 public enum ToolsOld implements INamed, Translatable {
     COPPER(OreMaterial.COPPER, 80f, 4.6f, 5.8f, 0.5f, 15, 2),

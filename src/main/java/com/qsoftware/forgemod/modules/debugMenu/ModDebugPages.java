@@ -14,6 +14,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryBuilder;
 
 import java.util.function.Supplier;
+/*
 
 @SuppressWarnings("unused")
 public class ModDebugPages {
@@ -52,3 +53,4 @@ public class ModDebugPages {
 
     }
 }
+*/

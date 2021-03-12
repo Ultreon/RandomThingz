@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.config;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.java.maps.SequencedHashMap;
-import com.qsoftware.forgemod.modules.environment.Ore;
+import com.qsoftware.forgemod.modules.environment.ores.DefaultOre;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
@@ -14,11 +14,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
+@SuppressWarnings("unused")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
@@ -30,46 +28,30 @@ public final class Config {
 //    public static final ForgeConfigSpec.BooleanValue closePromptQuitButton;
 //    public static final ForgeConfigSpec.BooleanValue quitOnEscInTitle;
 //    public static final ForgeConfigSpec.BooleanValue allowShutdownPC;
-    public static final ForgeConfigSpec.BooleanValue searchUpdatesOnStartup;
-    public static final ForgeConfigSpec.BooleanValue searchForUnstableReleases;
+    private static final ForgeConfigSpec.BooleanValue searchUpdatesOnStartup;
+    private static final ForgeConfigSpec.BooleanValue searchForUnstableReleases;
     public static final ForgeConfigSpec.IntValue worldGenOilLakeChance;
     public static final ForgeConfigSpec.IntValue fluidGeneratorInjectionVolume;
     private static final ForgeConfigSpec commonSpec;
     private static final ForgeConfigSpec.BooleanValue oreWorldGenMasterSwitch;
-    private static final Map<Ore, OreConfig> oreConfigs = new EnumMap<>(Ore.class);
 
+    @Deprecated
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+    private static final Map<DefaultOre, OreConfig> oreConfigs = new HashMap<>();
+
+    @Deprecated
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private static final Map<Module, ForgeConfigSpec.BooleanValue> modules = new SequencedHashMap<>();
 
     private static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
+    public static final QFMConfig conf = QFMConfig.instance;
 
     static {
         // Beta welcome message.
         showBetaWelcomeMessage = builder
                 .comment("Shows a message in chat warning the player that the mod is early in development")
                 .define("general.showBetaWelcomeMessage", true);
-
-//        // Close prompt
-//        closePrompt = builder
-//                .comment("Shows an exit confirm screen when closing window.")
-//                .define("quit.closePrompt", true);
-//        closePromptIngame = builder
-//                .comment("Shows an exit confirm screen when closing window ingame.")
-//                .define("quit.closePromptIngame", true);
-//        closePromptQuitButton = builder
-//                .comment("Shows an exit confirm screen when pressing quit button in the title screen.")
-//                .define("quit.closePromptQuitButton", true);
-//        quitOnEscInTitle = builder
-//                .comment("Shows an exit confirm screen when pressed ESC in the title screen.")
-//                .define("quit.quitOnEscInTitle", true);
-//
-//        // Permissions.
-//        allowShutdownPC = builder
-//                .comment("Allow QForgeMod to shutdown your pc on specific things.")
-//                .comment("Places:")
-//                .comment("  ITEM:   Kill switch")
-//                .comment("  BUTTON: In the exit confirm screen")
-//                .define("general.allowShutdownPC", false);
 
         // Updates
         searchUpdatesOnStartup = builder
@@ -105,7 +87,7 @@ public final class Config {
 
             builder.comment("Configs for specific ores. Set veinCount to zero to disable an ore.");
             builder.push("ores");
-            Arrays.stream(Ore.values()).forEach(ore -> oreConfigs.put(ore, new OreConfig(ore, builder, oreWorldGenMasterSwitch)));
+//            Arrays.stream(DefaultOre.values()).forEach(ore -> oreConfigs.put(ore, new OreConfig(ore, builder, oreWorldGenMasterSwitch)));
 
             builder.pop(2);
         }
@@ -117,7 +99,8 @@ public final class Config {
         throw ExceptionUtil.utilityConstructor();
     }
 
-    public static Optional<OreConfig> getOreConfig(Ore ore) {
+    @Deprecated
+    public static Optional<OreConfig> getOreConfig(DefaultOre ore) {
         return Optional.ofNullable(oreConfigs.getOrDefault(ore, null));
     }
 
@@ -126,6 +109,7 @@ public final class Config {
     }
 
     public static void sync() {
+
     }
 
     @SubscribeEvent
@@ -144,5 +128,35 @@ public final class Config {
 
     public static ForgeConfigSpec.BooleanValue getModuleSpec(Module module) {
         return modules.get(module);
+    }
+
+    @SuppressWarnings("unused")
+    public static class QFMConfig {
+        private static final QFMConfig instance = new QFMConfig();
+
+        public UpdateConfig getUpdateConfig() {
+            return UpdateConfig.instance;
+        }
+
+        @SuppressWarnings("unused")
+        public static class UpdateConfig {
+            private static final UpdateConfig instance = new UpdateConfig();
+
+            public boolean getCheckOnStartup() {
+                return searchUpdatesOnStartup.get();
+            }
+
+            public void setCheckOnStartup(boolean check) {
+                searchUpdatesOnStartup.set(check);
+            }
+
+            public boolean getAllowUnstable() {
+                return searchForUnstableReleases.get();
+            }
+
+            public void setAllowUnstable(boolean check) {
+                searchForUnstableReleases.set(check);
+            }
+        }
     }
 }

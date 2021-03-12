@@ -22,6 +22,9 @@
     "#forge:storage_blocks/bismuth_steel",
     "#forge:storage_blocks/signalum",
     "#forge:storage_blocks/lumium",
-    "#forge:storage_blocks/enderium"
+    "#forge:storage_blocks/enderium",
+    "#forge:storage_blocks/cobalt",
+    "#forge:storage_blocks/ultrinium",
+    "#forge:storage_blocks/infinity"
   ]
 }

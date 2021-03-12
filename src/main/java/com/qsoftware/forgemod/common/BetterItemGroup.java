@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Function;
 
-@Deprecated
 public class BetterItemGroup extends ItemGroup {
     private final ItemStack icon;
     @Getter private final ResourceLocation location;

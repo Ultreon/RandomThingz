@@ -12,6 +12,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PlayerEntity1Page extends DebugPage {
+    public PlayerEntity1Page(String modId, String name) {
+        super(modId, name);
+    }
+
     @Override
     public List<DebugEntry> getLinesLeft() {
         List<DebugEntry> list = new ArrayList<>();

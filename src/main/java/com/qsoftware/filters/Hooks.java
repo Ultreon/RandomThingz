@@ -4,7 +4,7 @@ import net.minecraft.client.gui.DisplayEffectsScreen;
 import net.minecraft.client.gui.screen.inventory.CreativeScreen;
 
 /**
- * @author MrCrayfish
+ * Author: MrCrayfish
  */
 public class Hooks
 {

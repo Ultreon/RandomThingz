@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ComputerPage extends DebugPage {
+    public ComputerPage(String modId, String name) {
+        super(modId, name);
+    }
+
     @Override
     public List<DebugEntry> getLinesLeft() {
         Minecraft mc = Minecraft.getInstance();

@@ -7,6 +7,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 import java.util.Objects;
 
+@SuppressWarnings("UnusedAssignment")
 public final class Network {
     private static final String VERSION = "qforgemod-net1";
 
@@ -39,16 +40,6 @@ public final class Network {
                 .add();
         id++;
         id++;
-//        channel.messageBuilder(ScriptPacket.class, id++)
-//                .decoder(ScriptPacket::fromBytes)
-//                .encoder(ScriptPacket::toBytes)
-//                .consumer(ScriptPacket::handle)
-//                .add();
-//        channel.messageBuilder(ScriptResponsePacket.class, id++)
-//                .decoder(ScriptResponsePacket::fromBytes)
-//                .encoder(ScriptResponsePacket::toBytes)
-//                .consumer(ScriptResponsePacket::handle)
-//                .add();
     }
 
     private Network() {

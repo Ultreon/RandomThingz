@@ -190,6 +190,12 @@
   "item.qforgemod.ultrinium_axe": "Ultrinium Axe",
   "item.qforgemod.ultrinium_hoe": "Ultrinium Hoe",
 
+  "item.qforgemod.cobalt_sword": "Cobalt Sword",
+  "item.qforgemod.cobalt_pickaxe": "Cobalt Pickaxe",
+  "item.qforgemod.cobalt_shovel": "Cobalt Shovel",
+  "item.qforgemod.cobalt_axe": "Cobalt Axe",
+  "item.qforgemod.cobalt_hoe": "Cobalt Hoe",
+
   "item.qforgemod.infinity_sword": "Infinity Sword",
   "item.qforgemod.infinity_pickaxe": "Infinity Pickaxe",
   "item.qforgemod.infinity_shovel": "Infinity Shovel",
@@ -290,6 +296,11 @@
   "item.qforgemod.ultrinium_chestplate": "Ultrinium Chestplate",
   "item.qforgemod.ultrinium_leggings": "Ultrinium Leggings",
   "item.qforgemod.ultrinium_boots": "Ultrinium Boots",
+
+  "item.qforgemod.cobalt_helmet": "Cobalt Helmet",
+  "item.qforgemod.cobalt_chestplate": "Cobalt Chestplate",
+  "item.qforgemod.cobalt_leggings": "Cobalt Leggings",
+  "item.qforgemod.cobalt_boots": "Cobalt Boots",
 
   "item.qforgemod.infinity_helmet": "Infinity Helmet",
   "item.qforgemod.infinity_chestplate": "Infinity Chestplate",
@@ -819,6 +830,17 @@
 
   "misc.qforgemod.unknown": "UNKNOWN",
 
+  "misc.client": "Client",
+  "misc.server": "Server",
+
+  "misc.qforgemod.security.safe": "This feature is safe.",
+  "misc.qforgemod.security.risc": "This feature has a risc of light damage.",
+  "misc.qforgemod.security.experimental": "This feature has a risc of unrecoverable damage.",
+
+  "misc.qforgemod.compatibility.full": "This feature has full compatibility.",
+  "misc.qforgemod.compatibility.partial": "This feature has partial compatibility.",
+  "misc.qforgemod.compatibility.none": "This feature has no compatibility.",
+
   "misc.qforgemod.error": "Error",
   "misc.qforgemod.failed_save": "Failed to save %s!",
   "misc.qforgemod.modules": "Module Config",
@@ -882,9 +904,9 @@
   "screen.qforgemod.quit_settings.close_prompt_quit_button": "Quit Button Close Prompt: %1$s",
   "screen.qforgemod.quit_settings.close_prompt_quit_button.tooltip": "Show an prompt when pressed on Quit in title screen.",
 
-  "gui.tag_filter.forge.dusts": "Dusts",
-  "gui.tag_filter.forge.ingots": "Ingots",
-  "gui.tag_filter.forge.nuggets": "Nuggets",
+  "gui.tag_filter.qforgemod.dusts": "Dusts",
+  "gui.tag_filter.qforgemod.ingots": "Ingots",
+  "gui.tag_filter.qforgemod.nuggets": "Nuggets",
   "gui.tag_filter.qforgemod.chunks": "Ore chunks",
 
   "module.qforgemod.main": "Core Module",

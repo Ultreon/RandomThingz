@@ -4,8 +4,8 @@ import com.qsoftware.forgemod.modules.debugMenu.DebugPage;
 import net.minecraft.client.Minecraft;
 
 public class PlayerPage extends DebugPage {
-    public PlayerPage() {
-
+    public PlayerPage(String modId, String name) {
+        super(modId, name);
     }
 
     @Override

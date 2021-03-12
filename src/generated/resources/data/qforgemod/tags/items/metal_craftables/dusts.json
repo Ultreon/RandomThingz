@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "qforgemod:redstone_alloy_dust",
+    "qforgemod:iron_dust",
+    "qforgemod:gold_dust",
+    "qforgemod:copper_dust",
+    "qforgemod:tin_dust",
+    "qforgemod:silver_dust",
+    "qforgemod:lead_dust",
+    "qforgemod:nickel_dust",
+    "qforgemod:platinum_dust",
+    "qforgemod:zinc_dust",
+    "qforgemod:bismuth_dust",
+    "qforgemod:aluminum_dust",
+    "qforgemod:uranium_dust",
+    "qforgemod:bronze_dust",
+    "qforgemod:brass_dust",
+    "qforgemod:invar_dust",
+    "qforgemod:electrum_dust",
+    "qforgemod:steel_dust",
+    "qforgemod:bismuth_brass_dust",
+    "qforgemod:aluminum_steel_dust",
+    "qforgemod:bismuth_steel_dust",
+    "qforgemod:signalum_dust",
+    "qforgemod:lumium_dust",
+    "qforgemod:enderium_dust",
+    "qforgemod:cobalt_dust",
+    "qforgemod:ultrinium_dust",
+    "qforgemod:infinity_dust"
+  ]
+}

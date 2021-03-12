@@ -6,12 +6,14 @@
     "qforgemod:tin_battleaxe",
     "qforgemod:compressed_iron_battleaxe",
     "qforgemod:obsidian_battleaxe",
+    "qforgemod:silver_battleaxe",
     "qforgemod:lead_battleaxe",
     "qforgemod:nickel_battleaxe",
     "qforgemod:platinum_battleaxe",
     "qforgemod:zinc_battleaxe",
     "qforgemod:bismuth_battleaxe",
     "qforgemod:aluminum_battleaxe",
+    "qforgemod:uranium_battleaxe",
     "qforgemod:bronze_battleaxe",
     "qforgemod:brass_battleaxe",
     "qforgemod:invar_battleaxe",
@@ -22,6 +24,9 @@
     "qforgemod:bismuth_steel_battleaxe",
     "qforgemod:signalum_battleaxe",
     "qforgemod:lumium_battleaxe",
-    "qforgemod:enderium_battleaxe"
+    "qforgemod:enderium_battleaxe",
+    "qforgemod:cobalt_battleaxe",
+    "qforgemod:ultrinium_battleaxe",
+    "qforgemod:infinity_battleaxe"
   ]
 }

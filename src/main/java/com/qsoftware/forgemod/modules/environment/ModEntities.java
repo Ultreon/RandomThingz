@@ -22,10 +22,10 @@ import net.minecraft.entity.EntityType;
 public class ModEntities extends ObjectInit<EntityType<?>> {
     public static final EntityTypeDeferredRegister ENTITY_TYPES = new EntityTypeDeferredRegister(QForgeMod.modId);
     public static final EntityTypeRegistryObject<BabyCreeperEntity> BABY_CREEPER = register("baby_creeper", EntityType.Builder.create(BabyCreeperEntity::new, EntityClassification.MONSTER).size(0.6F, 1.7F));
-    public static final EntityTypeRegistryObject<EntityBabyEnderman> BABY_ENDERMAN = register("baby_enderman", EntityType.Builder.create(EntityBabyEnderman::new, EntityClassification.MONSTER).size(0.6F, 2.9F));
-    public static final EntityTypeRegistryObject<EntityBabySkeleton> BABY_SKELETON = register("baby_skeleton", EntityType.Builder.create(EntityBabySkeleton::new, EntityClassification.MONSTER).size(0.6F, 1.99F));
-    public static final EntityTypeRegistryObject<EntityBabyStray> BABY_STRAY = register("baby_stray", EntityType.Builder.create(EntityBabyStray::new, EntityClassification.MONSTER).size(0.6F, 1.99F));
-    public static final EntityTypeRegistryObject<EntityBabyWitherSkeleton> BABY_WITHER_SKELETON = register("baby_wither_skeleton", EntityType.Builder.create(EntityBabyWitherSkeleton::new, EntityClassification.MONSTER).immuneToFire().size(0.7F, 2.4F));
+    public static final EntityTypeRegistryObject<BabyEndermanEntity> BABY_ENDERMAN = register("baby_enderman", EntityType.Builder.create(BabyEndermanEntity::new, EntityClassification.MONSTER).size(0.6F, 2.9F));
+    public static final EntityTypeRegistryObject<BabySkeletonEntity> BABY_SKELETON = register("baby_skeleton", EntityType.Builder.create(BabySkeletonEntity::new, EntityClassification.MONSTER).size(0.6F, 1.99F));
+    public static final EntityTypeRegistryObject<BabyStrayEntity> BABY_STRAY = register("baby_stray", EntityType.Builder.create(BabyStrayEntity::new, EntityClassification.MONSTER).size(0.6F, 1.99F));
+    public static final EntityTypeRegistryObject<BabyWitherSkeletonEntity> BABY_WITHER_SKELETON = register("baby_wither_skeleton", EntityType.Builder.create(BabyWitherSkeletonEntity::new, EntityClassification.MONSTER).immuneToFire().size(0.7F, 2.4F));
     public static final EntityTypeRegistryObject<HogEntity> HOG = register("hog", EntityType.Builder.create(HogEntity::new, EntityClassification.CREATURE).size(0.9F, 0.9F).trackingRange(10));
     public static final EntityTypeRegistryObject<WarthogEntity> WARTHOG = register("warthog", EntityType.Builder.create(WarthogEntity::new, EntityClassification.CREATURE).size(0.9F, 0.9F).trackingRange(10));
     public static final EntityTypeRegistryObject<BisonEntity> BISON = register("bison", EntityType.Builder.create(BisonEntity::new, EntityClassification.CREATURE).size(0.9F, 1.4F).trackingRange(10));

@@ -1,11 +1,11 @@
 package com.qsoftware.forgemod.modules.debugMenu;
 
+import com.qsoftware.forgemod.common.Angle;
+import com.qsoftware.forgemod.common.Multiplier;
+import com.qsoftware.forgemod.common.Percentage;
 import com.qsoftware.forgemod.common.IntSize;
 import com.qsoftware.forgemod.common.enums.MoonPhase;
-import com.qsoftware.modlib.common.Angle;
-import com.qsoftware.modlib.common.Multiplier;
-import com.qsoftware.modlib.common.Percentage;
-import com.qsoftware.modlib.common.interfaces.Formattable;
+import com.qsoftware.forgemod.common.interfaces.Formattable;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
@@ -13,37 +13,25 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.IForgeRegistryEntry;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings({"ConstantConditions", "unused"})
-public abstract class DebugPage implements IForgeRegistryEntry<DebugPage> {
+public abstract class DebugPage {
     private final List<DebugEntry> linesLeft = new ArrayList<>();
     private final List<DebugEntry> linesRight = new ArrayList<>();
+    private final ModContainer modContainer;
     private final Minecraft minecraft;
     protected final MainWindow mainWindow;
-    private ModContainer modContainer;
-    private ResourceLocation registryName;
+    private final ResourceLocation resourceLocation;
 
-    public DebugPage() {
-        this.minecraft = Minecraft.getInstance();
-        if (this.minecraft != null) {
-            this.mainWindow = this.minecraft.getMainWindow();
-        } else {
-            this.mainWindow = null;
-        }
-    }
-
-    public void init() {
-        if (getRegistryName() == null) {
-            throw new IllegalStateException("DebugPage is not registered yet.");
-        }
+    public DebugPage(String modId, String name) {
         // Mod container.
-        this.modContainer = ModList.get().getModContainerById(getRegistryName().getNamespace()).orElseThrow(() -> new IllegalArgumentException("Mod not found with id: " + getRegistryName().getNamespace()));
+        this.modContainer = ModList.get().getModContainerById(modId).orElseThrow(() -> new IllegalArgumentException("Mod not found with id: " + modId));
+        this.minecraft = Minecraft.getInstance();
+        this.mainWindow = this.minecraft.getMainWindow();
+        this.resourceLocation = new ResourceLocation(modId, name);
     }
 
     protected void addLeft(DebugEntry debugEntry) {
@@ -114,21 +102,8 @@ public abstract class DebugPage implements IForgeRegistryEntry<DebugPage> {
         return minecraft;
     }
 
-    @Override
-    public DebugPage setRegistryName(ResourceLocation name) {
-        this.registryName = name;
-        return this;
-    }
-
-    @Nullable
-    @Override
-    public ResourceLocation getRegistryName() {
-        return registryName;
-    }
-
-    @Override
-    public Class<DebugPage> getRegistryType() {
-        return DebugPage.class;
+    public ResourceLocation getResourceLocation() {
+        return resourceLocation;
     }
 
     public abstract boolean hasRequiredComponents();

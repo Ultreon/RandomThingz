@@ -22,6 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityPage extends DebugPage {
+    public EntityPage(String modId, String name) {
+        super(modId, name);
+    }
+
     @Override
     public final List<DebugEntry> getLinesLeft() {
         List<DebugEntry> list = new ArrayList<>();

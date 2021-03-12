@@ -5,7 +5,7 @@ import com.qsoftware.forgemod.init.ModTags;
 import com.qsoftware.forgemod.modules.tiles.ModBlocks;
 import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
-import com.qsoftware.forgemod.modules.items.Tools;
+import com.qsoftware.forgemod.modules.items.tools.Tools;
 import com.qsoftware.forgemod.modules.items.objects.CraftingItems;
 import com.qsoftware.forgemod.modules.items.objects.upgrades.MachineUpgrades;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;

@@ -6,12 +6,14 @@
     "qforgemod:tin_katana",
     "qforgemod:compressed_iron_katana",
     "qforgemod:obsidian_katana",
+    "qforgemod:silver_katana",
     "qforgemod:lead_katana",
     "qforgemod:nickel_katana",
     "qforgemod:platinum_katana",
     "qforgemod:zinc_katana",
     "qforgemod:bismuth_katana",
     "qforgemod:aluminum_katana",
+    "qforgemod:uranium_katana",
     "qforgemod:bronze_katana",
     "qforgemod:brass_katana",
     "qforgemod:invar_katana",
@@ -22,6 +24,9 @@
     "qforgemod:bismuth_steel_katana",
     "qforgemod:signalum_katana",
     "qforgemod:lumium_katana",
-    "qforgemod:enderium_katana"
+    "qforgemod:enderium_katana",
+    "qforgemod:cobalt_katana",
+    "qforgemod:ultrinium_katana",
+    "qforgemod:infinity_katana"
   ]
 }

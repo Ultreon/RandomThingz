@@ -6,12 +6,14 @@
     "qforgemod:tin_pickaxe",
     "qforgemod:compressed_iron_pickaxe",
     "qforgemod:obsidian_pickaxe",
+    "qforgemod:silver_pickaxe",
     "qforgemod:lead_pickaxe",
     "qforgemod:nickel_pickaxe",
     "qforgemod:platinum_pickaxe",
     "qforgemod:zinc_pickaxe",
     "qforgemod:bismuth_pickaxe",
     "qforgemod:aluminum_pickaxe",
+    "qforgemod:uranium_pickaxe",
     "qforgemod:bronze_pickaxe",
     "qforgemod:brass_pickaxe",
     "qforgemod:invar_pickaxe",
@@ -22,6 +24,9 @@
     "qforgemod:bismuth_steel_pickaxe",
     "qforgemod:signalum_pickaxe",
     "qforgemod:lumium_pickaxe",
-    "qforgemod:enderium_pickaxe"
+    "qforgemod:enderium_pickaxe",
+    "qforgemod:cobalt_pickaxe",
+    "qforgemod:ultrinium_pickaxe",
+    "qforgemod:infinity_pickaxe"
   ]
 }

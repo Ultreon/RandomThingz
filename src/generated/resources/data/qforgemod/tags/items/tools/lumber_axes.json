@@ -6,12 +6,14 @@
     "qforgemod:tin_lumber_axe",
     "qforgemod:compressed_iron_lumber_axe",
     "qforgemod:obsidian_lumber_axe",
+    "qforgemod:silver_lumber_axe",
     "qforgemod:lead_lumber_axe",
     "qforgemod:nickel_lumber_axe",
     "qforgemod:platinum_lumber_axe",
     "qforgemod:zinc_lumber_axe",
     "qforgemod:bismuth_lumber_axe",
     "qforgemod:aluminum_lumber_axe",
+    "qforgemod:uranium_lumber_axe",
     "qforgemod:bronze_lumber_axe",
     "qforgemod:brass_lumber_axe",
     "qforgemod:invar_lumber_axe",
@@ -22,6 +24,9 @@
     "qforgemod:bismuth_steel_lumber_axe",
     "qforgemod:signalum_lumber_axe",
     "qforgemod:lumium_lumber_axe",
-    "qforgemod:enderium_lumber_axe"
+    "qforgemod:enderium_lumber_axe",
+    "qforgemod:cobalt_lumber_axe",
+    "qforgemod:ultrinium_lumber_axe",
+    "qforgemod:infinity_lumber_axe"
   ]
 }

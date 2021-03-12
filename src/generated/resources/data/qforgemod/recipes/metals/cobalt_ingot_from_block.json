@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:storage_blocks/cobalt"
+    }
+  ],
+  "result": {
+    "item": "qforgemod:cobalt_ingot",
+    "count": 9
+  }
+}

@@ -856,9 +856,9 @@
   "screen.qforgemod.quit_settings.close_prompt_quit_button": "Kwit button kloze Prompt: %1$s",
   "screen.qforgemod.quit_settings.close_prompt_quit_button.tooltip": "Sjow an prompd wen prezzed on Kwit in title zkreen.",
 
-  "gui.tag_filter.forge.dusts": "Duztz",
-  "gui.tag_filter.forge.ingots": "Ingotz",
-  "gui.tag_filter.forge.nuggets": "Nukketz",
+  "gui.tag_filter.qforgemod.dusts": "Duztz",
+  "gui.tag_filter.qforgemod.ingots": "Ingotz",
+  "gui.tag_filter.qforgemod.nuggets": "Nukketz",
   "gui.tag_filter.qforgemod.chunks": "Or chuncks",
 
   "toasts.qforgemod.update_available.title": "Update Avaajlable"

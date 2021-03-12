@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.damagesource.DamageSourceInfinitySword;
 import com.qsoftware.forgemod.modules.items.ModItems;
+import com.qsoftware.forgemod.modules.items.tools.Tools;
 import com.qsoftware.forgemod.modules.ui.ModStats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -43,7 +44,7 @@ public class InfinityArmorItem extends ArmorItem {
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player) {
         player.world.destroyBlock(pos, true);
-        return false;
+        return true;
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -59,7 +60,7 @@ public class InfinityArmorItem extends ArmorItem {
                 victim.attackEntityFrom(new DamageSourceInfinitySword(player).setDamageBypassesArmor(), 4.0F);
                 return true;
             }
-            if (pvp.getHeldItem(Hand.MAIN_HAND) != null && pvp.getHeldItem(Hand.MAIN_HAND).getItem() == ModItems.INFINITY_SWORD.get() && pvp.isHandActive()) {
+            if (pvp.getHeldItem(Hand.MAIN_HAND) != null && pvp.getHeldItem(Hand.MAIN_HAND).getItem() == Tools.INFINITY.getSword().get() && pvp.isHandActive()) {
                 return true;
             }
         }
@@ -69,6 +70,26 @@ public class InfinityArmorItem extends ArmorItem {
         victim.setHealth(0);
         victim.onDeath(new EntityDamageSource("infinity", player));
 
+//        return true;
+//        if (target instanceof PlayerEntity) {
+//            // Get player
+//            PlayerEntity player1 = (PlayerEntity) target;
+//
+//            // Check Armor
+//            if (!armor.isEmpty()) {
+//                if (armor.get(0).getItem().equals(ModItems.INFINITY_BOOTS.get())) {
+//                    if (armor.get(1).getItem().equals(ModItems.INFINITY_LEGGINGS.get())) {
+//                        if (armor.get(2).getItem().equals(ModItems.INFINITY_CHESTPLATE.get())) {
+//                            if (armor.get(3).getItem().equals(ModItems.INFINITY_HELMET.get())) {
+//                                return false;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//        EntityUtils.instantKill(target, "infinity_sword");
         return true;
     }
 
@@ -78,10 +99,10 @@ public class InfinityArmorItem extends ArmorItem {
 
         // Check Armor
         if (!armor.isEmpty()) {
-            if (armor.get(0).getItem().equals(ModItems.INFINITY_BOOTS.get())) {
-                if (armor.get(1).getItem().equals(ModItems.INFINITY_LEGGINGS.get())) {
-                    if (armor.get(2).getItem().equals(ModItems.INFINITY_CHESTPLATE.get())) {
-                        return armor.get(3).getItem().equals(ModItems.INFINITY_HELMET.get());
+            if (armor.get(0).getItem().equals(Tools.INFINITY.getBoots().get())) {
+                if (armor.get(1).getItem().equals(Tools.INFINITY.getLeggings().get())) {
+                    if (armor.get(2).getItem().equals(Tools.INFINITY.getChestplate().get())) {
+                        return armor.get(3).getItem().equals(Tools.INFINITY.getHelmet().get());
                     }
                 }
             }

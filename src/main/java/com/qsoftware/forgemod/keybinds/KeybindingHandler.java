@@ -23,10 +23,10 @@ public class KeybindingHandler {
      */
     @SubscribeEvent
     public static void onAnKeybindHasBeenProcessedEventHandler(InputEvent event) {
-        Minecraft mc = Minecraft.getInstance();
-
-        if (KeybindingList.MODULES_SCREEN.isPressed()) {
-            mc.displayGuiScreen(new ModuleScreen(mc.currentScreen, ModuleManager.getInstance(), new TranslationTextComponent("screen.qforgemod.modules")));
-        }
+//        Minecraft mc = Minecraft.getInstance();
+//
+//        if (KeyBindingList.MODULES_SCREEN.isPressed()) {
+//            mc.displayGuiScreen(new ModuleScreen(mc.currentScreen, ModuleManager.getInstance(), new TranslationTextComponent("screen.qforgemod.modules")));
+//        }
     }
 }

@@ -2,6 +2,8 @@ package com.qsoftware.forgemod.modules.items.objects.tools;
 
 import com.qsoftware.forgemod.common.damagesource.DamageSourceInfinitySword;
 import com.qsoftware.forgemod.modules.items.ModItems;
+import com.qsoftware.forgemod.modules.items.OreMaterial;
+import com.qsoftware.forgemod.modules.items.tools.Tools;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.modules.ui.ModStats;
 import mcp.MethodsReturnNonnullByDefault;
@@ -57,7 +59,7 @@ public class InfinityHoeItem extends HoeItem {
 
             @Override
             public @NotNull Ingredient getRepairMaterial() {
-                return Ingredient.fromItems(ModItems.INFINITY_INGOT.get());
+                return Ingredient.fromItems(OreMaterial.INFINITY.getIngot().get());
             }
         }, Integer.MAX_VALUE, -0.0f, new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
@@ -70,11 +72,11 @@ public class InfinityHoeItem extends HoeItem {
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player) {
         player.world.destroyBlock(pos, true);
-        return false;
+        return true;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    @ParametersAreNonnullByDefault
     public boolean hitEntity(ItemStack stack, LivingEntity victim, LivingEntity player) {
 
         if (player.world.isRemote) {
@@ -86,7 +88,7 @@ public class InfinityHoeItem extends HoeItem {
                 victim.attackEntityFrom(new DamageSourceInfinitySword(player).setDamageBypassesArmor(), 4.0F);
                 return true;
             }
-            if (pvp.getHeldItem(Hand.MAIN_HAND).getItem() == ModItems.INFINITY_SWORD.get() && pvp.isHandActive()) {
+            if (pvp.getHeldItem(Hand.MAIN_HAND) != null && pvp.getHeldItem(Hand.MAIN_HAND).getItem() == Tools.INFINITY.getSword().get() && pvp.isHandActive()) {
                 return true;
             }
         }
@@ -125,10 +127,10 @@ public class InfinityHoeItem extends HoeItem {
 
         // Check Armor
         if (!armor.isEmpty()) {
-            if (armor.get(0).getItem().equals(ModItems.INFINITY_BOOTS.get())) {
-                if (armor.get(1).getItem().equals(ModItems.INFINITY_LEGGINGS.get())) {
-                    if (armor.get(2).getItem().equals(ModItems.INFINITY_CHESTPLATE.get())) {
-                        return armor.get(3).getItem().equals(ModItems.INFINITY_HELMET.get());
+            if (armor.get(0).getItem().equals(Tools.INFINITY.getBoots().get())) {
+                if (armor.get(1).getItem().equals(Tools.INFINITY.getLeggings().get())) {
+                    if (armor.get(2).getItem().equals(Tools.INFINITY.getChestplate().get())) {
+                        return armor.get(3).getItem().equals(Tools.INFINITY.getHelmet().get());
                     }
                 }
             }

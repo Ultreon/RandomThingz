@@ -6,12 +6,14 @@
     "qforgemod:tin_broadsword",
     "qforgemod:compressed_iron_broadsword",
     "qforgemod:obsidian_broadsword",
+    "qforgemod:silver_broadsword",
     "qforgemod:lead_broadsword",
     "qforgemod:nickel_broadsword",
     "qforgemod:platinum_broadsword",
     "qforgemod:zinc_broadsword",
     "qforgemod:bismuth_broadsword",
     "qforgemod:aluminum_broadsword",
+    "qforgemod:uranium_broadsword",
     "qforgemod:bronze_broadsword",
     "qforgemod:brass_broadsword",
     "qforgemod:invar_broadsword",
@@ -22,6 +24,9 @@
     "qforgemod:bismuth_steel_broadsword",
     "qforgemod:signalum_broadsword",
     "qforgemod:lumium_broadsword",
-    "qforgemod:enderium_broadsword"
+    "qforgemod:enderium_broadsword",
+    "qforgemod:cobalt_broadsword",
+    "qforgemod:ultrinium_broadsword",
+    "qforgemod:infinity_broadsword"
   ]
 }

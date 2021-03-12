@@ -6,12 +6,14 @@
     "qforgemod:tin_excavator",
     "qforgemod:compressed_iron_excavator",
     "qforgemod:obsidian_excavator",
+    "qforgemod:silver_excavator",
     "qforgemod:lead_excavator",
     "qforgemod:nickel_excavator",
     "qforgemod:platinum_excavator",
     "qforgemod:zinc_excavator",
     "qforgemod:bismuth_excavator",
     "qforgemod:aluminum_excavator",
+    "qforgemod:uranium_excavator",
     "qforgemod:bronze_excavator",
     "qforgemod:brass_excavator",
     "qforgemod:invar_excavator",
@@ -22,6 +24,9 @@
     "qforgemod:bismuth_steel_excavator",
     "qforgemod:signalum_excavator",
     "qforgemod:lumium_excavator",
-    "qforgemod:enderium_excavator"
+    "qforgemod:enderium_excavator",
+    "qforgemod:cobalt_excavator",
+    "qforgemod:ultrinium_excavator",
+    "qforgemod:infinity_excavator"
   ]
 }

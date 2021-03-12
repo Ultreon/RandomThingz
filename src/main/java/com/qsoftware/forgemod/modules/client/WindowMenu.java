@@ -6,10 +6,9 @@ import com.qsoftware.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qsoftware.forgemod.modules.actionmenu.IActionMenuItem;
 import com.qsoftware.forgemod.modules.confirmExit.ConfirmExitScreen;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
-import com.qsoftware.forgemod.modules.debugMenu.DebugMenuModule;
-import com.qsoftware.forgemod.modules.debugMenu.ModDebugPages;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class WindowMenu extends AbstractActionMenu {
@@ -45,7 +44,7 @@ public class WindowMenu extends AbstractActionMenu {
         addItem(new IActionMenuItem() {
             @Override
             public void onActivate() {
-                DebugMenuModule.getDebugMenu().setPage(ModDebugPages.WINDOW_PAGE.get());
+                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.WINDOW;
             }
 
             @Override

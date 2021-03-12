@@ -6,7 +6,6 @@ import lombok.Getter;
 import net.minecraft.util.text.TextFormatting;
 
 @Data
-@Deprecated
 public class Angle implements Formattable {
     @Getter private final double degrees;
 

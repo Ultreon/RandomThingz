@@ -6,12 +6,14 @@
     "qforgemod:tin_axe",
     "qforgemod:compressed_iron_axe",
     "qforgemod:obsidian_axe",
+    "qforgemod:silver_axe",
     "qforgemod:lead_axe",
     "qforgemod:nickel_axe",
     "qforgemod:platinum_axe",
     "qforgemod:zinc_axe",
     "qforgemod:bismuth_axe",
     "qforgemod:aluminum_axe",
+    "qforgemod:uranium_axe",
     "qforgemod:bronze_axe",
     "qforgemod:brass_axe",
     "qforgemod:invar_axe",
@@ -22,6 +24,9 @@
     "qforgemod:bismuth_steel_axe",
     "qforgemod:signalum_axe",
     "qforgemod:lumium_axe",
-    "qforgemod:enderium_axe"
+    "qforgemod:enderium_axe",
+    "qforgemod:cobalt_axe",
+    "qforgemod:ultrinium_axe",
+    "qforgemod:infinity_axe"
   ]
 }

@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.modules.environment;
 
 import com.qsoftware.forgemod.effects.CurseEffect;
 import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.forgemod.modules.environment.effects.RadiationEffect;
 import com.qsoftware.forgemod.util.ExceptionUtil;
 import lombok.experimental.UtilityClass;
 import net.minecraft.potion.Effect;
@@ -17,6 +18,7 @@ public final class ModEffects {
     //     Racks     //
     ///////////////////
     public static final RegistryObject<CurseEffect> CURSE = register("curse", CurseEffect::new);
+    public static final RegistryObject<RadiationEffect> RADIATION = register("radiation", RadiationEffect::new);
 
     //////////////////////////////
     //     Utility methods     //

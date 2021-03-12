@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " / ",
+    " / "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "qforgemod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "qforgemod:uranium_pickaxe"
+  }
+}

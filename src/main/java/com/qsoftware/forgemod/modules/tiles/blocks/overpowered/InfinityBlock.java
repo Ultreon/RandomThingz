@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.modules.tiles.blocks.overpowered;
 
-import com.qsoftware.forgemod.modules.items.ModItems;
+import com.qsoftware.forgemod.modules.items.tools.Tools;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
@@ -34,23 +34,23 @@ public class InfinityBlock extends Block {
             Minecraft.getInstance().enqueue(() -> {
                 player.onDeath(new DamageSource("mine.infinity_ore"));
             });
-        } else if (heldItemMainhand.getItem() != ModItems.INFINITY_SHOVEL.get() &&
-                heldItemMainhand.getItem() != ModItems.INFINITY_PICKAXE.get() &&
-                heldItemMainhand.getItem() != ModItems.INFINITY_HOE.get() &&
-                heldItemMainhand.getItem() != ModItems.INFINITY_SWORD.get() &&
-                heldItemMainhand.getItem() != ModItems.INFINITY_AXE.get()) {
+        } else if (heldItemMainhand.getItem() != Tools.INFINITY.getShovel().get() &&
+                heldItemMainhand.getItem() != Tools.INFINITY.getPickaxe().get() &&
+                heldItemMainhand.getItem() != Tools.INFINITY.getHoe().get() &&
+                heldItemMainhand.getItem() != Tools.INFINITY.getSword().get() &&
+                heldItemMainhand.getItem() != Tools.INFINITY.getAxe().get()) {
             if (heldItemMainhand.isDamageable()) {
                 player.getHeldItemMainhand().damageItem(player.getHeldItemMainhand().getMaxDamage(), player, (entity) -> {
                     entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
                 });
-            } else {
-                player.getCombatTracker().trackDamage(new DamageSource("mine_infinity_ore"), player.getHealth(), player.getHealth());
-                player.setHealth(0);
-
-                Minecraft.getInstance().enqueue(() -> {
-                    player.onDeath(new DamageSource("mine.infinity_ore"));
-                });
             }
+        } else {
+            player.getCombatTracker().trackDamage(new DamageSource("mine_infinity_ore"), player.getHealth(), player.getHealth());
+            player.setHealth(0);
+
+            Minecraft.getInstance().enqueue(() -> {
+                player.onDeath(new DamageSource("mine.infinity_ore"));
+            });
         }
     }
 }

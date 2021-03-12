@@ -24,6 +24,9 @@
     "#forge:nuggets/bismuth_steel",
     "#forge:nuggets/signalum",
     "#forge:nuggets/lumium",
-    "#forge:nuggets/enderium"
+    "#forge:nuggets/enderium",
+    "#forge:nuggets/cobalt",
+    "#forge:nuggets/ultrinium",
+    "#forge:nuggets/infinity"
   ]
 }

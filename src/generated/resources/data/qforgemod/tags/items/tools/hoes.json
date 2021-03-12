@@ -6,12 +6,14 @@
     "qforgemod:tin_hoe",
     "qforgemod:compressed_iron_hoe",
     "qforgemod:obsidian_hoe",
+    "qforgemod:silver_hoe",
     "qforgemod:lead_hoe",
     "qforgemod:nickel_hoe",
     "qforgemod:platinum_hoe",
     "qforgemod:zinc_hoe",
     "qforgemod:bismuth_hoe",
     "qforgemod:aluminum_hoe",
+    "qforgemod:uranium_hoe",
     "qforgemod:bronze_hoe",
     "qforgemod:brass_hoe",
     "qforgemod:invar_hoe",
@@ -22,6 +24,9 @@
     "qforgemod:bismuth_steel_hoe",
     "qforgemod:signalum_hoe",
     "qforgemod:lumium_hoe",
-    "qforgemod:enderium_hoe"
+    "qforgemod:enderium_hoe",
+    "qforgemod:cobalt_hoe",
+    "qforgemod:ultrinium_hoe",
+    "qforgemod:infinity_hoe"
   ]
 }
