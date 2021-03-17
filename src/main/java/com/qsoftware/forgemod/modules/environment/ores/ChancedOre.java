@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.modules.environment.ores;
 
-import com.qsoftware.forgemod.modules.environment.ores.configs.ChancedOreConfigs;
+import com.qsoftware.forgemod.modules.environment.ores.configs.ChancedOreConfig;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Blocks;
@@ -16,14 +16,14 @@ import java.util.function.Supplier;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class ChancedOre extends DefaultOre {
-    private final ChancedOreConfigs config;
+    private final ChancedOreConfig config;
 
-    public ChancedOre(String name, Supplier<OreMaterial> material, int hardness, int harvestLevel, ChancedOreConfigs config) {
+    public ChancedOre(String name, Supplier<OreMaterial> material, int hardness, int harvestLevel, ChancedOreConfig config) {
         super(name, material, hardness, harvestLevel, config);
         this.config = config;
     }
 
-    public ChancedOre(String name, Supplier<OreMaterial> material, int hardness, int harvestLevel, ChancedOreConfigs config, Predicate<BiomeLoadingEvent> predicate) {
+    public ChancedOre(String name, Supplier<OreMaterial> material, int hardness, int harvestLevel, ChancedOreConfig config, Predicate<BiomeLoadingEvent> predicate) {
         super(name, material, hardness, harvestLevel, config, predicate);
         this.config = config;
     }

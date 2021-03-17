@@ -1,13 +1,13 @@
 package com.qsoftware.forgemod.modules.environment.ores;
 
-import com.qsoftware.forgemod.modules.environment.ores.configs.ChancedOreConfigs;
+import com.qsoftware.forgemod.modules.environment.ores.configs.ChancedOreConfig;
 import com.qsoftware.forgemod.modules.environment.ores.configs.DefaultOreConfig;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import lombok.experimental.UtilityClass;
-import net.minecraft.world.biome.Biome;
 
 @UtilityClass
 public final class Ores {
+    // Default ore.
     public static final DefaultOre COPPER = new DefaultOre("copper", () -> OreMaterial.COPPER, 3, 1, new DefaultOreConfig(8, 8, 40, 90));
     public static final DefaultOre TIN = new DefaultOre("tin", () -> OreMaterial.TIN, 3, 1, new DefaultOreConfig(8, 8, 20, 80));
     public static final DefaultOre SILVER = new DefaultOre("silver", () -> OreMaterial.SILVER, 4, 2, new DefaultOreConfig(4, 8, 0, 40));
@@ -18,8 +18,11 @@ public final class Ores {
     public static final DefaultOre BISMUTH = new DefaultOre("bismuth", () -> OreMaterial.BISMUTH, 3, 1, new DefaultOreConfig(4, 8, 16, 64));
     public static final DefaultOre BAUXITE = new DefaultOre("bauxite", () -> OreMaterial.ALUMINUM, 4, 1, new DefaultOreConfig(6, 8, 15, 50));
     public static final DefaultOre URANIUM = new DefaultOre("uranium", () -> OreMaterial.URANIUM, 6, 2, new DefaultOreConfig(1, 4, 0, 18));
-    public static final NetherOre COBALT = new NetherOre("cobalt", () -> OreMaterial.COBALT, 20, 4, new DefaultOreConfig(1, 2, 0, 48));
-    public static final ChancedOre INFINITY = new ChancedOre("infinity", () -> OreMaterial.INFINITY, 8192, 6, new ChancedOreConfigs(1, 1, 0, 64, 512), (b) -> b.getClimate().temperature >= 2.0);
-    public static final ChancedOre ULTRINIUM = new ChancedOre("ultrinium", () -> OreMaterial.ULTRINIUM, 512, 5, new ChancedOreConfigs(1, 1, 0, 64, 16), (b) -> b.getClimate().temperature >= 1.0);
 
+    // Nether ore.
+    public static final NetherOre COBALT = new NetherOre("cobalt", () -> OreMaterial.COBALT, 20, 4, new DefaultOreConfig(1, 2, 0, 48));
+
+    // Chanced ore.
+    public static final ChancedOre ULTRINIUM = new ChancedOre("ultrinium", () -> OreMaterial.ULTRINIUM, 512, 5, new ChancedOreConfig(1, 1, 0, 64, 6), (b) -> b.getClimate().temperature >= 1.0);
+    public static final ChancedOre INFINITY = new ChancedOre("infinity", () -> OreMaterial.INFINITY, 8192, 6, new ChancedOreConfig(1, 1, 0, 64, 128), (b) -> b.getClimate().temperature >= 2.0);
 }
