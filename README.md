@@ -2,7 +2,7 @@
 
 ***
 ## Pages
-The GitHub pages are here: https://qboi123.github.io/QForgeMod/.
+The GitHub pages are here: https://qtechcommunity.github.io/QForgeMod/.
 
 ## Running from source
 1) Clone the [**QModLib**](https://github.com/Qboi123/QModLib) repository.  
