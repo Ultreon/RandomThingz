@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
+            /* Make the image fully responsive */
+            .carousel-inner img {
+                width: 100vw;
+                height: 100vh;
+                object-fit: cover;
+            }
+            img, h1, h2, h3, h4, h5, h6, p {
+                user-drag: none;
+                user-select: none;
+                -mz-user-drag: none;
+                -mz-user-select: none;
+                -ms-user-drag: none;
+                -mozila-user-drag: none;
+                -mozila-user-select: none;
+                -mozilla-user-drag: none;
+                -mozilla-user-select: none;
+                -webkit-user-drag: none;
+                -webkit-user-select: none;
+            }
+            * {
+                &:focus {
+                        outline: 10px solid red!important;
+                }
+            }
+        </style>
+        <script>    
+            keydownEvent = (event) => {
+                console.log(event, event.keyCode)
+                if (event.keyCode === 37) {
+                    prev.click();
+                    return;
+                }
+                if (event.keyCode === 39) {
+                    next.click();
+                    return;
+                }
+            }
+        </script>
+        <script>
+            focusOut = (event, element) => {
+                element.focus();
+            }
+        </script>
+    </head>
+    <body>
+        <div id="demo" class="carousel slide" data-ride="carousel" style="height:100vh;width:100vw" tabindex=0 autofocus="true" id="scripted" onkeydown="keydownEvent(event)" onfocusout="focusOut(event, this)">
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="1" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="2" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="3" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="4" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="5" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="6" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="7" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="8" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="9" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="10" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="11" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="12" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="13" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="14" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="15" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="16" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="17" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="18" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="19" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="20" tabindex="-1"></li>
+                <li data-target="#demo" data-slide-to="21" tabindex="-1"></li>
+            </ul>
+            
+            <!-- The slideshow -->
+            <div class="carousel-inner" tabindex="-1">
+                <div class="carousel-item active" tabindex="-1" tabindex="-1">
+                    <img src="img/1.png" alt="1" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Overworld Items 1.1 Beta 5</h3>
+                        <p tabindex="-1">Buttercup, Eucalyptus Log and Planks</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1" tabindex="-1">
+                    <img src="img/2.png" alt="2" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Ores 1</h3>
+                        <p tabindex="-1">Copper, Steel, Tungsten Steel, Uranium, Ruby Amethyst, Aquamarine.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/3.png" alt="3" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Ores 2</h3>
+                        <p tabindex="-1">Saphire, Malachite, Tanzanite, Ultrinium, Infinity, Beryl.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/4.png" alt="4" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Nature</h3>
+                        <p tabindex="-1">Buttercup, Stick 1, Stick 2, Eucalyptus Leaf</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/5.png" alt="5" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Logs</h3>
+                        <p tabindex="-1">Eucalyptus Logs</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/6.png" alt="6" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Miscellaneous</h3>
+                        <p tabindex="-1">Legendary Ender Pearl</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/7.png" alt="7" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Spawn Eggs</h3>
+                        <p tabindex="-1">Duck, ???, ???, Bison, Glow Squid, Fire Creeper, ???, Ice Enderman, Moobloom, Baby Creeper, Baby Enderman, Baby Skeleton, Baby Stray, Baby Wither Skeleton.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/8.png" alt="8" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Ores and storage blocks.</h3>
+                        <p tabindex="-1">Copper Block, Steel Block, Tungsten Block, Uranium Block, Ruby Block, Amethyst Block, Aquamarine Block, Saphire Block, Malachite Block, Tanzanite Block, Ultrinium Block, Infinity Block, ??? Block, ??? Block, Beryl Block</p>
+                        <p tabindex="-1">Copper Ore, Steel Ore, Tungsten Ore, Uranium Ore, Ruby Ore, Amethyst Ore, Aquamarine Ore, Saphire Ore, Malachite Ore, Tanzanite Ore, Ultrinium Ore, Infinity Ore, ??? Ore, ??? Ore, Beryl Ore</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/9.png" alt="9" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Ingots, nuggets and dusts.</h3>
+                        <p tabindex="-1">Ingot, Nugget, Dust: Copper, Nickle, Steel, Tungsten, Ultrinium, Infinity, Uranium. Dust: Iron Gold, Ruby, Amethyst, Aquamarine, Saphire, Malachite, ?, ?, Beyl, Diamond.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/10.png" alt="10" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Gems</h3>
+                        <p tabindex="-1">Ruby, Amethyst, Aquamarine, Saphire, Malachite, Topaz, Amber, Peridot, Beryl, Tanzanite</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/11.png" alt="11" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Tools 1</h3>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/12.png" alt="12" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Tools 2</h3>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/13.png" alt="13" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Armors 1</h3>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/14.png" alt="14" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Armors 2</h3>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/15.png" alt="15" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Machines</h3>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/16.png" alt="16" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Specials</h3>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/17.png" alt="17" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Shapes</h3>
+                        <p tabindex="-1">Stairs, slabs, fences, fence gates, butons and chestplates.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/18.png" alt="18" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Bows and arrows</h3>
+                        <p tabindex="-1">Blaze bow and ice bow.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/19.png" alt="19" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">MC Dungeons Related</h3>
+                        <p tabindex="-1">Diamond axe, diamond sword, iron sword, broadsword.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/20.png" alt="20" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Redstone</h3>
+                        <p tabindex="-1">Currently only doors.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/21.png" alt="21" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">Food</h3>
+                        <p tabindex="-1">Cheese burger, cheese slice, cheese.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" tabindex="-1">
+                    <img src="img/22.png" alt="22" width="1100" height="500" tabindex="-1">
+                    <div class="carousel-caption" tabindex="-1">
+                        <h3 tabindex="-1">God items</h3>
+                        <p tabindex="-1">Kill Switch, Ban Hammer, Unstable Infinity Ingot, Walking wand, Infinity Armor, Infinity Sword, Pickaxe, Shovel, Axe and Hoe.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" tabindex="1" href="#demo" data-slide="prev" id="prev">
+             <span class="carousel-control-prev-icon" tabindex="-1"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" tabindex="-1" data-slide="next" id="next">
+                <span class="carousel-control-next-icon" tabindex="-1"></span>
+            </a>
+        </div>
+    </body>
+</html>
