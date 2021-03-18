@@ -27,4 +27,4 @@ The GitHub pages are here: https://qtechcommunity.github.io/QForgeMod/.
  - [x] Multiple moobloom variants.
  - [x] Cluckshroom.
  - [x] Mod updater for **QForgeMod** including api.
- - ~~[x] Javascript console ingame. (An alternative to commands)~~
+ - [x] ~~Javascript console ingame. (An alternative to commands)~~
