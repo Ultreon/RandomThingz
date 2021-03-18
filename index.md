@@ -7,3 +7,6 @@
 
 ## Links:
  * [CurseForge](https://www.curseforge.com/minecraft/mc-mods/qforgemod/)
+
+## Screenshots:
+ * The screenshots are [here](screenshots.html).
