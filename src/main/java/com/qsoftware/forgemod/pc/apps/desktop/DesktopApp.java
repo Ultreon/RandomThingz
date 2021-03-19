@@ -26,6 +26,6 @@ public class DesktopApp extends App {
 
     @Override
     public void init() {
-        this.wallpaper = getComputer().getFileSystem().getFile();
+//        this.wallpaper = getComputer().getFileSystem().getFile();
     }
 }

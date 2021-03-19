@@ -28,15 +28,15 @@ public class Rom {
         return new Rom(Files.readAllBytes(Paths.get(filePath)));
     }
 
-    private static Rom readFile(File file) throws IOException {
+    public static Rom readFile(File file) throws IOException {
         return new Rom(Files.readAllBytes(file.toPath()));
     }
 
-    private static Rom of(byte[] bytes) {
+    public static Rom of(byte[] bytes) {
         return new Rom(bytes);
     }
 
-    private static Rom fromHex(String hex) throws DecoderException {
+    public static Rom fromHex(String hex) throws DecoderException {
         return new Rom(Hex.decodeHex(hex));
     }
 

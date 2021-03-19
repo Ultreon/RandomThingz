@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.pc.common;
 
-import com.qsoftware.forgemod.pc.common.device.component.CPU;
+import com.qsoftware.forgemod.pc.cpu.CPU;
 import com.qsoftware.forgemod.pc.common.device.component.Rom;
 import com.qsoftware.forgemod.pc.common.device.component.Win;
 import com.qsoftware.forgemod.pc.cpu.Loader;
@@ -19,17 +19,17 @@ public class Run {
             Files.createFile(ROM_FILE);
             Rom rom;
             if (Files.exists(PROGRAM_FILE)) {
-                rom = new Rom(Files.readAllBytes(ROM_FILE))
+                rom = Rom.of(Files.readAllBytes(ROM_FILE));
             } else {
                 rom = Rom.empty();
             }
-            if (Files.write(ROM_FILE, rom.getBytecode(), StandardOpenOption.CREATE_NEW, StandardOpenOption.READ))
+            Files.write(ROM_FILE, rom.getBytecode(), StandardOpenOption.CREATE_NEW, StandardOpenOption.READ);
         }
 
-        Rom rom = new Rom(Files.readAllBytes(ROM_FILE));
+        Rom rom = Rom.of(Files.readAllBytes(ROM_FILE));
         CPU cpu = new CPU();
         Loader loader = new Loader(cpu);
-        loader.load(rom)
+        loader.load(rom);
 
         loader.load("fffc-0020"); // Reset vector
         loader.load("00a0-2004"); // Test vector for (--),Y

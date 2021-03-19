@@ -1,5 +1,6 @@
 package com.qsoftware.forgemod.pc.common.device.component;
 
+import com.qsoftware.forgemod.pc.cpu.CPU;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
