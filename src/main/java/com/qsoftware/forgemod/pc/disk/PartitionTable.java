@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.pc.disk;
 
-import com.qsoftware.forgemod.pc.Disk;
+import com.qsoftware.forgemod.pc.common.device.component.Disk;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

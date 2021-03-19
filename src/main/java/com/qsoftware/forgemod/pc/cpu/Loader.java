@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.pc.cpu;
 
-import com.qsoftware.forgemod.pc.Rom;
+import com.qsoftware.forgemod.pc.common.device.component.Rom;
 
 public class Loader {
     private final CPU cpu;

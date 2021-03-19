@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.pc;
+package com.qsoftware.forgemod.pc.common.device.component;
 
 @SuppressWarnings({"ConstantConditions", "unused"})
 public class CPU {

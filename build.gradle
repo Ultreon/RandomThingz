@@ -232,6 +232,9 @@ repositories {
     maven {
         url "file://${local_maven}"
     }
+    maven {
+        url "https://github.com/QTechCommunity/Maven/raw/main/"
+    }
 }
 
 compileJava {

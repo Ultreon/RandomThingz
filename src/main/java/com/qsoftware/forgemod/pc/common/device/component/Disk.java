@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.pc;
+package com.qsoftware.forgemod.pc.common.device.component;
 
 import com.google.common.annotations.Beta;
 import com.qsoftware.forgemod.pc.disk.PartitionTable;

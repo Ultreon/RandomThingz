@@ -1,6 +1,8 @@
-package com.qsoftware.forgemod.pc;
+package com.qsoftware.forgemod.pc.common.computerapi;
 
 import com.google.common.annotations.Beta;
+import com.qsoftware.forgemod.pc.PCError;
+import com.qsoftware.forgemod.pc.common.device.component.Disk;
 import com.qsoftware.forgemod.pc.disk.AbstractFile;
 
 @Beta

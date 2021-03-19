@@ -17,6 +17,7 @@ import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.crash.ReportedException;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.FolderName;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,6 +39,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Random;
 import java.util.function.Supplier;
@@ -195,6 +197,14 @@ public class QForgeMod {
 
         // Client-start.
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> QForgeMod.init.clientStart());
+    }
+
+    public static File getDataFile() {
+        return Initialization.getServer().func_240776_a_(new FolderName("qcore-data")).toFile();
+    }
+
+    public static Path getDataPath() {
+        return Initialization.getServer().func_240776_a_(new FolderName("qcore-data"));
     }
 
     /**

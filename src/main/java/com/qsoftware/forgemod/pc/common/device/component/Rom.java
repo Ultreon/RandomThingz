@@ -1,4 +1,4 @@
-package com.qsoftware.forgemod.pc;
+package com.qsoftware.forgemod.pc.common.device.component;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;

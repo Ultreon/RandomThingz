@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.pc.disk.qfs;
 
-import com.qsoftware.forgemod.pc.Disk;
+import com.qsoftware.forgemod.pc.common.device.component.Disk;
 import com.qsoftware.forgemod.pc.disk.AbstractFile;
 import com.qsoftware.forgemod.pc.disk.FileSystem;
 

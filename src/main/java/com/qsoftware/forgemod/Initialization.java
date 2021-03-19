@@ -24,6 +24,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -42,6 +43,11 @@ import org.apache.logging.log4j.Logger;
 public class Initialization {
     private final Logger logger;
     private final QForgeMod mod;
+    private MinecraftServer server;
+
+    public static MinecraftServer getServer() {
+        return QForgeMod.getInit().server;
+    }
 
     /**
      * Constructor
@@ -189,6 +195,7 @@ public class Initialization {
     void serverStart(@SuppressWarnings("unused") FMLServerStartingEvent event) {
         logger.info("Hello server!");
         ModuleManager.getInstance().serverStart();
+        server = event.getServer();
     }
 
     /**

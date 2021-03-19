@@ -1,6 +1,6 @@
 package com.qsoftware.forgemod.container.pc;
 
-import com.qsoftware.forgemod.pc.DesktopImage;
+import com.qsoftware.forgemod.pc.common.computerapi.DesktopImage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;

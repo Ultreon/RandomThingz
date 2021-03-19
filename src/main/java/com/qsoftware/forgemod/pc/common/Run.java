@@ -1,5 +1,8 @@
-package com.qsoftware.forgemod.pc;
+package com.qsoftware.forgemod.pc.common;
 
+import com.qsoftware.forgemod.pc.common.device.component.CPU;
+import com.qsoftware.forgemod.pc.common.device.component.Rom;
+import com.qsoftware.forgemod.pc.common.device.component.Win;
 import com.qsoftware.forgemod.pc.cpu.Loader;
 
 import java.io.IOException;
