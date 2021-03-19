@@ -113,6 +113,10 @@ publishing {
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
+        maven {
+            name = "QTGithubMaven"
+            url = uri("D:/Maven")
+        }
     }
     publications {
         gpr(MavenPublication) {
@@ -229,9 +233,9 @@ repositories {
     flatDir {
         dirs './libs'
     }
-    maven {
-        url "file://${local_maven}"
-    }
+//    maven {
+//        url "file://${local_maven}"
+//    }
     maven {
         url "https://github.com/QTechCommunity/Maven/raw/main/"
     }
