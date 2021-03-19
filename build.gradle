@@ -1,11 +1,14 @@
-//import com.google.gson.*
-//import com.google.gson.stream.*;
-//import com.google.gson.stream.JsonWriter;
-//import org.apache.commons.io.FileUtils
-//import java.io.*
-//
-//import java.time.LocalDateTime
-//import java.time.ZoneId
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.stream.JsonWriter
+
+import java.nio.file.Files
+import java.nio.file.FileSystems
+import java.nio.file.FileSystem
+import java.nio.file.Paths
+import java.nio.file.Path
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 buildscript {
     repositories {
@@ -36,6 +39,8 @@ apply plugin: 'net.minecraftforge.gradle'
 
 // Other plugins.
 apply plugin: 'maven'
+apply plugin: 'java-library'
+apply plugin: 'signing'
 //apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
@@ -44,34 +49,37 @@ apply plugin: "io.freefair.lombok"
 println('Java: ' + System.getProperty('java.version') + '\n JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ')\n Arch: ' + System.getProperty('os.arch'))
 println("OS: " + System.getProperty("os.name") + "\n OS Version: " + System.getProperty("os.version"))
 
-//// Read build number file.
-//int vers = Integer.parseInt(project.property("version").toString())
-//int release = Integer.parseInt(project.property("versionRelease").toString())
-//String stage = project.property("versionStage").toString()
-//int stageRelease = Integer.parseInt(project.property("versionStageRelease").toString())
-//String isDevTestString = project.property("isDevTest").toString()
-//
-//FileInputStream fileInputStream = new FileInputStream("buildnumber.txt")
-//String buildNrString = new String(Files.readAllBytes(fileInputStream))
-//fileInputStream.close()
-//Integer buildNumber = Integer.valueOf(buildNrString)
-//
-//// Advance build number.
-//buildNumber++
-//println("Executing build " + buildNumber)
-//String newBuild = buildNumber.toString()
-//
-//// Write new build number.
-//FileOutputStream output = new FileOutputStream("buildnumber.txt")
-//output.write(newBuild.getBytes())
-//output.flush()
-//output.close()
+// Read build number file.
+int vers = Integer.parseInt(project.property("version").toString())
+int release = Integer.parseInt(project.property("versionRelease").toString())
+String stage = project.property("versionStage").toString()
+int stageRelease = Integer.parseInt(project.property("versionStageRelease").toString())
+String isDevTestString = project.property("isDevTest").toString()
 
-int buildNumber = 0
-int vers = 2
-int release = 0
-String stage = "a"
-int stageRelease = 6
+String content = "";
+String filePath = "buildnumber.txt";
+
+printf(new File('.').getAbsolutePath());
+
+try {
+    content = new String(Files.readAllBytes(FileSystems.getDefault().getPath(project.getRootDir().getAbsolutePath(), filePath)));
+} catch (IOException e) {
+    throw new RuntimeException(e);
+}
+
+String buildNrString = content
+Integer buildNumber = Integer.valueOf(buildNrString)
+
+// Advance build number.
+buildNumber++
+println("Executing build " + buildNumber)
+String newBuild = buildNumber.toString()
+
+// Write new build number.
+FileOutputStream output = new FileOutputStream("buildnumber.txt")
+output.write(newBuild.getBytes())
+output.flush()
+output.close()
 
 
 //boolean isDevTest = Boolean.parseBoolean(isDevTestString)
@@ -176,7 +184,12 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the forgemod for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'qforgemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'qforgemod',
+                    '--all',
+                    '--output', file('src/generated/resources/'),
+                    '--existing', file('src/main/resources/'),
+                    '--existing-mod', 'computercraft',
+                    '--existing-mod', 'jei'
 
             mods {
                 qforgemod {
@@ -247,6 +260,10 @@ dependencies {
     // QModLib - Qboi's Library Mod.
     compileOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.+")
     runtimeOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.+")
+
+    // QModLib - Qboi's Library Mod.
+    implementation group: "com.qtech.commons", name: "commons", version: "1.0.+"
+    extraLibs group: "com.qtech.commons", name: "commons", version: "1.0.+"
 
     compileOnly 'org.projectlombok:lombok:1.18.18'
     annotationProcessor 'org.projectlombok:lombok:1.18.18'
@@ -418,6 +435,21 @@ processResources {
     finalizedBy replaceResources
 }
 
+task sourcesJar(type: Jar) {
+    from sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
@@ -500,62 +532,62 @@ task("uploadJars", dependsOn: "build") {
 jar.finalizedBy(uploadJars)
 jar.finalizedBy(uploadArchives)
 
-//Gson gson = new Gson()
-//JsonObject json = new JsonObject();
-//
-//// \version
-//JsonObject versionJ = new JsonObject()
-//versionJ.addProperty "name", version.toString()
-//versionJ.addProperty "version", vers
-//versionJ.addProperty "release", release
-//versionJ.addProperty "build", buildNumber
-//versionJ.addProperty "stage", stage
-//versionJ.addProperty "stage_release", stageRelease
-//
-//// \flags
-//JsonObject flagsJ = new JsonObject()
-//flagsJ.addProperty "dev_test", isDevTest
-//json.add("flags", flagsJ)
-//JsonObject buildInfoJ = new JsonObject()
-//buildInfoJ.addProperty("date", LocalDateTime.now(ZoneId.systemDefault()).toString())
-//
-//// \compile
-//JsonObject compileJ = new JsonObject()
-//compileJ.addProperty "name", compileJava.name
-//compileJ.addProperty "source_compat", compileJava.sourceCompatibility
-//compileJ.addProperty "target_compat", compileJava.targetCompatibility
-//
-//// \project
-//JsonObject projectJ = new JsonObject()
-//projectJ.addProperty "name", project.name != null ? project.name : ""
-//projectJ.addProperty "display_name", project.displayName != null ? project.displayName : ""
-//
-//JsonObject minecraftJ = new JsonObject();
-//minecraftJ.addProperty "mappings_version", "${project.mappingsVersion}"
-//minecraftJ.addProperty "mappings_channel", "${project.mappingsChannel}"
-//minecraftJ.addProperty "mappings", "${project.mappingsChannel}_${project.mappingsVersion}"
-//minecraftJ.addProperty "version", "${project.mc_version}"
-//minecraftJ.addProperty "forge_version", "${project.forge_version}"
-//
-//// \project\gradle
-//JsonObject gradleJ = new JsonObject();
-//gradleJ.addProperty "version", gradle.gradleVersion
-//
-//compileJ  .add "gradle",     gradleJ
-//projectJ  .add "minecraft",  minecraftJ
-//buildInfoJ.add "compile",    compileJ
-//buildInfoJ.add "project",    projectJ
-//json      .add "version",    versionJ
-//json      .add "build_info", buildInfoJ
-//
-//File qfmArgsFile = new File("src/main/resources/META-INF/qfm_args.json")
-////File qfmArgsFile = new File("qfm_args.json")
-//if (qfmArgsFile.exists()) {
-//    qfmArgsFile.delete()
-//}
-//FileWriter fileWriter = new FileWriter(qfmArgsFile)
-//JsonWriter jsonWriter = new JsonWriter(fileWriter)
-//jsonWriter.setIndent("   ")
-//gson.toJson(json, jsonWriter)
-//fileWriter.flush()
-//fileWriter.close()
+Gson gson = new Gson()
+JsonObject json = new JsonObject();
+
+// \version
+JsonObject versionJ = new JsonObject()
+versionJ.addProperty "name", version.toString()
+versionJ.addProperty "version", vers
+versionJ.addProperty "release", release
+versionJ.addProperty "build", buildNumber
+versionJ.addProperty "stage", stage
+versionJ.addProperty "stage_release", stageRelease
+
+// \flags
+JsonObject flagsJ = new JsonObject()
+flagsJ.addProperty "dev_test", isDevTest
+json.add("flags", flagsJ)
+JsonObject buildInfoJ = new JsonObject()
+buildInfoJ.addProperty("date", LocalDateTime.now(ZoneId.systemDefault()).toString())
+
+// \compile
+JsonObject compileJ = new JsonObject()
+compileJ.addProperty "name", compileJava.name
+compileJ.addProperty "source_compat", compileJava.sourceCompatibility
+compileJ.addProperty "target_compat", compileJava.targetCompatibility
+
+// \project
+JsonObject projectJ = new JsonObject()
+projectJ.addProperty "name", project.name != null ? project.name : ""
+projectJ.addProperty "display_name", project.displayName != null ? project.displayName : ""
+
+JsonObject minecraftJ = new JsonObject();
+minecraftJ.addProperty "mappings_version", "${project.mappingsVersion}"
+minecraftJ.addProperty "mappings_channel", "${project.mappingsChannel}"
+minecraftJ.addProperty "mappings", "${project.mappingsChannel}_${project.mappingsVersion}"
+minecraftJ.addProperty "version", "${project.mc_version}"
+minecraftJ.addProperty "forge_version", "${project.forge_version}"
+
+// \project\gradle
+JsonObject gradleJ = new JsonObject();
+gradleJ.addProperty "version", gradle.gradleVersion
+
+compileJ  .add "gradle",     gradleJ
+projectJ  .add "minecraft",  minecraftJ
+buildInfoJ.add "compile",    compileJ
+buildInfoJ.add "project",    projectJ
+json      .add "version",    versionJ
+json      .add "build_info", buildInfoJ
+
+File qfmArgsFile = new File("src/main/resources/META-INF/qfm_args.json")
+//File qfmArgsFile = new File("qfm_args.json")
+if (qfmArgsFile.exists()) {
+    qfmArgsFile.delete()
+}
+FileWriter fileWriter = new FileWriter(qfmArgsFile)
+JsonWriter jsonWriter = new JsonWriter(fileWriter)
+jsonWriter.setIndent("   ")
+gson.toJson(json, jsonWriter)
+fileWriter.flush()
+fileWriter.close()

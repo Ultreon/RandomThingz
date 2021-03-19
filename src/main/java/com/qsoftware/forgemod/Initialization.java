@@ -3,11 +3,8 @@ package com.qsoftware.forgemod;
 import com.qsoftware.filters.Filters;
 import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.common.interfaces.IHasRenderType;
-import com.qsoftware.forgemod.modules.items.tools.Tools;
-import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.keybinds.KeyBindingList;
-import com.qsoftware.forgemod.modules.tiles.ModBlocks;
 import com.qsoftware.forgemod.modules.debugMenu.DebugMenu;
 import com.qsoftware.forgemod.modules.environment.ModEntities;
 import com.qsoftware.forgemod.modules.environment.entities.*;
@@ -15,6 +12,9 @@ import com.qsoftware.forgemod.modules.environment.entities.baby.*;
 import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
 import com.qsoftware.forgemod.modules.items.objects.advanced.AdvancedBowItem;
+import com.qsoftware.forgemod.modules.items.tools.Tools;
+import com.qsoftware.forgemod.modules.tiles.ModBlocks;
+import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
@@ -25,6 +25,7 @@ import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
@@ -57,6 +58,7 @@ public class Initialization {
      *
      * @param event a {@link FMLCommonSetupEvent} object.
      */
+    @SuppressWarnings("unused")
     void serverSetup(FMLDedicatedServerSetupEvent event) {
         ModuleManager.getInstance().serverSetup();
     }
@@ -100,6 +102,7 @@ public class Initialization {
         // do something that can only be done on the client
 
         ModuleManager.getInstance().clientSetup();
+//        ((IReloadableResourceManager)Minecraft.getInstance().getResourceManager()).addReloadListener(QFMResouces::new);
 
         this.logger.info("Setting render layers for blocks.");
         for (Block block : Registration.getBlocks()) {
@@ -204,6 +207,22 @@ public class Initialization {
     void loadComplete(FMLLoadCompleteEvent event) {
         logger.info("LoadCompleteEvent: " + event);
         ModuleManager.getInstance().loadComplete();
+
+        DistExecutor.unsafeRunForDist(() -> () -> {
+            loadCompleteClient();
+            return null;
+        }, () -> () -> {
+            loadCompleteServer();
+            return null;
+        });
+    }
+
+    void loadCompleteServer() {
+
+    }
+
+    void loadCompleteClient() {
+
     }
 
     public QForgeMod getMod() {

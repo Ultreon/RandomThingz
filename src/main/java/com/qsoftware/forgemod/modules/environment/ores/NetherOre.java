@@ -2,6 +2,8 @@ package com.qsoftware.forgemod.modules.environment.ores;
 
 import com.qsoftware.forgemod.modules.environment.ores.configs.DefaultOreConfig;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
+import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
@@ -11,9 +13,13 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.placement.TopSolidRangeConfig;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+@FieldsAreNonnullByDefault
 public class NetherOre extends DefaultOre {
     public NetherOre(String name, Supplier<OreMaterial> material, int hardness, int harvestLevel, DefaultOreConfig config) {
         super(name, material, hardness, harvestLevel, config);

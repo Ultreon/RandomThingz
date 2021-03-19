@@ -20,7 +20,7 @@ public final class Ores {
     public static final DefaultOre URANIUM = new DefaultOre("uranium", () -> OreMaterial.URANIUM, 6, 2, new DefaultOreConfig(1, 4, 0, 18));
 
     // Nether ore.
-    public static final NetherOre COBALT = new NetherOre("cobalt", () -> OreMaterial.COBALT, 20, 4, new DefaultOreConfig(1, 2, 0, 48));
+    public static final NetherOre COBALT = new NetherOre("cobalt", () -> OreMaterial.COBALT, 20, 4, new DefaultOreConfig(128, 2, 0, 48));
 
     // Chanced ore.
     public static final ChancedOre ULTRINIUM = new ChancedOre("ultrinium", () -> OreMaterial.ULTRINIUM, 512, 5, new ChancedOreConfig(1, 1, 0, 64, 6), (b) -> b.getClimate().temperature >= 1.0);

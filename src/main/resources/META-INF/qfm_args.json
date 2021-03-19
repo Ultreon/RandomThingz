@@ -1,17 +1,17 @@
 {
    "flags": {
-      "dev_test": false
+      "dev_test": "false"
    },
    "version": {
-      "name": "2.0.1274-b6",
+      "name": "2.0.1299-b6",
       "version": 2,
       "release": 0,
-      "build": 1274,
+      "build": 1299,
       "stage": "b",
       "stage_release": 6
    },
    "build_info": {
-      "date": "2021-03-12T22:31:16.637",
+      "date": "2021-03-19T20:08:19.374",
       "compile": {
          "name": "compileJava",
          "source_compat": "1.8",
@@ -21,8 +21,8 @@
          }
       },
       "project": {
-         "name": "qforgemod",
-         "display_name": "root project \u0027qforgemod\u0027",
+         "name": "qtech-qforgemod",
+         "display_name": "root project \u0027qtech-qforgemod\u0027",
          "minecraft": {
             "mappings_version": "20201028-1.16.3",
             "mappings_channel": "snapshot",
