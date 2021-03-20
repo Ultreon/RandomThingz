@@ -24,4 +24,4 @@ jobs:
     - name: Downgrade gradle
       run: ./gradlew wrapper --gradle-version=5.3
     - name: Build with Gradle
-      run: ./gradlew genIntellijRuns build jar runData
+      run: ./gradlew genIntellijRuns build jar
