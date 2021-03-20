@@ -3,15 +3,15 @@
       "dev_test": "false"
    },
    "version": {
-      "name": "2.0.1308-b6",
+      "name": "2.0.1312-b6",
       "version": 2,
       "release": 0,
-      "build": 1308,
+      "build": 1312,
       "stage": "b",
       "stage_release": 6
    },
    "build_info": {
-      "date": "2021-03-20T00:34:18.560",
+      "date": "2021-03-20T01:08:29.628",
       "compile": {
          "name": "compileJava",
          "source_compat": "1.8",
