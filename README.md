@@ -1,4 +1,4 @@
-# QForgeMod  
+# QForgeMod [![Java CI with Gradle](https://github.com/QTechCommunity/QForgeMod/actions/workflows/gradle.yml/badge.svg)](https://github.com/QTechCommunity/QForgeMod/actions/workflows/gradle.yml)
 
 ***
 ## Pages
