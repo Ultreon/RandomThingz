@@ -1,4 +1,4 @@
-# Welcome by QForgeMod Pages  
+# Welcome by QForgeMod Pages [![Java CI with Gradle](https://github.com/QTechCommunity/QForgeMod/actions/workflows/gradle.yml/badge.svg)](https://github.com/QTechCommunity/QForgeMod/actions/workflows/gradle.yml)
 *This page is in progress*
 
 ## Downloads:
