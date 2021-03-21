@@ -71,7 +71,9 @@ public class ScreenshotsScreen extends AdvancedScreen {
 
     private void reload() {
         File dir = new File(Minecraft.getInstance().gameDir, "screenshots");
-        this.files.addAll(Arrays.asList(dir.listFiles()));
+        if (dir.exists()) {
+            this.files.addAll(Arrays.asList(dir.listFiles()));
+        }
         this.total = this.files.size();
         this.index = 0;
 

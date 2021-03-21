@@ -1,7 +1,7 @@
 package com.qsoftware.forgemod.pc.apps.desktop;
 
 import com.qsoftware.forgemod.pc.common.computerapi.App;
-import com.qsoftware.forgemod.pc.common.device.Computer;
+import com.qsoftware.forgemod.pc.common.computerapi.Computer;
 import mcp.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

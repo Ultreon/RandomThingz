@@ -1,7 +1,5 @@
 package com.qsoftware.forgemod.pc.common.computerapi;
 
-import com.qsoftware.forgemod.pc.common.device.Computer;
-
 public class Folder {
     private final String path;
 

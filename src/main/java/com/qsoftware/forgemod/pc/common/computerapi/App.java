@@ -1,6 +1,5 @@
 package com.qsoftware.forgemod.pc.common.computerapi;
 
-import com.qsoftware.forgemod.pc.common.device.Computer;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 
