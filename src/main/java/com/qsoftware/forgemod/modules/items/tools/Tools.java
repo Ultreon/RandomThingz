@@ -218,7 +218,7 @@ public enum Tools {
                     .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ALUMINUM.getIngot().orElseThrow(() -> new NullPointerException("Aluminum ingot not found in OreMaterial class.")))).build())),
     URANIUM(builder("uranium")
             .material(() -> OreMaterial.URANIUM.getIngot().get(), () -> Items.STICK)
-            .armor(() -> TraitPack.create().all(ModTraits.WITHER.get()).build(), () -> ArmorMaterial.builder()
+            .armor(() -> TraitPack.create().all(ModTraits.RADIOACTIVE.get()).build(), () -> ArmorMaterial.builder()
                     .name(QForgeMod.modId + ":uranium")
                     .maxDamageFactor(14)
                     .damageReduction(new int[]{2, 5, 6, 2})

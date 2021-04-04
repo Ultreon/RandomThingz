@@ -25,6 +25,15 @@
     "#forge:storage_blocks/enderium",
     "#forge:storage_blocks/cobalt",
     "#forge:storage_blocks/ultrinium",
-    "#forge:storage_blocks/infinity"
+    "#forge:storage_blocks/infinity",
+    "#forge:storage_blocks/ruby",
+    "#forge:storage_blocks/amethyst",
+    "#forge:storage_blocks/saphire",
+    "#forge:storage_blocks/amber",
+    "#forge:storage_blocks/peridot",
+    "#forge:storage_blocks/beryl",
+    "#forge:storage_blocks/topaz",
+    "#forge:storage_blocks/tanzanite",
+    "#forge:storage_blocks/malachite"
   ]
 }

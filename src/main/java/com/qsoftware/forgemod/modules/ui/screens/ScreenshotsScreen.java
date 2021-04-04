@@ -55,7 +55,6 @@ public class ScreenshotsScreen extends AdvancedScreen {
     @Getter private int total;
     @Getter private int loaded;
 
-
     /**
      * Screenshots screen: constructor.
      *

@@ -20,6 +20,7 @@ public final class ModTraits {
     }
 
 
+    public static final RegistryObject<RadioactiveTrait> RADIOACTIVE = register("radioactive", RadioactiveTrait::new);
     public static final RegistryObject<WitherTrait> WITHER = register("wither", WitherTrait::new);
     public static final RegistryObject<PoisonTrait> POISON = register("poison", PoisonTrait::new);
     public static final RegistryObject<EnderTrait> ENDER = register("ender", EnderTrait::new);

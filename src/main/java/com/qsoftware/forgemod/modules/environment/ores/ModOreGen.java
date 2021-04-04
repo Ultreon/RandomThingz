@@ -112,25 +112,25 @@ public final class ModOreGen {
         // Started generating ores.
         QForgeMod.LOGGER.info("-===========- Create Ore Features [START] -===========-");
 
-        addOreFeature((a) -> a.count(12).range(64, 48), 6,
+        addOreFeature((a) -> a.count(12).range(30, 48), 6,
                 new BlockMatchRuleTest(Blocks.DIRT), ModBlocks.GILDED_DIRT.get(),
                 (b) -> b.getCategory() == Biome.Category.RIVER
         );
-        addOreFeature((a) -> a.count(6).range(25, 8), 6, BASE_STONE_OVERWORLD, ModBlocks.RUBY_ORE.get(),
-                (b) -> b.getCategory() == Biome.Category.EXTREME_HILLS
-        );
-        addOreFeature((a) -> a.count(8).range(30, 8), 8, BASE_STONE_OVERWORLD, ModBlocks.AMETHYST_ORE.get(),
-                (b) -> b.getCategory() == Biome.Category.EXTREME_HILLS
-        );
-        addOreFeature((a) -> a.count(8).range(30, 8), 8, BASE_STONE_OVERWORLD, ModBlocks.MALACHITE_ORE.get(),
-                (b) -> b.getCategory() == Biome.Category.EXTREME_HILLS || b.getCategory() == Biome.Category.DESERT
-        );
-        addOreFeature((a) -> a.count(8).range(30, 8), 8, BASE_STONE_OVERWORLD, ModBlocks.PERIDOT_ORE.get(),
-                (b) -> b.getCategory() == Biome.Category.EXTREME_HILLS || b.getCategory() == Biome.Category.DESERT
-        );
-        addOreFeature((a) -> a.count(4).range(15, 1), 2, BASE_STONE_OVERWORLD, ModBlocks.TANZANITE_ORE.get(),
-                (b) -> b.getClimate().temperature >= 1.0f
-        );
+//        addOreFeature((a) -> a.count(6).range(25, 8), 6, BASE_STONE_OVERWORLD, ModBlocks.RUBY_ORE.get(),
+//                (b) -> b.getCategory() == Biome.Category.EXTREME_HILLS
+//        );
+//        addOreFeature((a) -> a.count(8).range(30, 8), 8, BASE_STONE_OVERWORLD, ModBlocks.AMETHYST_ORE.get(),
+//                (b) -> b.getCategory() == Biome.Category.EXTREME_HILLS
+//        );
+//        addOreFeature((a) -> a.count(8).range(30, 8), 8, BASE_STONE_OVERWORLD, ModBlocks.MALACHITE_ORE.get(),
+//                (b) -> b.getCategory() == Biome.Category.EXTREME_HILLS || b.getCategory() == Biome.Category.DESERT
+//        );
+//        addOreFeature((a) -> a.count(8).range(30, 8), 8, BASE_STONE_OVERWORLD, ModBlocks.PERIDOT_ORE.get(),
+//                (b) -> b.getCategory() == Biome.Category.EXTREME_HILLS || b.getCategory() == Biome.Category.DESERT
+//        );
+//        addOreFeature((a) -> a.count(4).range(15, 1), 2, BASE_STONE_OVERWORLD, ModBlocks.TANZANITE_ORE.get(),
+//                (b) -> b.getClimate().temperature >= 1.0f
+//        );
 //        addOreFeature((a) -> a.count(2).range(11, 8), 1, BASE_STONE_OVERWORLD, ModBlocks.ULTRINIUM_ORE.get(),
 //                (b) -> b.getClimate().temperature >= 1.0f
 //        );

@@ -1111,5 +1111,7 @@
   "qfm_trait.qforgemod.holy": "§7Holy",
   "qfm_trait.qforgemod.poison": "§2Poison",
   "qfm_trait.qforgemod.wither": "§8Wither",
+  "qfm_trait.qforgemod.ender": "§2Ender",
+  "qfm_trait.qforgemod.radioactive": "§2Radioactive",
   "qfm_trait.qforgemod.infinity": "§cI§6n§ef§ai§3n§bi§9t§dy"
 }

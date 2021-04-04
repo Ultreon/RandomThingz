@@ -42,82 +42,82 @@ public class TraitPack {
         }
 
         public Builder sword(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.sword, traits);
+            pack.sword = ArrayUtils.addAll(pack.sword, traits);
             return this;
         }
 
         public Builder axe(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.axe, traits);
+            pack.axe = ArrayUtils.addAll(pack.axe, traits);
             return this;
         }
 
         public Builder pickaxe(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.pickaxe, traits);
+            pack.pickaxe = ArrayUtils.addAll(pack.pickaxe, traits);
             return this;
         }
 
         public Builder shovel(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.shovel, traits);
+            pack.shovel = ArrayUtils.addAll(pack.shovel, traits);
             return this;
         }
 
         public Builder hoe(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.hoe, traits);
+            pack.hoe = ArrayUtils.addAll(pack.hoe, traits);
             return this;
         }
 
         public Builder longsword(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.longsword, traits);
+            pack.longsword = ArrayUtils.addAll(pack.longsword, traits);
             return this;
         }
 
         public Builder broadsword(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.broadsword, traits);
+            pack.broadsword = ArrayUtils.addAll(pack.broadsword, traits);
             return this;
         }
 
         public Builder katana(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.katana, traits);
+            pack.katana = ArrayUtils.addAll(pack.katana, traits);
             return this;
         }
 
         public Builder lumberAxe(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.lumberAxe, traits);
+            pack.lumberAxe = ArrayUtils.addAll(pack.lumberAxe, traits);
             return this;
         }
 
         public Builder battleaxe(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.battleaxe, traits);
+            pack.battleaxe = ArrayUtils.addAll(pack.battleaxe, traits);
             return this;
         }
 
         public Builder hammer(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.hammer, traits);
+            pack.hammer = ArrayUtils.addAll(pack.hammer, traits);
             return this;
         }
 
         public Builder excavator(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.excavator, traits);
+            pack.excavator = ArrayUtils.addAll(pack.excavator, traits);
             return this;
         }
 
         public Builder helmet(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.helmet, traits);
+            pack.helmet = ArrayUtils.addAll(pack.helmet, traits);
             return this;
         }
 
         public Builder chestplate(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.chestplate, traits);
+            pack.chestplate = ArrayUtils.addAll(pack.chestplate, traits);
             return this;
         }
 
         public Builder leggings(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.leggings, traits);
+            pack.leggings = ArrayUtils.addAll(pack.leggings, traits);
             return this;
         }
 
         public Builder boots(AbstractTrait... traits) {
-            ArrayUtils.addAll(pack.boots, traits);
+            pack.boots = ArrayUtils.addAll(pack.boots, traits);
             return this;
         }
 

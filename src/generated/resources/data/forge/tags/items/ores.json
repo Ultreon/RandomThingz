@@ -13,6 +13,15 @@
     "#forge:ores/uranium",
     "#forge:ores/cobalt",
     "#forge:ores/ultrinium",
-    "#forge:ores/infinity"
+    "#forge:ores/infinity",
+    "#forge:ores/ruby",
+    "#forge:ores/amethyst",
+    "#forge:ores/saphire",
+    "#forge:ores/amber",
+    "#forge:ores/peridot",
+    "#forge:ores/beryl",
+    "#forge:ores/topaz",
+    "#forge:ores/tanzanite",
+    "#forge:ores/malachite"
   ]
 }

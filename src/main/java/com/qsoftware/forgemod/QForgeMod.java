@@ -232,11 +232,25 @@ public class QForgeMod {
      *
      * @return the QFM dev-state..
      */
-    public static boolean isDevState() {
+    public static boolean isModDev() {
         try {
             return isDevState0();
         } catch (NoSuchMethodError error) {
             return false;
+        }
+    }
+
+    /**
+     * Check if QForgeMod is currently a development build.
+     *
+     * @param def the default value if failed to detect development mode.
+     * @return the QFM dev-state..
+     */
+    public static boolean isModDev(boolean def) {
+        try {
+            return isDevState0();
+        } catch (NoSuchMethodError error) {
+            return def;
         }
     }
 
@@ -246,7 +260,7 @@ public class QForgeMod {
      * @return true if QForgeMod is in test phase, false otherwise.
      */
     public static boolean isTestPhase() {
-        return isDevState() || MOD_TEST_PHASE;
+        return isModDev() || MOD_TEST_PHASE;
     }
 
     /**

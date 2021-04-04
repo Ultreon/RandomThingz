@@ -1,5 +1,8 @@
 package com.qsoftware.forgemod.modules.items.objects.tools;
 
+import com.qsoftware.forgemod.modules.items.tools.ModTraits;
+import com.qsoftware.forgemod.modules.items.tools.SwordTool;
+import com.qsoftware.forgemod.modules.items.tools.trait.AbstractTrait;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.BlockState;
@@ -21,49 +24,8 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class FireSwordItem extends SwordItem {
+public class FireSwordItem extends SwordTool {
     public FireSwordItem(ItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties properties) {
-        super(tier, attackDamageIn, attackSpeedIn, properties);
-    }
-
-    @Override
-    public boolean hitEntity(@NotNull ItemStack stack, LivingEntity target, @NotNull LivingEntity attacker) {
-        target.setFire(10);
-        return super.hitEntity(stack, target, attacker);
-    }
-
-    /**
-     * Called when this item is used when targetting a Block
-     */
-    public @NotNull ActionResultType onItemUse(ItemUseContext context) {
-        PlayerEntity player = context.getPlayer();
-        World world = context.getWorld();
-        BlockPos position = context.getPos();
-        BlockState state = world.getBlockState(position);
-        if (CampfireBlock.canBeLit(state)) {
-            world.playSound(player, position, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
-            world.setBlockState(position, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
-            if (player != null) {
-                context.getItem().damageItem(1, player, (playerEntity) -> playerEntity.sendBreakAnimation(context.getHand()));
-            }
-
-            return ActionResultType.func_233537_a_(world.isRemote());
-        } else {
-            BlockPos offsetPos = position.offset(context.getFace());
-            if (AbstractFireBlock.canLightBlock(world, offsetPos, context.getPlacementHorizontalFacing())) {
-                world.playSound(player, offsetPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, random.nextFloat() * 0.4F + 0.8F);
-                BlockState blockState1 = AbstractFireBlock.getFireForPlacement(world, offsetPos);
-                world.setBlockState(offsetPos, blockState1, 11);
-                ItemStack stack = context.getItem();
-                if (player instanceof ServerPlayerEntity) {
-                    CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) player, offsetPos, stack);
-                    stack.damageItem(1, player, (playerEntity) -> playerEntity.sendBreakAnimation(context.getHand()));
-                }
-
-                return ActionResultType.func_233537_a_(world.isRemote());
-            } else {
-                return ActionResultType.FAIL;
-            }
-        }
+        super(tier, attackDamageIn, attackSpeedIn, properties, () -> new AbstractTrait[]{ModTraits.BLAZE.get()});
     }
 }

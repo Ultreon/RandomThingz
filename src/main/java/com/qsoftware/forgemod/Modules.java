@@ -4,6 +4,7 @@ import com.qsoftware.forgemod.common.Module;
 import com.qsoftware.forgemod.common.ModuleManager;
 import com.qsoftware.forgemod.modules.actionmenu.ActionMenuModule;
 import com.qsoftware.forgemod.modules.client.ClientTweaksModule;
+import com.qsoftware.forgemod.modules.debug.DebuggingModule;
 import com.qsoftware.forgemod.modules.environment.WorldGenerationModule;
 import com.qsoftware.forgemod.modules.environment.EntitiesModule;
 import com.qsoftware.forgemod.modules.tiles.BlocksModule;
@@ -39,6 +40,7 @@ public class Modules {
     public static final UpdatesModule UPDATES = new UpdatesModule();
     public static final DebugMenuModule DEBUG_MENU = new DebugMenuModule();
     public static final ActionMenuModule ACTION_MENU = new ActionMenuModule();
+    public static final DebuggingModule DEBUGGING = new DebuggingModule();
 
     public static void init(ModuleManager manager) {
         manager.register(MAIN);
@@ -54,6 +56,9 @@ public class Modules {
         manager.register(UPDATES);
         if (QForgeMod.isClientSide()) {
             manager.register(CLIENT);
+        }
+        if (QForgeMod.isModDev(false)) {
+            manager.register(DEBUGGING);
         }
         manager.register(DEBUG_MENU);
         manager.register(ACTION_MENU);

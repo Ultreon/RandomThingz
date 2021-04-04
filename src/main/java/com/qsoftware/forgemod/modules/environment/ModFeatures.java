@@ -27,7 +27,7 @@ import java.util.OptionalInt;
 @UtilityClass
 public final class ModFeatures {
     // Ore
-    public static final ConfiguredFeature<?, ?> ORE_RUBY = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.RUBY_BLOCK.asBlockState(), 8)).range(16).square());
+//    public static final ConfiguredFeature<?, ?> ORE_RUBY = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.RUBY_BLOCK.asBlockState(), 8)).range(16).square());
 
     // Trees
     public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> EUCALYPTUS_TREE = register("eucalyptus_tree", Feature.TREE.withConfiguration((new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.EUCALYPTUS_LOG.asBlockState()), new SimpleBlockStateProvider(ModBlocks.EUCALYPTUS_LEAVES.asBlockState()), new FancyFoliagePlacer(FeatureSpread.func_242252_a(2), FeatureSpread.func_242252_a(4), 4), new FancyTrunkPlacer(4, 7, 0), new TwoLayerFeature(0, 0, 0, OptionalInt.of(4)))).setIgnoreVines().func_236702_a_(Heightmap.Type.MOTION_BLOCKING).build()));

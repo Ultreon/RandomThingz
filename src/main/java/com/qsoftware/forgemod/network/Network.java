@@ -40,6 +40,11 @@ public final class Network {
                 .add();
         id++;
         id++;
+        channel.messageBuilder(OreProfilePacket.class, id++)
+                .decoder(OreProfilePacket::fromBytes)
+                .encoder(OreProfilePacket::toBytes)
+                .consumer(OreProfilePacket::handle)
+                .add();
     }
 
     private Network() {

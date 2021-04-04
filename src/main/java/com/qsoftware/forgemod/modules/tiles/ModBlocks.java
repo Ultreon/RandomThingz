@@ -33,8 +33,6 @@ import com.qsoftware.forgemod.modules.tiles.blocks.machines.quarry.QuarryBlock;
 import com.qsoftware.forgemod.modules.tiles.blocks.machines.refinery.RefineryBlock;
 import com.qsoftware.forgemod.modules.tiles.blocks.machines.solidifier.SolidifierBlock;
 import com.qsoftware.forgemod.modules.tiles.blocks.machines.wire.WireBlock;
-import com.qsoftware.forgemod.modules.tiles.blocks.overpowered.InfinityBlock;
-import com.qsoftware.forgemod.modules.tiles.blocks.overpowered.InfinityOreBlock;
 import com.qsoftware.forgemod.modules.tiles.blocks.trees.CherryTree;
 import com.qsoftware.forgemod.modules.tiles.blocks.trees.EucalyptusTree;
 import com.qsoftware.forgemod.modules.items.objects.type.FaceableBlock;
@@ -303,27 +301,27 @@ public final class ModBlocks {
     @Deprecated public static final ItemRegistryObject<BlockItem> TUNGSTEN_ORE_ITEM = registerItem("tungsten_ore", () -> new BlockItem(TUNGSTEN_ORE.get(), new Item.Properties()));
 
     public static final BlockRegistryObject<OreBlock> GILDED_DIRT = registerOre("gilded_dirt", () -> new OreBlock(Block.Properties.create(Material.EARTH, MaterialColor.DIRT).setRequiresTool().harvestTool(ToolType.SHOVEL).hardnessAndResistance(0.5f).sound(SoundType.GROUND)));
-    public static final BlockRegistryObject<OreBlock> RUBY_ORE = registerOre("ruby_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.75f, 2.875f).sound(SoundType.STONE).harvestLevel(2)));
-    public static final BlockRegistryObject<OreBlock> AMETHYST_ORE = registerOre("amethyst_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.25f, 2.375f).sound(SoundType.STONE).harvestLevel(2)));
-    public static final BlockRegistryObject<OreBlock> AQUAMARINE_ORE = registerOre("aquamarine_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.155f, 2.4635f).sound(SoundType.STONE).harvestLevel(2)));
-    public static final BlockRegistryObject<OreBlock> SAPHIRE_ORE = registerOre("saphire_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.365f, 2.845f).sound(SoundType.STONE).harvestLevel(2)));
-    public static final BlockRegistryObject<OreBlock> MALACHITE_ORE = registerOre("malachite_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.25f, 3.75f).sound(SoundType.STONE).harvestLevel(2)));
-    public static final BlockRegistryObject<OreBlock> PERIDOT_ORE = registerOre("peridot_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.95f, 3.2f).sound(SoundType.STONE).harvestLevel(2)));
-    public static final BlockRegistryObject<OreBlock> TANZANITE_ORE = registerOre("tanzanite_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> RUBY_ORE = registerOre("ruby_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.75f, 2.875f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> AMETHYST_ORE = registerOre("amethyst_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.25f, 2.375f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> AQUAMARINE_ORE = registerOre("aquamarine_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.155f, 2.4635f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> SAPHIRE_ORE = registerOre("saphire_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.365f, 2.845f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> MALACHITE_ORE = registerOre("malachite_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.25f, 3.75f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> PERIDOT_ORE = registerOre("peridot_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.95f, 3.2f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> TANZANITE_ORE = registerOre("tanzanite_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE).harvestLevel(2)));
 //    public static final BlockRegistryObject<OreBlock> ULTRINIUM_ORE = registerOre("ultrinium_ore", () -> new OreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(250.0f, 9600.0f).sound(SoundType.STONE).harvestLevel(5)));
 //    public static final BlockRegistryObject<InfinityOreBlock> INFINITY_ORE = registerOverpowered("infinity_ore", () -> new InfinityOreBlock(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(10240f, Float.POSITIVE_INFINITY).sound(SoundType.STONE).harvestLevel(6)));
 
     /////////////////////////////////////
     //     Solid Gem / Metal block     //
     /////////////////////////////////////
-    public static final BlockRegistryObject<Block> TUNGSTEN_BLOCK = register("tungsten_block", () -> new Block(Block.Properties.create(Material.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5.9875f, 6.5525f).sound(SoundType.STONE).harvestLevel(3)));
-    public static final BlockRegistryObject<Block> RUBY_BLOCK = register("ruby_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.25f, 5.5f).sound(SoundType.STONE).harvestLevel(2)));
-    public static final BlockRegistryObject<Block> AMETHYST_BLOCK = register("amethyst_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.875f, 4.0625f).sound(SoundType.STONE).harvestLevel(1)));
-    public static final BlockRegistryObject<Block> AQUAMARINE_BLOCK = register("aquamarine_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.995f, 4.1275f).sound(SoundType.STONE).harvestLevel(1)));
-    public static final BlockRegistryObject<Block> SAPHIRE_BLOCK = register("saphire_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.120f, 4.5735f).sound(SoundType.STONE).harvestLevel(1)));
-    public static final BlockRegistryObject<Block> MALACHITE_BLOCK = register("malachite_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.8914f, 5.06635f).sound(SoundType.STONE).harvestLevel(1)));
-    public static final BlockRegistryObject<Block> PERIDOT_BLOCK = register("peridot_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.8914f, 5.06635f).sound(SoundType.STONE).harvestLevel(1)));
-    public static final BlockRegistryObject<Block> TANZANITE_BLOCK = register("tanzanite_block", () -> new Block(Block.Properties.create(Material.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.26f, 5.5f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<Block> TUNGSTEN_BLOCK = register("tungsten_block", () -> new Block(Block.Properties.create(Material.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5.9875f, 6.5525f).sound(SoundType.STONE).harvestLevel(3)));
+//    public static final BlockRegistryObject<Block> RUBY_BLOCK = register("ruby_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.25f, 5.5f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<Block> AMETHYST_BLOCK = register("amethyst_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.875f, 4.0625f).sound(SoundType.STONE).harvestLevel(1)));
+//    public static final BlockRegistryObject<Block> AQUAMARINE_BLOCK = register("aquamarine_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.995f, 4.1275f).sound(SoundType.STONE).harvestLevel(1)));
+//    public static final BlockRegistryObject<Block> SAPHIRE_BLOCK = register("saphire_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.120f, 4.5735f).sound(SoundType.STONE).harvestLevel(1)));
+//    public static final BlockRegistryObject<Block> MALACHITE_BLOCK = register("malachite_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.8914f, 5.06635f).sound(SoundType.STONE).harvestLevel(1)));
+//    public static final BlockRegistryObject<Block> PERIDOT_BLOCK = register("peridot_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.8914f, 5.06635f).sound(SoundType.STONE).harvestLevel(1)));
+//    public static final BlockRegistryObject<Block> TANZANITE_BLOCK = register("tanzanite_block", () -> new Block(Block.Properties.create(Material.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.26f, 5.5f).sound(SoundType.STONE).harvestLevel(2)));
 //    public static final BlockRegistryObject<Block> ULTRINIUM_BLOCK = register("ultrinium_block", () -> new Block(Block.Properties.create(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(12.9f, 99999999.9f).sound(SoundType.STONE).harvestLevel(5)));
 //    public static final BlockRegistryObject<InfinityBlock> INFINITY_BLOCK = registerOverpowered("infinity_block", () -> new InfinityBlock(Block.Properties.create(Material.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(64.5f, Float.MAX_VALUE).sound(SoundType.METAL).harvestLevel(6)));
 
@@ -473,7 +471,7 @@ public final class ModBlocks {
     @Nullable
     public static ITextComponent checkForMissingLootTables(PlayerEntity player) {
         // Checks for missing block loot tables, but only in dev
-        if (!(player.world instanceof ServerWorld) || !QForgeMod.isDevState()) return null;
+        if (!(player.world instanceof ServerWorld) || !QForgeMod.isModDev()) return null;
 
         LootTableManager lootTableManager = ((ServerWorld) player.world).getServer().getLootTableManager();
         Collection<String> missing = new ArrayList<>();

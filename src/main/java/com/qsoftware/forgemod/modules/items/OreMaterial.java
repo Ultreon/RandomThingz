@@ -58,7 +58,17 @@ public enum OreMaterial implements IOreMaterial {
     ENDERIUM(builderAlloy("enderium", 3)),
     COBALT(builderBaseWithOre("cobalt", Ores.COBALT, 4)),
     ULTRINIUM(builderBaseWithOre("ultrinium", Ores.ULTRINIUM, 5)),
-    INFINITY(builderBaseWithOre("infinity", Ores.INFINITY, 6));
+    INFINITY(builderBaseWithOre("infinity", Ores.INFINITY, 6)),
+    RUBY(builder("ruby").ore(Ores.RUBY).storageBlock(2)),
+    AMETHYST(builder("amethyst").ore(Ores.AMETHYST).storageBlock(2)),
+    SAPHIRE(builder("saphire").ore(Ores.SAPHIRE).storageBlock(2)),
+    AMBER(builder("amber").ore(Ores.AMBER).storageBlock(2)),
+    PERIDOT(builder("peridot").ore(Ores.PERIDOT).storageBlock(2)),
+    BERYL(builder("beryl").ore(Ores.BERYL).storageBlock(2)),
+    TOPAZ(builder("topaz").ore(Ores.TOPAZ).storageBlock(2)),
+    TANZANITE(builder("tanzanite").ore(Ores.TANZANITE).storageBlock(2)),
+    MALACHITE(builder("malachite").ore(Ores.MALACHITE).storageBlock(2))
+    ;
 //    OBSIDIAN(builder("obsidian").dust().ingot().ingotTagOnly());
 
 //    // Gems

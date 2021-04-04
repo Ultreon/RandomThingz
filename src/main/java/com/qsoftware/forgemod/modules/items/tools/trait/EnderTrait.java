@@ -34,7 +34,7 @@ public class EnderTrait extends AbstractTrait {
         float lookZ = fz * f;
 
         // Ray length.
-        double rayLength = 48;
+        double rayLength = 12;
         Vector3d endPos = startPos.add((double) lookX * rayLength, (double) lookY * rayLength, (double) lookZ * rayLength);
 
         // Raytracing.
