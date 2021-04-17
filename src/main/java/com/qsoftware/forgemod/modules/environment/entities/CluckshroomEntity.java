@@ -53,7 +53,7 @@ public class CluckshroomEntity extends ChickenEntity {
     @Nullable
     @Override
     @ParametersAreNonnullByDefault
-    public CluckshroomEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
+    public CluckshroomEntity createChild(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
         return ModEntities.CLUCKSHROOM.get().create(this.world);
     }
 

@@ -49,7 +49,7 @@ public final class CustomTNTEntity extends TNTEntity {
         this.prevPosX = x;
         this.prevPosY = y;
         this.prevPosZ = z;
-        this.tntPlacedBy = igniter;
+        this.igniter = igniter;
     }
 
     /**

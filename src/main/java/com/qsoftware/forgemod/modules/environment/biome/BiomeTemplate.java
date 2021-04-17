@@ -65,7 +65,7 @@ public class BiomeTemplate {
         MobSpawnInfo.Builder mobSpawnBuilder = new MobSpawnInfo.Builder();
         this.configureDefaultMobSpawns(mobSpawnBuilder);
         this.configureMobSpawns(mobSpawnBuilder);
-        biomeBuilder.withMobSpawnSettings(mobSpawnBuilder.copy());
+        biomeBuilder.withMobSpawnSettings(mobSpawnBuilder.build());
 
         // Configure and build the biome
         this.configureBiome(biomeBuilder);

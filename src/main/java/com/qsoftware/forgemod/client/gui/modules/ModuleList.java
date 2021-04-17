@@ -74,8 +74,8 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
     */
    @Override
    protected void renderHeader(MatrixStack matrixStack, int x, int y, Tessellator tessellator) {
-      ITextComponent itextcomponent = (new StringTextComponent("")).append(this.title).mergeStyle(TextFormatting.UNDERLINE, TextFormatting.BOLD);
-      this.minecraft.fontRenderer.func_243248_b(matrixStack, itextcomponent, (float)(x + this.width / 2 - this.minecraft.fontRenderer.getStringPropertyWidth(itextcomponent) / 2), (float)Math.min(this.y0 + 3, y), 16777215);
+      ITextComponent itextcomponent = (new StringTextComponent("")).appendSibling(this.title).mergeStyle(TextFormatting.UNDERLINE, TextFormatting.BOLD);
+      this.minecraft.fontRenderer.drawText(matrixStack, itextcomponent, (float)(x + this.width / 2 - this.minecraft.fontRenderer.getStringPropertyWidth(itextcomponent) / 2), (float)Math.min(this.y0 + 3, y), 16777215);
    }
 
    /**
@@ -278,7 +278,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
             }
          }
 
-         this.mc.fontRenderer.func_238407_a_(matrixStack, reorderingLocalizedName, (float)(xOffset + 32 + 2), (float)(scroll + 1), 16777215);
+         this.mc.fontRenderer.drawTextWithShadow(matrixStack, reorderingLocalizedName, (float)(xOffset + 32 + 2), (float)(scroll + 1), 16777215);
 
          int btnX = 36;
          int btnY = 12;

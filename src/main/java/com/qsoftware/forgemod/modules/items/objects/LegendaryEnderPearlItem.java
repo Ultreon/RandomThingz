@@ -33,7 +33,7 @@ public class LegendaryEnderPearlItem extends EnderPearlItem {
         if (!worldIn.isRemote) {
             LegendaryEnderPearlEntity enderPearlEntity = new LegendaryEnderPearlEntity(worldIn, playerIn);
             enderPearlEntity.setItem(itemstack);
-            enderPearlEntity.func_234612_a_(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+            enderPearlEntity.setDirectionAndMovement(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
             worldIn.addEntity(enderPearlEntity);
         }
 

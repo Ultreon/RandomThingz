@@ -37,7 +37,7 @@ public class OreProps implements Cloneable {
         }
 
         if (count != null) {
-            feature = feature.func_242731_b(count);
+            feature = feature.count(count);
         }
 
         if (square) {

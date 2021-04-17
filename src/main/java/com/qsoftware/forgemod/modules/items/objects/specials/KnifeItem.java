@@ -92,7 +92,7 @@ public class KnifeItem extends TieredItem {
      */
     @Override
     public boolean canHarvestBlock(BlockState blockIn) {
-        return blockIn.isIn(Blocks.COBWEB);
+        return blockIn.matchesBlock(Blocks.COBWEB);
     }
 
     /**
@@ -105,7 +105,7 @@ public class KnifeItem extends TieredItem {
     }
 
     public float getDestroySpeed(@NotNull ItemStack stack, BlockState state) {
-        if (state.isIn(Blocks.COBWEB)) {
+        if (state.matchesBlock(Blocks.COBWEB)) {
             return 15.0F;
         } else {
             Material material = state.getMaterial();

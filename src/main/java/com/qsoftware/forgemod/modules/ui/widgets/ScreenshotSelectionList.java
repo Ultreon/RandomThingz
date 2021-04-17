@@ -133,7 +133,7 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
 
          this.minecraft.fontRenderer.drawString(matrixStack, name, (float)(xOffset + 32 + 3), (float)(scroll + 1), 0xffffff);
          this.minecraft.fontRenderer.drawString(matrixStack, size, (float)(xOffset + 32 + 3), (float)(scroll + 9 + 3), 0x808080);
-         this.minecraft.fontRenderer.func_243248_b(matrixStack, description, (float)(xOffset + 32 + 3), (float)(scroll + 9 + 9 + 3), 0x808080);
+         this.minecraft.fontRenderer.drawText(matrixStack, description, (float)(xOffset + 32 + 3), (float)(scroll + 9 + 9 + 3), 0x808080);
          RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
          this.minecraft.getTextureManager().bindTexture(this.texture != null ? this.textureLocation : ScreenshotSelectionList.UNKNOWN_IMAGE);
          RenderSystem.enableBlend();

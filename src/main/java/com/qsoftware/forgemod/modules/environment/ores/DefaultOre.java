@@ -68,13 +68,13 @@ public class DefaultOre implements IBlockProvider, IOre {
                     .withConfiguration(new ReplaceBlockConfig(Blocks.STONE.getDefaultState(), this.asBlockState()))
                     .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
                     .square()
-                    .func_242731_b(config.getVeinCount());
+                    .count(config.getVeinCount());
         }
         return Feature.ORE
                 .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, this.asBlockState(), config.getVeinSize()))
                 .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
                 .square()
-                .func_242731_b(config.getVeinCount());
+                .count(config.getVeinCount());
     }
 
     @Deprecated

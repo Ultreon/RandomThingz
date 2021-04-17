@@ -29,7 +29,7 @@ public class WarthogEntity extends HogEntity {
     @Nullable
     @Override
     @ParametersAreNonnullByDefault
-    public WarthogEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
+    public WarthogEntity createChild(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
         return ModEntities.WARTHOG.get().create(this.world);
     }
 }

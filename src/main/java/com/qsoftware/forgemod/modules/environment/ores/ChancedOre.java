@@ -36,12 +36,12 @@ public class ChancedOre extends DefaultOre {
                     .setChance(1f / (float)config.getChance())
                     .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
                     .square()
-                    .func_242731_b(config.getVeinCount());
+                    .count(config.getVeinCount());
         }
         return new ConfiguredFeatureQFM<>(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, this.asBlockState(), config.getVeinSize()))
                 .setChance(1f / (float)config.getChance())
                 .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
                 .square()
-                .func_242731_b(config.getVeinCount());
+                .count(config.getVeinCount());
     }
 }

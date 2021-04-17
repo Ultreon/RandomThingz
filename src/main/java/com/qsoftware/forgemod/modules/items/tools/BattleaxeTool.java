@@ -3,7 +3,7 @@ package com.qsoftware.forgemod.modules.items.tools;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.qsoftware.forgemod.QForgeMod;
-import com.qsoftware.forgemod.modules.items.objects.tools.BattleaxeItem;
+import com.qsoftware.forgemod.modules.items.objects.tools.types.BattleaxeItem;
 import com.qsoftware.forgemod.modules.items.tools.trait.AbstractTrait;
 import com.qsoftware.forgemod.util.ItemUtils;
 import mcp.MethodsReturnNonnullByDefault;

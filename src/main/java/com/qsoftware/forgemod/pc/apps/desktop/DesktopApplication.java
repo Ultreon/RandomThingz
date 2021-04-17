@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.pc.apps.desktop;
 
-import com.qsoftware.forgemod.pc.common.computerapi.App;
-import com.qsoftware.forgemod.pc.common.computerapi.Computer;
+import com.qsoftware.forgemod.pc.common.computerapi.*;
 import mcp.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -9,8 +8,10 @@ import java.awt.*;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class DesktopApp extends App {
-    public DesktopApp(Computer computer) {
+public class DesktopApplication extends WindowApplication {
+    private AbstractFileIO wallpaper;
+
+    public DesktopApplication(Computer computer) {
         super(computer);
     }
 
@@ -26,6 +27,11 @@ public class DesktopApp extends App {
 
     @Override
     public void init() {
-//        this.wallpaper = getComputer().getFileSystem().getFile();
+        this.wallpaper = getComputer().getFileSystem().getFile(new File("/system/user/data/wallpaper.png"));
+    }
+
+    @Override
+    public void render(PCGraphics gfx) {
+        super.render(gfx);
     }
 }

@@ -12,7 +12,7 @@ public class RadiationEffect extends Effect {
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        entityLivingBaseIn.attackEntityFrom(ModDamageSources.RADIATION, 1.0F);
+        entityLivingBaseIn.attackEntityFrom(ModDamageSources.RADIATION, 2.0F);
     }
 
     @Override

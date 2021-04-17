@@ -59,7 +59,7 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
 
     @SuppressWarnings("unused")
     public static boolean func_223318_c(EntityType<MoobloomEntityOld> p_223318_0_, IWorld p_223318_1_, SpawnReason p_223318_2_, BlockPos p_223318_3_, Random p_223318_4_) {
-        return p_223318_1_.getBlockState(p_223318_3_.down()).isIn(Blocks.MYCELIUM) && p_223318_1_.getLightSubtracted(p_223318_3_, 0) > 8;
+        return p_223318_1_.getBlockState(p_223318_3_.down()).matchesBlock(Blocks.MYCELIUM) && p_223318_1_.getLightSubtracted(p_223318_3_, 0) > 8;
     }
 
     protected void registerGoals() {
@@ -75,14 +75,14 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
     }
 
     public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
-        return worldIn.getBlockState(pos.down()).isIn(Blocks.MYCELIUM) ? 10.0F : worldIn.getBrightness(pos) - 0.5F;
+        return worldIn.getBlockState(pos.down()).matchesBlock(Blocks.MYCELIUM) ? 10.0F : worldIn.getBrightness(pos) - 0.5F;
     }
 
     protected void registerData() {
         super.registerData();
     }
 
-    public @NotNull ActionResultType func_230254_b_(PlayerEntity p_230254_1_, @NotNull Hand p_230254_2_) {
+    public @NotNull ActionResultType getEntityInteractionResult(PlayerEntity p_230254_1_, @NotNull Hand p_230254_2_) {
         ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
         if (itemstack.getItem() == Items.BOWL && !this.isChild()) {
             boolean flag = false;
@@ -135,7 +135,7 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
 
             return ActionResultType.func_233537_a_(this.world.isRemote);
         } else {
-            return super.func_230254_b_(p_230254_1_, p_230254_2_);
+            return super.getEntityInteractionResult(p_230254_1_, p_230254_2_);
         }
     }
 
@@ -208,7 +208,7 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
         return Optional.empty();
     }
 
-    public MoobloomEntityOld func_241840_a(@NotNull ServerWorld p_241840_1_, @NotNull AgeableEntity p_241840_2_) {
+    public MoobloomEntityOld createChild(@NotNull ServerWorld p_241840_1_, @NotNull AgeableEntity p_241840_2_) {
 //        return EntityTypeInit.MOOBLOOM.get().create(p_241840_1_);
         return null;
     }

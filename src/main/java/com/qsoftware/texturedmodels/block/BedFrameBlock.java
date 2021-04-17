@@ -7,11 +7,11 @@ import com.qsoftware.texturedmodels.tileentity.BedFrameTile;
 import com.qsoftware.texturedmodels.util.BCBlockStateProperties;
 import com.qsoftware.texturedmodels.util.BlockAppearanceHelper;
 import com.qsoftware.texturedmodels.util.BlockSavingHelper;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
@@ -31,11 +31,16 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.*;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Main class for frame beds - all important block info can be found here
@@ -44,6 +49,8 @@ import java.util.List;
  * @author PianoManu
  * @version 1.3 10/06/20
  */
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class BedFrameBlock extends BedBlock {
     public static final BooleanProperty CONTAINS_BLOCK = BCBlockStateProperties.CONTAINS_BLOCK;
     public static final IntegerProperty LIGHT_LEVEL = BCBlockStateProperties.LIGHT_LEVEL;
@@ -53,7 +60,7 @@ public class BedFrameBlock extends BedBlock {
 
     public BedFrameBlock(DyeColor colorIn, Properties properties) {
         super(colorIn, properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(CONTAINS_BLOCK, false).with(LIGHT_LEVEL, 0).with(PART, BedPart.FOOT).with(OCCUPIED, Boolean.valueOf(false)).with(HORIZONTAL_FACING, Direction.NORTH));//.with(TEXTURE,0));
+        this.setDefaultState(this.stateContainer.getBaseState().with(CONTAINS_BLOCK, false).with(LIGHT_LEVEL, 0).with(PART, BedPart.FOOT).with(OCCUPIED, Boolean.FALSE).with(HORIZONTAL_FACING, Direction.NORTH));//.with(TEXTURE,0));
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
@@ -75,12 +82,12 @@ public class BedFrameBlock extends BedBlock {
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
         ItemStack item = player.getHeldItem(hand);
         if (!world.isRemote) {
-            if ((state.get(CONTAINS_BLOCK) && !item.getItem().isIn(Tags.Items.DYES) && !item.getItem().getRegistryName().getNamespace().equals(QTextureModels.MOD_ID)) || item.isEmpty()) {
+            if ((state.get(CONTAINS_BLOCK) && !item.getItem().isIn(Tags.Items.DYES) && !Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) || item.isEmpty()) {
                 //Taken from BedBlock, should work similar to vanilla beds
                 if (state.get(PART) != BedPart.HEAD) {
                     pos = pos.offset(state.get(HORIZONTAL_FACING));
                     state = world.getBlockState(pos);
-                    if (!state.isIn(this)) {
+                    if (!state.matchesBlock(this)) {
                         return ActionResultType.CONSUME;
                     }
                 }
@@ -88,11 +95,11 @@ public class BedFrameBlock extends BedBlock {
                 if (!doesBedWork(world)) {
                     world.removeBlock(pos, false);
                     BlockPos blockpos = pos.offset(state.get(HORIZONTAL_FACING).getOpposite());
-                    if (world.getBlockState(blockpos).isIn(this)) {
+                    if (world.getBlockState(blockpos).matchesBlock(this)) {
                         world.removeBlock(blockpos, false);
                     }
 
-                    world.createExplosion((Entity) null, DamageSource.func_233546_a_(), (ExplosionContext) null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 5.0F, true, Explosion.Mode.DESTROY);
+                    world.createExplosion(null, DamageSource.causeBedExplosionDamage(), null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 5.0F, true, Explosion.Mode.DESTROY);
                     return ActionResultType.SUCCESS;
                 } else if (state.get(OCCUPIED)) {
                     if (!this.func_226861_a_(world, pos)) {
@@ -103,7 +110,7 @@ public class BedFrameBlock extends BedBlock {
                 } else {
                     player.trySleep(pos).ifLeft((p_220173_1_) -> {
                         if (p_220173_1_ != null) {
-                            player.sendStatusMessage(p_220173_1_.getMessage(), true);
+                            player.sendStatusMessage(Objects.requireNonNull(p_220173_1_.getMessage()), true);
                         }
 
                     });
@@ -153,6 +160,7 @@ public class BedFrameBlock extends BedBlock {
         }
     }
 
+    @SuppressWarnings("unused")
     protected void dropContainedBlock(World worldIn, BlockPos pos) {
         if (!worldIn.isRemote) {
             TileEntity tileentity = worldIn.getTileEntity(pos);

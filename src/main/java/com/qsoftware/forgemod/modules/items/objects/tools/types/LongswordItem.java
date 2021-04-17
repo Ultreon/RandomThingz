@@ -1,7 +1,8 @@
-package com.qsoftware.forgemod.modules.items.objects.tools;
+package com.qsoftware.forgemod.modules.items.objects.tools.types;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.qsoftware.forgemod.common.IHasToolType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -11,23 +12,25 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
 import java.util.UUID;
 
-public class BroadswordItem extends SwordItem {
+public class LongswordItem extends SwordItem implements IHasToolType {
     private final float attackDamage;
     /** Modifiers applied when the item is in the mainhand of a user. */
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
 
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
-    public BroadswordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn.defaultMaxDamage((int) (tier.getMaxUses() * 1.3)));
+    public LongswordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builderIn) {
+        super(tier, attackDamageIn, attackSpeedIn, builderIn.defaultMaxDamage((int) (tier.getMaxUses() * 1.6)));
         this.attackDamage = (float)attackDamageIn + (tier.getAttackDamage());
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
@@ -41,7 +44,7 @@ public class BroadswordItem extends SwordItem {
     }
 
     public float getDestroySpeed(ItemStack stack, BlockState state) {
-        if (state.isIn(Blocks.COBWEB)) {
+        if (state.matchesBlock(Blocks.COBWEB)) {
             return 20.0F;
         } else {
             Material material = state.getMaterial();
@@ -78,5 +81,10 @@ public class BroadswordItem extends SwordItem {
      */
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
         return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(equipmentSlot);
+    }
+
+    @Override
+    public ToolType getToolType() {
+        return ToolType.get("sword");
     }
 }

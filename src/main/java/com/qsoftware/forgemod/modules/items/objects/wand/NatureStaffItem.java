@@ -69,7 +69,7 @@ public class NatureStaffItem extends Item {
 
     @SuppressWarnings("unused")
     public static boolean growSeagrass(ItemStack stack, World worldIn, BlockPos pos, @Nullable Direction side) {
-        if (worldIn.getBlockState(pos).isIn(Blocks.WATER) && worldIn.getFluidState(pos).getLevel() == 8) {
+        if (worldIn.getBlockState(pos).matchesBlock(Blocks.WATER) && worldIn.getFluidState(pos).getLevel() == 8) {
             if (worldIn instanceof ServerWorld) {
                 label80:
                 for (int i = 0; i < 128; ++i) {
@@ -100,9 +100,9 @@ public class NatureStaffItem extends Item {
 
                     if (blockState.isValidPosition(worldIn, blockpos)) {
                         BlockState blockState1 = worldIn.getBlockState(blockpos);
-                        if (blockState1.isIn(Blocks.WATER) && worldIn.getFluidState(blockpos).getLevel() == 8) {
+                        if (blockState1.matchesBlock(Blocks.WATER) && worldIn.getFluidState(blockpos).getLevel() == 8) {
                             worldIn.setBlockState(blockpos, blockState, 3);
-                        } else if (blockState1.isIn(Blocks.SEAGRASS) && random.nextInt(10) == 0) {
+                        } else if (blockState1.matchesBlock(Blocks.SEAGRASS) && random.nextInt(10) == 0) {
                             ((IGrowable) Blocks.SEAGRASS).grow((ServerWorld) worldIn, random, blockpos, blockState1);
                         }
                     }
@@ -125,7 +125,7 @@ public class NatureStaffItem extends Item {
         if (!blockstate.isAir(worldIn, posIn)) {
             double d0 = 0.5D;
             double d1;
-            if (blockstate.isIn(Blocks.WATER)) {
+            if (blockstate.matchesBlock(Blocks.WATER)) {
                 data *= 3;
                 d1 = 1.0D;
                 d0 = 3.0D;

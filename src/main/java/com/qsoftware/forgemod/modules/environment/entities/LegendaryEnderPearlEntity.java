@@ -50,7 +50,7 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
      */
     protected void onEntityHit(@NotNull EntityRayTraceResult p_213868_1_) {
         super.onEntityHit(p_213868_1_);
-        p_213868_1_.getEntity().attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), 0.0F);
+        p_213868_1_.getEntity().attackEntityFrom(DamageSource.causeThrownDamage(this, this.getShooter()), 0.0F);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
      */
     protected void onImpact(@NotNull RayTraceResult result) {
         super.onImpact(result);
-        Entity entity = this.func_234616_v_();
+        Entity entity = this.getShooter();
 
         for (int i = 0; i < 32; ++i) {
             this.world.addParticle(ParticleTypes.PORTAL, this.getPosX(), this.getPosY() + this.rand.nextDouble() * 2.0D, this.getPosZ(), this.rand.nextGaussian(), 0.0D, this.rand.nextGaussian());
@@ -96,7 +96,7 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
      * Called to update the entity's position/logic.
      */
     public void tick() {
-        Entity entity = this.func_234616_v_();
+        Entity entity = this.getShooter();
         if (entity instanceof PlayerEntity && !entity.isAlive()) {
             this.remove();
         } else {
@@ -107,7 +107,7 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
 
     @Nullable
     public Entity changeDimension(@NotNull ServerWorld server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
-        Entity entity = this.func_234616_v_();
+        Entity entity = this.getShooter();
         if (entity != null && entity.world.getDimensionKey() != server.getDimensionKey()) {
             this.setShooter(null);
         }

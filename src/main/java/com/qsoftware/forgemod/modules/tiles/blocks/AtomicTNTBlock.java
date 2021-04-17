@@ -10,6 +10,6 @@ import net.minecraft.world.Explosion;
  */
 public class AtomicTNTBlock extends CustomTNTBlock<AtomicTNTBlock> {
     public AtomicTNTBlock(Properties properties) {
-        super(properties, TNTProperties.builder().radius(48.0f).causesFire(true).mode(Explosion.Mode.DESTROY).build());
+        super(properties, TNTProperties.builder().radius(48.0f).fuse(80).causesFire(true).mode(Explosion.Mode.DESTROY).build());
     }
 }

@@ -32,7 +32,7 @@ public class RedstoneModeButton extends Button {
     }
 
     @Override
-    public void renderButton(MatrixStack matrixStack, int p_renderButton_1_, int p_renderButton_2_, float p_renderButton_3_) {
+    public void renderWidget(MatrixStack matrixStack, int p_renderWidget_1_, int p_renderWidget_2_, float p_renderWidget_3_) {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.getTextureManager().bindTexture(container.getRedstoneMode().getTexture());
         GlStateManager.disableDepthTest();

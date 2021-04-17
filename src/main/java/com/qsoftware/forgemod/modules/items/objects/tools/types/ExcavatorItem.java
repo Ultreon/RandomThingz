@@ -1,11 +1,11 @@
-package com.qsoftware.forgemod.modules.items.objects.tools;
+package com.qsoftware.forgemod.modules.items.objects.tools.types;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Sets;
+import com.google.common.collect.ImmutableSet;
 import com.qsoftware.forgemod.QForgeMod;
-import net.minecraft.block.Block;
+import com.qsoftware.forgemod.common.IHasToolType;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -24,24 +24,29 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.Map;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+@SuppressWarnings("SameParameterValue")
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 @Mod.EventBusSubscriber(modid = QForgeMod.modId)
-public class LumberAxeItem extends AxeItem {
-    private static final Set<Material> EFFECTIVE_ON_MATERIALS = Sets.newHashSet(Material.WOOD, Material.NETHER_WOOD, Material.PLANTS, Material.TALL_PLANTS, Material.BAMBOO, Material.GOURD);
-    public static final Map<Block, Block> BLOCK_STRIPPING_MAP = (new ImmutableMap.Builder<Block, Block>()).put(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD).put(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG).put(Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD).put(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG).put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD).put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG).put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD).put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG).put(Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD).put(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG).put(Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD).put(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG).put(Blocks.WARPED_STEM, Blocks.STRIPPED_WARPED_STEM).put(Blocks.WARPED_HYPHAE, Blocks.STRIPPED_WARPED_HYPHAE).put(Blocks.CRIMSON_STEM, Blocks.STRIPPED_CRIMSON_STEM).put(Blocks.CRIMSON_HYPHAE, Blocks.STRIPPED_CRIMSON_HYPHAE).build();
+public class ExcavatorItem extends ShovelItem implements IHasToolType {
+    private static final Set<Material> EFFECTIVE_ON_MATERIAL = ImmutableSet.of(Material.SNOW, Material.SNOW_BLOCK, Material.SAND, Material.EARTH, Material.CLAY);
 
-    public LumberAxeItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
+    public ExcavatorItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder.defaultMaxDamage((int) (tier.getMaxUses() * 1.7)));
     }
 
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
-        if (EFFECTIVE_ON_MATERIALS.contains(material)) return this.efficiency * 1.6f;
+        if (EFFECTIVE_ON_MATERIAL.contains(material)) return this.efficiency * 1.6f;
         if (getToolTypes(stack).stream().anyMatch(state::isToolEffective)) return efficiency;
         return this.effectiveBlocks.contains(state.getBlock()) ? this.efficiency : 1.0F;
     }
@@ -55,7 +60,7 @@ public class LumberAxeItem extends AxeItem {
             ClientWorld world = mc.world;
             ItemStack stack = mc.player.getHeldItem(Hand.MAIN_HAND);
             Item heldItem = stack.getItem();
-            if (heldItem instanceof LumberAxeItem) {
+            if (heldItem instanceof ExcavatorItem) {
                 CompoundNBT modTag = stack.getOrCreateChildTag(QForgeMod.modId);
                 if (modTag.contains("knownFacing", 3)) {
                     Direction knownFacing = Direction.values()[modTag.getInt("knownFacing")];
@@ -139,104 +144,189 @@ public class LumberAxeItem extends AxeItem {
 
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+        if (stack.getItem() != this) {
+            return true;
+        }
+
         Vector3d lookVec = entityLiving.getLookVec();
         Direction face = Direction.getFacingFromVector(lookVec.x, lookVec.y, lookVec.z);
 
-        if (face.getAxis() == Direction.Axis.Z) {
-            destroy(entityLiving, worldIn, pos.east());
-            destroy(entityLiving, worldIn, pos.west());
-            destroy(entityLiving, worldIn, pos.up());
-            destroy(entityLiving, worldIn, pos.down());
-            destroy(entityLiving, worldIn, pos.east().up());
-            destroy(entityLiving, worldIn, pos.west().up());
-            destroy(entityLiving, worldIn, pos.east().down());
-            destroy(entityLiving, worldIn, pos.west().down());
-        }
-        if (face.getAxis() == Direction.Axis.X) {
-            destroy(entityLiving, worldIn, pos.north());
-            destroy(entityLiving, worldIn, pos.south());
-            destroy(entityLiving, worldIn, pos.up());
-            destroy(entityLiving, worldIn, pos.down());
-            destroy(entityLiving, worldIn, pos.north().up());
-            destroy(entityLiving, worldIn, pos.south().up());
-            destroy(entityLiving, worldIn, pos.north().down());
-            destroy(entityLiving, worldIn, pos.south().down());
-        }
-        if (face.getAxis() == Direction.Axis.Y) {
-            destroy(entityLiving, worldIn, pos.north());
-            destroy(entityLiving, worldIn, pos.south());
-            destroy(entityLiving, worldIn, pos.east());
-            destroy(entityLiving, worldIn, pos.west());
-            destroy(entityLiving, worldIn, pos.north().east());
-            destroy(entityLiving, worldIn, pos.south().east());
-            destroy(entityLiving, worldIn, pos.north().west());
-            destroy(entityLiving, worldIn, pos.south().west());
-        }
+        destroyAround(entityLiving, pos, face);
+
         return true;
+    }
+
+    /**
+     * Block start break handler. Here's where the magic of 3x3 begins.
+     *
+     * @param itemstack the item stack used for breaking a block.
+     * @param pos the block's position.
+     * @param player the player that's trying to break a block.
+     * @return false, so the block can be broken.
+     */
+    @Override
+    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player) {
+        if (player.isCreative()) {
+            Vector3d lookVec = player.getLookVec();
+            Direction face = Direction.getFacingFromVector(lookVec.x, lookVec.y, lookVec.z);
+
+            destroyAround(player, pos, face, false);
+        }
+        return false;
+    }
+
+    protected void destroyAround(LivingEntity entity, BlockPos pos, Direction direction) {
+        destroyAround(entity, entity.getEntityWorld(), pos, direction);
+    }
+
+    protected void destroyAround(LivingEntity entity, BlockPos pos, Direction direction, boolean dropBlock) {
+        destroyAround(entity, entity.getEntityWorld(), pos, direction, dropBlock);
+    }
+
+    protected void destroyAround(LivingEntity entity, World world, BlockPos pos, Direction direction) {
+        if (entity instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) entity;
+            float blockHardness = world.getBlockState(pos).getPlayerRelativeBlockHardness(player, world, pos);
+            for (BlockPos position : getPositionsAround(pos, direction)) {
+                if (world.getBlockState(position).getPlayerRelativeBlockHardness(player, world, pos) <= blockHardness) {
+                    destroy(entity, world, position);
+                }
+            }
+        } else {
+            float blockHardness = world.getBlockState(pos).getBlockHardness(world, pos);
+            for (BlockPos position : getPositionsAround(pos, direction)) {
+                if (world.getBlockState(position).getBlockHardness(world, pos) <= blockHardness) {
+                    destroy(entity, world, position);
+                }
+            }
+        }
+    }
+
+    protected void destroyAround(LivingEntity entity, World world, BlockPos pos, Direction direction, boolean dropBlock) {
+        if (entity instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) entity;
+            float blockHardness = world.getBlockState(pos).getPlayerRelativeBlockHardness(player, world, pos);
+            for (BlockPos position : getPositionsAround(pos, direction)) {
+                if (world.getBlockState(position).getPlayerRelativeBlockHardness(player, world, pos) <= blockHardness) {
+                    destroy(entity, world, position, dropBlock);
+                }
+            }
+        } else {
+            float blockHardness = world.getBlockState(pos).getBlockHardness(world, pos);
+            for (BlockPos position : getPositionsAround(pos, direction)) {
+                if (world.getBlockState(position).getBlockHardness(world, pos) <= blockHardness) {
+                    destroy(entity, world, position, dropBlock);
+                }
+            }
+        }
+    }
+
+    protected BlockPos[] getPositionsAround(BlockPos pos, Direction direction) {
+        return this.getPositionsAround(pos, direction.getAxis());
+    }
+
+    protected BlockPos[] getPositionsAround(BlockPos pos, Direction.Axis axis) {
+        List<BlockPos> positions = new ArrayList<>();
+
+        switch (axis) {
+            case Z:
+                positions.add(pos.east());
+                positions.add(pos.west());
+                positions.add(pos.up());
+                positions.add(pos.down());
+                positions.add(pos.east().up());
+                positions.add(pos.west().up());
+                positions.add(pos.east().down());
+                positions.add(pos.west().down());
+                break;
+            case X:
+                positions.add(pos.north());
+                positions.add(pos.south());
+                positions.add(pos.up());
+                positions.add(pos.down());
+                positions.add(pos.north().up());
+                positions.add(pos.south().up());
+                positions.add(pos.north().down());
+                positions.add(pos.south().down());
+                break;
+            case Y:
+                positions.add(pos.north());
+                positions.add(pos.south());
+                positions.add(pos.east());
+                positions.add(pos.west());
+                positions.add(pos.north().east());
+                positions.add(pos.south().east());
+                positions.add(pos.north().west());
+                positions.add(pos.south().west());
+                break;
+        }
+
+        return positions.toArray(new BlockPos[]{});
     }
 
     private void destroy(LivingEntity entityLiving, World worldIn, BlockPos pos) {
         worldIn.destroyBlock(pos, true, entityLiving);
     }
 
+    private void destroy(LivingEntity entityLiving, World worldIn, BlockPos pos, boolean dropBlock) {
+        worldIn.destroyBlock(pos, dropBlock, entityLiving);
+    }
+
     /**
-     * Called when this item is used when targetting a Block
+     * Called when this item is used when targeting a Block
      */
     public ActionResultType onItemUse(ItemUseContext context) {
         World world = context.getWorld();
-        BlockPos blockpos = context.getPos();
+        BlockPos pos = context.getPos();
         Direction face = context.getFace();
-        ActionResultType result = onItemUse0(world, blockpos, context);
+        ActionResultType result = useItem(world, pos, context);
 
-        if (face.getAxis() == Direction.Axis.Z) {
-            onItemUse0(world, blockpos.east(), context);
-            onItemUse0(world, blockpos.west(), context);
-            onItemUse0(world, blockpos.up(), context);
-            onItemUse0(world, blockpos.down(), context);
-            onItemUse0(world, blockpos.east().up(), context);
-            onItemUse0(world, blockpos.west().up(), context);
-            onItemUse0(world, blockpos.east().down(), context);
-            onItemUse0(world, blockpos.west().down(), context);
-        }
-        if (face.getAxis() == Direction.Axis.X) {
-            onItemUse0(world, blockpos.north(), context);
-            onItemUse0(world, blockpos.south(), context);
-            onItemUse0(world, blockpos.up(), context);
-            onItemUse0(world, blockpos.down(), context);
-            onItemUse0(world, blockpos.north().up(), context);
-            onItemUse0(world, blockpos.south().up(), context);
-            onItemUse0(world, blockpos.north().down(), context);
-            onItemUse0(world, blockpos.south().down(), context);
-        }
-        if (face.getAxis() == Direction.Axis.Y) {
-            onItemUse0(world, blockpos.north(), context);
-            onItemUse0(world, blockpos.south(), context);
-            onItemUse0(world, blockpos.east(), context);
-            onItemUse0(world, blockpos.west(), context);
-            onItemUse0(world, blockpos.north().east(), context);
-            onItemUse0(world, blockpos.south().east(), context);
-            onItemUse0(world, blockpos.north().west(), context);
-            onItemUse0(world, blockpos.south().west(), context);
+        for (BlockPos position : getPositionsAround(pos, face)) {
+            useItem(world, position, context);
         }
         return result;
     }
 
-    private ActionResultType onItemUse0(World world, BlockPos blockpos, ItemUseContext context) {
+    private ActionResultType useItem(World world, BlockPos blockpos, ItemUseContext context) {
         BlockState blockstate = world.getBlockState(blockpos);
-        BlockState block = blockstate.getToolModifiedState(world, blockpos, context.getPlayer(), context.getItem(), net.minecraftforge.common.ToolType.AXE);
-        if (block != null) {
+        if (context.getFace() == Direction.DOWN) {
+            return ActionResultType.PASS;
+        } else {
             PlayerEntity playerentity = context.getPlayer();
-            world.playSound(playerentity, blockpos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            if (!world.isRemote) {
-                world.setBlockState(blockpos, block, 11);
-                if (playerentity != null) {
-                    context.getItem().damageItem(1, playerentity, (p_220040_1_) -> p_220040_1_.sendBreakAnimation(context.getHand()));
+            BlockState toolModifiedState = blockstate.getToolModifiedState(world, blockpos, playerentity, context.getItem(), ModToolTypes.EXCAVATOR);
+            if (toolModifiedState == null) {
+                toolModifiedState = blockstate.getToolModifiedState(world, blockpos, playerentity, context.getItem(), ToolType.SHOVEL);
+            }
+            BlockState finalBlockState = null;
+            if (toolModifiedState != null && world.isAirBlock(blockpos.up())) {
+                world.playSound(playerentity, blockpos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                finalBlockState = toolModifiedState;
+            } else if (blockstate.getBlock() instanceof CampfireBlock && blockstate.get(CampfireBlock.LIT)) {
+                if (!world.isRemote()) {
+                    world.playEvent(null, 1009, blockpos, 0);
                 }
+
+                CampfireBlock.extinguish(world, blockpos, blockstate);
+                finalBlockState = blockstate.with(CampfireBlock.LIT, Boolean.FALSE);
             }
 
-            return ActionResultType.func_233537_a_(world.isRemote);
-        } else {
-            return ActionResultType.PASS;
+            if (finalBlockState != null) {
+                if (!world.isRemote) {
+                    world.setBlockState(blockpos, finalBlockState, 11);
+                    if (playerentity != null) {
+                        context.getItem().damageItem(1, playerentity, (player) -> player.sendBreakAnimation(context.getHand()));
+                    }
+                }
+
+                return ActionResultType.func_233537_a_(world.isRemote);
+            } else {
+                return ActionResultType.PASS;
+            }
         }
+    }
+
+    @Override
+    public ToolType getToolType() {
+        return ToolType.SHOVEL;
     }
 }

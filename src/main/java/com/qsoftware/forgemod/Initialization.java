@@ -91,7 +91,7 @@ public class Initialization {
             GlobalEntityTypeAttributes.put(ModEntities.DUCK.get(), DuckEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.CLUCKSHROOM.get(), CluckshroomEntity.func_234187_eI_().create());
             GlobalEntityTypeAttributes.put(ModEntities.BISON.get(), BisonEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.MOOBLOOM.get(), MoobloomEntity.func_234188_eI_().create());
+            GlobalEntityTypeAttributes.put(ModEntities.MOOBLOOM.get(), MoobloomEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.WARTHOG.get(), WarthogEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.ICE_ENDERMAN.get(), IceEndermanEntity.registerAttributes().create());
             GlobalEntityTypeAttributes.put(ModEntities.FIRE_CREEPER.get(), FireCreeperEntity.registerAttributes().create());

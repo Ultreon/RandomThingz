@@ -37,7 +37,7 @@ public class IconButton extends Button
     }
 
     @Override
-    public void renderButton(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
+    public void renderWidget(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
     {
         Minecraft.getInstance().getTextureManager().bindTexture(WIDGETS_LOCATION);
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);

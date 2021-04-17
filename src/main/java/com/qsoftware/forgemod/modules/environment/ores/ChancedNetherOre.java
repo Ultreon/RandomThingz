@@ -40,13 +40,13 @@ public class ChancedNetherOre extends DefaultOre {
                     .setChance(1f / (float)config.getChance())
                     .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
                     .square()
-                    .func_242731_b(config.getVeinCount());
+                    .count(config.getVeinCount());
         }
         return Feature.ORE
                 .withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, this.asBlockState(), config.getVeinSize()))
                 .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
                 .withPlacement(Placement.CHANCE.configure(new ChanceConfig(config.getChance())))
                 .square()
-                .func_242731_b(config.getVeinCount());
+                .count(config.getVeinCount());
     }
 }

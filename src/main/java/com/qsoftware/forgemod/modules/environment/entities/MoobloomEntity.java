@@ -48,12 +48,11 @@ import javax.annotation.Nullable;
  * 
  * @author Qboi123
  */
+@SuppressWarnings("deprecation")
 public class MoobloomEntity extends CowEntity implements IShearable, net.minecraftforge.common.IForgeShearable {
    private static final DataParameter<String> MOOBLOOM_TYPE = EntityDataManager.createKey(MoobloomEntity.class, DataSerializers.STRING);
    private Effect hasStewEffect;
    private int effectDuration;
-   /** Stores the UUID of the most recent lightning bolt to strike */
-   private UUID lightningUUID;
 
    public MoobloomEntity(EntityType<? extends MoobloomEntity> type, World worldIn) {
       super(type, worldIn);
@@ -67,11 +66,11 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
     * @return ...
     */
    public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
-      return worldIn.getBlockState(pos.down()).isIn(Blocks.MYCELIUM) ? 10.0F : worldIn.getBrightness(pos) - 0.5F;
+      return worldIn.getBlockState(pos.down()).matchesBlock(Blocks.MYCELIUM) ? 10.0F : worldIn.getBrightness(pos) - 0.5F;
    }
 
 //   public static boolean func_223318_c(EntityType<MoobloomEntity> p_223318_0_, IWorld p_223318_1_, SpawnReason p_223318_2_, BlockPos p_223318_3_, Random p_223318_4_) {
-//      return p_223318_1_.getBlockState(p_223318_3_.down()).isIn(Blocks.MYCELIUM) && p_223318_1_.getLightSubtracted(p_223318_3_, 0) > 8;
+//      return p_223318_1_.getBlockState(p_223318_3_.down()).matchesBlock(Blocks.MYCELIUM) && p_223318_1_.getLightSubtracted(p_223318_3_, 0) > 8;
 //   }
 
 //   public void func_241841_a(ServerWorld p_241841_1_, LightningBoltEntity p_241841_2_) {
@@ -177,7 +176,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
          } else {
             this.setMoobloomType(Type.BUTTERCUP);
          }
-      };
+      }
       return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
    }
 
@@ -189,7 +188,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
     * @return the action result (type).
     */
    @Override
-   public ActionResultType func_230254_b_(PlayerEntity playerIn, Hand handIn) {
+   public ActionResultType getEntityInteractionResult(PlayerEntity playerIn, Hand handIn) {
       ItemStack itemstack = playerIn.getHeldItem(handIn);
       if (itemstack.getItem() == Items.BOWL && !this.isChild()) {
          boolean flag = false;
@@ -242,14 +241,14 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
 
          return ActionResultType.func_233537_a_(this.world.isRemote);
       } else {
-         return super.func_230254_b_(playerIn, handIn);
+         return super.getEntityInteractionResult(playerIn, handIn);
       }
    }
 
    /**
     * Shear method.
     *
-    * @param category
+    * @param category the sound category for shearing.
     */
    @Override
    @SuppressWarnings("deprecation")
@@ -344,7 +343,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
       return MoobloomEntity.Type.getTypeByName(this.dataManager.get(MOOBLOOM_TYPE));
    }
 
-   public MoobloomEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
+   public MoobloomEntity createChild(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
       MoobloomEntity mooshroomentity = ModEntities.MOOBLOOM.get().create(p_241840_1_);
       assert mooshroomentity != null;
       mooshroomentity.setMoobloomType(this.func_213445_a((MoobloomEntity)p_241840_2_));

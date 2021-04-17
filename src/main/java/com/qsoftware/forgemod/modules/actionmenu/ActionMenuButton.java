@@ -36,7 +36,7 @@ public class ActionMenuButton extends TransparentButton implements IActionMenuIn
 
     @SuppressWarnings("deprecation")
     @Override
-    public void renderButton(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderWidget(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();
         FontRenderer fontrenderer = mc.fontRenderer;
 

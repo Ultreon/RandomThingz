@@ -4,7 +4,7 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.exceptions.UnidentifiedObjectException;
 import com.qsoftware.forgemod.init.Registration;
 import com.qsoftware.forgemod.modules.items.OreMaterial;
-import com.qsoftware.forgemod.modules.items.objects.tools.*;
+import com.qsoftware.forgemod.modules.items.objects.tools.types.*;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.forgemod.util.builder.ArmorMaterial;
 import com.qsoftware.forgemod.util.builder.ItemTier;
@@ -228,7 +228,7 @@ public enum Tools {
                     .toughness(0.0F)
                     .repairMaterial(() -> Ingredient.fromItems(OreMaterial.URANIUM.getIngot().get()))
                     .build())
-            .tools(() -> TraitPack.create().all(ModTraits.WITHER.get()).build(), () -> ItemTier.builder()
+            .tools(() -> TraitPack.create().all(ModTraits.RADIOACTIVE.get()).build(), () -> ItemTier.builder()
                     .tier(3).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(11)
                     .repairMaterial(() -> Ingredient.fromItems(OreMaterial.URANIUM.getIngot().orElseThrow(() -> new NullPointerException("Uranium ingot not found in OreMaterial class.")))).build())),
     BRONZE(builder("bronze")
@@ -676,13 +676,13 @@ public enum Tools {
             this.pickaxe = () -> new PickaxeTool(itemTier.get(), 1, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().pickaxe);
             this.shovel = () -> new ShovelTool(itemTier.get(), 1.5f, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().shovel);
             this.hoe = () -> new HoeTool(itemTier.get(), (int) -(itemTier.get().getAttackDamage() - 1), -1.0f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().hoe);
-            this.longsword = () -> new LongswordTool(itemTier.get(), 3, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().longsword);
-            this.broadsword = () -> new BroadswordTool(itemTier.get(), 4, -2.5f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().broadsword);
-            this.katana = () -> new KatanaTool(itemTier.get(), 3, -1.0f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().katana);
+            this.longsword = () -> new LongswordTool(itemTier.get(), 3, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().longsword);
+            this.broadsword = () -> new BroadswordTool(itemTier.get(), 5, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().broadsword);
+            this.katana = () -> new KatanaTool(itemTier.get(), 3, -1.2f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().katana);
             this.lumberAxe = () -> new LumberAxeTool(itemTier.get(), 5.5f, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().lumberAxe);
-            this.battleaxe = () -> new BattleaxeTool(itemTier.get(), 6.5f, -2.7f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().battleaxe);
-            this.hammer = () -> new HammerTool(itemTier.get(), 4, -2.7f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().hammer);
-            this.excavator = () -> new ExcavatorTool(itemTier.get(), 2.0f, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().excavator);
+            this.battleaxe = () -> new BattleaxeTool(itemTier.get(), 6.5f, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().battleaxe);
+            this.hammer = () -> new HammerTool(itemTier.get(), 4, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().hammer);
+            this.excavator = () -> new ExcavatorTool(itemTier.get(), 2.0f, -2.6f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().excavator);
             return this;
         }
 

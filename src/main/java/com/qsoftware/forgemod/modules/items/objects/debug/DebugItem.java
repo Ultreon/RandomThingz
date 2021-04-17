@@ -36,7 +36,7 @@ public class DebugItem extends Item {
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
                 ITextComponent energyText = TextUtils.energyWithMax(e.getEnergyStored(), e.getMaxEnergyStored());
-                player.sendMessage(new StringTextComponent("Energy: ").append(energyText), Util.DUMMY_UUID);
+                player.sendMessage(new StringTextComponent("Energy: ").appendSibling(energyText), Util.DUMMY_UUID);
                 player.sendMessage(new StringTextComponent("Receive/Extract: " + e.canReceive() + "/" + e.canExtract()), Util.DUMMY_UUID);
                 player.sendMessage(new StringTextComponent(e.getClass().getName()).mergeStyle(TextFormatting.ITALIC), Util.DUMMY_UUID);
             });
@@ -44,14 +44,14 @@ public class DebugItem extends Item {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(e -> {
                 ItemStack stackInSlot = e.getStackInSlot(0);
                 String text = stackInSlot.getCount() + "x " + stackInSlot.getItem().getRegistryName();
-                player.sendMessage(new StringTextComponent("Item Stack: ").append(new StringTextComponent(text)), Util.DUMMY_UUID);
+                player.sendMessage(new StringTextComponent("Item Stack: ").appendSibling(new StringTextComponent(text)), Util.DUMMY_UUID);
                 player.sendMessage(new StringTextComponent(e.getClass().getName()).mergeStyle(TextFormatting.ITALIC), Util.DUMMY_UUID);
             });
 
             tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).ifPresent(e -> {
                 FluidStack stackInSlot = e.getFluidInTank(0);
                 String text = stackInSlot.getAmount() + "L of " + stackInSlot.getFluid().getRegistryName();
-                player.sendMessage(new StringTextComponent("Fluid Stack: ").append(new StringTextComponent(text)), Util.DUMMY_UUID);
+                player.sendMessage(new StringTextComponent("Fluid Stack: ").appendSibling(new StringTextComponent(text)), Util.DUMMY_UUID);
                 player.sendMessage(new StringTextComponent(e.getClass().getName()).mergeStyle(TextFormatting.ITALIC), Util.DUMMY_UUID);
             });
 

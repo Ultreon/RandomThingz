@@ -33,7 +33,7 @@ public class DynamiteItem extends Item {
         if (!worldIn.isRemote) {
             DynamiteEntity dynamiteEntity = new DynamiteEntity(worldIn, playerIn);
             dynamiteEntity.setItem(itemstack);
-            dynamiteEntity.func_234612_a_(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+            dynamiteEntity.setDirectionAndMovement(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
             worldIn.addEntity(dynamiteEntity);
         }
 

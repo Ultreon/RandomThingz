@@ -54,7 +54,7 @@ public class DynamiteEntity extends ProjectileItemEntity {
      */
     protected void onImpact(@NotNull RayTraceResult result) {
         super.onImpact(result);
-        Entity entity = this.func_234616_v_();
+        Entity entity = this.getShooter();
 
         if (!this.world.isRemote && !this.removed) {
             this.world.createExplosion(this, this.getPosX(), this.getPosY(), this.getPosZ(), 4f, false, Explosion.Mode.BREAK);
@@ -66,7 +66,7 @@ public class DynamiteEntity extends ProjectileItemEntity {
      * Called to update the entity's position/logic.
      */
     public void tick() {
-        Entity entity = this.func_234616_v_();
+        Entity entity = this.getShooter();
         if (entity instanceof PlayerEntity && !entity.isAlive()) {
             this.remove();
         } else {
@@ -77,7 +77,7 @@ public class DynamiteEntity extends ProjectileItemEntity {
 
     @Nullable
     public Entity changeDimension(@NotNull ServerWorld server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
-        Entity entity = this.func_234616_v_();
+        Entity entity = this.getShooter();
         if (entity != null && entity.world.getDimensionKey() != server.getDimensionKey()) {
             this.setShooter(null);
         }

@@ -63,7 +63,7 @@ public final class ModOreGen {
         }
 
         public OreProps count(int count) {
-            feature.func_242731_b(count);
+            feature.count(count);
             return this;
         }
 

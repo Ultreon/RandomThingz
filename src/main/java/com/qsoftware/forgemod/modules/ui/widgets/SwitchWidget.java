@@ -40,7 +40,7 @@ public class SwitchWidget extends Widget {
         this.y = yIn;
     }
 
-    public void renderButton(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderWidget(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
         minecraft.getTextureManager().bindTexture(this.resourceLocation);
         RenderSystem.disableDepthTest();

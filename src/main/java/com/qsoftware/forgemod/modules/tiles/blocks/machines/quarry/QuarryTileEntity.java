@@ -502,7 +502,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
                 TileEntity upTe = this.world.getTileEntity(up);
                 if (upTe != null) {
                     LazyOptional<IItemHandler> capability = upTe.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.SOUTH);
-                    LootContext.Builder builder = new LootContext.Builder((ServerWorld) this.world).withRandom(this.world.rand).withParameter(LootParameters.field_237457_g_, Vector3d.copyCentered(pos)).withParameter(LootParameters.TOOL, ItemStack.EMPTY).withNullableParameter(LootParameters.BLOCK_ENTITY, this).withNullableParameter(LootParameters.THIS_ENTITY, null);
+                    LootContext.Builder builder = new LootContext.Builder((ServerWorld) this.world).withRandom(this.world.rand).withParameter(LootParameters.ORIGIN, Vector3d.copyCentered(pos)).withParameter(LootParameters.TOOL, ItemStack.EMPTY).withNullableParameter(LootParameters.BLOCK_ENTITY, this).withNullableParameter(LootParameters.THIS_ENTITY, null);
                     if (capability.isPresent() && capability.resolve().isPresent()) {
                         IItemHandler itemHandler = capability.resolve().get();
                         List<ItemStack> stacks = new ArrayList<>();

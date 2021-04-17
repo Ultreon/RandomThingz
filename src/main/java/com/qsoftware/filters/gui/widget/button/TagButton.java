@@ -49,7 +49,7 @@ public class TagButton extends Button
     }
 
     @Override
-    public void renderButton(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
+    public void renderWidget(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
     {
         Minecraft mc = Minecraft.getInstance();
         mc.getTextureManager().bindTexture(TABS);

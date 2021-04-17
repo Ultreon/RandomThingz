@@ -63,9 +63,9 @@ public class UpdateToast implements IToast {
         }
 
         if (this.subtitle == null) {
-            toastGui.getMinecraft().fontRenderer.func_243248_b(matrixStack, this.title, 18.0F, 12.0F, -256);
+            toastGui.getMinecraft().fontRenderer.drawText(matrixStack, this.title, 18.0F, 12.0F, -256);
         } else {
-            toastGui.getMinecraft().fontRenderer.func_243248_b(matrixStack, this.title, 18.0F, 7.0F, -256);
+            toastGui.getMinecraft().fontRenderer.drawText(matrixStack, this.title, 18.0F, 7.0F, -256);
 
             for(int k1 = 0; k1 < this.subtitle.size(); ++k1) {
                 toastGui.getMinecraft().fontRenderer.func_238422_b_(matrixStack, this.subtitle.get(k1), 18.0F, (float)(18 + k1 * 12), -1);

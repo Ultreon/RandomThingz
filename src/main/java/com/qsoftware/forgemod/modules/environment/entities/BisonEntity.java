@@ -30,7 +30,7 @@ public class BisonEntity extends CowEntity {
     @Nullable
     @Override
     @ParametersAreNonnullByDefault
-    public BisonEntity func_241840_a(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
+    public BisonEntity createChild(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
         return ModEntities.BISON.get().create(this.world);
     }
 }

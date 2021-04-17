@@ -8,25 +8,13 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import org.jetbrains.annotations.NotNull;
 
-public class PoisonTrait extends AbstractTrait {
+public class PoisonTrait extends AbstractPotionTrait {
     public PoisonTrait() {
 
     }
 
+    @Override
     public EffectInstance getEffectInstance() {
         return new EffectInstance(Effects.POISON, 50, 2);
-    }
-
-    @Override
-    public boolean onHitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, LivingEntity attacker) {
-        victim.addPotionEffect(getEffectInstance());
-        return super.onHitEntity(stack, victim, attacker);
-    }
-
-    @Override
-    public void onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-        if (entity instanceof LivingEntity) {
-            ((LivingEntity) entity).addPotionEffect(getEffectInstance());
-        }
     }
 }
