@@ -73,10 +73,10 @@ public abstract class AbstractEnergyInventoryTileEntity extends LockableSidedInv
 
     @Override
     public void tick() {
-        if (world == null || world.isRemote) return;
+        if (this.dimension == null || dimension.isClientSided) return;
 
         if (maxExtract > 0) {
-            EnergyUtils.trySendToNeighbors(world, pos, this, maxExtract);
+            EnergyUtils.trySendToNeighbors(this.dimension, pos, this, maxExtract);
         }
     }
 
@@ -98,8 +98,8 @@ public abstract class AbstractEnergyInventoryTileEntity extends LockableSidedInv
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         super.onDataPacket(net, packet);
-        SyncVariable.Helper.readSyncVars(this, packet.getNbtCompound());
-        readEnergy(packet.getNbtCompound());
+        SyncVariable.Helper.readSyncVars(this, packet.getNbt());
+        readEnergy(packet.getNbt());
     }
 
     @Override
@@ -119,8 +119,8 @@ public abstract class AbstractEnergyInventoryTileEntity extends LockableSidedInv
     }
 
     @Override
-    public void remove() {
-        super.remove();
+    public void delete() {
+        super.delete();
         energy.invalidate();
     }
 }

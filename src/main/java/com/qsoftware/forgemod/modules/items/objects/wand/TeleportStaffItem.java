@@ -23,7 +23,7 @@ public class TeleportStaffItem extends WandItem {
     }
 
     @Override
-    public void activate(ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity livingIn, float charge) {
+    public void activate(ItemStack stack, @NotNull World dimensionIn, @NotNull LivingEntity livingIn, float charge) {
         if (!(livingIn instanceof PlayerEntity)) {
             return;
         }
@@ -35,7 +35,7 @@ public class TeleportStaffItem extends WandItem {
 
         PlayerEntity player = (PlayerEntity) livingIn;
 
-        if (worldIn instanceof ServerWorld) {
+        if (dimensionIn instanceof ServerWorld) {
             Vector3d vector3d = player.getLookVec();
             double dx = vector3d.x * (4 * charge * strength);
             double dy = vector3d.y * (4 * charge * strength);

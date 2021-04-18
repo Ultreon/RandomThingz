@@ -51,8 +51,8 @@ public class AlloySmelterTileEntity extends AbstractMachineTileEntity<AlloySmelt
     @Nullable
     @Override
     protected AlloySmeltingRecipe getRecipe() {
-        if (world == null) return null;
-        return world.getRecipeManager().getRecipe(ModRecipes.Types.ALLOY_SMELTING, this, world).orElse(null);
+        if (dimension == null) return null;
+        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.ALLOY_SMELTING, this, dimension).orElse(null);
     }
 
     @Override

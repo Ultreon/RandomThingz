@@ -53,8 +53,8 @@ public class BetterItemGroup extends ItemGroup {
             values.stream().map(function).filter(Objects::nonNull).forEach(items::add);
         } catch (Throwable t) {
 
-            CrashReport crashreport = CrashReport.makeCrashReport(t, "Enum has no static values() method.");
-            CrashReportCategory crashreportcategory = crashreport.makeCategory("Enum being looped in QForgeMod Item Group.");
+            CrashReport crashreport = CrashReport.createCrashReport(t, "Enum has no static values() method.");
+            CrashReportCategory crashreportcategory = crashreport.createCategory("Enum being looped in QForgeMod Item Group.");
             crashreportcategory.addDetail("Enum Class Name", enum_::toString);
             throw new ReportedException(crashreport);
         }
@@ -68,8 +68,8 @@ public class BetterItemGroup extends ItemGroup {
             values.stream().map(function).filter(Objects::nonNull).forEach(items::addAll);
         } catch (Throwable t) {
 
-            CrashReport crashreport = CrashReport.makeCrashReport(t, "Enum has no static values() method.");
-            CrashReportCategory crashreportcategory = crashreport.makeCategory("Enum being looped in QForgeMod Item Group.");
+            CrashReport crashreport = CrashReport.createCrashReport(t, "Enum has no static values() method.");
+            CrashReportCategory crashreportcategory = crashreport.createCategory("Enum being looped in QForgeMod Item Group.");
             crashreportcategory.addDetail("Enum Class Name", enum_::toString);
             throw new ReportedException(crashreport);
         }
@@ -83,8 +83,8 @@ public class BetterItemGroup extends ItemGroup {
             values.forEach(t -> function.apply(t).stream().filter(Objects::nonNull).forEach((item) -> items.add(new ItemStack(item))));
         } catch (Throwable t) {
 
-            CrashReport crashreport = CrashReport.makeCrashReport(t, "Enum has no static values() method.");
-            CrashReportCategory crashreportcategory = crashreport.makeCategory("Enum being looped in QForgeMod Item Group.");
+            CrashReport crashreport = CrashReport.createCrashReport(t, "Enum has no static values() method.");
+            CrashReportCategory crashreportcategory = crashreport.createCategory("Enum being looped in QForgeMod Item Group.");
             crashreportcategory.addDetail("Enum Class Name", enum_::toString);
             throw new ReportedException(crashreport);
         }
@@ -98,8 +98,8 @@ public class BetterItemGroup extends ItemGroup {
             values.stream().map(t -> function.apply(t) != null ? new ItemStack(function.apply(t)) : null).filter(Objects::nonNull).forEach(items::add);
         } catch (Throwable t) {
 
-            CrashReport crashreport = CrashReport.makeCrashReport(t, "Enum has no static values() method.");
-            CrashReportCategory crashreportcategory = crashreport.makeCategory("Enum being looped in QForgeMod Item Group.");
+            CrashReport crashreport = CrashReport.createCrashReport(t, "Enum has no static values() method.");
+            CrashReportCategory crashreportcategory = crashreport.createCategory("Enum being looped in QForgeMod Item Group.");
             crashreportcategory.addDetail("Enum Class Name", enum_::toString);
             throw new ReportedException(crashreport);
         }

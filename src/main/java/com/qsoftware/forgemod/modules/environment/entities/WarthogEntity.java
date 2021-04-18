@@ -18,8 +18,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author Qboi123
  */
 public class WarthogEntity extends HogEntity {
-    public WarthogEntity(EntityType<? extends WarthogEntity> type, World worldIn) {
-        super(type, worldIn);
+    public WarthogEntity(EntityType<? extends WarthogEntity> type, World dimensionIn) {
+        super(type, dimensionIn);
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
@@ -29,7 +29,7 @@ public class WarthogEntity extends HogEntity {
     @Nullable
     @Override
     @ParametersAreNonnullByDefault
-    public WarthogEntity createChild(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return ModEntities.WARTHOG.get().create(this.world);
+    public WarthogEntity createChild(ServerWorld dimensionIn, AgeableEntity ageable) {  // createChild
+        return ModEntities.WARTHOG.get().create(this.dimension);
     }
 }

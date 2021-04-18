@@ -25,20 +25,20 @@ import java.util.Random;
 
 public class MixerBlock extends AbstractMachineBlock {
 
-    private static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(1, 0, 1, 15, 2, 15), Block.makeCuboidShape(1, 6, 1, 15, 8, 15), Block.makeCuboidShape(2, 2, 2, 14, 6, 14), Block.makeCuboidShape(2, 8, 2, 14, 16, 14));
+    private static final VoxelShape SHAPE = VoxelShapes.or(Block.createCuboidShape(1, 0, 1, 15, 2, 15), Block.createCuboidShape(1, 6, 1, 15, 8, 15), Block.createCuboidShape(2, 2, 2, 14, 6, 14), Block.createCuboidShape(2, 8, 2, 14, 16, 14));
 
     public MixerBlock() {
-        super(MachineTier.STANDARD, Block.Properties.create(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL));
+        super(MachineTier.STANDARD, Block.Properties.generate(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL));
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, IBlockReader dimensionIn, BlockPos pos, ISelectionContext context) {
         return SHAPE;
     }
 
     @Override
-    protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
+    protected void interactWith(World dimensionIn, BlockPos pos, PlayerEntity player) {
+        TileEntity tileEntity = dimensionIn.getTileEntity(pos);
         if (tileEntity instanceof INamedContainerProvider) {
             player.openContainer((INamedContainerProvider) tileEntity);
         }
@@ -46,19 +46,19 @@ public class MixerBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    public TileEntity createNewTileEntity(IBlockReader dimensionIn) {
         return new MixerTileEntity();
     }
 
     @Override
-    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    public void animateTick(BlockState stateIn, World dimensionIn, BlockPos pos, Random rand) {
         // TODO: Unique sound and particles? Copied from BlastFurnaceBlock.
         if (stateIn.get(LIT)) {
             double d0 = (double) pos.getX() + 0.5D;
             double d1 = pos.getY();
             double d2 = (double) pos.getZ() + 0.5D;
             if (rand.nextDouble() < 0.1D) {
-                worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                dimensionIn.playSound(d0, d1, d2, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
             }
 
             Direction direction = stateIn.get(FACING);
@@ -68,7 +68,7 @@ public class MixerBlock extends AbstractMachineBlock {
             double d5 = direction$axis == Direction.Axis.X ? (double) direction.getXOffset() * 0.52D : d4;
             double d6 = rand.nextDouble() * 9.0D / 16.0D;
             double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getZOffset() * 0.52D : d4;
-            worldIn.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+            dimensionIn.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
         }
     }
 }

@@ -36,8 +36,8 @@ public class VMWarningScreen extends Screen {
         this.shutdownPcText = new TranslationTextComponent("button.qforgemod.confirm_exit.shutdown_pc");
     }
 
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         this.buttons.clear();
         this.children.clear();

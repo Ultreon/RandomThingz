@@ -76,8 +76,8 @@ public class UpdateAvailableScreen extends AdvancedScreen {
      * Screen initialization.
      * Initializes the update available screen, called internally in MC Forge.
      */
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         // Get narrator status/
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;

@@ -55,10 +55,10 @@ public class KatanaTool extends KatanaItem implements ITool {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        ActionResultType result = super.onItemUse(context);
+    public ActionResultType onUseItem(ItemUseContext context) {
+        ActionResultType result = super.onUseItem(context);
         for (AbstractTrait trait : getTraits()) {
-            ActionResultType actionResultType = trait.onItemUse(context);
+            ActionResultType actionResultType = trait.onUseItem(context);
             result = ItemUtils.maxActionResult(result, actionResultType);
         }
         return result;
@@ -129,10 +129,10 @@ public class KatanaTool extends KatanaItem implements ITool {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World dimensionIn, PlayerEntity playerIn, Hand handIn) {
         boolean val = false;
         for (AbstractTrait trait : getTraits()) {
-            val |= trait.onRightClick(this, worldIn, playerIn, handIn);
+            val |= trait.onRightClick(this, dimensionIn, playerIn, handIn);
         }
         if (val) {
             return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
@@ -157,7 +157,7 @@ public class KatanaTool extends KatanaItem implements ITool {
             if (clicked instanceof LivingEntity) {
                 LivingEntity living = (LivingEntity) clicked;
                 if (living.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-                    clicked.attackEntityFrom(new EntityDamageSource("player", player), smite);
+                    clicked.attack(new EntityDamageSource("player", player), smite);
                 }
             }
         }
@@ -182,9 +182,9 @@ public class KatanaTool extends KatanaItem implements ITool {
         if (smite > 0.0f) {
             if (victim.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
                 if (attacker instanceof PlayerEntity) {
-                    victim.attackEntityFrom(new EntityDamageSource("player", attacker), smite);
+                    victim.attack(new EntityDamageSource("player", attacker), smite);
                 } else {
-                    victim.attackEntityFrom(new EntityDamageSource("entity", attacker), smite);
+                    victim.attack(new EntityDamageSource("entity", attacker), smite);
                 }
             }
         }
@@ -197,21 +197,21 @@ public class KatanaTool extends KatanaItem implements ITool {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+    public void inventoryTick(ItemStack stack, World dimension, Entity entity, int slot, boolean selected) {
         if (!isDamageable()) {
             setDamage(stack, 0);
         }
 
         for (AbstractTrait trait : getTraits()) {
-            trait.onInventoryTick(stack, world, entity, slot, selected);
+            trait.onInventoryTick(stack, dimension, entity, slot, selected);
         }
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity living) {
-        boolean op = super.onBlockDestroyed(stack, world, state, pos, living);
+    public boolean onBlockBroken(ItemStack stack, World dimension, BlockState state, BlockPos pos, LivingEntity living) {
+        boolean op = super.onBlockBroken(stack, dimension, state, pos, living);
         for (AbstractTrait trait : getTraits()) {
-            op |= trait.onBlockBroken(stack, world, state, pos, living);
+            op |= trait.onBlockBroken(stack, dimension, state, pos, living);
         }
         return op;
     }
@@ -226,7 +226,7 @@ public class KatanaTool extends KatanaItem implements ITool {
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, @Nullable World dimension, List<ITextComponent> tooltip, ITooltipFlag flag) {
         for (AbstractTrait trait : traits.get()) {
             tooltip.add(trait.getTranslation());
         }
@@ -242,8 +242,8 @@ public class KatanaTool extends KatanaItem implements ITool {
     }
 
     @Override
-    public float getDestroySpeed(ItemStack stack, BlockState state) {
-        float val = super.getDestroySpeed(stack, state);
+    public float getMiningSpeed(ItemStack stack, BlockState state) {
+        float val = super.getMiningSpeed(stack, state);
         for (AbstractTrait trait : getTraits()) {
             val *= trait.getDestroyMultiplier(getQfmToolTypes(), stack, state);
         }

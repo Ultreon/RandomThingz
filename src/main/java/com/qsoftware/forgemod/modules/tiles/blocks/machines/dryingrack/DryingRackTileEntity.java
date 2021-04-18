@@ -60,9 +60,9 @@ public class DryingRackTileEntity extends TileEntity implements IInventory, ITic
 
     @Override
     public void tick() {
-        if (this.world == null || this.world.isRemote || isEmpty()) return;
+        if (this.dimension == null || this.dimension.isClientSided || isEmpty()) return;
 
-        DryingRecipe recipe = this.world.getRecipeManager().getRecipe(ModRecipes.Types.DRYING, this, this.world).orElse(null);
+        DryingRecipe recipe = this.dimension.getRecipeManager().getRecipe(ModRecipes.Types.DRYING, this, this.dimension).orElse(null);
         if (recipe != null && canWork()) {
             ++processTime;
             if (processTime >= recipe.getProcessTime()) {
@@ -70,7 +70,7 @@ public class DryingRackTileEntity extends TileEntity implements IInventory, ITic
                 processTime = 0;
             }
             if (processTime % 10 == 0) {
-                ParticleUtils.spawn(world, ParticleTypes.SMOKE, pos, 1, 0.1, 0.1, 0.1, 0.01);
+                ParticleUtils.spawn(dimension, ParticleTypes.SMOKE, pos, 1, 0.1, 0.1, 0.1, 0.01);
             }
         } else {
             processTime = 0;
@@ -78,19 +78,19 @@ public class DryingRackTileEntity extends TileEntity implements IInventory, ITic
     }
 
     private boolean canWork() {
-        return world != null && !world.getBlockState(pos).get(DryingRackBlock.WATERLOGGED);
+        return dimension != null && !dimension.getBlockState(pos).get(DryingRackBlock.WATERLOGGED);
     }
 
     @Override
-    public void markDirty() {
-        super.markDirty();
+    public void markModified() {
+        super.markModified();
         sendUpdate();
     }
 
     private void sendUpdate() {
-        if (this.world != null) {
-            BlockState state = this.world.getBlockState(this.pos);
-            this.world.notifyBlockUpdate(this.pos, state, state, 3);
+        if (this.dimension != null) {
+            BlockState state = this.dimension.getBlockState(this.pos);
+            this.dimension.notifyBlockUpdate(this.pos, state, state, 3);
         }
     }
 
@@ -122,21 +122,21 @@ public class DryingRackTileEntity extends TileEntity implements IInventory, ITic
     @Override
     public ItemStack decrStackSize(int index, int count) {
         ItemStack result = ItemStackHelper.getAndSplit(this.items, index, count);
-        this.markDirty();
+        this.markModified();
         return result;
     }
 
     @Override
-    public ItemStack removeStackFromSlot(int index) {
+    public ItemStack deleteStackFromSlot(int index) {
         ItemStack result = ItemStackHelper.getAndRemove(this.items, index);
-        this.markDirty();
+        this.markModified();
         return result;
     }
 
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
         this.items.set(0, stack);
-        this.markDirty();
+        this.markModified();
     }
 
     @Override
@@ -187,8 +187,8 @@ public class DryingRackTileEntity extends TileEntity implements IInventory, ITic
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        if (pkt.getNbtCompound().contains("Item")) {
-            this.items.set(0, ItemStack.read(pkt.getNbtCompound().getCompound("Item")));
+        if (pkt.getNbt().contains("Item")) {
+            this.items.set(0, ItemStack.read(pkt.getNbt().getCompound("Item")));
         } else {
             this.items.set(0, ItemStack.EMPTY);
         }
@@ -203,8 +203,8 @@ public class DryingRackTileEntity extends TileEntity implements IInventory, ITic
     }
 
     @Override
-    public void remove() {
-        super.remove();
+    public void delete() {
+        super.delete();
         itemHandlerCap.invalidate();
     }
 }

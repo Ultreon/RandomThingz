@@ -35,24 +35,24 @@ public class BattleaxeItem extends AxeItem implements IHasToolType {
         super(tier, attackDamageIn, attackSpeedIn, builder.defaultMaxDamage((int) (tier.getMaxUses() * 1.5)));
     }
 
-    public float getDestroySpeed(ItemStack stack, BlockState state) {
+    public float getMiningSpeed(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
-        return EFFECTIVE_ON_MATERIALS.contains(material) ? this.efficiency / 1.5f : super.getDestroySpeed(stack, state) / 1.5f;
+        return EFFECTIVE_ON_MATERIALS.contains(material) ? this.efficiency / 1.5f : super.getMiningSpeed(stack, state) / 1.5f;
     }
 
     /**
      * Called when this item is used when targetting a Block
      */
-    public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
+    public ActionResultType onUseItem(ItemUseContext context) {
+        World dimension = context.getDimension();
         BlockPos blockpos = context.getPos();
-        BlockState blockstate = world.getBlockState(blockpos);
-        BlockState block = blockstate.getToolModifiedState(world, blockpos, context.getPlayer(), context.getItem(), net.minecraftforge.common.ToolType.AXE);
+        BlockState blockstate = dimension.getBlockState(blockpos);
+        BlockState block = blockstate.getToolModifiedState(dimension, blockpos, context.getPlayer(), context.getItem(), net.minecraftforge.common.ToolType.AXE);
         if (block != null) {
             PlayerEntity playerentity = context.getPlayer();
-            world.playSound(playerentity, blockpos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            if (!world.isRemote) {
-                world.setBlockState(blockpos, block, 11);
+            dimension.playSound(playerentity, blockpos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            if (!dimension.isClientSided) {
+                dimension.setBlockState(blockpos, block, 11);
                 if (playerentity != null) {
                     context.getItem().damageItem(1, playerentity, (p_220040_1_) -> {
                         p_220040_1_.sendBreakAnimation(context.getHand());
@@ -60,7 +60,7 @@ public class BattleaxeItem extends AxeItem implements IHasToolType {
                 }
             }
 
-            return ActionResultType.func_233537_a_(world.isRemote);
+            return ActionResultType.func_233537_a_(dimension.isClientSided);
         } else {
             return ActionResultType.PASS;
         }

@@ -38,7 +38,7 @@ public class DebugChoiceScreen extends Screen {
     }
 
     @Override
-    protected void init() {
+    protected void initialize() {
         this.textureX = this.width / 2 - this.textureWidth / 2;
         this.textureY = this.height / 2 - this.textureHeight / 2;
         this.leftButton = addButton(new Button(textureX + 4, textureY + 4, 20, 20, new StringTextComponent("<"), this::prev));

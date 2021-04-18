@@ -12,6 +12,6 @@ import org.jetbrains.annotations.NotNull;
 public class RadioactiveTrait extends AbstractPotionTrait {
     @Override
     public EffectInstance getEffectInstance() {
-        return new EffectInstance(ModEffects.RADIATION.get(), 1200, 1);
+        return new EffectInstance(ModEffects.RADIATION.get(), 1200, 5);
     }
 }

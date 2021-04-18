@@ -76,8 +76,8 @@ public class ChristmasChestTileEntityRenderer<T extends TileEntity & IChestLid> 
    }
 
    public void render(T tileEntityIn, float partialTicks, @NotNull MatrixStack matrixStackIn, @NotNull IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-      World world = tileEntityIn.getWorld();
-      boolean flag = world != null;
+      World dimension = tileEntityIn.getDimension();
+      boolean flag = dimension != null;
       BlockState blockState = flag ? tileEntityIn.getBlockState() : Blocks.CHEST.getDefaultState().with(ChestBlock.FACING, Direction.SOUTH);
       ChestType chestType = blockState.hasProperty(ChestBlock.TYPE) ? blockState.get(ChestBlock.TYPE) : ChestType.SINGLE;
       Block block = blockState.getBlock();
@@ -91,7 +91,7 @@ public class ChristmasChestTileEntityRenderer<T extends TileEntity & IChestLid> 
          matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
          TileEntityMerger.ICallbackWrapper<? extends ChestTileEntity> iCallbackWrapper;
          if (flag) {
-            iCallbackWrapper = abstractChestBlock.combine(blockState, world, tileEntityIn.getPos(), true);
+            iCallbackWrapper = abstractChestBlock.combine(blockState, dimension, tileEntityIn.getPos(), true);
          } else {
             iCallbackWrapper = TileEntityMerger.ICallback::func_225537_b_;
          }

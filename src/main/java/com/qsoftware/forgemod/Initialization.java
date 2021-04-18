@@ -207,7 +207,7 @@ public class Initialization {
     }
 
     /**
-     * Do things when load is complete.
+     * Do things when read is complete.
      *
      * @param event a {@link FMLLoadCompleteEvent} object.
      */

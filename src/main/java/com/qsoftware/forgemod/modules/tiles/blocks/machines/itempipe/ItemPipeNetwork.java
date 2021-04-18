@@ -18,46 +18,46 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public final class ItemPipeNetwork implements IItemHandler {
-    private final IWorldReader world;
+    private final IWorldReader dimension;
     private final Map<BlockPos, Set<Connection>> connections = new HashMap<>();
     private boolean connectionsBuilt;
     private final ItemContainer itemTank;
 
-    private ItemPipeNetwork(IWorldReader world, Set<BlockPos> wires) {
-        this.world = world;
+    private ItemPipeNetwork(IWorldReader dimension, Set<BlockPos> wires) {
+        this.dimension = dimension;
         wires.forEach(pos -> connections.put(pos, Collections.emptySet()));
         this.itemTank = new ItemContainer(250);
     }
 
-    static ItemPipeNetwork buildNetwork(IWorldReader world, BlockPos pos) {
-        Set<BlockPos> pipes = buildPipeSet(world, pos);
+    static ItemPipeNetwork buildNetwork(IWorldReader dimension, BlockPos pos) {
+        Set<BlockPos> pipes = buildPipeSet(dimension, pos);
 //        int energyStored = pipes.stream().mapToInt(p -> {
-//            TileEntity tileEntity = world.getTileEntity(p);
+//            TileEntity tileEntity = dimension.getTileEntity(p);
 //            return tileEntity instanceof PipeTileEntity ? ((PipeTileEntity) tileEntity).energyStored : 0;
 //        }).sum();
-        return new ItemPipeNetwork(world, pipes);
+        return new ItemPipeNetwork(dimension, pipes);
     }
 
-    private static Set<BlockPos> buildPipeSet(IWorldReader world, BlockPos pos) {
-        return buildPipeSet(world, pos, new HashSet<>());
+    private static Set<BlockPos> buildPipeSet(IWorldReader dimension, BlockPos pos) {
+        return buildPipeSet(dimension, pos, new HashSet<>());
     }
 
-    private static Set<BlockPos> buildPipeSet(IWorldReader world, BlockPos pos, Set<BlockPos> set) {
+    private static Set<BlockPos> buildPipeSet(IWorldReader dimension, BlockPos pos, Set<BlockPos> set) {
         // Get all positions that have a wire connected to the wire at pos
         set.add(pos);
         for (Direction side : Direction.values()) {
             BlockPos pos1 = pos.offset(side);
-            if (!set.contains(pos1) && world.getTileEntity(pos1) instanceof ItemPipeTileEntity) {
+            if (!set.contains(pos1) && dimension.getTileEntity(pos1) instanceof ItemPipeTileEntity) {
                 set.add(pos1);
-                set.addAll(buildPipeSet(world, pos1, set));
+                set.addAll(buildPipeSet(dimension, pos1, set));
             }
         }
         return set;
     }
 
     @Nullable
-    private static IItemHandler getItemHandler(IBlockReader world, BlockPos pos, Direction side) {
-        TileEntity tileEntity = world.getTileEntity(pos.offset(side));
+    private static IItemHandler getItemHandler(IBlockReader dimension, BlockPos pos, Direction side) {
+        TileEntity tileEntity = dimension.getTileEntity(pos.offset(side));
         if (tileEntity != null) {
             //noinspection ConstantConditions
             return tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side.getOpposite()).orElse(null);
@@ -65,8 +65,8 @@ public final class ItemPipeNetwork implements IItemHandler {
         return null;
     }
 
-    public boolean contains(IWorldReader world, BlockPos pos) {
-        return this.world == world && connections.containsKey(pos);
+    public boolean contains(IWorldReader dimension, BlockPos pos) {
+        return this.dimension == dimension && connections.containsKey(pos);
     }
 
     public int getPipeCount() {
@@ -91,18 +91,18 @@ public final class ItemPipeNetwork implements IItemHandler {
     private void buildConnections() {
         // Determine all connections. This will be done once the connections are actually needed.
         if (!connectionsBuilt) {
-            connections.keySet().forEach(p -> connections.put(p, getConnections(world, p)));
+            connections.keySet().forEach(p -> connections.put(p, getConnections(dimension, p)));
             connectionsBuilt = true;
         }
     }
 
-    private Set<Connection> getConnections(IBlockReader world, BlockPos pos) {
+    private Set<Connection> getConnections(IBlockReader dimension, BlockPos pos) {
         // Get all connections for the wire at pos
         Set<Connection> connections = new HashSet<>();
         for (Direction direction : Direction.values()) {
-            TileEntity te = world.getTileEntity(pos.offset(direction));
+            TileEntity te = dimension.getTileEntity(pos.offset(direction));
             if (te != null && !(te instanceof ItemPipeTileEntity) && te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).isPresent()) {
-                ConnectionType type = ItemPipeBlock.getConnection(world.getBlockState(pos), direction);
+                ConnectionType type = ItemPipeBlock.getConnection(dimension.getBlockState(pos), direction);
                 connections.add(new Connection(this, direction, type));
             }
         }
@@ -117,7 +117,7 @@ public final class ItemPipeNetwork implements IItemHandler {
             Set<Connection> connections = entry.getValue();
             for (Connection con : connections) {
                 if (con.type.canExtract()) {
-                    IItemHandler itemHandler = getItemHandler(world, pos, con.side);
+                    IItemHandler itemHandler = getItemHandler(dimension, pos, con.side);
                     if (itemHandler != null) {
 //                        ItemStack toSend = itemHandler.extractItem(0, 10, true);
                         ItemCapabilityUtils.trySendItems(4, itemHandler, this);
@@ -131,7 +131,7 @@ public final class ItemPipeNetwork implements IItemHandler {
             }
             for (Connection con : connections) {
                 if (con.type.canReceive()) {
-                    IItemHandler itemHandler = getItemHandler(world, pos, con.side);
+                    IItemHandler itemHandler = getItemHandler(dimension, pos, con.side);
                     if (itemHandler != null) {
 //                        ItemStack toSend = extractItem(0, 10, true);
 //                        if (!toSend.isEmpty()) {

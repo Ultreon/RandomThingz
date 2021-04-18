@@ -30,12 +30,12 @@ public class ClientRegistration {
 //    private static final Map<ResourceLocation, CustomModelRegistryObject> customModels = new Object2ObjectOpenHashMap<>();
 
     @SubscribeEvent
-    public static void init(FMLClientSetupEvent event) {
+    public static void initialize(FMLClientSetupEvent event) {
 //        MinecraftForge.EVENT_BUS.register(new ClientTickHandler());
 //        MinecraftForge.EVENT_BUS.register(new RenderTickHandler());
 //        MinecraftForge.EVENT_BUS.register(SoundHandler.class);
 //        new QForgeUtilsKeyHandler();
-//        HolidayManager.init();
+//        HolidayManager.initialize();
 
 //        //Register entity rendering handlers
 //        ClientRegistrationUtil.registerEntityRenderingHandler(QForgeUtilsEntityTypes.ROBIT, RenderRobit::new);
@@ -205,9 +205,9 @@ public class ClientRegistration {
     public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
 //        BlockColors blockColors = event.getBlockColors();
 //        ItemColors itemColors = event.getItemColors();
-//        ClientRegistrationUtil.registerBlockColorHandler(blockColors, (state, world, pos, tintIndex) -> {
+//        ClientRegistrationUtil.registerBlockColorHandler(blockColors, (state, dimension, pos, tintIndex) -> {
 //                  if (pos != null) {
-//                      TileEntity tile = WorldUtils.getTileEntity(world, pos);
+//                      TileEntity tile = WorldUtils.getTileEntity(dimension, pos);
 //                      if (tile instanceof TileEntityQIOComponent) {
 //                          EnumColor color = ((TileEntityQIOComponent) tile).getColor();
 //                          return color != null ? QForgeUtilsRenderer.getColorARGB(color, 1) : -1;
@@ -220,9 +220,9 @@ public class ClientRegistration {
 //              //Fluid Tank
 //              QForgeUtilsBlocks.BASIC_FLUID_TANK, QForgeUtilsBlocks.ADVANCED_FLUID_TANK, QForgeUtilsBlocks.ELITE_FLUID_TANK, QForgeUtilsBlocks.ULTIMATE_FLUID_TANK,
 //              QForgeUtilsBlocks.CREATIVE_FLUID_TANK);
-//        ClientRegistrationUtil.registerBlockColorHandler(blockColors, (state, world, pos, tintIndex) -> {
+//        ClientRegistrationUtil.registerBlockColorHandler(blockColors, (state, dimension, pos, tintIndex) -> {
 //                  if (tintIndex == 1 && pos != null) {
-//                      TileEntityLogisticalTransporter transporter = WorldUtils.getTileEntity(TileEntityLogisticalTransporter.class, world, pos);
+//                      TileEntityLogisticalTransporter transporter = WorldUtils.getTileEntity(TileEntityLogisticalTransporter.class, dimension, pos);
 //                      if (transporter != null) {
 //                          EnumColor renderColor = transporter.getTransmitter().getColor();
 //                          if (renderColor != null) {
@@ -240,7 +240,7 @@ public class ClientRegistration {
 //        }
 //        for (Map.Entry<PrimaryResource, BlockRegistryObject<?, ?>> entry : QForgeUtilsBlocks.PROCESSED_RESOURCE_BLOCKS.entrySet()) {
 //            int tint = entry.getKey().getTint();
-//            ClientRegistrationUtil.registerBlockColorHandler(blockColors, itemColors, (state, world, pos, index) -> index == 1 ? tint : -1,
+//            ClientRegistrationUtil.registerBlockColorHandler(blockColors, itemColors, (state, dimension, pos, index) -> index == 1 ? tint : -1,
 //                  (stack, index) -> index == 1 ? tint : -1, entry.getValue());
 //        }
 //        ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, index) -> {

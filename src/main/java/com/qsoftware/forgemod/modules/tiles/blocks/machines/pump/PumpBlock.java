@@ -26,14 +26,14 @@ import javax.annotation.Nullable;
 
 public class PumpBlock extends AbstractMachineBlock {
 
-    private static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(1, 0, 1, 15, 15, 15));
+    private static final VoxelShape SHAPE = VoxelShapes.or(Block.createCuboidShape(1, 0, 1, 15, 15, 15));
 
     public PumpBlock() {
-        super(MachineTier.STANDARD, AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL));
+        super(MachineTier.STANDARD, AbstractBlock.Properties.generate(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL));
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, IBlockReader dimensionIn, BlockPos pos, ISelectionContext context) {
         return SHAPE;
     }
 
@@ -61,13 +61,13 @@ public class PumpBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    public TileEntity createNewTileEntity(IBlockReader dimensionIn) {
         return new PumpTileEntity();
     }
 
     @Override
-    protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
+    protected void interactWith(World dimensionIn, BlockPos pos, PlayerEntity player) {
+        TileEntity tileEntity = dimensionIn.getTileEntity(pos);
         if (tileEntity instanceof INamedContainerProvider) {
             player.openContainer((INamedContainerProvider) tileEntity);
         }

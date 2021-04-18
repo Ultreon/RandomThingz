@@ -32,7 +32,7 @@ public class UpdateChecker {
         Minecraft mc = Minecraft.getInstance();
         Screen gui = mc.currentScreen;
 
-        if (gui == null && mc.world == null) {
+        if (gui == null && mc.dimension == null) {
             return;
         }
 

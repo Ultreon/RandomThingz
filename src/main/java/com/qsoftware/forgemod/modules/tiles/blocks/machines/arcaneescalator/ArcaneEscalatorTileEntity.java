@@ -51,8 +51,8 @@ public class ArcaneEscalatorTileEntity extends AbstractMachineTileEntity<ArcaneE
     @Nullable
     @Override
     protected ArcaneEscalatingRecipe getRecipe() {
-        if (world == null) return null;
-        return world.getRecipeManager().getRecipe(ModRecipes.Types.ARCANE_ESCALATING, this, world).orElse(null);
+        if (dimension == null) return null;
+        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.ARCANE_ESCALATING, this, dimension).orElse(null);
     }
 
     @Override

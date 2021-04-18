@@ -47,19 +47,19 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
  * @version 1.4 10/06/20
  */
 public class ChestFrameBlock extends FrameBlock implements IWaterLoggable {
-    private static final VoxelShape INNER_CUBE = Block.makeCuboidShape(2.0, 2.0, 2.0, 14.0, 14.0, 14.0);
-    private static final VoxelShape BOTTOM_NORTH = Block.makeCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 2.0);
-    private static final VoxelShape BOTTOM_EAST = Block.makeCuboidShape(14.0, 0.0, 2.0, 16.0, 2.0, 14.0);
-    private static final VoxelShape BOTTOM_SOUTH = Block.makeCuboidShape(0.0, 0.0, 14.0, 16.0, 2.0, 16.0);
-    private static final VoxelShape BOTTOM_WEST = Block.makeCuboidShape(0.0, 0.0, 2.0, 2.0, 2.0, 14.0);
-    private static final VoxelShape TOP_NORTH = Block.makeCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 2.0);
-    private static final VoxelShape TOP_EAST = Block.makeCuboidShape(14.0, 14.0, 2.0, 16.0, 16.0, 14.0);
-    private static final VoxelShape TOP_SOUTH = Block.makeCuboidShape(0.0, 14.0, 14.0, 16.0, 16.0, 16.0);
-    private static final VoxelShape TOP_WEST = Block.makeCuboidShape(0.0, 14.0, 2.0, 2.0, 16.0, 14.0);
-    private static final VoxelShape NW_PILLAR = Block.makeCuboidShape(0.0, 2.0, 0.0, 2.0, 14.0, 2.0);
-    private static final VoxelShape SW_PILLAR = Block.makeCuboidShape(0.0, 2.0, 14.0, 2.0, 14.0, 16.0);
-    private static final VoxelShape NE_PILLAR = Block.makeCuboidShape(14.0, 2.0, 0.0, 16.0, 14.0, 2.0);
-    private static final VoxelShape SE_PILLAR = Block.makeCuboidShape(14.0, 2.0, 14.0, 16.0, 14.0, 16.0);
+    private static final VoxelShape INNER_CUBE = Block.createCuboidShape(2.0, 2.0, 2.0, 14.0, 14.0, 14.0);
+    private static final VoxelShape BOTTOM_NORTH = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 2.0);
+    private static final VoxelShape BOTTOM_EAST = Block.createCuboidShape(14.0, 0.0, 2.0, 16.0, 2.0, 14.0);
+    private static final VoxelShape BOTTOM_SOUTH = Block.createCuboidShape(0.0, 0.0, 14.0, 16.0, 2.0, 16.0);
+    private static final VoxelShape BOTTOM_WEST = Block.createCuboidShape(0.0, 0.0, 2.0, 2.0, 2.0, 14.0);
+    private static final VoxelShape TOP_NORTH = Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 2.0);
+    private static final VoxelShape TOP_EAST = Block.createCuboidShape(14.0, 14.0, 2.0, 16.0, 16.0, 14.0);
+    private static final VoxelShape TOP_SOUTH = Block.createCuboidShape(0.0, 14.0, 14.0, 16.0, 16.0, 16.0);
+    private static final VoxelShape TOP_WEST = Block.createCuboidShape(0.0, 14.0, 2.0, 2.0, 16.0, 14.0);
+    private static final VoxelShape NW_PILLAR = Block.createCuboidShape(0.0, 2.0, 0.0, 2.0, 14.0, 2.0);
+    private static final VoxelShape SW_PILLAR = Block.createCuboidShape(0.0, 2.0, 14.0, 2.0, 14.0, 16.0);
+    private static final VoxelShape NE_PILLAR = Block.createCuboidShape(14.0, 2.0, 0.0, 16.0, 14.0, 2.0);
+    private static final VoxelShape SE_PILLAR = Block.createCuboidShape(14.0, 2.0, 14.0, 16.0, 14.0, 16.0);
     private static final VoxelShape CHEST = VoxelShapes.or(INNER_CUBE, BOTTOM_EAST, BOTTOM_SOUTH, BOTTOM_WEST, BOTTOM_NORTH, TOP_EAST, TOP_SOUTH, TOP_WEST, TOP_NORTH, NW_PILLAR, SW_PILLAR, NE_PILLAR, SE_PILLAR);
 
     public ChestFrameBlock(Properties properties) {
@@ -74,7 +74,7 @@ public class ChestFrameBlock extends FrameBlock implements IWaterLoggable {
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         BlockPos blockpos = context.getPos();
-        FluidState fluidstate = context.getWorld().getFluidState(blockpos);
+        FluidState fluidstate = context.getDimension().getFluidState(blockpos);
         if (fluidstate.getFluid() == Fluids.WATER) {
             return this.getDefaultState().with(HORIZONTAL_FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, fluidstate.isSource());
         } else {
@@ -88,22 +88,22 @@ public class ChestFrameBlock extends FrameBlock implements IWaterLoggable {
     }
 
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
         return Registration.CHEST_FRAME_TILE.get().create();
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player,
+    public ActionResultType onBlockActivated(BlockState state, World dimension, BlockPos pos, PlayerEntity player,
                                              Hand hand, BlockRayTraceResult result) {
         ItemStack item = player.getHeldItem(hand);
-        if (!world.isRemote) {
-            TileEntity tileEntity = world.getTileEntity(pos);
+        if (!dimension.isClientSided) {
+            TileEntity tileEntity = dimension.getTileEntity(pos);
             if (item.getItem() instanceof BlockItem) {
                 int count = player.getHeldItem(hand).getCount();
                 Block heldBlock = ((BlockItem) item.getItem()).getBlock();
                 if (tileEntity instanceof ChestFrameTileEntity && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.get(CONTAINS_BLOCK)) {
                     BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().getDefaultState();
-                    insertBlock(world, pos, state, handBlockState);
+                    insertBlock(dimension, pos, state, handBlockState);
                     if (!player.isCreative())
                         player.getHeldItem(hand).setCount(count - 1);
                 }
@@ -111,14 +111,14 @@ public class ChestFrameBlock extends FrameBlock implements IWaterLoggable {
             //hammer is needed to remove the block from the frame - you can change it in the config
             if (player.getHeldItem(hand).getItem() == Registration.HAMMER.get() || (!BCModConfig.HAMMER_NEEDED.get() && player.isSneaking())) {
                 if (!player.isCreative())
-                    this.dropContainedBlock(world, pos);
+                    this.dropContainedBlock(dimension, pos);
                 state = state.with(CONTAINS_BLOCK, Boolean.FALSE);
-                world.setBlockState(pos, state, 2);
+                dimension.setBlockState(pos, state, 2);
             }
-            BlockAppearanceHelper.setLightLevel(item, state, world, pos, player, hand);
-            BlockAppearanceHelper.setTexture(item, state, world, player, pos);
-            BlockAppearanceHelper.setDesign(world, pos, player, item);
-            BlockAppearanceHelper.setDesignTexture(world, pos, player, item);
+            BlockAppearanceHelper.setLightLevel(item, state, dimension, pos, player, hand);
+            BlockAppearanceHelper.setTexture(item, state, dimension, player, pos);
+            BlockAppearanceHelper.setDesign(dimension, pos, player, item);
+            BlockAppearanceHelper.setDesignTexture(dimension, pos, player, item);
             if (tileEntity instanceof ChestFrameTileEntity && state.get(CONTAINS_BLOCK)) {
                 if (!(Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID))) {
                     NetworkHooks.openGui((ServerPlayerEntity) player, (ChestFrameTileEntity) tileEntity, pos);
@@ -130,23 +130,23 @@ public class ChestFrameBlock extends FrameBlock implements IWaterLoggable {
     }
 
     @Override
-    protected void dropContainedBlock(World worldIn, BlockPos pos) {
-        if (!worldIn.isRemote) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+    protected void dropContainedBlock(World dimensionIn, BlockPos pos) {
+        if (!dimensionIn.isClientSided) {
+            TileEntity tileentity = dimensionIn.getTileEntity(pos);
             if (tileentity instanceof ChestFrameTileEntity) {
                 ChestFrameTileEntity frameTileEntity = (ChestFrameTileEntity) tileentity;
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
-                    worldIn.playEvent(1010, pos, 0);
+                    dimensionIn.playEvent(1010, pos, 0);
                     frameTileEntity.clear();
                     float f = 0.7F;
-                    double d0 = (double) (worldIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (worldIn.rand.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (worldIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d0 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d1 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
+                    double d2 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
                     ItemStack itemstack1 = new ItemStack(blockState.getBlock());
-                    ItemEntity itementity = new ItemEntity(worldIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
+                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
                     itementity.setDefaultPickupDelay();
-                    worldIn.addEntity(itementity);
+                    dimensionIn.spawnEntity(itementity);
                     frameTileEntity.clear();
                 }
             }
@@ -154,23 +154,23 @@ public class ChestFrameBlock extends FrameBlock implements IWaterLoggable {
     }
 
     @Override
-    public void insertBlock(IWorld worldIn, BlockPos pos, BlockState state, BlockState handBlock) {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+    public void insertBlock(IWorld dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
+        TileEntity tileentity = dimensionIn.getTileEntity(pos);
         if (tileentity instanceof ChestFrameTileEntity) {
             ChestFrameTileEntity frameTileEntity = (ChestFrameTileEntity) tileentity;
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
-            worldIn.setBlockState(pos, state.with(CONTAINS_BLOCK, Boolean.TRUE), 2);
+            dimensionIn.setBlockState(pos, state.with(CONTAINS_BLOCK, Boolean.TRUE), 2);
         }
     }
 
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity te = worldIn.getTileEntity(pos);
+            TileEntity te = dimensionIn.getTileEntity(pos);
             if (te instanceof ChestFrameTileEntity) {
-                dropContainedBlock(worldIn, pos);
-                InventoryHelper.dropItems(worldIn, pos, ((ChestFrameTileEntity) te).getItems());
+                dropContainedBlock(dimensionIn, pos);
+                InventoryHelper.dropItems(dimensionIn, pos, ((ChestFrameTileEntity) te).getItems());
             }
         }
     }
@@ -182,17 +182,17 @@ public class ChestFrameBlock extends FrameBlock implements IWaterLoggable {
     }
 
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld dimensionIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.get(WATERLOGGED)) {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+            dimensionIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(dimensionIn));
         }
 
-        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return super.updatePostPlacement(stateIn, facing, facingState, dimensionIn, currentPos, facingPos);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, IBlockReader dimensionIn, BlockPos pos, ISelectionContext context) {
         return CHEST;
     }
 }

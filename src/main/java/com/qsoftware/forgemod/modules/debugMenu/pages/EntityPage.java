@@ -51,8 +51,8 @@ public class EntityPage extends DebugPage {
 
         Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
         Minecraft mc = Minecraft.getInstance();
-        ClientWorld world = mc.world;
-        if (world == null) {
+        ClientWorld dimension = mc.dimension;
+        if (dimension == null) {
             list.add(new DebugEntry("$WORLD$", null));
             return list;
         }
@@ -60,12 +60,12 @@ public class EntityPage extends DebugPage {
         int i = 1;
         int j = 1;
 
-        RayTraceResult raytraceresult = world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+        RayTraceResult raytraceresult = dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
         if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
             vec3d1 = raytraceresult.getHitVec();
         }
 
-        RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(world, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
+        RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(dimension, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
         if (rayTraceResult1 != null) {
             raytraceresult = rayTraceResult1;
         }
@@ -75,7 +75,7 @@ public class EntityPage extends DebugPage {
             Entity entity = entityRayTraceResult.getEntity();
             EntityType<? extends Entity> type = entity.getType();
 
-            list.add(new DebugEntry("translatedName", I18n.format(type.getTranslationKey())));
+            list.add(new DebugEntry("translatedName", I18n.format(type.getTranslationId())));
             list.add(new DebugEntry("height", type.getHeight()));
             list.add(new DebugEntry("lootTable", type.getLootTable()));
             list.add(new DebugEntry("name", type.getName().getString()));

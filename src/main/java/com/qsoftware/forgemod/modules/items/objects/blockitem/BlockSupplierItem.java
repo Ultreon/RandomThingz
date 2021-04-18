@@ -22,8 +22,8 @@ public class BlockSupplierItem extends BlockItem {
     }
 
     @Override
-    public @NotNull String getTranslationKey() {
-        return this.block.getTranslationKey();
+    public @NotNull String getTranslationId() {
+        return this.block.getTranslationId();
     }
 
     @Override

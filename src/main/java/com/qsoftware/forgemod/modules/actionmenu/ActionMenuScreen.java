@@ -43,15 +43,15 @@ public class ActionMenuScreen extends Screen {
     }
 
     @Override
-    public void init(Minecraft minecraft, int width, int height) {
+    public void initialize(Minecraft minecraft, int width, int height) {
         if (parent != null && initialized) {
-            parent.init(minecraft, width, height);
+            parent.initialize(minecraft, width, height);
         }
-        super.init(minecraft, width, height);
+        super.initialize(minecraft, width, height);
     }
 
     @Override
-    protected void init() {
+    protected void initialize() {
         this.buttons.clear();
         this.children.clear();
 

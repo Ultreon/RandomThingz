@@ -47,7 +47,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     }
 
     private static ITag.INamedTag<Item> itemTag(ResourceLocation id) {
-        return ItemTags.makeWrapperTag(id.toString());
+        return ItemTags.createWrapperTag(id.toString());
     }
 
     private static ResourceLocation forgeId(String path) {
@@ -158,7 +158,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.registerTags();
         this.tagToBuilder.forEach((p_240524_4_, p_240524_5_) -> {
             JsonObject jsonobject = p_240524_5_.serialize();
-            Path path = this.makePath(p_240524_4_);
+            Path path = this.createPath(p_240524_4_);
             if (path == null)
                 return; //Forge: Allow running this data provider without writing it. Recipe provider needs valid tags.
 
@@ -175,13 +175,13 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
                 cache.recordHash(path, s1);
             } catch (IOException ioexception) {
-                LOGGER.error("Couldn't save tags to {}", path, ioexception);
+                LOGGER.error("Couldn't write tags to {}", path, ioexception);
             }
 
         });
     }
 
     private static ITag.INamedTag<Item> itemTag(String path) {
-        return ItemTags.makeWrapperTag(new ResourceLocation(QForgeMod.modId, path).toString());
+        return ItemTags.createWrapperTag(new ResourceLocation(QForgeMod.modId, path).toString());
     }
 }

@@ -23,8 +23,8 @@ public abstract class AbstractMachineBaseScreen<C extends AbstractMachineBaseCon
     public abstract ResourceLocation getGuiTexture();
 
     @Override
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
         this.addButton(new RedstoneModeButton(container, this.guiLeft - 16, this.guiTop, 16, 16, button -> {
             RedstoneMode mode = ((RedstoneModeButton) button).getMode();
             Network.channel.sendToServer(new SetRedstoneModePacket(mode));
@@ -37,7 +37,7 @@ public abstract class AbstractMachineBaseScreen<C extends AbstractMachineBaseCon
             IFormattableTextComponent text = TextUtils.energyWithMax(container.getEnergyStored(), container.getMaxEnergyStored());
             renderTooltip(matrixStack, text, x, y);
         }
-        if (hoveredSlot instanceof MachineUpgradeSlot && !hoveredSlot.getHasStack()) {
+        if (hoveredSlot instanceof MachineUpgradeSlot && !hoveredSlot.hasStack()) {
             renderTooltip(matrixStack, TextUtils.translate("misc", "upgradeSlot"), x, y);
         }
         super.renderHoveredTooltip(matrixStack, x, y);

@@ -49,8 +49,8 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
      * Stores the UUID of the most recent lightning bolt to strike
      */
 
-    public MoobloomEntityOld(EntityType<? extends CowEntity> type, World worldIn) {
-        super(type, worldIn);
+    public MoobloomEntityOld(EntityType<? extends CowEntity> type, World dimensionIn) {
+        super(type, dimensionIn);
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
@@ -74,8 +74,8 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
         this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
     }
 
-    public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
-        return worldIn.getBlockState(pos.down()).matchesBlock(Blocks.MYCELIUM) ? 10.0F : worldIn.getBrightness(pos) - 0.5F;
+    public float getBlockPathWeight(BlockPos pos, IWorldReader dimensionIn) {
+        return dimensionIn.getBlockState(pos.down()).matchesBlock(Blocks.MYCELIUM) ? 10.0F : dimensionIn.getBrightness(pos) - 0.5F;
     }
 
     protected void registerData() {
@@ -107,11 +107,11 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
             }
 
             this.playSound(soundevent, 1.0F, 1.0F);
-            return ActionResultType.func_233537_a_(this.world.isRemote);
+            return ActionResultType.func_233537_a_(this.dimension.isClientSided);
         } else if (itemstack.getItem().isIn(ItemTags.SMALL_FLOWERS)) {
             if (this.hasStewEffect != null) {
                 for (int i = 0; i < 2; ++i) {
-                    this.world.addParticle(ParticleTypes.SMOKE, this.getPosX() + this.rand.nextDouble() / 2.0D, this.getPosYHeight(0.5D), this.getPosZ() + this.rand.nextDouble() / 2.0D, 0.0D, this.rand.nextDouble() / 5.0D, 0.0D);
+                    this.dimension.addParticle(ParticleTypes.SMOKE, this.getPosX() + this.rand.nextDouble() / 2.0D, this.getPosYHeight(0.5D), this.getPosZ() + this.rand.nextDouble() / 2.0D, 0.0D, this.rand.nextDouble() / 5.0D, 0.0D);
                 }
             } else {
                 Optional<Pair<Effect, Integer>> optional = this.getStewEffect(itemstack);
@@ -125,7 +125,7 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
                 }
 
                 for (int j = 0; j < 4; ++j) {
-                    this.world.addParticle(ParticleTypes.EFFECT, this.getPosX() + this.rand.nextDouble() / 2.0D, this.getPosYHeight(0.5D), this.getPosZ() + this.rand.nextDouble() / 2.0D, 0.0D, this.rand.nextDouble() / 5.0D, 0.0D);
+                    this.dimension.addParticle(ParticleTypes.EFFECT, this.getPosX() + this.rand.nextDouble() / 2.0D, this.getPosYHeight(0.5D), this.getPosZ() + this.rand.nextDouble() / 2.0D, 0.0D, this.rand.nextDouble() / 5.0D, 0.0D);
                 }
 
                 this.hasStewEffect = pair.getLeft();
@@ -133,18 +133,18 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
                 this.playSound(SoundEvents.ENTITY_MOOSHROOM_EAT, 2.0F, 1.0F);
             }
 
-            return ActionResultType.func_233537_a_(this.world.isRemote);
+            return ActionResultType.func_233537_a_(this.dimension.isClientSided);
         } else {
             return super.getEntityInteractionResult(p_230254_1_, p_230254_2_);
         }
     }
 
     public void shear(@NotNull SoundCategory category) {
-        this.world.playMovingSound(null, this, SoundEvents.ENTITY_MOOSHROOM_SHEAR, category, 1.0F, 1.0F);
-        if (!this.world.isRemote()) {
-            ((ServerWorld) this.world).spawnParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
-            this.remove();
-            CowEntity cowentity = EntityType.COW.create(this.world);
+        this.dimension.playMovingSound(null, this, SoundEvents.ENTITY_MOOSHROOM_SHEAR, category, 1.0F, 1.0F);
+        if (!this.dimension.isClientSided()) {
+            ((ServerWorld) this.dimension).spawnParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            this.delete();
+            CowEntity cowentity = EntityType.COW.create(this.dimension);
             Objects.requireNonNull(cowentity).setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationYaw, this.rotationPitch);
             cowentity.setHealth(this.getHealth());
             cowentity.renderYawOffset = this.renderYawOffset;
@@ -158,10 +158,10 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
             }
 
             cowentity.setInvulnerable(this.isInvulnerable());
-            this.world.addEntity(cowentity);
+            this.dimension.spawnEntity(cowentity);
 
             for (int i = 0; i < 5; ++i) {
-                this.world.addEntity(new ItemEntity(this.world, this.getPosX(), this.getPosYHeight(1.0D), this.getPosZ(), new ItemStack(ModBlocks.BUTTERCUP.get())));
+                this.dimension.spawnEntity(new ItemEntity(this.dimension, this.getPosX(), this.getPosYHeight(1.0D), this.getPosZ(), new ItemStack(ModBlocks.BUTTERCUP.get())));
             }
         }
 
@@ -214,18 +214,18 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
     }
 
     @Override
-    public boolean isShearable(@javax.annotation.Nonnull ItemStack item, World world, BlockPos pos) {
+    public boolean isShearable(@javax.annotation.Nonnull ItemStack item, World dimension, BlockPos pos) {
         return isShearable();
     }
 
     @javax.annotation.Nonnull
     @Override
-    public java.util.List<ItemStack> onSheared(@javax.annotation.Nullable PlayerEntity player, @javax.annotation.Nonnull ItemStack item, World world, BlockPos pos, int fortune) {
-        world.playMovingSound(null, this, SoundEvents.ENTITY_MOOSHROOM_SHEAR, player == null ? SoundCategory.BLOCKS : SoundCategory.PLAYERS, 1.0F, 1.0F);
-        if (!world.isRemote()) {
-            ((ServerWorld) this.world).spawnParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
-            this.remove();
-            CowEntity cowentity = EntityType.COW.create(this.world);
+    public java.util.List<ItemStack> onSheared(@javax.annotation.Nullable PlayerEntity player, @javax.annotation.Nonnull ItemStack item, World dimension, BlockPos pos, int fortune) {
+        dimension.playMovingSound(null, this, SoundEvents.ENTITY_MOOSHROOM_SHEAR, player == null ? SoundCategory.BLOCKS : SoundCategory.PLAYERS, 1.0F, 1.0F);
+        if (!dimension.isClientSided()) {
+            ((ServerWorld) this.dimension).spawnParticle(ParticleTypes.EXPLOSION, this.getPosX(), this.getPosYHeight(0.5D), this.getPosZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            this.delete();
+            CowEntity cowentity = EntityType.COW.create(this.dimension);
             Objects.requireNonNull(cowentity).setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationYaw, this.rotationPitch);
             cowentity.setHealth(this.getHealth());
             cowentity.renderYawOffset = this.renderYawOffset;
@@ -239,7 +239,7 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
             }
 
             cowentity.setInvulnerable(this.isInvulnerable());
-            this.world.addEntity(cowentity);
+            this.dimension.spawnEntity(cowentity);
 
             java.util.List<ItemStack> items = new java.util.ArrayList<>();
             for (int i = 0; i < 5; ++i) {

@@ -18,7 +18,7 @@ public class EnderTrait extends AbstractTrait {
 
     }
 
-    protected static BlockRayTraceResult rayTrace(World worldIn, PlayerEntity player) {
+    protected static BlockRayTraceResult rayTrace(World dimensionIn, PlayerEntity player) {
         float pitch = player.rotationPitch;
         float yaw = player.rotationYaw;
 
@@ -38,13 +38,13 @@ public class EnderTrait extends AbstractTrait {
         Vector3d endPos = startPos.add((double) lookX * rayLength, (double) lookY * rayLength, (double) lookZ * rayLength);
 
         // Raytracing.
-        return worldIn.rayTraceBlocks(new RayTraceContext(startPos, endPos, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+        return dimensionIn.rayTraceBlocks(new RayTraceContext(startPos, endPos, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
     }
 
     @Override
-    public boolean onRightClick(Item item, World world, PlayerEntity clicker, Hand hand) {
-        if (world instanceof ServerWorld) {
-            ServerWorld serverWorld = (ServerWorld) world;
+    public boolean onRightClick(Item item, World dimension, PlayerEntity clicker, Hand hand) {
+        if (dimension instanceof ServerWorld) {
+            ServerWorld serverWorld = (ServerWorld) dimension;
 
             RayTraceResult raytraceresult = rayTrace(serverWorld, clicker);
             double posX = raytraceresult.getHitVec().x;
@@ -52,7 +52,7 @@ public class EnderTrait extends AbstractTrait {
             double posZ = raytraceresult.getHitVec().z;
 
             for (int i = 0; i < 32; ++i) {
-                clicker.world.addParticle(ParticleTypes.PORTAL, posX, posY + clicker.getRNG().nextDouble() * 2.0D, posZ, clicker.getRNG().nextGaussian(), 0.0D, clicker.getRNG().nextGaussian());
+                clicker.dimension.addParticle(ParticleTypes.PORTAL, posX, posY + clicker.getRNG().nextDouble() * 2.0D, posZ, clicker.getRNG().nextGaussian(), 0.0D, clicker.getRNG().nextGaussian());
             }
 
             if (clicker.isPassenger()) {

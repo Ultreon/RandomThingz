@@ -214,184 +214,184 @@ public final class ModItems {
     //////////////////////
     public static final ItemRegistryObject<AdvancedBowItem> DUNGEONS_HUNTERS_BOW = register("hunters_bow", () -> new AdvancedBowItem(new Item.Properties().group(ModItemGroups.DUNGEONS), 4.0f, 1.0f, 1.75d) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<PickaxeItem> DUNGEONS_DIAMOND_PICKAXE = register("dungeons_diamond_pickaxe", () -> new PickaxeItem(net.minecraft.item.ItemTier.DIAMOND, 3, -2.1f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<AxeItem> DUNGEONS_DIAMOND_AXE = register("dungeons_diamond_axe", () -> new AxeItem(net.minecraft.item.ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<AxeItem> DUNGEONS_AXE = register("dungeons_axe", () -> new AxeItem(net.minecraft.item.ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<AxeItem> DUNGEONS_CURSED_AXE = register("cursed_axe", () -> new AxeItem(net.minecraft.item.ItemTier.GOLD, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<AxeItem> DUNGEONS_FIREBRAND = register("firebrand", () -> new AxeItem(net.minecraft.item.ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<AxeItem> DUNGEONS_HIGHLAND_AXE = register("highland_axe", () -> new AxeItem(net.minecraft.item.ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<AxeItem> DUNGEONS_WHIRLWIND = register("whirlwind", () -> new AxeItem(net.minecraft.item.ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_DAGGER = register("dungeons_dagger", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_ETERNAL_KNIFE = register("eternal_knife", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_FANGS_OF_FROST = register("fangs_of_frost", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_MOON_DAGGER = register("moon_dagger", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_NIGHTMARES_BITE = register("nightmares_bite", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_SPIRIT_KNIFE = register("spirit_knife", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 2, -1.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_GOLD = register("the_last_laugh_gold", () -> new SwordItem(net.minecraft.item.ItemTier.GOLD, 3, -0.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_SILVER = register("the_last_laugh_silver", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 2, -0.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_DIAMOND_SWORD = register("dungeons_diamond_sword", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_IRON_SWORD = register("dungeons_iron_sword", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 4, -2.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_BROADSWORD = register("dungeons_broadsword", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 5, -3.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<PickaxeItem> DUNGEONS_STORMLANDER = register("stormlander", () -> new PickaxeItem(net.minecraft.item.ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<PickaxeItem> DUNGEONS_GREAT_HAMMER = register("great_hammer", () -> new PickaxeItem(net.minecraft.item.ItemTier.IRON, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<PickaxeItem> DUNGEONS_HAMMER_OF_GRAVITY = register("hammer_of_gravity", () -> new PickaxeItem(net.minecraft.item.ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_FLAIL = register("flail", () -> new SwordItem(net.minecraft.item.ItemTier.STONE, 5, -3.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<SwordItem> DUNGEONS_SUNS_GRACE = register("suns_grace", () -> new SwordItem(net.minecraft.item.ItemTier.STONE, 5, -3.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<HoeItem> DUNGEONS_FROST_SCYTHE = register("frost_scythe", () -> new HoeItem(net.minecraft.item.ItemTier.STONE, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
     public static final ItemRegistryObject<HoeItem> DUNGEONS_JAILORS_SCYTHE = register("jailors_scythe", () -> new HoeItem(net.minecraft.item.ItemTier.STONE, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
-        public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+        public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.qforgemod.mc_dungeons"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
 

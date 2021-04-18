@@ -24,8 +24,8 @@ import javax.annotation.Nullable;
  * @author Qboi123
  */
 public class IceEndermanEntity extends EndermanEntity {
-    public IceEndermanEntity(EntityType<? extends EndermanEntity> type, World worldIn) {
-        super(type, worldIn);
+    public IceEndermanEntity(EntityType<? extends EndermanEntity> type, World dimensionIn) {
+        super(type, dimensionIn);
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
@@ -39,7 +39,7 @@ public class IceEndermanEntity extends EndermanEntity {
 
     @Override
     protected int getExperiencePoints(@NotNull PlayerEntity player) {
-        return 5 + this.world.rand.nextInt(8);
+        return 5 + this.dimension.rand.nextInt(8);
     }
 
     @Nullable

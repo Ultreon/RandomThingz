@@ -24,40 +24,40 @@ public class TargetEntityPage extends DebugPage {
 
         if (mc.player != null) {
             PlayerEntity player = mc.player;
-            float f = player.rotationPitch;
-            float f1 = player.rotationYaw;
+            float playerPitch = player.rotationPitch;
+            float playerYaw = player.rotationYaw;
 
-            Vector3d vec3d = player.getEyePosition(1.0F);
+            Vector3d playerEye = player.getEyePosition(1.0F);
 
-            float f2 = MathHelper.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-            float f3 = MathHelper.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-            float f4 = -MathHelper.cos(-f * ((float) Math.PI / 180F));
-            float f5 = MathHelper.sin(-f * ((float) Math.PI / 180F));
+            float f2 = MathHelper.cos(-playerYaw * ((float) Math.PI / 180F) - (float) Math.PI);
+            float f3 = MathHelper.sin(-playerYaw * ((float) Math.PI / 180F) - (float) Math.PI);
+            float f4 = -MathHelper.cos(-playerPitch * ((float) Math.PI / 180F));
+            float f5 = MathHelper.sin(-playerPitch * ((float) Math.PI / 180F));
 
             float f6 = f3 * f4;
             float f7 = f2 * f4;
 
-            double d0 = 16;
+            double distance = 16;
 
-            Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
+            Vector3d endPoint = playerEye.add((double) f6 * distance, (double) f5 * distance, (double) f7 * distance);
 
-            if (Minecraft.getInstance().world != null) {
-                RayTraceResult raytraceresult = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
-                if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
-                    vec3d1 = raytraceresult.getHitVec();
+            if (Minecraft.getInstance().dimension != null) {
+                RayTraceResult rayTraceResult = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(playerEye, endPoint, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+                if (rayTraceResult.getType() != RayTraceResult.Type.MISS) {
+                    endPoint = rayTraceResult.getHitVec();
                 }
 
-                RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().world, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
+                RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().dimension, player, playerEye, endPoint, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
                 if (rayTraceResult1 != null) {
-                    raytraceresult = rayTraceResult1;
+                    rayTraceResult = rayTraceResult1;
                 }
-                if (raytraceresult.getType() == RayTraceResult.Type.ENTITY) {
-                    @SuppressWarnings("ConstantConditions") EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) raytraceresult;
+                if (rayTraceResult.getType() == RayTraceResult.Type.ENTITY) {
+                    @SuppressWarnings("ConstantConditions") EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) rayTraceResult;
 
                     Entity entity = entityRayTraceResult.getEntity();
                     EntityType<? extends Entity> type = entity.getType();
 
-                    debugText.addLeftText("translatedName", I18n.format(type.getTranslationKey()));
+                    debugText.addLeftText("translatedName", I18n.format(type.getTranslationId()));
                     debugText.addLeftText("height", type.getHeight());
                     debugText.addLeftText("lootTable", type.getLootTable());
                     debugText.addLeftText("name", type.getName().getString());

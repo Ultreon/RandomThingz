@@ -47,7 +47,7 @@ public class Registration {
     private static final DeferredRegister<PointOfInterestType> POI_TYPES = DeferredRegister.create(ForgeRegistries.POI_TYPES, QTextureModels.MOD_ID);
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static final RegistryObject<FrameBlock> FRAMEBLOCK = BLOCKS.register("frameblock", () -> new FrameBlock(Block.Properties.create(Material.WOOD)
+    public static final RegistryObject<FrameBlock> FRAMEBLOCK = BLOCKS.register("frameblock", () -> new FrameBlock(Block.Properties.generate(Material.WOOD)
             .sound(SoundType.WOOD)
             .hardnessAndResistance(0.4f)
             .harvestTool(ToolType.AXE)
@@ -57,7 +57,7 @@ public class Registration {
     public static final RegistryObject<Item> FRAMEBLOCK_ITEM = ITEMS.register("frameblock", () -> new BlockItem(FRAMEBLOCK.get(), new Item.Properties().group(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
     public static final RegistryObject<TileEntityType<FrameBlockTile>> FRAMEBLOCK_TILE = TILES.register("frameblock", () -> TileEntityType.Builder.create(FrameBlockTile::new, FRAMEBLOCK.get()).build(null));
 
-    public static final RegistryObject<FrameBlock> FRAME_WALK_THRU = BLOCKS.register("frame_walk_thru", () -> new FrameBlock(Block.Properties.create(Material.WOOD)
+    public static final RegistryObject<FrameBlock> FRAME_WALK_THRU = BLOCKS.register("frame_walk_thru", () -> new FrameBlock(Block.Properties.generate(Material.WOOD)
             .sound(SoundType.WOOD)
             .hardnessAndResistance(0.4f)
             .harvestTool(ToolType.AXE)
@@ -193,7 +193,7 @@ public class Registration {
     public static final RegistryObject<Item> FENCE_GATE_ILLUSION_ITEM = ITEMS.register("illusion_fence_gate", () -> new BlockItem(FENCE_GATE_ILLUSIONBLOCK.get(), new Item.Properties().group(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
     public static final RegistryObject<TileEntityType<FrameBlockTile>> FENCE_GATE_ILLUSION_TILE = TILES.register("illusion_fence_gate", () -> TileEntityType.Builder.create(FrameBlockTile::new, FENCE_GATE_ILLUSIONBLOCK.get()).build(null));
 
-    public static void init() {
+    public static void initialize() {
         LOGGER.info("Registering blocks from QTextureModels");
         BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         LOGGER.info("Registering items from QTextureModels");

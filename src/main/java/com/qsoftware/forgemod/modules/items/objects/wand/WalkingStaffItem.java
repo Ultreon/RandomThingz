@@ -35,64 +35,64 @@ public class WalkingStaffItem extends Item {
     }
 
     @Override
-    public boolean hasEffect(@NotNull ItemStack stack) {
+    public boolean hasEnchantmentGlint(@NotNull ItemStack stack) {
         return true;
     }
 
     @Override
-    public void addInformation(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
         if (KeyboardHelper.isHoldingShift()) {
             tooltip.add(new StringTextComponent("Test Information"));
         } else {
             tooltip.add(new StringTextComponent(TextColors.YELLOW.toString() + TextColors.BOLD + "Hold SHIFT for more information."));
         }
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.addInformation(stack, dimensionIn, tooltip, flagIn);
     }
 
     @Override
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, PlayerEntity playerIn, @NotNull Hand handIn) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
         playerIn.addPotionEffect(new EffectInstance(Effects.SPEED, 5, 4, false, false));
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return super.onItemRightClick(dimensionIn, playerIn, handIn);
     }
 
     @Override
     public void onUsingTick(ItemStack stack, LivingEntity player, int count) {
-        World world = player.getEntityWorld();
+        World dimension = player.getEntityDimension();
         System.out.println("UsingTick");
 
-        if (world.getBlockState(player.getPosition().down()).getBlock() == Blocks.AIR || world.getBlockState(player.getPosition().down()).getBlock() == Blocks.CAVE_AIR || world.getBlockState(player.getPosition().down()).getBlock() == Blocks.LAVA || world.getBlockState(player.getPosition().down()).getBlock() == Blocks.WATER) {
+        if (dimension.getBlockState(player.getPosition().down()).getBlock() == Blocks.AIR || dimension.getBlockState(player.getPosition().down()).getBlock() == Blocks.CAVE_AIR || dimension.getBlockState(player.getPosition().down()).getBlock() == Blocks.LAVA || dimension.getBlockState(player.getPosition().down()).getBlock() == Blocks.WATER) {
             if (KeyboardHelper.isHoldingAlt()) {
-                if (world.getBlockState(player.getPosition().down().down()).getBlock() == Blocks.AIR || world.getBlockState(player.getPosition().down().down()).getBlock() == Blocks.CAVE_AIR || world.getBlockState(player.getPosition().down()).getBlock() == Blocks.LAVA || world.getBlockState(player.getPosition().down()).getBlock() == Blocks.WATER) {
-                    world.setBlockState(player.getPosition().down().down(), Blocks.COBBLESTONE.getDefaultState());
+                if (dimension.getBlockState(player.getPosition().down().down()).getBlock() == Blocks.AIR || dimension.getBlockState(player.getPosition().down().down()).getBlock() == Blocks.CAVE_AIR || dimension.getBlockState(player.getPosition().down()).getBlock() == Blocks.LAVA || dimension.getBlockState(player.getPosition().down()).getBlock() == Blocks.WATER) {
+                    dimension.setBlockState(player.getPosition().down().down(), Blocks.COBBLESTONE.getDefaultState());
                 }
             } else {
-                world.setBlockState(player.getPosition().down(), Blocks.COBBLESTONE.getDefaultState());
+                dimension.setBlockState(player.getPosition().down(), Blocks.COBBLESTONE.getDefaultState());
             }
         }
     }
 
     @Override
-    public void inventoryTick(@NotNull ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(@NotNull ItemStack stack, @NotNull World dimensionIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
         if (entityIn instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) entityIn;
             if (isSelected) {
-                if (worldIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.AIR || worldIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.CAVE_AIR || worldIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.LAVA || worldIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.WATER) {
+                if (dimensionIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.AIR || dimensionIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.CAVE_AIR || dimensionIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.LAVA || dimensionIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.WATER) {
                     if (KeyboardHelper.isHoldingAlt()) {
-                        if (worldIn.getBlockState(player.getPosition().down().down()).getBlock() == Blocks.AIR || worldIn.getBlockState(player.getPosition().down().down()).getBlock() == Blocks.CAVE_AIR || worldIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.LAVA || worldIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.WATER) {
-                            worldIn.setBlockState(player.getPosition().down().down(), Blocks.COBBLESTONE.getDefaultState());
+                        if (dimensionIn.getBlockState(player.getPosition().down().down()).getBlock() == Blocks.AIR || dimensionIn.getBlockState(player.getPosition().down().down()).getBlock() == Blocks.CAVE_AIR || dimensionIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.LAVA || dimensionIn.getBlockState(player.getPosition().down()).getBlock() == Blocks.WATER) {
+                            dimensionIn.setBlockState(player.getPosition().down().down(), Blocks.COBBLESTONE.getDefaultState());
                         }
                     } else {
-                        worldIn.setBlockState(player.getPosition().down(), Blocks.COBBLESTONE.getDefaultState());
+                        dimensionIn.setBlockState(player.getPosition().down(), Blocks.COBBLESTONE.getDefaultState());
                     }
                 }
             }
         }
-        super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+        super.inventoryTick(stack, dimensionIn, entityIn, itemSlot, isSelected);
     }
 
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
-        entity.world.setBlockState(entity.getPosition().down(), Blocks.BEDROCK.getDefaultState());
+        entity.dimension.setBlockState(entity.getPosition().down(), Blocks.BEDROCK.getDefaultState());
         return false;
     }
 }

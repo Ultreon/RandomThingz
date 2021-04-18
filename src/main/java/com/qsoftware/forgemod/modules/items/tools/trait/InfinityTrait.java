@@ -1,7 +1,6 @@
 package com.qsoftware.forgemod.modules.items.tools.trait;
 
 import com.qsoftware.forgemod.common.damagesource.DamageSourceInfinitySword;
-import com.qsoftware.forgemod.modules.items.ModItems;
 import com.qsoftware.forgemod.modules.items.tools.ToolType;
 import com.qsoftware.forgemod.modules.items.tools.Tools;
 import com.qsoftware.forgemod.modules.ui.ModStats;
@@ -14,6 +13,7 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class InfinityTrait extends AbstractTrait {
 
     @Override
     public boolean onHitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, LivingEntity attacker) {
-        if (attacker.world.isRemote) {
+        if (attacker.dimension.isClientSided) {
             // Don't do anything on client.
             return true;
         }
@@ -40,7 +40,7 @@ public class InfinityTrait extends AbstractTrait {
             // Get victim
             PlayerEntity playerVictim = (PlayerEntity) victim;
             if (isInfinite(playerVictim)) {
-                victim.attackEntityFrom(new DamageSourceInfinitySword(attacker).setDamageBypassesArmor(), 4.0F);
+                victim.attack(new DamageSourceInfinitySword(attacker).setDamageBypassesArmor(), 4.0F);
                 return true;
             }
             //noinspection ConstantConditions
@@ -87,7 +87,7 @@ public class InfinityTrait extends AbstractTrait {
 
     @Override
     public void onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-        if (!entity.world.isRemote && entity instanceof PlayerEntity) {
+        if (!entity.dimension.isClientSided && entity instanceof PlayerEntity) {
             PlayerEntity victim = (PlayerEntity) entity;
             if (victim.isCreative() && !(victim.getHealth() <= 0) && victim.getHealth() > 0 && !isInfinite(victim)) {
                 victim.getCombatTracker().trackDamage(new DamageSourceInfinitySword(player), victim.getHealth(), victim.getHealth());
@@ -95,21 +95,37 @@ public class InfinityTrait extends AbstractTrait {
                 victim.onDeath(new EntityDamageSource("infinity", player));
                 player.addStat(ModStats.INFINITY_KILL, 1);
             }
-        } else if (!entity.world.isRemote && !(entity instanceof LivingEntity)) {
+        } else if (!entity.dimension.isClientSided && !(entity instanceof LivingEntity)) {
             if (entity.ticksExisted > 100) {
-                entity.remove();
+                entity.delete();
             }
         }
     }
 
     @Override
-    public boolean onBlockBroken(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+    public boolean onBlockBroken(ItemStack stack, World dimensionIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
         return true;
     }
 
     @Override
     public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, PlayerEntity player) {
-        player.world.destroyBlock(pos, true);
+        player.dimension.destroyBlock(pos, true);
         return true;
+    }
+
+    @Override
+    public boolean isDamageable() {
+        return false;
+    }
+
+    @Override
+    public boolean isImmuneToFire() {
+        return true;
+    }
+
+    @Override
+    public void onLivingDamage(LivingDamageEvent e) {
+        e.setAmount(0);
+        e.setCanceled(true);
     }
 }

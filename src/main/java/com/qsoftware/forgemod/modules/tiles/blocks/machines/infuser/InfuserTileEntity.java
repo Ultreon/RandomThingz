@@ -36,7 +36,7 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
 
     @Override
     public void tick() {
-        if (world == null || world.isRemote) return;
+        if (dimension == null || dimension.isClientSided) return;
 
         tryFillTank();
 
@@ -75,7 +75,7 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
                 && this.isFluidValid(0, fluid)
                 && this.fill(fluid, IFluidHandler.FluidAction.SIMULATE) == 1000
                 && (output.isEmpty() || InventoryUtils.canItemsStack(input.getContainerItem(), output))
-                && (output.isEmpty() || output.getCount() < output.getMaxStackSize());
+                && (output.isEmpty() || output.getCount() < output.getMaxSize());
     }
 
     @Override
@@ -101,8 +101,8 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
     @Nullable
     @Override
     public InfusingRecipe getRecipe() {
-        if (world == null) return null;
-        return world.getRecipeManager().getRecipe(ModRecipes.Types.INFUSING, this, world).orElse(null);
+        if (dimension == null) return null;
+        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.INFUSING, this, dimension).orElse(null);
     }
 
     @Override

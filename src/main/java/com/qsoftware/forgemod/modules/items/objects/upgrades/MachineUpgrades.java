@@ -68,7 +68,7 @@ public enum MachineUpgrades implements IItemProvider, IMachineUpgrade, INamed, T
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getTranslationId() {
         return "upgrade." + QForgeMod.modId + "." + getStringName();
     }
 }

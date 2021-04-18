@@ -39,15 +39,15 @@ public final class FluidUtils {
      * Gets the energy capability for the block at the given position. If it does not have an energy
      * capability, or the block is not a tile entity, this returns null.
      *
-     * @param world The world
+     * @param dimension The dimension
      * @param pos   The position to check
      * @return The energy capability, or null if not present
      */
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    public static IFluidHandler getFluid(IWorldReader world, BlockPos pos) {
-        if (!world.isAreaLoaded(pos, 1)) return null;
-        TileEntity tileEntity = world.getTileEntity(pos);
+    public static IFluidHandler getFluid(IWorldReader dimension, BlockPos pos) {
+        if (!dimension.isAreaLoaded(pos, 1)) return null;
+        TileEntity tileEntity = dimension.getTileEntity(pos);
         return tileEntity != null ? tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).orElse(null) : null;
     }
 

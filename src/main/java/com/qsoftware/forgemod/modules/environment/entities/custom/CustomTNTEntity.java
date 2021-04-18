@@ -4,6 +4,7 @@ import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.common.TNTProperties;
 import com.qsoftware.forgemod.modules.environment.ModEntities;
 import com.qsoftware.forgemod.modules.tiles.blocks.CustomTNTBlock;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -12,21 +13,27 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.TNTEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
+import net.minecraft.network.IPacket;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public final class CustomTNTEntity extends TNTEntity {
     private final TNTProperties properties;
     private @Nullable BlockState blockState;
     private static final Supplier<BlockState> defaultBlockState = Blocks.TNT::getDefaultState;
     private static final TNTProperties defaultProperties = TNTProperties.builder().radius(4.0f).mode(Explosion.Mode.BREAK).fuse(80).build();
 
-    public CustomTNTEntity(@NotNull BlockState blockState, World worldIn) {
-        super(ModEntities.CUSTOM_TNT.get(), worldIn);
+    public CustomTNTEntity(@NotNull BlockState blockState, World dimensionIn) {
+        super(ModEntities.CUSTOM_TNT.get(), dimensionIn);
 
         Block block = blockState.getBlock();
         TNTProperties properties = null;
@@ -39,11 +46,11 @@ public final class CustomTNTEntity extends TNTEntity {
         this.properties = properties != null ? properties : defaultProperties;
     }
 
-    public CustomTNTEntity(@NotNull BlockState blockState, World worldIn, double x, double y, double z, @Nullable LivingEntity igniter) {
-        this(blockState, worldIn);
+    public CustomTNTEntity(@NotNull BlockState blockState, World dimensionIn, double x, double y, double z, @Nullable LivingEntity igniter) {
+        this(blockState, dimensionIn);
         this.setPosition(x, y, z);
 
-        double d0 = worldIn.rand.nextDouble() * (double)((float)Math.PI * 2F);
+        double d0 = dimensionIn.rand.nextDouble() * (double)((float)Math.PI * 2F);
         this.setMotion(-Math.sin(d0) * 0.02D, 0.2F, -Math.cos(d0) * 0.02D);
         this.setFuse(properties.getFuse());
         this.prevPosX = x;
@@ -87,8 +94,26 @@ public final class CustomTNTEntity extends TNTEntity {
     }
 
     @Override
+    public IPacket<?> getSpawnPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
+    @Override
     protected void explode() {
-        this.world.createExplosion(this, this.getPosX(), this.getPosYHeight(0.0625D), this.getPosZ(), properties.getRadius(), properties.isCausesFire(), properties.getMode());
+        World dimension = this.dimension;
+        BlockPos pos = this.getPosition();
+        BlockState state = this.blockState;
+        Block blockBefore = this.blockState.getBlock();
+        if (blockBefore instanceof CustomTNTBlock<?>) {
+            CustomTNTBlock<?> customTNTBlock = (CustomTNTBlock<?>) blockBefore;
+            customTNTBlock.beforeExplosion(dimension, pos, state, this);
+        }
+        dimension.createExplosion(this, this.getPosX(), this.getPosYHeight(0.0625D), this.getPosZ(), properties.getRadius(), properties.isCausesFire(), properties.getMode());
+        Block blockAfter = this.blockState.getBlock();
+        if (blockAfter instanceof CustomTNTBlock<?>) {
+            CustomTNTBlock<?> customTNTBlock = (CustomTNTBlock<?>) blockAfter;
+            customTNTBlock.afterExplosion(dimension, pos, state, this);
+        }
     }
 
     public @NotNull BlockState getBlockState() {

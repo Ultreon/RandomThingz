@@ -45,7 +45,7 @@ public class BroadswordItem extends SwordItem implements IHasToolType {
         return this.attackDamage;
     }
 
-    public float getDestroySpeed(ItemStack stack, BlockState state) {
+    public float getMiningSpeed(ItemStack stack, BlockState state) {
         if (state.matchesBlock(Blocks.COBWEB)) {
             return 20.0F;
         } else {
@@ -68,8 +68,8 @@ public class BroadswordItem extends SwordItem implements IHasToolType {
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-        if (state.getBlockHardness(worldIn, pos) > 0.2F) {
+    public boolean onBlockBroken(ItemStack stack, World dimensionIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+        if (state.getBlockHardness(dimensionIn, pos) > 0.2F) {
             stack.damageItem(2, entityLiving, (entity) -> {
                 entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
             });

@@ -55,7 +55,7 @@ public class ClientRegistrationUtil {
     }
 
 //    public static void registerIColoredBlockHandler(BlockColors blockColors, ItemColors itemColors, IBlockProvider... blocks) {
-//        ClientRegistrationUtil.registerBlockColorHandler(blockColors, itemColors, (state, world, pos, tintIndex) -> {
+//        ClientRegistrationUtil.registerBlockColorHandler(blockColors, itemColors, (state, dimension, pos, tintIndex) -> {
 //            Block block = state.asBlock();
 //            if (block instanceof IColoredBlock) {
 //                return QForgeUtilsRenderer.getColorARGB(((IColoredBlock) block).getColor(), 1);

@@ -20,12 +20,12 @@ public class EmpoweredRailBlock extends PoweredRailBlock implements IHasRenderTy
     }
 
     @Override
-    public float getRailMaxSpeed(BlockState state, World world, BlockPos pos, AbstractMinecartEntity cart) {
+    public float getRailMaxSpeed(BlockState state, World dimension, BlockPos pos, AbstractMinecartEntity cart) {
         return 0.6f;
     }
 
     @Override
-    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+    public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
         return state.get(POWERED) ? 10 : 0;
     }
 

@@ -76,7 +76,7 @@ public final class RenderUtils {
 
     @Nullable
     public static TextureAtlasSprite getFluidTexture(FluidStack stack) {
-        TextureAtlasSprite[] sprites = ForgeHooksClient.getFluidSprites(Minecraft.getInstance().world, BlockPos.ZERO, stack.getFluid().getDefaultState());
+        TextureAtlasSprite[] sprites = ForgeHooksClient.getFluidSprites(Minecraft.getInstance().dimension, BlockPos.ZERO, stack.getFluid().getDefaultState());
         return sprites.length > 0 ? sprites[0] : null;
     }
 }

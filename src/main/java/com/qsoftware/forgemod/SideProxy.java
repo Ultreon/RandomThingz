@@ -34,8 +34,8 @@ class SideProxy implements com.qsoftware.forgemod.IProxy {
     private MinecraftServer server = null;
 
     SideProxy() {
-        Config.init();
-        Network.init();
+        Config.initialize();
+        Network.initialize();
         Registration.register();
 
         // Add listeners for common events
@@ -65,7 +65,7 @@ class SideProxy implements com.qsoftware.forgemod.IProxy {
 
     private void commonSetup(FMLCommonSetupEvent event) {
 //        if (ModList.get().isLoaded("computercraft")) {
-//            SMechComputerCraftCompat.init();
+//            SMechComputerCraftCompat.initialize();
 //        }
     }
 
@@ -101,7 +101,7 @@ class SideProxy implements com.qsoftware.forgemod.IProxy {
         }
 
         public void setFog(EntityViewRenderEvent.FogColors fog) {
-            World w = fog.getInfo().getRenderViewEntity().getEntityWorld();
+            World w = fog.getInfo().getRenderViewEntity().getEntityDimension();
             BlockPos pos = fog.getInfo().getBlockPos();
             BlockState bs = w.getBlockState(pos);
             Block b = bs.getBlock();

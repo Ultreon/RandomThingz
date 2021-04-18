@@ -59,7 +59,7 @@ public class InfusingRecipe implements IFluidRecipe<IFluidInventory> {
     }
 
     @Override
-    public boolean matches(IFluidInventory inv, World worldIn) {
+    public boolean matches(IFluidInventory inv, World dimensionIn) {
         FluidStack fluidInTank = inv.getFluidInTank(0);
         ItemStack input = inv.getStackInSlot(InfuserTileEntity.SLOT_ITEM_IN);
         return this.fluid.test(fluidInTank) && this.ingredient.test(input);

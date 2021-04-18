@@ -38,7 +38,7 @@ public class BanHammerItem extends Item {
     public boolean hitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, @NotNull LivingEntity player) {
         if (victim instanceof PlayerEntity) {
             PlayerEntity playerVictim = (PlayerEntity) victim;
-            if (playerVictim.world instanceof ServerWorld) {
+            if (playerVictim.dimension instanceof ServerWorld) {
                 if (player.getServer() != null) {
                     BanList banlist = player.getServer().getPlayerList().getBannedPlayers();
                     GameProfile gameprofile = playerVictim.getGameProfile();
@@ -60,8 +60,8 @@ public class BanHammerItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        super.onItemRightClick(worldIn, playerIn, handIn);
+    public ActionResult<ItemStack> onItemRightClick(World dimensionIn, PlayerEntity playerIn, Hand handIn) {
+        super.onItemRightClick(dimensionIn, playerIn, handIn);
 
         ItemStack stack = playerIn.getHeldItem(handIn);
         Entity entity = Targeter.getTarget(playerIn);
@@ -69,9 +69,9 @@ public class BanHammerItem extends Item {
             return ActionResult.resultFail(stack);
         }
 
-        if (!entity.world.isRemote && entity instanceof PlayerEntity) {
+        if (!entity.dimension.isClientSided && entity instanceof PlayerEntity) {
             PlayerEntity victim = (PlayerEntity) entity;
-            if (victim.world instanceof ServerWorld) {
+            if (victim.dimension instanceof ServerWorld) {
                 if (playerIn.getServer() != null) {
                     BanList banlist = playerIn.getServer().getPlayerList().getBannedPlayers();
                     GameProfile gameprofile = victim.getGameProfile();
@@ -92,9 +92,9 @@ public class BanHammerItem extends Item {
                     }
                 }
             }
-        } else if (!entity.world.isRemote) {
-            if (entity.world instanceof ServerWorld) {
-                entity.remove();
+        } else if (!entity.dimension.isClientSided) {
+            if (entity.dimension instanceof ServerWorld) {
+                entity.delete();
                 playerIn.sendMessage(new TranslationTextComponent("commands.ban.success", entity.getName(), "The banhammer has spoken!"), entity.getUniqueID());
                 playerIn.addStat(Stats.ITEM_USED.get(this));
 
@@ -102,14 +102,14 @@ public class BanHammerItem extends Item {
             }
         }
 
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return super.onItemRightClick(dimensionIn, playerIn, handIn);
     }
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-        if (!entity.world.isRemote && entity instanceof PlayerEntity) {
+        if (!entity.dimension.isClientSided && entity instanceof PlayerEntity) {
             PlayerEntity victim = (PlayerEntity) entity;
-            if (victim.world instanceof ServerWorld) {
+            if (victim.dimension instanceof ServerWorld) {
                 if (player.getServer() != null) {
                     BanList banlist = player.getServer().getPlayerList().getBannedPlayers();
                     GameProfile gameprofile = victim.getGameProfile();
@@ -126,9 +126,9 @@ public class BanHammerItem extends Item {
                     }
                 }
             }
-        } else if (!entity.world.isRemote) {
-            if (entity.world instanceof ServerWorld) {
-                entity.remove();
+        } else if (!entity.dimension.isClientSided) {
+            if (entity.dimension instanceof ServerWorld) {
+                entity.delete();
                 player.sendMessage(new TranslationTextComponent("commands.ban.success", entity.getName(), "The banhammer has spoken!"), entity.getUniqueID());
             }
         }

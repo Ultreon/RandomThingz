@@ -17,7 +17,7 @@ public class SilverItem extends Item {
     }
 
     @Override
-    public boolean hasEffect(ItemStack stack) {
+    public boolean hasEnchantmentGlint(ItemStack stack) {
         boolean hasSmite = false;
         boolean hasMultiple = false;
         int enchantmentAmount = 0;
@@ -46,12 +46,12 @@ public class SilverItem extends Item {
     }
 
     @Override
-    public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
+    public void whenCreated(ItemStack stack, World dimensionIn, PlayerEntity playerIn) {
         stack.addEnchantment(Enchantments.SMITE, 2);
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, World dimensionIn, Entity entityIn, int itemSlot, boolean isSelected) {
         stack.addEnchantment(Enchantments.SMITE, 2);
     }
 }

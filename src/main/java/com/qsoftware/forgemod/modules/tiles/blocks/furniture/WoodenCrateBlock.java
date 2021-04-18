@@ -44,14 +44,14 @@ public class WoodenCrateBlock extends FaceableBlock {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
         return ModTileEntities.EXAMPLE_CHEST.get().create();
     }
 
     @Override
-    public @NotNull ActionResultType onBlockActivated(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult result) {
-        if (!worldIn.isRemote()) {
-            TileEntity tile = worldIn.getTileEntity(pos);
+    public @NotNull ActionResultType onBlockActivated(@NotNull BlockState state, World dimensionIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult result) {
+        if (!dimensionIn.isClientSided()) {
+            TileEntity tile = dimensionIn.getTileEntity(pos);
 
             if (tile instanceof CrateTileEntity) {
                 NetworkHooks.openGui((ServerPlayerEntity) player, (CrateTileEntity) tile, pos);
@@ -59,41 +59,41 @@ public class WoodenCrateBlock extends FaceableBlock {
             }
         }
         return ActionResultType.FAIL;
-//        return super.onBlockActivated(state, worldIn, pos, player, handIn, result);
+//        return super.onBlockActivated(state, dimensionIn, pos, player, handIn, result);
     }
 
     @Override
-    public void onReplaced(BlockState state, @NotNull World worldIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, @NotNull World dimensionIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity te = worldIn.getTileEntity(pos);
+            TileEntity te = dimensionIn.getTileEntity(pos);
             if (te instanceof CrateTileEntity) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, new Inventory(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
+                InventoryHelper.dropInventoryItems(dimensionIn, pos, new Inventory(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
             }
         }
     }
 
     @Override
-    public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
-        TileEntity te = world.getTileEntity(pos);
+    public boolean removedByPlayer(BlockState state, World dimension, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
+        TileEntity te = dimension.getTileEntity(pos);
         if (te instanceof CrateTileEntity) {
-            InventoryHelper.dropInventoryItems(world, pos, ((CrateTileEntity) te).getInventory());
+            InventoryHelper.dropInventoryItems(dimension, pos, ((CrateTileEntity) te).getInventory());
         }
-        return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
+        return super.removedByPlayer(state, dimension, pos, player, willHarvest, fluid);
     }
 
 
     @Override
-    public void onPlayerDestroy(@NotNull IWorld worldIn, @NotNull BlockPos pos, @NotNull BlockState state) {
-        super.onPlayerDestroy(worldIn, pos, state);
+    public void onPlayerDestroy(@NotNull IWorld dimensionIn, @NotNull BlockPos pos, @NotNull BlockState state) {
+        super.onPlayerDestroy(dimensionIn, pos, state);
     }
 
     @Override
-    public void onExplosionDestroy(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull Explosion explosionIn) {
-        super.onExplosionDestroy(worldIn, pos, explosionIn);
+    public void onExplosionDestroy(@NotNull World dimensionIn, @NotNull BlockPos pos, @NotNull Explosion explosionIn) {
+        super.onExplosionDestroy(dimensionIn, pos, explosionIn);
 
-        TileEntity te = worldIn.getTileEntity(pos);
+        TileEntity te = dimensionIn.getTileEntity(pos);
         if (te instanceof CrateTileEntity) {
-            InventoryHelper.dropInventoryItems(worldIn, pos, new Inventory(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
+            InventoryHelper.dropInventoryItems(dimensionIn, pos, new Inventory(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
         }
     }
 }

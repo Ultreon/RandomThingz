@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 public class ClientSetup {
 
     @SubscribeEvent
-    public static void init(final ModelRegistryEvent event) {
+    public static void initialize(final ModelRegistryEvent event) {
         ModelLoaderRegistry.registerLoader(new ResourceLocation(QTextureModels.MOD_ID, "frameloader"), new FrameModelLoader());
         ModelLoaderRegistry.registerLoader(new ResourceLocation(QTextureModels.MOD_ID, "frame_slab_loader"), new SlabFrameModelLoader());
         ModelLoaderRegistry.registerLoader(new ResourceLocation(QTextureModels.MOD_ID, "frame_button_loader"), new ButtonFrameModelLoader());

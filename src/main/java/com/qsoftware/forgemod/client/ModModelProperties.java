@@ -16,9 +16,9 @@ public final class ModModelProperties {
     }
 
     public static void register(FMLClientSetupEvent event) {
-        register(ModItems.BATTERY, EnergyStoringItem.CHARGE, (stack, world, entity) ->
+        register(ModItems.BATTERY, EnergyStoringItem.CHARGE, (stack, dimension, entity) ->
                 EnergyStoringItem.getChargeRatio(stack));
-        register(ModItems.MAGNET, EnergyStoringItem.CHARGE, (stack, world, entity) ->
+        register(ModItems.MAGNET, EnergyStoringItem.CHARGE, (stack, dimension, entity) ->
                 EnergyStoringItem.getChargeRatio(stack));
     }
 

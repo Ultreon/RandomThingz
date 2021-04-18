@@ -16,11 +16,11 @@ public class FrameSignItem extends SignItem {
         super(propertiesIn, floorBlockIn, wallBlockIn);
     }
 
-    protected boolean onBlockPlaced(BlockPos pos, World worldIn, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
-        boolean flag = super.onBlockPlaced(pos, worldIn, player, stack, state);
-        if (!worldIn.isRemote && !flag && player != null) {
+    protected boolean onBlockPlaced(BlockPos pos, World dimensionIn, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
+        boolean flag = super.onBlockPlaced(pos, dimensionIn, player, stack, state);
+        if (!dimensionIn.isClientSided && !flag && player != null) {
             System.out.println("platziert");
-            player.openSignEditor((SignFrameTile) worldIn.getTileEntity(pos));
+            player.openSignEditor((SignFrameTile) dimensionIn.getTileEntity(pos));
         }
 
         return flag;

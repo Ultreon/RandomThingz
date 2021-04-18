@@ -53,12 +53,12 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * Called when a player has right-clicked with an item that has this trait.
      * 
      * @param item the item that has this trait.
-     * @param world the world of the clicker.
+     * @param dimension the dimension of the clicker.
      * @param clicker the player that clicked.
      * @param hand the hand where the item was held.
      * @return ?
      */
-    public boolean onRightClick(Item item, World world, PlayerEntity clicker, Hand hand) {
+    public boolean onRightClick(Item item, World dimension, PlayerEntity clicker, Hand hand) {
         return false;
     }
 
@@ -66,12 +66,12 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * Called every tick when in inventory of an item that has this trait.
      * 
      * @param stack the item stack that is ticking.
-     * @param worldIn the world where the tick happened.
+     * @param dimensionIn the dimension where the tick happened.
      * @param entityIn the owner of the item.
      * @param itemSlot the slot index of the item in the inventory.
      * @param isSelected true if the item is selected in the hotbar.
      */
-    public void onInventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void onInventoryTick(ItemStack stack, World dimensionIn, Entity entityIn, int itemSlot, boolean isSelected) {
 
     }
 
@@ -79,10 +79,10 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * Called every tick while equipped on an item slot for armor with an item that has this trait.
      * 
      * @param stack the item stack that is ticking.
-     * @param world the world where the tick happened.
+     * @param dimension the dimension where the tick happened.
      * @param player the owner of the item that has this trait.
      */
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+    public void onArmorTick(ItemStack stack, World dimension, PlayerEntity player) {
 
     }
 
@@ -90,13 +90,13 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * Called when a block was broken by an item the item that has this trait.
      * 
      * @param stack the item that has this trait.
-     * @param worldIn the world where the block was broken.
+     * @param dimensionIn the dimension where the block was broken.
      * @param state the block state of the broken block.
      * @param pos the position of the broken block.
      * @param entityLiving the entity that broke the block.
      * @return ?
      */
-    public boolean onBlockBroken(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+    public boolean onBlockBroken(ItemStack stack, World dimensionIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
         return true;
     }
 
@@ -241,7 +241,7 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
     /**
      * Called when this item is used when targetting a Block
      */
-    public @NotNull ActionResultType onItemUse(ItemUseContext context) {
+    public @NotNull ActionResultType onUseItem(ItemUseContext context) {
         return ActionResultType.FAIL;
     }
 }

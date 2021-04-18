@@ -18,7 +18,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(modid = QForgeMod.modId, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class AdditionsClientRegistration {
     @SubscribeEvent
-    public static void init(FMLClientSetupEvent event) {
+    public static void initialize(FMLClientSetupEvent event) {
 //        new AdditionsKeyHandler();
 
         //Register entity rendering handlers

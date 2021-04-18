@@ -28,16 +28,16 @@ public final class PipeNetworkManager {
 
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    public static PipeNetwork get(IWorldReader world, BlockPos pos) {
-        return getLazy(world, pos).orElse(null);
+    public static PipeNetwork get(IWorldReader dimension, BlockPos pos) {
+        return getLazy(dimension, pos).orElse(null);
     }
 
-    public static LazyOptional<PipeNetwork> getLazy(IWorldReader world, BlockPos pos) {
+    public static LazyOptional<PipeNetwork> getLazy(IWorldReader dimension, BlockPos pos) {
         synchronized (NETWORK_LIST) {
             for (LazyOptional<PipeNetwork> network : NETWORK_LIST) {
                 if (network.isPresent()) {
                     PipeNetwork net = network.orElseThrow(IllegalStateException::new);
-                    if (net.contains(world, pos)) {
+                    if (net.contains(dimension, pos)) {
 //                    QForgeUtils.LOGGER.debug("get network {}", network);
                         return network;
                     }
@@ -46,16 +46,16 @@ public final class PipeNetworkManager {
         }
 
         // Create new
-        PipeNetwork network = PipeNetwork.buildNetwork(world, pos);
+        PipeNetwork network = PipeNetwork.buildNetwork(dimension, pos);
         LazyOptional<PipeNetwork> lazy = LazyOptional.of(() -> network);
         NETWORK_LIST.add(lazy);
         QForgeMod.LOGGER.debug("create network {}", network);
         return lazy;
     }
 
-    public static void invalidateNetwork(IWorldReader world, BlockPos pos) {
+    public static void invalidateNetwork(IWorldReader dimension, BlockPos pos) {
         Collection<LazyOptional<PipeNetwork>> toRemove = NETWORK_LIST.stream()
-                .filter(n -> n != null && n.isPresent() && n.orElseThrow(IllegalStateException::new).contains(world, pos))
+                .filter(n -> n != null && n.isPresent() && n.orElseThrow(IllegalStateException::new).contains(dimension, pos))
                 .collect(Collectors.toList());
         toRemove.forEach(PipeNetworkManager::invalidateNetwork);
     }

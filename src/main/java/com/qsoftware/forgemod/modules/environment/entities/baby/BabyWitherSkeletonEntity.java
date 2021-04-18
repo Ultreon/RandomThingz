@@ -26,8 +26,8 @@ public class BabyWitherSkeletonEntity extends WitherSkeletonEntity implements IB
 
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(BabyWitherSkeletonEntity.class, DataSerializers.BOOLEAN);
 
-    public BabyWitherSkeletonEntity(EntityType<BabyWitherSkeletonEntity> type, World world) {
-        super(type, world);
+    public BabyWitherSkeletonEntity(EntityType<BabyWitherSkeletonEntity> type, World dimension) {
+        super(type, dimension);
         setChild(true);
     }
 
@@ -80,7 +80,7 @@ public class BabyWitherSkeletonEntity extends WitherSkeletonEntity implements IB
 
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

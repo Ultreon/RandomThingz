@@ -170,7 +170,7 @@ public class CPU {
         }
     }
 
-    public void init(){
+    public void initialize(){
         pc = 0;
     }
 
@@ -230,7 +230,7 @@ public class CPU {
         // TODO Auto-generated method stub
 
         CPU cpu = new CPU(true);
-        cpu.init();
+        cpu.initialize();
         cpu.testOpcodes();
     }
 }

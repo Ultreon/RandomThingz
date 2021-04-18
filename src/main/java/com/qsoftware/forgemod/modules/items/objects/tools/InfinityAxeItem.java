@@ -70,7 +70,7 @@ public class InfinityAxeItem extends AxeItem {
 
     @Override
     public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player) {
-        player.world.destroyBlock(pos, true);
+        player.dimension.destroyBlock(pos, true);
         return true;
     }
 
@@ -78,13 +78,13 @@ public class InfinityAxeItem extends AxeItem {
     @Override
     public boolean hitEntity(ItemStack stack, LivingEntity victim, LivingEntity player) {
 
-        if (player.world.isRemote) {
+        if (player.dimension.isClientSided) {
             return true;
         }
         if (victim instanceof PlayerEntity) {
             PlayerEntity pvp = (PlayerEntity) victim;
             if (isInfinite(pvp)) {
-                victim.attackEntityFrom(new DamageSourceInfinitySword(player).setDamageBypassesArmor(), 4.0F);
+                victim.attack(new DamageSourceInfinitySword(player).setDamageBypassesArmor(), 4.0F);
                 return true;
             }
             if (pvp.getHeldItem(Hand.MAIN_HAND) != null && pvp.getHeldItem(Hand.MAIN_HAND).getItem() == Tools.INFINITY.getSword().get() && pvp.isHandActive()) {
@@ -139,7 +139,7 @@ public class InfinityAxeItem extends AxeItem {
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-        if (!entity.world.isRemote && entity instanceof PlayerEntity) {
+        if (!entity.dimension.isClientSided && entity instanceof PlayerEntity) {
             PlayerEntity victim = (PlayerEntity) entity;
             if (victim.isCreative() && !(victim.getHealth() <= 0) && victim.getHealth() > 0 && !isInfinite(victim)) {
                 victim.getCombatTracker().trackDamage(new DamageSourceInfinitySword(player), victim.getHealth(), victim.getHealth());

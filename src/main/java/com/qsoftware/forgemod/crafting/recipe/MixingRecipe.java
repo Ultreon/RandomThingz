@@ -31,7 +31,7 @@ public class MixingRecipe implements IFluidRecipe<IFluidInventory> {
     @Getter private FluidStack result;
 
     @Override
-    public boolean matches(IFluidInventory inv, World worldIn) {
+    public boolean matches(IFluidInventory inv, World dimensionIn) {
         final int inputTanks = Math.min(4, inv.getTanks());
         Set<Integer> matchedTanks = new HashSet<>();
 

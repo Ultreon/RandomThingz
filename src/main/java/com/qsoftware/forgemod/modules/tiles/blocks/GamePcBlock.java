@@ -31,7 +31,7 @@ public class GamePcBlock extends FaceableBlock {
     }
 
     @Override
-    public @NotNull VoxelShape getShape(BlockState state, @NotNull IBlockReader worldIn, @NotNull BlockPos pos, @NotNull ISelectionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull IBlockReader dimensionIn, @NotNull BlockPos pos, @NotNull ISelectionContext context) {
         switch (state.get(FACING)) {
             case EAST:
                 return SHAPE_E;
@@ -45,7 +45,7 @@ public class GamePcBlock extends FaceableBlock {
     }
 
     @Override
-    public float getAmbientOcclusionLightValue(@NotNull BlockState state, @NotNull IBlockReader worldIn, @NotNull BlockPos pos) {
+    public float getAmbientOcclusionLightValue(@NotNull BlockState state, @NotNull IBlockReader dimensionIn, @NotNull BlockPos pos) {
         return 0.6f;
     }
 
@@ -55,7 +55,7 @@ public class GamePcBlock extends FaceableBlock {
 //        if (context.getPos().equals(new BlockPos(0, 255, 0))) {
 //            return super.getStateForPlacement(context);
 //        } else {
-//            return context.getWorld().getBlockState(context.getPos());
+//            return context.getDimension().getBlockState(context.getPos());
 //        }
 //    }
 }

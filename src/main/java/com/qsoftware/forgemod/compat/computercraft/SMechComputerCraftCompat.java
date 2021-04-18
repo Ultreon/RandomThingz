@@ -13,13 +13,13 @@ public final class SMechComputerCraftCompat {
     private SMechComputerCraftCompat() {
     }
 
-    public static void init() {
+    public static void initialize() {
         ComputerCraftAPI.registerPeripheralProvider(SMechComputerCraftCompat::getPeripheral);
     }
 
     @SuppressWarnings("TypeMayBeWeakened")
-    private static LazyOptional<IPeripheral> getPeripheral(World world, BlockPos pos, Direction side) {
-        TileEntity tileEntity = world.getTileEntity(pos);
+    private static LazyOptional<IPeripheral> getPeripheral(World dimension, BlockPos pos, Direction side) {
+        TileEntity tileEntity = dimension.getTileEntity(pos);
         if (tileEntity instanceof AbstractMachineBaseTileEntity) {
             return LazyOptional.of(() -> new MachinePeripheral((AbstractMachineBaseTileEntity) tileEntity));
         }

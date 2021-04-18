@@ -7,17 +7,17 @@ import net.minecraft.potion.EffectType;
 
 public class RadiationEffect extends Effect {
     public RadiationEffect() {
-        super(EffectType.HARMFUL, 0x003f00);
+        super(EffectType.HARMFUL, 0x408040);
     }
 
     @Override
     public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        entityLivingBaseIn.attackEntityFrom(ModDamageSources.RADIATION, 2.0F);
+        entityLivingBaseIn.attack(ModDamageSources.RADIATION, 2.0F);
     }
 
     @Override
     public boolean isReady(int duration, int amplifier) {
-        int i = 64 >> amplifier;
+        int i = 1200 >> amplifier;
         if (i > 0) {
             return duration % i == 0;
         } else {

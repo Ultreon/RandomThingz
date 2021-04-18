@@ -80,7 +80,7 @@ public class EnergyStoringItem extends HudItem {
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World dimensionIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         // Apparently, addInformation can be called before caps are initialized
         if (CapabilityEnergy.ENERGY == null) return;
 
@@ -122,7 +122,7 @@ public class EnergyStoringItem extends HudItem {
 
         int height = mc.getMainWindow().getScaledHeight();
 
-        World worldIn = player.getEntityWorld();
+        World dimensionIn = player.getEntityDimension();
 
         stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
             int val;

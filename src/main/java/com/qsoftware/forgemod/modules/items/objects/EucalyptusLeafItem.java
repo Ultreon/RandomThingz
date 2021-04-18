@@ -28,9 +28,10 @@ public class EucalyptusLeafItem extends Item {
      * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
      * the Item before the action is complete.
      */
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        if (!worldIn.isRemote) entityLiving.removeActivePotionEffect(Effects.POISON);
-        if (!worldIn.isRemote) entityLiving.removeActivePotionEffect(Effects.HUNGER);
+    @Override
+    public ItemStack onFinishUseItem(ItemStack stack, World dimensionIn, LivingEntity entityLiving) {
+        if (!dimensionIn.isClientSided) entityLiving.removeActivePotionEffect(Effects.POISON);
+        if (!dimensionIn.isClientSided) entityLiving.removeActivePotionEffect(Effects.HUNGER);
 
 
         if (entityLiving instanceof ServerPlayerEntity) {
@@ -49,6 +50,7 @@ public class EucalyptusLeafItem extends Item {
     /**
      * How long it takes to use or consume an item
      */
+    @Override
     public int getUseDuration(ItemStack stack) {
         return 32;
     }
@@ -56,15 +58,16 @@ public class EucalyptusLeafItem extends Item {
     /**
      * returns the action that specifies what animation to play when the items is being used
      */
+    @Override
     public UseAction getUseAction(ItemStack stack) {
         return UseAction.EAT;
     }
 
     /**
      * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-     * {@link #onItemUse}.
+     * {@link #onUseItem}.
      */
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World dimensionIn, PlayerEntity playerIn, Hand handIn) {
         playerIn.setActiveHand(handIn);
         return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
     }

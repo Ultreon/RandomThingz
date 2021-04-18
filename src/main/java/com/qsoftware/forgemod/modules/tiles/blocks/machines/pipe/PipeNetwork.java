@@ -21,46 +21,46 @@ import java.util.*;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public final class PipeNetwork implements IFluidHandler {
-    private final IWorldReader world;
+    private final IWorldReader dimension;
     private final Map<BlockPos, Set<Connection>> connections = new HashMap<>();
     private final FluidTank fluidTank;
     private boolean connectionsBuilt;
 
-    private PipeNetwork(IWorldReader world, Set<BlockPos> wires) {
-        this.world = world;
+    private PipeNetwork(IWorldReader dimension, Set<BlockPos> wires) {
+        this.dimension = dimension;
         wires.forEach(pos -> connections.put(pos, Collections.emptySet()));
         this.fluidTank = new FluidTank(1000);
     }
 
-    static PipeNetwork buildNetwork(IWorldReader world, BlockPos pos) {
-        Set<BlockPos> pipes = buildPipeSet(world, pos);
+    static PipeNetwork buildNetwork(IWorldReader dimension, BlockPos pos) {
+        Set<BlockPos> pipes = buildPipeSet(dimension, pos);
 //        int energyStored = pipes.stream().mapToInt(p -> {
-//            TileEntity tileEntity = world.getTileEntity(p);
+//            TileEntity tileEntity = dimension.getTileEntity(p);
 //            return tileEntity instanceof PipeTileEntity ? ((PipeTileEntity) tileEntity).energyStored : 0;
 //        }).sum();
-        return new PipeNetwork(world, pipes);
+        return new PipeNetwork(dimension, pipes);
     }
 
-    private static Set<BlockPos> buildPipeSet(IWorldReader world, BlockPos pos) {
-        return buildPipeSet(world, pos, new HashSet<>());
+    private static Set<BlockPos> buildPipeSet(IWorldReader dimension, BlockPos pos) {
+        return buildPipeSet(dimension, pos, new HashSet<>());
     }
 
-    private static Set<BlockPos> buildPipeSet(IWorldReader world, BlockPos pos, Set<BlockPos> set) {
+    private static Set<BlockPos> buildPipeSet(IWorldReader dimension, BlockPos pos, Set<BlockPos> set) {
         // Get all positions that have a wire connected to the wire at pos
         set.add(pos);
         for (Direction side : Direction.values()) {
             BlockPos pos1 = pos.offset(side);
-            if (!set.contains(pos1) && world.getTileEntity(pos1) instanceof PipeTileEntity) {
+            if (!set.contains(pos1) && dimension.getTileEntity(pos1) instanceof PipeTileEntity) {
                 set.add(pos1);
-                set.addAll(buildPipeSet(world, pos1, set));
+                set.addAll(buildPipeSet(dimension, pos1, set));
             }
         }
         return set;
     }
 
     @Nullable
-    private static IFluidHandler getFluidHandler(IBlockReader world, BlockPos pos, Direction side) {
-        TileEntity tileEntity = world.getTileEntity(pos.offset(side));
+    private static IFluidHandler getFluidHandler(IBlockReader dimension, BlockPos pos, Direction side) {
+        TileEntity tileEntity = dimension.getTileEntity(pos.offset(side));
         if (tileEntity != null) {
             //noinspection ConstantConditions
             return tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()).orElse(null);
@@ -68,8 +68,8 @@ public final class PipeNetwork implements IFluidHandler {
         return null;
     }
 
-    public boolean contains(IWorldReader world, BlockPos pos) {
-        return this.world == world && connections.containsKey(pos);
+    public boolean contains(IWorldReader dimension, BlockPos pos) {
+        return this.dimension == dimension && connections.containsKey(pos);
     }
 
     public int getPipeCount() {
@@ -94,18 +94,18 @@ public final class PipeNetwork implements IFluidHandler {
     private void buildConnections() {
         // Determine all connections. This will be done once the connections are actually needed.
         if (!connectionsBuilt) {
-            connections.keySet().forEach(p -> connections.put(p, getConnections(world, p)));
+            connections.keySet().forEach(p -> connections.put(p, getConnections(dimension, p)));
             connectionsBuilt = true;
         }
     }
 
-    private Set<Connection> getConnections(IBlockReader world, BlockPos pos) {
+    private Set<Connection> getConnections(IBlockReader dimension, BlockPos pos) {
         // Get all connections for the wire at pos
         Set<Connection> connections = new HashSet<>();
         for (Direction direction : Direction.values()) {
-            TileEntity te = world.getTileEntity(pos.offset(direction));
+            TileEntity te = dimension.getTileEntity(pos.offset(direction));
             if (te != null && !(te instanceof PipeTileEntity) && te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).isPresent()) {
-                ConnectionType type = PipeBlock.getConnection(world.getBlockState(pos), direction);
+                ConnectionType type = PipeBlock.getConnection(dimension.getBlockState(pos), direction);
                 connections.add(new Connection(this, direction, type));
             }
         }
@@ -120,7 +120,7 @@ public final class PipeNetwork implements IFluidHandler {
             Set<Connection> connections = entry.getValue();
             for (Connection con : connections) {
                 if (con.type.canExtract()) {
-                    IFluidHandler fluidHandler = getFluidHandler(world, pos, con.side);
+                    IFluidHandler fluidHandler = getFluidHandler(dimension, pos, con.side);
                     if (fluidHandler != null) {
                         FluidStack toSend = fluidHandler.drain(10, FluidAction.SIMULATE);
                         if (!toSend.isEmpty()) {
@@ -133,7 +133,7 @@ public final class PipeNetwork implements IFluidHandler {
             }
             for (Connection con : connections) {
                 if (con.type.canReceive()) {
-                    IFluidHandler fluidHandler = getFluidHandler(world, pos, con.side);
+                    IFluidHandler fluidHandler = getFluidHandler(dimension, pos, con.side);
                     if (fluidHandler != null) {
                         FluidStack toSend = drain(10, FluidAction.SIMULATE);
                         if (!toSend.isEmpty()) {

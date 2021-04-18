@@ -30,14 +30,14 @@ public class BabyStrayEntity extends StrayEntity implements IBabyEntity {
 
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(BabyStrayEntity.class, DataSerializers.BOOLEAN);
 
-    public BabyStrayEntity(EntityType<BabyStrayEntity> type, World world) {
-        super(type, world);
+    public BabyStrayEntity(EntityType<BabyStrayEntity> type, World dimension) {
+        super(type, dimension);
         setChild(true);
     }
 
     //Copy of stray spawn restrictions
-    public static boolean spawnRestrictions(EntityType<BabyStrayEntity> type, IServerWorld world, SpawnReason reason, BlockPos pos, Random random) {
-        return canMonsterSpawnInLight(type, world, reason, pos, random) && (reason == SpawnReason.SPAWNER || world.canSeeSky(pos));
+    public static boolean spawnRestrictions(EntityType<BabyStrayEntity> type, IServerWorld dimension, SpawnReason reason, BlockPos pos, Random random) {
+        return canMonsterSpawnInLight(type, dimension, reason, pos, random) && (reason == SpawnReason.SPAWNER || dimension.canSeeSky(pos));
     }
 
     @Override
@@ -89,7 +89,7 @@ public class BabyStrayEntity extends StrayEntity implements IBabyEntity {
 
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

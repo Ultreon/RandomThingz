@@ -29,13 +29,13 @@ public class Run {
         Rom rom = Rom.of(Files.readAllBytes(ROM_FILE));
         CPU cpu = new CPU();
         Loader loader = new Loader(cpu);
-        loader.load(rom);
+        loader.read(rom);
 
-        loader.load("fffc-0020"); // Reset vector
-        loader.load("00a0-2004"); // Test vector for (--),Y
+        loader.read("fffc-0020"); // Reset vector
+        loader.read("00a0-2004"); // Test vector for (--),Y
         loader.write(0x2000, Files.readAllBytes(Paths.get("rom.bin")));
-//        loader.load(program);
-        loader.load("3000-a934ff01a932ff0160");
+//        loader.read(program);
+        loader.read("3000-a934ff01a932ff0160");
         cpu.reset();
         for (int i = 0; i < 100; i++) {
             cpu.execute();

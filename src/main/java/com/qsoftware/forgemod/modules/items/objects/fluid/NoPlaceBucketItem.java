@@ -24,7 +24,7 @@ public class NoPlaceBucketItem extends BucketItem {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World dimensionIn, PlayerEntity playerIn, Hand handIn) {
         return new ActionResult<>(ActionResultType.PASS, playerIn.getHeldItem(handIn));
     }
 

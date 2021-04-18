@@ -23,9 +23,9 @@ public class PipeTileEntity extends TileEntity {
     }
 
     public String getPipeNetworkData() {
-        if (world == null) return "world is null";
+        if (dimension == null) return "world is null";
 
-        PipeNetwork net = PipeNetworkManager.get(world, pos);
+        PipeNetwork net = PipeNetworkManager.get(dimension, pos);
         return net != null ? net.toString() : "null";
     }
 
@@ -40,18 +40,18 @@ public class PipeTileEntity extends TileEntity {
     }
 
     @Override
-    public void remove() {
-        if (world != null) {
-            PipeNetworkManager.invalidateNetwork(world, pos);
+    public void delete() {
+        if (dimension != null) {
+            PipeNetworkManager.invalidateNetwork(dimension, pos);
         }
-        super.remove();
+        super.delete();
     }
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (world != null && !removed && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side != null) {
-            LazyOptional<PipeNetwork> networkOptional = PipeNetworkManager.getLazy(world, pos);
+        if (dimension != null && !removed && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side != null) {
+            LazyOptional<PipeNetwork> networkOptional = PipeNetworkManager.getLazy(dimension, pos);
             if (networkOptional.isPresent()) {
                 return networkOptional.orElseThrow(IllegalStateException::new).getConnection(pos, side).getLazyOptional().cast();
             }

@@ -16,17 +16,17 @@ import javax.annotation.Nullable;
 
 @UtilityClass
 public final class EnergyUtils {
-    public static void trySendToNeighbors(IBlockReader world, BlockPos pos, IEnergyHandler energyHandler, int maxSend) {
+    public static void trySendToNeighbors(IBlockReader dimension, BlockPos pos, IEnergyHandler energyHandler, int maxSend) {
         for (Direction side : Direction.values()) {
             if (energyHandler.getEnergyStored() == 0) {
                 return;
             }
-            trySendTo(world, pos, energyHandler, maxSend, side);
+            trySendTo(dimension, pos, energyHandler, maxSend, side);
         }
     }
 
-    public static void trySendTo(IBlockReader world, BlockPos pos, IEnergyHandler energyHandler, int maxSend, Direction side) {
-        TileEntity tileEntity = world.getTileEntity(pos.offset(side));
+    public static void trySendTo(IBlockReader dimension, BlockPos pos, IEnergyHandler energyHandler, int maxSend, Direction side) {
+        TileEntity tileEntity = dimension.getTileEntity(pos.offset(side));
         if (tileEntity != null) {
             IEnergyStorage energy = energyHandler.getEnergy(side).orElse(new EnergyStorage(0));
             tileEntity.getCapability(CapabilityEnergy.ENERGY, side.getOpposite()).ifPresent(other -> trySendEnergy(maxSend, energy, other));
@@ -47,15 +47,15 @@ public final class EnergyUtils {
      * Gets the energy capability for the block at the given position. If it does not have an energy
      * capability, or the block is not a tile entity, this returns null.
      *
-     * @param world The world
+     * @param dimension The dimension
      * @param pos   The position to check
      * @return The energy capability, or null if not present
      */
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    public static IEnergyStorage getEnergy(IWorldReader world, BlockPos pos) {
-        if (!world.isAreaLoaded(pos, 1)) return null;
-        TileEntity tileEntity = world.getTileEntity(pos);
+    public static IEnergyStorage getEnergy(IWorldReader dimension, BlockPos pos) {
+        if (!dimension.isAreaLoaded(pos, 1)) return null;
+        TileEntity tileEntity = dimension.getTileEntity(pos);
         return tileEntity != null ? tileEntity.getCapability(CapabilityEnergy.ENERGY).orElse(null) : null;
     }
 

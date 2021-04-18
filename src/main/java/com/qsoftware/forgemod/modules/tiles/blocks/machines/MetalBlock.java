@@ -7,7 +7,7 @@ import net.minecraftforge.common.ToolType;
 
 public class MetalBlock extends Block {
     public MetalBlock(int harvestLevel) {
-        super(Properties.create(Material.IRON)
+        super(Properties.generate(Material.IRON)
                 .hardnessAndResistance(4, 20)
                 .setRequiresTool()
                 .harvestLevel(harvestLevel)

@@ -31,7 +31,7 @@ public class SolidifierTileEntity extends AbstractFluidMachineTileEntity<Solidif
 
     @Override
     public void tick() {
-        if (world == null || world.isRemote) return;
+        if (dimension == null || dimension.isClientSided) return;
 
         tryFillTank();
 
@@ -70,7 +70,7 @@ public class SolidifierTileEntity extends AbstractFluidMachineTileEntity<Solidif
                 && this.isFluidValid(0, fluid)
                 && this.fill(fluid, IFluidHandler.FluidAction.SIMULATE) == 1000
                 && (output.isEmpty() || InventoryUtils.canItemsStack(input.getContainerItem(), output))
-                && (output.isEmpty() || output.getCount() < output.getMaxStackSize());
+                && (output.isEmpty() || output.getCount() < output.getMaxSize());
     }
 
     @Override
@@ -96,8 +96,8 @@ public class SolidifierTileEntity extends AbstractFluidMachineTileEntity<Solidif
     @Nullable
     @Override
     public SolidifyingRecipe getRecipe() {
-        if (world == null) return null;
-        return world.getRecipeManager().getRecipe(ModRecipes.Types.SOLIDIFYING, this, world).orElse(null);
+        if (dimension == null) return null;
+        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.SOLIDIFYING, this, dimension).orElse(null);
     }
 
     @Override

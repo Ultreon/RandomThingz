@@ -56,7 +56,7 @@ public class KnifeItem extends TieredItem {
 
     @SuppressWarnings("NullableProblems")
     @Override
-    public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
+    public boolean canPlayerBreakBlockWhileHolding(BlockState state, World dimensionIn, BlockPos pos, PlayerEntity player) {
         return !player.isCreative();
     }
 
@@ -77,8 +77,8 @@ public class KnifeItem extends TieredItem {
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
     @Override
-    public boolean onBlockDestroyed(@NotNull ItemStack stack, @NotNull World worldIn, BlockState state, @NotNull BlockPos pos, @NotNull LivingEntity entityLiving) {
-        if (state.getBlockHardness(worldIn, pos) != 0.0F) {
+    public boolean onBlockBroken(@NotNull ItemStack stack, @NotNull World dimensionIn, BlockState state, @NotNull BlockPos pos, @NotNull LivingEntity entityLiving) {
+        if (state.getBlockHardness(dimensionIn, pos) != 0.0F) {
             stack.damageItem(2, entityLiving, (entity) -> {
                 entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
             });
@@ -104,7 +104,7 @@ public class KnifeItem extends TieredItem {
         return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(equipmentSlot);
     }
 
-    public float getDestroySpeed(@NotNull ItemStack stack, BlockState state) {
+    public float getMiningSpeed(@NotNull ItemStack stack, BlockState state) {
         if (state.matchesBlock(Blocks.COBWEB)) {
             return 15.0F;
         } else {
@@ -142,7 +142,7 @@ public class KnifeItem extends TieredItem {
 //    }
 
     //    @Override
-//    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, PlayerEntity playerIn, @NotNull Hand handIn) {
+//    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
 //        Entity entity1 = Targeter.getTarget(playerIn);
 //
 //        ItemStack stack = playerIn.getHeldItem(handIn);
@@ -167,9 +167,9 @@ public class KnifeItem extends TieredItem {
 //
 //            entity1.remove(false);
 //
-//            ItemEntity entity2 = new ItemEntity(worldIn, x, y, z, newStack);
+//            ItemEntity entity2 = new ItemEntity(dimensionIn, x, y, z, newStack);
 //            entity2.setDefaultPickupDelay();
-//            worldIn.addEntity(entity2);
+//            dimensionIn.spawnEntity(entity2);
 ////            playerIn.sendMessage(new StringTextComponent(TextColors.LIGHT_RED + "Entity: " + TextColors.WHITE + Objects.toString(entity, "null")), UUID.randomUUID());
 //            Entity entity3 = Targeter.getTarget(playerIn);
 //

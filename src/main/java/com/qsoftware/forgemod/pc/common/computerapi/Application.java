@@ -3,12 +3,12 @@ package com.qsoftware.forgemod.pc.common.computerapi;
 public abstract class Application extends Executable {
     private String[] args;
 
-    public abstract void init();
+    public abstract void initialize();
 
     @Override
     public final void execute(String... args) {
         this.args = args;
-        init();
+        initialize();
     }
 
     protected final String[] getArgs() {

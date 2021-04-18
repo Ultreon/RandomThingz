@@ -30,13 +30,13 @@ public class WrenchItem extends Item {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
+    public ActionResultType onUseItem(ItemUseContext context) {
         PlayerEntity player = context.getPlayer();
         if (player == null) return ActionResultType.PASS;
 
-        World world = context.getWorld();
+        World dimension = context.getDimension();
         BlockPos pos = context.getPos();
-        BlockState state = world.getBlockState(pos);
+        BlockState state = dimension.getBlockState(pos);
 
         if (state.getBlock() instanceof IWrenchable) {
             ActionResultType result = ((IWrenchable) state.getBlock()).onWrench(context);
@@ -47,11 +47,11 @@ public class WrenchItem extends Item {
 
         if (player.isCrouching() && state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
             BlockState state1 = cycleProperty(state, BlockStateProperties.HORIZONTAL_FACING);
-            world.setBlockState(pos, state1, 18);
+            dimension.setBlockState(pos, state1, 18);
             player.addStat(Stats.ITEM_USED.get(this));
             return ActionResultType.SUCCESS;
         }
 
-        return super.onItemUse(context);
+        return super.onUseItem(context);
     }
 }

@@ -56,8 +56,8 @@ public class SettingsScreen extends Screen {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 

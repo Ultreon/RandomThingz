@@ -105,17 +105,17 @@ public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTil
     }
 
     protected boolean canRun() {
-        return world != null
-                && redstoneMode.shouldRun(world.isBlockPowered(pos))
+        return dimension != null
+                && redstoneMode.shouldRun(dimension.isBlockPowered(pos))
                 && getEnergyStored() < getMaxEnergyStored();
     }
 
     protected void sendUpdate(BlockState newState, boolean force) {
-        if (world == null) return;
-        BlockState oldState = world.getBlockState(pos);
+        if (dimension == null) return;
+        BlockState oldState = dimension.getBlockState(pos);
         if (oldState != newState || force) {
-            world.setBlockState(pos, newState, 3);
-            world.notifyBlockUpdate(pos, oldState, newState, 3);
+            dimension.setBlockState(pos, newState, 3);
+            dimension.notifyBlockUpdate(pos, oldState, newState, 3);
         }
     }
 
@@ -136,7 +136,7 @@ public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTil
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         super.onDataPacket(net, packet);
-        CompoundNBT tags = packet.getNbtCompound();
+        CompoundNBT tags = packet.getNbt();
         this.burnTime = tags.getInt("BurnTime");
         this.totalBurnTime = tags.getInt("TotalBurnTime");
     }

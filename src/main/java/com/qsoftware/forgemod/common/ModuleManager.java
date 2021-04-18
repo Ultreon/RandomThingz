@@ -47,7 +47,7 @@ public final class ModuleManager {
     }
 
     private ModuleManager() {
-        Modules.init(this);
+        Modules.initialize(this);
         this.parent = null;
     }
 
@@ -71,7 +71,7 @@ public final class ModuleManager {
 
     public void saveChanges() throws IOException {
         if (this.unsavedModules.entrySet().size() == 0) {
-            QForgeMod.LOGGER.info("Skipping save module changes because there's nothing to save.");
+            QForgeMod.LOGGER.info("Skipping write module changes because there's nothing to write.");
             return;
         }
 
@@ -110,17 +110,17 @@ public final class ModuleManager {
             }
         }
 
-        // Clear save cache.
+        // Clear write cache.
         this.unsavedModules.clear();
 
         // Write changes.
         QForgeMod.LOGGER.info("Saving module data...");
-        CompressedStreamTools.writeCompressed(this.modulesNbt, dataFile);
+        CompressedStreamTools.saveCompressed(this.modulesNbt, dataFile);
         QForgeMod.LOGGER.info("Module data saved!");
     }
 
     public void enable(@Nonnull Module module) {
-        // Update lists, and add save cache.
+        // Update lists, and add write cache.
         this.unsavedModules.put(module, true);
         this.unsavedDisabled.remove(module);
         this.unsavedEnabled.add(module);
@@ -128,7 +128,7 @@ public final class ModuleManager {
     }
 
     public void disable(@NonNull Module module) {
-        // Update lists, and add save cache.
+        // Update lists, and add write cache.
         this.unsavedModules.put(module, false);
         this.unsavedEnabled.remove(module);
         this.unsavedDisabled.add(module);
@@ -164,7 +164,7 @@ public final class ModuleManager {
     }
 
     @SuppressWarnings("ConstantConditions")
-    public void init() throws IOException {
+    public void initialize() throws IOException {
         File configFolder;
         if (QForgeMod.isClientSide()) {
             configFolder = new File(Minecraft.getInstance().gameDir, "qforgemod-data/config");
@@ -184,7 +184,7 @@ public final class ModuleManager {
         boolean wasValid;
         this.dataFile = new File(configFolder, getDataPrefix() + "modules.nbt");
         try {
-            a = CompressedStreamTools.readCompressed(this.dataFile);
+            a = CompressedStreamTools.loadCompressed(this.dataFile);
             if (a == null) {
                 a = new CompoundNBT();
             }
@@ -210,7 +210,7 @@ public final class ModuleManager {
                 enabled = module.isDefaultEnabled();
             }
             if (module.isSubManagerEnabled()) {
-                module.getSubmoduleManager().init();
+                module.getSubmoduleManager().initialize();
             }
             if (enabled) {
                 this.enable(module);

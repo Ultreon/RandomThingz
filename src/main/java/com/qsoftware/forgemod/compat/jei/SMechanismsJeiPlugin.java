@@ -41,8 +41,8 @@ public class SMechanismsJeiPlugin implements IModPlugin {
     private static final ResourceLocation PLUGIN_UID = QForgeMod.rl("plugin/main");
 
     private static List<IRecipe<?>> getRecipesOfType(IRecipeType<?> recipeType) {
-        assert Minecraft.getInstance().world != null;
-        return Minecraft.getInstance().world.getRecipeManager().getRecipes().stream()
+        assert Minecraft.getInstance().dimension != null;
+        return Minecraft.getInstance().dimension.getRecipeManager().getRecipes().stream()
                 .filter(r -> r.getType() == recipeType)
                 .collect(Collectors.toList());
     }

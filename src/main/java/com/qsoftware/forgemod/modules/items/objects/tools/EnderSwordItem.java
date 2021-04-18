@@ -27,7 +27,7 @@ public class EnderSwordItem extends SwordItem {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);
     }
 
-    protected static BlockRayTraceResult rayTrace(World worldIn, PlayerEntity player, RayTraceContext.@NotNull FluidMode fluidMode) {
+    protected static BlockRayTraceResult rayTrace(World dimensionIn, PlayerEntity player, RayTraceContext.@NotNull FluidMode fluidMode) {
         float f = player.rotationPitch;
         float f1 = player.rotationYaw;
         Vector3d vec3d = player.getEyePosition(1.0F);
@@ -39,21 +39,21 @@ public class EnderSwordItem extends SwordItem {
         float f7 = f2 * f4;
         double d0 = 48;
         Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
-        return worldIn.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
+        return dimensionIn.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
     }
 
     @Override
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, @NotNull PlayerEntity playerIn, @NotNull Hand handIn) {
-        if (worldIn instanceof ServerWorld) {
-            ServerWorld world = (ServerWorld) worldIn;
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, @NotNull PlayerEntity playerIn, @NotNull Hand handIn) {
+        if (dimensionIn instanceof ServerWorld) {
+            ServerWorld dimension = (ServerWorld) dimensionIn;
 
-            RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.ANY);
+            RayTraceResult raytraceresult = rayTrace(dimensionIn, playerIn, RayTraceContext.FluidMode.ANY);
             double posX = raytraceresult.getHitVec().x;
             double posY = Math.floor(raytraceresult.getHitVec().y);
             double posZ = raytraceresult.getHitVec().z;
 
             for (int i = 0; i < 32; ++i) {
-                playerIn.world.addParticle(ParticleTypes.PORTAL, posX, posY + playerIn.getRNG().nextDouble() * 2.0D, posZ, playerIn.getRNG().nextGaussian(), 0.0D, playerIn.getRNG().nextGaussian());
+                playerIn.dimension.addParticle(ParticleTypes.PORTAL, posX, posY + playerIn.getRNG().nextDouble() * 2.0D, posZ, playerIn.getRNG().nextGaussian(), 0.0D, playerIn.getRNG().nextGaussian());
             }
 
             if (playerIn.isPassenger()) {
@@ -66,6 +66,6 @@ public class EnderSwordItem extends SwordItem {
             playerIn.addStat(Stats.ITEM_USED.get(this));
         }
 
-        return super.onItemRightClick(worldIn, playerIn, handIn);
+        return super.onItemRightClick(dimensionIn, playerIn, handIn);
     }
 }

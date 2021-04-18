@@ -21,8 +21,8 @@ public class TestScreen extends Screen {
 
     @Deprecated
     @Override
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         this.testButton = addButton(new Button(10, 10, 250, 20, new StringTextComponent("Test button"), (button) -> {
             i += 1;

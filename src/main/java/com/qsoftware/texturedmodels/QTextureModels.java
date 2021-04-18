@@ -48,7 +48,7 @@ public class QTextureModels
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
 
         LOGGER.info("Registering all blocks and items from QTextureModels");
-        Registration.init();
+        Registration.initialize();
         LOGGER.info("Registered all blocks and items from QTextureModels");
         // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);

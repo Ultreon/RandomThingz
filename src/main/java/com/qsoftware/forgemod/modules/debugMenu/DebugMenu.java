@@ -193,28 +193,28 @@ public class DebugMenu {
                     int j = 1;
 
                     BlockRayTraceResult lookingAt = null;
-                    if (Minecraft.getInstance().world != null) {
-                        lookingAt = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
+                    if (Minecraft.getInstance().dimension != null) {
+                        lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
                         if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
                             BlockPos pos = lookingAt.getPos();
 
                             // now the coordinates you want are in pos. Example of use:
-                            BlockState blockState = Minecraft.getInstance().player.getEntityWorld().getBlockState(pos);
+                            BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
                             Block block = blockState.getBlock();
                             mc.fontRenderer.drawStringWithShadow(matrixStack, TextFormatting.GRAY + "-== BLOCK ==-", 12f, 12f, 0xffffff);
                             drawLeftTopString(matrixStack, "translatedName", i++, block.getTranslatedName().getString());
                             drawLeftTopString(matrixStack, "harvestLevel", i++, blockState.getHarvestLevel());
                             drawLeftTopString(matrixStack, "harvestTool", i++, blockState.getHarvestTool() == null ? null : blockState.getHarvestTool().getName());
-                            drawLeftTopString(matrixStack, "blockHardness", i++, blockState.getBlockHardness(player.getEntityWorld(), pos));
+                            drawLeftTopString(matrixStack, "blockHardness", i++, blockState.getBlockHardness(player.getEntityDimension(), pos));
                             drawLeftTopString(matrixStack, "lightValue", i++, blockState.getLightValue());
-                            drawLeftTopString(matrixStack, "opacity", i++, blockState.getOpacity(player.getEntityWorld(), pos));
-                            drawLeftTopString(matrixStack, "offset", i++, blockState.getOffset(player.getEntityWorld(), pos));
-                            drawLeftTopString(matrixStack, "playerRelativeHardness", i++, blockState.getPlayerRelativeBlockHardness(player, player.getEntityWorld(), pos));
+                            drawLeftTopString(matrixStack, "opacity", i++, blockState.getOpacity(player.getEntityDimension(), pos));
+                            drawLeftTopString(matrixStack, "offset", i++, blockState.getOffset(player.getEntityDimension(), pos));
+                            drawLeftTopString(matrixStack, "playerRelativeHardness", i++, blockState.getPlayerRelativeBlockHardness(player, player.getEntityDimension(), pos));
                             drawLeftTopString(matrixStack, "requiresTool", i++, blockState.getRequiresTool());
                             drawLeftTopString(matrixStack, "renderType", i++, blockState.getRenderType());
-                            drawLeftTopString(matrixStack, "slipperiness", i++, blockState.getSlipperiness(player.getEntityWorld(), pos, player));
+                            drawLeftTopString(matrixStack, "slipperiness", i++, blockState.getSlipperiness(player.getEntityDimension(), pos, player));
                             drawLeftTopString(matrixStack, "jumpFactor", i++, block.getJumpFactor());
-                            drawLeftTopString(matrixStack, "enchantPowerBonus", i++, blockState.getEnchantPowerBonus(player.getEntityWorld(), pos));
+                            drawLeftTopString(matrixStack, "enchantPowerBonus", i++, blockState.getEnchantPowerBonus(player.getEntityDimension(), pos));
                             drawLeftTopString(matrixStack, "lootTable", i++, block.getLootTable());
                             drawLeftTopString(matrixStack, "materialColor", i++, block.getMaterialColor().colorIndex, getColor(block.getMaterialColor().colorValue));
                             drawLeftTopString(matrixStack, "offsetType", i++, block.getOffsetType());
@@ -226,25 +226,25 @@ public class DebugMenu {
                             Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 16, 0xff0000);
                         }
 
-                        lookingAt = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
+                        lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
                         if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
                             BlockPos pos = lookingAt.getPos();
 
                             // now the coordinates you want are in pos. Example of use:
-                            BlockState blockState = Minecraft.getInstance().player.getEntityWorld().getBlockState(pos);
+                            BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
                             FluidState fluidState = blockState.getFluidState();
                             if (!fluidState.isEmpty()) {
                                 drawRightString(matrixStack, TextFormatting.GRAY + "-== Fluid ==-", 12f, 12f, 0xffffff);
                                 drawRightTopString(matrixStack, "empty", j++, fluidState.isEmpty());
                                 drawRightTopString(matrixStack, "height", j++, fluidState.getHeight());
                                 drawRightTopString(matrixStack, "level", j++, fluidState.getLevel());
-                                drawRightTopString(matrixStack, "actualHeight", j++, fluidState.getFluid().getActualHeight(fluidState, player.getEntityWorld(), pos));
+                                drawRightTopString(matrixStack, "actualHeight", j++, fluidState.getFluid().getActualHeight(fluidState, player.getEntityDimension(), pos));
                                 try {
                                     drawRightTopString(matrixStack, "filledBucket", j++, fluidState.getFluid().getFilledBucket());
                                 } catch (Throwable ignored) {
 
                                 }
-                                drawRightTopString(matrixStack, "tickRate", j++, fluidState.getFluid().getTickRate(player.getEntityWorld()));
+                                drawRightTopString(matrixStack, "tickRate", j++, fluidState.getFluid().getTickRate(player.getEntityDimension()));
                             } else {
                                 // not looking at a fluid, or too far away from one to tell
 //                                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 32, 0xff0000);
@@ -389,13 +389,13 @@ public class DebugMenu {
                     int i = 1;
                     int j = 1;
 
-                    if (Minecraft.getInstance().world != null) {
-                        RayTraceResult raytraceresult = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+                    if (Minecraft.getInstance().dimension != null) {
+                        RayTraceResult raytraceresult = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
                         if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
                             vec3d1 = raytraceresult.getHitVec();
                         }
 
-                        RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().world, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
+                        RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().dimension, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
                         if (rayTraceResult1 != null) {
                             raytraceresult = rayTraceResult1;
                         }
@@ -406,7 +406,7 @@ public class DebugMenu {
                             EntityType<? extends Entity> type = entity.getType();
 
                             mc.fontRenderer.drawStringWithShadow(matrixStack, TextFormatting.GRAY + "-== Entity ==-", 12f, 12f, 0xffffff);
-                            drawLeftTopString(matrixStack, "translatedName", i++, I18n.format(type.getTranslationKey()));
+                            drawLeftTopString(matrixStack, "translatedName", i++, I18n.format(type.getTranslationId()));
                             drawLeftTopString(matrixStack, "height", i++, type.getHeight());
                             drawLeftTopString(matrixStack, "lootTable", i++, type.getLootTable());
                             drawLeftTopString(matrixStack, "name", i++, type.getName().getString());
@@ -449,7 +449,7 @@ public class DebugMenu {
                                 drawRightTopString(matrixStack, "leashPosition", j++, itemEntity.getLeashPosition(mc.getRenderPartialTicks()));
                                 drawRightTopString(matrixStack, "pose", j++, itemEntity.getPose());
                             }
-//                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationKey()), width / 2, height / 2 - 48, 0x00bf00);
+//                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationId()), width / 2, height / 2 - 48, 0x00bf00);
                         } else {
                             // not looking at a block, or too far away from one to tell
 //                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 48, 0xff0000);
@@ -472,61 +472,61 @@ public class DebugMenu {
                 drawRightTopString(matrixStack, "integratedServerRunning", j++, mc.isIntegratedServerRunning());
                 break;
             } case WORLD: {
-                if (Minecraft.getInstance().world != null) {
-                    ClientWorld world = Minecraft.getInstance().world;
+                if (Minecraft.getInstance().dimension != null) {
+                    ClientWorld dimension = Minecraft.getInstance().dimension;
 
                     int i = 0;
-                    drawLeftTopString(matrixStack, "timeLightningFlash", i++, world.getTimeLightningFlash());
-                    drawLeftTopString(matrixStack, "providerName", i++, world.getProviderName());
-                    drawLeftTopString(matrixStack, "loadedEntities", i++, world.getCountLoadedEntities());
-                    drawLeftTopString(matrixStack, "nextMapId", i++, world.getNextMapId());
-                    drawLeftTopString(matrixStack, "difficulty", i++, world.getDifficulty().getDisplayName().getString());
-                    drawLeftTopString(matrixStack, "seaLevel", i++, world.getSeaLevel());
-                    drawLeftTopString(matrixStack, "moonPhase", i++, getMoonPhase(world.getMoonPhase()));
-                    drawLeftTopString(matrixStack, "spawnAngle", i++, getAngle(world.getWorldInfo().getSpawnAngle()));
-                    drawLeftTopString(matrixStack, "dimension", i++, world.getDimensionKey().getLocation());
-                    drawLeftTopString(matrixStack, "dayTime", i++, world.getDayTime());
-                    drawLeftTopString(matrixStack, "gameTime", i++, world.getGameTime());
-                    drawLeftTopString(matrixStack, "cloudColor", i++, getColor(world.getCloudColor(mc.getRenderPartialTicks())));
+                    drawLeftTopString(matrixStack, "timeLightningFlash", i++, dimension.getTimeLightningFlash());
+                    drawLeftTopString(matrixStack, "providerName", i++, dimension.getProviderName());
+                    drawLeftTopString(matrixStack, "loadedEntities", i++, dimension.getCountLoadedEntities());
+                    drawLeftTopString(matrixStack, "nextMapId", i++, dimension.getNextMapId());
+                    drawLeftTopString(matrixStack, "difficulty", i++, dimension.getDifficulty().getDisplayName().getString());
+                    drawLeftTopString(matrixStack, "seaLevel", i++, dimension.getSeaLevel());
+                    drawLeftTopString(matrixStack, "moonPhase", i++, getMoonPhase(dimension.getMoonPhase()));
+                    drawLeftTopString(matrixStack, "spawnAngle", i++, getAngle(dimension.getDimensionInfo().getSpawnAngle()));
+                    drawLeftTopString(matrixStack, "dimension", i++, dimension.getDimensionKey().getLocation());
+                    drawLeftTopString(matrixStack, "dayTime", i++, dimension.getDayTime());
+                    drawLeftTopString(matrixStack, "gameTime", i++, dimension.getGameTime());
+                    drawLeftTopString(matrixStack, "cloudColor", i++, getColor(dimension.getCloudColor(mc.getRenderPartialTicks())));
                     if (Minecraft.getInstance().player != null) {
                         ClientPlayerEntity player = Minecraft.getInstance().player;
-                        drawLeftTopString(matrixStack, "skyColor", i++, getColor(world.getSkyColor(player.getPosition(), mc.getRenderPartialTicks())));
+                        drawLeftTopString(matrixStack, "skyColor", i++, getColor(dimension.getSkyColor(player.getPosition(), mc.getRenderPartialTicks())));
                     }
-                    drawLeftTopString(matrixStack, "starBrightness", i++, getPercentage(world.getStarBrightness(mc.getRenderPartialTicks())));
-                    drawLeftTopString(matrixStack, "sunBrightness", i++, getPercentage(world.getSunBrightness(mc.getRenderPartialTicks())));
+                    drawLeftTopString(matrixStack, "starBrightness", i++, getPercentage(dimension.getStarBrightness(mc.getRenderPartialTicks())));
+                    drawLeftTopString(matrixStack, "sunBrightness", i++, getPercentage(dimension.getSunBrightness(mc.getRenderPartialTicks())));
 
                     int j = 0;
-                    drawRightTopString(matrixStack, "daytime", j++, world.isDaytime());
-                    drawRightTopString(matrixStack, "nightTime", j++, world.isNightTime());
-                    drawRightTopString(matrixStack, "raining", j++, world.isRaining());
-                    drawRightTopString(matrixStack, "thundering", j++, world.isThundering());
-                    drawRightTopString(matrixStack, "saveDisabled", j++, world.isSaveDisabled());
+                    drawRightTopString(matrixStack, "daytime", j++, dimension.isDaytime());
+                    drawRightTopString(matrixStack, "nightTime", j++, dimension.isNightTime());
+                    drawRightTopString(matrixStack, "raining", j++, dimension.isRaining());
+                    drawRightTopString(matrixStack, "thundering", j++, dimension.isThundering());
+                    drawRightTopString(matrixStack, "saveDisabled", j++, dimension.isSaveDisabled());
                     if (Minecraft.getInstance().player != null) {
                         ClientPlayerEntity player = Minecraft.getInstance().player;
-                        drawRightTopString(matrixStack, "areaLoaded", j++, world.isAreaLoaded(player.getPosition(), 1));
+                        drawRightTopString(matrixStack, "areaLoaded", j++, dimension.isAreaLoaded(player.getPosition(), 1));
                     }
-                    drawRightTopString(matrixStack, "debug", j++, world.isDebug());
+                    drawRightTopString(matrixStack, "debug", j++, dimension.isDebug());
                 }
                 break;
             } case WORLD_INFO: {
-                if (Minecraft.getInstance().world != null) {
-                    ClientWorld.ClientWorldInfo worldInfo = Minecraft.getInstance().world.getWorldInfo();
+                if (Minecraft.getInstance().dimension != null) {
+                    ClientWorld.ClientWorldInfo dimensionInfo = Minecraft.getInstance().dimension.getDimensionInfo();
 
                     int i = 0;
-                    drawLeftTopString(matrixStack, "spawnAngle", i++, worldInfo.getSpawnAngle());
-                    drawLeftTopString(matrixStack, "difficulty", i++, worldInfo.getDifficulty());
-                    drawLeftTopString(matrixStack, "dayTime", i++, worldInfo.getDayTime());
-                    drawLeftTopString(matrixStack, "gameTime", i++, worldInfo.getGameTime());
-                    drawLeftTopString(matrixStack, "fogDistance", i++, worldInfo.getFogDistance());
-                    drawLeftTopString(matrixStack, "spawnX", i++, worldInfo.getSpawnX());
-                    drawLeftTopString(matrixStack, "spawnY", i++, worldInfo.getSpawnY());
-                    drawLeftTopString(matrixStack, "spawnZ", i++, worldInfo.getSpawnZ());
+                    drawLeftTopString(matrixStack, "spawnAngle", i++, dimensionInfo.getSpawnAngle());
+                    drawLeftTopString(matrixStack, "difficulty", i++, dimensionInfo.getDifficulty());
+                    drawLeftTopString(matrixStack, "dayTime", i++, dimensionInfo.getDayTime());
+                    drawLeftTopString(matrixStack, "gameTime", i++, dimensionInfo.getGameTime());
+                    drawLeftTopString(matrixStack, "fogDistance", i++, dimensionInfo.getFogDistance());
+                    drawLeftTopString(matrixStack, "spawnX", i++, dimensionInfo.getSpawnX());
+                    drawLeftTopString(matrixStack, "spawnY", i++, dimensionInfo.getSpawnY());
+                    drawLeftTopString(matrixStack, "spawnZ", i++, dimensionInfo.getSpawnZ());
 
                     int j = 0;
-                    drawRightTopString(matrixStack, "difficultyLocked", j++, worldInfo.isDifficultyLocked());
-                    drawRightTopString(matrixStack, "hardcore", j++, worldInfo.isHardcore());
-                    drawRightTopString(matrixStack, "raining", j++, worldInfo.isRaining());
-                    drawRightTopString(matrixStack, "thundering", j++, worldInfo.isThundering());
+                    drawRightTopString(matrixStack, "difficultyLocked", j++, dimensionInfo.isDifficultyLocked());
+                    drawRightTopString(matrixStack, "hardcore", j++, dimensionInfo.isHardcore());
+                    drawRightTopString(matrixStack, "raining", j++, dimensionInfo.isRaining());
+                    drawRightTopString(matrixStack, "thundering", j++, dimensionInfo.isThundering());
                 }
                 break;
             } case PLAYER_2: {
@@ -617,13 +617,13 @@ public class DebugMenu {
                         Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
                         BlockRayTraceResult lookingAt = null;
-                        if (Minecraft.getInstance().world != null) {
-                            lookingAt = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
+                        if (Minecraft.getInstance().dimension != null) {
+                            lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
                             if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
                                 BlockPos pos = lookingAt.getPos();
 
                                 // now the coordinates you want are in pos. Example of use:
-                                BlockState blockState = Minecraft.getInstance().player.getEntityWorld().getBlockState(pos);
+                                BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
                                 drawTopString(matrixStack, "-== Block ==-", k++);
                                 drawTopString(matrixStack, blockState.getBlock().getTranslatedName().getString(), k++);
                                 k++;
@@ -631,12 +631,12 @@ public class DebugMenu {
                                 // not looking at a block, or too far away from one to tell
 //                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 16, 0xff0000);
                             }
-                            lookingAt = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
+                            lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
                             if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
                                 BlockPos pos = lookingAt.getPos();
 
                                 // now the coordinates you want are in pos. Example of use:
-                                BlockState blockState = Minecraft.getInstance().player.getEntityWorld().getBlockState(pos);
+                                BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
                                 FluidState fluidState = blockState.getFluidState();
                                 if (!fluidState.isEmpty()) {
                                     drawTopString(matrixStack, "-== Fluid ==-", k++);
@@ -673,13 +673,13 @@ public class DebugMenu {
 
                         Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
-                        if (Minecraft.getInstance().world != null) {
-                            RayTraceResult raytraceresult = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+                        if (Minecraft.getInstance().dimension != null) {
+                            RayTraceResult raytraceresult = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
                             if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
                                 vec3d1 = raytraceresult.getHitVec();
                             }
 
-                            RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().world, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
+                            RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().dimension, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
                             if (rayTraceResult1 != null) {
                                 raytraceresult = rayTraceResult1;
                             }
@@ -687,9 +687,9 @@ public class DebugMenu {
                                 @SuppressWarnings("ConstantConditions") EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) raytraceresult;
 
                                 drawTopString(matrixStack, "-== Entity ==-", k++);
-                                drawTopString(matrixStack, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationKey()), k++);
+                                drawTopString(matrixStack, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationId()), k++);
                                 k++;
-//                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationKey()), width / 2, height / 2 - 48, 0x00bf00);
+//                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationId()), width / 2, height / 2 - 48, 0x00bf00);
                             } else {
                                 // not looking at a block, or too far away from one to tell
 //                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 48, 0xff0000);
@@ -701,10 +701,10 @@ public class DebugMenu {
                 }
                 break;
             } case NONE: {
-                ClientWorld world = Minecraft.getInstance().world;
+                ClientWorld dimension = Minecraft.getInstance().dimension;
                 ClientPlayerEntity player = Minecraft.getInstance().player;
-                if (world != null && player != null) {
-                    String dayTimeStr = Long.toString(world.getDayTime() % 24000);
+                if (dimension != null && player != null) {
+                    String dayTimeStr = Long.toString(dimension.getDayTime() % 24000);
                     StringBuilder timeText = new StringBuilder();
                     if (dayTimeStr.length() == 1) {
                         timeText.append("0:00,").append(dayTimeStr);
@@ -725,7 +725,7 @@ public class DebugMenu {
                     drawLeftTopString(matrixStack, "QFM Build", i++, new Formatted(QForgeMod.getModArgs().getVersion().getBuild()));
                     drawLeftTopString(matrixStack, "Time", i++, new Formatted(timeText.toString()));
 
-                    long dayTime = world.getDayTime() % 24000;
+                    long dayTime = dimension.getDayTime() % 24000;
 
                     String timePhase;
                     if (dayTime < 3000 || dayTime > 21000) {
@@ -742,8 +742,8 @@ public class DebugMenu {
 
                     drawLeftTopString(matrixStack, "Time Phase", i++, new Formatted(timePhase));
 
-                    if (!world.isRemote) {
-                        Biome biome = world.getBiome(player.getPosition());
+                    if (!dimension.isClientSided) {
+                        Biome biome = dimension.getBiome(player.getPosition());
                         ResourceLocation location = biome.getRegistryName();
                         if (location != null) {
                             @Nonnull ResourceLocation registryName = location;

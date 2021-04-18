@@ -29,7 +29,7 @@ public class LightningStaffItem extends WandItem {
         super(5, 1, new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
-    protected static BlockRayTraceResult rayTrace(World worldIn, PlayerEntity player, RayTraceContext.@NotNull FluidMode fluidMode) {
+    protected static BlockRayTraceResult rayTrace(World dimensionIn, PlayerEntity player, RayTraceContext.@NotNull FluidMode fluidMode) {
         float f = player.rotationPitch;
         float f1 = player.rotationYaw;
         Vector3d vec3d = player.getEyePosition(1.0F);
@@ -41,29 +41,29 @@ public class LightningStaffItem extends WandItem {
         float f7 = f2 * f4;
         double d0 = 128;
         Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
-        return worldIn.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
+        return dimensionIn.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
     }
 
     @Override
-    public void activate(ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity livingIn, float charge) {
+    public void activate(ItemStack stack, @NotNull World dimensionIn, @NotNull LivingEntity livingIn, float charge) {
         if (!(livingIn instanceof PlayerEntity)) {
             return;
         }
 
         PlayerEntity playerIn = (PlayerEntity) livingIn;
 
-        if (worldIn instanceof ServerWorld) {
-            ServerWorld world = (ServerWorld) worldIn;
+        if (dimensionIn instanceof ServerWorld) {
+            ServerWorld dimension = (ServerWorld) dimensionIn;
 
-            RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.ANY);
+            RayTraceResult raytraceresult = rayTrace(dimensionIn, playerIn, RayTraceContext.FluidMode.ANY);
             double posX = raytraceresult.getHitVec().x;
             double posY = Math.floor(raytraceresult.getHitVec().y);
             double posZ = raytraceresult.getHitVec().z;
 
-            LightningBoltEntity l = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, worldIn);
+            LightningBoltEntity l = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, dimensionIn);
             l.setPosition(posX, posY, posZ);
             l.setEffectOnly(false);
-            world.addEntity(l);
+            dimension.spawnEntity(l);
 
             playerIn.addStat(Stats.ITEM_USED.get(this));
         }

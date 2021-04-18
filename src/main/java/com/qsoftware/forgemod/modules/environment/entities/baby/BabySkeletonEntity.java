@@ -26,8 +26,8 @@ public class BabySkeletonEntity extends SkeletonEntity implements IBabyEntity {
 
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(BabySkeletonEntity.class, DataSerializers.BOOLEAN);
 
-    public BabySkeletonEntity(EntityType<BabySkeletonEntity> type, World world) {
-        super(type, world);
+    public BabySkeletonEntity(EntityType<BabySkeletonEntity> type, World dimension) {
+        super(type, dimension);
         setChild(true);
     }
 
@@ -80,7 +80,7 @@ public class BabySkeletonEntity extends SkeletonEntity implements IBabyEntity {
 
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

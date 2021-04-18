@@ -112,7 +112,7 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
                 && tank.isFluidValid(0, fluid)
                 && tank.fill(fluid, IFluidHandler.FluidAction.SIMULATE) == fluid.getAmount()
                 && (output.isEmpty() || InventoryUtils.canItemsStack(item.getContainerItem(), output))
-                && (output.isEmpty() || output.getCount() < output.getMaxStackSize());
+                && (output.isEmpty() || output.getCount() < output.getMaxSize());
     }
 
     @Override
@@ -150,7 +150,7 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         super.onDataPacket(net, packet);
-        CompoundNBT tags = packet.getNbtCompound();
+        CompoundNBT tags = packet.getNbt();
         if (tags.contains("FluidTank")) {
             this.tank.setFluid(FluidStack.loadFluidStackFromNBT(tags.getCompound("FluidTank")));
         }
@@ -172,8 +172,8 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
     }
 
     @Override
-    public void remove() {
-        super.remove();
+    public void delete() {
+        super.delete();
         fluidHandlerCap.invalidate();
     }
 }

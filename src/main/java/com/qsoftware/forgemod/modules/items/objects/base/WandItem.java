@@ -42,7 +42,7 @@ public abstract class WandItem extends HudItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, @NotNull World dimensionIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
         if (!nbt.contains("mana", 5)) {
             nbt.putFloat("mana", (float) this.maxMana);
@@ -66,7 +66,7 @@ public abstract class WandItem extends HudItem {
     /**
      * Called when the player stops using an Item (stops holding the right mouse button).
      */
-    public void onPlayerStoppedUsing(ItemStack stack, @NotNull World world, @NotNull LivingEntity entityLiving, int timeLeft) {
+    public void onPlayerStoppedUsing(ItemStack stack, @NotNull World dimension, @NotNull LivingEntity entityLiving, int timeLeft) {
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
         if (!nbt.contains("mana", 5)) {
             nbt.putFloat("mana", (float) maxMana);
@@ -88,7 +88,7 @@ public abstract class WandItem extends HudItem {
                 }
 
                 nbt.putFloat("mana", Math.max(mana - getTimeUsed(stack, timeLeft1), 0));
-                activate(stack, world, entityLiving, getCharge(stack, timeLeft1));
+                activate(stack, dimension, entityLiving, getCharge(stack, timeLeft1));
             }
         }
     }
@@ -134,13 +134,13 @@ public abstract class WandItem extends HudItem {
 
     /**
      * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-     * {@link #onItemUse}.
+     * {@link #onUseItem}.
      */
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, PlayerEntity playerIn, @NotNull Hand handIn) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
 
-        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, flag);
+        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, dimensionIn, playerIn, handIn, flag);
         if (ret != null) return ret;
 
         if (!playerIn.abilities.isCreativeMode && !flag) {
@@ -151,7 +151,7 @@ public abstract class WandItem extends HudItem {
         }
     }
 
-    public abstract void activate(ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity livingIn, float charge);
+    public abstract void activate(ItemStack stack, @NotNull World dimensionIn, @NotNull LivingEntity livingIn, float charge);
 
     public int getMaxMana() {
         return maxMana;
@@ -214,33 +214,33 @@ public abstract class WandItem extends HudItem {
     }
 
     @Override
-    public void addInformation(ItemStack stack, @javax.annotation.Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @javax.annotation.Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
-        if (worldIn == null) {
+        if (dimensionIn == null) {
             return;
         }
 
         if (!nbt.contains("mana", 5)) {
             tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
             return;
         }
 
         if (!nbt.contains("maxMana", 3)) {
             tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
             return;
         }
 
         if (!nbt.contains("chargeTime", 3)) {
             tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
             return;
         }
 
         if (!nbt.contains("strength", 3)) {
             tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-            super.addInformation(stack, worldIn, tooltip, flagIn);
+            super.addInformation(stack, dimensionIn, tooltip, flagIn);
             return;
         }
 
@@ -259,34 +259,34 @@ public abstract class WandItem extends HudItem {
     public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
         int height = mc.getMainWindow().getScaledHeight();
 
-        World worldIn = player.getEntityWorld();
+        World dimensionIn = player.getEntityDimension();
 
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
-        if (worldIn == null) {
+        if (dimensionIn == null) {
             return;
         }
 
         if (!nbt.contains("mana", 5)) {
 //            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-//            super.addInformation(stack, worldIn, tooltip, flagIn);
+//            super.addInformation(stack, dimensionIn, tooltip, flagIn);
             return;
         }
 
         if (!nbt.contains("maxMana", 3)) {
 //            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-//            super.addInformation(stack, worldIn, tooltip, flagIn);
+//            super.addInformation(stack, dimensionIn, tooltip, flagIn);
             return;
         }
 
         if (!nbt.contains("chargeTime", 3)) {
 //            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-//            super.addInformation(stack, worldIn, tooltip, flagIn);
+//            super.addInformation(stack, dimensionIn, tooltip, flagIn);
             return;
         }
 
         if (!nbt.contains("strength", 3)) {
 //            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-//            super.addInformation(stack, worldIn, tooltip, flagIn);
+//            super.addInformation(stack, dimensionIn, tooltip, flagIn);
             return;
         }
 

@@ -71,7 +71,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
     private void reload() {
         File dir = new File(Minecraft.getInstance().gameDir, "screenshots");
         if (dir.exists()) {
-            this.files.addAll(Arrays.asList(dir.listFiles()));
+            this.files.addAll(Arrays.asList(Objects.requireNonNull(dir.listFiles())));
         }
         this.total = this.files.size();
         this.index = 0;
@@ -128,8 +128,8 @@ public class ScreenshotsScreen extends AdvancedScreen {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         this.list = this.addListener(new ScreenshotSelectionList(this, Minecraft.getInstance(),
                 200, this.height - 50, 10, this.height - 40, null));
@@ -261,8 +261,8 @@ public class ScreenshotsScreen extends AdvancedScreen {
     /**
      * Load texture file into a resource location.
      *
-     * @param location the resource location to load the texture into.
-     * @param file the file to load.
+     * @param location the resource location to read the texture into.
+     * @param file the file to read.
      * @return an instance of {@link DynamicTexture} containing data of the given file.
      */
     @Nullable
@@ -275,7 +275,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
 
             Minecraft mc = Minecraft.getInstance();
 
-            mc.getTextureManager().loadTexture(location, texture);
+            mc.getTextureManager().readTexture(location, texture);
             return texture;
         } catch (Throwable t) {
             QForgeMod.LOGGER.error("Couldn't read image: {}", file.getAbsolutePath(), t);

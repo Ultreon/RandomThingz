@@ -74,7 +74,7 @@ public class HandPumpItem extends EnergyStoringItem {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
+    public ActionResultType onUseItem(ItemUseContext context) {
         PlayerEntity player = context.getPlayer();
         if (player == null) return ActionResultType.PASS;
 
@@ -86,11 +86,11 @@ public class HandPumpItem extends EnergyStoringItem {
             return ActionResultType.FAIL;
         }
 
-        World world = context.getWorld();
+        World dimension = context.getDimension();
 
         // Try to pull fluid from machines
         BlockPos pos = context.getPos();
-        TileEntity tileEntity = world.getTileEntity(pos);
+        TileEntity tileEntity = dimension.getTileEntity(pos);
 
         if (tileEntity != null) {
             LazyOptional<IFluidHandler> lazyOptional = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY);
@@ -100,14 +100,14 @@ public class HandPumpItem extends EnergyStoringItem {
             }
         }
 
-        // Or pickup fluids from the world
+        // Or pickup fluids from the dimension
         BlockPos posOpposite = context.getPos().offset(context.getFace());
-        BlockState state = world.getBlockState(posOpposite);
+        BlockState state = dimension.getBlockState(posOpposite);
 
         if (state.getBlock() instanceof IBucketPickupHandler) {
             ItemStack emptyContainer = takeFluidContainer(player);
             if (!emptyContainer.isEmpty()) {
-                Fluid fluid = ((IBucketPickupHandler) state.getBlock()).pickupFluid(world, posOpposite, state);
+                Fluid fluid = ((IBucketPickupHandler) state.getBlock()).pickupFluid(dimension, posOpposite, state);
                 FluidStack fluidStack = new FluidStack(fluid, 1000);
                 if (!fluidStack.isEmpty()) {
                     giveFilledContainer(player, energy, emptyContainer, fluidStack);

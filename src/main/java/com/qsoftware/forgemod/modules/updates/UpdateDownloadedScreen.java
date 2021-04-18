@@ -48,8 +48,8 @@ public class UpdateDownloadedScreen extends Screen {
      * Uses narrator, clears buttons and other widgets, adds the buttons and sets the button delay.
      */
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 

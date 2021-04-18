@@ -7,7 +7,7 @@ public class Loader {
     public Loader(CPU cpu) {
         this.cpu = cpu;
     }
-    public void load(String program) {
+    public void read(String program) {
         int address = Integer.parseInt(program.substring(0, 4), 16);
         program = program.substring(5);
         for (int i = 0; i < program.length(); i += 2) {
@@ -33,7 +33,7 @@ public class Loader {
         }
     }
 
-    public void load(Rom rom) {
+    public void read(Rom rom) {
 
     }
 }

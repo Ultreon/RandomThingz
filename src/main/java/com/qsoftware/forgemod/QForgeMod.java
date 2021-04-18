@@ -149,10 +149,10 @@ public class QForgeMod {
         QForgeMod.init = new Initialization(this);
 
         try {
-            ModuleManager.getInstance().init();
+            ModuleManager.getInstance().initialize();
         } catch (IOException e) {
             CrashReport report = new CrashReport("QFM Modules being initialized", e);
-            CrashReportCategory reportCategory = report.makeCategory("Module details");
+            CrashReportCategory reportCategory = report.createCategory("Module details");
             try {
                 ModuleManager manager = ModuleManager.getInstance();
                 Module currentModule = manager.getCurrentModule();
@@ -287,8 +287,8 @@ public class QForgeMod {
      */
     private void enqueueIMC(final InterModEnqueueEvent event) {
         InterModComms.sendTo("qforgemod", "helloworld", () -> {
-            LOGGER.info("Hello world from the MDK");
-            return "Hello world";
+            LOGGER.info("Hello dimension from the MDK");
+            return "Hello dimension";
         });
     }
 

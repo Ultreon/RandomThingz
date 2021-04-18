@@ -43,8 +43,8 @@ public class ConfirmShutdownScreen extends Screen {
         mc.displayGuiScreen(new ConfirmShutdownScreen(mc.currentScreen, shutdown));
     }
 
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 
@@ -56,7 +56,7 @@ public class ConfirmShutdownScreen extends Screen {
         this.children.clear();
 
         this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 100, 20, this.yesButtonText, (btn) -> {
-            if (this.minecraft.world != null) {
+            if (this.minecraft.dimension != null) {
                 btn.active = false;
                 WorldUtils.saveWorldThen(shutdown);
                 return;

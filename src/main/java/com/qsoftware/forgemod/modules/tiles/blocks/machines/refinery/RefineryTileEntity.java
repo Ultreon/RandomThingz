@@ -31,8 +31,8 @@ public class RefineryTileEntity extends AbstractFluidMachineTileEntity<RefiningR
     @Nullable
     @Override
     public RefiningRecipe getRecipe() {
-        if (world == null) return null;
-        return world.getRecipeManager().getRecipe(ModRecipes.Types.REFINING, this, world).orElse(null);
+        if (dimension == null) return null;
+        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.REFINING, this, dimension).orElse(null);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class RefineryTileEntity extends AbstractFluidMachineTileEntity<RefiningR
 
     @Override
     public void tick() {
-        if (world == null || world.isRemote) return;
+        if (dimension == null || dimension.isClientSided) return;
 
         tryFillTank();
         tryFillFluidContainer();
@@ -102,7 +102,7 @@ public class RefineryTileEntity extends AbstractFluidMachineTileEntity<RefiningR
                 && this.isFluidValid(0, fluid)
                 && this.fill(fluid, IFluidHandler.FluidAction.SIMULATE) == 1000
                 && (output.isEmpty() || InventoryUtils.canItemsStack(input.getContainerItem(), output))
-                && (output.isEmpty() || output.getCount() < output.getMaxStackSize());
+                && (output.isEmpty() || output.getCount() < output.getMaxSize());
     }
 
     private void tryFillFluidContainer() {

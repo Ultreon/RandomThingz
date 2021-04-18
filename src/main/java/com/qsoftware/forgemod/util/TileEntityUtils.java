@@ -27,7 +27,7 @@ public final class TileEntityUtils {
     public static void sendUpdatePacket(TileEntity tileEntity) {
         SUpdateTileEntityPacket packet = tileEntity.getUpdatePacket();
         if (packet != null) {
-            sendUpdatePacket(tileEntity.getWorld(), tileEntity.getPos(), packet);
+            sendUpdatePacket(tileEntity.getDimension(), tileEntity.getPos(), packet);
         }
     }
 
@@ -38,12 +38,12 @@ public final class TileEntityUtils {
      */
     public static void sendUpdatePacket(TileEntity tileEntity, CompoundNBT compound) {
         SUpdateTileEntityPacket packet = new SUpdateTileEntityPacket(tileEntity.getPos(), 0, compound);
-        sendUpdatePacket(tileEntity.getWorld(), tileEntity.getPos(), packet);
+        sendUpdatePacket(tileEntity.getDimension(), tileEntity.getPos(), packet);
     }
 
-    private static void sendUpdatePacket(World world, BlockPos pos, SUpdateTileEntityPacket packet) {
-        if (world instanceof ServerWorld) {
-            ServerWorld server = (ServerWorld) world;
+    private static void sendUpdatePacket(World dimension, BlockPos pos, SUpdateTileEntityPacket packet) {
+        if (dimension instanceof ServerWorld) {
+            ServerWorld server = (ServerWorld) dimension;
             Stream<ServerPlayerEntity> players = server.getChunkProvider().chunkManager.getTrackingPlayers(new ChunkPos(pos), false);
             players.forEach(player -> player.connection.sendPacket(packet));
         }

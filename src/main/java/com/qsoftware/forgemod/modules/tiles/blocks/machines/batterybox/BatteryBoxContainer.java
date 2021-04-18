@@ -37,7 +37,7 @@ public class BatteryBoxContainer extends AbstractEnergyStorageContainer<BatteryB
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
         ItemStack stackCopy = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
+        if (slot != null && slot.hasStack()) {
             ItemStack stack = slot.getStack();
             stackCopy = stack.copy();
 

@@ -48,8 +48,8 @@ public class UpdateFailedScreen extends Screen {
     /**
      * Screen initialization.
      */
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 

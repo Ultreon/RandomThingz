@@ -293,7 +293,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
      *   <li>Check if the tile entity is at a legal position.<br>
      *       If not, set the status to illegal position, and send blockstate update for inactive state.</li>
      *   <li>Get block position of currently mining block.</li>
-     *   <li>If world is null or is remote, then return.</li>
+     *   <li>If dimension is null or is remote, then return.</li>
      *   <li>Set status to no problem</li>
      *   <li>If the quarry blockstate property for lit is false, send an update for active state.</li>
      *   <li>If the break progress is larger or equals the break process speed,<br>
@@ -308,7 +308,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
      *       Otherwise:
      *       <ol>
      *           <li>Calculate block break animation index.</li>
-     *           <li>Send block break animation to world, with breaker id -1 for current mining block.</li>
+     *           <li>Send block break animation to dimension, with breaker id -1 for current mining block.</li>
      *           <li>Advance break progress by 0.04f * the process speed upgrade count.</li>
      *       </ol>
      *   </li>
@@ -317,7 +317,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
      */
     @Override
     public void tick() {
-        if (this.world == null) {
+        if (this.dimension == null) {
             this.status = Status.UNIDENTIFIED_WORLD;
             return;
         }
@@ -325,13 +325,13 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         if (!this.initialized) {
             this.status = Status.NOT_ENOUGH_ENERGY;
             setInactiveState();
-            init();
+            initialize();
             return;
         } else if (this.getEnergyStored() < this.getEnergyUsedPerTick()) {
             this.status = Status.NOT_ENOUGH_ENERGY;
             setInactiveState();
             return;
-        } else if (!this.redstoneMode.shouldRun(this.world.getRedstonePowerFromNeighbors(this.pos) > 0)) {
+        } else if (!this.redstoneMode.shouldRun(this.dimension.getRedstonePowerFromNeighbors(this.pos) > 0)) {
             this.status = Status.PAUSED;
             setInactiveState();
             return;
@@ -347,15 +347,15 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
 
         BlockPos posToBreak = new BlockPos(this.x, this.y, this.z);
 
-        if (world == null || world.isRemote) {
+        if (dimension == null || dimension.isClientSided) {
             return;
         }
 
-//        this.world.getBlockState(posToBreak).getBlock();
+//        this.dimension.getBlockState(posToBreak).getBlock();
 
         this.status = Status.NO_PROBLEM;
-        if (!world.getBlockState(pos).get(AbstractFurnaceBlock.LIT)) {
-            sendUpdate(getActiveState(this.world.getBlockState(this.pos)));
+        if (!dimension.getBlockState(pos).get(AbstractFurnaceBlock.LIT)) {
+            sendUpdate(getActiveState(this.dimension.getBlockState(this.pos)));
         }
 
         if (breakProgress >= breakProcessTime) {
@@ -374,11 +374,11 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
             }
 
             BlockPos newPos = new BlockPos(this.x, this.y, this.z);
-            BlockState blockState = world.getBlockState(newPos);
-            breakProcessTime = blockState.getBlockHardness(world, pos);
+            BlockState blockState = dimension.getBlockState(newPos);
+            breakProcessTime = blockState.getBlockHardness(dimension, pos);
         } else {
             int i = (int) ((breakProcessTime / breakProgress) * 10.0F);
-            world.sendBlockBreakProgress(this.pos.hashCode(), posToBreak, i);
+            dimension.sendBlockBreakProgress(this.pos.hashCode(), posToBreak, i);
             breakProgress += 0.2f * ((getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) * 2f) + 1f);
         }
 
@@ -404,7 +404,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
      */
     @SuppressWarnings("unused")
     @Deprecated
-    private void init() {
+    private void initialize() {
         this.initialized = true;
         this.x = this.pos.getX() - 1;
         this.y = this.pos.getY() - 1;
@@ -444,26 +444,26 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
      * @param newState the new state.
      */
     protected void sendUpdate(BlockState newState) {
-        if (this.world == null) return;
-        BlockState oldState = this.world.getBlockState(this.pos);
+        if (this.dimension == null) return;
+        BlockState oldState = this.dimension.getBlockState(this.pos);
         if (oldState != newState) {
-            this.world.setBlockState(this.pos, newState, 3);
-            this.world.notifyBlockUpdate(this.pos, oldState, newState, 3);
-            this.world.notifyNeighborsOfStateChange(this.pos, newState.getBlock());
+            this.dimension.setBlockState(this.pos, newState, 3);
+            this.dimension.notifyBlockUpdate(this.pos, oldState, newState, 3);
+            this.dimension.notifyNeighborsOfStateChange(this.pos, newState.getBlock());
 
-//            markDirty();
+//            markModified();
 
-            if (this.world instanceof ServerWorld) {
-                ServerWorld serverWorld = (ServerWorld) this.world;
+            if (this.dimension instanceof ServerWorld) {
+                ServerWorld serverWorld = (ServerWorld) this.dimension;
                 serverWorld.getServer().getPlayerList().getPlayers().forEach((player) -> player.connection.sendPacket(new SChangeBlockPacket(serverWorld, pos)));
             }
         }
     }
 
     protected void setInactiveState() {
-        if (world == null) return;
-        if (world.getBlockState(pos).get(AbstractFurnaceBlock.LIT)) {
-            sendUpdate(getInactiveState(world.getBlockState(pos)));
+        if (dimension == null) return;
+        if (dimension.getBlockState(pos).get(AbstractFurnaceBlock.LIT)) {
+            sendUpdate(getInactiveState(dimension.getBlockState(pos)));
         }
     }
 
@@ -490,19 +490,19 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     private boolean destroyBlock(BlockPos pos, boolean dropBlock, @Nullable Entity entity) {
         BlockState blockState;
 
-        assert this.world != null;
-        blockState = this.world.getBlockState(pos);
-        if (blockState.isAir(this.world, pos)) return false;
+        assert this.dimension != null;
+        blockState = this.dimension.getBlockState(pos);
+        if (blockState.isAir(this.dimension, pos)) return false;
         else {
-            FluidState fluidState = this.world.getFluidState(pos);
-            this.world.playEvent(2001, pos, Block.getStateId(blockState));
+            FluidState fluidState = this.dimension.getFluidState(pos);
+            this.dimension.playEvent(2001, pos, Block.getStateId(blockState));
             if (dropBlock) {
-                TileEntity tileEntity = blockState.hasTileEntity() ? this.world.getTileEntity(pos) : null;
+                TileEntity tileEntity = blockState.hasTileEntity() ? this.dimension.getTileEntity(pos) : null;
                 BlockPos up = this.pos.up();
-                TileEntity upTe = this.world.getTileEntity(up);
+                TileEntity upTe = this.dimension.getTileEntity(up);
                 if (upTe != null) {
                     LazyOptional<IItemHandler> capability = upTe.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.SOUTH);
-                    LootContext.Builder builder = new LootContext.Builder((ServerWorld) this.world).withRandom(this.world.rand).withParameter(LootParameters.ORIGIN, Vector3d.copyCentered(pos)).withParameter(LootParameters.TOOL, ItemStack.EMPTY).withNullableParameter(LootParameters.BLOCK_ENTITY, this).withNullableParameter(LootParameters.THIS_ENTITY, null);
+                    LootContext.Builder builder = new LootContext.Builder((ServerWorld) this.dimension).withRandom(this.dimension.rand).withParameter(LootParameters.ORIGIN, Vector3d.copyCentered(pos)).withParameter(LootParameters.TOOL, ItemStack.EMPTY).withNullableParameter(LootParameters.BLOCK_ENTITY, this).withNullableParameter(LootParameters.THIS_ENTITY, null);
                     if (capability.isPresent() && capability.resolve().isPresent()) {
                         IItemHandler itemHandler = capability.resolve().get();
                         List<ItemStack> stacks = new ArrayList<>();
@@ -516,32 +516,32 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
                             if (stack.isEmpty()) {
                                 continue;
                             }
-                            if (!this.world.isRemote && !stack.isEmpty() && this.world.getGameRules().getBoolean(GameRules.DO_TILE_DROPS) && !this.world.restoringBlockSnapshots) {
+                            if (!this.dimension.isClientSided && !stack.isEmpty() && this.dimension.getGameRules().getBoolean(GameRules.DO_TILE_DROPS) && !this.dimension.restoringBlockSnapshots) {
                                 float f = 0.5F;
-                                double d0 = (double) (this.world.rand.nextFloat() * 0.5F) + 0.25D;
-                                double d1 = (double) (this.world.rand.nextFloat() * 0.5F) + 0.25D;
-                                double d2 = (double) (this.world.rand.nextFloat() * 0.5F) + 0.25D;
-                                ItemEntity itementity = new ItemEntity(this.world, (double) this.pos.getX() + d0, (double) this.pos.getY() + 2.5d + d1, (double) this.pos.getZ() + d2, stack);
+                                double d0 = (double) (this.dimension.rand.nextFloat() * 0.5F) + 0.25D;
+                                double d1 = (double) (this.dimension.rand.nextFloat() * 0.5F) + 0.25D;
+                                double d2 = (double) (this.dimension.rand.nextFloat() * 0.5F) + 0.25D;
+                                ItemEntity itementity = new ItemEntity(this.dimension, (double) this.pos.getX() + d0, (double) this.pos.getY() + 2.5d + d1, (double) this.pos.getZ() + d2, stack);
                                 itementity.setDefaultPickupDelay();
-                                this.world.addEntity(itementity);
+                                this.dimension.spawnEntity(itementity);
                             }
                         }
                     } else {
-                        Block.spawnDrops(blockState, this.world, this.pos.add(0, 1.5, 0), tileEntity, entity, ItemStack.EMPTY);
+                        Block.spawnDrops(blockState, this.dimension, this.pos.add(0, 1.5, 0), tileEntity, entity, ItemStack.EMPTY);
                     }
                 } else {
-                    Block.spawnDrops(blockState, this.world, this.pos.add(0, 1.5, 0), tileEntity, entity, ItemStack.EMPTY);
+                    Block.spawnDrops(blockState, this.dimension, this.pos.add(0, 1.5, 0), tileEntity, entity, ItemStack.EMPTY);
                 }
 
 //                BlockPos above = this.pos.add(0, 1, 0);
-//                @Nullable TileEntity aboveTE = this.world.getTileEntity(above);
+//                @Nullable TileEntity aboveTE = this.dimension.getTileEntity(above);
 //                if (aboveTE != null) {
 //                    if (aboveTE instanceof IInventory) {
 //                        IInventory inventory = (IInventory) aboveTE;
 //                    }
 //                }
             }
-            return this.world.setBlockState(pos, fluidState.getBlockState(), 3);
+            return this.dimension.setBlockState(pos, fluidState.getBlockState(), 3);
         }
     }
 
@@ -588,11 +588,11 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         try {
             this.tier = MachineTier.valueOf(nbt.getString("Tier"));
         } catch (IllegalArgumentException e) {
-            Block block = this.world.getBlockState(this.pos).getBlock();
+            Block block = this.dimension.getBlockState(this.pos).getBlock();
             if (block instanceof QuarryBlock) {
                 this.tier = ((QuarryBlock)block).getDefaultTier();
             } else {
-                this.remove();
+                this.delete();
             }
         }
         this.breakProgress = nbt.getFloat("BreakProgress");
@@ -602,7 +602,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         super.onDataPacket(net, packet);
-        CompoundNBT nbt = packet.getNbtCompound();
+        CompoundNBT nbt = packet.getNbt();
         this.initialized = nbt.getBoolean("Initialized");
         this.x = nbt.getInt("CurrentX");
         this.y = nbt.getInt("CurrentY");
@@ -616,11 +616,11 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         try {
             this.tier = MachineTier.valueOf(nbt.getString("Tier"));
         } catch (IllegalArgumentException e) {
-            Block block = Objects.requireNonNull(this.world).getBlockState(this.pos).getBlock();
+            Block block = Objects.requireNonNull(this.dimension).getBlockState(this.pos).getBlock();
             if (block instanceof QuarryBlock) {
                 this.tier = ((QuarryBlock)block).getDefaultTier();
             } else {
-                this.remove();
+                this.delete();
             }
         }
     }
@@ -650,9 +650,9 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
      */
     @Deprecated
     private boolean canMachineRun() {
-        return this.world != null
+        return this.dimension != null
                 && getEnergyStored() >= getEnergyUsedPerTick()
-                && this.redstoneMode.shouldRun(this.world.getRedstonePowerFromNeighbors(this.pos) > 0)
+                && this.redstoneMode.shouldRun(this.dimension.getRedstonePowerFromNeighbors(this.pos) > 0)
                 && this.y >= DEPTH;
     }
 

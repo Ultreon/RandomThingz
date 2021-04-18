@@ -34,7 +34,7 @@ public class WireBlock extends SixWayBlock implements IWrenchable {
     public static final EnumProperty<ConnectionType> WEST = EnumProperty.create("west", ConnectionType.class);
     public static final EnumProperty<ConnectionType> UP = EnumProperty.create("up", ConnectionType.class);
     public static final EnumProperty<ConnectionType> DOWN = EnumProperty.create("down", ConnectionType.class);
-    public static final Map<Direction, EnumProperty<ConnectionType>> FACING_TO_PROPERTY_MAP = Util.make(Maps.newEnumMap(Direction.class), (map) -> {
+    public static final Map<Direction, EnumProperty<ConnectionType>> FACING_TO_PROPERTY_MAP = Util.create(Maps.newEnumMap(Direction.class), (map) -> {
         map.put(Direction.NORTH, NORTH);
         map.put(Direction.EAST, EAST);
         map.put(Direction.SOUTH, SOUTH);
@@ -83,8 +83,8 @@ public class WireBlock extends SixWayBlock implements IWrenchable {
         return Util.getElementAfter(p_195959_0_, p_195959_1_);
     }
 
-    private static ConnectionType createConnection(IBlockReader worldIn, BlockPos pos, Direction side, ConnectionType current) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos.offset(side));
+    private static ConnectionType createConnection(IBlockReader dimensionIn, BlockPos pos, Direction side, ConnectionType current) {
+        TileEntity tileEntity = dimensionIn.getTileEntity(pos.offset(side));
         if (tileEntity instanceof WireTileEntity) {
             return ConnectionType.BOTH;
         } else if (tileEntity != null) {
@@ -111,25 +111,25 @@ public class WireBlock extends SixWayBlock implements IWrenchable {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
         return new WireTileEntity();
     }
 
     @Override
     public ActionResultType onWrench(ItemUseContext context) {
         BlockPos pos = context.getPos();
-        World world = context.getWorld();
-        BlockState state = world.getBlockState(pos);
+        World dimension = context.getDimension();
+        BlockState state = dimension.getBlockState(pos);
         Vector3d relative = context.getHitVec().subtract(pos.getX(), pos.getY(), pos.getZ());
         QForgeMod.LOGGER.debug("onWrench: {}", relative);
 
         Direction side = getClickedConnection(relative);
         if (side != null) {
-            TileEntity other = world.getTileEntity(pos.offset(side));
+            TileEntity other = dimension.getTileEntity(pos.offset(side));
             if (!(other instanceof WireTileEntity)) {
                 BlockState state1 = cycleProperty(state, FACING_TO_PROPERTY_MAP.get(side));
-                world.setBlockState(pos, state1, 18);
-                WireNetworkManager.invalidateNetwork(world, pos);
+                dimension.setBlockState(pos, state1, 18);
+                WireNetworkManager.invalidateNetwork(dimension, pos);
                 return ActionResultType.SUCCESS;
             }
         }
@@ -144,28 +144,28 @@ public class WireBlock extends SixWayBlock implements IWrenchable {
 
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.makeConnections(context.getWorld(), context.getPos());
+        return this.makeConnections(context.getDimension(), context.getPos());
     }
 
-    public BlockState makeConnections(IBlockReader worldIn, BlockPos pos) {
+    public BlockState makeConnections(IBlockReader dimensionIn, BlockPos pos) {
         return this.getDefaultState()
-                .with(DOWN, createConnection(worldIn, pos, Direction.DOWN, ConnectionType.NONE))
-                .with(UP, createConnection(worldIn, pos, Direction.UP, ConnectionType.NONE))
-                .with(NORTH, createConnection(worldIn, pos, Direction.NORTH, ConnectionType.NONE))
-                .with(EAST, createConnection(worldIn, pos, Direction.EAST, ConnectionType.NONE))
-                .with(SOUTH, createConnection(worldIn, pos, Direction.SOUTH, ConnectionType.NONE))
-                .with(WEST, createConnection(worldIn, pos, Direction.WEST, ConnectionType.NONE));
+                .with(DOWN, createConnection(dimensionIn, pos, Direction.DOWN, ConnectionType.NONE))
+                .with(UP, createConnection(dimensionIn, pos, Direction.UP, ConnectionType.NONE))
+                .with(NORTH, createConnection(dimensionIn, pos, Direction.NORTH, ConnectionType.NONE))
+                .with(EAST, createConnection(dimensionIn, pos, Direction.EAST, ConnectionType.NONE))
+                .with(SOUTH, createConnection(dimensionIn, pos, Direction.SOUTH, ConnectionType.NONE))
+                .with(WEST, createConnection(dimensionIn, pos, Direction.WEST, ConnectionType.NONE));
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (worldIn.getTileEntity(facingPos) instanceof WireTileEntity)
-            WireNetworkManager.invalidateNetwork(worldIn, currentPos);
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld dimensionIn, BlockPos currentPos, BlockPos facingPos) {
+        if (dimensionIn.getTileEntity(facingPos) instanceof WireTileEntity)
+            WireNetworkManager.invalidateNetwork(dimensionIn, currentPos);
 
         EnumProperty<ConnectionType> property = FACING_TO_PROPERTY_MAP.get(facing);
         ConnectionType current = stateIn.get(property);
-        return stateIn.with(property, createConnection(worldIn, currentPos, facing, current));
+        return stateIn.with(property, createConnection(dimensionIn, currentPos, facing, current));
     }
 
     @Override

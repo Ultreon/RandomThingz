@@ -37,10 +37,10 @@ public class EntitiesModule extends CoreRegisterModule<EntityType<?>> {
 
     private static boolean enableMenu() {
         Minecraft mc = Minecraft.getInstance();
-        ClientWorld world = mc.world;
+        ClientWorld dimension = mc.dimension;
         ClientPlayerEntity player = mc.player;
 
-        EntityRayTraceResult result = Targeter.rayTraceEntities(player, world);
+        EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
         return result != null;
     }
 

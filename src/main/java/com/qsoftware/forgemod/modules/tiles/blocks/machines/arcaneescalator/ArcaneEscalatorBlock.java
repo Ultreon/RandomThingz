@@ -22,12 +22,12 @@ import java.util.Random;
 
 public class ArcaneEscalatorBlock extends AbstractMachineBlock {
     public ArcaneEscalatorBlock(MachineTier tier) {
-        super(tier, Properties.create(Material.IRON).hardnessAndResistance(6.0f, 20.0f).sound(SoundType.METAL));
+        super(tier, Properties.generate(Material.IRON).hardnessAndResistance(6.0f, 20.0f).sound(SoundType.METAL));
     }
 
     @Override
-    protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
+    protected void interactWith(World dimensionIn, BlockPos pos, PlayerEntity player) {
+        TileEntity tileEntity = dimensionIn.getTileEntity(pos);
         if (tileEntity instanceof ArcaneEscalatorTileEntity) {
             player.openContainer((INamedContainerProvider) tileEntity);
         }
@@ -35,19 +35,19 @@ public class ArcaneEscalatorBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    public TileEntity createNewTileEntity(IBlockReader dimensionIn) {
         return MachineType.ARCANE_ESCALATOR.getTileEntityType(tier).create();
     }
 
     @Override
-    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    public void animateTick(BlockState stateIn, World dimensionIn, BlockPos pos, Random rand) {
         // TODO: Unique sound and particles? Copied from BlastFurnaceBlock.
         if (stateIn.get(LIT)) {
             double d0 = (double) pos.getX() + 0.5D;
             double d1 = pos.getY();
             double d2 = (double) pos.getZ() + 0.5D;
             if (rand.nextDouble() < 0.1D) {
-                worldIn.playSound(d0, d1, d2, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                dimensionIn.playSound(d0, d1, d2, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
             }
 
             Direction direction = stateIn.get(FACING);
@@ -57,7 +57,7 @@ public class ArcaneEscalatorBlock extends AbstractMachineBlock {
             double d5 = direction$axis == Direction.Axis.X ? (double) direction.getXOffset() * 0.52D : d4;
             double d6 = rand.nextDouble() * 9.0D / 16.0D;
             double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getZOffset() * 0.52D : d4;
-            worldIn.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+            dimensionIn.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
         }
     }
 }

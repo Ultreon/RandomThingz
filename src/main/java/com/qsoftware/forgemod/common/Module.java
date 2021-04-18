@@ -133,7 +133,7 @@ public abstract class Module {
     /**
      * Mark the data dirty, the next time the modules data will be saved this module will be included.
      */
-    public final void markDirty() {
+    public final void markModified() {
         ModuleManager.getInstance().setSaveSchedule(this);
     }
 

@@ -26,7 +26,7 @@ public class DieselGeneratorTileEntity extends AbstractFluidFuelGeneratorTileEnt
     public static final int ENERGY_CREATED_PER_TICK = 120;
     public static final int TICKS_PER_MILLIBUCKET = 10;
 
-    static final ITag.INamedTag<Fluid> FUEL_TAG = FluidTags.makeWrapperTag(new ResourceLocation("forge", "diesel").toString());
+    static final ITag.INamedTag<Fluid> FUEL_TAG = FluidTags.createWrapperTag(new ResourceLocation("forge", "diesel").toString());
 
     public DieselGeneratorTileEntity() {
         super(ModMachineTileEntities.dieselGenerator, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(4000, s -> s.getFluid().isIn(FUEL_TAG)));

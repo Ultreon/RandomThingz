@@ -23,8 +23,8 @@ public class InfinityBlock extends Block {
     }
 
     @Override
-    public void onBlockClicked(@NotNull BlockState state, @NotNull World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player) {
-        super.onBlockClicked(state, worldIn, pos, player);
+    public void onBlockClicked(@NotNull BlockState state, @NotNull World dimensionIn, @NotNull BlockPos pos, @NotNull PlayerEntity player) {
+        super.onBlockClicked(state, dimensionIn, pos, player);
 
         ItemStack heldItemMainhand = player.getHeldItemMainhand();
         if (heldItemMainhand.isEmpty()) {

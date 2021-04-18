@@ -44,14 +44,14 @@ public class StandingSignFrameBlock extends StandingSignBlock {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
         System.out.println("new tile");
         return new SignFrameTile();
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        TileEntity tile = worldIn.getTileEntity(pos);
+    public ActionResultType onBlockActivated(BlockState state, World dimensionIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        TileEntity tile = dimensionIn.getTileEntity(pos);
         if (tile instanceof SignFrameTile) {
             SignFrameTile signTile = (SignFrameTile) tile;
             player.openSignEditor(signTile);

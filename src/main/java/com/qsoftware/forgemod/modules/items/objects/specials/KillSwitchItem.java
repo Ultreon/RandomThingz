@@ -32,7 +32,7 @@ public final class KillSwitchItem extends Item {
     }
 
     @Override
-    public @NotNull ActionResultType onItemUse(@NotNull ItemUseContext context) {
+    public @NotNull ActionResultType onUseItem(@NotNull ItemUseContext context) {
         if (ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN)) {
             ComputerUtils.shutdown();
             PlayerEntity player = context.getPlayer();
@@ -46,7 +46,7 @@ public final class KillSwitchItem extends Item {
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World dimensionIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if (Platform.isWindows() || Platform.isLinux()) {
 //            tooltip.add(new StringTextComponent(TextColors.LIGHT_RED + "Warning: " + TextColors.WHITE + TextColors.ITALIC + "This will shutdown you computer!"));
             tooltip.add(Translations.getTooltip("kill_switch", "warning"));
@@ -54,7 +54,7 @@ public final class KillSwitchItem extends Item {
 //            tooltip.add(new StringTextComponent(TextColors.AQUA + "Note: " + TextColors.WHITE + TextColors.ITALIC + "This item works only on Windows or Linux computers!"));
             tooltip.add(Translations.getTooltip("kill_switch", "not_supported"));
         }
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.addInformation(stack, dimensionIn, tooltip, flagIn);
     }
 
     @Override

@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemEntity.class)
 public class MixinItemEntity {
-    @Inject(at = @At("HEAD"), method = "attackEntityFrom(Lnet/minecraft/util/DamageSource;F)Z", cancellable = true)
-    private void attackEntityFrom(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callback) {
+    @Inject(at = @At("HEAD"), method = "attack(Lnet/minecraft/util/DamageSource;F)Z", cancellable = true)
+    private void attack(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callback) {
         System.out.println("HELLO MIXIN");
         if (source.isFireDamage() && EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_PROTECTION, this.getItem()) > 0) {
             callback.setReturnValue(false);

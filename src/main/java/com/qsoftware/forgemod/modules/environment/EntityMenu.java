@@ -24,11 +24,11 @@ public class EntityMenu extends AbstractActionMenu {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld world = mc.world;
+                ClientWorld dimension = mc.dimension;
                 ClientPlayerEntity player = mc.player;
                 PlayerController controller = mc.playerController;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, world);
+                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
                 if (result != null && controller != null) {
                     controller.attackEntity(player, result.getEntity());
                 }
@@ -42,10 +42,10 @@ public class EntityMenu extends AbstractActionMenu {
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld world = mc.world;
+                ClientWorld dimension = mc.dimension;
                 ClientPlayerEntity player = mc.player;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, world);
+                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
                 return result != null;
             }
         });
@@ -53,11 +53,11 @@ public class EntityMenu extends AbstractActionMenu {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld world = mc.world;
+                ClientWorld dimension = mc.dimension;
                 ClientPlayerEntity player = mc.player;
                 PlayerController controller = mc.playerController;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, world);
+                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
                 if (result != null && controller != null) {
                     controller.interactWithEntity(player, result.getEntity(), result, Hand.MAIN_HAND);
                 }
@@ -71,10 +71,10 @@ public class EntityMenu extends AbstractActionMenu {
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld world = mc.world;
+                ClientWorld dimension = mc.dimension;
                 ClientPlayerEntity player = mc.player;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, world);
+                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
                 return result != null;
             }
         });
@@ -92,7 +92,7 @@ public class EntityMenu extends AbstractActionMenu {
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.world != null && mc.playerController != null;
+                return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
     }

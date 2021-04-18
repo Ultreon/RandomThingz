@@ -10,6 +10,6 @@ public class WitherTrait extends AbstractPotionTrait {
 
     @Override
     public EffectInstance getEffectInstance() {
-        return new EffectInstance(Effects.WITHER, 50, 2);
+        return new EffectInstance(Effects.WITHER, 50, 1);
     }
 }

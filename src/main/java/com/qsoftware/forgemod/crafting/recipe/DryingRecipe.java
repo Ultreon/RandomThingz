@@ -21,7 +21,7 @@ public class DryingRecipe implements IRecipe<IInventory> {
     private ItemStack result;
 
     @Override
-    public boolean matches(IInventory inv, World worldIn) {
+    public boolean matches(IInventory inv, World dimensionIn) {
         ItemStack stack = inv.getStackInSlot(0);
         return ingredient.test(stack);
     }

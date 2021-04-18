@@ -44,7 +44,7 @@ public class CurseEffect extends Effect {
         Random rng = entity.getRNG();
         switch (rng.nextInt(13)) {
             case 0: {
-                entity.attackEntityFrom(DAMAGE_SOURCE, 1.0F);
+                entity.attack(DAMAGE_SOURCE, 1.0F);
                 break;
             }
             case 1: {

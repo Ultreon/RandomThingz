@@ -32,7 +32,7 @@ public class TextureGenerator {
     public void generate() {
         for (Map.Entry<ResourceLocation, QFMTexture> texture : this.textures.entrySet()) {
             try {
-                Minecraft.getInstance().getTextureManager().loadTexture(texture.getKey(), new DynamicTexture(NativeImage.read(BufferUtil.toByteBuffer(texture.getValue().render()))));
+                Minecraft.getInstance().getTextureManager().readTexture(texture.getKey(), new DynamicTexture(NativeImage.read(BufferUtil.toByteBuffer(texture.getValue().render()))));
             } catch (IOException e) {
                 QForgeMod.LOGGER.error("Couldn't generate texture: " + texture.getKey(), e);
             }

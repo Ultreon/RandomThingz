@@ -22,16 +22,16 @@ public final class ItemPipeNetworkManager {
 
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    public static ItemPipeNetwork get(IWorldReader world, BlockPos pos) {
-        return getLazy(world, pos).orElse(null);
+    public static ItemPipeNetwork get(IWorldReader dimension, BlockPos pos) {
+        return getLazy(dimension, pos).orElse(null);
     }
 
-    public static LazyOptional<ItemPipeNetwork> getLazy(IWorldReader world, BlockPos pos) {
+    public static LazyOptional<ItemPipeNetwork> getLazy(IWorldReader dimension, BlockPos pos) {
         synchronized (NETWORK_LIST) {
             for (LazyOptional<ItemPipeNetwork> network : NETWORK_LIST) {
                 if (network.isPresent()) {
                     ItemPipeNetwork net = network.orElseThrow(IllegalStateException::new);
-                    if (net.contains(world, pos)) {
+                    if (net.contains(dimension, pos)) {
 //                    QForgeUtils.LOGGER.debug("get network {}", network);
                         return network;
                     }
@@ -40,16 +40,16 @@ public final class ItemPipeNetworkManager {
         }
 
         // Create new
-        ItemPipeNetwork network = ItemPipeNetwork.buildNetwork(world, pos);
+        ItemPipeNetwork network = ItemPipeNetwork.buildNetwork(dimension, pos);
         LazyOptional<ItemPipeNetwork> lazy = LazyOptional.of(() -> network);
         NETWORK_LIST.add(lazy);
         QForgeMod.LOGGER.debug("create network {}", network);
         return lazy;
     }
 
-    public static void invalidateNetwork(IWorldReader world, BlockPos pos) {
+    public static void invalidateNetwork(IWorldReader dimension, BlockPos pos) {
         Collection<LazyOptional<ItemPipeNetwork>> toRemove = NETWORK_LIST.stream()
-                .filter(n -> n != null && n.isPresent() && n.orElseThrow(IllegalStateException::new).contains(world, pos))
+                .filter(n -> n != null && n.isPresent() && n.orElseThrow(IllegalStateException::new).contains(dimension, pos))
                 .collect(Collectors.toList());
         toRemove.forEach(ItemPipeNetworkManager::invalidateNetwork);
     }

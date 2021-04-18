@@ -36,7 +36,7 @@ public final class EntityUtils {
         // Set damage source
         DamageSource damageSrc = new DamageSource(damageType).setDamageBypassesArmor().setDamageIsAbsolute().setDamageAllowedInCreativeMode();
 
-        entity.attackEntityFrom(damageSrc, Float.POSITIVE_INFINITY);
+        entity.attack(damageSrc, Float.POSITIVE_INFINITY);
 
 //        // Get health
 //        float currentHealth = entity.getHealth();

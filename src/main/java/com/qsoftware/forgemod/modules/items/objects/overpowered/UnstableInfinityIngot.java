@@ -29,35 +29,35 @@ public class UnstableInfinityIngot extends Item {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, @NotNull World dimensionIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
         if (!nbt.contains("createTime")) {
-            nbt.putLong("createTime", worldIn.getGameTime());
+            nbt.putLong("createTime", dimensionIn.getGameTime());
         } else {
             long createTime = nbt.getLong("createTime");
-            if ((createTime + 200) < worldIn.getGameTime()) {
-                trigger(stack, worldIn, entityIn, itemSlot);
+            if ((createTime + 200) < dimensionIn.getGameTime()) {
+                trigger(stack, dimensionIn, entityIn, itemSlot);
             }
         }
 
-        super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+        super.inventoryTick(stack, dimensionIn, entityIn, itemSlot, isSelected);
     }
 
-    public void trigger(ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot) {
+    public void trigger(ItemStack stack, @NotNull World dimensionIn, @NotNull Entity entityIn, int itemSlot) {
         entityIn.replaceItemInInventory(itemSlot, ItemStack.EMPTY);
-        worldIn.createExplosion(entityIn, entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ(), 8f * (float) stack.getCount(), true, Explosion.Mode.DESTROY);
+        dimensionIn.createExplosion(entityIn, entityIn.getPosX(), entityIn.getPosY(), entityIn.getPosZ(), 8f * (float) stack.getCount(), true, Explosion.Mode.DESTROY);
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
-        if (worldIn == null) {
+        if (dimensionIn == null) {
             return;
         }
 
         if (nbt.contains("createTime")) {
             long createTime = nbt.getLong("createTime");
-            double ticks = ((double) createTime + 200) - (double) worldIn.getGameTime();
+            double ticks = ((double) createTime + 200) - (double) dimensionIn.getGameTime();
             long seconds = Math.round(ticks / 20d);
 
             //////////////////////
@@ -69,37 +69,37 @@ public class UnstableInfinityIngot extends Item {
             // 600 - 400
             // 200
 
-            if ((createTime + 200) < worldIn.getGameTime()) {
+            if ((createTime + 200) < dimensionIn.getGameTime()) {
                 tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "TOO LATE!"));
-                super.addInformation(stack, worldIn, tooltip, flagIn);
-            } else if ((createTime + 150) < worldIn.getGameTime()) {
+                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+            } else if ((createTime + 150) < dimensionIn.getGameTime()) {
                 tooltip.add(new StringTextComponent(TextColors.LIGHT_RED + "" + seconds + " seconds"));
-                super.addInformation(stack, worldIn, tooltip, flagIn);
-            } else if ((createTime + 100) < worldIn.getGameTime()) {
+                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+            } else if ((createTime + 100) < dimensionIn.getGameTime()) {
                 tooltip.add(new StringTextComponent(TextColors.GOLD + "" + seconds + " seconds"));
-                super.addInformation(stack, worldIn, tooltip, flagIn);
-            } else if ((createTime + 50) < worldIn.getGameTime()) {
+                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+            } else if ((createTime + 50) < dimensionIn.getGameTime()) {
                 tooltip.add(new StringTextComponent(TextColors.YELLOW + "" + seconds + " seconds"));
-                super.addInformation(stack, worldIn, tooltip, flagIn);
+                super.addInformation(stack, dimensionIn, tooltip, flagIn);
             } else {
                 tooltip.add(new StringTextComponent(TextColors.LIME + "" + seconds + " seconds"));
-                super.addInformation(stack, worldIn, tooltip, flagIn);
+                super.addInformation(stack, dimensionIn, tooltip, flagIn);
             }
         }
     }
 
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
-        World world = entity.getEntityWorld();
+        World dimension = entity.getEntityDimension();
 
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
         if (!nbt.contains("createTime")) {
-            nbt.putLong("createTime", world.getGameTime());
+            nbt.putLong("createTime", dimension.getGameTime());
             entity.setInvulnerable(true);
         } else {
             long createTime = nbt.getLong("createTime");
-            if ((createTime + 200) < world.getGameTime()) {
-                world.createExplosion(entity, entity.getPosX(), entity.getPosY(), entity.getPosZ(), 8f * (float) stack.getCount(), true, Explosion.Mode.DESTROY);
+            if ((createTime + 200) < dimension.getGameTime()) {
+                dimension.createExplosion(entity, entity.getPosX(), entity.getPosY(), entity.getPosZ(), 8f * (float) stack.getCount(), true, Explosion.Mode.DESTROY);
                 if (entity.isAlive()) {
                     entity.remove(false);
                 }

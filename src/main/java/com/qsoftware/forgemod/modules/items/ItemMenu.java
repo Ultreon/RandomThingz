@@ -17,8 +17,8 @@ public class ItemMenu extends AbstractActionMenu {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                if (mc.player != null && mc.world != null && mc.playerController != null) {
-                    mc.playerController.processRightClick(mc.player, mc.world, Hand.MAIN_HAND);
+                if (mc.player != null && mc.dimension != null && mc.playerController != null) {
+                    mc.playerController.processRightClick(mc.player, mc.dimension, Hand.MAIN_HAND);
                 }
             }
 
@@ -30,14 +30,14 @@ public class ItemMenu extends AbstractActionMenu {
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.world != null && mc.playerController != null;
+                return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
         addItem(new IActionMenuItem() {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                if (mc.player != null && mc.world != null && mc.playerController != null) {
+                if (mc.player != null && mc.dimension != null && mc.playerController != null) {
                     if (!mc.player.isSpectator() && mc.player.drop(Screen.hasControlDown())) {
                         mc.player.swingArm(Hand.MAIN_HAND);
                     }
@@ -52,14 +52,14 @@ public class ItemMenu extends AbstractActionMenu {
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.world != null && mc.playerController != null;
+                return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
         addItem(new IActionMenuItem() {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                if (mc.player != null && mc.world != null && mc.playerController != null) {
+                if (mc.player != null && mc.dimension != null && mc.playerController != null) {
                     if (!mc.player.isSpectator() && mc.player.drop(true)) {
                         mc.player.swingArm(Hand.MAIN_HAND);
                     }
@@ -74,14 +74,14 @@ public class ItemMenu extends AbstractActionMenu {
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.world != null && mc.playerController != null;
+                return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
         addItem(new IActionMenuItem() {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                if (mc.player != null && mc.world != null && mc.playerController != null) {
+                if (mc.player != null && mc.dimension != null && mc.playerController != null) {
                     if (!mc.player.isSpectator() && mc.player.drop(false)) {
                         mc.player.swingArm(Hand.MAIN_HAND);
                     }
@@ -96,7 +96,7 @@ public class ItemMenu extends AbstractActionMenu {
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.world != null && mc.playerController != null;
+                return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
         addItem(new IActionMenuItem() {
@@ -113,7 +113,7 @@ public class ItemMenu extends AbstractActionMenu {
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.world != null && mc.playerController != null;
+                return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
     }

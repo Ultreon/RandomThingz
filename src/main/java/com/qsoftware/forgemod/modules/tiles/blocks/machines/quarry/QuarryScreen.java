@@ -25,8 +25,8 @@ public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
         this.buttons.removeIf((widget) -> widget instanceof RedstoneModeButton);
     }
 
@@ -78,12 +78,12 @@ public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
                 break;
             } case UNIDENTIFIED_WORLD: {
                 fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
-                fontRenderer.drawString(matrixStack, "  Unidentified world", xPos + 5, yPos + 48, 0xbf0000);
+                fontRenderer.drawString(matrixStack, "  Unidentified dimension", xPos + 5, yPos + 48, 0xbf0000);
                 break;
             } case PAUSED: {
                 fontRenderer.drawString(matrixStack, "Paused", xPos + 5, yPos + 48, 0xbf5f00);
-                if (minecraft.world != null) {
-                    itemRenderer.renderItemIntoGUI(new ItemStack(minecraft.world.getBlockState(container.getCurrentPos()).getBlock()), xPos + xSize - 33, yPos + 17);
+                if (minecraft.dimension != null) {
+                    itemRenderer.renderItemIntoGUI(new ItemStack(minecraft.dimension.getBlockState(container.getCurrentPos()).getBlock()), xPos + xSize - 33, yPos + 17);
                 }
                 break;
             } case DONE: {
@@ -94,8 +94,8 @@ public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
                 fontRenderer.drawString(matrixStack, "Total blocks: " + container.getTotalBlocks(), xPos + 5, yPos + 48, 0x7f7f7f);
                 fontRenderer.drawString(matrixStack, "Remaining: " + container.getBlocksRemaining(), xPos + 5, yPos + 60, 0x7f7f7f);
                 fontRenderer.drawString(matrixStack, "Y: " + container.getCurrentY(), xPos + 5, yPos + 72, 0x7f7f7f);
-                if (minecraft.world != null) {
-                    itemRenderer.renderItemIntoGUI(new ItemStack(minecraft.world.getBlockState(container.getCurrentPos()).getBlock()), xPos + xSize - 33, yPos + 17);
+                if (minecraft.dimension != null) {
+                    itemRenderer.renderItemIntoGUI(new ItemStack(minecraft.dimension.getBlockState(container.getCurrentPos()).getBlock()), xPos + xSize - 33, yPos + 17);
                 }
                 break;
             } default: {

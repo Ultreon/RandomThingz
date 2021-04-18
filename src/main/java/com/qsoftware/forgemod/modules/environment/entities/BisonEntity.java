@@ -19,8 +19,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author Qboi123
  */
 public class BisonEntity extends CowEntity {
-    public BisonEntity(EntityType<? extends CowEntity> type, World worldIn) {
-        super(type, worldIn);
+    public BisonEntity(EntityType<? extends CowEntity> type, World dimensionIn) {
+        super(type, dimensionIn);
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
@@ -30,7 +30,7 @@ public class BisonEntity extends CowEntity {
     @Nullable
     @Override
     @ParametersAreNonnullByDefault
-    public BisonEntity createChild(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return ModEntities.BISON.get().create(this.world);
+    public BisonEntity createChild(ServerWorld dimensionIn, AgeableEntity ageable) {  // createChild
+        return ModEntities.BISON.get().create(this.dimension);
     }
 }

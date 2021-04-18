@@ -76,7 +76,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.registerTags();
         this.tagToBuilder.forEach((p_240524_4_, p_240524_5_) -> {
             JsonObject jsonobject = p_240524_5_.serialize();
-            Path path = this.makePath(p_240524_4_);
+            Path path = this.createPath(p_240524_4_);
             if (path == null)
                 return; //Forge: Allow running this data provider without writing it. Recipe provider needs valid tags.
 
@@ -93,7 +93,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
                 cache.recordHash(path, s1);
             } catch (IOException ioexception) {
-                LOGGER.error("Couldn't save tags to {}", path, ioexception);
+                LOGGER.error("Couldn't write tags to {}", path, ioexception);
             }
 
         });

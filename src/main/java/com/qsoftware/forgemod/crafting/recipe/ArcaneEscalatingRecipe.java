@@ -43,7 +43,7 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
     }
 
     @Override
-    public boolean matches(IMachineInventory inv, World worldIn) {
+    public boolean matches(IMachineInventory inv, World dimensionIn) {
         for (Ingredient ingredient : ingredients.keySet()) {
             int required = ingredients.get(ingredient);
             int found = InventoryUtils.getTotalCount(inv, ingredient);

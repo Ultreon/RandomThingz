@@ -52,7 +52,7 @@ public class QFMPluginLoader {
                             LOGGER.debug("Registering QFM Plugin for Class name: {}", ad.getClassType().getClassName());
                             QFMPluginManager.get().registerPlugin(Class.forName(ad.getClassType().getClassName(), true, loader));
                         } catch (ClassNotFoundException e) {
-                            LOGGER.fatal(LOADING, "Failed to load QFM Plugin class {} for @QFMPlugin annotation", ad.getClassType(), e);
+                            LOGGER.fatal(LOADING, "Failed to read QFM Plugin class {} for @QFMPlugin annotation", ad.getClassType(), e);
                             throw new RuntimeException(e);
                         }
                     }/* else if (!Objects.equals(modIdMap.getValue(), modId)) {

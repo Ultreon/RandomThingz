@@ -71,7 +71,7 @@ public abstract class ContainerBase extends Container {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = inventorySlots.get(index);
 
-        if (slot != null && slot.getHasStack()) {
+        if (slot != null && slot.hasStack()) {
             ItemStack stack = slot.getStack();
             itemStack = stack.copy();
 

@@ -57,8 +57,8 @@ public class CrusherTileEntity extends AbstractMachineTileEntity<CrushingRecipe>
     @Nullable
     @Override
     protected CrushingRecipe getRecipe() {
-        if (world == null) return null;
-        return world.getRecipeManager().getRecipe(ModRecipes.Types.CRUSHING, this, world).orElse(null);
+        if (dimension == null) return null;
+        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.CRUSHING, this, dimension).orElse(null);
     }
 
     @Override

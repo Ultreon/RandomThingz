@@ -108,7 +108,7 @@ public class MinecraftMenu extends AbstractActionMenu {
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.world != null && mc.playerController != null;
+                return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
     }

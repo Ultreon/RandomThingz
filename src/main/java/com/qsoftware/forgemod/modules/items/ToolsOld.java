@@ -52,14 +52,14 @@ public enum ToolsOld implements INamed, Translatable {
     ELECTRUM(OreMaterial.ELECTRUM, 120f, 3.8f, 6.5f, 0.65f, 44, 1),
     ENDERIUM(OreMaterial.ENDERIUM, 600f, 8.0f, 9.0f, 0.05f, 34, 4) {
         @Override
-        public ActionResultType onItemUse(ItemUseContext context) {
+        public ActionResultType onUseItem(ItemUseContext context) {
             PlayerEntity playerEntity = context.getPlayer();
-            World world = context.getWorld();
+            World dimension = context.getDimension();
 
-            if (playerEntity != null && world instanceof ServerWorld) {
+            if (playerEntity != null && dimension instanceof ServerWorld) {
                 if (context.getHand() == Hand.MAIN_HAND) {
                     ItemStack item = context.getItem();
-                    BlockRayTraceResult blockRayTraceResult = rayTrace(context.getWorld(), playerEntity, RayTraceContext.FluidMode.NONE);
+                    BlockRayTraceResult blockRayTraceResult = rayTrace(context.getDimension(), playerEntity, RayTraceContext.FluidMode.NONE);
                     BlockPos add = blockRayTraceResult.getPos().add(blockRayTraceResult.getFace().getDirectionVec());
 
                     playerEntity.teleportKeepLoaded(add.getX(), add.getY(), add.getZ());
@@ -69,10 +69,10 @@ public enum ToolsOld implements INamed, Translatable {
                     });
                 }
             }
-            return super.onItemUse(context);
+            return super.onUseItem(context);
         }
 
-        protected BlockRayTraceResult rayTrace(World worldIn, PlayerEntity player, RayTraceContext.FluidMode fluidMode) {
+        protected BlockRayTraceResult rayTrace(World dimensionIn, PlayerEntity player, RayTraceContext.FluidMode fluidMode) {
             float f = player.rotationPitch;
             float f1 = player.rotationYaw;
             Vector3d vector3d = player.getEyePosition(1.0F);
@@ -84,7 +84,7 @@ public enum ToolsOld implements INamed, Translatable {
             float f7 = f2 * f4;
             double d0 = player.getAttribute(net.minecraftforge.common.ForgeMod.REACH_DISTANCE.get()).getValue();;
             Vector3d vector3d1 = vector3d.add((double)f6 * d0, (double)f5 * d0, (double)f7 * d0);
-            return worldIn.rayTraceBlocks(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.COLLIDER, fluidMode, player));
+            return dimensionIn.rayTraceBlocks(new RayTraceContext(vector3d, vector3d1, RayTraceContext.BlockMode.COLLIDER, fluidMode, player));
         }
     },
     LEAD(OreMaterial.LEAD, 1_600f, 3.0f, 9.0f, 0.05f, 34, 4, (entity) -> new EffectInstance(Effects.POISON, ThreadLocalRandom.current().nextInt(400, 800), 1, false, false), null),
@@ -494,34 +494,34 @@ public enum ToolsOld implements INamed, Translatable {
             // Armor pieces
             toolsOld.helmetProvider = toolsOld.registry.register(toolsOld.name() + "_helmet", () -> new ArmorItem(toolsOld.armorMaterial, EquipmentSlotType.HEAD, new Item.Properties().group(ModItemGroups.TOOLS)) {
                 @Override
-                public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-                    toolsOld.doArmorTick(stack, world, player);
+                public void onArmorTick(ItemStack stack, World dimension, PlayerEntity player) {
+                    toolsOld.doArmorTick(stack, dimension, player);
                 }
             });
             toolsOld.chestplateProvider = toolsOld.registry.register(toolsOld.name() + "_chestplate", () -> new ArmorItem(toolsOld.armorMaterial, EquipmentSlotType.CHEST, new Item.Properties().group(ModItemGroups.TOOLS)) {
                 @Override
-                public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-                    toolsOld.doArmorTick(stack, world, player);
+                public void onArmorTick(ItemStack stack, World dimension, PlayerEntity player) {
+                    toolsOld.doArmorTick(stack, dimension, player);
                 }
             });
             toolsOld.leggingsProvider = toolsOld.registry.register(toolsOld.name() + "_leggings", () -> new ArmorItem(toolsOld.armorMaterial, EquipmentSlotType.LEGS, new Item.Properties().group(ModItemGroups.TOOLS)) {
                 @Override
-                public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-                    toolsOld.doArmorTick(stack, world, player);
+                public void onArmorTick(ItemStack stack, World dimension, PlayerEntity player) {
+                    toolsOld.doArmorTick(stack, dimension, player);
                 }
             });
             toolsOld.bootsProvider = toolsOld.registry.register(toolsOld.name() + "_boots", () -> new ArmorItem(toolsOld.armorMaterial, EquipmentSlotType.FEET, new Item.Properties().group(ModItemGroups.TOOLS)) {
                 @Override
-                public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
-                    toolsOld.doArmorTick(stack, world, player);
+                public void onArmorTick(ItemStack stack, World dimension, PlayerEntity player) {
+                    toolsOld.doArmorTick(stack, dimension, player);
                 }
             });
 
             // Tools.
             toolsOld.swordProvider = toolsOld.registry.register(toolsOld.name() + "_sword", () -> new SwordItem(toolsOld.itemTier, 3, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS)) {
                 @Override
-                public ActionResultType onItemUse(ItemUseContext context) {
-                    return toolsOld.onItemUse(context);
+                public ActionResultType onUseItem(ItemUseContext context) {
+                    return toolsOld.onUseItem(context);
                 }
 
                 @Override
@@ -539,8 +539,8 @@ public enum ToolsOld implements INamed, Translatable {
             });
             toolsOld.axeProvider = toolsOld.registry.register(toolsOld.name() + "_axe", () -> new AxeItem(toolsOld.itemTier, 5.0f, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS)) {
                 @Override
-                public ActionResultType onItemUse(ItemUseContext context) {
-                    return toolsOld.onItemUse(context);
+                public ActionResultType onUseItem(ItemUseContext context) {
+                    return toolsOld.onUseItem(context);
                 }
 
                 @Override
@@ -558,8 +558,8 @@ public enum ToolsOld implements INamed, Translatable {
             });
             toolsOld.pickaxeProvider = toolsOld.registry.register(toolsOld.name() + "_pickaxe", () -> new PickaxeItem(toolsOld.itemTier, 1, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS)) {
                 @Override
-                public ActionResultType onItemUse(ItemUseContext context) {
-                    return toolsOld.onItemUse(context);
+                public ActionResultType onUseItem(ItemUseContext context) {
+                    return toolsOld.onUseItem(context);
                 }
 
                 @Override
@@ -577,8 +577,8 @@ public enum ToolsOld implements INamed, Translatable {
             });
             toolsOld.shovelProvider = toolsOld.registry.register(toolsOld.name() + "_shovel", () -> new ShovelItem(toolsOld.itemTier, 1.5f, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS)) {
                 @Override
-                public ActionResultType onItemUse(ItemUseContext context) {
-                    return toolsOld.onItemUse(context);
+                public ActionResultType onUseItem(ItemUseContext context) {
+                    return toolsOld.onUseItem(context);
                 }
 
                 @Override
@@ -596,8 +596,8 @@ public enum ToolsOld implements INamed, Translatable {
             });
             toolsOld.hoeProvider = toolsOld.registry.register(toolsOld.name() + "_hoe", () -> new HoeItem(toolsOld.itemTier, -3, -0.0f, new Item.Properties().group(ModItemGroups.TOOLS)) {
                 @Override
-                public ActionResultType onItemUse(ItemUseContext context) {
-                    return toolsOld.onItemUse(context);
+                public ActionResultType onUseItem(ItemUseContext context) {
+                    return toolsOld.onUseItem(context);
                 }
 
                 @Override
@@ -960,21 +960,21 @@ public enum ToolsOld implements INamed, Translatable {
         return defenseEffect != null ? defenseEffect.apply(player) : null;
     }
 
-    public ActionResultType onItemUse(ItemUseContext context) {
+    public ActionResultType onUseItem(ItemUseContext context) {
         return ActionResultType.PASS;
     }
 
-    public final void doArmorTick(ItemStack stack, World world, PlayerEntity playerEntity) {
+    public final void doArmorTick(ItemStack stack, World dimension, PlayerEntity playerEntity) {
         if (playerEntity instanceof ServerPlayerEntity) {
             EffectInstance defenseEffect = getDefenseEffect((ServerPlayerEntity) playerEntity);
             if (defenseEffect != null) {
                 playerEntity.addPotionEffect(defenseEffect);
             }
         }
-        this.onArmorTick(stack, world, playerEntity);
+        this.onArmorTick(stack, dimension, playerEntity);
     }
 
-    private void onArmorTick(ItemStack stack, World world, PlayerEntity playerEntity) {
+    private void onArmorTick(ItemStack stack, World dimension, PlayerEntity playerEntity) {
 
     }
 
@@ -984,7 +984,7 @@ public enum ToolsOld implements INamed, Translatable {
     }
 
     @Override
-    public String getTranslationKey() {
+    public String getTranslationId() {
         return "tool_material." + QForgeMod.modId + "." + getStringName();
     }
 }

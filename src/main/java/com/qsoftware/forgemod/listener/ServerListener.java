@@ -30,7 +30,7 @@ public class ServerListener {
         if (OreProfiler.isActive()) {
             IChunk chunk = event.getChunk();
             ChunkPos chunkPos = chunk.getPos();
-//            event.getWorld().getPlayers().forEach((p) -> p.sendMessage(new StringTextComponent("> Scanning chunk " + chunkPos.toString()), p.getUniqueID()));
+//            event.getDimension().getPlayers().forEach((p) -> p.sendMessage(new StringTextComponent("> Scanning chunk " + chunkPos.toString()), p.getUniqueID()));
             for (int x = 0; x < 16; x++) {
                 for (int y = 0; y < 255; y++) {
                     for (int z = 0; z < 255; z++) {
@@ -41,12 +41,12 @@ public class ServerListener {
                             event.getWorld().getPlayers().forEach((p) -> p.sendMessage(new StringTextComponent("= Found Infinity Ore at: " + pos.getCoordinatesAsString()), p.getUniqueID()));
                         }
 //                        if (block == Ores.ULTRINIUM.getOre()) {
-//                            event.getWorld().getPlayers().forEach((p) -> p.sendMessage(new StringTextComponent("= Found Ultrinium Ore at: " + pos.getCoordinatesAsString()), p.getUniqueID()));
+//                            event.getDimension().getPlayers().forEach((p) -> p.sendMessage(new StringTextComponent("= Found Ultrinium Ore at: " + pos.getCoordinatesAsString()), p.getUniqueID()));
 //                        }
                     }
                 }
             }
-//            event.getWorld().getPlayers().forEach((p) -> p.sendMessage(new StringTextComponent("+ Scanned chunk " + chunkPos.toString()), p.getUniqueID()));
+//            event.getDimension().getPlayers().forEach((p) -> p.sendMessage(new StringTextComponent("+ Scanned chunk " + chunkPos.toString()), p.getUniqueID()));
         }
     }
 }

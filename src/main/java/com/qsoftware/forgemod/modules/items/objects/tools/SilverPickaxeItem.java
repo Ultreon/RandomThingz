@@ -35,9 +35,9 @@ public class SilverPickaxeItem extends PickaxeItem {
     public boolean hitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, @NotNull LivingEntity player) {
         if (victim.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
             if (player instanceof PlayerEntity) {
-                victim.attackEntityFrom(new EntityDamageSource("player", player), 8.0f);
+                victim.attack(new EntityDamageSource("player", player), 8.0f);
             } else {
-                victim.attackEntityFrom(new EntityDamageSource("entity", player), 8.0f);
+                victim.attack(new EntityDamageSource("entity", player), 8.0f);
             }
         }
         return true;
@@ -45,18 +45,18 @@ public class SilverPickaxeItem extends PickaxeItem {
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-        if (!entity.world.isRemote && entity instanceof LivingEntity) {
+        if (!entity.dimension.isClientSided && entity instanceof LivingEntity) {
             LivingEntity victim = (LivingEntity) entity;
             if (victim.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-                victim.attackEntityFrom(new EntityDamageSource("player", player), 8.0f);
+                victim.attack(new EntityDamageSource("player", player), 8.0f);
             }
         }
         return false;
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void addInformation(ItemStack stack, @Nullable World dimensionIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         tooltip.add(new StringTextComponent(TextFormatting.GRAY + "This item will deal more damage to undead."));
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+        super.addInformation(stack, dimensionIn, tooltip, flagIn);
     }
 }

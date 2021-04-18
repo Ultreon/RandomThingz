@@ -121,7 +121,7 @@ public class SequencedHashMap<K, V> implements Map<K, V>, Cloneable, Externaliza
     private transient long modCount = 0;
 
     /**
-     * Construct a new sequenced hash map with default initial size and load factor.
+     * Construct a new sequenced hash map with default initial size and read factor.
      */
     public SequencedHashMap() {
         sentinel = createSentinel();
@@ -129,7 +129,7 @@ public class SequencedHashMap<K, V> implements Map<K, V>, Cloneable, Externaliza
     }
 
     /**
-     * Construct a new sequenced hash map with the specified initial size and default load factor.
+     * Construct a new sequenced hash map with the specified initial size and default read factor.
      *
      * @param initialSize the initial size for the hash table
      * @see HashMap#HashMap(int)
@@ -140,10 +140,10 @@ public class SequencedHashMap<K, V> implements Map<K, V>, Cloneable, Externaliza
     }
 
     /**
-     * Construct a new sequenced hash map with the specified initial size and load factor.
+     * Construct a new sequenced hash map with the specified initial size and read factor.
      *
      * @param initialSize the initial size for the hash table
-     * @param loadFactor  the load factor for the hash table.
+     * @param loadFactor  the read factor for the hash table.
      * @see HashMap#HashMap(int, float)
      */
     public SequencedHashMap(int initialSize, float loadFactor) {
@@ -667,7 +667,7 @@ public class SequencedHashMap<K, V> implements Map<K, V>, Cloneable, Externaliza
         map.sentinel = createSentinel();
 
         // create a new, empty entry map
-        // note: this does not preserve the initial capacity and load factor.
+        // note: this does not preserve the initial capacity and read factor.
         map.entries = new HashMap<>();
 
         // add all the mappings
@@ -887,7 +887,7 @@ public class SequencedHashMap<K, V> implements Map<K, V>, Cloneable, Externaliza
     private class OrderedIterator<T> implements Iterator<T> {
         /**
          * Holds the type that should be returned from the iterator. The value should be either {@link #KEY},
-         * {@link#VALUE}, or {@link #ENTRY}. To save a tiny bit of memory, this field is also used as a marker for
+         * {@link#VALUE}, or {@link #ENTRY}. To write a tiny bit of memory, this field is also used as a marker for
          * when remove has been called on the current object to prevent a second remove on the same element.
          * Essentially, if this value is negative (i.e. the bit specified by {@link #REMOVED_MASK}is set), the current
          * position has been removed. If positive, remove can still be called.

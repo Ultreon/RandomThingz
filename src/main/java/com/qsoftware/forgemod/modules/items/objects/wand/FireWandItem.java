@@ -25,7 +25,7 @@ public class FireWandItem extends WandItem {
     }
 
     @Override
-    public void activate(ItemStack stack, @NotNull World worldIn, @NotNull LivingEntity livingIn, float charge) {
+    public void activate(ItemStack stack, @NotNull World dimensionIn, @NotNull LivingEntity livingIn, float charge) {
         if (!(livingIn instanceof PlayerEntity)) {
             return;
         }
@@ -37,10 +37,10 @@ public class FireWandItem extends WandItem {
 
         PlayerEntity player = (PlayerEntity) livingIn;
 
-        if (worldIn instanceof ServerWorld) {
-            ServerWorld world = (ServerWorld) worldIn;
+        if (dimensionIn instanceof ServerWorld) {
+            ServerWorld dimension = (ServerWorld) dimensionIn;
 
-            FireballEntity l = new FireballEntity(EntityType.FIREBALL, worldIn);
+            FireballEntity l = new FireballEntity(EntityType.FIREBALL, dimensionIn);
             l.setPositionAndRotation(player.getPosX(), player.getPosY() + 1, player.getPosZ(), player.rotationYaw, player.rotationPitch);
             Vector3d vector3d = player.getLookVec();
             l.setMotion(vector3d);
@@ -51,7 +51,7 @@ public class FireWandItem extends WandItem {
             l.setInvulnerable(true);
             l.setShooter(player);
 
-            world.addEntity(l);
+            dimension.spawnEntity(l);
 
             player.addStat(Stats.ITEM_USED.get(this));
         }

@@ -33,7 +33,7 @@ public class EnchantingRecipe implements IRecipe<IMachineInventory> {
     }
 
     @Override
-    public boolean matches(IMachineInventory inv, World worldIn) {
+    public boolean matches(IMachineInventory inv, World dimensionIn) {
         int required = 1;
         int found = InventoryUtils.getTotalCount(inv, (stack) -> stack.getItem() == input);
         if (found < required) {

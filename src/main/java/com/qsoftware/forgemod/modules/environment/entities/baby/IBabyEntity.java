@@ -23,10 +23,10 @@ public interface IBabyEntity {
     default void setChild(DataParameter<Boolean> childParameter, boolean child) {
         LivingEntity entity = (LivingEntity) this;
         entity.getDataManager().set(childParameter, child);
-        if (entity.world != null && !entity.world.isRemote) {
+        if (entity.dimension != null && !entity.dimension.isClientSided) {
             ModifiableAttributeInstance attributeInstance = entity.getAttribute(Attributes.MOVEMENT_SPEED);
             if (attributeInstance != null) {
-                attributeInstance.removeModifier(babySpeedBoostModifier);
+                attributeInstance.deleteModifier(babySpeedBoostModifier);
                 if (child) {
                     attributeInstance.applyNonPersistentModifier(babySpeedBoostModifier);
                 }

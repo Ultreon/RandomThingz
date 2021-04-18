@@ -26,7 +26,7 @@ public class DesktopApplication extends WindowApplication {
     }
 
     @Override
-    public void init() {
+    public void initialize() {
         this.wallpaper = getComputer().getFileSystem().getFile(new File("/system/user/data/wallpaper.png"));
     }
 

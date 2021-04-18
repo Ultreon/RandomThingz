@@ -25,8 +25,8 @@ import org.jetbrains.annotations.Nullable;
 @UtilityClass
 public final class Targeter {
     @Nullable
-    public static EntityRayTraceResult rayTraceEntities(PlayerEntity player, World world) {
-        if (player != null && world != null) {
+    public static EntityRayTraceResult rayTraceEntities(PlayerEntity player, World dimension) {
+        if (player != null && dimension != null) {
             float f = player.rotationPitch;
             float f1 = player.rotationYaw;
 
@@ -44,12 +44,12 @@ public final class Targeter {
 
             Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
-            RayTraceResult raytraceresult = world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+            RayTraceResult raytraceresult = dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
             if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
                 vec3d1 = raytraceresult.getHitVec();
             }
 
-            EntityRayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(world, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
+            EntityRayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(dimension, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
             if (rayTraceResult1 != null) {
                 raytraceresult = rayTraceResult1;
             }
@@ -81,13 +81,13 @@ public final class Targeter {
 
         Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
-        if (Minecraft.getInstance().world != null) {
-            RayTraceResult raytraceresult = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+        if (Minecraft.getInstance().dimension != null) {
+            RayTraceResult raytraceresult = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
             if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
                 vec3d1 = raytraceresult.getHitVec();
             }
 
-            RayTraceResult raytraceresult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().world, player, vec3d, vec3d1, player.getBoundingBox().grow(5.0D), entity -> !entity.equals(player));
+            RayTraceResult raytraceresult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().dimension, player, vec3d, vec3d1, player.getBoundingBox().grow(5.0D), entity -> !entity.equals(player));
             if (raytraceresult1 != null) {
                 raytraceresult = raytraceresult1;
             }

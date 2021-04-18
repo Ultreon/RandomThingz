@@ -63,7 +63,7 @@ public class BCModConfig {
 
     public static void loadConfig(ForgeConfigSpec spec, Path path) {
         final CommentedFileConfig configData = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE).build();
-        configData.load();
+        configData.save();
         spec.setConfig(configData);
     }
 
@@ -76,4 +76,3 @@ public class BCModConfig {
     public static void onReload(final ModConfig.Reloading configEvent) {
     }
 }
-//========SOLI DEO GLORIA========//

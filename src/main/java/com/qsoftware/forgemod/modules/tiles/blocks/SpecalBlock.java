@@ -59,13 +59,13 @@ public class SpecalBlock extends Block {
     }
 
     @Override
-    public @NotNull ActionResultType onBlockActivated(@NotNull BlockState state, World worldIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
-        if (!worldIn.isRemote()) {
-            ServerWorld serverWorld = (ServerWorld) worldIn;
-            LightningBoltEntity entity = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, worldIn);
+    public @NotNull ActionResultType onBlockActivated(@NotNull BlockState state, World dimensionIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult hit) {
+        if (!dimensionIn.isClientSided()) {
+            ServerWorld serverWorld = (ServerWorld) dimensionIn;
+            LightningBoltEntity entity = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, dimensionIn);
             entity.setPosition(pos.getX(), pos.getY() + 1, pos.getZ());
             entity.setEffectOnly(false);
-            serverWorld.addEntity(entity);
+            serverWorld.spawnEntity(entity);
         }
         return ActionResultType.SUCCESS;
     }

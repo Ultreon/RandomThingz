@@ -13,14 +13,14 @@ import net.minecraft.util.text.TranslationTextComponent;
 public final class WorldUtils {
     public static void saveWorldThenOpenTitle() {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.world != null) {
+        if (mc.dimension != null) {
             boolean flag = mc.isIntegratedServerRunning();
             boolean flag1 = mc.isConnectedToRealms();
-            mc.world.sendQuittingDisconnectingPacket();
+            mc.dimension.sendQuittingDisconnectingPacket();
             if (flag) {
-                mc.unloadWorld(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
+                mc.unloadDimension(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
             } else {
-                mc.unloadWorld();
+                mc.unloadDimension();
             }
 
             if (flag) {
@@ -35,14 +35,14 @@ public final class WorldUtils {
     }
     public static void saveWorldThen(Runnable runnable) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.world != null) {
+        if (mc.dimension != null) {
             boolean flag = mc.isIntegratedServerRunning();
             boolean flag1 = mc.isConnectedToRealms();
-            mc.world.sendQuittingDisconnectingPacket();
+            mc.dimension.sendQuittingDisconnectingPacket();
             if (flag) {
-                mc.unloadWorld(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
+                mc.unloadDimension(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
             } else {
-                mc.unloadWorld();
+                mc.unloadDimension();
             }
 
             runnable.run();
@@ -50,14 +50,14 @@ public final class WorldUtils {
     }
     public static void saveWorldThenOpen(Screen screen) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.world != null) {
+        if (mc.dimension != null) {
             boolean flag = mc.isIntegratedServerRunning();
             boolean flag1 = mc.isConnectedToRealms();
-            mc.world.sendQuittingDisconnectingPacket();
+            mc.dimension.sendQuittingDisconnectingPacket();
             if (flag) {
-                mc.unloadWorld(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
+                mc.unloadDimension(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
             } else {
-                mc.unloadWorld();
+                mc.unloadDimension();
             }
 
             mc.displayGuiScreen(screen);

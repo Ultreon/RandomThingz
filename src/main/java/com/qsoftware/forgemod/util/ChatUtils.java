@@ -14,14 +14,14 @@ import org.jetbrains.annotations.NotNull;
 @Deprecated
 @UtilityClass
 public final class ChatUtils {
-    public static void broadcastMessage(@NotNull World worldIn, @NotNull ITextComponent msg) {
-        if (worldIn.getServer() != null) {
-            for (PlayerEntity player : worldIn.getServer().getPlayerList().getPlayers()) {
+    public static void broadcastMessage(@NotNull World dimensionIn, @NotNull ITextComponent msg) {
+        if (dimensionIn.getServer() != null) {
+            for (PlayerEntity player : dimensionIn.getServer().getPlayerList().getPlayers()) {
                 player.sendMessage(msg, player.getUniqueID());
             }
             return;
         }
-        for (PlayerEntity player : worldIn.getPlayers()) {
+        for (PlayerEntity player : dimensionIn.getPlayers()) {
             player.sendMessage(msg, player.getUniqueID());
         }
     }

@@ -21,9 +21,9 @@ public class DryingRackTileEntityRenderer extends TileEntityRenderer<DryingRackT
     }
 
     private static Direction getFacing(DryingRackTileEntity tileEntity) {
-        World world = tileEntity.getWorld();
-        if (world != null) {
-            BlockState state = world.getBlockState(tileEntity.getPos());
+        World dimension = tileEntity.getDimension();
+        if (dimension != null) {
+            BlockState state = dimension.getBlockState(tileEntity.getPos());
             return state.get(DryingRackBlock.FACING);
         }
         return Direction.NORTH;

@@ -77,14 +77,14 @@ public class AdvancedBowItem extends BowItem {
      */
     @ParametersAreNonnullByDefault
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+    public void onPlayerStoppedUsing(ItemStack stack, World dimensionIn, LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof PlayerEntity) {
             PlayerEntity playerentity = (PlayerEntity) entityLiving;
             boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
             ItemStack itemstack = playerentity.findAmmo(stack);
 
             int i = this.getUseDuration(stack) - timeLeft;
-            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, !itemstack.isEmpty() || flag);
+            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, dimensionIn, playerentity, i, !itemstack.isEmpty() || flag);
             if (i < 0) return;
 
             if (!itemstack.isEmpty() || flag) {
@@ -95,9 +95,9 @@ public class AdvancedBowItem extends BowItem {
                 float f = getArrowVelocity(i);
                 if (!((double) f < 0.1D)) {
                     boolean flag1 = playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem) itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
-                    if (!worldIn.isRemote) {
+                    if (!dimensionIn.isClientSided) {
                         ArrowItem arrowitem = (ArrowItem) (itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                        AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
+                        AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(dimensionIn, itemstack, playerentity);
                         abstractarrowentity = customArrow(abstractarrowentity);
                         abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * this.velocity, this.inaccuracy);
                         if (f == 1.0F) {
@@ -127,10 +127,10 @@ public class AdvancedBowItem extends BowItem {
                             abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
                         }
 
-                        worldIn.addEntity(abstractarrowentity);
+                        dimensionIn.spawnEntity(abstractarrowentity);
                     }
 
-                    worldIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    dimensionIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                     if (!flag1 && !playerentity.abilities.isCreativeMode) {
                         itemstack.shrink(1);
                         if (itemstack.isEmpty()) {
@@ -162,13 +162,13 @@ public class AdvancedBowItem extends BowItem {
 
     /**
      * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-     * {@link #onItemUse}.
+     * {@link #onUseItem}.
      */
-//    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+//    public ActionResult<ItemStack> onItemRightClick(World dimensionIn, PlayerEntity playerIn, Hand handIn) {
 //        ItemStack itemstack = playerIn.getHeldItem(handIn);
 //        boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
 //
-//        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, flag);
+//        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, dimensionIn, playerIn, handIn, flag);
 //        if (ret != null) return ret;
 //
 //        if (!playerIn.abilities.isCreativeMode && !flag) {
@@ -197,14 +197,14 @@ public class AdvancedBowItem extends BowItem {
 //    /**
 //     * Called when the player stops using an Item (stops holding the right mouse button).
 //     */
-//    public void onPlayerStoppedUsing(ItemStack stack, World worldIn, LivingEntity entityLiving, int timeLeft) {
+//    public void onPlayerStoppedUsing(ItemStack stack, World dimensionIn, LivingEntity entityLiving, int timeLeft) {
 //        if (entityLiving instanceof PlayerEntity) {
 //            PlayerEntity playerentity = (PlayerEntity)entityLiving;
 //            boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
 //            ItemStack itemstack = playerentity.findAmmo(stack);
 //
 //            int i = this.getUseDuration(stack) - timeLeft;
-//            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, i, !itemstack.isEmpty() || flag);
+//            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, dimensionIn, playerentity, i, !itemstack.isEmpty() || flag);
 //            if (i < 0) return;
 //
 //            if (!itemstack.isEmpty() || flag) {
@@ -215,9 +215,9 @@ public class AdvancedBowItem extends BowItem {
 //                float f = getArrowVelocity(i);
 //                if (!((double)f < 0.1D)) {
 //                    boolean flag1 = playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem)itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
-//                    if (!worldIn.isRemote) {
+//                    if (!dimensionIn.isClientSided) {
 //                        ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-//                        AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
+//                        AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(dimensionIn, itemstack, playerentity);
 //                        abstractarrowentity = customeArrow(abstractarrowentity);
 //                        abstractarrowentity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * this.velocity, this.inaccuracy);
 //                        if (f == 1.0F) {
@@ -247,10 +247,10 @@ public class AdvancedBowItem extends BowItem {
 //                            abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
 //                        }
 //
-//                        worldIn.addEntity(abstractarrowentity);
+//                        dimensionIn.spawnEntity(abstractarrowentity);
 //                    }
 //
-//                    worldIn.playSound((PlayerEntity)null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+//                    dimensionIn.playSound((PlayerEntity)null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 //                    if (!flag1 && !playerentity.abilities.isCreativeMode) {
 //                        itemstack.shrink(1);
 //                        if (itemstack.isEmpty()) {

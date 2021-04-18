@@ -28,10 +28,10 @@ import javax.annotation.Nullable;
 public class BatteryBoxBlock extends Block {
     public static final IntegerProperty BATTERIES = IntegerProperty.create("batteries", 0, 6);
 
-    private static final VoxelShape SHAPE = Block.makeCuboidShape(0, 0, 0, 16, 13, 16);
+    private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 13, 16);
 
     public BatteryBoxBlock() {
-        super(Properties.create(Material.IRON).hardnessAndResistance(6.0f, 20.0f).sound(SoundType.METAL));
+        super(Properties.generate(Material.IRON).hardnessAndResistance(6.0f, 20.0f).sound(SoundType.METAL));
         this.setDefaultState(this.getStateContainer().getBaseState().with(BATTERIES, 0));
     }
 
@@ -42,7 +42,7 @@ public class BatteryBoxBlock extends Block {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
         return new BatteryBoxTileEntity();
     }
 
@@ -65,30 +65,30 @@ public class BatteryBoxBlock extends Block {
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, IBlockReader dimensionIn, BlockPos pos, ISelectionContext context) {
         return SHAPE;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            this.interactWith(worldIn, pos, player);
+    public ActionResultType onBlockActivated(BlockState state, World dimensionIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!dimensionIn.isClientSided) {
+            this.interactWith(dimensionIn, pos, player);
         }
         return ActionResultType.SUCCESS;
     }
 
-    public void interactWith(World worldIn, BlockPos pos, PlayerEntity player) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
+    public void interactWith(World dimensionIn, BlockPos pos, PlayerEntity player) {
+        TileEntity tileEntity = dimensionIn.getTileEntity(pos);
         if (tileEntity instanceof BatteryBoxTileEntity) {
             player.openContainer((INamedContainerProvider) tileEntity);
         }
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+    public void onBlockPlacedBy(World dimensionIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         if (stack.hasDisplayName()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = dimensionIn.getTileEntity(pos);
             if (tileentity instanceof BatteryBoxTileEntity) {
                 ((BatteryBoxTileEntity) tileentity).setCustomName(stack.getDisplayName());
             }
@@ -97,15 +97,15 @@ public class BatteryBoxBlock extends Block {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = dimensionIn.getTileEntity(pos);
             if (tileentity instanceof BatteryBoxTileEntity) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (BatteryBoxTileEntity) tileentity);
-                worldIn.updateComparatorOutputLevel(pos, this);
+                InventoryHelper.dropInventoryItems(dimensionIn, pos, (BatteryBoxTileEntity) tileentity);
+                dimensionIn.updateComparatorOutputLevel(pos, this);
             }
 
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
+            super.onReplaced(state, dimensionIn, pos, newState, isMoving);
         }
     }
 }

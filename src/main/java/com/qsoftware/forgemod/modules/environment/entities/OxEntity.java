@@ -19,8 +19,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * @author Qboi123
  */
 public class OxEntity extends CowEntity {
-    public OxEntity(EntityType<? extends CowEntity> type, World worldIn) {
-        super(type, worldIn);
+    public OxEntity(EntityType<? extends CowEntity> type, World dimensionIn) {
+        super(type, dimensionIn);
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
@@ -30,7 +30,7 @@ public class OxEntity extends CowEntity {
     @Nullable
     @Override
     @ParametersAreNonnullByDefault
-    public OxEntity createChild(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return ModEntities.OX.get().create(this.world);
+    public OxEntity createChild(ServerWorld dimensionIn, AgeableEntity ageable) {  // createChild
+        return ModEntities.OX.get().create(this.dimension);
     }
 }

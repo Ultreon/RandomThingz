@@ -28,8 +28,8 @@ public class BabyCreeperEntity extends CreeperEntity implements IBabyEntity {
 
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(BabyCreeperEntity.class, DataSerializers.BOOLEAN);
 
-    public BabyCreeperEntity(EntityType<BabyCreeperEntity> type, World world) {
-        super(type, world);
+    public BabyCreeperEntity(EntityType<BabyCreeperEntity> type, World dimension) {
+        super(type, dimension);
         setChild(true);
     }
 
@@ -80,12 +80,12 @@ public class BabyCreeperEntity extends CreeperEntity implements IBabyEntity {
      */
     @Override
     protected void explode() {
-        if (!world.isRemote) {
-            Explosion.Mode mode = ForgeEventFactory.getMobGriefingEvent(world, this) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
+        if (!dimension.isClientSided) {
+            Explosion.Mode mode = ForgeEventFactory.getMobGriefingEvent(dimension, this) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
             float f = isCharged() ? 1 : 0.5F;
             dead = true;
-            world.createExplosion(this, getPosX(), getPosY(), getPosZ(), explosionRadius * f, mode);
-            remove();
+            dimension.createExplosion(this, getPosX(), getPosY(), getPosZ(), explosionRadius * f, mode);
+            delete();
             spawnLingeringCloud();
         }
     }
@@ -97,7 +97,7 @@ public class BabyCreeperEntity extends CreeperEntity implements IBabyEntity {
 
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

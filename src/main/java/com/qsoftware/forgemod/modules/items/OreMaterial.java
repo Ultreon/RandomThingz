@@ -317,19 +317,19 @@ public enum OreMaterial implements IOreMaterial {
         }
 
         private static ITag.INamedTag<Block> blockTag(String path) {
-            return BlockTags.makeWrapperTag(new ResourceLocation("forge", path).toString());
+            return BlockTags.createWrapperTag(new ResourceLocation("forge", path).toString());
         }
 
         private static ITag.INamedTag<Item> itemTag(String path) {
-            return ItemTags.makeWrapperTag(new ResourceLocation("forge", path).toString());
+            return ItemTags.createWrapperTag(new ResourceLocation("forge", path).toString());
         }
 
         private static ITag.INamedTag<Item> itemTag(ResourceLocation tag) {
-            return ItemTags.makeWrapperTag(tag.toString());
+            return ItemTags.createWrapperTag(tag.toString());
         }
 
         Builder ore(IOre ore) {
-            this.ore = () -> new OreBlock(AbstractBlock.Properties.create(Material.ROCK)
+            this.ore = () -> new OreBlock(AbstractBlock.Properties.generate(Material.ROCK)
                     .setRequiresTool()
                     .harvestTool(ToolType.PICKAXE)
                     .harvestLevel(ore.getHarvestLevel())

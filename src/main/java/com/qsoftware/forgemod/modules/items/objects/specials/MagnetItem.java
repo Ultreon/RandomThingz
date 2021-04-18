@@ -29,7 +29,7 @@ public class MagnetItem extends EnergyStoringItem {
     }
 
     @Override
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, PlayerEntity playerIn, @NotNull Hand handIn) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
         CompoundNBT nbt = stack.getOrCreateChildTag(Objects.requireNonNull(stack.getItem().getRegistryName()).getNamespace());
         boolean magnetized;
@@ -52,7 +52,7 @@ public class MagnetItem extends EnergyStoringItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, @NotNull World worldIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, @NotNull World dimensionIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
         CompoundNBT nbt = stack.getOrCreateChildTag(Objects.requireNonNull(stack.getItem().getRegistryName()).getNamespace());
         if (nbt.contains("magnetized")) {
             boolean magnetized = nbt.getBoolean("magnetized");
@@ -60,7 +60,7 @@ public class MagnetItem extends EnergyStoringItem {
                 if (entityIn instanceof PlayerEntity) {
                     PlayerEntity player = (PlayerEntity) entityIn;
 
-                    List<ItemEntity> itemEntities = player.world.getEntitiesWithinAABB(ItemEntity.class, player.getBoundingBox().grow(10));
+                    List<ItemEntity> itemEntities = player.dimension.getEntitiesWithinBox(ItemEntity.class, player.getBoundingBox().grow(10));
                     for (ItemEntity item : itemEntities) {
                         double distX = player.getPosX() - item.getPosX();
                         double distZ = player.getPosZ() - item.getPosZ();
@@ -84,6 +84,6 @@ public class MagnetItem extends EnergyStoringItem {
             }
         }
 
-        super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+        super.inventoryTick(stack, dimensionIn, entityIn, itemSlot, isSelected);
     }
 }

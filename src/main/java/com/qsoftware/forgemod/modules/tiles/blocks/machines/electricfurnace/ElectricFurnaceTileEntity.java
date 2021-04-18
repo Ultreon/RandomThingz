@@ -48,13 +48,13 @@ public class ElectricFurnaceTileEntity extends AbstractMachineTileEntity<Abstrac
     @Override
     @Nullable
     protected AbstractCookingRecipe getRecipe() {
-        if (world == null) return null;
+        if (dimension == null) return null;
 
-        RecipeManager recipeManager = world.getRecipeManager();
-        Optional<BlastingRecipe> optional = recipeManager.getRecipe(IRecipeType.BLASTING, this, world);
+        RecipeManager recipeManager = dimension.getRecipeManager();
+        Optional<BlastingRecipe> optional = recipeManager.getRecipe(IRecipeType.BLASTING, this, dimension);
         if (optional.isPresent()) return optional.get();
 
-        Optional<FurnaceRecipe> optional1 = recipeManager.getRecipe(IRecipeType.SMELTING, this, world);
+        Optional<FurnaceRecipe> optional1 = recipeManager.getRecipe(IRecipeType.SMELTING, this, dimension);
         return optional1.orElse(null);
     }
 

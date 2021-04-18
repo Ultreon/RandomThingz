@@ -154,22 +154,22 @@ public abstract class AbstractMachineTileEntity<R extends IRecipe<?>> extends Ab
     }
 
     protected void sendUpdate(BlockState newState) {
-        if (world == null) return;
-        BlockState oldState = world.getBlockState(pos);
+        if (dimension == null) return;
+        BlockState oldState = dimension.getBlockState(pos);
         if (oldState != newState) {
-            world.setBlockState(pos, newState, 3);
-            world.notifyBlockUpdate(pos, oldState, newState, 3);
+            dimension.setBlockState(pos, newState, 3);
+            dimension.notifyBlockUpdate(pos, oldState, newState, 3);
         }
     }
 
     protected void setInactiveState() {
-        if (world == null) return;
-        sendUpdate(getInactiveState(world.getBlockState(pos)));
+        if (dimension == null) return;
+        sendUpdate(getInactiveState(dimension.getBlockState(pos)));
     }
 
     @Override
     public void tick() {
-        if (world == null || world.isRemote) return;
+        if (dimension == null || dimension.isClientSided) return;
 
         R recipe = getRecipe();
         if (recipe != null && canMachineRun(recipe)) {
@@ -188,7 +188,7 @@ public abstract class AbstractMachineTileEntity<R extends IRecipe<?>> extends Ab
                     setInactiveState();
                 }
             } else {
-                sendUpdate(getActiveState(world.getBlockState(pos)));
+                sendUpdate(getActiveState(dimension.getBlockState(pos)));
             }
         } else {
             if (recipe == null) {
@@ -199,10 +199,10 @@ public abstract class AbstractMachineTileEntity<R extends IRecipe<?>> extends Ab
     }
 
     private boolean canMachineRun(R recipe) {
-        return world != null
+        return dimension != null
                 && getEnergyStored() >= getEnergyUsedPerTick()
                 && hasRoomInOutput(getPossibleProcessResult(recipe))
-                && redstoneMode.shouldRun(world.getRedstonePowerFromNeighbors(pos) > 0);
+                && redstoneMode.shouldRun(dimension.getRedstonePowerFromNeighbors(pos) > 0);
     }
 
     protected boolean hasRoomInOutput(Iterable<ItemStack> results) {
@@ -266,7 +266,7 @@ public abstract class AbstractMachineTileEntity<R extends IRecipe<?>> extends Ab
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         super.onDataPacket(net, packet);
-        CompoundNBT tags = packet.getNbtCompound();
+        CompoundNBT tags = packet.getNbt();
         this.progress = tags.getInt("Progress");
         this.processTime = tags.getInt("ProcessTime");
     }

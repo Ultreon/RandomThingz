@@ -59,7 +59,7 @@ public class ConfirmExitModule extends Module {
         Minecraft mc = Minecraft.getInstance();
 
         if (event.getSource() == WindowCloseEvent.Source.GENERIC) {
-            if (mc.world == null && mc.currentScreen == null) {
+            if (mc.dimension == null && mc.currentScreen == null) {
                 event.setCanceled(true);
                 return;
             }
@@ -70,7 +70,7 @@ public class ConfirmExitModule extends Module {
             }
 
             if (closePrompt) {
-                if (mc.world != null && !closePromptIngame) {
+                if (mc.dimension != null && !closePromptIngame) {
                     return;
                 }
                 event.setCanceled(true);

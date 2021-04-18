@@ -27,7 +27,7 @@ public class ChestFrameContainer extends Container {
     public ChestFrameContainer(final int windowId, final PlayerInventory playerInventory, final ChestFrameTileEntity tileEntity) {
         super(Registration.CHEST_FRAME_CONTAINER.get(), windowId);
         this.tileEntity = tileEntity;
-        this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos());
+        this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getDimension(), tileEntity.getPos());
 
         // Main Inventory
         int startX = 8;
@@ -63,7 +63,7 @@ public class ChestFrameContainer extends Container {
     private static ChestFrameTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
-        final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
+        final TileEntity tileAtPos = playerInventory.player.dimension.getTileEntity(data.readBlockPos());
         if (tileAtPos instanceof  ChestFrameTileEntity) {
             return (ChestFrameTileEntity) tileAtPos;
         }
@@ -78,7 +78,7 @@ public class ChestFrameContainer extends Container {
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
+        if (slot != null && slot.hasStack()) {
             ItemStack itemStack1 = slot.getStack();
             itemStack = itemStack1.copy();
             if(index < 27) {

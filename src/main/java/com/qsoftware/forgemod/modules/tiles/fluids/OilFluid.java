@@ -47,7 +47,7 @@ public abstract class OilFluid extends FlowingFluid {
    }
 
    @Override
-   public void randomTick(World world, BlockPos pos, FluidState state, Random random) {
+   public void randomTick(World dimension, BlockPos pos, FluidState state, Random random) {
 
    }
 
@@ -62,16 +62,16 @@ public abstract class OilFluid extends FlowingFluid {
               .build(this);
    }
 
-   private boolean isSurroundingBlockFlammable(IWorldReader worldIn, BlockPos pos) {
+   private boolean isSurroundingBlockFlammable(IWorldReader dimensionIn, BlockPos pos) {
       return false;
    }
 
-   private boolean getCanBlockBurn(IWorldReader worldIn, BlockPos pos) {
+   private boolean canBlockBurn(IWorldReader dimensionIn, BlockPos pos) {
       return false;
    }
 
    @Override
-   protected int getLevelDecreasePerBlock(IWorldReader worldIn) {
+   protected int getLevelDecreasePerBlock(IWorldReader dimensionIn) {
       return 2;
    }
 
@@ -87,13 +87,13 @@ public abstract class OilFluid extends FlowingFluid {
    }
 
    @Override
-   protected void beforeReplacingBlock(IWorld worldIn, BlockPos pos, BlockState state) {
-      this.triggerEffects(worldIn, pos);
+   protected void beforeReplacingBlock(IWorld dimensionIn, BlockPos pos, BlockState state) {
+      this.triggerEffects(dimensionIn, pos);
    }
 
    @Override
-   public int getSlopeFindDistance(IWorldReader worldIn) {
-      return worldIn.getDimensionType().isUltrawarm() ? 4 : 2;
+   public int getSlopeFindDistance(IWorldReader dimensionIn) {
+      return dimensionIn.getDimensionType().isUltrawarm() ? 4 : 2;
    }
 
    @Override
@@ -117,17 +117,17 @@ public abstract class OilFluid extends FlowingFluid {
    }
 
    @Override
-   public int func_215667_a(World world, BlockPos pos, FluidState p_215667_3_, FluidState p_215667_4_) {
-      int i = this.getTickRate(world);
-      if (!p_215667_3_.isEmpty() && !p_215667_4_.isEmpty() && !p_215667_3_.get(FALLING) && !p_215667_4_.get(FALLING) && p_215667_4_.getActualHeight(world, pos) > p_215667_3_.getActualHeight(world, pos) && world.getRandom().nextInt(4) != 0) {
+   public int func_215667_a(World dimension, BlockPos pos, FluidState p_215667_3_, FluidState p_215667_4_) {
+      int i = this.getTickRate(dimension);
+      if (!p_215667_3_.isEmpty() && !p_215667_4_.isEmpty() && !p_215667_3_.get(FALLING) && !p_215667_4_.get(FALLING) && p_215667_4_.getActualHeight(dimension, pos) > p_215667_3_.getActualHeight(dimension, pos) && dimension.getRandom().nextInt(4) != 0) {
          i *= 4;
       }
 
       return i;
    }
 
-   private void triggerEffects(IWorld world, BlockPos pos) {
-      world.playEvent(1501, pos, 0);
+   private void triggerEffects(IWorld dimension, BlockPos pos) {
+      dimension.playEvent(1501, pos, 0);
    }
 
    @Override
@@ -136,8 +136,8 @@ public abstract class OilFluid extends FlowingFluid {
    }
 
    @Override
-   protected void flowInto(IWorld worldIn, BlockPos pos, BlockState blockStateIn, Direction direction, FluidState fluidStateIn) {
-      super.flowInto(worldIn, pos, blockStateIn, direction, fluidStateIn);
+   protected void flowInto(IWorld dimensionIn, BlockPos pos, BlockState blockStateIn, Direction direction, FluidState fluidStateIn) {
+      super.flowInto(dimensionIn, pos, blockStateIn, direction, fluidStateIn);
    }
 
    protected boolean ticksRandomly() {

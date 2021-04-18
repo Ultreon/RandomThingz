@@ -98,7 +98,7 @@ public class CrateTileEntity extends LockableLootTileEntity {
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
         if (!this.checkLootAndWrite(compound)) {
-            ItemStackHelper.saveAllItems(compound, this.chestContents);
+            ItemStackHelper.writeAllItems(compound, this.chestContents);
         }
         return compound;
     }
@@ -109,7 +109,7 @@ public class CrateTileEntity extends LockableLootTileEntity {
         super.read(state, compound);
         this.chestContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         if (!this.checkLootAndRead(compound)) {
-            ItemStackHelper.loadAllItems(compound, this.chestContents);
+            ItemStackHelper.readAllItems(compound, this.chestContents);
         }
     }
 
@@ -119,7 +119,7 @@ public class CrateTileEntity extends LockableLootTileEntity {
         double dy = (double) this.pos.getY() + 0.5d;
         double dz = (double) this.pos.getZ() + 0.5d;
 
-        Objects.requireNonNull(this.world).playSound(null, dx, dy, dz, sound, SoundCategory.BLOCKS, 0.5f, this.world.rand.nextFloat() * 0.1f + 0.9f);
+        Objects.requireNonNull(this.dimension).playSound(null, dx, dy, dz, sound, SoundCategory.BLOCKS, 0.5f, this.dimension.rand.nextFloat() * 0.1f + 0.9f);
     }
 
     @Override
@@ -153,10 +153,10 @@ public class CrateTileEntity extends LockableLootTileEntity {
 
     protected void onOpenOrClose() {
         Block block = this.getBlockState().getBlock();
-        Objects.requireNonNull(this.world);
+        Objects.requireNonNull(this.dimension);
         if (block instanceof WoodenCrateBlock) {
-            this.world.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
-            this.world.notifyNeighborsOfStateChange(this.pos, block);
+            this.dimension.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
+            this.dimension.notifyNeighborsOfStateChange(this.pos, block);
         }
     }
 
@@ -195,19 +195,19 @@ public class CrateTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public void remove() {
-        assert world != null;
-        BlockState blockState = world.getBlockState(pos);
+    public void delete() {
+        assert dimension != null;
+        BlockState blockState = dimension.getBlockState(pos);
         for (int i = 0; i < chestContents.size(); i++) {
             ItemStack stack = chestContents.get(i);
             chestContents.set(i, ItemStack.EMPTY);
-            TileEntity tileEntity = blockState.hasTileEntity() ? world.getTileEntity(pos) : null;
+            TileEntity tileEntity = blockState.hasTileEntity() ? dimension.getTileEntity(pos) : null;
 
             //noinspection ConstantConditions
-            Block.spawnDrops(blockState, world, this.pos.add(0, 1.5, 0), tileEntity, null, stack);
+            Block.spawnDrops(blockState, dimension, this.pos.add(0, 1.5, 0), tileEntity, null, stack);
         }
 
-        super.remove();
+        super.delete();
         if (itemHandler != null) {
             itemHandler.invalidate();
         }

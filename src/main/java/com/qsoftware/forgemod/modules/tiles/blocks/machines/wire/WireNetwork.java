@@ -16,45 +16,45 @@ import java.util.*;
 public final class WireNetwork implements IEnergyStorage {
     public static final int TRANSFER_PER_CONNECTION = 1000;
 
-    private final IWorldReader world;
+    private final IWorldReader dimension;
     private final Map<BlockPos, Set<Connection>> connections = new HashMap<>();
     private boolean connectionsBuilt;
     private int energyStored;
 
-    private WireNetwork(IWorldReader world, Set<BlockPos> wires, int energyStored) {
-        this.world = world;
+    private WireNetwork(IWorldReader dimension, Set<BlockPos> wires, int energyStored) {
+        this.dimension = dimension;
         wires.forEach(pos -> connections.put(pos, Collections.emptySet()));
         this.energyStored = energyStored;
     }
 
-    static WireNetwork buildNetwork(IWorldReader world, BlockPos pos) {
-        Set<BlockPos> wires = buildWireSet(world, pos);
+    static WireNetwork buildNetwork(IWorldReader dimension, BlockPos pos) {
+        Set<BlockPos> wires = buildWireSet(dimension, pos);
         int energyStored = wires.stream().mapToInt(p -> {
-            TileEntity tileEntity = world.getTileEntity(p);
+            TileEntity tileEntity = dimension.getTileEntity(p);
             return tileEntity instanceof WireTileEntity ? ((WireTileEntity) tileEntity).energyStored : 0;
         }).sum();
-        return new WireNetwork(world, wires, energyStored);
+        return new WireNetwork(dimension, wires, energyStored);
     }
 
-    private static Set<BlockPos> buildWireSet(IWorldReader world, BlockPos pos) {
-        return buildWireSet(world, pos, new HashSet<>());
+    private static Set<BlockPos> buildWireSet(IWorldReader dimension, BlockPos pos) {
+        return buildWireSet(dimension, pos, new HashSet<>());
     }
 
-    private static Set<BlockPos> buildWireSet(IWorldReader world, BlockPos pos, Set<BlockPos> set) {
+    private static Set<BlockPos> buildWireSet(IWorldReader dimension, BlockPos pos, Set<BlockPos> set) {
         // Get all positions that have a wire connected to the wire at pos
         set.add(pos);
         for (Direction side : Direction.values()) {
             BlockPos pos1 = pos.offset(side);
-            if (!set.contains(pos1) && world.getTileEntity(pos1) instanceof WireTileEntity) {
+            if (!set.contains(pos1) && dimension.getTileEntity(pos1) instanceof WireTileEntity) {
                 set.add(pos1);
-                set.addAll(buildWireSet(world, pos1, set));
+                set.addAll(buildWireSet(dimension, pos1, set));
             }
         }
         return set;
     }
 
-    public boolean contains(IWorldReader world, BlockPos pos) {
-        return this.world == world && connections.containsKey(pos);
+    public boolean contains(IWorldReader dimension, BlockPos pos) {
+        return this.dimension == dimension && connections.containsKey(pos);
     }
 
     public int getWireCount() {
@@ -75,7 +75,7 @@ public final class WireNetwork implements IEnergyStorage {
     private void updateWireEnergy() {
         int energyPerWire = energyStored / getWireCount();
         connections.keySet().forEach(p -> {
-            TileEntity tileEntity = world.getTileEntity(p);
+            TileEntity tileEntity = dimension.getTileEntity(p);
             if (tileEntity instanceof WireTileEntity) {
                 ((WireTileEntity) tileEntity).energyStored = energyPerWire;
             }
@@ -123,7 +123,7 @@ public final class WireNetwork implements IEnergyStorage {
             Set<Connection> connections = entry.getValue();
             for (Connection con : connections) {
                 if (con.type.canExtract()) {
-                    IEnergyStorage energy = EnergyUtils.getEnergy(world, pos.offset(con.side));
+                    IEnergyStorage energy = EnergyUtils.getEnergy(dimension, pos.offset(con.side));
                     if (energy != null && energy.canReceive()) {
                         int toSend = extractEnergy(TRANSFER_PER_CONNECTION, true);
                         int accepted = energy.receiveEnergy(toSend, false);
@@ -158,18 +158,18 @@ public final class WireNetwork implements IEnergyStorage {
     private void buildConnections() {
         // Determine all connections. This will be done once the connections are actually needed.
         if (!connectionsBuilt) {
-            connections.keySet().forEach(p -> connections.put(p, getConnections(world, p)));
+            connections.keySet().forEach(p -> connections.put(p, getConnections(dimension, p)));
             connectionsBuilt = true;
         }
     }
 
-    private Set<Connection> getConnections(IBlockReader world, BlockPos pos) {
+    private Set<Connection> getConnections(IBlockReader dimension, BlockPos pos) {
         // Get all connections for the wire at pos
         Set<Connection> connections = new HashSet<>();
         for (Direction direction : Direction.values()) {
-            TileEntity te = world.getTileEntity(pos.offset(direction));
+            TileEntity te = dimension.getTileEntity(pos.offset(direction));
             if (te != null && !(te instanceof WireTileEntity) && te.getCapability(CapabilityEnergy.ENERGY).isPresent()) {
-                ConnectionType type = WireBlock.getConnection(world.getBlockState(pos), direction);
+                ConnectionType type = WireBlock.getConnection(dimension.getBlockState(pos), direction);
                 connections.add(new Connection(this, direction, type));
             }
         }

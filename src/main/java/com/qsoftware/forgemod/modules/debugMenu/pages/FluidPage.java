@@ -45,21 +45,21 @@ public class FluidPage extends DebugPage {
         Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
         BlockRayTraceResult lookingAt;
-        if (Minecraft.getInstance().world != null) {
-            lookingAt = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
+        if (Minecraft.getInstance().dimension != null) {
+            lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
             if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
                 BlockPos pos = lookingAt.getPos();
 
                 // now the coordinates you want are in pos. Example of use:
-                BlockState blockState = Minecraft.getInstance().player.getEntityWorld().getBlockState(pos);
+                BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
                 FluidState fluidState = blockState.getFluidState();
                 if (!fluidState.isEmpty()) {
                     list.add(new DebugEntry("empty", fluidState::isEmpty));
                     list.add(new DebugEntry("height", fluidState::getHeight));
                     list.add(new DebugEntry("level", fluidState::getLevel));
-                    list.add(new DebugEntry("actualHeight", () -> fluidState.getFluid().getActualHeight(fluidState, player.getEntityWorld(), pos)));
+                    list.add(new DebugEntry("actualHeight", () -> fluidState.getFluid().getActualHeight(fluidState, player.getEntityDimension(), pos)));
                     list.add(new DebugEntry("filledBucket", () -> fluidState.getFluid().getFilledBucket()));
-                    list.add(new DebugEntry("tickRate", () -> fluidState.getFluid().getTickRate(player.getEntityWorld())));
+                    list.add(new DebugEntry("tickRate", () -> fluidState.getFluid().getTickRate(player.getEntityDimension())));
                 } else {
                     // not looking at a fluid, or too far away from one to tell
 //                                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 32, 0xff0000);

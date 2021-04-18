@@ -24,8 +24,8 @@ import javax.annotation.Nullable;
  * @author Qboi123
  */
 public class GlowSquidEntity extends SquidEntity {
-    public GlowSquidEntity(EntityType<? extends GlowSquidEntity> type, World worldIn) {
-        super(type, worldIn);
+    public GlowSquidEntity(EntityType<? extends GlowSquidEntity> type, World dimensionIn) {
+        super(type, dimensionIn);
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
@@ -39,7 +39,7 @@ public class GlowSquidEntity extends SquidEntity {
 
     @Override
     protected int getExperiencePoints(@NotNull PlayerEntity player) {
-        return 4 + this.world.rand.nextInt(3);
+        return 4 + this.dimension.rand.nextInt(3);
     }
 
     @Nullable

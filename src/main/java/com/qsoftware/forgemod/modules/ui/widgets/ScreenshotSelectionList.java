@@ -169,7 +169,7 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
 //               }
 //            } else if (this.field_214451_d.markVersionInList()) {
 //               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 32.0F, (float)j, 32, 32, 256, 256);
-//               if (this.field_214451_d.askToOpenWorld()) {
+//               if (this.field_214451_d.askToOpenDimension()) {
 //                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96.0F, (float)j, 32, 32, 256, 256);
 //                  if (flag) {
 //                     this.gui.func_239026_b_(ImmutableList.of(ScreenshotSelectionList.field_243462_r.func_241878_f(), ScreenshotSelectionList.field_243463_s.func_241878_f()));

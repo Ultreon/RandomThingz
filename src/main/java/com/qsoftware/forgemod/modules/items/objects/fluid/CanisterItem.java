@@ -21,7 +21,7 @@ import java.util.Objects;
 public class CanisterItem extends Item implements IFluidContainer {
     public CanisterItem(Properties properties) {
         super(properties);
-        //addPropertyOverride(QForgeUtils.getId("fluid_level"), (stack, world, entity) -> getFluid(stack).getAmount());
+        //addPropertyOverride(QForgeUtils.getId("fluid_level"), (stack, dimension, entity) -> getFluid(stack).getAmount());
     }
 
     public static ItemStack getStack(@Nullable Fluid fluid) {
@@ -73,7 +73,7 @@ public class CanisterItem extends Item implements IFluidContainer {
     public ITextComponent getDisplayName(ItemStack stack) {
         FluidStack fluid = getFluid(stack);
         ITextComponent fluidText = fluid.isEmpty() ? TextUtils.translate("misc", "empty") : fluid.getDisplayName();
-        return new TranslationTextComponent(this.getTranslationKey(), fluidText);
+        return new TranslationTextComponent(this.getTranslationId(), fluidText);
     }
 
     @Override

@@ -47,8 +47,8 @@ public class UpdateScreen extends Screen {
         this.dependencies = dependencies.getAll();
     }
 
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 

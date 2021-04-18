@@ -15,6 +15,6 @@ public class PoisonTrait extends AbstractPotionTrait {
 
     @Override
     public EffectInstance getEffectInstance() {
-        return new EffectInstance(Effects.POISON, 50, 2);
+        return new EffectInstance(Effects.POISON, 50, 1);
     }
 }

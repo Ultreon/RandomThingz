@@ -28,16 +28,16 @@ import javax.annotation.Nullable;
 @SuppressWarnings({"deprecation", "unused"})
 public class DynamiteEntity extends ProjectileItemEntity {
 
-    public DynamiteEntity(EntityType<? extends DynamiteEntity> p_i50153_1_, World world) {
-        super(p_i50153_1_, world);
+    public DynamiteEntity(EntityType<? extends DynamiteEntity> p_i50153_1_, World dimension) {
+        super(p_i50153_1_, dimension);
     }
 
-    public DynamiteEntity(World worldIn, LivingEntity throwerIn) {
-        super(ModEntities.DYNAMITE.getEntityType(), throwerIn, worldIn);
+    public DynamiteEntity(World dimensionIn, LivingEntity throwerIn) {
+        super(ModEntities.DYNAMITE.getEntityType(), throwerIn, dimensionIn);
     }
 
-    public DynamiteEntity(World worldIn, double x, double y, double z) {
-        super(ModEntities.DYNAMITE.getEntityType(), x, y, z, worldIn);
+    public DynamiteEntity(World dimensionIn, double x, double y, double z) {
+        super(ModEntities.DYNAMITE.getEntityType(), x, y, z, dimensionIn);
     }
 
     protected @NotNull Item getDefaultItem() {
@@ -45,7 +45,7 @@ public class DynamiteEntity extends ProjectileItemEntity {
     }
 
     @Override
-    public @NotNull IPacket<?> createSpawnPacket() {
+    public @NotNull IPacket<?> getSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
@@ -56,9 +56,9 @@ public class DynamiteEntity extends ProjectileItemEntity {
         super.onImpact(result);
         Entity entity = this.getShooter();
 
-        if (!this.world.isRemote && !this.removed) {
-            this.world.createExplosion(this, this.getPosX(), this.getPosY(), this.getPosZ(), 4f, false, Explosion.Mode.BREAK);
-            this.remove();
+        if (!this.dimension.isClientSided && !this.removed) {
+            this.dimension.createExplosion(this, this.getPosX(), this.getPosY(), this.getPosZ(), 4f, false, Explosion.Mode.BREAK);
+            this.delete();
         }
     }
 
@@ -68,7 +68,7 @@ public class DynamiteEntity extends ProjectileItemEntity {
     public void tick() {
         Entity entity = this.getShooter();
         if (entity instanceof PlayerEntity && !entity.isAlive()) {
-            this.remove();
+            this.delete();
         } else {
             super.tick();
         }
@@ -78,7 +78,7 @@ public class DynamiteEntity extends ProjectileItemEntity {
     @Nullable
     public Entity changeDimension(@NotNull ServerWorld server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
         Entity entity = this.getShooter();
-        if (entity != null && entity.world.getDimensionKey() != server.getDimensionKey()) {
+        if (entity != null && entity.dimension.getDimensionKey() != server.getDimensionKey()) {
             this.setShooter(null);
         }
 

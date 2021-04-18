@@ -43,8 +43,8 @@ public class ConfirmCrashScreen extends Screen {
         mc.displayGuiScreen(new ConfirmCrashScreen(mc.currentScreen, crash));
     }
 
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 

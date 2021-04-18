@@ -47,8 +47,8 @@ public class CompressorTileEntity extends AbstractMachineTileEntity<CompressingR
     @Nullable
     @Override
     protected CompressingRecipe getRecipe() {
-        if (world == null) return null;
-        return world.getRecipeManager().getRecipe(ModRecipes.Types.COMPRESSING, this, world).orElse(null);
+        if (dimension == null) return null;
+        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.COMPRESSING, this, dimension).orElse(null);
     }
 
     @Override

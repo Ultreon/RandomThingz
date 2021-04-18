@@ -33,8 +33,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class DuckEntity extends ChickenEntity {
     private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(Items.BREAD);
 
-    public DuckEntity(EntityType<? extends ChickenEntity> type, World worldIn) {
-        super(type, worldIn);
+    public DuckEntity(EntityType<? extends ChickenEntity> type, World dimensionIn) {
+        super(type, dimensionIn);
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
@@ -55,14 +55,14 @@ public class DuckEntity extends ChickenEntity {
 
     @Override
     protected int getExperiencePoints(@NotNull PlayerEntity player) {
-        return 5 + this.world.rand.nextInt(8);
+        return 5 + this.dimension.rand.nextInt(8);
     }
 
     @Nullable
     @Override
     @ParametersAreNonnullByDefault
-    public DuckEntity createChild(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return ModEntities.DUCK.get().create(this.world);
+    public DuckEntity createChild(ServerWorld dimensionIn, AgeableEntity ageable) {  // createChild
+        return ModEntities.DUCK.get().create(this.dimension);
     }
 
     @Nullable

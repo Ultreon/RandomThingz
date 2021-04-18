@@ -30,7 +30,7 @@ public class RefiningRecipe implements IFluidRecipe<IFluidInventory> {
     @Getter private FluidIngredient ingredient;
 
     @Override
-    public boolean matches(IFluidInventory inv, World worldIn) {
+    public boolean matches(IFluidInventory inv, World dimensionIn) {
         return ingredient.test(inv.getFluidInTank(0));
     }
 

@@ -121,7 +121,7 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
 
     @Override
     public void tick() {
-        if (world == null || world.isRemote) return;
+        if (dimension == null || dimension.isClientSided) return;
 
         R recipe = getRecipe();
         if (recipe != null && canMachineRun(recipe)) {
@@ -142,7 +142,7 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
                     setInactiveState();
                 }
             } else {
-                sendUpdate(getActiveState(world.getBlockState(pos)));
+                sendUpdate(getActiveState(dimension.getBlockState(pos)));
             }
         } else {
             if (recipe == null) {
@@ -153,11 +153,11 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
     }
 
     private boolean canMachineRun(R recipe) {
-        return world != null
+        return dimension != null
                 && getEnergyStored() >= getEnergyUsedPerTick()
                 && hasRoomInOutputTank(getPossibleFluidResults(recipe))
                 && hasRoomInOutput(getPossibleProcessResult(recipe))
-                && redstoneMode.shouldRun(world.getRedstonePowerFromNeighbors(pos) > 0);
+                && redstoneMode.shouldRun(dimension.getRedstonePowerFromNeighbors(pos) > 0);
     }
 
     private boolean hasRoomInOutputTank(Iterable<FluidStack> results) {
@@ -207,8 +207,8 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
     protected abstract void consumeIngredients(R recipe);
 
     @Override
-    public void remove() {
-        super.remove();
+    public void delete() {
+        super.delete();
         fluidHandlerCap.invalidate();
     }
 

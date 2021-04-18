@@ -23,9 +23,9 @@ public class ArmorTool extends ArmorItem implements ITool {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player) {
+    public void onArmorTick(ItemStack stack, World dimension, PlayerEntity player) {
         for (AbstractTrait trait : traits.get()) {
-            trait.onArmorTick(stack, world, player);
+            trait.onArmorTick(stack, dimension, player);
         }
     }
 

@@ -27,7 +27,7 @@ public class CrateContainer extends Container {
     public CrateContainer(final int windowId, final PlayerInventory playerInventory, final CrateTileEntity tileEntity) {
         super(ModContainers.WOODEN_CRATE.get(), windowId);
         this.tileEntity = tileEntity;
-        this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getWorld()), tileEntity.getPos());
+        this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getDimension()), tileEntity.getPos());
 
         // QForgeUtils Inventory
         int startX = 8;
@@ -106,7 +106,7 @@ public class CrateContainer extends Container {
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
 
-        final TileEntity tileAtPos = playerInventory.player.world.getTileEntity(data.readBlockPos());
+        final TileEntity tileAtPos = playerInventory.player.dimension.getTileEntity(data.readBlockPos());
 
         if (tileAtPos instanceof CrateTileEntity) {
             return (CrateTileEntity) tileAtPos;
@@ -124,7 +124,7 @@ public class CrateContainer extends Container {
     public @NotNull ItemStack transferStackInSlot(@NotNull PlayerEntity playerIn, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.getHasStack()) {
+        if (slot != null && slot.hasStack()) {
             ItemStack itemStack1 = slot.getStack();
             itemStack = itemStack1.copy();
             if (index < 36) {

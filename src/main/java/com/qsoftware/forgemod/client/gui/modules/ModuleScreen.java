@@ -67,7 +67,7 @@ public class ModuleScreen extends Screen {
    }
 
    @Override
-   protected void init() {
+   protected void initialize() {
       Button cancelButton = this.addButton(new Button(this.width / 2 + 5, this.height - 48, 150, 20, DialogTexts.GUI_CANCEL, (p_238903_1_) -> {
          manager.discardChanges();
          this.closeScreen();

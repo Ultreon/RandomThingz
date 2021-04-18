@@ -41,14 +41,14 @@ public class BatteryBoxTileEntity extends AbstractMachineBaseTileEntity {
     public void tick() {
         super.tick();
 
-        if (world == null || world.isRemote) return;
+        if (dimension == null || dimension.isClientSided) return;
 
         if (energy.getInternalEnergyStored() > 0) {
             // Charge stored batteries
             energy.receiveEnergy(energy.extractInternalEnergy(MAX_SEND / 2, false), false);
         }
 
-        if (world.getGameTime() % 50 == 0) {
+        if (dimension.getGameTime() % 50 == 0) {
             int batteryCount = 0;
             for (int i = 0; i < getSizeInventory(); ++i) {
                 if (!getStackInSlot(i).isEmpty()) {
@@ -56,9 +56,9 @@ public class BatteryBoxTileEntity extends AbstractMachineBaseTileEntity {
                 }
             }
 
-            int currentCount = world.getBlockState(pos).get(BatteryBoxBlock.BATTERIES);
+            int currentCount = dimension.getBlockState(pos).get(BatteryBoxBlock.BATTERIES);
             if (batteryCount != currentCount) {
-                world.setBlockState(pos, world.getBlockState(pos).with(BatteryBoxBlock.BATTERIES, batteryCount), 3);
+                dimension.setBlockState(pos, dimension.getBlockState(pos).with(BatteryBoxBlock.BATTERIES, batteryCount), 3);
             }
         }
     }

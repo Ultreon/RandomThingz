@@ -104,12 +104,12 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
 
     @Override
     public void tick() {
-        if (world == null || world.isRemote) return;
+        if (dimension == null || dimension.isClientSided) return;
 
         tryFillFluidContainer();
 
         // Only pump fluids occasionally
-        if (!canMachineRun() || world.getGameTime() % getPumpDelay() != 0) return;
+        if (!canMachineRun() || dimension.getGameTime() % getPumpDelay() != 0) return;
 
         // TODO: Could probably optimize this to not iterate over the entire region each time
         BlockPos.Mutable blockPos = new BlockPos.Mutable();
@@ -118,7 +118,7 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
             for (int x = pos.getX() - range; x <= pos.getX() + range; ++x) {
                 for (int z = pos.getZ() - range; z <= pos.getZ() + range; ++z) {
                     blockPos.setPos(x, y, z);
-                    BlockState state = world.getBlockState(blockPos);
+                    BlockState state = dimension.getBlockState(blockPos);
                     if (tryPumpFluid(blockPos, x, y, z, state)) {
                         return;
                     }
@@ -129,8 +129,8 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
 
     private boolean tryPumpFluid(BlockPos.Mutable blockPos, int x, int y, int z, BlockState state) {
         if (state.getBlock() instanceof IBucketPickupHandler) {
-            assert world != null;
-            Fluid fluid = ((IBucketPickupHandler) state.getBlock()).pickupFluid(world, blockPos, state);
+            assert dimension != null;
+            Fluid fluid = ((IBucketPickupHandler) state.getBlock()).pickupFluid(dimension, blockPos, state);
             FluidStack fluidStack = new FluidStack(fluid, 1000);
 
             if (!fluidStack.isEmpty() && tank.fill(fluidStack, IFluidHandler.FluidAction.SIMULATE) == 1000) {
@@ -161,10 +161,10 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
     }
 
     private boolean canMachineRun() {
-        return world != null
+        return dimension != null
                 && getEnergyStored() >= getEnergyPerOperation()
                 && tank.getCapacity() - tank.getFluidAmount() >= 1000
-                && redstoneMode.shouldRun(world.getRedstonePowerFromNeighbors(pos) > 0);
+                && redstoneMode.shouldRun(dimension.getRedstonePowerFromNeighbors(pos) > 0);
     }
 
     @Override

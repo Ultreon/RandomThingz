@@ -30,7 +30,7 @@ public class SolidifyingRecipe implements IFluidRecipe<IFluidInventory> {
     private ItemStack result;
 
     @Override
-    public boolean matches(IFluidInventory inv, World worldIn) {
+    public boolean matches(IFluidInventory inv, World dimensionIn) {
         return ingredient.test(inv.getFluidInTank(0));
     }
 

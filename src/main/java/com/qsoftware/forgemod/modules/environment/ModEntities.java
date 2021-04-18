@@ -38,7 +38,7 @@ public class ModEntities extends ObjectInit<EntityType<?>> {
     public static final EntityTypeRegistryObject<GlowSquidEntity> GLOW_SQUID = register("glow_squid", EntityType.Builder.create(GlowSquidEntity::new, EntityClassification.WATER_CREATURE).size(0.8F, 0.8F).trackingRange(8));
     // Sprites
     public static final EntityTypeRegistryObject<LegendaryEnderPearlEntity> LEGENDARY_ENDER_PEARL = register("legendary_ender_pearl", EntityType.Builder.<LegendaryEnderPearlEntity>create(LegendaryEnderPearlEntity::new, EntityClassification.MISC).size(1.0f, 1.0f));
-    public static final EntityTypeRegistryObject<CustomTNTEntity> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<CustomTNTEntity>create((entityType, world) -> new CustomTNTEntity(ModBlocks.ATOMIC_TNT.get().getDefaultState(), world), EntityClassification.MISC).size(1.0f, 1.0f));
+    public static final EntityTypeRegistryObject<CustomTNTEntity> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<CustomTNTEntity>create((entityType, dimension) -> new CustomTNTEntity(ModBlocks.ATOMIC_TNT.get().getDefaultState(), dimension), EntityClassification.MISC).size(1.0f, 1.0f));
     public static final EntityTypeRegistryObject<DynamiteEntity> DYNAMITE = register("dynamite", EntityType.Builder.<DynamiteEntity>create(DynamiteEntity::new, EntityClassification.MISC).size(1.0f, 1.0f));
 
     /**

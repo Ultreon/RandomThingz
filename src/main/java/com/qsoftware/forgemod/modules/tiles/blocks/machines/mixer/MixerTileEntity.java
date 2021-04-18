@@ -30,7 +30,7 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
 
     @Override
     public void tick() {
-        if (world == null || world.isRemote) return;
+        if (dimension == null || dimension.isClientSided) return;
 
         tryFillTanks();
         tryFillFluidContainer();
@@ -94,7 +94,7 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
                 && this.isFluidValid(tank, fluid)
                 && tanks[tank].fill(fluid, IFluidHandler.FluidAction.SIMULATE) == fluid.getAmount()
                 && (output.isEmpty() || InventoryUtils.canItemsStack(input.getContainerItem(), output))
-                && (output.isEmpty() || output.getCount() < output.getMaxStackSize());
+                && (output.isEmpty() || output.getCount() < output.getMaxSize());
     }
 
     private void tryFillFluidContainer() {
@@ -133,8 +133,8 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
     @Nullable
     @Override
     public MixingRecipe getRecipe() {
-        if (world == null) return null;
-        return world.getRecipeManager().getRecipe(ModRecipes.Types.MIXING, this, world).orElse(null);
+        if (dimension == null) return null;
+        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.MIXING, this, dimension).orElse(null);
     }
 
     @Override

@@ -67,7 +67,7 @@ public class OptionsMenu extends AbstractActionMenu {
             }
         }
 
-        settings.saveOptions();
+        settings.writeOptions();
         List<String> oldPackNames = ImmutableList.copyOf(settings.resourcePacks);
         if (!oldPackNames.equals(packNames)) {
             mc.reloadResources();

@@ -47,8 +47,8 @@ public class ConfirmExitOptions extends ModuleOptionsScreen<ConfirmExitModule> {
     }
 
     @Override
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 
@@ -158,7 +158,7 @@ public class ConfirmExitOptions extends ModuleOptionsScreen<ConfirmExitModule> {
         this.module.setClosePromptQuitButton(closePromptQuitButton);
 
         // Mark dirty, so it will be saved.
-        this.module.markDirty();
+        this.module.markModified();
 
         // Go back.
         goBack(button);

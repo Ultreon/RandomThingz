@@ -19,7 +19,7 @@ public class ChristmasChestBlock extends ChestBlock {
     }
 
     @Override
-    public ChristmasChestTileEntity createNewTileEntity(IBlockReader worldIn) {
+    public ChristmasChestTileEntity createNewTileEntity(IBlockReader dimensionIn) {
         return new ChristmasChestTileEntity();
     }
 }

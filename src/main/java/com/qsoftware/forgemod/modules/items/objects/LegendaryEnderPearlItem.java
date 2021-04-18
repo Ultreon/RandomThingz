@@ -24,21 +24,21 @@ public class LegendaryEnderPearlItem extends EnderPearlItem {
 
     /**
      * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-     * {@link #onItemUse}.
+     * {@link #onUseItem}.
      */
-    public @NotNull ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, @NotNull Hand handIn) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
-        worldIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.ENTITY_ENDER_PEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+        dimensionIn.playSound(null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.ENTITY_ENDER_PEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
         playerIn.getCooldownTracker().setCooldown(this, 5);
-        if (!worldIn.isRemote) {
-            LegendaryEnderPearlEntity enderPearlEntity = new LegendaryEnderPearlEntity(worldIn, playerIn);
+        if (!dimensionIn.isClientSided) {
+            LegendaryEnderPearlEntity enderPearlEntity = new LegendaryEnderPearlEntity(dimensionIn, playerIn);
             enderPearlEntity.setItem(itemstack);
             enderPearlEntity.setDirectionAndMovement(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-            worldIn.addEntity(enderPearlEntity);
+            dimensionIn.spawnEntity(enderPearlEntity);
         }
 
         playerIn.addStat(Stats.ITEM_USED.get(this));
 
-        return ActionResult.func_233538_a_(itemstack, worldIn.isRemote());
+        return ActionResult.func_233538_a_(itemstack, dimensionIn.isClientSided());
     }
 }

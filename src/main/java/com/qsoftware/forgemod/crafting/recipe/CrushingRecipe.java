@@ -73,7 +73,7 @@ public class CrushingRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public boolean matches(IInventory inv, World worldIn) {
+    public boolean matches(IInventory inv, World dimensionIn) {
         return this.ingredient.test(inv.getStackInSlot(0));
     }
 

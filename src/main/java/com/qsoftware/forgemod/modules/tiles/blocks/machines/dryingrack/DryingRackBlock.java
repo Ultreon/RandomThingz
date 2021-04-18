@@ -27,13 +27,13 @@ import javax.annotation.Nullable;
 public class DryingRackBlock extends HorizontalBlock implements IWaterLoggable {
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final VoxelShape SHAPE_NORTH = Block.makeCuboidShape(0, 12, 12, 16, 16, 16);
-    private static final VoxelShape SHAPE_SOUTH = Block.makeCuboidShape(0, 12, 0, 16, 16, 4);
-    private static final VoxelShape SHAPE_WEST = Block.makeCuboidShape(12, 12, 0, 16, 16, 16);
-    private static final VoxelShape SHAPE_EAST = Block.makeCuboidShape(0, 12, 0, 4, 16, 16);
+    private static final VoxelShape SHAPE_NORTH = Block.createCuboidShape(0, 12, 12, 16, 16, 16);
+    private static final VoxelShape SHAPE_SOUTH = Block.createCuboidShape(0, 12, 0, 16, 16, 4);
+    private static final VoxelShape SHAPE_WEST = Block.createCuboidShape(12, 12, 0, 16, 16, 16);
+    private static final VoxelShape SHAPE_EAST = Block.createCuboidShape(0, 12, 0, 4, 16, 16);
 
     public DryingRackBlock() {
-        super(Properties.create(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2f, 3f).sound(SoundType.WOOD));
+        super(Properties.generate(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2f, 3f).sound(SoundType.WOOD));
         setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
     }
 
@@ -44,37 +44,37 @@ public class DryingRackBlock extends HorizontalBlock implements IWaterLoggable {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
         return new DryingRackTileEntity();
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
+    public ActionResultType onBlockActivated(BlockState state, World dimensionIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        TileEntity tileEntity = dimensionIn.getTileEntity(pos);
         if (tileEntity instanceof DryingRackTileEntity) {
             return ((DryingRackTileEntity) tileEntity).interact(player) ? ActionResultType.SUCCESS : ActionResultType.PASS;
         }
-        return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+        return super.onBlockActivated(state, dimensionIn, pos, player, handIn, hit);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = dimensionIn.getTileEntity(pos);
             if (tileentity instanceof IInventory) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileentity);
-                worldIn.updateComparatorOutputLevel(pos, this);
+                InventoryHelper.dropInventoryItems(dimensionIn, pos, (IInventory) tileentity);
+                dimensionIn.updateComparatorOutputLevel(pos, this);
             }
 
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
+            super.onReplaced(state, dimensionIn, pos, newState, isMoving);
         }
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, IBlockReader dimensionIn, BlockPos pos, ISelectionContext context) {
         Direction facing = state.get(FACING);
         switch (facing) {
             case NORTH:
@@ -93,7 +93,7 @@ public class DryingRackBlock extends HorizontalBlock implements IWaterLoggable {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        FluidState fluidState = context.getWorld().getFluidState(context.getPos());
+        FluidState fluidState = context.getDimension().getFluidState(context.getPos());
         return getDefaultState()
                 .with(FACING, context.getPlacementHorizontalFacing().getOpposite())
                 .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);

@@ -73,21 +73,21 @@ public class EnergyStorageImpl extends com.qsoftware.forgemod.capability.EnergyS
 
         @Override
         public int receiveEnergy(int maxReceive, boolean simulate) {
-            World world = EnergyStorageImpl.this.tileEntity.getWorld();
-            if (world == null) return 0;
+            World dimension = EnergyStorageImpl.this.tileEntity.getDimension();
+            if (dimension == null) return 0;
 
             int received = EnergyStorageImpl.this.receiveEnergy(maxReceive, simulate);
             if (received > 0 && !simulate)
-                this.lastReceiveTick = world.getGameTime();
+                this.lastReceiveTick = dimension.getGameTime();
             return received;
         }
 
         @Override
         public int extractEnergy(int maxExtract, boolean simulate) {
-            World world = EnergyStorageImpl.this.tileEntity.getWorld();
-            if (world == null) return 0;
+            World dimension = EnergyStorageImpl.this.tileEntity.getDimension();
+            if (dimension == null) return 0;
 
-            long time = world.getGameTime();
+            long time = dimension.getGameTime();
             if (time != this.lastReceiveTick) {
                 return EnergyStorageImpl.this.extractEnergy(maxExtract, simulate);
             }

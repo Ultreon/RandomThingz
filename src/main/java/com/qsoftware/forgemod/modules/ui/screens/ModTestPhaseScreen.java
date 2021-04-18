@@ -40,8 +40,8 @@ public class ModTestPhaseScreen extends Screen {
         this.noButtonText = DialogTexts.GUI_NO;
     }
 
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 

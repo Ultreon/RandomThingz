@@ -47,8 +47,8 @@ public class ConfirmExitScreen extends Screen {
         this.crashPcText = new TranslationTextComponent("button.qforgemod.confirm_exit.crash_pc");
     }
 
-    protected void init() {
-        super.init();
+    protected void initialize() {
+        super.initialize();
 
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
 
@@ -62,7 +62,7 @@ public class ConfirmExitScreen extends Screen {
         this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (btn) -> {
             if (this.minecraft != null) {
                 btn.active = false;
-                if (this.minecraft.world != null && this.minecraft.isIntegratedServerRunning()) {
+                if (this.minecraft.dimension != null && this.minecraft.isIntegratedServerRunning()) {
                     WorldUtils.saveWorldThenQuitGame();
                     return;
                 }

@@ -16,42 +16,42 @@ public class WorldInfoPage extends DebugPage {
     @Override
     public List<DebugEntry> getLinesLeft() {
         List<DebugEntry> list = new ArrayList<>();
-        ClientWorld world = Minecraft.getInstance().world;
-        if (world == null) {
+        ClientWorld dimension = Minecraft.getInstance().dimension;
+        if (dimension == null) {
             list.add(new DebugEntry("$WORLD$", null));
             return list;
         }
 
-        ClientWorld.ClientWorldInfo worldInfo = world.getWorldInfo();
+        ClientWorld.ClientWorldInfo dimensionInfo = dimension.getDimensionInfo();
 
         int i = 0;
-        list.add(new DebugEntry("spawnAngle", worldInfo::getSpawnAngle));
-        list.add(new DebugEntry("difficulty", worldInfo::getDifficulty));
-        list.add(new DebugEntry("dayTime", worldInfo::getDayTime));
-        list.add(new DebugEntry("gameTime", worldInfo::getGameTime));
-        list.add(new DebugEntry("fogDistance", worldInfo::getFogDistance));
-        list.add(new DebugEntry("spawnX", worldInfo::getSpawnX));
-        list.add(new DebugEntry("spawnY", worldInfo::getSpawnY));
-        list.add(new DebugEntry("spawnZ", worldInfo::getSpawnZ));
+        list.add(new DebugEntry("spawnAngle", dimensionInfo::getSpawnAngle));
+        list.add(new DebugEntry("difficulty", dimensionInfo::getDifficulty));
+        list.add(new DebugEntry("dayTime", dimensionInfo::getDayTime));
+        list.add(new DebugEntry("gameTime", dimensionInfo::getGameTime));
+        list.add(new DebugEntry("fogDistance", dimensionInfo::getFogDistance));
+        list.add(new DebugEntry("spawnX", dimensionInfo::getSpawnX));
+        list.add(new DebugEntry("spawnY", dimensionInfo::getSpawnY));
+        list.add(new DebugEntry("spawnZ", dimensionInfo::getSpawnZ));
         return list;
     }
 
     @Override
     public List<DebugEntry> getLinesRight() {
         List<DebugEntry> list = new ArrayList<>();
-        ClientWorld world = Minecraft.getInstance().world;
-        if (world == null) {
+        ClientWorld dimension = Minecraft.getInstance().dimension;
+        if (dimension == null) {
             list.add(new DebugEntry("$WORLD$", null));
             return list;
         }
 
-        ClientWorld.ClientWorldInfo worldInfo = world.getWorldInfo();
+        ClientWorld.ClientWorldInfo dimensionInfo = dimension.getDimensionInfo();
 
         int j = 0;
-        list.add(new DebugEntry("difficultyLocked", worldInfo::isDifficultyLocked));
-        list.add(new DebugEntry("hardcore", worldInfo::isHardcore));
-        list.add(new DebugEntry("raining", worldInfo::isRaining));
-        list.add(new DebugEntry("thundering", worldInfo::isThundering));
+        list.add(new DebugEntry("difficultyLocked", dimensionInfo::isDifficultyLocked));
+        list.add(new DebugEntry("hardcore", dimensionInfo::isHardcore));
+        list.add(new DebugEntry("raining", dimensionInfo::isRaining));
+        list.add(new DebugEntry("thundering", dimensionInfo::isThundering));
         return list;
     }
 

@@ -17,8 +17,8 @@ public abstract class AbstractGeneratorBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+    public void addInformation(ItemStack stack, @Nullable IBlockReader dimensionIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, dimensionIn, tooltip, flagIn);
         // TODO: Show energy production rate and fuel consumption rate?
     }
 }

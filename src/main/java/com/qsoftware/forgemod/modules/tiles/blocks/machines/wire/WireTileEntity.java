@@ -20,9 +20,9 @@ public class WireTileEntity extends TileEntity {
     }
 
     public String getWireNetworkData() {
-        if (world == null) return "world is null";
+        if (dimension == null) return "world is null";
 
-        WireNetwork net = WireNetworkManager.get(world, pos);
+        WireNetwork net = WireNetworkManager.get(dimension, pos);
         return net != null ? net.toString() : "null";
     }
 
@@ -39,18 +39,18 @@ public class WireTileEntity extends TileEntity {
     }
 
     @Override
-    public void remove() {
-        if (world != null) {
-            WireNetworkManager.invalidateNetwork(world, pos);
+    public void delete() {
+        if (dimension != null) {
+            WireNetworkManager.invalidateNetwork(dimension, pos);
         }
-        super.remove();
+        super.delete();
     }
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (world != null && !removed && cap == CapabilityEnergy.ENERGY && side != null) {
-            LazyOptional<WireNetwork> networkOptional = WireNetworkManager.getLazy(world, pos);
+        if (dimension != null && !removed && cap == CapabilityEnergy.ENERGY && side != null) {
+            LazyOptional<WireNetwork> networkOptional = WireNetworkManager.getLazy(dimension, pos);
             if (networkOptional.isPresent()) {
                 return networkOptional.orElseThrow(IllegalStateException::new).getConnection(pos, side).getLazyOptional().cast();
             }

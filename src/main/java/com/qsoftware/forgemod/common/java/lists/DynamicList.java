@@ -90,7 +90,7 @@ public class DynamicList<T> {
      *
      * @param index the partition index.
      */
-    public synchronized void remove(int index) {
+    public synchronized void delete(int index) {
         totalSize -= sizes.get(index);
         sizes.remove(index);
         values.remove(index);

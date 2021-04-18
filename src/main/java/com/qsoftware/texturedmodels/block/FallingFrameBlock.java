@@ -59,36 +59,36 @@ public class FallingFrameBlock extends FallingBlock {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
         return new FrameBlockTile();
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
+    public ActionResultType onBlockActivated(BlockState state, World dimension, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
         ItemStack item = player.getHeldItem(hand);
-        if (!world.isRemote) {
+        if (!dimension.isClientSided) {
             if (state.get(CONTAINS_BLOCK)) {
                 if (!player.isCreative())
-                    this.dropContainedBlock(world, pos);
+                    this.dropContainedBlock(dimension, pos);
                 state = state.with(CONTAINS_BLOCK, Boolean.FALSE);
-                world.setBlockState(pos, state, 2);
+                dimension.setBlockState(pos, state, 2);
             } else {
                 if (item.getItem() instanceof BlockItem) {
-                    TileEntity tileEntity = world.getTileEntity(pos);
+                    TileEntity tileEntity = dimension.getTileEntity(pos);
                     int count = player.getHeldItem(hand).getCount();
                     if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(((BlockItem) item.getItem()).getBlock()) && !state.get(CONTAINS_BLOCK)) {
                         ((FrameBlockTile) tileEntity).clear();
                         BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().getDefaultState();
                         ((FrameBlockTile) tileEntity).setMimic(handBlockState);
-                        insertBlock(world, pos, state, handBlockState);
+                        insertBlock(dimension, pos, state, handBlockState);
                         if (!player.isCreative())
                             player.getHeldItem(hand).setCount(count - 1);
                     }
                 }
             }
-            BlockAppearanceHelper.setLightLevel(item, state, world, pos, player, hand);
-            BlockAppearanceHelper.setTexture(item, state, world, player, pos);
+            BlockAppearanceHelper.setLightLevel(item, state, dimension, pos, player, hand);
+            BlockAppearanceHelper.setTexture(item, state, dimension, player, pos);
             if (item.getItem() == Registration.TEXTURE_WRENCH.get() && player.isSneaking()) {
                 //System.out.println("You should rotate now!");
             }
@@ -96,46 +96,46 @@ public class FallingFrameBlock extends FallingBlock {
         return ActionResultType.SUCCESS;
     }
 
-    private void dropContainedBlock(World worldIn, BlockPos pos) {
-        if (!worldIn.isRemote) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+    private void dropContainedBlock(World dimensionIn, BlockPos pos) {
+        if (!dimensionIn.isClientSided) {
+            TileEntity tileentity = dimensionIn.getTileEntity(pos);
             if (tileentity instanceof FrameBlockTile) {
                 FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
-                    worldIn.playEvent(1010, pos, 0);
+                    dimensionIn.playEvent(1010, pos, 0);
                     frameTileEntity.clear();
                     float f = 0.7F;
-                    double d0 = (double) (worldIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (worldIn.rand.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (worldIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d0 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d1 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
+                    double d2 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
                     ItemStack itemstack1 = new ItemStack(blockState.getBlock());
-                    ItemEntity itementity = new ItemEntity(worldIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
+                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
                     itementity.setDefaultPickupDelay();
-                    worldIn.addEntity(itementity);
+                    dimensionIn.spawnEntity(itementity);
                     frameTileEntity.clear();
                 }
             }
         }
     }
 
-    public void insertBlock(IWorld worldIn, BlockPos pos, BlockState state, BlockState handBlock) {
-        TileEntity tileentity = worldIn.getTileEntity(pos);
+    public void insertBlock(IWorld dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
+        TileEntity tileentity = dimensionIn.getTileEntity(pos);
         if (tileentity instanceof FrameBlockTile) {
             FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
-            worldIn.setBlockState(pos, state.with(CONTAINS_BLOCK, Boolean.TRUE), 2);
+            dimensionIn.setBlockState(pos, state.with(CONTAINS_BLOCK, Boolean.TRUE), 2);
         }
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            dropContainedBlock(worldIn, pos);
+            dropContainedBlock(dimensionIn, pos);
 
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
+            super.onReplaced(state, dimensionIn, pos, newState, isMoving);
         }
     }
 
@@ -145,20 +145,20 @@ public class FallingFrameBlock extends FallingBlock {
     }
 
     @Override
-    public void onEndFalling(World worldIn, BlockPos pos, BlockState fallingState, BlockState hitState, FallingBlockEntity entity) {
-        super.onEndFalling(worldIn, pos, fallingState, hitState, entity);
+    public void onEndFalling(World dimensionIn, BlockPos pos, BlockState fallingState, BlockState hitState, FallingBlockEntity entity) {
+        super.onEndFalling(dimensionIn, pos, fallingState, hitState, entity);
 
     }
 
     @Override
-    public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
-        if (worldIn.isAirBlock(pos.down()) || canFallThrough(worldIn.getBlockState(pos.down())) && pos.getY() >= 0) {
-            if (worldIn.getTileEntity(pos) instanceof FrameBlockTile) {
-                FrameBlockTile tileEntity = (FrameBlockTile) worldIn.getTileEntity(pos);
+    public void tick(BlockState state, ServerWorld dimensionIn, BlockPos pos, Random rand) {
+        if (dimensionIn.isAirBlock(pos.down()) || canFallThrough(dimensionIn.getBlockState(pos.down())) && pos.getY() >= 0) {
+            if (dimensionIn.getTileEntity(pos) instanceof FrameBlockTile) {
+                FrameBlockTile tileEntity = (FrameBlockTile) dimensionIn.getTileEntity(pos);
                 if (tileEntity.getMimic() != null) {
-                    //FallingFrameBlockEntity fallingFrameBlockEntity = new FallingFrameBlockEntity(worldIn, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, worldIn.getBlockState(pos), tileEntity.getMimic());
+                    //FallingFrameBlockEntity fallingFrameBlockEntity = new FallingFrameBlockEntity(dimensionIn, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, dimensionIn.getBlockState(pos), tileEntity.getMimic());
                     //this.onStartFalling(fallingFrameBlockEntity);
-                    //worldIn.addEntity(fallingFrameBlockEntity);
+                    //dimensionIn.spawnEntity(fallingFrameBlockEntity);
                 }
             }
         }
@@ -169,7 +169,7 @@ public class FallingFrameBlock extends FallingBlock {
     }
 
     @Override
-    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+    public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
         if (state.get(LIGHT_LEVEL) > 15) {
             return 15;
         }

@@ -30,7 +30,7 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
         for (int i = 0; i < inv.getSizeInventory() - inv.getMachineTier().getUpgradeSlots(); ++i) {
             ItemStack itemstack = inv.getStackInSlot(i);
             if (!itemstack.isEmpty()) {
-                fillRatio += (float) itemstack.getCount() / Math.min(inv.getInventoryStackLimit(), itemstack.getMaxStackSize());
+                fillRatio += (float) itemstack.getCount() / Math.min(inv.getInventoryStackLimit(), itemstack.getMaxSize());
                 ++slotsFilled;
             }
         }
@@ -40,33 +40,33 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
     }
 
     @Override
-    protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
+    protected void interactWith(World dimensionIn, BlockPos pos, PlayerEntity player) {
+        TileEntity tileEntity = dimensionIn.getTileEntity(pos);
         if (tileEntity instanceof INamedContainerProvider) {
             player.openContainer((INamedContainerProvider) tileEntity);
         }
     }
 
     @Override
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+            TileEntity tileentity = dimensionIn.getTileEntity(pos);
             if (tileentity instanceof IInventory) {
-                InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) tileentity);
-                worldIn.updateComparatorOutputLevel(pos, this);
+                InventoryHelper.dropInventoryItems(dimensionIn, pos, (IInventory) tileentity);
+                dimensionIn.updateComparatorOutputLevel(pos, this);
             }
 
-            super.onReplaced(state, worldIn, pos, newState, isMoving);
+            super.onReplaced(state, dimensionIn, pos, newState, isMoving);
         }
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public int getComparatorInputOverride(BlockState blockState, World worldIn, BlockPos pos) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
+    public int getComparatorInputOverride(BlockState blockState, World dimensionIn, BlockPos pos) {
+        TileEntity tileEntity = dimensionIn.getTileEntity(pos);
         if (tileEntity instanceof AbstractMachineBaseTileEntity) {
             return calcRedstoneFromInventory((AbstractMachineBaseTileEntity) tileEntity);
         }
-        return super.getComparatorInputOverride(blockState, worldIn, pos);
+        return super.getComparatorInputOverride(blockState, dimensionIn, pos);
     }
 }

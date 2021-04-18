@@ -38,8 +38,8 @@ public class HogEntity extends PigEntity {
     private EatGrassGoal eatGrassGoal;
     private int hogTimer;
 
-    public HogEntity(EntityType<? extends HogEntity> type, World worldIn) {
-        super(type, worldIn);
+    public HogEntity(EntityType<? extends HogEntity> type, World dimensionIn) {
+        super(type, dimensionIn);
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
@@ -64,7 +64,7 @@ public class HogEntity extends PigEntity {
 
     @Override
     protected int getExperiencePoints(@NotNull PlayerEntity player) {
-        return 3 + this.world.rand.nextInt(4);
+        return 3 + this.dimension.rand.nextInt(4);
     }
 
     @Nullable
@@ -100,8 +100,8 @@ public class HogEntity extends PigEntity {
     @Nullable
     @Override
     @ParametersAreNonnullByDefault
-    public HogEntity createChild(ServerWorld worldIn, AgeableEntity ageable) {  // createChild
-        return ModEntities.HOG.get().create(this.world);
+    public HogEntity createChild(ServerWorld dimensionIn, AgeableEntity ageable) {  // createChild
+        return ModEntities.HOG.get().create(this.dimension);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class HogEntity extends PigEntity {
 
     @Override
     public void livingTick() {
-        if (this.world.isRemote) {
+        if (this.dimension.isClientSided) {
             this.hogTimer = Math.max(0, this.hogTimer - 1);
         }
         super.livingTick();

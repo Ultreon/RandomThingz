@@ -26,8 +26,8 @@ public class BabyIceEndermanEntity extends EndermanEntity implements IBabyEntity
 
     private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(BabyIceEndermanEntity.class, DataSerializers.BOOLEAN);
 
-    public BabyIceEndermanEntity(EntityType<BabyIceEndermanEntity> type, World world) {
-        super(type, world);
+    public BabyIceEndermanEntity(EntityType<BabyIceEndermanEntity> type, World dimension) {
+        super(type, dimension);
         setChild(true);
     }
 
@@ -80,7 +80,7 @@ public class BabyIceEndermanEntity extends EndermanEntity implements IBabyEntity
 
     @Nonnull
     @Override
-    public IPacket<?> createSpawnPacket() {
+    public IPacket<?> getSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

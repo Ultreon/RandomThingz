@@ -27,11 +27,11 @@ public class MachineUpgradeItem extends Item {
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+    public void addInformation(ItemStack stack, @Nullable World dimensionIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, dimensionIn, tooltip, flagIn);
 
         // Upgrade description and value
-        tooltip.add(new TranslationTextComponent(this.getTranslationKey() + ".desc", upgrade.getDisplayValue()));
+        tooltip.add(new TranslationTextComponent(this.getTranslationId() + ".desc", upgrade.getDisplayValue()));
 
         // Energy usage multiplier
         float energyCost = upgrade.getEnergyUsageMultiplier();

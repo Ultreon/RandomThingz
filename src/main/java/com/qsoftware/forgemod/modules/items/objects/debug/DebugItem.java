@@ -26,13 +26,13 @@ public class DebugItem extends Item {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
+    public ActionResultType onUseItem(ItemUseContext context) {
         PlayerEntity player = context.getPlayer();
         if (player == null) return ActionResultType.PASS;
 
-        World world = context.getWorld();
+        World dimension = context.getDimension();
         BlockPos pos = context.getPos();
-        TileEntity tileEntity = world.getTileEntity(pos);
+        TileEntity tileEntity = dimension.getTileEntity(pos);
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
                 ITextComponent energyText = TextUtils.energyWithMax(e.getEnergyStored(), e.getMaxEnergyStored());
@@ -56,7 +56,7 @@ public class DebugItem extends Item {
             });
 
             for (Direction side : Direction.values()) {
-                TileEntity other = world.getTileEntity(pos.offset(side));
+                TileEntity other = dimension.getTileEntity(pos.offset(side));
                 if (other != null) {
                     other.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
                         player.sendMessage(new StringTextComponent(side + ": " + other.getClass().getSimpleName()), Util.DUMMY_UUID);

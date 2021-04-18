@@ -45,27 +45,27 @@ public class BlockPage extends DebugPage {
         Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
         BlockRayTraceResult lookingAt;
-        if (Minecraft.getInstance().world != null) {
-            lookingAt = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
+        if (Minecraft.getInstance().dimension != null) {
+            lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
             if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
                 BlockPos pos = lookingAt.getPos();
 
                 // now the coordinates you want are in pos. Example of use:
-                BlockState blockState = Minecraft.getInstance().player.getEntityWorld().getBlockState(pos);
+                BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
                 Block block = blockState.getBlock();
                 list.add(new DebugEntry("translatedName", () -> block.getTranslatedName().getString()));
                 list.add(new DebugEntry("harvestLevel", blockState::getHarvestLevel));
                 list.add(new DebugEntry("harvestTool", () -> blockState.getHarvestTool() == null ? null : blockState.getHarvestTool().getName()));
-                list.add(new DebugEntry("blockHardness", () -> blockState.getBlockHardness(player.getEntityWorld(), pos)));
+                list.add(new DebugEntry("blockHardness", () -> blockState.getBlockHardness(player.getEntityDimension(), pos)));
                 list.add(new DebugEntry("lightValue", blockState::getLightValue));
-                list.add(new DebugEntry("opacity", () -> blockState.getOpacity(player.getEntityWorld(), pos)));
-                list.add(new DebugEntry("offset", () -> blockState.getOffset(player.getEntityWorld(), pos)));
-                list.add(new DebugEntry("playerRelativeHardness", () -> blockState.getPlayerRelativeBlockHardness(player, player.getEntityWorld(), pos)));
+                list.add(new DebugEntry("opacity", () -> blockState.getOpacity(player.getEntityDimension(), pos)));
+                list.add(new DebugEntry("offset", () -> blockState.getOffset(player.getEntityDimension(), pos)));
+                list.add(new DebugEntry("playerRelativeHardness", () -> blockState.getPlayerRelativeBlockHardness(player, player.getEntityDimension(), pos)));
                 list.add(new DebugEntry("requiresTool", blockState::getRequiresTool));
                 list.add(new DebugEntry("renderType", blockState::getRenderType));
-                list.add(new DebugEntry("slipperiness", () -> blockState.getSlipperiness(player.getEntityWorld(), pos, player)));
+                list.add(new DebugEntry("slipperiness", () -> blockState.getSlipperiness(player.getEntityDimension(), pos, player)));
                 list.add(new DebugEntry("jumpFactor", block::getJumpFactor));
-                list.add(new DebugEntry("enchantPowerBonus", () -> blockState.getEnchantPowerBonus(player.getEntityWorld(), pos)));
+                list.add(new DebugEntry("enchantPowerBonus", () -> blockState.getEnchantPowerBonus(player.getEntityDimension(), pos)));
                 list.add(new DebugEntry("lootTable", block::getLootTable));
                 list.add(new DebugEntry("materialColor", () -> new Pair<>(block.getMaterialColor().colorIndex, getColor(block.getMaterialColor().colorValue))));
                 list.add(new DebugEntry("offsetType", block::getOffsetType));
@@ -74,25 +74,25 @@ public class BlockPage extends DebugPage {
                 list.add(new DebugEntry("speedFactor", () -> getMultiplier(block.getSpeedFactor())));
             }
 
-//            lookingAt = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
+//            lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
 //            if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
 //                BlockPos pos = lookingAt.getPos();
 //
 //                // now the coordinates you want are in pos. Example of use:
-//                BlockState blockState = Minecraft.getInstance().player.getEntityWorld().getBlockState(pos);
+//                BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
 //                FluidState fluidState = blockState.getFluidState();
 //                if (!fluidState.isEmpty()) {
 //                    drawRightString(matrixStack, TextFormatting.GRAY + "-== Fluid ==-", 12f, 12f, 0xffffff);
 //                    drawRightTopString(matrixStack, "empty", j++, fluidState.isEmpty());
 //                    drawRightTopString(matrixStack, "height", j++, fluidState.getHeight());
 //                    drawRightTopString(matrixStack, "level", j++, fluidState.getLevel());
-//                    drawRightTopString(matrixStack, "actualHeight", j++, fluidState.getFluid().getActualHeight(fluidState, player.getEntityWorld(), pos));
+//                    drawRightTopString(matrixStack, "actualHeight", j++, fluidState.getFluid().getActualHeight(fluidState, player.getEntityDimension(), pos));
 //                    try {
 //                        drawRightTopString(matrixStack, "filledBucket", j++, fluidState.getFluid().getFilledBucket());
 //                    } catch (Throwable ignored) {
 //
 //                    }
-//                    drawRightTopString(matrixStack, "tickRate", j++, fluidState.getFluid().getTickRate(player.getEntityWorld()));
+//                    drawRightTopString(matrixStack, "tickRate", j++, fluidState.getFluid().getTickRate(player.getEntityDimension()));
 //                } else {
 //                    // not looking at a fluid, or too far away from one to tell
 ////                                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 32, 0xff0000);

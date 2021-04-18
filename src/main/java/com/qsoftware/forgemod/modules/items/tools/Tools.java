@@ -438,7 +438,7 @@ public enum Tools {
                     .toughness((float) Double.POSITIVE_INFINITY)
                     .repairMaterial(() -> Ingredient.fromItems(OreMaterial.INFINITY.getIngot().get()))
                     .build())
-            .tools(() -> ItemTier.builder()
+            .tools(TraitPack.create().all(ModTraits.INFINITY), () -> ItemTier.builder()
                     .tier(7).maxUses((int) Double.POSITIVE_INFINITY).efficiency((float) Double.POSITIVE_INFINITY).attackDamage((float) Double.POSITIVE_INFINITY).enchantability((int) Double.POSITIVE_INFINITY)
                     .repairMaterial(() -> Ingredient.fromItems(OreMaterial.INFINITY.getIngot().orElseThrow(() -> new UnidentifiedObjectException("Infinity ingot not found in OreMaterial class.")))).build())),
     ;

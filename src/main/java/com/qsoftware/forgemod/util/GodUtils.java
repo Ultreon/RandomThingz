@@ -54,7 +54,7 @@ public class GodUtils {
             Objects.requireNonNull(event.player.getAttribute(Attributes.LUCK)).setBaseValue(5.0d);
             event.player.heal(0.025f);
 
-            if (event.player.isServerWorld()) {
+            if (event.player.isServerDimension()) {
                 if (event.player instanceof ServerPlayerEntity) {
                     ServerPlayerEntity player = (ServerPlayerEntity) event.player;
                     player.abilities.allowFlying = true;

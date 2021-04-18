@@ -30,7 +30,7 @@ public final class Config {
 //    public static final ForgeConfigSpec.BooleanValue allowShutdownPC;
     private static final ForgeConfigSpec.BooleanValue searchUpdatesOnStartup;
     private static final ForgeConfigSpec.BooleanValue searchForUnstableReleases;
-    public static final ForgeConfigSpec.IntValue worldGenOilLakeChance;
+    public static final ForgeConfigSpec.IntValue dimensionGenOilLakeChance;
     public static final ForgeConfigSpec.IntValue fluidGeneratorInjectionVolume;
     private static final ForgeConfigSpec commonSpec;
     private static final ForgeConfigSpec.BooleanValue oreWorldGenMasterSwitch;
@@ -79,7 +79,7 @@ public final class Config {
                             "You can also enable/disable ores individually, but this is useful if you plan to use another mod for ore generation.")
                     .define("masterSwitch", true);
 
-            worldGenOilLakeChance = builder
+            dimensionGenOilLakeChance = builder
                     .comment("Chance of oil lakes spawning (1 in chance). Higher numbers = less common. Set 0 to disable.",
                             "Water is 4, lava is 80. Oil lakes will spawn underground about 90% of the time.",
                             "Note that disabling oil will make some items uncraftable unless recipes are changed")
@@ -104,7 +104,7 @@ public final class Config {
         return Optional.ofNullable(oreConfigs.getOrDefault(ore, null));
     }
 
-    public static void init() {
+    public static void initialize() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, commonSpec);
     }
 

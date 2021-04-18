@@ -43,7 +43,7 @@ public class LumberAxeItem extends AxeItem implements IHasToolType {
         super(tier, attackDamageIn, attackSpeedIn, builder.defaultMaxDamage((int) (tier.getMaxUses() * 1.7)));
     }
 
-    public float getDestroySpeed(ItemStack stack, BlockState state) {
+    public float getMiningSpeed(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
         if (EFFECTIVE_ON_MATERIALS.contains(material)) return this.efficiency * 1.6f;
         if (getToolTypes(stack).stream().anyMatch(state::isToolEffective)) return efficiency;
@@ -54,9 +54,9 @@ public class LumberAxeItem extends AxeItem implements IHasToolType {
     @OnlyIn(Dist.CLIENT)
     public static void onClick(InputEvent.ClickInputEvent event) {
         Minecraft mc = Minecraft.getInstance();
-        if (event.getKeyBinding() == mc.gameSettings.keyBindAttack && event.isAttack() && mc.playerController != null && mc.player != null && mc.world != null) {
+        if (event.getKeyBinding() == mc.gameSettings.keyBindAttack && event.isAttack() && mc.playerController != null && mc.player != null && mc.dimension != null) {
             ClientPlayerEntity player = mc.player;
-            ClientWorld world = mc.world;
+            ClientWorld dimension = mc.dimension;
             ItemStack stack = mc.player.getHeldItem(Hand.MAIN_HAND);
             Item heldItem = stack.getItem();
             if (heldItem instanceof LumberAxeItem) {
@@ -79,37 +79,37 @@ public class LumberAxeItem extends AxeItem implements IHasToolType {
                         if (leftClick && mc.objectMouseOver != null && mc.objectMouseOver.getType() == RayTraceResult.Type.BLOCK) {
                             BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) mc.objectMouseOver;
                             BlockPos pos = blockraytraceresult.getPos();
-                            damageBlock(world, pos, mc, player, blockraytraceresult);
+                            damageBlock(dimension, pos, mc, player, blockraytraceresult);
 
                             if (currentFacing.getAxis() == Direction.Axis.Z) {
-                                damageBlock(world, pos.east(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.west(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.up(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.down(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.east().up(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.west().up(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.east().down(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.west().down(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.east(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.west(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.up(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.down(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.east().up(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.west().up(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.east().down(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.west().down(), mc, player, blockraytraceresult);
                             }
                             if (currentFacing.getAxis() == Direction.Axis.X) {
-                                damageBlock(world, pos.north(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.south(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.up(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.down(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.north().up(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.south().up(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.north().down(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.south().down(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.north(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.south(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.up(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.down(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.north().up(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.south().up(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.north().down(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.south().down(), mc, player, blockraytraceresult);
                             }
                             if (currentFacing.getAxis() == Direction.Axis.Y) {
-                                damageBlock(world, pos.north(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.south(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.east(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.west(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.north().east(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.south().east(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.north().west(), mc, player, blockraytraceresult);
-                                damageBlock(world, pos.south().west(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.north(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.south(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.east(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.west(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.north().east(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.south().east(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.north().west(), mc, player, blockraytraceresult);
+                                damageBlock(dimension, pos.south().west(), mc, player, blockraytraceresult);
                             }
                         } else {
                             mc.playerController.resetBlockRemoving();
@@ -121,8 +121,8 @@ public class LumberAxeItem extends AxeItem implements IHasToolType {
     }
 
     @SuppressWarnings("ConstantConditions")
-    private static void damageBlock(World worldIn, BlockPos blockpos, Minecraft mc, ClientPlayerEntity player, BlockRayTraceResult blockraytraceresult) {
-        if (!worldIn.isAirBlock(blockpos)) {
+    private static void damageBlock(World dimensionIn, BlockPos blockpos, Minecraft mc, ClientPlayerEntity player, BlockRayTraceResult blockraytraceresult) {
+        if (!dimensionIn.isAirBlock(blockpos)) {
             net.minecraftforge.client.event.InputEvent.ClickInputEvent inputEvent = net.minecraftforge.client.ForgeHooksClient.onClickInput(0, mc.gameSettings.keyBindAttack, Hand.MAIN_HAND);
             if (inputEvent.isCanceled()) {
                 if (inputEvent.shouldSwingHand()) {
@@ -142,7 +142,7 @@ public class LumberAxeItem extends AxeItem implements IHasToolType {
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack stack, World worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+    public boolean onBlockBroken(ItemStack stack, World dimensionIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
         if (stack.getItem() != this) {
             return true;
         }
@@ -175,46 +175,46 @@ public class LumberAxeItem extends AxeItem implements IHasToolType {
     }
 
     protected void destroyAround(LivingEntity entity, BlockPos pos, Direction direction) {
-        destroyAround(entity, entity.getEntityWorld(), pos, direction);
+        destroyAround(entity, entity.getEntityDimension(), pos, direction);
     }
 
     protected void destroyAround(LivingEntity entity, BlockPos pos, Direction direction, boolean dropBlock) {
-        destroyAround(entity, entity.getEntityWorld(), pos, direction, dropBlock);
+        destroyAround(entity, entity.getEntityDimension(), pos, direction, dropBlock);
     }
 
-    protected void destroyAround(LivingEntity entity, World world, BlockPos pos, Direction direction) {
+    protected void destroyAround(LivingEntity entity, World dimension, BlockPos pos, Direction direction) {
         if (entity instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) entity;
-            float blockHardness = world.getBlockState(pos).getPlayerRelativeBlockHardness(player, world, pos);
+            float blockHardness = dimension.getBlockState(pos).getPlayerRelativeBlockHardness(player, dimension, pos);
             for (BlockPos position : getPositionsAround(pos, direction)) {
-                if (world.getBlockState(position).getPlayerRelativeBlockHardness(player, world, pos) <= blockHardness) {
-                    destroy(entity, world, position);
+                if (dimension.getBlockState(position).getPlayerRelativeBlockHardness(player, dimension, pos) <= blockHardness) {
+                    destroy(entity, dimension, position);
                 }
             }
         } else {
-            float blockHardness = world.getBlockState(pos).getBlockHardness(world, pos);
+            float blockHardness = dimension.getBlockState(pos).getBlockHardness(dimension, pos);
             for (BlockPos position : getPositionsAround(pos, direction)) {
-                if (world.getBlockState(position).getBlockHardness(world, pos) <= blockHardness) {
-                    destroy(entity, world, position);
+                if (dimension.getBlockState(position).getBlockHardness(dimension, pos) <= blockHardness) {
+                    destroy(entity, dimension, position);
                 }
             }
         }
     }
 
-    protected void destroyAround(LivingEntity entity, World world, BlockPos pos, Direction direction, boolean dropBlock) {
+    protected void destroyAround(LivingEntity entity, World dimension, BlockPos pos, Direction direction, boolean dropBlock) {
         if (entity instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) entity;
-            float blockHardness = world.getBlockState(pos).getPlayerRelativeBlockHardness(player, world, pos);
+            float blockHardness = dimension.getBlockState(pos).getPlayerRelativeBlockHardness(player, dimension, pos);
             for (BlockPos position : getPositionsAround(pos, direction)) {
-                if (world.getBlockState(position).getPlayerRelativeBlockHardness(player, world, pos) <= blockHardness) {
-                    destroy(entity, world, position, dropBlock);
+                if (dimension.getBlockState(position).getPlayerRelativeBlockHardness(player, dimension, pos) <= blockHardness) {
+                    destroy(entity, dimension, position, dropBlock);
                 }
             }
         } else {
-            float blockHardness = world.getBlockState(pos).getBlockHardness(world, pos);
+            float blockHardness = dimension.getBlockState(pos).getBlockHardness(dimension, pos);
             for (BlockPos position : getPositionsAround(pos, direction)) {
-                if (world.getBlockState(position).getBlockHardness(world, pos) <= blockHardness) {
-                    destroy(entity, world, position, dropBlock);
+                if (dimension.getBlockState(position).getBlockHardness(dimension, pos) <= blockHardness) {
+                    destroy(entity, dimension, position, dropBlock);
                 }
             }
         }
@@ -248,46 +248,46 @@ public class LumberAxeItem extends AxeItem implements IHasToolType {
         return positions.toArray(new BlockPos[]{});
     }
 
-    private void destroy(LivingEntity entityLiving, World worldIn, BlockPos pos) {
-        worldIn.destroyBlock(pos, true, entityLiving);
+    private void destroy(LivingEntity entityLiving, World dimensionIn, BlockPos pos) {
+        dimensionIn.destroyBlock(pos, true, entityLiving);
     }
 
-    private void destroy(LivingEntity entityLiving, World worldIn, BlockPos pos, boolean dropBlock) {
-        worldIn.destroyBlock(pos, dropBlock, entityLiving);
+    private void destroy(LivingEntity entityLiving, World dimensionIn, BlockPos pos, boolean dropBlock) {
+        dimensionIn.destroyBlock(pos, dropBlock, entityLiving);
     }
 
     /**
      * Called when this item is used when targeting a Block
      */
-    public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
+    public ActionResultType onUseItem(ItemUseContext context) {
+        World dimension = context.getDimension();
         BlockPos pos = context.getPos();
         Direction face = context.getFace();
-        ActionResultType result = useItem(world, pos, context);
+        ActionResultType result = useItem(dimension, pos, context);
 
         for (BlockPos position : getPositionsAround(pos, face)) {
-            useItem(world, position, context);
+            useItem(dimension, position, context);
         }
         return result;
     }
 
-    private ActionResultType useItem(World world, BlockPos blockpos, ItemUseContext context) {
-        BlockState worldBlockState = world.getBlockState(blockpos);
-        BlockState toolModifiedState = worldBlockState.getToolModifiedState(world, blockpos, context.getPlayer(), context.getItem(), ModToolTypes.LUMBER_AXE);
+    private ActionResultType useItem(World dimension, BlockPos blockpos, ItemUseContext context) {
+        BlockState dimensionBlockState = dimension.getBlockState(blockpos);
+        BlockState toolModifiedState = dimensionBlockState.getToolModifiedState(dimension, blockpos, context.getPlayer(), context.getItem(), ModToolTypes.LUMBER_AXE);
         if (toolModifiedState == null) {
-            toolModifiedState = worldBlockState.getToolModifiedState(world, blockpos, context.getPlayer(), context.getItem(), ToolType.AXE);
+            toolModifiedState = dimensionBlockState.getToolModifiedState(dimension, blockpos, context.getPlayer(), context.getItem(), ToolType.AXE);
         }
         if (toolModifiedState != null) {
             PlayerEntity player = context.getPlayer();
-            world.playSound(player, blockpos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-            if (!world.isRemote) {
-                world.setBlockState(blockpos, toolModifiedState, 11);
+            dimension.playSound(player, blockpos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            if (!dimension.isClientSided) {
+                dimension.setBlockState(blockpos, toolModifiedState, 11);
                 if (player != null) {
                     context.getItem().damageItem(1, player, (p_220040_1_) -> p_220040_1_.sendBreakAnimation(context.getHand()));
                 }
             }
 
-            return ActionResultType.func_233537_a_(world.isRemote);
+            return ActionResultType.func_233537_a_(dimension.isClientSided);
         } else {
             return ActionResultType.PASS;
         }

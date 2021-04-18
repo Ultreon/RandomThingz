@@ -25,21 +25,21 @@ import javax.annotation.Nullable;
 @SuppressWarnings("deprecation")
 public class QuarryBlock extends AbstractMachineBlock {
 
-    private static final VoxelShape SHAPE = VoxelShapes.or(Block.makeCuboidShape(0, 0, 0, 16, 16, 16));
+    private static final VoxelShape SHAPE = VoxelShapes.or(Block.createCuboidShape(0, 0, 0, 16, 16, 16));
     private final MachineTier defaultTier;
 
     public QuarryBlock(MachineTier defaultTier) {
-        super(MachineTier.HEAVY, Properties.create(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL));
+        super(MachineTier.HEAVY, Properties.generate(Material.IRON).hardnessAndResistance(6, 20).sound(SoundType.METAL));
         this.defaultTier = defaultTier;
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, IBlockReader dimensionIn, BlockPos pos, ISelectionContext context) {
         return SHAPE;
     }
 
     @Override
-    public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+    public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
         return 0;
     }
 
@@ -62,14 +62,14 @@ public class QuarryBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    public TileEntity createNewTileEntity(IBlockReader dimensionIn) {
 //        return new QuarryTileEntity(this.defaultTier);
         return new QuarryTileEntity();
     }
 
     @Override
-    protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player) {
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
+    protected void interactWith(World dimensionIn, BlockPos pos, PlayerEntity player) {
+        TileEntity tileEntity = dimensionIn.getTileEntity(pos);
         if (tileEntity instanceof INamedContainerProvider) {
             player.openContainer((INamedContainerProvider) tileEntity);
         }

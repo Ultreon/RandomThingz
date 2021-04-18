@@ -30,11 +30,11 @@ public class ModTags {
         }
 
         private static ITag.INamedTag<Block> forge(String path) {
-            return BlockTags.makeWrapperTag(forgeId(path).toString());
+            return BlockTags.createWrapperTag(forgeId(path).toString());
         }
 
         private static ITag.INamedTag<Block> mod(String path) {
-            return BlockTags.makeWrapperTag(modId(path).toString());
+            return BlockTags.createWrapperTag(modId(path).toString());
         }
     }
 
@@ -52,11 +52,11 @@ public class ModTags {
         }
 
         private static ITag.INamedTag<Item> forge(String path) {
-            return ItemTags.makeWrapperTag(forgeId(path).toString());
+            return ItemTags.createWrapperTag(forgeId(path).toString());
         }
 
         private static ITag.INamedTag<Item> mod(String path) {
-            return ItemTags.makeWrapperTag(modId(path).toString());
+            return ItemTags.createWrapperTag(modId(path).toString());
         }
     }
 }

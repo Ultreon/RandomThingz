@@ -64,7 +64,7 @@ public final class InventoryUtils {
     public static boolean canItemsStack(ItemStack a, ItemStack b) {
         // Determine if the item stacks can be merged
         if (a.isEmpty() || b.isEmpty()) return true;
-        return ItemHandlerHelper.canItemStacksStack(a, b) && a.getCount() + b.getCount() <= a.getMaxStackSize();
+        return ItemHandlerHelper.canItemStacksStack(a, b) && a.getCount() + b.getCount() <= a.getMaxSize();
     }
 
     public static boolean mergeItem(IInventory inventory, ItemStack stack, int slot) {

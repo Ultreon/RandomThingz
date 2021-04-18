@@ -49,17 +49,17 @@ public class ItemEntityPage extends EntityPage {
 
         Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
         Minecraft mc = Minecraft.getInstance();
-        ClientWorld world = Minecraft.getInstance().world;
-        if (world == null) {
+        ClientWorld dimension = Minecraft.getInstance().dimension;
+        if (dimension == null) {
             list.add(new DebugEntry("$WORLD$", null));
             return list;
         }
-        RayTraceResult raytraceresult = Minecraft.getInstance().world.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+        RayTraceResult raytraceresult = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
         if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
             vec3d1 = raytraceresult.getHitVec();
         }
 
-        RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(world, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
+        RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(dimension, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
         if (rayTraceResult1 != null) {
             raytraceresult = rayTraceResult1;
         }

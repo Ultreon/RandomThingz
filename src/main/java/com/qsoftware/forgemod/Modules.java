@@ -42,7 +42,7 @@ public class Modules {
     public static final ActionMenuModule ACTION_MENU = new ActionMenuModule();
     public static final DebuggingModule DEBUGGING = new DebuggingModule();
 
-    public static void init(ModuleManager manager) {
+    public static void initialize(ModuleManager manager) {
         manager.register(MAIN);
         manager.register(BLOCKS);
         manager.register(ITEMS);
