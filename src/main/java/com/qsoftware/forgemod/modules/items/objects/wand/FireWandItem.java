@@ -37,17 +37,17 @@ public class FireWandItem extends WandItem {
 
         PlayerEntity player = (PlayerEntity) livingIn;
 
-        if (dimensionIn instanceof ServerWorld) {
+        if (!dimensionIn.isClientSided()) {
             ServerWorld dimension = (ServerWorld) dimensionIn;
 
             FireballEntity l = new FireballEntity(EntityType.FIREBALL, dimensionIn);
             l.setPositionAndRotation(player.getPosX(), player.getPosY() + 1, player.getPosZ(), player.rotationYaw, player.rotationPitch);
             Vector3d vector3d = player.getLookVec();
             l.setMotion(vector3d);
-            l.explosionPower = (int) (4 * charge * strength);
-            l.accelerationX = vector3d.x * (3 * charge * strength);
-            l.accelerationY = vector3d.y * (3 * charge * strength);
-            l.accelerationZ = vector3d.z * (3 * charge * strength);
+            l.explosionPower =  4 + (int) (4 * charge * strength);
+            l.accelerationX = vector3d.x * 1.5 + (3 * charge * strength);
+            l.accelerationY = vector3d.y * 1.5 + (3 * charge * strength);
+            l.accelerationZ = vector3d.z * 1.5 + (3 * charge * strength);
             l.setInvulnerable(true);
             l.setShooter(player);
 

@@ -3,13 +3,17 @@ package com.qsoftware.forgemod.modules.items.tools;
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.modules.items.tools.trait.*;
 import lombok.experimental.UtilityClass;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryBuilder;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
 @UtilityClass
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public final class ModTraits {
 
 

@@ -66,7 +66,7 @@ String isDevTestString = project.property("isDevTest").toString()
 String content = "";
 String filePath = "buildnumber.txt";
 
-printf(new File('.').getAbsolutePath());
+println("Current Path: " + new File('.').getAbsolutePath());
 
 try {
     content = new String(Files.readAllBytes(FileSystems.getDefault().getPath(project.getRootDir().getAbsolutePath(), filePath)));
@@ -79,11 +79,11 @@ Integer buildNumber = Integer.valueOf(buildNrString)
 
 // Advance build number.
 buildNumber++
-println("Executing build " + buildNumber)
+println("Executing Build " + buildNumber)
 String newBuild = buildNumber.toString()
 
 // Write new build number.
-FileOutputStream output = new FileOutputStream("buildnumber.txt")
+FileOutputStream output = new FileOutputStream("${projectDir}/buildnumber.txt")
 output.write(newBuild.getBytes())
 output.flush()
 output.close()

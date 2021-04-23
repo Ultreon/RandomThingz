@@ -57,7 +57,6 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unused")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-@FieldsAreNonnullByDefault
 @Mod(QForgeMod.modId)
 @Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class QForgeMod {
@@ -84,7 +83,7 @@ public class QForgeMod {
 
     // Mod Data
     @Getter public static final String modId = "qforgemod";
-    @Getter public static final String modName = "QForgeMod";
+    @Getter public static final String modName = "Qboi's Forge Mod";
     @Getter public static final String nbtName = "QForgeMod";
     @Getter public static final String modVersion;
     @Getter public static final QFMVersion version;

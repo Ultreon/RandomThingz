@@ -66,6 +66,7 @@ public abstract class WandItem extends HudItem {
     /**
      * Called when the player stops using an Item (stops holding the right mouse button).
      */
+    @Override
     public void onPlayerStoppedUsing(ItemStack stack, @NotNull World dimension, @NotNull LivingEntity entityLiving, int timeLeft) {
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
         if (!nbt.contains("mana", 5)) {
@@ -220,38 +221,53 @@ public abstract class WandItem extends HudItem {
             return;
         }
 
-        if (!nbt.contains("mana", 5)) {
-            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-            super.addInformation(stack, dimensionIn, tooltip, flagIn);
-            return;
+        if (QForgeMod.isModDev(false)) {
+            boolean hasError = false;
+            if (!nbt.contains("mana", 5)) {
+                hasError = true;
+                tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "Mana: N/A"));
+                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+            }
+
+            if (!nbt.contains("maxMana", 3)) {
+                hasError = true;
+                tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "Max Mana: N/A"));
+                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+            }
+
+            if (!nbt.contains("chargeTime", 3)) {
+                hasError = true;
+                tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "Charge Time: N/A"));
+                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+            }
+
+            if (!nbt.contains("strength", 3)) {
+                hasError = true;
+                tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "Strength: N/A"));
+                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+            }
+
+            if (hasError) {
+                return;
+            }
         }
 
-        if (!nbt.contains("maxMana", 3)) {
-            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-            super.addInformation(stack, dimensionIn, tooltip, flagIn);
-            return;
+
+        if (nbt.contains("mana", 5)) {
+            if (nbt.contains("maxMana", 3)) {
+                float mana = nbt.getFloat("mana");
+                int maxMana = nbt.getInt("maxMana");
+                tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Mana: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + Math.round(mana) + " / " + maxMana));
+            }
         }
-
-        if (!nbt.contains("chargeTime", 3)) {
-            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-            super.addInformation(stack, dimensionIn, tooltip, flagIn);
-            return;
+        if (nbt.contains("chargeTime", 3)) {
+            int chargeTime = nbt.getInt("chargeTime");
+            tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Charge Time: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + chargeTime));
         }
-
-        if (!nbt.contains("strength", 3)) {
-            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-            super.addInformation(stack, dimensionIn, tooltip, flagIn);
-            return;
+        if (nbt.contains("strength", 3)) {
+            int strength = nbt.getInt("strength");
+            tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Strength: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + RomanNumber.toRoman(strength)));
         }
-
-        float mana = nbt.getFloat("mana");
-        int maxMana = nbt.getInt("maxMana");
-        int chargeTime = nbt.getInt("chargeTime");
-        int strength = nbt.getInt("strength");
-
-        tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Mana: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + Math.round(mana) + " / " + maxMana));
-        tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Charge Time: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + chargeTime));
-        tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Strength: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + RomanNumber.toRoman(strength)));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -263,30 +279,6 @@ public abstract class WandItem extends HudItem {
 
         CompoundNBT nbt = stack.getOrCreateChildTag("qforgemod");
         if (dimensionIn == null) {
-            return;
-        }
-
-        if (!nbt.contains("mana", 5)) {
-//            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-//            super.addInformation(stack, dimensionIn, tooltip, flagIn);
-            return;
-        }
-
-        if (!nbt.contains("maxMana", 3)) {
-//            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-//            super.addInformation(stack, dimensionIn, tooltip, flagIn);
-            return;
-        }
-
-        if (!nbt.contains("chargeTime", 3)) {
-//            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-//            super.addInformation(stack, dimensionIn, tooltip, flagIn);
-            return;
-        }
-
-        if (!nbt.contains("strength", 3)) {
-//            tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "INVALID DATA"));
-//            super.addInformation(stack, dimensionIn, tooltip, flagIn);
             return;
         }
 

@@ -3,15 +3,15 @@
       "dev_test": "false"
    },
    "version": {
-      "name": "2.0.1346-b6",
+      "name": "2.0.1362-b6",
       "version": 2,
       "release": 0,
-      "build": 1346,
+      "build": 1362,
       "stage": "b",
       "stage_release": 6
    },
    "build_info": {
-      "date": "2021-04-18T22:07:31.456",
+      "date": "2021-04-23T13:01:44.151",
       "compile": {
          "name": "compileJava",
          "source_compat": "1.8",
@@ -27,8 +27,8 @@
             "mappings_version": "20201028-1.16.3",
             "mappings_channel": "snapshot",
             "mappings": "snapshot_20201028-1.16.3",
-            "version": "1.16.4",
-            "forge_version": "35.1.16"
+            "version": "1.16.5",
+            "forge_version": "36.1.0"
          }
       }
    }

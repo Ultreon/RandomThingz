@@ -2,11 +2,13 @@ package com.qsoftware.texturedmodels.setup.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.nio.file.Path;
 
 /**
@@ -14,6 +16,8 @@ import java.nio.file.Path;
  * @author PianoManu
  * @version 1.3 10/21/20
  */
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 @Mod.EventBusSubscriber
 public class BCModConfig {
     public static final String CATEGORY_TOOLS = "tools";

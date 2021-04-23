@@ -1,7 +1,10 @@
 package com.qsoftware.forgemod.modules.items;
 
 import com.qsoftware.forgemod.QForgeMod;
+import com.qsoftware.forgemod.modules.items.tools.ModTraits;
+import com.qsoftware.forgemod.modules.items.tools.SwordTool;
 import com.qsoftware.forgemod.modules.items.tools.Tools;
+import com.qsoftware.forgemod.modules.items.tools.trait.AbstractTrait;
 import com.qsoftware.forgemod.modules.tiles.ModFluids;
 import com.qsoftware.forgemod.modules.items.objects.CraftingItems;
 import com.qsoftware.forgemod.modules.items.objects.EucalyptusLeafItem;
@@ -171,13 +174,13 @@ public final class ModItems {
     public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_INGOT = register("tungsten_ingot", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_NUGGET = register("tungsten_nugget", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_DUST = register("tungsten_dust", IngotOrDustItem::new);
-//    // Metals - Ultrinium Level
+    //    // Metals - Ultrinium Level
 //    public static final ItemRegistryObject<IngotOrDustItem> ULTRINIUM_INGOT = register("ultrinium_ingot", IngotOrDustItem::new);
 //    public static final ItemRegistryObject<IngotOrDustItem> ULTRINIUM_NUGGET = register("ultrinium_nugget", IngotOrDustItem::new);
 //    public static final ItemRegistryObject<IngotOrDustItem> ULTRINIUM_DUST = register("ultrinium_dust", IngotOrDustItem::new);
     // Metals - Infinity Level
     public static final ItemRegistryObject<UnstableInfinityIngot> UNSTABLE_INFINITY_INGOT = register("unstable_infinity_ingot", UnstableInfinityIngot::new);
-//    public static final ItemRegistryObject<IngotOrDustItem> INFINITY_INGOT = register("infinity_ingot", IngotOrDustItem::new);
+    //    public static final ItemRegistryObject<IngotOrDustItem> INFINITY_INGOT = register("infinity_ingot", IngotOrDustItem::new);
 //    public static final ItemRegistryObject<IngotOrDustItem> INFINITY_NUGGET = register("infinity_nugget", IngotOrDustItem::new);
 //    public static final ItemRegistryObject<IngotOrDustItem> INFINITY_DUST = register("infinity_dust", IngotOrDustItem::new);
     // Dusts
@@ -414,12 +417,12 @@ public final class ModItems {
     public static final ItemRegistryObject<TeleportStaffItem> TELEPORT_STAFF = register("teleport_wand", TeleportStaffItem::new);
 
     // Stone Level
-    public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordItem(net.minecraft.item.ItemTier.STONE, 8, -2.0f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE)));
+    public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordTool(net.minecraft.item.ItemTier.STONE, 8, -2.0f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.WITHER.get()}));
 
     // Iron Level
     public static final ItemRegistryObject<AxeItem> EMERGENCY_FIRE_AXE = register("emergency_fire_axe", () -> new AxeItem(net.minecraft.item.ItemTier.IRON, 2, -2.55f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.UNCOMMON)));
-    public static final ItemRegistryObject<FireSwordItem> FIRE_SWORD = register("fire_sword", () -> new FireSwordItem(net.minecraft.item.ItemTier.IRON, 3, -3.5f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.EPIC)));
-    public static final ItemRegistryObject<EnderSwordItem> ENDER_SWORD = register("ender_sword", () -> new EnderSwordItem(net.minecraft.item.ItemTier.IRON, 3, -1.9f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.EPIC)));
+    public static final ItemRegistryObject<SwordTool> FIRE_SWORD = register("fire_sword", () -> new SwordTool(net.minecraft.item.ItemTier.IRON, 3, -3.5f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.BLAZE.get()}));
+    public static final ItemRegistryObject<SwordTool> ENDER_SWORD = register("ender_sword", () -> new SwordTool(net.minecraft.item.ItemTier.IRON, 3, -1.9f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.ENDER.get()}));
 
     // Diamond Level
     public static final ItemRegistryObject<AxeItem> LEVIATHAN_AXE = register("leviathan_axe", () -> new AxeItem(net.minecraft.item.ItemTier.DIAMOND, 5, -2.55f, new Item.Properties().group(ModItemGroups.SPECIALS)));
@@ -703,7 +706,7 @@ public final class ModItems {
     public static final IItemTier TIN_ITEM_TIER = ItemTier.builder()
             .tier(2).maxUses(630).efficiency(5.8f).attackDamage(1.8f).enchantability(8)
             .repairMaterial(() -> Ingredient.fromItems(OreMaterial.TIN.getIngot().orElseThrow(() -> new NullPointerException("Tin ingot not found in OreMaterial class.")))).build();
-//    public static final IItemTier SILVER_ITEM_TIER = ItemTier.builder()
+    //    public static final IItemTier SILVER_ITEM_TIER = ItemTier.builder()
 //            .tier(2).maxUses(580).efficiency(5.4f).attackDamage(1.7f).enchantability(48)
 //            .repairMaterial(() -> Ingredient.fromItems(OreMaterial.SILVER.getIngot().orElseThrow(() -> new NullPointerException("Silver ingot not found in OreMaterial class.")))).build();
     public static final IItemTier ENDERIUM_ITEM_TIER = ItemTier.builder()

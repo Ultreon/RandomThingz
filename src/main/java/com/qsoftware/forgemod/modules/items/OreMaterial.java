@@ -2,6 +2,7 @@ package com.qsoftware.forgemod.modules.items;
 
 import com.qsoftware.forgemod.QForgeMod;
 import com.qsoftware.forgemod.init.Registration;
+import com.qsoftware.forgemod.modules.items.tools.Tools;
 import com.qsoftware.forgemod.modules.tiles.blocks.machines.MetalBlock;
 import com.qsoftware.forgemod.modules.environment.ores.DefaultOre;
 import com.qsoftware.forgemod.modules.environment.ores.IOre;
@@ -9,6 +10,7 @@ import com.qsoftware.forgemod.modules.environment.ores.Ores;
 import com.qsoftware.forgemod.modules.ui.ModItemGroups;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.OreBlock;
@@ -23,11 +25,14 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ToolType;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public enum OreMaterial implements IOreMaterial {
     // Metals
     REDSTONE_ALLOY(builderAlloy("redstone_alloy", 2)),
@@ -310,7 +315,7 @@ public enum OreMaterial implements IOreMaterial {
         ITag.INamedTag<Item> gemTag;
         ITag.INamedTag<Item> nuggetTag;
 
-        Supplier<ToolsOld> tools;
+        Supplier<Tools> tools;
 
         Builder(String name) {
             this.name = name;
@@ -339,7 +344,7 @@ public enum OreMaterial implements IOreMaterial {
             return this;
         }
 
-        Builder tools(Supplier<ToolsOld> tools) {
+        Builder tools(Supplier<Tools> tools) {
             this.tools = tools;
             return this;
         }

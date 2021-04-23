@@ -428,7 +428,7 @@ public enum Tools {
                     .repairMaterial(() -> Ingredient.fromItems(OreMaterial.ULTRINIUM.getIngot().orElseThrow(() -> new UnidentifiedObjectException("Ultrinium ingot not found in OreMaterial class.")))).build())),
     INFINITY(builder("infinity")
             .material(() -> OreMaterial.INFINITY.getIngot().get(), () -> Items.STICK)
-            .armor(() -> ArmorMaterial.builder()
+            .armor(() -> TraitPack.create().all(ModTraits.INFINITY.get()).build(), () -> ArmorMaterial.builder()
                     .name(QForgeMod.modId + ":infinity")
                     .maxDamageFactor((int) Double.POSITIVE_INFINITY)
                     .damageReduction(new int[]{(int) Double.POSITIVE_INFINITY, (int) Double.POSITIVE_INFINITY, (int) Double.POSITIVE_INFINITY, (int) Double.POSITIVE_INFINITY})
@@ -438,7 +438,7 @@ public enum Tools {
                     .toughness((float) Double.POSITIVE_INFINITY)
                     .repairMaterial(() -> Ingredient.fromItems(OreMaterial.INFINITY.getIngot().get()))
                     .build())
-            .tools(TraitPack.create().all(ModTraits.INFINITY), () -> ItemTier.builder()
+            .tools(() -> TraitPack.create().all(ModTraits.INFINITY.get()).build(), () -> ItemTier.builder()
                     .tier(7).maxUses((int) Double.POSITIVE_INFINITY).efficiency((float) Double.POSITIVE_INFINITY).attackDamage((float) Double.POSITIVE_INFINITY).enchantability((int) Double.POSITIVE_INFINITY)
                     .repairMaterial(() -> Ingredient.fromItems(OreMaterial.INFINITY.getIngot().orElseThrow(() -> new UnidentifiedObjectException("Infinity ingot not found in OreMaterial class.")))).build())),
     ;

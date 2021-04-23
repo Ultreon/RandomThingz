@@ -225,6 +225,10 @@ public abstract class AbstractUpdater<T extends IVersion> {
 
                 // Get latest Mod version.
                 JsonObject versionIndex = mcVersions.getAsJsonObject(id);
+                if (versionIndex == null) {
+                    return new UpdateInfo(UpdateStatus.INCOMPATIBLE, null);
+                }
+
                 JsonObject releaseIndex = versionIndex.getAsJsonObject(QForgeMod.version.isStable() ? "stable" : "unstable");
                 JsonPrimitive latestJson = releaseIndex.getAsJsonPrimitive("version");
 
