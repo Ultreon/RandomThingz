@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.qsoftware.forgemod.mixin",
+  "package": "com.qtech.forgemod.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "qforgemod.refmap.json",
   "mixins": [

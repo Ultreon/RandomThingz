@@ -10,7 +10,7 @@
             "translate": "advancements.qforgemod.fast_food.description"
         }
     },
-    "parent": "qforgemod:root1",
+    "parent": "qforgemod:root",
     "criteria": {
         "get_sword": {
             "trigger": "minecraft:inventory_changed",

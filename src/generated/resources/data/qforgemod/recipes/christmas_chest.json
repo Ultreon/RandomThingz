@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#A#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "A": {
+      "item": "minecraft:spruce_sapling"
+    }
+  },
+  "result": {
+    "item": "qforgemod:christmas_chest"
+  }
+}

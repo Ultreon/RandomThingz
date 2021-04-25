@@ -8,9 +8,11 @@
         },
         "description": {
             "translate": "advancements.qforgemod.overpowered.description"
-        }
+        },
+        "show_toast": true,
+        "announce_to_chat": true
     },
-    "parent": "qforgemod:root1",
+    "parent": "qforgemod:root",
     "criteria": {
         "get_sword": {
             "trigger": "minecraft:inventory_changed",

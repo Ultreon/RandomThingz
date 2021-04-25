@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "qforgemod:kill_switch"
+    },
+    "title": {
+      "translate": "advancements.qforgemod.shutdown.title"
+    },
+    "description": {
+      "translate": "advancements.qforgemod.shutdown.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "qforgemod:root",
+  "criteria": {
+    "get_sword": {
+      "trigger": "qforgemod:used_kill_switch",
+      "conditions": {
+      }
+    }
+  }
+}

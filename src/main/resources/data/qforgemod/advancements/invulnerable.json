@@ -8,7 +8,9 @@
         },
         "description": {
             "translate": "advancements.qforgemod.invulnerable.description"
-        }
+        },
+        "show_toast": true,
+        "announce_to_chat": true
     },
     "parent": "qforgemod:overpowered",
     "criteria": {

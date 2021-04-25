@@ -137,11 +137,11 @@ function patch_CreativeScreen_setCurrentCreativeTab(method) {
     var node = findFirstMethodInsnNode(method, findInstruction, Opcodes.INVOKEVIRTUAL);
     if(node !== null)
     {
-        method.instructions.insert(node, new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "com/qsoftware/filters/Events", "onCreativeTabChange", "(Lnet/minecraft/client/gui/screen/inventory/CreativeScreen;Lnet/minecraft/item/ItemGroup;)V", false));
+        method.instructions.insert(node, new MethodInsnNode(Opcodes.INVOKEVIRTUAL, "com/qtech/filters/Events", "onCreativeTabChange", "(Lnet/minecraft/client/gui/screen/inventory/CreativeScreen;Lnet/minecraft/item/ItemGroup;)V", false));
         method.instructions.insert(node, new VarInsnNode(Opcodes.ALOAD, 1));
         method.instructions.insert(node, new VarInsnNode(Opcodes.ALOAD, 0));
-        method.instructions.insert(node, new FieldInsnNode(Opcodes.GETFIELD, "com/qsoftware/filters/Filters", "events", "Lcom/qsoftware/filters/Events;"));
-        method.instructions.insert(node, new MethodInsnNode(Opcodes.INVOKESTATIC, "com/qsoftware/filters/Filters", "get", "()Lcom/qsoftware/filters/Filters;", false))
+        method.instructions.insert(node, new FieldInsnNode(Opcodes.GETFIELD, "com/qtech/filters/Filters", "events", "Lcom/qtech/filters/Events;"));
+        method.instructions.insert(node, new MethodInsnNode(Opcodes.INVOKESTATIC, "com/qtech/filters/Filters", "get", "()Lcom/qtech/filters/Filters;", false))
         return true;
     }
     return false;
@@ -161,7 +161,7 @@ function patch_DisplayEffectsScreen_drawActivePotionEffects(method) {
     {
         var nextNode = node.getNext();
         method.instructions.remove(nextNode);
-        method.instructions.insert(node, new MethodInsnNode(Opcodes.INVOKESTATIC, "com/qsoftware/filters/Hooks", "getPotionEffectOffset", "(Lnet/minecraft/client/gui/DisplayEffectsScreen;)I", false));
+        method.instructions.insert(node, new MethodInsnNode(Opcodes.INVOKESTATIC, "com/qtech/filters/Hooks", "getPotionEffectOffset", "(Lnet/minecraft/client/gui/DisplayEffectsScreen;)I", false));
         method.instructions.insert(node, new VarInsnNode(Opcodes.ALOAD, 0));
         return true;
     }
@@ -175,7 +175,7 @@ function patch_DisplayEffectsScreen_updateActivePotionEffects(method) {
     var node = findFirstIntInsnNode(method, instruction, Opcodes.SIPUSH);
     if(node !== null)
     {
-        method.instructions.insert(node, new MethodInsnNode(Opcodes.INVOKESTATIC, "com/qsoftware/filters/Hooks", "getEffectsGuiOffset", "(Lnet/minecraft/client/gui/DisplayEffectsScreen;)I", false));
+        method.instructions.insert(node, new MethodInsnNode(Opcodes.INVOKESTATIC, "com/qtech/filters/Hooks", "getEffectsGuiOffset", "(Lnet/minecraft/client/gui/DisplayEffectsScreen;)I", false));
         method.instructions.insert(node, new VarInsnNode(Opcodes.ALOAD, 0));
         method.instructions.remove(node);
         return true;

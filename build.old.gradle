@@ -70,7 +70,7 @@ output.close()
 boolean isDevTest = Boolean.parseBoolean(isDevTestString)
 
 version = vers + "." + release + '.' + buildNumber + "-" + stage + stageRelease
-group = 'com.qsoftware.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'com.qtech.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'qforgemod'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
@@ -281,7 +281,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Main-Class": "com.qsoftware.forgemod.Main",
+                "Main-Class": "com.qtech.forgemod.Main",
                 "Specification-Title": "qforgemod",
                 "Specification-Vendor": "qsoftware",
                 "Specification-Version": "1.2-alpha3-DEVTEST",

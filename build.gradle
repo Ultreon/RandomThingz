@@ -259,8 +259,8 @@ repositories {
 }
 
 compileJava {
-    exclude("com/qsoftware/forgemod/script")
-    exclude("com/qsoftware/scriptjs")
+    exclude("com/qtech/forgemod/script")
+    exclude("com/qtech/scriptjs")
 }
 
 ////////////////////////////
@@ -396,10 +396,10 @@ dependencies {
         runtimeOnly fg.deobf("mezz.jei:jei-${project.jei_version}")
     }
 
-    // CC Tweaked
-    if (project.hasProperty("cctweaked_version")) {
-        compile fg.deobf("org.squiddev:cc-tweaked-${project.cctweaked_version}")
-    }
+//    // CC Tweaked
+//    if (project.hasProperty("cctweaked_version")) {
+//        compile fg.deobf("org.squiddev:cc-tweaked-${project.cctweaked_version}")
+//    }
 
     if (project.hasProperty("refined_storage_version")) {
         compile fg.deobf("com.raoulvdberge:refinedstorage:${project.refined_storage_version}")
@@ -478,7 +478,7 @@ artifacts {
 jar {
     manifest {
         attributes([
-                "Main-Class": "com.qsoftware.forgemod.Main",
+                "Main-Class": "com.qtech.forgemod.Main",
                 "Specification-Title": "qforgemod",
                 "Specification-Vendor": "qsoftware",
                 "Specification-Version": version,
