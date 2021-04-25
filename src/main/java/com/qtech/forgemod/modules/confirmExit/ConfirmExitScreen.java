@@ -3,10 +3,7 @@ package com.qtech.forgemod.modules.confirmExit;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.text2speech.Narrator;
-import com.qtech.forgemod.Modules;
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.common.ModuleManager;
-import com.qtech.forgemod.util.ComputerUtils;
 import com.qtech.forgemod.util.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
@@ -76,12 +73,6 @@ public class ConfirmExitScreen extends Screen {
                 this.minecraft.displayGuiScreen(backScreen);
             }
         }));
-        if (ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN)) {
-            this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 126, 210, 20, this.shutdownPcText, (p_213006_1_) -> ComputerUtils.shutdown()));
-            if (ModuleManager.getInstance().isEnabled(Modules.PC_CRASH)) {
-                this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 156, 210, 20, this.crashPcText, (p_213006_1_) -> ComputerUtils.crash()));
-            }
-        }
 
         setButtonDelay(10);
     }

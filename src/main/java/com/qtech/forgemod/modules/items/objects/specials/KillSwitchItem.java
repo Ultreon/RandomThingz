@@ -3,13 +3,10 @@ package com.qtech.forgemod.modules.items.objects.specials;
 import com.qtech.forgemod.Modules;
 import com.qtech.forgemod.common.ModuleManager;
 import com.qtech.forgemod.common.text.Translations;
-import com.qtech.forgemod.init.ModCriteriaTriggers;
 import com.qtech.forgemod.modules.ui.ModItemGroups;
-import com.qtech.forgemod.util.ComputerUtils;
 import com.sun.jna.Platform;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -34,18 +31,18 @@ public final class KillSwitchItem extends Item {
 
     @Override
     public @NotNull ActionResultType onUseItem(@NotNull ItemUseContext context) {
-        PlayerEntity player = context.getPlayer();
-        if (player instanceof ServerPlayerEntity) {
-            ModCriteriaTriggers.USED_KILL_SWITCH.trigger((ServerPlayerEntity) player);
-        }
-        if (ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN)) {
-            if (player != null) {
-                player.addStat(Stats.ITEM_USED.get(this));
-                ComputerUtils.shutdown();
-                return ActionResultType.SUCCESS;
-            }
-            return ActionResultType.PASS;
-        }
+//        PlayerEntity player = context.getPlayer();
+//        if (player instanceof ServerPlayerEntity) {
+//            ModCriteriaTriggers.USED_KILL_SWITCH.trigger((ServerPlayerEntity) player);
+//        }
+//        if (ModuleManager.getInstance().isEnabled(Modules.PC_SHUTDOWN)) {
+//            if (player != null) {
+//                player.addStat(Stats.ITEM_USED.get(this));
+////                ComputerUtils.shutdown();
+//                return ActionResultType.SUCCESS;
+//            }
+//            return ActionResultType.PASS;
+//        }
         return ActionResultType.FAIL;
     }
 
