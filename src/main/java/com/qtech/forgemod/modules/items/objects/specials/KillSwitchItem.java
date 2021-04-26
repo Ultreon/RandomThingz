@@ -1,16 +1,12 @@
 package com.qtech.forgemod.modules.items.objects.specials;
 
-import com.qtech.forgemod.Modules;
-import com.qtech.forgemod.common.ModuleManager;
 import com.qtech.forgemod.common.text.Translations;
 import com.qtech.forgemod.modules.ui.ModItemGroups;
 import com.sun.jna.Platform;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
-import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
@@ -24,6 +20,7 @@ import java.util.List;
  *
  * @author Qboi123
  */
+@Deprecated
 public final class KillSwitchItem extends Item {
     public KillSwitchItem() {
         super(new Item.Properties().group(ModItemGroups.OVERPOWERED));

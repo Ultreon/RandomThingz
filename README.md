@@ -28,3 +28,6 @@ The GitHub pages are here: https://qtechcommunity.github.io/QForgeMod/.
  - [x] Cluckshroom.
  - [x] Mod updater for **QForgeMod** including api.
  - [ ] ~~Javascript console ingame. (An alternative to commands)~~
+
+## Build numbers.
+On a merge, the build number will be recalculated. *See image below:*
