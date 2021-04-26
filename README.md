@@ -31,3 +31,4 @@ The GitHub pages are here: https://qtechcommunity.github.io/QForgeMod/.
 
 ## Build numbers.
 On a merge, the build number will be recalculated. *See image below:*
+![Workflow](https://github.com/QTechCommunity/QForgeMod/raw/master/img/Image1.png)
