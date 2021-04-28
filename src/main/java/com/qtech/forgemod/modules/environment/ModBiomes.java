@@ -19,6 +19,7 @@ import java.util.function.Supplier;
 @UtilityClass
 public class ModBiomes extends ObjectInit<Biome> {
     public static final DeferredRegister<Biome> BIOMES = WorldGenerationModule.BIOMES;
+
     public static final RegistryObject<Biome> EXAMPLE_BIOME = register("example_biome", () -> new ExampleBiome().build());
     public static final RegistryObject<Biome> GRASSLAND = register("grassland", () -> new GrasslandBiome().build());
 
