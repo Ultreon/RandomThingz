@@ -22,6 +22,7 @@ public final class Ores {
     // Gems
     public static final DefaultOre RUBY = new DefaultOre("ruby", () -> OreMaterial.RUBY, 6, 2, new DefaultOreConfig(1, 4, 0, 18));
     public static final DefaultOre AMETHYST = new DefaultOre("amethyst", () -> OreMaterial.AMETHYST, 6, 2, new DefaultOreConfig(1, 4, 15, 20));
+    public static final DefaultOre AQUAMARINE = new DefaultOre("aquamarine", () -> OreMaterial.AQUAMARINE, 6, 2, new DefaultOreConfig(1, 6, 8, 20));
     public static final DefaultOre SAPHIRE = new DefaultOre("amethyst", () -> OreMaterial.SAPHIRE, 6, 2, new DefaultOreConfig(1, 4, 10, 17));
     public static final DefaultOre AMBER = new DefaultOre("amber", () -> OreMaterial.AMBER, 6, 2, new DefaultOreConfig(1, 4, 2, 10));
     public static final DefaultOre PERIDOT = new DefaultOre("peridot", () -> OreMaterial.PERIDOT, 6, 2, new DefaultOreConfig(1, 4, 5, 15));

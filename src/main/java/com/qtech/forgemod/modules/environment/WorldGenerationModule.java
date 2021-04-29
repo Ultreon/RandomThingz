@@ -4,6 +4,7 @@ import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.client.gui.modules.ModuleCompatibility;
 import com.qtech.forgemod.common.CoreRegisterModule;
 import com.qtech.forgemod.common.ModuleSecurity;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -13,9 +14,12 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Collection;
 import java.util.function.Supplier;
 
+@ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public class WorldGenerationModule extends CoreRegisterModule<Biome> {
     public static final DeferredRegister<Biome> BIOMES = create(ForgeRegistries.BIOMES);
 

@@ -21,7 +21,6 @@ public class MixinItemEntity {
         }
     }
 
-    @Shadow
     public ItemStack getItem() {
         throw new IllegalStateException("Mixin failed to shadow getItem()");
     }

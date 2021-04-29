@@ -72,7 +72,7 @@ public final class CustomTNTEntity extends TNTEntity {
 
     @Override
     public void readAdditional(@NotNull CompoundNBT compound) {
-        super.read(compound);
+        super.readAdditional(compound);
 
         compound.contains(QForgeMod.nbtName);
         CompoundNBT blockStateNbt = compound.getCompound(QForgeMod.nbtName);
