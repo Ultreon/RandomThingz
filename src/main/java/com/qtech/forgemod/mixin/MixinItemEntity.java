@@ -1,5 +1,6 @@
 package com.qtech.forgemod.mixin;
 
+/*
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.item.ItemEntity;
@@ -24,4 +25,4 @@ public class MixinItemEntity {
     public ItemStack getItem() {
         throw new IllegalStateException("Mixin failed to shadow getItem()");
     }
-}
+}*/
