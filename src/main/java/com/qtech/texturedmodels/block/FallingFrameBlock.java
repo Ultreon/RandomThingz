@@ -32,7 +32,7 @@ import java.util.Random;
 import static com.qtech.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
 
 /**
- * Nothing important to see here, this class is currently unused, visit {@link FrameBlock} for a better documentation
+ * Nothing important to see here, this class is currently unused, visit {@linkplain FrameBlock} for a better documentation
  *
  * @author PianoManu
  * @version 1.1 10/06/20

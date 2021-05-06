@@ -2,18 +2,15 @@ package com.qtech.forgemod.modules.client;
 
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.client.gui.modules.ModuleCompatibility;
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleManager;
-import com.qtech.forgemod.common.ModuleSecurity;
-import com.qtech.forgemod.modules.actionmenu.AbstractActionMenu;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleManager;
+import com.qtech.forgemod.commons.ModuleSecurity;
 import com.qtech.forgemod.modules.actionmenu.MainActionMenu;
-import com.qtech.forgemod.modules.actionmenu.IMenuHandler;
 import com.qtech.forgemod.modules.actionmenu.MenuHandler;
 import com.qtech.forgemod.modules.client.modules.MobVariantsModule;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import lombok.NonNull;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -31,6 +28,8 @@ public class ClientTweaksModule extends Module {
         super();
 
         enableSubManager();
+
+//        registerSubmodule();
 
         MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Minecraft"), minecraftMenu));
         MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Window"), windowMenu));

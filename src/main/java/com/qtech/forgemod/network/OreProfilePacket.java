@@ -1,17 +1,15 @@
 package com.qtech.forgemod.network;
 
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleManager;
 import com.qtech.forgemod.modules.debug.OreProfiler;
 import lombok.Getter;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
@@ -43,12 +41,15 @@ public class OreProfilePacket {
     }
 
     private static void handlePacket(OreProfilePacket packet, ServerPlayerEntity player) {
-        if (packet.isStart) {
-            player.sendMessage(new StringTextComponent("Starting profiler."), player.getUniqueID());
-            OreProfiler.start();
-        } else {
-            player.sendMessage(new StringTextComponent("Stopping profiler."), player.getUniqueID());
-            OreProfiler.stop();
+        MinecraftServer server = player.getServer();
+        if (server != null && server.getPermissionLevel(player.getGameProfile()) >= 4) {
+            if (packet.isStart) {
+                player.sendMessage(new StringTextComponent("Starting profiler."), player.getUniqueID());
+                OreProfiler.start();
+            } else {
+                player.sendMessage(new StringTextComponent("Stopping profiler."), player.getUniqueID());
+                OreProfiler.stop();
+            }
         }
     }
 

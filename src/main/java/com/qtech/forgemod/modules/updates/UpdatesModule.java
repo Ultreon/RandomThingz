@@ -2,10 +2,10 @@ package com.qtech.forgemod.modules.updates;
 
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.client.gui.modules.ModuleCompatibility;
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleSecurity;
-import com.qtech.forgemod.common.Ticker;
-import com.qtech.forgemod.common.interfaces.IVersion;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleSecurity;
+import com.qtech.forgemod.commons.Ticker;
+import com.qtech.forgemod.commons.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -136,11 +136,15 @@ public class UpdatesModule extends Module {
     }
 
     private static class ClientSide extends Module.ClientSide {
+        private ClientSide() {
+//            super(module);
+        }
+
         /**
          * On screen initialize event.
          * Catches the main menu initialization.
          *
-         * @param event a {@link GuiScreenEvent.InitGuiEvent.Post} event.
+         * @param event a {@linkplain GuiScreenEvent.InitGuiEvent.Post} event.
          */
         @SubscribeEvent
         public void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
@@ -169,6 +173,7 @@ public class UpdatesModule extends Module {
 
         public ServerSide() {
 
+//            super(module, server);
         }
 
         @SubscribeEvent

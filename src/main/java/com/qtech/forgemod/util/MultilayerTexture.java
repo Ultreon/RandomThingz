@@ -1,16 +1,9 @@
 package com.qtech.forgemod.util;
 
-import com.google.common.collect.Maps;
-import com.qtech.forgemod.common.java.lists.DynamicList;
-import org.apache.logging.log4j.util.SortedArrayStringMap;
-
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.SortedMap;
 
 public class MultilayerTexture extends QFMTexture {
     private final List<QFMTexture> textures = new ArrayList<>();

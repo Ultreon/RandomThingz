@@ -2,13 +2,13 @@ package com.qtech.forgemod.modules.debugMenu;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.common.*;
-import com.qtech.forgemod.common.enums.MoonPhase;
-import com.qtech.forgemod.common.interfaces.Formattable;
-import com.qtech.forgemod.common.interfaces.Sliceable;
-import com.qtech.forgemod.hud.HudItems;
-import com.qtech.forgemod.hud.IHasHud;
-import com.qtech.forgemod.keybinds.KeyBindingList;
+import com.qtech.forgemod.commons.*;
+import com.qtech.forgemod.commons.enums.MoonPhase;
+import com.qtech.forgemod.commons.interfaces.Formattable;
+import com.qtech.forgemod.commons.interfaces.Sliceable;
+import com.qtech.forgemod.client.hud.HudItems;
+import com.qtech.forgemod.client.hud.IHasHud;
+import com.qtech.forgemod.client.keybinds.KeyBindingList;
 import com.qsoftware.modlib.silentlib.client.key.InputUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -722,7 +722,7 @@ public class DebugMenu {
 
                     int i = 0;
 
-                    drawLeftTopString(matrixStack, "QFM Build", i++, new Formatted(QForgeMod.getModArgs().getVersion().getBuild()));
+                    drawLeftTopString(matrixStack, "QFM Build", i++, new Formatted(QForgeMod.QFM_ARGS.getVersion().getBuild()));
                     drawLeftTopString(matrixStack, "Time", i++, new Formatted(timeText.toString()));
 
                     long dayTime = dimension.getDayTime() % 24000;

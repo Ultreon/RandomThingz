@@ -1,7 +1,7 @@
 package com.qtech.forgemod.api;
 
-import com.qtech.forgemod.modules.items.objects.upgrades.MachineUpgradeItem;
-import com.qtech.forgemod.modules.items.objects.upgrades.MachineUpgrades;
+import com.qtech.forgemod.item.upgrades.MachineUpgradeItem;
+import com.qtech.forgemod.item.upgrades.MachineUpgrades;
 
 /**
  * A machine upgrade item, which goes into the upgrade slots of machines. Also see {@link

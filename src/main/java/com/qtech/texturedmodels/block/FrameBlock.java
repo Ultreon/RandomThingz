@@ -71,7 +71,7 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
     /**
      * classic constructor, all default values are set
      *
-     * @param properties determined when registering the block (see {@link Registration}
+     * @param properties determined when registering the block (see {@linkplain Registration}
      */
     public FrameBlock(Properties properties) {
         super(properties.variableOpacity());
@@ -123,7 +123,7 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
      * @param player entity of the player that includes all important information (health, armor, inventory,
      * @param hand   which hand is used (e.g. you have a sword in your main hand and an axe in your off-hand and right click a log -> you use the off-hand, not the main hand)
      * @param trace  to determine which part of the block is clicked (upper half, lower half, right side, left side, corners...)
-     * @return see {@link ActionResultType}
+     * @return see {@linkplain ActionResultType}
      */
     @Override
     public ActionResultType onBlockActivated(BlockState state, World dimension, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {

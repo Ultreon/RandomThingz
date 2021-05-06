@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:leather"
+        },
+        "title": {
+            "translate": "advancements.qforgemod.material_leather.title"
+        },
+        "description": {
+            "translate": "advancements.qforgemod.material_leather.description"
+        },
+        "show_toast": true,
+        "announce_to_chat": true
+    },
+    "parent": "qforgemod:root_materials",
+    "criteria": {
+        "get_sword": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "minecraft:leather"
+                    }
+                ]
+            }
+        }
+    }
+}

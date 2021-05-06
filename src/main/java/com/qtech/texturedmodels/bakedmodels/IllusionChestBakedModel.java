@@ -27,7 +27,7 @@ import java.util.Random;
 
 /**
  * Contains all information for the block model
- * See {@link ModelHelper} for more information
+ * See {@linkplain ModelHelper} for more information
  *
  * @author PianoManu
  * @version 1.0 09/22/20

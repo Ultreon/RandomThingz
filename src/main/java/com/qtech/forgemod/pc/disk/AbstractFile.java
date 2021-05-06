@@ -1,7 +1,7 @@
 package com.qtech.forgemod.pc.disk;
 
 import com.google.common.annotations.Beta;
-import com.qtech.forgemod.common.IntSize;
+import com.qtech.forgemod.commons.IntSize;
 
 @Beta
 public abstract class AbstractFile

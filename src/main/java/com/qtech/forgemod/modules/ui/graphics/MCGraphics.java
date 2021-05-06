@@ -4,7 +4,7 @@ import com.google.common.annotations.Beta;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.qtech.forgemod.modules.ui.screens.AdvancedScreen;
-import com.qtech.forgemod.common.geom.RectangleUV;
+import com.qtech.forgemod.commons.geom.RectangleUV;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;

@@ -1,14 +1,13 @@
 package com.qtech.forgemod.data.client;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.common.interfaces.IMachine;
 import com.qtech.forgemod.init.Registration;
-import com.qtech.forgemod.modules.items.tools.Tools;
+import com.qtech.forgemod.item.tools.Tools;
 import com.qtech.forgemod.modules.tiles.ModBlocks;
-import com.qtech.forgemod.modules.items.ModItems;
-import com.qtech.forgemod.modules.items.OreMaterial;
-import com.qtech.forgemod.modules.items.objects.CraftingItems;
-import com.qtech.forgemod.modules.items.objects.upgrades.MachineUpgrades;
+import com.qtech.forgemod.item.common.ModItems;
+import com.qtech.forgemod.item.common.ItemMaterial;
+import com.qtech.forgemod.item.CraftingItems;
+import com.qtech.forgemod.item.upgrades.MachineUpgrades;
 import com.qsoftware.modlib.silentlib.block.IBlockProvider;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import net.minecraft.block.Block;
@@ -23,7 +22,7 @@ import java.util.Arrays;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, QForgeMod.modId, existingFileHelper);
+        super(generator, QForgeMod.MOD_ID, existingFileHelper);
     }
 
     @Override
@@ -33,14 +32,14 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        Registration.BLOCKS.getEntries().stream().filter((block) -> block.get().getClass().getPackage().getName().startsWith("com.qtech.forgemod.modules.tiles.blocks.machines")).forEach(block -> blockBuilder(block.get()));
+        Registration.BLOCKS.getEntries().stream().filter((block) -> block.get().getClass().getPackage().getName().startsWith("com.qtech.forgemod.blocks.machines")).forEach(block -> blockBuilder(block.get()));
 
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
         ModelFile itemHandheld = getExistingFile(mcLoc("item/handheld"));
         ModelFile itemHandheldDouble = getExistingFile(modLoc("item/handheld_double_size"));
 
         //noinspection OverlyLongLambda
-        Arrays.stream(OreMaterial.values()).forEach(metal -> {
+        Arrays.stream(ItemMaterial.values()).forEach(metal -> {
             metal.getOre().ifPresent(this::blockBuilder);
             metal.getStorageBlock().ifPresent(this::blockBuilder);
             metal.getChunks().ifPresent(item -> builder(item, itemGenerated));

@@ -1,10 +1,9 @@
 package com.qtech.forgemod;
 
-import com.qtech.forgemod.common.interfaces.IVersion;
+import com.qtech.forgemod.commons.interfaces.IVersion;
 import lombok.Getter;
 import lombok.NonNull;
 import net.minecraft.client.resources.I18n;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -101,7 +100,7 @@ public class QFMVersion implements IVersion {
 
     @Override
     public boolean isStable() {
-        return stage == Stage.RELEASE && !QForgeMod.getModArgs().getFlags().isDevTest();
+        return stage == Stage.RELEASE && !QForgeMod.QFM_ARGS.getFlags().isDevTest();
     }
 
     public String toString() {
@@ -114,7 +113,7 @@ public class QFMVersion implements IVersion {
         sb.append('-');
         sb.append(stage.name().toLowerCase());
         sb.append(stageRelease);
-        if (QForgeMod.getModArgs().getFlags().isDevTest()) {
+        if (QForgeMod.QFM_ARGS.getFlags().isDevTest()) {
             sb.append("-DEVTEST");
         }
         return sb.toString();
@@ -144,7 +143,7 @@ public class QFMVersion implements IVersion {
 
         sb.append(' ');
         sb.append(stageRelease);
-        if (QForgeMod.getModArgs().getFlags().isDevTest()) {
+        if (QForgeMod.QFM_ARGS.getFlags().isDevTest()) {
             sb.append(" Dev-Test");
         }
 

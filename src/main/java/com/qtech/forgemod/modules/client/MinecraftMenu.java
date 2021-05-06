@@ -1,19 +1,15 @@
 package com.qtech.forgemod.modules.client;
 
-import com.qtech.forgemod.Modules;
-import com.qtech.forgemod.common.ModuleManager;
 import com.qtech.forgemod.modules.actionmenu.AbstractActionMenu;
 import com.qtech.forgemod.modules.actionmenu.IActionMenuItem;
 import com.qtech.forgemod.modules.actionmenu.MenuHandler;
 import com.qtech.forgemod.modules.actionmenu.SubmenuItem;
-import com.qtech.forgemod.modules.confirmExit.ConfirmExitScreen;
 import com.qtech.forgemod.modules.debugMenu.DebugMenu;
 import com.qtech.forgemod.util.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.advancements.AdvancementsScreen;
 import net.minecraft.client.gui.screen.*;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class MinecraftMenu extends AbstractActionMenu {

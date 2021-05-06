@@ -1,12 +1,12 @@
 package com.qtech.forgemod.init;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.items.tools.ModTraits;
+import com.qtech.forgemod.item.tools.ModTraits;
 import com.qtech.forgemod.modules.tiles.ModBlocks;
 import com.qtech.forgemod.modules.tiles.ModFluids;
 import com.qtech.forgemod.modules.tiles.ModMachineTileEntities;
-import com.qtech.forgemod.modules.environment.ModEffects;
-import com.qtech.forgemod.modules.items.ModItems;
+import com.qtech.forgemod.effect.common.ModEffects;
+import com.qtech.forgemod.item.common.ModItems;
 import com.qtech.forgemod.modules.ui.ModMachineContainers;
 import com.qtech.forgemod.modules.ui.ModStats;
 import com.qtech.forgemod.util.ExceptionUtil;
@@ -25,7 +25,6 @@ import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -43,7 +42,7 @@ public final class Registration {
     public static final DeferredRegister<Block> BLOCKS = create(ForgeRegistries.BLOCKS);
     public static final DeferredRegister<Fluid> FLUIDS = create(ForgeRegistries.FLUIDS);
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = create(ForgeRegistries.CONTAINERS);
-    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.modId);
+    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.MOD_ID);
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = create(ForgeRegistries.ENCHANTMENTS);
     public static final DeferredRegister<PaintingType> PAINTINGS = create(ForgeRegistries.PAINTING_TYPES);
     public static final DeferredRegister<Potion> POTION_TYPES = create(ForgeRegistries.POTION_TYPES);
@@ -114,6 +113,6 @@ public final class Registration {
     }
 
     private static <T extends IForgeRegistryEntry<T>> DeferredRegister<T> create(IForgeRegistry<T> registry) {
-        return DeferredRegister.create(registry, QForgeMod.modId);
+        return DeferredRegister.create(registry, QForgeMod.MOD_ID);
     }
 }

@@ -4,8 +4,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.client.gui.modules.ModuleScreen;
-import com.qtech.forgemod.common.ModuleManager;
-import com.qtech.forgemod.common.text.Translations;
+import com.qtech.forgemod.commons.ModuleManager;
+import com.qtech.forgemod.commons.text.Translations;
 import com.qtech.forgemod.config.Config;
 import com.qtech.forgemod.modules.ui.screens.ScreenshotsScreen;
 import com.qtech.forgemod.modules.ui.widgets.SwitchWidget;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class SettingsScreen extends Screen {
 
     @SuppressWarnings("FieldCanBeLocal")

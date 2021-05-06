@@ -8,6 +8,6 @@ import net.minecraft.util.ResourceLocation;
 
 public class BuildingItemGroup extends BetterItemGroup {
     public BuildingItemGroup() {
-        super(new ResourceLocation(QForgeMod.modId, "building"), new ItemStack(Blocks.BOOKSHELF));
+        super(new ResourceLocation(QForgeMod.MOD_ID, "building"), new ItemStack(Blocks.BOOKSHELF));
     }
 }

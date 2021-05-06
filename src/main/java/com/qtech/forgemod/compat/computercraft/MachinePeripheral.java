@@ -2,7 +2,7 @@ package com.qtech.forgemod.compat.computercraft;
 /*
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.tiles.blocks.machines.AbstractMachineBaseTileEntity;
+import com.qtech.forgemod.blocks.machines.AbstractMachineBaseTileEntity;
 import com.qsoftware.modlib.api.RedstoneMode;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;

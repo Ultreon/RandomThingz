@@ -3,7 +3,7 @@ package com.qtech.forgemod.modules.ui.screens;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.common.FloatSize;
+import com.qtech.forgemod.commons.FloatSize;
 import com.qtech.forgemod.modules.ui.common.Resizer;
 import com.qtech.forgemod.modules.ui.common.Screenshot;
 import com.qtech.forgemod.modules.ui.widgets.ScreenshotSelectionList;
@@ -37,7 +37,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @SuppressWarnings("deprecation")
-@Mod.EventBusSubscriber(modid = QForgeMod.modId)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
 public class ScreenshotsScreen extends AdvancedScreen {
     // No getter / setter.
     private final List<File> files = new ArrayList<>();
@@ -92,7 +92,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
         for (File file : this.files) {
             active.set(true);
             RenderSystem.recordRenderCall(() -> {
-                ResourceLocation location = new ResourceLocation(QForgeMod.modId, "screenshots_screen/" + file.getName().toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9/._-]", "_"));
+                ResourceLocation location = new ResourceLocation(QForgeMod.MOD_ID, "screenshots_screen/" + file.getName().toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9/._-]", "_"));
                 Texture texture0 = Minecraft.getInstance().getTextureManager().getTexture(location);
 
                 DynamicTexture texture;
@@ -263,7 +263,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
      *
      * @param location the resource location to read the texture into.
      * @param file the file to read.
-     * @return an instance of {@link DynamicTexture} containing data of the given file.
+     * @return an instance of {@linkplain DynamicTexture} containing data of the given file.
      */
     @Nullable
     public DynamicTexture loadTexture(ResourceLocation location, File file) {

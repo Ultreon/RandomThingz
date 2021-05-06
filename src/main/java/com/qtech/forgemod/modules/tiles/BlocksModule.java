@@ -2,8 +2,8 @@ package com.qtech.forgemod.modules.tiles;
 
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.client.gui.modules.ModuleCompatibility;
-import com.qtech.forgemod.common.CoreRegisterWrapperModule;
-import com.qtech.forgemod.common.ModuleSecurity;
+import com.qtech.forgemod.commons.CoreRegisterWrapperModule;
+import com.qtech.forgemod.commons.ModuleSecurity;
 import com.qsoftware.modlib.silentlib.registry.BlockDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import mcp.MethodsReturnNonnullByDefault;
@@ -18,8 +18,8 @@ import java.util.function.Supplier;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlocksModule extends CoreRegisterWrapperModule<Block> {
-    public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(QForgeMod.modId);
-    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, QForgeMod.modId);
+    public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(QForgeMod.MOD_ID);
+    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, QForgeMod.MOD_ID);
 
     @Override
     public void onEnable() {

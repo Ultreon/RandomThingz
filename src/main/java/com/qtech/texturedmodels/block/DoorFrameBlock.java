@@ -34,7 +34,7 @@ import static com.qtech.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
 
 /**
  * Main class for frame doors - all important block info can be found here
- * Visit {@link FrameBlock} for a better documentation
+ * Visit {@linkplain FrameBlock} for a better documentation
  *
  * @author PianoManu
  * @version 1.5 10/09/20

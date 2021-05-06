@@ -1,6 +1,6 @@
 package com.qtech.forgemod.modules.debugMenu.pages;
 
-import com.qtech.forgemod.common.interfaces.Sliceable;
+import com.qtech.forgemod.commons.interfaces.Sliceable;
 import com.qtech.forgemod.modules.debugMenu.DebugEntry;
 import com.qtech.forgemod.modules.debugMenu.DebugPage;
 import net.minecraft.client.Minecraft;

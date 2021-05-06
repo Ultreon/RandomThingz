@@ -3,11 +3,11 @@ package com.qtech.forgemod.data.recipes;
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.init.ModTags;
 import com.qtech.forgemod.modules.tiles.ModBlocks;
-import com.qtech.forgemod.modules.items.ModItems;
-import com.qtech.forgemod.modules.items.OreMaterial;
-import com.qtech.forgemod.modules.items.tools.Tools;
-import com.qtech.forgemod.modules.items.objects.CraftingItems;
-import com.qtech.forgemod.modules.items.objects.upgrades.MachineUpgrades;
+import com.qtech.forgemod.item.common.ModItems;
+import com.qtech.forgemod.item.common.ItemMaterial;
+import com.qtech.forgemod.item.tools.Tools;
+import com.qtech.forgemod.item.CraftingItems;
+import com.qtech.forgemod.item.upgrades.MachineUpgrades;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.modlib.silentlib.data.ExtendedShapedRecipeBuilder;
 import com.qsoftware.modlib.silentlib.data.ExtendedShapelessRecipeBuilder;
@@ -39,62 +39,62 @@ public class ModRecipesProvider extends RecipeProvider {
     }
 
     private static void registerAlloySmelting(Consumer<IFinishedRecipe> consumer) {
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.ALUMINUM_STEEL, 4, 600)
-                .ingredient(OreMaterial.IRON, 2)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.ALUMINUM_STEEL, 4, 600)
+                .ingredient(ItemMaterial.IRON, 2)
                 .ingredient(ModTags.Items.DUSTS_COAL, 3)
-                .ingredient(OreMaterial.ALUMINUM, 1)
+                .ingredient(ItemMaterial.ALUMINUM, 1)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.BISMUTH_BRASS, 4, 400)
-                .ingredient(OreMaterial.COPPER, 2)
-                .ingredient(OreMaterial.ZINC, 1)
-                .ingredient(OreMaterial.BISMUTH, 1)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.BISMUTH_BRASS, 4, 400)
+                .ingredient(ItemMaterial.COPPER, 2)
+                .ingredient(ItemMaterial.ZINC, 1)
+                .ingredient(ItemMaterial.BISMUTH, 1)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.BISMUTH_STEEL, 4, 600)
-                .ingredient(OreMaterial.IRON, 2)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.BISMUTH_STEEL, 4, 600)
+                .ingredient(ItemMaterial.IRON, 2)
                 .ingredient(ModTags.Items.DUSTS_COAL, 3)
-                .ingredient(OreMaterial.BISMUTH, 1)
+                .ingredient(ItemMaterial.BISMUTH, 1)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.BRASS, 4, 400)
-                .ingredient(OreMaterial.COPPER, 3)
-                .ingredient(OreMaterial.ZINC, 1)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.BRASS, 4, 400)
+                .ingredient(ItemMaterial.COPPER, 3)
+                .ingredient(ItemMaterial.ZINC, 1)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.BRONZE, 4, 400)
-                .ingredient(OreMaterial.COPPER, 3)
-                .ingredient(OreMaterial.TIN, 1)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.BRONZE, 4, 400)
+                .ingredient(ItemMaterial.COPPER, 3)
+                .ingredient(ItemMaterial.TIN, 1)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.ELECTRUM, 2, 400)
-                .ingredient(OreMaterial.GOLD, 1)
-                .ingredient(OreMaterial.SILVER, 1)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.ELECTRUM, 2, 400)
+                .ingredient(ItemMaterial.GOLD, 1)
+                .ingredient(ItemMaterial.SILVER, 1)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.ENDERIUM, 4, 500)
-                .ingredient(OreMaterial.LEAD, 3)
-                .ingredient(OreMaterial.PLATINUM, 1)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.ENDERIUM, 4, 500)
+                .ingredient(ItemMaterial.LEAD, 3)
+                .ingredient(ItemMaterial.PLATINUM, 1)
                 .ingredient(Tags.Items.ENDER_PEARLS, 4)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.INVAR, 3, 400)
-                .ingredient(OreMaterial.IRON, 2)
-                .ingredient(OreMaterial.NICKEL, 1)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.INVAR, 3, 400)
+                .ingredient(ItemMaterial.IRON, 2)
+                .ingredient(ItemMaterial.NICKEL, 1)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.LUMIUM, 4, 500)
-                .ingredient(OreMaterial.TIN, 3)
-                .ingredient(OreMaterial.SILVER, 1)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.LUMIUM, 4, 500)
+                .ingredient(ItemMaterial.TIN, 3)
+                .ingredient(ItemMaterial.SILVER, 1)
                 .ingredient(Tags.Items.DUSTS_GLOWSTONE, 4)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.REDSTONE_ALLOY, 2, 200)
-                .ingredient(OreMaterial.IRON, 1)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.REDSTONE_ALLOY, 2, 200)
+                .ingredient(ItemMaterial.IRON, 1)
                 .ingredient(Tags.Items.DUSTS_REDSTONE, 4)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.SIGNALUM, 4, 500)
-                .ingredient(OreMaterial.COPPER, 3)
-                .ingredient(OreMaterial.SILVER, 1)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.SIGNALUM, 4, 500)
+                .ingredient(ItemMaterial.COPPER, 3)
+                .ingredient(ItemMaterial.SILVER, 1)
                 .ingredient(Tags.Items.DUSTS_REDSTONE, 10)
                 .build(consumer);
         AlloySmeltingRecipeBuilder.builder(CraftingItems.SOLDER, 12, 200)
-                .ingredient(OreMaterial.TIN, 1)
-                .ingredient(OreMaterial.LEAD, 1)
+                .ingredient(ItemMaterial.TIN, 1)
+                .ingredient(ItemMaterial.LEAD, 1)
                 .build(consumer);
-        AlloySmeltingRecipeBuilder.builder(OreMaterial.STEEL, 2, 600)
-                .ingredient(OreMaterial.IRON, 2)
+        AlloySmeltingRecipeBuilder.builder(ItemMaterial.STEEL, 2, 600)
+                .ingredient(ItemMaterial.IRON, 2)
                 .ingredient(ModTags.Items.DUSTS_COAL, 2)
                 .build(consumer);
     }
@@ -102,8 +102,8 @@ public class ModRecipesProvider extends RecipeProvider {
     private static void registerCompressingRecipes(Consumer<IFinishedRecipe> consumer) {
         CompressingRecipeBuilder.builder(Items.BLAZE_POWDER, 4, Items.BLAZE_ROD, 1, 400)
                 .build(consumer);
-        assert (OreMaterial.COMPRESSED_IRON.getIngot().isPresent());
-        CompressingRecipeBuilder.builder(Tags.Items.INGOTS_IRON, 1, OreMaterial.COMPRESSED_IRON.getIngot().get(), 1, 400)
+        assert (ItemMaterial.COMPRESSED_IRON.getIngot().isPresent());
+        CompressingRecipeBuilder.builder(Tags.Items.INGOTS_IRON, 1, ItemMaterial.COMPRESSED_IRON.getIngot().get(), 1, 400)
                 .build(consumer);
         CompressingRecipeBuilder.builder(Tags.Items.STORAGE_BLOCKS_COAL, 16, Items.DIAMOND, 1, 800)
                 .build(consumer);
@@ -111,7 +111,7 @@ public class ModRecipesProvider extends RecipeProvider {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     private static void registerCrushingRecipes(Consumer<IFinishedRecipe> consumer) {
-        for (OreMaterial metal : OreMaterial.values()) {
+        for (ItemMaterial metal : ItemMaterial.values()) {
             if (metal.getOreItemTag().isPresent() && metal.getChunks().isPresent()) {
                 crushingOre(metal.getOreItemTag().get(), metal.getChunks().get(), Blocks.COBBLESTONE)
                         .build(consumer);
@@ -141,10 +141,10 @@ public class ModRecipesProvider extends RecipeProvider {
         crushingOreBonus(Tags.Items.ORES_QUARTZ, Items.QUARTZ).build(consumer);
         crushingOreBonus(Tags.Items.ORES_DIAMOND, Items.DIAMOND).build(consumer);
         crushingOreBonus(Tags.Items.ORES_EMERALD, Items.EMERALD).build(consumer);
-        crushingOre(Tags.Items.ORES_GOLD, OreMaterial.GOLD.getChunks().get(), Blocks.COBBLESTONE).build(consumer);
-        crushingOre(Blocks.NETHER_GOLD_ORE, OreMaterial.GOLD.getChunks().get(), Blocks.NETHERRACK)
+        crushingOre(Tags.Items.ORES_GOLD, ItemMaterial.GOLD.getChunks().get(), Blocks.COBBLESTONE).build(consumer);
+        crushingOre(Blocks.NETHER_GOLD_ORE, ItemMaterial.GOLD.getChunks().get(), Blocks.NETHERRACK)
                 .build(consumer, QForgeMod.rl("crushing/gold_chunks_nether"));
-        crushingOre(Tags.Items.ORES_IRON, OreMaterial.IRON.getChunks().get(), Blocks.COBBLESTONE).build(consumer);
+        crushingOre(Tags.Items.ORES_IRON, ItemMaterial.IRON.getChunks().get(), Blocks.COBBLESTONE).build(consumer);
 
         CrushingRecipeBuilder.builder(Blocks.ANCIENT_DEBRIS, 2 * CRUSHING_ORE_TIME)
                 .result(Items.NETHERITE_SCRAP, 2)
@@ -256,7 +256,7 @@ public class ModRecipesProvider extends RecipeProvider {
     }
 
     private void registerMetalCrafting(Consumer<IFinishedRecipe> consumer) {
-        for (OreMaterial metal : OreMaterial.values()) {
+        for (ItemMaterial metal : ItemMaterial.values()) {
             if (metal.getIngot().isPresent() && metal.getNuggetTag().isPresent()) {
                 ExtendedShapedRecipeBuilder.vanillaBuilder(metal.getIngot().get())
                         .patternLine("###")
@@ -344,18 +344,18 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("/#/")
                 .patternLine("#s#")
                 .patternLine("/#/")
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .key('#', Tags.Items.GLASS)
                 .key('s', ModTags.Items.STEELS)
-                .addCriterion("has_item", hasItem(OreMaterial.REDSTONE_ALLOY.getIngotTag().get()))
+                .addCriterion("has_item", hasItem(ItemMaterial.REDSTONE_ALLOY.getIngotTag().get()))
                 .build(consumer);
 
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.BASIC_ALLOY_SMELTER)
                 .patternLine("###")
                 .patternLine("/X/")
                 .patternLine("O/O")
-                .key('#', OreMaterial.TIN.getIngotTag().get())
-                .key('/', OreMaterial.COPPER.getIngotTag().get())
+                .key('#', ItemMaterial.TIN.getIngotTag().get())
+                .key('/', ItemMaterial.COPPER.getIngotTag().get())
                 .key('X', ModBlocks.STONE_MACHINE_FRAME)
                 .key('O', Blocks.BRICKS)
                 .addCriterion("has_item", hasItem(ModBlocks.STONE_MACHINE_FRAME))
@@ -365,9 +365,9 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#C#")
                 .patternLine("/X/")
                 .patternLine("OHO")
-                .key('#', OreMaterial.BISMUTH_BRASS.getIngotTag().get())
+                .key('#', ItemMaterial.BISMUTH_BRASS.getIngotTag().get())
                 .key('C', CraftingItems.CIRCUIT_BOARD)
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .key('O', Blocks.BRICKS)
                 .key('H', CraftingItems.HEATING_ELEMENT)
@@ -377,9 +377,9 @@ public class ModRecipesProvider extends RecipeProvider {
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.ALLOY_SMELTER)
                 .patternLine("#C#")
                 .patternLine("/X/")
-                .key('#', OreMaterial.BISMUTH_BRASS.getIngotTag().get())
+                .key('#', ItemMaterial.BISMUTH_BRASS.getIngotTag().get())
                 .key('C', ModBlocks.BASIC_ALLOY_SMELTER)
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .addCriterion("has_item", hasItem(ModBlocks.ALLOY_MACHINE_FRAME))
                 .build(consumer, QForgeMod.rl("alloy_smelter_from_basic"));
@@ -388,8 +388,8 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("###")
                 .patternLine("/X/")
                 .patternLine("O/O")
-                .key('#', OreMaterial.BRONZE.getIngotTag().get())
-                .key('/', OreMaterial.ALUMINUM.getIngotTag().get())
+                .key('#', ItemMaterial.BRONZE.getIngotTag().get())
+                .key('/', ItemMaterial.ALUMINUM.getIngotTag().get())
                 .key('X', ModBlocks.STONE_MACHINE_FRAME)
                 .key('O', Blocks.SMOOTH_STONE)
                 .addCriterion("has_item", hasItem(ModBlocks.STONE_MACHINE_FRAME))
@@ -399,9 +399,9 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#C#")
                 .patternLine("/X/")
                 .patternLine("ODO")
-                .key('#', OreMaterial.BISMUTH_STEEL.getIngotTag().get())
+                .key('#', ItemMaterial.BISMUTH_STEEL.getIngotTag().get())
                 .key('C', CraftingItems.CIRCUIT_BOARD)
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .key('O', Blocks.SMOOTH_STONE)
                 .key('D', Tags.Items.GEMS_DIAMOND)
@@ -412,9 +412,9 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#C#")
                 .patternLine("/X/")
                 .patternLine(" D ")
-                .key('#', OreMaterial.BISMUTH_STEEL.getIngotTag().get())
+                .key('#', ItemMaterial.BISMUTH_STEEL.getIngotTag().get())
                 .key('C', ModBlocks.BASIC_CRUSHER)
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .key('D', Tags.Items.GEMS_DIAMOND)
                 .addCriterion("has_item", hasItem(ModBlocks.ALLOY_MACHINE_FRAME))
@@ -426,7 +426,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("ODC")
                 .key('#', Tags.Items.INGOTS_IRON)
                 .key('D', Tags.Items.GEMS_DIAMOND)
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .key('O', Blocks.SMOOTH_STONE)
                 .key('C', CraftingItems.CIRCUIT_BOARD)
@@ -439,7 +439,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("OHO")
                 .key('#', Tags.Items.INGOTS_IRON)
                 .key('C', CraftingItems.CIRCUIT_BOARD)
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .key('O', Blocks.SMOOTH_STONE)
                 .key('H', CraftingItems.HEATING_ELEMENT)
@@ -450,11 +450,11 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#C#")
                 .patternLine("/X/")
                 .patternLine("OHO")
-                .key('#', OreMaterial.ALUMINUM_STEEL.getIngotTag().get())
+                .key('#', ItemMaterial.ALUMINUM_STEEL.getIngotTag().get())
                 .key('C', CraftingItems.CIRCUIT_BOARD)
                 .key('/', ModItems.EMPTY_CANISTER)
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
-                .key('O', OreMaterial.ELECTRUM.getIngotTag().get())
+                .key('O', ItemMaterial.ELECTRUM.getIngotTag().get())
                 .key('H', CraftingItems.HEATING_ELEMENT)
                 .addCriterion("has_item", hasItem(ModBlocks.ALLOY_MACHINE_FRAME))
                 .build(consumer);
@@ -463,11 +463,11 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#C#")
                 .patternLine("/X/")
                 .patternLine("OHO")
-                .key('#', OreMaterial.BISMUTH_STEEL.getIngotTag().get())
+                .key('#', ItemMaterial.BISMUTH_STEEL.getIngotTag().get())
                 .key('C', CraftingItems.CIRCUIT_BOARD)
                 .key('/', ModItems.EMPTY_CANISTER)
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
-                .key('O', OreMaterial.BRASS.getIngotTag().get())
+                .key('O', ItemMaterial.BRASS.getIngotTag().get())
                 .key('H', Items.PISTON)
                 .addCriterion("has_item", hasItem(ModBlocks.ALLOY_MACHINE_FRAME))
                 .build(consumer);
@@ -476,11 +476,11 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#C#")
                 .patternLine("/X/")
                 .patternLine("OHO")
-                .key('#', OreMaterial.STEEL.getIngotTag().get())
+                .key('#', ItemMaterial.STEEL.getIngotTag().get())
                 .key('C', CraftingItems.CIRCUIT_BOARD)
                 .key('/', ModItems.EMPTY_CANISTER)
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
-                .key('O', OreMaterial.SILVER.getIngotTag().get())
+                .key('O', ItemMaterial.SILVER.getIngotTag().get())
                 .key('H', Items.IRON_BARS)
                 .addCriterion("has_item", hasItem(ModBlocks.ALLOY_MACHINE_FRAME))
                 .build(consumer);
@@ -489,11 +489,11 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#C#")
                 .patternLine("/X/")
                 .patternLine("OPO")
-                .key('#', OreMaterial.BISMUTH_BRASS.getIngotTag().get())
+                .key('#', ItemMaterial.BISMUTH_BRASS.getIngotTag().get())
                 .key('C', CraftingItems.CIRCUIT_BOARD)
                 .key('/', ModItems.EMPTY_CANISTER)
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
-                .key('O', OreMaterial.NICKEL.getIngotTag().get())
+                .key('O', ItemMaterial.NICKEL.getIngotTag().get())
                 .key('P', ModTags.Items.PLASTIC)
                 .addCriterion("has_item", hasItem(ModBlocks.ALLOY_MACHINE_FRAME))
                 .build(consumer);
@@ -502,9 +502,9 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#C#")
                 .patternLine("/X/")
                 .patternLine("OHO")
-                .key('#', OreMaterial.ALUMINUM.getIngotTag().get())
+                .key('#', ItemMaterial.ALUMINUM.getIngotTag().get())
                 .key('C', CraftingItems.CIRCUIT_BOARD)
-                .key('/', OreMaterial.INVAR.getIngotTag().get())
+                .key('/', ItemMaterial.INVAR.getIngotTag().get())
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .key('O', Items.BUCKET)
                 .key('H', Items.PISTON)
@@ -516,10 +516,10 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("/X/")
                 .patternLine("OAO")
                 .key('#', Tags.Items.INGOTS_IRON)
-                .key('/', OreMaterial.COPPER.getIngotTag().get())
+                .key('/', ItemMaterial.COPPER.getIngotTag().get())
                 .key('X', ModBlocks.STONE_MACHINE_FRAME)
                 .key('O', Tags.Items.COBBLESTONE)
-                .key('A', OreMaterial.REFINED_IRON.getIngotTag().get())
+                .key('A', ItemMaterial.REFINED_IRON.getIngotTag().get())
                 .addCriterion("has_item", hasItem(ModBlocks.STONE_MACHINE_FRAME))
                 .build(consumer);
 
@@ -527,9 +527,9 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#C#")
                 .patternLine("/X/")
                 .patternLine("#O#")
-                .key('#', OreMaterial.INVAR.getIngotTag().get())
+                .key('#', ItemMaterial.INVAR.getIngotTag().get())
                 .key('C', CraftingItems.CIRCUIT_BOARD)
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .key('O', Blocks.SMOOTH_STONE)
                 .addCriterion("has_item", hasItem(ModBlocks.ALLOY_MACHINE_FRAME))
@@ -539,11 +539,11 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#C#")
                 .patternLine("/X/")
                 .patternLine("#B#")
-                .key('#', OreMaterial.STEEL.getIngotTag().get())
+                .key('#', ItemMaterial.STEEL.getIngotTag().get())
                 .key('C', CraftingItems.CIRCUIT_BOARD)
                 .key('/', Ingredient.fromItemListStream(Stream.of(
-                        new Ingredient.TagList(OreMaterial.PLATINUM.getNuggetTag().get()),
-                        new Ingredient.TagList(OreMaterial.SILVER.getIngotTag().get())
+                        new Ingredient.TagList(ItemMaterial.PLATINUM.getNuggetTag().get()),
+                        new Ingredient.TagList(ItemMaterial.SILVER.getIngotTag().get())
                 )))
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .key('B', Items.BUCKET)
@@ -554,11 +554,11 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("#B#")
                 .patternLine("/X/")
                 .patternLine("L/L")
-                .key('#', OreMaterial.ALUMINUM.getIngotTag().get())
+                .key('#', ItemMaterial.ALUMINUM.getIngotTag().get())
                 .key('B', ModItems.BATTERY)
                 .key('/', ModBlocks.WIRE)
                 .key('X', ModBlocks.ALLOY_MACHINE_FRAME)
-                .key('L', OreMaterial.LEAD.getIngotTag().get())
+                .key('L', ItemMaterial.LEAD.getIngotTag().get())
                 .addCriterion("has_item", hasItem(ModBlocks.ALLOY_MACHINE_FRAME))
                 .build(consumer);
 
@@ -566,11 +566,11 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("///")
                 .patternLine("###")
                 .key('/', Ingredient.fromItemListStream(Stream.of(
-                        new Ingredient.TagList(OreMaterial.COPPER.getIngotTag().get()),
-                        new Ingredient.TagList(OreMaterial.REFINED_IRON.getIngotTag().get())
+                        new Ingredient.TagList(ItemMaterial.COPPER.getIngotTag().get()),
+                        new Ingredient.TagList(ItemMaterial.REFINED_IRON.getIngotTag().get())
                 )))
-                .key('#', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
-                .addCriterion("has_item", hasItem(OreMaterial.REDSTONE_ALLOY.getIngotTag().get()))
+                .key('#', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .addCriterion("has_item", hasItem(ItemMaterial.REDSTONE_ALLOY.getIngotTag().get()))
                 .build(consumer);
     }
 
@@ -579,19 +579,19 @@ public class ModRecipesProvider extends RecipeProvider {
         ShapedRecipeBuilder.shapedRecipe(CraftingItems.CIRCUIT_BOARD, 3)
                 .patternLine("/G/")
                 .patternLine("###")
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .key('G', Tags.Items.INGOTS_GOLD)
-                .key('#', OreMaterial.COPPER.getIngotTag().get())
-                .addCriterion("has_item", hasItem(OreMaterial.REDSTONE_ALLOY.getIngotTag().get()))
+                .key('#', ItemMaterial.COPPER.getIngotTag().get())
+                .addCriterion("has_item", hasItem(ItemMaterial.REDSTONE_ALLOY.getIngotTag().get()))
                 .build(consumer);
 
         ShapedRecipeBuilder.shapedRecipe(CraftingItems.HEATING_ELEMENT, 2)
                 .patternLine("##")
                 .patternLine("##")
                 .patternLine("/ ")
-                .key('#', OreMaterial.COPPER.getIngotTag().get())
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
-                .addCriterion("has_item", hasItem(OreMaterial.REDSTONE_ALLOY.getIngotTag().get()))
+                .key('#', ItemMaterial.COPPER.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .addCriterion("has_item", hasItem(ItemMaterial.REDSTONE_ALLOY.getIngotTag().get()))
                 .build(consumer);
 
         ShapedRecipeBuilder.shapedRecipe(CraftingItems.PLASTIC_SHEET)
@@ -613,32 +613,32 @@ public class ModRecipesProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapelessRecipe(MachineUpgrades.PROCESSING_SPEED)
                 .addIngredient(CraftingItems.UPGRADE_CASE)
                 .addIngredient(Tags.Items.STORAGE_BLOCKS_REDSTONE)
-                .addIngredient(OreMaterial.SILVER.getIngotTag().get())
-                .addIngredient(OreMaterial.SILVER.getIngotTag().get())
+                .addIngredient(ItemMaterial.SILVER.getIngotTag().get())
+                .addIngredient(ItemMaterial.SILVER.getIngotTag().get())
                 .addCriterion("has_item", hasItem(CraftingItems.UPGRADE_CASE))
                 .build(consumer);
 
         ShapelessRecipeBuilder.shapelessRecipe(MachineUpgrades.OUTPUT_CHANCE)
                 .addIngredient(CraftingItems.UPGRADE_CASE)
                 .addIngredient(Tags.Items.STORAGE_BLOCKS_LAPIS)
-                .addIngredient(OreMaterial.PLATINUM.getIngotTag().get())
-                .addIngredient(OreMaterial.PLATINUM.getIngotTag().get())
+                .addIngredient(ItemMaterial.PLATINUM.getIngotTag().get())
+                .addIngredient(ItemMaterial.PLATINUM.getIngotTag().get())
                 .addCriterion("has_item", hasItem(CraftingItems.UPGRADE_CASE))
                 .build(consumer);
 
         ShapelessRecipeBuilder.shapelessRecipe(MachineUpgrades.ENERGY_EFFICIENCY)
                 .addIngredient(CraftingItems.UPGRADE_CASE)
                 .addIngredient(Items.GLOWSTONE)
-                .addIngredient(OreMaterial.ELECTRUM.getIngotTag().get())
-                .addIngredient(OreMaterial.ELECTRUM.getIngotTag().get())
+                .addIngredient(ItemMaterial.ELECTRUM.getIngotTag().get())
+                .addIngredient(ItemMaterial.ELECTRUM.getIngotTag().get())
                 .addCriterion("has_item", hasItem(CraftingItems.UPGRADE_CASE))
                 .build(consumer);
 
         ShapelessRecipeBuilder.shapelessRecipe(MachineUpgrades.RANGE)
                 .addIngredient(CraftingItems.UPGRADE_CASE)
                 .addIngredient(Tags.Items.ENDER_PEARLS)
-                .addIngredient(OreMaterial.INVAR.getIngotTag().get())
-                .addIngredient(OreMaterial.INVAR.getIngotTag().get())
+                .addIngredient(ItemMaterial.INVAR.getIngotTag().get())
+                .addIngredient(ItemMaterial.INVAR.getIngotTag().get())
                 .addCriterion("has_item", hasItem(CraftingItems.UPGRADE_CASE))
                 .build(consumer);
 
@@ -647,25 +647,25 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine(" # ")
                 .patternLine(" / ")
                 .key('/', Tags.Items.INGOTS_IRON)
-                .key('#', OreMaterial.REFINED_IRON.getIngotTag().get())
-                .addCriterion("has_item", hasItem(OreMaterial.REFINED_IRON.getIngotTag().get()))
+                .key('#', ItemMaterial.REFINED_IRON.getIngotTag().get())
+                .addCriterion("has_item", hasItem(ItemMaterial.REFINED_IRON.getIngotTag().get()))
                 .build(consumer);
 
         ShapedRecipeBuilder.shapedRecipe(ModItems.BATTERY)
                 .patternLine(" / ")
                 .patternLine("#X#")
                 .patternLine("LXL")
-                .key('/', OreMaterial.REDSTONE_ALLOY.getIngotTag().get())
+                .key('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .key('#', Tags.Items.INGOTS_IRON)
                 .key('X', Tags.Items.DUSTS_REDSTONE)
-                .key('L', OreMaterial.LEAD.getIngotTag().get())
-                .addCriterion("has_item", hasItem(OreMaterial.REDSTONE_ALLOY.getIngotTag().get()))
+                .key('L', ItemMaterial.LEAD.getIngotTag().get())
+                .addCriterion("has_item", hasItem(ItemMaterial.REDSTONE_ALLOY.getIngotTag().get()))
                 .build(consumer);
 
         ExtendedShapedRecipeBuilder.vanillaBuilder(ModItems.HAND_PUMP)
                 .patternLine("/C#")
                 .patternLine(" B#")
-                .key('/', OreMaterial.ALUMINUM.getIngotTag().get())
+                .key('/', ItemMaterial.ALUMINUM.getIngotTag().get())
                 .key('C', ModItems.EMPTY_CANISTER)
                 .key('#', ModTags.Items.PLASTIC)
                 .key('B', ModItems.BATTERY)
@@ -693,7 +693,7 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine("/ ")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getAxe().getName() + "_mirror"));
+                    .build(consumer, new ResourceLocation(QForgeMod.MOD_ID, tools.getAxe().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getShovel())
                     .patternLine("X")
                     .patternLine("/")
@@ -721,7 +721,7 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine("/ ")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getHoe().getName() + "_mirror"));
+                    .build(consumer, new ResourceLocation(QForgeMod.MOD_ID, tools.getHoe().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getKatana())
                     .patternLine(" X")
                     .patternLine("X ")
@@ -735,7 +735,7 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine("/X")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getKatana().getName() + "_mirror"));
+                    .build(consumer, new ResourceLocation(QForgeMod.MOD_ID, tools.getKatana().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getLongsword())
                     .patternLine("X ")
                     .patternLine("X ")
@@ -749,7 +749,7 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine("/X")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getLongsword().getName() + "_mirror"));
+                    .build(consumer, new ResourceLocation(QForgeMod.MOD_ID, tools.getLongsword().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBroadsword())
                     .patternLine("XX")
                     .patternLine("XX")
@@ -763,7 +763,7 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine(" /")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getBroadsword().getName() + "_mirror"));
+                    .build(consumer, new ResourceLocation(QForgeMod.MOD_ID, tools.getBroadsword().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHammer())
                     .patternLine("XXX")
                     .patternLine("XXX")
@@ -784,7 +784,7 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine("/  ")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getExcavator().getName() + "_mirror"));
+                    .build(consumer, new ResourceLocation(QForgeMod.MOD_ID, tools.getExcavator().getName() + "_mirror"));
             ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBattleaxe())
                     .patternLine("XXX")
                     .patternLine("X/X")
@@ -805,7 +805,7 @@ public class ModRecipesProvider extends RecipeProvider {
                     .patternLine(" / ")
                     .key('/', () -> tools.getHandleMaterial().get())
                     .key('X', () -> tools.getBaseMaterial().get())
-                    .build(consumer, new ResourceLocation(QForgeMod.modId, tools.getLumberAxe().getName() + "_mirror"));
+                    .build(consumer, new ResourceLocation(QForgeMod.MOD_ID, tools.getLumberAxe().getName() + "_mirror"));
             if (tools.getArmorSubMaterial() != null) {
                 ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHelmet())
                         .patternLine("XXX")
@@ -863,7 +863,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine(" # ")
                 .patternLine("# #")
                 .patternLine(" # ")
-                .key('#', OreMaterial.ALUMINUM.getIngotTag().get())
+                .key('#', ItemMaterial.ALUMINUM.getIngotTag().get())
                 .build(consumer);
 
         ExtendedShapelessRecipeBuilder.vanillaBuilder(ModItems.EMPTY_CANISTER)
@@ -876,7 +876,7 @@ public class ModRecipesProvider extends RecipeProvider {
     }
 
     private void registerSmelting(Consumer<IFinishedRecipe> consumer) {
-        for (OreMaterial metal : OreMaterial.values()) {
+        for (ItemMaterial metal : ItemMaterial.values()) {
             if (metal.getIngot().isPresent() && (metal.getChunksTag().isPresent() || metal.getDustTag().isPresent())) {
                 smeltingAndBlasting(consumer, metal.getName() + "_ingot",
                         metal.getSmeltables(false), metal.getIngot().get());
@@ -887,11 +887,11 @@ public class ModRecipesProvider extends RecipeProvider {
             }
         }
 
-        smeltingAndBlasting(consumer, "iron_ingot", OreMaterial.IRON.getSmeltables(false), Items.IRON_INGOT);
-        smeltingAndBlasting(consumer, "gold_ingot", OreMaterial.GOLD.getSmeltables(false), Items.GOLD_INGOT);
+        smeltingAndBlasting(consumer, "iron_ingot", ItemMaterial.IRON.getSmeltables(false), Items.IRON_INGOT);
+        smeltingAndBlasting(consumer, "gold_ingot", ItemMaterial.GOLD.getSmeltables(false), Items.GOLD_INGOT);
 
-        assert (OreMaterial.REFINED_IRON.getIngot().isPresent());
-        smeltingAndBlasting(consumer, "refined_iron_ingot", Ingredient.fromTag(Tags.Items.INGOTS_IRON), OreMaterial.REFINED_IRON.getIngot().get());
+        assert (ItemMaterial.REFINED_IRON.getIngot().isPresent());
+        smeltingAndBlasting(consumer, "refined_iron_ingot", Ingredient.fromTag(Tags.Items.INGOTS_IRON), ItemMaterial.REFINED_IRON.getIngot().get());
     }
 
     private void smeltingAndBlasting(Consumer<IFinishedRecipe> consumer, String name, Ingredient ingredient, IItemProvider result) {

@@ -2,8 +2,8 @@ package com.qtech.forgemod.data.client;
 
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.modules.tiles.ModBlocks;
-import com.qtech.forgemod.modules.tiles.blocks.machines.dryingrack.DryingRackBlock;
-import com.qtech.forgemod.modules.items.OreMaterial;
+import com.qtech.forgemod.block.machines.dryingrack.DryingRackBlock;
+import com.qtech.forgemod.item.common.ItemMaterial;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import net.minecraft.block.Block;
@@ -12,7 +12,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
@@ -21,7 +20,7 @@ import java.util.Objects;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, QForgeMod.modId, exFileHelper);
+        super(gen, QForgeMod.MOD_ID, exFileHelper);
     }
 
     @Nonnull
@@ -32,7 +31,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        Arrays.stream(OreMaterial.values()).forEach(metal -> {
+        Arrays.stream(ItemMaterial.values()).forEach(metal -> {
             metal.getOre().ifPresent(this::simpleBlock);
             metal.getStorageBlock().ifPresent(this::simpleBlock);
         });

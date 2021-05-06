@@ -25,7 +25,7 @@ import java.util.Objects;
 
 @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal"})
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ConfirmExitScreen extends Screen {
     private final IBidiRenderer bidi = IBidiRenderer.field_243257_a;
     private final ITextComponent shutdownPcText;

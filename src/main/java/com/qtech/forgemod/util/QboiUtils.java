@@ -1,7 +1,7 @@
 package com.qtech.forgemod.util;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.environment.ModEffects;
+import com.qtech.forgemod.effect.common.ModEffects;
 import lombok.experimental.UtilityClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Objects;
 
-@Mod.EventBusSubscriber(modid = QForgeMod.modId)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
 @UtilityClass
 public class QboiUtils {
     @SubscribeEvent

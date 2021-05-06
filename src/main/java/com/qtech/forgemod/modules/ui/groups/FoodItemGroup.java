@@ -1,6 +1,6 @@
 package com.qtech.forgemod.modules.ui.groups;
 
-import com.qtech.forgemod.modules.items.ModItems;
+import com.qtech.forgemod.item.common.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;

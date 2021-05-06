@@ -1,8 +1,8 @@
 package com.qtech.forgemod.init;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.items.ModItems;
-import com.qtech.forgemod.modules.items.objects.spawnegg.CustomSpawnEggItem;
+import com.qtech.forgemod.item.common.ModItems;
+import com.qtech.forgemod.item.spawnegg.CustomSpawnEggItem;
 import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
@@ -13,14 +13,14 @@ import java.util.function.Supplier;
 
 /**
  * @author Qboi123
- * @deprecated Use {@link ModItems} instead.
+ * @deprecated Use {@linkplain ModItems} instead.
  */
 @Deprecated
 @SuppressWarnings({"unused"})
 //@Mod.EventBusSubscriber(modid=QForgeUtils.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
 //@ObjectHolder(QForgeUtils.MOD_ID)
 public class ItemInit extends ObjectInit<Item> {
-    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.modId);
+    public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(QForgeMod.MOD_ID);
 
     /**
      * Register item.

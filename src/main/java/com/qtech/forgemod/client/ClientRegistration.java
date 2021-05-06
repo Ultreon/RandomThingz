@@ -6,36 +6,30 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
-import net.minecraft.client.renderer.entity.layers.BipedArmorLayer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 
-import java.util.ArrayList;
 import java.util.Map.Entry;
 
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientRegistration {
 
 //    private static final Map<ResourceLocation, CustomModelRegistryObject> customModels = new Object2ObjectOpenHashMap<>();
 
     /**
      *
-     * @param event a {@link FMLClientSetupEvent Forge Mod Loader Client Setup Event}.
+     * @param event a {@linkplain FMLClientSetupEvent Forge Mod Loader Client Setup Event}.
      */
     @SubscribeEvent
     public static void initialize(FMLClientSetupEvent event) {
@@ -109,7 +103,7 @@ public class ClientRegistration {
      * Todo: may be use this method.
      *
      * @see #onModelBake(ModelBakeEvent)
-     * @param event a {@link ModelRegistryEvent Model Registration Event}.
+     * @param event a {@linkplain ModelRegistryEvent Model Registration Event}.
      */
     @SubscribeEvent
     public static void registerModelLoaders(ModelRegistryEvent event) {
@@ -122,7 +116,7 @@ public class ClientRegistration {
      * Todo: may be use this method.
      *
      * @see #registerModelLoaders(ModelRegistryEvent)
-     * @param event a {@link ModelBakeEvent Model Bake Event}.
+     * @param event a {@linkplain ModelBakeEvent Model Bake Event}.
      */
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event) {
@@ -136,7 +130,7 @@ public class ClientRegistration {
     /**
      * Todo: may be use custom patricles.
      *
-     * @param event a {@link ParticleFactoryRegisterEvent Particle Factory Registration Event}.
+     * @param event a {@linkplain ParticleFactoryRegisterEvent Particle Factory Registration Event}.
      */
     @SubscribeEvent
     public static void registerParticleFactories(ParticleFactoryRegisterEvent event) {
@@ -150,7 +144,7 @@ public class ClientRegistration {
     /**
      * Todo: may be use it, it's possibly already in use but not sure.
      *
-     * @param event an {@link ColorHandlerEvent.Item Item Color Handler Event} object
+     * @param event an {@linkplain ColorHandlerEvent.Item Item Color Handler Event} object
      */
     @SubscribeEvent
     public static void registerItemColorHandlers(ColorHandlerEvent.Item event) {
@@ -207,7 +201,7 @@ public class ClientRegistration {
     /**
      * Load complete event for client side.
      *
-     * @param evt a {@link FMLLoadCompleteEvent Forge Mod Loader Event: Load Complete} object.
+     * @param evt a {@linkplain FMLLoadCompleteEvent Forge Mod Loader Event: Load Complete} object.
      */
     @SubscribeEvent
     public static void loadComplete(FMLLoadCompleteEvent evt) {

@@ -8,7 +8,6 @@ import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -17,7 +16,7 @@ import java.awt.*;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ActionMenuButton extends TransparentButton implements IActionMenuIndexable {
-    private static final ResourceLocation ICONS = new ResourceLocation(QForgeMod.modId, "textures/gui/icons/action_menu.png");
+    private static final ResourceLocation ICONS = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/icons/action_menu.png");
     @Getter private final IActionMenuItem item;
     @Getter private final ActionMenuScreen screen;
     @Getter private int menuIndex;

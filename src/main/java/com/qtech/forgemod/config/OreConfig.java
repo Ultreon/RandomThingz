@@ -1,6 +1,6 @@
 package com.qtech.forgemod.config;
 
-import com.qtech.forgemod.modules.environment.ores.DefaultOre;
+import com.qtech.forgemod.world.gen.ores.DefaultOre;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraftforge.common.ForgeConfigSpec;

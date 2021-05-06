@@ -24,7 +24,7 @@ import java.util.Objects;
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class UpdateFailedScreen extends Screen {
     // Bidi Renderer.
     private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;

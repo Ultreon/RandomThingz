@@ -1,6 +1,6 @@
 package com.qtech.forgemod.modules.ui.common;
 
-import com.qtech.forgemod.common.FloatSize;
+import com.qtech.forgemod.commons.FloatSize;
 import lombok.Getter;
 
 public class Resizer {

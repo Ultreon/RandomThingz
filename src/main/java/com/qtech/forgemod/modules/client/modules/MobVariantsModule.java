@@ -4,12 +4,11 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.client.gui.modules.ModuleCompatibility;
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleSecurity;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleSecurity;
 import com.qtech.forgemod.modules.client.modules.render.variant.*;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
-import mezz.jei.collect.ListMultiMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -145,7 +144,7 @@ public class MobVariantsModule extends Module {
         List<ResourceLocation> styles = shinyTextures.get(type);
         if(shinyAnimalChance > 0 && (most % shinyAnimalChance) == 0) {
             if (styles.size() == 0) {
-                return new ResourceLocation(QForgeMod.modId, "textures/default.png");
+                return new ResourceLocation(QForgeMod.MOD_ID, "textures/default.png");
             }
             if (least == 0) {
                 return styles.get(0);
@@ -173,7 +172,7 @@ public class MobVariantsModule extends Module {
     private static void registerTextures(VariantTextureType type, int count, int shinyCount, @Nullable ResourceLocation vanilla) {
         String name = type.name().toLowerCase(Locale.ROOT);
         for(int i = 1; i < count + 1; i++)
-            textures.put(type, new ResourceLocation(QForgeMod.modId, String.format("textures/entity/variants/%s%d.png", name, i)));
+            textures.put(type, new ResourceLocation(QForgeMod.MOD_ID, String.format("textures/entity/variants/%s%d.png", name, i)));
 
         if(vanilla != null)
             textures.put(type, vanilla);
@@ -182,9 +181,9 @@ public class MobVariantsModule extends Module {
 
     private static void registerShiny(VariantTextureType type, int count) {
         String name = type.name().toLowerCase(Locale.ROOT);
-//        shinyTextures.put(type, new ResourceLocation(QForgeMod.modId, String.format("textures/entity/variants/%s_shiny.png", name)));
+//        shinyTextures.put(type, new ResourceLocation(QForgeMod.MOD_ID, String.format("textures/entity/variants/%s_shiny.png", name)));
         for(int i = 1; i < count + 1; i++)
-            textures.put(type, new ResourceLocation(QForgeMod.modId, String.format("textures/entity/variants/%s_shiny%d.png", name, i)));
+            textures.put(type, new ResourceLocation(QForgeMod.MOD_ID, String.format("textures/entity/variants/%s_shiny%d.png", name, i)));
     }
 
     @Override

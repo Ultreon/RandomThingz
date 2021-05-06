@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
 
 /**
  * Main class for frame trapdoors - all important block info can be found here
- * Visit {@link FrameBlock} for a better documentation
+ * Visit {@linkplain FrameBlock} for a better documentation
  *
  * @author PianoManu
  * @version 1.5 10/09/20

@@ -2,8 +2,8 @@ package com.qtech.forgemod.modules.ui.screens;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.qtech.forgemod.common.geom.RectangleUV;
-import com.qtech.forgemod.graphics.MCGraphics;
+import com.qtech.forgemod.commons.geom.RectangleUV;
+import com.qtech.forgemod.client.graphics.MCGraphics;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;

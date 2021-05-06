@@ -3,9 +3,9 @@ package com.qtech.forgemod.client.gui.modules;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleManager;
-import com.qtech.forgemod.graphics.MCGraphics;
+import com.qtech.forgemod.client.graphics.MCGraphics;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleManager;
 import com.qtech.forgemod.modules.ui.screens.AdvancedScreen;
 import com.qtech.forgemod.modules.ui.toasts.ErrorToast;
 import net.minecraft.client.gui.DialogTexts;
@@ -31,7 +31,7 @@ import java.util.Objects;
 @OnlyIn(Dist.CLIENT)
 public class ModuleScreen extends Screen {
    // Icons
-   private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(QForgeMod.modId, "textures/gui/icons.png");
+   private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/icons.png");
 
    // Drop info.
    private static final ITextComponent DROP_INFO = (new TranslationTextComponent("pack.dropInfo")).mergeStyle(TextFormatting.GRAY);

@@ -82,7 +82,7 @@ public final class CrushingRecipeBuilder {
     public void build(Consumer<IFinishedRecipe> consumer) {
         ResourceLocation resultId = NameUtils.fromItem(results.keySet().iterator().next());
         ResourceLocation id = new ResourceLocation(
-                "minecraft".equals(resultId.getNamespace()) ? QForgeMod.modId : resultId.getNamespace(),
+                "minecraft".equals(resultId.getNamespace()) ? QForgeMod.MOD_ID : resultId.getNamespace(),
                 "crushing/" + resultId.getPath());
         build(consumer, id);
     }

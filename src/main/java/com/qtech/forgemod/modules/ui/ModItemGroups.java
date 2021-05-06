@@ -1,6 +1,6 @@
 package com.qtech.forgemod.modules.ui;
 
-import com.qtech.forgemod.groups.*;
+import com.qtech.forgemod.client.groups.*;
 import lombok.experimental.UtilityClass;
 
 /**

@@ -1,18 +1,12 @@
 package com.qtech.forgemod.client;
 
-import com.google.common.collect.ImmutableList;
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.items.tools.Tools;
-import com.qtech.forgemod.util.QFMTexture;
+import com.qtech.forgemod.item.tools.Tools;
 import lombok.Getter;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.RenderMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.model.ItemLayerModel;
-import net.minecraftforge.client.model.ItemMultiLayerBakedModel;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
@@ -20,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModelGenerator {
     @Getter
     private static final ModelGenerator instance = new ModelGenerator();

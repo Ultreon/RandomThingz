@@ -10,7 +10,7 @@ import net.minecraft.util.text.StringTextComponent;
 import org.jetbrains.annotations.NotNull;
 
 public class SwitchWidget extends Widget {
-    private final ResourceLocation resourceLocation = new ResourceLocation(QForgeMod.modId, "textures/gui/widgets/switch.png");
+    private final ResourceLocation resourceLocation = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/widgets/switch.png");
     private boolean state;
 
     public SwitchWidget(int x, int y, boolean state) {

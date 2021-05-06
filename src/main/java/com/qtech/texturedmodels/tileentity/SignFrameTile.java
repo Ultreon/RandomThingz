@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
- * TileEntity for {@link com.qtech.texturedmodels.block.StandingSignFrameBlock} and {@link com.qtech.texturedmodels.block.WallSignFrameBlock}
+ * TileEntity for {@linkplain com.qtech.texturedmodels.block.StandingSignFrameBlock} and {@linkplain com.qtech.texturedmodels.block.WallSignFrameBlock}
  * Contains all information about the block and the mimicked block
  *
  * @author PianoManu

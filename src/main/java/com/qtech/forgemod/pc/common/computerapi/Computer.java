@@ -1,6 +1,6 @@
 package com.qtech.forgemod.pc.common.computerapi;
 
-import com.qtech.forgemod.modules.tiles.tileentities.ComputerTileEntity;
+import com.qtech.forgemod.tileentity.ComputerTileEntity;
 import com.qtech.forgemod.pc.common.device.AbstractBios;
 
 public class Computer {

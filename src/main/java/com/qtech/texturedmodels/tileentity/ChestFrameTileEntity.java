@@ -43,7 +43,7 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
- * TileEntity for {@link com.qtech.texturedmodels.block.ChestFrameBlock} and all sorts of frame/illusion chest blocks
+ * TileEntity for {@linkplain com.qtech.texturedmodels.block.ChestFrameBlock} and all sorts of frame/illusion chest blocks
  * Contains all information about the block and the mimicked block, as well as the inventory size and stored items
  * @author PianoManu
  * @version 1.0 09/22/20

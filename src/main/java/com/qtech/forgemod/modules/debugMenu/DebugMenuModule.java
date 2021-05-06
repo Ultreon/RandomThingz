@@ -2,13 +2,10 @@ package com.qtech.forgemod.modules.debugMenu;
 
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.client.gui.modules.ModuleCompatibility;
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleSecurity;
-import com.qtech.forgemod.modules.actionmenu.AbstractActionMenu;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleSecurity;
 import com.qtech.forgemod.modules.actionmenu.MainActionMenu;
-import com.qtech.forgemod.modules.actionmenu.IMenuHandler;
 import com.qtech.forgemod.modules.actionmenu.MenuHandler;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;

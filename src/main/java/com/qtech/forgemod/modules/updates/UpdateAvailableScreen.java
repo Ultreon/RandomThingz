@@ -4,7 +4,7 @@ import com.mojang.text2speech.Narrator;
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.QFMVersion;
 import com.qtech.forgemod.modules.ui.screens.AdvancedScreen;
-import com.qtech.forgemod.graphics.MCGraphics;
+import com.qtech.forgemod.client.graphics.MCGraphics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IBidiRenderer;
@@ -26,15 +26,15 @@ import java.util.Objects;
 /**
  * Update available screen.
  * Will show after loading when there's an update available for QForgeMod.
- * Can be used for other mods using their own implementation of {@link AbstractUpdater}.
+ * Can be used for other mods using their own implementation of {@linkplain AbstractUpdater}.
  * 
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class UpdateAvailableScreen extends AdvancedScreen {
     // Icons.
-    private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(QForgeMod.modId, "textures/gui/icons.png");
+    private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/icons.png");
 
     // Flags.
     private static boolean initializedBefore = false;
@@ -180,7 +180,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
     }
 
     /**
-     * Should close on esc, only if buttons are enabled after setting {@link #setButtonDelay(int)}.
+     * Should close on esc, only if buttons are enabled after setting {@linkplain #setButtonDelay(int)}.
      * 
      * @return the amount of ticks until buttons will enable.
      */

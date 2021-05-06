@@ -33,7 +33,7 @@ import static com.qtech.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
 
 /**
  * Main class for frame ladder plates - all important block info can be found here
- * Visit {@link FrameBlock} for a better documentation
+ * Visit {@linkplain FrameBlock} for a better documentation
  *
  * @author PianoManu
  * @version 1.4 10/06/20

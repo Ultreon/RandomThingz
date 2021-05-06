@@ -1,13 +1,13 @@
 package com.qtech.forgemod.modules.tiles;
 
-import com.qtech.forgemod.common.enums.MachineTier;
-import com.qtech.forgemod.modules.tiles.blocks.machines.AbstractMachineBaseTileEntity;
-import com.qtech.forgemod.modules.tiles.blocks.machines.alloysmelter.AlloySmelterContainer;
-import com.qtech.forgemod.modules.tiles.blocks.machines.alloysmelter.AlloySmelterTileEntity;
-import com.qtech.forgemod.modules.tiles.blocks.machines.arcaneescalator.ArcaneEscalatorContainer;
-import com.qtech.forgemod.modules.tiles.blocks.machines.arcaneescalator.ArcaneEscalatorTileEntity;
-import com.qtech.forgemod.modules.tiles.blocks.machines.crusher.CrusherContainer;
-import com.qtech.forgemod.modules.tiles.blocks.machines.crusher.CrusherTileEntity;
+import com.qtech.forgemod.commons.enums.MachineTier;
+import com.qtech.forgemod.block.machines.AbstractMachineBaseTileEntity;
+import com.qtech.forgemod.block.machines.alloysmelter.AlloySmelterContainer;
+import com.qtech.forgemod.block.machines.alloysmelter.AlloySmelterTileEntity;
+import com.qtech.forgemod.block.machines.arcaneescalator.ArcaneEscalatorContainer;
+import com.qtech.forgemod.block.machines.arcaneescalator.ArcaneEscalatorTileEntity;
+import com.qtech.forgemod.block.machines.crusher.CrusherContainer;
+import com.qtech.forgemod.block.machines.crusher.CrusherTileEntity;
 import com.qsoftware.modlib.silentlib.util.Lazy;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;

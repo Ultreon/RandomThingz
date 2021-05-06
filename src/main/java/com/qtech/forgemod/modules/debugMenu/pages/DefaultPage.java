@@ -5,7 +5,7 @@ import com.qtech.forgemod.modules.debugMenu.DebugPage;
 
 public class DefaultPage extends DebugPage {
     public DefaultPage() {
-        super(QForgeMod.getModId(), "default");
+        super(QForgeMod.MOD_ID, "default");
     }
 
     @Override

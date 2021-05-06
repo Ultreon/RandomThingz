@@ -2,7 +2,7 @@ package com.qtech.forgemod.modules.ui.widgets;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.qtech.forgemod.common.FloatSize;
+import com.qtech.forgemod.commons.FloatSize;
 import com.qtech.forgemod.modules.ui.common.Resizer;
 import com.qtech.forgemod.modules.ui.common.Screenshot;
 import com.qtech.forgemod.modules.ui.screens.ScreenshotsScreen;

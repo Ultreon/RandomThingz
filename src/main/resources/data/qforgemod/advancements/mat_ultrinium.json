@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "qforgemod:ultrinium_ingot"
+        },
+        "title": {
+            "translate": "advancements.qforgemod.material_ultrinium.title"
+        },
+        "description": {
+            "translate": "advancements.qforgemod.material_ultrinium.description"
+        },
+        "show_toast": true,
+        "announce_to_chat": true
+    },
+    "parent": "qforgemod:mat_cobalt",
+    "criteria": {
+        "get_sword": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "qforgemod:ultrinium_ingot"
+                    }
+                ]
+            }
+        }
+    }
+}

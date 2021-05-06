@@ -1,8 +1,8 @@
 package com.qtech.forgemod.modules.tiles;
 
 import com.qtech.forgemod.client.gui.modules.ModuleCompatibility;
-import com.qtech.forgemod.common.CoreRegisterModule;
-import com.qtech.forgemod.common.ModuleSecurity;
+import com.qtech.forgemod.commons.CoreRegisterModule;
+import com.qtech.forgemod.commons.ModuleSecurity;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;

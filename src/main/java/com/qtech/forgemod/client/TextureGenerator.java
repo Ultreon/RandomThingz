@@ -1,7 +1,6 @@
 package com.qtech.forgemod.client;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.common.java.lists.DynamicList;
 import com.qtech.forgemod.util.BufferUtil;
 import com.qtech.forgemod.util.QFMTexture;
 import lombok.Getter;
@@ -11,9 +10,7 @@ import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class TextureGenerator {

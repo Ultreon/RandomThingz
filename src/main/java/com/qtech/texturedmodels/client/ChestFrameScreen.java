@@ -60,7 +60,7 @@ public class ChestFrameScreen extends ContainerScreen<ChestFrameContainer> imple
     }
 
     /**
-     * I just took this from the Vanilla Chest Screen {@link net.minecraft.client.gui.screen.inventory.ChestScreen}
+     * I just took this from the Vanilla Chest Screen {@linkplain net.minecraft.client.gui.screen.inventory.ChestScreen}
      */
     @Override
     protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {

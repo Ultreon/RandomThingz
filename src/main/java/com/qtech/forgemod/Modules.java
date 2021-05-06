@@ -1,17 +1,17 @@
 package com.qtech.forgemod;
 
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleManager;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleManager;
 import com.qtech.forgemod.modules.MainModule;
 import com.qtech.forgemod.modules.actionmenu.ActionMenuModule;
 import com.qtech.forgemod.modules.client.ClientTweaksModule;
 import com.qtech.forgemod.modules.confirmExit.ConfirmExitModule;
 import com.qtech.forgemod.modules.debug.DebuggingModule;
 import com.qtech.forgemod.modules.debugMenu.DebugMenuModule;
-import com.qtech.forgemod.modules.environment.EntitiesModule;
-import com.qtech.forgemod.modules.environment.WorldGenerationModule;
-import com.qtech.forgemod.modules.environment.ores.OresModule;
-import com.qtech.forgemod.modules.items.ItemsModule;
+import com.qtech.forgemod.entity.common.EntitiesModule;
+import com.qtech.forgemod.world.gen.WorldGenerationModule;
+import com.qtech.forgemod.world.gen.ores.OresModule;
+import com.qtech.forgemod.item.common.ItemsModule;
 import com.qtech.forgemod.modules.tiles.BlocksModule;
 import com.qtech.forgemod.modules.tiles.TileEntitiesModule;
 import com.qtech.forgemod.modules.updates.UpdatesModule;
@@ -20,6 +20,12 @@ import lombok.experimental.UtilityClass;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Module registration class.
+ *
+ * @see Module
+ * @see ModuleManager
+ */
 @SuppressWarnings("unused")
 @UtilityClass
 public class Modules {

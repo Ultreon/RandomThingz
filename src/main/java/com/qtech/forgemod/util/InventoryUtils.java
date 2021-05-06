@@ -1,7 +1,7 @@
 package com.qtech.forgemod.util;
 
-import com.qtech.forgemod.modules.tiles.blocks.machines.refinery.RefineryTileEntity;
-import com.qtech.forgemod.modules.items.objects.fluid.CanisterItem;
+import com.qtech.forgemod.block.machines.refinery.RefineryTileEntity;
+import com.qtech.forgemod.item.fluid.CanisterItem;
 import lombok.experimental.UtilityClass;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.IInventory;
@@ -19,7 +19,7 @@ public final class InventoryUtils {
      * Gets the total number of matching items in all slots in the inventory.
      *
      * @param inventory  The inventory
-     * @param ingredient The items to match ({@link net.minecraft.item.crafting.Ingredient}, etc.)
+     * @param ingredient The items to match ({@linkplain net.minecraft.item.crafting.Ingredient}, etc.)
      * @return The number of items in all matching item stacks
      */
     public static int getTotalCount(IInventory inventory, Predicate<ItemStack> ingredient) {
@@ -38,7 +38,7 @@ public final class InventoryUtils {
      * multiple input slots and recipes that consume multiple of one item.
      *
      * @param inventory  The inventory
-     * @param ingredient The items to match ({@link net.minecraft.item.crafting.Ingredient}, etc.)
+     * @param ingredient The items to match ({@linkplain net.minecraft.item.crafting.Ingredient}, etc.)
      * @param amount     The total number of items to remove
      */
     public static void consumeItems(IInventory inventory, Predicate<ItemStack> ingredient, int amount) {

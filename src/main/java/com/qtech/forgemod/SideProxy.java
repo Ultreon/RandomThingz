@@ -6,7 +6,7 @@ import com.qtech.forgemod.data.DataGenerators;
 import com.qtech.forgemod.init.*;
 import com.qtech.forgemod.modules.tiles.ModBlocks;
 import com.qtech.forgemod.modules.tiles.ModFluids;
-import com.qtech.forgemod.modules.items.ModItems;
+import com.qtech.forgemod.item.common.ModItems;
 import com.qtech.forgemod.modules.tiles.ModMachineTileEntities;
 import com.qtech.forgemod.modules.ui.ModMachineContainers;
 import com.qtech.forgemod.network.Network;

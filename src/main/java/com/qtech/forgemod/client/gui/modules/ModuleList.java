@@ -3,9 +3,9 @@ package com.qtech.forgemod.client.gui.modules;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleManager;
-import com.qtech.forgemod.common.ModuleSecurity;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleManager;
+import com.qtech.forgemod.commons.ModuleSecurity;
 import com.qtech.forgemod.modules.ui.screens.AdvancedScreen;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -34,7 +34,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @OnlyIn(Dist.CLIENT)
 public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
    private static final ResourceLocation ICONS = new ResourceLocation("textures/gui/resource_packs.png");
-   private static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(QForgeMod.modId, "textures/empty.png");
+   private static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(QForgeMod.MOD_ID, "textures/empty.png");
    private static final ITextComponent INCOMPATIBLE_TEXT = new TranslationTextComponent("challenges.incompatible");
    private static final ITextComponent INCOMPATIBLE_CONFIRM_TITLE = new TranslationTextComponent("challenges.incompatible.confirm.title");
    private final ITextComponent title;
@@ -102,9 +102,9 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
    @SuppressWarnings("deprecation")
    @OnlyIn(Dist.CLIENT)
    public static class ModuleEntry extends ExtendedList.AbstractListEntry<ModuleEntry> {
-      private static final ResourceLocation MODULE_OVERLAYS = new ResourceLocation(QForgeMod.modId, "textures/gui/overlays/modules.png");
-      private static final ResourceLocation OPTIONS_BUTTON = new ResourceLocation(QForgeMod.modId, "textures/gui/modules/buttons/options.png");
-      private static final ResourceLocation MANAGER_BUTTON = new ResourceLocation(QForgeMod.modId, "textures/gui/modules/buttons/manager.png");
+      private static final ResourceLocation MODULE_OVERLAYS = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/overlays/modules.png");
+      private static final ResourceLocation OPTIONS_BUTTON = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/modules/buttons/options.png");
+      private static final ResourceLocation MANAGER_BUTTON = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/modules/buttons/manager.png");
       private final ModuleList list;
       protected final Minecraft mc;
       protected final Screen screen;
@@ -134,7 +134,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
        *
        * @param minecraft the minecraft instance.
        * @param text the text component to process.
-       * @return a {@link IReorderingProcessor reordering processor}.
+       * @return a {@linkplain IReorderingProcessor reordering processor}.
        */
       private static IReorderingProcessor getReordering(Minecraft minecraft, ITextComponent text) {
          int i = minecraft.fontRenderer.getStringPropertyWidth(text);
@@ -158,7 +158,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
        * @param mouseX real mouse x coordinate.
        * @param mouseY real mouse y coordinate.
        * @param isHovered ...
-       * @param partialTicks the {@link Minecraft#getRenderPartialTicks() render partial ticks}.
+       * @param partialTicks the {@linkplain Minecraft#getRenderPartialTicks() render partial ticks}.
        */
       @SuppressWarnings("DanglingJavadoc")
       public void render(MatrixStack matrixStack, int listIndex, int scroll, int xOffset, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean isHovered, float partialTicks) {

@@ -2,9 +2,9 @@ package com.qtech.forgemod.modules.actionmenu;
 
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.client.gui.modules.ModuleCompatibility;
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleSecurity;
-import com.qtech.forgemod.keybinds.KeyBindingList;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleSecurity;
+import com.qtech.forgemod.client.keybinds.KeyBindingList;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -98,6 +98,7 @@ public class ActionMenuModule extends Module {
         private final ActionMenuModule module;
 
         public ServerSide(ActionMenuModule module) {
+//            super(module, server);
             this.module = module;
         }
     }

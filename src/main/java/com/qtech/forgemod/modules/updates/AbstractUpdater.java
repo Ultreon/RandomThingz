@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.QFMVersion;
-import com.qtech.forgemod.common.interfaces.IVersion;
+import com.qtech.forgemod.commons.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
@@ -30,10 +30,10 @@ import java.util.Map;
 /**
  * An abstract updater used for checking for updates.
  * Other modders can use this to create their own updaters.
- * They need to create an implementation of {@link IVersion} to make it work with their own version systems -
- * Or use {@link QFMVersion} if modders want to use the QSoftware / QTech version system.
+ * They need to create an implementation of {@linkplain IVersion} to make it work with their own version systems -
+ * Or use {@linkplain QFMVersion} if modders want to use the QSoftware / QTech version system.
  *
- * @param <T> an implementation of {@link IVersion}.
+ * @param <T> an implementation of {@linkplain IVersion}.
  */
 @SuppressWarnings("unused")
 public abstract class AbstractUpdater<T extends IVersion> {
@@ -48,9 +48,9 @@ public abstract class AbstractUpdater<T extends IVersion> {
     private Release release;
 
     /**
-     * Get a mod container from an instance of an {@link Mod @Mod} annotated class.
+     * Get a mod container from an instance of an {@linkplain Mod @Mod} annotated class.
      *
-     * @param obj an instance of a {@link Mod @Mod} annotated class
+     * @param obj an instance of a {@linkplain Mod @Mod} annotated class
      * @return the mod container got from the Object.
      */
     private static ModContainer getModFromObject(Object obj) {
@@ -229,7 +229,7 @@ public abstract class AbstractUpdater<T extends IVersion> {
                     return new UpdateInfo(UpdateStatus.INCOMPATIBLE, null);
                 }
 
-                JsonObject releaseIndex = versionIndex.getAsJsonObject(QForgeMod.version.isStable() ? "stable" : "unstable");
+                JsonObject releaseIndex = versionIndex.getAsJsonObject(QForgeMod.QFM_VERSION.isStable() ? "stable" : "unstable");
                 JsonPrimitive latestJson = releaseIndex.getAsJsonPrimitive("version");
 
                 // Get version download url.

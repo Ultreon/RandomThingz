@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.Constants;
 
 /**
  * Item stack helper class.
- * Currently used for write or read {@link ItemStack item stacks} to or from {@link CompoundNBT}
+ * Currently used for write or read {@linkplain ItemStack item stacks} to or from {@linkplain CompoundNBT}
  *
  * @author MrCrayfish
  */

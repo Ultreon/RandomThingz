@@ -3,7 +3,7 @@ package com.qtech.forgemod.compat.jei;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qtech.forgemod.crafting.recipe.ArcaneEscalatingRecipe;
 import com.qtech.forgemod.modules.tiles.ModBlocks;
-import com.qtech.forgemod.modules.tiles.blocks.machines.arcaneescalator.ArcaneEscalatorScreen;
+import com.qtech.forgemod.block.machines.arcaneescalator.ArcaneEscalatorScreen;
 import com.qtech.forgemod.util.Constants;
 import com.qtech.forgemod.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;

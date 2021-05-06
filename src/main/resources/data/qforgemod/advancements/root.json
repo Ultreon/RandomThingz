@@ -9,7 +9,7 @@
         "description": {
             "translate": "advancements.qforgemod.root.description"
         },
-        "background": "minecraft:textures/gui/advancements/backgrounds/adventure.png",
+        "background": "minecraft:textures/block/iron_block.png",
         "show_toast": false,
         "announce_to_chat": false
     },
@@ -19,7 +19,7 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "minecraft:crafting_table"
+                        "tag": "minecraft:logs"
                     }
                 ]
             }

@@ -2,20 +2,20 @@ package com.qtech.forgemod;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleManager;
-import com.qtech.forgemod.internal.QfmArgs;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleManager;
+import com.qtech.forgemod.commons.internal.QfmArgs;
 import com.qtech.forgemod.modules.tiles.ModBlocksAlt;
-import com.qtech.forgemod.modules.environment.ModEntities;
-import com.qtech.forgemod.modules.items.ModItemsAlt;
+import com.qtech.forgemod.entity.common.ModEntities;
+import com.qtech.forgemod.item.common.ModItemsAlt;
 import com.qtech.forgemod.modules.ui.ModContainers;
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.crash.ReportedException;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.FolderName;
 import net.minecraftforge.api.distmarker.Dist;
@@ -29,6 +29,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,20 +58,15 @@ import java.util.stream.Collectors;
 @SuppressWarnings("unused")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-@Mod(QForgeMod.modId)
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class QForgeMod {
+@Mod(QForgeMod.MOD_ID)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public final class QForgeMod {
     /**
      * QForgeMod's Logger
      */
     public static final Logger LOGGER = LogManager.getLogger("QFM:Generic");
 
-    /**
-     * Unused.
-     */
-    @SuppressWarnings("unused")
-    @Deprecated
-    public static final Random RANDOM = new Random();
+    private static MinecraftServer server = null;
     private static final boolean MOD_TEST_PHASE = false;
 
     // Class static fields.
@@ -82,12 +78,17 @@ public class QForgeMod {
     @Getter private static final boolean serverSide;
 
     // Mod Data
-    @Getter public static final String modId = "qforgemod";
-    @Getter public static final String modName = "Qboi's Forge Mod";
-    @Getter public static final String nbtName = "QForgeMod";
-    @Getter public static final String modVersion;
-    @Getter public static final QFMVersion version;
-    @Getter private static final QfmArgs modArgs;
+    public static final String MOD_ID = "qforgemod";
+    public static final String MOD_NAME = "Qboi's Forge Mod";
+    public static final String NBT_NAME = "QForgeMod";
+    public static final String MOD_VERSION;
+    public static final QFMVersion QFM_VERSION;
+    public static final QfmArgs QFM_ARGS;
+
+    @Nullable
+    public static MinecraftServer getServer() {
+        return server;
+    }
 
     @SuppressWarnings("ConstantConditions")
     private static final Supplier<Boolean> getClientSide = () -> {
@@ -125,9 +126,9 @@ public class QForgeMod {
         InputStreamReader isr = new InputStreamReader(qfmArgsStream);
         JsonObject o = gson.fromJson(isr, JsonObject.class);
 
-        modArgs = new QfmArgs(o);
-        modVersion = modArgs.getVersion().getName();
-        version = modArgs.getVersion().toVersionObject();
+        QFM_ARGS = new QfmArgs(o);
+        MOD_VERSION = QFM_ARGS.getVersion().getName();
+        QFM_VERSION = QFM_ARGS.getVersion().toVersionObject();
     }
 
     // Getters
@@ -213,7 +214,7 @@ public class QForgeMod {
      * @return a resource location.
      */
     public static ResourceLocation rl(String path) {
-        return new ResourceLocation(modId, path);
+        return new ResourceLocation(MOD_ID, path);
     }
 
     /**
@@ -266,23 +267,42 @@ public class QForgeMod {
      * @return true if QForgeMod is a dev test version, false otherwise.
      */
     public static boolean isDevtest() {
-        return modArgs.getFlags().isDevTest();
+        return QFM_ARGS.getFlags().isDevTest();
     }
 
     /**
-     * Event handler for server starting.
+     * Event handler for server starting.<br>
+     * This will handle things that supposed to happen when the server is starting.<br>
+     * For example: server start event for the mod initializer.<br>
      *
-     * @param event a {@link FMLServerStartingEvent} object.
+     * @param event a {@linkplain FMLServerStartingEvent} object.
      */
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
         Objects.requireNonNull(init).serverStart(event);
+        
+        // Server field.
+        LOGGER.info("Minecraft Server is starting, setting server field to current server...");
+        server = event.getServer();
+    }
+
+    /**
+     * This will handle things that supposed to happen when the server is stopping.<br>
+     * For example: clear the server field of the QForgeMod class.
+     * 
+     * @param event a {@linkplain FMLServerStoppingEvent} object.
+     */
+    @SubscribeEvent
+    public void onServerStopped(FMLServerStoppingEvent event) {
+        // Server field.
+        LOGGER.info("Minecraft Server has been stopped, nullifying server field...");
+        server = null;
     }
 
     /**
      * Event handler for Inter-Mod Communication enqueue. (IMC enqueue)
      *
-     * @param event a {@link InterModEnqueueEvent} object.
+     * @param event a {@linkplain InterModEnqueueEvent} object.
      */
     private void enqueueIMC(final InterModEnqueueEvent event) {
         InterModComms.sendTo("qforgemod", "helloworld", () -> {
@@ -294,7 +314,7 @@ public class QForgeMod {
     /**
      * Event handler for Inter-Mod Communication process. (IMC process)
      *
-     * @param event a {@link InterModProcessEvent} object.
+     * @param event a {@linkplain InterModProcessEvent} object.
      */
     private void processIMC(final InterModProcessEvent event) {
         LOGGER.info("Got IMC {}", event.getIMCStream().

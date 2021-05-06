@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;
 import com.qtech.forgemod.client.gui.modules.ModuleOptionsScreen;
 import com.qtech.forgemod.modules.ui.widgets.SwitchWidget;
-import com.qtech.forgemod.common.text.Translations;
+import com.qtech.forgemod.commons.text.Translations;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;

@@ -26,7 +26,7 @@ import java.util.Random;
 
 /**
  * Contains all information for the block model
- * See {@link com.qtech.texturedmodels.util.ModelHelper} for more information
+ * See {@linkplain com.qtech.texturedmodels.util.ModelHelper} for more information
  *
  * @author PianoManu
  * @version 1.5 10/01/20

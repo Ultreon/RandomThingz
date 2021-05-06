@@ -45,7 +45,7 @@ public final class InfusingRecipeBuilder {
     public void build(Consumer<IFinishedRecipe> consumer) {
         ResourceLocation resultId = NameUtils.fromItem(result);
         ResourceLocation id = new ResourceLocation(
-                "minecraft".equals(resultId.getNamespace()) ? QForgeMod.modId : resultId.getNamespace(),
+                "minecraft".equals(resultId.getNamespace()) ? QForgeMod.MOD_ID : resultId.getNamespace(),
                 "infusing/" + resultId.getPath());
         build(consumer, id);
     }

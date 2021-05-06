@@ -2,9 +2,9 @@ package com.qtech.forgemod.modules.confirmExit;
 
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.client.gui.modules.ModuleCompatibility;
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleManager;
-import com.qtech.forgemod.common.ModuleSecurity;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleManager;
+import com.qtech.forgemod.commons.ModuleSecurity;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.qsoftware.modlib.event.WindowCloseEvent;
 import mcp.MethodsReturnNonnullByDefault;

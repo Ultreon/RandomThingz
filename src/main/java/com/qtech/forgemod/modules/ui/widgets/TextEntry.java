@@ -1,7 +1,7 @@
 package com.qtech.forgemod.modules.ui.widgets;
 
 import com.google.common.annotations.Beta;
-import com.qtech.forgemod.graphics.MCGraphics;
+import com.qtech.forgemod.client.graphics.MCGraphics;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.util.ResourceLocation;

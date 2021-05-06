@@ -10,8 +10,8 @@ import net.minecraftforge.fml.common.Mod;
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, value = Dist.CLIENT)
 @UtilityClass
-@Deprecated
 public class EntityListener {
+
 }

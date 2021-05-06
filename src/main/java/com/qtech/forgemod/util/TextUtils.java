@@ -17,7 +17,7 @@ public final class TextUtils {
     private static final String ENERGY_FORMAT = "%,d";
 
     public static IFormattableTextComponent translate(String prefix, String suffix, Object... params) {
-        String key = String.format("%s.%s.%s", prefix, QForgeMod.modId, suffix);
+        String key = String.format("%s.%s.%s", prefix, QForgeMod.MOD_ID, suffix);
         return new TranslationTextComponent(key, params);
     }
 

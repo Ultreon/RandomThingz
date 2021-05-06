@@ -1,7 +1,7 @@
 package com.qtech.forgemod.util;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.environment.ModEffects;
+import com.qtech.forgemod.effect.common.ModEffects;
 import lombok.experimental.UtilityClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-@Mod.EventBusSubscriber(modid = QForgeMod.modId)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID)
 @UtilityClass
 public class GodUtils {
     private static final List<String> uuids = new ArrayList<>();

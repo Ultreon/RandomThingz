@@ -1,7 +1,7 @@
 package com.qtech.forgemod.network;
 
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.ModuleManager;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.ModuleManager;
 import lombok.Getter;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;

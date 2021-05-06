@@ -27,7 +27,7 @@ import java.util.Objects;
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class UpdateDownloadedScreen extends Screen {
     private final IBidiRenderer bidiRenderer = IBidiRenderer.field_243257_a;
     private final Screen backScreen;

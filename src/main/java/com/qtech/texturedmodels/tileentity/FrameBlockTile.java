@@ -21,7 +21,7 @@ import java.util.Objects;
 import static com.qtech.texturedmodels.setup.Registration.FRAMEBLOCK_TILE;
 
 /**
- * TileEntity for {@link com.qtech.texturedmodels.block.FrameBlock} and all sorts of frame blocks
+ * TileEntity for {@linkplain com.qtech.texturedmodels.block.FrameBlock} and all sorts of frame blocks
  * Contains all information about the block and the mimicked block
  *
  * @author PianoManu

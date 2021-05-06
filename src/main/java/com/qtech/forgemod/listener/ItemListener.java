@@ -1,8 +1,8 @@
 package com.qtech.forgemod.listener;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.items.OreMaterial;
-import com.qtech.forgemod.modules.items.tools.Tools;
+import com.qtech.forgemod.item.common.ItemMaterial;
+import com.qtech.forgemod.item.tools.Tools;
 import lombok.experimental.UtilityClass;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 @UtilityClass
 public class ItemListener {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
@@ -28,11 +28,11 @@ public class ItemListener {
                 event.getEntityItem().getItem().getItem() == Tools.INFINITY.getChestplate().get() ||
                 event.getEntityItem().getItem().getItem() == Tools.INFINITY.getLeggings().get() ||
                 event.getEntityItem().getItem().getItem() == Tools.INFINITY.getBoots().get() ||
-                event.getEntityItem().getItem().getItem() == OreMaterial.INFINITY.getIngot().get() ||
-                event.getEntityItem().getItem().getItem() == OreMaterial.INFINITY.getNugget().get() ||
-                event.getEntityItem().getItem().getItem() == OreMaterial.INFINITY.getDust().get() ||
-                event.getEntityItem().getItem().getItem() == OreMaterial.INFINITY.getStorageBlock().get().asItem().getItem() ||
-                event.getEntityItem().getItem().getItem() == OreMaterial.INFINITY.getOre().get().asItem().getItem()) {
+                event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getIngot().get() ||
+                event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getNugget().get() ||
+                event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getDust().get() ||
+                event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getStorageBlock().get().asItem().getItem() ||
+                event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getOre().get().asItem().getItem()) {
             event.getEntityItem().setInvulnerable(true);
         }
     }

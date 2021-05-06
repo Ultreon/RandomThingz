@@ -1,18 +1,18 @@
 package com.qtech.forgemod;
 
 import com.qtech.filters.Filters;
-import com.qtech.forgemod.common.ModuleManager;
-import com.qtech.forgemod.common.interfaces.IHasRenderType;
+import com.qtech.forgemod.commons.ModuleManager;
+import com.qtech.forgemod.commons.interfaces.IHasRenderType;
 import com.qtech.forgemod.init.Registration;
-import com.qtech.forgemod.keybinds.KeyBindingList;
+import com.qtech.forgemod.client.keybinds.KeyBindingList;
 import com.qtech.forgemod.modules.debugMenu.DebugMenu;
-import com.qtech.forgemod.modules.environment.ModEntities;
-import com.qtech.forgemod.modules.environment.entities.*;
-import com.qtech.forgemod.modules.environment.entities.baby.*;
-import com.qtech.forgemod.modules.items.ModItems;
-import com.qtech.forgemod.modules.items.OreMaterial;
-import com.qtech.forgemod.modules.items.objects.advanced.AdvancedBowItem;
-import com.qtech.forgemod.modules.items.tools.Tools;
+import com.qtech.forgemod.entity.common.ModEntities;
+import com.qtech.forgemod.entity.*;
+import com.qtech.forgemod.entity.baby.*;
+import com.qtech.forgemod.item.common.ModItems;
+import com.qtech.forgemod.item.common.ItemMaterial;
+import com.qtech.forgemod.item.advanced.AdvancedBowItem;
+import com.qtech.forgemod.item.tools.Tools;
 import com.qtech.forgemod.modules.tiles.ModBlocks;
 import com.qtech.forgemod.modules.ui.ModItemGroups;
 import net.minecraft.block.Block;
@@ -59,7 +59,7 @@ public class Initialization {
     /**
      * Setup server side components.
      *
-     * @param event a {@link FMLCommonSetupEvent} object.
+     * @param event a {@linkplain FMLCommonSetupEvent} object.
      */
     @SuppressWarnings("unused")
     void serverSetup(FMLDedicatedServerSetupEvent event) {
@@ -69,7 +69,7 @@ public class Initialization {
     /**
      * Setup server side components.
      *
-     * @param event a {@link FMLCommonSetupEvent} object.
+     * @param event a {@linkplain FMLCommonSetupEvent} object.
      */
     void commonSetup(FMLCommonSetupEvent event) {
         ModuleManager.getInstance().commonSetup();
@@ -99,7 +99,7 @@ public class Initialization {
     /**
      * Setup client side components.
      *
-     * @param event a {@link FMLClientSetupEvent} object.
+     * @param event a {@linkplain FMLClientSetupEvent} object.
      */
     void clientSetup(@SuppressWarnings("unused") FMLClientSetupEvent event) {
         // do something that can only be done on the client
@@ -133,10 +133,10 @@ public class Initialization {
             ItemModelsProperties.registerProperty(item, new ResourceLocation("pulling"), (p_239428_0_, p_239428_1_, p_239428_2_) -> p_239428_2_ != null && p_239428_2_.isHandActive() && p_239428_2_.getActiveItemStack() == p_239428_0_ ? 1.0F : 0.0F);
         }
 
-        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("qforgemod", "metal_craftables/dusts"), new ItemStack(OreMaterial.IRON.getDust().orElse(Items.AIR)));
+        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("qforgemod", "metal_craftables/dusts"), new ItemStack(ItemMaterial.IRON.getDust().orElse(Items.AIR)));
         Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("qforgemod", "metal_craftables/nuggets"), new ItemStack(Items.IRON_NUGGET));
         Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("qforgemod", "metal_craftables/ingots"), new ItemStack(Items.IRON_INGOT));
-        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("qforgemod", "metal_craftables/chunks"), new ItemStack(OreMaterial.IRON.getChunks().orElse(Items.AIR)));
+        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("qforgemod", "metal_craftables/chunks"), new ItemStack(ItemMaterial.IRON.getChunks().orElse(Items.AIR)));
 
         Filters.get().register(ItemGroup.DECORATIONS, new ResourceLocation("qforgemod", "nature/flowers"), new ItemStack(Items.POPPY));
         Filters.get().register(ItemGroup.DECORATIONS, new ResourceLocation("qforgemod", "nature/saplings"), new ItemStack(Items.OAK_SAPLING));
@@ -187,7 +187,7 @@ public class Initialization {
     /**
      * Do things on server start.
      *
-     * @param event a {@link FMLServerStartingEvent} object.
+     * @param event a {@linkplain FMLServerStartingEvent} object.
      */
     void serverStart(@SuppressWarnings("unused") FMLServerStartingEvent event) {
         logger.info("Hello server!");
@@ -206,7 +206,7 @@ public class Initialization {
     /**
      * Do things when read is complete.
      *
-     * @param event a {@link FMLLoadCompleteEvent} object.
+     * @param event a {@linkplain FMLLoadCompleteEvent} object.
      */
     void loadComplete(FMLLoadCompleteEvent event) {
         logger.info("LoadCompleteEvent: " + event);

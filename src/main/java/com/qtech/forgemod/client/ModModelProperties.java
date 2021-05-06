@@ -1,7 +1,7 @@
 package com.qtech.forgemod.client;
 
-import com.qtech.forgemod.modules.items.ModItems;
-import com.qtech.forgemod.modules.items.objects.energy.EnergyStoringItem;
+import com.qtech.forgemod.item.common.ModItems;
+import com.qtech.forgemod.item.energy.EnergyStoringItem;
 import com.qtech.forgemod.util.ExceptionUtil;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemModelsProperties;

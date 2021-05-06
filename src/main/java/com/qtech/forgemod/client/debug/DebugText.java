@@ -1,6 +1,6 @@
 package com.qtech.forgemod.client.debug;
 
-import com.qtech.forgemod.common.java.maps.SequencedHashMap;
+import com.qtech.forgemod.commons.java.maps.SequencedHashMap;
 
 public class DebugText {
     private final SequencedHashMap<String, Object[]> left = new SequencedHashMap<>();

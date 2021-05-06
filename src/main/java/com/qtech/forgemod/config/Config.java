@@ -1,9 +1,9 @@
 package com.qtech.forgemod.config;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.common.Module;
-import com.qtech.forgemod.common.java.maps.SequencedHashMap;
-import com.qtech.forgemod.modules.environment.ores.DefaultOre;
+import com.qtech.forgemod.commons.Module;
+import com.qtech.forgemod.commons.java.maps.SequencedHashMap;
+import com.qtech.forgemod.world.gen.ores.DefaultOre;
 import com.qtech.forgemod.util.ExceptionUtil;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import mcp.MethodsReturnNonnullByDefault;
@@ -16,24 +16,17 @@ import net.minecraftforge.fml.config.ModConfig;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 
-@SuppressWarnings("unused")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class Config {
     public static final ForgeConfigSpec.BooleanValue showBetaWelcomeMessage;
-//    public static final ForgeConfigSpec.BooleanValue closePrompt;
-//    public static final ForgeConfigSpec.BooleanValue closePromptIngame;
-//    public static final ForgeConfigSpec.BooleanValue closePromptQuitButton;
-//    public static final ForgeConfigSpec.BooleanValue quitOnEscInTitle;
-//    public static final ForgeConfigSpec.BooleanValue allowShutdownPC;
     private static final ForgeConfigSpec.BooleanValue searchUpdatesOnStartup;
     private static final ForgeConfigSpec.BooleanValue searchForUnstableReleases;
     public static final ForgeConfigSpec.IntValue dimensionGenOilLakeChance;
     public static final ForgeConfigSpec.IntValue fluidGeneratorInjectionVolume;
     private static final ForgeConfigSpec commonSpec;
-    private static final ForgeConfigSpec.BooleanValue oreWorldGenMasterSwitch;
 
     @Deprecated
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
@@ -45,6 +38,7 @@ public final class Config {
 
     private static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
+    @Deprecated
     public static final QFMConfig conf = QFMConfig.instance;
 
     static {
@@ -62,7 +56,7 @@ public final class Config {
                 .comment("Places:")
                 .comment("  ITEM:   Kill switch")
                 .comment("  BUTTON: In the exit confirm screen")
-                .define("updates.searchForUnstable", !QForgeMod.version.isStable());
+                .define("updates.searchForUnstable", !QForgeMod.QFM_VERSION.isStable());
 
         // ?
         fluidGeneratorInjectionVolume = builder
@@ -74,10 +68,6 @@ public final class Config {
         // World Gen/Ore
         {
             builder.push("world");
-            oreWorldGenMasterSwitch = builder
-                    .comment("Set to 'false' to completely disable ore generation from this mod, ignoring all other settings.",
-                            "You can also enable/disable ores individually, but this is useful if you plan to use another mod for ore generation.")
-                    .define("masterSwitch", true);
 
             dimensionGenOilLakeChance = builder
                     .comment("Chance of oil lakes spawning (1 in chance). Higher numbers = less common. Set 0 to disable.",
@@ -130,30 +120,37 @@ public final class Config {
         return modules.get(module);
     }
 
-    @SuppressWarnings("unused")
+    @Deprecated
     public static class QFMConfig {
+        @Deprecated
         private static final QFMConfig instance = new QFMConfig();
 
+        @Deprecated
         public UpdateConfig getUpdateConfig() {
             return UpdateConfig.instance;
         }
 
-        @SuppressWarnings("unused")
+        @Deprecated
         public static class UpdateConfig {
+            @Deprecated
             private static final UpdateConfig instance = new UpdateConfig();
 
+            @Deprecated
             public boolean getCheckOnStartup() {
                 return searchUpdatesOnStartup.get();
             }
 
+            @Deprecated
             public void setCheckOnStartup(boolean check) {
                 searchUpdatesOnStartup.set(check);
             }
 
+            @Deprecated
             public boolean getAllowUnstable() {
                 return searchForUnstableReleases.get();
             }
 
+            @Deprecated
             public void setAllowUnstable(boolean check) {
                 searchForUnstableReleases.set(check);
             }

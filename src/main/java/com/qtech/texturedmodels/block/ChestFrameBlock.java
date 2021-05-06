@@ -41,7 +41,7 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 /**
  * Main class for frame chests - all important block info can be found here
- * Visit {@link FrameBlock} for a better documentation
+ * Visit {@linkplain FrameBlock} for a better documentation
  *
  * @author PianoManu
  * @version 1.4 10/06/20

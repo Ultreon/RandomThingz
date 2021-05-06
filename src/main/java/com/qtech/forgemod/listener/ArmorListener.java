@@ -1,8 +1,7 @@
 package com.qtech.forgemod.listener;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.items.ModItems;
-import com.qtech.forgemod.modules.items.tools.Tools;
+import com.qtech.forgemod.item.tools.Tools;
 import lombok.experimental.UtilityClass;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -20,14 +19,14 @@ import java.util.List;
  *
  * @author Qboi123
  */
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 @UtilityClass
 public class ArmorListener {
     /**
-     * Event handler for living entity damage.
-     * Used for cancel damage when having infinity armor.
+     * Event handler for living entity damage.<br>
+     * This method cancels hurting player when the being equipped with infinity armor.<br>
      *
-     * @param event a {@link LivingDamageEvent living damage event} object.
+     * @param event a {@linkplain LivingDamageEvent living damage event} object.
      */
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onPlayerDamage(LivingDamageEvent event) {
@@ -56,7 +55,10 @@ public class ArmorListener {
     }
 
     /**
-     * @param event a {@link LivingAttackEvent living attack event} object.
+     * Handles a living attack event.<br>
+     * This method cancels hurting player when the being equipped with infinity armor.<br>
+     *
+     * @param event a {@linkplain LivingAttackEvent living attack event} object.
      */
     @SubscribeEvent
     public static void onPlayerAttacked(LivingAttackEvent event) {
@@ -85,7 +87,10 @@ public class ArmorListener {
     }
 
     /**
-     * @param event a {@link LivingHurtEvent living hurt event} object.
+     * Handles a living hurt event.<br>
+     * This method cancels hurting player when the being equipped with infinity armor.<br>
+     *
+     * @param event a {@linkplain LivingHurtEvent living hurt event} object.
      */
     @SubscribeEvent
     public static void onPlayerHurt(LivingHurtEvent event) {

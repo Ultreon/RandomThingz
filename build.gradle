@@ -294,11 +294,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.18'
     annotationProcessor 'org.projectlombok:lombok:1.18.18'
     annotationProcessor "org.graalvm.truffle:truffle-dsl-processor:19.3.5"
-    annotationProcessor("org.spongepowered:mixin:0.7-SNAPSHOT") {
-//        exclude module: 'guava'
-//        exclude module: 'commons-io'
-//        exclude module: 'gson'
-    }
+    annotationProcessor 'org.spongepowered:mixin:0.8:processor'
 
     testCompileOnly 'org.projectlombok:lombok:1.18.18'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.18'

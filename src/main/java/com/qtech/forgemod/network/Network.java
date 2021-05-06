@@ -1,6 +1,8 @@
 package com.qtech.forgemod.network;
 
 import com.qtech.forgemod.QForgeMod;
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.NetworkManager;
 import net.minecraftforge.fml.network.FMLHandshakeHandler;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -10,6 +12,10 @@ import java.util.Objects;
 @SuppressWarnings("UnusedAssignment")
 public final class Network {
     private static final String VERSION = "qforgemod-net1";
+
+    public static NetworkManager getManager() {
+        return Minecraft.getInstance().getConnection().getNetworkManager();
+    }
 
     public static SimpleChannel channel;
 

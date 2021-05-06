@@ -2,9 +2,9 @@ package com.qtech.forgemod.util.eventbus;
 
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.modules.tiles.ModTileEntities;
-import com.qtech.forgemod.modules.tiles.tileentities.renderer.ChristmasChestTileEntityRenderer;
-import com.qtech.forgemod.modules.environment.ModEntities;
-import com.qtech.forgemod.modules.environment.client.renderer.*;
+import com.qtech.forgemod.tileentity.renderer.ChristmasChestTileEntityRenderer;
+import com.qtech.forgemod.entity.common.ModEntities;
+import com.qtech.forgemod.client.renderer.*;
 import com.qtech.forgemod.modules.ui.ModContainers;
 import com.qtech.forgemod.modules.ui.screens.ExampleChestScreen;
 import lombok.experimental.UtilityClass;
@@ -28,12 +28,12 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
  * @author Qboi123
  */
 @UtilityClass
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ClientEventBusSubscriber {
     /**
      * Client setup event for client side render registration.
      *
-     * @param event the {@link FMLClientSetupEvent} event.
+     * @param event the {@linkplain FMLClientSetupEvent} event.
      */
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {

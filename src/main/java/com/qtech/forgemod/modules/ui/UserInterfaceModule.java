@@ -1,8 +1,8 @@
 package com.qtech.forgemod.modules.ui;
 
 import com.qtech.forgemod.client.gui.modules.ModuleCompatibility;
-import com.qtech.forgemod.common.CoreModule;
-import com.qtech.forgemod.common.ModuleSecurity;
+import com.qtech.forgemod.commons.CoreModule;
+import com.qtech.forgemod.commons.ModuleSecurity;
 import com.qtech.forgemod.init.Registration;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.fml.RegistryObject;

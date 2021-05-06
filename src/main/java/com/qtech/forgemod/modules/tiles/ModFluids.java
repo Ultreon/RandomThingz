@@ -1,7 +1,7 @@
 package com.qtech.forgemod.modules.tiles;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.items.ModItems;
+import com.qtech.forgemod.item.common.ModItems;
 import lombok.experimental.UtilityClass;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;

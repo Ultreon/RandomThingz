@@ -1,46 +1,45 @@
 package com.qtech.forgemod.modules.tiles;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.tiles.blocks.machines.arcaneescalator.ArcaneEscalatorBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.itempipe.ItemPipeBlock;
-import com.qtech.forgemod.modules.tiles.blocks.rails.SpeedRailBlock;
-import com.qtech.forgemod.modules.tiles.tileentities.ChristmasChestTileEntity;
-import com.qtech.forgemod.modules.tiles.tileentities.itemrenderer.ChristmasChestItemStackRenderer;
-import com.qtech.forgemod.modules.tiles.tileentities.renderer.ChristmasChestTileEntityRenderer;
+import com.qtech.forgemod.block.machines.arcaneescalator.ArcaneEscalatorBlock;
+import com.qtech.forgemod.block.machines.itempipe.ItemPipeBlock;
+import com.qtech.forgemod.block.rails.SpeedRailBlock;
+import com.qtech.forgemod.tileentity.ChristmasChestTileEntity;
+import com.qtech.forgemod.tileentity.itemrenderer.ChristmasChestItemStackRenderer;
 import com.qtech.forgemod.modules.ui.ModItemGroups;
 import com.qtech.forgemod.init.Registration;
-import com.qtech.forgemod.modules.tiles.blocks.machines.alloysmelter.AlloySmelterBlock;
-import com.qtech.forgemod.modules.items.OreMaterial;
-import com.qtech.forgemod.modules.tiles.blocks.AtomicTNTBlock;
-import com.qtech.forgemod.modules.tiles.blocks.ChristmasChestBlock;
-import com.qtech.forgemod.modules.tiles.blocks.GamePcBlock;
-import com.qtech.forgemod.modules.tiles.blocks.custom.CustomButtonBlock;
-import com.qtech.forgemod.modules.tiles.blocks.custom.render.CRDoorBlock;
-import com.qtech.forgemod.modules.tiles.blocks.custom.render.CRFlowerBlock;
-import com.qtech.forgemod.modules.tiles.blocks.furniture.WoodenCrateBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.AbstractMachineBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.MachineFrameBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.batterybox.BatteryBoxBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.compressor.CompressorBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.crusher.CrusherBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.dryingrack.DryingRackBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.electricfurnace.ElectricFurnaceBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.generator.coal.CoalGeneratorBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.generator.diesel.DieselGeneratorBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.generator.lava.LavaGeneratorBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.infuser.InfuserBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.mixer.MixerBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.pipe.PipeBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.pump.PumpBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.quarry.QuarryBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.refinery.RefineryBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.solidifier.SolidifierBlock;
-import com.qtech.forgemod.modules.tiles.blocks.machines.wire.WireBlock;
-import com.qtech.forgemod.modules.tiles.blocks.trees.CherryTree;
-import com.qtech.forgemod.modules.tiles.blocks.trees.EucalyptusTree;
-import com.qtech.forgemod.modules.items.objects.type.FaceableBlock;
+import com.qtech.forgemod.block.machines.alloysmelter.AlloySmelterBlock;
+import com.qtech.forgemod.item.common.ItemMaterial;
+import com.qtech.forgemod.block.AtomicTNTBlock;
+import com.qtech.forgemod.block.ChristmasChestBlock;
+import com.qtech.forgemod.block.GamePcBlock;
+import com.qtech.forgemod.block.custom.CustomButtonBlock;
+import com.qtech.forgemod.block.custom.render.CRDoorBlock;
+import com.qtech.forgemod.block.custom.render.CRFlowerBlock;
+import com.qtech.forgemod.block.furniture.WoodenCrateBlock;
+import com.qtech.forgemod.block.machines.AbstractMachineBlock;
+import com.qtech.forgemod.block.machines.MachineFrameBlock;
+import com.qtech.forgemod.block.machines.batterybox.BatteryBoxBlock;
+import com.qtech.forgemod.block.machines.compressor.CompressorBlock;
+import com.qtech.forgemod.block.machines.crusher.CrusherBlock;
+import com.qtech.forgemod.block.machines.dryingrack.DryingRackBlock;
+import com.qtech.forgemod.block.machines.electricfurnace.ElectricFurnaceBlock;
+import com.qtech.forgemod.block.machines.generator.coal.CoalGeneratorBlock;
+import com.qtech.forgemod.block.machines.generator.diesel.DieselGeneratorBlock;
+import com.qtech.forgemod.block.machines.generator.lava.LavaGeneratorBlock;
+import com.qtech.forgemod.block.machines.infuser.InfuserBlock;
+import com.qtech.forgemod.block.machines.mixer.MixerBlock;
+import com.qtech.forgemod.block.machines.pipe.PipeBlock;
+import com.qtech.forgemod.block.machines.pump.PumpBlock;
+import com.qtech.forgemod.block.machines.quarry.QuarryBlock;
+import com.qtech.forgemod.block.machines.refinery.RefineryBlock;
+import com.qtech.forgemod.block.machines.solidifier.SolidifierBlock;
+import com.qtech.forgemod.block.machines.wire.WireBlock;
+import com.qtech.forgemod.block.trees.CherryTree;
+import com.qtech.forgemod.block.trees.EucalyptusTree;
+import com.qtech.forgemod.item.type.FaceableBlock;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
-import com.qtech.forgemod.common.enums.MachineTier;
+import com.qtech.forgemod.commons.enums.MachineTier;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import lombok.experimental.UtilityClass;
 import mcp.MethodsReturnNonnullByDefault;
@@ -359,7 +358,7 @@ public final class ModBlocks {
     //     Utility methods     //
     //////////////////////////////
     static {
-        OreMaterial.registerBlocks();
+        ItemMaterial.registerBlocks();
     }
 
     private static <T extends Item> ItemRegistryObject<T> registerItem(String name, Supplier<T> supplier) {
@@ -496,7 +495,7 @@ public final class ModBlocks {
         for (Block block : ForgeRegistries.BLOCKS.getValues()) {
             ResourceLocation lootTable = block.getLootTable();
             // The AirBlock check filters out removed blocks
-            if (lootTable.getNamespace().equals(QForgeMod.modId) && !(block instanceof AirBlock) && !lootTableManager.getLootTableKeys().contains(lootTable)) {
+            if (lootTable.getNamespace().equals(QForgeMod.MOD_ID) && !(block instanceof AirBlock) && !lootTableManager.getLootTableKeys().contains(lootTable)) {
                 QForgeMod.LOGGER.error("Missing block loot table '{}' for {}", lootTable, block.getRegistryName());
                 missing.add(lootTable.toString());
             }

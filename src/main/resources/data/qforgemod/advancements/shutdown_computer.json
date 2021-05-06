@@ -18,6 +18,7 @@
     "get_sword": {
       "trigger": "qforgemod:used_kill_switch",
       "conditions": {
+
       }
     }
   }

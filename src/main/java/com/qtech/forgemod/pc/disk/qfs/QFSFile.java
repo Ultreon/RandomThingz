@@ -1,6 +1,6 @@
 package com.qtech.forgemod.pc.disk.qfs;
 
-import com.qtech.forgemod.common.IntSize;
+import com.qtech.forgemod.commons.IntSize;
 import com.qtech.forgemod.pc.disk.AbstractFile;
 import com.qtech.forgemod.pc.disk.Partition;
 

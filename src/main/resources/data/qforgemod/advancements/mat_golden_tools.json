@@ -1,0 +1,40 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:golden_axe"
+        },
+        "title": {
+            "translate": "advancements.qforgemod.golden_tools.title"
+        },
+        "description": {
+            "translate": "advancements.qforgemod.golden_tools.description"
+        },
+        "show_toast": true,
+        "announce_to_chat": true
+    },
+    "parent": "qforgemod:mat_gold",
+    "criteria": {
+        "get_tools": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "minecraft:golden_sword"
+                    },
+                    {
+                        "item": "minecraft:golden_axe"
+                    },
+                    {
+                        "item": "minecraft:golden_pickaxe"
+                    },
+                    {
+                        "item": "minecraft:golden_shovel"
+                    },
+                    {
+                        "item": "minecraft:golden_hoe"
+                    }
+                ]
+            }
+        }
+    }
+}

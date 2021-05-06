@@ -1,0 +1,28 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:gold_ingot"
+        },
+        "title": {
+            "translate": "advancements.qforgemod.material_gold.title"
+        },
+        "description": {
+            "translate": "advancements.qforgemod.material_gold.description"
+        },
+        "show_toast": true,
+        "announce_to_chat": true
+    },
+    "parent": "qforgemod:mat_iron",
+    "criteria": {
+        "get_sword": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "minecraft:gold_ingot"
+                    }
+                ]
+            }
+        }
+    }
+}

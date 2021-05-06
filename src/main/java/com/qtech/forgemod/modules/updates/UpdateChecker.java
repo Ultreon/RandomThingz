@@ -2,8 +2,8 @@ package com.qtech.forgemod.modules.updates;
 
 import com.qtech.forgemod.QForgeMod;
 import com.qtech.forgemod.client.gui.settings.SettingsScreen;
-import com.qtech.forgemod.common.Ticker;
-import com.qtech.forgemod.common.interfaces.IVersion;
+import com.qtech.forgemod.commons.Ticker;
+import com.qtech.forgemod.commons.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraftforge.event.TickEvent;

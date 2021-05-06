@@ -1,8 +1,8 @@
 package com.qtech.forgemod.modules.tiles;
 
 import com.qtech.forgemod.init.ObjectInit;
-import com.qtech.forgemod.modules.tiles.tileentities.ChristmasChestTileEntity;
-import com.qtech.forgemod.modules.tiles.tileentities.CrateTileEntity;
+import com.qtech.forgemod.tileentity.ChristmasChestTileEntity;
+import com.qtech.forgemod.tileentity.CrateTileEntity;
 import lombok.experimental.UtilityClass;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;

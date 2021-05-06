@@ -33,7 +33,7 @@ import java.util.Objects;
 
 /**
  * Main class for frame fences - all important block info can be found here
- * Visit {@link FrameBlock} for a better documentation
+ * Visit {@linkplain FrameBlock} for a better documentation
  *
  * @author PianoManu
  * @version 1.5 10/06/20

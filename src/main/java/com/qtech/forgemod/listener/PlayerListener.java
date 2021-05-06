@@ -1,19 +1,16 @@
 package com.qtech.forgemod.listener;
 
+import com.google.common.annotations.Beta;
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.modules.tiles.ModBlocks;
 import lombok.experimental.UtilityClass;
-import net.minecraft.block.Blocks;
-import net.minecraft.world.IWorld;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.Calendar;
-
-@Mod.EventBusSubscriber(modid = QForgeMod.modId, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 @UtilityClass
 public class PlayerListener {
+    @Beta
     @SubscribeEvent
     public static void onBlockPlaced(BlockEvent.EntityPlaceEvent event) {
 //        Calendar calendar = Calendar.getInstance();

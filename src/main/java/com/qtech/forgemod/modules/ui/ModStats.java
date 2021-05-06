@@ -17,7 +17,7 @@ public class ModStats {
 
     @SuppressWarnings("SameParameterValue")
     private static ResourceLocation registerCustomStat(String name) {
-        ResourceLocation resourcelocation = new ResourceLocation(QForgeMod.modId, name);
+        ResourceLocation resourcelocation = new ResourceLocation(QForgeMod.MOD_ID, name);
         Registry.register(Registry.CUSTOM_STAT, name, resourcelocation);
         Stats.CUSTOM.get(resourcelocation, IStatFormatter.DEFAULT);
         return resourcelocation;

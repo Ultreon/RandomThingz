@@ -37,7 +37,7 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 /**
  * Main class for frame fence gates - all important block info can be found here
- * Visit {@link FrameBlock} for a better documentation
+ * Visit {@linkplain FrameBlock} for a better documentation
  *
  * @author PianoManu
  * @version 1.3 10/06/20

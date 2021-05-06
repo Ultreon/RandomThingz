@@ -1,7 +1,7 @@
 package com.qtech.forgemod.modules.ui;
 
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.container.CrateContainer;
+import com.qtech.forgemod.inventory.CrateContainer;
 import com.qtech.forgemod.init.ObjectInit;
 import lombok.experimental.UtilityClass;
 import net.minecraft.inventory.container.ContainerType;
@@ -19,7 +19,7 @@ import java.util.function.Supplier;
  */
 @UtilityClass
 public class ModContainers extends ObjectInit<ContainerType<?>> {
-    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, QForgeMod.modId);
+    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, QForgeMod.MOD_ID);
 
     // Crates, chests.
     public static final RegistryObject<ContainerType<CrateContainer>> WOODEN_CRATE = CONTAINER_TYPES.register("wooden_crate", () -> IForgeContainerType.create(CrateContainer::new));

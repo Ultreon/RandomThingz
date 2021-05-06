@@ -22,7 +22,7 @@ import static com.qtech.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
 
 /**
  * Main class for standing frame signs - all important block info can be found here
- * Visit {@link FrameBlock} for a better documentation
+ * Visit {@linkplain FrameBlock} for a better documentation
  * @author PianoManu
  * @version 1.1 09/25/20
  */

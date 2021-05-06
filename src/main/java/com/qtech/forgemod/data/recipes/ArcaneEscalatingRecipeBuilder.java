@@ -1,28 +1,20 @@
 package com.qtech.forgemod.data.recipes;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.qtech.forgemod.QForgeMod;
-import com.qtech.forgemod.common.java.maps.SequencedHashMap;
 import com.qtech.forgemod.init.ModRecipes;
-import com.qtech.forgemod.modules.items.OreMaterial;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 
 public class ArcaneEscalatingRecipeBuilder {
@@ -52,7 +44,7 @@ public class ArcaneEscalatingRecipeBuilder {
     public void build(Consumer<IFinishedRecipe> consumer) {
         ResourceLocation resultId = NameUtils.from(result);
         ResourceLocation id = new ResourceLocation(
-                "minecraft".equals(resultId.getNamespace()) ? QForgeMod.modId : resultId.getNamespace(),
+                "minecraft".equals(resultId.getNamespace()) ? QForgeMod.MOD_ID : resultId.getNamespace(),
                 "arcane_escalating/" + resultId.getPath());
         build(consumer, id);
     }

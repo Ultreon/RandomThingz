@@ -6,7 +6,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.qtech.forgemod.modules.tiles.ModFluids;
 import com.qtech.forgemod.modules.tiles.ModBlocks;
-import com.qtech.forgemod.modules.items.ModItems;
+import com.qtech.forgemod.item.common.ModItems;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;

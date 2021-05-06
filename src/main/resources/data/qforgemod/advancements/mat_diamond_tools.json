@@ -1,0 +1,40 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:diamond_axe"
+        },
+        "title": {
+            "translate": "advancements.qforgemod.diamond_tools.title"
+        },
+        "description": {
+            "translate": "advancements.qforgemod.diamond_tools.description"
+        },
+        "show_toast": true,
+        "announce_to_chat": true
+    },
+    "parent": "qforgemod:mat_diamond",
+    "criteria": {
+        "get_tools": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "minecraft:diamond_sword"
+                    },
+                    {
+                        "item": "minecraft:diamond_axe"
+                    },
+                    {
+                        "item": "minecraft:diamond_pickaxe"
+                    },
+                    {
+                        "item": "minecraft:diamond_shovel"
+                    },
+                    {
+                        "item": "minecraft:diamond_hoe"
+                    }
+                ]
+            }
+        }
+    }
+}

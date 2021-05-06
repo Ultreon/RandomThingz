@@ -1,11 +1,11 @@
 package com.qtech.forgemod.modules.debugMenu;
 
-import com.qtech.forgemod.common.Angle;
-import com.qtech.forgemod.common.Multiplier;
-import com.qtech.forgemod.common.Percentage;
-import com.qtech.forgemod.common.IntSize;
-import com.qtech.forgemod.common.enums.MoonPhase;
-import com.qtech.forgemod.common.interfaces.Formattable;
+import com.qtech.forgemod.commons.Angle;
+import com.qtech.forgemod.commons.Multiplier;
+import com.qtech.forgemod.commons.Percentage;
+import com.qtech.forgemod.commons.IntSize;
+import com.qtech.forgemod.commons.enums.MoonPhase;
+import com.qtech.forgemod.commons.interfaces.Formattable;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;

@@ -34,6 +34,6 @@ public class QFMUpdater extends AbstractUpdater<QFMVersion> {
 
     @Override
     public QFMVersion getCurrentModVersion() {
-        return QForgeMod.version;
+        return QForgeMod.QFM_VERSION;
     }
 }

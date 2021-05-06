@@ -1,5 +1,6 @@
 package com.qtech.forgemod.listener;
 
+import com.google.common.annotations.Beta;
 import com.studiohartman.jamepad.*;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
@@ -16,6 +17,7 @@ import org.jline.utils.ShutdownHooks;
  *
  * @author Qboi123
  */
+@Beta
 //@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 @UtilityClass
 public class TickListener {
@@ -31,6 +33,7 @@ public class TickListener {
         ShutdownHooks.add(controllers::quitSDLGamepad);
     }
 
+    @Beta
 //    @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public static void onClientPlayerTick(TickEvent.ClientTickEvent event) {

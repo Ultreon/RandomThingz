@@ -41,7 +41,7 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 /**
  * Main class for frame "slabs", they can be placed in six different ways (that's the reason for this class name) - all important block info can be found here
- * Visit {@link FrameBlock} for a better documentation
+ * Visit {@linkplain FrameBlock} for a better documentation
  *
  * @author PianoManu
  * @version 1.6 10/21/20

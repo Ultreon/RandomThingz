@@ -1,0 +1,37 @@
+{
+    "display": {
+        "icon": {
+            "item": "minecraft:chainmail_chestplate"
+        },
+        "title": {
+            "translate": "advancements.qforgemod.chainmail_armor.title"
+        },
+        "description": {
+            "translate": "advancements.qforgemod.chainmail_armor.description"
+        },
+        "show_toast": true,
+        "announce_to_chat": true
+    },
+    "parent": "qforgemod:mat_stone",
+    "criteria": {
+        "get_armor": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "minecraft:chainmail_helmet"
+                    },
+                    {
+                        "item": "minecraft:chainmail_chestplate"
+                    },
+                    {
+                        "item": "minecraft:chainmail_leggings"
+                    },
+                    {
+                        "item": "minecraft:chainmail_boots"
+                    }
+                ]
+            }
+        }
+    }
+}

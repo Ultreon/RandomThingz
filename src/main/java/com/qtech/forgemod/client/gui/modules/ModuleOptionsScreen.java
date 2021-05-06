@@ -1,6 +1,6 @@
 package com.qtech.forgemod.client.gui.modules;
 
-import com.qtech.forgemod.common.Module;
+import com.qtech.forgemod.commons.Module;
 import com.qtech.forgemod.modules.ui.screens.AdvancedScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.text.TranslationTextComponent;
