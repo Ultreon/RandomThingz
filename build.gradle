@@ -172,7 +172,6 @@ minecraft {
                 qforgemod {
                     //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
-                    source sourceSets.test
                 }
             }
         }
