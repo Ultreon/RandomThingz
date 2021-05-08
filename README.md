@@ -1,4 +1,5 @@
-# QForgeMod [![Java CI with Gradle](https://github.com/QTechCommunity/QForgeMod/actions/workflows/gradle.yml/badge.svg)](https://github.com/QTechCommunity/QForgeMod/actions/workflows/gradle.yml)
+# QForgeMod
+*Probably just another random things mod.*
 
 ***
 ## Pages
@@ -8,8 +9,8 @@ The GitHub pages are here: https://qtechcommunity.github.io/QForgeMod/.
 1) Clone the [**QModLib**](https://github.com/Qboi123/QModLib) repository.  
 2) Change the variable `local_maven` in the `gradle.properties` file of your QModLib cloned repo to an empty folder, or a local maven repo.
 3) Execute gradle command `uploadJars`, or the command `build :jar`. *This will upload it to the local maven repo.*
-4) Clone the [**QForgeMod**](https://github.com/Qboi123/QForgeMod) repository.
-5) Change the variable `local_maven` in the `gradle.properties` file of your QForgeMod cloned repo to the same folder set in step 2.
+4) Clone the [**Random Thingz**](https://github.com/Qboi123/RandomThingz) repository.
+5) Change the variable `local_maven` in the `gradle.properties` file of your Random Thingz cloned repo to the same folder set in step 2.
 6) Run gradle command runClient, or use the runClient run config in your IDE.
 
 ## Planned features.
@@ -31,4 +32,4 @@ The GitHub pages are here: https://qtechcommunity.github.io/QForgeMod/.
 
 ## Build numbers.
 On a merge, the build number will be recalculated. *See image below:*  
-![Workflow](https://github.com/QTechCommunity/QForgeMod/raw/master/img/Image1.png)
+![Workflow](https://github.com/QTechCommunity/RandomThingz/raw/master/img/Image1.png)
