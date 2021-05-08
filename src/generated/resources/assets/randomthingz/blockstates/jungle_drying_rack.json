@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "randomthingz:block/jungle_drying_rack",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "randomthingz:block/jungle_drying_rack"
+    },
+    "facing=west": {
+      "model": "randomthingz:block/jungle_drying_rack",
+      "y": 90
+    },
+    "facing=east": {
+      "model": "randomthingz:block/jungle_drying_rack",
+      "y": 270
+    }
+  }
+}

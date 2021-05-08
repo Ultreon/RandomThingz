@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    " / "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "randomthingz:electrum_ingot"
+    }
+  },
+  "result": {
+    "item": "randomthingz:electrum_hammer"
+  }
+}

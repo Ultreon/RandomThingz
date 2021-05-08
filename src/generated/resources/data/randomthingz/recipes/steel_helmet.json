@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "randomthingz:steel_helmet"
+  }
+}

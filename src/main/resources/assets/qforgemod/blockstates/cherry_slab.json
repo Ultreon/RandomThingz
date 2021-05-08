@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "type=bottom": { "model": "randomthingz:block/cherry_slab" },
-        "type=top": { "model": "randomthingz:block/cherry_slab_top" },
-        "type=double": { "model": "randomthingz:block/cherry_planks" }
-    }
-}

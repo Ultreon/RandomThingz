@@ -1,0 +1,13 @@
+{
+  "type": "randomthingz:compressing",
+  "process_time": 400,
+  "ingredient": {
+    "value": {
+      "tag": "forge:ingots/iron"
+    },
+    "count": 1
+  },
+  "result": {
+    "item": "randomthingz:compressed_iron_ingot"
+  }
+}

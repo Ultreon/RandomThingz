@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "randomthingz:items/uranium_lumber_axe"
+  }
+}

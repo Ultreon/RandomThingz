@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:beryl"
+    }
+  },
+  "result": {
+    "item": "randomthingz:beryl_block",
+    "count": 1
+  }
+}

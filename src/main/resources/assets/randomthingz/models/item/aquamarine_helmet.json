@@ -1,0 +1,35 @@
+{
+  "parent": "item/generated",
+  "defaults": {
+    "textures": {
+      "layer0": "randomthingz:items/aquamarine_helmet"
+    },
+    "variants": {
+      "normal": {
+        "textures": {
+          "layer0": "randomthingz:items/aquamarine_helmet"
+        }
+      },
+      "inventory": {
+        "textures": {
+          "layer0": "randomthingz:items/aquamarine_helmet"
+        }
+      }
+    }
+  },
+  "textures": {
+    "layer0": "randomthingz:items/aquamarine_helmet"
+  },
+  "variants": {
+    "normal": {
+      "textures": {
+        "layer0": "randomthingz:items/aquamarine_helmet"
+      }
+    },
+    "inventory": {
+      "textures": {
+        "layer0": "randomthingz:items/aquamarine_helmet"
+      }
+    }
+  }
+}

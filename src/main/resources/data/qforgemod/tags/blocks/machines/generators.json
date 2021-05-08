@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "#randomthingz:machines/generators/coal",
-    "#randomthingz:machines/generators/lava",
-    "#randomthingz:machines/generators/diesel"
-  ]
-}

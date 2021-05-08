@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "randomthingz:ultrinium_ore"
-  },
-  "result": "randomthingz:ultrinium_ingot",
-  "experience": 0.7,
-  "cookingtime": 800
-}

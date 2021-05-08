@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomthingz:enderium_block"
+    }
+  ],
+  "result": {
+    "item": "randomthingz:enderium_ingot",
+    "count": 9
+  }
+}

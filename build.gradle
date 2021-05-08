@@ -169,30 +169,27 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                qforgemod {
+                randomthingz {
                     //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
                 }
             }
         }
 
-        client {
-            //noinspection GroovyAssignabilityCheck
-            workingDirectory project.file('run')
+        clientTest {
+            parent runs.client
+
             arg "-mixin.config=randomthingz.mixins.json"
 
             taskName "runClientTest"
 
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+            environment 'MOD_CLASSES', 'dummy'
 
             mods {
-                qforgemod {
-                    //noinspection GroovyAssignabilityCheck
+                randomthingz {
                     source sourceSets.main
+                }
+                test {
                     source sourceSets.test
                 }
             }
@@ -210,7 +207,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                qforgemod {
+                randomthingz {
                     //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
                 }
@@ -236,7 +233,7 @@ minecraft {
                     '--existing-mod', 'jei'
 
             mods {
-                qforgemod {
+                randomthingz {
                     //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
                 }

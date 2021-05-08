@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "tag": "forge:ores/uranium"
-  },
-  "result": "randomthingz:uranium_ingot",
-  "experience": 1.0,
-  "cookingtime": 200
-}

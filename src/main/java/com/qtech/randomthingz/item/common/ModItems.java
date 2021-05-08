@@ -8,6 +8,7 @@ import com.qtech.randomthingz.item.EucalyptusLeafItem;
 import com.qtech.randomthingz.item.LegendaryEnderPearlItem;
 import com.qtech.randomthingz.item.UnstableInfinityIngot;
 import com.qtech.randomthingz.item.advanced.AdvancedBowItem;
+import com.qtech.randomthingz.item.debug.DebugItem;
 import com.qtech.randomthingz.item.energy.BatteryItem;
 import com.qtech.randomthingz.item.energy.WrenchItem;
 import com.qtech.randomthingz.item.fluid.CanisterItem;
@@ -60,7 +61,7 @@ public final class ModItems {
     }
 
     public static final ItemRegistryObject<WrenchItem> WRENCH = register("wrench", WrenchItem::new);
-    public static final ItemRegistryObject<Item> DEBUG_ITEM = register("debug_item", () -> new Item(new Item.Properties()));
+    public static final ItemRegistryObject<Item> DEBUG_ITEM = register("debug_item", DebugItem::new);
     public static final ItemRegistryObject<BatteryItem> BATTERY = register("battery", BatteryItem::new);
     public static final ItemRegistryObject<HandPumpItem> HAND_PUMP = register("hand_pump", HandPumpItem::new);
     public static final ItemRegistryObject<CanisterItem> CANISTER = register("canister", () -> new CanisterItem(new Item.Properties().group(ItemGroup.MISC)));

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:dusts/steel"
+  },
+  "result": "randomthingz:steel_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

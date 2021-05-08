@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "X",
+    "#"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:infinity_ingot"
+    },
+    "#": {
+      "tag": "sticks"
+    }
+  },
+  "result": {
+    "item": "randomthingz:infinity_sword"
+  }
+}

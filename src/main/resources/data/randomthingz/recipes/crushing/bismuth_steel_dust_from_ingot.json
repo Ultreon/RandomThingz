@@ -1,0 +1,12 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 200,
+  "ingredient": {
+    "tag": "forge:ingots/bismuth_steel"
+  },
+  "results": [
+    {
+      "item": "randomthingz:bismuth_steel_dust"
+    }
+  ]
+}

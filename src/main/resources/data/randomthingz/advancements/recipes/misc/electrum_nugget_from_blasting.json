@@ -1,0 +1,160 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:electrum_nugget_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_electrum_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:electrum_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_electrum_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:electrum_shovel"
+          }
+        ]
+      }
+    },
+    "has_electrum_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:electrum_axe"
+          }
+        ]
+      }
+    },
+    "has_electrum_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:electrum_hoe"
+          }
+        ]
+      }
+    },
+    "has_electrum_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:electrum_sword"
+          }
+        ]
+      }
+    },
+    "has_electrum_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:electrum_helmet"
+          }
+        ]
+      }
+    },
+    "has_electrum_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:electrum_chestplate"
+          }
+        ]
+      }
+    },
+    "has_electrum_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:electrum_leggings"
+          }
+        ]
+      }
+    },
+    "has_electrum_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:electrum_boots"
+          }
+        ]
+      }
+    },
+    "has_chainmail_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_helmet"
+          }
+        ]
+      }
+    },
+    "has_chainmail_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_chestplate"
+          }
+        ]
+      }
+    },
+    "has_chainmail_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_leggings"
+          }
+        ]
+      }
+    },
+    "has_chainmail_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_boots"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:electrum_nugget_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_electrum_pickaxe",
+      "has_electrum_shovel",
+      "has_electrum_axe",
+      "has_electrum_hoe",
+      "has_electrum_sword",
+      "has_electrum_helmet",
+      "has_electrum_chestplate",
+      "has_electrum_leggings",
+      "has_electrum_boots",
+      "has_the_recipe"
+    ]
+  ]
+}

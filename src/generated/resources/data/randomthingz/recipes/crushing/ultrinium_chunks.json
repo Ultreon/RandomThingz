@@ -1,0 +1,17 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 400,
+  "ingredient": {
+    "tag": "forge:ores/ultrinium"
+  },
+  "results": [
+    {
+      "item": "randomthingz:ultrinium_chunks",
+      "count": 2
+    },
+    {
+      "item": "minecraft:cobblestone",
+      "chance": 0.1
+    }
+  ]
+}

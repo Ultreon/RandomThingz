@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:bismuth_ingot"
+    }
+  },
+  "result": {
+    "item": "randomthingz:bismuth_leggings"
+  }
+}

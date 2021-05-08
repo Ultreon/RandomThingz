@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "/ ",
+    "/ "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "randomthingz:brass_ingot"
+    }
+  },
+  "result": {
+    "item": "randomthingz:brass_hoe"
+  }
+}

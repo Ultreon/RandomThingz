@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X/ ",
+    " / "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "randomthingz:signalum_ingot"
+    }
+  },
+  "result": {
+    "item": "randomthingz:signalum_lumber_axe"
+  }
+}

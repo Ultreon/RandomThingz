@@ -1,0 +1,12 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 200,
+  "ingredient": {
+    "tag": "forge:cobblestone"
+  },
+  "results": [
+    {
+      "item": "minecraft:gravel"
+    }
+  ]
+}

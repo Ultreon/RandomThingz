@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "randomthingz:redstone_longsword",
+    "randomthingz:copper_longsword",
+    "randomthingz:tin_longsword",
+    "randomthingz:compressed_iron_longsword",
+    "randomthingz:obsidian_longsword",
+    "randomthingz:silver_longsword",
+    "randomthingz:lead_longsword",
+    "randomthingz:nickel_longsword",
+    "randomthingz:platinum_longsword",
+    "randomthingz:zinc_longsword",
+    "randomthingz:bismuth_longsword",
+    "randomthingz:aluminum_longsword",
+    "randomthingz:uranium_longsword",
+    "randomthingz:bronze_longsword",
+    "randomthingz:brass_longsword",
+    "randomthingz:invar_longsword",
+    "randomthingz:electrum_longsword",
+    "randomthingz:steel_longsword",
+    "randomthingz:bismuth_brass_longsword",
+    "randomthingz:aluminum_steel_longsword",
+    "randomthingz:bismuth_steel_longsword",
+    "randomthingz:signalum_longsword",
+    "randomthingz:lumium_longsword",
+    "randomthingz:enderium_longsword",
+    "randomthingz:cobalt_longsword",
+    "randomthingz:ultrinium_longsword",
+    "randomthingz:infinity_longsword"
+  ]
+}

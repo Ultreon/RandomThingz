@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "randomthingz:redstone_hoe",
+    "randomthingz:copper_hoe",
+    "randomthingz:tin_hoe",
+    "randomthingz:compressed_iron_hoe",
+    "randomthingz:obsidian_hoe",
+    "randomthingz:silver_hoe",
+    "randomthingz:lead_hoe",
+    "randomthingz:nickel_hoe",
+    "randomthingz:platinum_hoe",
+    "randomthingz:zinc_hoe",
+    "randomthingz:bismuth_hoe",
+    "randomthingz:aluminum_hoe",
+    "randomthingz:uranium_hoe",
+    "randomthingz:bronze_hoe",
+    "randomthingz:brass_hoe",
+    "randomthingz:invar_hoe",
+    "randomthingz:electrum_hoe",
+    "randomthingz:steel_hoe",
+    "randomthingz:bismuth_brass_hoe",
+    "randomthingz:aluminum_steel_hoe",
+    "randomthingz:bismuth_steel_hoe",
+    "randomthingz:signalum_hoe",
+    "randomthingz:lumium_hoe",
+    "randomthingz:enderium_hoe",
+    "randomthingz:cobalt_hoe",
+    "randomthingz:ultrinium_hoe",
+    "randomthingz:infinity_hoe"
+  ]
+}

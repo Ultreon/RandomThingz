@@ -1,0 +1,16 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 300,
+  "ingredient": {
+    "tag": "randomthingz:chunks/lead"
+  },
+  "results": [
+    {
+      "item": "randomthingz:lead_dust"
+    },
+    {
+      "item": "randomthingz:lead_dust",
+      "chance": 0.1
+    }
+  ]
+}

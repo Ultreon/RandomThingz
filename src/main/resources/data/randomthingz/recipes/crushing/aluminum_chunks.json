@@ -1,0 +1,17 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 400,
+  "ingredient": {
+    "tag": "forge:ores/aluminum"
+  },
+  "results": [
+    {
+      "item": "randomthingz:aluminum_chunks",
+      "count": 2
+    },
+    {
+      "item": "minecraft:cobblestone",
+      "chance": 0.1
+    }
+  ]
+}

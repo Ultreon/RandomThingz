@@ -203,7 +203,7 @@ public final class RandomThingz {
 
         // Assign constants.
         Constants.logger = LOGGER;
-        Constants.qforgemod = this;
+        Constants.randomthingz = this;
         Constants.proxy = proxy;
 
         // Final fields.

@@ -1,0 +1,12 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 200,
+  "ingredient": {
+    "tag": "forge:ingots/brass"
+  },
+  "results": [
+    {
+      "item": "randomthingz:brass_dust"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 300,
+  "ingredient": {
+    "tag": "randomthingz:chunks/lumium"
+  },
+  "results": [
+    {
+      "item": "randomthingz:lumium_dust"
+    },
+    {
+      "item": "randomthingz:lumium_dust",
+      "chance": 0.1
+    }
+  ]
+}

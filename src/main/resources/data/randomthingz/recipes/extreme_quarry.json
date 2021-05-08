@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XVX",
+    "XoX",
+    "XTX"
+  ],
+  "key": {
+    "X": {
+      "tag": "ingots/silver"
+    },
+    "o": {
+      "tag": "dusts/redstone"
+    },
+    "T": {
+      "item": "minecraft:diamond_pickaxe"
+    },
+    "V": {
+      "item": "minecraft:hopper"
+    }
+  },
+  "result": {
+    "item": "randomthingz:extreme_quarry"
+  }
+}

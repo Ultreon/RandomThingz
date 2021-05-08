@@ -1,0 +1,7 @@
+{
+  "parent": "block/door_bottom",
+  "textures": {
+    "bottom": "randomthingz:blocks/iron_barrier_door_bottom",
+    "top": "randomthingz:blocks/iron_barrier_door_top"
+  }
+}

@@ -149,7 +149,7 @@ public class SettingsScreen extends Screen {
     public static void onOptionsScreenInit(GuiScreenEvent.InitGuiEvent event) {
         if (event.getGui() instanceof OptionsScreen) {
             event.addWidget(new Button(event.getGui().width / 2 - 155 - 40, event.getGui().height / 6 + 120 - 6, 30, 20, new StringTextComponent("RandomThingz"), (p_213060_1_) -> {
-//            event.getGui().getMinecraft().displayGuiScreen(new SettingsScreen(new TranslationTextComponent("screen.qforgemod.settings.title")));
+//            event.getGui().getMinecraft().displayGuiScreen(new SettingsScreen(new TranslationTextComponent("screen.randomthingz.settings.title")));
                 event.getGui().getMinecraft().displayGuiScreen(new SettingsScreen(event.getGui(), new StringTextComponent("RandomThingz")));
             }));
         }

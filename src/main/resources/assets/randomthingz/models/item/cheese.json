@@ -1,0 +1,35 @@
+{
+  "parent": "item/generated",
+  "defaults": {
+    "textures": {
+      "layer0": "randomthingz:items/cheese"
+    },
+    "variants": {
+      "normal": {
+        "textures": {
+          "layer0": "randomthingz:items/cheese"
+        }
+      },
+      "inventory": {
+        "textures": {
+          "layer0": "randomthingz:items/cheese"
+        }
+      }
+    }
+  },
+  "textures": {
+    "layer0": "randomthingz:items/cheese"
+  },
+  "variants": {
+    "normal": {
+      "textures": {
+        "layer0": "randomthingz:items/cheese"
+      }
+    },
+    "inventory": {
+      "textures": {
+        "layer0": "randomthingz:items/cheese"
+      }
+    }
+  }
+}

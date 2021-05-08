@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "#randomthingz:drying_racks/acacia",
+    "#randomthingz:drying_racks/birch",
+    "#randomthingz:drying_racks/cherry",
+    "#randomthingz:drying_racks/dark_oak",
+    "#randomthingz:drying_racks/eucalyptus",
+    "#randomthingz:drying_racks/jungle",
+    "#randomthingz:drying_racks/oak",
+    "#randomthingz:drying_racks/spruce"
+  ]
+}

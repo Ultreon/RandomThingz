@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "tag": "randomthingz:chunks/platinum"
+    },
+    {
+      "tag": "forge:dusts/platinum"
+    }
+  ],
+  "result": "randomthingz:platinum_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

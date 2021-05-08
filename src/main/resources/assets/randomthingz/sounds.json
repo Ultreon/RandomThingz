@@ -1,0 +1,93 @@
+{
+  "teleport": {
+    "category": "block",
+    "subtitle": "randomthingz.subtitle.teleport",
+    "sounds": [
+      "randomthingz:teleport"
+    ]
+  },
+  "block.cabinet.open": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.open_cabinet",
+    "sounds": [
+      "randomthingz:block/cabinet/open"
+    ]
+  },
+  "block.cabinet.close": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.close_cabinet",
+    "sounds": [
+      "randomthingz:block/cabinet/close"
+    ]
+  },
+  "block.bedside_cabinet.open": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.open_cabinet",
+    "sounds": [
+      "randomthingz:block/bedside_cabinet/open"
+    ]
+  },
+  "block.bedside_cabinet.close": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.close_cabinet",
+    "sounds": [
+      "randomthingz:block/bedside_cabinet/close"
+    ]
+  },
+  "block.blinds.open": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.open_blinds",
+    "sounds": [
+      "randomthingz:block/blinds/open"
+    ]
+  },
+  "block.blinds.close": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.close_blinds",
+    "sounds": [
+      "randomthingz:block/blinds/close"
+    ]
+  },
+  "block.trampoline.bounce": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.trampoline_bounce",
+    "sounds": [
+      "randomthingz:block/trampoline/bounce"
+    ]
+  },
+  "block.grill.place": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.grill_place",
+    "sounds": [
+      "randomthingz:block/grill/place"
+    ]
+  },
+  "block.grill.flip": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.grill_flip",
+    "sounds": [
+      "randomthingz:block/grill/flip"
+    ]
+  },
+  "block.diving_board.bounce": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.diving_board.bounce",
+    "sounds": [
+      "randomthingz:block/diving_board/bounce"
+    ]
+  },
+  "block.fridge.open": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.open_fridge",
+    "sounds": [
+      "randomthingz:block/fridge/open"
+    ]
+  },
+  "block.fridge.close": {
+    "category": "block",
+    "subtitle": "subtitle.randomthingz.close_fridge",
+    "sounds": [
+      "randomthingz:block/fridge/close"
+    ]
+  }
+}

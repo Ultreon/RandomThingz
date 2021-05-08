@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " XX",
+    "XXX",
+    "/X "
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:topaz"
+    },
+    "/": {
+      "tag": "forge:sticks"
+    }
+  },
+  "result": {
+    "item": "randomthingz:topaz_broadsword"
+  }
+}

@@ -7,16 +7,15 @@ import org.apache.logging.log4j.Logger;
 
 public class Constants {
     static IProxy proxy;
-    static RandomThingz qforgemod;
-    static Minecraft minecraft;
+    static RandomThingz randomthingz;
     static Logger logger;
 
     public static Logger getLogger() {
         return logger;
     }
 
-    public static RandomThingz getQForgeMod() {
-        return qforgemod;
+    public static RandomThingz getRandomThingzMod() {
+        return randomthingz;
     }
 
     @OnlyIn(Dist.CLIENT)

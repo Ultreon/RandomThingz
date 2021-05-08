@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:tin_ingot"
+    }
+  },
+  "result": {
+    "item": "randomthingz:tin_leggings"
+  }
+}

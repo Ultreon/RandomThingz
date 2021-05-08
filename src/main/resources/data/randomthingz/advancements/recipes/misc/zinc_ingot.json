@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:zinc_ingot"
+    ]
+  },
+  "criteria": {
+    "has_zinc_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:zinc_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:zinc_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_zinc_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

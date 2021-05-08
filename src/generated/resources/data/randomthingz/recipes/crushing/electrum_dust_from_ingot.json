@@ -1,0 +1,12 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 200,
+  "ingredient": {
+    "tag": "forge:ingots/electrum"
+  },
+  "results": [
+    {
+      "item": "randomthingz:electrum_dust"
+    }
+  ]
+}

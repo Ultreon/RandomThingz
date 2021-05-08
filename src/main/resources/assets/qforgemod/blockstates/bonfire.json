@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "": [
-      { "model": "randomthingz:block/bonfire" },
-      { "model": "randomthingz:block/bonfire_alt" }
-    ]
-  }
-}

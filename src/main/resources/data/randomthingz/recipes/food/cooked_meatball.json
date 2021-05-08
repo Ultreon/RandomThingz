@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "randomthingz:meatball"
+  },
+  "result": "randomthingz:cooked_meatball",
+  "experience": 0.35,
+  "cookingtime": 200
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "item/generated",
+  "defaults": {
+    "textures": {
+      "layer0": "randomthingz:items/corrupt_fried_egg"
+    },
+    "variants": {
+      "normal": {
+        "textures": {
+          "layer0": "randomthingz:items/corrupt_fried_egg"
+        }
+      },
+      "inventory": {
+        "textures": {
+          "layer0": "randomthingz:items/corrupt_fried_egg"
+        }
+      }
+    }
+  },
+  "textures": {
+    "layer0": "randomthingz:items/corrupt_fried_egg"
+  },
+  "variants": {
+    "normal": {
+      "textures": {
+        "layer0": "randomthingz:items/corrupt_fried_egg"
+      }
+    },
+    "inventory": {
+      "textures": {
+        "layer0": "randomthingz:items/corrupt_fried_egg"
+      }
+    }
+  }
+}

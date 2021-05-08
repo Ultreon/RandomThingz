@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "randomthingz:tungsten_pickaxe"
+    },
+    {
+      "item": "randomthingz:tungsten_shovel"
+    },
+    {
+      "item": "randomthingz:tungsten_axe"
+    },
+    {
+      "item": "randomthingz:tungsten_hoe"
+    },
+    {
+      "item": "randomthingz:tungsten_sword"
+    },
+    {
+      "item": "randomthingz:tungsten_helmet"
+    },
+    {
+      "item": "randomthingz:tungsten_chestplate"
+    },
+    {
+      "item": "randomthingz:tungsten_leggings"
+    },
+    {
+      "item": "randomthingz:tungsten_boots"
+    }
+  ],
+  "result": "randomthingz:tungsten_nugget",
+  "experience": 7,
+  "cookingtime": 900
+}

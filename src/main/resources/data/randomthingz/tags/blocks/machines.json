@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:machines/alloy_smelter",
+    "#forge:machines/crusher",
+    "#forge:machines/generators",
+    "#forge:machines/infuser",
+    "#forge:machines/mixer",
+    "#forge:machines/quarry",
+    "#forge:machines/refinery",
+    "#forge:machines/solidifier"
+  ]
+}

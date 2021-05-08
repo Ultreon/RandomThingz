@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "randomthingz:electrum_nugget"
+    }
+  },
+  "result": {
+    "item": "randomthingz:electrum_ingot"
+  }
+}

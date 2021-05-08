@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:tanzanite_boots"
+    ]
+  },
+  "criteria": {
+    "has_tanzanite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:tanzanite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:tanzanite_boots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tanzanite",
+      "has_the_recipe"
+    ]
+  ]
+}

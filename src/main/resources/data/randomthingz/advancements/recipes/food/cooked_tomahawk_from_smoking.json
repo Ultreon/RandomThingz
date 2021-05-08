@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:cooked_tomahawk_from_smoking"
+    ]
+  },
+  "criteria": {
+    "has_tomahawk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:tomahawk"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:cooked_tomahawk_from_smoking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tomahawk",
+      "has_the_recipe"
+    ]
+  ]
+}

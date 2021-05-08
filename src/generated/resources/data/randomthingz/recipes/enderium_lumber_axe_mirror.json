@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " /X",
+    " / "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "randomthingz:enderium_ingot"
+    }
+  },
+  "result": {
+    "item": "randomthingz:enderium_lumber_axe"
+  }
+}

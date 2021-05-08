@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=true": {
+      "model": "randomthingz:block/brazier"
+    },
+    "lit=false": {
+      "model": "randomthingz:block/brazier_extinguished"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "item/generated",
+  "defaults": {
+    "textures": {
+      "layer0": "randomthingz:items/tomahawk"
+    },
+    "variants": {
+      "normal": {
+        "textures": {
+          "layer0": "randomthingz:items/tomahawk"
+        }
+      },
+      "inventory": {
+        "textures": {
+          "layer0": "randomthingz:items/tomahawk"
+        }
+      }
+    }
+  },
+  "textures": {
+    "layer0": "randomthingz:items/tomahawk"
+  },
+  "variants": {
+    "normal": {
+      "textures": {
+        "layer0": "randomthingz:items/tomahawk"
+      }
+    },
+    "inventory": {
+      "textures": {
+        "layer0": "randomthingz:items/tomahawk"
+      }
+    }
+  }
+}

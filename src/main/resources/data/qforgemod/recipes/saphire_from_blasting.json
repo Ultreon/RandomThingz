@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "randomthingz:saphire_ore"
-  },
-  "result": "randomthingz:saphire",
-  "experience": 0.7,
-  "cookingtime": 100
-}

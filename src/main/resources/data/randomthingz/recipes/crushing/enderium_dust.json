@@ -1,0 +1,16 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 300,
+  "ingredient": {
+    "tag": "randomthingz:chunks/enderium"
+  },
+  "results": [
+    {
+      "item": "randomthingz:enderium_dust"
+    },
+    {
+      "item": "randomthingz:enderium_dust",
+      "chance": 0.1
+    }
+  ]
+}

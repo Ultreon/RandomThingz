@@ -1,0 +1,12 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 200,
+  "ingredient": {
+    "tag": "forge:ingots/enderium"
+  },
+  "results": [
+    {
+      "item": "randomthingz:enderium_dust"
+    }
+  ]
+}

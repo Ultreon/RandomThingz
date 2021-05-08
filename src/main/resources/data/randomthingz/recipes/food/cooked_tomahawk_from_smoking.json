@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "randomthingz:tomahawk"
+  },
+  "result": "randomthingz:cooked_tomahawk",
+  "experience": 0.35,
+  "cookingtime": 100
+}

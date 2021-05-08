@@ -1,6 +1,0 @@
-{
-    "parent": "randomthingz:items/fridge_light",
-    "textures": {
-        "base": "minecraft:block/gray_concrete"
-    }
-}

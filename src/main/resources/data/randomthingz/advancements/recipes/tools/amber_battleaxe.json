@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:amber_battleaxe"
+    ]
+  },
+  "criteria": {
+    "has_amber": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:amber"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:amber_battleaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_amber",
+      "has_the_recipe"
+    ]
+  ]
+}

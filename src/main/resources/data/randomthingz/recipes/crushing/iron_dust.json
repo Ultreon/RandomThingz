@@ -1,0 +1,16 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 300,
+  "ingredient": {
+    "tag": "randomthingz:chunks/iron"
+  },
+  "results": [
+    {
+      "item": "randomthingz:iron_dust"
+    },
+    {
+      "item": "randomthingz:iron_dust",
+      "chance": 0.1
+    }
+  ]
+}

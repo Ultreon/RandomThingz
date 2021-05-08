@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "randomthingz:lumium_pickaxe"
+    },
+    {
+      "item": "randomthingz:lumium_shovel"
+    },
+    {
+      "item": "randomthingz:lumium_axe"
+    },
+    {
+      "item": "randomthingz:lumium_hoe"
+    },
+    {
+      "item": "randomthingz:lumium_sword"
+    },
+    {
+      "item": "randomthingz:lumium_helmet"
+    },
+    {
+      "item": "randomthingz:lumium_chestplate"
+    },
+    {
+      "item": "randomthingz:lumium_leggings"
+    },
+    {
+      "item": "randomthingz:lumium_boots"
+    }
+  ],
+  "result": "randomthingz:lumium_nugget",
+  "experience": 0.1,
+  "cookingtime": 200
+}

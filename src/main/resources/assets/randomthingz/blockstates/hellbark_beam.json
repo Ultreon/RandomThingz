@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "randomthingz:block/hellbark_beam_x"
+    },
+    "axis=y": {
+      "model": "randomthingz:block/hellbark_beam_y"
+    },
+    "axis=z": {
+      "model": "randomthingz:block/hellbark_beam_z"
+    }
+  }
+}

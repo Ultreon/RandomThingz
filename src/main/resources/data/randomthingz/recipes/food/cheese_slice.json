@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomthingz:cheese"
+    },
+    {
+      "item": "randomthingz:knife"
+    }
+  ],
+  "result": {
+    "item": "randomthingz:cheese_slice",
+    "count": 6
+  }
+}

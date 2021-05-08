@@ -22,7 +22,7 @@ public class KeybindingHandler {
 //        Minecraft mc = Minecraft.getInstance();
 //
 //        if (KeyBindingList.MODULES_SCREEN.isPressed()) {
-//            mc.displayGuiScreen(new ModuleScreen(mc.currentScreen, ModuleManager.getInstance(), new TranslationTextComponent("screen.qforgemod.modules")));
+//            mc.displayGuiScreen(new ModuleScreen(mc.currentScreen, ModuleManager.getInstance(), new TranslationTextComponent("screen.randomthingz.modules")));
 //        }
     }
 }

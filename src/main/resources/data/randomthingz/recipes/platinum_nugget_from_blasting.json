@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "randomthingz:platinum_pickaxe"
+    },
+    {
+      "item": "randomthingz:platinum_shovel"
+    },
+    {
+      "item": "randomthingz:platinum_axe"
+    },
+    {
+      "item": "randomthingz:platinum_hoe"
+    },
+    {
+      "item": "randomthingz:platinum_sword"
+    },
+    {
+      "item": "randomthingz:platinum_helmet"
+    },
+    {
+      "item": "randomthingz:platinum_chestplate"
+    },
+    {
+      "item": "randomthingz:platinum_leggings"
+    },
+    {
+      "item": "randomthingz:platinum_boots"
+    }
+  ],
+  "result": "randomthingz:platinum_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

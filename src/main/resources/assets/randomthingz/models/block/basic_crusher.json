@@ -1,0 +1,31 @@
+{
+  "parent": "block/cube",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        135,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.40,
+        0.40,
+        0.40
+      ]
+    }
+  },
+  "textures": {
+    "particle": "randomthingz:blocks/basic_crusher/front",
+    "down": "randomthingz:blocks/basic_crusher/bottom",
+    "up": "randomthingz:blocks/basic_crusher/top",
+    "north": "randomthingz:blocks/basic_crusher/front",
+    "east": "randomthingz:blocks/basic_crusher/side",
+    "south": "randomthingz:blocks/basic_crusher/back",
+    "west": "randomthingz:blocks/basic_crusher/side"
+  }
+}

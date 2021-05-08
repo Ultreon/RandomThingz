@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "X",
+    "/"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:enderium_ingot"
+    },
+    "/": {
+      "tag": "forge:sticks"
+    }
+  },
+  "result": {
+    "item": "randomthingz:enderium_sword"
+  }
+}

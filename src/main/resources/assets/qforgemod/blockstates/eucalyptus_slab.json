@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "type=bottom": { "model": "randomthingz:block/eucalyptus_slab" },
-        "type=top": { "model": "randomthingz:block/eucalyptus_slab_top" },
-        "type=double": { "model": "randomthingz:block/eucalyptus_planks" }
-    }
-}

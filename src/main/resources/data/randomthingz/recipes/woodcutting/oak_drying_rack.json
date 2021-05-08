@@ -1,0 +1,14 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "woodcutter"
+    }
+  ],
+  "type": "woodcutter:woodcutting",
+  "ingredient": {
+    "item": "minecraft:oak_plank"
+  },
+  "result": "randomthingz:oak_drying_rack",
+  "count": 1
+}

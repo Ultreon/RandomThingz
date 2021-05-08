@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XOX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:blaze_rod"
+    },
+    "X": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "randomthingz:obsidian_chestplate"
+  }
+}

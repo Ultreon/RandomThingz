@@ -1,0 +1,13 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 100,
+  "ingredient": {
+    "item": "minecraft:wheat"
+  },
+  "results": [
+    {
+      "item": "randomthingz:flour",
+      "count": 2
+    }
+  ]
+}

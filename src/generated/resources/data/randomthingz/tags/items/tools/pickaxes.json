@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "randomthingz:redstone_pickaxe",
+    "randomthingz:copper_pickaxe",
+    "randomthingz:tin_pickaxe",
+    "randomthingz:compressed_iron_pickaxe",
+    "randomthingz:obsidian_pickaxe",
+    "randomthingz:silver_pickaxe",
+    "randomthingz:lead_pickaxe",
+    "randomthingz:nickel_pickaxe",
+    "randomthingz:platinum_pickaxe",
+    "randomthingz:zinc_pickaxe",
+    "randomthingz:bismuth_pickaxe",
+    "randomthingz:aluminum_pickaxe",
+    "randomthingz:uranium_pickaxe",
+    "randomthingz:bronze_pickaxe",
+    "randomthingz:brass_pickaxe",
+    "randomthingz:invar_pickaxe",
+    "randomthingz:electrum_pickaxe",
+    "randomthingz:steel_pickaxe",
+    "randomthingz:bismuth_brass_pickaxe",
+    "randomthingz:aluminum_steel_pickaxe",
+    "randomthingz:bismuth_steel_pickaxe",
+    "randomthingz:signalum_pickaxe",
+    "randomthingz:lumium_pickaxe",
+    "randomthingz:enderium_pickaxe",
+    "randomthingz:cobalt_pickaxe",
+    "randomthingz:ultrinium_pickaxe",
+    "randomthingz:infinity_pickaxe"
+  ]
+}

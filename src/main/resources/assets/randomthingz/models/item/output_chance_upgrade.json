@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "randomthingz:items/output_chance_upgrade"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "randomthingz:blocks/eucalyptus_log_top",
+    "side": "randomthingz:blocks/eucalyptus_log"
+  }
+}

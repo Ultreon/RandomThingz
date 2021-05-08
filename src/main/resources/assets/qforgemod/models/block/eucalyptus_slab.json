@@ -1,8 +1,0 @@
-{
-    "parent": "block/slab",
-    "textures": {
-        "bottom": "randomthingz:blocks/eucalyptus_planks",
-        "top": "randomthingz:blocks/eucalyptus_planks",
-        "side": "randomthingz:blocks/eucalyptus_planks"
-    }
-}

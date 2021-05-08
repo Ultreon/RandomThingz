@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "randomthingz:aluminum_pickaxe"
+    },
+    {
+      "item": "randomthingz:aluminum_shovel"
+    },
+    {
+      "item": "randomthingz:aluminum_axe"
+    },
+    {
+      "item": "randomthingz:aluminum_hoe"
+    },
+    {
+      "item": "randomthingz:aluminum_sword"
+    },
+    {
+      "item": "randomthingz:aluminum_helmet"
+    },
+    {
+      "item": "randomthingz:aluminum_chestplate"
+    },
+    {
+      "item": "randomthingz:aluminum_leggings"
+    },
+    {
+      "item": "randomthingz:aluminum_boots"
+    }
+  ],
+  "result": "randomthingz:aluminum_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}

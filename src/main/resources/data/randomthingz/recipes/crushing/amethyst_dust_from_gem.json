@@ -1,0 +1,12 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 400,
+  "ingredient": {
+    "item": "randomthingz:amethyst"
+  },
+  "results": [
+    {
+      "item": "randomthingz:amethyst_dust"
+    }
+  ]
+}

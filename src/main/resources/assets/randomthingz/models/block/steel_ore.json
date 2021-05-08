@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "randomthingz:blocks/steel_ore",
+    "all": "randomthingz:blocks/steel_ore"
+  }
+}

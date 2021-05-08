@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "randomthingz:blocks/gilded_dirt",
+    "all": "randomthingz:blocks/gilded_dirt"
+  }
+}

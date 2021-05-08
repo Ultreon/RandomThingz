@@ -1,0 +1,13 @@
+{
+  "type": "randomthingz:compressing",
+  "process_time": 800,
+  "ingredient": {
+    "value": {
+      "item": "randomthingz:steel_ingot"
+    },
+    "count": 1
+  },
+  "result": {
+    "item": "randomthingz:tungsten_nugget"
+  }
+}

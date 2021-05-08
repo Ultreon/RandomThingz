@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "randomthingz:walking_wand",
+    "randomthingz:lightning_wand",
+    "randomthingz:fire_wand",
+    "randomthingz:nature_wand",
+    "randomthingz:teleport_wand"
+  ]
+}

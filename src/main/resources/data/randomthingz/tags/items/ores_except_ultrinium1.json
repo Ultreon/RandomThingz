@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#randomthingz:ores_except_ultrinium",
+    "#forge:ores/ruby",
+    "#forge:ores/malachite",
+    "#forge:ores/amber",
+    "#forge:ores/amethyst",
+    "#forge:ores/beryl",
+    "#forge:ores/peridot",
+    "minecraft:sand",
+    "minecraft:sandstone",
+    "minecraft:cobblestone"
+  ]
+}

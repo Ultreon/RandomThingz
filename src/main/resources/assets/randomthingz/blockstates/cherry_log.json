@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "randomthingz:block/cherry_log"
+    },
+    "axis=z": {
+      "model": "randomthingz:block/cherry_log",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "randomthingz:block/cherry_log",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

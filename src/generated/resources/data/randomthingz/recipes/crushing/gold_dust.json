@@ -1,0 +1,16 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 300,
+  "ingredient": {
+    "tag": "randomthingz:chunks/gold"
+  },
+  "results": [
+    {
+      "item": "randomthingz:gold_dust"
+    },
+    {
+      "item": "randomthingz:gold_dust",
+      "chance": 0.1
+    }
+  ]
+}

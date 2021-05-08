@@ -1,0 +1,31 @@
+{
+  "parent": "block/cube",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        135,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        0.40,
+        0.40,
+        0.40
+      ]
+    }
+  },
+  "textures": {
+    "particle": "randomthingz:blocks/super_quarry/front",
+    "down": "randomthingz:blocks/super_quarry/bottom",
+    "up": "randomthingz:blocks/super_quarry/top",
+    "north": "randomthingz:blocks/super_quarry/front",
+    "east": "randomthingz:blocks/super_quarry/side",
+    "south": "randomthingz:blocks/super_quarry/back",
+    "west": "randomthingz:blocks/super_quarry/side"
+  }
+}

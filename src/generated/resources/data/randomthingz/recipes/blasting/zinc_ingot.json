@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "tag": "randomthingz:chunks/zinc"
+    },
+    {
+      "tag": "forge:dusts/zinc"
+    }
+  ],
+  "result": "randomthingz:zinc_ingot",
+  "experience": 1.0,
+  "cookingtime": 100
+}

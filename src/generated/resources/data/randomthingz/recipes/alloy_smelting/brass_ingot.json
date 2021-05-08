@@ -1,0 +1,38 @@
+{
+  "type": "randomthingz:alloy_smelting",
+  "process_time": 400,
+  "ingredients": [
+    {
+      "value": [
+        {
+          "tag": "forge:ingots/copper"
+        },
+        {
+          "tag": "randomthingz:chunks/copper"
+        },
+        {
+          "tag": "forge:dusts/copper"
+        }
+      ],
+      "count": 3
+    },
+    {
+      "value": [
+        {
+          "tag": "forge:ingots/zinc"
+        },
+        {
+          "tag": "randomthingz:chunks/zinc"
+        },
+        {
+          "tag": "forge:dusts/zinc"
+        }
+      ],
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "randomthingz:brass_ingot",
+    "count": 4
+  }
+}

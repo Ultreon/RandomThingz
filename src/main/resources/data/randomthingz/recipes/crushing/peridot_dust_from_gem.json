@@ -1,0 +1,12 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 400,
+  "ingredient": {
+    "item": "randomthingz:peridot"
+  },
+  "results": [
+    {
+      "item": "randomthingz:peridot_dust"
+    }
+  ]
+}

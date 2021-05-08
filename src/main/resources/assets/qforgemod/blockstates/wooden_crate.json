@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north": {"model": "randomthingz:block/wooden_crate"},
-    "facing=south": {"model": "randomthingz:block/wooden_crate", "y": 180},
-    "facing=west": {"model": "randomthingz:block/wooden_crate", "y": 270},
-    "facing=east": {"model": "randomthingz:block/wooden_crate", "y": 90}
-  }
-}

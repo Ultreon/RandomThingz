@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "randomthingz:cobalt_ingot"
+    },
+    "title": {
+      "translate": "advancements.randomthingz.material_cobalt.title"
+    },
+    "description": {
+      "translate": "advancements.randomthingz.material_cobalt.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "randomthingz:mat_netherite",
+  "criteria": {
+    "get_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:cobalt_ingot"
+          }
+        ]
+      }
+    }
+  }
+}

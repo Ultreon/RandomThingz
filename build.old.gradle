@@ -109,7 +109,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                qforgemod {
+                randomthingz {
                     //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
                 }
@@ -128,7 +128,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             mods {
-                qforgemod {
+                randomthingz {
                     //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
                 }
@@ -149,7 +149,7 @@ minecraft {
             args '--mod', 'randomthingz', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                qforgemod {
+                randomthingz {
                     //noinspection GroovyAssignabilityCheck
                     source sourceSets.main
                 }

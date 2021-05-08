@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "randomthingz:bacon"
-  },
-  "result": "randomthingz:cooked_bacon",
-  "experience": 0.35,
-  "cookingtime": 200
-}

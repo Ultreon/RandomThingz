@@ -1,0 +1,6 @@
+{
+  "parent": "randomthingz:item/handheld_double_size",
+  "textures": {
+    "layer0": "randomthingz:items/brass_longsword"
+  }
+}

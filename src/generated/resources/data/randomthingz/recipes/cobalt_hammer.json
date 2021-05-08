@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    " / "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "randomthingz:cobalt_ingot"
+    }
+  },
+  "result": {
+    "item": "randomthingz:cobalt_hammer"
+  }
+}

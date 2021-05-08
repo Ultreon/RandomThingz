@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:aluminum_steel_chestplate"
+    ]
+  },
+  "criteria": {
+    "has_aluminum_steel_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:aluminum_steel_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:aluminum_steel_chestplate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_aluminum_steel_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    " X ",
+    " / "
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:legendary_ender_pearl"
+    },
+    "/": {
+      "tag": "forge:sticks"
+    }
+  },
+  "result": {
+    "item": "randomthingz:ender_sword",
+    "count": 1
+  }
+}

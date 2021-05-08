@@ -1,0 +1,160 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:uranium_nugget_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_uranium_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:uranium_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_uranium_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:uranium_shovel"
+          }
+        ]
+      }
+    },
+    "has_uranium_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:uranium_axe"
+          }
+        ]
+      }
+    },
+    "has_uranium_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:uranium_hoe"
+          }
+        ]
+      }
+    },
+    "has_uranium_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:uranium_sword"
+          }
+        ]
+      }
+    },
+    "has_uranium_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:uranium_helmet"
+          }
+        ]
+      }
+    },
+    "has_uranium_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:uranium_chestplate"
+          }
+        ]
+      }
+    },
+    "has_uranium_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:uranium_leggings"
+          }
+        ]
+      }
+    },
+    "has_uranium_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:uranium_boots"
+          }
+        ]
+      }
+    },
+    "has_chainmail_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_helmet"
+          }
+        ]
+      }
+    },
+    "has_chainmail_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_chestplate"
+          }
+        ]
+      }
+    },
+    "has_chainmail_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_leggings"
+          }
+        ]
+      }
+    },
+    "has_chainmail_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:chainmail_boots"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:uranium_nugget_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_uranium_pickaxe",
+      "has_uranium_shovel",
+      "has_uranium_axe",
+      "has_uranium_hoe",
+      "has_uranium_sword",
+      "has_uranium_helmet",
+      "has_uranium_chestplate",
+      "has_uranium_leggings",
+      "has_uranium_boots",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 250,
+  "ingredient": {
+    "item": "randomthingz:tungsten_ingot"
+  },
+  "results": [
+    {
+      "item": "randomthingz:tungsten_dust"
+    }
+  ]
+}

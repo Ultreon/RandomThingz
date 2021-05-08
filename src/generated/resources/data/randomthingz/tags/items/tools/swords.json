@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "randomthingz:redstone_sword",
+    "randomthingz:copper_sword",
+    "randomthingz:tin_sword",
+    "randomthingz:compressed_iron_sword",
+    "randomthingz:obsidian_sword",
+    "randomthingz:silver_sword",
+    "randomthingz:lead_sword",
+    "randomthingz:nickel_sword",
+    "randomthingz:platinum_sword",
+    "randomthingz:zinc_sword",
+    "randomthingz:bismuth_sword",
+    "randomthingz:aluminum_sword",
+    "randomthingz:uranium_sword",
+    "randomthingz:bronze_sword",
+    "randomthingz:brass_sword",
+    "randomthingz:invar_sword",
+    "randomthingz:electrum_sword",
+    "randomthingz:steel_sword",
+    "randomthingz:bismuth_brass_sword",
+    "randomthingz:aluminum_steel_sword",
+    "randomthingz:bismuth_steel_sword",
+    "randomthingz:signalum_sword",
+    "randomthingz:lumium_sword",
+    "randomthingz:enderium_sword",
+    "randomthingz:cobalt_sword",
+    "randomthingz:ultrinium_sword",
+    "randomthingz:infinity_sword"
+  ]
+}

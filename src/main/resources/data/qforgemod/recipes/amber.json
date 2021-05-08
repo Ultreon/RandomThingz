@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "randomthingz:amber_ore"
-  },
-  "result": "randomthingz:amber",
-  "experience": 0.7,
-  "cookingtime": 200
-}

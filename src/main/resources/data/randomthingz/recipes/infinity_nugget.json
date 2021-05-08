@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomthingz:infinity_ingot"
+    }
+  ],
+  "result": {
+    "item": "randomthingz:infinity_nugget",
+    "count": 9
+  }
+}

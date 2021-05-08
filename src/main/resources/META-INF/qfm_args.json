@@ -3,33 +3,33 @@
       "dev_test": "false"
    },
    "version": {
-      "name": "2.0.1531-b6",
-      "version": 2,
-      "release": 0,
-      "build": 1531,
-      "stage": "b",
-      "stage_release": 6
+     "name": "2.0.1554-b6",
+     "version": 2,
+     "release": 0,
+     "build": 1554,
+     "stage": "b",
+     "stage_release": 6
    },
    "build_info": {
-      "date": "2021-05-08T12:01:27.448",
-      "compile": {
-         "name": "compileJava",
-         "source_compat": "1.8",
-         "target_compat": "1.8",
-         "gradle": {
-            "version": "6.8.3"
-         }
-      },
-      "project": {
-         "name": "qtech-qforgemod",
-         "display_name": "root project \u0027qtech-qforgemod\u0027",
-         "minecraft": {
-            "mappings_version": "20201028-1.16.3",
-            "mappings_channel": "snapshot",
-            "mappings": "snapshot_20201028-1.16.3",
-            "version": "1.16.5",
-            "forge_version": "36.1.0"
-         }
-      }
+     "date": "2021-05-08T15:33:28.514",
+     "compile": {
+       "name": "compileJava",
+       "source_compat": "1.8",
+       "target_compat": "1.8",
+       "gradle": {
+         "version": "6.8.3"
+       }
+     },
+     "project": {
+       "name": "randomthingz",
+       "display_name": "root project \u0027randomthingz\u0027",
+       "minecraft": {
+         "mappings_version": "20201028-1.16.3",
+         "mappings_channel": "snapshot",
+         "mappings": "snapshot_20201028-1.16.3",
+         "version": "1.16.5",
+         "forge_version": "36.1.0"
+       }
+     }
    }
 }

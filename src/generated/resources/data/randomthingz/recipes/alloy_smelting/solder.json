@@ -1,0 +1,38 @@
+{
+  "type": "randomthingz:alloy_smelting",
+  "process_time": 200,
+  "ingredients": [
+    {
+      "value": [
+        {
+          "tag": "forge:ingots/tin"
+        },
+        {
+          "tag": "randomthingz:chunks/tin"
+        },
+        {
+          "tag": "forge:dusts/tin"
+        }
+      ],
+      "count": 1
+    },
+    {
+      "value": [
+        {
+          "tag": "forge:ingots/lead"
+        },
+        {
+          "tag": "randomthingz:chunks/lead"
+        },
+        {
+          "tag": "forge:dusts/lead"
+        }
+      ],
+      "count": 1
+    }
+  ],
+  "result": {
+    "item": "randomthingz:solder",
+    "count": 12
+  }
+}

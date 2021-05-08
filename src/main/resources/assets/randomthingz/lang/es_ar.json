@@ -1,0 +1,19 @@
+{
+  "block.randomthingz.elevator_white": "Ascensor blanco",
+  "block.randomthingz.elevator_black": "Ascensor negro",
+  "block.randomthingz.elevator_blue": "Ascensor azul",
+  "block.randomthingz.elevator_brown": "Ascensor marrón",
+  "block.randomthingz.elevator_cyan": "Ascensor cian",
+  "block.randomthingz.elevator_gray": "Ascensor gris",
+  "block.randomthingz.elevator_green": "Ascensor verde",
+  "block.randomthingz.elevator_light_blue": "Ascensor azul celeste",
+  "block.randomthingz.elevator_lime": "Ascensor verde lima",
+  "block.randomthingz.elevator_magenta": "Ascensor magenta",
+  "block.randomthingz.elevator_orange": "Ascensor naranja",
+  "block.randomthingz.elevator_pink": "Ascensor rosa",
+  "block.randomthingz.elevator_purple": "Ascensor violeta",
+  "block.randomthingz.elevator_red": "Ascensor rojo",
+  "block.randomthingz.elevator_light_gray": "Ascensor gris claro",
+  "block.randomthingz.elevator_yellow": "Ascensor amarillo",
+  "itemGroup.randomthingz_elevators": "Ascensores"
+}

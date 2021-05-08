@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "randomthingz:bronze_pickaxe"
+    },
+    {
+      "item": "randomthingz:bronze_shovel"
+    },
+    {
+      "item": "randomthingz:bronze_axe"
+    },
+    {
+      "item": "randomthingz:bronze_hoe"
+    },
+    {
+      "item": "randomthingz:bronze_sword"
+    },
+    {
+      "item": "randomthingz:bronze_helmet"
+    },
+    {
+      "item": "randomthingz:bronze_chestplate"
+    },
+    {
+      "item": "randomthingz:bronze_leggings"
+    },
+    {
+      "item": "randomthingz:bronze_boots"
+    }
+  ],
+  "result": "randomthingz:bronze_nugget",
+  "experience": 0.1,
+  "cookingtime": 100
+}
