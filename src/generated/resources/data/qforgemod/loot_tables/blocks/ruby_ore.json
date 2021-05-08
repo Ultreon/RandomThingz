@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:ruby_ore"
+          "name": "randomthingz:ruby_ore"
         }
       ],
       "conditions": [

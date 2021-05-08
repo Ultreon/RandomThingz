@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:obsidian_leggings"
+      "randomthingz:obsidian_leggings"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:obsidian_leggings"
+        "recipe": "randomthingz:obsidian_leggings"
       }
     }
   },

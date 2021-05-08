@@ -1,22 +1,22 @@
 {
   "display": {
     "icon": {
-      "item": "qforgemod:kill_switch"
+      "item": "randomthingz:kill_switch"
     },
     "title": {
-      "translate": "advancements.qforgemod.shutdown.title"
+      "translate": "advancements.randomthingz.shutdown.title"
     },
     "description": {
-      "translate": "advancements.qforgemod.shutdown.description"
+      "translate": "advancements.randomthingz.shutdown.description"
     },
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": true
   },
-  "parent": "qforgemod:root",
+  "parent": "randomthingz:root",
   "criteria": {
     "get_sword": {
-      "trigger": "qforgemod:used_kill_switch",
+      "trigger": "randomthingz:used_kill_switch",
       "conditions": {
 
       }

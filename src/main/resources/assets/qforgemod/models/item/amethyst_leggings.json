@@ -2,33 +2,33 @@
   "parent": "item/generated",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/amethyst_leggings"
+      "layer0": "randomthingz:items/amethyst_leggings"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/amethyst_leggings"
+          "layer0": "randomthingz:items/amethyst_leggings"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/amethyst_leggings"
+          "layer0": "randomthingz:items/amethyst_leggings"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/amethyst_leggings"
+    "layer0": "randomthingz:items/amethyst_leggings"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/amethyst_leggings"
+        "layer0": "randomthingz:items/amethyst_leggings"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/amethyst_leggings"
+        "layer0": "randomthingz:items/amethyst_leggings"
       }
     }
   }

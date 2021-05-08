@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:lava_generator"
+          "name": "randomthingz:lava_generator"
         }
       ],
       "conditions": [

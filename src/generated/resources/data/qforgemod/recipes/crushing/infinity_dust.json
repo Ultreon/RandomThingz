@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/infinity"
+    "tag": "randomthingz:chunks/infinity"
   },
   "results": [
     {
-      "item": "qforgemod:infinity_dust"
+      "item": "randomthingz:infinity_dust"
     },
     {
-      "item": "qforgemod:infinity_dust",
+      "item": "randomthingz:infinity_dust",
       "chance": 0.1
     }
   ]

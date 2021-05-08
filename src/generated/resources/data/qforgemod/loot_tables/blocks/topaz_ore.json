@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:topaz_ore"
+          "name": "randomthingz:topaz_ore"
         }
       ],
       "conditions": [

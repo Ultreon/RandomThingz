@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:wooden_battleaxe"
+      "randomthingz:wooden_battleaxe"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:wooden_battleaxe"
+        "recipe": "randomthingz:wooden_battleaxe"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:tin_nugget_from_blasting"
+      "randomthingz:tin_nugget_from_blasting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tin_pickaxe"
+            "item": "randomthingz:tin_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tin_shovel"
+            "item": "randomthingz:tin_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tin_axe"
+            "item": "randomthingz:tin_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tin_hoe"
+            "item": "randomthingz:tin_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tin_sword"
+            "item": "randomthingz:tin_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tin_helmet"
+            "item": "randomthingz:tin_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tin_chestplate"
+            "item": "randomthingz:tin_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tin_leggings"
+            "item": "randomthingz:tin_leggings"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tin_boots"
+            "item": "randomthingz:tin_boots"
           }
         ]
       }
@@ -139,7 +139,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:tin_nugget_from_blasting"
+        "recipe": "randomthingz:tin_nugget_from_blasting"
       }
     }
   },

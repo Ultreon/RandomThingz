@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:electrum_shovel"
+      "randomthingz:electrum_shovel"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:electrum_ingot"
+            "item": "randomthingz:electrum_ingot"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:electrum_shovel"
+        "recipe": "randomthingz:electrum_shovel"
       }
     }
   },

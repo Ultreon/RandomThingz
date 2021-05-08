@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:tin_block"
+      "item": "randomthingz:tin_block"
     }
   ],
   "result": {
-    "item": "qforgemod:tin_ingot",
+    "item": "randomthingz:tin_ingot",
     "count": 9
   }
 }

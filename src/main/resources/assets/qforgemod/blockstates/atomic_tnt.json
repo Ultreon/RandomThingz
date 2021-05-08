@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/atomic_tnt"
+      "model": "randomthingz:block/atomic_tnt"
     }
   }
 }

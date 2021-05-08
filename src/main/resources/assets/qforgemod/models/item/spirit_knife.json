@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "qforgemod:items/spirit_knife"
+		"layer0": "randomthingz:items/spirit_knife"
 	},
 	"gui_light": "front",
 	"display": {

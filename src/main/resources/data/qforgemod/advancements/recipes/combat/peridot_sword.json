@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:peridot_sword"
+      "randomthingz:peridot_sword"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:peridot"
+            "item": "randomthingz:peridot"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:peridot_sword"
+        "recipe": "randomthingz:peridot_sword"
       }
     }
   },

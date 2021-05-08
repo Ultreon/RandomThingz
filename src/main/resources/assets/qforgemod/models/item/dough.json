@@ -2,33 +2,33 @@
   "parent": "item/generated",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/dough"
+      "layer0": "randomthingz:items/dough"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/dough"
+          "layer0": "randomthingz:items/dough"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/dough"
+          "layer0": "randomthingz:items/dough"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/dough"
+    "layer0": "randomthingz:items/dough"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/dough"
+        "layer0": "randomthingz:items/dough"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/dough"
+        "layer0": "randomthingz:items/dough"
       }
     }
   }

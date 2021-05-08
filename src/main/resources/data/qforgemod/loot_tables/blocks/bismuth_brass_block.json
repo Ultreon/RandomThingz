@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:bismuth_brass_block"
+          "name": "randomthingz:bismuth_brass_block"
         }
       ],
       "conditions": [

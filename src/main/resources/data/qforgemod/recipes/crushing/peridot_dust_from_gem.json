@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
-    "item": "qforgemod:peridot"
+    "item": "randomthingz:peridot"
   },
   "results": [
     {
-      "item": "qforgemod:peridot_dust"
+      "item": "randomthingz:peridot_dust"
     }
   ]
 }

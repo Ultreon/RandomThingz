@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:lead_ingot"
+      "item": "randomthingz:lead_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:lead_shovel"
+    "item": "randomthingz:lead_shovel"
   }
 }

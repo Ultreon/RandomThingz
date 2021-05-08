@@ -8,12 +8,12 @@
         }
     },
     "textures": {
-        "particle": "qforgemod:blocks/basic_crusher/front",
-        "down": "qforgemod:blocks/basic_crusher/bottom",
-        "up": "qforgemod:blocks/basic_crusher/top",
-        "north": "qforgemod:blocks/basic_crusher/front",
-        "east": "qforgemod:blocks/basic_crusher/side",
-        "south": "qforgemod:blocks/basic_crusher/back",
-        "west": "qforgemod:blocks/basic_crusher/side"
+        "particle": "randomthingz:blocks/basic_crusher/front",
+        "down": "randomthingz:blocks/basic_crusher/bottom",
+        "up": "randomthingz:blocks/basic_crusher/top",
+        "north": "randomthingz:blocks/basic_crusher/front",
+        "east": "randomthingz:blocks/basic_crusher/side",
+        "south": "randomthingz:blocks/basic_crusher/back",
+        "west": "randomthingz:blocks/basic_crusher/side"
     }
 }

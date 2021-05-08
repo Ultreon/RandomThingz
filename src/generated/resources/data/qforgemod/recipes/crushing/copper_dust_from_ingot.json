@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/copper"
   },
   "results": [
     {
-      "item": "qforgemod:copper_dust"
+      "item": "randomthingz:copper_dust"
     }
   ]
 }

@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/silver"
   },
   "results": [
     {
-      "item": "qforgemod:silver_chunks",
+      "item": "randomthingz:silver_chunks",
       "count": 2
     },
     {

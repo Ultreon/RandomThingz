@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:basic_alloy_smelter",
-    "qforgemod:alloy_smelter"
+    "randomthingz:basic_alloy_smelter",
+    "randomthingz:alloy_smelter"
   ]
 }

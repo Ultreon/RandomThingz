@@ -2,33 +2,33 @@
   "parent": "item/generated",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/shoarma"
+      "layer0": "randomthingz:items/shoarma"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/shoarma"
+          "layer0": "randomthingz:items/shoarma"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/shoarma"
+          "layer0": "randomthingz:items/shoarma"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/shoarma"
+    "layer0": "randomthingz:items/shoarma"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/shoarma"
+        "layer0": "randomthingz:items/shoarma"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/shoarma"
+        "layer0": "randomthingz:items/shoarma"
       }
     }
   }

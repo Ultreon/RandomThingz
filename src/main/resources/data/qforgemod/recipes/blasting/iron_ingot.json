@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "ingredient": [
     {
-      "tag": "qforgemod:chunks/iron"
+      "tag": "randomthingz:chunks/iron"
     },
     {
       "tag": "forge:dusts/iron"

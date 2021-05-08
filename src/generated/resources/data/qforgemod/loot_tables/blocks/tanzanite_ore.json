@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:tanzanite_ore"
+          "name": "randomthingz:tanzanite_ore"
         }
       ],
       "conditions": [

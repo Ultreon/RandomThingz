@@ -2,13 +2,13 @@
   "type": "minecraft:smelting",
   "ingredient": [
     {
-      "tag": "qforgemod:chunks/infinity"
+      "tag": "randomthingz:chunks/infinity"
     },
     {
       "tag": "forge:dusts/infinity"
     }
   ],
-  "result": "qforgemod:infinity_ingot",
+  "result": "randomthingz:infinity_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

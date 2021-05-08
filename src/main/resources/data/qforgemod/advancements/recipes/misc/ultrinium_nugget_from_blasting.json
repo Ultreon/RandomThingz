@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:ultrinium_nugget_from_blasting"
+      "randomthingz:ultrinium_nugget_from_blasting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ultrinium_pickaxe"
+            "item": "randomthingz:ultrinium_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ultrinium_shovel"
+            "item": "randomthingz:ultrinium_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ultrinium_axe"
+            "item": "randomthingz:ultrinium_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ultrinium_hoe"
+            "item": "randomthingz:ultrinium_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ultrinium_sword"
+            "item": "randomthingz:ultrinium_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ultrinium_helmet"
+            "item": "randomthingz:ultrinium_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ultrinium_chestplate"
+            "item": "randomthingz:ultrinium_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ultrinium_leggings"
+            "item": "randomthingz:ultrinium_leggings"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ultrinium_boots"
+            "item": "randomthingz:ultrinium_boots"
           }
         ]
       }
@@ -99,7 +99,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:ultrinium_nugget_from_blasting"
+        "recipe": "randomthingz:ultrinium_nugget_from_blasting"
       }
     }
   },

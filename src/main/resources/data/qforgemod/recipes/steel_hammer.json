@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:steel_ingot"
+         "item": "randomthingz:steel_ingot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:steel_hammer"
+      "item": "randomthingz:steel_hammer"
    }
 }

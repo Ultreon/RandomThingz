@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "particle": "qforgemod:blocks/tanzanite_ore",
-    "all": "qforgemod:blocks/tanzanite_ore"
+    "particle": "randomthingz:blocks/tanzanite_ore",
+    "all": "randomthingz:blocks/tanzanite_ore"
   }
 }

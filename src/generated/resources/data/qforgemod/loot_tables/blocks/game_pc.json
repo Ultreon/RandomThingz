@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:game_pc"
+          "name": "randomthingz:game_pc"
         }
       ],
       "conditions": [

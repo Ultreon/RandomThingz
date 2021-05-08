@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:copper_ingot"
+      "item": "randomthingz:copper_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:copper_lumber_axe"
+    "item": "randomthingz:copper_lumber_axe"
   }
 }

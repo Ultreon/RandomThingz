@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:aquamarine_block"
+          "name": "randomthingz:aquamarine_block"
         }
       ],
       "conditions": [

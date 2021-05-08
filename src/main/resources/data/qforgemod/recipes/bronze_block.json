@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:bronze_ingot"
+      "item": "randomthingz:bronze_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:bronze_block"
+    "item": "randomthingz:bronze_block"
   }
 }

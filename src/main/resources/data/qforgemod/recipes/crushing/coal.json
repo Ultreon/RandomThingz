@@ -1,5 +1,5 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/coal"

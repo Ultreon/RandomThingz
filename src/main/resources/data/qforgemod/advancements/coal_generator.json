@@ -1,23 +1,23 @@
 {
     "display": {
         "icon": {
-            "item": "qforgemod:coal_generator"
+            "item": "randomthingz:coal_generator"
         },
         "title": {
-            "translate": "advancements.qforgemod.coal_generator.title"
+            "translate": "advancements.randomthingz.coal_generator.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.coal_generator.description"
+            "translate": "advancements.randomthingz.coal_generator.description"
         }
     },
-    "parent": "qforgemod:stone_machine_frame",
+    "parent": "randomthingz:stone_machine_frame",
     "criteria": {
         "get_item": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "qforgemod:coal_generator"
+                        "item": "randomthingz:coal_generator"
                     }
                 ]
             }

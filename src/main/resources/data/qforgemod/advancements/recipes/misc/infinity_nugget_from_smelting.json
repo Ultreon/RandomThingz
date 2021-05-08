@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:infinity_nugget_from_smelting"
+      "randomthingz:infinity_nugget_from_smelting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:infinity_pickaxe"
+            "item": "randomthingz:infinity_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:infinity_shovel"
+            "item": "randomthingz:infinity_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:infinity_axe"
+            "item": "randomthingz:infinity_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:infinity_hoe"
+            "item": "randomthingz:infinity_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:infinity_sword"
+            "item": "randomthingz:infinity_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:infinity_helmet"
+            "item": "randomthingz:infinity_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:infinity_chestplate"
+            "item": "randomthingz:infinity_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:infinity_leggings"
+            "item": "randomthingz:infinity_leggings"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:infinity_boots"
+            "item": "randomthingz:infinity_boots"
           }
         ]
       }
@@ -99,7 +99,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:infinity_nugget_from_smelting"
+        "recipe": "randomthingz:infinity_nugget_from_smelting"
       }
     }
   },

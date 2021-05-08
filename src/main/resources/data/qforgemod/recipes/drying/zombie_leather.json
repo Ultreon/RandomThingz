@@ -1,10 +1,10 @@
 {
-    "type": "qforgemod:drying",
+    "type": "randomthingz:drying",
     "process_time": 600,
     "ingredient": {
         "item": "minecraft:rotten_flesh"
     },
     "result": {
-        "item": "qforgemod:zombie_leather"
+        "item": "randomthingz:zombie_leather"
     }
 }

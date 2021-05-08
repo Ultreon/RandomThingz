@@ -4,15 +4,15 @@
             "item": "minecraft:iron_chestplate"
         },
         "title": {
-            "translate": "advancements.qforgemod.iron_armor.title"
+            "translate": "advancements.randomthingz.iron_armor.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.iron_armor.description"
+            "translate": "advancements.randomthingz.iron_armor.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_iron",
+    "parent": "randomthingz:mat_iron",
     "criteria": {
         "get_armor": {
             "trigger": "minecraft:inventory_changed",

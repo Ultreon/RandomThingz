@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/zinc_ore"
+      "model": "randomthingz:block/zinc_ore"
     }
   }
 }

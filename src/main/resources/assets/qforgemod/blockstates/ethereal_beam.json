@@ -1,13 +1,13 @@
 {
   "variants": {
     "axis=x": {
-      "model": "qforgemod:block/ethereal_beam_x"
+      "model": "randomthingz:block/ethereal_beam_x"
     },
     "axis=y": {
-      "model": "qforgemod:block/ethereal_beam_y"
+      "model": "randomthingz:block/ethereal_beam_y"
     },
     "axis=z": {
-      "model": "qforgemod:block/ethereal_beam_z"
+      "model": "randomthingz:block/ethereal_beam_z"
     }
   }
 }

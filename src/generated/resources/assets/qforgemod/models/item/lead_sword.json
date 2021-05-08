@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/lead_sword"
+    "layer0": "randomthingz:items/lead_sword"
   }
 }

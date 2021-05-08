@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "qforgemod:items/cursed_axe"
+		"layer0": "randomthingz:items/cursed_axe"
 	},
 	"gui_light": "front",
 	"display": {

@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:dusts/aluminum_steel"
   },
-  "result": "qforgemod:aluminum_steel_ingot",
+  "result": "randomthingz:aluminum_steel_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

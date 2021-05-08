@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:electrum_ingot"
+      "item": "randomthingz:electrum_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:electrum_block"
+    "item": "randomthingz:electrum_block"
   }
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:platinum_ingot_from_platinum_block"
+      "randomthingz:platinum_ingot_from_platinum_block"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:platinum_block"
+            "item": "randomthingz:platinum_block"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:platinum_ingot_from_platinum_block"
+        "recipe": "randomthingz:platinum_ingot_from_platinum_block"
       }
     }
   },

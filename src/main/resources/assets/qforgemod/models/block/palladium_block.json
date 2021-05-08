@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/palladium_block"
+    "all": "randomthingz:blocks/palladium_block"
   }
 }

@@ -1,23 +1,23 @@
 {
     "display": {
         "icon": {
-            "item": "qforgemod:electric_furnace"
+            "item": "randomthingz:electric_furnace"
         },
         "title": {
-            "translate": "advancements.qforgemod.electric_furnace.title"
+            "translate": "advancements.randomthingz.electric_furnace.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.electric_furnace.description"
+            "translate": "advancements.randomthingz.electric_furnace.description"
         }
     },
-    "parent": "qforgemod:alloy_machine_frame",
+    "parent": "randomthingz:alloy_machine_frame",
     "criteria": {
         "get_item": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "qforgemod:electric_furnace"
+                        "item": "randomthingz:electric_furnace"
                     }
                 ]
             }

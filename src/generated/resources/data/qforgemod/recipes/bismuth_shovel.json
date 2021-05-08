@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:bismuth_ingot"
+      "item": "randomthingz:bismuth_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:bismuth_shovel"
+    "item": "randomthingz:bismuth_shovel"
   }
 }

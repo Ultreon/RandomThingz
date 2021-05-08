@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/morganite_block"
+    "all": "randomthingz:blocks/morganite_block"
   }
 }

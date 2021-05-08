@@ -1,13 +1,13 @@
 {
   "replace": false,
   "values": [
-    "#qforgemod:machines/alloy_smelter",
-    "#qforgemod:machines/crusher",
-    "#qforgemod:machines/generators",
-    "#qforgemod:machines/infuser",
-    "#qforgemod:machines/mixer",
-    "#qforgemod:machines/quarry",
-    "#qforgemod:machines/refinery",
-    "#qforgemod:machines/solidifier"
+    "#randomthingz:machines/alloy_smelter",
+    "#randomthingz:machines/crusher",
+    "#randomthingz:machines/generators",
+    "#randomthingz:machines/infuser",
+    "#randomthingz:machines/mixer",
+    "#randomthingz:machines/quarry",
+    "#randomthingz:machines/refinery",
+    "#randomthingz:machines/solidifier"
   ]
 }

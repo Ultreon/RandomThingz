@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/tin_ore"
+    "all": "randomthingz:blocks/tin_ore"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "qforgemod:items/eucalyptus_plank"
+    "layer0": "randomthingz:items/eucalyptus_plank"
   }
 }

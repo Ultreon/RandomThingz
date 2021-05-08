@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:smelting/electrum_ingot"
+      "randomthingz:smelting/electrum_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:smelting/electrum_ingot"
+        "recipe": "randomthingz:smelting/electrum_ingot"
       }
     }
   },

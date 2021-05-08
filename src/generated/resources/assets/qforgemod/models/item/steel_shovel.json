@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/steel_shovel"
+    "layer0": "randomthingz:items/steel_shovel"
   }
 }

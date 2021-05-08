@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:enderium_ingot"
+      "item": "randomthingz:enderium_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:enderium_broadsword"
+    "item": "randomthingz:enderium_broadsword"
   }
 }

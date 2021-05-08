@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:steel_ingot"
+      "item": "randomthingz:steel_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:steel_boots"
+    "item": "randomthingz:steel_boots"
   }
 }

@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:lead_ingot"
+      "item": "randomthingz:lead_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:lead_chestplate"
+    "item": "randomthingz:lead_chestplate"
   }
 }

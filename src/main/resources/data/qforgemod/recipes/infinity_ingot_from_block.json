@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:infinity_block"
+      "item": "randomthingz:infinity_block"
     }
   ],
   "result": {
-    "item": "qforgemod:infinity_ingot",
+    "item": "randomthingz:infinity_ingot",
     "count": 9
   }
 }

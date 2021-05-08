@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/bismuth"
   },
   "results": [
     {
-      "item": "qforgemod:bismuth_dust"
+      "item": "randomthingz:bismuth_dust"
     }
   ]
 }

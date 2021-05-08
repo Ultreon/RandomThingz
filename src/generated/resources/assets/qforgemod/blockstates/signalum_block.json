@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/signalum_block"
+      "model": "randomthingz:block/signalum_block"
     }
   }
 }

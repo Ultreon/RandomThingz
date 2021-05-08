@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:ultrinium_ingot_from_ultrinium_block"
+      "randomthingz:ultrinium_ingot_from_ultrinium_block"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ultrinium_block"
+            "item": "randomthingz:ultrinium_block"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:ultrinium_ingot_from_ultrinium_block"
+        "recipe": "randomthingz:ultrinium_ingot_from_ultrinium_block"
       }
     }
   },

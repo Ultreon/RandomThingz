@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "qforgemod:ruby_ore"
+              "name": "randomthingz:ruby_ore"
             },
             {
               "type": "minecraft:item",
@@ -38,7 +38,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "qforgemod:ruby"
+              "name": "randomthingz:ruby"
             }
           ]
         }

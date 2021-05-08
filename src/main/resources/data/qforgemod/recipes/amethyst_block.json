@@ -7,11 +7,11 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:amethyst"
+      "item": "randomthingz:amethyst"
     }
   },
   "result": {
-    "item": "qforgemod:amethyst_block",
+    "item": "randomthingz:amethyst_block",
     "count": 1
   }
 }

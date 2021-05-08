@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/iron"
   },
   "results": [
     {
-      "item": "qforgemod:iron_chunks",
+      "item": "randomthingz:iron_chunks",
       "count": 2
     },
     {

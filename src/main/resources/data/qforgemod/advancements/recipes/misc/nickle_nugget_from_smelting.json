@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_pickaxe"
+            "item": "randomthingz:nickel_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_shovel"
+            "item": "randomthingz:nickel_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_axe"
+            "item": "randomthingz:nickel_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_hoe"
+            "item": "randomthingz:nickel_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_sword"
+            "item": "randomthingz:nickel_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_helmet"
+            "item": "randomthingz:nickel_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_chestplate"
+            "item": "randomthingz:nickel_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_leggings"
+            "item": "randomthingz:nickel_leggings"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_boots"
+            "item": "randomthingz:nickel_boots"
           }
         ]
       }
@@ -139,7 +139,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "item": "qforgemod:nickel_nugget_from_smelting"
+        "item": "randomthingz:nickel_nugget_from_smelting"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:lumium_leggings"
+      "randomthingz:lumium_leggings"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:lumium_ingot"
+            "item": "randomthingz:lumium_ingot"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:lumium_leggings"
+        "recipe": "randomthingz:lumium_leggings"
       }
     }
   },

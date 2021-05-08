@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=north": {"model": "qforgemod:block/router"},
-    "facing=south": {"model": "qforgemod:block/router", "y": 180},
-    "facing=west": {"model": "qforgemod:block/router", "y": 270},
-    "facing=east": {"model": "qforgemod:block/router", "y": 90}
+    "facing=north": {"model": "randomthingz:block/router"},
+    "facing=south": {"model": "randomthingz:block/router", "y": 180},
+    "facing=west": {"model": "randomthingz:block/router", "y": 270},
+    "facing=east": {"model": "randomthingz:block/router", "y": 90}
   }
 }

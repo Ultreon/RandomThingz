@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:basic_crusher",
-    "qforgemod:crusher"
+    "randomthingz:basic_crusher",
+    "randomthingz:crusher"
   ]
 }

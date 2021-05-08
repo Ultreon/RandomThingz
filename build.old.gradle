@@ -71,7 +71,7 @@ boolean isDevTest = Boolean.parseBoolean(isDevTestString)
 
 version = vers + "." + release + '.' + buildNumber + "-" + stage + stageRelease
 group = 'com.qtech.forgemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'qforgemod'
+archivesBaseName = 'randomthingz'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -80,7 +80,7 @@ println("Project: " + group + ":" + archivesBaseName)
 println("Bulding a Java " + compileJava.targetCompatibility + " project...")
 
 mixin {
-    add sourceSets.main, "qforgemod.refmap.json"
+    add sourceSets.main, "randomthingz.refmap.json"
 }
 
 minecraft {
@@ -100,7 +100,7 @@ minecraft {
         client {
             //noinspection GroovyAssignabilityCheck
             workingDirectory project.file('run')
-            arg "-mixin.config=qforgemod.mixins.json"
+            arg "-mixin.config=randomthingz.mixins.json"
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -119,7 +119,7 @@ minecraft {
         server {
             //noinspection GroovyAssignabilityCheck
             workingDirectory project.file('run')
-            arg "-mixin.config=qforgemod.mixins.json"
+            arg "-mixin.config=randomthingz.mixins.json"
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -146,7 +146,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             // Specify the forgemod for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'qforgemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'randomthingz', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 qforgemod {
@@ -282,14 +282,14 @@ jar {
     manifest {
         attributes([
                 "Main-Class": "com.qtech.forgemod.Main",
-                "Specification-Title": "qforgemod",
+                "Specification-Title": "randomthingz",
                 "Specification-Vendor": "qsoftware",
                 "Specification-Version": "1.2-alpha3-DEVTEST",
                 "Implementation-Title": project.name,
                 "Implementation-Version": "${version}",
                 "Implementation-Vendor" :"qsoftware",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs": "qforgemod.mixins.json",
+                "MixinConfigs": "randomthingz.mixins.json",
                 "Build-Number": build.toString()
         ])
     }

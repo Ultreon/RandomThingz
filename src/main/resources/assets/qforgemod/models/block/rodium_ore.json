@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/rodium_ore"
+    "all": "randomthingz:blocks/rodium_ore"
   }
 }

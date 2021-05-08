@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:nickel_ore"
+          "name": "randomthingz:nickel_ore"
         }
       ],
       "conditions": [

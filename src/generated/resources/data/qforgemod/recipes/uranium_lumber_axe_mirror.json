@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:uranium_ingot"
+      "item": "randomthingz:uranium_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:uranium_lumber_axe"
+    "item": "randomthingz:uranium_lumber_axe"
   }
 }

@@ -7,14 +7,14 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:legendary_ender_pearl"
+      "item": "randomthingz:legendary_ender_pearl"
     },
     "/": {
       "tag": "forge:sticks"
     }
   },
   "result": {
-    "item": "qforgemod:ender_sword",
+    "item": "randomthingz:ender_sword",
     "count": 1
   }
 }

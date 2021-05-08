@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:item_pipe"
+          "name": "randomthingz:item_pipe"
         }
       ],
       "conditions": [

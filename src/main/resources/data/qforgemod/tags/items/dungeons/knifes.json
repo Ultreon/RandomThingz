@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:dungeons_dagger",
-    "qforgemod:eternal_knife",
-    "qforgemod:fangs_of_frost",
-    "qforgemod:moon_dagger",
-    "qforgemod:nightmares_bite",
-    "qforgemod:spirit_knife"
+    "randomthingz:dungeons_dagger",
+    "randomthingz:eternal_knife",
+    "randomthingz:fangs_of_frost",
+    "randomthingz:moon_dagger",
+    "randomthingz:nightmares_bite",
+    "randomthingz:spirit_knife"
   ]
 }

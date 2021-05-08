@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/heliotrope_ore"
+    "all": "randomthingz:blocks/heliotrope_ore"
   }
 }

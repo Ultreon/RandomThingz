@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:ethane_bucket",
-    "qforgemod:polyethylene_bucket"
+    "randomthingz:ethane_bucket",
+    "randomthingz:polyethylene_bucket"
   ]
 }

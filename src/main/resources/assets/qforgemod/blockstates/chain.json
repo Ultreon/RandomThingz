@@ -1,15 +1,15 @@
 {
   "variants": {
     "axis=x": {
-      "model": "qforgemod:block/chain",
+      "model": "randomthingz:block/chain",
       "x": 90,
       "y": 90
     },
     "axis=y": {
-      "model": "qforgemod:block/chain"
+      "model": "randomthingz:block/chain"
     },
     "axis=z": {
-      "model": "qforgemod:block/chain",
+      "model": "randomthingz:block/chain",
       "x": 90
     }
   }

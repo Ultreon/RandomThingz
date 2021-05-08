@@ -1,13 +1,13 @@
 {
   "replace": false,
   "values": [
-    "#qforgemod:drying_racks/acacia",
-    "#qforgemod:drying_racks/birch",
-    "#qforgemod:drying_racks/cherry",
-    "#qforgemod:drying_racks/dark_oak",
-    "#qforgemod:drying_racks/eucalyptus",
-    "#qforgemod:drying_racks/jungle",
-    "#qforgemod:drying_racks/oak",
-    "#qforgemod:drying_racks/spruce"
+    "#randomthingz:drying_racks/acacia",
+    "#randomthingz:drying_racks/birch",
+    "#randomthingz:drying_racks/cherry",
+    "#randomthingz:drying_racks/dark_oak",
+    "#randomthingz:drying_racks/eucalyptus",
+    "#randomthingz:drying_racks/jungle",
+    "#randomthingz:drying_racks/oak",
+    "#randomthingz:drying_racks/spruce"
   ]
 }

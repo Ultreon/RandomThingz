@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/aluminum"
   },
   "results": [
     {
-      "item": "qforgemod:aluminum_dust"
+      "item": "randomthingz:aluminum_dust"
     }
   ]
 }

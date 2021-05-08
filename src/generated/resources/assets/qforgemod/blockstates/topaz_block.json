@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/topaz_block"
+      "model": "randomthingz:block/topaz_block"
     }
   }
 }

@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/lead"
   },
   "results": [
     {
-      "item": "qforgemod:lead_chunks",
+      "item": "randomthingz:lead_chunks",
       "count": 2
     },
     {

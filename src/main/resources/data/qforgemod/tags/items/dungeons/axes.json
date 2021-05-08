@@ -1,11 +1,11 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:dungeons_diamond_axe",
-    "qforgemod:dungeons_axe",
-    "qforgemod:cursed_axe",
-    "qforgemod:firebrand",
-    "qforgemod:highland_axe",
-    "qforgemod:whirlwind"
+    "randomthingz:dungeons_diamond_axe",
+    "randomthingz:dungeons_axe",
+    "randomthingz:cursed_axe",
+    "randomthingz:firebrand",
+    "randomthingz:highland_axe",
+    "randomthingz:whirlwind"
   ]
 }

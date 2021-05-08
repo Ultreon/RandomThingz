@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=north": {
-      "model": "qforgemod:block/dark_oak_drying_rack",
+      "model": "randomthingz:block/dark_oak_drying_rack",
       "y": 180
     },
     "facing=south": {
-      "model": "qforgemod:block/dark_oak_drying_rack"
+      "model": "randomthingz:block/dark_oak_drying_rack"
     },
     "facing=west": {
-      "model": "qforgemod:block/dark_oak_drying_rack",
+      "model": "randomthingz:block/dark_oak_drying_rack",
       "y": 90
     },
     "facing=east": {
-      "model": "qforgemod:block/dark_oak_drying_rack",
+      "model": "randomthingz:block/dark_oak_drying_rack",
       "y": 270
     }
   }

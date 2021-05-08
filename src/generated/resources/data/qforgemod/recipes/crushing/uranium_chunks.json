@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/uranium"
   },
   "results": [
     {
-      "item": "qforgemod:uranium_chunks",
+      "item": "randomthingz:uranium_chunks",
       "count": 2
     },
     {

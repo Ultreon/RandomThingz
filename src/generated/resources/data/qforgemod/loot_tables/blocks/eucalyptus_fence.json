@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:eucalyptus_fence"
+          "name": "randomthingz:eucalyptus_fence"
         }
       ],
       "conditions": [

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/tin_block"
+      "model": "randomthingz:block/tin_block"
     }
   }
 }

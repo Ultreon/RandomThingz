@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/bismuth_brass_block"
+    "all": "randomthingz:blocks/bismuth_brass_block"
   }
 }

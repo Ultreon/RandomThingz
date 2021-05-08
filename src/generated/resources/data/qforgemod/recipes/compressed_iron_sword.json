@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:compressed_iron_ingot"
+      "item": "randomthingz:compressed_iron_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:compressed_iron_sword"
+    "item": "randomthingz:compressed_iron_sword"
   }
 }

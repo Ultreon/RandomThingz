@@ -9,13 +9,13 @@
           "conditions": [
             {
               "condition": "minecraft:block_state_property",
-              "block": "qforgemod:shopping_door",
+              "block": "randomthingz:shopping_door",
               "properties": {
                 "half": "lower"
               }
             }
           ],
-          "name": "qforgemod:shopping_door"
+          "name": "randomthingz:shopping_door"
         }
       ],
       "conditions": [

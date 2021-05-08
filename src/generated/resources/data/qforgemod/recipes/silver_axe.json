@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:silver_ingot"
+      "item": "randomthingz:silver_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:silver_axe"
+    "item": "randomthingz:silver_axe"
   }
 }

@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:beryl"
+         "item": "randomthingz:beryl"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:beryl_excavator"
+      "item": "randomthingz:beryl_excavator"
    }
 }

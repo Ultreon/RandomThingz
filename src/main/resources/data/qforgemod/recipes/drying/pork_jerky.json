@@ -1,10 +1,10 @@
 {
-    "type": "qforgemod:drying",
+    "type": "randomthingz:drying",
     "process_time": 400,
     "ingredient": {
         "item": "minecraft:porkchop"
     },
     "result": {
-        "item": "qforgemod:pork_jerky"
+        "item": "randomthingz:pork_jerky"
     }
 }

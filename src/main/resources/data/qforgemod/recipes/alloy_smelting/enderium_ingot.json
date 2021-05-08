@@ -1,5 +1,5 @@
 {
-  "type": "qforgemod:alloy_smelting",
+  "type": "randomthingz:alloy_smelting",
   "process_time": 500,
   "ingredients": [
     {
@@ -8,7 +8,7 @@
           "tag": "forge:ingots/lead"
         },
         {
-          "tag": "qforgemod:chunks/lead"
+          "tag": "randomthingz:chunks/lead"
         },
         {
           "tag": "forge:dusts/lead"
@@ -22,7 +22,7 @@
           "tag": "forge:ingots/platinum"
         },
         {
-          "tag": "qforgemod:chunks/platinum"
+          "tag": "randomthingz:chunks/platinum"
         },
         {
           "tag": "forge:dusts/platinum"
@@ -38,7 +38,7 @@
     }
   ],
   "result": {
-    "item": "qforgemod:enderium_ingot",
+    "item": "randomthingz:enderium_ingot",
     "count": 4
   }
 }

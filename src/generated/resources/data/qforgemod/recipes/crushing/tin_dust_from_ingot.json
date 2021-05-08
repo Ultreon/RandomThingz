@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/tin"
   },
   "results": [
     {
-      "item": "qforgemod:tin_dust"
+      "item": "randomthingz:tin_dust"
     }
   ]
 }

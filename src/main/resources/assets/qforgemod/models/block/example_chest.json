@@ -1,8 +1,8 @@
 {
   "parent": "block/orientable",
   "textures": {
-    "top": "qforgemod:blocks/wooden_crate_top",
-    "front": "qforgemod:blocks/wooden_crate_front",
-    "side": "qforgemod:blocks/wooden_crate_side"
+    "top": "randomthingz:blocks/wooden_crate_top",
+    "front": "randomthingz:blocks/wooden_crate_front",
+    "side": "randomthingz:blocks/wooden_crate_side"
   }
 }

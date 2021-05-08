@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:bismuth_ore"
+          "name": "randomthingz:bismuth_ore"
         }
       ],
       "conditions": [

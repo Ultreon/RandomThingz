@@ -1,37 +1,37 @@
 {
     "display": {
         "icon": {
-            "item": "qforgemod:ultrinium_axe"
+            "item": "randomthingz:ultrinium_axe"
         },
         "title": {
-            "translate": "advancements.qforgemod.ultrinium_tools.title"
+            "translate": "advancements.randomthingz.ultrinium_tools.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.ultrinium_tools.description"
+            "translate": "advancements.randomthingz.ultrinium_tools.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_ultrinium",
+    "parent": "randomthingz:mat_ultrinium",
     "criteria": {
         "get_tools": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "qforgemod:ultrinium_sword"
+                        "item": "randomthingz:ultrinium_sword"
                     },
                     {
-                        "item": "qforgemod:ultrinium_axe"
+                        "item": "randomthingz:ultrinium_axe"
                     },
                     {
-                        "item": "qforgemod:ultrinium_pickaxe"
+                        "item": "randomthingz:ultrinium_pickaxe"
                     },
                     {
-                        "item": "qforgemod:ultrinium_shovel"
+                        "item": "randomthingz:ultrinium_shovel"
                     },
                     {
-                        "item": "qforgemod:ultrinium_hoe"
+                        "item": "randomthingz:ultrinium_hoe"
                     }
                 ]
             }

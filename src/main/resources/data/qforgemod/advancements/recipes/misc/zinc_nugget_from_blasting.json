@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:zinc_nugget_from_blasting"
+      "randomthingz:zinc_nugget_from_blasting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:zinc_pickaxe"
+            "item": "randomthingz:zinc_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:zinc_shovel"
+            "item": "randomthingz:zinc_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:zinc_axe"
+            "item": "randomthingz:zinc_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:zinc_hoe"
+            "item": "randomthingz:zinc_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:zinc_sword"
+            "item": "randomthingz:zinc_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:zinc_helmet"
+            "item": "randomthingz:zinc_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:zinc_chestplate"
+            "item": "randomthingz:zinc_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:zinc_leggings"
+            "item": "randomthingz:zinc_leggings"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:zinc_boots"
+            "item": "randomthingz:zinc_boots"
           }
         ]
       }
@@ -139,7 +139,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:zinc_nugget_from_blasting"
+        "recipe": "randomthingz:zinc_nugget_from_blasting"
       }
     }
   },

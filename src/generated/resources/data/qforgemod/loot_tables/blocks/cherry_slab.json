@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:cherry_slab"
+          "name": "randomthingz:cherry_slab"
         }
       ],
       "conditions": [

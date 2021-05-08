@@ -7,13 +7,13 @@
   ],
   "key": {
     "c": {
-      "item": "qforgemod:nickel_ingot"
+      "item": "randomthingz:nickel_ingot"
     },
     "s": {
       "tag": "forge:sticks"
     }
   },
   "result": {
-    "item": "qforgemod:nickel_sword"
+    "item": "randomthingz:nickel_sword"
   }
 }

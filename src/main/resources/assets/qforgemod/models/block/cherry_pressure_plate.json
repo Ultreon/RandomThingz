@@ -1,6 +1,6 @@
 {
     "parent": "block/pressure_plate_up",
     "textures": {
-        "texture": "qforgemod:blocks/cherry_planks"
+        "texture": "randomthingz:blocks/cherry_planks"
     }
 }

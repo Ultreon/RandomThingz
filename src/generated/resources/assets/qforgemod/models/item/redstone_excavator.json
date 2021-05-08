@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/redstone_excavator"
+    "layer0": "randomthingz:items/redstone_excavator"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "qforgemod:items/lime_shard"
+    "layer0": "randomthingz:items/lime_shard"
   }
 }

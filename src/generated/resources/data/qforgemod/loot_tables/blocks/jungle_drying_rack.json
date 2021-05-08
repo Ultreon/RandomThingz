@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:jungle_drying_rack"
+          "name": "randomthingz:jungle_drying_rack"
         }
       ],
       "conditions": [

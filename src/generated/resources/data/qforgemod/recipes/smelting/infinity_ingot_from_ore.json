@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:ores/infinity"
   },
-  "result": "qforgemod:infinity_ingot",
+  "result": "randomthingz:infinity_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

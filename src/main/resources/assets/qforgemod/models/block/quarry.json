@@ -8,12 +8,12 @@
     }
   },
   "textures": {
-    "particle": "qforgemod:blocks/quarry/front",
-    "down": "qforgemod:blocks/quarry/bottom",
-    "up": "qforgemod:blocks/quarry/top",
-    "north": "qforgemod:blocks/quarry/front",
-    "east": "qforgemod:blocks/quarry/side",
-    "south": "qforgemod:blocks/quarry/back",
-    "west": "qforgemod:blocks/quarry/side"
+    "particle": "randomthingz:blocks/quarry/front",
+    "down": "randomthingz:blocks/quarry/bottom",
+    "up": "randomthingz:blocks/quarry/top",
+    "north": "randomthingz:blocks/quarry/front",
+    "east": "randomthingz:blocks/quarry/side",
+    "south": "randomthingz:blocks/quarry/back",
+    "west": "randomthingz:blocks/quarry/side"
   }
 }

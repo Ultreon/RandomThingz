@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:blasting/lumium_ingot"
+      "randomthingz:blasting/lumium_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:blasting/lumium_ingot"
+        "recipe": "randomthingz:blasting/lumium_ingot"
       }
     }
   },

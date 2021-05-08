@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:basic_alloy_smelter",
-    "qforgemod:basic_crusher",
-    "qforgemod:coal_generator"
+    "randomthingz:basic_alloy_smelter",
+    "randomthingz:basic_crusher",
+    "randomthingz:coal_generator"
   ]
 }

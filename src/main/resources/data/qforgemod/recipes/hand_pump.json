@@ -9,16 +9,16 @@
       "tag": "forge:ingots/aluminum"
     },
     "C": {
-      "item": "qforgemod:empty_canister"
+      "item": "randomthingz:empty_canister"
     },
     "#": {
       "tag": "forge:plastic"
     },
     "B": {
-      "item": "qforgemod:battery"
+      "item": "randomthingz:battery"
     }
   },
   "result": {
-    "item": "qforgemod:hand_pump"
+    "item": "randomthingz:hand_pump"
   }
 }

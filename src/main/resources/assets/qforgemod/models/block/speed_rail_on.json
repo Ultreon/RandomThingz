@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/rail_flat",
   "textures": {
-    "rail": "qforgemod:blocks/speed_rail_on"
+    "rail": "randomthingz:blocks/speed_rail_on"
   }
 }

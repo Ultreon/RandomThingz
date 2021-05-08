@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:electrum_nugget_from_blasting"
+      "randomthingz:electrum_nugget_from_blasting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:electrum_pickaxe"
+            "item": "randomthingz:electrum_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:electrum_shovel"
+            "item": "randomthingz:electrum_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:electrum_axe"
+            "item": "randomthingz:electrum_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:electrum_hoe"
+            "item": "randomthingz:electrum_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:electrum_sword"
+            "item": "randomthingz:electrum_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:electrum_helmet"
+            "item": "randomthingz:electrum_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:electrum_chestplate"
+            "item": "randomthingz:electrum_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:electrum_leggings"
+            "item": "randomthingz:electrum_leggings"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:electrum_boots"
+            "item": "randomthingz:electrum_boots"
           }
         ]
       }
@@ -139,7 +139,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:electrum_nugget_from_blasting"
+        "recipe": "randomthingz:electrum_nugget_from_blasting"
       }
     }
   },

@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:wrench",
-    "qforgemod:knife",
-    "qforgemod:magnet"
+    "randomthingz:wrench",
+    "randomthingz:knife",
+    "randomthingz:magnet"
   ]
 }

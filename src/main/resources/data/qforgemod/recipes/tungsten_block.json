@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:tungsten_ingot"
+      "item": "randomthingz:tungsten_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:tungsten_block"
+    "item": "randomthingz:tungsten_block"
   }
 }

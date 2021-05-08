@@ -7,10 +7,10 @@
   ],
   "key": {
     "c": {
-      "item": "qforgemod:nickel_nugget"
+      "item": "randomthingz:nickel_nugget"
     }
   },
   "result": {
-    "item": "qforgemod:nickel_ingot"
+    "item": "randomthingz:nickel_ingot"
   }
 }

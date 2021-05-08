@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/bismuth"
   },
   "results": [
     {
-      "item": "qforgemod:bismuth_chunks",
+      "item": "randomthingz:bismuth_chunks",
       "count": 2
     },
     {

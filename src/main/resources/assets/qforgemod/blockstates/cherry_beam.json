@@ -1,13 +1,13 @@
 {
   "variants": {
     "axis=x": {
-      "model": "qforgemod:block/cherry_beam_x"
+      "model": "randomthingz:block/cherry_beam_x"
     },
     "axis=y": {
-      "model": "qforgemod:block/cherry_beam_y"
+      "model": "randomthingz:block/cherry_beam_y"
     },
     "axis=z": {
-      "model": "qforgemod:block/cherry_beam_z"
+      "model": "randomthingz:block/cherry_beam_z"
     }
   }
 }

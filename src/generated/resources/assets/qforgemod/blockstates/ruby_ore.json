@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/ruby_ore"
+      "model": "randomthingz:block/ruby_ore"
     }
   }
 }

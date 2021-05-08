@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/topaz_ore"
+    "all": "randomthingz:blocks/topaz_ore"
   }
 }

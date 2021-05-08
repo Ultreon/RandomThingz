@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "qforgemod:amethyst_ore"
+    "item": "randomthingz:amethyst_ore"
   },
-  "result": "qforgemod:amethyst",
+  "result": "randomthingz:amethyst",
   "experience": 0.7,
   "cookingtime": 200
 }

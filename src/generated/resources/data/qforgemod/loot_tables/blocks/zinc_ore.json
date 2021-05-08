@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:zinc_ore"
+          "name": "randomthingz:zinc_ore"
         }
       ],
       "conditions": [

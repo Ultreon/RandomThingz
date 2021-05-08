@@ -30,7 +30,7 @@
               ]
             }
           ],
-          "name": "qforgemod:chicken_leg"
+          "name": "randomthingz:chicken_leg"
         }
       ]
     },
@@ -40,7 +40,7 @@
       "entries": [
         {
           "type": "item",
-          "name": "qforgemod:chicken_leg",
+          "name": "randomthingz:chicken_leg",
           "weight": 1
         }
       ],

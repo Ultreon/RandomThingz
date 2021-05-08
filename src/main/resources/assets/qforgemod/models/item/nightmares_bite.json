@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "qforgemod:items/nightmares_bite"
+		"layer0": "randomthingz:items/nightmares_bite"
 	},
 	"gui_light": "front",
 	"display": {

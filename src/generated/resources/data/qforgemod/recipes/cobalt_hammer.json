@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:cobalt_ingot"
+      "item": "randomthingz:cobalt_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:cobalt_hammer"
+    "item": "randomthingz:cobalt_hammer"
   }
 }

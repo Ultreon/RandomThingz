@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:items/wrench"
+    "layer0": "randomthingz:items/wrench"
   }
 }

@@ -13,13 +13,13 @@
       "tag": "forge:ingots/aluminum"
     },
     "X": {
-      "item": "qforgemod:stone_machine_frame"
+      "item": "randomthingz:stone_machine_frame"
     },
     "O": {
       "item": "minecraft:smooth_stone"
     }
   },
   "result": {
-    "item": "qforgemod:basic_crusher"
+    "item": "randomthingz:basic_crusher"
   }
 }

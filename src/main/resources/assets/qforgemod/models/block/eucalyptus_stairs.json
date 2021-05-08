@@ -1,8 +1,8 @@
 {
     "parent": "block/stairs",
     "textures": {
-        "bottom": "qforgemod:blocks/eucalyptus_planks",
-        "top": "qforgemod:blocks/eucalyptus_planks",
-        "side": "qforgemod:blocks/eucalyptus_planks"
+        "bottom": "randomthingz:blocks/eucalyptus_planks",
+        "top": "randomthingz:blocks/eucalyptus_planks",
+        "side": "randomthingz:blocks/eucalyptus_planks"
     }
 }

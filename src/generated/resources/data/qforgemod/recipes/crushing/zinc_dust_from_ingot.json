@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/zinc"
   },
   "results": [
     {
-      "item": "qforgemod:zinc_dust"
+      "item": "randomthingz:zinc_dust"
     }
   ]
 }

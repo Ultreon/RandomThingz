@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
-    "item": "qforgemod:amethyst"
+    "item": "randomthingz:amethyst"
   },
   "results": [
     {
-      "item": "qforgemod:amethyst_dust"
+      "item": "randomthingz:amethyst_dust"
     }
   ]
 }

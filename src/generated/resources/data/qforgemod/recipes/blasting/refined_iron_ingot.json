@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:ingots/iron"
   },
-  "result": "qforgemod:refined_iron_ingot",
+  "result": "randomthingz:refined_iron_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

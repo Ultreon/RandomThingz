@@ -2,33 +2,33 @@
   "parent": "item/generated",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/cooked_shoarma"
+      "layer0": "randomthingz:items/cooked_shoarma"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/cooked_shoarma"
+          "layer0": "randomthingz:items/cooked_shoarma"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/cooked_shoarma"
+          "layer0": "randomthingz:items/cooked_shoarma"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/cooked_shoarma"
+    "layer0": "randomthingz:items/cooked_shoarma"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/cooked_shoarma"
+        "layer0": "randomthingz:items/cooked_shoarma"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/cooked_shoarma"
+        "layer0": "randomthingz:items/cooked_shoarma"
       }
     }
   }

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:iron_glass_door"
+          "name": "randomthingz:iron_glass_door"
         }
       ],
       "conditions": [

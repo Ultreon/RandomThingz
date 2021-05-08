@@ -7,13 +7,13 @@
   ],
   "key": {
     "c": {
-      "item": "qforgemod:uranium_ingot"
+      "item": "randomthingz:uranium_ingot"
     },
     "s": {
       "tag": "forge:sticks"
     }
   },
   "result": {
-    "item": "qforgemod:uranium_sword"
+    "item": "randomthingz:uranium_sword"
   }
 }

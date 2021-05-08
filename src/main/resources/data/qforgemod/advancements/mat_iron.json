@@ -4,15 +4,15 @@
             "item": "minecraft:iron_ingot"
         },
         "title": {
-            "translate": "advancements.qforgemod.material_iron.title"
+            "translate": "advancements.randomthingz.material_iron.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.material_iron.description"
+            "translate": "advancements.randomthingz.material_iron.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_stone",
+    "parent": "randomthingz:mat_stone",
     "criteria": {
         "get_sword": {
             "trigger": "minecraft:inventory_changed",

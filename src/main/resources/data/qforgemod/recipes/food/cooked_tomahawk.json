@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "qforgemod:tomahawk"
+    "item": "randomthingz:tomahawk"
   },
-  "result": "qforgemod:cooked_tomahawk",
+  "result": "randomthingz:cooked_tomahawk",
   "experience": 0.35,
   "cookingtime": 200
 }

@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
-    "item": "qforgemod:amber"
+    "item": "randomthingz:amber"
   },
   "results": [
     {
-      "item": "qforgemod:amber_dust"
+      "item": "randomthingz:amber_dust"
     }
   ]
 }

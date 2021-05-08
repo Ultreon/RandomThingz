@@ -1,13 +1,13 @@
 {
-  "type": "qforgemod:compressing",
+  "type": "randomthingz:compressing",
   "process_time": 800,
   "ingredient": {
     "value": {
-      "item": "qforgemod:steel_block"
+      "item": "randomthingz:steel_block"
     },
     "count": 1
   },
   "result": {
-    "item": "qforgemod:tungsten_ingot"
+    "item": "randomthingz:tungsten_ingot"
   }
 }

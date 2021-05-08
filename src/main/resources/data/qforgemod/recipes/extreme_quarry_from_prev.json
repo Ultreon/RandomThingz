@@ -10,10 +10,10 @@
       "tag": "ingots/silver"
     },
     "o": {
-      "item": "qforgemod:quarry"
+      "item": "randomthingz:quarry"
     }
   },
   "result": {
-    "item": "qforgemod:extreme_quarry"
+    "item": "randomthingz:extreme_quarry"
   }
 }

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:speed_rail",
-    "qforgemod:empowered_rail"
+    "randomthingz:speed_rail",
+    "randomthingz:empowered_rail"
   ]
 }

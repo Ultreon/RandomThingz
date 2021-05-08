@@ -10,19 +10,19 @@
       "tag": "forge:ingots/invar"
     },
     "C": {
-      "item": "qforgemod:circuit_board"
+      "item": "randomthingz:circuit_board"
     },
     "/": {
       "tag": "forge:ingots/redstone_alloy"
     },
     "X": {
-      "item": "qforgemod:alloy_machine_frame"
+      "item": "randomthingz:alloy_machine_frame"
     },
     "O": {
       "item": "minecraft:smooth_stone"
     }
   },
   "result": {
-    "item": "qforgemod:lava_generator"
+    "item": "randomthingz:lava_generator"
   }
 }

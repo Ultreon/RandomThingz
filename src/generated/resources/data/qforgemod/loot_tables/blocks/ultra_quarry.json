@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:ultra_quarry"
+          "name": "randomthingz:ultra_quarry"
         }
       ],
       "conditions": [

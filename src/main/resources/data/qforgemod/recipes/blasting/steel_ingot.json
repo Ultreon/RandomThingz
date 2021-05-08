@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:dusts/steel"
   },
-  "result": "qforgemod:steel_ingot",
+  "result": "randomthingz:steel_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

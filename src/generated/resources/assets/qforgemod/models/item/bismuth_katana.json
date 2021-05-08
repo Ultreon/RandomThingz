@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/bismuth_katana"
+    "layer0": "randomthingz:items/bismuth_katana"
   }
 }

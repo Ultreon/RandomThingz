@@ -1,37 +1,37 @@
 {
     "display": {
         "icon": {
-            "item": "qforgemod:cobalt_axe"
+            "item": "randomthingz:cobalt_axe"
         },
         "title": {
-            "translate": "advancements.qforgemod.cobalt_tools.title"
+            "translate": "advancements.randomthingz.cobalt_tools.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.cobalt_tools.description"
+            "translate": "advancements.randomthingz.cobalt_tools.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_cobalt",
+    "parent": "randomthingz:mat_cobalt",
     "criteria": {
         "get_tools": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "qforgemod:cobalt_sword"
+                        "item": "randomthingz:cobalt_sword"
                     },
                     {
-                        "item": "qforgemod:cobalt_axe"
+                        "item": "randomthingz:cobalt_axe"
                     },
                     {
-                        "item": "qforgemod:cobalt_pickaxe"
+                        "item": "randomthingz:cobalt_pickaxe"
                     },
                     {
-                        "item": "qforgemod:cobalt_shovel"
+                        "item": "randomthingz:cobalt_shovel"
                     },
                     {
-                        "item": "qforgemod:cobalt_hoe"
+                        "item": "randomthingz:cobalt_hoe"
                     }
                 ]
             }

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/tungsten_block"
+      "model": "randomthingz:block/tungsten_block"
     }
   }
 }

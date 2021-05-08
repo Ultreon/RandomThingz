@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:iron_battleaxe"
+      "randomthingz:iron_battleaxe"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:iron_battleaxe"
+        "recipe": "randomthingz:iron_battleaxe"
       }
     }
   },

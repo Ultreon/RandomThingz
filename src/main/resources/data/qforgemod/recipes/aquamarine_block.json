@@ -7,11 +7,11 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:aquamarine"
+      "item": "randomthingz:aquamarine"
     }
   },
   "result": {
-    "item": "qforgemod:aquamarine_block",
+    "item": "randomthingz:aquamarine_block",
     "count": 1
   }
 }

@@ -7,13 +7,13 @@
   ],
   "key": {
     "c": {
-      "item": "qforgemod:zinc_ingot"
+      "item": "randomthingz:zinc_ingot"
     },
     "s": {
       "tag": "forge:sticks"
     }
   },
   "result": {
-    "item": "qforgemod:zinc_sword"
+    "item": "randomthingz:zinc_sword"
   }
 }

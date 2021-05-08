@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:bronze_ingot"
+         "item": "randomthingz:bronze_ingot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:bronze_hammer"
+      "item": "randomthingz:bronze_hammer"
    }
 }

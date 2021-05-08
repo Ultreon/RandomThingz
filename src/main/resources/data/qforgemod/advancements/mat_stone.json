@@ -4,15 +4,15 @@
             "item": "minecraft:cobblestone"
         },
         "title": {
-            "translate": "advancements.qforgemod.material_stone.title"
+            "translate": "advancements.randomthingz.material_stone.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.material_stone.description"
+            "translate": "advancements.randomthingz.material_stone.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_wood",
+    "parent": "randomthingz:mat_wood",
     "criteria": {
         "get_sword": {
             "trigger": "minecraft:inventory_changed",

@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/infinity"
   },
   "results": [
     {
-      "item": "qforgemod:infinity_dust"
+      "item": "randomthingz:infinity_dust"
     }
   ]
 }

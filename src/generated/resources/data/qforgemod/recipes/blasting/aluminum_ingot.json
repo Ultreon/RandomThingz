@@ -2,13 +2,13 @@
   "type": "minecraft:blasting",
   "ingredient": [
     {
-      "tag": "qforgemod:chunks/aluminum"
+      "tag": "randomthingz:chunks/aluminum"
     },
     {
       "tag": "forge:dusts/aluminum"
     }
   ],
-  "result": "qforgemod:aluminum_ingot",
+  "result": "randomthingz:aluminum_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

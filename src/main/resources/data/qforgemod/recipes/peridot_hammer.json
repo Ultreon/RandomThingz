@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:peridot"
+         "item": "randomthingz:peridot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:peridot_hammer"
+      "item": "randomthingz:peridot_hammer"
    }
 }

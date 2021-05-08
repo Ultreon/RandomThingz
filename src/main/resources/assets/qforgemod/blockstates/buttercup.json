@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/buttercup"
+      "model": "randomthingz:block/buttercup"
     }
   }
 }

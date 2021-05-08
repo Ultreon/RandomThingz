@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:peridot_block"
+          "name": "randomthingz:peridot_block"
         }
       ],
       "conditions": [

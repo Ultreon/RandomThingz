@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:tanzanite_from_smelting"
+        "recipe": "randomthingz:tanzanite_from_smelting"
       }
     }
   },

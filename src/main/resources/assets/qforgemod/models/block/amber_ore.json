@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/amber_ore"
+    "all": "randomthingz:blocks/amber_ore"
   }
 }

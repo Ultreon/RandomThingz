@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/enderium_block"
+      "model": "randomthingz:block/enderium_block"
     }
   }
 }

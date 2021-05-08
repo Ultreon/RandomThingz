@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:electrum_ingot"
+      "item": "randomthingz:electrum_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:electrum_longsword"
+    "item": "randomthingz:electrum_longsword"
   }
 }

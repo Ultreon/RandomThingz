@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/uranium_axe"
+    "layer0": "randomthingz:items/uranium_axe"
   }
 }

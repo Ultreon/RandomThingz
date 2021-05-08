@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/uranium"
+    "tag": "randomthingz:chunks/uranium"
   },
   "results": [
     {
-      "item": "qforgemod:uranium_dust"
+      "item": "randomthingz:uranium_dust"
     },
     {
-      "item": "qforgemod:uranium_dust",
+      "item": "randomthingz:uranium_dust",
       "chance": 0.1
     }
   ]

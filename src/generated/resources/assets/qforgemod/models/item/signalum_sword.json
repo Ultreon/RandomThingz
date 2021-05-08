@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/signalum_sword"
+    "layer0": "randomthingz:items/signalum_sword"
   }
 }

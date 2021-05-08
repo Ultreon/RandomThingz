@@ -10,7 +10,7 @@
       "tag": "forge:ingots/steel"
     },
     "C": {
-      "item": "qforgemod:circuit_board"
+      "item": "randomthingz:circuit_board"
     },
     "/": [
       {
@@ -21,13 +21,13 @@
       }
     ],
     "X": {
-      "item": "qforgemod:alloy_machine_frame"
+      "item": "randomthingz:alloy_machine_frame"
     },
     "B": {
       "item": "minecraft:bucket"
     }
   },
   "result": {
-    "item": "qforgemod:diesel_generator"
+    "item": "randomthingz:diesel_generator"
   }
 }

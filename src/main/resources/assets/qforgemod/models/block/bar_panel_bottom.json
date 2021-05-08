@@ -1,8 +1,8 @@
 {
-  "parent": "qforgemod:custom/bar_panel_bottom",
+  "parent": "randomthingz:custom/bar_panel_bottom",
   "textures": {
-    "particle": "qforgemod:blocks/bar_panel_side",
-    "side": "qforgemod:blocks/bar_panel_side",
-    "end": "qforgemod:blocks/bar_panel_end"
+    "particle": "randomthingz:blocks/bar_panel_side",
+    "side": "randomthingz:blocks/bar_panel_side",
+    "end": "randomthingz:blocks/bar_panel_end"
   }
 }

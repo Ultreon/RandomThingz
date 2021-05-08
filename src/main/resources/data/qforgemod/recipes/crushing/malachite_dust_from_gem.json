@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
-    "item": "qforgemod:malachite"
+    "item": "randomthingz:malachite"
   },
   "results": [
     {
-      "item": "qforgemod:malachite_dust"
+      "item": "randomthingz:malachite_dust"
     }
   ]
 }

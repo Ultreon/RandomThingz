@@ -10,13 +10,13 @@
       "tag": "forge:ingots/bismuth_steel"
     },
     "C": {
-      "item": "qforgemod:circuit_board"
+      "item": "randomthingz:circuit_board"
     },
     "/": {
-      "item": "qforgemod:empty_canister"
+      "item": "randomthingz:empty_canister"
     },
     "X": {
-      "item": "qforgemod:alloy_machine_frame"
+      "item": "randomthingz:alloy_machine_frame"
     },
     "O": {
       "tag": "forge:ingots/brass"
@@ -26,6 +26,6 @@
     }
   },
   "result": {
-    "item": "qforgemod:mixer"
+    "item": "randomthingz:mixer"
   }
 }

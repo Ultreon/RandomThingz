@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:copper_ingot"
+      "item": "randomthingz:copper_ingot"
     }
   ],
   "result": {
-    "item": "qforgemod:copper_nugget",
+    "item": "randomthingz:copper_nugget",
     "count": 9
   }
 }

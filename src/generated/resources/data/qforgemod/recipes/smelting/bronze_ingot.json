@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:dusts/bronze"
   },
-  "result": "qforgemod:bronze_ingot",
+  "result": "randomthingz:bronze_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "qforgemod:items/dungeons_axe",
-		"particle": "qforgemod:items/dungeons_axe"
+		"0": "randomthingz:items/dungeons_axe",
+		"particle": "randomthingz:items/dungeons_axe"
 	},
 	"elements": [
 		{

@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:copper_ingot"
+            "item": "randomthingz:copper_ingot"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "item": "qforgemod:copper_block"
+        "item": "randomthingz:copper_block"
       }
     }
   },

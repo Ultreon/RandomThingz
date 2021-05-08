@@ -4,15 +4,15 @@
             "item": "minecraft:oak_planks"
         },
         "title": {
-            "translate": "advancements.qforgemod.material_wood.title"
+            "translate": "advancements.randomthingz.material_wood.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.material_wood.description"
+            "translate": "advancements.randomthingz.material_wood.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:root_materials",
+    "parent": "randomthingz:root_materials",
     "criteria": {
         "get_sword": {
             "trigger": "minecraft:inventory_changed",

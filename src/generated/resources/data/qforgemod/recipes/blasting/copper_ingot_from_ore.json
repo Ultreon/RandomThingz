@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:ores/copper"
   },
-  "result": "qforgemod:copper_ingot",
+  "result": "randomthingz:copper_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

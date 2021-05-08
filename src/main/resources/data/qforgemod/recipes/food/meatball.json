@@ -10,11 +10,11 @@
       "item": "minecraft:beef"
     },
     "#": {
-      "item": "qforgemod:flour"
+      "item": "randomthingz:flour"
     }
   },
   "result": {
-    "item": "qforgemod:meatball",
+    "item": "randomthingz:meatball",
     "count": 8
   }
 }

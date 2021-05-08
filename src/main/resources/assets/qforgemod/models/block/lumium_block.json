@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/lumium_block"
+    "all": "randomthingz:blocks/lumium_block"
   }
 }

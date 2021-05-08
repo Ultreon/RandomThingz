@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "qforgemod:items/moon_dagger"
+		"layer0": "randomthingz:items/moon_dagger"
 	},
 	"gui_light": "front",
 	"display": {

@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/platinum"
   },
   "results": [
     {
-      "item": "qforgemod:platinum_chunks",
+      "item": "randomthingz:platinum_chunks",
       "count": 2
     },
     {

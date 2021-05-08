@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:stone_machine_frame"
+          "name": "randomthingz:stone_machine_frame"
         }
       ],
       "conditions": [

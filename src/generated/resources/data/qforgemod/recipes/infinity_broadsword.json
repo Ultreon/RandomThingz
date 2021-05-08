@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:infinity_ingot"
+      "item": "randomthingz:infinity_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:infinity_broadsword"
+    "item": "randomthingz:infinity_broadsword"
   }
 }

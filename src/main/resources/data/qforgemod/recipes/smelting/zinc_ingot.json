@@ -2,13 +2,13 @@
   "type": "minecraft:smelting",
   "ingredient": [
     {
-      "tag": "qforgemod:chunks/zinc"
+      "tag": "randomthingz:chunks/zinc"
     },
     {
       "tag": "forge:dusts/zinc"
     }
   ],
-  "result": "qforgemod:zinc_ingot",
+  "result": "randomthingz:zinc_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

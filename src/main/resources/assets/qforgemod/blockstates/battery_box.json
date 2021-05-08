@@ -1,11 +1,11 @@
 {
     "variants": {
-        "batteries=0": { "model": "qforgemod:block/battery_box_0"},
-        "batteries=1": { "model": "qforgemod:block/battery_box_1"},
-        "batteries=2": { "model": "qforgemod:block/battery_box_2"},
-        "batteries=3": { "model": "qforgemod:block/battery_box_3"},
-        "batteries=4": { "model": "qforgemod:block/battery_box_4"},
-        "batteries=5": { "model": "qforgemod:block/battery_box_5"},
-        "batteries=6": { "model": "qforgemod:block/battery_box_6"}
+        "batteries=0": { "model": "randomthingz:block/battery_box_0"},
+        "batteries=1": { "model": "randomthingz:block/battery_box_1"},
+        "batteries=2": { "model": "randomthingz:block/battery_box_2"},
+        "batteries=3": { "model": "randomthingz:block/battery_box_3"},
+        "batteries=4": { "model": "randomthingz:block/battery_box_4"},
+        "batteries=5": { "model": "randomthingz:block/battery_box_5"},
+        "batteries=6": { "model": "randomthingz:block/battery_box_6"}
     }
 }

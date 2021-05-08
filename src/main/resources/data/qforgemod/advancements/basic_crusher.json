@@ -1,23 +1,23 @@
 {
     "display": {
         "icon": {
-            "item": "qforgemod:basic_crusher"
+            "item": "randomthingz:basic_crusher"
         },
         "title": {
-            "translate": "advancements.qforgemod.basic_crusher.title"
+            "translate": "advancements.randomthingz.basic_crusher.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.basic_crusher.description"
+            "translate": "advancements.randomthingz.basic_crusher.description"
         }
     },
-    "parent": "qforgemod:basic_alloy_smelter",
+    "parent": "randomthingz:basic_alloy_smelter",
     "criteria": {
         "get_item": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "qforgemod:basic_crusher"
+                        "item": "randomthingz:basic_crusher"
                     }
                 ]
             }

@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "qforgemod:topaz_ore"
+    "item": "randomthingz:topaz_ore"
   },
-  "result": "qforgemod:topaz",
+  "result": "randomthingz:topaz",
   "experience": 0.7,
   "cookingtime": 100
 }

@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:ores/lead"
   },
-  "result": "qforgemod:lead_ingot",
+  "result": "randomthingz:lead_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

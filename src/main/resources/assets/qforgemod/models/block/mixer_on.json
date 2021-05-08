@@ -3,10 +3,10 @@
 	"parent": "block/cube",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "qforgemod:blocks/mixer/mixer",
-		"1": "qforgemod:blocks/mixer/fluid_animation",
-		"2": "qforgemod:blocks/mixer/tub_animation",
-		"particle": "qforgemod:blocks/mixer/mixer"
+		"0": "randomthingz:blocks/mixer/mixer",
+		"1": "randomthingz:blocks/mixer/fluid_animation",
+		"2": "randomthingz:blocks/mixer/tub_animation",
+		"particle": "randomthingz:blocks/mixer/mixer"
 	},
 	"elements": [
 		{

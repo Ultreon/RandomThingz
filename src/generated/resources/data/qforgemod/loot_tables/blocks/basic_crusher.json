@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:basic_crusher"
+          "name": "randomthingz:basic_crusher"
         }
       ],
       "conditions": [

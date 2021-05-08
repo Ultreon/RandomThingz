@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:iron_barrier_door"
+          "name": "randomthingz:iron_barrier_door"
         }
       ],
       "conditions": [

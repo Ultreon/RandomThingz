@@ -13,11 +13,11 @@
       "tag": "forge:glass"
     },
     "s": {
-      "tag": "qforgemod:ingots/steels"
+      "tag": "randomthingz:ingots/steels"
     }
   },
   "result": {
-    "item": "qforgemod:alloy_machine_frame",
+    "item": "randomthingz:alloy_machine_frame",
     "count": 2
   }
 }

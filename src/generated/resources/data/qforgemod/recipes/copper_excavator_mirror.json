@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:copper_ingot"
+      "item": "randomthingz:copper_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:copper_excavator"
+    "item": "randomthingz:copper_excavator"
   }
 }

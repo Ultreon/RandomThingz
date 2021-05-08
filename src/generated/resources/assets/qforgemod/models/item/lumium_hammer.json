@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/lumium_hammer"
+    "layer0": "randomthingz:items/lumium_hammer"
   }
 }

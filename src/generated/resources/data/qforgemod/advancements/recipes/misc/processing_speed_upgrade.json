@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:processing_speed_upgrade"
+      "randomthingz:processing_speed_upgrade"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:upgrade_case"
+            "item": "randomthingz:upgrade_case"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:processing_speed_upgrade"
+        "recipe": "randomthingz:processing_speed_upgrade"
       }
     }
   },

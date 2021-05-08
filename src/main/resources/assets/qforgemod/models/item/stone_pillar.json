@@ -1,5 +1,5 @@
 {
-  "parent": "qforgemod:block/stone_pillar",
+  "parent": "randomthingz:block/stone_pillar",
   "display": {
     "thirdperson": {
       "rotation": [

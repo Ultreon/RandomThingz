@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "particle": "qforgemod:blocks/steel_ore",
-    "all": "qforgemod:blocks/steel_ore"
+    "particle": "randomthingz:blocks/steel_ore",
+    "all": "randomthingz:blocks/steel_ore"
   }
 }

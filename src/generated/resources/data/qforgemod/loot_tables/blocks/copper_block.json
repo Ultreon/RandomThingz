@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:copper_block"
+          "name": "randomthingz:copper_block"
         }
       ],
       "conditions": [

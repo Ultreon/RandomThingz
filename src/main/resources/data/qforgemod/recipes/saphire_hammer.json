@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:saphire"
+         "item": "randomthingz:saphire"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:saphire_hammer"
+      "item": "randomthingz:saphire_hammer"
    }
 }

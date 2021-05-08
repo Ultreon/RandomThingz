@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:gilded_dirt"
+          "name": "randomthingz:gilded_dirt"
         }
       ],
       "conditions": [

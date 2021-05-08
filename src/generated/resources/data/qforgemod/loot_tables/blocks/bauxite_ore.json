@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:bauxite_ore"
+          "name": "randomthingz:bauxite_ore"
         }
       ],
       "conditions": [

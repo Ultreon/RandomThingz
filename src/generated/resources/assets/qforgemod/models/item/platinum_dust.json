@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:items/platinum_dust"
+    "layer0": "randomthingz:items/platinum_dust"
   }
 }

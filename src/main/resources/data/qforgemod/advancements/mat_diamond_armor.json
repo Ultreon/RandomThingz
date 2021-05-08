@@ -4,15 +4,15 @@
             "item": "minecraft:diamond_chestplate"
         },
         "title": {
-            "translate": "advancements.qforgemod.diamond_armor.title"
+            "translate": "advancements.randomthingz.diamond_armor.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.diamond_armor.description"
+            "translate": "advancements.randomthingz.diamond_armor.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_diamond",
+    "parent": "randomthingz:mat_diamond",
     "criteria": {
         "get_armor": {
             "trigger": "minecraft:inventory_changed",

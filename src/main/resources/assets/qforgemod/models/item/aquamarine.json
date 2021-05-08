@@ -2,33 +2,33 @@
   "parent": "item/generated",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/aquamarine"
+      "layer0": "randomthingz:items/aquamarine"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/aquamarine"
+          "layer0": "randomthingz:items/aquamarine"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/aquamarine"
+          "layer0": "randomthingz:items/aquamarine"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/aquamarine"
+    "layer0": "randomthingz:items/aquamarine"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/aquamarine"
+        "layer0": "randomthingz:items/aquamarine"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/aquamarine"
+        "layer0": "randomthingz:items/aquamarine"
       }
     }
   }

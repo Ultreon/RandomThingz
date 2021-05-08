@@ -10,10 +10,10 @@
       "tag": "ingots/tin"
     },
     "o": {
-      "item": "qforgemod:quarry"
+      "item": "randomthingz:quarry"
     }
   },
   "result": {
-    "item": "qforgemod:heavy_quarry"
+    "item": "randomthingz:heavy_quarry"
   }
 }

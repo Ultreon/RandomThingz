@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "qforgemod:infinity_ore"
+    "item": "randomthingz:infinity_ore"
   },
-  "result": "qforgemod:unstable_infinity_ingot",
+  "result": "randomthingz:unstable_infinity_ingot",
   "experience": 0.7,
   "cookingtime": 100
 }

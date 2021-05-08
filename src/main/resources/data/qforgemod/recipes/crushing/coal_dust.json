@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "item": "minecraft:coal"
   },
   "results": [
     {
-      "item": "qforgemod:coal_dust"
+      "item": "randomthingz:coal_dust"
     }
   ]
 }

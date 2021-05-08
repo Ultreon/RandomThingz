@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/bismuth_ore"
+      "model": "randomthingz:block/bismuth_ore"
     }
   }
 }

@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:bronze_ingot"
+      "item": "randomthingz:bronze_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:bronze_pickaxe"
+    "item": "randomthingz:bronze_pickaxe"
   }
 }

@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_ingot"
+            "item": "randomthingz:nickel_ingot"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "item": "qforgemod:nickel_hoe"
+        "item": "randomthingz:nickel_hoe"
       }
     }
   },

@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:amber"
+         "item": "randomthingz:amber"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:amber_hammer"
+      "item": "randomthingz:amber_hammer"
    }
 }

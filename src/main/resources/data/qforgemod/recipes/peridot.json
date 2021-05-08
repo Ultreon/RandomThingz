@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "qforgemod:peridot_ore"
+    "item": "randomthingz:peridot_ore"
   },
-  "result": "qforgemod:peridot",
+  "result": "randomthingz:peridot",
   "experience": 0.7,
   "cookingtime": 200
 }

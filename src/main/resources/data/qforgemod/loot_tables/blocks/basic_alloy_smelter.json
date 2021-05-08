@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:basic_alloy_smelter"
+          "name": "randomthingz:basic_alloy_smelter"
         }
       ],
       "conditions": [

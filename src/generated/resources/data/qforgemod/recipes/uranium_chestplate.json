@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:uranium_ingot"
+      "item": "randomthingz:uranium_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:uranium_chestplate"
+    "item": "randomthingz:uranium_chestplate"
   }
 }

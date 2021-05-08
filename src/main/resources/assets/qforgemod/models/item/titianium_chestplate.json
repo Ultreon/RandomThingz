@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/titianium_chestplate"
+    "layer0": "randomthingz:items/titianium_chestplate"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
   "textures": {
-    "all": "qforgemod:blocks/eucalyptus_leaves"
+    "all": "randomthingz:blocks/eucalyptus_leaves"
   }
 }

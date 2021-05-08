@@ -1,6 +1,6 @@
 {
-    "parent": "qforgemod:items/ice_bow",
+    "parent": "randomthingz:items/ice_bow",
     "textures": {
-        "layer0": "qforgemod:items/ice_bow_pulling_0"
+        "layer0": "randomthingz:items/ice_bow_pulling_0"
     }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/diamond_battleaxe"
+    "layer0": "randomthingz:items/diamond_battleaxe"
   }
 }

@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:invar_ingot"
+      "item": "randomthingz:invar_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:invar_helmet"
+    "item": "randomthingz:invar_helmet"
   }
 }

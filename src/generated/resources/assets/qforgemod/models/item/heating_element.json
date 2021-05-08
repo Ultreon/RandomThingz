@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:items/heating_element"
+    "layer0": "randomthingz:items/heating_element"
   }
 }

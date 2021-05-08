@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:lumium_nugget_from_blasting"
+      "randomthingz:lumium_nugget_from_blasting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:lumium_pickaxe"
+            "item": "randomthingz:lumium_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:lumium_shovel"
+            "item": "randomthingz:lumium_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:lumium_axe"
+            "item": "randomthingz:lumium_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:lumium_hoe"
+            "item": "randomthingz:lumium_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:lumium_sword"
+            "item": "randomthingz:lumium_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:lumium_helmet"
+            "item": "randomthingz:lumium_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:lumium_chestplate"
+            "item": "randomthingz:lumium_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:lumium_leggings"
+            "item": "randomthingz:lumium_leggings"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:lumium_boots"
+            "item": "randomthingz:lumium_boots"
           }
         ]
       }
@@ -139,7 +139,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:lumium_nugget_from_blasting"
+        "recipe": "randomthingz:lumium_nugget_from_blasting"
       }
     }
   },

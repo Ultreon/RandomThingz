@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/ultrinium_sword"
+    "layer0": "randomthingz:items/ultrinium_sword"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/lumium_helmet"
+    "layer0": "randomthingz:items/lumium_helmet"
   }
 }

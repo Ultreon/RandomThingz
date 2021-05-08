@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:dusts/lumium"
   },
-  "result": "qforgemod:lumium_ingot",
+  "result": "randomthingz:lumium_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

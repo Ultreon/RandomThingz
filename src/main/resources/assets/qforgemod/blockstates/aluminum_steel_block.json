@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/aluminum_steel_block"
+      "model": "randomthingz:block/aluminum_steel_block"
     }
   }
 }

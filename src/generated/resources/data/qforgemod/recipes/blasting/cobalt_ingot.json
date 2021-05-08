@@ -2,13 +2,13 @@
   "type": "minecraft:blasting",
   "ingredient": [
     {
-      "tag": "qforgemod:chunks/cobalt"
+      "tag": "randomthingz:chunks/cobalt"
     },
     {
       "tag": "forge:dusts/cobalt"
     }
   ],
-  "result": "qforgemod:cobalt_ingot",
+  "result": "randomthingz:cobalt_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

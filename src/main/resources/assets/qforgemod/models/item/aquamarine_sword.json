@@ -2,33 +2,33 @@
   "parent": "item/handheld",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/aquamarine_sword"
+      "layer0": "randomthingz:items/aquamarine_sword"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/aquamarine_sword"
+          "layer0": "randomthingz:items/aquamarine_sword"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/aquamarine_sword"
+          "layer0": "randomthingz:items/aquamarine_sword"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/aquamarine_sword"
+    "layer0": "randomthingz:items/aquamarine_sword"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/aquamarine_sword"
+        "layer0": "randomthingz:items/aquamarine_sword"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/aquamarine_sword"
+        "layer0": "randomthingz:items/aquamarine_sword"
       }
     }
   }

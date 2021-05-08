@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:tanzanite_helmet"
+        "recipe": "randomthingz:tanzanite_helmet"
       }
     }
   },

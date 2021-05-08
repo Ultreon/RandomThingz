@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/amethyst_block"
+      "model": "randomthingz:block/amethyst_block"
     }
   }
 }

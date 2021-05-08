@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:redstone_alloy_ingot"
+      "item": "randomthingz:redstone_alloy_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:redstone_boots"
+    "item": "randomthingz:redstone_boots"
   }
 }

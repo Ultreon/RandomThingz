@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:beryl_block"
+      "item": "randomthingz:beryl_block"
     }
   ],
   "result": {
-    "item": "qforgemod:beryl",
+    "item": "randomthingz:beryl",
     "count": 9
   }
 }

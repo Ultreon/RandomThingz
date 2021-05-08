@@ -1,17 +1,17 @@
 {
   "replace": false,
   "values": [
-    "#qforgemod:chunks/iron",
-    "#qforgemod:chunks/gold",
-    "#qforgemod:chunks/copper",
-    "#qforgemod:chunks/tin",
-    "#qforgemod:chunks/silver",
-    "#qforgemod:chunks/lead",
-    "#qforgemod:chunks/nickel",
-    "#qforgemod:chunks/platinum",
-    "#qforgemod:chunks/zinc",
-    "#qforgemod:chunks/bismuth",
-    "#qforgemod:chunks/aluminum",
-    "#qforgemod:chunks/uranium"
+    "#randomthingz:chunks/iron",
+    "#randomthingz:chunks/gold",
+    "#randomthingz:chunks/copper",
+    "#randomthingz:chunks/tin",
+    "#randomthingz:chunks/silver",
+    "#randomthingz:chunks/lead",
+    "#randomthingz:chunks/nickel",
+    "#randomthingz:chunks/platinum",
+    "#randomthingz:chunks/zinc",
+    "#randomthingz:chunks/bismuth",
+    "#randomthingz:chunks/aluminum",
+    "#randomthingz:chunks/uranium"
   ]
 }

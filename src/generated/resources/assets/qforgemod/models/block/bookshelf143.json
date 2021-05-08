@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cube_column",
   "textures": {
     "end": "minecraft:block/oak_planks",
-    "side": "qforgemod:blocks/bookshelfs/bookshelf143"
+    "side": "randomthingz:blocks/bookshelfs/bookshelf143"
   }
 }

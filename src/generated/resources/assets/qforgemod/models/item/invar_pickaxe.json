@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/invar_pickaxe"
+    "layer0": "randomthingz:items/invar_pickaxe"
   }
 }

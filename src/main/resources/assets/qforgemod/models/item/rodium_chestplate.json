@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/rodium_chestplate"
+    "layer0": "randomthingz:items/rodium_chestplate"
   }
 }

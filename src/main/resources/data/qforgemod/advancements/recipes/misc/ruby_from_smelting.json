@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ruby_ore"
+            "item": "randomthingz:ruby_ore"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:ruby_from_smelting"
+        "recipe": "randomthingz:ruby_from_smelting"
       }
     }
   },

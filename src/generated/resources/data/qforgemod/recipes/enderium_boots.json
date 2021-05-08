@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:enderium_ingot"
+      "item": "randomthingz:enderium_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:enderium_boots"
+    "item": "randomthingz:enderium_boots"
   }
 }

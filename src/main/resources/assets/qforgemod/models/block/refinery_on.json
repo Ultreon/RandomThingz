@@ -3,10 +3,10 @@
 	"parent": "block/cube",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "qforgemod:blocks/refinery/refinery",
-		"1": "qforgemod:blocks/refinery/fluid_animation",
-		"2": "qforgemod:blocks/refinery/tub_animation",
-		"particle": "qforgemod:blocks/refinery/refinery"
+		"0": "randomthingz:blocks/refinery/refinery",
+		"1": "randomthingz:blocks/refinery/fluid_animation",
+		"2": "randomthingz:blocks/refinery/tub_animation",
+		"particle": "randomthingz:blocks/refinery/refinery"
 	},
 	"elements": [
 		{

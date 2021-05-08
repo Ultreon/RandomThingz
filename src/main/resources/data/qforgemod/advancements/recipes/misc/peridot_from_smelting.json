@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:peridot_ore"
+            "item": "randomthingz:peridot_ore"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:peridot_from_smelting"
+        "recipe": "randomthingz:peridot_from_smelting"
       }
     }
   },

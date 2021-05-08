@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/lumium"
   },
   "results": [
     {
-      "item": "qforgemod:lumium_dust"
+      "item": "randomthingz:lumium_dust"
     }
   ]
 }

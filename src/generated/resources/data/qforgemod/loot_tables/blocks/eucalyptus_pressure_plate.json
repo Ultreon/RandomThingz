@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:eucalyptus_pressure_plate"
+          "name": "randomthingz:eucalyptus_pressure_plate"
         }
       ],
       "conditions": [

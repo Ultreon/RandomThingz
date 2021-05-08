@@ -9,16 +9,16 @@
       "tag": "forge:ingots/bismuth_brass"
     },
     "C": {
-      "item": "qforgemod:basic_alloy_smelter"
+      "item": "randomthingz:basic_alloy_smelter"
     },
     "/": {
       "tag": "forge:ingots/redstone_alloy"
     },
     "X": {
-      "item": "qforgemod:alloy_machine_frame"
+      "item": "randomthingz:alloy_machine_frame"
     }
   },
   "result": {
-    "item": "qforgemod:alloy_smelter"
+    "item": "randomthingz:alloy_smelter"
   }
 }

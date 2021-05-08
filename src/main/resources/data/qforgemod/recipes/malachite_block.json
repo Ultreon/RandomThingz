@@ -7,11 +7,11 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:malachite"
+      "item": "randomthingz:malachite"
     }
   },
   "result": {
-    "item": "qforgemod:malachite_block",
+    "item": "randomthingz:malachite_block",
     "count": 1
   }
 }

@@ -9,10 +9,10 @@
       "tag": "ingots/aluminum"
     },
     "o": {
-      "tag": "qforgemod:heavy_quarry"
+      "tag": "randomthingz:heavy_quarry"
     }
   },
   "result": {
-    "item": "qforgemod:super_quarry"
+    "item": "randomthingz:super_quarry"
   }
 }

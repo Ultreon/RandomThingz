@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/invar_block"
+      "model": "randomthingz:block/invar_block"
     }
   }
 }

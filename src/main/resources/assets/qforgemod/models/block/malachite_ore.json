@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "particle": "qforgemod:blocks/malachite_ore",
-    "all": "qforgemod:blocks/malachite_ore"
+    "particle": "randomthingz:blocks/malachite_ore",
+    "all": "randomthingz:blocks/malachite_ore"
   }
 }

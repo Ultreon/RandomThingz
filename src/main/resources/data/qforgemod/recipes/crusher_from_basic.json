@@ -10,19 +10,19 @@
       "tag": "forge:ingots/bismuth_steel"
     },
     "C": {
-      "item": "qforgemod:basic_crusher"
+      "item": "randomthingz:basic_crusher"
     },
     "/": {
       "tag": "forge:ingots/redstone_alloy"
     },
     "X": {
-      "item": "qforgemod:alloy_machine_frame"
+      "item": "randomthingz:alloy_machine_frame"
     },
     "D": {
       "tag": "forge:gems/diamond"
     }
   },
   "result": {
-    "item": "qforgemod:crusher"
+    "item": "randomthingz:crusher"
   }
 }

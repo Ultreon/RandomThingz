@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:aluminum_ingot"
+      "item": "randomthingz:aluminum_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:aluminum_axe"
+    "item": "randomthingz:aluminum_axe"
   }
 }

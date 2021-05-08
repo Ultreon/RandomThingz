@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:zinc_ingot_from_zinc_block"
+      "randomthingz:zinc_ingot_from_zinc_block"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:zinc_block"
+            "item": "randomthingz:zinc_block"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:zinc_ingot_from_zinc_block"
+        "recipe": "randomthingz:zinc_ingot_from_zinc_block"
       }
     }
   },

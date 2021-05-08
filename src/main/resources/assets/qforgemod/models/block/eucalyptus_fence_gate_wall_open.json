@@ -1,6 +1,6 @@
 {
     "parent": "block/template_fence_gate_wall_open",
     "textures": {
-        "texture": "qforgemod:blocks/eucalyptus_planks"
+        "texture": "randomthingz:blocks/eucalyptus_planks"
     }
 }

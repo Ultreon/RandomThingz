@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:atomic_tnt"
+          "name": "randomthingz:atomic_tnt"
         }
       ],
       "conditions": [

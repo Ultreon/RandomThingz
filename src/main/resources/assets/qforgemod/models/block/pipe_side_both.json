@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"0": "qforgemod:blocks/pipe",
-		"particle": "qforgemod:blocks/pipe"
+		"0": "randomthingz:blocks/pipe",
+		"particle": "randomthingz:blocks/pipe"
 	},
 	"elements": [
 		{

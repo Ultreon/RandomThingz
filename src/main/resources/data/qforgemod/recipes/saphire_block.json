@@ -7,11 +7,11 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:saphire"
+      "item": "randomthingz:saphire"
     }
   },
   "result": {
-    "item": "qforgemod:saphire_block",
+    "item": "randomthingz:saphire_block",
     "count": 1
   }
 }

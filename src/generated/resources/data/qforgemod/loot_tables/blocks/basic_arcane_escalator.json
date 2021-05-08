@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:basic_arcane_escalator"
+          "name": "randomthingz:basic_arcane_escalator"
         }
       ],
       "conditions": [

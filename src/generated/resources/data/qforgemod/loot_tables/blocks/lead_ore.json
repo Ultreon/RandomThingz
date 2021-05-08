@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:lead_ore"
+          "name": "randomthingz:lead_ore"
         }
       ],
       "conditions": [

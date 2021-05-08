@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:silver_ingot"
+      "item": "randomthingz:silver_ingot"
     }
   ],
   "result": {
-    "item": "qforgemod:silver_nugget",
+    "item": "randomthingz:silver_nugget",
     "count": 9
   }
 }

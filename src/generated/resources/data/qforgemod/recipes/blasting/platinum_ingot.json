@@ -2,13 +2,13 @@
   "type": "minecraft:blasting",
   "ingredient": [
     {
-      "tag": "qforgemod:chunks/platinum"
+      "tag": "randomthingz:chunks/platinum"
     },
     {
       "tag": "forge:dusts/platinum"
     }
   ],
-  "result": "qforgemod:platinum_ingot",
+  "result": "randomthingz:platinum_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/redstone_axe"
+    "layer0": "randomthingz:items/redstone_axe"
   }
 }

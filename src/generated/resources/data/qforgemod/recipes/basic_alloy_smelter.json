@@ -13,13 +13,13 @@
       "tag": "forge:ingots/copper"
     },
     "X": {
-      "item": "qforgemod:stone_machine_frame"
+      "item": "randomthingz:stone_machine_frame"
     },
     "O": {
       "item": "minecraft:bricks"
     }
   },
   "result": {
-    "item": "qforgemod:basic_alloy_smelter"
+    "item": "randomthingz:basic_alloy_smelter"
   }
 }

@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:aluminum_steel_ingot"
+         "item": "randomthingz:aluminum_steel_ingot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:aluminum_steel_excavator"
+      "item": "randomthingz:aluminum_steel_excavator"
    }
 }

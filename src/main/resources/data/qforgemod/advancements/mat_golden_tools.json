@@ -4,15 +4,15 @@
             "item": "minecraft:golden_axe"
         },
         "title": {
-            "translate": "advancements.qforgemod.golden_tools.title"
+            "translate": "advancements.randomthingz.golden_tools.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.golden_tools.description"
+            "translate": "advancements.randomthingz.golden_tools.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_gold",
+    "parent": "randomthingz:mat_gold",
     "criteria": {
         "get_tools": {
             "trigger": "minecraft:inventory_changed",

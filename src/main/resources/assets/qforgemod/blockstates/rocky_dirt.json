@@ -1,10 +1,10 @@
 {
     "variants": {
         "": [
-            { "model": "qforgemod:block/rocky_dirt" },
-            { "model": "qforgemod:block/rocky_dirt", "y": 90 },
-            { "model": "qforgemod:block/rocky_dirt", "y": 180 },
-            { "model": "qforgemod:block/rocky_dirt", "y": 270 }
+            { "model": "randomthingz:block/rocky_dirt" },
+            { "model": "randomthingz:block/rocky_dirt", "y": 90 },
+            { "model": "randomthingz:block/rocky_dirt", "y": 180 },
+            { "model": "randomthingz:block/rocky_dirt", "y": 270 }
         ]
     }
 }

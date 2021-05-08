@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:steel_block"
+      "item": "randomthingz:steel_block"
     }
   ],
   "result": {
-    "item": "qforgemod:steel_ingot",
+    "item": "randomthingz:steel_ingot",
     "count": 9
   }
 }

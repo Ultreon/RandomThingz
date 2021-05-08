@@ -1,23 +1,23 @@
 {
     "display": {
         "icon": {
-            "item": "qforgemod:crusher"
+            "item": "randomthingz:crusher"
         },
         "title": {
-            "translate": "advancements.qforgemod.crusher.title"
+            "translate": "advancements.randomthingz.crusher.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.crusher.description"
+            "translate": "advancements.randomthingz.crusher.description"
         }
     },
-    "parent": "qforgemod:alloy_machine_frame",
+    "parent": "randomthingz:alloy_machine_frame",
     "criteria": {
         "get_item": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "qforgemod:crusher"
+                        "item": "randomthingz:crusher"
                     }
                 ]
             }

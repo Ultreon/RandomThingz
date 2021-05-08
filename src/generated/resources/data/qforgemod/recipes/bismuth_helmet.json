@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:bismuth_ingot"
+      "item": "randomthingz:bismuth_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:bismuth_helmet"
+    "item": "randomthingz:bismuth_helmet"
   }
 }

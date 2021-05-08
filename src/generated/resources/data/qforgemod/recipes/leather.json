@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:zombie_leather"
+      "item": "randomthingz:zombie_leather"
     },
     {
-      "item": "qforgemod:zombie_leather"
+      "item": "randomthingz:zombie_leather"
     },
     {
-      "item": "qforgemod:zombie_leather"
+      "item": "randomthingz:zombie_leather"
     },
     {
-      "item": "qforgemod:zombie_leather"
+      "item": "randomthingz:zombie_leather"
     }
   ],
   "result": {

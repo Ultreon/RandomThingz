@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:items/hand_pump"
+    "layer0": "randomthingz:items/hand_pump"
   }
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:smelting/bismuth_ingot"
+      "randomthingz:smelting/bismuth_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:smelting/bismuth_ingot"
+        "recipe": "randomthingz:smelting/bismuth_ingot"
       }
     }
   },

@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/bronze"
+    "tag": "randomthingz:chunks/bronze"
   },
   "results": [
     {
-      "item": "qforgemod:bronze_dust"
+      "item": "randomthingz:bronze_dust"
     },
     {
-      "item": "qforgemod:bronze_dust",
+      "item": "randomthingz:bronze_dust",
       "chance": 0.1
     }
   ]

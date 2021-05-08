@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:platinum_ingot"
+      "item": "randomthingz:platinum_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:platinum_broadsword"
+    "item": "randomthingz:platinum_broadsword"
   }
 }

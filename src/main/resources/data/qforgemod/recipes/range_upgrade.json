@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:upgrade_case"
+      "item": "randomthingz:upgrade_case"
     },
     {
       "tag": "forge:ender_pearls"
@@ -15,6 +15,6 @@
     }
   ],
   "result": {
-    "item": "qforgemod:range_upgrade"
+    "item": "randomthingz:range_upgrade"
   }
 }

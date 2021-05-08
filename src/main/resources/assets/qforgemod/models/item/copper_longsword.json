@@ -2,7 +2,7 @@
   "credit": "Made with Blockbench",
   "parent": "item/generated",
   "textures": {
-    "layer0": "qforgemod:items/copper_longsword"
+    "layer0": "randomthingz:items/copper_longsword"
   },
   "gui_light": "front",
   "display": {

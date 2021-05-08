@@ -2,33 +2,33 @@
   "parent": "item/handheld",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/aquamarine_shovel"
+      "layer0": "randomthingz:items/aquamarine_shovel"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/aquamarine_shovel"
+          "layer0": "randomthingz:items/aquamarine_shovel"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/aquamarine_shovel"
+          "layer0": "randomthingz:items/aquamarine_shovel"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/aquamarine_shovel"
+    "layer0": "randomthingz:items/aquamarine_shovel"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/aquamarine_shovel"
+        "layer0": "randomthingz:items/aquamarine_shovel"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/aquamarine_shovel"
+        "layer0": "randomthingz:items/aquamarine_shovel"
       }
     }
   }

@@ -1,6 +1,6 @@
 {
-  "parent": "qforgemod:items/handheld_double_size",
+  "parent": "randomthingz:items/handheld_double_size",
   "textures": {
-    "layer0": "qforgemod:items/dungeons_broadsword"
+    "layer0": "randomthingz:items/dungeons_broadsword"
   }
 }

@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:nickel_block"
+      "item": "randomthingz:nickel_block"
     }
   ],
   "result": {
-    "item": "qforgemod:nickel_ingot",
+    "item": "randomthingz:nickel_ingot",
     "count": 9
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "qforgemod:items/stick_variant5"
+    "layer0": "randomthingz:items/stick_variant5"
   }
 }

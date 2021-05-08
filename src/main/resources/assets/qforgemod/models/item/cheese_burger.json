@@ -2,33 +2,33 @@
   "parent": "item/generated",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/cheese_burger"
+      "layer0": "randomthingz:items/cheese_burger"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/cheese_burger"
+          "layer0": "randomthingz:items/cheese_burger"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/cheese_burger"
+          "layer0": "randomthingz:items/cheese_burger"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/cheese_burger"
+    "layer0": "randomthingz:items/cheese_burger"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/cheese_burger"
+        "layer0": "randomthingz:items/cheese_burger"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/cheese_burger"
+        "layer0": "randomthingz:items/cheese_burger"
       }
     }
   }

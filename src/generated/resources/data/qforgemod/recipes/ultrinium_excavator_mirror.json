@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:ultrinium_ingot"
+      "item": "randomthingz:ultrinium_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:ultrinium_excavator"
+    "item": "randomthingz:ultrinium_excavator"
   }
 }

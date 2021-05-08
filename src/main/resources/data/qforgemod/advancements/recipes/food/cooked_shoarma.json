@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:cooked_shoarma"
+      "randomthingz:cooked_shoarma"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:shoarma"
+            "item": "randomthingz:shoarma"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:cooked_shoarma"
+        "recipe": "randomthingz:cooked_shoarma"
       }
     }
   },

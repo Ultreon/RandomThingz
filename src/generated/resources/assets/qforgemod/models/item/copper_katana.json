@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/copper_katana"
+    "layer0": "randomthingz:items/copper_katana"
   }
 }

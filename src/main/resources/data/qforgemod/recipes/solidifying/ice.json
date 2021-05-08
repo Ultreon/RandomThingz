@@ -1,5 +1,5 @@
 {
-    "type": "qforgemod:solidifying",
+    "type": "randomthingz:solidifying",
     "process_time": 800,
     "ingredient": {
         "tag": "minecraft:water"

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:amethyst_block"
+          "name": "randomthingz:amethyst_block"
         }
       ],
       "conditions": [

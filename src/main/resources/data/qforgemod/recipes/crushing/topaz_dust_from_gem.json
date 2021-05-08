@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
-    "item": "qforgemod:topaz"
+    "item": "randomthingz:topaz"
   },
   "results": [
     {
-      "item": "qforgemod:topaz_dust"
+      "item": "randomthingz:topaz_dust"
     }
   ]
 }

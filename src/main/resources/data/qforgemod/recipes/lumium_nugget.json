@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:lumium_ingot"
+      "item": "randomthingz:lumium_ingot"
     }
   ],
   "result": {
-    "item": "qforgemod:lumium_nugget",
+    "item": "randomthingz:lumium_nugget",
     "count": 9
   }
 }

@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_ore"
+            "item": "randomthingz:nickel_ore"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "item": "qforgemod:nickel_ingot_from_blasting"
+        "item": "randomthingz:nickel_ingot_from_blasting"
       }
     }
   },

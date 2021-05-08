@@ -10,22 +10,22 @@
       "tag": "forge:ingots/aluminum_steel"
     },
     "C": {
-      "item": "qforgemod:circuit_board"
+      "item": "randomthingz:circuit_board"
     },
     "/": {
-      "item": "qforgemod:empty_canister"
+      "item": "randomthingz:empty_canister"
     },
     "X": {
-      "item": "qforgemod:alloy_machine_frame"
+      "item": "randomthingz:alloy_machine_frame"
     },
     "O": {
       "tag": "forge:ingots/electrum"
     },
     "H": {
-      "item": "qforgemod:heating_element"
+      "item": "randomthingz:heating_element"
     }
   },
   "result": {
-    "item": "qforgemod:refinery"
+    "item": "randomthingz:refinery"
   }
 }

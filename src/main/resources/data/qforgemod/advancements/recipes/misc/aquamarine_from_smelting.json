@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aquamarine_ore"
+            "item": "randomthingz:aquamarine_ore"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:aquamarine_from_smelting"
+        "recipe": "randomthingz:aquamarine_from_smelting"
       }
     }
   },

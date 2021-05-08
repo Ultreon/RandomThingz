@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/ultrinium"
+    "tag": "randomthingz:chunks/ultrinium"
   },
   "results": [
     {
-      "item": "qforgemod:ultrinium_dust"
+      "item": "randomthingz:ultrinium_dust"
     },
     {
-      "item": "qforgemod:ultrinium_dust",
+      "item": "randomthingz:ultrinium_dust",
       "chance": 0.1
     }
   ]

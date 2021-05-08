@@ -8,12 +8,12 @@
         }
     },
     "textures": {
-        "particle": "qforgemod:blocks/alloy_smelter/front",
-        "down": "qforgemod:blocks/alloy_smelter/bottom",
-        "up": "qforgemod:blocks/alloy_smelter/top",
-        "north": "qforgemod:blocks/alloy_smelter/front",
-        "east": "qforgemod:blocks/alloy_smelter/side",
-        "south": "qforgemod:blocks/alloy_smelter/back",
-        "west": "qforgemod:blocks/alloy_smelter/side"
+        "particle": "randomthingz:blocks/alloy_smelter/front",
+        "down": "randomthingz:blocks/alloy_smelter/bottom",
+        "up": "randomthingz:blocks/alloy_smelter/top",
+        "north": "randomthingz:blocks/alloy_smelter/front",
+        "east": "randomthingz:blocks/alloy_smelter/side",
+        "south": "randomthingz:blocks/alloy_smelter/back",
+        "west": "randomthingz:blocks/alloy_smelter/side"
     }
 }

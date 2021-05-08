@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:lumium_block"
+          "name": "randomthingz:lumium_block"
         }
       ],
       "conditions": [

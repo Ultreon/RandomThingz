@@ -7,11 +7,11 @@
   ],
   "key": {
     "/": {
-      "tag": "qforgemod:ingots/steels"
+      "tag": "randomthingz:ingots/steels"
     }
   },
   "result": {
-    "item": "qforgemod:item_pipe",
+    "item": "randomthingz:item_pipe",
     "count": 12
   }
 }

@@ -10,22 +10,22 @@
       "tag": "forge:ingots/bismuth_brass"
     },
     "C": {
-      "item": "qforgemod:circuit_board"
+      "item": "randomthingz:circuit_board"
     },
     "/": {
       "tag": "forge:ingots/redstone_alloy"
     },
     "X": {
-      "item": "qforgemod:alloy_machine_frame"
+      "item": "randomthingz:alloy_machine_frame"
     },
     "O": {
       "item": "minecraft:bricks"
     },
     "H": {
-      "item": "qforgemod:heating_element"
+      "item": "randomthingz:heating_element"
     }
   },
   "result": {
-    "item": "qforgemod:alloy_smelter"
+    "item": "randomthingz:alloy_smelter"
   }
 }

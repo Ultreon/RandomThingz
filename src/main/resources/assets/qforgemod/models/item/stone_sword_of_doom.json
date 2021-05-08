@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/stone_sword_of_doom"
+    "layer0": "randomthingz:items/stone_sword_of_doom"
   }
 }

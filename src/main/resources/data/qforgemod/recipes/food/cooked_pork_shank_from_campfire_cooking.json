@@ -1,9 +1,9 @@
 {
   "type": "minecraft:campfire_cooking",
   "ingredient": {
-    "item": "qforgemod:pork_shank"
+    "item": "randomthingz:pork_shank"
   },
-  "result": "qforgemod:cooked_pork_shank",
+  "result": "randomthingz:cooked_pork_shank",
   "experience": 0.35,
   "cookingtime": 600
 }

@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/aluminum"
   },
   "results": [
     {
-      "item": "qforgemod:bauxite_chunks",
+      "item": "randomthingz:bauxite_chunks",
       "count": 2
     },
     {

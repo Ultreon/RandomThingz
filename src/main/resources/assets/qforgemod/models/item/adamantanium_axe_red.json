@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/adamantanium_axe_red"
+    "layer0": "randomthingz:items/adamantanium_axe_red"
   }
 }

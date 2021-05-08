@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/zinc"
   },
   "results": [
     {
-      "item": "qforgemod:zinc_chunks",
+      "item": "randomthingz:zinc_chunks",
       "count": 2
     },
     {

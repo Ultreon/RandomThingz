@@ -2,34 +2,34 @@
   "type": "minecraft:smelting",
   "ingredient": [
     {
-      "item": "qforgemod:zinc_pickaxe"
+      "item": "randomthingz:zinc_pickaxe"
     },
     {
-      "item": "qforgemod:zinc_shovel"
+      "item": "randomthingz:zinc_shovel"
     },
     {
-      "item": "qforgemod:zinc_axe"
+      "item": "randomthingz:zinc_axe"
     },
     {
-      "item": "qforgemod:zinc_hoe"
+      "item": "randomthingz:zinc_hoe"
     },
     {
-      "item": "qforgemod:zinc_sword"
+      "item": "randomthingz:zinc_sword"
     },
     {
-      "item": "qforgemod:zinc_helmet"
+      "item": "randomthingz:zinc_helmet"
     },
     {
-      "item": "qforgemod:zinc_chestplate"
+      "item": "randomthingz:zinc_chestplate"
     },
     {
-      "item": "qforgemod:zinc_leggings"
+      "item": "randomthingz:zinc_leggings"
     },
     {
-      "item": "qforgemod:zinc_boots"
+      "item": "randomthingz:zinc_boots"
     }
   ],
-  "result": "qforgemod:zinc_nugget",
+  "result": "randomthingz:zinc_nugget",
   "experience": 0.1,
   "cookingtime": 200
 }

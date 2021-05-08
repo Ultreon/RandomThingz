@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:aluminum_ingot"
+      "item": "randomthingz:aluminum_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:aluminum_boots"
+    "item": "randomthingz:aluminum_boots"
   }
 }

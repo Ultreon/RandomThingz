@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:dusts/bismuth_brass"
   },
-  "result": "qforgemod:bismuth_brass_ingot",
+  "result": "randomthingz:bismuth_brass_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

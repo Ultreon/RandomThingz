@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/silver"
   },
   "results": [
     {
-      "item": "qforgemod:silver_dust"
+      "item": "randomthingz:silver_dust"
     }
   ]
 }

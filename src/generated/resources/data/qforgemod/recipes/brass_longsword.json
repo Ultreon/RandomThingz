@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:brass_ingot"
+      "item": "randomthingz:brass_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:brass_longsword"
+    "item": "randomthingz:brass_longsword"
   }
 }

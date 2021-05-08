@@ -4,15 +4,15 @@
             "item": "minecraft:iron_axe"
         },
         "title": {
-            "translate": "advancements.qforgemod.iron_tools.title"
+            "translate": "advancements.randomthingz.iron_tools.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.iron_tools.description"
+            "translate": "advancements.randomthingz.iron_tools.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_iron",
+    "parent": "randomthingz:mat_iron",
     "criteria": {
         "get_tools": {
             "trigger": "minecraft:inventory_changed",

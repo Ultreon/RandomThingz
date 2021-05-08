@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:platinum_ingot"
+      "item": "randomthingz:platinum_ingot"
     }
   ],
   "result": {
-    "item": "qforgemod:platinum_nugget",
+    "item": "randomthingz:platinum_nugget",
     "count": 9
   }
 }

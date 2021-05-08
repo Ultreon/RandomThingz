@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:aluminum_steel_battleaxe"
+      "randomthingz:aluminum_steel_battleaxe"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_steel_ingot"
+            "item": "randomthingz:aluminum_steel_ingot"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:aluminum_steel_battleaxe"
+        "recipe": "randomthingz:aluminum_steel_battleaxe"
       }
     }
   },

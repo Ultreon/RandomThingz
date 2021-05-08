@@ -1,9 +1,9 @@
 {
   "type": "minecraft:campfire_cooking",
   "ingredient": {
-    "item": "qforgemod:shoarma"
+    "item": "randomthingz:shoarma"
   },
-  "result": "qforgemod:cooked_shoarma",
+  "result": "randomthingz:cooked_shoarma",
   "experience": 0.35,
   "cookingtime": 600
 }

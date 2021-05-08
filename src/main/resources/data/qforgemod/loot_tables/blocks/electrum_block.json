@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:electrum_block"
+          "name": "randomthingz:electrum_block"
         }
       ],
       "conditions": [

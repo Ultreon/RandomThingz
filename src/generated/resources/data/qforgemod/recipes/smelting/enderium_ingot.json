@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:dusts/enderium"
   },
-  "result": "qforgemod:enderium_ingot",
+  "result": "randomthingz:enderium_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

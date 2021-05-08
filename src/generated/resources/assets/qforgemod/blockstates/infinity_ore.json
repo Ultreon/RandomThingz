@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/infinity_ore"
+      "model": "randomthingz:block/infinity_ore"
     }
   }
 }

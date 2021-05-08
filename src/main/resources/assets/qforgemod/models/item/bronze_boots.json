@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/bronze_boots"
+    "layer0": "randomthingz:items/bronze_boots"
   }
 }

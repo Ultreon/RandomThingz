@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:tungsten_ingot"
+      "item": "randomthingz:tungsten_ingot"
     }
   ],
   "result": {
-    "item": "qforgemod:tungsten_nugget",
+    "item": "randomthingz:tungsten_nugget",
     "count": 9
   }
 }

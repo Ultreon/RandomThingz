@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:ores/cobalt"
   },
-  "result": "qforgemod:cobalt_ingot",
+  "result": "randomthingz:cobalt_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

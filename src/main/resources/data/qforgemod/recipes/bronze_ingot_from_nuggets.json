@@ -7,10 +7,10 @@
   ],
   "key": {
     "c": {
-      "item": "qforgemod:bronze_nugget"
+      "item": "randomthingz:bronze_nugget"
     }
   },
   "result": {
-    "item": "qforgemod:bronze_ingot"
+    "item": "randomthingz:bronze_ingot"
   }
 }

@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
-    "item": "qforgemod:beryl"
+    "item": "randomthingz:beryl"
   },
   "results": [
     {
-      "item": "qforgemod:beryl_dust"
+      "item": "randomthingz:beryl_dust"
     }
   ]
 }

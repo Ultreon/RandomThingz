@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/nickel_ore"
+      "model": "randomthingz:block/nickel_ore"
     }
   }
 }

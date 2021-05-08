@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "qforgemod:items/suns_grace",
-		"particle": "qforgemod:items/suns_grace"
+		"0": "randomthingz:items/suns_grace",
+		"particle": "randomthingz:items/suns_grace"
 	},
 	"elements": [
 		{

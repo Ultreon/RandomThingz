@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:compressed_iron_ingot"
+      "item": "randomthingz:compressed_iron_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:compressed_iron_leggings"
+    "item": "randomthingz:compressed_iron_leggings"
   }
 }

@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#qforgemod:ores_except_ultrinium",
+    "#randomthingz:ores_except_ultrinium",
     "#forge:ores/ruby",
     "#forge:ores/malachite",
     "#forge:ores/amber",

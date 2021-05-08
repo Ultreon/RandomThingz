@@ -1,6 +1,6 @@
 {
-  "parent": "qforgemod:item/handheld_double_size",
+  "parent": "randomthingz:item/handheld_double_size",
   "textures": {
-    "layer0": "qforgemod:items/enderium_longsword"
+    "layer0": "randomthingz:items/enderium_longsword"
   }
 }

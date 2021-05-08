@@ -1,5 +1,5 @@
 {
-  "type": "qforgemod:alloy_smelting",
+  "type": "randomthingz:alloy_smelting",
   "process_time": 200,
   "ingredients": [
     {
@@ -8,7 +8,7 @@
           "tag": "forge:ingots/tin"
         },
         {
-          "tag": "qforgemod:chunks/tin"
+          "tag": "randomthingz:chunks/tin"
         },
         {
           "tag": "forge:dusts/tin"
@@ -22,7 +22,7 @@
           "tag": "forge:ingots/lead"
         },
         {
-          "tag": "qforgemod:chunks/lead"
+          "tag": "randomthingz:chunks/lead"
         },
         {
           "tag": "forge:dusts/lead"
@@ -32,7 +32,7 @@
     }
   ],
   "result": {
-    "item": "qforgemod:solder",
+    "item": "randomthingz:solder",
     "count": 12
   }
 }

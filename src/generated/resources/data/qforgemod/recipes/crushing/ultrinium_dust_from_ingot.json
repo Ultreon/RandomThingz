@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/ultrinium"
   },
   "results": [
     {
-      "item": "qforgemod:ultrinium_dust"
+      "item": "randomthingz:ultrinium_dust"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:aquamarine_hoe"
+      "randomthingz:aquamarine_hoe"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aquamarine"
+            "item": "randomthingz:aquamarine"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:aquamarine_hoe"
+        "recipe": "randomthingz:aquamarine_hoe"
       }
     }
   },

@@ -1,23 +1,23 @@
 {
     "display": {
         "icon": {
-            "item": "qforgemod:stone_machine_frame"
+            "item": "randomthingz:stone_machine_frame"
         },
         "title": {
-            "translate": "advancements.qforgemod.stone_machine_frame.title"
+            "translate": "advancements.randomthingz.stone_machine_frame.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.stone_machine_frame.description"
+            "translate": "advancements.randomthingz.stone_machine_frame.description"
         }
     },
-    "parent": "qforgemod:root",
+    "parent": "randomthingz:root",
     "criteria": {
         "get_item": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "qforgemod:stone_machine_frame"
+                        "item": "randomthingz:stone_machine_frame"
                     }
                 ]
             }

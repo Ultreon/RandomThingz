@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "qforgemod:items/malachite_leggings"
+    "layer0": "randomthingz:items/malachite_leggings"
   }
 }

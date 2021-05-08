@@ -2,9 +2,9 @@
 	"__comment": "Designed by Stohun with Cubik Studio - https://cubik.studio",
 	"parent": "block/block",
 	"textures": {
-		"particle": "qforgemod:block/bar_panel_end",
-		"texture": "qforgemod:block/bar_panel_side",
-		"texture1": "qforgemod:block/bar_panel_end"
+		"particle": "randomthingz:block/bar_panel_end",
+		"texture": "randomthingz:block/bar_panel_side",
+		"texture1": "randomthingz:block/bar_panel_end"
 	},
 	"elements": [ 	 
 		{

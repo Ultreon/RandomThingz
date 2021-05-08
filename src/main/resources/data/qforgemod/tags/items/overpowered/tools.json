@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:kill_switch",
-    "qforgemod:ban_hammer"
+    "randomthingz:kill_switch",
+    "randomthingz:ban_hammer"
   ]
 }

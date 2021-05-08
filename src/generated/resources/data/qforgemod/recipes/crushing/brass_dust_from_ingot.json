@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/brass"
   },
   "results": [
     {
-      "item": "qforgemod:brass_dust"
+      "item": "randomthingz:brass_dust"
     }
   ]
 }

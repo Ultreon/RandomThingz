@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:beryl_ore"
+            "item": "randomthingz:beryl_ore"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:steel_from_blasting"
+        "recipe": "randomthingz:steel_from_blasting"
       }
     }
   },

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/brass_block"
+      "model": "randomthingz:block/brass_block"
     }
   }
 }

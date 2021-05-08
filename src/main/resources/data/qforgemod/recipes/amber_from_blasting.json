@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "qforgemod:amber_ore"
+    "item": "randomthingz:amber_ore"
   },
-  "result": "qforgemod:amber",
+  "result": "randomthingz:amber",
   "experience": 0.7,
   "cookingtime": 100
 }

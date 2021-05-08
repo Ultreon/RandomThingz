@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:enderium_ingot_from_enderium_block"
+      "randomthingz:enderium_ingot_from_enderium_block"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:enderium_block"
+            "item": "randomthingz:enderium_block"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:enderium_ingot_from_enderium_block"
+        "recipe": "randomthingz:enderium_ingot_from_enderium_block"
       }
     }
   },

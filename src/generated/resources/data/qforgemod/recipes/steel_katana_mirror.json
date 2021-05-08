@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:steel_ingot"
+      "item": "randomthingz:steel_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:steel_katana"
+    "item": "randomthingz:steel_katana"
   }
 }

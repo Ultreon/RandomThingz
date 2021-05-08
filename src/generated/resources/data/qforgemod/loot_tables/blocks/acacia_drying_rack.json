@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:acacia_drying_rack"
+          "name": "randomthingz:acacia_drying_rack"
         }
       ],
       "conditions": [

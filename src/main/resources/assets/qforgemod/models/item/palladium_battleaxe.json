@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/palladium_battleaxe"
+    "layer0": "randomthingz:items/palladium_battleaxe"
   }
 }

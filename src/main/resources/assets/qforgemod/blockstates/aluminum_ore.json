@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/aluminum_ore"
+      "model": "randomthingz:block/aluminum_ore"
     }
   }
 }

@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:invar_ingot"
+      "item": "randomthingz:invar_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:invar_leggings"
+    "item": "randomthingz:invar_leggings"
   }
 }

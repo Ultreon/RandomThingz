@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:bronze_block"
+          "name": "randomthingz:bronze_block"
         }
       ],
       "conditions": [

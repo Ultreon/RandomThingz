@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:cooked_carrot"
+      "randomthingz:cooked_carrot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:cooked_carrot"
+        "recipe": "randomthingz:cooked_carrot"
       }
     }
   },

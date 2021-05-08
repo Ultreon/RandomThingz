@@ -2,33 +2,33 @@
   "parent": "item/generated",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/hamburger_bun"
+      "layer0": "randomthingz:items/hamburger_bun"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/hamburger_bun"
+          "layer0": "randomthingz:items/hamburger_bun"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/hamburger_bun"
+          "layer0": "randomthingz:items/hamburger_bun"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/hamburger_bun"
+    "layer0": "randomthingz:items/hamburger_bun"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/hamburger_bun"
+        "layer0": "randomthingz:items/hamburger_bun"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/hamburger_bun"
+        "layer0": "randomthingz:items/hamburger_bun"
       }
     }
   }

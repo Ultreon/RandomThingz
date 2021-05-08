@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:saphire_ore"
+            "item": "randomthingz:saphire_ore"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:saphire_from_blasting"
+        "recipe": "randomthingz:saphire_from_blasting"
       }
     }
   },

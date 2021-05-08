@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_rail_raised_ne",
   "textures": {
-    "rail": "qforgemod:blocks/empowered_rail_on"
+    "rail": "randomthingz:blocks/empowered_rail_on"
   }
 }

@@ -2,33 +2,33 @@
   "parent": "item/generated",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/baked_apple"
+      "layer0": "randomthingz:items/baked_apple"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/baked_apple"
+          "layer0": "randomthingz:items/baked_apple"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/baked_apple"
+          "layer0": "randomthingz:items/baked_apple"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/baked_apple"
+    "layer0": "randomthingz:items/baked_apple"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/baked_apple"
+        "layer0": "randomthingz:items/baked_apple"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/baked_apple"
+        "layer0": "randomthingz:items/baked_apple"
       }
     }
   }

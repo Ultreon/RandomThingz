@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:infinity_ore",
-    "qforgemod:infinity_block",
-    "qforgemod:ultrinium_ore",
-    "qforgemod:ultrinium_block"
+    "randomthingz:infinity_ore",
+    "randomthingz:infinity_block",
+    "randomthingz:ultrinium_ore",
+    "randomthingz:ultrinium_block"
   ]
 }

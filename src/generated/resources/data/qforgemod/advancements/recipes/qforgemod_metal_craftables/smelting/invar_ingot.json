@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:smelting/invar_ingot"
+      "randomthingz:smelting/invar_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:smelting/invar_ingot"
+        "recipe": "randomthingz:smelting/invar_ingot"
       }
     }
   },

@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:aluminum_block"
+      "item": "randomthingz:aluminum_block"
     }
   ],
   "result": {
-    "item": "qforgemod:aluminum_ingot",
+    "item": "randomthingz:aluminum_ingot",
     "count": 9
   }
 }

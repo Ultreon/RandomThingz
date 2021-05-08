@@ -2,33 +2,33 @@
   "parent": "item/generated",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/aquamarine_boots"
+      "layer0": "randomthingz:items/aquamarine_boots"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/aquamarine_boots"
+          "layer0": "randomthingz:items/aquamarine_boots"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/aquamarine_boots"
+          "layer0": "randomthingz:items/aquamarine_boots"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/aquamarine_boots"
+    "layer0": "randomthingz:items/aquamarine_boots"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/aquamarine_boots"
+        "layer0": "randomthingz:items/aquamarine_boots"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/aquamarine_boots"
+        "layer0": "randomthingz:items/aquamarine_boots"
       }
     }
   }

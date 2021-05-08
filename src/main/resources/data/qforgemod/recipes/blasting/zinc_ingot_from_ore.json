@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:ores/zinc"
   },
-  "result": "qforgemod:zinc_ingot",
+  "result": "randomthingz:zinc_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

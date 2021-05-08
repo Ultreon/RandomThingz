@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:brass_block"
+          "name": "randomthingz:brass_block"
         }
       ],
       "conditions": [

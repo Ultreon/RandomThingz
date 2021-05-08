@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "qforgemod:uranium_ore"
+    "item": "randomthingz:uranium_ore"
   },
-  "result": "qforgemod:uranium_ingot",
+  "result": "randomthingz:uranium_ingot",
   "experience": 0.7,
   "cookingtime": 100
 }

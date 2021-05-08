@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:amethyst"
+         "item": "randomthingz:amethyst"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:amethyst_broadsword"
+      "item": "randomthingz:amethyst_broadsword"
    }
 }

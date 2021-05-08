@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:nickel_ingot"
+      "item": "randomthingz:nickel_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:nickel_leggings"
+    "item": "randomthingz:nickel_leggings"
   }
 }

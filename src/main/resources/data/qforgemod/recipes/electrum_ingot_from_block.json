@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:electrum_block"
+      "item": "randomthingz:electrum_block"
     }
   ],
   "result": {
-    "item": "qforgemod:electrum_ingot",
+    "item": "randomthingz:electrum_ingot",
     "count": 9
   }
 }

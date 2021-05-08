@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/copper"
   },
   "results": [
     {
-      "item": "qforgemod:copper_chunks",
+      "item": "randomthingz:copper_chunks",
       "count": 2
     },
     {

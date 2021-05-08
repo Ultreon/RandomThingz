@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "qforgemod:zinc_ore"
+    "item": "randomthingz:zinc_ore"
   },
-  "result": "qforgemod:zinc_ingot",
+  "result": "randomthingz:zinc_ingot",
   "experience": 0.7,
   "cookingtime": 100
 }

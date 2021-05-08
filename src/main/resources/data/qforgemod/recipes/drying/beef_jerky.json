@@ -1,10 +1,10 @@
 {
-    "type": "qforgemod:drying",
+    "type": "randomthingz:drying",
     "process_time": 400,
     "ingredient": {
         "item": "minecraft:beef"
     },
     "result": {
-        "item": "qforgemod:beef_jerky"
+        "item": "randomthingz:beef_jerky"
     }
 }

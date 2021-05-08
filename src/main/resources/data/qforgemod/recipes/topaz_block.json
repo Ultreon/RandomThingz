@@ -7,11 +7,11 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:topaz"
+      "item": "randomthingz:topaz"
     }
   },
   "result": {
-    "item": "qforgemod:topaz_block",
+    "item": "randomthingz:topaz_block",
     "count": 1
   }
 }

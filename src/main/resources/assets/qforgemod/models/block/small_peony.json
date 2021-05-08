@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "qforgemod:blocks/small_peony"
+    "cross": "randomthingz:blocks/small_peony"
   }
 }

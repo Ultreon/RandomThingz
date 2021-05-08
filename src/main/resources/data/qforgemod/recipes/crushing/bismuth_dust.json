@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/bismuth"
+    "tag": "randomthingz:chunks/bismuth"
   },
   "results": [
     {
-      "item": "qforgemod:bismuth_dust"
+      "item": "randomthingz:bismuth_dust"
     },
     {
-      "item": "qforgemod:bismuth_dust",
+      "item": "randomthingz:bismuth_dust",
       "chance": 0.1
     }
   ]

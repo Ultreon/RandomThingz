@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/electrum"
+    "tag": "randomthingz:chunks/electrum"
   },
   "results": [
     {
-      "item": "qforgemod:electrum_dust"
+      "item": "randomthingz:electrum_dust"
     },
     {
-      "item": "qforgemod:electrum_dust",
+      "item": "randomthingz:electrum_dust",
       "chance": 0.1
     }
   ]

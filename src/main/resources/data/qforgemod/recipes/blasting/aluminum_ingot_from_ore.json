@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:ores/aluminum"
   },
-  "result": "qforgemod:aluminum_ingot",
+  "result": "randomthingz:aluminum_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

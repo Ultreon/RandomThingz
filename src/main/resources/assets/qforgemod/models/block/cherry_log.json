@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_column",
   "textures": {
-    "end": "qforgemod:blocks/cherry_log_top",
-    "side": "qforgemod:blocks/cherry_log"
+    "end": "randomthingz:blocks/cherry_log_top",
+    "side": "randomthingz:blocks/cherry_log"
   }
 }

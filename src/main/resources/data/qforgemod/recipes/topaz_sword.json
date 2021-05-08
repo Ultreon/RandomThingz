@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:topaz"
+         "item": "randomthingz:topaz"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:topaz_sword"
+      "item": "randomthingz:topaz_sword"
    }
 }

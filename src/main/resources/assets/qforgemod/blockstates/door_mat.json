@@ -1,19 +1,19 @@
 {
     "variants": {
         "facing=north": {
-            "model": "qforgemod:block/door_mat",
+            "model": "randomthingz:block/door_mat",
             "y": 0
         },
         "facing=east": {
-            "model": "qforgemod:block/door_mat",
+            "model": "randomthingz:block/door_mat",
             "y": 90
         },
         "facing=south": {
-            "model": "qforgemod:block/door_mat",
+            "model": "randomthingz:block/door_mat",
             "y": 180
         },
         "facing=west": {
-            "model": "qforgemod:block/door_mat",
+            "model": "randomthingz:block/door_mat",
             "y": 270
         }
     }

@@ -1,16 +1,16 @@
 {
-    "type": "qforgemod:refining",
+    "type": "randomthingz:refining",
     "process_time": 600,
     "ingredient": {
         "tag": "forge:oil"
     },
     "results": [
         {
-            "fluid": "qforgemod:diesel",
+            "fluid": "randomthingz:diesel",
             "amount": 1000
         },
         {
-            "fluid": "qforgemod:ethane",
+            "fluid": "randomthingz:ethane",
             "amount": 1000
         }
     ]

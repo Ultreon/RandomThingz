@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:mixer"
+          "name": "randomthingz:mixer"
         }
       ],
       "conditions": [

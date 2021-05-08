@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/copper_lumber_axe"
+    "layer0": "randomthingz:items/copper_lumber_axe"
   }
 }

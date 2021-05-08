@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:walking_wand",
-    "qforgemod:lightning_wand",
-    "qforgemod:fire_wand",
-    "qforgemod:nature_wand",
-    "qforgemod:teleport_wand"
+    "randomthingz:walking_wand",
+    "randomthingz:lightning_wand",
+    "randomthingz:fire_wand",
+    "randomthingz:nature_wand",
+    "randomthingz:teleport_wand"
   ]
 }

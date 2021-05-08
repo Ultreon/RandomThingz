@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "qforgemod:items/dungeons_diamond_pickaxe",
-		"particle": "qforgemod:items/dungeons_diamond_pickaxe"
+		"0": "randomthingz:items/dungeons_diamond_pickaxe",
+		"particle": "randomthingz:items/dungeons_diamond_pickaxe"
 	},
 	"elements": [
 		{

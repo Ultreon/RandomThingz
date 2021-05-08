@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/aluminum_broadsword"
+    "layer0": "randomthingz:items/aluminum_broadsword"
   }
 }

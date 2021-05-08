@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/nickel"
   },
   "results": [
     {
-      "item": "qforgemod:nickel_dust"
+      "item": "randomthingz:nickel_dust"
     }
   ]
 }

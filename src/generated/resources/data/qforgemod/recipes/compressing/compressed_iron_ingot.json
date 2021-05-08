@@ -1,5 +1,5 @@
 {
-  "type": "qforgemod:compressing",
+  "type": "randomthingz:compressing",
   "process_time": 400,
   "ingredient": {
     "value": {
@@ -8,6 +8,6 @@
     "count": 1
   },
   "result": {
-    "item": "qforgemod:compressed_iron_ingot"
+    "item": "randomthingz:compressed_iron_ingot"
   }
 }

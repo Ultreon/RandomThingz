@@ -10,13 +10,13 @@
       "tag": "forge:ingots/bismuth_steel"
     },
     "C": {
-      "item": "qforgemod:circuit_board"
+      "item": "randomthingz:circuit_board"
     },
     "/": {
       "tag": "forge:ingots/redstone_alloy"
     },
     "X": {
-      "item": "qforgemod:alloy_machine_frame"
+      "item": "randomthingz:alloy_machine_frame"
     },
     "O": {
       "item": "minecraft:smooth_stone"
@@ -26,6 +26,6 @@
     }
   },
   "result": {
-    "item": "qforgemod:crusher"
+    "item": "randomthingz:crusher"
   }
 }

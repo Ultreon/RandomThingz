@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:dark_oak_drying_rack"
+          "name": "randomthingz:dark_oak_drying_rack"
         }
       ],
       "conditions": [

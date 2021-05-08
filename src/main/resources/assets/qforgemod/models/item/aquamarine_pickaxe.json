@@ -2,33 +2,33 @@
   "parent": "item/handheld",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/aquamarine_pickaxe"
+      "layer0": "randomthingz:items/aquamarine_pickaxe"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/aquamarine_pickaxe"
+          "layer0": "randomthingz:items/aquamarine_pickaxe"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/aquamarine_pickaxe"
+          "layer0": "randomthingz:items/aquamarine_pickaxe"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/aquamarine_pickaxe"
+    "layer0": "randomthingz:items/aquamarine_pickaxe"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/aquamarine_pickaxe"
+        "layer0": "randomthingz:items/aquamarine_pickaxe"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/aquamarine_pickaxe"
+        "layer0": "randomthingz:items/aquamarine_pickaxe"
       }
     }
   }

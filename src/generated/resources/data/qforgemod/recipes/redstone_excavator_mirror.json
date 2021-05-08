@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:redstone_alloy_ingot"
+      "item": "randomthingz:redstone_alloy_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:redstone_excavator"
+    "item": "randomthingz:redstone_excavator"
   }
 }

@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:aquamarine_block"
+      "item": "randomthingz:aquamarine_block"
     }
   ],
   "result": {
-    "item": "qforgemod:aquamarine",
+    "item": "randomthingz:aquamarine",
     "count": 9
   }
 }

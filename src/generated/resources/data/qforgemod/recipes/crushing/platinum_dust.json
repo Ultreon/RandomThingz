@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/platinum"
+    "tag": "randomthingz:chunks/platinum"
   },
   "results": [
     {
-      "item": "qforgemod:platinum_dust"
+      "item": "randomthingz:platinum_dust"
     },
     {
-      "item": "qforgemod:platinum_dust",
+      "item": "randomthingz:platinum_dust",
       "chance": 0.1
     }
   ]

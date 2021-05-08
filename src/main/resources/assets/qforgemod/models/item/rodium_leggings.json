@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/rodium_leggings"
+    "layer0": "randomthingz:items/rodium_leggings"
   }
 }

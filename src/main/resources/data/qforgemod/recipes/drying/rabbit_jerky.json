@@ -1,10 +1,10 @@
 {
-    "type": "qforgemod:drying",
+    "type": "randomthingz:drying",
     "process_time": 400,
     "ingredient": {
         "item": "minecraft:rabbit"
     },
     "result": {
-        "item": "qforgemod:rabbit_jerky"
+        "item": "randomthingz:rabbit_jerky"
     }
 }

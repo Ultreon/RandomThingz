@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:platinum_ingot"
+      "item": "randomthingz:platinum_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:platinum_block"
+    "item": "randomthingz:platinum_block"
   }
 }

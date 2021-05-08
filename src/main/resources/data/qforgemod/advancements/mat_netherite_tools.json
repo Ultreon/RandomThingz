@@ -4,15 +4,15 @@
             "item": "minecraft:netherite_axe"
         },
         "title": {
-            "translate": "advancements.qforgemod.netherite_tools.title"
+            "translate": "advancements.randomthingz.netherite_tools.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.netherite_tools.description"
+            "translate": "advancements.randomthingz.netherite_tools.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_netherite",
+    "parent": "randomthingz:mat_netherite",
     "criteria": {
         "get_tools": {
             "trigger": "minecraft:inventory_changed",

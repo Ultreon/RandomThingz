@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:uranium_ingot_from_uranium_block"
+      "randomthingz:uranium_ingot_from_uranium_block"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:uranium_block"
+            "item": "randomthingz:uranium_block"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:uranium_ingot_from_uranium_block"
+        "recipe": "randomthingz:uranium_ingot_from_uranium_block"
       }
     }
   },

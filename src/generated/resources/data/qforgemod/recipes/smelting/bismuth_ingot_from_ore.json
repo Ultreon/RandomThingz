@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:ores/bismuth"
   },
-  "result": "qforgemod:bismuth_ingot",
+  "result": "randomthingz:bismuth_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

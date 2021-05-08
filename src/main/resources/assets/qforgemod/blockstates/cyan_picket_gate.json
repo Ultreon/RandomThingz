@@ -7,7 +7,7 @@
                 { "open": "false" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_left_closed", "y": 0 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_left_closed", "y": 0 }
         },
         {
             "when": { "AND": [
@@ -16,7 +16,7 @@
                 { "open": "false" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_left_closed", "y": 90 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_left_closed", "y": 90 }
         },
         {
             "when": { "AND": [
@@ -25,7 +25,7 @@
                 { "open": "false" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_left_closed", "y": 180 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_left_closed", "y": 180 }
         },
         {
             "when": { "AND": [
@@ -34,7 +34,7 @@
                 { "open": "false" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_left_closed", "y": 270 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_left_closed", "y": 270 }
         },
         {
             "when": { "AND": [
@@ -43,7 +43,7 @@
                 { "open": "false" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_left_closed", "y": 0 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_left_closed", "y": 0 }
         },
         {
             "when": { "AND": [
@@ -52,7 +52,7 @@
                 { "open": "false" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_left_closed", "y": 90 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_left_closed", "y": 90 }
         },
         {
             "when": { "AND": [
@@ -61,7 +61,7 @@
                 { "open": "false" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_left_closed", "y": 180 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_left_closed", "y": 180 }
         },
         {
             "when": { "AND": [
@@ -70,7 +70,7 @@
                 { "open": "false" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_left_closed", "y": 270 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_left_closed", "y": 270 }
         },
         {
             "when": { "AND": [
@@ -79,7 +79,7 @@
                 { "open": "false" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_right_closed", "y": 0 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_right_closed", "y": 0 }
         },
         {
             "when": { "AND": [
@@ -88,7 +88,7 @@
                 { "open": "false" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_right_closed", "y": 90 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_right_closed", "y": 90 }
         },
         {
             "when": { "AND": [
@@ -97,7 +97,7 @@
                 { "open": "false" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_right_closed", "y": 180 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_right_closed", "y": 180 }
         },
         {
             "when": { "AND": [
@@ -106,7 +106,7 @@
                 { "open": "false" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_right_closed", "y": 270 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_right_closed", "y": 270 }
         },
         {
             "when": { "AND": [
@@ -115,7 +115,7 @@
                 { "open": "false" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_right_closed", "y": 0 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_right_closed", "y": 0 }
         },
         {
             "when": { "AND": [
@@ -124,7 +124,7 @@
                 { "open": "false" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_right_closed", "y": 90 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_right_closed", "y": 90 }
         },
         {
             "when": { "AND": [
@@ -133,7 +133,7 @@
                 { "open": "false" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_right_closed", "y": 180 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_right_closed", "y": 180 }
         },
         {
             "when": { "AND": [
@@ -142,7 +142,7 @@
                 { "open": "false" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_right_closed", "y": 270 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_right_closed", "y": 270 }
         },
         {
             "when": { "AND": [
@@ -151,7 +151,7 @@
                 { "open": "true" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_left_open", "y": 0 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_left_open", "y": 0 }
         },
         {
             "when": { "AND": [
@@ -160,7 +160,7 @@
                 { "open": "true" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_left_open", "y": 90 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_left_open", "y": 90 }
         },
         {
             "when": { "AND": [
@@ -169,7 +169,7 @@
                 { "open": "true" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_left_open", "y": 180 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_left_open", "y": 180 }
         },
         {
             "when": { "AND": [
@@ -178,7 +178,7 @@
                 { "open": "true" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_left_open", "y": 270 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_left_open", "y": 270 }
         },
         {
             "when": { "AND": [
@@ -187,7 +187,7 @@
                 { "open": "true" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_right_open", "y": 0 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_right_open", "y": 0 }
         },
         {
             "when": { "AND": [
@@ -196,7 +196,7 @@
                 { "open": "true" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_right_open", "y": 90 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_right_open", "y": 90 }
         },
         {
             "when": { "AND": [
@@ -205,7 +205,7 @@
                 { "open": "true" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_right_open", "y": 180 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_right_open", "y": 180 }
         },
         {
             "when": { "AND": [
@@ -214,7 +214,7 @@
                 { "open": "true" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_right_open", "y": 270 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_right_open", "y": 270 }
         },
         {
             "when": { "AND": [
@@ -223,7 +223,7 @@
                 { "open": "true" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_left_open", "y": 0 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_left_open", "y": 0 }
         },
         {
             "when": { "AND": [
@@ -232,7 +232,7 @@
                 { "open": "true" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_left_open", "y": 90 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_left_open", "y": 90 }
         },
         {
             "when": { "AND": [
@@ -241,7 +241,7 @@
                 { "open": "true" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_left_open", "y": 180 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_left_open", "y": 180 }
         },
         {
             "when": { "AND": [
@@ -250,7 +250,7 @@
                 { "open": "true" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_left_open", "y": 270 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_left_open", "y": 270 }
         },
         {
             "when": { "AND": [
@@ -259,7 +259,7 @@
                 { "open": "true" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_right_open", "y": 0 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_right_open", "y": 0 }
         },
         {
             "when": { "AND": [
@@ -268,7 +268,7 @@
                 { "open": "true" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_right_open", "y": 90 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_right_open", "y": 90 }
         },
         {
             "when": { "AND": [
@@ -277,7 +277,7 @@
                 { "open": "true" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_right_open", "y": 180 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_right_open", "y": 180 }
         },
         {
             "when": { "AND": [
@@ -286,7 +286,7 @@
                 { "open": "true" },
                 { "double": "true" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_double_right_open", "y": 270 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_double_right_open", "y": 270 }
         },
         {
             "when": { "AND": [
@@ -294,7 +294,7 @@
                 { "hinge": "left" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_pole", "y": 0 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_pole", "y": 0 }
         },
         {
             "when": { "AND": [
@@ -302,7 +302,7 @@
                 { "hinge": "left" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_pole", "y": 90 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_pole", "y": 90 }
         },
         {
             "when": { "AND": [
@@ -310,7 +310,7 @@
                 { "hinge": "left" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_pole", "y": 180 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_pole", "y": 180 }
         },
         {
             "when": { "AND": [
@@ -318,7 +318,7 @@
                 { "hinge": "left" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_pole", "y": 270 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_pole", "y": 270 }
         },
         {
             "when": { "AND": [
@@ -326,7 +326,7 @@
                 { "hinge": "right" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_pole", "y": 180 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_pole", "y": 180 }
         },
         {
             "when": { "AND": [
@@ -334,7 +334,7 @@
                 { "hinge": "right" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_pole", "y": 270 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_pole", "y": 270 }
         },
         {
             "when": { "AND": [
@@ -342,7 +342,7 @@
                 { "hinge": "right" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_pole", "y": 0 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_pole", "y": 0 }
         },
         {
             "when": { "AND": [
@@ -350,7 +350,7 @@
                 { "hinge": "right" },
                 { "double": "false" }
             ]},
-            "apply": { "model": "qforgemod:block/cyan_picket_gate_pole", "y": 90 }
+            "apply": { "model": "randomthingz:block/cyan_picket_gate_pole", "y": 90 }
         }
     ]
 }

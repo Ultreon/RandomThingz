@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "particle": "qforgemod:blocks/topaz_ore",
-    "all": "qforgemod:blocks/topaz_ore"
+    "particle": "randomthingz:blocks/topaz_ore",
+    "all": "randomthingz:blocks/topaz_ore"
   }
 }

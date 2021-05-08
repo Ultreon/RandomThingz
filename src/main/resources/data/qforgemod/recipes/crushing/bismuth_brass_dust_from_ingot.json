@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/bismuth_brass"
   },
   "results": [
     {
-      "item": "qforgemod:bismuth_brass_dust"
+      "item": "randomthingz:bismuth_brass_dust"
     }
   ]
 }

@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
-    "item": "qforgemod:aquamarine"
+    "item": "randomthingz:aquamarine"
   },
   "results": [
     {
-      "item": "qforgemod:aquamarine_dust"
+      "item": "randomthingz:aquamarine_dust"
     }
   ]
 }

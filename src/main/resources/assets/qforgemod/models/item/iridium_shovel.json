@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/iridium_shovel"
+    "layer0": "randomthingz:items/iridium_shovel"
   }
 }

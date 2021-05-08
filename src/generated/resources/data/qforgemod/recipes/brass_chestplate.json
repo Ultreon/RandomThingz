@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:brass_ingot"
+      "item": "randomthingz:brass_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:brass_chestplate"
+    "item": "randomthingz:brass_chestplate"
   }
 }

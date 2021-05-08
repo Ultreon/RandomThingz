@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:coal_generator",
-    "qforgemod:diesel_generator",
-    "qforgemod:lava_generator"
+    "randomthingz:coal_generator",
+    "randomthingz:diesel_generator",
+    "randomthingz:lava_generator"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "type": "qforgemod:alloy_smelting",
+  "type": "randomthingz:alloy_smelting",
   "process_time": 200,
   "ingredients": [
     {
@@ -8,7 +8,7 @@
           "tag": "forge:ingots/iron"
         },
         {
-          "tag": "qforgemod:chunks/iron"
+          "tag": "randomthingz:chunks/iron"
         },
         {
           "tag": "forge:dusts/iron"
@@ -24,7 +24,7 @@
     }
   ],
   "result": {
-    "item": "qforgemod:redstone_alloy_ingot",
+    "item": "randomthingz:redstone_alloy_ingot",
     "count": 2
   }
 }

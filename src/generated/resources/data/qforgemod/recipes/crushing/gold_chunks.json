@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/gold"
   },
   "results": [
     {
-      "item": "qforgemod:gold_chunks",
+      "item": "randomthingz:gold_chunks",
       "count": 2
     },
     {

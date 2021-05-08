@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:dusts/brass"
   },
-  "result": "qforgemod:brass_ingot",
+  "result": "randomthingz:brass_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

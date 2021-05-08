@@ -1,5 +1,5 @@
 {
-  "type": "qforgemod:alloy_smelting",
+  "type": "randomthingz:alloy_smelting",
   "process_time": 600,
   "ingredients": [
     {
@@ -8,7 +8,7 @@
           "tag": "forge:ingots/iron"
         },
         {
-          "tag": "qforgemod:chunks/iron"
+          "tag": "randomthingz:chunks/iron"
         },
         {
           "tag": "forge:dusts/iron"
@@ -28,7 +28,7 @@
           "tag": "forge:ingots/bismuth"
         },
         {
-          "tag": "qforgemod:chunks/bismuth"
+          "tag": "randomthingz:chunks/bismuth"
         },
         {
           "tag": "forge:dusts/bismuth"
@@ -38,7 +38,7 @@
     }
   ],
   "result": {
-    "item": "qforgemod:bismuth_steel_ingot",
+    "item": "randomthingz:bismuth_steel_ingot",
     "count": 4
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/moon_stone_ore"
+    "all": "randomthingz:blocks/moon_stone_ore"
   }
 }

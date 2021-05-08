@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:lead_ingot"
+      "item": "randomthingz:lead_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:lead_battleaxe"
+    "item": "randomthingz:lead_battleaxe"
   }
 }

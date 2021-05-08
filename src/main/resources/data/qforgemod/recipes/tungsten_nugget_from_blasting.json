@@ -2,34 +2,34 @@
   "type": "minecraft:blasting",
   "ingredient": [
     {
-      "item": "qforgemod:tungsten_pickaxe"
+      "item": "randomthingz:tungsten_pickaxe"
     },
     {
-      "item": "qforgemod:tungsten_shovel"
+      "item": "randomthingz:tungsten_shovel"
     },
     {
-      "item": "qforgemod:tungsten_axe"
+      "item": "randomthingz:tungsten_axe"
     },
     {
-      "item": "qforgemod:tungsten_hoe"
+      "item": "randomthingz:tungsten_hoe"
     },
     {
-      "item": "qforgemod:tungsten_sword"
+      "item": "randomthingz:tungsten_sword"
     },
     {
-      "item": "qforgemod:tungsten_helmet"
+      "item": "randomthingz:tungsten_helmet"
     },
     {
-      "item": "qforgemod:tungsten_chestplate"
+      "item": "randomthingz:tungsten_chestplate"
     },
     {
-      "item": "qforgemod:tungsten_leggings"
+      "item": "randomthingz:tungsten_leggings"
     },
     {
-      "item": "qforgemod:tungsten_boots"
+      "item": "randomthingz:tungsten_boots"
     }
   ],
-  "result": "qforgemod:tungsten_nugget",
+  "result": "randomthingz:tungsten_nugget",
   "experience": 8.5,
   "cookingtime": 600
 }

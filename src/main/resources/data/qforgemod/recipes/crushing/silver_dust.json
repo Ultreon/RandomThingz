@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/silver"
+    "tag": "randomthingz:chunks/silver"
   },
   "results": [
     {
-      "item": "qforgemod:silver_dust"
+      "item": "randomthingz:silver_dust"
     },
     {
-      "item": "qforgemod:silver_dust",
+      "item": "randomthingz:silver_dust",
       "chance": 0.1
     }
   ]

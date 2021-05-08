@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:peridot_block"
+      "item": "randomthingz:peridot_block"
     }
   ],
   "result": {
-    "item": "qforgemod:peridot",
+    "item": "randomthingz:peridot",
     "count": 9
   }
 }

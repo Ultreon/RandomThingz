@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/tanzanite_block"
+      "model": "randomthingz:block/tanzanite_block"
     }
   }
 }

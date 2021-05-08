@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:steel_ingot"
+      "item": "randomthingz:steel_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:steel_chestplate"
+    "item": "randomthingz:steel_chestplate"
   }
 }

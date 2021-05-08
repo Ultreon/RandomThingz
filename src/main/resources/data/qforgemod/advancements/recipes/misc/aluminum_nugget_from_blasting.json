@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:aluminum_nugget_from_blasting"
+      "randomthingz:aluminum_nugget_from_blasting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_pickaxe"
+            "item": "randomthingz:aluminum_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_shovel"
+            "item": "randomthingz:aluminum_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_axe"
+            "item": "randomthingz:aluminum_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_hoe"
+            "item": "randomthingz:aluminum_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_sword"
+            "item": "randomthingz:aluminum_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_helmet"
+            "item": "randomthingz:aluminum_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_chestplate"
+            "item": "randomthingz:aluminum_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_leggings"
+            "item": "randomthingz:aluminum_leggings"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_boots"
+            "item": "randomthingz:aluminum_boots"
           }
         ]
       }
@@ -139,7 +139,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:aluminum_nugget_from_blasting"
+        "recipe": "randomthingz:aluminum_nugget_from_blasting"
       }
     }
   },

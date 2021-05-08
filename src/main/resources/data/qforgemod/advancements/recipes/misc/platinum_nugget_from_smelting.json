@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:platinum_nugget_from_smelting"
+      "randomthingz:platinum_nugget_from_smelting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:platinum_pickaxe"
+            "item": "randomthingz:platinum_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:platinum_shovel"
+            "item": "randomthingz:platinum_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:platinum_axe"
+            "item": "randomthingz:platinum_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:platinum_hoe"
+            "item": "randomthingz:platinum_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:platinum_sword"
+            "item": "randomthingz:platinum_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:platinum_helmet"
+            "item": "randomthingz:platinum_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:platinum_chestplate"
+            "item": "randomthingz:platinum_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:platinum_leggings"
+            "item": "randomthingz:platinum_leggings"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:platinum_boots"
+            "item": "randomthingz:platinum_boots"
           }
         ]
       }
@@ -139,7 +139,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:platinum_nugget_from_smelting"
+        "recipe": "randomthingz:platinum_nugget_from_smelting"
       }
     }
   },

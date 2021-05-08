@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "minecraft:carrot"
   },
-  "result": "qforgemod:cooked_carrot",
+  "result": "randomthingz:cooked_carrot",
   "experience": 0.35,
   "cookingtime": 200
 }

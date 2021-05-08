@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:topaz_pickaxe"
+      "randomthingz:topaz_pickaxe"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:topaz"
+            "item": "randomthingz:topaz"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:topaz_shovel"
+        "recipe": "randomthingz:topaz_shovel"
       }
     }
   },

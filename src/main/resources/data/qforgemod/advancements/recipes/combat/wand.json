@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:wand"
+      "randomthingz:wand"
     ]
   },
   "criteria": {
@@ -11,10 +11,10 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:ruby"
+            "item": "randomthingz:ruby"
           },
           {
-            "item": "qforgemod:copper_ingot"
+            "item": "randomthingz:copper_ingot"
           }
         ]
       }
@@ -22,7 +22,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:wand"
+        "recipe": "randomthingz:wand"
       }
     }
   },

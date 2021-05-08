@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:tungsten_ingot"
+         "item": "randomthingz:tungsten_ingot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:tungsten_sword"
+      "item": "randomthingz:tungsten_sword"
    }
 }

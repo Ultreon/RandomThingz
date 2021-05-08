@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:dusts/tungsten"
   },
-  "result": "qforgemod:tungsten_ingot",
+  "result": "randomthingz:tungsten_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

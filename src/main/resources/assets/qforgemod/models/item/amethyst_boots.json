@@ -2,33 +2,33 @@
   "parent": "item/generated",
   "defaults": {
     "textures": {
-      "layer0": "qforgemod:items/amethyst_boots"
+      "layer0": "randomthingz:items/amethyst_boots"
     },
     "variants": {
       "normal": {
         "textures": {
-          "layer0": "qforgemod:items/amethyst_boots"
+          "layer0": "randomthingz:items/amethyst_boots"
         }
       },
       "inventory": {
         "textures": {
-          "layer0": "qforgemod:items/amethyst_boots"
+          "layer0": "randomthingz:items/amethyst_boots"
         }
       }
     }
   },
   "textures": {
-    "layer0": "qforgemod:items/amethyst_boots"
+    "layer0": "randomthingz:items/amethyst_boots"
   },
   "variants": {
     "normal": {
       "textures": {
-        "layer0": "qforgemod:items/amethyst_boots"
+        "layer0": "randomthingz:items/amethyst_boots"
       }
     },
     "inventory": {
       "textures": {
-        "layer0": "qforgemod:items/amethyst_boots"
+        "layer0": "randomthingz:items/amethyst_boots"
       }
     }
   }

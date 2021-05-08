@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:zinc_ingot"
+      "item": "randomthingz:zinc_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:zinc_boots"
+    "item": "randomthingz:zinc_boots"
   }
 }

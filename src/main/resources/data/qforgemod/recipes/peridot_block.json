@@ -7,11 +7,11 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:peridot"
+      "item": "randomthingz:peridot"
     }
   },
   "result": {
-    "item": "qforgemod:peridot_block",
+    "item": "randomthingz:peridot_block",
     "count": 1
   }
 }

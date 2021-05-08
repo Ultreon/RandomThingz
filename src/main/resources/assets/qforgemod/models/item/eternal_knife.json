@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "qforgemod:items/eternal_knife"
+		"layer0": "randomthingz:items/eternal_knife"
 	},
 	"gui_light": "front",
 	"display": {

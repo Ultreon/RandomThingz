@@ -7,10 +7,10 @@
   ],
   "key": {
     "c": {
-      "item": "qforgemod:uranium_nugget"
+      "item": "randomthingz:uranium_nugget"
     }
   },
   "result": {
-    "item": "qforgemod:uranium_ingot"
+    "item": "randomthingz:uranium_ingot"
   }
 }

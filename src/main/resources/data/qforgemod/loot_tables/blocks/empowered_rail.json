@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:empowered_rail"
+          "name": "randomthingz:empowered_rail"
         }
       ],
       "conditions": [

@@ -3,7 +3,7 @@
     "textures": {
         "particle": "#color",
         "legs": "minecraft:block/light_gray_concrete",
-        "mesh": "qforgemod:blocks/mesh"
+        "mesh": "randomthingz:blocks/mesh"
     },
     "display": {
         "gui": {

@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:stick",
-    "qforgemod:stick_variant1",
-    "qforgemod:stick_variant2"
+    "randomthingz:stick_variant1",
+    "randomthingz:stick_variant2"
   ]
 }

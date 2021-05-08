@@ -5,7 +5,7 @@
         "attached": "true"
       },
       "apply": {
-        "model": "qforgemod:block/ethereal_seat_post"
+        "model": "randomthingz:block/ethereal_seat_post"
       }
     },
     {
@@ -13,7 +13,7 @@
         "facing": "north"
       },
       "apply": {
-        "model": "qforgemod:block/ethereal_seat_top"
+        "model": "randomthingz:block/ethereal_seat_top"
       }
     },
     {
@@ -21,7 +21,7 @@
         "facing": "south"
       },
       "apply": {
-        "model": "qforgemod:block/ethereal_seat_top",
+        "model": "randomthingz:block/ethereal_seat_top",
         "y": 180
       }
     },
@@ -30,7 +30,7 @@
         "facing": "east"
       },
       "apply": {
-        "model": "qforgemod:block/ethereal_seat_top",
+        "model": "randomthingz:block/ethereal_seat_top",
         "y": 90
       }
     },
@@ -39,7 +39,7 @@
         "facing": "west"
       },
       "apply": {
-        "model": "qforgemod:block/ethereal_seat_top",
+        "model": "randomthingz:block/ethereal_seat_top",
         "y": 270
       }
     }

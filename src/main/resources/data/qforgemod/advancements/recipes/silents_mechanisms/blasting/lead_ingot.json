@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:blasting/lead_ingot"
+      "randomthingz:blasting/lead_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:blasting/lead_ingot"
+        "recipe": "randomthingz:blasting/lead_ingot"
       }
     }
   },

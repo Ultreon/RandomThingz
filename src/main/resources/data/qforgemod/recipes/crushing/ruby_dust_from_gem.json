@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
-    "item": "qforgemod:ruby"
+    "item": "randomthingz:ruby"
   },
   "results": [
     {
-      "item": "qforgemod:ruby_dust"
+      "item": "randomthingz:ruby_dust"
     }
   ]
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:bronze_battleaxe"
+      "randomthingz:bronze_battleaxe"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:bronze_ingot"
+            "item": "randomthingz:bronze_ingot"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:bronze_battleaxe"
+        "recipe": "randomthingz:bronze_battleaxe"
       }
     }
   },

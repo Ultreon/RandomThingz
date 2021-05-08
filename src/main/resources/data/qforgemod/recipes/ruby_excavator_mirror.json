@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:ruby"
+         "item": "randomthingz:ruby"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:ruby_excavator"
+      "item": "randomthingz:ruby_excavator"
    }
 }

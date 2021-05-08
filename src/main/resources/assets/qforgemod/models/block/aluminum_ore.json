@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/aluminum_ore"
+    "all": "randomthingz:blocks/aluminum_ore"
   }
 }

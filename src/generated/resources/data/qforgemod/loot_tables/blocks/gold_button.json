@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:gold_button"
+          "name": "randomthingz:gold_button"
         }
       ],
       "conditions": [

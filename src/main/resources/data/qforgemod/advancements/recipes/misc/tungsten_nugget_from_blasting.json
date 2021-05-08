@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:tungsten_nugget_from_blasting"
+      "randomthingz:tungsten_nugget_from_blasting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tungsten_pickaxe"
+            "item": "randomthingz:tungsten_pickaxe"
           }
         ]
       }
@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tungsten_shovel"
+            "item": "randomthingz:tungsten_shovel"
           }
         ]
       }
@@ -31,7 +31,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tungsten_axe"
+            "item": "randomthingz:tungsten_axe"
           }
         ]
       }
@@ -41,7 +41,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tungsten_hoe"
+            "item": "randomthingz:tungsten_hoe"
           }
         ]
       }
@@ -51,7 +51,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tungsten_sword"
+            "item": "randomthingz:tungsten_sword"
           }
         ]
       }
@@ -61,7 +61,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tungsten_helmet"
+            "item": "randomthingz:tungsten_helmet"
           }
         ]
       }
@@ -71,7 +71,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tungsten_chestplate"
+            "item": "randomthingz:tungsten_chestplate"
           }
         ]
       }
@@ -81,7 +81,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tungsten_leggings"
+            "item": "randomthingz:tungsten_leggings"
           }
         ]
       }
@@ -91,7 +91,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tungsten_boots"
+            "item": "randomthingz:tungsten_boots"
           }
         ]
       }
@@ -139,7 +139,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:tungsten_nugget_from_blasting"
+        "recipe": "randomthingz:tungsten_nugget_from_blasting"
       }
     }
   },

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/cherry_sapling"
+      "model": "randomthingz:block/cherry_sapling"
     }
   }
 }

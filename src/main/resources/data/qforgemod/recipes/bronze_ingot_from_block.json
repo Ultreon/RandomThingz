@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:bronze_block"
+      "item": "randomthingz:bronze_block"
     }
   ],
   "result": {
-    "item": "qforgemod:bronze_ingot",
+    "item": "randomthingz:bronze_ingot",
     "count": 9
   }
 }

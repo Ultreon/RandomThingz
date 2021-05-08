@@ -1,9 +1,9 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "qforgemod:platinum_ore"
+    "item": "randomthingz:platinum_ore"
   },
-  "result": "qforgemod:platinum_ingot",
+  "result": "randomthingz:platinum_ingot",
   "experience": 0.7,
   "cookingtime": 100
 }

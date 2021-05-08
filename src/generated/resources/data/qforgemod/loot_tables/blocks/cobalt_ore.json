@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:cobalt_ore"
+          "name": "randomthingz:cobalt_ore"
         }
       ],
       "conditions": [

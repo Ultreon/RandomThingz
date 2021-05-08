@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:items/cod_jerky"
+    "layer0": "randomthingz:items/cod_jerky"
   }
 }

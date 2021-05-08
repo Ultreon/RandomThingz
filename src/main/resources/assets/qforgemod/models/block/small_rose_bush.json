@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "qforgemod:blocks/small_rose_bush"
+    "cross": "randomthingz:blocks/small_rose_bush"
   }
 }

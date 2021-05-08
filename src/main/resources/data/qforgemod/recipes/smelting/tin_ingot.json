@@ -2,13 +2,13 @@
   "type": "minecraft:smelting",
   "ingredient": [
     {
-      "tag": "qforgemod:chunks/tin"
+      "tag": "randomthingz:chunks/tin"
     },
     {
       "tag": "forge:dusts/tin"
     }
   ],
-  "result": "qforgemod:tin_ingot",
+  "result": "randomthingz:tin_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

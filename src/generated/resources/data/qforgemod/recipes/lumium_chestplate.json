@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:lumium_ingot"
+      "item": "randomthingz:lumium_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:lumium_chestplate"
+    "item": "randomthingz:lumium_chestplate"
   }
 }

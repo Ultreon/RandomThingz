@@ -1,93 +1,93 @@
 {
   "teleport": {
     "category": "block",
-    "subtitle": "qforgemod.subtitle.teleport",
+    "subtitle": "randomthingz.subtitle.teleport",
     "sounds": [
-      "qforgemod:teleport"
+      "randomthingz:teleport"
     ]
   },
   "block.cabinet.open": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.open_cabinet",
+    "subtitle": "subtitle.randomthingz.open_cabinet",
     "sounds": [
-      "qforgemod:block/cabinet/open"
+      "randomthingz:block/cabinet/open"
     ]
   },
   "block.cabinet.close": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.close_cabinet",
+    "subtitle": "subtitle.randomthingz.close_cabinet",
     "sounds": [
-      "qforgemod:block/cabinet/close"
+      "randomthingz:block/cabinet/close"
     ]
   },
   "block.bedside_cabinet.open": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.open_cabinet",
+    "subtitle": "subtitle.randomthingz.open_cabinet",
     "sounds": [
-      "qforgemod:block/bedside_cabinet/open"
+      "randomthingz:block/bedside_cabinet/open"
     ]
   },
   "block.bedside_cabinet.close": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.close_cabinet",
+    "subtitle": "subtitle.randomthingz.close_cabinet",
     "sounds": [
-      "qforgemod:block/bedside_cabinet/close"
+      "randomthingz:block/bedside_cabinet/close"
     ]
   },
   "block.blinds.open": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.open_blinds",
+    "subtitle": "subtitle.randomthingz.open_blinds",
     "sounds": [
-      "qforgemod:block/blinds/open"
+      "randomthingz:block/blinds/open"
     ]
   },
   "block.blinds.close": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.close_blinds",
+    "subtitle": "subtitle.randomthingz.close_blinds",
     "sounds": [
-      "qforgemod:block/blinds/close"
+      "randomthingz:block/blinds/close"
     ]
   },
   "block.trampoline.bounce": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.trampoline_bounce",
+    "subtitle": "subtitle.randomthingz.trampoline_bounce",
     "sounds": [
-      "qforgemod:block/trampoline/bounce"
+      "randomthingz:block/trampoline/bounce"
     ]
   },
   "block.grill.place": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.grill_place",
+    "subtitle": "subtitle.randomthingz.grill_place",
     "sounds": [
-      "qforgemod:block/grill/place"
+      "randomthingz:block/grill/place"
     ]
   },
   "block.grill.flip": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.grill_flip",
+    "subtitle": "subtitle.randomthingz.grill_flip",
     "sounds": [
-      "qforgemod:block/grill/flip"
+      "randomthingz:block/grill/flip"
     ]
   },
   "block.diving_board.bounce": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.diving_board.bounce",
+    "subtitle": "subtitle.randomthingz.diving_board.bounce",
     "sounds": [
-      "qforgemod:block/diving_board/bounce"
+      "randomthingz:block/diving_board/bounce"
     ]
   },
   "block.fridge.open": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.open_fridge",
+    "subtitle": "subtitle.randomthingz.open_fridge",
     "sounds": [
-      "qforgemod:block/fridge/open"
+      "randomthingz:block/fridge/open"
     ]
   },
   "block.fridge.close": {
     "category": "block",
-    "subtitle": "subtitle.qforgemod.close_fridge",
+    "subtitle": "subtitle.randomthingz.close_fridge",
     "sounds": [
-      "qforgemod:block/fridge/close"
+      "randomthingz:block/fridge/close"
     ]
   }
 }

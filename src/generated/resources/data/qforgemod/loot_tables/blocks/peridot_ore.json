@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:peridot_ore"
+          "name": "randomthingz:peridot_ore"
         }
       ],
       "conditions": [

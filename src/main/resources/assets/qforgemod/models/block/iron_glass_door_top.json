@@ -1,7 +1,7 @@
 {
     "parent": "block/door_top",
     "textures": {
-        "bottom": "qforgemod:blocks/iron_glass_door_bottom",
-        "top": "qforgemod:blocks/iron_glass_door_top"
+        "bottom": "randomthingz:blocks/iron_glass_door_bottom",
+        "top": "randomthingz:blocks/iron_glass_door_top"
     }
 }

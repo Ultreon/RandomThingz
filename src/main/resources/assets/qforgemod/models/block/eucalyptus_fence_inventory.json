@@ -1,6 +1,6 @@
 {
     "parent": "block/fence_inventory",
     "textures": {
-        "texture": "qforgemod:blocks/eucalyptus_planks"
+        "texture": "randomthingz:blocks/eucalyptus_planks"
     }
 }

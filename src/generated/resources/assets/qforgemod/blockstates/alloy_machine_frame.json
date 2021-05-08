@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/alloy_machine_frame"
+      "model": "randomthingz:block/alloy_machine_frame"
     }
   }
 }

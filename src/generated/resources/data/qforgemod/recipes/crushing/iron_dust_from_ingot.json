@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/iron"
   },
   "results": [
     {
-      "item": "qforgemod:iron_dust"
+      "item": "randomthingz:iron_dust"
     }
   ]
 }

@@ -7,10 +7,10 @@
   ],
   "key": {
     "c": {
-      "item": "qforgemod:zinc_nugget"
+      "item": "randomthingz:zinc_nugget"
     }
   },
   "result": {
-    "item": "qforgemod:zinc_ingot"
+    "item": "randomthingz:zinc_ingot"
   }
 }

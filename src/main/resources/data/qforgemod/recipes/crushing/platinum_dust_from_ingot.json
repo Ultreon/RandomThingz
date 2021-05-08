@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 200,
   "ingredient": {
     "tag": "forge:ingots/platinum"
   },
   "results": [
     {
-      "item": "qforgemod:platinum_dust"
+      "item": "randomthingz:platinum_dust"
     }
   ]
 }

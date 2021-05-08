@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:beryl"
+            "item": "randomthingz:beryl"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:steel_leggings"
+        "recipe": "randomthingz:steel_leggings"
       }
     }
   },

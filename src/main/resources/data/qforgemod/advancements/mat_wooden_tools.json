@@ -4,15 +4,15 @@
             "item": "minecraft:wooden_axe"
         },
         "title": {
-            "translate": "advancements.qforgemod.wooden_tools.title"
+            "translate": "advancements.randomthingz.wooden_tools.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.wooden_tools.description"
+            "translate": "advancements.randomthingz.wooden_tools.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_wood",
+    "parent": "randomthingz:mat_wood",
     "criteria": {
         "get_sword": {
             "trigger": "minecraft:inventory_changed",

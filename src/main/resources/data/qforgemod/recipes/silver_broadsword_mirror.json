@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:silver_ingot"
+         "item": "randomthingz:silver_ingot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:silver_broadsword"
+      "item": "randomthingz:silver_broadsword"
    }
 }

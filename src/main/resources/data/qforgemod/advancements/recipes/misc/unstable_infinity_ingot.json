@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:unstable_infinity_ingot"
+      "randomthingz:unstable_infinity_ingot"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:infinity_ore"
+            "item": "randomthingz:infinity_ore"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:unstable_infinity_ingot"
+        "recipe": "randomthingz:unstable_infinity_ingot"
       }
     }
   },

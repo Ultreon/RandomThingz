@@ -1,10 +1,10 @@
 {
-    "type": "qforgemod:drying",
+    "type": "randomthingz:drying",
     "process_time": 400,
     "ingredient": {
         "item": "minecraft:mutton"
     },
     "result": {
-        "item": "qforgemod:mutton_jerky"
+        "item": "randomthingz:mutton_jerky"
     }
 }

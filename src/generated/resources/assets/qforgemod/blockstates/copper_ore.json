@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/copper_ore"
+      "model": "randomthingz:block/copper_ore"
     }
   }
 }

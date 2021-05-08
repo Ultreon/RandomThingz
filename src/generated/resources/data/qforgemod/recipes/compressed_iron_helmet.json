@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:compressed_iron_ingot"
+      "item": "randomthingz:compressed_iron_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:compressed_iron_helmet"
+    "item": "randomthingz:compressed_iron_helmet"
   }
 }

@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/iron"
+    "tag": "randomthingz:chunks/iron"
   },
   "results": [
     {
-      "item": "qforgemod:iron_dust"
+      "item": "randomthingz:iron_dust"
     },
     {
-      "item": "qforgemod:iron_dust",
+      "item": "randomthingz:iron_dust",
       "chance": 0.1
     }
   ]

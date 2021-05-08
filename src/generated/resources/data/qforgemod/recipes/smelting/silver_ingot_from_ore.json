@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:ores/silver"
   },
-  "result": "qforgemod:silver_ingot",
+  "result": "randomthingz:silver_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

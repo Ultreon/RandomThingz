@@ -4,15 +4,15 @@
             "item": "minecraft:golden_chestplate"
         },
         "title": {
-            "translate": "advancements.qforgemod.golden_armor.title"
+            "translate": "advancements.randomthingz.golden_armor.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.golden_armor.description"
+            "translate": "advancements.randomthingz.golden_armor.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_gold",
+    "parent": "randomthingz:mat_gold",
     "criteria": {
         "get_armor": {
             "trigger": "minecraft:inventory_changed",

@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:copper_ingot"
+      "item": "randomthingz:copper_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:copper_leggings"
+    "item": "randomthingz:copper_leggings"
   }
 }

@@ -2,13 +2,13 @@
   "type": "minecraft:smelting",
   "ingredient": [
     {
-      "tag": "qforgemod:chunks/uranium"
+      "tag": "randomthingz:chunks/uranium"
     },
     {
       "tag": "forge:dusts/uranium"
     }
   ],
-  "result": "qforgemod:uranium_ingot",
+  "result": "randomthingz:uranium_ingot",
   "experience": 1.0,
   "cookingtime": 200
 }

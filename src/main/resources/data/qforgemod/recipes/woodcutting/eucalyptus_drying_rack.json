@@ -7,8 +7,8 @@
   ],
   "type": "woodcutter:woodcutting",
   "ingredient": {
-    "item": "qforgemod:eucalyptus_plank"
+    "item": "randomthingz:eucalyptus_plank"
   },
-  "result": "qforgemod:eucalyptus_drying_rack",
+  "result": "randomthingz:eucalyptus_drying_rack",
   "count": 1
 }

@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:enderium_ingot"
+      "item": "randomthingz:enderium_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:enderium_block"
+    "item": "randomthingz:enderium_block"
   }
 }

@@ -1,8 +1,8 @@
 {
     "parent": "block/outer_stairs",
     "textures": {
-        "bottom": "qforgemod:blocks/cherry_planks",
-        "top": "qforgemod:blocks/cherry_planks",
-        "side": "qforgemod:blocks/cherry_planks"
+        "bottom": "randomthingz:blocks/cherry_planks",
+        "top": "randomthingz:blocks/cherry_planks",
+        "side": "randomthingz:blocks/cherry_planks"
     }
 }

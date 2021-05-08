@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/tungsten_block"
+    "all": "randomthingz:blocks/tungsten_block"
   }
 }

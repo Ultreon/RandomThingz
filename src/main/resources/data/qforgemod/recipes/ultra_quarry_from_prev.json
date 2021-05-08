@@ -9,10 +9,10 @@
       "tag": "ingots/platinum"
     },
     "o": {
-      "item": "qforgemod:quarry"
+      "item": "randomthingz:quarry"
     }
   },
   "result": {
-    "item": "qforgemod:ultra_quarry"
+    "item": "randomthingz:ultra_quarry"
   }
 }

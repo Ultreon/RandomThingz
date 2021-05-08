@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:uranium_ingot"
+      "item": "randomthingz:uranium_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:uranium_helmet"
+    "item": "randomthingz:uranium_helmet"
   }
 }

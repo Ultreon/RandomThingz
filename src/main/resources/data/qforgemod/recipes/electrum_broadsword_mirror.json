@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:electrum_ingot"
+         "item": "randomthingz:electrum_ingot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:electrum_broadsword"
+      "item": "randomthingz:electrum_broadsword"
    }
 }

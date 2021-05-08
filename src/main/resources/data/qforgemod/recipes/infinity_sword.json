@@ -7,13 +7,13 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:infinity_ingot"
+      "item": "randomthingz:infinity_ingot"
     },
     "#": {
       "tag": "sticks"
     }
   },
   "result": {
-    "item": "qforgemod:infinity_sword"
+    "item": "randomthingz:infinity_sword"
   }
 }

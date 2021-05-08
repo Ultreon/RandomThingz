@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:small_rose_bush"
+      "item": "randomthingz:small_rose_bush"
     }
   ],
   "result": {

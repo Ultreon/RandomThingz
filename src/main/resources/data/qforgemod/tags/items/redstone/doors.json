@@ -1,9 +1,9 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:lab_door",
-    "qforgemod:shopping_door",
-    "qforgemod:iron_glass_door",
-    "qforgemod:iron_barrier_door"
+    "randomthingz:lab_door",
+    "randomthingz:shopping_door",
+    "randomthingz:iron_glass_door",
+    "randomthingz:iron_barrier_door"
   ]
 }

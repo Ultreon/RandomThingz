@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/cobalt_ore"
+      "model": "randomthingz:block/cobalt_ore"
     }
   }
 }

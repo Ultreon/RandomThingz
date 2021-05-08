@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:high_speed_rail"
+      "randomthingz:high_speed_rail"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:high_speed_rail"
+        "recipe": "randomthingz:high_speed_rail"
       }
     }
   },

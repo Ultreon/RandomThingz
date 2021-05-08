@@ -2,8 +2,8 @@
 	"__comment": "Designed by Stohun with Cubik Studio - https://cubik.studio",
 	"parent": "block/block",
 	"textures": {
-		"torch": "qforgemod:block/torch",
-		"base": "qforgemod:block/chandelier_base"
+		"torch": "randomthingz:block/torch",
+		"base": "randomthingz:block/chandelier_base"
 	},
 	"elements": [ 	 
 		{

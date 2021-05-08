@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/ultrinium"
   },
   "results": [
     {
-      "item": "qforgemod:ultrinium_chunks",
+      "item": "randomthingz:ultrinium_chunks",
       "count": 2
     },
     {

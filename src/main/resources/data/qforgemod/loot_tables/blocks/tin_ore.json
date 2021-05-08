@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:tin_ore"
+          "name": "randomthingz:tin_ore"
         }
       ],
       "conditions": [

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:tin_ingot_from_tin_block"
+      "randomthingz:tin_ingot_from_tin_block"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tin_block"
+            "item": "randomthingz:tin_block"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:tin_ingot_from_tin_block"
+        "recipe": "randomthingz:tin_ingot_from_tin_block"
       }
     }
   },

@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:dusts/signalum"
   },
-  "result": "qforgemod:signalum_ingot",
+  "result": "randomthingz:signalum_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

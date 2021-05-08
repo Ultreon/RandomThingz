@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/cherry_planks"
+    "all": "randomthingz:blocks/cherry_planks"
   }
 }

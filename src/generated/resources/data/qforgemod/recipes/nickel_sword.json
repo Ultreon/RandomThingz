@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:nickel_ingot"
+      "item": "randomthingz:nickel_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:nickel_sword"
+    "item": "randomthingz:nickel_sword"
   }
 }

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:blasting/iron_ingot"
+      "randomthingz:blasting/iron_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:blasting/iron_ingot"
+        "recipe": "randomthingz:blasting/iron_ingot"
       }
     }
   },

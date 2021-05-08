@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "qforgemod:items/salmon_jerky"
+    "layer0": "randomthingz:items/salmon_jerky"
   }
 }

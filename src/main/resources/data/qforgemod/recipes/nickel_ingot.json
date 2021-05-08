@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "qforgemod:nickel_ore"
+    "item": "randomthingz:nickel_ore"
   },
-  "result": "qforgemod:nickel_ingot",
+  "result": "randomthingz:nickel_ingot",
   "experience": 0.7,
   "cookingtime": 200
 }

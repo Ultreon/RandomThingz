@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:upgrade_case"
+      "item": "randomthingz:upgrade_case"
     },
     {
       "tag": "forge:storage_blocks/lapis"
@@ -15,6 +15,6 @@
     }
   ],
   "result": {
-    "item": "qforgemod:output_chance_upgrade"
+    "item": "randomthingz:output_chance_upgrade"
   }
 }

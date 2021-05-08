@@ -4,15 +4,15 @@
             "item": "minecraft:stone_axe"
         },
         "title": {
-            "translate": "advancements.qforgemod.stone_tools.title"
+            "translate": "advancements.randomthingz.stone_tools.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.stone_tools.description"
+            "translate": "advancements.randomthingz.stone_tools.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_stone",
+    "parent": "randomthingz:mat_stone",
     "criteria": {
         "get_sword": {
             "trigger": "minecraft:inventory_changed",

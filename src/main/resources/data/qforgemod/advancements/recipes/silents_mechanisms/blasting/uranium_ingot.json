@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:blasting/uranium_ingot"
+      "randomthingz:blasting/uranium_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:blasting/uranium_ingot"
+        "recipe": "randomthingz:blasting/uranium_ingot"
       }
     }
   },

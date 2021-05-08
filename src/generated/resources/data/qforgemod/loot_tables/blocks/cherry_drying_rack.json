@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:cherry_drying_rack"
+          "name": "randomthingz:cherry_drying_rack"
         }
       ],
       "conditions": [

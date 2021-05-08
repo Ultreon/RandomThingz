@@ -7,10 +7,10 @@
   ],
   "key": {
     "c": {
-      "item": "qforgemod:aluminum_nugget"
+      "item": "randomthingz:aluminum_nugget"
     }
   },
   "result": {
-    "item": "qforgemod:aluminum_ingot"
+    "item": "randomthingz:aluminum_ingot"
   }
 }

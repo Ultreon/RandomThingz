@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/peridot_block"
+    "all": "randomthingz:blocks/peridot_block"
   }
 }

@@ -7,13 +7,13 @@
   ],
   "key": {
     "c": {
-      "item": "qforgemod:lumium_ingot"
+      "item": "randomthingz:lumium_ingot"
     },
     "s": {
       "tag": "forge:sticks"
     }
   },
   "result": {
-    "item": "qforgemod:lumium_sword"
+    "item": "randomthingz:lumium_sword"
   }
 }

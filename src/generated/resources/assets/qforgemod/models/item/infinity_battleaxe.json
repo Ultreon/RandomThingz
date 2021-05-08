@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/infinity_battleaxe"
+    "layer0": "randomthingz:items/infinity_battleaxe"
   }
 }

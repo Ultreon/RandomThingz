@@ -1,9 +1,9 @@
 {
   "type": "minecraft:campfire_cooking",
   "ingredient": {
-    "item": "qforgemod:meatball"
+    "item": "randomthingz:meatball"
   },
-  "result": "qforgemod:cooked_meatball",
+  "result": "randomthingz:cooked_meatball",
   "experience": 0.35,
   "cookingtime": 600
 }

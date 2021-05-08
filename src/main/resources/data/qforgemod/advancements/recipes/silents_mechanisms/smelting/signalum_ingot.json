@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:smelting/signalum_ingot"
+      "randomthingz:smelting/signalum_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:smelting/signalum_ingot"
+        "recipe": "randomthingz:smelting/signalum_ingot"
       }
     }
   },

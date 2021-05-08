@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:copper_ingot"
+      "item": "randomthingz:copper_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:copper_helmet"
+    "item": "randomthingz:copper_helmet"
   }
 }

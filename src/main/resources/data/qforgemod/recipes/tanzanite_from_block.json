@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:tanzanite_block"
+      "item": "randomthingz:tanzanite_block"
     }
   ],
   "result": {
-    "item": "qforgemod:tanzanite",
+    "item": "randomthingz:tanzanite",
     "count": 9
   }
 }

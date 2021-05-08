@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "minecraft:egg"
   },
-  "result": "qforgemod:fried_egg",
+  "result": "randomthingz:fried_egg",
   "experience": 0.35,
   "cookingtime": 100
 }

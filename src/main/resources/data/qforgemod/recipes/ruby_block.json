@@ -7,11 +7,11 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:ruby"
+      "item": "randomthingz:ruby"
     }
   },
   "result": {
-    "item": "qforgemod:ruby_block",
+    "item": "randomthingz:ruby_block",
     "count": 1
   }
 }

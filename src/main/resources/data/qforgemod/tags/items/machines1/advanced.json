@@ -1,16 +1,16 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:alloy_smelter",
-    "qforgemod:battery_box",
-    "qforgemod:compressor",
-    "qforgemod:crusher",
-    "qforgemod:quarry",
-    "qforgemod:lava_generator",
-    "qforgemod:diesel_generator",
-    "qforgemod:solidifier",
-    "qforgemod:mixer",
-    "qforgemod:refinery",
-    "qforgemod:infuser"
+    "randomthingz:alloy_smelter",
+    "randomthingz:battery_box",
+    "randomthingz:compressor",
+    "randomthingz:crusher",
+    "randomthingz:quarry",
+    "randomthingz:lava_generator",
+    "randomthingz:diesel_generator",
+    "randomthingz:solidifier",
+    "randomthingz:mixer",
+    "randomthingz:refinery",
+    "randomthingz:infuser"
   ]
 }

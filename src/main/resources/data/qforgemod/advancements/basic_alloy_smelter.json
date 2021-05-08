@@ -1,23 +1,23 @@
 {
     "display": {
         "icon": {
-            "item": "qforgemod:basic_alloy_smelter"
+            "item": "randomthingz:basic_alloy_smelter"
         },
         "title": {
-            "translate": "advancements.qforgemod.basic_alloy_smelter.title"
+            "translate": "advancements.randomthingz.basic_alloy_smelter.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.basic_alloy_smelter.description"
+            "translate": "advancements.randomthingz.basic_alloy_smelter.description"
         }
     },
-    "parent": "qforgemod:stone_machine_frame",
+    "parent": "randomthingz:stone_machine_frame",
     "criteria": {
         "get_item": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "qforgemod:basic_alloy_smelter"
+                        "item": "randomthingz:basic_alloy_smelter"
                     }
                 ]
             }

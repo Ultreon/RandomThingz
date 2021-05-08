@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:oil_bucket",
-    "qforgemod:diesel_bucket"
+    "randomthingz:oil_bucket",
+    "randomthingz:diesel_bucket"
   ]
 }

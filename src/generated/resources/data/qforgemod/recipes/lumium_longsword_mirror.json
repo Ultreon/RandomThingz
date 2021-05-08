@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:lumium_ingot"
+      "item": "randomthingz:lumium_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:lumium_longsword"
+    "item": "randomthingz:lumium_longsword"
   }
 }

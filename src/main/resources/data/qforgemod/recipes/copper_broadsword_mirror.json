@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:copper_ingot"
+         "item": "randomthingz:copper_ingot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:copper_broadsword"
+      "item": "randomthingz:copper_broadsword"
    }
 }

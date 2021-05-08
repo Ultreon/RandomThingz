@@ -3,8 +3,8 @@
 	"parent": "block/cube",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "qforgemod:blocks/lava_generator/lava_generator",
-		"particle": "qforgemod:blocks/lava_generator/lava_generator"
+		"0": "randomthingz:blocks/lava_generator/lava_generator",
+		"particle": "randomthingz:blocks/lava_generator/lava_generator"
 	},
 	"elements": [
 		{

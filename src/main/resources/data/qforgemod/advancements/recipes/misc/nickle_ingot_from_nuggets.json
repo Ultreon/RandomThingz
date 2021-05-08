@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:nickel_nugget"
+            "item": "randomthingz:nickel_nugget"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "item": "qforgemod:nickel_ingot_from_nuggets"
+        "item": "randomthingz:nickel_ingot_from_nuggets"
       }
     }
   },

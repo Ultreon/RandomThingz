@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:iron_button"
+          "name": "randomthingz:iron_button"
         }
       ],
       "conditions": [

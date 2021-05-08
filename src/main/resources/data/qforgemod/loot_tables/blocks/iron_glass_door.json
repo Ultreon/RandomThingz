@@ -9,13 +9,13 @@
           "conditions": [
             {
               "condition": "minecraft:block_state_property",
-              "block": "qforgemod:iron_glass_door",
+              "block": "randomthingz:iron_glass_door",
               "properties": {
                 "half": "lower"
               }
             }
           ],
-          "name": "qforgemod:iron_glass_door"
+          "name": "randomthingz:iron_glass_door"
         }
       ],
       "conditions": [

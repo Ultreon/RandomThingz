@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:tin_nugget"
+      "item": "randomthingz:tin_nugget"
     }
   },
   "result": {
-    "item": "qforgemod:tin_ingot"
+    "item": "randomthingz:tin_ingot"
   }
 }

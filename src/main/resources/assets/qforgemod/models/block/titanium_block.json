@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/titanium_block"
+    "all": "randomthingz:blocks/titanium_block"
   }
 }

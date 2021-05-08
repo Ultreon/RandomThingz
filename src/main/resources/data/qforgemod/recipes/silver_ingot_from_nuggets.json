@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:silver_nugget"
+      "item": "randomthingz:silver_nugget"
     }
   },
   "result": {
-    "item": "qforgemod:silver_ingot"
+    "item": "randomthingz:silver_ingot"
   }
 }

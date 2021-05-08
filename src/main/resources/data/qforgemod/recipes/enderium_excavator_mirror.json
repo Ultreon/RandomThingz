@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:enderium_ingot"
+         "item": "randomthingz:enderium_ingot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:enderium_excavator"
+      "item": "randomthingz:enderium_excavator"
    }
 }

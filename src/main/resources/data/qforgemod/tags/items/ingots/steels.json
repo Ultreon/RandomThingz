@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:aluminum_steel_ingot",
-    "qforgemod:bismuth_steel_ingot",
-    "qforgemod:steel_ingot"
+    "randomthingz:aluminum_steel_ingot",
+    "randomthingz:bismuth_steel_ingot",
+    "randomthingz:steel_ingot"
   ]
 }

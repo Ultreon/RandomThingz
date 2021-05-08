@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/tanzanite_pickaxe"
+    "layer0": "randomthingz:items/tanzanite_pickaxe"
   }
 }

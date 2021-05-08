@@ -1,6 +1,6 @@
 {
-  "parent": "qforgemod:block/machine_frame",
+  "parent": "randomthingz:block/machine_frame",
   "textures": {
-    "all": "qforgemod:blocks/machine_frame/alloy"
+    "all": "randomthingz:blocks/machine_frame/alloy"
   }
 }

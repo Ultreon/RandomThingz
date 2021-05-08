@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_column",
   "textures": {
-    "end": "qforgemod:blocks/eucalyptus_log_top",
-    "side": "qforgemod:blocks/eucalyptus_log"
+    "end": "randomthingz:blocks/eucalyptus_log_top",
+    "side": "randomthingz:blocks/eucalyptus_log"
   }
 }

@@ -4,15 +4,15 @@
             "item": "minecraft:diamond_axe"
         },
         "title": {
-            "translate": "advancements.qforgemod.diamond_tools.title"
+            "translate": "advancements.randomthingz.diamond_tools.title"
         },
         "description": {
-            "translate": "advancements.qforgemod.diamond_tools.description"
+            "translate": "advancements.randomthingz.diamond_tools.description"
         },
         "show_toast": true,
         "announce_to_chat": true
     },
-    "parent": "qforgemod:mat_diamond",
+    "parent": "randomthingz:mat_diamond",
     "criteria": {
         "get_tools": {
             "trigger": "minecraft:inventory_changed",

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:basic_crusher"
+      "randomthingz:basic_crusher"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:stone_machine_frame"
+            "item": "randomthingz:stone_machine_frame"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:basic_crusher"
+        "recipe": "randomthingz:basic_crusher"
       }
     }
   },

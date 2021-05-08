@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/cherry_leaves"
+      "model": "randomthingz:block/cherry_leaves"
     }
   }
 }

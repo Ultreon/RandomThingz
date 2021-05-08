@@ -35,7 +35,7 @@
                   ]
                 }
               ],
-              "name": "qforgemod:cherry_leaves"
+              "name": "randomthingz:cherry_leaves"
             },
             {
               "type": "minecraft:item",
@@ -54,7 +54,7 @@
                   ]
                 }
               ],
-              "name": "qforgemod:cherry_sapling"
+              "name": "randomthingz:cherry_sapling"
             }
           ]
         }

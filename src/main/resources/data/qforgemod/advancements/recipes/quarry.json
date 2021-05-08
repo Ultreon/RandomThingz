@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:chain"
+      "randomthingz:chain"
     ]
   },
   "criteria": {
@@ -22,7 +22,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:quarry"
+        "recipe": "randomthingz:quarry"
       }
     }
   },

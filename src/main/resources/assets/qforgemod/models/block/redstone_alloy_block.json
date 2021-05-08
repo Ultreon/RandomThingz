@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "qforgemod:blocks/redstone_alloy_block"
+    "all": "randomthingz:blocks/redstone_alloy_block"
   }
 }

@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "particle": "qforgemod:blocks/ultrinium_ore",
-    "all": "qforgemod:blocks/ultrinium_ore"
+    "particle": "randomthingz:blocks/ultrinium_ore",
+    "all": "randomthingz:blocks/ultrinium_ore"
   }
 }

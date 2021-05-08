@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:platinum_block"
+          "name": "randomthingz:platinum_block"
         }
       ],
       "conditions": [

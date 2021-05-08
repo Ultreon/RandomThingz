@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:topaz_from_smelting"
+      "randomthingz:topaz_from_smelting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:topaz_ore"
+            "item": "randomthingz:topaz_ore"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:topaz_from_smelting"
+        "recipe": "randomthingz:topaz_from_smelting"
       }
     }
   },

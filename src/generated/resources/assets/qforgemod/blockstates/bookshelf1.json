@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/bookshelf1"
+      "model": "randomthingz:block/bookshelf1"
     }
   }
 }

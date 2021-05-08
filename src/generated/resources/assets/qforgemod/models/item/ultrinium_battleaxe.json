@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/ultrinium_battleaxe"
+    "layer0": "randomthingz:items/ultrinium_battleaxe"
   }
 }

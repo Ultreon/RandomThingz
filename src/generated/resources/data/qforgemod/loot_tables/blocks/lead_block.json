@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:lead_block"
+          "name": "randomthingz:lead_block"
         }
       ],
       "conditions": [

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:alloy_machine_frame"
+          "name": "randomthingz:alloy_machine_frame"
         }
       ],
       "conditions": [

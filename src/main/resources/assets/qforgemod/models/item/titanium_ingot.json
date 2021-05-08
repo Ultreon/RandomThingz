@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "qforgemod:items/titanium_ingot"
+    "layer0": "randomthingz:items/titanium_ingot"
   }
 }

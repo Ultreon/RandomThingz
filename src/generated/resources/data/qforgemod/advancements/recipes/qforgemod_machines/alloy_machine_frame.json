@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:alloy_machine_frame"
+      "randomthingz:alloy_machine_frame"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:alloy_machine_frame"
+        "recipe": "randomthingz:alloy_machine_frame"
       }
     }
   },

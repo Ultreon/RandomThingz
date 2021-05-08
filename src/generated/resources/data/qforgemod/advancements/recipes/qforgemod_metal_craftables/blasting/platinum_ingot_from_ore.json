@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:blasting/platinum_ingot_from_ore"
+      "randomthingz:blasting/platinum_ingot_from_ore"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:blasting/platinum_ingot_from_ore"
+        "recipe": "randomthingz:blasting/platinum_ingot_from_ore"
       }
     }
   },

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/electrum_block"
+      "model": "randomthingz:block/electrum_block"
     }
   }
 }

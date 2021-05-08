@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:diesel_generator"
+          "name": "randomthingz:diesel_generator"
         }
       ],
       "conditions": [

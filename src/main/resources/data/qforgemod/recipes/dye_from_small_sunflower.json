@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:small_sunflower"
+      "item": "randomthingz:small_sunflower"
     }
   ],
   "result": {

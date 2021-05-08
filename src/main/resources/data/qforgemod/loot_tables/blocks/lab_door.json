@@ -9,13 +9,13 @@
           "conditions": [
             {
               "condition": "minecraft:block_state_property",
-              "block": "qforgemod:lab_door",
+              "block": "randomthingz:lab_door",
               "properties": {
                 "half": "lower"
               }
             }
           ],
-          "name": "qforgemod:lab_door"
+          "name": "randomthingz:lab_door"
         }
       ],
       "conditions": [

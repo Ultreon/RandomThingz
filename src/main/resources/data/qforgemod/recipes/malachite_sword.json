@@ -7,14 +7,14 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:malachite"
+      "item": "randomthingz:malachite"
     },
     "/": {
       "tag": "forge:sticks"
     }
   },
   "result": {
-    "item": "qforgemod:malachite_sword",
+    "item": "randomthingz:malachite_sword",
     "count": 1
   }
 }

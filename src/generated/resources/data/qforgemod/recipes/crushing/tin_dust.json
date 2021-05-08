@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/tin"
+    "tag": "randomthingz:chunks/tin"
   },
   "results": [
     {
-      "item": "qforgemod:tin_dust"
+      "item": "randomthingz:tin_dust"
     },
     {
-      "item": "qforgemod:tin_dust",
+      "item": "randomthingz:tin_dust",
       "chance": 0.1
     }
   ]

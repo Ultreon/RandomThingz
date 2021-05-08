@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:zinc_block"
+      "item": "randomthingz:zinc_block"
     }
   ],
   "result": {
-    "item": "qforgemod:zinc_ingot",
+    "item": "randomthingz:zinc_ingot",
     "count": 9
   }
 }

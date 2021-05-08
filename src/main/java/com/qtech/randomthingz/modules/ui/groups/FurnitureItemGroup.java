@@ -1,0 +1,24 @@
+package com.qtech.randomthingz.modules.ui.groups;
+
+import com.qtech.randomthingz.block.common.ModBlocks;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * Food item group.
+ *
+ * @author Qboi123
+ */
+public class FurnitureItemGroup extends ItemGroup {
+    public static final FurnitureItemGroup instance = new FurnitureItemGroup(ItemGroup.GROUPS.length, "randomthingz_furniture");
+
+    public FurnitureItemGroup(int index, String label) {
+        super(index, label);
+    }
+
+    @Override
+    public @NotNull ItemStack createIcon() {
+        return new ItemStack(ModBlocks.GAME_PC.get());
+    }
+}

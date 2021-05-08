@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:malachite_block"
+      "item": "randomthingz:malachite_block"
     }
   ],
   "result": {
-    "item": "qforgemod:malachite",
+    "item": "randomthingz:malachite",
     "count": 9
   }
 }

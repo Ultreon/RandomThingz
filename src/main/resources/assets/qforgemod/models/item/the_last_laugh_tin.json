@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "qforgemod:items/the_last_laugh_tin"
+		"layer0": "randomthingz:items/the_last_laugh_tin"
 	},
 	"gui_light": "front",
 	"display": {

@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 100,
   "ingredient": {
     "item": "minecraft:wheat"
   },
   "results": [
     {
-      "item": "qforgemod:flour",
+      "item": "randomthingz:flour",
       "count": 2
     }
   ]

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:infinity_ore"
+          "name": "randomthingz:infinity_ore"
         }
       ],
       "conditions": [

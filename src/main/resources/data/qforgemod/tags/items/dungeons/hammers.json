@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:stormlander",
-    "qforgemod:great_hammer",
-    "qforgemod:hammer_of_gravity"
+    "randomthingz:stormlander",
+    "randomthingz:great_hammer",
+    "randomthingz:hammer_of_gravity"
   ]
 }

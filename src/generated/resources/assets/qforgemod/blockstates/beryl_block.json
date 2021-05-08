@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/beryl_block"
+      "model": "randomthingz:block/beryl_block"
     }
   }
 }

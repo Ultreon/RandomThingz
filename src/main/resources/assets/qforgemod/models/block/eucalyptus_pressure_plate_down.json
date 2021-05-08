@@ -1,6 +1,6 @@
 {
     "parent": "block/pressure_plate_down",
     "textures": {
-        "texture": "qforgemod:blocks/eucalyptus_planks"
+        "texture": "randomthingz:blocks/eucalyptus_planks"
     }
 }

@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "qforgemod:amethyst_ore"
+              "name": "randomthingz:amethyst_ore"
             },
             {
               "type": "minecraft:item",
@@ -38,7 +38,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "qforgemod:amethyst"
+              "name": "randomthingz:amethyst"
             }
           ]
         }

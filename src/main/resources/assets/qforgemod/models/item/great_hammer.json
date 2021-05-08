@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "qforgemod:items/great_hammer",
-		"particle": "qforgemod:items/great_hammer"
+		"0": "randomthingz:items/great_hammer",
+		"particle": "randomthingz:items/great_hammer"
 	},
 	"elements": [
 		{

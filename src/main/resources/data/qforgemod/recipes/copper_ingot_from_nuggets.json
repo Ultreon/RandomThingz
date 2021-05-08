@@ -7,10 +7,10 @@
   ],
   "key": {
     "c": {
-      "item": "qforgemod:copper_nugget"
+      "item": "randomthingz:copper_nugget"
     }
   },
   "result": {
-    "item": "qforgemod:copper_ingot"
+    "item": "randomthingz:copper_ingot"
   }
 }

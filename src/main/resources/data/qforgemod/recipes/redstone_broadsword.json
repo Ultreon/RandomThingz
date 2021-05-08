@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:redstone_alloy_ingot"
+         "item": "randomthingz:redstone_alloy_ingot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:redstone_broadsword"
+      "item": "randomthingz:redstone_broadsword"
    }
 }

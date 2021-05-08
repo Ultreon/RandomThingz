@@ -1,6 +1,6 @@
 {
-  "parent": "qforgemod:block/drying_rack",
+  "parent": "randomthingz:block/drying_rack",
   "textures": {
-    "wood": "qforgemod:blocks/cherry_planks"
+    "wood": "randomthingz:blocks/cherry_planks"
   }
 }

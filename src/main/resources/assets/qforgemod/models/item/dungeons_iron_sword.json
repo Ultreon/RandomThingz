@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/dungeons_iron_sword"
+    "layer0": "randomthingz:items/dungeons_iron_sword"
   }
 }

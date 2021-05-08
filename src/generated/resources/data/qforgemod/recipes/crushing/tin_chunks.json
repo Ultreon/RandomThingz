@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/tin"
   },
   "results": [
     {
-      "item": "qforgemod:tin_chunks",
+      "item": "randomthingz:tin_chunks",
       "count": 2
     },
     {

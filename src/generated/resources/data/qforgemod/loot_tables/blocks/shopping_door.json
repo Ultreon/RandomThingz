@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:shopping_door"
+          "name": "randomthingz:shopping_door"
         }
       ],
       "conditions": [

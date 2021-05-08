@@ -1,18 +1,18 @@
 {
   "replace": false,
   "values": [
-    "qforgemod:infinity_helmet",
-    "qforgemod:infinity_chestplate",
-    "qforgemod:infinity_leggings",
-    "qforgemod:infinity_boots",
-    "qforgemod:infinity_sword",
-    "qforgemod:infinity_axe",
-    "qforgemod:infinity_pickaxe",
-    "qforgemod:infinity_shovel",
-    "qforgemod:infinity_hoe",
-    "qforgemod:infinity_block",
-    "qforgemod:infinity_ore",
-    "qforgemod:infinity_ingot",
-    "qforgemod:unstable_infinity_ingot"
+    "randomthingz:infinity_helmet",
+    "randomthingz:infinity_chestplate",
+    "randomthingz:infinity_leggings",
+    "randomthingz:infinity_boots",
+    "randomthingz:infinity_sword",
+    "randomthingz:infinity_axe",
+    "randomthingz:infinity_pickaxe",
+    "randomthingz:infinity_shovel",
+    "randomthingz:infinity_hoe",
+    "randomthingz:infinity_block",
+    "randomthingz:infinity_ore",
+    "randomthingz:infinity_ingot",
+    "randomthingz:unstable_infinity_ingot"
   ]
 }

@@ -7,11 +7,11 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:tanzanite"
+      "item": "randomthingz:tanzanite"
     }
   },
   "result": {
-    "item": "qforgemod:tanzanite_block",
+    "item": "randomthingz:tanzanite_block",
     "count": 1
   }
 }

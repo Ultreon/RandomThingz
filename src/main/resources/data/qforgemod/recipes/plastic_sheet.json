@@ -6,10 +6,10 @@
   ],
   "key": {
     "#": {
-      "item": "qforgemod:plastic_pellets"
+      "item": "randomthingz:plastic_pellets"
     }
   },
   "result": {
-    "item": "qforgemod:plastic_sheet"
+    "item": "randomthingz:plastic_sheet"
   }
 }

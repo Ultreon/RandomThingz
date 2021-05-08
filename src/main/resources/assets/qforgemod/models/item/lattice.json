@@ -2,8 +2,8 @@
 	"__comment": "Designed by Stohun with Cubik Studio - https://cubik.studio",
 	"parent": "block/block",
 	"textures": {
-		"particle": "qforgemod:block/lattice",
-		"texture": "qforgemod:block/lattice"
+		"particle": "randomthingz:block/lattice",
+		"texture": "randomthingz:block/lattice"
 	},
 	"elements": [
 		{

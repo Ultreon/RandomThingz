@@ -1,7 +1,7 @@
 [
 	{
-		"modid": "qforgemod",
-		"name": "QForgeMod",
+		"modid": "randomthingz",
+		"name": "Random Thingz",
 		"description": "‘The’ mod for all your needs!",
 		"version": "${version}",
 		"mcversion": "${mc_version}",

@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:redstone_alloy_block"
+          "name": "randomthingz:redstone_alloy_block"
         }
       ],
       "conditions": [

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:blasting/nickel_ingot"
+      "randomthingz:blasting/nickel_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:blasting/nickel_ingot"
+        "recipe": "randomthingz:blasting/nickel_ingot"
       }
     }
   },

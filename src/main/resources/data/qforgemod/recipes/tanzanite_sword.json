@@ -7,14 +7,14 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:tanzanite"
+      "item": "randomthingz:tanzanite"
     },
     "/": {
       "tag": "forge:sticks"
     }
   },
   "result": {
-    "item": "qforgemod:tanzanite_sword",
+    "item": "randomthingz:tanzanite_sword",
     "count": 1
   }
 }

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "qforgemod:upgrade_case"
+      "item": "randomthingz:upgrade_case"
     },
     {
       "item": "minecraft:glowstone"
@@ -15,6 +15,6 @@
     }
   ],
   "result": {
-    "item": "qforgemod:energy_efficiency_upgrade"
+    "item": "randomthingz:energy_efficiency_upgrade"
   }
 }

@@ -10,19 +10,19 @@
       "tag": "forge:ingots/aluminum"
     },
     "B": {
-      "item": "qforgemod:battery"
+      "item": "randomthingz:battery"
     },
     "/": {
-      "item": "qforgemod:wire"
+      "item": "randomthingz:wire"
     },
     "X": {
-      "item": "qforgemod:alloy_machine_frame"
+      "item": "randomthingz:alloy_machine_frame"
     },
     "L": {
       "tag": "forge:ingots/lead"
     }
   },
   "result": {
-    "item": "qforgemod:battery_box"
+    "item": "randomthingz:battery_box"
   }
 }

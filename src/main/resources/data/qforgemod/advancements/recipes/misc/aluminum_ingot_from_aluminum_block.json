@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:aluminum_ingot_from_aluminum_block"
+      "randomthingz:aluminum_ingot_from_aluminum_block"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:aluminum_block"
+            "item": "randomthingz:aluminum_block"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:aluminum_ingot_from_aluminum_block"
+        "recipe": "randomthingz:aluminum_ingot_from_aluminum_block"
       }
     }
   },

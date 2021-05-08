@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:baked_apple_from_campfire_cooking"
+      "randomthingz:baked_apple_from_campfire_cooking"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:baked_apple_from_campfire_cooking"
+        "recipe": "randomthingz:baked_apple_from_campfire_cooking"
       }
     }
   },

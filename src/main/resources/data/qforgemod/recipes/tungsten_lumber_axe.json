@@ -7,13 +7,13 @@
    ],
    "key": {
       "X": {
-         "item": "qforgemod:tungsten_ingot"
+         "item": "randomthingz:tungsten_ingot"
       },
       "/": {
          "tag": "forge:sticks"
       }
    },
    "result": {
-      "item": "qforgemod:tungsten_lumber_axe"
+      "item": "randomthingz:tungsten_lumber_axe"
    }
 }

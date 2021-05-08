@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/aluminum_steel"
+    "tag": "randomthingz:chunks/aluminum_steel"
   },
   "results": [
     {
-      "item": "qforgemod:aluminum_steel_dust"
+      "item": "randomthingz:aluminum_steel_dust"
     },
     {
-      "item": "qforgemod:aluminum_steel_dust",
+      "item": "randomthingz:aluminum_steel_dust",
       "chance": 0.1
     }
   ]

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:cooked_tomahawk_from_campfire_cooking"
+      "randomthingz:cooked_tomahawk_from_campfire_cooking"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:tomahawk"
+            "item": "randomthingz:tomahawk"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:cooked_tomahawk_from_campfire_cooking"
+        "recipe": "randomthingz:cooked_tomahawk_from_campfire_cooking"
       }
     }
   },

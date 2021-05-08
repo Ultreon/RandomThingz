@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/infinity"
   },
   "results": [
     {
-      "item": "qforgemod:infinity_chunks",
+      "item": "randomthingz:infinity_chunks",
       "count": 2
     },
     {

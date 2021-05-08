@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:tungsten_block"
+          "name": "randomthingz:tungsten_block"
         }
       ],
       "conditions": [

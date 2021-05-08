@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/compressed_iron_hammer"
+    "layer0": "randomthingz:items/compressed_iron_hammer"
   }
 }

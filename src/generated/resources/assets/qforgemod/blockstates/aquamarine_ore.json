@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/aquamarine_ore"
+      "model": "randomthingz:block/aquamarine_ore"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "qforgemod:items/platinum_axe"
+    "layer0": "randomthingz:items/platinum_axe"
   }
 }

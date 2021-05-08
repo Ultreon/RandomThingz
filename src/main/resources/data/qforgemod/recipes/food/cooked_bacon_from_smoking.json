@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smoking",
   "ingredient": {
-    "item": "qforgemod:bacon"
+    "item": "randomthingz:bacon"
   },
-  "result": "qforgemod:cooked_bacon",
+  "result": "randomthingz:cooked_bacon",
   "experience": 0.35,
   "cookingtime": 100
 }

@@ -13,7 +13,7 @@
       "tag": "forge:ingots/copper"
     },
     "X": {
-      "item": "qforgemod:stone_machine_frame"
+      "item": "randomthingz:stone_machine_frame"
     },
     "O": {
       "tag": "forge:cobblestone"
@@ -23,6 +23,6 @@
     }
   },
   "result": {
-    "item": "qforgemod:coal_generator"
+    "item": "randomthingz:coal_generator"
   }
 }

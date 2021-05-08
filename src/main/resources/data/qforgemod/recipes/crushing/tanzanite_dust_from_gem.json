@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
-    "item": "qforgemod:tanzanite"
+    "item": "randomthingz:tanzanite"
   },
   "results": [
     {
-      "item": "qforgemod:tanzanite_dust"
+      "item": "randomthingz:tanzanite_dust"
     }
   ]
 }

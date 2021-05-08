@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "qforgemod:amber_ore"
+              "name": "randomthingz:amber_ore"
             },
             {
               "type": "minecraft:item",
@@ -38,7 +38,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "qforgemod:amber"
+              "name": "randomthingz:amber"
             }
           ]
         }

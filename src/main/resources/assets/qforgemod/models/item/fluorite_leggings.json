@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "qforgemod:items/fluorite_leggings"
+    "layer0": "randomthingz:items/fluorite_leggings"
   }
 }

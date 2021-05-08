@@ -56,7 +56,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "qforgemod:clear_shard"
+              "name": "randomthingz:clear_shard"
             }
           ]
         }

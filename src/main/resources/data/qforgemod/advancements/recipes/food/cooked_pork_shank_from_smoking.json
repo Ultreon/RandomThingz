@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:cooked_pork_shank_from_smoking"
+      "randomthingz:cooked_pork_shank_from_smoking"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:pork_shank"
+            "item": "randomthingz:pork_shank"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:cooked_pork_shank_from_smoking"
+        "recipe": "randomthingz:cooked_pork_shank_from_smoking"
       }
     }
   },

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:alloy_smelter"
+      "randomthingz:alloy_smelter"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "qforgemod:alloy_machine_frame"
+            "item": "randomthingz:alloy_machine_frame"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:alloy_smelter"
+        "recipe": "randomthingz:alloy_smelter"
       }
     }
   },

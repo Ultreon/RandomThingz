@@ -1,12 +1,12 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 400,
   "ingredient": {
     "tag": "forge:ores/nickel"
   },
   "results": [
     {
-      "item": "qforgemod:nickel_chunks",
+      "item": "randomthingz:nickel_chunks",
       "count": 2
     },
     {

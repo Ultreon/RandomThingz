@@ -10,10 +10,10 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "qforgemod:invar_ingot"
+      "item": "randomthingz:invar_ingot"
     }
   },
   "result": {
-    "item": "qforgemod:invar_battleaxe"
+    "item": "randomthingz:invar_battleaxe"
   }
 }

@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:dusts/electrum"
   },
-  "result": "qforgemod:electrum_ingot",
+  "result": "randomthingz:electrum_ingot",
   "experience": 1.0,
   "cookingtime": 100
 }

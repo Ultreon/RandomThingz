@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "qforgemod:spruce_drying_rack"
+          "name": "randomthingz:spruce_drying_rack"
         }
       ],
       "conditions": [

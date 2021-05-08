@@ -1,15 +1,15 @@
 {
-  "type": "qforgemod:crushing",
+  "type": "randomthingz:crushing",
   "process_time": 300,
   "ingredient": {
-    "tag": "qforgemod:chunks/nickel"
+    "tag": "randomthingz:chunks/nickel"
   },
   "results": [
     {
-      "item": "qforgemod:nickel_dust"
+      "item": "randomthingz:nickel_dust"
     },
     {
-      "item": "qforgemod:nickel_dust",
+      "item": "randomthingz:nickel_dust",
       "chance": 0.1
     }
   ]

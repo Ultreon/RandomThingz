@@ -7,14 +7,14 @@
   ],
   "key": {
     "X": {
-      "item": "qforgemod:aquamarine"
+      "item": "randomthingz:aquamarine"
     },
     "/": {
       "tag": "forge:sticks"
     }
   },
   "result": {
-    "item": "qforgemod:aquamarine_sword",
+    "item": "randomthingz:aquamarine_sword",
     "count": 1
   }
 }

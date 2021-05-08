@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "qforgemod:block/bronze_block"
+      "model": "randomthingz:block/bronze_block"
     }
   }
 }

@@ -1,5 +1,5 @@
 {
-  "type": "qforgemod:alloy_smelting",
+  "type": "randomthingz:alloy_smelting",
   "process_time": 500,
   "ingredients": [
     {
@@ -8,7 +8,7 @@
           "tag": "forge:ingots/copper"
         },
         {
-          "tag": "qforgemod:chunks/copper"
+          "tag": "randomthingz:chunks/copper"
         },
         {
           "tag": "forge:dusts/copper"
@@ -22,7 +22,7 @@
           "tag": "forge:ingots/silver"
         },
         {
-          "tag": "qforgemod:chunks/silver"
+          "tag": "randomthingz:chunks/silver"
         },
         {
           "tag": "forge:dusts/silver"
@@ -38,7 +38,7 @@
     }
   ],
   "result": {
-    "item": "qforgemod:signalum_ingot",
+    "item": "randomthingz:signalum_ingot",
     "count": 4
   }
 }

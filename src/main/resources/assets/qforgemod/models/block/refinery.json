@@ -3,8 +3,8 @@
 	"parent": "block/cube",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "qforgemod:blocks/refinery/refinery",
-		"particle": "qforgemod:blocks/refinery/refinery"
+		"0": "randomthingz:blocks/refinery/refinery",
+		"particle": "randomthingz:blocks/refinery/refinery"
 	},
 	"elements": [
 		{

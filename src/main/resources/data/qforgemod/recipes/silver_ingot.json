@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "qforgemod:silver_ore"
+    "item": "randomthingz:silver_ore"
   },
-  "result": "qforgemod:silver_ingot",
+  "result": "randomthingz:silver_ingot",
   "experience": 0.7,
   "cookingtime": 200
 }

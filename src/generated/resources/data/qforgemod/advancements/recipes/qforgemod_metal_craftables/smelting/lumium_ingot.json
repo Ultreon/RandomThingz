@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "qforgemod:smelting/lumium_ingot"
+      "randomthingz:smelting/lumium_ingot"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "qforgemod:smelting/lumium_ingot"
+        "recipe": "randomthingz:smelting/lumium_ingot"
       }
     }
   },
