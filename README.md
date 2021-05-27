@@ -6,7 +6,7 @@
 The GitHub pages are here: https://qtechcommunity.github.io/QForgeMod/.
 
 ## Running from source
-1) Clone the [**QModLib**](https://randomthingzQModLib) repository.  
+1) Clone the [**QModLib**](https://github.com/Qboi123/QModLib) repository.  
 2) Change the variable `local_maven` in the `gradle.properties` file of your QModLib cloned repo to an empty folder, or a local maven repo.
 3) Execute gradle command `uploadJars`, or the command `build :jar`. *This will upload it to the local maven repo.*
 4) Clone the [**Random Thingz**](https://github.com/QTechCommunity/RandomThingz) repository.
