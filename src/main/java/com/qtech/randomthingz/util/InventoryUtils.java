@@ -1,7 +1,7 @@
 package com.qtech.randomthingz.util;
 
 import com.qtech.randomthingz.block.machines.refinery.RefineryTileEntity;
-import com.qtech.randomthingz.item.fluid.CanisterItem;
+import com.qtech.randomthingz.item.CanisterItem;
 import lombok.experimental.UtilityClass;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.IInventory;

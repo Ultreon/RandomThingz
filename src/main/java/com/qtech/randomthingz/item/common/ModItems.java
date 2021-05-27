@@ -3,21 +3,7 @@ package com.qtech.randomthingz.item.common;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.block.fluid.common.ModFluids;
-import com.qtech.randomthingz.item.CraftingItems;
-import com.qtech.randomthingz.item.EucalyptusLeafItem;
-import com.qtech.randomthingz.item.LegendaryEnderPearlItem;
-import com.qtech.randomthingz.item.UnstableInfinityIngot;
-import com.qtech.randomthingz.item.advanced.AdvancedBowItem;
-import com.qtech.randomthingz.item.debug.DebugItem;
-import com.qtech.randomthingz.item.energy.BatteryItem;
-import com.qtech.randomthingz.item.energy.WrenchItem;
-import com.qtech.randomthingz.item.fluid.CanisterItem;
-import com.qtech.randomthingz.item.fluid.EmptyCanisterItem;
-import com.qtech.randomthingz.item.fluid.HandPumpItem;
-import com.qtech.randomthingz.item.fluid.NoPlaceBucketItem;
-import com.qtech.randomthingz.item.specials.KillSwitchItem;
-import com.qtech.randomthingz.item.specials.KnifeItem;
-import com.qtech.randomthingz.item.specials.MagnetItem;
+import com.qtech.randomthingz.item.*;
 import com.qtech.randomthingz.item.tools.*;
 import com.qtech.randomthingz.item.tools.trait.AbstractTrait;
 import com.qtech.randomthingz.item.type.IngotOrDustItem;
@@ -74,7 +60,7 @@ public final class ModItems {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Overpowered     //
     /////////////////////////
-    public static final ItemRegistryObject<KillSwitchItem> KILL_SWITCH = register("kill_switch", KillSwitchItem::new);
+    public static final ItemRegistryObject<Item> KILL_SWITCH = register("kill_switch", () -> new Item(new Item.Properties()));
     public static final ItemRegistryObject<BanHammerItem> BAN_HAMMER = register("ban_hammer", BanHammerItem::new);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,29 +123,6 @@ public final class ModItems {
     public static final ItemRegistryObject<AdvancedBowItem> BLAZE_BOW = register("blaze_bow", () -> new AdvancedBowItem(new Item.Properties().group(ItemGroup.COMBAT), 6.25f, 1.0f, 6, 1, true));
     public static final ItemRegistryObject<AdvancedBowItem> ICE_BOW = register("ice_bow", () -> new AdvancedBowItem(new Item.Properties().group(ItemGroup.COMBAT), 2f, 1.0f, 8, 2));
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //     Ingredients     //
-    /////////////////////////
-
-    // Glass shards
-//    public static final ItemRegistryObject<IngredientItem> CLEAR_SHARD = register("clear_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> BLACK_SHARD = register("black_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> BLUE_SHARD = register("blue_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> BROWN_SHARD = register("brown_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> CYAN_SHARD = register("cyan_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> GRAY_SHARD = register("gray_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> GREEN_SHARD = register("green_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> LIGHT_BLUE_SHARD = register("light_blue_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> LIGHT_GRAY_SHARD = register("light_gray_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> LIME_SHARD = register("lime_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> MAGENTA_SHARD = register("magenta_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> ORANGE_SHARD = register("orange_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> PINK_SHARD = register("pink_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> PURPLE_SHARD = register("purple_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> RED_SHARD = register("red_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> WHITE_SHARD = register("white_shard", IngredientItem::new);
-//    public static final ItemRegistryObject<IngredientItem> YELLOW_SHARD = register("yellow_shard", IngredientItem::new);
-
     // Rods
     public static final ItemRegistryObject<IngredientItem> URANIUM_ROD = register("uranium_rod", IngredientItem::new);
 
@@ -167,19 +130,9 @@ public final class ModItems {
     //     Ingots or Dusts     //
     /////////////////////////////
 
-    // Metals - Tungsten Steel Level
-//    public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_INGOT = register("tungsten_ingot", IngotOrDustItem::new);
-//    public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_NUGGET = register("tungsten_nugget", IngotOrDustItem::new);
-//    public static final ItemRegistryObject<IngotOrDustItem> TUNGSTEN_DUST = register("tungsten_dust", IngotOrDustItem::new);
-    //    // Metals - Ultrinium Level
-//    public static final ItemRegistryObject<IngotOrDustItem> ULTRINIUM_INGOT = register("ultrinium_ingot", IngotOrDustItem::new);
-//    public static final ItemRegistryObject<IngotOrDustItem> ULTRINIUM_NUGGET = register("ultrinium_nugget", IngotOrDustItem::new);
-//    public static final ItemRegistryObject<IngotOrDustItem> ULTRINIUM_DUST = register("ultrinium_dust", IngotOrDustItem::new);
-    // Metals - Infinity Level
+    // Unstable
     public static final ItemRegistryObject<UnstableInfinityIngot> UNSTABLE_INFINITY_INGOT = register("unstable_infinity_ingot", UnstableInfinityIngot::new);
-    //    public static final ItemRegistryObject<IngotOrDustItem> INFINITY_INGOT = register("infinity_ingot", IngotOrDustItem::new);
-//    public static final ItemRegistryObject<IngotOrDustItem> INFINITY_NUGGET = register("infinity_nugget", IngotOrDustItem::new);
-//    public static final ItemRegistryObject<IngotOrDustItem> INFINITY_DUST = register("infinity_dust", IngotOrDustItem::new);
+
     // Dusts
     public static final ItemRegistryObject<IngotOrDustItem> RUBY_DUST = register("ruby_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> AMETHYST_DUST = register("amethyst_dust", IngotOrDustItem::new);
@@ -191,9 +144,8 @@ public final class ModItems {
     public static final ItemRegistryObject<IngotOrDustItem> BERYL_DUST = register("beryl_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> DIAMOND_DUST = register("diamond_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> TANZANITE_DUST = register("tanzanite_dust", IngotOrDustItem::new);
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //     Gems     //
-    //////////////////
+
+    // Gems
     public static final ItemRegistryObject<Item> RUBY = register("ruby", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
     public static final ItemRegistryObject<Item> AMETHYST = register("amethyst", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
     public static final ItemRegistryObject<Item> AQUAMARINE = register("aquamarine", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
@@ -204,9 +156,8 @@ public final class ModItems {
     public static final ItemRegistryObject<Item> PERIDOT = register("peridot", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
     public static final ItemRegistryObject<Item> BERYL = register("beryl", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
     public static final ItemRegistryObject<Item> TANZANITE = register("tanzanite", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //     Icons     //
-    ///////////////////
+
+    // Icons
     public static final ItemRegistryObject<Item> DUNGEONS = register("dungeons", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 0, 0f, new Item.Properties().setNoRepair().maxStackSize(1)));
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -3,7 +3,7 @@ package com.qtech.randomthingz.compat.jei;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qtech.randomthingz.block.common.ModBlocks;
 import com.qtech.randomthingz.block.machines.arcaneescalator.ArcaneEscalatorScreen;
-import com.qtech.randomthingz.crafting.recipe.ArcaneEscalatingRecipe;
+import com.qtech.randomthingz.item.crafting.ArcaneEscalatingRecipe;
 import com.qtech.randomthingz.util.Constants;
 import com.qtech.randomthingz.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;

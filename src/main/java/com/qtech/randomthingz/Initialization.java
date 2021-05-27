@@ -8,7 +8,7 @@ import com.qtech.randomthingz.commons.interfaces.IHasRenderType;
 import com.qtech.randomthingz.entity.*;
 import com.qtech.randomthingz.entity.baby.*;
 import com.qtech.randomthingz.entity.common.ModEntities;
-import com.qtech.randomthingz.item.advanced.AdvancedBowItem;
+import com.qtech.randomthingz.item.AdvancedBowItem;
 import com.qtech.randomthingz.item.common.ItemMaterial;
 import com.qtech.randomthingz.item.common.ModItems;
 import com.qtech.randomthingz.item.tools.Tools;

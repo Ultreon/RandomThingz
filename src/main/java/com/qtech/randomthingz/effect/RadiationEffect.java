@@ -1,7 +1,7 @@
 package com.qtech.randomthingz.effect;
 
 import com.qtech.randomthingz.block.AtomicTNTBlock;
-import com.qtech.randomthingz.commons.damagesource.ModDamageSources;
+import com.qtech.randomthingz.entity.damagesource.ModDamageSources;
 import com.qtech.randomthingz.item.tools.Tools;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
@@ -25,11 +25,12 @@ public class RadiationEffect extends Effect {
 
     @Override
     public boolean isReady(int duration, int amplifier) {
-        int i = 1200 >> amplifier;
-        if (i > 0) {
-            return duration % i == 0;
-        } else {
-            return true;
-        }
+        int i;
+
+        if (duration == 0) i = 0;
+        else i = (1800 * amplifier) / duration;
+
+        if (i > 0) return duration % i == 0;
+        else return true;
     }
 }

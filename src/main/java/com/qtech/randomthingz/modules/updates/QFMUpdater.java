@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class QFMUpdater extends AbstractUpdater<RtVersion> {
-    private static final String UPDATE_URL = "https://raw.githubusercontent.com/Qboi123/RandomThingz/master/update.json";
+    private static final String UPDATE_URL = "https://raw.githubusercontent.com/QTechCommunity/RandomThingz/master/update.json";
     private static final QFMUpdater INSTANCE = new QFMUpdater();
 
     @SuppressWarnings({"unused", "SameParameterValue"})

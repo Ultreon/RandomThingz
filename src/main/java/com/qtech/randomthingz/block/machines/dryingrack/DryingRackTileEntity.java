@@ -1,8 +1,8 @@
 package com.qtech.randomthingz.block.machines.dryingrack;
 
 import com.qsoftware.modlib.silentlib.util.PlayerUtils;
-import com.qtech.randomthingz.crafting.recipe.DryingRecipe;
-import com.qtech.randomthingz.crafting.recipe.common.ModRecipes;
+import com.qtech.randomthingz.item.crafting.DryingRecipe;
+import com.qtech.randomthingz.item.crafting.common.ModRecipes;
 import com.qtech.randomthingz.modules.tiles.ModMachineTileEntities;
 import com.qtech.randomthingz.util.ParticleUtils;
 import net.minecraft.block.BlockState;

@@ -4,7 +4,7 @@ import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.client.keybinds.KeyBindingList;
 import com.qtech.randomthingz.commons.Module;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -72,8 +72,8 @@ public class ActionMenuModule extends Module {
     }
 
     @Override
-    public ModuleSecurity getSecurity() {
-        return ModuleSecurity.SAFE;
+    public ModuleSafety getSafety() {
+        return ModuleSafety.SAFE;
     }
 
     public static class ClientSide extends Module.ClientSide {

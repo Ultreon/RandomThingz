@@ -5,7 +5,7 @@ import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.commons.CoreRegisterWrapperModule;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
@@ -30,8 +30,8 @@ public class BlocksModule extends CoreRegisterWrapperModule<Block> {
     }
 
     @Override
-    public ModuleSecurity getSecurity() {
-        return ModuleSecurity.SAFE;
+    public ModuleSafety getSafety() {
+        return ModuleSafety.SAFE;
     }
 
     @Override

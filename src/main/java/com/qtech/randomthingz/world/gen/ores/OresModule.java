@@ -3,7 +3,7 @@ package com.qtech.randomthingz.world.gen.ores;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.commons.CoreModule;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import mcp.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -15,8 +15,8 @@ public class OresModule extends CoreModule {
     private final ModOreGen oreGen = ModOreGen.getInstance();
 
     @Override
-    public ModuleSecurity getSecurity() {
-        return ModuleSecurity.SAFE;
+    public ModuleSafety getSafety() {
+        return ModuleSafety.SAFE;
     }
 
     @Override

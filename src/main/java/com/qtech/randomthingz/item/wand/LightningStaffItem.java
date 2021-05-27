@@ -1,6 +1,6 @@
 package com.qtech.randomthingz.item.wand;
 
-import com.qtech.randomthingz.item.base.WandItem;
+import com.qtech.randomthingz.item.WandItem;
 import com.qtech.randomthingz.modules.ui.ModItemGroups;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

@@ -3,7 +3,7 @@ package com.qtech.randomthingz.modules.updates;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.commons.Module;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import com.qtech.randomthingz.commons.Ticker;
 import com.qtech.randomthingz.commons.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
@@ -56,8 +56,8 @@ public class UpdatesModule extends Module {
     }
 
     @Override
-    public ModuleSecurity getSecurity() {
-        return ModuleSecurity.SAFE;
+    public ModuleSafety getSafety() {
+        return ModuleSafety.SAFE;
     }
 
     public AbstractUpdater<?> getUpdater(String modId) {

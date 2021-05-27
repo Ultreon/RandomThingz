@@ -22,6 +22,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.FolderName;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -30,6 +31,7 @@ import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -58,7 +60,6 @@ import java.util.stream.Collectors;
  * @see Mod
  * @see Mod.EventBusSubscriber
  */
-@SuppressWarnings("unused")
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 @Mod(RandomThingz.MOD_ID)
@@ -176,8 +177,8 @@ public final class RandomThingz {
      * @see Mod
      * @see RandomThingz
      */
+    @SuppressWarnings("deprecation")
     public RandomThingz() {
-
         // Constants.
         RandomThingz.instance = this;
         RandomThingz.proxy = DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);
@@ -234,12 +235,17 @@ public final class RandomThingz {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> RandomThingz.init.clientStart());
     }
 
+    @SubscribeEvent
+    public void onMainMenuInit(GuiScreenEvent.InitGuiEvent.Post event) {
+
+    }
+
     public static File getDataFile() {
-        return Initialization.getServer().func_240776_a_(new FolderName("qcore-data")).toFile();
+        return server.getSaveSubfolder(new FolderName("randomthingz-data")).toFile();
     }
 
     public static Path getDataPath() {
-        return Initialization.getServer().func_240776_a_(new FolderName("qcore-data"));
+        return server.getSaveSubfolder(new FolderName("randomthingz-data"));
     }
 
     /**
@@ -319,6 +325,12 @@ public final class RandomThingz {
         // Server field.
         LOGGER.info("Minecraft Server is starting, setting server field to current server...");
         server = event.getServer();
+    }
+
+    @SubscribeEvent
+    public void onServerStarted(FMLServerStartedEvent event) {
+        LOGGER.debug(getDataFile().getAbsolutePath());
+        LOGGER.debug(getDataPath().toAbsolutePath().toString());
     }
 
     /**

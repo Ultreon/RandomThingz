@@ -1,6 +1,6 @@
 package com.qtech.randomthingz.block.furniture;
 
-import com.qtech.randomthingz.item.type.FaceableBlock;
+import com.qtech.randomthingz.block.FaceableBlock;
 import com.qtech.randomthingz.modules.tiles.ModTileEntities;
 import com.qtech.randomthingz.tileentity.CrateTileEntity;
 import net.minecraft.block.Block;

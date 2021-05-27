@@ -5,6 +5,7 @@ import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.api.IMachineUpgrade;
 import com.qtech.randomthingz.commons.interfaces.INamed;
 import com.qtech.randomthingz.commons.interfaces.Translatable;
+import com.qtech.randomthingz.item.MachineUpgradeItem;
 import com.qtech.randomthingz.registration.Registration;
 import com.qtech.randomthingz.util.Constants;
 import net.minecraft.item.Item;

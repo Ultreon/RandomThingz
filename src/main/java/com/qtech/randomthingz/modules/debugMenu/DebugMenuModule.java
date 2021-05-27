@@ -3,7 +3,7 @@ package com.qtech.randomthingz.modules.debugMenu;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.commons.Module;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import com.qtech.randomthingz.modules.actionmenu.MainActionMenu;
 import com.qtech.randomthingz.modules.actionmenu.MenuHandler;
 import net.minecraft.util.text.StringTextComponent;
@@ -22,8 +22,8 @@ public class DebugMenuModule extends Module {
     }
 
     @Override
-    public ModuleSecurity getSecurity() {
-        return ModuleSecurity.SAFE;
+    public ModuleSafety getSafety() {
+        return ModuleSafety.SAFE;
     }
 
     @Override

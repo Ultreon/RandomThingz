@@ -6,7 +6,7 @@ import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.commons.Module;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import com.qtech.randomthingz.modules.client.modules.render.variant.*;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.Entity;
@@ -55,8 +55,8 @@ public class MobVariantsModule extends Module {
     }
 
     @Override
-    public ModuleSecurity getSecurity() {
-        return ModuleSecurity.SAFE;
+    public ModuleSafety getSafety() {
+        return ModuleSafety.SAFE;
     }
 
     @Override

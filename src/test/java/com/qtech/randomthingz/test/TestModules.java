@@ -9,4 +9,7 @@ public class TestModules {
     static {
         ModuleManager.getInstance().register(DEBUGGING);
     }
+
+    public static void initialize() {
+    }
 }

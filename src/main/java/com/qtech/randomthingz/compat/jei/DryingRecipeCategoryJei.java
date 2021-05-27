@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.qsoftware.modlib.silentlib.util.TextRenderUtils;
 import com.qtech.randomthingz.block.common.ModBlocks;
 import com.qtech.randomthingz.block.machines.compressor.CompressorScreen;
-import com.qtech.randomthingz.crafting.recipe.DryingRecipe;
+import com.qtech.randomthingz.item.crafting.DryingRecipe;
 import com.qtech.randomthingz.util.Constants;
 import com.qtech.randomthingz.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;

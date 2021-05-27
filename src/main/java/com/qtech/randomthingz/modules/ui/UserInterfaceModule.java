@@ -2,7 +2,7 @@ package com.qtech.randomthingz.modules.ui;
 
 import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.commons.CoreModule;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import com.qtech.randomthingz.registration.Registration;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.fml.RegistryObject;
@@ -13,8 +13,8 @@ import java.util.Collection;
 
 public class UserInterfaceModule extends CoreModule {
     @Override
-    public ModuleSecurity getSecurity() {
-        return ModuleSecurity.SAFE;
+    public ModuleSafety getSafety() {
+        return ModuleSafety.SAFE;
     }
 
     @Override

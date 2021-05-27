@@ -1,6 +1,5 @@
 package com.qtech.randomthingz.block;
 
-import com.qtech.randomthingz.item.type.FaceableBlock;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

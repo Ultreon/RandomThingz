@@ -3,7 +3,7 @@ package com.qtech.randomthingz.world.gen;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.commons.CoreRegisterModule;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import com.qtech.randomthingz.world.biome.common.ModBiomes;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.world.biome.Biome;
@@ -25,8 +25,8 @@ public class WorldGenerationModule extends CoreRegisterModule<Biome> {
     public static final DeferredRegister<Biome> BIOMES = create(ForgeRegistries.BIOMES);
 
     @Override
-    public ModuleSecurity getSecurity() {
-        return ModuleSecurity.SAFE;
+    public ModuleSafety getSafety() {
+        return ModuleSafety.SAFE;
     }
 
     @Override

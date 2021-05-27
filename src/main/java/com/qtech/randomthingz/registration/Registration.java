@@ -6,7 +6,7 @@ import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.advancement.criterion.common.ModCriteriaTriggers;
 import com.qtech.randomthingz.block.common.ModBlocks;
 import com.qtech.randomthingz.block.fluid.common.ModFluids;
-import com.qtech.randomthingz.crafting.recipe.common.ModRecipes;
+import com.qtech.randomthingz.item.crafting.common.ModRecipes;
 import com.qtech.randomthingz.effect.common.ModEffects;
 import com.qtech.randomthingz.item.common.ModItems;
 import com.qtech.randomthingz.item.tools.ModTraits;

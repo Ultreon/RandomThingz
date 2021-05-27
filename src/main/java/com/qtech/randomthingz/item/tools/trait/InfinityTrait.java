@@ -1,6 +1,6 @@
 package com.qtech.randomthingz.item.tools.trait;
 
-import com.qtech.randomthingz.commons.damagesource.DamageSourceInfinitySword;
+import com.qtech.randomthingz.entity.damagesource.DamageSourceInfinitySword;
 import com.qtech.randomthingz.item.tools.ToolType;
 import com.qtech.randomthingz.item.tools.Tools;
 import com.qtech.randomthingz.modules.ui.ModStats;

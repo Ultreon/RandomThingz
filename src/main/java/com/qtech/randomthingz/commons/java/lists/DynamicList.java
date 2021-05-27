@@ -1,11 +1,10 @@
 package com.qtech.randomthingz.commons.java.lists;
 
+import com.qtech.randomthingz.commons.exceptions.OutOfRangeException;
 import com.qtech.randomthingz.commons.exceptions.ValueExistsException;
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Range;
-import org.apache.commons.math3.exception.OutOfRangeException;
 
-import java.util.Comparator;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Function;
 
@@ -16,7 +15,7 @@ import java.util.function.Function;
  * @param <T> the type to use for the partition value.
  */
 @SuppressWarnings("unused")
-public class DynamicList<T> {
+public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
     CopyOnWriteArrayList<Double> sizes = new CopyOnWriteArrayList<>();
     CopyOnWriteArrayList<T> values = new CopyOnWriteArrayList<>();
 
@@ -191,17 +190,18 @@ public class DynamicList<T> {
      *
      * @return the ranges of all partitions.
      */
+    @SuppressWarnings("unchecked")
     public Range<Double>[] getRanges() {
-        Range<Double>[] ranges = new Range[]{};
+        List<Range<Double>> ranges = new ArrayList<>();
         double currentSize = 0;
         for (Double size : sizes) {
             double newSize = currentSize + size;
 
-            ranges = ArrayUtils.add(ranges, Range.between(currentSize, newSize, Comparator.naturalOrder()));
+            ranges.add(Range.between(currentSize, newSize, Comparator.naturalOrder()));
             currentSize = newSize;
         }
 
-        return ranges;
+        return (Range<Double>[]) ranges.toArray();
     }
 
     public synchronized Double getTotalSize() {
@@ -242,5 +242,51 @@ public class DynamicList<T> {
             currentSize = newSize;
         }
         sizes = sizes2;
+    }
+
+    @Override
+    public Iterator<Entry<T>> iterator() {
+        return getEntries().iterator();
+    }
+
+    public Collection<Entry<T>> getEntries() {
+        checkSizes();
+
+        List<Entry<T>> entries = new ArrayList<>();
+        for (int i = 0; i < values.size(); i++) {
+            T value = values.get(i);
+            Double size = sizes.get(i);
+            if (size == null) {
+                continue;
+            }
+
+            entries.add(new Entry<>(value, size));
+        }
+
+        return Collections.unmodifiableList(entries);
+    }
+
+    private void checkSizes() {
+        if (values.size() != sizes.size()) {
+            throw new IllegalStateException("The values and sizes have different sizes, this is not allowed.");
+        }
+    }
+
+    public static class Entry<T> {
+        private final T value;
+        private final double size;
+
+        private Entry(T value, double size) {
+            this.value = value;
+            this.size = size;
+        }
+
+        public T getValue() {
+            return value;
+        }
+
+        public double getSize() {
+            return size;
+        }
     }
 }

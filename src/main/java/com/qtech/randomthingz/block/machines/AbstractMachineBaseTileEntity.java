@@ -3,7 +3,7 @@ package com.qtech.randomthingz.block.machines;
 import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import com.qtech.randomthingz.commons.enums.MachineTier;
-import com.qtech.randomthingz.item.upgrades.MachineUpgradeItem;
+import com.qtech.randomthingz.item.MachineUpgradeItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;

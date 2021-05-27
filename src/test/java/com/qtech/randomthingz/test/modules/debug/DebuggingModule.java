@@ -3,7 +3,7 @@ package com.qtech.randomthingz.test.modules.debug;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.commons.Module;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import com.qtech.randomthingz.modules.actionmenu.MainActionMenu;
 import com.qtech.randomthingz.modules.actionmenu.MenuHandler;
 import net.minecraft.util.text.StringTextComponent;
@@ -19,8 +19,8 @@ public class DebuggingModule extends Module {
     }
 
     @Override
-    public ModuleSecurity getSecurity() {
-        return ModuleSecurity.SAFE;
+    public ModuleSafety getSafety() {
+        return ModuleSafety.SAFE;
     }
 
     @Override
@@ -39,12 +39,12 @@ public class DebuggingModule extends Module {
 
     @Override
     public boolean canDisable() {
-        return true;
+        return false;
     }
 
     @Override
     public @NotNull String getName() {
-        return "debug_menu";
+        return "debugging";
     }
 
     @Override

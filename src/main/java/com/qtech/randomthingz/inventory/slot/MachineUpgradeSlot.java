@@ -1,6 +1,6 @@
 package com.qtech.randomthingz.inventory.slot;
 
-import com.qtech.randomthingz.item.upgrades.MachineUpgradeItem;
+import com.qtech.randomthingz.item.MachineUpgradeItem;
 import com.qtech.randomthingz.util.Constants;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;

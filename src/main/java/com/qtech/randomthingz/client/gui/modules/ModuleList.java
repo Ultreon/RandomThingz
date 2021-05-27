@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.commons.Module;
 import com.qtech.randomthingz.commons.ModuleManager;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import com.qtech.randomthingz.modules.ui.screens.AdvancedScreen;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -164,7 +164,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
       public void render(MatrixStack matrixStack, int listIndex, int scroll, int xOffset, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean isHovered, float partialTicks) {
          // Get module compatibility and security.
          ModuleCompatibility compatibility = this.module.getCompatibility();
-         ModuleSecurity security = this.module.getSecurity();
+         ModuleSafety security = this.module.getSafety();
 
          // If there's no compatibility show a red color.
          if (compatibility == ModuleCompatibility.NONE) {
@@ -346,7 +346,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
             this.module.showOptions(this.screen);
          }
          if (this.module.isSubManagerEnabled() && AdvancedScreen.isPointInRegion(btnX + 22, btnY, 19, 20, mouseXOffset, mouseYOffset)) {
-            Minecraft.getInstance().displayGuiScreen(new ModuleScreen(this.screen, this.module.getSubmoduleManager(), this.screen.getTitle()));
+            Minecraft.getInstance().displayGuiScreen(new ModuleScreen(this.screen, this.module.getSubmoduleManager()));
          }
          // Check if is on arrow button.
          if (mouseXOffset <= 32.0D) {
@@ -354,7 +354,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
             if (this.manager.isUnsavedDisabled(this.module)) {
                // Get the compatibility of the module.
                ModuleCompatibility compatibility = this.module.getCompatibility();
-               ModuleSecurity security = this.module.getSecurity();
+               ModuleSafety security = this.module.getSafety();
 
                // Switch security state enum.
                switch (security) {

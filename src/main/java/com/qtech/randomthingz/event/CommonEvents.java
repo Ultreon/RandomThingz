@@ -2,7 +2,7 @@ package com.qtech.randomthingz.event;
 
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.capability.EnergyStorageImplBase;
-import com.qtech.randomthingz.item.energy.BatteryItem;
+import com.qtech.randomthingz.item.BatteryItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

@@ -8,11 +8,13 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(TestMod.MOD_ID)
 public class TestMod {
+    @SuppressWarnings("unused")
     public static final Logger LOGGER = LogManager.getLogger("RT:TestMod:Generic");
     public static final String MOD_ID = "test";
 
     public TestMod() {
         Network.initialize();
+        TestModules.initialize();
     }
 
     public static ResourceLocation rl(String path) {

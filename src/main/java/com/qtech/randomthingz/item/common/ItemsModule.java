@@ -7,12 +7,12 @@ import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.client.ClientRegistrationUtil;
 import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.commons.CoreRegisterWrapperModule;
-import com.qtech.randomthingz.commons.ModuleSecurity;
+import com.qtech.randomthingz.commons.ModuleSafety;
 import com.qtech.randomthingz.commons.interfaces.IHasDyeColor;
 import com.qtech.randomthingz.commons.interfaces.IHasMaterialColor;
-import com.qtech.randomthingz.item.base.DyeColorizedItem;
-import com.qtech.randomthingz.item.base.MaterialColorizedItem;
-import com.qtech.randomthingz.item.spawnegg.CustomSpawnEggItem;
+import com.qtech.randomthingz.item.DyeColorizedItem;
+import com.qtech.randomthingz.item.MaterialColorizedItem;
+import com.qtech.randomthingz.item.CustomSpawnEggItem;
 import com.qtech.randomthingz.modules.actionmenu.MainActionMenu;
 import com.qtech.randomthingz.modules.actionmenu.MenuHandler;
 import com.qtech.randomthingz.registration.Registration;
@@ -41,8 +41,8 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
     }
 
     @Override
-    public ModuleSecurity getSecurity() {
-        return ModuleSecurity.SAFE;
+    public ModuleSafety getSafety() {
+        return ModuleSafety.SAFE;
     }
 
     @SubscribeEvent
@@ -147,7 +147,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
 
     @Override
     public @NotNull String getName() {
-        return "blocks";
+        return "items";
     }
 
     @Override

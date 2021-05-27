@@ -37,7 +37,7 @@ import com.qtech.randomthingz.block.trees.CherryTree;
 import com.qtech.randomthingz.block.trees.EucalyptusTree;
 import com.qtech.randomthingz.commons.enums.MachineTier;
 import com.qtech.randomthingz.item.common.ItemMaterial;
-import com.qtech.randomthingz.item.type.FaceableBlock;
+import com.qtech.randomthingz.block.FaceableBlock;
 import com.qtech.randomthingz.modules.tiles.ModTileEntities;
 import com.qtech.randomthingz.modules.ui.ModItemGroups;
 import com.qtech.randomthingz.registration.Registration;

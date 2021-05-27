@@ -1,6 +1,6 @@
 package com.qtech.randomthingz.item.tools;
 
-import com.qtech.randomthingz.commons.damagesource.DamageSourceInfinitySword;
+import com.qtech.randomthingz.entity.damagesource.DamageSourceInfinitySword;
 import com.qtech.randomthingz.item.common.ItemMaterial;
 import com.qtech.randomthingz.modules.ui.ModItemGroups;
 import com.qtech.randomthingz.modules.ui.ModStats;

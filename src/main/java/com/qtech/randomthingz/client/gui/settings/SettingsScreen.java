@@ -11,18 +11,15 @@ import com.qtech.randomthingz.modules.ui.screens.ScreenshotsScreen;
 import com.qtech.randomthingz.modules.ui.widgets.SwitchWidget;
 import com.qtech.randomthingz.modules.updates.AbstractUpdater;
 import com.qtech.randomthingz.modules.updates.UpdateButton;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
-import net.minecraft.client.gui.screen.OptionsScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.settings.NarratorStatus;
 import net.minecraft.util.IReorderingProcessor;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,8 +41,8 @@ public class SettingsScreen extends Screen {
     private Button allowShutdownPCButton;
     private Button modulesButton;
 
-    protected SettingsScreen(Screen back, ITextComponent titleIn) {
-        super(titleIn);
+    public SettingsScreen(Minecraft mc, Screen back) {
+        super(new StringTextComponent(""));
         this.back = back;
     }
 
@@ -85,7 +82,7 @@ public class SettingsScreen extends Screen {
     }
 
     private void openModulesScreen(Button button) {
-        Objects.requireNonNull(this.minecraft).displayGuiScreen(new ModuleScreen(this, ModuleManager.getInstance(), new TranslationTextComponent("screen.randomthingz.modules")));
+        Objects.requireNonNull(this.minecraft).displayGuiScreen(new ModuleScreen(this, ModuleManager.getInstance()));
     }
 
     private void openScreenshotsScreen(Button button) {
@@ -140,18 +137,18 @@ public class SettingsScreen extends Screen {
         }
     }
 
-    /**
-     * Event for showing button for the settings of QForgeMod.
-     *
-     * @param event the gui-initialization event.
-     */
-    @SubscribeEvent
-    public static void onOptionsScreenInit(GuiScreenEvent.InitGuiEvent event) {
-        if (event.getGui() instanceof OptionsScreen) {
-            event.addWidget(new Button(event.getGui().width / 2 - 155 - 40, event.getGui().height / 6 + 120 - 6, 30, 20, new StringTextComponent("RandomThingz"), (p_213060_1_) -> {
-//            event.getGui().getMinecraft().displayGuiScreen(new SettingsScreen(new TranslationTextComponent("screen.randomthingz.settings.title")));
-                event.getGui().getMinecraft().displayGuiScreen(new SettingsScreen(event.getGui(), new StringTextComponent("RandomThingz")));
-            }));
-        }
-    }
+//    /**
+//     * Event for showing button for the settings of QForgeMod.
+//     *
+//     * @param event the gui-initialization event.
+//     */
+//    @SubscribeEvent
+//    public static void onOptionsScreenInit(GuiScreenEvent.InitGuiEvent event) {
+//        if (event.getGui() instanceof OptionsScreen) {
+//            event.addWidget(new Button(event.getGui().width / 2 - 155 - 40, event.getGui().height / 6 + 120 - 6, 30, 20, new StringTextComponent("RandomThingz"), (p_213060_1_) -> {
+////            event.getGui().getMinecraft().displayGuiScreen(new SettingsScreen(new TranslationTextComponent("screen.randomthingz.settings.title")));
+//                event.getGui().getMinecraft().displayGuiScreen(new SettingsScreen(event.getGui(), new StringTextComponent("RT")));
+//            }));
+//        }
+//    }
 }

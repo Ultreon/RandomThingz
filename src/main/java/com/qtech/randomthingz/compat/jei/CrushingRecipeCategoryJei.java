@@ -5,7 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import com.qsoftware.modlib.silentlib.util.TextRenderUtils;
 import com.qtech.randomthingz.block.common.ModBlocks;
 import com.qtech.randomthingz.block.machines.crusher.CrusherScreen;
-import com.qtech.randomthingz.crafting.recipe.CrushingRecipe;
+import com.qtech.randomthingz.item.crafting.CrushingRecipe;
 import com.qtech.randomthingz.util.Constants;
 import com.qtech.randomthingz.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;

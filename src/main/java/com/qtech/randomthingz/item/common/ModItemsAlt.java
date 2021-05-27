@@ -6,7 +6,7 @@ import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.commons.init.ObjectInit;
 import com.qtech.randomthingz.entity.common.ModEntities;
-import com.qtech.randomthingz.item.spawnegg.CustomSpawnEggItem;
+import com.qtech.randomthingz.item.CustomSpawnEggItem;
 import lombok.experimental.UtilityClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;

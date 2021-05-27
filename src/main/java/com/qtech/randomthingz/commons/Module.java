@@ -160,7 +160,7 @@ public abstract class Module {
         return false;
     }
 
-    public abstract ModuleSecurity getSecurity();
+    public abstract ModuleSafety getSafety();
 
     protected static abstract class ClientSide {
 

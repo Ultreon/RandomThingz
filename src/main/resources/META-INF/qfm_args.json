@@ -3,33 +3,33 @@
       "dev_test": "false"
    },
    "version": {
-     "name": "2.0.1556-b6",
-     "version": 2,
-     "release": 0,
-     "build": 1556,
-     "stage": "b",
-     "stage_release": 6
+      "name": "2.0.1621-b6",
+      "version": 2,
+      "release": 0,
+      "build": 1621,
+      "stage": "b",
+      "stage_release": 6
    },
    "build_info": {
-     "date": "2021-05-08T16:01:16.009",
-     "compile": {
-       "name": "compileJava",
-       "source_compat": "1.8",
-       "target_compat": "1.8",
-       "gradle": {
-         "version": "6.8.3"
-       }
-     },
-     "project": {
-       "name": "randomthingz",
-       "display_name": "root project \u0027randomthingz\u0027",
-       "minecraft": {
-         "mappings_version": "20201028-1.16.3",
-         "mappings_channel": "snapshot",
-         "mappings": "snapshot_20201028-1.16.3",
-         "version": "1.16.5",
-         "forge_version": "36.1.0"
-       }
-     }
+      "date": "2021-05-25T15:47:17.290",
+      "compile": {
+         "name": "compileJava",
+         "source_compat": "1.8",
+         "target_compat": "1.8",
+         "gradle": {
+            "version": "6.8.3"
+         }
+      },
+      "project": {
+         "name": "randomthingz",
+         "display_name": "root project \u0027randomthingz\u0027",
+         "minecraft": {
+            "mappings_version": "20201028-1.16.3",
+            "mappings_channel": "snapshot",
+            "mappings": "snapshot_20201028-1.16.3",
+            "version": "1.16.5",
+            "forge_version": "36.1.0"
+         }
+      }
    }
 }

@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import com.qtech.randomthingz.RandomThingz;
-import com.qtech.randomthingz.crafting.recipe.common.ModRecipes;
+import com.qtech.randomthingz.item.crafting.common.ModRecipes;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;

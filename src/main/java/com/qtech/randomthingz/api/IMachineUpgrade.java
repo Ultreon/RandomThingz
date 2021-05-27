@@ -1,6 +1,6 @@
 package com.qtech.randomthingz.api;
 
-import com.qtech.randomthingz.item.upgrades.MachineUpgradeItem;
+import com.qtech.randomthingz.item.MachineUpgradeItem;
 import com.qtech.randomthingz.item.upgrades.MachineUpgrades;
 
 /**

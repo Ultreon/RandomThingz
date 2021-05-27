@@ -4,6 +4,7 @@ import com.qsoftware.modlib.silentlib.event.Greetings;
 import com.qtech.randomthingz.block.common.ModBlocks;
 import com.qtech.randomthingz.block.fluid.common.ModFluids;
 import com.qtech.randomthingz.client.ModModelProperties;
+import com.qtech.randomthingz.client.gui.settings.SettingsScreen;
 import com.qtech.randomthingz.config.Config;
 import com.qtech.randomthingz.data.DataGenerators;
 import com.qtech.randomthingz.item.common.ModItems;
@@ -24,6 +25,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.ExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -63,6 +66,7 @@ class SideProxy implements com.qtech.randomthingz.IProxy {
                 : null;
     }
 
+    @SuppressWarnings({"CommentedOutCode", "SpellCheckingInspection"})
     private void commonSetup(FMLCommonSetupEvent event) {
 //        if (ModList.get().isLoaded("computercraft")) {
 //            SMechComputerCraftCompat.initialize();
@@ -90,7 +94,8 @@ class SideProxy implements com.qtech.randomthingz.IProxy {
             FMLJavaModLoadingContext.get().getModEventBus().addListener(ModItems::registerItemColors);
             FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
-            MinecraftForge.EVENT_BUS.addListener(this::setFog);
+            MinecraftForge.EVENT_BUS.addListener(this::setFogColors);
+            MinecraftForge.EVENT_BUS.addListener(this::setFogDensity);
         }
 
         private void clientSetup(FMLClientSetupEvent event) {
@@ -98,15 +103,17 @@ class SideProxy implements com.qtech.randomthingz.IProxy {
             ModMachineContainers.registerScreens(event);
             ModMachineTileEntities.registerRenderers(event);
             ModModelProperties.register(event);
+
+            ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> SettingsScreen::new);
         }
 
-        public void setFog(EntityViewRenderEvent.FogColors fog) {
+        public void setFogColors(EntityViewRenderEvent.FogColors fog) {
             World w = fog.getInfo().getRenderViewEntity().getEntityDimension();
             BlockPos pos = fog.getInfo().getBlockPos();
             BlockState bs = w.getBlockState(pos);
             Block b = bs.getBlock();
 
-            if (b.equals(ModBlocks.OIL)) {
+            if (b.equals(ModBlocks.OIL.get())) {
                 float red = 0.02F;
                 float green = 0.02F;
                 float blue = 0.02F;
@@ -115,13 +122,28 @@ class SideProxy implements com.qtech.randomthingz.IProxy {
                 fog.setBlue(blue);
             }
 
-            if (b.equals(ModBlocks.DIESEL)) {
+            if (b.equals(ModBlocks.DIESEL.get())) {
                 float red = 0.9F;
                 float green = 0.9F;
                 float blue = 0.02F;
                 fog.setRed(red);
                 fog.setGreen(green);
                 fog.setBlue(blue);
+            }
+        }
+
+        public void setFogDensity(EntityViewRenderEvent.FogDensity fog) {
+            World w = fog.getInfo().getRenderViewEntity().getEntityDimension();
+            BlockPos pos = fog.getInfo().getBlockPos();
+            BlockState bs = w.getBlockState(pos);
+            Block b = bs.getBlock();
+
+            if (b.equals(ModBlocks.OIL.get())) {
+                fog.setDensity(0.9f);
+            }
+
+            if (b.equals(ModBlocks.DIESEL.get())) {
+                fog.setDensity(0.5f);
             }
         }
     }

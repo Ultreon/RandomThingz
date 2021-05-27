@@ -3,7 +3,7 @@ package com.qtech.randomthingz.item.tools;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.qtech.randomthingz.RandomThingz;
-import com.qtech.randomthingz.commons.damagesource.DamageSourceInfinitySword;
+import com.qtech.randomthingz.entity.damagesource.DamageSourceInfinitySword;
 import com.qtech.randomthingz.modules.ui.ModStats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
