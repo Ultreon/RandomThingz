@@ -577,17 +577,22 @@ public enum Tools {
             .tools(() -> ItemTier.builder()
                     .tier(7).maxUses(226).efficiency(6.5f).attackDamage(3.8f).enchantability(30)
                     .repairMaterial(() -> Ingredient.fromItems(ModItems.TANZANITE.get())).build())),
+    TOPAZ(builder("topaz")
+            .material(ModItems.TOPAZ, () -> Items.STICK)
+            .armor(() -> ArmorMaterial.builder()
+                    .name(RandomThingz.MOD_ID + ":topaz")
+                    .maxDamageFactor(21)
+                    .damageReduction(new int[]{4, 9, 11, 5})
+                    .enchantability(35)
+                    .knockbackResistance(0)
+                    .sound(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND)
+                    .toughness(0)
+                    .repairMaterial(() -> Ingredient.fromItems(ModItems.TOPAZ.get()))
+                    .build())
+            .tools(() -> ItemTier.builder()
+                    .tier(7).maxUses(226).efficiency(6.5f).attackDamage(3.8f).enchantability(30)
+                    .repairMaterial(() -> Ingredient.fromItems(ModItems.TOPAZ.get())).build())),
     ;
-//    // Gems
-//    RUBY(builderGem("ruby", Ore.RUBY)),
-//    BERYL(builderGem("beryl", Ore.BERYL)),
-//    MALACHITE(builderGem("malachite", Ore.MALACHITE)),
-//    PERIDOT(builderGem("peridot", Ore.PERIDOT)),
-//    AMBER(builderGem("amber", Ore.AMBER)),
-//    SAPPHIRE(builderGem("sapphire", Ore.SAPPHIRE)),
-//    AMETHYST(builderGem("amethyst", Ore.AMETHYST)),
-//    TANZANITE(builderGem("tanzanite", Ore.TANZANITE)),
-//    ;
 
     private final String toolName;
 

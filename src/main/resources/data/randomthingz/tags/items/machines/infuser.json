@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:basic_infuser",
     "randomthingz:infuser"
   ]
 }
