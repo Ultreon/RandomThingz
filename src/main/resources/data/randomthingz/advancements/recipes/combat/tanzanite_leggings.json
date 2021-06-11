@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:tanzanite_leggings"
+      "randomthingz:tanzanite_leggings"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:tanzanite"
+            "item": "randomthingz:tanzanite"
           }
         ]
       }

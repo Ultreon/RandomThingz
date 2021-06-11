@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:ruby_block"
+      "randomthingz:ruby_block"
     ]
   },
   "criteria": {

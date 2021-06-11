@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:aquamarine_leggings"
+      "randomthingz:aquamarine_leggings"
     ]
   },
   "criteria": {

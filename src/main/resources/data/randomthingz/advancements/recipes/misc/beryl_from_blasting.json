@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:beryl_from_blasting"
+      "randomthingz:beryl_from_blasting"
     ]
   },
   "criteria": {

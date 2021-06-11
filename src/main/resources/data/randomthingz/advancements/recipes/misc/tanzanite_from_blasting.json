@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:tanzanite_from_blasting"
+      "randomthingz:tanzanite_from_blasting"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:tanzanite_ore"
+            "item": "randomthingz:tanzanite_ore"
           }
         ]
       }

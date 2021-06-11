@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:beryl_block"
+      "randomthingz:beryl_block"
     ]
   },
   "criteria": {

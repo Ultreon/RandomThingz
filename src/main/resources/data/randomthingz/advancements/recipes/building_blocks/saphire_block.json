@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:saphire_block"
+      "randomthingz:saphire_block"
     ]
   },
   "criteria": {

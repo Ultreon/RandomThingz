@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:peridot_block"
+      "randomthingz:peridot__block"
     ]
   },
   "criteria": {

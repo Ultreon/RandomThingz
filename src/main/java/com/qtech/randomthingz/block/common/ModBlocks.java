@@ -467,7 +467,7 @@ public final class ModBlocks {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
     }
     private static <T extends Block> Supplier<BlockItem> godItem(BlockRegistryObject<T> block) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.OVERPOWERED));
+        return () -> new BlockItem(block.get(), new Item.Properties());
     }
     private static <T extends Block> Supplier<BlockItem> furnitureItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.DECORATIONS));

@@ -96,46 +96,6 @@
         ]
       }
     },
-    "has_chainmail_helmet": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:chainmail_helmet"
-          }
-        ]
-      }
-    },
-    "has_chainmail_chestplate": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:chainmail_chestplate"
-          }
-        ]
-      }
-    },
-    "has_chainmail_leggings": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:chainmail_leggings"
-          }
-        ]
-      }
-    },
-    "has_chainmail_boots": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "item": "minecraft:chainmail_boots"
-          }
-        ]
-      }
-    },
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {

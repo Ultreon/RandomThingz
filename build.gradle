@@ -245,40 +245,57 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    //noinspection JCenterRepository
     jcenter()
+    google()
+    mavenCentral()
     mavenLocal()
     maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "http://dvs1.progwml6.com/files/maven/"
+        name "Forge Maven New"
+        url 'https://maven.minecraftforge.net'
     }
     maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "http://modmaven.k-4u.nl"
+        name "Forge Maven"
+        url 'https://files.minecraftforge.net/maven'
     }
     maven {
+        name "Sonatype"
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+    maven { // JEI
+        name "Progwml6 Maven"
+        url "http://dvs1.progwml6.com/files/maven/"
+    }
+    maven { // Fallback for JEI
+        name "ModMaven"
+        url "http://modmaven.k-4u.nl"
+    }
+    maven {
+        name "SquidDev Maven"
         url 'http://squiddev.cc/maven/'
     }
     maven {
+        name "JitPack"
         url 'http://jitpack.io'
     }
     maven {
+        name "ImageJ"
         url 'http://maven.imagej.net/content/repositories/public/'
     }
+    maven {
+        name "Sponge Powered Maven"
+        url 'https://repo.spongepowered.org/maven'
+    }
     flatDir {
+        name "Libraries Directory"
         dirs './libs'
+    }
+    maven {
+        name "QTech Community Maven"
+        url "https://github.com/QTechCommunity/Maven/raw/main/"
     }
 //    maven {
 //        url "file://${local_maven}"
 //    }
-    maven {
-        url "https://github.com/QTechCommunity/Maven/raw/main/"
-    }
-    maven {
-        url 'https://repo.spongepowered.org/maven'
-    }
 }
 
 compileJava {
@@ -357,55 +374,37 @@ def buildPaths = [
 
 // task to add mods.toml to all relevant folders
 task replaceResources(type: Copy) {
-    from("src/main/resources/META-INF/mods.toml")
+    from("${projectDir}/src/main/resources/META-INF/mods.toml")
     outputs.upToDateWhen {
         false
     }
 
-//    File modsToml = new File("src/main/resources/META-INF/mods.toml")
-//
-//    FileReader reader = new FileReader(modsToml)
-//    char[] buffer = new char[modsToml.length()]
-//    reader.read(buffer)
-//    reader.close()
-//
-//    String text = new String(buffer);
-//    text = text.replaceAll('\\\$\\\$QFM_VERSION\\\$\\\$', version.toString())
-//
-//    char[] out = text.getChars();
-//
-//    File outputToml = new File(processResources.destinationDir, "META-INF/mods.toml")
-//    if (outputToml.exists()) {
-//        outputToml.delete()
-//    }
-//    outputToml.createNewFile()
-//
-//    FileWriter writer = new FileWriter(outputToml)
-//    writer.write(text)
-//    writer.flush()
-//    writer.close()
-
     filter { line -> line.replaceAll('\\\$\\\$MOD_VERSION\\\$\\\$', version.toString()) }
+    into new File(processResources.destinationDir, "META-INF")
+}
+
+// task to add mods.toml to all relevant folders
+task qfmArgs(type: Copy) {
+    from("${projectDir}/qfm_args.json")
+    outputs.upToDateWhen {
+        false
+    }
+
     into new File(processResources.destinationDir, "META-INF")
 }
 
 processResources {
     exclude 'META-INF/mods.toml'
     finalizedBy replaceResources
+    finalizedBy qfmArgs
 }
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.java.srcDirs
     classifier 'sources'
 }
-//
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
 
 artifacts {
-//    archives javadocJar
     archives sourcesJar
 }
 
@@ -480,7 +479,7 @@ task("uploadJars", dependsOn: "build") {
                     repositories.mavenDeployer {
                         configuration = configurations.deployerJars
                         repository(url: "sftp://${sftp_maven}") {
-                            authentication(userName: "${sftp_username}", privateKey: "${sftp_key}")
+                             authentication(userName: "${sftp_username}", privateKey: "${sftp_key}")
                         }
                     }
                 }
@@ -489,10 +488,6 @@ task("uploadJars", dependsOn: "build") {
         }
     }
 }
-
-// Upload jars to local of sftp maven.
-jar.finalizedBy(uploadJars)
-jar.finalizedBy(uploadArchives)
 
 Gson gson = new Gson()
 JsonObject json = new JsonObject()
@@ -542,7 +537,7 @@ buildInfoJ.add "project",    projectJ
 json      .add "version",    versionJ
 json      .add "build_info", buildInfoJ
 
-File qfmArgsFile = new File("${projectDir}/src/main/resources/META-INF/qfm_args.json")
+File qfmArgsFile = new File("${projectDir}/qfm_args.json")
 //File qfmArgsFile = new File("qfm_args.json")
 if (qfmArgsFile.exists()) {
     qfmArgsFile.delete()

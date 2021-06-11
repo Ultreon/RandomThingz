@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:amethyst_leggings"
+      "randomthingz:amethyst_leggings"
     ]
   },
   "criteria": {

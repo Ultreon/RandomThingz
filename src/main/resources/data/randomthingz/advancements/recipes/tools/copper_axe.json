@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:copper_axe"
+      "randomthingz:copper_axe"
     ]
   },
   "criteria": {

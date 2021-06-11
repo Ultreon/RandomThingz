@@ -15,6 +15,7 @@ displayURL="https://github.com/QTechCommunity/RandomThingz" #optional
 logoFile= "randomthingz.png" #optional
 credits="Qboi123, Laz The Artist, INDUSTRIALIST, StormDragon77, FatCow Web (TM), JustinRustin, Gengar, Miep_HD, Giovanni_5656, F1ash, Kai1907, Shadow_236, Nate the Penguin, un_roman, kekkman, sirkomplete, Etaris, Robert0213" #optional
 authors="Qboi123, Laz The Artist" #optional
+itemIcon="randomthingz:infinity_ingot"
 description='''
 §l§nRandom Thingz§r
   §7§oProbably just another random things mod.§r
@@ -114,6 +115,7 @@ version="1.0-release1" #mandatory
 displayName="Random Thingz: Textured Models Mod" #mandatory
 credits="Thanks for many help goes to McJty and the Forge Forum Team" #optional
 authors="PianoManu, Qboi123" #optional
+itemIcon="qtexturedmodels:hammer"
 description='''
 This Mod is partially forked from: https://github.com/PianoManu/QTextureModels
 The mod was merged after the base essentials of Random Thingz were created.

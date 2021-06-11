@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:amethyst_from_blasting"
+      "randomthingz:amethyst_from_blasting"
     ]
   },
   "criteria": {

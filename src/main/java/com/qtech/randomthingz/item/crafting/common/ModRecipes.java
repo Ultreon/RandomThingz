@@ -1,6 +1,5 @@
 package com.qtech.randomthingz.item.crafting.common;
 
-import com.qtech.randomthingz.crafting.recipe.*;
 import com.qtech.randomthingz.item.crafting.*;
 import com.qtech.randomthingz.registration.Registration;
 import com.qtech.randomthingz.util.Constants;
