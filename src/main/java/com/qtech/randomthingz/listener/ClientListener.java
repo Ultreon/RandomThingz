@@ -9,9 +9,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.FOVUpdateEvent;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 
 /**
  * <h2>Client listener:</h2>
@@ -43,9 +43,10 @@ public class ClientListener {
      * @param event a FML server started event.
      */
     @SubscribeEvent
-    public static void onPlayerClientWorldOpen(FMLServerStartedEvent event) {
-        if (event.getServer().isSinglePlayer()) {
-            Minecraft.getInstance().displayGuiScreen(new ModuleScreen(Minecraft.getInstance().currentScreen, ModuleManager.getInstance()));
+    public static void onPlayerClientWorldOpen(GuiScreenEvent.InitGuiEvent.Pre event) {
+        Minecraft mc = Minecraft.getInstance();
+        if (event.getGui() == null && mc.isSingleplayer()) {
+            mc.displayGuiScreen(new ModuleScreen(Minecraft.getInstance().currentScreen, ModuleManager.getInstance()));
         }
     }
 }

@@ -47,6 +47,6 @@ public class Main {
             JOptionPane.showMessageDialog(new Frame(), info, "Success", JOptionPane.INFORMATION_MESSAGE);
         }
 
-        System.exit(0);
+//        System.exit(0);
     }
 }

@@ -10,46 +10,60 @@ import net.minecraft.client.gui.screen.*;
 import net.minecraft.resources.ResourcePackInfo;
 import net.minecraft.resources.ResourcePackList;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
 public class OptionsMenu extends AbstractActionMenu {
     @SuppressWarnings("ConstantConditions")
     public OptionsMenu() {
-        addItem(new ActionMenuItem(new TranslationTextComponent("options.skinCustomisation"), () -> {
+
+    }
+
+    @Override
+    public void client() {
+
+        addClient(new ActionMenuItem(new TranslationTextComponent("options.skinCustomisation"), () -> {
             Minecraft mc = Minecraft.getInstance();
             mc.displayGuiScreen(new CustomizeSkinScreen(mc.currentScreen, mc.gameSettings));
         }));
-        addItem(new ActionMenuItem(new TranslationTextComponent("options.sounds"), () -> {
+        addClient(new ActionMenuItem(new TranslationTextComponent("options.sounds"), () -> {
             Minecraft mc = Minecraft.getInstance();
             mc.displayGuiScreen(new OptionsSoundsScreen(mc.currentScreen, mc.gameSettings));
         }));
-        addItem(new ActionMenuItem(new TranslationTextComponent("options.video"), () -> {
+        addClient(new ActionMenuItem(new TranslationTextComponent("options.video"), () -> {
             Minecraft mc = Minecraft.getInstance();
             mc.displayGuiScreen(new VideoSettingsScreen(mc.currentScreen, mc.gameSettings));
         }));
-        addItem(new ActionMenuItem(new TranslationTextComponent("options.controls"), () -> {
+        addClient(new ActionMenuItem(new TranslationTextComponent("options.controls"), () -> {
             Minecraft mc = Minecraft.getInstance();
             mc.displayGuiScreen(new ControlsScreen(mc.currentScreen, mc.gameSettings));
         }));
-        addItem(new ActionMenuItem(new TranslationTextComponent("options.language"), () -> {
+        addClient(new ActionMenuItem(new TranslationTextComponent("options.language"), () -> {
             Minecraft mc = Minecraft.getInstance();
             mc.displayGuiScreen(new LanguageScreen(mc.currentScreen, mc.gameSettings, mc.getLanguageManager()));
         }));
-        addItem(new ActionMenuItem(new TranslationTextComponent("options.chat.title"), () -> {
+        addClient(new ActionMenuItem(new TranslationTextComponent("options.chat.title"), () -> {
             Minecraft mc = Minecraft.getInstance();
             mc.displayGuiScreen(new ChatOptionsScreen(mc.currentScreen, mc.gameSettings));
         }));
-        addItem(new ActionMenuItem(new TranslationTextComponent("options.resourcepack"), () -> {
+        addClient(new ActionMenuItem(new TranslationTextComponent("options.resourcepack"), () -> {
             Minecraft mc = Minecraft.getInstance();
             mc.displayGuiScreen(new PackScreen(mc.currentScreen, mc.getResourcePackList(), this::savePackChanges, mc.getFileResourcePacks(), new TranslationTextComponent("resourcePack.title")));
         }));
-        addItem(new ActionMenuItem(new TranslationTextComponent("options.accessibility.title"), () -> {
+        addClient(new ActionMenuItem(new TranslationTextComponent("options.accessibility.title"), () -> {
             Minecraft mc = Minecraft.getInstance();
             mc.displayGuiScreen(new AccessibilityScreen(mc.currentScreen, mc.gameSettings));
         }));
     }
 
+    @Override
+    public void server() {
+
+    }
+
+    @OnlyIn(Dist.CLIENT)
     @SuppressWarnings("deprecation")
     private void savePackChanges(ResourcePackList resourcePacks) {
         Minecraft mc = Minecraft.getInstance();

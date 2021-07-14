@@ -1,8 +1,10 @@
 package com.qtech.randomthingz.modules.actionmenu;
 
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class SubmenuItem implements IActionMenuItem {
+public class SubmenuItem extends ActionMenuItem {
     private final IMenuHandler handler;
 
     public SubmenuItem(IMenuHandler handler) {

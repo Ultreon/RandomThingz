@@ -8,6 +8,7 @@
     "randomthingz:obsidian_hammer",
     "randomthingz:silver_hammer",
     "randomthingz:lead_hammer",
+    "randomthingz:tungsten_hammer",
     "randomthingz:nickel_hammer",
     "randomthingz:platinum_hammer",
     "randomthingz:zinc_hammer",
@@ -27,6 +28,16 @@
     "randomthingz:enderium_hammer",
     "randomthingz:cobalt_hammer",
     "randomthingz:ultrinium_hammer",
-    "randomthingz:infinity_hammer"
+    "randomthingz:infinity_hammer",
+    "randomthingz:aquamarine_hammer",
+    "randomthingz:amethyst_hammer",
+    "randomthingz:beryl_hammer",
+    "randomthingz:amber_hammer",
+    "randomthingz:malachite_hammer",
+    "randomthingz:peridot_hammer",
+    "randomthingz:saphire_hammer",
+    "randomthingz:ruby_hammer",
+    "randomthingz:tanzanite_hammer",
+    "randomthingz:topaz_hammer"
   ]
 }

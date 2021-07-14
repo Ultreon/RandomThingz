@@ -8,6 +8,7 @@
     "randomthingz:obsidian_katana",
     "randomthingz:silver_katana",
     "randomthingz:lead_katana",
+    "randomthingz:tungsten_katana",
     "randomthingz:nickel_katana",
     "randomthingz:platinum_katana",
     "randomthingz:zinc_katana",
@@ -27,6 +28,16 @@
     "randomthingz:enderium_katana",
     "randomthingz:cobalt_katana",
     "randomthingz:ultrinium_katana",
-    "randomthingz:infinity_katana"
+    "randomthingz:infinity_katana",
+    "randomthingz:aquamarine_katana",
+    "randomthingz:amethyst_katana",
+    "randomthingz:beryl_katana",
+    "randomthingz:amber_katana",
+    "randomthingz:malachite_katana",
+    "randomthingz:peridot_katana",
+    "randomthingz:saphire_katana",
+    "randomthingz:ruby_katana",
+    "randomthingz:tanzanite_katana",
+    "randomthingz:topaz_katana"
   ]
 }

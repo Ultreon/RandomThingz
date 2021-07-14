@@ -8,6 +8,7 @@
     "randomthingz:obsidian_axe",
     "randomthingz:silver_axe",
     "randomthingz:lead_axe",
+    "randomthingz:tungsten_axe",
     "randomthingz:nickel_axe",
     "randomthingz:platinum_axe",
     "randomthingz:zinc_axe",
@@ -27,6 +28,16 @@
     "randomthingz:enderium_axe",
     "randomthingz:cobalt_axe",
     "randomthingz:ultrinium_axe",
-    "randomthingz:infinity_axe"
+    "randomthingz:infinity_axe",
+    "randomthingz:aquamarine_axe",
+    "randomthingz:amethyst_axe",
+    "randomthingz:beryl_axe",
+    "randomthingz:amber_axe",
+    "randomthingz:malachite_axe",
+    "randomthingz:peridot_axe",
+    "randomthingz:saphire_axe",
+    "randomthingz:ruby_axe",
+    "randomthingz:tanzanite_axe",
+    "randomthingz:topaz_axe"
   ]
 }

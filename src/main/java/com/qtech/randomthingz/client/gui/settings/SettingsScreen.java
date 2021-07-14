@@ -3,15 +3,12 @@ package com.qtech.randomthingz.client.gui.settings;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.text2speech.Narrator;
 import com.qtech.randomthingz.RandomThingz;
-import com.qtech.randomthingz.client.gui.modules.ModuleScreen;
-import com.qtech.randomthingz.commons.ModuleManager;
+import com.qtech.randomthingz.commons.Used;
 import com.qtech.randomthingz.commons.text.Translations;
 import com.qtech.randomthingz.config.Config;
 import com.qtech.randomthingz.modules.ui.screens.ScreenshotsScreen;
-import com.qtech.randomthingz.modules.ui.widgets.SwitchWidget;
 import com.qtech.randomthingz.modules.updates.AbstractUpdater;
 import com.qtech.randomthingz.modules.updates.UpdateButton;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -26,22 +23,18 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Objects;
 
-@SuppressWarnings({"FieldCanBeLocal", "unused"})
+@SuppressWarnings({"FieldCanBeLocal"})
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class SettingsScreen extends Screen {
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private SwitchWidget testSwitch;
     private final Screen back;
-    private static boolean closePrompt = false;
-    private static boolean allowShutdownPC = false;
-    private Button doneButton;
-    private Button cancelButton;
-    private Button quitSettings;
-    private Button allowShutdownPCButton;
-    private Button modulesButton;
+    @Used private Button doneButton;
+    @Used private Button cancelButton;
+    @Used private Button quitSettingsButton;
+    @Used private Button allowShutdownPCButton;
+    @Used private Button modulesButton;
 
-    public SettingsScreen(Minecraft mc, Screen back) {
+    public SettingsScreen(Screen back) {
         super(new StringTextComponent(""));
         this.back = back;
     }
@@ -71,18 +64,10 @@ public class SettingsScreen extends Screen {
                 Translations.getScreen("settings", "screenshots"), this::openScreenshotsScreen, this::tooltip));
 
         dy += 30;
-        this.modulesButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 310, 20,
-                Translations.getScreen("settings", "modules"), this::openModulesScreen, this::tooltip));
-
-        dy += 30;
         this.doneButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
                 DialogTexts.GUI_DONE, this::saveAndGoBack));
         this.cancelButton = addButton(new Button(width / 2 + 5, height / 6 + dy - 6, 150, 20,
                 DialogTexts.GUI_CANCEL, this::goBack));
-    }
-
-    private void openModulesScreen(Button button) {
-        Objects.requireNonNull(this.minecraft).displayGuiScreen(new ModuleScreen(this, ModuleManager.getInstance()));
     }
 
     private void openScreenshotsScreen(Button button) {
@@ -109,16 +94,6 @@ public class SettingsScreen extends Screen {
                     this.renderTooltip(matrixStack, iReorderingProcessors, mouseX, mouseY);
                 }
             }
-        }
-    }
-
-    protected void toggleAllowShutdownPC(Button button) {
-        if (button == this.allowShutdownPCButton) {
-            // Invert boolean.
-            allowShutdownPC = !allowShutdownPC;
-
-            // Update message.
-            allowShutdownPCButton.setMessage(Translations.getScreen("settings", "allow_shutdown_pc").appendString(allowShutdownPC ? DialogTexts.OPTIONS_ON.getString() : DialogTexts.OPTIONS_OFF.getString()));
         }
     }
 

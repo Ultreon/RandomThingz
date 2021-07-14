@@ -71,6 +71,7 @@ public abstract class EnergyStoringItem extends HudItem {
         };
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World dimensionIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         // Apparently, addInformation can be called before caps are initialized

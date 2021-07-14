@@ -443,7 +443,7 @@ public enum Tools {
                     .tier(7).maxUses((int) Double.POSITIVE_INFINITY).efficiency((float) Double.POSITIVE_INFINITY).attackDamage((float) Double.POSITIVE_INFINITY).enchantability((int) Double.POSITIVE_INFINITY)
                     .repairMaterial(() -> Ingredient.fromItems(ItemMaterial.INFINITY.getIngot().orElseThrow(() -> new UnidentifiedObjectException("Infinity ingot not found in OreMaterial class.")))).build())),
     AQUAMARINE(builder("aquamarine")
-            .material(ModItems.AQUAMARINE, () -> Items.STICK)
+            .material(() -> ModItems.AQUAMARINE.get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":aquamarine")
                     .maxDamageFactor(5)
@@ -616,6 +616,7 @@ public enum Tools {
 
     private final Supplier<LongswordItem> longswordSupplier;
     private final Supplier<KatanaItem> katanaSupplier;
+    private final Supplier<CutlassItem> cutlassSupplier;
     private final Supplier<BroadswordItem> broadswordSupplier;
     private final Supplier<LumberAxeItem> lumberAxeSupplier;
     private final Supplier<BattleaxeItem> battleaxeSupplier;
@@ -633,6 +634,7 @@ public enum Tools {
     @Getter private ItemRegistryObject<HoeItem> hoe;
     @Getter private ItemRegistryObject<LongswordItem> longsword;
     @Getter private ItemRegistryObject<KatanaItem> katana;
+    @Getter private ItemRegistryObject<CutlassItem> cutlass;
     @Getter private ItemRegistryObject<BroadswordItem> broadsword;
     @Getter private ItemRegistryObject<LumberAxeItem> lumberAxe;
     @Getter private ItemRegistryObject<BattleaxeItem> battleaxe;
@@ -648,6 +650,7 @@ public enum Tools {
             throw new IllegalArgumentException("Builder name is incorrect, should be " + this.getName());
         }
         this.toolName = toolName;
+        RandomThingz.LOGGER.debug(toolName + "{<class>:<init>[1].0}: " + builder.baseMaterial);
         this.baseMaterial = builder.baseMaterial;
         this.handleMaterial = builder.handleMaterial;
         this.armorSubMaterial = builder.armorSubMaterial;
@@ -666,11 +669,13 @@ public enum Tools {
         this.hoeSupplier = builder.hoe;
         this.longswordSupplier = builder.longsword;
         this.katanaSupplier = builder.katana;
+        this.cutlassSupplier = builder.cutlass;
         this.broadswordSupplier = builder.broadsword;
         this.lumberAxeSupplier = builder.lumberAxe;
         this.battleaxeSupplier = builder.battleaxe;
         this.hammerSupplier = builder.hammer;
         this.excavatorSupplier = builder.excavator;
+        RandomThingz.LOGGER.debug(toolName + "{<class>:<init>[1].1}: " + this.baseMaterial);
     }
 
     public static void registerItems() {
@@ -702,6 +707,10 @@ public enum Tools {
             if (metal.katanaSupplier != null) {
                 metal.katana = Registration.ITEMS.register(
                         metal.toolName + "_katana", metal.katanaSupplier);
+            }
+            if (metal.cutlassSupplier != null) {
+                metal.cutlass = Registration.ITEMS.register(
+                        metal.toolName + "_cutlass", metal.cutlassSupplier);
             }
             if (metal.broadswordSupplier != null) {
                 metal.broadsword = Registration.ITEMS.register(
@@ -769,6 +778,7 @@ public enum Tools {
         private Supplier<HoeItem> hoe;
         private Supplier<LongswordItem> longsword;
         private Supplier<KatanaItem> katana;
+        private Supplier<CutlassItem> cutlass;
         private Supplier<BroadswordItem> broadsword;
         private Supplier<LumberAxeItem> lumberAxe;
         private Supplier<BattleaxeItem> battleaxe;
@@ -780,10 +790,12 @@ public enum Tools {
         }
 
         Builder material(Supplier<Item> material, Supplier<Item> handleMaterial) {
+            RandomThingz.LOGGER.debug(name + "{BUILDER:MATERIAL[0]}: " + material);
             return material(material, handleMaterial, null);
         }
 
         Builder material(Supplier<Item> material, Supplier<Item> handleMaterial, @Nullable Supplier<Item> armorSubMaterial) {
+            RandomThingz.LOGGER.debug(name + "{BUILDER:MATERIAL[1]}: " + material);
             this.baseMaterial = material;
             this.handleMaterial = handleMaterial;
             this.armorSubMaterial = armorSubMaterial;
@@ -817,6 +829,7 @@ public enum Tools {
             this.longsword = () -> new LongswordTool(itemTier.get(), 3, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().longsword);
             this.broadsword = () -> new BroadswordTool(itemTier.get(), 5, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().broadsword);
             this.katana = () -> new KatanaTool(itemTier.get(), 3, -1.2f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().katana);
+            this.cutlass = () -> new CutlassTool(itemTier.get(), 4, -1.8f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().cutlass);
             this.lumberAxe = () -> new LumberAxeTool(itemTier.get(), 5.5f, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().lumberAxe);
             this.battleaxe = () -> new BattleaxeTool(itemTier.get(), 6.5f, -2.4f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().battleaxe);
             this.hammer = () -> new HammerTool(itemTier.get(), 4, -2.8f, new Item.Properties().group(ModItemGroups.TOOLS), () -> pack.get().hammer);

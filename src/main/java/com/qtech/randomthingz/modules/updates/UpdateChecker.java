@@ -6,6 +6,8 @@ import com.qtech.randomthingz.commons.Ticker;
 import com.qtech.randomthingz.commons.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -23,6 +25,7 @@ public class UpdateChecker {
         this.module = module;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void clientTick(TickEvent.ClientTickEvent event) {
         if (RandomThingz.isDevtest()) {

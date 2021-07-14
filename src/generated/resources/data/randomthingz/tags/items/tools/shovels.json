@@ -8,6 +8,7 @@
     "randomthingz:obsidian_shovel",
     "randomthingz:silver_shovel",
     "randomthingz:lead_shovel",
+    "randomthingz:tungsten_shovel",
     "randomthingz:nickel_shovel",
     "randomthingz:platinum_shovel",
     "randomthingz:zinc_shovel",
@@ -27,6 +28,16 @@
     "randomthingz:enderium_shovel",
     "randomthingz:cobalt_shovel",
     "randomthingz:ultrinium_shovel",
-    "randomthingz:infinity_shovel"
+    "randomthingz:infinity_shovel",
+    "randomthingz:aquamarine_shovel",
+    "randomthingz:amethyst_shovel",
+    "randomthingz:beryl_shovel",
+    "randomthingz:amber_shovel",
+    "randomthingz:malachite_shovel",
+    "randomthingz:peridot_shovel",
+    "randomthingz:saphire_shovel",
+    "randomthingz:ruby_shovel",
+    "randomthingz:tanzanite_shovel",
+    "randomthingz:topaz_shovel"
   ]
 }

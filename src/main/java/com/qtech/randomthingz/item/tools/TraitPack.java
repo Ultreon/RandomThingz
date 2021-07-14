@@ -16,6 +16,7 @@ public class TraitPack {
     AbstractTrait[] longsword = new AbstractTrait[0];
     AbstractTrait[] broadsword = new AbstractTrait[0];
     AbstractTrait[] katana = new AbstractTrait[0];
+    AbstractTrait[] cutlass = new AbstractTrait[0];
     AbstractTrait[] lumberAxe = new AbstractTrait[0];
     AbstractTrait[] battleaxe = new AbstractTrait[0];
     AbstractTrait[] hammer = new AbstractTrait[0];
@@ -81,6 +82,11 @@ public class TraitPack {
             return this;
         }
 
+        public Builder cutlass(AbstractTrait... traits) {
+            pack.cutlass = ArrayUtils.addAll(pack.cutlass, traits);
+            return this;
+        }
+
         public Builder lumberAxe(AbstractTrait... traits) {
             pack.lumberAxe = ArrayUtils.addAll(pack.lumberAxe, traits);
             return this;
@@ -126,6 +132,10 @@ public class TraitPack {
         }
 
         public Builder all(AbstractTrait... traits) {
+            helmet(traits);
+            chestplate(traits);
+            leggings(traits);
+            boots(traits);
             sword(traits);
             axe(traits);
             pickaxe(traits);
@@ -134,6 +144,7 @@ public class TraitPack {
             longsword(traits);
             broadsword(traits);
             katana(traits);
+            cutlass(traits);
             lumberAxe(traits);
             battleaxe(traits);
             hammer(traits);

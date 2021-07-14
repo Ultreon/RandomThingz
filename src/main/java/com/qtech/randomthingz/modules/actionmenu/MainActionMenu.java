@@ -11,7 +11,17 @@ public final class MainActionMenu extends AbstractActionMenu {
 
     }
 
+    @Override
+    public void client() {
+
+    }
+
+    @Override
+    public void server() {
+
+    }
+
     public static void registerHandler(IMenuHandler handler) {
-        INSTANCE.addItem(new SubmenuItem(handler));
+        INSTANCE.add(new SubmenuItem(handler));
     }
 }

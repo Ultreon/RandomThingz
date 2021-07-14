@@ -1,6 +1,5 @@
 package com.qtech.randomthingz.item;
 
-import com.qtech.randomthingz.item.WandItem;
 import com.qtech.randomthingz.item.common.ModItems;
 import com.qtech.randomthingz.modules.ui.ModItemGroups;
 import net.minecraft.entity.EntityType;

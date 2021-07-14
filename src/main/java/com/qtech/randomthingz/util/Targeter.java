@@ -13,6 +13,8 @@ import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -62,6 +64,7 @@ public final class Targeter {
         return null;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Nullable
     public static <T extends Entity> Entity getTarget(PlayerEntity player) {
         float f = player.rotationPitch;

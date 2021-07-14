@@ -8,6 +8,7 @@
     "randomthingz:obsidian_excavator",
     "randomthingz:silver_excavator",
     "randomthingz:lead_excavator",
+    "randomthingz:tungsten_excavator",
     "randomthingz:nickel_excavator",
     "randomthingz:platinum_excavator",
     "randomthingz:zinc_excavator",
@@ -27,6 +28,16 @@
     "randomthingz:enderium_excavator",
     "randomthingz:cobalt_excavator",
     "randomthingz:ultrinium_excavator",
-    "randomthingz:infinity_excavator"
+    "randomthingz:infinity_excavator",
+    "randomthingz:aquamarine_excavator",
+    "randomthingz:amethyst_excavator",
+    "randomthingz:beryl_excavator",
+    "randomthingz:amber_excavator",
+    "randomthingz:malachite_excavator",
+    "randomthingz:peridot_excavator",
+    "randomthingz:saphire_excavator",
+    "randomthingz:ruby_excavator",
+    "randomthingz:tanzanite_excavator",
+    "randomthingz:topaz_excavator"
   ]
 }

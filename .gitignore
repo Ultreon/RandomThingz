@@ -44,3 +44,5 @@ forge*changelog.txt
 /local/
 src/main/resources/assets/qforgemod/textures/blocks/.png
 /local/
+
+*.pdn

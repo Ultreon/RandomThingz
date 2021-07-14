@@ -1,17 +1,17 @@
 {
    "flags": {
-      "dev_test": "false"
+      "dev_test": false
    },
    "version": {
-      "name": "2.0.1648-b6",
+      "name": "2.0.1877-b7",
       "version": 2,
       "release": 0,
-      "build": 1648,
+      "build": 1877,
       "stage": "b",
-      "stage_release": 6
+      "stage_release": 7
    },
    "build_info": {
-      "date": "2021-05-31T12:34:58.652",
+      "date": "2021-07-10T17:58:10.653",
       "compile": {
          "name": "compileJava",
          "source_compat": "1.8",

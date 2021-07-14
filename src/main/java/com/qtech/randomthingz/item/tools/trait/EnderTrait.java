@@ -10,12 +10,17 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.Color;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class EnderTrait extends AbstractTrait {
     public EnderTrait() {
 
+    }
+
+    public Color getColor() {
+        return Color.fromHex("#3D9964");
     }
 
     protected static BlockRayTraceResult rayTrace(World dimensionIn, PlayerEntity player) {

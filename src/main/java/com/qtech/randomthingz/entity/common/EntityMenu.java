@@ -1,7 +1,7 @@
 package com.qtech.randomthingz.entity.common;
 
 import com.qtech.randomthingz.modules.actionmenu.AbstractActionMenu;
-import com.qtech.randomthingz.modules.actionmenu.IActionMenuItem;
+import com.qtech.randomthingz.modules.actionmenu.ActionMenuItem;
 import com.qtech.randomthingz.modules.debugMenu.DebugMenu;
 import com.qtech.randomthingz.util.Targeter;
 import net.minecraft.client.Minecraft;
@@ -12,10 +12,17 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EntityMenu extends AbstractActionMenu {
     public EntityMenu() {
-        addItem(new IActionMenuItem() {
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public void client() {
+        addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
@@ -44,7 +51,7 @@ public class EntityMenu extends AbstractActionMenu {
                 return result != null;
             }
         });
-        addItem(new IActionMenuItem() {
+        addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
@@ -73,7 +80,7 @@ public class EntityMenu extends AbstractActionMenu {
                 return result != null;
             }
         });
-        addItem(new IActionMenuItem() {
+        addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
                 DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.ENTITY;
@@ -90,5 +97,10 @@ public class EntityMenu extends AbstractActionMenu {
                 return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
+    }
+
+    @Override
+    public void server() {
+
     }
 }

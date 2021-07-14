@@ -1,6 +1,5 @@
 package com.qtech.randomthingz.item;
 
-import com.qtech.randomthingz.item.CanisterItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

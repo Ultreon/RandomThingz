@@ -156,7 +156,7 @@ public final class RandomThingz {
 
         // Get stream.
         InputStream qfmArgsStream = RandomThingz.class.getResourceAsStream("/META-INF/qfm_args.json");
-        Objects.requireNonNull(qfmArgsStream, "Couldn't get RandomThingz Args file.");
+        Objects.requireNonNull(qfmArgsStream, "Couldn't get Random Thingz Args file.");
 
         // Get data.
         InputStreamReader isr = new InputStreamReader(qfmArgsStream);
@@ -235,6 +235,7 @@ public final class RandomThingz {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> RandomThingz.init.clientStart());
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void onMainMenuInit(GuiScreenEvent.InitGuiEvent.Post event) {
 

@@ -2,13 +2,14 @@ package com.qtech.randomthingz.commons.xinput;
 
 import com.studiohartman.jamepad.ControllerIndex;
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class ControllerManager {
     public static final int MAX_CONTROLLERS = 1;
 

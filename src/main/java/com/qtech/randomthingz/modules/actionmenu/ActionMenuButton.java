@@ -17,18 +17,18 @@ import java.awt.*;
 @MethodsReturnNonnullByDefault
 public class ActionMenuButton extends TransparentButton implements IActionMenuIndexable {
     private static final ResourceLocation ICONS = new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/icons/action_menu.png");
-    @Getter private final IActionMenuItem item;
+    @Getter private final ActionMenuItem item;
     @Getter private final ActionMenuScreen screen;
     @Getter private int menuIndex;
 
-    public ActionMenuButton(ActionMenuScreen screen, IActionMenuItem item, int x, int y, int width, int height) {
-        super(x, y, width, height, item.getText(), (btn) -> item.onActivate());
+    public ActionMenuButton(ActionMenuScreen screen, ActionMenuItem item, int x, int y, int width, int height) {
+        super(x, y, width, height, item.getText(), (btn) -> item.activate());
         this.screen = screen;
         this.item = item;
     }
 
-    public ActionMenuButton(ActionMenuScreen screen, IActionMenuItem item, int x, int y, int width, int height, ITooltip onTooltip) {
-        super(x, y, width, height, item.getText(), (btn) -> item.onActivate(), onTooltip);
+    public ActionMenuButton(ActionMenuScreen screen, ActionMenuItem item, int x, int y, int width, int height, ITooltip onTooltip) {
+        super(x, y, width, height, item.getText(), (btn) -> item.activate(), onTooltip);
         this.screen = screen;
         this.item = item;
     }

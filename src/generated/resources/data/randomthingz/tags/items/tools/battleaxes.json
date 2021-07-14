@@ -8,6 +8,7 @@
     "randomthingz:obsidian_battleaxe",
     "randomthingz:silver_battleaxe",
     "randomthingz:lead_battleaxe",
+    "randomthingz:tungsten_battleaxe",
     "randomthingz:nickel_battleaxe",
     "randomthingz:platinum_battleaxe",
     "randomthingz:zinc_battleaxe",
@@ -27,6 +28,16 @@
     "randomthingz:enderium_battleaxe",
     "randomthingz:cobalt_battleaxe",
     "randomthingz:ultrinium_battleaxe",
-    "randomthingz:infinity_battleaxe"
+    "randomthingz:infinity_battleaxe",
+    "randomthingz:aquamarine_battleaxe",
+    "randomthingz:amethyst_battleaxe",
+    "randomthingz:beryl_battleaxe",
+    "randomthingz:amber_battleaxe",
+    "randomthingz:malachite_battleaxe",
+    "randomthingz:peridot_battleaxe",
+    "randomthingz:saphire_battleaxe",
+    "randomthingz:ruby_battleaxe",
+    "randomthingz:tanzanite_battleaxe",
+    "randomthingz:topaz_battleaxe"
   ]
 }

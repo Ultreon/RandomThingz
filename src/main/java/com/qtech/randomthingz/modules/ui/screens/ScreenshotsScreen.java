@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.texture.Texture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -37,7 +38,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @SuppressWarnings("deprecation")
-@Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID)
+@Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, value = Dist.CLIENT)
 public class ScreenshotsScreen extends AdvancedScreen {
     // No getter / setter.
     private final List<File> files = new ArrayList<>();

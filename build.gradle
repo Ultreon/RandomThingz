@@ -65,6 +65,7 @@ int release = Integer.parseInt(project.property("versionRelease").toString())
 String stage = project.property("versionStage").toString()
 int stageRelease = Integer.parseInt(project.property("versionStageRelease").toString())
 String isDevTestString = project.property("isDevTest").toString()
+boolean isDevTest = Boolean.parseBoolean isDevTestString
 
 String content = ""
 String filePath = "buildnumber.txt"
@@ -91,10 +92,14 @@ output.write(newBuild.getBytes())
 output.flush()
 output.close()
 
-
 //boolean isDevTest = Boolean.parseBoolean(isDevTestString)
 
-version = version1 + "." + release + '.' + buildNumber + "-" + stage + stageRelease
+if (isDevTest) {
+    version = "Dev"
+} else {
+    version = version1 + "." + release + '.' + buildNumber + "-" + stage + stageRelease
+}
+
 group = 'com.qtech' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'randomthingz'
 jar.archiveVersion.set(version)
@@ -383,20 +388,22 @@ task replaceResources(type: Copy) {
     into new File(processResources.destinationDir, "META-INF")
 }
 
-// task to add mods.toml to all relevant folders
-task qfmArgs(type: Copy) {
-    from("${projectDir}/qfm_args.json")
-    outputs.upToDateWhen {
-        false
-    }
-
-    into new File(processResources.destinationDir, "META-INF")
-}
+//// task to add mods.toml to all relevant folders
+//task qfmArgs(type: Copy) {
+//    from("${projectDir}/qfm_args.json")
+//    outputs.upToDateWhen {
+//        false
+//    }
+//
+//    into new File(processResources.destinationDir, "META-INF")
+//    into new File("${projectDir}/src/main/resources/META-INF")
+//}
 
 processResources {
     exclude 'META-INF/mods.toml'
+//    exclude 'META-INF/qfm_args.json'
     finalizedBy replaceResources
-    finalizedBy qfmArgs
+//    finalizedBy qfmArgs
 }
 
 task sourcesJar(type: Jar) {
@@ -489,62 +496,62 @@ task("uploadJars", dependsOn: "build") {
     }
 }
 
-Gson gson = new Gson()
-JsonObject json = new JsonObject()
-
-// \version
-JsonObject versionJ = new JsonObject()
-versionJ.addProperty "name", version.toString()
-versionJ.addProperty "version", version1
-versionJ.addProperty "release", release
-versionJ.addProperty "build", buildNumber
-versionJ.addProperty "stage", stage
-versionJ.addProperty "stage_release", stageRelease
-
-// \flags
-JsonObject flagsJ = new JsonObject()
-flagsJ.addProperty "dev_test", isDevTest
-json.add("flags", flagsJ)
-JsonObject buildInfoJ = new JsonObject()
-buildInfoJ.addProperty("date", LocalDateTime.now(ZoneId.systemDefault()).toString())
-
-// \compile
-JsonObject compileJ = new JsonObject()
-compileJ.addProperty "name", compileJava.name
-compileJ.addProperty "source_compat", compileJava.sourceCompatibility
-compileJ.addProperty "target_compat", compileJava.targetCompatibility
-
-// \project
-JsonObject projectJ = new JsonObject()
-projectJ.addProperty "name", project.name != null ? project.name : ""
-projectJ.addProperty "display_name", project.displayName != null ? project.displayName : ""
-
-JsonObject minecraftJ = new JsonObject()
-minecraftJ.addProperty "mappings_version", "${project.mappingsVersion}"
-minecraftJ.addProperty "mappings_channel", "${project.mappingsChannel}"
-minecraftJ.addProperty "mappings", "${project.mappingsChannel}_${project.mappingsVersion}"
-minecraftJ.addProperty "version", "${project.mc_version}"
-minecraftJ.addProperty "forge_version", "${project.forge_version}"
-
-// \project\gradle
-JsonObject gradleJ = new JsonObject()
-gradleJ.addProperty "version", gradle.gradleVersion
-
-compileJ  .add "gradle",     gradleJ
-projectJ  .add "minecraft",  minecraftJ
-buildInfoJ.add "compile",    compileJ
-buildInfoJ.add "project",    projectJ
-json      .add "version",    versionJ
-json      .add "build_info", buildInfoJ
-
-File qfmArgsFile = new File("${projectDir}/qfm_args.json")
-//File qfmArgsFile = new File("qfm_args.json")
-if (qfmArgsFile.exists()) {
-    qfmArgsFile.delete()
-}
-FileWriter fileWriter = new FileWriter(qfmArgsFile)
-JsonWriter jsonWriter = new JsonWriter(fileWriter)
-jsonWriter.setIndent("   ")
-gson.toJson(json, jsonWriter)
-fileWriter.flush()
-fileWriter.close()
+//Gson gson = new Gson()
+//JsonObject json = new JsonObject()
+//
+//// \version
+//JsonObject versionJ = new JsonObject()
+//versionJ.addProperty "name", version.toString()
+//versionJ.addProperty "version", version1
+//versionJ.addProperty "release", release
+//versionJ.addProperty "build", buildNumber
+//versionJ.addProperty "stage", stage
+//versionJ.addProperty "stage_release", stageRelease
+//
+//// \flags
+//JsonObject flagsJ = new JsonObject()
+//flagsJ.addProperty "dev_test", isDevTest
+//json.add("flags", flagsJ)
+//JsonObject buildInfoJ = new JsonObject()
+//buildInfoJ.addProperty("date", LocalDateTime.now(ZoneId.systemDefault()).toString())
+//
+//// \compile
+//JsonObject compileJ = new JsonObject()
+//compileJ.addProperty "name", compileJava.name
+//compileJ.addProperty "source_compat", compileJava.sourceCompatibility
+//compileJ.addProperty "target_compat", compileJava.targetCompatibility
+//
+//// \project
+//JsonObject projectJ = new JsonObject()
+//projectJ.addProperty "name", project.name != null ? project.name : ""
+//projectJ.addProperty "display_name", project.displayName != null ? project.displayName : ""
+//
+//JsonObject minecraftJ = new JsonObject()
+//minecraftJ.addProperty "mappings_version", "${project.mappingsVersion}"
+//minecraftJ.addProperty "mappings_channel", "${project.mappingsChannel}"
+//minecraftJ.addProperty "mappings", "${project.mappingsChannel}_${project.mappingsVersion}"
+//minecraftJ.addProperty "version", "${project.mc_version}"
+//minecraftJ.addProperty "forge_version", "${project.forge_version}"
+//
+//// \project\gradle
+//JsonObject gradleJ = new JsonObject()
+//gradleJ.addProperty "version", gradle.gradleVersion
+//
+//compileJ  .add "gradle",     gradleJ
+//projectJ  .add "minecraft",  minecraftJ
+//buildInfoJ.add "compile",    compileJ
+//buildInfoJ.add "project",    projectJ
+//json      .add "version",    versionJ
+//json      .add "build_info", buildInfoJ
+//
+//File qfmArgsFile = new File("${projectDir}/qfm_args.json")
+////File qfmArgsFile = new File("qfm_args.json")
+//if (qfmArgsFile.exists()) {
+//    qfmArgsFile.delete()
+//}
+//FileWriter fileWriter = new FileWriter(qfmArgsFile)
+//JsonWriter jsonWriter = new JsonWriter(fileWriter)
+//jsonWriter.setIndent("   ")
+//gson.toJson(json, jsonWriter)
+//fileWriter.flush()
+//fileWriter.close()

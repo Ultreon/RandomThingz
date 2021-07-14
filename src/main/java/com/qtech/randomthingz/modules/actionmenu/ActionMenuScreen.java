@@ -1,6 +1,9 @@
 package com.qtech.randomthingz.modules.actionmenu;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.qtech.randomthingz.network.AMenuItemPermissionRequestPacket;
+import com.qtech.randomthingz.network.Network;
+import com.qtech.randomthingz.util.CrashReportUtils;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +11,8 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
+import net.minecraft.crash.CrashReport;
+import net.minecraft.crash.ReportedException;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import org.jetbrains.annotations.Nullable;
@@ -27,6 +32,7 @@ public class ActionMenuScreen extends Screen {
     @Getter private final AbstractActionMenu menu;
     @Getter @Nullable private Rectangle buttonRect;
     @Getter @Setter(AccessLevel.PACKAGE) @Nullable private ActionMenuButton activeItem;
+    private final List<ActionMenuButton> serverButtons = new ArrayList<>();
 
     protected ActionMenuScreen(@Nullable Screen parent, AbstractActionMenu menu, int menuIndex) {
         super(new StringTextComponent("Main"));
@@ -54,41 +60,48 @@ public class ActionMenuScreen extends Screen {
     protected void initialize() {
         this.buttons.clear();
         this.children.clear();
+        this.serverButtons.clear();
 
-        int x = 1;
-        if (menuIndex > 0) {
-            x = (151 * menuIndex) + 1;
-        }
+        try {
+            int x = 1;
+            if (menuIndex > 0) {
+                x = (151 * menuIndex) + 1;
+            }
 
-        int y = height - 16;
-        List<? extends IActionMenuItem> items = menu.getItems();
-        for (int i = items.size() - 1; i >= 0; i--) {
-            IActionMenuItem item = items.get(i);
-            ActionMenuButton actionMenuButton = addButton(new ActionMenuButton(this, item, x, y, 150, 15));
-            actionMenuButton.active = item.isEnabled();
+            int y = height - 16;
+            List<? extends ActionMenuItem> items = menu.getClient();
+            for (int i = items.size() - 1; i >= 0; i--) {
+                ActionMenuItem item = items.get(i);
+                try {
+                    ActionMenuButton actionMenuButton = addButton(new ActionMenuButton(this, item, x, y, 150, 15));
+                    if (item.isServerVariant()) {
+                        actionMenuButton.active = false;
+                        serverButtons.add(actionMenuButton);
+                    } else {
+                        actionMenuButton.active = item.isEnabled();
+                    }
+                } catch (Throwable t) {
+                    CrashReport crashreport = CrashReport.createCrashReport(t, "Failed to load action menu item into screen.");
+
+                    CrashReportUtils.addActionMenuItem(crashreport, item, i, x, y);
+                    throw new ReportedException(crashreport);
+                }
+
+                y -= 16;
+           }
 
             y -= 16;
+            addButton(new ActionMenuTitle(this, x, y, 150, 15));
+        } catch (Throwable t) {
+            CrashReport crashreport = CrashReport.createCrashReport(t, "Failed to initialize action menu screen.");
+
+            CrashReportUtils.addActionMenu(crashreport, menu, menuIndex);
+            throw new ReportedException(crashreport);
         }
 
-//        y -= 16;
-//
-//        addButton(new ActionMenuButton(this, new IActionMenuItem() {
-//            @Override
-//            public void onActivate() {
-//                Minecraft mc = Minecraft.getInstance();
-//                mc.displayGuiScreen(parent);
-//            }
-//
-//            @Override
-//            public ITextComponent getText() {
-//                return DialogTexts.GUI_BACK;
-//            }
-//        }, x, y, 150, 15));
-
-        y -= 16;
-        addButton(new ActionMenuTitle(this, x, y, 150, 15));
-
         initialized = true;
+
+        Network.sendToServer(new AMenuItemPermissionRequestPacket());
     }
 
     void setButtonRectangle(Rectangle rect) {
@@ -170,5 +183,11 @@ public class ActionMenuScreen extends Screen {
 
     void scheduleDisplay(ActionMenuScreen screen) {
         this.screens.add(screen);
+    }
+
+    public void handlePermission(AMenuItemPermissionRequestPacket.Reply reply) {
+        if (reply.isAllowed()) {
+            serverButtons.forEach(button -> button.active = true);
+        }
     }
 }

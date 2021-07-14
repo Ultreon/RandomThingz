@@ -10,9 +10,9 @@ import com.qtech.randomthingz.commons.CoreRegisterWrapperModule;
 import com.qtech.randomthingz.commons.ModuleSafety;
 import com.qtech.randomthingz.commons.interfaces.IHasDyeColor;
 import com.qtech.randomthingz.commons.interfaces.IHasMaterialColor;
+import com.qtech.randomthingz.item.CustomSpawnEggItem;
 import com.qtech.randomthingz.item.DyeColorizedItem;
 import com.qtech.randomthingz.item.MaterialColorizedItem;
-import com.qtech.randomthingz.item.CustomSpawnEggItem;
 import com.qtech.randomthingz.modules.actionmenu.MainActionMenu;
 import com.qtech.randomthingz.modules.actionmenu.MenuHandler;
 import com.qtech.randomthingz.registration.Registration;
@@ -20,7 +20,10 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,6 +48,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
         return ModuleSafety.SAFE;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public void registerItemColorHandlers(ColorHandlerEvent.Item event) {
         ItemColors itemColors = event.getItemColors();
@@ -97,6 +101,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
         registerGenericColorHandler(itemColors);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SafeVarargs
     private final void registerSpawnEggColorHandler(ItemColors colors, ItemRegistryObject<CustomSpawnEggItem<?>>... spawnEggs) {
         for (ItemRegistryObject<CustomSpawnEggItem<?>> spawnEgg : spawnEggs) {
@@ -104,6 +109,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SafeVarargs
     private final void registerDyeColorHandler(ItemColors colors, ItemRegistryObject<DyeColorizedItem>... dyeColorItems) {
         for (ItemRegistryObject<DyeColorizedItem> dyeColorized : dyeColorItems) {
@@ -111,6 +117,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SafeVarargs
     private final void registerMaterialColorHandler(ItemColors colors, ItemRegistryObject<MaterialColorizedItem>... materialColorItems) {
         for (ItemRegistryObject<MaterialColorizedItem> materialColorized : materialColorItems) {
@@ -118,6 +125,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     private void registerGenericColorHandler(ItemColors colors) {
 //        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.RED.getColorValue(), ModItems.RED_SHARD);
 //        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.BROWN.getColorValue(), ModItems.BROWN_SHARD);
@@ -142,7 +150,10 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
         ModItemsAlt.register();
 
         ITEMS.register(modEventBus);
-        modEventBus.register(this);
+    }
+
+    private void enableClient() {
+        MinecraftForge.EVENT_BUS.addListener(this::registerItemColorHandlers);
     }
 
     @Override

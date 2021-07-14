@@ -166,8 +166,8 @@ public class UpdatesModule extends Module {
     }
 
     private static class ServerSide extends Module.ServerSide {
-        private static final int delay = 10;
-        private static final int tickDelay = 20 * delay;
+        private static final int delay = 3600;
+        private static final int tickDelay = 40 * delay;
         private static final HashMap<AbstractUpdater<?>, IVersion> latestKnownMap = new HashMap<>();
         private static final Ticker ticker = new Ticker(tickDelay - 1);
 

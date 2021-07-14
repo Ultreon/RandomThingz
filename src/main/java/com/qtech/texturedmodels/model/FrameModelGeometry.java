@@ -1,7 +1,7 @@
 package com.qtech.texturedmodels.model;
 
-import com.qtech.texturedmodels.bakedmodels.FrameBakedModel;
 import com.mojang.datafixers.util.Pair;
+import com.qtech.texturedmodels.bakedmodels.FrameBakedModel;
 import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;

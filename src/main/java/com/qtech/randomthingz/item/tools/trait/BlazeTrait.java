@@ -14,6 +14,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.Color;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +29,10 @@ public class BlazeTrait extends AbstractTrait {
     public boolean onHitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, LivingEntity attacker) {
         victim.setFire(10);
         return super.onHitEntity(stack, victim, attacker);
+    }
+
+    public Color getColor() {
+        return Color.fromHex("#ff8000");
     }
 
     /**

@@ -5,6 +5,7 @@ import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.block.AtomicTNTBlock;
 import com.qtech.randomthingz.block.ChristmasChestBlock;
+import com.qtech.randomthingz.block.FaceableBlock;
 import com.qtech.randomthingz.block.GamePcBlock;
 import com.qtech.randomthingz.block.custom.CustomButtonBlock;
 import com.qtech.randomthingz.block.custom.render.CRDoorBlock;
@@ -37,7 +38,6 @@ import com.qtech.randomthingz.block.trees.CherryTree;
 import com.qtech.randomthingz.block.trees.EucalyptusTree;
 import com.qtech.randomthingz.commons.enums.MachineTier;
 import com.qtech.randomthingz.item.common.ItemMaterial;
-import com.qtech.randomthingz.block.FaceableBlock;
 import com.qtech.randomthingz.modules.tiles.ModTileEntities;
 import com.qtech.randomthingz.modules.ui.ModItemGroups;
 import com.qtech.randomthingz.registration.Registration;
@@ -72,6 +72,7 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
@@ -302,7 +303,7 @@ public final class ModBlocks {
                     .harvestTool(ToolType.AXE)
                     .hardnessAndResistance(2.0f, 3.0f)
                     .sound(SoundType.WOOD), ModTileEntities.CHRISTMAS_CHEST::get),
-            () -> () -> new ChristmasChestItemStackRenderer(ChristmasChestTileEntity::new));
+            () -> () -> new ChristmasChestItemStackRenderer<>(ChristmasChestTileEntity::new));
 
     ////////////////////////
     //     Ore blocks     //
@@ -397,7 +398,7 @@ public final class ModBlocks {
     private static <T extends Block> BlockRegistryObject<T> registerMachine(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::machineItem);
     }
-    private static <T extends Block> BlockRegistryObject<T> registerChest(String name, Supplier<T> block, Supplier<Callable<ItemStackTileEntityRenderer>> renderMethod) {
+    private static <T extends Block> BlockRegistryObject<T> registerChest(String name, Supplier<T> block, Supplier<Callable<?>> renderMethod) {
         return register(name, block, block1 -> chestItem(block1, renderMethod));
     }
     private static <T extends Block> BlockRegistryObject<T> registerIngredient(String name, Supplier<T> block) {
@@ -448,8 +449,8 @@ public final class ModBlocks {
     private static <T extends Block> Supplier<BlockItem> machineItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.MACHINES));
     }
-    private static <T extends Block> Supplier<BlockItem> chestItem(BlockRegistryObject<T> block, Supplier<Callable<ItemStackTileEntityRenderer>> renderMethod) {
-        return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.MACHINES).setISTER(renderMethod));
+    private static <T extends Block> Supplier<BlockItem> chestItem(BlockRegistryObject<T> block, Supplier<Callable<?>> renderMethod) {
+        return DistExecutor.unsafeRunForDist(() -> () -> () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.MACHINES).setISTER(() -> () -> (ItemStackTileEntityRenderer) renderMethod.get().call())), () -> () -> () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.MACHINES)));
     }
     private static <T extends Block> Supplier<BlockItem> ingredientItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.MISC));

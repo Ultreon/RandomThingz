@@ -31,6 +31,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Objects;
+
 /**
  * Initialization class for QForgeMod.
  *
@@ -43,7 +45,7 @@ public class Initialization {
     private MinecraftServer server;
 
     public static MinecraftServer getServer() {
-        return RandomThingz.getInit().server;
+        return Objects.requireNonNull(RandomThingz.getInit()).server;
     }
 
     /**
@@ -74,6 +76,7 @@ public class Initialization {
     void commonSetup(FMLCommonSetupEvent event) {
         ModuleManager.getInstance().commonSetup();
 
+        // Todo: update GlobalEntityTypeAttributes.put(...) to new version.
         event.enqueueWork(() -> {
             // Baby variants.
             GlobalEntityTypeAttributes.put(ModEntities.BABY_CREEPER.get(), BabyCreeperEntity.registerAttributes().create());

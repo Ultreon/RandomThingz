@@ -21,7 +21,6 @@ import java.util.Objects;
 @MethodsReturnNonnullByDefault
 public class ClientTweaksModule extends Module {
     public final MobVariantsModule MOB_VARIANTS = submoduleManager.register(new MobVariantsModule());
-    private static final MinecraftMenu minecraftMenu = new MinecraftMenu();
     private static final WindowMenu windowMenu = new WindowMenu();
 
     public ClientTweaksModule() {
@@ -31,7 +30,6 @@ public class ClientTweaksModule extends Module {
 
 //        registerSubmodule();
 
-        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Minecraft"), minecraftMenu));
         MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Window"), windowMenu));
     }
 

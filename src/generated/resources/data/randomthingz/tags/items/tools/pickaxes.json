@@ -8,6 +8,7 @@
     "randomthingz:obsidian_pickaxe",
     "randomthingz:silver_pickaxe",
     "randomthingz:lead_pickaxe",
+    "randomthingz:tungsten_pickaxe",
     "randomthingz:nickel_pickaxe",
     "randomthingz:platinum_pickaxe",
     "randomthingz:zinc_pickaxe",
@@ -27,6 +28,16 @@
     "randomthingz:enderium_pickaxe",
     "randomthingz:cobalt_pickaxe",
     "randomthingz:ultrinium_pickaxe",
-    "randomthingz:infinity_pickaxe"
+    "randomthingz:infinity_pickaxe",
+    "randomthingz:aquamarine_pickaxe",
+    "randomthingz:amethyst_pickaxe",
+    "randomthingz:beryl_pickaxe",
+    "randomthingz:amber_pickaxe",
+    "randomthingz:malachite_pickaxe",
+    "randomthingz:peridot_pickaxe",
+    "randomthingz:saphire_pickaxe",
+    "randomthingz:ruby_pickaxe",
+    "randomthingz:tanzanite_pickaxe",
+    "randomthingz:topaz_pickaxe"
   ]
 }

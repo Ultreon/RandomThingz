@@ -5,9 +5,11 @@ import com.qtech.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.qtech.randomthingz.client.keybinds.KeyBindingList;
 import com.qtech.randomthingz.commons.Module;
 import com.qtech.randomthingz.commons.ModuleSafety;
+import com.qtech.randomthingz.modules.client.MinecraftMenu;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,8 +21,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class ActionMenuModule extends Module {
     private final ClientSide clientSide;
     private final ServerSide serverSide;
+    private static final MinecraftMenu minecraftMenu = new MinecraftMenu();
 
     public ActionMenuModule() {
+        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Minecraft"), minecraftMenu));
+
         if (RandomThingz.isClientSide()) {
             this.clientSide = new ClientSide(this);
             this.serverSide = null;

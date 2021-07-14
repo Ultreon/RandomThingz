@@ -8,6 +8,7 @@
     "randomthingz:obsidian_lumber_axe",
     "randomthingz:silver_lumber_axe",
     "randomthingz:lead_lumber_axe",
+    "randomthingz:tungsten_lumber_axe",
     "randomthingz:nickel_lumber_axe",
     "randomthingz:platinum_lumber_axe",
     "randomthingz:zinc_lumber_axe",
@@ -27,6 +28,16 @@
     "randomthingz:enderium_lumber_axe",
     "randomthingz:cobalt_lumber_axe",
     "randomthingz:ultrinium_lumber_axe",
-    "randomthingz:infinity_lumber_axe"
+    "randomthingz:infinity_lumber_axe",
+    "randomthingz:aquamarine_lumber_axe",
+    "randomthingz:amethyst_lumber_axe",
+    "randomthingz:beryl_lumber_axe",
+    "randomthingz:amber_lumber_axe",
+    "randomthingz:malachite_lumber_axe",
+    "randomthingz:peridot_lumber_axe",
+    "randomthingz:saphire_lumber_axe",
+    "randomthingz:ruby_lumber_axe",
+    "randomthingz:tanzanite_lumber_axe",
+    "randomthingz:topaz_lumber_axe"
   ]
 }

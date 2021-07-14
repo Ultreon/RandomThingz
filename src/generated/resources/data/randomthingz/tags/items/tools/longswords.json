@@ -8,6 +8,7 @@
     "randomthingz:obsidian_longsword",
     "randomthingz:silver_longsword",
     "randomthingz:lead_longsword",
+    "randomthingz:tungsten_longsword",
     "randomthingz:nickel_longsword",
     "randomthingz:platinum_longsword",
     "randomthingz:zinc_longsword",
@@ -27,6 +28,16 @@
     "randomthingz:enderium_longsword",
     "randomthingz:cobalt_longsword",
     "randomthingz:ultrinium_longsword",
-    "randomthingz:infinity_longsword"
+    "randomthingz:infinity_longsword",
+    "randomthingz:aquamarine_longsword",
+    "randomthingz:amethyst_longsword",
+    "randomthingz:beryl_longsword",
+    "randomthingz:amber_longsword",
+    "randomthingz:malachite_longsword",
+    "randomthingz:peridot_longsword",
+    "randomthingz:saphire_longsword",
+    "randomthingz:ruby_longsword",
+    "randomthingz:tanzanite_longsword",
+    "randomthingz:topaz_longsword"
   ]
 }

@@ -12,9 +12,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -118,7 +116,13 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
         if (this.getRegistryName() == null) {
             return new StringTextComponent("misc.unknown");
         }
-        return new TranslationTextComponent("qfm_trait." + this.getRegistryName().getNamespace() + "." + this.getRegistryName().getPath().replaceAll("/", "."));
+        TranslationTextComponent translationTextComponent = new TranslationTextComponent("qfm_trait." + this.getRegistryName().getNamespace() + "." + this.getRegistryName().getPath().replaceAll("/", "."));
+        translationTextComponent.setStyle(translationTextComponent.getStyle().setColor(getColor()));
+        return translationTextComponent;
+    }
+
+    public Color getColor() {
+        return null;
     }
 
     @Override

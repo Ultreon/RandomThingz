@@ -1,7 +1,7 @@
 package com.qtech.randomthingz.modules.debugMenu;
 
 import com.qtech.randomthingz.modules.actionmenu.AbstractActionMenu;
-import com.qtech.randomthingz.modules.actionmenu.IActionMenuItem;
+import com.qtech.randomthingz.modules.actionmenu.ActionMenuItem;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -9,8 +9,14 @@ import java.util.Locale;
 
 public class DebugMenuMenu extends AbstractActionMenu {
     public DebugMenuMenu() {
+
+    }
+
+    @Override
+    public void client() {
+
         for (DebugMenu.PAGE page : DebugMenu.PAGE.values()) {
-            addItem(new IActionMenuItem() {
+            addClient(new ActionMenuItem() {
                 @Override
                 public void onActivate() {
                     DebugMenu.DEBUG_PAGE = page;
@@ -27,5 +33,10 @@ public class DebugMenuMenu extends AbstractActionMenu {
                 }
             });
         }
+    }
+
+    @Override
+    public void server() {
+
     }
 }

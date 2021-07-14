@@ -1,7 +1,7 @@
 package com.qtech.randomthingz.item.common;
 
 import com.qtech.randomthingz.modules.actionmenu.AbstractActionMenu;
-import com.qtech.randomthingz.modules.actionmenu.IActionMenuItem;
+import com.qtech.randomthingz.modules.actionmenu.ActionMenuItem;
 import com.qtech.randomthingz.modules.debugMenu.DebugMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -10,10 +10,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemMenu extends AbstractActionMenu {
     public ItemMenu() {
-        addItem(new IActionMenuItem() {
+
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public void client() {
+
+        addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
@@ -34,7 +43,7 @@ public class ItemMenu extends AbstractActionMenu {
                 return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
-        addItem(new IActionMenuItem() {
+        addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
@@ -56,7 +65,7 @@ public class ItemMenu extends AbstractActionMenu {
                 return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
-        addItem(new IActionMenuItem() {
+        addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
@@ -78,7 +87,7 @@ public class ItemMenu extends AbstractActionMenu {
                 return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
-        addItem(new IActionMenuItem() {
+        addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
@@ -100,7 +109,7 @@ public class ItemMenu extends AbstractActionMenu {
                 return mc.player != null && mc.dimension != null && mc.playerController != null;
             }
         });
-        addItem(new IActionMenuItem() {
+        addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
                 DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.ITEM;
@@ -118,7 +127,13 @@ public class ItemMenu extends AbstractActionMenu {
             }
         });
     }
-    
+
+    @Override
+    public void server() {
+
+    }
+
+    @OnlyIn(Dist.CLIENT)
     private ItemStack getCurrentStack() {
         Minecraft mc = Minecraft.getInstance();
         ClientPlayerEntity player = mc.player;

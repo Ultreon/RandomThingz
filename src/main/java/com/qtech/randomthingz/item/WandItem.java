@@ -318,12 +318,12 @@ public abstract class WandItem extends HudItem {
      * @see GuiUtils#drawHoveringText(MatrixStack, List, int, int, int, int, int, int, int, int, FontRenderer)
      */
     //TODO, Validate rendering is the same as the original
+    @OnlyIn(Dist.CLIENT)
     @SuppressWarnings("deprecation")
     public void drawItemTooltipText(GraphicsUtil gu, int val, @Nonnull final ItemStack stack, List<? extends ITextProperties> textLines, int mouseX, int mouseY,
                                     int minWidth, int xOffset, int yOffset,
                                     int screenWidth, int screenHeight, int maxTextWidth,
-                                    int backgroundColor, int borderColorStart, int borderColorEnd, FontRenderer font)
-    {
+                                    int backgroundColor, int borderColorStart, int borderColorEnd, FontRenderer font) {
         MatrixStack matrixStack = gu.getMatrixStack();
         if (!textLines.isEmpty())
         {

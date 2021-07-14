@@ -104,7 +104,7 @@ class SideProxy implements com.qtech.randomthingz.IProxy {
             ModMachineTileEntities.registerRenderers(event);
             ModModelProperties.register(event);
 
-            ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> SettingsScreen::new);
+            ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> (mc, back) -> new SettingsScreen(back));
         }
 
         public void setFogColors(EntityViewRenderEvent.FogColors fog) {
