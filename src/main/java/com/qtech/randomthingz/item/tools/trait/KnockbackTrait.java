@@ -17,6 +17,6 @@ public class KnockbackTrait extends AbstractTrait {
 
     @Override
     public float getKnockback(Set<ToolType> qfmToolTypes) {
-        return 8.0f;
+        return 2.0f;
     }
 }

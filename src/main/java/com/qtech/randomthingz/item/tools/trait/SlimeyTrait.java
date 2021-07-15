@@ -1,13 +1,8 @@
 package com.qtech.randomthingz.item.tools.trait;
 
-import com.qtech.randomthingz.entity.damagesource.DamageSourceInfinitySword;
 import com.qtech.randomthingz.item.tools.ToolType;
-import com.qtech.randomthingz.item.tools.Toolset;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.Color;
@@ -38,6 +33,6 @@ public class SlimeyTrait extends AbstractTrait {
 
     @Override
     public float getKnockback(Set<ToolType> qfmToolTypes) {
-        return 24.0f;
+        return 4.0f;
     }
 }
