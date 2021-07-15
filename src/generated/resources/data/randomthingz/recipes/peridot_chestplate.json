@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:peridot"
+    }
+  },
+  "result": {
+    "item": "randomthingz:peridot_chestplate"
+  }
+}

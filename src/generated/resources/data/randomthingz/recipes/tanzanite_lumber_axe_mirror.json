@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " /X",
+    " / "
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "randomthingz:tanzanite"
+    }
+  },
+  "result": {
+    "item": "randomthingz:tanzanite_lumber_axe"
+  }
+}

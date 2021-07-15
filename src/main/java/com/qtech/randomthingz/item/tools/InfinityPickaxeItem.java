@@ -84,7 +84,7 @@ public class InfinityPickaxeItem extends PickaxeItem {
                 victim.attack(new DamageSourceInfinitySword(player).setDamageBypassesArmor(), 4.0F);
                 return true;
             }
-            if (pvp.getHeldItem(Hand.MAIN_HAND) != null && pvp.getHeldItem(Hand.MAIN_HAND).getItem() == Tools.INFINITY.getSword().get() && pvp.isHandActive()) {
+            if (pvp.getHeldItem(Hand.MAIN_HAND) != null && pvp.getHeldItem(Hand.MAIN_HAND).getItem() == Toolset.INFINITY.getSword().get() && pvp.isHandActive()) {
                 return true;
             }
         }
@@ -123,10 +123,10 @@ public class InfinityPickaxeItem extends PickaxeItem {
 
         // Check Armor
         if (!armor.isEmpty()) {
-            if (armor.get(0).getItem().equals(Tools.INFINITY.getBoots().get())) {
-                if (armor.get(1).getItem().equals(Tools.INFINITY.getLeggings().get())) {
-                    if (armor.get(2).getItem().equals(Tools.INFINITY.getChestplate().get())) {
-                        return armor.get(3).getItem().equals(Tools.INFINITY.getHelmet().get());
+            if (armor.get(0).getItem().equals(Toolset.INFINITY.getBoots().get())) {
+                if (armor.get(1).getItem().equals(Toolset.INFINITY.getLeggings().get())) {
+                    if (armor.get(2).getItem().equals(Toolset.INFINITY.getChestplate().get())) {
+                        return armor.get(3).getItem().equals(Toolset.INFINITY.getHelmet().get());
                     }
                 }
             }

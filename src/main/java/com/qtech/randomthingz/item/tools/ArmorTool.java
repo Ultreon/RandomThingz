@@ -5,12 +5,14 @@ import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.item.tools.trait.AbstractTrait;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -80,13 +82,25 @@ public class ArmorTool extends ArmorItem implements ITool {
         LivingEntity entityLiving = e.getEntityLiving();
         for (ItemStack stack : Streams.stream(entityLiving.getEquipmentAndArmor()).filter((itemStack) -> itemStack.getItem() instanceof ArmorTool).collect(Collectors.toList())) {
             ArmorTool item = (ArmorTool) stack.getItem();
-            item.livingDamage(e);
+            item.livingDamage(stack, e);
         }
     }
 
-    public void livingDamage(LivingDamageEvent e) {
+    public void livingDamage(ItemStack stack, LivingDamageEvent e) {
+        float smite = 0.0f;
         for (AbstractTrait trait : traits.get()) {
             trait.onLivingDamage(e);
+            float smiteValue = trait.getSmiteValue(getQfmToolTypes(), stack, e.getEntityLiving());
+            if (smiteValue < 0.0f) {
+                RandomThingz.LOGGER.warn("Smite value is less that zero, this can cause weird behavior");
+            }
+
+            smite += smiteValue;
+        }
+
+        Entity trueSource = e.getSource().getTrueSource();
+        if (trueSource != null) {
+            trueSource.attack(new EntityDamageSource("player", e.getEntityLiving()), smite);
         }
     }
 }

@@ -43,6 +43,8 @@ public class KatanaTool extends KatanaItem implements ITool {
     private final float attackDamage;
     private final Multimap<Attribute, AttributeModifier> toolAttributes;
 
+    protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
+
     public KatanaTool(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Supplier<AbstractTrait[]> traits) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);
         this.traits = traits;
@@ -259,7 +261,19 @@ public class KatanaTool extends KatanaItem implements ITool {
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
-        return equipmentSlot == EquipmentSlotType.MAINHAND ? this.toolAttributes : super.getAttributeModifiers(equipmentSlot);
+        Multimap<Attribute, AttributeModifier> attributes;
+
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        builder.putAll(this.toolAttributes);
+
+        int knockback = 0;
+        for (AbstractTrait trait : getTraits()) {
+            knockback += trait.getKnockback(getQfmToolTypes());
+        }
+
+        builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Tool modifier", knockback, AttributeModifier.Operation.ADDITION));
+        attributes = builder.build();
+        return equipmentSlot == EquipmentSlotType.MAINHAND ? attributes : super.getAttributeModifiers(equipmentSlot);
     }
 
     public float getAttackDamage() {

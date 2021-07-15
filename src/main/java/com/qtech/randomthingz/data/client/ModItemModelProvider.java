@@ -7,7 +7,7 @@ import com.qtech.randomthingz.block.common.ModBlocks;
 import com.qtech.randomthingz.item.CraftingItems;
 import com.qtech.randomthingz.item.common.ItemMaterial;
 import com.qtech.randomthingz.item.common.ModItems;
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import com.qtech.randomthingz.item.upgrades.MachineUpgrades;
 import com.qtech.randomthingz.registration.Registration;
 import net.minecraft.block.Block;
@@ -47,7 +47,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             metal.getIngot().ifPresent(item -> builder(item, itemGenerated));
             metal.getNugget().ifPresent(item -> builder(item, itemGenerated));
         });
-        Arrays.stream(Tools.values()).forEach(metal -> {
+        Arrays.stream(Toolset.values()).forEach(metal -> {
             metal.getHelmet().ifPresent(item -> builder(item, itemHandheld));
             metal.getChestplate().ifPresent(item -> builder(item, itemHandheld));
             metal.getLeggings().ifPresent(item -> builder(item, itemHandheld));

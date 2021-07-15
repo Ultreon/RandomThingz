@@ -4,7 +4,7 @@ import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.block.machines.MetalBlock;
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import com.qtech.randomthingz.modules.ui.ModItemGroups;
 import com.qtech.randomthingz.registration.Registration;
 import com.qtech.randomthingz.world.gen.ores.DefaultOre;
@@ -318,7 +318,7 @@ public enum ItemMaterial implements IItemMaterial {
         ITag.INamedTag<Item> gemTag;
         ITag.INamedTag<Item> nuggetTag;
 
-        Supplier<Tools> tools;
+        Supplier<Toolset> tools;
 
         Builder(String name) {
             this.name = name;
@@ -347,7 +347,7 @@ public enum ItemMaterial implements IItemMaterial {
             return this;
         }
 
-        Builder tools(Supplier<Tools> tools) {
+        Builder tools(Supplier<Toolset> tools) {
             this.tools = tools;
             return this;
         }

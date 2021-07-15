@@ -33,12 +33,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
-@SuppressWarnings({"unused", "OptionalGetWithoutIsPresent"})
+@SuppressWarnings({"unused"})
 @UtilityClass
 public final class ModItems {
     static {
         ItemMaterial.registerItems();
-        Tools.registerItems();
+        Toolset.registerItems();
         CraftingItems.register();
         MachineUpgrades.register();
     }
@@ -155,7 +155,7 @@ public final class ModItems {
     public static final ItemRegistryObject<Item> TANZANITE = register("tanzanite", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
 
     // Icons
-    public static final ItemRegistryObject<Item> DUNGEONS = register("dungeons", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 0, 0f, new Item.Properties().setNoRepair().maxStackSize(1)));
+    public static final ItemRegistryObject<Item> DUNGEONS = register("dungeons", () -> new SwordItem(ItemTier.DIAMOND, 0, 0f, new Item.Properties().setNoRepair().maxStackSize(1)));
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Dungeons     //
@@ -167,175 +167,175 @@ public final class ModItems {
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_DIAMOND_PICKAXE = register("dungeons_diamond_pickaxe", () -> new PickaxeItem(net.minecraft.item.ItemTier.DIAMOND, 3, -2.1f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_DIAMOND_PICKAXE = register("dungeons_diamond_pickaxe", () -> new PickaxeItem(ItemTier.DIAMOND, 3, -2.1f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_DIAMOND_AXE = register("dungeons_diamond_axe", () -> new AxeItem(net.minecraft.item.ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_DIAMOND_AXE = register("dungeons_diamond_axe", () -> new AxeItem(ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_AXE = register("dungeons_axe", () -> new AxeItem(net.minecraft.item.ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_AXE = register("dungeons_axe", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_CURSED_AXE = register("cursed_axe", () -> new AxeItem(net.minecraft.item.ItemTier.GOLD, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_CURSED_AXE = register("cursed_axe", () -> new AxeItem(ItemTier.GOLD, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_FIREBRAND = register("firebrand", () -> new AxeItem(net.minecraft.item.ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_FIREBRAND = register("firebrand", () -> new AxeItem(ItemTier.DIAMOND, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_HIGHLAND_AXE = register("highland_axe", () -> new AxeItem(net.minecraft.item.ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_HIGHLAND_AXE = register("highland_axe", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<AxeItem> DUNGEONS_WHIRLWIND = register("whirlwind", () -> new AxeItem(net.minecraft.item.ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<AxeItem> DUNGEONS_WHIRLWIND = register("whirlwind", () -> new AxeItem(ItemTier.IRON, 4, -2.2f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_DAGGER = register("dungeons_dagger", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_DAGGER = register("dungeons_dagger", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_ETERNAL_KNIFE = register("eternal_knife", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_ETERNAL_KNIFE = register("eternal_knife", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_FANGS_OF_FROST = register("fangs_of_frost", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_FANGS_OF_FROST = register("fangs_of_frost", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_MOON_DAGGER = register("moon_dagger", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_MOON_DAGGER = register("moon_dagger", () -> new SwordItem(ItemTier.IRON, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_NIGHTMARES_BITE = register("nightmares_bite", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_NIGHTMARES_BITE = register("nightmares_bite", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_SPIRIT_KNIFE = register("spirit_knife", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 2, -1.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_SPIRIT_KNIFE = register("spirit_knife", () -> new SwordItem(ItemTier.DIAMOND, 2, -1.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_GOLD = register("the_last_laugh_gold", () -> new SwordItem(net.minecraft.item.ItemTier.GOLD, 3, -0.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_GOLD = register("the_last_laugh_gold", () -> new SwordItem(ItemTier.GOLD, 3, -0.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_SILVER = register("the_last_laugh_silver", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 2, -0.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_SILVER = register("the_last_laugh_silver", () -> new SwordItem(ItemTier.IRON, 2, -0.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_DIAMOND_SWORD = register("dungeons_diamond_sword", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_DIAMOND_SWORD = register("dungeons_diamond_sword", () -> new SwordItem(ItemTier.DIAMOND, 4, -2.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_IRON_SWORD = register("dungeons_iron_sword", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 4, -2.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_IRON_SWORD = register("dungeons_iron_sword", () -> new SwordItem(ItemTier.IRON, 4, -2.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_BROADSWORD = register("dungeons_broadsword", () -> new SwordItem(net.minecraft.item.ItemTier.IRON, 5, -3.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_BROADSWORD = register("dungeons_broadsword", () -> new SwordItem(ItemTier.IRON, 5, -3.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_STORMLANDER = register("stormlander", () -> new PickaxeItem(net.minecraft.item.ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_STORMLANDER = register("stormlander", () -> new PickaxeItem(ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_GREAT_HAMMER = register("great_hammer", () -> new PickaxeItem(net.minecraft.item.ItemTier.IRON, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_GREAT_HAMMER = register("great_hammer", () -> new PickaxeItem(ItemTier.IRON, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_HAMMER_OF_GRAVITY = register("hammer_of_gravity", () -> new PickaxeItem(net.minecraft.item.ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<PickaxeItem> DUNGEONS_HAMMER_OF_GRAVITY = register("hammer_of_gravity", () -> new PickaxeItem(ItemTier.DIAMOND, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_FLAIL = register("flail", () -> new SwordItem(net.minecraft.item.ItemTier.STONE, 5, -3.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_FLAIL = register("flail", () -> new SwordItem(ItemTier.STONE, 5, -3.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_SUNS_GRACE = register("suns_grace", () -> new SwordItem(net.minecraft.item.ItemTier.STONE, 5, -3.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_SUNS_GRACE = register("suns_grace", () -> new SwordItem(ItemTier.STONE, 5, -3.0f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<HoeItem> DUNGEONS_FROST_SCYTHE = register("frost_scythe", () -> new HoeItem(net.minecraft.item.ItemTier.STONE, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<HoeItem> DUNGEONS_FROST_SCYTHE = register("frost_scythe", () -> new HoeItem(ItemTier.STONE, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
             super.addInformation(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<HoeItem> DUNGEONS_JAILORS_SCYTHE = register("jailors_scythe", () -> new HoeItem(net.minecraft.item.ItemTier.STONE, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
+    public static final ItemRegistryObject<HoeItem> DUNGEONS_JAILORS_SCYTHE = register("jailors_scythe", () -> new HoeItem(ItemTier.STONE, 6, -2.5f, new Item.Properties().group(ModItemGroups.DUNGEONS)) {
         @Override
         public void addInformation(@NotNull ItemStack stack, @Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
             tooltip.add(new TranslationTextComponent("desc.randomthingz.mc_dungeons"));
@@ -353,7 +353,7 @@ public final class ModItems {
     //     Specials     //
     //////////////////////
 
-    public static final ItemRegistryObject<KnifeItem> KNIFE = register("knife", () -> new KnifeItem(net.minecraft.item.ItemTier.IRON, new Item.Properties().group(ItemGroup.TOOLS).maxDamage(4)));
+    public static final ItemRegistryObject<KnifeItem> KNIFE = register("knife", () -> new KnifeItem(ItemTier.IRON, new Item.Properties().group(ItemGroup.TOOLS).maxDamage(4)));
     public static final ItemRegistryObject<MagnetItem> MAGNET = register("magnet", () -> new MagnetItem(new Item.Properties().group(ItemGroup.TOOLS).maxDamage(4)));
 
     // Wands
@@ -362,29 +362,30 @@ public final class ModItems {
     public static final ItemRegistryObject<TeleportStaffItem> TELEPORT_STAFF = register("teleport_wand", TeleportStaffItem::new);
 
     // Stone Level
-    public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordTool(net.minecraft.item.ItemTier.STONE, 8, -2.0f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.WITHER.get()}));
+    public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordTool(ItemTier.STONE, 8, -2.0f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.WITHER.get()}));
 
     // Iron Level
-    public static final ItemRegistryObject<AxeItem> EMERGENCY_FIRE_AXE = register("emergency_fire_axe", () -> new AxeItem(net.minecraft.item.ItemTier.IRON, 2, -2.55f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.UNCOMMON)));
-    public static final ItemRegistryObject<SwordTool> FIRE_SWORD = register("fire_sword", () -> new SwordTool(net.minecraft.item.ItemTier.IRON, 3, -3.5f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.BLAZE.get()}));
-    public static final ItemRegistryObject<SwordTool> ENDER_SWORD = register("ender_sword", () -> new SwordTool(net.minecraft.item.ItemTier.IRON, 3, -1.9f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.ENDER.get()}));
+    public static final ItemRegistryObject<AxeItem> EMERGENCY_FIRE_AXE = register("emergency_fire_axe", () -> new AxeItem(ItemTier.IRON, 2, -2.55f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.UNCOMMON)));
+    public static final ItemRegistryObject<SwordTool> FIRE_SWORD = register("fire_sword", () -> new SwordTool(ItemTier.IRON, 3, -3.5f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.BLAZE.get()}));
+    public static final ItemRegistryObject<SwordTool> ENDER_SWORD = register("ender_sword", () -> new SwordTool(ItemTier.IRON, 3, -1.9f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.ENDER.get()}));
+    public static final ItemRegistryObject<SwordTool> SLIME_SWORD = register("slime_sword", () -> new SwordTool(ItemTier.WOOD, 0, -1.5f, new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.SLIMEY.get()}));
 
     // Diamond Level
-    public static final ItemRegistryObject<AxeItem> LEVIATHAN_AXE = register("leviathan_axe", () -> new AxeItem(net.minecraft.item.ItemTier.DIAMOND, 5, -2.55f, new Item.Properties().group(ModItemGroups.SPECIALS)));
-    public static final ItemRegistryObject<AxeItem> ADAMANTANIUM_AXE_RED = register("adamantanium_axe_red", () -> new AxeItem(net.minecraft.item.ItemTier.DIAMOND, 5, -1.875f, new Item.Properties().group(ModItemGroups.SPECIALS)));
-    public static final ItemRegistryObject<SwordItem> DIAMOND_QUARTZ_SWORD = register("diamond_quartz_sword", () -> new SwordItem(net.minecraft.item.ItemTier.DIAMOND, 6, -2.0f, new Item.Properties().group(ModItemGroups.SPECIALS)));
+    public static final ItemRegistryObject<AxeItem> LEVIATHAN_AXE = register("leviathan_axe", () -> new AxeItem(ItemTier.DIAMOND, 5, -2.55f, new Item.Properties().group(ModItemGroups.SPECIALS)));
+    public static final ItemRegistryObject<AxeItem> ADAMANTANIUM_AXE_RED = register("adamantanium_axe_red", () -> new AxeItem(ItemTier.DIAMOND, 5, -1.875f, new Item.Properties().group(ModItemGroups.SPECIALS)));
+    public static final ItemRegistryObject<SwordItem> DIAMOND_QUARTZ_SWORD = register("diamond_quartz_sword", () -> new SwordItem(ItemTier.DIAMOND, 6, -2.0f, new Item.Properties().group(ModItemGroups.SPECIALS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Tools     //
     ///////////////////
 
     // Tools - Vanilla
-    public static final ItemRegistryObject<AxeItem> WOODEN_BATTLEAXE = register("wooden_battleaxe", () -> new AxeItem(net.minecraft.item.ItemTier.WOOD, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> STONE_BATTLEAXE = register("stone_battleaxe", () -> new AxeItem(net.minecraft.item.ItemTier.STONE, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> GOLDEN_BATTLEAXE = register("golden_battleaxe", () -> new AxeItem(net.minecraft.item.ItemTier.GOLD, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> IRON_BATTLEAXE = register("iron_battleaxe", () -> new AxeItem(net.minecraft.item.ItemTier.IRON, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> DIAMOND_BATTLEAXE = register("diamond_battleaxe", () -> new AxeItem(net.minecraft.item.ItemTier.DIAMOND, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> NETHERITE_BATTLEAXE = register("netherite_battleaxe", () -> new AxeItem(net.minecraft.item.ItemTier.NETHERITE, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> WOODEN_BATTLEAXE = register("wooden_battleaxe", () -> new AxeItem(ItemTier.WOOD, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> STONE_BATTLEAXE = register("stone_battleaxe", () -> new AxeItem(ItemTier.STONE, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> GOLDEN_BATTLEAXE = register("golden_battleaxe", () -> new AxeItem(ItemTier.GOLD, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> IRON_BATTLEAXE = register("iron_battleaxe", () -> new AxeItem(ItemTier.IRON, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> DIAMOND_BATTLEAXE = register("diamond_battleaxe", () -> new AxeItem(ItemTier.DIAMOND, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> NETHERITE_BATTLEAXE = register("netherite_battleaxe", () -> new AxeItem(ItemTier.NETHERITE, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Utility Methods     //

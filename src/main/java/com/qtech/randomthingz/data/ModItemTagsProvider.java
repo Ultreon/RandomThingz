@@ -7,7 +7,7 @@ import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.commons.tags.ModTags;
 import com.qtech.randomthingz.item.CraftingItems;
 import com.qtech.randomthingz.item.common.ItemMaterial;
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
@@ -113,19 +113,19 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         Builder<Item> lumberAxes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/lumber_axes")));
         Builder<Item> excavators = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/excavators")));
         Builder<Item> hammers = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/hammers")));
-        for (Tools tools : Tools.values()) {
-            swords.add(tools.getSword().get());
-            axes.add(tools.getAxe().get());
-            pickaxes.add(tools.getPickaxe().get());
-            shovels.add(tools.getShovel().get());
-            hoes.add(tools.getHoe().get());
-            longswords.add(tools.getLongsword().get());
-            broadswords.add(tools.getBroadsword().get());
-            katanas.add(tools.getKatana().get());
-            battleaxes.add(tools.getBattleaxe().get());
-            lumberAxes.add(tools.getLumberAxe().get());
-            excavators.add(tools.getExcavator().get());
-            hammers.add(tools.getHammer().get());
+        for (Toolset toolset : Toolset.values()) {
+            swords.add(toolset.getSword().get());
+            axes.add(toolset.getAxe().get());
+            pickaxes.add(toolset.getPickaxe().get());
+            shovels.add(toolset.getShovel().get());
+            hoes.add(toolset.getHoe().get());
+            longswords.add(toolset.getLongsword().get());
+            broadswords.add(toolset.getBroadsword().get());
+            katanas.add(toolset.getKatana().get());
+            battleaxes.add(toolset.getBattleaxe().get());
+            lumberAxes.add(toolset.getLumberAxe().get());
+            excavators.add(toolset.getExcavator().get());
+            hammers.add(toolset.getHammer().get());
         }
     }
 

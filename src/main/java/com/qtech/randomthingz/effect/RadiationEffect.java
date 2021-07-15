@@ -2,7 +2,7 @@ package com.qtech.randomthingz.effect;
 
 import com.qtech.randomthingz.block.AtomicTNTBlock;
 import com.qtech.randomthingz.entity.damagesource.ModDamageSources;
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
@@ -10,7 +10,7 @@ import net.minecraft.potion.EffectType;
 /**
  * Radiation potion effect, does one heart of damage very slowly. Can kill all living entities.
  *
- * @see Tools#URANIUM
+ * @see Toolset#URANIUM
  * @see AtomicTNTBlock
  */
 public class RadiationEffect extends Effect {

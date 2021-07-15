@@ -1,5 +1,6 @@
 package com.qtech.randomthingz.effect.common;
 
+import com.qtech.randomthingz.effect.BleedingEffect;
 import com.qtech.randomthingz.effect.CurseEffect;
 import com.qtech.randomthingz.effect.RadiationEffect;
 import com.qtech.randomthingz.registration.Registration;
@@ -18,6 +19,7 @@ public final class ModEffects {
     ///////////////////
     public static final RegistryObject<CurseEffect> CURSE = register("curse", CurseEffect::new);
     public static final RegistryObject<RadiationEffect> RADIATION = register("radiation", RadiationEffect::new);
+    public static final RegistryObject<BleedingEffect> BLEEDING = register("bleeding", BleedingEffect::new);
 
     //////////////////////////////
     //     Utility methods     //

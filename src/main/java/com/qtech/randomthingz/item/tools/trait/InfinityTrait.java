@@ -2,7 +2,7 @@ package com.qtech.randomthingz.item.tools.trait;
 
 import com.qtech.randomthingz.entity.damagesource.DamageSourceInfinitySword;
 import com.qtech.randomthingz.item.tools.ToolType;
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import com.qtech.randomthingz.modules.ui.ModStats;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -44,7 +44,7 @@ public class InfinityTrait extends AbstractTrait {
                 return true;
             }
             //noinspection ConstantConditions
-            if (playerVictim.getHeldItem(Hand.MAIN_HAND) != null && playerVictim.getHeldItem(Hand.MAIN_HAND).getItem() == Tools.INFINITY.getSword().get() && playerVictim.isHandActive()) {
+            if (playerVictim.getHeldItem(Hand.MAIN_HAND) != null && playerVictim.getHeldItem(Hand.MAIN_HAND).getItem() == Toolset.INFINITY.getSword().get() && playerVictim.isHandActive()) {
                 return true;
             }
         }
@@ -68,13 +68,13 @@ public class InfinityTrait extends AbstractTrait {
         // Check Armor
         if (!armor.isEmpty()) {
             // Check boots.
-            if (armor.get(0).getItem().equals(Tools.INFINITY.getBoots().get())) {
+            if (armor.get(0).getItem().equals(Toolset.INFINITY.getBoots().get())) {
                 // Check leggings.
-                if (armor.get(1).getItem().equals(Tools.INFINITY.getLeggings().get())) {
+                if (armor.get(1).getItem().equals(Toolset.INFINITY.getLeggings().get())) {
                     // Check chestplate.
-                    if (armor.get(2).getItem().equals(Tools.INFINITY.getChestplate().get())) {
+                    if (armor.get(2).getItem().equals(Toolset.INFINITY.getChestplate().get())) {
                         // Check helmet.
-                        if (armor.get(3).getItem().equals(Tools.INFINITY.getHelmet().get())) {
+                        if (armor.get(3).getItem().equals(Toolset.INFINITY.getHelmet().get())) {
                             return true;
                         }
                     }

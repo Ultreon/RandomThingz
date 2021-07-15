@@ -1,7 +1,7 @@
 package com.qtech.randomthingz.listener;
 
 import com.qtech.randomthingz.RandomThingz;
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import lombok.experimental.UtilityClass;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -39,10 +39,10 @@ public class ArmorListener {
 
             // Check Armor
             if (!armor.isEmpty()) {
-                if (armor.get(0).getItem().getRegistryName() == Tools.INFINITY.getBoots().get().getRegistryName()) {
-                    if (armor.get(1).getItem().getRegistryName() == Tools.INFINITY.getLeggings().get().getRegistryName()) {
-                        if (armor.get(2).getItem().getRegistryName() == Tools.INFINITY.getChestplate().get().getRegistryName()) {
-                            if (armor.get(3).getItem().getRegistryName() == Tools.INFINITY.getBoots().get().getRegistryName()) {
+                if (armor.get(0).getItem().getRegistryName() == Toolset.INFINITY.getBoots().get().getRegistryName()) {
+                    if (armor.get(1).getItem().getRegistryName() == Toolset.INFINITY.getLeggings().get().getRegistryName()) {
+                        if (armor.get(2).getItem().getRegistryName() == Toolset.INFINITY.getChestplate().get().getRegistryName()) {
+                            if (armor.get(3).getItem().getRegistryName() == Toolset.INFINITY.getBoots().get().getRegistryName()) {
                                 // Set amount to zero, and cancel it.
                                 event.setAmount(0);
                                 event.setCanceled(true);
@@ -71,10 +71,10 @@ public class ArmorListener {
 
             // Check Armor
             if (!armor.isEmpty()) {
-                if (armor.get(0).getItem().getRegistryName() == Tools.INFINITY.getBoots().get().getRegistryName()) {
-                    if (armor.get(1).getItem().getRegistryName() == Tools.INFINITY.getLeggings().get().getRegistryName()) {
-                        if (armor.get(2).getItem().getRegistryName() == Tools.INFINITY.getChestplate().get().getRegistryName()) {
-                            if (armor.get(3).getItem().getRegistryName() == Tools.INFINITY.getBoots().get().getRegistryName()) {
+                if (armor.get(0).getItem().getRegistryName() == Toolset.INFINITY.getBoots().get().getRegistryName()) {
+                    if (armor.get(1).getItem().getRegistryName() == Toolset.INFINITY.getLeggings().get().getRegistryName()) {
+                        if (armor.get(2).getItem().getRegistryName() == Toolset.INFINITY.getChestplate().get().getRegistryName()) {
+                            if (armor.get(3).getItem().getRegistryName() == Toolset.INFINITY.getBoots().get().getRegistryName()) {
 
                                 // Set amount to zero, and cancel it.
                                 event.setCanceled(true);
@@ -103,10 +103,10 @@ public class ArmorListener {
 
             // Check Armor
             if (!armor.isEmpty()) {
-                if (armor.get(0).getItem().getRegistryName() == Tools.INFINITY.getBoots().get().getRegistryName()) {
-                    if (armor.get(1).getItem().getRegistryName() == Tools.INFINITY.getLeggings().get().getRegistryName()) {
-                        if (armor.get(2).getItem().getRegistryName() == Tools.INFINITY.getChestplate().get().getRegistryName()) {
-                            if (armor.get(3).getItem().getRegistryName() == Tools.INFINITY.getBoots().get().getRegistryName()) {
+                if (armor.get(0).getItem().getRegistryName() == Toolset.INFINITY.getBoots().get().getRegistryName()) {
+                    if (armor.get(1).getItem().getRegistryName() == Toolset.INFINITY.getLeggings().get().getRegistryName()) {
+                        if (armor.get(2).getItem().getRegistryName() == Toolset.INFINITY.getChestplate().get().getRegistryName()) {
+                            if (armor.get(3).getItem().getRegistryName() == Toolset.INFINITY.getBoots().get().getRegistryName()) {
                                 // Set amount to zero, and cancel it.
                                 event.setAmount(0);
                                 event.setCanceled(true);

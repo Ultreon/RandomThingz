@@ -1,6 +1,6 @@
 package com.qtech.randomthingz.block.overpowered;
 
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.OreBlock;
 import net.minecraft.client.Minecraft;
@@ -34,11 +34,11 @@ public class InfinityOreBlock extends OreBlock {
             Minecraft.getInstance().enqueue(() -> {
                 player.onDeath(new DamageSource("mine.infinity_ore"));
             });
-        } else if (heldItemMainhand.getItem() != Tools.INFINITY.getShovel().get() &&
-                heldItemMainhand.getItem() != Tools.INFINITY.getPickaxe().get() &&
-                heldItemMainhand.getItem() != Tools.INFINITY.getHoe().get() &&
-                heldItemMainhand.getItem() != Tools.INFINITY.getSword().get() &&
-                heldItemMainhand.getItem() != Tools.INFINITY.getAxe().get()) {
+        } else if (heldItemMainhand.getItem() != Toolset.INFINITY.getShovel().get() &&
+                heldItemMainhand.getItem() != Toolset.INFINITY.getPickaxe().get() &&
+                heldItemMainhand.getItem() != Toolset.INFINITY.getHoe().get() &&
+                heldItemMainhand.getItem() != Toolset.INFINITY.getSword().get() &&
+                heldItemMainhand.getItem() != Toolset.INFINITY.getAxe().get()) {
             if (heldItemMainhand.isDamageable()) {
                 player.getHeldItemMainhand().damageItem(player.getHeldItemMainhand().getMaxDamage(), player, (entity) -> {
                     entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);

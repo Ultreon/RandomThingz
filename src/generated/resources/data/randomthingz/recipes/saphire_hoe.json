@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    " /",
+    " /"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "randomthingz:saphire"
+    }
+  },
+  "result": {
+    "item": "randomthingz:saphire_hoe"
+  }
+}

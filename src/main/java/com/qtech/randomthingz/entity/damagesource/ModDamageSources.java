@@ -8,7 +8,8 @@ import java.util.function.Function;
 
 @UtilityClass
 public class ModDamageSources {
-    public static final DamageSource RADIATION = new DamageSource("qfm_radiation");
+    public static final DamageSource RADIATION = new DamageSource("qtech_rt_radiation");
+    public static final DamageSource BLEEDING = new DamageSource("qtech_rt_bleeding");
 
     public static final Function<Entity, DamageSource> INFINITY = DamageSourceInfinitySword::new;
 }

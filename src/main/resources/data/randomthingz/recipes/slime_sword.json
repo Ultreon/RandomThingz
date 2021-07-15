@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    " X ",
+    " / "
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:slime_ball"
+    },
+    "/": {
+      "tag": "forge:sticks"
+    }
+  },
+  "result": {
+    "item": "randomthingz:ender_sword",
+    "count": 1
+  }
+}

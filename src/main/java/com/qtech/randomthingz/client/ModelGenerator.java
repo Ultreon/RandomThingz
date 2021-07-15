@@ -1,7 +1,7 @@
 package com.qtech.randomthingz.client;
 
 import com.qtech.randomthingz.RandomThingz;
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import lombok.Getter;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.item.Item;
@@ -23,7 +23,7 @@ public class ModelGenerator {
     private final Map<ResourceLocation, IBakedModel> models = new HashMap<>();
 
     private ModelGenerator() {
-        for (Tools tools : Tools.values()) {
+        for (Toolset toolset : Toolset.values()) {
         }
     }
 

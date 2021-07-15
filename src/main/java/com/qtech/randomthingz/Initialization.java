@@ -11,7 +11,7 @@ import com.qtech.randomthingz.entity.common.ModEntities;
 import com.qtech.randomthingz.item.AdvancedBowItem;
 import com.qtech.randomthingz.item.common.ItemMaterial;
 import com.qtech.randomthingz.item.common.ModItems;
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import com.qtech.randomthingz.modules.debugMenu.DebugMenu;
 import com.qtech.randomthingz.modules.ui.ModItemGroups;
 import com.qtech.randomthingz.registration.Registration;
@@ -163,7 +163,7 @@ public class Initialization {
         Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("randomthingz", "machines1/storage"), new ItemStack(ModItems.BATTERY));
         Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("randomthingz", "machines1/generators"), new ItemStack(ModBlocks.COAL_GENERATOR));
 
-        Filters.get().register(ModItemGroups.OVERPOWERED, new ResourceLocation("randomthingz", "overpowered/infinity"), new ItemStack(Tools.INFINITY.getAxe()));
+        Filters.get().register(ModItemGroups.OVERPOWERED, new ResourceLocation("randomthingz", "overpowered/infinity"), new ItemStack(Toolset.INFINITY.getAxe()));
         Filters.get().register(ModItemGroups.OVERPOWERED, new ResourceLocation("randomthingz", "overpowered/tools"), new ItemStack(ModItems.KILL_SWITCH));
         Filters.get().register(ModItemGroups.OVERPOWERED, new ResourceLocation("randomthingz", "overpowered/wands"), new ItemStack(ModItems.WALKING_STAFF));
 
@@ -171,18 +171,18 @@ public class Initialization {
         Filters.get().register(ItemGroup.REDSTONE, new ResourceLocation("randomthingz", "redstone/buttons"), new ItemStack(ModBlocks.EUCALYPTUS_BUTTON));
         Filters.get().register(ItemGroup.REDSTONE, new ResourceLocation("randomthingz", "redstone/pressure_plates"), new ItemStack(ModBlocks.EUCALYPTUS_PRESSURE_PLATE));
 
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/swords"), new ItemStack(Tools.COPPER.getSword()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/axes"), new ItemStack(Tools.COPPER.getAxe()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/pickaxes"), new ItemStack(Tools.COPPER.getPickaxe()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/shovels"), new ItemStack(Tools.COPPER.getShovel()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/hoes"), new ItemStack(Tools.COPPER.getHoe()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/longswords"), new ItemStack(Tools.COPPER.getLongsword()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/broadswords"), new ItemStack(Tools.COPPER.getBroadsword()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/katanas"), new ItemStack(Tools.COPPER.getKatana()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/battleaxes"), new ItemStack(Tools.COPPER.getBattleaxe()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/lumber_axes"), new ItemStack(Tools.COPPER.getLumberAxe()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/excavators"), new ItemStack(Tools.COPPER.getExcavator()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/hammers"), new ItemStack(Tools.COPPER.getHammer()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/swords"), new ItemStack(Toolset.COPPER.getSword()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/axes"), new ItemStack(Toolset.COPPER.getAxe()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/pickaxes"), new ItemStack(Toolset.COPPER.getPickaxe()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/shovels"), new ItemStack(Toolset.COPPER.getShovel()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/hoes"), new ItemStack(Toolset.COPPER.getHoe()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/longswords"), new ItemStack(Toolset.COPPER.getLongsword()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/broadswords"), new ItemStack(Toolset.COPPER.getBroadsword()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/katanas"), new ItemStack(Toolset.COPPER.getKatana()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/battleaxes"), new ItemStack(Toolset.COPPER.getBattleaxe()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/lumber_axes"), new ItemStack(Toolset.COPPER.getLumberAxe()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/excavators"), new ItemStack(Toolset.COPPER.getExcavator()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/hammers"), new ItemStack(Toolset.COPPER.getHammer()));
 
 //        logger.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }

@@ -1,19 +1,25 @@
 package com.qtech.randomthingz.item.tools.trait;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.Color;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import org.jetbrains.annotations.NotNull;
 
+/**
+ * Attacked entity has 5 in 16 chance to randomly teleport.
+ * Right click causes teleport to the block you looking at in range.
+ */
 public class EnderTrait extends AbstractTrait {
     public EnderTrait() {
 
@@ -21,6 +27,29 @@ public class EnderTrait extends AbstractTrait {
 
     public Color getColor() {
         return Color.fromHex("#3D9964");
+    }
+
+    @Override
+    public boolean onHitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, LivingEntity attacker) {
+        super.onHitEntity(stack, victim, attacker);
+
+        int retries = 5;
+
+        while (retries > 0) {
+            if (victim.getRNG().nextInt(16) == 0) {
+                World entityDimension = victim.getEntityDimension();
+                int x = victim.getRNG().nextInt(20) - 10;
+                int z = victim.getRNG().nextInt(20) - 10;
+                int y = entityDimension.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
+
+                victim.teleportKeepLoaded(x, y, z);
+                break;
+            }
+
+            retries--;
+        }
+
+        return true;
     }
 
     protected static BlockRayTraceResult rayTrace(World dimensionIn, PlayerEntity player) {
@@ -71,5 +100,26 @@ public class EnderTrait extends AbstractTrait {
             clicker.getCooldownTracker().setCooldown(item, 100);
         }
         return true;
+    }
+
+    @Override
+    public void onLivingDamage(LivingDamageEvent e) {
+        LivingEntity livingBeing = e.getEntityLiving();
+        if (e.getEntityLiving().getHealth() - e.getAmount() < 1.0f) {
+            if (livingBeing.getRNG().nextInt(5) == 0) {
+                e.setCanceled(true);
+
+                World entityDimension = livingBeing.getEntityDimension();
+                int x = livingBeing.getRNG().nextInt(20) - 10;
+                int z = livingBeing.getRNG().nextInt(20) - 10;
+                x = (int) (e.getEntityLiving().getPosX() + x);
+                z = (int) (e.getEntityLiving().getPosZ() + z);
+                int y = entityDimension.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
+
+                livingBeing.teleportKeepLoaded(x, y, z);
+                return;
+            }
+        }
+        super.onLivingDamage(e);
     }
 }

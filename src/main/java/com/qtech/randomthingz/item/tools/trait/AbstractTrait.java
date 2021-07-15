@@ -44,7 +44,7 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @return ?
      */
     public boolean onHitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, LivingEntity attacker) {
-        return false;
+        return true;
     }
 
     /**
@@ -247,5 +247,9 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      */
     public @NotNull ActionResultType onUseItem(ItemUseContext context) {
         return ActionResultType.FAIL;
+    }
+
+    public float getKnockback(Set<ToolType> qfmToolTypes) {
+        return 0.0f;
     }
 }

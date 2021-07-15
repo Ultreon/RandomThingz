@@ -32,10 +32,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -45,6 +42,8 @@ public class LongswordTool extends LongswordItem implements ITool {
     private final Supplier<AbstractTrait[]> traits;
     private final float attackDamage;
     private final Multimap<Attribute, AttributeModifier> toolAttributes;
+
+    protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
     public LongswordTool(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Supplier<AbstractTrait[]> traits) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn);
@@ -59,7 +58,7 @@ public class LongswordTool extends LongswordItem implements ITool {
 
     @Override
     public Set<ToolType> getQfmToolTypes() {
-        return new HashSet<>(Arrays.asList(ToolType.SWORD));
+        return new HashSet<>(Collections.singletonList(ToolType.SWORD));
     }
 
     @Override
@@ -263,7 +262,19 @@ public class LongswordTool extends LongswordItem implements ITool {
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
-        return equipmentSlot == EquipmentSlotType.MAINHAND ? this.toolAttributes : super.getAttributeModifiers(equipmentSlot);
+        Multimap<Attribute, AttributeModifier> attributes;
+
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        builder.putAll(this.toolAttributes);
+
+        int knockback = 0;
+        for (AbstractTrait trait : getTraits()) {
+            knockback += trait.getKnockback(getQfmToolTypes());
+        }
+
+        builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Tool modifier", knockback, AttributeModifier.Operation.ADDITION));
+        attributes = builder.build();
+        return equipmentSlot == EquipmentSlotType.MAINHAND ? attributes : super.getAttributeModifiers(equipmentSlot);
     }
 
     public float getAttackDamage() {

@@ -153,5 +153,32 @@ public class TraitPack {
 
             return this;
         }
+
+        public Builder armor(AbstractTrait... traits) {
+            helmet(traits);
+            chestplate(traits);
+            leggings(traits);
+            boots(traits);
+
+            return this;
+        }
+
+        public Builder tools(AbstractTrait... traits) {
+            sword(traits);
+            axe(traits);
+            pickaxe(traits);
+            shovel(traits);
+            hoe(traits);
+            longsword(traits);
+            broadsword(traits);
+            katana(traits);
+            cutlass(traits);
+            lumberAxe(traits);
+            battleaxe(traits);
+            hammer(traits);
+            excavator(traits);
+
+            return this;
+        }
     }
 }

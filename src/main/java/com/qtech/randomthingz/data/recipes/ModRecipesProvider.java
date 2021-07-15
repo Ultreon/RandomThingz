@@ -5,11 +5,12 @@ import com.qsoftware.modlib.silentlib.data.ExtendedShapedRecipeBuilder;
 import com.qsoftware.modlib.silentlib.data.ExtendedShapelessRecipeBuilder;
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.block.common.ModBlocks;
+import com.qtech.randomthingz.commons.FeatureStatus;
 import com.qtech.randomthingz.commons.tags.ModTags;
 import com.qtech.randomthingz.item.CraftingItems;
 import com.qtech.randomthingz.item.common.ItemMaterial;
 import com.qtech.randomthingz.item.common.ModItems;
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import com.qtech.randomthingz.item.upgrades.MachineUpgrades;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
@@ -671,195 +672,199 @@ public class ModRecipesProvider extends RecipeProvider {
                 .key('B', ModItems.BATTERY)
                 .build(consumer);
 
-        for (Tools tools : Tools.values()) {
+        for (Toolset toolset : Toolset.values()) {
+            if (toolset.getStatus() == FeatureStatus.DEPRECATED) {
+                continue;
+            }
+
             try {
-                RandomThingz.LOGGER.info("Loading recipe for tool: " + tools.getName());
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getSword())
+                RandomThingz.LOGGER.info("Loading recipe for tool: " + toolset.getName());
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getSword())
                         .patternLine("X")
                         .patternLine("X")
                         .patternLine("/")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getAxe())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getAxe())
                         .patternLine("XX")
                         .patternLine("X/")
                         .patternLine(" /")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getAxe())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getAxe())
                         .patternLine("XX")
                         .patternLine("/X")
                         .patternLine("/ ")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
-                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, tools.getAxe().getName() + "_mirror"));
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getShovel())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
+                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getAxe().getName() + "_mirror"));
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getShovel())
                         .patternLine("X")
                         .patternLine("/")
                         .patternLine("/")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getPickaxe())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getPickaxe())
                         .patternLine("XXX")
                         .patternLine(" / ")
                         .patternLine(" / ")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHoe())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getHoe())
                         .patternLine("XX")
                         .patternLine(" /")
                         .patternLine(" /")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHoe())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getHoe())
                         .patternLine("XX")
                         .patternLine("/ ")
                         .patternLine("/ ")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
-                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, tools.getHoe().getName() + "_mirror"));
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getKatana())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
+                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getHoe().getName() + "_mirror"));
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getKatana())
                         .patternLine(" X")
                         .patternLine("X ")
                         .patternLine("X/")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getKatana())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getKatana())
                         .patternLine("X ")
                         .patternLine(" X")
                         .patternLine("/X")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
-                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, tools.getKatana().getName() + "_mirror"));
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getLongsword())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
+                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getKatana().getName() + "_mirror"));
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getLongsword())
                         .patternLine("X ")
                         .patternLine("X ")
                         .patternLine("X/")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getLongsword())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getLongsword())
                         .patternLine(" X")
                         .patternLine(" X")
                         .patternLine("/X")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
-                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, tools.getLongsword().getName() + "_mirror"));
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBroadsword())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
+                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getLongsword().getName() + "_mirror"));
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getBroadsword())
                         .patternLine("XX")
                         .patternLine("XX")
                         .patternLine("/ ")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBroadsword())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getBroadsword())
                         .patternLine("XX")
                         .patternLine("XX")
                         .patternLine(" /")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
-                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, tools.getBroadsword().getName() + "_mirror"));
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHammer())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
+                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getBroadsword().getName() + "_mirror"));
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getHammer())
                         .patternLine("XXX")
                         .patternLine("XXX")
                         .patternLine(" / ")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getExcavator())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getExcavator())
                         .patternLine("XX ")
                         .patternLine("X/ ")
                         .patternLine("  /")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getExcavator())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getExcavator())
                         .patternLine(" XX")
                         .patternLine(" /X")
                         .patternLine("/  ")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
-                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, tools.getExcavator().getName() + "_mirror"));
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBattleaxe())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
+                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getExcavator().getName() + "_mirror"));
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getBattleaxe())
                         .patternLine("XXX")
                         .patternLine("X/X")
                         .patternLine(" / ")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getLumberAxe())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getLumberAxe())
                         .patternLine("XXX")
                         .patternLine("X/ ")
                         .patternLine(" / ")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer);
-                ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getLumberAxe())
+                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getLumberAxe())
                         .patternLine("XXX")
                         .patternLine(" /X")
                         .patternLine(" / ")
-                        .key('/', () -> tools.getHandleMaterial().get())
-                        .key('X', () -> tools.getBaseMaterial().get())
-                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, tools.getLumberAxe().getName() + "_mirror"));
-                if (tools.getArmorSubMaterial() != null) {
-                    ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHelmet())
+                        .key('/', () -> toolset.getHandleMaterial().get())
+                        .key('X', () -> toolset.getBaseMaterial().get())
+                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getLumberAxe().getName() + "_mirror"));
+                if (toolset.getArmorSubMaterial() != null) {
+                    ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getHelmet())
                             .patternLine("XXX")
                             .patternLine("XOX")
-                            .key('O', () -> tools.getArmorSubMaterial().get())
-                            .key('X', () -> tools.getBaseMaterial().get())
+                            .key('O', () -> toolset.getArmorSubMaterial().get())
+                            .key('X', () -> toolset.getBaseMaterial().get())
                             .build(consumer);
-                    ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getChestplate())
+                    ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getChestplate())
                             .patternLine("XOX")
                             .patternLine("XXX")
                             .patternLine("XXX")
-                            .key('O', () -> tools.getArmorSubMaterial().get())
-                            .key('X', () -> tools.getBaseMaterial().get())
+                            .key('O', () -> toolset.getArmorSubMaterial().get())
+                            .key('X', () -> toolset.getBaseMaterial().get())
                             .build(consumer);
-                    ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getLeggings())
+                    ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getLeggings())
                             .patternLine("XXX")
                             .patternLine("XOX")
                             .patternLine("X X")
-                            .key('O', () -> tools.getArmorSubMaterial().get())
-                            .key('X', () -> tools.getBaseMaterial().get())
+                            .key('O', () -> toolset.getArmorSubMaterial().get())
+                            .key('X', () -> toolset.getBaseMaterial().get())
                             .build(consumer);
-                    ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBoots())
+                    ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getBoots())
                             .patternLine("X X")
                             .patternLine("XOX")
-                            .key('O', () -> tools.getArmorSubMaterial().get())
-                            .key('X', () -> tools.getBaseMaterial().get())
+                            .key('O', () -> toolset.getArmorSubMaterial().get())
+                            .key('X', () -> toolset.getBaseMaterial().get())
                             .build(consumer);
                 } else {
-                    ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getHelmet())
+                    ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getHelmet())
                             .patternLine("XXX")
                             .patternLine("X X")
-                            .key('X', () -> tools.getBaseMaterial().get())
+                            .key('X', () -> toolset.getBaseMaterial().get())
                             .build(consumer);
-                    ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getChestplate())
+                    ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getChestplate())
                             .patternLine("X X")
                             .patternLine("XXX")
                             .patternLine("XXX")
-                            .key('X', () -> tools.getBaseMaterial().get())
+                            .key('X', () -> toolset.getBaseMaterial().get())
                             .build(consumer);
-                    ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getLeggings())
+                    ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getLeggings())
                             .patternLine("XXX")
                             .patternLine("X X")
                             .patternLine("X X")
-                            .key('X', () -> tools.getBaseMaterial().get())
+                            .key('X', () -> toolset.getBaseMaterial().get())
                             .build(consumer);
-                    ExtendedShapedRecipeBuilder.vanillaBuilder(tools.getBoots())
+                    ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getBoots())
                             .patternLine("X X")
                             .patternLine("X X")
-                            .key('X', () -> tools.getBaseMaterial().get())
+                            .key('X', () -> toolset.getBaseMaterial().get())
                             .build(consumer);
                 }
             } catch (Throwable t) {
-                throw new RuntimeException("Could not load tools data for type '" + tools.getName() + "'", t);
+                throw new RuntimeException("Could not load tools data for type '" + toolset.getName() + "'", t);
             }
         }
 

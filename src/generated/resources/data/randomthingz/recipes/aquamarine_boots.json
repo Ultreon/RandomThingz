@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:aquamarine"
+    }
+  },
+  "result": {
+    "item": "randomthingz:aquamarine_boots"
+  }
+}

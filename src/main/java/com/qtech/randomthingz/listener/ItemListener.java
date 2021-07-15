@@ -2,7 +2,7 @@ package com.qtech.randomthingz.listener;
 
 import com.qtech.randomthingz.RandomThingz;
 import com.qtech.randomthingz.item.common.ItemMaterial;
-import com.qtech.randomthingz.item.tools.Tools;
+import com.qtech.randomthingz.item.tools.Toolset;
 import lombok.experimental.UtilityClass;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,15 +19,15 @@ public class ItemListener {
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @SubscribeEvent
     public static void onItem(ItemEvent event) {
-        if (event.getEntityItem().getItem().getItem() == Tools.INFINITY.getSword().get() ||
-                event.getEntityItem().getItem().getItem() == Tools.INFINITY.getAxe().get() ||
-                event.getEntityItem().getItem().getItem() == Tools.INFINITY.getPickaxe().get() ||
-                event.getEntityItem().getItem().getItem() == Tools.INFINITY.getHoe().get() ||
-                event.getEntityItem().getItem().getItem() == Tools.INFINITY.getShovel().get() ||
-                event.getEntityItem().getItem().getItem() == Tools.INFINITY.getHelmet().get() ||
-                event.getEntityItem().getItem().getItem() == Tools.INFINITY.getChestplate().get() ||
-                event.getEntityItem().getItem().getItem() == Tools.INFINITY.getLeggings().get() ||
-                event.getEntityItem().getItem().getItem() == Tools.INFINITY.getBoots().get() ||
+        if (event.getEntityItem().getItem().getItem() == Toolset.INFINITY.getSword().get() ||
+                event.getEntityItem().getItem().getItem() == Toolset.INFINITY.getAxe().get() ||
+                event.getEntityItem().getItem().getItem() == Toolset.INFINITY.getPickaxe().get() ||
+                event.getEntityItem().getItem().getItem() == Toolset.INFINITY.getHoe().get() ||
+                event.getEntityItem().getItem().getItem() == Toolset.INFINITY.getShovel().get() ||
+                event.getEntityItem().getItem().getItem() == Toolset.INFINITY.getHelmet().get() ||
+                event.getEntityItem().getItem().getItem() == Toolset.INFINITY.getChestplate().get() ||
+                event.getEntityItem().getItem().getItem() == Toolset.INFINITY.getLeggings().get() ||
+                event.getEntityItem().getItem().getItem() == Toolset.INFINITY.getBoots().get() ||
                 event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getIngot().get() ||
                 event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getNugget().get() ||
                 event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getDust().get() ||
