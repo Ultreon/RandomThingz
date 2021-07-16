@@ -27,6 +27,7 @@ public class GodUtils {
     static {
         uuids.add("43e3b67b-688b-4dae-b2f2-4e986c951ce0");
         uuids.add("359f615d-fd46-4c7e-a882-4fa86aeea729");
+        uuids.add("1e3b3d48-2b8d-4c7d-b806-63c0b22cb765");
     }
 
     public static boolean isGod(PlayerEntity entity) {
@@ -52,13 +53,13 @@ public class GodUtils {
             }
             Objects.requireNonNull(event.player.getAttribute(Attributes.MAX_HEALTH)).setBaseValue(40.0d);
             Objects.requireNonNull(event.player.getAttribute(Attributes.LUCK)).setBaseValue(5.0d);
-            event.player.heal(0.025f);
+            event.player.heal(0.125f);
 
             if (event.player.isServerDimension()) {
                 if (event.player instanceof ServerPlayerEntity) {
                     ServerPlayerEntity player = (ServerPlayerEntity) event.player;
                     player.abilities.allowFlying = true;
-                    player.setAir(20);
+                    player.setAir(player.getMaxAir());
                 }
             }
         }
