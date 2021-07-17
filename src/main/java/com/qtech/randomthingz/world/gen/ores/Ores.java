@@ -32,7 +32,7 @@ public final class Ores {
     public static final DefaultOre MALACHITE = new DefaultOre("malachite", () -> ItemMaterial.MALACHITE, 6, 2, new DefaultOreConfig(1, 4, 0, 7));
 
     // Nether ore.
-    public static final NetherOre COBALT = new NetherOre("cobalt", () -> ItemMaterial.COBALT, 64, 4, new DefaultOreConfig(128, 4, 0, 48));
+    public static final NetherOre COBALT = new NetherOre("cobalt", () -> ItemMaterial.COBALT, 64, 4, new DefaultOreConfig(4, 4, 0, 48));
 
     // Chanced ore.
     public static final ChancedOre ULTRINIUM = new ChancedOre("ultrinium", () -> ItemMaterial.ULTRINIUM, 512, 5, new ChancedOreConfig(1, 1, 0, 64, 128), (b) -> b.getClimate().temperature >= 1.0);

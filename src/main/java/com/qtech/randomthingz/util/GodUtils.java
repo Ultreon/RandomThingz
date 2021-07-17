@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -73,7 +74,32 @@ public class GodUtils {
             if (isGod(player)) {
                 if (source instanceof LivingEntity) {
                     LivingEntity entity = (LivingEntity) source;
-                    entity.addPotionEffect(new EffectInstance(ModEffects.CURSE.orElseThrow(() -> new IllegalArgumentException("The curse effect could not be applied, this Minecraft instance is possible cursed.")), Integer.MAX_VALUE, 1, false, false));
+                    if (entity instanceof PlayerEntity) {
+                        if (!isGod((PlayerEntity) entity)) {
+                            entity.addPotionEffect(new EffectInstance(ModEffects.CURSE.orElseThrow(() -> new IllegalArgumentException("The curse effect could not be applied, this Minecraft instance is possible cursed.")), Integer.MAX_VALUE, 1, false, false));
+                        }
+                    } else {
+                        entity.addPotionEffect(new EffectInstance(ModEffects.CURSE.orElseThrow(() -> new IllegalArgumentException("The curse effect could not be applied, this Minecraft instance is possible cursed.")), Integer.MAX_VALUE, 1, false, false));
+                    }
+                    event.setCanceled(true);
+                    player.setHealth(player.getMaxHealth());
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onDamage(LivingDamageEvent event) {
+        if (event.getEntityLiving() instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+            Entity source = event.getSource().getTrueSource();
+            if (isGod(player)) {
+                if (source instanceof LivingEntity) {
+                    LivingEntity entity = (LivingEntity) source;
+                    if (entity instanceof PlayerEntity) {
+                        event.setCanceled(true);
+                        entity.heal(event.getAmount());
+                    }
                 }
             }
         }
