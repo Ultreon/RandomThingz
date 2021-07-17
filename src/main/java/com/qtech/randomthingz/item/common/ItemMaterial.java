@@ -341,7 +341,7 @@ public enum ItemMaterial implements IItemMaterial {
                     .setRequiresTool()
                     .harvestTool(ToolType.PICKAXE)
                     .harvestLevel(ore.getHarvestLevel())
-                    .hardnessAndResistance(ore.getHardness(), 3)
+                    .hardnessAndResistance(ore.getHardness(), ore.getResistance())
                     .sound(SoundType.STONE));
             this.oreTag = blockTag("ores/" + name);
             return this;

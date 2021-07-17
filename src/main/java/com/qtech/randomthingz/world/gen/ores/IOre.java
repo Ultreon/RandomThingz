@@ -30,4 +30,6 @@ public interface IOre {
     default Predicate<BiomeLoadingEvent> getBiomePredicate() {
         return (b) -> true;
     }
+
+    float getResistance();
 }

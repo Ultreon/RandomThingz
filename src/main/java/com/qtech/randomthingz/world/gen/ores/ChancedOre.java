@@ -31,6 +31,16 @@ public class ChancedOre extends DefaultOre {
         this.config = config;
     }
 
+    public ChancedOre(String name, Supplier<ItemMaterial> material, int hardness, int resistance, int harvestLevel, ChancedOreConfig config) {
+        super(name, material, hardness, resistance, harvestLevel, config);
+        this.config = config;
+    }
+
+    public ChancedOre(String name, Supplier<ItemMaterial> material, int hardness, int resistance, int harvestLevel, ChancedOreConfig config, Predicate<BiomeLoadingEvent> predicate) {
+        super(name, material, hardness, resistance, harvestLevel, config, predicate);
+        this.config = config;
+    }
+
     @Override
     public ConfiguredFeature<?, ?> generate() {
         int bottom = config.getMinHeight();

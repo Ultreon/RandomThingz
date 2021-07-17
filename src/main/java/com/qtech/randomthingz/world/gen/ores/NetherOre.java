@@ -33,7 +33,7 @@ public class NetherOre extends DefaultOre {
     public ConfiguredFeature<?, ?> generate() {
         DefaultOreConfig config = this.config;
         int bottom = config.getMinHeight();
-        if (config.getVeinSize() < 2) {
+        if (config.getVeinSize() <= 2) {
             return Feature.EMERALD_ORE
                     .withConfiguration(new ReplaceBlockConfig(Blocks.NETHERRACK.getDefaultState(), this.asBlockState()))
                     .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))

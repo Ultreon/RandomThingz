@@ -41,12 +41,21 @@ public class DefaultOre implements IBlockProvider, IOre {
     private final String name;
     private final Map<Block, Block> oreGroundTypeMap = new HashMap<>();
     private Predicate<BiomeLoadingEvent> predicate;
+    private float resistance;
 
     public DefaultOre(String name, Supplier<ItemMaterial> material, int hardness, int harvestLevel, DefaultOreConfig config) {
         this(name, material, hardness, harvestLevel, config, (b) -> true);
     }
 
+    public DefaultOre(String name, Supplier<ItemMaterial> material, int hardness, int resistance, int harvestLevel, DefaultOreConfig config) {
+        this(name, material, hardness, resistance, harvestLevel, config, (b) -> true);
+    }
+
     public DefaultOre(String name, Supplier<ItemMaterial> material, int hardness, int harvestLevel, DefaultOreConfig config, Predicate<BiomeLoadingEvent> predicate) {
+        this(name, material, hardness, 3, harvestLevel, config, predicate);
+    }
+
+    public DefaultOre(String name, Supplier<ItemMaterial> material, int hardness, int resistance, int harvestLevel, DefaultOreConfig config, Predicate<BiomeLoadingEvent> predicate) {
         this.material = material;
         this.config = config;
         this.hardness = hardness;
@@ -143,5 +152,10 @@ public class DefaultOre implements IBlockProvider, IOre {
     @Override
     public Predicate<BiomeLoadingEvent> getBiomePredicate() {
         return predicate;
+    }
+
+    @Override
+    public float getResistance() {
+        return resistance;
     }
 }
