@@ -2,6 +2,9 @@
 *Probably just another random things mod.*
 
 ***
+## Ideas:
+[Google Docs](https://docs.google.com/document/d/1z3MKoFRFzNu_Qmz0HYUsLOh5f-y4033F9UBfSapATMY/edit?usp=sharing)
+
 ## Pages
 The GitHub pages are here: https://qtechcommunity.github.io/QForgeMod/.
 
