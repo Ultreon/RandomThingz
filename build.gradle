@@ -1,15 +1,8 @@
 //file:noinspection GroovyUnusedAssignment
 //file:noinspection GroovyAssignabilityCheck
 //file:noinspection JCenterRepository
-
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.stream.JsonWriter
-
-import java.nio.file.FileSystems
-import java.nio.file.Files
-import java.time.LocalDateTime
-import java.time.ZoneId
+import java.time.LocalDate
+import java.time.LocalTime
 
 buildscript {
     repositories {
@@ -59,52 +52,57 @@ apply plugin: "io.freefair.lombok"
 println('Java: ' + System.getProperty('java.version') + '\n JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ')\n Arch: ' + System.getProperty('os.arch'))
 println("OS: " + System.getProperty("os.name") + "\n OS Version: " + System.getProperty("os.version"))
 
-// Read build number file.
-int version1 = Integer.parseInt(project.property("version").toString())
-int release = Integer.parseInt(project.property("versionRelease").toString())
-String stage = project.property("versionStage").toString()
-int stageRelease = Integer.parseInt(project.property("versionStageRelease").toString())
-String isDevTestString = project.property("isDevTest").toString()
-boolean isDevTest = Boolean.parseBoolean isDevTestString
+//// Read build number file.
+//int version1 = Integer.parseInt(project.property("version").toString())
+//int release = Integer.parseInt(project.property("versionRelease").toString())
+//String stage = project.property("versionStage").toString()
+//int stageRelease = Integer.parseInt(project.property("versionStageRelease").toString())
+//
+//String content = ""
+//String filePath = "buildnumber.txt"
+//
+//println("Current Path: " + new File('.').getAbsolutePath())
+//
+//try {
+//    content = new String(Files.readAllBytes(FileSystems.getDefault().getPath(project.getRootDir().getAbsolutePath(), filePath)))
+//} catch (IOException e) {
+//    throw new RuntimeException(e)
+//}
+//
+//String buildNrString = content
+//Integer buildNumber = Integer.valueOf(buildNrString)
+//
+//// Advance build number.
+//buildNumber++
+//println("Executing Build " + buildNumber)
+//String newBuild = buildNumber.toString()
+//
+//// Write new build number.
+//FileOutputStream output = new FileOutputStream("${projectDir}/buildnumber.txt")
+//output.write(newBuild.getBytes())
+//output.flush()
+//output.close()
 
-String content = ""
-String filePath = "buildnumber.txt"
+boolean isDevTest = Boolean.parseBoolean rootProject.property("isDevTest").toString()
 
-println("Current Path: " + new File('.').getAbsolutePath())
-
-try {
-    content = new String(Files.readAllBytes(FileSystems.getDefault().getPath(project.getRootDir().getAbsolutePath(), filePath)))
-} catch (IOException e) {
-    throw new RuntimeException(e)
-}
-
-String buildNrString = content
-Integer buildNumber = Integer.valueOf(buildNrString)
-
-// Advance build number.
-buildNumber++
-println("Executing Build " + buildNumber)
-String newBuild = buildNumber.toString()
-
-// Write new build number.
-FileOutputStream output = new FileOutputStream("${projectDir}/buildnumber.txt")
-output.write(newBuild.getBytes())
-output.flush()
-output.close()
-
-//boolean isDevTest = Boolean.parseBoolean(isDevTestString)
+def final SECOND_INTERVAL = 15
 
 if (isDevTest) {
-    version = "Dev"
+    version "Dev"
 } else {
-    version = version1 + "." + release + '.' + buildNumber + "-" + stage + stageRelease
+//    version = version1 + "." + release + '.' + buildNumber + "-" + stage + stageRelease
+    def date = LocalDate.now()
+    def time = LocalTime.now()
+    version "" + (date.year - 1985) + "." + date.dayOfYear + "." + ((time.hour * 3600 + time.minute * 60 + time.second) / SECOND_INTERVAL as Integer)
 }
 
-group = 'com.qtech' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group 'com.qtech' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'randomthingz'
-jar.archiveVersion.set(version)
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+jar.archiveVersion.set(version) // Set Jar archive version to the project version.
+
+sourceCompatibility = compileJava.sourceCompatibility = JavaVersion.VERSION_1_8 // Minecraft versions prior to 1.17 needs Java version 1.8
+targetCompatibility = compileJava.targetCompatibility = JavaVersion.VERSION_1_8 // Minecraft versions prior to 1.17 needs Java version 1.8
 
 println "Current version: " + version
 println "Project: " + group + ":" + archivesBaseName
@@ -399,11 +397,22 @@ task replaceResources(type: Copy) {
 //    into new File("${projectDir}/src/main/resources/META-INF")
 //}
 
+import org.apache.tools.ant.filters.ReplaceTokens
+
+task processSource(type: Sync) {
+    from sourceSets.main.resources
+    inputs.property 'version', version
+    filter(ReplaceTokens, tokens: [version: version])
+    into "$buildDir/stagedResources"
+}
+
 processResources {
     exclude 'META-INF/mods.toml'
 //    exclude 'META-INF/qfm_args.json'
     finalizedBy replaceResources
 //    finalizedBy qfmArgs
+
+    source = processSource.outputs;
 }
 
 task sourcesJar(type: Jar) {
@@ -446,6 +455,11 @@ jar {
         }
     }
     zip64 = true
+}
+
+tasks.withType(ProcessResources).configureEach {
+//    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+
 }
 
 // Example configuration to allow publishing using the maven-publish task
@@ -496,62 +510,10 @@ task("uploadJars", dependsOn: "build") {
     }
 }
 
-//Gson gson = new Gson()
-//JsonObject json = new JsonObject()
-//
-//// \version
-//JsonObject versionJ = new JsonObject()
-//versionJ.addProperty "name", version.toString()
-//versionJ.addProperty "version", version1
-//versionJ.addProperty "release", release
-//versionJ.addProperty "build", buildNumber
-//versionJ.addProperty "stage", stage
-//versionJ.addProperty "stage_release", stageRelease
-//
-//// \flags
-//JsonObject flagsJ = new JsonObject()
-//flagsJ.addProperty "dev_test", isDevTest
-//json.add("flags", flagsJ)
-//JsonObject buildInfoJ = new JsonObject()
-//buildInfoJ.addProperty("date", LocalDateTime.now(ZoneId.systemDefault()).toString())
-//
-//// \compile
-//JsonObject compileJ = new JsonObject()
-//compileJ.addProperty "name", compileJava.name
-//compileJ.addProperty "source_compat", compileJava.sourceCompatibility
-//compileJ.addProperty "target_compat", compileJava.targetCompatibility
-//
-//// \project
-//JsonObject projectJ = new JsonObject()
-//projectJ.addProperty "name", project.name != null ? project.name : ""
-//projectJ.addProperty "display_name", project.displayName != null ? project.displayName : ""
-//
-//JsonObject minecraftJ = new JsonObject()
-//minecraftJ.addProperty "mappings_version", "${project.mappingsVersion}"
-//minecraftJ.addProperty "mappings_channel", "${project.mappingsChannel}"
-//minecraftJ.addProperty "mappings", "${project.mappingsChannel}_${project.mappingsVersion}"
-//minecraftJ.addProperty "version", "${project.mc_version}"
-//minecraftJ.addProperty "forge_version", "${project.forge_version}"
-//
-//// \project\gradle
-//JsonObject gradleJ = new JsonObject()
-//gradleJ.addProperty "version", gradle.gradleVersion
-//
-//compileJ  .add "gradle",     gradleJ
-//projectJ  .add "minecraft",  minecraftJ
-//buildInfoJ.add "compile",    compileJ
-//buildInfoJ.add "project",    projectJ
-//json      .add "version",    versionJ
-//json      .add "build_info", buildInfoJ
-//
-//File qfmArgsFile = new File("${projectDir}/qfm_args.json")
-////File qfmArgsFile = new File("qfm_args.json")
-//if (qfmArgsFile.exists()) {
-//    qfmArgsFile.delete()
-//}
-//FileWriter fileWriter = new FileWriter(qfmArgsFile)
-//JsonWriter jsonWriter = new JsonWriter(fileWriter)
-//jsonWriter.setIndent("   ")
-//gson.toJson(json, jsonWriter)
-//fileWriter.flush()
-//fileWriter.close()
+tasks.withType(Test).configureEach {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.fork = true
+}

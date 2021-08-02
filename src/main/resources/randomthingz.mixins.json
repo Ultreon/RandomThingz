@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.qtech.randomthingz.mixin",
+  "package": "com.ultreon.randomthingz.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "randomthingz.refmap.json",
   "mixins": [
