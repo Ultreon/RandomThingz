@@ -31,7 +31,7 @@ public class CutlassItem extends SwordItem implements IHasToolType {
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
     public CutlassItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn.defaultMaxDamage((int) (tier.getMaxUses() * 1.4)));
+        super(tier, attackDamageIn, attackSpeedIn, builderIn.group(null).defaultMaxDamage((int) (tier.getMaxUses() * 1.4)));
         this.attackDamage = (float) attackDamageIn + (tier.getAttackDamage() * 2);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.attackDamage * 0.8, AttributeModifier.Operation.ADDITION));
