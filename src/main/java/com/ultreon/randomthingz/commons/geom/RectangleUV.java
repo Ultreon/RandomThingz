@@ -46,7 +46,6 @@ public class RectangleUV extends Rectangle2D implements Serializable {
 
     /**
      * {@inheritDoc}
-     *
      * @since 1.2
      */
     public Rectangle2D getBounds2D() {
@@ -55,7 +54,6 @@ public class RectangleUV extends Rectangle2D implements Serializable {
 
     /**
      * {@inheritDoc}
-     *
      * @since 1.2
      */
     public Rectangle2D createIntersection(Rectangle2D r) {
@@ -66,7 +64,6 @@ public class RectangleUV extends Rectangle2D implements Serializable {
 
     /**
      * {@inheritDoc}
-     *
      * @since 1.2
      */
     public Rectangle2D createUnion(Rectangle2D r) {

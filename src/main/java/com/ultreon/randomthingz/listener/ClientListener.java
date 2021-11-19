@@ -17,7 +17,6 @@ import net.minecraftforge.fml.common.Mod;
  * <h2>Client listener:</h2>
  * Listens for client side only events.<br>
  * <br>
- *
  * @author <a href="https://github.com/CoFH">(partial) CoFH</a>, Qboi123
  */
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -27,7 +26,6 @@ public class ClientListener {
      * Handles FOV update event.<br>
      * <br>
      * Author: <a href="https://github.com/CoFH">CoFH</a>
-     *
      * @param event fov update event.
      */
     @SubscribeEvent

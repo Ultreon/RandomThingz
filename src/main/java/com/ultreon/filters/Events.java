@@ -26,7 +26,8 @@ import java.util.stream.Collectors;
 /**
  * @author MrCrayfish
  */
-public class Events {
+public class Events
+{
     private static final ResourceLocation ICONS = new ResourceLocation(Reference.MOD_ID, "textures/gui/icons.png");
     private static final Map<ItemGroup, Integer> scrollMap = new HashMap<>();
 
@@ -43,14 +44,15 @@ public class Events {
     private ItemGroup currentGroup = ItemGroup.BUILDING_BLOCKS;
 
     @SubscribeEvent
-    public void onPlayerLogout(ClientPlayerNetworkEvent.LoggedOutEvent event) {
+    public void onPlayerLogout(ClientPlayerNetworkEvent.LoggedOutEvent event)
+    {
         this.updatedFilters = false;
     }
 
     @SubscribeEvent
     public void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
-        if (event.getGui() instanceof CreativeScreen) {
-            if (!this.updatedFilters) {
+        if(event.getGui() instanceof CreativeScreen) {
+            if(!this.updatedFilters) {
                 this.updateFilters();
                 this.updatedFilters = true;
             }
@@ -70,7 +72,8 @@ public class Events {
             this.updateTagButtons(screen);
 
             ItemGroup group = this.getGroup(screen.getSelectedTabIndex());
-            if (Filters.get().hasFilters(group)) {
+            if(Filters.get().hasFilters(group))
+            {
                 this.showButtons();
                 this.viewingFilterTab = true;
                 this.updateItems(screen);
@@ -82,13 +85,13 @@ public class Events {
 
     @SubscribeEvent
     public void onScreenClick(GuiScreenEvent.MouseClickedEvent.Pre event) {
-        if (event.getButton() != GLFW.GLFW_MOUSE_BUTTON_LEFT)
+        if(event.getButton() != GLFW.GLFW_MOUSE_BUTTON_LEFT)
             return;
 
-        if (event.getGui() instanceof CreativeScreen) {
-            for (Button button : this.buttons) {
-                if (button.isMouseOver(event.getMouseX(), event.getMouseY())) {
-                    if (button.mouseClicked(event.getMouseX(), event.getMouseY(), event.getButton())) {
+        if(event.getGui() instanceof CreativeScreen) {
+            for(Button button : this.buttons) {
+                if(button.isMouseOver(event.getMouseX(), event.getMouseY())) {
+                    if(button.mouseClicked(event.getMouseX(), event.getMouseY(), event.getButton())) {
                         return;
                     }
                 }
@@ -96,9 +99,12 @@ public class Events {
         }
     }
 
-    public void onCreativeTabChange(CreativeScreen screen, ItemGroup group) {
-        if (Filters.get().hasFilters(group)) {
-            if (group != this.currentGroup) {
+    public void onCreativeTabChange(CreativeScreen screen, ItemGroup group)
+    {
+        if(Filters.get().hasFilters(group))
+        {
+            if(group != this.currentGroup)
+            {
                 this.updateItems(screen);
                 this.currentGroup = group;
             }
@@ -107,29 +113,38 @@ public class Events {
     }
 
     @SubscribeEvent
-    public void onScreenDrawPre(GuiScreenEvent.DrawScreenEvent.Pre event) {
-        if (event.getGui() instanceof CreativeScreen) {
+    public void onScreenDrawPre(GuiScreenEvent.DrawScreenEvent.Pre event)
+    {
+        if(event.getGui() instanceof CreativeScreen)
+        {
             CreativeScreen screen = (CreativeScreen) event.getGui();
             ItemGroup group = this.getGroup(screen.getSelectedTabIndex());
 
-            if (Filters.get().hasFilters(group)) {
-                if (!this.viewingFilterTab) {
+            if(Filters.get().hasFilters(group))
+            {
+                if(!this.viewingFilterTab)
+                {
                     this.updateItems(screen);
                     this.viewingFilterTab = true;
                 }
-            } else {
+            }
+            else
+            {
                 this.viewingFilterTab = false;
             }
         }
     }
 
     @SubscribeEvent
-    public void onScreenDrawBackground(GuiContainerEvent.DrawBackground event) {
-        if (event.getGuiContainer() instanceof CreativeScreen) {
+    public void onScreenDrawBackground(GuiContainerEvent.DrawBackground event)
+    {
+        if(event.getGuiContainer() instanceof CreativeScreen)
+        {
             CreativeScreen screen = (CreativeScreen) event.getGuiContainer();
             ItemGroup group = this.getGroup(screen.getSelectedTabIndex());
 
-            if (Filters.get().hasFilters(group)) {
+            if(Filters.get().hasFilters(group))
+            {
                 /* Render buttons */
                 this.buttons.forEach(button ->
                 {
@@ -140,25 +155,31 @@ public class Events {
     }
 
     @SubscribeEvent
-    public void onScreenDrawPost(GuiScreenEvent.DrawScreenEvent.Post event) {
-        if (event.getGui() instanceof CreativeScreen) {
+    public void onScreenDrawPost(GuiScreenEvent.DrawScreenEvent.Post event)
+    {
+        if(event.getGui() instanceof CreativeScreen)
+        {
             CreativeScreen screen = (CreativeScreen) event.getGui();
             ItemGroup group = this.getGroup(screen.getSelectedTabIndex());
 
-            if (Filters.get().hasFilters(group)) {
+            if(Filters.get().hasFilters(group))
+            {
                 /* Render tooltips after so it renders above buttons */
                 this.buttons.forEach(button ->
                 {
-                    if (button.isMouseOver(event.getMouseX(), event.getMouseY())) {
+                    if(button.isMouseOver(event.getMouseX(), event.getMouseY()))
+                    {
                         screen.renderTooltip(event.getMatrixStack(), button.getFilter().getName(), event.getMouseX(), event.getMouseY());
                     }
                 });
 
-                if (this.btnEnableAll.isMouseOver(event.getMouseX(), event.getMouseY())) {
+                if(this.btnEnableAll.isMouseOver(event.getMouseX(), event.getMouseY()))
+                {
                     screen.renderTooltip(event.getMatrixStack(), this.btnEnableAll.getMessage(), event.getMouseX(), event.getMouseY());
                 }
 
-                if (this.btnDisableAll.isMouseOver(event.getMouseX(), event.getMouseY())) {
+                if(this.btnDisableAll.isMouseOver(event.getMouseX(), event.getMouseY()))
+                {
                     screen.renderTooltip(event.getMatrixStack(), this.btnDisableAll.getMessage(), event.getMouseX(), event.getMouseY());
                 }
             }
@@ -166,8 +187,10 @@ public class Events {
     }
 
     @SubscribeEvent
-    public void onMouseScroll(GuiScreenEvent.MouseScrollEvent.Pre event) {
-        if (event.getGui() instanceof CreativeScreen) {
+    public void onMouseScroll(GuiScreenEvent.MouseScrollEvent.Pre event)
+    {
+        if(event.getGui() instanceof CreativeScreen)
+        {
             CreativeScreen creativeScreen = (CreativeScreen) event.getGui();
             int guiLeft = creativeScreen.getGuiLeft();
             int guiTop = creativeScreen.getGuiTop();
@@ -175,10 +198,14 @@ public class Events {
             int startY = guiTop + 10;
             int endX = guiLeft;
             int endY = startY + 28 * 4 + 3;
-            if (event.getMouseX() >= startX && event.getMouseX() < endX && event.getMouseY() >= startY && event.getMouseY() < endY) {
-                if (event.getScrollDelta() > 0) {
+            if(event.getMouseX() >= startX && event.getMouseX() < endX && event.getMouseY() >= startY && event.getMouseY() < endY)
+            {
+                if(event.getScrollDelta() > 0)
+                {
                     this.scrollUp();
-                } else {
+                }
+                else
+                {
                     this.scrollDown();
                 }
                 event.setCanceled(true);
@@ -186,37 +213,48 @@ public class Events {
         }
     }
 
-    private void updateTagButtons(CreativeScreen screen) {
-        if (!this.updatedFilters)
+    private void updateTagButtons(CreativeScreen screen)
+    {
+        if(!this.updatedFilters)
             return;
 
         this.buttons.clear();
         ItemGroup group = this.getGroup(screen.getSelectedTabIndex());
-        if (Filters.get().hasFilters(group)) {
+        if(Filters.get().hasFilters(group))
+        {
             List<FilterEntry> entries = this.getFilters(group);
             int scroll = scrollMap.computeIfAbsent(group, group1 -> 0);
-            for (int i = scroll; i < scroll + 4 && i < entries.size(); i++) {
+            for(int i = scroll; i < scroll + 4 && i < entries.size(); i++)
+            {
                 TagButton button = new TagButton(screen.getGuiLeft() - 28, screen.getGuiTop() + 29 * (i - scroll) + 10, entries.get(i), button1 -> this.updateItems(screen));
                 this.buttons.add(button);
             }
             this.btnScrollUp.active = scroll > 0;
             this.btnScrollDown.active = scroll <= entries.size() - 4 - 1;
             this.showButtons();
-        } else {
+        }
+        else
+        {
             this.hideButtons();
         }
     }
 
-    private void updateItems(CreativeScreen screen) {
+    private void updateItems(CreativeScreen screen)
+    {
         CreativeScreen.CreativeContainer container = screen.getContainer();
         Set<Item> filteredItems = new LinkedHashSet<>();
         ItemGroup group = this.getGroup(screen.getSelectedTabIndex());
-        if (group != null) {
-            if (Filters.get().hasFilters(group)) {
+        if(group != null)
+        {
+            if(Filters.get().hasFilters(group))
+            {
                 List<FilterEntry> entries = Filters.get().getFilters(group);
-                if (entries != null) {
-                    for (FilterEntry filter : this.getFilters(group)) {
-                        if (filter.isEnabled()) {
+                if(entries != null)
+                {
+                    for(FilterEntry filter : this.getFilters(group))
+                    {
+                        if(filter.isEnabled())
+                        {
                             filteredItems.addAll(filter.getItems());
                         }
                     }
@@ -229,7 +267,8 @@ public class Events {
         }
     }
 
-    private void updateFilters() {
+    private void updateFilters()
+    {
         Filters.get().getGroups().forEach(group ->
         {
             List<FilterEntry> entries = Filters.get().getFilters(group);
@@ -237,13 +276,16 @@ public class Events {
 
             Set<Item> removed = new HashSet<>();
             List<Item> items = ForgeRegistries.ITEMS.getValues().stream()
-                    .filter(item -> item.getGroup() == group || item == Items.ENCHANTED_BOOK)
-                    .collect(Collectors.toList());
+                .filter(item -> item.getGroup() == group || item == Items.ENCHANTED_BOOK)
+                .collect(Collectors.toList());
             items.forEach(item ->
             {
-                for (ResourceLocation location : item.getTags()) {
-                    for (FilterEntry filter : entries) {
-                        if (location.equals(filter.getTag())) {
+                for(ResourceLocation location : item.getTags())
+                {
+                    for(FilterEntry filter : entries)
+                    {
+                        if(location.equals(filter.getTag()))
+                        {
                             filter.add(item);
                             removed.add(item);
                         }
@@ -252,11 +294,13 @@ public class Events {
             });
             items.removeAll(removed);
 
-            if (group.getRelevantEnchantmentTypes().length == 0) {
+            if(group.getRelevantEnchantmentTypes().length == 0)
+            {
                 items.remove(Items.ENCHANTED_BOOK);
             }
 
-            if (!items.isEmpty()) {
+            if(!items.isEmpty())
+            {
                 FilterEntry entry = new FilterEntry(new ResourceLocation("miscellaneous"), new ItemStack(Blocks.BARRIER));
                 items.forEach(entry::add);
                 this.miscFilterMap.put(group, entry);
@@ -264,16 +308,20 @@ public class Events {
         });
     }
 
-    private ItemGroup getGroup(int index) {
-        if (index < 0 || index >= ItemGroup.GROUPS.length)
+    private ItemGroup getGroup(int index)
+    {
+        if(index < 0 || index >= ItemGroup.GROUPS.length)
             return null;
         return ItemGroup.GROUPS[index];
     }
 
-    private List<FilterEntry> getFilters(ItemGroup group) {
-        if (Filters.get().hasFilters(group)) {
+    private List<FilterEntry> getFilters(ItemGroup group)
+    {
+        if(Filters.get().hasFilters(group))
+        {
             List<FilterEntry> filters = new ArrayList<>(Filters.get().getFilters(group));
-            if (this.miscFilterMap.containsKey(group)) {
+            if(this.miscFilterMap.containsKey(group))
+            {
                 filters.add(this.miscFilterMap.get(group));
             }
             return filters;
@@ -281,7 +329,8 @@ public class Events {
         return Collections.emptyList();
     }
 
-    private void showButtons() {
+    private void showButtons()
+    {
         this.btnScrollUp.visible = true;
         this.btnScrollDown.visible = true;
         this.btnEnableAll.visible = true;
@@ -289,7 +338,8 @@ public class Events {
         this.buttons.forEach(button -> button.visible = true);
     }
 
-    private void hideButtons() {
+    private void hideButtons()
+    {
         this.btnScrollUp.visible = false;
         this.btnScrollDown.visible = false;
         this.btnEnableAll.visible = false;
@@ -297,15 +347,19 @@ public class Events {
         this.buttons.forEach(button -> button.visible = false);
     }
 
-    private void scrollUp() {
+    private void scrollUp()
+    {
         Screen screen = Minecraft.getInstance().currentScreen;
-        if (screen instanceof CreativeScreen) {
+        if(screen instanceof CreativeScreen)
+        {
             CreativeScreen creativeScreen = (CreativeScreen) screen;
             ItemGroup group = this.getGroup(creativeScreen.getSelectedTabIndex());
             List<FilterEntry> entries = this.getFilters(group);
-            if (entries != null) {
+            if(entries != null)
+            {
                 int scroll = scrollMap.computeIfAbsent(group, group1 -> 0);
-                if (scroll > 0) {
+                if(scroll > 0)
+                {
                     scrollMap.put(group, scroll - 1);
                     this.updateTagButtons(creativeScreen);
                 }
@@ -313,15 +367,19 @@ public class Events {
         }
     }
 
-    private void scrollDown() {
+    private void scrollDown()
+    {
         Screen screen = Minecraft.getInstance().currentScreen;
-        if (screen instanceof CreativeScreen) {
+        if(screen instanceof CreativeScreen)
+        {
             CreativeScreen creativeScreen = (CreativeScreen) screen;
             ItemGroup group = this.getGroup(creativeScreen.getSelectedTabIndex());
             List<FilterEntry> entries = this.getFilters(group);
-            if (entries != null) {
+            if(entries != null)
+            {
                 int scroll = scrollMap.computeIfAbsent(group, group1 -> 0);
-                if (scroll <= entries.size() - 4 - 1) {
+                if(scroll <= entries.size() - 4 - 1)
+                {
                     scrollMap.put(group, scroll + 1);
                     this.updateTagButtons(creativeScreen);
                 }
@@ -329,13 +387,16 @@ public class Events {
         }
     }
 
-    private void enableAllFilters() {
+    private void enableAllFilters()
+    {
         Screen screen = Minecraft.getInstance().currentScreen;
-        if (screen instanceof CreativeScreen) {
+        if(screen instanceof CreativeScreen)
+        {
             CreativeScreen creativeScreen = (CreativeScreen) screen;
             ItemGroup group = this.getGroup(creativeScreen.getSelectedTabIndex());
             List<FilterEntry> entries = this.getFilters(group);
-            if (entries != null) {
+            if(entries != null)
+            {
                 entries.forEach(entry -> entry.setEnabled(true));
                 this.buttons.forEach(TagButton::updateState);
                 this.updateItems(creativeScreen);
@@ -343,13 +404,16 @@ public class Events {
         }
     }
 
-    private void disableAllFilters() {
+    private void disableAllFilters()
+    {
         Screen screen = Minecraft.getInstance().currentScreen;
-        if (screen instanceof CreativeScreen) {
+        if(screen instanceof CreativeScreen)
+        {
             CreativeScreen creativeScreen = (CreativeScreen) screen;
             ItemGroup group = this.getGroup(creativeScreen.getSelectedTabIndex());
             List<FilterEntry> entries = this.getFilters(group);
-            if (entries != null) {
+            if(entries != null)
+            {
                 entries.forEach(filters -> filters.setEnabled(false));
                 this.buttons.forEach(TagButton::updateState);
                 this.updateItems(creativeScreen);

@@ -24,16 +24,14 @@ import java.util.UUID;
 
 public class LongswordItem extends SwordItem implements IHasToolType {
     private final float attackDamage;
-    /**
-     * Modifiers applied when the item is in the mainhand of a user.
-     */
+    /** Modifiers applied when the item is in the mainhand of a user. */
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
 
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
     public LongswordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn.defaultMaxDamage((int) (tier.getMaxUses() * 1.6)));
-        this.attackDamage = (float) attackDamageIn + (tier.getAttackDamage());
+        this.attackDamage = (float)attackDamageIn + (tier.getAttackDamage());
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));

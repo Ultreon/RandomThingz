@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.block;
 
-import com.ultreon.texturedmodels.QTextureModels;
+import com.ultreon.texturedmodels.TexturedModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
@@ -28,8 +28,6 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
-
 /**
  * Main class for frame pressure plates - all important block info can be found here
  * Visit {@linkplain FrameBlock} for a better documentation
@@ -43,11 +41,11 @@ public class PressurePlateFrameBlock extends PressurePlateBlock {
 
     public PressurePlateFrameBlock(Sensitivity sensitivityIn, Properties propertiesIn) {
         super(sensitivityIn, propertiesIn);
-        this.setDefaultState(this.stateContainer.getBaseState().with(CONTAINS_BLOCK, Boolean.FALSE).with(POWERED, Boolean.FALSE).with(LIGHT_LEVEL, 0));
+        this.setDefaultState(this.stateContainer.getBaseState().with(CONTAINS_BLOCK, Boolean.FALSE).with(POWERED, Boolean.FALSE).with(BCBlockStateProperties.LIGHT_LEVEL, 0));
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(CONTAINS_BLOCK).add(POWERED).add(LIGHT_LEVEL);
+        builder.add(CONTAINS_BLOCK).add(POWERED).add(BCBlockStateProperties.LIGHT_LEVEL);
     }
 
     @Override
@@ -72,7 +70,7 @@ public class PressurePlateFrameBlock extends PressurePlateBlock {
             BlockAppearanceHelper.setDesignTexture(dimension, pos, player, item);
             BlockAppearanceHelper.setOverlay(dimension, pos, player, item);
             if (item.getItem() instanceof BlockItem) {
-                if (state.get(BCBlockStateProperties.CONTAINS_BLOCK) || Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) {
+                if (state.get(BCBlockStateProperties.CONTAINS_BLOCK) || Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(TexturedModels.MOD_ID)) {
                     return ActionResultType.PASS;
                 }
                 TileEntity tileEntity = dimension.getTileEntity(pos);
@@ -139,10 +137,10 @@ public class PressurePlateFrameBlock extends PressurePlateBlock {
 
     @Override
     public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
-        if (state.get(LIGHT_LEVEL) > 15) {
+        if (state.get(BCBlockStateProperties.LIGHT_LEVEL) > 15) {
             return 15;
         }
-        return state.get(LIGHT_LEVEL);
+        return state.get(BCBlockStateProperties.LIGHT_LEVEL);
     }
 }
 //========SOLI DEO GLORIA========//

@@ -53,7 +53,7 @@ public class Progressbar extends Widget {
         if (this.length == 0) {
             i = 0;
         } else {
-            i = (int) (182d * (double) value / (double) length);
+            i = (int) (182d * (double)value / (double) length);
         }
         if (i > 0) {
             this.blit(matrixStack, x, y, 0, 69, i, 5);

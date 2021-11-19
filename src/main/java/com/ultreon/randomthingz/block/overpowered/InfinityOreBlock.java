@@ -22,7 +22,6 @@ public class InfinityOreBlock extends OreBlock {
     public InfinityOreBlock(Properties properties) {
         super(properties);
     }
-
     @Override
     public void onBlockClicked(@NotNull BlockState state, @NotNull World dimensionIn, @NotNull BlockPos pos, @NotNull PlayerEntity player) {
         super.onBlockClicked(state, dimensionIn, pos, player);

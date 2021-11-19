@@ -33,8 +33,8 @@ public final class ModFluids {
                 .density(5_000)
                 .color(0xff00000)
                 .viscosity(5000))
-                .block(() -> ModBlocks.OIL.get())
-                .bucket(() -> ModItems.OIL_BUCKET.get());
+            .block(() -> ModBlocks.OIL.get())
+            .bucket(() -> ModItems.OIL_BUCKET.get());
         FLOWING_OIL = register("flowing_oil", new ForgeFlowingFluid.Flowing(oilProps));
         OIL = register("oil", new ForgeFlowingFluid.Source(oilProps));
 

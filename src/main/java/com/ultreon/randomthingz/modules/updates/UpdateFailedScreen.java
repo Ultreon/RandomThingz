@@ -20,7 +20,7 @@ import java.util.Objects;
 /**
  * Update failed screen.
  * Shows when the update was failed after downloading.
- *
+ * 
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
@@ -28,16 +28,16 @@ import java.util.Objects;
 public class UpdateFailedScreen extends Screen {
     // Bidi Renderer.
     private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
-
+    
     // Back screen.
     private final Screen backScreen;
-
+    
     // Values.
     private int ticksUntilEnable;
 
     /**
      * Update-failed-screen: class constructor.
-     *
+     * 
      * @param backScreen the back screen.
      */
     public UpdateFailedScreen(Screen backScreen) {
@@ -72,10 +72,10 @@ public class UpdateFailedScreen extends Screen {
 
     /**
      * Render the screen.
-     *
-     * @param matrixStack  the render matrix stack.
-     * @param mouseX       the mouse pointer x position.
-     * @param mouseY       the mouse pointer y position.
+     * 
+     * @param matrixStack the render matrix stack.
+     * @param mouseX the mouse pointer x position.
+     * @param mouseY the mouse pointer y position.
      * @param partialTicks the render partial ticks.
      */
     public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
@@ -88,7 +88,7 @@ public class UpdateFailedScreen extends Screen {
 
     /**
      * Sets the number of ticks to wait before enabling the buttons.
-     *
+     * 
      * @param ticksUntilEnableIn ticks until enable widgets.
      */
     public void setButtonDelay(int ticksUntilEnableIn) {

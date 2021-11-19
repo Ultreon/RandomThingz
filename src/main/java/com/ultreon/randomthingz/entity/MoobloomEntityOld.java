@@ -82,8 +82,7 @@ public class MoobloomEntityOld extends CowEntity implements IShearable, net.mine
         super.registerData();
     }
 
-    public @NotNull
-    ActionResultType getEntityInteractionResult(PlayerEntity p_230254_1_, @NotNull Hand p_230254_2_) {
+    public @NotNull ActionResultType getEntityInteractionResult(PlayerEntity p_230254_1_, @NotNull Hand p_230254_2_) {
         ItemStack itemstack = p_230254_1_.getHeldItem(p_230254_2_);
         if (itemstack.getItem() == Items.BOWL && !this.isChild()) {
             boolean flag = false;

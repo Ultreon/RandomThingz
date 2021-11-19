@@ -28,9 +28,7 @@ public abstract class AbstractActionMenu {
         serverLock = false;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public abstract void client();
-
+    @OnlyIn(Dist.CLIENT) public abstract void client();
     public abstract void server();
 
     public List<? extends ActionMenuItem> getClient() {

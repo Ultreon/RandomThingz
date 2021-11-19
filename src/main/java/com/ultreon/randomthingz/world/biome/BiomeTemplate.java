@@ -28,16 +28,11 @@ import static lombok.AccessLevel.PROTECTED;
  */
 public class BiomeTemplate {
     private final Map<BOPClimates, Integer> weightMap = new HashMap<>();
-    @Setter(PROTECTED)
-    private RegistryKey<Biome> beachBiome = Biomes.BEACH;
-    @Setter(PROTECTED)
-    private RegistryKey<Biome> riverBiome = Biomes.RIVER;
-    @Setter(PROTECTED)
-    BiFunction<Double, Double, Integer> foliageColorFunction;
-    @Setter(PROTECTED)
-    private BiFunction<Double, Double, Integer> grassColorFunction;
-    @Setter(PROTECTED)
-    private BiFunction<Double, Double, Integer> waterColorFunction;
+    @Setter(PROTECTED) private RegistryKey<Biome> beachBiome = Biomes.BEACH;
+    @Setter(PROTECTED) private RegistryKey<Biome> riverBiome = Biomes.RIVER;
+    @Setter(PROTECTED) BiFunction<Double, Double, Integer> foliageColorFunction;
+    @Setter(PROTECTED) private BiFunction<Double, Double, Integer> grassColorFunction;
+    @Setter(PROTECTED) private BiFunction<Double, Double, Integer> waterColorFunction;
 
     public static int calculateSkyColor(float temperature) {
         float lvt_1_1_ = temperature / 3.0F;

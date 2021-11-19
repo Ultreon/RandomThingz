@@ -15,13 +15,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class VariantCowRenderer extends CowRenderer {
 
-    public VariantCowRenderer(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn);
-    }
-
-    @Override
-    public ResourceLocation getEntityTexture(CowEntity entity) {
-        return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.COW, MobVariantsModule.enableCow);
-    }
-
+	public VariantCowRenderer(EntityRendererManager renderManagerIn) {
+		super(renderManagerIn);
+	}
+	
+	@Override
+	public ResourceLocation getEntityTexture(CowEntity entity) {
+		return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.COW, MobVariantsModule.enableCow);
+	}
+	
 }

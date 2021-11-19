@@ -24,7 +24,6 @@ public class CommonEvents {
             event.addCapability(RandomThingz.rl("energy"), new EnergyStorageImplBase(500_000, 10_000, 10_000));
         }
     }
-
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
         try {

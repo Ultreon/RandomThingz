@@ -498,12 +498,10 @@ public class SequencedHashMap<K, V> implements Map<K, V>, Cloneable, Externaliza
     /**
      * Implements {@link Map#keySet()}.
      */
-    public @NotNull
-    Set<K> keySet() {
+    public @NotNull Set<K> keySet() {
         return new AbstractSet<K>() {
             // required impls
-            public @NotNull
-            Iterator<K> iterator() {
+            public @NotNull Iterator<K> iterator() {
                 return new OrderedIterator<>(KEY);
             }
 
@@ -535,12 +533,10 @@ public class SequencedHashMap<K, V> implements Map<K, V>, Cloneable, Externaliza
     /**
      * Implements {@link Map#values()}.
      */
-    public @NotNull
-    Collection<V> values() {
+    public @NotNull Collection<V> values() {
         return new AbstractCollection<V>() {
             // required impl
-            public @NotNull
-            Iterator<V> iterator() {
+            public @NotNull Iterator<V> iterator() {
                 return new OrderedIterator<>(VALUE);
             }
 
@@ -590,8 +586,7 @@ public class SequencedHashMap<K, V> implements Map<K, V>, Cloneable, Externaliza
      *
      * @return
      */
-    public @NotNull
-    Set<Map.Entry<K, V>> entrySet() {
+    public @NotNull Set<Map.Entry<K, V>> entrySet() {
         return new AbstractSet<Map.Entry<K, V>>() {
             // helper
             private Entry<K, V> findEntry(Map.Entry<K, V> o) {
@@ -607,8 +602,7 @@ public class SequencedHashMap<K, V> implements Map<K, V>, Cloneable, Externaliza
             }
 
             // required impl
-            public @NotNull
-            Iterator<Map.Entry<K, V>> iterator() {
+            public @NotNull Iterator<Map.Entry<K, V>> iterator() {
                 return new OrderedIterator<>(ENTRY);
             }
 

@@ -7,11 +7,10 @@ import net.minecraft.util.text.TextFormatting;
 
 @Data
 public class Angle implements Formattable {
-    @Getter
-    private final double degrees;
+    @Getter private final double degrees;
 
     public String toFormattedString() {
-        return TextFormatting.BLUE.toString() + this.degrees + ((char) 0xb0);
+        return TextFormatting.BLUE.toString() + this.degrees + ((char)0xb0);
     }
 
     public double getRadians() {

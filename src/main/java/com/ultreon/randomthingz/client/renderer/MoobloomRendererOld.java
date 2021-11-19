@@ -30,8 +30,7 @@ public class MoobloomRendererOld extends MobRenderer<MoobloomEntityOld, CowModel
     /**
      * Returns the location of an entity's texture.
      */
-    public @NotNull
-    ResourceLocation getEntityTexture(@NotNull MoobloomEntityOld entity) {
+    public @NotNull ResourceLocation getEntityTexture(@NotNull MoobloomEntityOld entity) {
         return MOOBLOOM_TEXTURES;
     }
 

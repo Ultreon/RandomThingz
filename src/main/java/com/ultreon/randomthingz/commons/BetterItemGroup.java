@@ -18,10 +18,8 @@ import java.util.function.Function;
 
 public class BetterItemGroup extends ItemGroup {
     private final ItemStack icon;
-    @Getter
-    private final ResourceLocation location;
-    @Getter
-    private final String labelName;
+    @Getter private final ResourceLocation location;
+    @Getter private final String labelName;
 
     public BetterItemGroup(ResourceLocation location, ItemStack icon) {
         super(location.getNamespace() + "_" + location.getPath().replaceAll("[/.]", "_"));
@@ -47,7 +45,7 @@ public class BetterItemGroup extends ItemGroup {
     }
 
     @SuppressWarnings("unchecked")
-    protected <T extends Enum<T>> void addEnumValuesStack(NonNullList<ItemStack> items, Class<T> enum_, Function<T, ItemStack> function) {
+    protected  <T extends Enum<T>> void addEnumValuesStack(NonNullList<ItemStack> items, Class<T> enum_, Function<T, ItemStack> function) {
         try {
             Method method = enum_.getDeclaredMethod("values");
             Collection<T> values = (Collection<T>) method.invoke(null);
@@ -61,9 +59,8 @@ public class BetterItemGroup extends ItemGroup {
             throw new ReportedException(crashreport);
         }
     }
-
     @SuppressWarnings("unchecked")
-    protected <T extends Enum<T>> void addEnumValuesStackCollection(NonNullList<ItemStack> items, Class<T> enum_, Function<T, Collection<ItemStack>> function) {
+    protected  <T extends Enum<T>> void addEnumValuesStackCollection(NonNullList<ItemStack> items, Class<T> enum_, Function<T, Collection<ItemStack>> function) {
         try {
             Method method = enum_.getDeclaredMethod("values");
             Collection<T> values = (Collection<T>) method.invoke(null);
@@ -77,9 +74,8 @@ public class BetterItemGroup extends ItemGroup {
             throw new ReportedException(crashreport);
         }
     }
-
     @SuppressWarnings("unchecked")
-    protected <T extends Enum<T>> void addEnumValuesCollection(NonNullList<ItemStack> items, Class<T> enum_, Function<T, Collection<IItemProvider>> function) {
+    protected  <T extends Enum<T>> void addEnumValuesCollection(NonNullList<ItemStack> items, Class<T> enum_, Function<T, Collection<IItemProvider>> function) {
         try {
             Method method = enum_.getDeclaredMethod("values");
             Collection<T> values = (Collection<T>) method.invoke(null);
@@ -93,9 +89,8 @@ public class BetterItemGroup extends ItemGroup {
             throw new ReportedException(crashreport);
         }
     }
-
     @SuppressWarnings("unchecked")
-    protected <T extends Enum<T>> void addEnumValues(NonNullList<ItemStack> items, Class<T> enum_, Function<T, IItemProvider> function) {
+    protected  <T extends Enum<T>> void addEnumValues(NonNullList<ItemStack> items, Class<T> enum_, Function<T, IItemProvider> function) {
         try {
             Method method = enum_.getDeclaredMethod("values");
             Collection<T> values = (Collection<T>) method.invoke(null);

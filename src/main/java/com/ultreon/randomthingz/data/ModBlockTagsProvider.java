@@ -27,7 +27,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-@SuppressWarnings({"deprecation", "UnstableApiUsage"})
+@SuppressWarnings("deprecation")
 public class ModBlockTagsProvider extends BlockTagsProvider {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
@@ -64,12 +64,11 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     }
 
     @Override
-    public @NotNull
-    String getName() {
+    public @NotNull String getName() {
         return "RandomThingz - Block Tags";
     }
 
-    @SuppressWarnings({"ConstantConditions", "DuplicatedCode"})
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void act(@NotNull DirectoryCache cache) {
         // Temp fix that removes the broken safety check

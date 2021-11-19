@@ -63,7 +63,7 @@ import java.util.regex.Pattern;
 public class DebugMenu {
     public static PAGE DEBUG_PAGE = PAGE.NONE;
     public static final List<DebugPage> PAGES = new ArrayList<>();
-
+    
     public enum PAGE {
         NONE,
         PLAYER_1,
@@ -96,9 +96,9 @@ public class DebugMenu {
 //                            next = values.length - 1;
 //                        }
 //                    } else {
-                    if (next < 0) {
-                        next = values.length - 1;
-                    }
+                        if (next < 0) {
+                            next = values.length - 1;
+                        }
 //                    }
 
                     DEBUG_PAGE = values[next];
@@ -112,7 +112,7 @@ public class DebugMenu {
 //                    if (Minecraft.getInstance().getVersion().equals("MOD_DEV")) {
 //                        next = 1;
 //                    } else {
-                    next = 0;
+                        next = 0;
 //                    }
                 }
 
@@ -159,12 +159,12 @@ public class DebugMenu {
                 int i = 0;
                 drawLeftTopString(matrixStack, "guiScaleFactor", i++, getMultiplier(mainWindow.getGuiScaleFactor()));
                 drawLeftTopString(matrixStack, "windowSizeScaled", i++, getSize(mainWindow.getScaledWidth(), mainWindow.getScaledHeight()));
-                drawLeftTopString(matrixStack, "windowSize", i++, getSize(mainWindow.getWidth(), mainWindow.getHeight()));
+                drawLeftTopString(matrixStack, "windowSize", i++, getSize(mainWindow.getWidth(),  mainWindow.getHeight()));
                 drawLeftTopString(matrixStack, "windowHandle", i++, mainWindow.getHandle());
                 drawLeftTopString(matrixStack, "framebufferSize", i++, getSize(mainWindow.getFramebufferWidth(), mainWindow.getFramebufferHeight()));
                 drawLeftTopString(matrixStack, "refreshTate", i++, getFormatted(TextFormatting.GOLD.toString() + mainWindow.getRefreshRate() + TextFormatting.GRAY + " fps"));
                 drawLeftTopString(matrixStack, "framerateLimit", i++, getFormatted(TextFormatting.GOLD.toString() + mainWindow.getLimitFramerate() + TextFormatting.GRAY + "fps"));
-
+                
                 int j = 0;
                 drawRightTopString(matrixStack, "fullscreenMode", j++, mainWindow.isFullscreen());
                 break;
@@ -258,8 +258,7 @@ public class DebugMenu {
                     }
                 }
                 break;
-            }
-            case COMPUTER: {
+            } case COMPUTER: {
                 int i = 0;
                 if (monitor != null) {
                     drawLeftTopString(matrixStack, "screenSize", i++, dw, dh);
@@ -367,8 +366,7 @@ public class DebugMenu {
                     drawRightTopString(matrixStack, "damaged", j++, item.isDamaged(stack));
                 }
                 break;
-            }
-            case ENTITY: {
+            } case ENTITY: {
                 if (Minecraft.getInstance().player != null) {
                     PlayerEntity player = Minecraft.getInstance().player;
                     float f = player.rotationPitch;
@@ -459,8 +457,7 @@ public class DebugMenu {
                     }
                 }
                 break;
-            }
-            case MINECRAFT: {
+            } case MINECRAFT: {
                 int i = 0;
                 drawLeftTopString(matrixStack, "version", i++, mc.getVersion());
                 drawLeftTopString(matrixStack, "versionType", i++, mc.getVersionType());
@@ -474,8 +471,7 @@ public class DebugMenu {
                 drawRightTopString(matrixStack, "gamePaused", j++, mc.isGamePaused());
                 drawRightTopString(matrixStack, "integratedServerRunning", j++, mc.isIntegratedServerRunning());
                 break;
-            }
-            case WORLD: {
+            } case WORLD: {
                 if (Minecraft.getInstance().dimension != null) {
                     ClientWorld dimension = Minecraft.getInstance().dimension;
 
@@ -512,8 +508,7 @@ public class DebugMenu {
                     drawRightTopString(matrixStack, "debug", j++, dimension.isDebug());
                 }
                 break;
-            }
-            case WORLD_INFO: {
+            } case WORLD_INFO: {
                 if (Minecraft.getInstance().dimension != null) {
                     ClientWorld.ClientWorldInfo dimensionInfo = Minecraft.getInstance().dimension.getDimensionInfo();
 
@@ -534,8 +529,7 @@ public class DebugMenu {
                     drawRightTopString(matrixStack, "thundering", j++, dimensionInfo.isThundering());
                 }
                 break;
-            }
-            case PLAYER_2: {
+            } case PLAYER_2: {
                 if (Minecraft.getInstance().player != null) {
                     PlayerEntity player = Minecraft.getInstance().player;
                     Team team = player.getTeam();
@@ -554,8 +548,7 @@ public class DebugMenu {
                     drawRightTopString(matrixStack, "onLadder", j++, player.isOnLadder());
                 }
                 break;
-            }
-            case PLAYER_1: {
+            } case PLAYER_1: {
                 if (Minecraft.getInstance().player != null) {
                     PlayerEntity player = Minecraft.getInstance().player;
 
@@ -707,8 +700,7 @@ public class DebugMenu {
 //                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<Invalid>", width / 2, height / 2 - 16, 0xbf0000);
                 }
                 break;
-            }
-            case NONE: {
+            } case NONE: {
                 ClientWorld dimension = Minecraft.getInstance().dimension;
                 ClientPlayerEntity player = Minecraft.getInstance().player;
                 if (dimension != null && player != null) {
@@ -760,50 +752,49 @@ public class DebugMenu {
                     }
                     drawLeftTopString(matrixStack, "Current Pos", i++, new Formatted(player.getPosition().getCoordinatesAsString()));
                 }
-            }
-            default: {
+            } default: {
                 break;
             }
         }
     }
 
-    private static com.ultreon.randomthingz.commons.interfaces.Formattable getFormatted(String s) {
+    private static Formattable getFormatted(String s) {
         return () -> s;
     }
 
-    private static com.ultreon.randomthingz.commons.interfaces.Formattable getMultiplier(double multiplier) {
+    private static Formattable getMultiplier(double multiplier) {
         return new Multiplier(multiplier);
     }
 
-    private static com.ultreon.randomthingz.commons.interfaces.Formattable getSize(int w, int h) {
+    private static Formattable getSize(int w, int h) {
         return new IntSize(w, h);
     }
 
-    private static com.ultreon.randomthingz.commons.interfaces.Formattable getSize(float w, float h) {
+    private static Formattable getSize(float w, float h) {
         return () -> TextFormatting.GOLD.toString() + w + TextFormatting.GRAY + " x " + TextFormatting.GOLD + h;
     }
 
-    private static com.ultreon.randomthingz.commons.interfaces.Formattable getPercentage(double value) {
+    private static Formattable getPercentage(double value) {
         return new Percentage(value);
     }
 
     private static Color getColor(Vector3d color) {
-        return new Color((float) color.x, (float) color.y, (float) color.z);
+        return new Color((float)color.x, (float)color.y, (float)color.z);
     }
 
     private static Color getColor(int rgb) {
         return new Color(rgb);
     }
 
-    private static com.ultreon.randomthingz.commons.interfaces.Formattable getAngle(double angle) {
+    private static Formattable getAngle(double angle) {
         return new Angle(angle * 360.0d);
     }
 
-    private static com.ultreon.randomthingz.commons.interfaces.Formattable getRadians(double angle) {
+    private static Formattable getRadians(double angle) {
         return new Angle(Math.toDegrees(angle));
     }
 
-    private static com.ultreon.randomthingz.commons.interfaces.Formattable getDegrees(double angle) {
+    private static Formattable getDegrees(double angle) {
         return new Angle(angle);
     }
 
@@ -815,7 +806,7 @@ public class DebugMenu {
         StringBuilder sb = new StringBuilder();
 
 //        sb.append(TextFormatting.DARK_AQUA).append(text);
-        sb.append(TextFormatting.GRAY).append(text);
+         sb.append(TextFormatting.GRAY).append(text);
         sb.append(TextFormatting.GRAY).append(": ");
         sb.append(format(obj));
 
@@ -866,36 +857,36 @@ public class DebugMenu {
                 sb.append(TextFormatting.WHITE);
                 sb.append("\\f");
             } else {
-                sb.append(obj.toString());
+                sb.append(obj);
             }
             sb.append(TextFormatting.GOLD);
             sb.append("'");
         } else if (obj instanceof Integer) {
             sb.append(TextFormatting.YELLOW);
-            sb.append(obj.toString());
+            sb.append(obj);
         } else if (obj instanceof Short) {
             sb.append(TextFormatting.YELLOW);
-            sb.append(obj.toString());
+            sb.append(obj);
             sb.append("s");
         } else if (obj instanceof Byte) {
             sb.append(TextFormatting.YELLOW);
-            sb.append(obj.toString());
+            sb.append(obj);
             sb.append("b");
         } else if (obj instanceof Long) {
             sb.append(TextFormatting.YELLOW);
-            sb.append(obj.toString());
+            sb.append(obj);
             sb.append("L");
         } else if (obj instanceof Float) {
             sb.append(TextFormatting.YELLOW);
-            sb.append(obj.toString());
+            sb.append(obj);
             sb.append("f");
         } else if (obj instanceof Double) {
             sb.append(TextFormatting.YELLOW);
-            sb.append(obj.toString());
+            sb.append(obj);
             sb.append("d");
         } else if (obj instanceof Boolean) {
             sb.append(TextFormatting.LIGHT_PURPLE);
-            sb.append(obj.toString());
+            sb.append(obj);
         } else if (obj instanceof Enum<?>) {
             Enum<?> e = (Enum<?>) obj;
 
@@ -907,15 +898,15 @@ public class DebugMenu {
             List<?> list = (List<?>) obj;
 
             Iterator<?> it = list.iterator();
-            if (!it.hasNext()) {
+            if (! it.hasNext()) {
                 sb.append("]");
                 return sb.toString();
             }
 
-            for (; ; ) {
+            for (;;) {
                 Object e = it.next();
                 sb.append(e == list ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this List" + TextFormatting.GRAY + ")") : format(e));
-                if (!it.hasNext()) {
+                if (! it.hasNext()) {
                     return sb.append(TextFormatting.GRAY).append(']').toString();
                 }
                 sb.append(TextFormatting.GRAY).append(',').append(' ');
@@ -927,15 +918,15 @@ public class DebugMenu {
             Set<?> set = (Set<?>) obj;
 
             Iterator<?> it = set.iterator();
-            if (!it.hasNext()) {
+            if (! it.hasNext()) {
                 sb.append("}");
                 return sb.toString();
             }
 
-            for (; ; ) {
+            for (;;) {
                 Object e = it.next();
                 sb.append(e == set ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this Set" + TextFormatting.GRAY + ")") : format(e));
-                if (!it.hasNext()) {
+                if (! it.hasNext()) {
                     return sb.append(TextFormatting.GRAY).append('}').toString();
                 }
                 sb.append(TextFormatting.GRAY).append(',').append(' ');
@@ -947,17 +938,17 @@ public class DebugMenu {
             Map<?, ?> map = (Map<?, ?>) obj;
 
             Iterator<? extends Map.Entry<?, ?>> it = map.entrySet().iterator();
-            if (!it.hasNext()) {
+            if (! it.hasNext()) {
                 sb.append("}");
                 return sb.toString();
             }
 
-            for (; ; ) {
+            for (;;) {
                 Map.Entry<?, ?> e = it.next();
                 sb.append(e.getKey() == map ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this Map" + TextFormatting.GRAY + ")") : format(e.getKey()));
                 sb.append(TextFormatting.GRAY).append(": ");
                 sb.append(e.getValue() == map ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this Map" + TextFormatting.GRAY + ")") : format(e.getValue()));
-                if (!it.hasNext()) {
+                if (! it.hasNext()) {
                     return sb.append(TextFormatting.GRAY).append('}').toString();
                 }
                 sb.append(TextFormatting.GRAY).append(", ");
@@ -1029,8 +1020,8 @@ public class DebugMenu {
             ItemStack e = (ItemStack) obj;
             sb.append(TextFormatting.BLUE).append(e.getItem().getRegistryName()).append(" ");
             sb.append(TextFormatting.GRAY).append(e.getCount()).append("x");
-        } else if (obj instanceof com.ultreon.randomthingz.commons.interfaces.Formattable) {
-            com.ultreon.randomthingz.commons.interfaces.Formattable e = (Formattable) obj;
+        } else if (obj instanceof Formattable) {
+            Formattable e = (Formattable) obj;
             sb.append(e.toFormattedString());
         } else if (obj instanceof IForgeRegistryEntry<?>) {
             IForgeRegistryEntry<?> ifrEntry = (IForgeRegistryEntry<?>) obj;
@@ -1063,15 +1054,15 @@ public class DebugMenu {
             Collection<?> collection = (Collection<?>) obj;
 
             Iterator<?> it = collection.iterator();
-            if (!it.hasNext()) {
+            if (! it.hasNext()) {
                 sb.append(")");
                 return sb.toString();
             }
 
-            for (; ; ) {
+            for (;;) {
                 Object e = it.next();
                 sb.append(e == collection ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this Collection" + TextFormatting.GRAY + ")") : format(e));
-                if (!it.hasNext()) {
+                if (! it.hasNext()) {
                     return sb.append(TextFormatting.GRAY).append(')').toString();
                 }
                 sb.append(TextFormatting.GRAY).append(',').append(' ');
@@ -1103,7 +1094,7 @@ public class DebugMenu {
         int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f, 12f + (line * 12), 0xffffff);
+        fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f,  12f + (line * 12), 0xffffff);
     }
 
     private static void drawLeftTopString(MatrixStack matrixStack, String text, int line, Object obj, Object... objects) {
@@ -1113,7 +1104,7 @@ public class DebugMenu {
         text = format(text, obj, objects);
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, 12f, 12f + (line * 12), 0xffffff);
+        fontRenderer.drawStringWithShadow(matrixStack, text, 12f,  12f + (line * 12), 0xffffff);
     }
 
     private static void drawRightTopString(MatrixStack matrixStack, String text, int line, Object obj, Object... objects) {
@@ -1135,7 +1126,7 @@ public class DebugMenu {
         int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f, height - 29f - (line * 12), 0xffffff);
+        fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f,  height - 29f - (line * 12), 0xffffff);
     }
 
     @SuppressWarnings("unused")

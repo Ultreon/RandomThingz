@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "randomthingz.refmap.json",
   "mixins": [
-    "MixinItemEntity"
+    "MixinItemEntity",
+    "ServerPlayNetHandlerMixin"
   ],
   "minVersion": "0.8"
 }

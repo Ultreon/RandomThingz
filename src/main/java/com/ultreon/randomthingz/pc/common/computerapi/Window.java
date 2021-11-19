@@ -6,12 +6,8 @@ import lombok.Setter;
 import java.awt.*;
 
 public class Window {
-    @Getter
-    @Setter
-    public Point pos;
-    @Getter
-    @Setter
-    public Dimension size;
+    @Getter @Setter public Point pos;
+    @Getter @Setter public Dimension size;
 
     Window(long handle) {
 

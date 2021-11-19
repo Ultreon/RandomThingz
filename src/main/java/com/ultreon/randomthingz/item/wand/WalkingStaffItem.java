@@ -50,8 +50,7 @@ public class WalkingStaffItem extends Item {
     }
 
     @Override
-    public @NotNull
-    ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
         playerIn.addPotionEffect(new EffectInstance(Effects.SPEED, 5, 4, false, false));
         return super.onItemRightClick(dimensionIn, playerIn, handIn);
     }

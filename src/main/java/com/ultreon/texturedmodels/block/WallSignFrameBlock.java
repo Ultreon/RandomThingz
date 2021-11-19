@@ -1,6 +1,7 @@
 package com.ultreon.texturedmodels.block;
 
 import com.ultreon.texturedmodels.tileentity.SignFrameTile;
+import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WallSignBlock;
@@ -18,25 +19,21 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-import static com.ultreon.texturedmodels.util.BCBlockStateProperties.CONTAINS_BLOCK;
-import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
-
 /**
  * Main class for wall frame signs - all important block info can be found here
  * Visit {@linkplain FrameBlock} for a better documentation
- *
  * @author PianoManu
  * @version 1.1 09/25/20
  */
 public class WallSignFrameBlock extends WallSignBlock {
     public WallSignFrameBlock(Properties propertiesIn) {
         super(propertiesIn, WoodType.OAK);
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.FALSE).with(CONTAINS_BLOCK, false).with(LIGHT_LEVEL, 0));
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.FALSE).with(BCBlockStateProperties.CONTAINS_BLOCK, false).with(BCBlockStateProperties.LIGHT_LEVEL, 0));
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, CONTAINS_BLOCK, LIGHT_LEVEL);
+        builder.add(FACING, WATERLOGGED, BCBlockStateProperties.CONTAINS_BLOCK, BCBlockStateProperties.LIGHT_LEVEL);
     }
 
     @Override

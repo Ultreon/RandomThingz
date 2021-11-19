@@ -25,9 +25,9 @@ import java.util.Objects;
 
 /**
  * Update available screen.
- * Will show after loading when there's an update available for QForgeMod.
+ * Will show after loading when there's an update available for Random Thingz.
  * Can be used for other mods using their own implementation of {@linkplain AbstractUpdater}.
- *
+ * 
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
@@ -57,9 +57,9 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
     /**
      * Update available screen: class constructor.
-     *
+     * 
      * @param backScreen the screen to show after closing this screen.
-     * @param updater    the updater where the update is available.
+     * @param updater the updater where the update is available.
      */
     public UpdateAvailableScreen(Screen backScreen, AbstractUpdater<?> updater) {
         // Super call
@@ -112,8 +112,8 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
     /**
      * Render method for the screen.
-     *
-     * @param mcg   the mc-graphics instance.
+     * 
+     * @param mcg the mc-graphics instance.
      * @param mouse the position of the mouse pointer.
      */
     @Override
@@ -142,7 +142,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
     /**
      * Sets the number of ticks to wait before enabling the buttons.
-     *
+     * 
      * @param ticksUntilEnableIn ticks until enable.
      */
     public void setButtonDelay(int ticksUntilEnableIn) {
@@ -181,7 +181,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
     /**
      * Should close on esc, only if buttons are enabled after setting {@linkplain #setButtonDelay(int)}.
-     *
+     * 
      * @return the amount of ticks until buttons will enable.
      */
     public boolean shouldCloseOnEsc() {
@@ -190,7 +190,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
     /**
      * Get if the screen was initialized before.
-     *
+     * 
      * @return if the screen was initialized before.
      */
     public static boolean isInitializedBefore() {
@@ -198,9 +198,9 @@ public class UpdateAvailableScreen extends AdvancedScreen {
     }
 
     /**
-     * Check for QForgeMod updates, then show the update available screen.
+     * Check for Random Thingz updates, then show the update available screen.
      *
-     * @param mc  the minecraft instance.
+     * @param mc the minecraft instance.
      * @param gui the current gui.
      */
     static void checkUpdates(Minecraft mc, Screen gui) {
@@ -210,10 +210,10 @@ public class UpdateAvailableScreen extends AdvancedScreen {
             return;
         }
 
-        // Get QForgeMod updater instance.
+        // Get Random Thingz updater instance.
         AbstractUpdater<RtVersion> updater = AbstractUpdater.getQFMUpdater();
 
-        // Check for QForgeMod updates.
+        // Check for Random Thingz updates.
         AbstractUpdater.UpdateInfo updateInfo = updater.checkForUpdates();
 
         // Is there a update available?

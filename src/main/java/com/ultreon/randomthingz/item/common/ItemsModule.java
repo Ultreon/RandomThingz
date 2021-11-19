@@ -53,21 +53,21 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
     public void registerItemColorHandlers(ColorHandlerEvent.Item event) {
         ItemColors itemColors = event.getItemColors();
         registerSpawnEggColorHandler(itemColors,
-                ModItemsAlt.BABY_CREEPER_SPAWN_EGG,
-                ModItemsAlt.BABY_ENDERMAN_SPAWN_EGG,
-                ModItemsAlt.BABY_SKELETON_SPAWN_EGG,
-                ModItemsAlt.BABY_STRAY_SPAWN_EGG,
-                ModItemsAlt.BABY_WITHER_SKELETON_SPAWN_EGG,
-                ModItemsAlt.DUCK_SPAWN_EGG,
-                ModItemsAlt.CLUCKSHROOM_SPAWN_EGG,
-                ModItemsAlt.HOG_SPAWN_EGG,
-                ModItemsAlt.WARTHOG_SPAWN_EGG,
-                ModItemsAlt.BISON_SPAWN_EGG,
-                ModItemsAlt.FIRE_CREEPER_SPAWN_EGG,
-                ModItemsAlt.ICE_ENDERMAN_SPAWN_EGG,
-                ModItemsAlt.GLOW_SQUID_SPAWN_EGG,
-                ModItemsAlt.MOOBLOOM_SPAWN_EGG,
-                ModItemsAlt.OX_SPAWN_EGG
+                ModItems.BABY_CREEPER_SPAWN_EGG,
+                ModItems.BABY_ENDERMAN_SPAWN_EGG,
+                ModItems.BABY_SKELETON_SPAWN_EGG,
+                ModItems.BABY_STRAY_SPAWN_EGG,
+                ModItems.BABY_WITHER_SKELETON_SPAWN_EGG,
+                ModItems.DUCK_SPAWN_EGG,
+                ModItems.CLUCKSHROOM_SPAWN_EGG,
+                ModItems.HOG_SPAWN_EGG,
+                ModItems.WARTHOG_SPAWN_EGG,
+                ModItems.BISON_SPAWN_EGG,
+                ModItems.FIRE_CREEPER_SPAWN_EGG,
+                ModItems.ICE_ENDERMAN_SPAWN_EGG,
+                ModItems.GLOW_SQUID_SPAWN_EGG,
+                ModItems.MOOBLOOM_SPAWN_EGG,
+                ModItems.OX_SPAWN_EGG
         );
 
 //        List<IItemProvider> spawnEggItems = Registration.ITEMS.getAllItems();

@@ -57,9 +57,9 @@ public final class GraphicsUtil {
 
     public final void drawCenteredString(String text, float x, float y, int color, boolean shadow) {
         if (shadow) {
-            fontRenderer.drawStringWithShadow(matrixStack, text, x - (int) ((float) fontRenderer.getStringWidth(text) / 2), y, color);
+            fontRenderer.drawStringWithShadow(matrixStack, text, x - (int)((float)fontRenderer.getStringWidth(text) / 2), y, color);
         } else {
-            fontRenderer.drawString(matrixStack, text, x - (int) ((float) fontRenderer.getStringWidth(text) / 2), y, color);
+            fontRenderer.drawString(matrixStack, text, x - (int)((float)fontRenderer.getStringWidth(text) / 2), y, color);
         }
     }
 
@@ -92,10 +92,12 @@ public final class GraphicsUtil {
      */
     //TODO, Validate rendering is the same as the original
     public void drawItemTooltipText(@Nonnull final ItemStack stack, List<? extends ITextProperties> textLines, int mouseX, int mouseY,
-                                    int minWidth, int xOffset, int yOffset,
-                                    int screenWidth, int screenHeight, int maxTextWidth,
-                                    int backgroundColor, int borderColorStart, int borderColorEnd, FontRenderer font) {
-        if (!textLines.isEmpty()) {
+                                        int minWidth, int xOffset, int yOffset,
+                                        int screenWidth, int screenHeight, int maxTextWidth,
+                                        int backgroundColor, int borderColorStart, int borderColorEnd, FontRenderer font)
+    {
+        if (!textLines.isEmpty())
+        {
             RenderTooltipEvent.Pre event = new RenderTooltipEvent.Pre(stack, textLines, matrixStack, mouseX, mouseY, screenWidth, screenHeight, maxTextWidth, font);
             if (MinecraftForge.EVENT_BUS.post(event))
                 return;
@@ -110,7 +112,8 @@ public final class GraphicsUtil {
             RenderSystem.disableDepthTest();
             int tooltipTextWidth = minWidth; // Added minWidth.
 
-            for (ITextProperties textLine : textLines) {
+            for (ITextProperties textLine : textLines)
+            {
                 int textLineWidth = font.getStringPropertyWidth(textLine);
                 if (textLineWidth > tooltipTextWidth)
                     tooltipTextWidth = textLineWidth;
@@ -120,7 +123,8 @@ public final class GraphicsUtil {
 
             int titleLinesCount = 1;
             int tooltipX = mouseX + 12;
-            if (tooltipX + tooltipTextWidth + 4 > screenWidth) {
+            if (tooltipX + tooltipTextWidth + 4 > screenWidth)
+            {
                 tooltipX = mouseX - 16 - tooltipTextWidth;
                 if (tooltipX < 4) // if the tooltip doesn't fit on the screen
                 {
@@ -132,21 +136,25 @@ public final class GraphicsUtil {
                 }
             }
 
-            if (maxTextWidth > 0 && tooltipTextWidth > maxTextWidth) {
+            if (maxTextWidth > 0 && tooltipTextWidth > maxTextWidth)
+            {
                 tooltipTextWidth = maxTextWidth;
                 needsWrap = true;
             }
 
-            if (needsWrap) {
+            if (needsWrap)
+            {
                 int wrappedTooltipWidth = 0;
                 List<ITextProperties> wrappedTextLines = new ArrayList<>();
-                for (int i = 0; i < textLines.size(); i++) {
+                for (int i = 0; i < textLines.size(); i++)
+                {
                     ITextProperties textLine = textLines.get(i);
                     List<ITextProperties> wrappedLine = font.getCharacterManager().func_238362_b_(textLine, tooltipTextWidth, Style.EMPTY);
                     if (i == 0)
                         titleLinesCount = wrappedLine.size();
 
-                    for (ITextProperties line : wrappedLine) {
+                    for (ITextProperties line : wrappedLine)
+                    {
                         int lineWidth = font.getStringPropertyWidth(line);
                         if (lineWidth > wrappedTooltipWidth)
                             wrappedTooltipWidth = lineWidth;
@@ -165,7 +173,8 @@ public final class GraphicsUtil {
             int tooltipY = mouseY - 12;
             int tooltipHeight = 8;
 
-            if (textLines.size() > 1) {
+            if (textLines.size() > 1)
+            {
                 tooltipHeight += (textLines.size() - 1) * 10;
                 if (textLines.size() > titleLinesCount)
                     tooltipHeight += 2; // gap between title lines and next lines
@@ -218,10 +227,11 @@ public final class GraphicsUtil {
 
             int tooltipTop = tooltipY;
 
-            for (int lineNumber = 0; lineNumber < textLines.size(); ++lineNumber) {
+            for (int lineNumber = 0; lineNumber < textLines.size(); ++lineNumber)
+            {
                 ITextProperties line = textLines.get(lineNumber);
                 if (line != null)
-                    font.drawEntityText(LanguageMap.getInstance().func_241870_a(line), (float) tooltipX, (float) tooltipY, -1, true, mat, renderType, false, 0, 15728880);
+                    font.drawEntityText(LanguageMap.getInstance().func_241870_a(line), (float)tooltipX, (float)tooltipY, -1, true, mat, renderType, false, 0, 15728880);
 
                 if (lineNumber + 1 == titleLinesCount)
                     tooltipY += 2;

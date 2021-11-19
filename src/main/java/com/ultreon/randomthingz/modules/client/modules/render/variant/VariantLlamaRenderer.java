@@ -8,13 +8,13 @@ import net.minecraft.util.ResourceLocation;
 
 public class VariantLlamaRenderer extends LlamaRenderer {
 
-    public VariantLlamaRenderer(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn);
-    }
+	public VariantLlamaRenderer(EntityRendererManager renderManagerIn) {
+		super(renderManagerIn);
+	}
 
-    @Override
-    public ResourceLocation getEntityTexture(LlamaEntity entity) {
-        return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.LLAMA, () -> super.getEntityTexture(entity));
-    }
-
+	@Override
+	public ResourceLocation getEntityTexture(LlamaEntity entity) {
+		return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.LLAMA, () -> super.getEntityTexture(entity));
+	}
+	
 }

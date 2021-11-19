@@ -68,34 +68,28 @@ public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
                 fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
                 fontRenderer.drawString(matrixStack, "  Not initialized yet", xPos + 5, yPos + 48, 0xbf0000);
                 break;
-            }
-            case ILLEGAL_POSITION: {
+            } case ILLEGAL_POSITION: {
                 fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
                 fontRenderer.drawString(matrixStack, "  Illegal Position, move to above y=5", xPos + 5, yPos + 48, 0xbf0000);
                 break;
-            }
-            case NOT_ENOUGH_ENERGY: {
+            } case NOT_ENOUGH_ENERGY: {
                 fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
                 fontRenderer.drawString(matrixStack, "  No energy", xPos + 5, yPos + 48, 0xbf0000);
                 break;
-            }
-            case UNIDENTIFIED_WORLD: {
+            } case UNIDENTIFIED_WORLD: {
                 fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
                 fontRenderer.drawString(matrixStack, "  Unidentified dimension", xPos + 5, yPos + 48, 0xbf0000);
                 break;
-            }
-            case PAUSED: {
+            } case PAUSED: {
                 fontRenderer.drawString(matrixStack, "Paused", xPos + 5, yPos + 48, 0xbf5f00);
                 if (minecraft.dimension != null) {
                     itemRenderer.renderItemIntoGUI(new ItemStack(minecraft.dimension.getBlockState(container.getCurrentPos()).getBlock()), xPos + xSize - 33, yPos + 17);
                 }
                 break;
-            }
-            case DONE: {
+            } case DONE: {
                 fontRenderer.drawString(matrixStack, "Done", xPos + 5, yPos + 36, 0x007f00);
                 break;
-            }
-            case NO_PROBLEM: {
+            } case NO_PROBLEM: {
                 fontRenderer.drawString(matrixStack, "Mining...", xPos + 5, yPos + 36, 0x3f3f3f);
                 fontRenderer.drawString(matrixStack, "Total blocks: " + container.getTotalBlocks(), xPos + 5, yPos + 48, 0x7f7f7f);
                 fontRenderer.drawString(matrixStack, "Remaining: " + container.getBlocksRemaining(), xPos + 5, yPos + 60, 0x7f7f7f);
@@ -104,8 +98,7 @@ public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
                     itemRenderer.renderItemIntoGUI(new ItemStack(minecraft.dimension.getBlockState(container.getCurrentPos()).getBlock()), xPos + xSize - 33, yPos + 17);
                 }
                 break;
-            }
-            default: {
+            } default: {
                 fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
                 fontRenderer.drawString(matrixStack, "  Unknown error", xPos + 5, yPos + 48, 0xbf0000);
                 break;

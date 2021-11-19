@@ -33,7 +33,7 @@ public class ErrorToast implements IToast {
     public int func_230445_a_() {
         return this.fadeOutTicks;
     }
-
+    
     @NotNull
     public IToast.Visibility func_230444_a_(@NotNull MatrixStack matrixStack, @NotNull ToastGui toastGui, long ticks) {
         if (this.newDisplay) {
@@ -53,7 +53,7 @@ public class ErrorToast implements IToast {
             int i1 = Math.min(4, k - 28);
             this.blitTextures(matrixStack, toastGui, i, 0, 0, 28);
 
-            for (int j1 = 28; j1 < k - i1; j1 += 10) {
+            for(int j1 = 28; j1 < k - i1; j1 += 10) {
                 this.blitTextures(matrixStack, toastGui, i, 16, j1, Math.min(16, k - j1 - i1));
             }
 
@@ -65,8 +65,8 @@ public class ErrorToast implements IToast {
         } else {
             toastGui.getMinecraft().fontRenderer.drawText(matrixStack, this.title, 18.0F, 7.0F, -256);
 
-            for (int k1 = 0; k1 < this.subtitle.size(); ++k1) {
-                toastGui.getMinecraft().fontRenderer.func_238422_b_(matrixStack, this.subtitle.get(k1), 18.0F, (float) (18 + k1 * 12), -1);
+            for(int k1 = 0; k1 < this.subtitle.size(); ++k1) {
+                toastGui.getMinecraft().fontRenderer.func_238422_b_(matrixStack, this.subtitle.get(k1), 18.0F, (float)(18 + k1 * 12), -1);
             }
         }
 
@@ -78,7 +78,7 @@ public class ErrorToast implements IToast {
         int j = Math.min(60, p_238533_3_ - i);
         p_238533_2_.blit(p_238533_1_, 0, p_238533_5_, 0, 64 + p_238533_4_, i, p_238533_6_);
 
-        for (int k = i; k < p_238533_3_ - j; k += 64) {
+        for(int k = i; k < p_238533_3_ - j; k += 64) {
             p_238533_2_.blit(p_238533_1_, k, p_238533_5_, 32, 64 + p_238533_4_, Math.min(64, p_238533_3_ - k - j), p_238533_6_);
         }
 

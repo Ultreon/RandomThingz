@@ -1,4 +1,2 @@
-package com.ultreon.randomthingz.commons.annotation;
-
-public @interface Used {
+package com.ultreon.randomthingz.commons.annotation;public @interface Used {
 }

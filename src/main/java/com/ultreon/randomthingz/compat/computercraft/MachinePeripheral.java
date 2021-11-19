@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.compat.computercraft;
 /*
 
-import com.ultreon.forgemod.QForgeMod;
+import com.ultreon.forgemod.RandomThingz;
 import com.ultreon.forgemod.blocks.machines.AbstractMachineBaseTileEntity;
 import com.qsoftware.modlib.api.RedstoneMode;
 import dan200.computercraft.api.lua.LuaException;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class MachinePeripheral implements IPeripheral {
-    private static final String TYPE = QForgeMod.rl("machine").toString();
+    private static final String TYPE = RandomThingz.rl("machine").toString();
 
     private final AbstractMachineBaseTileEntity machine;
 

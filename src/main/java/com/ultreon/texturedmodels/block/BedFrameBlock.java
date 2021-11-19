@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.block;
 
-import com.ultreon.texturedmodels.QTextureModels;
+import com.ultreon.texturedmodels.TexturedModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.BedFrameTile;
@@ -82,7 +82,7 @@ public class BedFrameBlock extends BedBlock {
     public ActionResultType onBlockActivated(BlockState state, World dimension, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
         ItemStack item = player.getHeldItem(hand);
         if (!dimension.isClientSided) {
-            if ((state.get(CONTAINS_BLOCK) && !item.getItem().isIn(Tags.Items.DYES) && !Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) || item.isEmpty()) {
+            if ((state.get(CONTAINS_BLOCK) && !item.getItem().isIn(Tags.Items.DYES) && !Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(TexturedModels.MOD_ID)) || item.isEmpty()) {
                 //Taken from BedBlock, should work similar to vanilla beds
                 if (state.get(PART) != BedPart.HEAD) {
                     pos = pos.offset(state.get(HORIZONTAL_FACING));

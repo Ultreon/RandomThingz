@@ -10,13 +10,11 @@ import net.minecraft.util.text.TextFormatting;
  * Use {@link #getPercentage() getPercentage} or {@link #setPercentage(double) setPercentage} for getting / setting the percentage value.<br>
  * Use {@link #getValue() getValue} or {@link #setValue(double) setValue} for getting / settings the normalized value.<br>
  * <br>
- *
  * @author Qboi123
  */
 @Data
 public class Percentage implements Formattable {
-    @Getter
-    private double percentage;
+    @Getter private double percentage;
 
     public Percentage(double value) {
         this.percentage = value * 100;

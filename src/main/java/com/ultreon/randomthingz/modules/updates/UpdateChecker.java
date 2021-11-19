@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class UpdateChecker {
     private static final int delay = 10;
     private static final int tickDelay = 20 * delay;
-    //    private static int ticks = tickDelay - 1;
+//    private static int ticks = tickDelay - 1;
     private static final HashMap<AbstractUpdater<?>, IVersion> latestKnownMap = new HashMap<>();
     private static final Ticker ticker = new Ticker(tickDelay - 1);
     private final UpdatesModule module;

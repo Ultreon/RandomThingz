@@ -32,7 +32,7 @@ public final class FluidUtils {
      * capability, or the block is not a tile entity, this returns null.
      *
      * @param dimension The dimension
-     * @param pos       The position to check
+     * @param pos   The position to check
      * @return The energy capability, or null if not present
      */
     @SuppressWarnings("ConstantConditions")

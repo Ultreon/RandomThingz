@@ -25,8 +25,7 @@ public class MoobloomRenderer extends MobRenderer<MoobloomEntity, MoobloomModel<
     /**
      * Returns the location of an entity's texture.
      */
-    public @NotNull
-    ResourceLocation getEntityTexture(@NotNull MoobloomEntity entity) {
+    public @NotNull ResourceLocation getEntityTexture(@NotNull MoobloomEntity entity) {
         return new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/cow/moobloom/" + entity.getMoobloomType().getFilename());
     }
 }

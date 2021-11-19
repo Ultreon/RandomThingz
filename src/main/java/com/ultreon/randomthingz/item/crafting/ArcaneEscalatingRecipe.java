@@ -33,10 +33,8 @@ import java.util.Map;
 public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
     private final ResourceLocation recipeId;
     private final Map<Ingredient, Integer> ingredients = new LinkedHashMap<>();
-    @Getter
-    private int processTime;
-    @Getter
-    private Enchantment result;
+    @Getter private int processTime;
+    @Getter private Enchantment result;
     private List<ItemStack> input;
 
     public void consumeIngredients(IMachineInventory inv) {

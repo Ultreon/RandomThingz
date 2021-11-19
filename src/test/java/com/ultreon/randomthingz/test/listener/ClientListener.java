@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.Mod;
  * <h2>Client listener:</h2>
  * Listens for client side only events.<br>
  * <br>
- *
  * @author <a href="https://github.com/CoFH">(partial) CoFH</a>, Qboi123
  */
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
@@ -24,7 +23,6 @@ public class ClientListener {
      * Handle client chat event.<br>
      * <br>
      * Author: Qboi123<br>
-     *
      * @param event client chat.
      */
     @SubscribeEvent

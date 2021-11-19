@@ -14,13 +14,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class VariantCreeperRenderer extends CreeperRenderer {
-    public VariantCreeperRenderer(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn);
-    }
+	public VariantCreeperRenderer(EntityRendererManager renderManagerIn) {
+		super(renderManagerIn);
+	}
 
-    @Override
-    public ResourceLocation getEntityTexture(CreeperEntity entity) {
-        return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.CREEPER, MobVariantsModule.enableCreeper);
-    }
-
+	@Override
+	public ResourceLocation getEntityTexture(CreeperEntity entity) {
+		return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.CREEPER, MobVariantsModule.enableCreeper);
+	}
+	
 }

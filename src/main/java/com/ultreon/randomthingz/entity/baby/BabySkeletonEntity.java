@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.entity.baby;
 
-import com.ultreon.randomthingz.item.common.ModItemsAlt;
+import com.ultreon.randomthingz.item.common.ModItems;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;
@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 /**
  * Baby skeleton entity class.
  *
- * @author QTech Community.
+ * @author Ultreon Team.
  */
 public class BabySkeletonEntity extends SkeletonEntity implements IBabyEntity {
 
@@ -75,7 +75,7 @@ public class BabySkeletonEntity extends SkeletonEntity implements IBabyEntity {
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return new ItemStack(ModItemsAlt.BABY_SKELETON_SPAWN_EGG.asItem());
+        return new ItemStack(ModItems.BABY_SKELETON_SPAWN_EGG.asItem());
     }
 
     @Nonnull

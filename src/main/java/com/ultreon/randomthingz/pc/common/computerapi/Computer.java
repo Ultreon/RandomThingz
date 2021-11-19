@@ -5,7 +5,7 @@ import com.ultreon.randomthingz.tileentity.ComputerTileEntity;
 
 public class Computer {
     private AbstractFileSystem fileSystem;
-    private Screen screen;
+    private final Screen screen;
     private final ComputerTileEntity tileEntity;
 
     public Computer(ComputerTileEntity tileEntity, AbstractBios bios) {

@@ -9,7 +9,6 @@ public interface IActionMenuItem {
     default ITextComponent getText() {
         return new StringTextComponent("...");
     }
-
     @OnlyIn(Dist.CLIENT)
     default boolean isEnabled() {
         return true;

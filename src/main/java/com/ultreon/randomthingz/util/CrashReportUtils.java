@@ -16,7 +16,6 @@ public class CrashReportUtils {
         crashItemCategory.addDetail("Position", () -> "(" + x + ", " + y + ")");
         crashItemCategory.addDetail("Server variant", () -> String.valueOf(item.isServerVariant()));
     }
-
     public static void addActionMenuItem(CrashReport crashreport, ActionMenuItem item, final int x, final int y) {
         CrashReportCategory crashItemCategory = crashreport.createCategory("Action menu item details");
         crashItemCategory.addDetail("Item classname", item.getClass()::getName);
@@ -26,7 +25,6 @@ public class CrashReportUtils {
         crashItemCategory.addDetail("Position", () -> "(" + x + ", " + y + ")");
         crashItemCategory.addDetail("Server variant", () -> String.valueOf(item.isServerVariant()));
     }
-
     public static void addActionMenuItem(CrashReport crashreport, ActionMenuItem item, final int index) {
         CrashReportCategory crashItemCategory = crashreport.createCategory("Action menu item details");
         crashItemCategory.addDetail("Item classname", item.getClass()::getName);
@@ -36,7 +34,6 @@ public class CrashReportUtils {
         crashItemCategory.addDetail("Enabled", () -> String.valueOf(item.isEnabled()));
         crashItemCategory.addDetail("Server variant", () -> String.valueOf(item.isServerVariant()));
     }
-
     public static void addActionMenuItem(CrashReport crashreport, ActionMenuItem item) {
         CrashReportCategory crashItemCategory = crashreport.createCategory("Action menu item details");
         crashItemCategory.addDetail("Item classname", item.getClass()::getName);

@@ -83,20 +83,20 @@ public class MCGraphics {
     }
 
     public void drawTexture(int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, ResourceLocation resource) {
-        this.drawTexture(x, y, (float) uOffset, (float) vOffset, uWidth, vHeight, 256, 256, resource);
+        this.drawTexture(x, y, (float)uOffset, (float)vOffset, uWidth, vHeight, 256, 256, resource);
     }
 
-    public void drawTexture(int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
+    public void drawTexture(int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight,  int textureWidth, int textureHeight, ResourceLocation resource) {
         textureManager.bindTexture(resource);
         Screen.blit(matrixStack, x, y, width, height, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
-    public void drawTexture(int x, int y, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
+    public void drawTexture(int x, int y, float uOffset, float vOffset, int uWidth, int vHeight,  int textureWidth, int textureHeight, ResourceLocation resource) {
         textureManager.bindTexture(resource);
         Screen.blit(matrixStack, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
-    public void drawTexture(int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
+    public void drawTexture(int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight,  int textureWidth, int textureHeight, ResourceLocation resource) {
         textureManager.bindTexture(resource);
         Screen.blit(matrixStack, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureHeight, textureWidth);
     }
@@ -124,7 +124,7 @@ public class MCGraphics {
 
     /**
      * Draws an ItemStack.
-     * <p>
+     *
      * The z index is increased by 32 (and not decreased afterwards), and the item is then rendered at z=200.
      */
     @SuppressWarnings("deprecation")
@@ -173,7 +173,7 @@ public class MCGraphics {
 
     public void renderTooltip(ItemStack stack, Point point) {
         if (gui instanceof AdvancedScreen) {
-            ((AdvancedScreen) gui).renderTooltip(matrixStack, stack, point.x, point.y);
+            ((AdvancedScreen)gui).renderTooltip(matrixStack, stack, point.x, point.y);
         }
     }
 

@@ -21,7 +21,7 @@ public enum ModuleCompatibility {
     /**
      * Module compatibility: Constructor.
      *
-     * @param compatible     is the module compatible?
+     * @param compatible is the module compatible?
      * @param confirmMessage the confirm message.
      */
     ModuleCompatibility(boolean compatible, boolean isRunnable, ITextComponent confirmMessage) {

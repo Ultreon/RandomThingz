@@ -44,15 +44,15 @@ public class ChancedOre extends DefaultOre {
     @Override
     public ConfiguredFeature<?, ?> generate() {
         int bottom = config.getMinHeight();
-        if (config.getVeinSize() <= 2) {
+        if (config.getVeinSize() < 2) {
             return new ConfiguredFeatureQFM<>(Feature.EMERALD_ORE, new ReplaceBlockConfig(Blocks.STONE.getDefaultState(), this.asBlockState()))
-                    .setChance(1f / (float) config.getChance())
+                    .setChance(1f / (float)config.getChance())
                     .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
                     .square()
                     .count(config.getVeinCount());
         }
         return new ConfiguredFeatureQFM<>(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, this.asBlockState(), config.getVeinSize()))
-                .setChance(1f / (float) config.getChance())
+                .setChance(1f / (float)config.getChance())
                 .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
                 .square()
                 .count(config.getVeinCount());

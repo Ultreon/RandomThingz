@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.entity.baby;
 
-import com.ultreon.randomthingz.item.common.ModItemsAlt;
+import com.ultreon.randomthingz.item.common.ModItems;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;
@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 /**
  * Baby creeper entity class.
  *
- * @author QTech Community.
+ * @author Ultreon Team.
  */
 public class BabyCreeperEntity extends CreeperEntity implements IBabyEntity {
 
@@ -79,7 +79,7 @@ public class BabyCreeperEntity extends CreeperEntity implements IBabyEntity {
      * Modify vanilla's explode method to half the explosion strength of baby creepers, and charged baby creepers
      */
     @Override
-    protected void explode() {
+    public void explode() {
         if (!dimension.isClientSided) {
             Explosion.Mode mode = ForgeEventFactory.getMobGriefingEvent(dimension, this) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
             float f = isCharged() ? 1 : 0.5F;
@@ -92,7 +92,7 @@ public class BabyCreeperEntity extends CreeperEntity implements IBabyEntity {
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return new ItemStack(ModItemsAlt.BABY_CREEPER_SPAWN_EGG.asItem());
+        return new ItemStack(ModItems.BABY_CREEPER_SPAWN_EGG.asItem());
     }
 
     @Nonnull

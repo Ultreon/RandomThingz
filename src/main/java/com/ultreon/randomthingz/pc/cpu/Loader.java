@@ -4,11 +4,9 @@ import com.ultreon.randomthingz.pc.common.device.component.Rom;
 
 public class Loader {
     private final CPU cpu;
-
     public Loader(CPU cpu) {
         this.cpu = cpu;
     }
-
     public void read(String program) {
         int address = Integer.parseInt(program.substring(0, 4), 16);
         program = program.substring(5);

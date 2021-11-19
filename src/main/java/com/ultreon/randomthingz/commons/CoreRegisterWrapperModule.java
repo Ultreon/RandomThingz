@@ -19,9 +19,9 @@ public abstract class CoreRegisterWrapperModule<T extends IForgeRegistryEntry<T>
     /**
      * Register an object.
      *
-     * @param name     the name of the object to register.
+     * @param name the name of the object to register.
      * @param supplier an supplier containing the object.
-     * @param <O>      the object to register..
+     * @param <O> the object to register..
      * @return an registry object containing the registered object.
      */
     public abstract <O extends T> RegistryObjectWrapper<O> register(String name, Supplier<O> supplier);

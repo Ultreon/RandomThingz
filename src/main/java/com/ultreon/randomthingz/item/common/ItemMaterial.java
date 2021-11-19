@@ -75,7 +75,8 @@ public enum ItemMaterial implements IItemMaterial {
     BERYL(builder("beryl").ore(Ores.BERYL).storageBlock(2)),
     TOPAZ(builder("topaz").ore(Ores.TOPAZ).storageBlock(2)),
     TANZANITE(builder("tanzanite").ore(Ores.TANZANITE).storageBlock(2)),
-    MALACHITE(builder("malachite").ore(Ores.MALACHITE).storageBlock(2));
+    MALACHITE(builder("malachite").ore(Ores.MALACHITE).storageBlock(2))
+    ;
 //    OBSIDIAN(builder("obsidian").dust().ingot().ingotTagOnly());
 
 //    // Gems
@@ -119,7 +120,6 @@ public enum ItemMaterial implements IItemMaterial {
     private ItemRegistryObject<Item> gem;
     @SuppressWarnings("NonFinalFieldInEnum")
     private ItemRegistryObject<Item> nugget;
-    ;
 
     ItemMaterial(Builder builder) {
         this(builder, builder.name);
@@ -151,7 +151,7 @@ public enum ItemMaterial implements IItemMaterial {
         for (ItemMaterial metal : values()) {
             if (metal.oreSupplier != null) {
                 String name = metal.oreName + "_ore";
-                metal.ore = Registration.BLOCKS.register(name, metal.oreSupplier);
+                metal.ore = new BlockRegistryObject<>(Registration.BLOCKS.register(name, metal.oreSupplier));
                 Registration.ITEMS.register(name, () ->
                         new BlockItem(metal.ore.get(), new Item.Properties().group(ModItemGroups.ORES)));
             }
@@ -159,7 +159,7 @@ public enum ItemMaterial implements IItemMaterial {
         for (ItemMaterial metal : values()) {
             if (metal.storageBlockSupplier != null) {
                 String name = metal.getName() + "_block";
-                metal.storageBlock = Registration.BLOCKS.register(name, metal.storageBlockSupplier);
+                metal.storageBlock = new BlockRegistryObject<>(Registration.BLOCKS.register(name, metal.storageBlockSupplier));
                 Registration.ITEMS.register(name, () ->
                         new BlockItem(metal.storageBlock.get(), new Item.Properties().group(ModItemGroups.ORES)));
             }

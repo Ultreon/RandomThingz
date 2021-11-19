@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.client;
 
+import com.google.common.annotations.Beta;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.util.BufferUtil;
 import com.ultreon.randomthingz.util.QFMTexture;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@Beta
 public class TextureGenerator {
     @Getter
     private static final TextureGenerator instance = new TextureGenerator();

@@ -119,14 +119,14 @@ public abstract class EnergyStoringItem extends HudItem {
 
         stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
             int val;
-
+            
             int maxEnergy = e.getMaxEnergyStored();
-
+            
             if (maxEnergy == 0) {
                 val = 0;
             }
 
-            val = (int) (64d * e.getEnergyStored() / maxEnergy);
+            val = (int)(64d * e.getEnergyStored() / maxEnergy);
 
             TextureManager textureManager = mc.getTextureManager();
             textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/background.png"));

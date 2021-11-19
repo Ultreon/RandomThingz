@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.client;
 
+import com.google.common.annotations.Beta;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.tools.Toolset;
 import lombok.Getter;
@@ -15,6 +16,11 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ */
+// Todo: remove @Beta annotation when finished.
+@Beta
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModelGenerator {
     @Getter
@@ -24,6 +30,7 @@ public class ModelGenerator {
 
     private ModelGenerator() {
         for (Toolset toolset : Toolset.values()) {
+
         }
     }
 

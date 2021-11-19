@@ -22,7 +22,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * To check for enable/disable state use: {@link ModuleManager#isEnabled(Module)} or {@link ModuleManager#isDisabled(Module)}.<br>
  * To check for unsaved version of the enable/disable state, use: {@link ModuleManager#isUnsavedEnabled(Module)} or {@link ModuleManager#isUnsavedDisabled(Module)}.<br>
  * For submodules override {@link #isSubManagerEnabled()} with true, and use {@link #getSubmoduleManager()} to get the submodule manager, register / get the submodules there.<br>
- * The default QForgeMod modules are registered in {@link Modules}.
+ * The default Random Thingz modules are registered in {@link Modules}.
  *
  * @author Qboi123
  * @see ModuleManager
@@ -40,35 +40,26 @@ public abstract class Module {
     public void clientSetup() {
         this.submoduleManager.clientSetup();
     }
-
     public void commonSetup() {
         this.submoduleManager.commonSetup();
     }
-
     public void serverSetup() {
         this.submoduleManager.serverSetup();
     }
-
     public void serverStart() {
         this.submoduleManager.serverStart();
     }
-
     public void clientStart() {
         this.submoduleManager.clientStart();
     }
-
     public void loadComplete() {
         this.submoduleManager.loadComplete();
     }
 
     public abstract void onDisable();
-
     public abstract boolean canDisable();
-
     public abstract String getName();
-
     public abstract boolean isDefaultEnabled();
-
     private boolean subManagerEnabled = false;
 
     @Nullable
@@ -89,7 +80,6 @@ public abstract class Module {
 
 
     // Default values
-
     /**
      * @return an text component containing the localized name of the module/
      */
@@ -179,7 +169,6 @@ public abstract class Module {
     protected static abstract class ServerSide {
 
     }
-
     public boolean requiresRestart() {
         return false;
     }

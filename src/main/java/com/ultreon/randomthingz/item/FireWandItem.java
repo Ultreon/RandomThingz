@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.stats.Stats;
@@ -28,7 +27,7 @@ public class FireWandItem extends WandItem {
     private static final int EXPLOSION_BASE = 4;
 
     public FireWandItem() {
-        super(80, 20, new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(80, 20, new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override

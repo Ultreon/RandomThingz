@@ -30,7 +30,6 @@ import java.util.Random;
 /**
  * Contains all information for the block model
  * See {@linkplain ModelHelper} for more information
- *
  * @author PianoManu
  * @version 1.3 10/20/20
  */
@@ -55,7 +54,7 @@ public class SlopeBakedModel implements IDynamicBakedModel {
     }
 
     private static Vector3d v(double x, double y, double z) {
-        return new Vector3d(x, y, z);
+        return new Vector3d(x,y,z);
     }
 
     public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, IBakedModel model) {
@@ -85,14 +84,14 @@ public class SlopeBakedModel implements IDynamicBakedModel {
             w = -0.5;
         }
         //Eight corners of the block
-        Vector3d NWU = v(0, 0.5 + w, 0); //North-West-Up
-        Vector3d NEU = v(1, 0.5 + w, 0); //...
-        Vector3d NWD = v(0, 0.5 - w, 0);
-        Vector3d NED = v(1, 0.5 - w, 0);
-        Vector3d SWU = v(0, 0.5 + w, 1);
-        Vector3d SEU = v(1, 0.5 + w, 1);
-        Vector3d SWD = v(0, 0.5 - w, 1);
-        Vector3d SED = v(1, 0.5 - w, 1); //South-East-Down
+        Vector3d NWU = v(0,0.5+w,0); //North-West-Up
+        Vector3d NEU = v(1,0.5+w,0); //...
+        Vector3d NWD = v(0,0.5-w,0);
+        Vector3d NED = v(1,0.5-w,0);
+        Vector3d SWU = v(0,0.5+w,1);
+        Vector3d SEU = v(1,0.5+w,1);
+        Vector3d SWD = v(0,0.5-w,1);
+        Vector3d SED = v(1,0.5-w,1); //South-East-Down
         //bottom face
         /*quads.add(ModelHelper.createQuad(SED, SWD, NWD, NED, texture.get(index), 0, 16, 0, 16, tintIndex));
         switch (state.get(StairsBlock.FACING)) {
@@ -138,7 +137,7 @@ public class SlopeBakedModel implements IDynamicBakedModel {
         quads.add(ModelHelper.createQuad(SWU, SEU, NEU, NWU, texture.get(index), 0, 16, 0, 16, tintIndex));
         //quads.addAll(ModelHelper.createQuad(0,1,0,1,0,1, texture.get(index), tintIndex,state.get(StairsBlock.FACING), state.get(StairsBlock.HALF))); //TODO remove or fix
         */
-        quads.addAll(createSlope(0, 1, 0, 1, 0, 1, texture.get(index), tintIndex, state.get(StairsBlock.FACING)));
+        quads.addAll(createSlope(0,1,0,1,0,1, texture.get(index), tintIndex, state.get(StairsBlock.FACING)));
         return quads;
     }
 
@@ -153,7 +152,7 @@ public class SlopeBakedModel implements IDynamicBakedModel {
         Vector3d SEU = v(xh, yh, zh);
         Vector3d NED = v(xh, yl, zl);
         Vector3d SED = v(xh, yl, zh); //South-East-Down
-        if (xh - xl > 1 || yh - yl > 1 || zh - zl > 1) {
+        if (xh-xl>1 || yh-yl > 1 || zh-zl > 1) {
             if (Minecraft.getInstance().player != null) {
                 Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
             }

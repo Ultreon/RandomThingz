@@ -1,17 +1,17 @@
 modLoader="javafml" #mandatory
 loaderVersion="[36,)"
-issueTrackerURL="https://github.com/QTechCommunity/RandomThingz/issues" #optional
-license="""(C) Copyright 2020 - QTech Community.
+issueTrackerURL="https://github.com/Ultreon/RandomThingz/issues" #optional
+license="""(C) Copyright 2020 - Ultreon Team.
 This project is licensed under the CC BY-NC-SA 4.0 license.
 See this link for the full license: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 """
 
 [[mods]] #mandatory
 modId="randomthingz" #mandatory
-version="36.260.5369" #mandatory
+version="$$MOD_VERSION$$" #mandatory
 displayName="Random Thingz: Main Mod" #mandatory
 #updateJSONURL="http://myurl.me/" #optional. Todo: add update URL for Forge.
-displayURL="https://github.com/QTechCommunity/RandomThingz" #optional
+displayURL="https://github.com/Ultreon/RandomThingz" #optional
 logoFile= "randomthingz.png" #optional
 credits="Qboi123, Laz The Artist, INDUSTRIALIST, StormDragon77, FatCow Web (TM), JustinRustin, Gengar, Miep_HD, Giovanni_5656, F1ash, Kai1907, Shadow_236, Nate the Penguin, un_roman, kekkman, sirkomplete, Etaris, Robert0213" #optional
 authors="Qboi123, Laz The Artist" #optional
@@ -28,11 +28,11 @@ description='''
 
 §l§nLinks:§r
   MultiTeam Discord Server: https://discord.gg/rudHdrJ
-  QTech Community Discord Server: https://www.discord.gg/WePT9v2CmQ
-  QTech Community home page: https://quintenjungblut.wixsite.com/qplaysoftware
+  Ultreon Team Discord Server: https://www.discord.gg/WePT9v2CmQ
+  Ultreon Team home page: https://quintenjungblut.wixsite.com/qplaysoftware
 
 §l§nSource code:§r
-  https://github.com/QTechCommunity/RandomThingz
+  https://github.com/Ultreon/RandomThingz
 
 §l§nBugs / Feature requests§r
   §cIn Alpha / Beta releases stuff might change or break, it's recommended to use them for testing purposes only.§r

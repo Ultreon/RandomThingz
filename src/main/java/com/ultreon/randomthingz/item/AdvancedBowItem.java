@@ -160,10 +160,10 @@ public class AdvancedBowItem extends BowItem {
         return UseAction.BOW;
     }
 
-    /**
-     * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-     * {@linkplain #onUseItem}.
-     */
+//    /**
+//     * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
+//     * {@linkplain #onUseItem}.
+//     */
 //    public ActionResult<ItemStack> onItemRightClick(World dimensionIn, PlayerEntity playerIn, Hand handIn) {
 //        ItemStack itemstack = playerIn.getHeldItem(handIn);
 //        boolean flag = !playerIn.findAmmo(itemstack).isEmpty();

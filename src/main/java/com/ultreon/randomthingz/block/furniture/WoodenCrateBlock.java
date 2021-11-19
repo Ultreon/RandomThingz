@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.furniture;
 
 import com.ultreon.randomthingz.block.FaceableBlock;
-import com.ultreon.randomthingz.modules.tiles.ModTileEntities;
 import com.ultreon.randomthingz.tileentity.CrateTileEntity;
+import com.ultreon.randomthingz.tiles.ModTileEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -49,8 +49,7 @@ public class WoodenCrateBlock extends FaceableBlock {
     }
 
     @Override
-    public @NotNull
-    ActionResultType onBlockActivated(@NotNull BlockState state, World dimensionIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult result) {
+    public @NotNull ActionResultType onBlockActivated(@NotNull BlockState state, World dimensionIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult result) {
         if (!dimensionIn.isClientSided()) {
             TileEntity tile = dimensionIn.getTileEntity(pos);
 

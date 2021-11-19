@@ -13,17 +13,14 @@ public abstract class PowerController {
     }
 
     public abstract void tick();
-
     public final void on() {
         state = true;
         this.bios.boot();
     }
-
     public final void off() {
         this.bios.requestShutdown();
         state = false;
     }
-
     public final void forceOff() {
         this.bios.forceShutdown();
         state = false;

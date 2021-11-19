@@ -18,8 +18,7 @@ public class OverpoweredItemGroup extends ItemGroup {
     }
 
     @Override
-    public @NotNull
-    ItemStack createIcon() {
+    public @NotNull ItemStack createIcon() {
         return new ItemStack(Blocks.COMMAND_BLOCK);
     }
 }

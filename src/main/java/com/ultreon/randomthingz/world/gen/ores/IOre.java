@@ -16,21 +16,16 @@ public interface IOre {
 
     // Getters for values.
     int getHardness();
-
     int getHarvestLevel();
 
     // Config / features.
     IOreConfig getOreConfig();
-
     ConfiguredFeature<?, ?> getConfiguredFeature();
 
     // Misc getter for values.
     Block getOre();
-
     BlockState getFeatureState();
-
-    @Beta
-    Collection<Block> getGroundTypes();
+    @Beta Collection<Block> getGroundTypes();
 
     default Predicate<BiomeLoadingEvent> getBiomePredicate() {
         return (b) -> true;

@@ -42,7 +42,7 @@ public class Run {
         cpu.reset();
         for (int i = 0; i < 100; i++) {
             cpu.execute();
-        }
+        }        
         java.awt.EventQueue.invokeLater(() -> {
             new Win(cpu).setVisible(true);
         });

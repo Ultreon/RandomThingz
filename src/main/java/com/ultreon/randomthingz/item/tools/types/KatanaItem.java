@@ -23,16 +23,14 @@ import java.util.UUID;
 
 public class KatanaItem extends SwordItem implements IHasToolType {
     private final float attackDamage;
-    /**
-     * Modifiers applied when the item is in the mainhand of a user.
-     */
+    /** Modifiers applied when the item is in the mainhand of a user. */
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
 
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
     public KatanaItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
         super(tier, attackDamageIn, attackSpeedIn, builderIn.defaultMaxDamage((int) (tier.getMaxUses() * 1.4)));
-        this.attackDamage = (float) attackDamageIn + (tier.getAttackDamage() * 2);
+        this.attackDamage = (float)attackDamageIn + (tier.getAttackDamage() * 2);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));

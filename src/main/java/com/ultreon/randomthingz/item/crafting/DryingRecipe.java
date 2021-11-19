@@ -16,10 +16,8 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 @RequiredArgsConstructor
 public class DryingRecipe implements IRecipe<IInventory> {
     private final ResourceLocation recipeId;
-    @Getter
-    private int processTime;
-    @Getter
-    private Ingredient ingredient;
+    @Getter private int processTime;
+    @Getter private Ingredient ingredient;
     private ItemStack result;
 
     @Override

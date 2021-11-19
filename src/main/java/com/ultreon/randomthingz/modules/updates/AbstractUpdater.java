@@ -31,7 +31,7 @@ import java.util.Map;
  * An abstract updater used for checking for updates.
  * Other modders can use this to create their own updaters.
  * They need to create an implementation of {@linkplain IVersion} to make it work with their own version systems -
- * Or use {@linkplain RtVersion} if modders want to use the QSoftware / QTech version system.
+ * Or use {@linkplain RtVersion} if modders want to use the Ultreon Team version system.
  *
  * @param <T> an implementation of {@linkplain IVersion}.
  */
@@ -82,7 +82,7 @@ public abstract class AbstractUpdater<T extends IVersion> {
         IllegalArgumentException illegalArgumentException = new IllegalArgumentException("Mod with id \"" + modIdRepr + "\" not found.");
         this.modContainer = ModList.get().getModContainerById(modId).orElseThrow(() -> illegalArgumentException);
         this.updateUrl = url;
-
+        
         INSTANCES.add(this);
         MOD_UPDATER_MAP.put(modId, this);
     }
@@ -92,9 +92,9 @@ public abstract class AbstractUpdater<T extends IVersion> {
     ///////////////
 
     /**
-     * Get the updater that QForgeMod is using.
+     * Get the updater that Random Thingz is using.
      *
-     * @return the QForgeMod updater.
+     * @return the Random Thingz updater.
      */
     public static QFMUpdater getQFMUpdater() {
         return QFMUpdater.getInstance();
@@ -166,7 +166,6 @@ public abstract class AbstractUpdater<T extends IVersion> {
 
     /**
      * Ge6 mod information, from the mod associated with the updater.
-     *
      * @return the mod information.
      */
     public IModInfo getModInfo() {
@@ -329,7 +328,7 @@ public abstract class AbstractUpdater<T extends IVersion> {
         /**
          * Update information constructor.
          *
-         * @param status    the update status.
+         * @param status the update status.
          * @param throwable the throwable thrown when checking for updates.
          */
         public UpdateInfo(UpdateStatus status, Throwable throwable) {

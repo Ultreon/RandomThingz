@@ -115,14 +115,12 @@ public class UpdatesModule extends Module {
     }
 
     @Override
-    public @NotNull
-    String getName() {
+    public @NotNull String getName() {
         return "updates";
     }
 
     @Override
-    public @NotNull
-    ModuleCompatibility getCompatibility() {
+    public @NotNull ModuleCompatibility getCompatibility() {
         if (RandomThingz.isClientSide()) {
             return ModuleCompatibility.FULL;
         } else if (RandomThingz.isServerSide()) {

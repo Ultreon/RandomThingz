@@ -1,8 +1,7 @@
 package com.ultreon.randomthingz.registration;
 
 import com.qsoftware.modlib.api.providers.IItemProvider;
-import com.qsoftware.modlib.silentlib.block.IBlockProvider;
-import com.qsoftware.modlib.silentlib.registry.BlockDeferredRegister;
+import com.qsoftware.modlib.silentlib.registry.EntityTypeDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.advancement.criterion.common.ModCriteriaTriggers;
@@ -12,9 +11,9 @@ import com.ultreon.randomthingz.effect.common.ModEffects;
 import com.ultreon.randomthingz.item.common.ModItems;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.item.tools.ModTraits;
-import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
 import com.ultreon.randomthingz.modules.ui.ModMachineContainers;
 import com.ultreon.randomthingz.modules.ui.ModStats;
+import com.ultreon.randomthingz.tiles.ModMachineTileEntities;
 import com.ultreon.randomthingz.util.ExceptionUtil;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -31,6 +30,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -42,7 +42,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public final class Registration {
-    public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(RandomThingz.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = create(ForgeRegistries.BLOCKS);
     public static final DeferredRegister<Fluid> FLUIDS = create(ForgeRegistries.FLUIDS);
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = create(ForgeRegistries.CONTAINERS);
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(RandomThingz.MOD_ID);
@@ -52,10 +52,12 @@ public final class Registration {
     public static final DeferredRegister<Effect> POTIONS = create(ForgeRegistries.POTIONS);
     public static final DeferredRegister<Feature<?>> FEATURES = create(ForgeRegistries.FEATURES);
     public static final DeferredRegister<ParticleType<?>> PARTICLES = create(ForgeRegistries.PARTICLE_TYPES);
-    public static final DeferredRegister<EntityType<?>> ENTITIES = create(ForgeRegistries.ENTITIES);
+    @Deprecated public static final DeferredRegister<EntityType<?>> ENTITIES = create(ForgeRegistries.ENTITIES);
     public static final DeferredRegister<VillagerProfession> PROFESSIONS = create(ForgeRegistries.PROFESSIONS);
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = create(ForgeRegistries.RECIPE_SERIALIZERS);
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
+    public static final EntityTypeDeferredRegister ENTITY_TYPES = new EntityTypeDeferredRegister(RandomThingz.MOD_ID);
+    public static final DeferredRegister<ContainerType<?>> CONTAINER_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, RandomThingz.MOD_ID);
 
     private Registration() {
         throw ExceptionUtil.utilityConstructor();
@@ -84,8 +86,8 @@ public final class Registration {
 
     @SuppressWarnings("unchecked")
     public static <T extends Block> Collection<T> getBlocks(Class<T> clazz) {
-        return BLOCKS.getAllBlocks().stream()
-                .map(IBlockProvider::asBlock)
+        return BLOCKS.getEntries().stream()
+                .map(RegistryObject::get)
                 .filter(clazz::isInstance)
                 .map(block -> (T) block)
                 .collect(Collectors.toList());
@@ -93,8 +95,8 @@ public final class Registration {
 
     @SuppressWarnings("unchecked")
     public static <T extends Block> Collection<T> getBlocks() {
-        return BLOCKS.getAllBlocks().stream()
-                .map(IBlockProvider::asBlock)
+        return BLOCKS.getEntries().stream()
+                .map(RegistryObject::get)
                 .map(block -> (T) block)
                 .collect(Collectors.toList());
     }

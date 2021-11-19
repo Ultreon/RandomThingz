@@ -14,6 +14,5 @@ public abstract class CoreRegisterModule<T extends IForgeRegistryEntry<T>> exten
     }
 
     public abstract DeferredRegister<T> getDeferredRegister();
-
     public abstract <O extends T> RegistryObject<O> register(String name, Supplier<O> supplier);
 }

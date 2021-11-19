@@ -23,7 +23,6 @@ public class Reflection {
         }
         throw new NoSuchFieldException("No static field named " + name + " was found for class " + clazz.getName());
     }
-
     @SneakyThrows
     public static Object getField(Object o, String name) {
         Class<?> clazz = o.getClass();

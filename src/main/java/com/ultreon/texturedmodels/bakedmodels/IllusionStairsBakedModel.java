@@ -305,9 +305,9 @@ public class IllusionStairsBakedModel implements IDynamicBakedModel {
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0.5f, 1f, overlayIndex, false, true, true, false, true, true, !cullUpDown));
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0f, 0.5f, overlayIndex, false, true, false, true, cullUpDown, !cullUpDown, false));
                                 //upper part
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0f, 0.5f, overlayIndex, true, false, false, true, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0.5f, 1f, overlayIndex, true, true, true, false, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0f, 0.5f, overlayIndex, false, true, true, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0f, 0.5f, overlayIndex, true, false, false, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0.5f, 1f, overlayIndex, true, true, true, false, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0f, 0.5f, overlayIndex, false, true, true, true, true, cullUpDown, false));
                                 break;
                             case SOUTH:
                                 //bottom part
@@ -316,9 +316,9 @@ public class IllusionStairsBakedModel implements IDynamicBakedModel {
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0.5f, 1f, overlayIndex, false, true, true, false, cullUpDown, !cullUpDown, false));
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0f, 0.5f, overlayIndex, false, true, false, true, cullUpDown, !cullUpDown, false));
                                 //upper part
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0.5f, 1f, overlayIndex, true, false, true, true, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0.5f, 1f, overlayIndex, false, true, true, false, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0f, 0.5f, overlayIndex, true, true, false, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0.5f, 1f, overlayIndex, true, false, true, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0.5f, 1f, overlayIndex, false, true, true, false, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0f, 0.5f, overlayIndex, true, true, false, true, true, cullUpDown, false));
                                 break;
                             case WEST:
                                 //bottom part
@@ -327,9 +327,9 @@ public class IllusionStairsBakedModel implements IDynamicBakedModel {
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0.5f, 1f, overlayIndex, false, true, true, false, cullUpDown, !cullUpDown, false));
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0f, 0.5f, overlayIndex, false, true, false, true, true, true, !cullUpDown));
                                 //upper part
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0f, 0.5f, overlayIndex, true, true, false, true, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0.5f, 1f, overlayIndex, true, false, true, false, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0.5f, 1f, overlayIndex, false, true, true, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0f, 0.5f, overlayIndex, true, true, false, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0.5f, 1f, overlayIndex, true, false, true, false, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0.5f, 1f, overlayIndex, false, true, true, true, true, cullUpDown, false));
                                 break;
                             case EAST:
                                 //bottom part
@@ -338,9 +338,9 @@ public class IllusionStairsBakedModel implements IDynamicBakedModel {
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0.5f, 1f, overlayIndex, false, true, true, false, cullUpDown, !cullUpDown, false));
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0f, 0.5f, overlayIndex, false, true, false, true, cullUpDown, !cullUpDown, false));
                                 //upper part
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0f, 0.5f, overlayIndex, true, false, true, true, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0.5f, 1f, overlayIndex, true, true, true, false, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0f, 0.5f, overlayIndex, false, true, false, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0f, 0.5f, overlayIndex, true, false, true, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0.5f, 1f, overlayIndex, true, true, true, false, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0f, 0.5f, overlayIndex, false, true, false, true, true, cullUpDown, false));
                                 break;
                         }
                         break;
@@ -353,9 +353,9 @@ public class IllusionStairsBakedModel implements IDynamicBakedModel {
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0.5f, 1f, overlayIndex, false, true, true, false, true, true, !cullUpDown));
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0f, 0.5f, overlayIndex, false, true, false, true, cullUpDown, !cullUpDown, false));
                                 //upper part
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0f, 0.5f, overlayIndex, true, false, false, true, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0.5f, 1f, overlayIndex, true, true, true, false, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0f, 0.5f, overlayIndex, false, true, true, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0f, 0.5f, overlayIndex, true, false, false, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0.5f, 1f, overlayIndex, true, true, true, false, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0f, 0.5f, overlayIndex, false, true, true, true, true, cullUpDown, false));
                                 break;
                             case EAST:
                                 //bottom part
@@ -364,9 +364,9 @@ public class IllusionStairsBakedModel implements IDynamicBakedModel {
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0.5f, 1f, overlayIndex, false, true, true, false, cullUpDown, !cullUpDown, false));
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0f, 0.5f, overlayIndex, false, true, false, true, cullUpDown, !cullUpDown, false));
                                 //upper part
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0.5f, 1f, overlayIndex, true, false, true, true, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0.5f, 1f, overlayIndex, false, true, true, false, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0f, 0.5f, overlayIndex, true, true, false, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0.5f, 1f, overlayIndex, true, false, true, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0.5f, 1f, overlayIndex, false, true, true, false, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0f, 0.5f, overlayIndex, true, true, false, true, true, cullUpDown, false));
                                 break;
                             case SOUTH:
                                 //bottom part
@@ -375,9 +375,9 @@ public class IllusionStairsBakedModel implements IDynamicBakedModel {
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0.5f, 1f, overlayIndex, false, true, true, false, cullUpDown, !cullUpDown, false));
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0f, 0.5f, overlayIndex, false, true, false, true, true, true, !cullUpDown));
                                 //upper part
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0f, 0.5f, overlayIndex, true, true, false, true, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0.5f, 1f, overlayIndex, true, false, true, false, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0.5f, 1f, overlayIndex, false, true, true, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0f, 0.5f, overlayIndex, true, true, false, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0.5f, 1f, overlayIndex, true, false, true, false, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0.5f, 1f, overlayIndex, false, true, true, true, true, cullUpDown, false));
                                 break;
                             case NORTH:
                                 //bottom part
@@ -386,9 +386,9 @@ public class IllusionStairsBakedModel implements IDynamicBakedModel {
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0.5f, 1f, overlayIndex, false, true, true, false, cullUpDown, !cullUpDown, false));
                                 quads.addAll(ModelHelper.createOverlay(0.5f, 1f, yl, yh, 0f, 0.5f, overlayIndex, false, true, false, true, cullUpDown, !cullUpDown, false));
                                 //upper part
-                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f, 1f, 0f, 0.5f, overlayIndex, true, false, true, true, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0.5f, 1f, overlayIndex, true, true, true, false, true, cullUpDown, false));
-                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f, 1f, 0f, 0.5f, overlayIndex, false, true, false, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0.5f,1f, 0f, 0.5f, overlayIndex, true, false, true, true, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0.5f, 1f, overlayIndex, true, true, true, false, true, cullUpDown, false));
+                                quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0.5f,1f, 0f, 0.5f, overlayIndex, false, true, false, true, true, cullUpDown, false));
                                 break;
                         }
                         break;

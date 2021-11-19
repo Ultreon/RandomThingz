@@ -32,10 +32,8 @@ import java.util.stream.Collectors;
 public class CrushingRecipe implements IRecipe<IInventory> {
     private final ResourceLocation recipeId;
     private final Map<ItemStack, Float> results = new LinkedHashMap<>();
-    @Getter
-    private int processTime;
-    @Getter
-    private Ingredient ingredient;
+    @Getter private int processTime;
+    @Getter private Ingredient ingredient;
 
     /**
      * Get results of crushing. Some results may have a limited chance of being produced, and this

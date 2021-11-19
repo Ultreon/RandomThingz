@@ -58,9 +58,7 @@ public class DebugItem extends Item {
             for (Direction side : Direction.values()) {
                 TileEntity other = dimension.getTileEntity(pos.offset(side));
                 if (other != null) {
-                    other.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
-                        player.sendMessage(new StringTextComponent(side + ": " + other.getClass().getSimpleName()), Util.DUMMY_UUID);
-                    });
+                    other.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> player.sendMessage(new StringTextComponent(side + ": " + other.getClass().getSimpleName()), Util.DUMMY_UUID));
                 }
             }
 

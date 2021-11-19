@@ -15,26 +15,30 @@ import org.jetbrains.annotations.NotNull;
  */
 @SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)
-public class IconButton extends Button {
+public class IconButton extends Button
+{
     private ResourceLocation iconResource;
     private int iconU;
     private int iconV;
 
-    public IconButton(int x, int y, ITextComponent message, IPressable pressable, ResourceLocation iconResource, int iconU, int iconV) {
+    public IconButton(int x, int y, ITextComponent message, IPressable pressable, ResourceLocation iconResource, int iconU, int iconV)
+    {
         super(x, y, 20, 20, message, pressable);
         this.iconResource = iconResource;
         this.iconU = iconU;
         this.iconV = iconV;
     }
 
-    public void setIcon(ResourceLocation iconResource, int iconU, int iconV) {
+    public void setIcon(ResourceLocation iconResource, int iconU, int iconV)
+    {
         this.iconResource = iconResource;
         this.iconU = iconU;
         this.iconV = iconV;
     }
 
     @Override
-    public void renderWidget(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderWidget(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
+    {
         Minecraft.getInstance().getTextureManager().bindTexture(WIDGETS_LOCATION);
         GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.enableBlend();
@@ -43,7 +47,8 @@ public class IconButton extends Button {
         int offset = this.getYImage(this.isHovered());
         this.blit(matrixStack, this.x, this.y, 0, 46 + offset * 20, this.width / 2, this.height);
         this.blit(matrixStack, this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + offset * 20, this.width / 2, this.height);
-        if (!this.active) {
+        if(!this.active)
+        {
             GlStateManager.color4f(0.5F, 0.5F, 0.5F, 1.0F);
         }
         Minecraft.getInstance().getTextureManager().bindTexture(this.iconResource);

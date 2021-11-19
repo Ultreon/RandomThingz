@@ -47,7 +47,7 @@ public class CutlassTool extends CutlassItem implements ITool {
     private final Multimap<Attribute, AttributeModifier> toolAttributes;
 
     public CutlassTool(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn, Supplier<AbstractTrait[]> traits) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn);
+        super(tier, attackDamageIn, attackSpeedIn, builderIn.group(null));
         this.traits = traits;
         this.attackDamage = attackDamageIn + tier.getAttackDamage();
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
@@ -229,8 +229,7 @@ public class CutlassTool extends CutlassItem implements ITool {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World dimension, List<ITextComponent> tooltip, ITooltipFlag flag) {
-        for (AbstractTrait trait : traits.get()) {
+    public void addInformation(ItemStack stack, @Nullable World dimension, List<ITextComponent> tooltip, ITooltipFlag flag) {        for (AbstractTrait trait : traits.get()) {
             tooltip.add(trait.getTranslation());
         }
     }

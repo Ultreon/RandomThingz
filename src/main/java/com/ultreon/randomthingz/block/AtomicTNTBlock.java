@@ -26,9 +26,6 @@ public class AtomicTNTBlock extends CustomTNTBlock<AtomicTNTBlock> {
 
     @Override
     public void afterExplosion(World dimension, BlockPos pos, BlockState state, CustomTNTEntity tntEntity) {
-        System.out.println("World: " + dimension);
-        System.out.println("Pos: " + pos);
-        System.out.println("State: " + state);
         List<Entity> affectedEntities = dimension.getEntitiesWithinBoxExcludingEntity(null, new AxisAlignedBB(pos.getX() - 50, pos.getY() - 100, pos.getZ() - 50, pos.getX() + 50, pos.getY() + 300, pos.getZ() + 50));
         for (Entity entity : affectedEntities) {
             if (entity instanceof LivingEntity) {

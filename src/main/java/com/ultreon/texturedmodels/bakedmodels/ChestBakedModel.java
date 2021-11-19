@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.bakedmodels;
 
-import com.ultreon.texturedmodels.QTextureModels;
+import com.ultreon.texturedmodels.TexturedModels;
 import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
@@ -74,9 +74,9 @@ public class ChestBakedModel implements IDynamicBakedModel {
                 return Collections.emptyList();
             }
             designTextureList.add(Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/shulker_box")));
-            TextureAtlasSprite chestFront = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_front"));
-            TextureAtlasSprite chestSide = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_side"));
-            TextureAtlasSprite chestTop = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_top"));
+            TextureAtlasSprite chestFront = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(TexturedModels.MOD_ID, "block/chest_front"));
+            TextureAtlasSprite chestSide = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(TexturedModels.MOD_ID, "block/chest_side"));
+            TextureAtlasSprite chestTop = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(TexturedModels.MOD_ID, "block/chest_top"));
             TextureAtlasSprite texture;
             if (textureList.size() <= tex) {
                 extraData.setData(ChestFrameTileEntity.TEXTURE, 0);

@@ -80,8 +80,7 @@ public class EntitiesModule extends CoreRegisterModule<EntityType<?>> {
 //        modEventBus.register(this);
 
         DistExecutor.unsafeRunForDist(() -> () -> {
-            enableClient();
-            return null;
+            enableClient(); return null;
         }, () -> () -> null);
     }
 

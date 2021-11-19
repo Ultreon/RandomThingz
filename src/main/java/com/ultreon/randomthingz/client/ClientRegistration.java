@@ -28,6 +28,7 @@ public class ClientRegistration {
 //    private static final Map<ResourceLocation, CustomModelRegistryObject> customModels = new Object2ObjectOpenHashMap<>();
 
     /**
+     *
      * @param event a {@linkplain FMLClientSetupEvent Forge Mod Loader Client Setup Event}.
      */
     @SubscribeEvent
@@ -101,21 +102,21 @@ public class ClientRegistration {
     /**
      * Todo: may be use this method.
      *
-     * @param event a {@linkplain ModelRegistryEvent Model Registration Event}.
      * @see #onModelBake(ModelBakeEvent)
+     * @param event a {@linkplain ModelRegistryEvent Model Registration Event}.
      */
     @SubscribeEvent
     public static void registerModelLoaders(ModelRegistryEvent event) {
 //        // Use:
-//        ModelLoaderRegistry.registerLoader(QForgeMod.rl("<model-loader-location>"), /*<ModelLoader>*/)
+//        ModelLoaderRegistry.registerLoader(RandomThingz.rl("<model-loader-location>"), /*<ModelLoader>*/)
 //        RandomThingzModelCache.INSTANCE.setup();
     }
 
     /**
      * Todo: may be use this method.
      *
-     * @param event a {@linkplain ModelBakeEvent Model Bake Event}.
      * @see #registerModelLoaders(ModelRegistryEvent)
+     * @param event a {@linkplain ModelBakeEvent Model Bake Event}.
      */
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event) {
@@ -221,7 +222,7 @@ public class ClientRegistration {
 
     /**
      * Registers a custom armor layer.
-     * Todo: The QForgeModArmorLayer class is missing.
+     * Todo: The RTArmorLayer class is missing.
      *
      * @param renderer
      * @param <T>
@@ -233,7 +234,7 @@ public class ClientRegistration {
 //            //Only allow an exact match, so we don't add to modded entities that only have a modded extended armor layer
 //            if (layerRenderer.getClass() == BipedArmorLayer.class) {
 //                BipedArmorLayer<T, M, A> bipedArmorLayer = (BipedArmorLayer<T, M, A>) layerRenderer;
-//                renderer.addLayer(new QForgeModArmorLayer<>(renderer, bipedArmorLayer.modelLeggings, bipedArmorLayer.modelArmor));
+//                renderer.addLayer(new RandomThingzArmorLayer<>(renderer, bipedArmorLayer.modelLeggings, bipedArmorLayer.modelArmor));
 //                break;
 //            }
 //        }

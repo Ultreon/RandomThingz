@@ -29,11 +29,11 @@ public abstract class AdvancedScreen extends Screen {
     }
 
     public static boolean isPointInRegion(int x, int y, int width, int height, double mouseX, double mouseY) {
-        return mouseX >= (double) (x - 1) && mouseX < (double) (x + width + 1) && mouseY >= (double) (y - 1) && mouseY < (double) (y + height + 1);
+        return mouseX >= (double)(x - 1) && mouseX < (double)(x + width + 1) && mouseY >= (double)(y - 1) && mouseY < (double)(y + height + 1);
     }
 
     public static boolean isPointInRegion(int x, int y, int width, int height, Point mouse) {
-        return mouse.x >= (double) (x - 1) && mouse.x < (double) (x + width + 1) && mouse.y >= (double) (y - 1) && mouse.y < (double) (y + height + 1);
+        return mouse.x >= (double)(x - 1) && mouse.x < (double)(x + width + 1) && mouse.y >= (double)(y - 1) && mouse.y < (double)(y + height + 1);
     }
 
     public <T extends Widget> T add(T widget) {
@@ -77,24 +77,24 @@ public abstract class AdvancedScreen extends Screen {
         this.blit(matrixStack, x, y, uOffset, vOffset, uWidth, vHeight);
     }
 
-    public void drawTexture(MatrixStack matrixStack, int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
+    public void drawTexture(MatrixStack matrixStack, int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight,  int textureWidth, int textureHeight, ResourceLocation resource) {
         Objects.requireNonNull(minecraft).textureManager.bindTexture(resource);
         Screen.blit(matrixStack, x, y, width, height, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
-    public void drawTexture(MatrixStack matrixStack, int x, int y, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
+    public void drawTexture(MatrixStack matrixStack, int x, int y, float uOffset, float vOffset, int uWidth, int vHeight,  int textureWidth, int textureHeight, ResourceLocation resource) {
         Objects.requireNonNull(minecraft).textureManager.bindTexture(resource);
         Screen.blit(matrixStack, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
-    public void drawTexture(MatrixStack matrixStack, int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
+    public void drawTexture(MatrixStack matrixStack, int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight,  int textureWidth, int textureHeight, ResourceLocation resource) {
         Objects.requireNonNull(minecraft).textureManager.bindTexture(resource);
         Screen.blit(matrixStack, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureHeight, textureWidth);
     }
 
     /**
      * Draws an ItemStack.
-     * <p>
+     *
      * The z index is increased by 32 (and not decreased afterwards), and the item is then rendered at z=200.
      */
     @SuppressWarnings("deprecation")

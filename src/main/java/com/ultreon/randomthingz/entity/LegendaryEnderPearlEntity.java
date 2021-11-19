@@ -41,8 +41,7 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
         super(ModEntities.LEGENDARY_ENDER_PEARL.getEntityType(), x, y, z, dimensionIn);
     }
 
-    protected @NotNull
-    Item getDefaultItem() {
+    protected @NotNull Item getDefaultItem() {
         return ModItems.LEGENDARY_ENDER_PEARL.get();
     }
 
@@ -55,8 +54,7 @@ public class LegendaryEnderPearlEntity extends ProjectileItemEntity {
     }
 
     @Override
-    public @NotNull
-    IPacket<?> getSpawnPacket() {
+    public @NotNull IPacket<?> getSpawnPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 

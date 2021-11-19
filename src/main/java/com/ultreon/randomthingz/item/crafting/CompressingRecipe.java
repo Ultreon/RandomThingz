@@ -17,12 +17,9 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
 @RequiredArgsConstructor
 public class CompressingRecipe implements IRecipe<IInventory> {
     private final ResourceLocation recipeId;
-    @Getter
-    private int processTime;
-    @Getter
-    private Ingredient ingredient;
-    @Getter
-    private int ingredientCount;
+    @Getter private int processTime;
+    @Getter private Ingredient ingredient;
+    @Getter private int ingredientCount;
     private ItemStack result;
 
     @Override

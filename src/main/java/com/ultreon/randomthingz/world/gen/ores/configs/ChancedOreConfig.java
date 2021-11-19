@@ -27,10 +27,10 @@ public class ChancedOreConfig extends DefaultOreConfig {
     /**
      * Default Ore Configuration: Constructor
      *
-     * @param veinSize  the size of the vein.
+     * @param veinSize the size of the vein.
      * @param minHeight the lowest level of generating.
      * @param maxHeight the highest level of generating.
-     * @param chance    the chance per X chunks. {@linkplain #getChance() The getter}.
+     * @param chance the chance per X chunks. {@linkplain #getChance() The getter}.
      */
     public ChancedOreConfig(int veinCount, int veinSize, int minHeight, int maxHeight, int chance) {
         super(veinCount, veinSize, minHeight, maxHeight);

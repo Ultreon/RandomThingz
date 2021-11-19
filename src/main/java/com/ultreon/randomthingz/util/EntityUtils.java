@@ -46,9 +46,9 @@ public final class EntityUtils {
 //        ForgeHooks.onLivingDamage(entity, damageSrc, currentHealth);
 //
 //        // Set health
-//        entity.getCombatTracker().trackDamage(damageSrc, currentHealth, currentHealth); // QSoftware: changed f2 to currentHealth for instant kill
-//        entity.setHealth(0f); // Forge: moved to fix MC-121048; QSoftware: changed to 0f for instant kill
-//        entity.setAbsorptionAmount(0f); // QSoftware: changed to 0f for number compatibility
+//        entity.getCombatTracker().trackDamage(damageSrc, currentHealth, currentHealth); // Ultreon Team: changed f2 to currentHealth for instant kill
+//        entity.setHealth(0f); // Forge: moved to fix MC-121048; Ultreon Team: changed to 0f for instant kill
+//        entity.setAbsorptionAmount(0f); // Ultreon Team: changed to 0f for number compatibility
     }
 
     /**

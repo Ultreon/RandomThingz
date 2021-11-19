@@ -144,8 +144,7 @@ public abstract class WandItem extends HudItem {
      * returns the action that specifies what animation to play when the items is being used
      */
     @ParametersAreNonnullByDefault
-    public @NotNull
-    UseAction getUseAction(ItemStack stack) {
+    public @NotNull UseAction getUseAction(ItemStack stack) {
         return UseAction.BOW;
     }
 
@@ -153,8 +152,7 @@ public abstract class WandItem extends HudItem {
      * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
      * {@linkplain #onUseItem}.
      */
-    public @NotNull
-    ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
 
@@ -308,7 +306,7 @@ public abstract class WandItem extends HudItem {
             val = 0;
         }
 
-        val = (int) (64d * mana / maxMana);
+        val = (int)(64d * mana / maxMana);
 
         drawItemTooltipText(gu, val, stack, Arrays.asList(new StringTextComponent(TextFormatting.BLUE + I18n.format(stack.getTranslationId())), new StringTextComponent(TextFormatting.GRAY + "" + Math.round(mana) + " / " + Math.round(maxMana))), 0, height, 96, 10, -10, mc.getMainWindow().getWidth() - 20, mc.getMainWindow().getHeight(), -1, GuiUtils.DEFAULT_BACKGROUND_COLOR, GuiUtils.DEFAULT_BORDER_COLOR_START, GuiUtils.DEFAULT_BORDER_COLOR_END, mc.fontRenderer);
         MatrixStack matrixStack = gu.getMatrixStack();
@@ -327,7 +325,8 @@ public abstract class WandItem extends HudItem {
                                     int screenWidth, int screenHeight, int maxTextWidth,
                                     int backgroundColor, int borderColorStart, int borderColorEnd, FontRenderer font) {
         MatrixStack matrixStack = gu.getMatrixStack();
-        if (!textLines.isEmpty()) {
+        if (!textLines.isEmpty())
+        {
             RenderTooltipEvent.Pre event = new RenderTooltipEvent.Pre(stack, textLines, matrixStack, mouseX, mouseY, screenWidth, screenHeight, maxTextWidth, font);
             if (MinecraftForge.EVENT_BUS.post(event))
                 return;
@@ -342,7 +341,8 @@ public abstract class WandItem extends HudItem {
             RenderSystem.disableDepthTest();
             int tooltipTextWidth = minWidth; // Added minWidth.
 
-            for (ITextProperties textLine : textLines) {
+            for (ITextProperties textLine : textLines)
+            {
                 int textLineWidth = font.getStringPropertyWidth(textLine);
                 if (textLineWidth > tooltipTextWidth)
                     tooltipTextWidth = textLineWidth;
@@ -352,7 +352,8 @@ public abstract class WandItem extends HudItem {
 
             int titleLinesCount = 1;
             int tooltipX = mouseX + 12;
-            if (tooltipX + tooltipTextWidth + 4 > screenWidth) {
+            if (tooltipX + tooltipTextWidth + 4 > screenWidth)
+            {
                 tooltipX = mouseX - 16 - tooltipTextWidth;
                 if (tooltipX < 4) // if the tooltip doesn't fit on the screen
                 {
@@ -364,21 +365,25 @@ public abstract class WandItem extends HudItem {
                 }
             }
 
-            if (maxTextWidth > 0 && tooltipTextWidth > maxTextWidth) {
+            if (maxTextWidth > 0 && tooltipTextWidth > maxTextWidth)
+            {
                 tooltipTextWidth = maxTextWidth;
                 needsWrap = true;
             }
 
-            if (needsWrap) {
+            if (needsWrap)
+            {
                 int wrappedTooltipWidth = 0;
                 List<ITextProperties> wrappedTextLines = new ArrayList<>();
-                for (int i = 0; i < textLines.size(); i++) {
+                for (int i = 0; i < textLines.size(); i++)
+                {
                     ITextProperties textLine = textLines.get(i);
                     List<ITextProperties> wrappedLine = font.getCharacterManager().func_238362_b_(textLine, tooltipTextWidth, Style.EMPTY);
                     if (i == 0)
                         titleLinesCount = wrappedLine.size();
 
-                    for (ITextProperties line : wrappedLine) {
+                    for (ITextProperties line : wrappedLine)
+                    {
                         int lineWidth = font.getStringPropertyWidth(line);
                         if (lineWidth > wrappedTooltipWidth)
                             wrappedTooltipWidth = lineWidth;
@@ -397,7 +402,8 @@ public abstract class WandItem extends HudItem {
             int tooltipY = mouseY - 12;
             int tooltipHeight = 8;
 
-            if (textLines.size() > 1) {
+            if (textLines.size() > 1)
+            {
                 tooltipHeight += (textLines.size() - 1) * 10;
                 if (textLines.size() > titleLinesCount)
                     tooltipHeight += 2; // gap between title lines and next lines
@@ -472,10 +478,11 @@ public abstract class WandItem extends HudItem {
 
             int tooltipTop = tooltipY;
 
-            for (int lineNumber = 0; lineNumber < textLines.size(); ++lineNumber) {
+            for (int lineNumber = 0; lineNumber < textLines.size(); ++lineNumber)
+            {
                 ITextProperties line = textLines.get(lineNumber);
                 if (line != null)
-                    font.drawEntityText(LanguageMap.getInstance().func_241870_a(line), (float) tooltipX, (float) tooltipY, -1, true, mat, renderType, false, 0, 15728880);
+                    font.drawEntityText(LanguageMap.getInstance().func_241870_a(line), (float)tooltipX, (float)tooltipY, -1, true, mat, renderType, false, 0, 15728880);
 
                 if (lineNumber + 1 == titleLinesCount)
                     tooltipY += 2;

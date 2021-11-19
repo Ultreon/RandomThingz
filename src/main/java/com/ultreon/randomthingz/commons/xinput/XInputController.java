@@ -7,10 +7,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.vector.Vector2f;
 
 public class XInputController extends AbstractController {
-    @Getter
-    private final ControllerManager manager;
-    @Getter
-    private final int index;
+    @Getter private final ControllerManager manager;
+    @Getter private final int index;
     private ControllerState state;
 
     public XInputController(ControllerManager manager, int index) {

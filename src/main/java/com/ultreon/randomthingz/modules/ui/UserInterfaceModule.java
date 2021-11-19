@@ -19,13 +19,10 @@ public class UserInterfaceModule extends CoreModule {
 
     @Override
     public void onEnable() {
-        // Todo: add enabling for Main Module.
-        ModContainers.CONTAINER_TYPES.register(modEventBus);
     }
 
     @Override
-    public @NotNull
-    String getName() {
+    public @NotNull String getName() {
         return "user_interface";
     }
 
@@ -38,8 +35,7 @@ public class UserInterfaceModule extends CoreModule {
     }
 
     @Override
-    public @NotNull
-    ModuleCompatibility getCompatibility() {
+    public @NotNull ModuleCompatibility getCompatibility() {
         return ModuleCompatibility.FULL;
     }
 }

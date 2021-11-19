@@ -45,14 +45,12 @@ public class PumpBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public @NotNull
-    BlockState rotate(BlockState state, Rotation rot) {
+    public @NotNull BlockState rotate(BlockState state, Rotation rot) {
         return state.with(FACING, rot.rotate(state.get(FACING)));
     }
 
     @Override
-    public @NotNull
-    BlockState mirror(BlockState state, Mirror mirrorIn) {
+    public @NotNull BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(FACING)));
     }
 

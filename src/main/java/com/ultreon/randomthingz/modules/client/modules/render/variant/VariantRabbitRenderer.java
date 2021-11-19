@@ -8,13 +8,13 @@ import net.minecraft.util.ResourceLocation;
 
 public class VariantRabbitRenderer extends RabbitRenderer {
 
-    public VariantRabbitRenderer(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn);
-    }
-
-    @Override
-    public ResourceLocation getEntityTexture(RabbitEntity entity) {
-        return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.RABBIT, () -> super.getEntityTexture(entity));
-    }
+	public VariantRabbitRenderer(EntityRendererManager renderManagerIn) {
+		super(renderManagerIn);
+	}
+	
+	@Override
+	public ResourceLocation getEntityTexture(RabbitEntity entity) {
+		return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.RABBIT, () -> super.getEntityTexture(entity));
+	}
 
 }

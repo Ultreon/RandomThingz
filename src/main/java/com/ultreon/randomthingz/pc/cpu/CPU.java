@@ -5,7 +5,7 @@ public final class CPU {
     private int ac, xr, yr, st, sp, pc;
     private final int[] memory;
     private boolean cpurunning;
-
+    
     public CPU() {
         memory = new int[65536];
         for (int i = 0; i < 65536; i++) {
@@ -13,7 +13,6 @@ public final class CPU {
         }
         cpurunning = true;
     }
-
     /**
      * Resets emulator
      * <p>
@@ -25,105 +24,86 @@ public final class CPU {
         sp = 0xff;    // ?
         st = 0b00000000; // ?
     }
-
     /**
      * Writes a byte to a specified address
-     *
+     * 
      * @param addr  The address ($0000-$ffff)
      * @param pbyte The byte to poke
      */
     public void pokeByte(int addr, int pbyte) {
         memory[addr] = pbyte;
     }
-
     /**
      * Reads a byte
-     *
+     * 
      * @param addr
-     * @return Byte from the address
+     * @return      Byte from the address
      */
     public int peekByte(int addr) {
         return memory[addr];
     }
-
-    private int peekWord(int addr) {
+    private int peekWord(int addr) { 
         return memory[addr] + 256 * memory[addr + 1];
     }
-
     private int immediateByte() {
         return peekByte(pc);
     }
-
     private int addrZPiY() {
         return peekWord(peekByte(pc)) + yr;
     }
-
     private int addrZPiX() { // Dafuq
         return peekWord(peekByte(pc) + xr);
     }
-
     private int addrAbs() {
         int result = peekWord(pc);
         updatePC();
         return result;
     }
-
     private int addrBranch() {
-        return pc + 1 + (byte) peekByte(pc);
+        return pc + 1 + (byte)peekByte(pc);
     }
-
     private int addrAbsInd() {
         int result = peekWord(peekWord(pc));
         updatePC();
         return result;
     }
-
     private int addrAbsX() {
         int result = peekWord(pc) + xr;
         updatePC();
         return result;
     }
-
     private int addrZP() {
         return peekByte(peekByte(pc));
     }
-
     private int addrZPX() {
         return (peekWord(pc) & 255) + xr;
     }
-
     private int addrZPY() {
         return (peekWord(pc) & 255) + yr;
     }
-
     private int addrAbsY() {
         int result = peekWord(pc) + yr;
         updatePC();
         return result;
     }
-
     private void updatePC() {
         pc = (pc + 1) % 65536;
     }
-
     private void lda(int b) {
         ac = b;
         updateFlags(b);
         updatePC();
     }
-
     private void ldx(int b) {
         xr = b;
         updateFlags(b);
         updatePC();
     }
-
     private void ldy(int b) {
         yr = b;
         updateFlags(b);
         updatePC();
     }
-
     private void asl(int b) {
         int c = b & 128;
         ac = (b << 1) & 255;
@@ -131,50 +111,41 @@ public final class CPU {
         updateFlags(ac);
         updatePC();
     }
-
     private void and(int b) {
         ac = ac & b;
         updateFlags(ac);
         updatePC();
     }
-
     private void ora(int b) {
         ac = ac | b;
         updateFlags(ac);
         updatePC();
     }
-
     private void eor(int b) {
         ac = ac ^ b;
         updateFlags(ac);
         updatePC();
     }
-
     private void sta(int addr) {
         memory[addr] = ac;
         updatePC();
     }
-
     private void stx(int addr) {
         memory[addr] = xr;
         updatePC();
     }
-
     private void sty(int addr) {
         memory[addr] = yr;
         updatePC();
     }
-
     private void push(int b) {
         memory[0x100 + sp] = b;
-        sp = (sp + 255) & 255;
+        sp = (sp + 255) & 255; 
     }
-
     private int pop() {
         sp = (sp + 1) & 255;
         return memory[0x100 + sp];
     }
-
     private void branch(int flag, int state) {
         if ((st & flag) == state) {
             pc = addrBranch();
@@ -182,12 +153,10 @@ public final class CPU {
             updatePC();
         }
     }
-
     private void updateFlags(int b) {
         setNegative(b);
         setZero(b);
     }
-
     private void setNegative(int b) {
         if (b > 0) {
             setBit(NEGATIVE);
@@ -195,7 +164,6 @@ public final class CPU {
             clearBit(NEGATIVE);
         }
     }
-
     private void setCarry(int b) {
         if (b > 0) {
             setBit(CARRY);
@@ -203,7 +171,6 @@ public final class CPU {
             clearBit(CARRY);
         }
     }
-
     private void setZero(int b) {
         if (b == 0) { // !
             setBit(ZERO);
@@ -211,18 +178,15 @@ public final class CPU {
             clearBit(ZERO);
         }
     }
-
     private void clearBit(int bit) {
         st &= 255 - bit;
     }
-
     private void setBit(int bit) {
         st |= bit;
     }
-
     /**
      * Executes an opcode
-     *
+     * 
      * @return false if the program hat ended or failed
      */
     public boolean execute() {
@@ -472,7 +436,7 @@ public final class CPU {
                         System.out.print(ac); // Print AC as number
                         break;
                     case 1:
-                        System.out.printf("%c", (char) ac); // Print AC as character
+                        System.out.printf("%c", (char)ac); // Print AC as character
                         break;
                     default:
                         System.out.println(String.format("* Unknown INT at $%04X", pc - 1));

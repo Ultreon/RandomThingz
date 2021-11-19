@@ -12,12 +12,9 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public abstract class WindowApplication extends Application {
-    @Getter
-    private final Computer computer;
-    @Getter
-    private final Dimension size;
-    @Getter
-    private final Point pos;
+    @Getter private final Computer computer;
+    @Getter private final Dimension size;
+    @Getter private final Point pos;
     private final List<UIComponent> children = new ArrayList<>();
 
     public WindowApplication(Computer computer) {

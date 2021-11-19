@@ -50,7 +50,7 @@ public final class CustomTNTEntity extends TNTEntity {
         this(blockState, dimensionIn);
         this.setPosition(x, y, z);
 
-        double d0 = dimensionIn.rand.nextDouble() * (double) ((float) Math.PI * 2F);
+        double d0 = dimensionIn.rand.nextDouble() * (double)((float)Math.PI * 2F);
         this.setMotion(-Math.sin(d0) * 0.02D, 0.2F, -Math.cos(d0) * 0.02D);
         this.setFuse(properties.getFuse());
         this.prevPosX = x;
@@ -61,7 +61,6 @@ public final class CustomTNTEntity extends TNTEntity {
 
     /**
      * Get block
-     *
      * @return block of the entity.
      * @deprecated Use {@linkplain BlockState#getBlock()} using {@linkplain #getBlockState()} instead.
      */

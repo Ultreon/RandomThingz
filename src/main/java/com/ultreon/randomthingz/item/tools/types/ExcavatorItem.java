@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableSet;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.commons.IHasToolType;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -29,9 +31,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @SuppressWarnings("SameParameterValue")
 @ParametersAreNonnullByDefault
@@ -39,6 +39,17 @@ import java.util.Set;
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID)
 public class ExcavatorItem extends ShovelItem implements IHasToolType {
     private static final Set<Material> EFFECTIVE_ON_MATERIAL = ImmutableSet.of(Material.SNOW, Material.SNOW_BLOCK, Material.SAND, Material.EARTH, Material.CLAY);
+    private static final Map<Block, BlockState> excavateMappings = new HashMap<>();
+
+    static {
+        registerExcavateMapping(Blocks.DIRT, Blocks.COARSE_DIRT.getDefaultState());
+        registerExcavateMapping(Blocks.SANDSTONE, Blocks.SAND.getDefaultState());
+        registerExcavateMapping(Blocks.RED_SANDSTONE, Blocks.RED_SAND.getDefaultState());
+    }
+
+    public static void registerExcavateMapping(Block source, BlockState state) {
+        excavateMappings.put(source, state);
+    }
 
     public ExcavatorItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
         super(tier, attackDamageIn, attackSpeedIn, builder.defaultMaxDamage((int) (tier.getMaxUses() * 1.7)));
@@ -160,8 +171,8 @@ public class ExcavatorItem extends ShovelItem implements IHasToolType {
      * Block start break handler. Here's where the magic of 3x3 begins.
      *
      * @param itemstack the item stack used for breaking a block.
-     * @param pos       the block's position.
-     * @param player    the player that's trying to break a block.
+     * @param pos the block's position.
+     * @param player the player that's trying to break a block.
      * @return false, so the block can be broken.
      */
     @Override
@@ -287,38 +298,41 @@ public class ExcavatorItem extends ShovelItem implements IHasToolType {
         return result;
     }
 
-    private ActionResultType useItem(World dimension, BlockPos blockpos, ItemUseContext context) {
-        BlockState blockstate = dimension.getBlockState(blockpos);
+    private ActionResultType useItem(World world, BlockPos pos, ItemUseContext context) {
+        BlockState state = world.getBlockState(pos);
         if (context.getFace() == Direction.DOWN) {
             return ActionResultType.PASS;
         } else {
-            PlayerEntity playerentity = context.getPlayer();
-            BlockState toolModifiedState = blockstate.getToolModifiedState(dimension, blockpos, playerentity, context.getItem(), ModToolTypes.EXCAVATOR);
-            if (toolModifiedState == null) {
-                toolModifiedState = blockstate.getToolModifiedState(dimension, blockpos, playerentity, context.getItem(), ToolType.SHOVEL);
+            PlayerEntity player = context.getPlayer();
+            BlockState modifiedState = state.getToolModifiedState(world, pos, player, context.getItem(), ModToolTypes.EXCAVATOR);
+            if (modifiedState == null) {
+                modifiedState = state.getToolModifiedState(world, pos, player, context.getItem(), ToolType.SHOVEL);
             }
-            BlockState finalBlockState = null;
-            if (toolModifiedState != null && dimension.isAirBlock(blockpos.up())) {
-                dimension.playSound(playerentity, blockpos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                finalBlockState = toolModifiedState;
-            } else if (blockstate.getBlock() instanceof CampfireBlock && blockstate.get(CampfireBlock.LIT)) {
-                if (!dimension.isClientSided()) {
-                    dimension.playEvent(null, 1009, blockpos, 0);
+            if (modifiedState == null) {
+                modifiedState = excavateMappings.get(world.getBlockState(pos).getBlock());
+            }
+            BlockState resultState = null;
+            if (modifiedState != null && world.isAirBlock(pos.up())) {
+                world.playSound(player, pos, SoundEvents.ITEM_SHOVEL_FLATTEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                resultState = modifiedState;
+            } else if (state.getBlock() instanceof CampfireBlock && state.get(CampfireBlock.LIT)) {
+                if (!world.isClientSided()) {
+                    world.playEvent(null, 1009, pos, 0);
                 }
 
-                CampfireBlock.extinguish(dimension, blockpos, blockstate);
-                finalBlockState = blockstate.with(CampfireBlock.LIT, Boolean.FALSE);
+                CampfireBlock.extinguish(world, pos, state);
+                resultState = state.with(CampfireBlock.LIT, Boolean.FALSE);
             }
 
-            if (finalBlockState != null) {
-                if (!dimension.isClientSided) {
-                    dimension.setBlockState(blockpos, finalBlockState, 11);
-                    if (playerentity != null) {
-                        context.getItem().damageItem(1, playerentity, (player) -> player.sendBreakAnimation(context.getHand()));
+            if (resultState != null) {
+                if (!world.isClientSided) {
+                    world.setBlockState(pos, resultState, 11);
+                    if (player != null) {
+                        context.getItem().damageItem(1, player, (p) -> p.sendBreakAnimation(context.getHand()));
                     }
                 }
 
-                return ActionResultType.func_233537_a_(dimension.isClientSided);
+                return ActionResultType.func_233537_a_(world.isClientSided);
             } else {
                 return ActionResultType.PASS;
             }
