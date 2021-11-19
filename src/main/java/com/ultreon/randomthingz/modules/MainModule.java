@@ -22,12 +22,14 @@ public final class MainModule extends CoreModule {
     }
 
     @Override
-    public @NotNull String getName() {
+    public @NotNull
+    String getName() {
         return "main";
     }
 
     @Override
-    public @NotNull ModuleCompatibility getCompatibility() {
+    public @NotNull
+    ModuleCompatibility getCompatibility() {
         return ModuleCompatibility.FULL;
     }
 }

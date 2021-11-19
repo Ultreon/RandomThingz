@@ -5,8 +5,10 @@ import net.minecraft.util.text.StringTextComponent;
 
 public interface IMenuHandler {
     AbstractActionMenu getMenu();
+
     default ITextComponent getText() {
         return new StringTextComponent("...");
     }
+
     boolean isEnabled();
 }

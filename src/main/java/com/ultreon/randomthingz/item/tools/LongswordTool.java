@@ -229,7 +229,8 @@ public class LongswordTool extends LongswordItem implements ITool {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World dimension, List<ITextComponent> tooltip, ITooltipFlag flag) {        for (AbstractTrait trait : traits.get()) {
+    public void addInformation(ItemStack stack, @Nullable World dimension, List<ITextComponent> tooltip, ITooltipFlag flag) {
+        for (AbstractTrait trait : traits.get()) {
             tooltip.add(trait.getTranslation());
         }
     }

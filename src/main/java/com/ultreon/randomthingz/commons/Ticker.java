@@ -13,7 +13,8 @@ import java.util.function.Predicate;
 @AllArgsConstructor
 @ToString(of = {"currentTicks"})
 public class Ticker {
-    @Getter private int currentTicks;
+    @Getter
+    private int currentTicks;
     private final Predicate<Ticker> autoReset;
     private final Consumer<Ticker> onTick;
 
@@ -22,7 +23,8 @@ public class Ticker {
     }
 
     public Ticker(int currentTicks, @NotNull Predicate<Ticker> autoReset) {
-        this(currentTicks, autoReset, (ticker) -> {});
+        this(currentTicks, autoReset, (ticker) -> {
+        });
     }
 
     public void advance() {
@@ -32,7 +34,7 @@ public class Ticker {
             reset();
         }
     }
-    
+
     public void reset() {
         this.currentTicks = 0;
     }

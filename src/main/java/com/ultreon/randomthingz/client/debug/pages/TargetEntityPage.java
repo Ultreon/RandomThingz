@@ -19,7 +19,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class TargetEntityPage extends DebugPage {
     @Override
-    public @NotNull DebugText generateText() {
+    public @NotNull
+    DebugText generateText() {
         DebugText debugText = new DebugText();
 
         if (mc.player != null) {

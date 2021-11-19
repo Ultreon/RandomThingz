@@ -34,7 +34,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Objects;
 
 /**
- * Initialization class for Random Thingz.
+ * Initialization class for QForgeMod.
  *
  * @author Qboi123
  * @see RandomThingz
@@ -171,6 +171,7 @@ public class Initialization {
         Filters.get().register(ItemGroup.REDSTONE, new ResourceLocation("randomthingz", "redstone/buttons"), new ItemStack(ModBlocks.EUCALYPTUS_BUTTON));
         Filters.get().register(ItemGroup.REDSTONE, new ResourceLocation("randomthingz", "redstone/pressure_plates"), new ItemStack(ModBlocks.EUCALYPTUS_PRESSURE_PLATE));
 
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/armors"), new ItemStack(Toolset.COPPER.getChestplate()));
         Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/swords"), new ItemStack(Toolset.COPPER.getSword()));
         Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/axes"), new ItemStack(Toolset.COPPER.getAxe()));
         Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/pickaxes"), new ItemStack(Toolset.COPPER.getPickaxe()));
@@ -179,6 +180,7 @@ public class Initialization {
         Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/longswords"), new ItemStack(Toolset.COPPER.getLongsword()));
         Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/broadswords"), new ItemStack(Toolset.COPPER.getBroadsword()));
         Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/katanas"), new ItemStack(Toolset.COPPER.getKatana()));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/cutlasses"), new ItemStack(Toolset.COPPER.getCutlass()));
         Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/battleaxes"), new ItemStack(Toolset.COPPER.getBattleaxe()));
         Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/lumber_axes"), new ItemStack(Toolset.COPPER.getLumberAxe()));
         Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/excavators"), new ItemStack(Toolset.COPPER.getExcavator()));

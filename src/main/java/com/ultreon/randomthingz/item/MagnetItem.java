@@ -29,7 +29,8 @@ public class MagnetItem extends EnergyStoringItem {
     }
 
     @Override
-    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
+    public @NotNull
+    ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
         CompoundNBT nbt = stack.getOrCreateChildTag(Objects.requireNonNull(stack.getItem().getRegistryName()).getNamespace());
         boolean magnetized;

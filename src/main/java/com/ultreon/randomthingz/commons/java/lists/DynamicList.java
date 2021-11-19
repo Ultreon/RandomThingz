@@ -29,7 +29,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
     /**
      * Adds a partition along with the size and value.
      *
-     * @param size the size.
+     * @param size  the size.
      * @param value the value.
      * @return the partition index of the new partition.
      * @throws ValueExistsException as the exception it says: if the value already exists.
@@ -61,7 +61,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * Inserts a partition at the given index along with the size and value.
      *
      * @param index the partition index.
-     * @param size the size.
+     * @param size  the size.
      * @param value the value.
      * @return the index.
      */
@@ -151,7 +151,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * Change the size for a partition.
      *
      * @param value the value to change.
-     * @param size the size for the partition to set.
+     * @param size  the size for the partition to set.
      * @return the new size.
      */
     public synchronized Double edit(T value, Double size) {
@@ -168,8 +168,8 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
     /**
      * Change the size and value of a partition.
      *
-     * @param value the value to change.
-     * @param size the partition size/
+     * @param value    the value to change.
+     * @param size     the partition size/
      * @param newValue the value.
      * @return the new size.
      */

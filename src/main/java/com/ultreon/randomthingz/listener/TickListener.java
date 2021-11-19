@@ -19,7 +19,7 @@ import org.jline.utils.ShutdownHooks;
  * @author Qboi123
  */
 @Beta
-//@Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+//@Mod.EventBusSubscriber(modid = QForgeMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 @UtilityClass
 public class TickListener {
     private static boolean attackBusy = false;
@@ -29,6 +29,7 @@ public class TickListener {
     private static boolean jumpBusy = false;
 
     private static final ControllerManager controllers = new ControllerManager();
+
     static {
         controllers.initSDLGamepad();
         ShutdownHooks.add(controllers::quitSDLGamepad);

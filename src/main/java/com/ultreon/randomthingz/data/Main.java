@@ -16,15 +16,16 @@ import java.util.Set;
 @Deprecated
 public class Main {
     private static GatherDataEvent.DataGeneratorConfig dataGeneratorConfig;
-    private static final Set<String> mods = new HashSet<>();
-    private static final Path path = Paths.get("./src/main/generated");
+    private static Set<String> mods = new HashSet<>();
+    private static Path path = Paths.get("./src/main/generated");
     private static ExistingFileHelper existingFileHelper;
 
     public static void main(String[] args) {
 
         Bootstrap.register();
         dataGeneratorConfig = new GatherDataEvent.DataGeneratorConfig(mods, path, null, true, true, true, true, true, false);
-        ModLoader.get().gatherAndInitializeMods(ModWorkManager.syncExecutor(), ModWorkManager.parallelExecutor(), ()->{});
+        ModLoader.get().gatherAndInitializeMods(ModWorkManager.syncExecutor(), ModWorkManager.parallelExecutor(), () -> {
+        });
         //If we aren't generating data for forge, automatically add forge as an existing so mods can access forge's data
         mods.add(RandomThingz.MOD_ID);
         existingFileHelper = new ExistingFileHelper(Collections.singletonList(Paths.get("src/main/resources")), new HashSet<>(), true);

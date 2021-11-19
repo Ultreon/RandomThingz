@@ -18,7 +18,8 @@ public class ShapesItemGroup extends ItemGroup {
     }
 
     @Override
-    public @NotNull ItemStack createIcon() {
+    public @NotNull
+    ItemStack createIcon() {
         return new ItemStack(Blocks.OAK_STAIRS);
     }
 }

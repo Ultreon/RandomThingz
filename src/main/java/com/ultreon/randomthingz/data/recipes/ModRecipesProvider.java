@@ -176,8 +176,8 @@ public class ModRecipesProvider extends RecipeProvider {
                 .result(Items.STICK, 1, 0.25f)
                 .build(consumer);
         CrushingRecipeBuilder.builder(
-                Ingredient.fromItems(Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_PILLAR, Blocks.CHISELED_QUARTZ_BLOCK, Blocks.SMOOTH_QUARTZ),
-                200)
+                        Ingredient.fromItems(Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_PILLAR, Blocks.CHISELED_QUARTZ_BLOCK, Blocks.SMOOTH_QUARTZ),
+                        200)
                 .result(Items.QUARTZ, 4)
                 .build(consumer, RandomThingz.rl("crushing/quartz_from_blocks"));
         CrushingRecipeBuilder.builder(Ingredient.fromItems(Blocks.RED_SANDSTONE, Blocks.CHISELED_RED_SANDSTONE), 200)

@@ -160,7 +160,8 @@ public class NatureStaffItem extends Item {
     /**
      * Called when this item is used when targeting a Block
      */
-    public @NotNull ActionResultType onUseItem(ItemUseContext context) {
+    public @NotNull
+    ActionResultType onUseItem(ItemUseContext context) {
         World dimension = context.getDimension();
         BlockPos blockPos = context.getPos();
         BlockPos blockPos1 = blockPos.offset(context.getFace());

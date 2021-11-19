@@ -28,11 +28,16 @@ import java.util.Objects;
 public class SettingsScreen extends Screen {
 
     private final Screen back;
-    @Used private Button doneButton;
-    @Used private Button cancelButton;
-    @Used private Button quitSettingsButton;
-    @Used private Button allowShutdownPCButton;
-    @Used private Button modulesButton;
+    @Used
+    private Button doneButton;
+    @Used
+    private Button cancelButton;
+    @Used
+    private Button quitSettingsButton;
+    @Used
+    private Button allowShutdownPCButton;
+    @Used
+    private Button modulesButton;
 
     public SettingsScreen(Screen back) {
         super(new StringTextComponent(""));
@@ -113,7 +118,7 @@ public class SettingsScreen extends Screen {
     }
 
 //    /**
-//     * Event for showing button for the settings of Random Thingz.
+//     * Event for showing button for the settings of QForgeMod.
 //     *
 //     * @param event the gui-initialization event.
 //     */

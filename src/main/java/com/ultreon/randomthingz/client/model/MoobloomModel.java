@@ -242,12 +242,14 @@ public class MoobloomModel<T extends MoobloomEntity> extends AgeableModel<T> {
     }
 
     @Override
-    protected @NotNull Iterable<ModelRenderer> getHeadParts() {
+    protected @NotNull
+    Iterable<ModelRenderer> getHeadParts() {
         return ImmutableList.of(head, head_sub_0, head_sub_1, fungus, bone, bone4, cactus, bone9);
     }
 
     @Override
-    protected @NotNull Iterable<ModelRenderer> getBodyParts() {
+    protected @NotNull
+    Iterable<ModelRenderer> getBodyParts() {
         return ImmutableList.of(body,
                 bone2, bone3, bone5, bone6, bone7, bone8, bone9, bone10, bone11,
                 fungus2, fungus3, fungus4, fungus5,
@@ -261,8 +263,8 @@ public class MoobloomModel<T extends MoobloomEntity> extends AgeableModel<T> {
         this.leg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
         this.leg3.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
         this.leg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
-        this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
+        this.head.rotateAngleX = headPitch * ((float) Math.PI / 180F);
+        this.head.rotateAngleY = netHeadYaw * ((float) Math.PI / 180F);
     }
 
     @Override

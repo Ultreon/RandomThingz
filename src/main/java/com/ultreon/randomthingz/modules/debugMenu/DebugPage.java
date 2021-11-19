@@ -37,7 +37,7 @@ public abstract class DebugPage {
     protected void addLeft(DebugEntry debugEntry) {
         this.linesLeft.add(debugEntry);
     }
-    
+
     protected void addRight(DebugEntry debugEntry) {
         this.linesRight.add(debugEntry);
     }
@@ -75,7 +75,7 @@ public abstract class DebugPage {
     }
 
     protected static Color getColor(Vector3d color) {
-        return new Color((float)color.x, (float)color.y, (float)color.z);
+        return new Color((float) color.x, (float) color.y, (float) color.z);
     }
 
     protected static Color getColor(int rgb) {

@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * Base baby entity interface.
  *
- * @author Ultreon Team.
+ * @author QTech Community.
  */
 public interface IBabyEntity {
 

@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
  * This class is initialized my {@link RandomThingz}.<br>
  * Get the instance from {@link #getInstance()}.<br>
  * <br>
+ *
  * @author Qboi123
  * @see Module
  * @see #getInstance()
@@ -236,7 +237,8 @@ public final class ModuleManager {
         this.initialized = true;
     }
 
-    private @NotNull String getDataPrefix() {
+    private @NotNull
+    String getDataPrefix() {
         if (parent == null) {
             return "";
         }

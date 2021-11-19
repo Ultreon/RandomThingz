@@ -1,12 +1,13 @@
 package com.ultreon.randomthingz.entity.common;
 
+import com.qsoftware.modlib.silentlib.registry.EntityTypeDeferredRegister;
 import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
+import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.common.ModBlocks;
 import com.ultreon.randomthingz.commons.init.ObjectInit;
 import com.ultreon.randomthingz.entity.*;
 import com.ultreon.randomthingz.entity.baby.*;
 import com.ultreon.randomthingz.entity.custom.CustomTNTEntity;
-import com.ultreon.randomthingz.registration.Registration;
 import lombok.experimental.UtilityClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -19,6 +20,7 @@ import net.minecraft.entity.EntityType;
  */
 @UtilityClass
 public class ModEntities extends ObjectInit<EntityType<?>> {
+    public static final EntityTypeDeferredRegister ENTITY_TYPES = new EntityTypeDeferredRegister(RandomThingz.MOD_ID);
     public static final EntityTypeRegistryObject<BabyCreeperEntity> BABY_CREEPER = register("baby_creeper", EntityType.Builder.create(BabyCreeperEntity::new, EntityClassification.MONSTER).size(0.6F, 1.7F));
     public static final EntityTypeRegistryObject<BabyEndermanEntity> BABY_ENDERMAN = register("baby_enderman", EntityType.Builder.create(BabyEndermanEntity::new, EntityClassification.MONSTER).size(0.6F, 2.9F));
     public static final EntityTypeRegistryObject<BabySkeletonEntity> BABY_SKELETON = register("baby_skeleton", EntityType.Builder.create(BabySkeletonEntity::new, EntityClassification.MONSTER).size(0.6F, 1.99F));
@@ -48,11 +50,11 @@ public class ModEntities extends ObjectInit<EntityType<?>> {
      * @return the registry object.
      */
     private static <T extends Entity> EntityTypeRegistryObject<T> register(String name, EntityType.Builder<T> builder) {
-        return Registration.ENTITY_TYPES.register(name, builder);
+        return ENTITY_TYPES.register(name, builder);
     }
 
     private static <T extends Entity> EntityTypeRegistryObject<T> register(String name, EntityType<T> builder) {
-        return Registration.ENTITY_TYPES.register(name, builder);
+        return ENTITY_TYPES.register(name, builder);
     }
 
     public static void register() {

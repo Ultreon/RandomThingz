@@ -19,38 +19,33 @@ import org.jetbrains.annotations.NotNull;
  * Author: MrCrayfish
  */
 @SuppressWarnings({"SameParameterValue", "deprecation"})
-public class TagButton extends Button
-{
+public class TagButton extends Button {
     private static final ResourceLocation TABS = new ResourceLocation("textures/gui/container/creative_inventory/tabs.png");
 
     private final FilterEntry category;
     private final ItemStack stack;
     private boolean toggled;
 
-    public TagButton(int x, int y, FilterEntry filter, IPressable pressable)
-    {
+    public TagButton(int x, int y, FilterEntry filter, IPressable pressable) {
         super(x, y, 32, 28, new StringTextComponent(""), pressable);
         this.category = filter;
         this.stack = filter.getIcon();
         this.toggled = filter.isEnabled();
     }
 
-    public FilterEntry getFilter()
-    {
+    public FilterEntry getFilter() {
         return category;
     }
 
     @Override
-    public void onPress()
-    {
+    public void onPress() {
         this.toggled = !this.toggled;
         this.category.setEnabled(this.toggled);
         super.onPress();
     }
 
     @Override
-    public void renderWidget(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
-    {
+    public void renderWidget(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();
         mc.getTextureManager().bindTexture(TABS);
 
@@ -74,22 +69,20 @@ public class TagButton extends Button
         renderer.zLevel = 100.0F;
     }
 
-    private void drawRotatedTexture(int x, int y, int textureX, int textureY, int width, int height)
-    {
+    private void drawRotatedTexture(int x, int y, int textureX, int textureY, int width, int height) {
         float scaleX = 0.00390625F;
         float scaleY = 0.00390625F;
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos(x, y + height, 0.0).tex(((float)(textureX + height) * scaleX), (float)(textureY) * scaleY).endVertex();
-        bufferbuilder.pos(x + width, y + height, 0.0).tex(((float)(textureX + height) * scaleX), (float)(textureY + width) * scaleY).endVertex();
-        bufferbuilder.pos(x + width, y, 0.0).tex(((float)(textureX) * scaleX), (float)(textureY + width) * scaleY).endVertex();
-        bufferbuilder.pos(x, y, 0.0).tex(((float)(textureX) * scaleX), (float)(textureY) * scaleY).endVertex();
+        bufferbuilder.pos(x, y + height, 0.0).tex(((float) (textureX + height) * scaleX), (float) (textureY) * scaleY).endVertex();
+        bufferbuilder.pos(x + width, y + height, 0.0).tex(((float) (textureX + height) * scaleX), (float) (textureY + width) * scaleY).endVertex();
+        bufferbuilder.pos(x + width, y, 0.0).tex(((float) (textureX) * scaleX), (float) (textureY + width) * scaleY).endVertex();
+        bufferbuilder.pos(x, y, 0.0).tex(((float) (textureX) * scaleX), (float) (textureY) * scaleY).endVertex();
         tessellator.draw();
     }
 
-    public void updateState()
-    {
+    public void updateState() {
         this.toggled = category.isEnabled();
     }
 }

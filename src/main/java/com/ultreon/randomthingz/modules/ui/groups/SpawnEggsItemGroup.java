@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.modules.ui.groups;
 
-import com.ultreon.randomthingz.item.common.ModItems;
+import com.ultreon.randomthingz.item.common.ModItemsAlt;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +18,8 @@ public class SpawnEggsItemGroup extends ItemGroup {
     }
 
     @Override
-    public @NotNull ItemStack createIcon() {
-        return new ItemStack(ModItems.BABY_CREEPER_SPAWN_EGG);
+    public @NotNull
+    ItemStack createIcon() {
+        return new ItemStack(ModItemsAlt.BABY_CREEPER_SPAWN_EGG);
     }
 }

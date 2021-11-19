@@ -24,15 +24,13 @@ import java.util.Set;
  * Author: MrCrayfish
  */
 @Mod(Reference.MOD_ID)
-public class Filters
-{
+public class Filters {
     private static Filters instance;
 
-    private final Map<ItemGroup, Set<FilterEntry>> filterMap = new HashMap<>();
+    private Map<ItemGroup, Set<FilterEntry>> filterMap = new HashMap<>();
     public Events events;
 
-    public Filters()
-    {
+    public Filters() {
         if (FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
             return;
         }
@@ -41,8 +39,7 @@ public class Filters
         Filters.instance = this;
     }
 
-    private void onClientSetup(FMLClientSetupEvent event)
-    {
+    private void onClientSetup(FMLClientSetupEvent event) {
         this.register(ItemGroup.BUILDING_BLOCKS, new ResourceLocation("building_blocks/natural"), new ItemStack(Blocks.GRASS_BLOCK));
         this.register(ItemGroup.BUILDING_BLOCKS, new ResourceLocation("building_blocks/stones"), new ItemStack(Blocks.STONE));
         this.register(ItemGroup.BUILDING_BLOCKS, new ResourceLocation("building_blocks/woods"), new ItemStack(Blocks.OAK_LOG));
@@ -83,29 +80,24 @@ public class Filters
         this.register(ItemGroup.BREWING, new ResourceLocation("brewing/equipment"), new ItemStack(Items.BREWING_STAND));
     }
 
-    public static Filters get()
-    {
+    public static Filters get() {
         return instance;
     }
 
-    public void register(ItemGroup group, @Nullable ResourceLocation tag, ItemStack icon)
-    {
+    public void register(ItemGroup group, @Nullable ResourceLocation tag, ItemStack icon) {
         Set<FilterEntry> entries = this.filterMap.computeIfAbsent(group, itemGroup -> new LinkedHashSet<>());
         entries.add(new FilterEntry(tag, icon));
     }
 
-    public Set<ItemGroup> getGroups()
-    {
+    public Set<ItemGroup> getGroups() {
         return ImmutableSet.copyOf(this.filterMap.keySet());
     }
 
-    public ImmutableList<FilterEntry> getFilters(ItemGroup group)
-    {
+    public ImmutableList<FilterEntry> getFilters(ItemGroup group) {
         return ImmutableList.copyOf(this.filterMap.get(group));
     }
 
-    public boolean hasFilters(ItemGroup group)
-    {
+    public boolean hasFilters(ItemGroup group) {
         return this.filterMap.containsKey(group);
     }
 }

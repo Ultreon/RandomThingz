@@ -45,22 +45,30 @@ public class ScreenshotsScreen extends AdvancedScreen {
     private final List<Screenshot> screenshots = new ArrayList<>();
 
     // Getter only.
-    @Getter private final Screen backScreen;
-    @Getter private Screenshot currentScreenshot;
+    @Getter
+    private final Screen backScreen;
+    @Getter
+    private Screenshot currentScreenshot;
 
     // Getter & setter.
-    @Getter private int index;
-    @Getter private ScreenshotSelectionList list;
-    @Getter private Thread loadThread;
-    @Getter private int currentIndex = -1;
-    @Getter private int total;
-    @Getter private int loaded;
+    @Getter
+    private int index;
+    @Getter
+    private ScreenshotSelectionList list;
+    @Getter
+    private Thread loadThread;
+    @Getter
+    private int currentIndex = -1;
+    @Getter
+    private int total;
+    @Getter
+    private int loaded;
 
     /**
      * Screenshots screen: constructor.
      *
      * @param backScreen back screen.
-     * @param titleIn the screen title.
+     * @param titleIn    the screen title.
      */
     public ScreenshotsScreen(Screen backScreen, ITextComponent titleIn) {
         super(titleIn);
@@ -179,10 +187,10 @@ public class ScreenshotsScreen extends AdvancedScreen {
 
         // Render dirt.
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        bufferbuilder.pos(0.0D, this.height, 0.0D).tex(0.0F, (float)this.height  / 32.0F).color(64, 64, 64, 255).endVertex();
-        bufferbuilder.pos(224, this.height, 0.0D).tex((float)224 / 32.0F, (float)this.height  / 32.0F).color(64, 64, 64, 255).endVertex();
-        bufferbuilder.pos(224, this.height - 40d, 0.0D).tex((float)224 / 32.0F, ((float)this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
-        bufferbuilder.pos(0.0D, this.height - 40d, 0.0D).tex(0.0F, ((float)this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(0.0D, this.height, 0.0D).tex(0.0F, (float) this.height / 32.0F).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(224, this.height, 0.0D).tex((float) 224 / 32.0F, (float) this.height / 32.0F).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(224, this.height - 40d, 0.0D).tex((float) 224 / 32.0F, ((float) this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(0.0D, this.height - 40d, 0.0D).tex(0.0F, ((float) this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
 
         // Draw
         tessellator.draw();
@@ -263,7 +271,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
      * Load texture file into a resource location.
      *
      * @param location the resource location to read the texture into.
-     * @param file the file to read.
+     * @param file     the file to read.
      * @return an instance of {@linkplain DynamicTexture} containing data of the given file.
      */
     @Nullable

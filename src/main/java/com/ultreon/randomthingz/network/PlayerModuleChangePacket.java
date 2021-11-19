@@ -15,9 +15,12 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public class PlayerModuleChangePacket {
-    @Getter private final Module module;
-    @Getter private final boolean enable;
-    @Getter private CompoundNBT tag;
+    @Getter
+    private Module module;
+    @Getter
+    private boolean enable;
+    @Getter
+    private CompoundNBT tag;
 
     public PlayerModuleChangePacket(PacketBuffer buffer) {
         String moduleName = buffer.readString();

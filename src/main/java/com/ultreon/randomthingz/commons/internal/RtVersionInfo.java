@@ -9,7 +9,7 @@ import lombok.Data;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * Random Thingz Version for Build Arguments.
+ * QForgeMod Version for Build Arguments.
  *
  * @author Qboi123
  */
@@ -48,10 +48,10 @@ public class RtVersionInfo implements DevStringConvertible {
     public String toDevString() {
         StringBuilder sb = new StringBuilder();
         sb.append("QfmVersion{");
-        sb.append("version=")     .append(version)     .append(";");
-        sb.append("release=")     .append(release)     .append(";");
-        sb.append("build=")       .append(build)       .append(";");
-        sb.append("stage=")       .append(stage)       .append(";");
+        sb.append("version=").append(version).append(";");
+        sb.append("release=").append(release).append(";");
+        sb.append("build=").append(build).append(";");
+        sb.append("stage=").append(stage).append(";");
         sb.append("stageRelease=").append(stageRelease).append(";");
         sb.append("}");
         return sb.toString();

@@ -82,21 +82,21 @@ public class MobVariantsModule extends Module {
         registerShiny(VariantTextureType.RABBIT, 1);
         registerShiny(VariantTextureType.LLAMA, 1);
 
-        if(enableCow)
+        if (enableCow)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.COW, VariantCowRenderer::new);
-        if(enablePig)
+        if (enablePig)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.PIG, VariantPigRenderer::new);
-        if(enableChicken)
+        if (enableChicken)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.CHICKEN, VariantChickenRenderer::new);
-        if(enableCreeper)
+        if (enableCreeper)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.CREEPER, VariantCreeperRenderer::new);
-        if(enableZombie)
+        if (enableZombie)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.ZOMBIE, VariantZombieRenderer::new);
-        if(enableShinyRabbit)
+        if (enableShinyRabbit)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.RABBIT, VariantRabbitRenderer::new);
-        if(enableShinyLlama)
+        if (enableShinyLlama)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.LLAMA, VariantLlamaRenderer::new);
-        if(enableLGBTBees)
+        if (enableLGBTBees)
             RenderingRegistry.registerEntityRenderingHandler(EntityType.BEE, VariantBeeRenderer::new);
     }
 
@@ -111,7 +111,8 @@ public class MobVariantsModule extends Module {
     }
 
     @Override
-    public @NotNull String getName() {
+    public @NotNull
+    String getName() {
         return "client/mob_variants";
     }
 
@@ -121,7 +122,8 @@ public class MobVariantsModule extends Module {
     }
 
     @Override
-    public @NotNull ModuleCompatibility getCompatibility() {
+    public @NotNull
+    ModuleCompatibility getCompatibility() {
         if (RandomThingz.isClientSide()) {
             return ModuleCompatibility.FULL;
         } else if (RandomThingz.isServerSide()) {
@@ -142,7 +144,7 @@ public class MobVariantsModule extends Module {
         long most = id.getMostSignificantBits();
         long least = id.getLeastSignificantBits();
         List<ResourceLocation> styles = shinyTextures.get(type);
-        if(shinyAnimalChance > 0 && (most % shinyAnimalChance) == 0) {
+        if (shinyAnimalChance > 0 && (most % shinyAnimalChance) == 0) {
             if (styles.size() == 0) {
                 return new ResourceLocation(RandomThingz.MOD_ID, "textures/default.png");
             }
@@ -159,7 +161,7 @@ public class MobVariantsModule extends Module {
     @OnlyIn(Dist.CLIENT)
     private static ResourceLocation getRandomTexture(Entity e, VariantTextureType type, boolean enabled) {
         List<ResourceLocation> styles = textures.get(type);
-        if(!enabled)
+        if (!enabled)
             return styles.get(styles.size() - 1);
 
         UUID id = e.getUniqueID();
@@ -171,18 +173,18 @@ public class MobVariantsModule extends Module {
     @OnlyIn(Dist.CLIENT)
     private static void registerTextures(VariantTextureType type, int count, int shinyCount, @Nullable ResourceLocation vanilla) {
         String name = type.name().toLowerCase(Locale.ROOT);
-        for(int i = 1; i < count + 1; i++)
+        for (int i = 1; i < count + 1; i++)
             textures.put(type, new ResourceLocation(RandomThingz.MOD_ID, String.format("textures/entity/variants/%s%d.png", name, i)));
 
-        if(vanilla != null)
+        if (vanilla != null)
             textures.put(type, vanilla);
         registerShiny(type, shinyCount);
     }
 
     private static void registerShiny(VariantTextureType type, int count) {
         String name = type.name().toLowerCase(Locale.ROOT);
-//        shinyTextures.put(type, new ResourceLocation(RandomThingz.MOD_ID, String.format("textures/entity/variants/%s_shiny.png", name)));
-        for(int i = 1; i < count + 1; i++)
+//        shinyTextures.put(type, new ResourceLocation(QForgeMod.MOD_ID, String.format("textures/entity/variants/%s_shiny.png", name)));
+        for (int i = 1; i < count + 1; i++)
             textures.put(type, new ResourceLocation(RandomThingz.MOD_ID, String.format("textures/entity/variants/%s_shiny%d.png", name, i)));
     }
 

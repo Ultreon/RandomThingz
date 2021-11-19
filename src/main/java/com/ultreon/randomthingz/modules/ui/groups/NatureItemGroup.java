@@ -19,7 +19,8 @@ public class NatureItemGroup extends ItemGroup {
     }
 
     @Override
-    public @NotNull ItemStack createIcon() {
+    public @NotNull
+    ItemStack createIcon() {
         return new ItemStack(ModItems.EUCALYPTUS_LEAF.get());
     }
 }

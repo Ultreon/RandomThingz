@@ -27,8 +27,10 @@ import java.util.Set;
 public class MixingRecipe implements IFluidRecipe<IFluidInventory> {
     private final ResourceLocation recipeId;
     private final List<FluidIngredient> ingredients = NonNullList.create();
-    @Getter private int processTime;
-    @Getter private FluidStack result;
+    @Getter
+    private int processTime;
+    @Getter
+    private FluidStack result;
 
     @Override
     public boolean matches(IFluidInventory inv, World dimensionIn) {

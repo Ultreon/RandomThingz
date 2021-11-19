@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.generator.diesel;
 
 import com.qsoftware.modlib.api.IFluidContainer;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidFuelGeneratorTileEntity;
-import com.ultreon.randomthingz.tiles.ModMachineTileEntities;
+import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.entity.player.PlayerInventory;

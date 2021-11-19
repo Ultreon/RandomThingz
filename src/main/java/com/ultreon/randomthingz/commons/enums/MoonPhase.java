@@ -15,7 +15,8 @@ public enum MoonPhase implements Indexable {
     FIRST_QUARTER(6),
     WAXING_GIBBOUS(7);
 
-    @Getter private final int index;
+    @Getter
+    private final int index;
 
     public static MoonPhase fromIndex(int index) {
         MoonPhase[] values = MoonPhase.values();

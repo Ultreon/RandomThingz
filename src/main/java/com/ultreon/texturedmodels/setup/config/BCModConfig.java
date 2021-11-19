@@ -13,6 +13,7 @@ import java.nio.file.Path;
 
 /**
  * Config class for customizable values, values can be found and changed in the corresponding file at /config/blockcarpentry-common.toml and /config/blockcarpentry-client.toml
+ *
  * @author PianoManu
  * @version 1.3 10/21/20
  */
@@ -53,12 +54,12 @@ public class BCModConfig {
     }
 
     private static void setupToolSettings() {
-        HAMMER_NEEDED = COMMON_BUILDER.comment("Determines whether you need a hammer to remove blocks from a frame, when set to false, you can remove blocks from a frame by sneaking and right-clicking the block (default: true)").define("hammer_needed",true);
+        HAMMER_NEEDED = COMMON_BUILDER.comment("Determines whether you need a hammer to remove blocks from a frame, when set to false, you can remove blocks from a frame by sneaking and right-clicking the block (default: true)").define("hammer_needed", true);
         //SNEAK_FOR_TEXTURE_WRENCH_TO_ROTATE_MIMICKED_BLOCKS = COMMON_BUILDER.comment("Determines whether you have to sneak, when rotating a mimicked block. When set to true: right-clicking on a frame block without sneaking will change its texture, right-clicking on a frame block while sneaking will rotate the")
     }
 
     private static void setupBlockSettings() {
-        SNEAK_FOR_VERTICAL_SLABS = COMMON_BUILDER.comment("Determines whether you have to sneak when placing vertical slabs, when set to false, frame slabs will always be placed on the side of the block; when set to true, frame slabs will be placed like vanilla slabs, and you have to sneak in order to make place vertical slabs (default: true)").define("sneak_for_vertical_slabs",true);
+        SNEAK_FOR_VERTICAL_SLABS = COMMON_BUILDER.comment("Determines whether you have to sneak when placing vertical slabs, when set to false, frame slabs will always be placed on the side of the block; when set to true, frame slabs will be placed like vanilla slabs, and you have to sneak in order to make place vertical slabs (default: true)").define("sneak_for_vertical_slabs", true);
     }
 
     private static void setupClientSettings() {

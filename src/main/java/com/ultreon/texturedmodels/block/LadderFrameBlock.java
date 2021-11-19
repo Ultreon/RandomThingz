@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.block;
 
-import com.ultreon.texturedmodels.TexturedModels;
+import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
@@ -28,6 +28,9 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+import static com.ultreon.texturedmodels.util.BCBlockStateProperties.CONTAINS_BLOCK;
+import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
+
 /**
  * Main class for frame ladder plates - all important block info can be found here
  * Visit {@linkplain FrameBlock} for a better documentation
@@ -40,12 +43,12 @@ public class LadderFrameBlock extends LadderBlock {
 
     public LadderFrameBlock(Properties builder) {
         super(builder);
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.valueOf(false)).with(BCBlockStateProperties.CONTAINS_BLOCK, false).with(BCBlockStateProperties.LIGHT_LEVEL, 0));
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(WATERLOGGED, Boolean.valueOf(false)).with(CONTAINS_BLOCK, false).with(LIGHT_LEVEL, 0));
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, BCBlockStateProperties.CONTAINS_BLOCK, BCBlockStateProperties.LIGHT_LEVEL);
+        builder.add(FACING, WATERLOGGED, CONTAINS_BLOCK, LIGHT_LEVEL);
     }
 
     @Override
@@ -70,13 +73,13 @@ public class LadderFrameBlock extends LadderBlock {
             BlockAppearanceHelper.setDesignTexture(dimension, pos, player, item);
             BlockAppearanceHelper.setOverlay(dimension, pos, player, item);
             if (item.getItem() instanceof BlockItem) {
-                if (state.get(BCBlockStateProperties.CONTAINS_BLOCK) || Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(TexturedModels.MOD_ID)) {
+                if (state.get(BCBlockStateProperties.CONTAINS_BLOCK) || Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) {
                     return ActionResultType.PASS;
                 }
                 TileEntity tileEntity = dimension.getTileEntity(pos);
                 int count = player.getHeldItem(hand).getCount();
                 Block heldBlock = ((BlockItem) item.getItem()).getBlock();
-                if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.get(BCBlockStateProperties.CONTAINS_BLOCK)) {
+                if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.get(CONTAINS_BLOCK)) {
                     BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().getDefaultState();
                     insertBlock(dimension, pos, state, handBlockState);
                     if (!player.isCreative())
@@ -87,7 +90,7 @@ public class LadderFrameBlock extends LadderBlock {
             if (player.getHeldItem(hand).getItem() == Registration.HAMMER.get() || (!BCModConfig.HAMMER_NEEDED.get() && player.isSneaking())) {
                 if (!player.isCreative())
                     this.dropContainedBlock(dimension, pos);
-                state = state.with(BCBlockStateProperties.CONTAINS_BLOCK, Boolean.FALSE);
+                state = state.with(CONTAINS_BLOCK, Boolean.FALSE);
                 dimension.setBlockState(pos, state, 2);
             }
         }
@@ -123,7 +126,7 @@ public class LadderFrameBlock extends LadderBlock {
             FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
-            dimensionIn.setBlockState(pos, state.with(BCBlockStateProperties.CONTAINS_BLOCK, Boolean.TRUE), 2);
+            dimensionIn.setBlockState(pos, state.with(CONTAINS_BLOCK, Boolean.TRUE), 2);
         }
     }
 
@@ -139,10 +142,10 @@ public class LadderFrameBlock extends LadderBlock {
 
     @Override
     public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
-        if (state.get(BCBlockStateProperties.LIGHT_LEVEL) > 15) {
+        if (state.get(LIGHT_LEVEL) > 15) {
             return 15;
         }
-        return state.get(BCBlockStateProperties.LIGHT_LEVEL);
+        return state.get(LIGHT_LEVEL);
     }
 }
 //========SOLI DEO GLORIA========//

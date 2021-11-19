@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.bakedmodels;
 
-import com.ultreon.texturedmodels.TexturedModels;
+import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
@@ -65,9 +65,9 @@ public class IllusionChestBakedModel implements IDynamicBakedModel {
         if (mimic != null && state != null) {
             List<TextureAtlasSprite> designTextureList = new ArrayList<>(TextureHelper.getMetalTextures());
             designTextureList.add(Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/shulker_box")));
-            TextureAtlasSprite chestFront = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(TexturedModels.MOD_ID, "block/chest_front"));
-            TextureAtlasSprite chestSide = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(TexturedModels.MOD_ID, "block/chest_side"));
-            TextureAtlasSprite chestTop = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(TexturedModels.MOD_ID, "block/chest_top"));
+            TextureAtlasSprite chestFront = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_front"));
+            TextureAtlasSprite chestSide = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_side"));
+            TextureAtlasSprite chestTop = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_top"));
             int tintIndex = -1;
             if (mimic.getBlock() instanceof GrassBlock) {
                 tintIndex = 1;
@@ -77,30 +77,30 @@ public class IllusionChestBakedModel implements IDynamicBakedModel {
             TextureAtlasSprite designTexture = designTextureList.get(desTex);
             List<BakedQuad> quads = new ArrayList<>();
             if (design == 0) {
-                return new ArrayList<>(ModelHelper.createSixFaceCuboid(0f, 1f, 0f, 1f, 0f, 1f, mimic,model,extraData,rand, tintIndex));
+                return new ArrayList<>(ModelHelper.createSixFaceCuboid(0f, 1f, 0f, 1f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
             }
             if (design == 1 || design == 2) {
-                quads.addAll(ModelHelper.createSixFaceCuboid(2 / 16f, 14 / 16f, 2 / 16f, 14 / 16f, 2 / 16f, 14 / 16f, mimic,model,extraData,rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(2 / 16f, 14 / 16f, 2 / 16f, 14 / 16f, 2 / 16f, 14 / 16f, mimic, model, extraData, rand, tintIndex));
             }
             if (design == 3) {
                 quads.addAll(ModelHelper.createCuboid(2 / 16f, 14 / 16f, 2 / 16f, 14 / 16f, 2 / 16f, 14 / 16f, designTexture, tintIndex));
             }
             if (design == 1 || design == 3 || design == 4) {
                 //vertical
-                quads.addAll(ModelHelper.createSixFaceCuboid(0f, 2 / 16f, 0f, 1f, 0f, 2 / 16f, mimic,model,extraData,rand, tintIndex));
-                quads.addAll(ModelHelper.createSixFaceCuboid(0f, 2 / 16f, 0f, 1f, 14 / 16f, 1f, mimic,model,extraData,rand, tintIndex));
-                quads.addAll(ModelHelper.createSixFaceCuboid(14 / 16f, 1f, 0f, 1f, 0f, 2 / 16f, mimic,model,extraData,rand, tintIndex));
-                quads.addAll(ModelHelper.createSixFaceCuboid(14 / 16f, 1f, 0f, 1f, 14 / 16f, 1f, mimic,model,extraData,rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(0f, 2 / 16f, 0f, 1f, 0f, 2 / 16f, mimic, model, extraData, rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(0f, 2 / 16f, 0f, 1f, 14 / 16f, 1f, mimic, model, extraData, rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(14 / 16f, 1f, 0f, 1f, 0f, 2 / 16f, mimic, model, extraData, rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(14 / 16f, 1f, 0f, 1f, 14 / 16f, 1f, mimic, model, extraData, rand, tintIndex));
                 //horizontal down
-                quads.addAll(ModelHelper.createSixFaceCuboid(2 / 16f, 14 / 16f, 0f, 2 / 16f, 0f, 2 / 16f, mimic,model,extraData,rand, tintIndex));
-                quads.addAll(ModelHelper.createSixFaceCuboid(2 / 16f, 14 / 16f, 0f, 2 / 16f, 14 / 16f, 1f, mimic,model,extraData,rand, tintIndex));
-                quads.addAll(ModelHelper.createSixFaceCuboid(0f, 2 / 16f, 0f, 2 / 16f, 2 / 16f, 14 / 16f, mimic,model,extraData,rand, tintIndex));
-                quads.addAll(ModelHelper.createSixFaceCuboid(14 / 16f, 1f, 0f, 2 / 16f, 2 / 16f, 14 / 16f, mimic,model,extraData,rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(2 / 16f, 14 / 16f, 0f, 2 / 16f, 0f, 2 / 16f, mimic, model, extraData, rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(2 / 16f, 14 / 16f, 0f, 2 / 16f, 14 / 16f, 1f, mimic, model, extraData, rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(0f, 2 / 16f, 0f, 2 / 16f, 2 / 16f, 14 / 16f, mimic, model, extraData, rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(14 / 16f, 1f, 0f, 2 / 16f, 2 / 16f, 14 / 16f, mimic, model, extraData, rand, tintIndex));
                 //horizontal up
-                quads.addAll(ModelHelper.createSixFaceCuboid(2 / 16f, 14 / 16f, 14 / 16f, 1f, 0f, 2 / 16f, mimic,model,extraData,rand, tintIndex));
-                quads.addAll(ModelHelper.createSixFaceCuboid(2 / 16f, 14 / 16f, 14 / 16f, 1f, 14 / 16f, 1f, mimic,model,extraData,rand, tintIndex));
-                quads.addAll(ModelHelper.createSixFaceCuboid(0f, 2 / 16f, 14 / 16f, 1f, 2 / 16f, 14 / 16f, mimic,model,extraData,rand, tintIndex));
-                quads.addAll(ModelHelper.createSixFaceCuboid(14 / 16f, 1f, 14 / 16f, 1f, 2 / 16f, 14 / 16f, mimic,model,extraData,rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(2 / 16f, 14 / 16f, 14 / 16f, 1f, 0f, 2 / 16f, mimic, model, extraData, rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(2 / 16f, 14 / 16f, 14 / 16f, 1f, 14 / 16f, 1f, mimic, model, extraData, rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(0f, 2 / 16f, 14 / 16f, 1f, 2 / 16f, 14 / 16f, mimic, model, extraData, rand, tintIndex));
+                quads.addAll(ModelHelper.createSixFaceCuboid(14 / 16f, 1f, 14 / 16f, 1f, 2 / 16f, 14 / 16f, mimic, model, extraData, rand, tintIndex));
             }
             if (design == 2) {
                 //vertical

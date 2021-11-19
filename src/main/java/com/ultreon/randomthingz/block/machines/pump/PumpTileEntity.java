@@ -7,7 +7,7 @@ import com.qsoftware.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
 import com.ultreon.randomthingz.commons.enums.MachineTier;
 import com.ultreon.randomthingz.item.upgrades.MachineUpgrades;
-import com.ultreon.randomthingz.tiles.ModMachineTileEntities;
+import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
 import com.ultreon.randomthingz.util.Constants;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import com.ultreon.randomthingz.util.TextUtils;

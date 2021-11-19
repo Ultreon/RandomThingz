@@ -30,143 +30,144 @@ import java.util.Objects;
 @SuppressWarnings({"unused"})
 @OnlyIn(Dist.CLIENT)
 public class ModuleScreen extends Screen {
-   // Icons
-   private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/icons.png");
+    // Icons
+    private static final ResourceLocation SCREEN_ICONS = new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/icons.png");
 
-   // Drop info.
-   private static final ITextComponent DROP_INFO = (new TranslationTextComponent("pack.dropInfo")).mergeStyle(TextFormatting.GRAY);
+    // Drop info.
+    private static final ITextComponent DROP_INFO = (new TranslationTextComponent("pack.dropInfo")).mergeStyle(TextFormatting.GRAY);
 
-   // Back screen.
-   private final Screen backScreen;
+    // Back screen.
+    private final Screen backScreen;
 
-   // Lists.
-   private ModuleList leftScreen;
-   private ModuleList rightScreen;
+    // Lists.
+    private ModuleList leftScreen;
+    private ModuleList rightScreen;
 
-   // ?
-   private final Map<String, ResourceLocation> field_243394_y = Maps.newHashMap();
+    // ?
+    private final Map<String, ResourceLocation> field_243394_y = Maps.newHashMap();
 
-   // Modules.
-   private final ModuleManager manager;
-   private List<Module> enabled;
-   private List<Module> disabled;
+    // Modules.
+    private final ModuleManager manager;
+    private List<Module> enabled;
+    private List<Module> disabled;
 
-   public ModuleScreen(@Nullable Screen backScreen, ModuleManager manager) {
-      // Super call.
-      super(new TranslationTextComponent("screen.randomthingz.modules"));
+    public ModuleScreen(@Nullable Screen backScreen, ModuleManager manager) {
+        // Super call.
+        super(new TranslationTextComponent("screen.randomthingz.modules"));
 
-      // Assign back screen.
-      this.backScreen = backScreen;
-      this.manager = manager;
-   }
+        // Assign back screen.
+        this.backScreen = backScreen;
+        this.manager = manager;
+    }
 
-   @Override
-   public void closeScreen() {
-      // Display the back screen.
-      Objects.requireNonNull(this.minecraft).displayGuiScreen(this.backScreen);
-   }
+    @Override
+    public void closeScreen() {
+        // Display the back screen.
+        Objects.requireNonNull(this.minecraft).displayGuiScreen(this.backScreen);
+    }
 
-   @Override
-   protected void initialize() {
-      Button cancelButton = this.addButton(new Button(this.width / 2 + 5, this.height - 48, 150, 20, DialogTexts.GUI_CANCEL, (p_238903_1_) -> {
-         manager.discardChanges();
-         this.closeScreen();
-      }));
+    @Override
+    protected void initialize() {
+        Button cancelButton = this.addButton(new Button(this.width / 2 + 5, this.height - 48, 150, 20, DialogTexts.GUI_CANCEL, (p_238903_1_) -> {
+            manager.discardChanges();
+            this.closeScreen();
+        }));
 
-      Button doneButton = this.addButton(new Button(this.width / 2 - 155, this.height - 48, 150, 20, DialogTexts.GUI_DONE, (p_238903_1_) -> {
-         try {
-            manager.saveChanges();
-         } catch (IOException e) {
-            e.printStackTrace();
+        Button doneButton = this.addButton(new Button(this.width / 2 - 155, this.height - 48, 150, 20, DialogTexts.GUI_DONE, (p_238903_1_) -> {
+            try {
+                manager.saveChanges();
+            } catch (IOException e) {
+                e.printStackTrace();
 
-            if (RandomThingz.isClientSide()) {
-               ErrorToast systemToast = new ErrorToast(new TranslationTextComponent("misc.randomthingz.error"), new TranslationTextComponent("misc.randomthingz.failed_save", I18n.format("misc.randomthingz.modules")));
-               Objects.requireNonNull(minecraft).getToastGui().add(systemToast);
+                if (RandomThingz.isClientSide()) {
+                    ErrorToast systemToast = new ErrorToast(new TranslationTextComponent("misc.randomthingz.error"), new TranslationTextComponent("misc.randomthingz.failed_save", I18n.format("misc.randomthingz.modules")));
+                    Objects.requireNonNull(minecraft).getToastGui().add(systemToast);
+                }
             }
-         }
-         this.closeScreen();
-      }));
+            this.closeScreen();
+        }));
 
-      // Force to check the Minecraft instance isn't null.
-      assert this.minecraft != null;
-      
-      // Create the left screen.
-      this.leftScreen = new ModuleList(this, this.minecraft, 200, this.height, new TranslationTextComponent("pack.available.title"));
-      this.leftScreen.setLeftPos(this.width / 2 - 4 - 200);
-      this.children.add(this.leftScreen);
-      
-      // Create the right screen.
-      this.rightScreen = new ModuleList(this, this.minecraft, 200, this.height, new TranslationTextComponent("pack.selected.title"));
-      this.rightScreen.setLeftPos(this.width / 2 + 4);
-      this.children.add(this.rightScreen);
+        // Force to check the Minecraft instance isn't null.
+        assert this.minecraft != null;
 
-      // Reload all.
-      reload();
-   }
+        // Create the left screen.
+        this.leftScreen = new ModuleList(this, this.minecraft, 200, this.height, new TranslationTextComponent("pack.available.title"));
+        this.leftScreen.setLeftPos(this.width / 2 - 4 - 200);
+        this.children.add(this.leftScreen);
 
-   /**
-    * Reload the module screen.
-    */
-   public void reload() {
-      // Enabled / disabled.
-      this.enabled = manager.getUnsavedEnabled();
-      this.disabled = manager.getUnsavedDisabled();
+        // Create the right screen.
+        this.rightScreen = new ModuleList(this, this.minecraft, 200, this.height, new TranslationTextComponent("pack.selected.title"));
+        this.rightScreen.setLeftPos(this.width / 2 + 4);
+        this.children.add(this.rightScreen);
 
-      // Reload challenges.
-      this.reloadModules(this.rightScreen, this.enabled);
-      this.reloadModules(this.leftScreen, this.disabled);
-   }
+        // Reload all.
+        reload();
+    }
 
-   /**
-    * Reload modules.
-    *  @param list the module list.
-    * @param modules the modules.
-    */
-   private void reloadModules(ModuleList list, List<Module> modules) {
-      // Clear challenge in list.
-      list.getEventListeners().clear();
-      
-      // Add challenge entries.
-      for (Module module : modules) {
-         list.getEventListeners().add(new ModuleList.ModuleEntry(Objects.requireNonNull(this.minecraft), list, this, module));
-      }
-   }
+    /**
+     * Reload the module screen.
+     */
+    public void reload() {
+        // Enabled / disabled.
+        this.enabled = manager.getUnsavedEnabled();
+        this.disabled = manager.getUnsavedDisabled();
 
-   @Override
-   public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-      this.renderDirtBackground(0);
+        // Reload challenges.
+        this.reloadModules(this.rightScreen, this.enabled);
+        this.reloadModules(this.leftScreen, this.disabled);
+    }
 
-      // Render lists.
-      this.leftScreen.render(matrixStack, mouseX, mouseY, partialTicks);
-      this.rightScreen.render(matrixStack, mouseX, mouseY, partialTicks);
-      
-      // Render text.
-      drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 8, 16777215);
-      drawCenteredString(matrixStack, this.font, DROP_INFO, this.width / 2, 20, 16777215);
+    /**
+     * Reload modules.
+     *
+     * @param list    the module list.
+     * @param modules the modules.
+     */
+    private void reloadModules(ModuleList list, List<Module> modules) {
+        // Clear challenge in list.
+        list.getEventListeners().clear();
 
-      // Render super object.
-      super.render(matrixStack, mouseX, mouseY, partialTicks);
+        // Add challenge entries.
+        for (Module module : modules) {
+            list.getEventListeners().add(new ModuleList.ModuleEntry(Objects.requireNonNull(this.minecraft), list, this, module));
+        }
+    }
 
-      MCGraphics mcg = new MCGraphics(matrixStack, Objects.requireNonNull(minecraft).fontRenderer, this);
+    @Override
+    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        this.renderDirtBackground(0);
 
-      // Draw help icon.
-      mcg.drawTexture(1, 1, 64, 15, 16, 16, SCREEN_ICONS);
+        // Render lists.
+        this.leftScreen.render(matrixStack, mouseX, mouseY, partialTicks);
+        this.rightScreen.render(matrixStack, mouseX, mouseY, partialTicks);
 
-      // Draw help message if mouse pointer is on the help icon.
-      if (AdvancedScreen.isPointInRegion(1, 1, 17, 17, mouseX, mouseY)) {
-         mcg.renderTooltip(new TranslationTextComponent("msg.randomthingz.module_screen.help"), new Point(16, mouseY));
-      }
-   }
+        // Render text.
+        drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 8, 16777215);
+        drawCenteredString(matrixStack, this.font, DROP_INFO, this.width / 2, 20, 16777215);
 
-   public ModuleManager getManager() {
-      return manager;
-   }
+        // Render super object.
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
 
-   public List<Module> getEnabled() {
-      return enabled;
-   }
+        MCGraphics mcg = new MCGraphics(matrixStack, Objects.requireNonNull(minecraft).fontRenderer, this);
 
-   public List<Module> getDisabled() {
-      return disabled;
-   }
+        // Draw help icon.
+        mcg.drawTexture(1, 1, 64, 15, 16, 16, SCREEN_ICONS);
+
+        // Draw help message if mouse pointer is on the help icon.
+        if (AdvancedScreen.isPointInRegion(1, 1, 17, 17, mouseX, mouseY)) {
+            mcg.renderTooltip(new TranslationTextComponent("msg.randomthingz.module_screen.help"), new Point(16, mouseY));
+        }
+    }
+
+    public ModuleManager getManager() {
+        return manager;
+    }
+
+    public List<Module> getEnabled() {
+        return enabled;
+    }
+
+    public List<Module> getDisabled() {
+        return disabled;
+    }
 }

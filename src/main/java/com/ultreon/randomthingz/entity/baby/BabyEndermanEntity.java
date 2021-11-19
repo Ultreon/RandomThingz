@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.entity.baby;
 
-import com.ultreon.randomthingz.item.common.ModItems;
+import com.ultreon.randomthingz.item.common.ModItemsAlt;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;
@@ -20,7 +20,7 @@ import javax.annotation.Nonnull;
 /**
  * Baby enderman entity class.
  *
- * @author Ultreon Team.
+ * @author QTech Community.
  */
 public class BabyEndermanEntity extends EndermanEntity implements IBabyEntity {
 
@@ -75,7 +75,7 @@ public class BabyEndermanEntity extends EndermanEntity implements IBabyEntity {
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return new ItemStack(ModItems.BABY_ENDERMAN_SPAWN_EGG.asItem());
+        return new ItemStack(ModItemsAlt.BABY_ENDERMAN_SPAWN_EGG.asItem());
     }
 
     @Nonnull

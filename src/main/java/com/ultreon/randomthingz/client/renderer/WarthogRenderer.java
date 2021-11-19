@@ -26,7 +26,8 @@ public class WarthogRenderer extends MobRenderer<WarthogEntity, HogModel<Warthog
     /**
      * Returns the location of an entity's texture.
      */
-    public @NotNull ResourceLocation getEntityTexture(@NotNull WarthogEntity entity) {
+    public @NotNull
+    ResourceLocation getEntityTexture(@NotNull WarthogEntity entity) {
         return WARTHOG_TEXTURE;
     }
 }

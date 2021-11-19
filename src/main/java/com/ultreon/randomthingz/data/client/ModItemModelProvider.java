@@ -3,6 +3,7 @@ package com.ultreon.randomthingz.data.client;
 import com.qsoftware.modlib.silentlib.block.IBlockProvider;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
+import com.ultreon.randomthingz.block.StoneType;
 import com.ultreon.randomthingz.block.common.ModBlocks;
 import com.ultreon.randomthingz.item.CraftingItems;
 import com.ultreon.randomthingz.item.common.ItemMaterial;
@@ -26,13 +27,14 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     @Override
-    public @NotNull String getName() {
+    public @NotNull
+    String getName() {
         return "RandomThingz - Item Models";
     }
 
     @Override
     protected void registerModels() {
-        Registration.BLOCKS.getEntries().stream().filter((block) -> block.get().getClass().getPackage().getName().startsWith("com.ultreon.forgemod.blocks.machines")).forEach(block -> blockBuilder(block.get()));
+        Registration.BLOCKS.getAllBlocks().stream().filter((block) -> block.asBlock().getClass().getPackage().getName().startsWith("com.ultreon.forgemod.blocks.machines")).forEach(block -> blockBuilder(block.asBlock()));
 
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
         ModelFile itemHandheld = getExistingFile(mcLoc("item/handheld"));
@@ -65,6 +67,16 @@ public class ModItemModelProvider extends ItemModelProvider {
             metal.getHammer().ifPresent(item -> builder(item, itemHandheld));
             metal.getExcavator().ifPresent(item -> builder(item, itemHandheld));
         });
+        ModBlocks.BOOKSHELFS.forEach(block -> block.ifPresent(this::blockBuilder));
+        for (StoneType stoneType : StoneType.values()) {
+            stoneType.getRawBlock().ifPresent(this::blockBuilder);
+            stoneType.getSlabBlock().ifPresent(this::blockBuilder);
+            stoneType.getStairsBlock().ifPresent(this::blockBuilder);
+            stoneType.getPolishedBlock().ifPresent(this::blockBuilder);
+            stoneType.getPolishedSlabBlock().ifPresent(this::blockBuilder);
+            stoneType.getPolishedStairsBlock().ifPresent(this::blockBuilder);
+        }
+
         Arrays.stream(CraftingItems.values()).forEach(item -> builder(item, itemGenerated));
         Arrays.stream(MachineUpgrades.values()).forEach(item -> builder(item, itemGenerated));
 

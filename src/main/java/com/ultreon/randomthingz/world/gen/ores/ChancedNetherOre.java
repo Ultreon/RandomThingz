@@ -37,7 +37,7 @@ public class ChancedNetherOre extends DefaultOre {
         int bottom = config.getMinHeight();
         if (config.getVeinSize() < 2) {
             return new ConfiguredFeatureQFM<>(Feature.EMERALD_ORE, new ReplaceBlockConfig(Blocks.NETHERRACK.getDefaultState(), this.asBlockState()))
-                    .setChance(1f / (float)config.getChance())
+                    .setChance(1f / (float) config.getChance())
                     .withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(bottom, bottom, config.getMaxHeight())))
                     .square()
                     .count(config.getVeinCount());

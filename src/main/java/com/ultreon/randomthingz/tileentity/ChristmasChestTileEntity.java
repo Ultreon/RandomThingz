@@ -1,17 +1,17 @@
 package com.ultreon.randomthingz.tileentity;
 
-import com.ultreon.randomthingz.tiles.ModTileEntities;
+import com.ultreon.randomthingz.modules.tiles.ModTileEntities;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.IChestLid;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(
-   value = Dist.CLIENT,
-   _interface = IChestLid.class
+        value = Dist.CLIENT,
+        _interface = IChestLid.class
 )
 public class ChristmasChestTileEntity extends ChestTileEntity {
-   public ChristmasChestTileEntity() {
-      super(ModTileEntities.CHRISTMAS_CHEST.get());
-   }
+    public ChristmasChestTileEntity() {
+        super(ModTileEntities.CHRISTMAS_CHEST.get());
+    }
 }

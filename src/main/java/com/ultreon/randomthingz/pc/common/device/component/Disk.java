@@ -18,9 +18,10 @@ public class Disk {
     private final FileWriter writer;
     private final FileInputStream input;
     private final FileOutputStream output;
+    ;
     private final long size;
     private final UUID guid;
-    private final PartitionTable partitionTable;
+    private PartitionTable partitionTable;
 
     public Disk(File file) throws IOException {
         this.input = new FileInputStream(file);
@@ -30,14 +31,14 @@ public class Disk {
         this.channel = this.input.getChannel();
         this.size = file.length();
         this.channel.position(0);
-        
+
         FileLock lock = this.channel.lock(0, 32, false);
         this.guid = readUUID();
         lock.release();
-        
+
         this.partitionTable = new PartitionTable(this, this.channel.lock(size - 4096, 4096, false));
     }
-    
+
     private void eject() throws IOException {
         this.partitionTable.close();
         this.input.close();
@@ -53,7 +54,7 @@ public class Disk {
 
     private long readLong() {
         byte[] bytes = this.readBytes(16);
-        
+
         ByteBuffer bb = ByteBuffer.wrap(bytes);
         return bb.getLong();
     }
@@ -61,7 +62,7 @@ public class Disk {
     private byte[] readBytes(int len) {
         return new byte[len];
     }
-    
+
     private PartitionTable getPartitionTable() {
         return this.partitionTable;
     }
@@ -102,15 +103,15 @@ public class Disk {
     public long size() {
         return size;
     }
-    
+
     public QFMFileLock lock() throws IOException {
         return new QFMFileLock(this.channel.lock());
     }
-    
+
     public QFMFileLock lock(long pos, long size) throws IOException {
         return new QFMFileLock(this.channel.lock(pos, size, false));
     }
-    
+
     public QFMFileLock lock(long pos, long size, boolean shared) throws IOException {
         return new QFMFileLock(this.channel.lock(pos, size, shared));
     }

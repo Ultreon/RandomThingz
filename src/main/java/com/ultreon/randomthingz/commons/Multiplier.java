@@ -17,7 +17,7 @@ public class Multiplier implements Formattable {
 
         return TextFormatting.GOLD.toString() + value + TextFormatting.GRAY + "x";
     }
-    
+
     public Percentage toPercentage() {
         return new Percentage(value);
     }

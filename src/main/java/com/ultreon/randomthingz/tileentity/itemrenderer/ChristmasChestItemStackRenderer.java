@@ -15,14 +15,14 @@ import java.util.function.Supplier;
 @OnlyIn(Dist.CLIENT)
 public class ChristmasChestItemStackRenderer<T extends TileEntity> extends ItemStackTileEntityRenderer {
 
-  private final Supplier<T> te;
+    private final Supplier<T> te;
 
-  public ChristmasChestItemStackRenderer(Supplier<T> te) {
-    this.te = te;
-  }
+    public ChristmasChestItemStackRenderer(Supplier<T> te) {
+        this.te = te;
+    }
 
-  @Override
-  public void func_239207_a_(ItemStack itemStackIn, ItemCameraTransforms.TransformType transformType, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-    TileEntityRendererDispatcher.instance.renderItem(this.te.get(), matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
-  }
+    @Override
+    public void func_239207_a_(ItemStack itemStackIn, ItemCameraTransforms.TransformType transformType, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+        TileEntityRendererDispatcher.instance.renderItem(this.te.get(), matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn);
+    }
 }

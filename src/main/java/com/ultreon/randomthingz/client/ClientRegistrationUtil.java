@@ -19,6 +19,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import java.util.function.Predicate;
 
 public class ClientRegistrationUtil {
+
     private ClientRegistrationUtil() {
     }
 
@@ -26,7 +27,11 @@ public class ClientRegistrationUtil {
         RenderingRegistry.registerEntityRenderingHandler(entityTypeRO.getEntityType(), renderFactory);
     }
 
-    public static void overrideItemModelProperty(IItemProvider itemProvider, ResourceLocation override, IItemPropertyGetter propertyGetter) {
+//    public static <C extends Container, U extends Screen & IHasContainer<C>> void registerScreen(ContainerTypeRegistryObject<C> type, IScreenFactory<C, U> factory) {
+//        ScreenManager.registerFactory(type.getContainerType(), factory);
+//    }
+
+    public static void setPropertyOverride(IItemProvider itemProvider, ResourceLocation override, IItemPropertyGetter propertyGetter) {
         ItemModelsProperties.registerProperty(itemProvider.asItem(), override, propertyGetter);
     }
 
@@ -49,6 +54,25 @@ public class ClientRegistrationUtil {
         }
     }
 
+//    public static void registerIColoredBlockHandler(BlockColors blockColors, ItemColors itemColors, IBlockProvider... blocks) {
+//        ClientRegistrationUtil.registerBlockColorHandler(blockColors, itemColors, (state, dimension, pos, tintIndex) -> {
+//            Block block = state.asBlock();
+//            if (block instanceof IColoredBlock) {
+//                return RandomThingzRenderer.getColorARGB(((IColoredBlock) block).getColor(), 1);
+//            }
+//            return -1;
+//        }, (stack, tintIndex) -> {
+//            Item item = stack.asItem();
+//            if (item instanceof BlockItem) {
+//                Block block = ((BlockItem) item).asBlock();
+//                if (block instanceof IColoredBlock) {
+//                    return RandomThingzRenderer.getColorARGB(((IColoredBlock) block).getColor(), 1);
+//                }
+//            }
+//            return -1;
+//        }, blocks);
+//    }
+
     public static void setRenderLayer(RenderType type, IBlockProvider... blockProviders) {
         for (IBlockProvider blockProvider : blockProviders) {
             RenderTypeLookup.setRenderLayer(blockProvider.asBlock(), type);
@@ -60,4 +84,18 @@ public class ClientRegistrationUtil {
             RenderTypeLookup.setRenderLayer(blockProvider.asBlock(), predicate);
         }
     }
+
+//    public static void setRenderLayer(RenderType type, FluidRegistryObject<?, ?, ?, ?>... fluidROs) {
+//        for (FluidRegistryObject<?, ?, ?, ?> fluidRO : fluidROs) {
+//            RenderTypeLookup.setRenderLayer(fluidRO.getStillFluid(), type);
+//            RenderTypeLookup.setRenderLayer(fluidRO.getFlowingFluid(), type);
+//        }
+//    }
+//
+//    public static synchronized void setRenderLayer(Predicate<RenderType> predicate, FluidRegistryObject<?, ?, ?, ?>... fluidROs) {
+//        for (FluidRegistryObject<?, ?, ?, ?> fluidRO : fluidROs) {
+//            RenderTypeLookup.setRenderLayer(fluidRO.getStillFluid(), predicate);
+//            RenderTypeLookup.setRenderLayer(fluidRO.getFlowingFluid(), predicate);
+//        }
+//    }
 }

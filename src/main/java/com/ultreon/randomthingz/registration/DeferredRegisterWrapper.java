@@ -12,9 +12,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * 
- * @deprecated Moved to QModLib.
  * @param <T>
+ * @deprecated Moved to QModLib.
  */
 @Deprecated
 public class DeferredRegisterWrapper<T extends IForgeRegistryEntry<T>> {

@@ -46,7 +46,7 @@ public class HoeTool extends HoeItem implements ITool {
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
     public HoeTool(IItemTier tier, double attackDamageIn, double attackSpeedIn, Properties builderIn, Supplier<AbstractTrait[]> traits) {
-        super(tier, (int) attackDamageIn, (float)attackSpeedIn, builderIn);
+        super(tier, (int) attackDamageIn, (float) attackSpeedIn, builderIn);
         this.traits = traits;
         this.attackDamage = attackDamageIn + tier.getAttackDamage();
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
@@ -228,7 +228,8 @@ public class HoeTool extends HoeItem implements ITool {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World dimension, List<ITextComponent> tooltip, ITooltipFlag flag) {        for (AbstractTrait trait : traits.get()) {
+    public void addInformation(ItemStack stack, @Nullable World dimension, List<ITextComponent> tooltip, ITooltipFlag flag) {
+        for (AbstractTrait trait : traits.get()) {
             tooltip.add(trait.getTranslation());
         }
     }

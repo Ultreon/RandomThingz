@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.block;
 
-import com.ultreon.texturedmodels.TexturedModels;
+import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
@@ -84,13 +84,13 @@ public class TrapdoorFrameBlock extends TrapDoorBlock {
                     return ActionResultType.SUCCESS;
                 }
             }
-            if (!item.getItem().getRegistryName().getNamespace().equals(TexturedModels.MOD_ID)) {
+            if (!item.getItem().getRegistryName().getNamespace().equals(QTextureModels.MOD_ID)) {
                 if (state.get(OPEN)) {
                     state = state.with(OPEN, false);
                     dimension.playEvent(null, 1007, pos, 0);
                 } else {
                     state = state.with(OPEN, true);
-                    dimension.playEvent(null, 1013,pos, 0);
+                    dimension.playEvent(null, 1013, pos, 0);
                 }
                 dimension.setBlockState(pos, state, 2);
                 if (state.get(WATERLOGGED)) {

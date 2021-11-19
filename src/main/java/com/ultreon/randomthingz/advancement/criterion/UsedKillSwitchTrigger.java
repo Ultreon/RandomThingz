@@ -10,30 +10,30 @@ import net.minecraft.loot.ConditionArrayParser;
 import net.minecraft.util.ResourceLocation;
 
 public class UsedKillSwitchTrigger extends AbstractCriterionTrigger<UsedKillSwitchTrigger.Instance> {
-   private static final ResourceLocation ID = RandomThingz.rl("used_kill_switch");
+    private static final ResourceLocation ID = RandomThingz.rl("used_kill_switch");
 
-   @Override
-   public ResourceLocation getId() {
-      return ID;
-   }
+    @Override
+    public ResourceLocation getId() {
+        return ID;
+    }
 
-   @Override
-   public UsedKillSwitchTrigger.Instance deserializeTrigger(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser) {
+    @Override
+    public UsedKillSwitchTrigger.Instance deserializeTrigger(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser) {
 //      MinMaxBounds.FloatBound minmaxbounds$floatbound = MinMaxBounds.FloatBound.fromJson(json.get("distance"));
-      return new UsedKillSwitchTrigger.Instance(entityPredicate);
-   }
+        return new UsedKillSwitchTrigger.Instance(entityPredicate);
+    }
 
-   public void trigger(ServerPlayerEntity player) {
-      this.triggerListeners(player, Instance::test);
-   }
+    public void trigger(ServerPlayerEntity player) {
+        this.triggerListeners(player, Instance::test);
+    }
 
-   public static class Instance extends CriterionInstance {
-      public Instance(EntityPredicate.AndPredicate player) {
-         super(UsedKillSwitchTrigger.ID, player);
-      }
+    public static class Instance extends CriterionInstance {
+        public Instance(EntityPredicate.AndPredicate player) {
+            super(UsedKillSwitchTrigger.ID, player);
+        }
 
-      public boolean test() {
-         return true;
-      }
-   }
+        public boolean test() {
+            return true;
+        }
+    }
 }

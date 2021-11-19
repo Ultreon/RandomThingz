@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.pipe;
 
-import com.ultreon.randomthingz.tiles.ModMachineTileEntities;
+import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
@@ -35,7 +35,8 @@ public class PipeTileEntity extends TileEntity {
     }
 
     @Override
-    public @NotNull CompoundNBT write(@NotNull CompoundNBT compound) {
+    public @NotNull
+    CompoundNBT write(@NotNull CompoundNBT compound) {
         return super.write(compound);
     }
 

@@ -14,7 +14,8 @@ public class ServerActionMenuItem extends ActionMenuItem {
     }
 
     public ServerActionMenuItem(int permissionLevel) {
-        super(new TranslationTextComponent("misc.unknown"), () -> true, () -> {});
+        super(new TranslationTextComponent("misc.unknown"), () -> true, () -> {
+        });
         this.permissionLevel = permissionLevel;
     }
 

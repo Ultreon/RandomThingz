@@ -43,7 +43,8 @@ public class ActionMenuItem implements IActionMenuItem {
     }
 
     public ActionMenuItem() {
-        this(new TranslationTextComponent("misc.unknown"), () -> true, () -> {});
+        this(new TranslationTextComponent("misc.unknown"), () -> true, () -> {
+        });
     }
 
     public final void activate() {

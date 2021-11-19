@@ -35,12 +35,12 @@ public class EucalyptusLeafItem extends Item {
 
 
         if (entityLiving instanceof ServerPlayerEntity) {
-            ServerPlayerEntity serverplayerentity = (ServerPlayerEntity)entityLiving;
+            ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) entityLiving;
             CriteriaTriggers.CONSUME_ITEM.trigger(serverplayerentity, stack);
             serverplayerentity.addStat(Stats.ITEM_USED.get(this));
         }
 
-        if (entityLiving instanceof PlayerEntity && !((PlayerEntity)entityLiving).abilities.isCreativeMode) {
+        if (entityLiving instanceof PlayerEntity && !((PlayerEntity) entityLiving).abilities.isCreativeMode) {
             stack.shrink(1);
         }
 

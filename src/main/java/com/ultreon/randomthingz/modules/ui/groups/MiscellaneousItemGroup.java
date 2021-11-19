@@ -18,7 +18,8 @@ public class MiscellaneousItemGroup extends ItemGroup {
     }
 
     @Override
-    public @NotNull ItemStack createIcon() {
+    public @NotNull
+    ItemStack createIcon() {
         return new ItemStack(ModItems.LEGENDARY_ENDER_PEARL.get());
     }
 }

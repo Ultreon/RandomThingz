@@ -50,12 +50,14 @@ public class WorldGenerationModule extends CoreRegisterModule<Biome> {
     }
 
     @Override
-    public @NotNull String getName() {
+    public @NotNull
+    String getName() {
         return "world_gen";
     }
 
     @Override
-    public @NotNull ModuleCompatibility getCompatibility() {
+    public @NotNull
+    ModuleCompatibility getCompatibility() {
         return ModuleCompatibility.FULL;
     }
 

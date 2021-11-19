@@ -6,11 +6,11 @@ package com.ultreon.randomthingz.modules.debugMenu;
 public class ModDebugPages {
 //    @SubscribeEvent
 //    public static void clientSetup(FMLClientSetupEvent event) {
-//        DebugMenuModule.getDebugMenu().registerPage(new WindowPage(RandomThingz.MOD_ID, "window"));
-////        DebugScreen.registerPage(new PlayerPage1(RandomThingz.MOD_ID, "player1"));
+//        DebugMenuModule.getDebugMenu().registerPage(new WindowPage(QForgeMod.MOD_ID, "window"));
+////        DebugScreen.registerPage(new PlayerPage1(QForgeMod.MOD_ID, "player1"));
 //    }
 
-    public static final DeferredRegister<DebugPage> REGISTRY = DeferredRegister.create(DebugPage.class, RandomThingz.MOD_ID);
+    public static final DeferredRegister<DebugPage> REGISTRY = DeferredRegister.create(DebugPage.class, QForgeMod.MOD_ID);
 
     static {
         REGISTRY.makeRegistry("debug_page", () -> new RegistryBuilder<DebugPage>().disableOverrides());

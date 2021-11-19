@@ -16,7 +16,8 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class OreProfilePacket {
     private boolean isStart;
-    @Getter private CompoundNBT tag;
+    @Getter
+    private CompoundNBT tag;
 
     public OreProfilePacket() {
     }

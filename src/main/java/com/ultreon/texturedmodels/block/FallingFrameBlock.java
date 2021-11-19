@@ -29,6 +29,8 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
+
 /**
  * Nothing important to see here, this class is currently unused, visit {@linkplain FrameBlock} for a better documentation
  *
@@ -168,10 +170,10 @@ public class FallingFrameBlock extends FallingBlock {
 
     @Override
     public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
-        if (state.get(BCBlockStateProperties.LIGHT_LEVEL) > 15) {
+        if (state.get(LIGHT_LEVEL) > 15) {
             return 15;
         }
-        return state.get(BCBlockStateProperties.LIGHT_LEVEL);
+        return state.get(LIGHT_LEVEL);
     }
 }
 //========SOLI DEO GLORIA========//

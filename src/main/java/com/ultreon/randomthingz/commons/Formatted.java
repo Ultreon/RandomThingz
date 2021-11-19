@@ -6,7 +6,8 @@ import net.minecraft.util.text.TextFormatting;
 
 @SuppressWarnings("unused")
 public class Formatted implements Formattable {
-    @Getter private final String string;
+    @Getter
+    private final String string;
 
     public Formatted(String string) {
         this.string = string;

@@ -8,13 +8,13 @@ import net.minecraft.util.ResourceLocation;
 
 public class VariantChickenRenderer extends ChickenRenderer {
 
-	public VariantChickenRenderer(EntityRendererManager renderManagerIn) {
-		super(renderManagerIn);
-	}
-	
-	@Override
-	public ResourceLocation getEntityTexture(ChickenEntity entity) {
-		return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.CHICKEN, MobVariantsModule.enableChicken);
-	}
-	
+    public VariantChickenRenderer(EntityRendererManager renderManagerIn) {
+        super(renderManagerIn);
+    }
+
+    @Override
+    public ResourceLocation getEntityTexture(ChickenEntity entity) {
+        return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.CHICKEN, MobVariantsModule.enableChicken);
+    }
+
 }

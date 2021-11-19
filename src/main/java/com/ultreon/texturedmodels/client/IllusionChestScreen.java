@@ -21,9 +21,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class IllusionChestScreen extends ContainerScreen<IllusionChestContainer> implements IHasContainer<IllusionChestContainer> {
-    /** The ResourceLocation containing the chest GUI texture. */
+    /**
+     * The ResourceLocation containing the chest GUI texture.
+     */
     private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation("textures/gui/container/generic_54.png");
-    /** Window height is calculated with these values; the more rows, the higher */
+    /**
+     * Window height is calculated with these values; the more rows, the higher
+     */
     private final int inventoryRows;
 
     public IllusionChestScreen(IllusionChestContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {

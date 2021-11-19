@@ -2,13 +2,15 @@ package com.ultreon.randomthingz;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.ultreon.randomthingz.block.common.ModBlocksAlt;
 import com.ultreon.randomthingz.commons.Module;
 import com.ultreon.randomthingz.commons.ModuleManager;
 import com.ultreon.randomthingz.commons.internal.RtArgs;
 import com.ultreon.randomthingz.commons.internal.RtCredits;
 import com.ultreon.randomthingz.commons.internal.RtVersion;
+import com.ultreon.randomthingz.entity.common.ModEntities;
+import com.ultreon.randomthingz.item.common.ModItemsAlt;
 import com.ultreon.randomthingz.modules.ui.ModContainers;
-import com.ultreon.randomthingz.registration.Registration;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -64,7 +66,7 @@ import java.util.stream.Collectors;
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class RandomThingz {
     /**
-     * Random Thingz's Logger
+     * QForgeMod's Logger
      */
     public static final Logger LOGGER = LogManager.getLogger("RandomThingz:Generic");
 
@@ -72,12 +74,20 @@ public final class RandomThingz {
     private static final boolean MOD_TEST_PHASE = false;
 
     // Class static fields.
-    @Getter @Nullable private static RandomThingz instance;
-    @Getter @Nullable private static IProxy proxy;
-    @Getter @Nullable private static Initialization init;
+    @Getter
+    @Nullable
+    private static RandomThingz instance;
+    @Getter
+    @Nullable
+    private static IProxy proxy;
+    @Getter
+    @Nullable
+    private static Initialization init;
 
-    @Getter private static final boolean clientSide;
-    @Getter private static final boolean serverSide;
+    @Getter
+    private static final boolean clientSide;
+    @Getter
+    private static final boolean serverSide;
 
     // Mod Data
     public static final String MOD_ID = "randomthingz";
@@ -90,24 +100,42 @@ public final class RandomThingz {
         RtCredits RT_CREDITS1;
         try {
             RT_CREDITS1 = new RtCredits()
-                    .add("<Not yet included>",                                  "Modern Sofa",                                            "JustinRustin",                       "Available for download at https://blockmodels.com/model/361/", new URL("https://blockmodels.com/model/361/"))
-                    .add("<Not yet included>",                                  "Club",                                                   "Gengar",                             "Available for download at https://blockmodels.com/model/496/", new URL("https://blockmodels.com/model/496/"))
-                    .add("<Not yet included>",                                  "Table with tablecloth",                                  "Miep_HD",                            "Available for download at https://blockmodels.com/model/668/", new URL("https://blockmodels.com/model/668/"))
-                    .add("<Not yet included>",                                  "Healing Potion",                                         "Gengar",                             "Available for download at https://blockmodels.com/model/531/", new URL("https://blockmodels.com/model/531/"))
-                    .add("Game PC",                                             "Improved PC Gamer",                                      "Giovanni_5656",                      "Available for download at https://blockmodels.com/model/339/", new URL("https://blockmodels.com/model/339/"))
-                    .add("Router",                                              "Router",                                                 "F1ash",                              "Available for download at https://blockmodels.com/model/331/", new URL("https://blockmodels.com/model/331/"))
-                    .add("Crate",                                               "Wooden Box",                                             "F1ash",                              "Available for download at https://blockmodels.com/model/330/", new URL("https://blockmodels.com/model/330/"))
-                    .add("Minecraft Dungeons Items",                            "Minecraft Dungeons Textures for Minecraft Java Edition", "Kai1907, Shadow_236",                "",                                                             new URL("https://www.planetminecraft.com/texture-pack/minecraft-dungeons-textures-for-minecraft-java-edition/"))
-                    .add("<Not yet included>",                                  "GearPlus 1.16!",                                         "Nate the Penguin",                   "",                                                             new URL("https://www.planetminecraft.com/texture-pack/vanilla-more-items-armor-shields-and-more/"))
-                    .add("<Not yet included>",                                  "GearPlus - Terraria Edition",                            "Nate the Penguin",                   "",                                                             new URL("https://www.planetminecraft.com/texture-pack/gearplus-terraria-edition/"))
-                    .add("<Not yet included>",                                  "Cocoa Cake",                                             "Nate the Penguin",                   "",                                                             new URL("https://www.planetminecraft.com/texture-pack/gearplus-terraria-edition/"))
-                    .add("Moobloom",                                            "MoobLoom Update(Optifine)",                              "un_roman",                           "",                                                             new URL("https://www.planetminecraft.com/texture-pack/moobloom-update/"))
-                    .add("<Not yet included>",                                  "Avocados",                                               "kekkman",                            "",                                                             new URL("https://www.planetminecraft.com/texture-pack/avocados-4860171/"))
-                    .add("Bookshelf",                                           "Vanilla+ | 225 Custom Bookshelves Add-On",               "sirkomplete, Etaris and Robert0213", "",                                                             new URL("https://www.planetminecraft.com/texture-pack/vanilla-225-custom-bookshelves-add-on/"))
-                    .add("Empowered Rails (Modified Texture)",                  "Shinier Rails",                                          "StormDragon77",                      "",                                                             new URL("https://www.planetminecraft.com/texture-pack/shinier-rails/"))
-                    .add("Some UI Icons and Module Icons (Partially Modified)", "FatCow Icons",                                           "FatCow Web (TM)",                    "",                                                             new URL("http://www.fatcow.com/free-icons/"))
-                    .add("Sapphire ore, gem and block",                         "Minecraft Sapphire Ore Texture",                         "INDUSTRIALIST",                      "",                                                             new URL("https://www.deviantart.com/alex-moshan"))
-                    .add("Amber ore, gem and Block",                            "Minecraft Amber Ore Texture",                            "INDUSTRIALIST",                      "",                                                             new URL("https://www.deviantart.com/alex-moshan"))
+                    .add("<Not yet included>",
+                            "Modern Sofa", "JustinRustin", "Available for download at https://blockmodels.com/model/361/", new URL("https://blockmodels.com/model/361/"))
+                    .add("<Not yet included>",
+                            "Club", "Gengar", "Available for download at https://blockmodels.com/model/496/", new URL("https://blockmodels.com/model/496/"))
+                    .add("<Not yet included>",
+                            "Table with tablecloth", "Miep_HD", "Available for download at https://blockmodels.com/model/668/", new URL("https://blockmodels.com/model/668/"))
+                    .add("<Not yet included>",
+                            "Healing Potion", "Gengar", "Available for download at https://blockmodels.com/model/531/", new URL("https://blockmodels.com/model/531/"))
+                    .add("Game PC",
+                            "Improved PC Gamer", "Giovanni_5656", "Available for download at https://blockmodels.com/model/339/", new URL("https://blockmodels.com/model/339/"))
+                    .add("Router",
+                            "Router", "F1ash", "Available for download at https://blockmodels.com/model/331/", new URL("https://blockmodels.com/model/331/"))
+                    .add("Crate",
+                            "Wooden Box", "F1ash", "Available for download at https://blockmodels.com/model/330/", new URL("https://blockmodels.com/model/330/"))
+                    .add("Minecraft Dungeons Items",
+                            "Minecraft Dungeons Textures for Minecraft Java Edition", "Kai1907, Shadow_236", "", new URL("https://www.planetminecraft.com/texture-pack/minecraft-dungeons-textures-for-minecraft-java-edition/"))
+                    .add("<Not yet included>",
+                            "GearPlus 1.16!", "Nate the Penguin", "", new URL("https://www.planetminecraft.com/texture-pack/vanilla-more-items-armor-shields-and-more/"))
+                    .add("<Not yet included>",
+                            "GearPlus - Terraria Edition", "Nate the Penguin", "", new URL("https://www.planetminecraft.com/texture-pack/gearplus-terraria-edition/"))
+                    .add("<Not yet included>",
+                            "Cocoa Cake", "Nate the Penguin", "", new URL("https://www.planetminecraft.com/texture-pack/gearplus-terraria-edition/"))
+                    .add("Mooblooms",
+                            "MoobLoom Update(Optifine)", "un_roman", "", new URL("https://www.planetminecraft.com/texture-pack/moobloom-update/"))
+                    .add("<Not yet included>",
+                            "Avocados", "kekkman", "", new URL("https://www.planetminecraft.com/texture-pack/avocados-4860171/"))
+                    .add("Bookshelfs",
+                            "Vanilla+ | 225 Custom Bookshelves Add-On", "sirkomplete, Etaris and Robert0213", "", new URL("https://www.planetminecraft.com/texture-pack/vanilla-225-custom-bookshelves-add-on/"))
+                    .add("Empowered Rails (Modified Texture)",
+                            "Shinier Rails", "StormDragon77", "", new URL("https://www.planetminecraft.com/texture-pack/shinier-rails/"))
+                    .add("Some UI Icons and Module Icons (Partially Modified)",
+                            "FatCow Icons", "FatCow Web (TM)", "", new URL("http://www.fatcow.com/free-icons/"))
+                    .add("Sapphire ore, gem and block",
+                            "Minecraft Sapphire Ore Texture", "INDUSTRIALIST", "", new URL("https://www.deviantart.com/alex-moshan"))
+                    .add("Amber ore, gem and Block",
+                            "Minecraft Amber Ore Texture", "INDUSTRIALIST", "", new URL("https://www.deviantart.com/alex-moshan"))
             ;
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -166,15 +194,17 @@ public final class RandomThingz {
     }
 
     // Getters
-    @Getter private final IEventBus modEventBus;
+    @Getter
+    private final IEventBus modEventBus;
 
     /**
      * The Random Thingz constructor for mod-loading.
      *
-     * @since 1.0-alpha1
      * @see Mod
      * @see RandomThingz
+     * @since 1.0-alpha1
      */
+    @SuppressWarnings("deprecation")
     public RandomThingz() {
         // Constants.
         RandomThingz.instance = this;
@@ -199,6 +229,11 @@ public final class RandomThingz {
             throw new ReportedException(report);
         }
 
+        // Assign constants.
+        Constants.logger = LOGGER;
+        Constants.randomthingz = this;
+        Constants.proxy = proxy;
+
         // Final fields.
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -216,11 +251,11 @@ public final class RandomThingz {
         modEventBus.addListener(this::processIMC);
 
         // Register generic listeners.
-//        ModItems.ITEMS.register(modEventBus);
-        Registration.ENTITY_TYPES.register(modEventBus);
-        Registration.CONTAINER_TYPES.register(modEventBus);
-        ModContainers.init();
-
+        ModBlocksAlt.BLOCKS.register(modEventBus);
+        ModBlocksAlt.ITEMS.register(modEventBus);
+        ModItemsAlt.ITEMS.register(modEventBus);
+        ModEntities.ENTITY_TYPES.register(modEventBus);
+        ModContainers.CONTAINER_TYPES.register(modEventBus);
 //        ModTileEntities.TILE_ENTITY_TYPES.register(modEventBus);
 
         // Client-start.
@@ -242,7 +277,7 @@ public final class RandomThingz {
     }
 
     /**
-     * Get the resource location based on Random Thingz's id.
+     * Get the resource location based on QForgeMod's id.
      *
      * @param path the resource path.
      * @return a resource location.
@@ -262,7 +297,7 @@ public final class RandomThingz {
     }
 
     /**
-     * Check if Random Thingz is currently a development build.
+     * Check if QForgeMod is currently a development build.
      *
      * @return the QFM dev-state..
      */
@@ -275,7 +310,7 @@ public final class RandomThingz {
     }
 
     /**
-     * Check if Random Thingz is currently a development build.
+     * Check if QForgeMod is currently a development build.
      *
      * @param def the default value if failed to detect development mode.
      * @return the QFM dev-state..
@@ -291,14 +326,14 @@ public final class RandomThingz {
     /**
      * Check test phase.
      *
-     * @return true if Random Thingz is in test phase, false otherwise.
+     * @return true if QForgeMod is in test phase, false otherwise.
      */
     public static boolean isTestPhase() {
         return isModDev() || MOD_TEST_PHASE;
     }
 
     /**
-     * @return true if Random Thingz is a dev test version, false otherwise.
+     * @return true if QForgeMod is a dev test version, false otherwise.
      */
     public static boolean isDevtest() {
         return RT_ARGS.getFlags().isDevTest();
@@ -328,7 +363,7 @@ public final class RandomThingz {
 
     /**
      * This will handle things that supposed to happen when the server is stopping.<br>
-     * For example: clear the server field of the Random Thingz class.
+     * For example: clear the server field of the QForgeMod class.
      *
      * @param event a {@linkplain FMLServerStoppingEvent} object.
      */

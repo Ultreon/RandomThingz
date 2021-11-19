@@ -23,7 +23,7 @@ import java.util.Objects;
 /**
  * Update downloaded screen.
  * Shown when a update was downloaded.
- * 
+ *
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
@@ -84,10 +84,10 @@ public class UpdateDownloadedScreen extends Screen {
 
     /**
      * The render method for the screen.
-     * 
-     * @param matrixStack the matrix-stack for rendering.
-     * @param mouseX the x position of the mouse pointer.
-     * @param mouseY the y position of the mouse pointer.
+     *
+     * @param matrixStack  the matrix-stack for rendering.
+     * @param mouseX       the x position of the mouse pointer.
+     * @param mouseY       the y position of the mouse pointer.
      * @param partialTicks the render partial ticks.
      */
     public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
@@ -105,6 +105,7 @@ public class UpdateDownloadedScreen extends Screen {
 
     /**
      * Sets the number of ticks to wait before enabling the buttons.
+     *
      * @param ticksUntilEnableIn ticks until enabling.
      */
     public void setButtonDelay(int ticksUntilEnableIn) {

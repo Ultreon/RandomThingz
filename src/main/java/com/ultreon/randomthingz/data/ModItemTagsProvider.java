@@ -101,6 +101,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         groupBuilder(Tags.Items.INGOTS, ItemMaterial::getIngotTag);
         groupBuilder(Tags.Items.NUGGETS, ItemMaterial::getNuggetTag);
 
+        Builder<Item> armors = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/armors")));
         Builder<Item> swords = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/swords")));
         Builder<Item> axes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/axes")));
         Builder<Item> pickaxes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/pickaxes")));
@@ -109,11 +110,13 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         Builder<Item> longswords = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/longswords")));
         Builder<Item> broadswords = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/broadswords")));
         Builder<Item> katanas = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/katanas")));
+        Builder<Item> cutlasses = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/cutlasses")));
         Builder<Item> battleaxes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/battleaxes")));
         Builder<Item> lumberAxes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/lumber_axes")));
         Builder<Item> excavators = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/excavators")));
         Builder<Item> hammers = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/hammers")));
         for (Toolset toolset : Toolset.values()) {
+            armors.add(toolset.getSword().get());
             swords.add(toolset.getSword().get());
             axes.add(toolset.getAxe().get());
             pickaxes.add(toolset.getPickaxe().get());
@@ -122,6 +125,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             longswords.add(toolset.getLongsword().get());
             broadswords.add(toolset.getBroadsword().get());
             katanas.add(toolset.getKatana().get());
+            cutlasses.add(toolset.getCutlass().get());
             battleaxes.add(toolset.getBattleaxe().get());
             lumberAxes.add(toolset.getLumberAxe().get());
             excavators.add(toolset.getExcavator().get());
@@ -146,7 +150,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
-    public @NotNull String getName() {
+    public @NotNull
+    String getName() {
         return "RandomThingz - Item Tags";
     }
 

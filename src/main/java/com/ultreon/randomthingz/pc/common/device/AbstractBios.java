@@ -6,8 +6,8 @@ import com.ultreon.randomthingz.tileentity.ComputerTileEntity;
 
 public abstract class AbstractBios {
     private final Computer computer;
-    private final PowerController controller;
-    private final Screen screen;
+    private PowerController controller;
+    private Screen screen;
 
     public AbstractBios(ComputerTileEntity te, PowerController controller) {
         this.controller = controller;

@@ -9,17 +9,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RtVersion implements IVersion {
-    @Getter private final int version;
-    @Getter private final int release;
-    @Getter private final int buildNumber;
-    @Getter private final Stage stage;
-    @Getter private final int stageRelease;
+    @Getter
+    private final int version;
+    @Getter
+    private final int release;
+    @Getter
+    private final int buildNumber;
+    @Getter
+    private final Stage stage;
+    @Getter
+    private final int stageRelease;
     public static final RtVersion EMPTY = new RtVersion(0, 0, 0, Stage.ALPHA, 0);
 
     /**
-     * 
-     * @throws IllegalArgumentException when an invalid version has given.
      * @param s the version to parse.
+     * @throws IllegalArgumentException when an invalid version has given.
      */
     public RtVersion(String s) {
         // String to be scanned to find the pattern.
@@ -159,7 +163,7 @@ public class RtVersion implements IVersion {
         RtVersion version = (RtVersion) o;
 
         return Integer.compare(this.buildNumber, version.buildNumber);
-        
+
 //        int cmp = Integer.compare(this.version, version.version);
 //        if (cmp == 0) {
 //            int cmp1 = Integer.compare(this.release, version.release);

@@ -159,8 +159,8 @@ public class LumberAxeItem extends AxeItem implements IHasToolType {
      * Block start break handler. Here's where the magic of 3x3 begins.
      *
      * @param itemstack the item stack used for breaking a block.
-     * @param pos the block's position.
-     * @param player the player that's trying to break a block.
+     * @param pos       the block's position.
+     * @param player    the player that's trying to break a block.
      * @return false, so the block can be broken.
      */
     @Override

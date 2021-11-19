@@ -13,18 +13,28 @@ import java.util.function.Supplier;
 @Deprecated
 public class OreProps implements Cloneable {
     // ConfiguredFeature
-    @Deprecated private boolean square = false;
-    @Deprecated private Integer chance;
-    @Deprecated private Integer count;
-    @Deprecated private Integer size;
-    @Deprecated private ConfiguredPlacement<AtSurfaceWithExtraConfig> countExtra;
-    @Deprecated private ConfiguredPlacement<FeatureSpreadConfig> countMultilayer;
-    @Deprecated private ConfiguredPlacement<TopSolidRangeConfig> range;
-    @Deprecated private ConfiguredPlacement<DepthAverageConfig> depthAverage;
+    @Deprecated
+    private boolean square = false;
+    @Deprecated
+    private Integer chance;
+    @Deprecated
+    private Integer count;
+    @Deprecated
+    private Integer size;
+    @Deprecated
+    private ConfiguredPlacement<AtSurfaceWithExtraConfig> countExtra;
+    @Deprecated
+    private ConfiguredPlacement<FeatureSpreadConfig> countMultilayer;
+    @Deprecated
+    private ConfiguredPlacement<TopSolidRangeConfig> range;
+    @Deprecated
+    private ConfiguredPlacement<DepthAverageConfig> depthAverage;
 
     // OreFeatureConfig
-    @Deprecated private Supplier<RuleTest> ruleTest;
-    @Deprecated private Supplier<BlockState> blockState;
+    @Deprecated
+    private Supplier<RuleTest> ruleTest;
+    @Deprecated
+    private Supplier<BlockState> blockState;
 
     @Deprecated
     public static Builder builder() {

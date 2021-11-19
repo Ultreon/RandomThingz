@@ -25,8 +25,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SolidifyingRecipe implements IFluidRecipe<IFluidInventory> {
     private final ResourceLocation recipeId;
-    @Getter private int processTime;
-    @Getter private FluidIngredient ingredient;
+    @Getter
+    private int processTime;
+    @Getter
+    private FluidIngredient ingredient;
     private ItemStack result;
 
     @Override

@@ -23,34 +23,26 @@ import java.util.List;
  * Author: Ocelot
  */
 @JeiPlugin
-public class FiltersJeiPlugin implements IModPlugin
-{
+public class FiltersJeiPlugin implements IModPlugin {
     @Override
-    public ResourceLocation getPluginUid()
-    {
+    public ResourceLocation getPluginUid() {
         return new ResourceLocation(Reference.MOD_ID, Reference.MOD_ID);
     }
 
     @Override
-    public void registerGuiHandlers(IGuiHandlerRegistration registration)
-    {
-        registration.addGuiContainerHandler(CreativeScreen.class, new IGuiContainerHandler<CreativeScreen>()
-        {
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addGuiContainerHandler(CreativeScreen.class, new IGuiContainerHandler<CreativeScreen>() {
             @Override
-            public List<Rectangle2d> getGuiExtraAreas(CreativeScreen screen)
-            {
-                if (Filters.get().hasFilters(ItemGroup.GROUPS[screen.getSelectedTabIndex()]))
-                {
+            public List<Rectangle2d> getGuiExtraAreas(CreativeScreen screen) {
+                if (Filters.get().hasFilters(ItemGroup.GROUPS[screen.getSelectedTabIndex()])) {
                     List<Rectangle2d> areas = new ArrayList<>();
 
                     /* Tabs */
                     areas.add(new Rectangle2d(screen.getGuiLeft() - 28, screen.getGuiTop() + 10, 56, 230));
 
                     /* Buttons */
-                    for (IGuiEventListener child : screen.children)
-                    {
-                        if (child instanceof IconButton || child instanceof TagButton)
-                        {
+                    for (IGuiEventListener child : screen.children) {
+                        if (child instanceof IconButton || child instanceof TagButton) {
                             Button button = (Button) child;
                             areas.add(new Rectangle2d(button.x, button.y, button.getWidth(), button.height));
                         }

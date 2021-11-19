@@ -57,17 +57,17 @@ public class IllusionChestContainer extends Container {
     }
 
     public IllusionChestContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
-        this(windowId,playerInventory,getTileEntity(playerInventory, data));
+        this(windowId, playerInventory, getTileEntity(playerInventory, data));
     }
 
     private static ChestFrameTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
         final TileEntity tileAtPos = playerInventory.player.dimension.getTileEntity(data.readBlockPos());
-        if (tileAtPos instanceof  ChestFrameTileEntity) {
+        if (tileAtPos instanceof ChestFrameTileEntity) {
             return (ChestFrameTileEntity) tileAtPos;
         }
-        throw new IllegalStateException("TileEntity should be of type ChestFrameTileEntity but is "+tileAtPos);
+        throw new IllegalStateException("TileEntity should be of type ChestFrameTileEntity but is " + tileAtPos);
     }
 
     @Override
@@ -81,12 +81,11 @@ public class IllusionChestContainer extends Container {
         if (slot != null && slot.hasStack()) {
             ItemStack itemStack1 = slot.getStack();
             itemStack = itemStack1.copy();
-            if(index < 27) {
+            if (index < 27) {
                 if (this.mergeItemStack(itemStack1, 27, this.inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            }
-            else if (!this.mergeItemStack(itemStack1, 0, 27, false)) {
+            } else if (!this.mergeItemStack(itemStack1, 0, 27, false)) {
                 return ItemStack.EMPTY;
             }
 

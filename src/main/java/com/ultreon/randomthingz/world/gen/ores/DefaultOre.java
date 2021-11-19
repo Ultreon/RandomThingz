@@ -40,7 +40,7 @@ public class DefaultOre implements IBlockProvider, IOre {
 
     private final String name;
     private final Map<Block, Block> oreGroundTypeMap = new HashMap<>();
-    private final Predicate<BiomeLoadingEvent> predicate;
+    private Predicate<BiomeLoadingEvent> predicate;
     private float resistance;
 
     public DefaultOre(String name, Supplier<ItemMaterial> material, int hardness, int harvestLevel, DefaultOreConfig config) {

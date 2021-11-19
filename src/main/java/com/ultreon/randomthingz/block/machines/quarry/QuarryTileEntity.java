@@ -5,7 +5,7 @@ import com.qsoftware.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
 import com.ultreon.randomthingz.commons.enums.MachineTier;
 import com.ultreon.randomthingz.item.upgrades.MachineUpgrades;
-import com.ultreon.randomthingz.tiles.ModMachineTileEntities;
+import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
@@ -280,7 +280,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     /**
      * <h1>Tick event.</h1>
      * <h2>First tick:</h2>
-     *  initialize the quarry if not initialized.<br>
+     * initialize the quarry if not initialized.<br>
      * <br>
      * <h2>Other ticks:</h2>
      * <ol>
@@ -481,9 +481,9 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     /**
      * Destroy a block.
      *
-     * @param pos the position of the block to destroy.
+     * @param pos       the position of the block to destroy.
      * @param dropBlock flag to drop the block above the quarry.
-     * @param entity an entity?
+     * @param entity    an entity?
      * @return flag for if the block is destroyed.
      */
     @SuppressWarnings({"UnusedReturnValue", "SameParameterValue", "ConstantConditions"})
@@ -570,7 +570,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
      * Read quarry tile-entity data from a nbt compound.
      *
      * @param state the block state of the tile entity.
-     * @param nbt the quarry nbt data to read from.
+     * @param nbt   the quarry nbt data to read from.
      */
     @Override
     public void read(BlockState state, CompoundNBT nbt) {
@@ -590,7 +590,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         } catch (IllegalArgumentException e) {
             Block block = this.dimension.getBlockState(this.pos).getBlock();
             if (block instanceof QuarryBlock) {
-                this.tier = ((QuarryBlock)block).getDefaultTier();
+                this.tier = ((QuarryBlock) block).getDefaultTier();
             } else {
                 this.delete();
             }
@@ -618,7 +618,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         } catch (IllegalArgumentException e) {
             Block block = Objects.requireNonNull(this.dimension).getBlockState(this.pos).getBlock();
             if (block instanceof QuarryBlock) {
-                this.tier = ((QuarryBlock)block).getDefaultTier();
+                this.tier = ((QuarryBlock) block).getDefaultTier();
             } else {
                 this.delete();
             }
@@ -645,8 +645,8 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     /**
      * Check if machine can run, returns the flag/
      *
-     * @deprecated Not used anymore.
      * @return flag: true if machine can run otherwise false.
+     * @deprecated Not used anymore.
      */
     @Deprecated
     private boolean canMachineRun() {
@@ -670,9 +670,9 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     /**
      * Check if an item stack can be inserted.
      *
-     * @param index slot index.
+     * @param index       slot index.
      * @param itemStackIn the item stack.
-     * @param direction the direction of the block where to be inserted.
+     * @param direction   the direction of the block where to be inserted.
      * @return false, this block / tile-entity have no support for inserting items.
      */
     @Override
@@ -684,8 +684,8 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
      * Check if an item stack can be extracted.
      * Todo: Add support for item transport.
      *
-     * @param index the slot index.
-     * @param stack the item stack.
+     * @param index     the slot index.
+     * @param stack     the item stack.
      * @param direction the direction of the block where to be extracted.
      * @return false, this block / tile-entity have no support for extracting items.
      */
@@ -707,7 +707,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     /**
      * Create menu for a player.
      *
-     * @param id id?
+     * @param id     id?
      * @param player the player inventory.
      * @return the requested container.
      */
@@ -717,11 +717,9 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     }
 
     /**
-     *
-     *
-     * @param cap a non-null capability.
+     * @param cap  a non-null capability.
      * @param side the side of the block.
-     * @param <T> capability type.
+     * @param <T>  capability type.
      * @return
      */
     @Override

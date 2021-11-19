@@ -3,14 +3,11 @@ package com.ultreon.randomthingz.block.common;
 import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.AtomicTNTBlock;
-import com.ultreon.randomthingz.block.ChristmasChestBlock;
-import com.ultreon.randomthingz.block.FaceableBlock;
-import com.ultreon.randomthingz.block.custom.ModButtonBlock;
+import com.ultreon.randomthingz.block.*;
+import com.ultreon.randomthingz.block.custom.CustomButtonBlock;
 import com.ultreon.randomthingz.block.custom.render.CRDoorBlock;
 import com.ultreon.randomthingz.block.custom.render.CRFlowerBlock;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
-import com.ultreon.randomthingz.block.furniture.GamePcBlock;
 import com.ultreon.randomthingz.block.furniture.WoodenCrateBlock;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlock;
 import com.ultreon.randomthingz.block.machines.MachineFrameBlock;
@@ -38,11 +35,11 @@ import com.ultreon.randomthingz.block.trees.CherryTree;
 import com.ultreon.randomthingz.block.trees.EucalyptusTree;
 import com.ultreon.randomthingz.commons.enums.MachineTier;
 import com.ultreon.randomthingz.item.common.ItemMaterial;
+import com.ultreon.randomthingz.modules.tiles.ModTileEntities;
 import com.ultreon.randomthingz.modules.ui.ModItemGroups;
 import com.ultreon.randomthingz.registration.Registration;
 import com.ultreon.randomthingz.tileentity.ChristmasChestTileEntity;
 import com.ultreon.randomthingz.tileentity.itemrenderer.ChristmasChestItemStackRenderer;
-import com.ultreon.randomthingz.tiles.ModTileEntities;
 import lombok.experimental.UtilityClass;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.*;
@@ -88,8 +85,13 @@ import java.util.function.Supplier;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @UtilityClass
-@SuppressWarnings({"unused", "SameParameterValue"})
+@SuppressWarnings("unused")
 public final class ModBlocks {
+    static {
+        for (StoneType stoneType : StoneType.values()) {
+            stoneType.register(Registration.BLOCKS, Registration.ITEMS);
+        }
+    }
 
     ///////////////////
     //     Racks     //
@@ -264,10 +266,10 @@ public final class ModBlocks {
     public static final BlockRegistryObject<WoodButtonBlock> EUCALYPTUS_BUTTON = registerRedstone("eucalyptus_button", () -> new WoodButtonBlock(Block.Properties.generate(Material.WOOD).doesNotBlockMovement().harvestTool(ToolType.AXE).hardnessAndResistance(0.5f).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<WoodButtonBlock> CHERRY_BUTTON = registerRedstone("cherry_button", () -> new WoodButtonBlock(Block.Properties.generate(Material.WOOD).doesNotBlockMovement().harvestTool(ToolType.AXE).hardnessAndResistance(0.5f).sound(SoundType.WOOD)));
 
-    public static final BlockRegistryObject<ModButtonBlock> DIAMOND_BUTTON = registerRedstone("diamond_button", () -> new ModButtonBlock(Block.Properties.generate(Material.ROCK).doesNotBlockMovement().harvestTool(ToolType.PICKAXE).setRequiresTool().harvestLevel(2).hardnessAndResistance(3.0f).sound(SoundType.STONE), 100));
-    public static final BlockRegistryObject<ModButtonBlock> IRON_BUTTON = registerRedstone("iron_button", () -> new ModButtonBlock(Block.Properties.generate(Material.IRON).doesNotBlockMovement().harvestTool(ToolType.PICKAXE).setRequiresTool().harvestLevel(1).hardnessAndResistance(1.5f).sound(SoundType.METAL), 60));
-    public static final BlockRegistryObject<ModButtonBlock> GOLD_BUTTON = registerRedstone("gold_button", () -> new ModButtonBlock(Block.Properties.generate(Material.IRON).doesNotBlockMovement().harvestTool(ToolType.PICKAXE).setRequiresTool().harvestLevel(1).hardnessAndResistance(2.5f).sound(SoundType.METAL), 10));
-    public static final BlockRegistryObject<ModButtonBlock> QUARTZ_BUTTON = registerRedstone("quartz_button", () -> new ModButtonBlock(Block.Properties.generate(Material.ROCK).doesNotBlockMovement().harvestTool(ToolType.PICKAXE).setRequiresTool().harvestLevel(1).hardnessAndResistance(0.4f).sound(SoundType.STONE), 5));
+    public static final BlockRegistryObject<StoneButtonBlock> DIAMOND_BUTTON = registerRedstone("diamond_button", () -> new CustomButtonBlock(Block.Properties.generate(Material.ROCK).doesNotBlockMovement().harvestTool(ToolType.PICKAXE).setRequiresTool().harvestLevel(2).hardnessAndResistance(3.0f).sound(SoundType.STONE), 100));
+    public static final BlockRegistryObject<StoneButtonBlock> IRON_BUTTON = registerRedstone("iron_button", () -> new CustomButtonBlock(Block.Properties.generate(Material.IRON).doesNotBlockMovement().harvestTool(ToolType.PICKAXE).setRequiresTool().harvestLevel(1).hardnessAndResistance(1.5f).sound(SoundType.METAL), 60));
+    public static final BlockRegistryObject<StoneButtonBlock> GOLD_BUTTON = registerRedstone("gold_button", () -> new CustomButtonBlock(Block.Properties.generate(Material.IRON).doesNotBlockMovement().harvestTool(ToolType.PICKAXE).setRequiresTool().harvestLevel(1).hardnessAndResistance(2.5f).sound(SoundType.METAL), 10));
+    public static final BlockRegistryObject<StoneButtonBlock> QUARTZ_BUTTON = registerRedstone("quartz_button", () -> new CustomButtonBlock(Block.Properties.generate(Material.ROCK).doesNotBlockMovement().harvestTool(ToolType.PICKAXE).setRequiresTool().harvestLevel(1).hardnessAndResistance(0.4f).sound(SoundType.STONE), 5));
 
     public static final BlockRegistryObject<PressurePlateBlock> EUCALYPTUS_PRESSURE_PLATE = registerRedstone("eucalyptus_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.generate(Material.WOOD).doesNotBlockMovement().harvestTool(ToolType.AXE).hardnessAndResistance(0.5f).sound(SoundType.WOOD)));
     public static final BlockRegistryObject<PressurePlateBlock> CHERRY_PRESSURE_PLATE = registerRedstone("cherry_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.generate(Material.WOOD).doesNotBlockMovement().harvestTool(ToolType.AXE).hardnessAndResistance(0.5f).sound(SoundType.WOOD)));
@@ -283,7 +285,8 @@ public final class ModBlocks {
         @MethodsReturnNonnullByDefault
         @SuppressWarnings("deprecation")
         @Override
-        public @NotNull VoxelShape getShape(BlockState state, @NotNull IBlockReader dimensionIn, @NotNull BlockPos pos, @NotNull ISelectionContext context) {
+        public @NotNull
+        VoxelShape getShape(BlockState state, @NotNull IBlockReader dimensionIn, @NotNull BlockPos pos, @NotNull ISelectionContext context) {
             return SHAPE;
         }
     });
@@ -308,27 +311,51 @@ public final class ModBlocks {
     ////////////////////////
     //     Ore blocks     //
     ////////////////////////
-    @Deprecated public static final BlockRegistryObject<OreBlock> STEEL_ORE = registerNoItem("steel_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.25f, 3.45f).sound(SoundType.STONE).harvestLevel(2)));
-    @Deprecated public static final BlockRegistryObject<OreBlock> TUNGSTEN_ORE = registerNoItem("tungsten_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5.25f, 6.5f).sound(SoundType.STONE).harvestLevel(3)));
-    @Deprecated public static final ItemRegistryObject<BlockItem> STEEL_ORE_ITEM = registerItem("steel_ore", () -> new BlockItem(STEEL_ORE.get(), new Item.Properties()));
-    @Deprecated public static final ItemRegistryObject<BlockItem> TUNGSTEN_ORE_ITEM = registerItem("tungsten_ore", () -> new BlockItem(TUNGSTEN_ORE.get(), new Item.Properties()));
+    @Deprecated
+    public static final BlockRegistryObject<OreBlock> STEEL_ORE = registerNoItem("steel_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.25f, 3.45f).sound(SoundType.STONE).harvestLevel(2)));
+    @Deprecated
+    public static final BlockRegistryObject<OreBlock> TUNGSTEN_ORE = registerNoItem("tungsten_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5.25f, 6.5f).sound(SoundType.STONE).harvestLevel(3)));
+    @Deprecated
+    public static final ItemRegistryObject<BlockItem> STEEL_ORE_ITEM = registerItem("steel_ore", () -> new BlockItem(STEEL_ORE.get(), new Item.Properties()));
+    @Deprecated
+    public static final ItemRegistryObject<BlockItem> TUNGSTEN_ORE_ITEM = registerItem("tungsten_ore", () -> new BlockItem(TUNGSTEN_ORE.get(), new Item.Properties()));
 
     public static final BlockRegistryObject<OreBlock> GILDED_DIRT = registerOre("gilded_dirt", () -> new OreBlock(Block.Properties.generate(Material.EARTH, MaterialColor.DIRT).setRequiresTool().harvestTool(ToolType.SHOVEL).hardnessAndResistance(0.5f).sound(SoundType.GROUND)));
+//    public static final BlockRegistryObject<OreBlock> RUBY_ORE = registerOre("ruby_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.75f, 2.875f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> AMETHYST_ORE = registerOre("amethyst_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.25f, 2.375f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> AQUAMARINE_ORE = registerOre("aquamarine_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.155f, 2.4635f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> SAPHIRE_ORE = registerOre("saphire_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.365f, 2.845f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> MALACHITE_ORE = registerOre("malachite_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.25f, 3.75f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> PERIDOT_ORE = registerOre("peridot_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.95f, 3.2f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> TANZANITE_ORE = registerOre("tanzanite_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(2.5f, 2.5f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<OreBlock> ULTRINIUM_ORE = registerOre("ultrinium_ore", () -> new OreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(250.0f, 9600.0f).sound(SoundType.STONE).harvestLevel(5)));
+//    public static final BlockRegistryObject<InfinityOreBlock> INFINITY_ORE = registerOverpowered("infinity_ore", () -> new InfinityOreBlock(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(10240f, Float.POSITIVE_INFINITY).sound(SoundType.STONE).harvestLevel(6)));
 
-    /////////////////////////
-    //     Bookshelves     //
-    /////////////////////////
-    public static final ArrayList<BlockRegistryObject<Block>> BOOKSHELVES = new ArrayList<>();
+    /////////////////////////////////////
+    //     Solid Gem / Metal block     //
+    /////////////////////////////////////
+//    public static final BlockRegistryObject<Block> TUNGSTEN_BLOCK = register("tungsten_block", () -> new Block(Block.Properties.generate(Material.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(5.9875f, 6.5525f).sound(SoundType.STONE).harvestLevel(3)));
+//    public static final BlockRegistryObject<Block> RUBY_BLOCK = register("ruby_block", () -> new Block(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.25f, 5.5f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<Block> AMETHYST_BLOCK = register("amethyst_block", () -> new Block(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.875f, 4.0625f).sound(SoundType.STONE).harvestLevel(1)));
+//    public static final BlockRegistryObject<Block> AQUAMARINE_BLOCK = register("aquamarine_block", () -> new Block(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(3.995f, 4.1275f).sound(SoundType.STONE).harvestLevel(1)));
+//    public static final BlockRegistryObject<Block> SAPHIRE_BLOCK = register("saphire_block", () -> new Block(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.120f, 4.5735f).sound(SoundType.STONE).harvestLevel(1)));
+//    public static final BlockRegistryObject<Block> MALACHITE_BLOCK = register("malachite_block", () -> new Block(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.8914f, 5.06635f).sound(SoundType.STONE).harvestLevel(1)));
+//    public static final BlockRegistryObject<Block> PERIDOT_BLOCK = register("peridot_block", () -> new Block(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.8914f, 5.06635f).sound(SoundType.STONE).harvestLevel(1)));
+//    public static final BlockRegistryObject<Block> TANZANITE_BLOCK = register("tanzanite_block", () -> new Block(Block.Properties.generate(Material.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(4.26f, 5.5f).sound(SoundType.STONE).harvestLevel(2)));
+//    public static final BlockRegistryObject<Block> ULTRINIUM_BLOCK = register("ultrinium_block", () -> new Block(Block.Properties.generate(Material.ROCK).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(12.9f, 99999999.9f).sound(SoundType.STONE).harvestLevel(5)));
+//    public static final BlockRegistryObject<InfinityBlock> INFINITY_BLOCK = registerOverpowered("infinity_block", () -> new InfinityBlock(Block.Properties.generate(Material.IRON).setRequiresTool().harvestTool(ToolType.PICKAXE).hardnessAndResistance(64.5f, Float.MAX_VALUE).sound(SoundType.METAL).harvestLevel(6)));
+
+    public static final ArrayList<BlockRegistryObject<Block>> BOOKSHELFS = new ArrayList<>();
 
     static {
-        BOOKSHELVES.add(registerBookshelf("bookshelf", () -> new Block(AbstractBlock.Properties.generate(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD)) {
+        BOOKSHELFS.add(registerBookshelf("bookshelf", () -> new Block(AbstractBlock.Properties.generate(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD)) {
             @Override
             public String getTranslationId() {
                 return "block.minecraft.bookshelf";
             }
         }));
         for (int i = 1; i < 225; i++) {
-            BOOKSHELVES.add(registerBookshelf("bookshelf" + i, () -> new Block(AbstractBlock.Properties.generate(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD)) {
+            BOOKSHELFS.add(registerBookshelf("bookshelf" + i, () -> new Block(AbstractBlock.Properties.generate(Material.WOOD).hardnessAndResistance(1.5F).sound(SoundType.WOOD)) {
                 @Override
                 public String getTranslationId() {
                     return "block.minecraft.bookshelf";
@@ -360,102 +387,133 @@ public final class ModBlocks {
     }
 
     private static <T extends Block> BlockRegistryObject<T> registerNoItem(String name, Supplier<T> block) {
-        return new BlockRegistryObject<>(Registration.BLOCKS.register(name, block));
+        return Registration.BLOCKS.register(name, block);
     }
+
     private static <T extends Block> BlockRegistryObject<T> register(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::item);
     }
+
     @SuppressWarnings("SameParameterValue")
     private static <T extends Block> BlockRegistryObject<T> registerMiscellaneous(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::miscellaneousItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerNature(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::natureItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerRedstone(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::redstoneItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerMachine(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::machineItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerChest(String name, Supplier<T> block, Supplier<Callable<?>> renderMethod) {
         return register(name, block, block1 -> chestItem(block1, renderMethod));
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerIngredient(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::ingredientItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerSpecial(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::specialItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerOre(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::oreItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerWood(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::woodItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerShaped(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::shapedItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerOverpowered(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::godItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerFurniture(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::furnitureItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> registerBookshelf(String name, Supplier<T> block) {
         return register(name, block, ModBlocks::bookshelfItem);
     }
+
     private static <T extends Block> BlockRegistryObject<T> register(String name, Supplier<T> block, Function<BlockRegistryObject<T>, Supplier<? extends BlockItem>> item) {
         BlockRegistryObject<T> ret = registerNoItem(name, block);
         Registration.ITEMS.register(name, item.apply(ret));
         return ret;
     }
+
     private static BlockRegistryObject<FlowingFluidBlock> registerFluid(String name, Supplier<FlowingFluid> fluid) {
         return registerNoItem(name, () ->
                 new FlowingFluidBlock(fluid, Block.Properties.generate(Material.WATER).doesNotBlockMovement().hardnessAndResistance(100.0F).noDrops()));
     }
+
     private static <T extends Block> Supplier<BlockItem> item(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties());
     }
+
     private static <T extends Block> Supplier<BlockItem> miscellaneousItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.MISC));
     }
+
     private static <T extends Block> Supplier<BlockItem> natureItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.DECORATIONS));
     }
+
     private static <T extends Block> Supplier<BlockItem> redstoneItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.REDSTONE));
     }
+
     private static <T extends Block> Supplier<BlockItem> machineItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.MACHINES));
     }
+
     private static <T extends Block> Supplier<BlockItem> chestItem(BlockRegistryObject<T> block, Supplier<Callable<?>> renderMethod) {
         return DistExecutor.unsafeRunForDist(() -> () -> () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.MACHINES).setISTER(() -> () -> (ItemStackTileEntityRenderer) renderMethod.get().call())), () -> () -> () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.MACHINES)));
     }
+
     private static <T extends Block> Supplier<BlockItem> ingredientItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.MISC));
     }
+
     private static <T extends Block> Supplier<BlockItem> specialItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ModItemGroups.SPECIALS));
     }
+
     private static <T extends Block> Supplier<BlockItem> oreItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
     }
+
     private static <T extends Block> Supplier<BlockItem> woodItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
     }
+
     private static <T extends Block> Supplier<BlockItem> shapedItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.BUILDING_BLOCKS));
     }
+
     private static <T extends Block> Supplier<BlockItem> godItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties());
     }
+
     private static <T extends Block> Supplier<BlockItem> furnitureItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.DECORATIONS));
     }
+
     private static <T extends Block> Supplier<BlockItem> bookshelfItem(BlockRegistryObject<T> block) {
         return () -> new BlockItem(block.get(), new Item.Properties().group(ItemGroup.DECORATIONS));
     }
+
     private static LeavesBlock createLeavesBlock() {
         return new LeavesBlock(AbstractBlock.Properties.generate(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).notSolid().setAllowsSpawn(ModBlocks::allowsSpawnOnLeaves).setSuffocates(ModBlocks::isNotSolid).setBlocksVision(ModBlocks::isNotSolid));
     }
@@ -463,6 +521,7 @@ public final class ModBlocks {
     private static Boolean allowsSpawnOnLeaves(BlockState state, IBlockReader reader, BlockPos pos, EntityType<?> entity) {
         return entity == EntityType.OCELOT || entity == EntityType.PARROT;
     }
+
     private static boolean isNotSolid(BlockState state, IBlockReader reader, BlockPos pos) {
         return false;
     }

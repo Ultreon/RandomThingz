@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.setup;
 
-import com.ultreon.texturedmodels.TexturedModels;
+import com.ultreon.texturedmodels.QTextureModels;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
  * @author PianoManu
  * @version 1.2 09/30/20
  */
-@Mod.EventBusSubscriber(modid = TexturedModels.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = QTextureModels.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class TextureSetup {
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -41,7 +41,7 @@ public class TextureSetup {
     }
 
     private static ResourceLocation loc(String name) {
-        return new ResourceLocation(TexturedModels.MOD_ID, name);
+        return new ResourceLocation(QTextureModels.MOD_ID, name);
     }
 }
 //========SOLI DEO GLORIA========//

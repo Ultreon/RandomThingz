@@ -54,6 +54,7 @@ public class ConfirmExitModule extends Module {
             }
         }
     }
+
     @SubscribeEvent
     public void onWindowClose(WindowCloseEvent event) {
         Minecraft mc = Minecraft.getInstance();

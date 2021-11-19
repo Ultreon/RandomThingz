@@ -14,12 +14,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class VariantZombieRenderer extends ZombieRenderer {
-	public VariantZombieRenderer(EntityRendererManager renderManagerIn) {
-		super(renderManagerIn);
-	}
+    public VariantZombieRenderer(EntityRendererManager renderManagerIn) {
+        super(renderManagerIn);
+    }
 
-	@Override
-	public ResourceLocation getEntityTexture(ZombieEntity entity) {
-		return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.ZOMBIE, MobVariantsModule.enableZombie);
-	}
+    @Override
+    public ResourceLocation getEntityTexture(ZombieEntity entity) {
+        return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.ZOMBIE, MobVariantsModule.enableZombie);
+    }
 }

@@ -27,11 +27,19 @@ import java.util.List;
 public class ActionMenuScreen extends Screen {
     private final List<Screen> screens = new ArrayList<>();
     private final @Nullable Screen parent;
-    @Getter private boolean initialized = false;
-    @Getter private final int menuIndex;
-    @Getter private final AbstractActionMenu menu;
-    @Getter @Nullable private Rectangle buttonRect;
-    @Getter @Setter(AccessLevel.PACKAGE) @Nullable private ActionMenuButton activeItem;
+    @Getter
+    private boolean initialized = false;
+    @Getter
+    private final int menuIndex;
+    @Getter
+    private final AbstractActionMenu menu;
+    @Getter
+    @Nullable
+    private Rectangle buttonRect;
+    @Getter
+    @Setter(AccessLevel.PACKAGE)
+    @Nullable
+    private ActionMenuButton activeItem;
     private final List<ActionMenuButton> serverButtons = new ArrayList<>();
 
     protected ActionMenuScreen(@Nullable Screen parent, AbstractActionMenu menu, int menuIndex) {
@@ -88,7 +96,7 @@ public class ActionMenuScreen extends Screen {
                 }
 
                 y -= 16;
-           }
+            }
 
             y -= 16;
             addButton(new ActionMenuTitle(this, x, y, 150, 15));
@@ -111,7 +119,7 @@ public class ActionMenuScreen extends Screen {
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         if (parent instanceof ActionMenuScreen) {
-            ((ActionMenuScreen)parent).render(matrixStack, mouseX, mouseY, partialTicks, this.menuIndex);
+            ((ActionMenuScreen) parent).render(matrixStack, mouseX, mouseY, partialTicks, this.menuIndex);
         } else if (parent != null) {
             parent.render(matrixStack, mouseX, mouseY, partialTicks);
         }
@@ -157,7 +165,7 @@ public class ActionMenuScreen extends Screen {
 
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks, int childIndex) {
         if (parent instanceof ActionMenuScreen) {
-            ((ActionMenuScreen)parent).render(matrixStack, mouseX, mouseY, partialTicks, childIndex);
+            ((ActionMenuScreen) parent).render(matrixStack, mouseX, mouseY, partialTicks, childIndex);
         } else if (parent != null) {
             parent.render(matrixStack, mouseX, mouseY, partialTicks);
         }

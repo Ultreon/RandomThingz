@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class VMWarningScreen extends Screen {
-    private static final boolean initialized = false;
+    private static boolean initialized = false;
     private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
     private final ITextComponent shutdownPcText;
     private final ITextComponent yesButtonText;

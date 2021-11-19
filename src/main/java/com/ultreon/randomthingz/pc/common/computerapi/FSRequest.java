@@ -6,7 +6,7 @@ public abstract class FSRequest<T, V> {
     public static final FSRequest<String, Void> MKDIRS = new FSRequest<String, Void>(String.class, Void.class) {
         @Override
         public void execute(String req, Void val) throws IOException {
-//            Files.createDirectories(Paths.get(RandomThingz.getInstance().onServerStarting(), req))
+//            Files.createDirectories(Paths.get(QForgeMod.getInstance().onServerStarting(), req))
         }
     };
 

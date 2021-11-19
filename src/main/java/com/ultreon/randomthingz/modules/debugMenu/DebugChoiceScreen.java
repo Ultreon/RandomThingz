@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.modules.debugMenu;
 /*
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.ultreon.forgemod.RandomThingz;
+import com.ultreon.forgemod.QForgeMod;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
@@ -21,7 +21,7 @@ import java.util.Locale;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class DebugChoiceScreen extends Screen {
-    private static final ResourceLocation GUI_LOCATION = new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/debug_menu_choice.png");
+    private static final ResourceLocation GUI_LOCATION = new ResourceLocation(QForgeMod.MOD_ID, "textures/gui/debug_menu_choice.png");
     private final int textureWidth = 176;
     private final int textureHeight = 166;
     private int textureX;

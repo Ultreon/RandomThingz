@@ -1,10 +1,9 @@
 package com.ultreon.texturedmodels.block;
 
-import com.ultreon.texturedmodels.TexturedModels;
+import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
-import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
 import net.minecraft.block.Block;
@@ -32,6 +31,8 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+import static com.ultreon.texturedmodels.util.BCBlockStateProperties.CONTAINS_BLOCK;
+import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
 import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 /**
@@ -44,12 +45,12 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 public class FenceGateFrameBlock extends FenceGateBlock implements IWaterLoggable {
     public FenceGateFrameBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(OPEN, Boolean.FALSE).with(POWERED, Boolean.FALSE).with(IN_WALL, Boolean.FALSE).with(BCBlockStateProperties.CONTAINS_BLOCK, false).with(BCBlockStateProperties.LIGHT_LEVEL, 0).with(WATERLOGGED, false));
+        this.setDefaultState(this.stateContainer.getBaseState().with(OPEN, Boolean.FALSE).with(POWERED, Boolean.FALSE).with(IN_WALL, Boolean.FALSE).with(CONTAINS_BLOCK, false).with(LIGHT_LEVEL, 0).with(WATERLOGGED, false));
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED, HORIZONTAL_FACING, OPEN, POWERED, IN_WALL, BCBlockStateProperties.CONTAINS_BLOCK, BCBlockStateProperties.LIGHT_LEVEL);
+        builder.add(WATERLOGGED, HORIZONTAL_FACING, OPEN, POWERED, IN_WALL, CONTAINS_BLOCK, LIGHT_LEVEL);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class FenceGateFrameBlock extends FenceGateBlock implements IWaterLoggabl
             BlockAppearanceHelper.setTexture(item, state, dimension, player, pos);
             BlockAppearanceHelper.setDesign(dimension, pos, player, item);
             BlockAppearanceHelper.setDesignTexture(dimension, pos, player, item);
-            if ((state.get(BCBlockStateProperties.CONTAINS_BLOCK) || !(item.getItem() instanceof BlockItem)) && !(Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(TexturedModels.MOD_ID))) {
+            if ((state.get(CONTAINS_BLOCK) || !(item.getItem() instanceof BlockItem)) && !(Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID))) {
                 if (state.get(OPEN)) {
                     state = state.with(OPEN, Boolean.FALSE);
                 } else {
@@ -89,7 +90,7 @@ public class FenceGateFrameBlock extends FenceGateBlock implements IWaterLoggabl
                     TileEntity tileEntity = dimension.getTileEntity(pos);
                     int count = player.getHeldItem(hand).getCount();
                     Block heldBlock = ((BlockItem) item.getItem()).getBlock();
-                    if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.get(BCBlockStateProperties.CONTAINS_BLOCK)) {
+                    if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.get(CONTAINS_BLOCK)) {
                         ((FrameBlockTile) tileEntity).clear();
                         BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().getDefaultState();
                         ((FrameBlockTile) tileEntity).setMimic(handBlockState);
@@ -103,7 +104,7 @@ public class FenceGateFrameBlock extends FenceGateBlock implements IWaterLoggabl
             if (player.getHeldItem(hand).getItem() == Registration.HAMMER.get() || (!BCModConfig.HAMMER_NEEDED.get() && player.isSneaking())) {
                 if (!player.isCreative())
                     this.dropContainedBlock(dimension, pos);
-                state = state.with(BCBlockStateProperties.CONTAINS_BLOCK, Boolean.FALSE);
+                state = state.with(CONTAINS_BLOCK, Boolean.FALSE);
                 dimension.setBlockState(pos, state, 2);
             }
         }
@@ -139,7 +140,7 @@ public class FenceGateFrameBlock extends FenceGateBlock implements IWaterLoggabl
             FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
-            dimensionIn.setBlockState(pos, state.with(BCBlockStateProperties.CONTAINS_BLOCK, Boolean.TRUE), 2);
+            dimensionIn.setBlockState(pos, state.with(CONTAINS_BLOCK, Boolean.TRUE), 2);
         }
     }
 
@@ -155,10 +156,10 @@ public class FenceGateFrameBlock extends FenceGateBlock implements IWaterLoggabl
 
     @Override
     public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
-        if (state.get(BCBlockStateProperties.LIGHT_LEVEL) > 15) {
+        if (state.get(LIGHT_LEVEL) > 15) {
             return 15;
         }
-        return state.get(BCBlockStateProperties.LIGHT_LEVEL);
+        return state.get(LIGHT_LEVEL);
     }
 
     @Override

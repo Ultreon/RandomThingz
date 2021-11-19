@@ -33,6 +33,7 @@ public final class WorldUtils {
             }
         }
     }
+
     public static void saveWorldThen(Runnable runnable) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.dimension != null) {
@@ -48,6 +49,7 @@ public final class WorldUtils {
             runnable.run();
         }
     }
+
     public static void saveWorldThenOpen(Screen screen) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.dimension != null) {
@@ -63,6 +65,7 @@ public final class WorldUtils {
             mc.displayGuiScreen(screen);
         }
     }
+
     public static void saveWorldThenQuitGame() {
         saveWorldThen(() -> Minecraft.getInstance().shutdown());
     }

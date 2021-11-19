@@ -30,7 +30,7 @@ public abstract class MixinItemEntity extends Entity {
             } else {
                 if (getItem().getItem() == Items.GUNPOWDER) {
                     remove(false);
-                    getEntityDimension().createExplosion(null, getPosX(), getPosY(), getPosZ(), ((float)getItem().getCount()) / 2, false, Explosion.Mode.BREAK);
+                    getEntityDimension().createExplosion(null, getPosX(), getPosY(), getPosZ(), ((float) getItem().getCount()) / 2, false, Explosion.Mode.BREAK);
                 } else if (getItem().getItem() == Items.TNT) {
                     remove(false);
                     getEntityDimension().createExplosion(null, getPosX(), getPosY(), getPosZ(), getItem().getCount() * 4, false, Explosion.Mode.BREAK);

@@ -36,6 +36,7 @@ public final class ModTraits {
     public static final RegistryObject<ProjectileResistantTrait> PROJECTILE_RESISTANT = register("projectile_resistant", ProjectileResistantTrait::new);
     public static final RegistryObject<KnockbackTrait> KNOCKBACK = register("knockback", KnockbackTrait::new);
     public static final RegistryObject<SlimeyTrait> SLIMEY = register("slimey", SlimeyTrait::new);
+
     public static <T extends AbstractTrait> RegistryObject<T> register(String name, Supplier<T> supplier) {
         return REGISTRY.register(name, supplier);
     }

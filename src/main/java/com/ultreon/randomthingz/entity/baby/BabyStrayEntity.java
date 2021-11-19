@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.entity.baby;
 
-import com.ultreon.randomthingz.item.common.ModItems;
+import com.ultreon.randomthingz.item.common.ModItemsAlt;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;
@@ -24,7 +24,7 @@ import java.util.Random;
 /**
  * Baby stray entity class.
  *
- * @author Ultreon Team.
+ * @author QTech Community.
  */
 public class BabyStrayEntity extends StrayEntity implements IBabyEntity {
 
@@ -84,7 +84,7 @@ public class BabyStrayEntity extends StrayEntity implements IBabyEntity {
 
     @Override
     public ItemStack getPickedResult(RayTraceResult target) {
-        return new ItemStack(ModItems.BABY_STRAY_SPAWN_EGG.asItem());
+        return new ItemStack(ModItemsAlt.BABY_STRAY_SPAWN_EGG.asItem());
     }
 
     @Nonnull

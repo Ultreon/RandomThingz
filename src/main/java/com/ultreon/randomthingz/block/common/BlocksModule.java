@@ -24,6 +24,8 @@ public class BlocksModule extends CoreRegisterWrapperModule<Block> {
     @Override
     public void onEnable() {
         ModBlocks.register();
+        ModBlocksAlt.register();
+
         BLOCKS.register(modEventBus);
     }
 

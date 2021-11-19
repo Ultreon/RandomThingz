@@ -7,6 +7,7 @@ import net.minecraft.world.Explosion;
 
 /**
  * TNT-Properties.
+ *
  * @author Qboi123
  */
 @Builder(builderClassName = "Builder")

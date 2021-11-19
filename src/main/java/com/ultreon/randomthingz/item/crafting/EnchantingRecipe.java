@@ -28,8 +28,10 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class EnchantingRecipe implements IRecipe<IMachineInventory> {
     private final ResourceLocation recipeId;
-    @Getter private Item input;
-    @Getter private int processTime;
+    @Getter
+    private Item input;
+    @Getter
+    private int processTime;
     private Enchantment result;
 
     public void consumeIngredients(IMachineInventory inv) {

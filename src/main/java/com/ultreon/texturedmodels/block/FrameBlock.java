@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.block;
 
-import com.ultreon.texturedmodels.TexturedModels;
+import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
@@ -36,6 +36,7 @@ import net.minecraftforge.common.extensions.IForgeBlockState;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
+import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
 import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
 
 
@@ -74,14 +75,14 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
      */
     public FrameBlock(Properties properties) {
         super(properties.variableOpacity());
-        this.setDefaultState(this.stateContainer.getBaseState().with(CONTAINS_BLOCK, Boolean.FALSE).with(BCBlockStateProperties.LIGHT_LEVEL, 0).with(WATERLOGGED, false));//.with(TEXTURE,0));
+        this.setDefaultState(this.stateContainer.getBaseState().with(CONTAINS_BLOCK, Boolean.FALSE).with(LIGHT_LEVEL, 0).with(WATERLOGGED, false));//.with(TEXTURE,0));
     }
 
     /**
      * Assign needed blockstates to frame block - we need "contains_block" and "light_level", both because we have to check for blockstate changes
      */
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED, CONTAINS_BLOCK, BCBlockStateProperties.LIGHT_LEVEL);
+        builder.add(WATERLOGGED, CONTAINS_BLOCK, LIGHT_LEVEL);
     }
 
     /**
@@ -99,7 +100,7 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
      * When placed, this method is called and a new FrameBlockTile is created
      * This is needed to store a block inside the frame, change its light value etc.
      *
-     * @param state regardless of its state, we always create the TileEntity
+     * @param state     regardless of its state, we always create the TileEntity
      * @param dimension regardless of the dimension it's in, we always create the TileEntity
      * @return the new empty FrameBlock-TileEntity
      */
@@ -116,12 +117,12 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
      * If that's the case, we ask for the tile entity of the frame and if the frame is empty, we fill it with the held block and remove the item from the player's inventory
      * If the frame is not empty and the player holds the hammer, the contained block is dropped into the dimension
      *
-     * @param state  state of the block that is clicked
-     * @param dimension  dimension the block is placed in
-     * @param pos    position (x,y,z) of block
-     * @param player entity of the player that includes all important information (health, armor, inventory,
-     * @param hand   which hand is used (e.g. you have a sword in your main hand and an axe in your off-hand and right click a log -> you use the off-hand, not the main hand)
-     * @param trace  to determine which part of the block is clicked (upper half, lower half, right side, left side, corners...)
+     * @param state     state of the block that is clicked
+     * @param dimension dimension the block is placed in
+     * @param pos       position (x,y,z) of block
+     * @param player    entity of the player that includes all important information (health, armor, inventory,
+     * @param hand      which hand is used (e.g. you have a sword in your main hand and an axe in your off-hand and right click a log -> you use the off-hand, not the main hand)
+     * @param trace     to determine which part of the block is clicked (upper half, lower half, right side, left side, corners...)
      * @return see {@linkplain ActionResultType}
      */
     @Override
@@ -134,7 +135,7 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
             BlockAppearanceHelper.setDesignTexture(dimension, pos, player, item);
             BlockAppearanceHelper.setOverlay(dimension, pos, player, item);
             if (item.getItem() instanceof BlockItem) {
-                if (state.get(BCBlockStateProperties.CONTAINS_BLOCK) || Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(TexturedModels.MOD_ID)) {
+                if (state.get(BCBlockStateProperties.CONTAINS_BLOCK) || Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) {
                     return ActionResultType.PASS;
                 }
                 TileEntity tileEntity = dimension.getTileEntity(pos);
@@ -163,7 +164,7 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
      * We check the tile entity, get the block from the tile entity and drop it at the block pos plus some small random coords in the dimension
      *
      * @param dimensionIn the dimension where we drop the block
-     * @param pos     the block position where we drop the block
+     * @param pos         the block position where we drop the block
      */
     protected void dropContainedBlock(World dimensionIn, BlockPos pos) {
         if (!dimensionIn.isClientSided) {
@@ -192,10 +193,10 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
      * Used to place a block in a frame. Therefor we need the tile entity of the block and set its mimic to the given block state.
      * Lastly, we update the block state (useful for observers or something, idk)
      *
-     * @param dimensionIn   the dimension where we drop the block
-     * @param pos       the block position where we drop the block
-     * @param state     the old block state
-     * @param handBlock the block state of the held block - the block we want to insert into the frame
+     * @param dimensionIn the dimension where we drop the block
+     * @param pos         the block position where we drop the block
+     * @param state       the old block state
+     * @param handBlock   the block state of the held block - the block we want to insert into the frame
      */
     public void insertBlock(IWorld dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
         TileEntity tileentity = dimensionIn.getTileEntity(pos);
@@ -210,11 +211,11 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
     /**
      * This method is called, whenever the state of the block changes (e.g. the block is harvested)
      *
-     * @param state    old blockstate
-     * @param dimensionIn  dimension of the block
-     * @param pos      block position
-     * @param newState new blockstate
-     * @param isMoving whether the block has some sort of motion (should never be moving - false)
+     * @param state       old blockstate
+     * @param dimensionIn dimension of the block
+     * @param pos         block position
+     * @param newState    new blockstate
+     * @param isMoving    whether the block has some sort of motion (should never be moving - false)
      */
     @Override
     public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
@@ -230,10 +231,10 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
 
     //unused
     public int setLightValue(BlockState state, int amount) {
-        if (state.get(BCBlockStateProperties.LIGHT_LEVEL) > 15) {
+        if (state.get(LIGHT_LEVEL) > 15) {
             return 15;
         }
-        return state.get(BCBlockStateProperties.LIGHT_LEVEL);
+        return state.get(LIGHT_LEVEL);
     }
 
     //unused
@@ -245,17 +246,17 @@ public class FrameBlock extends Block implements IForgeBlockState, IWaterLoggabl
     /**
      * This method returns the light value of the block, i.e. the emitted light level
      *
-     * @param state state of the block
+     * @param state     state of the block
      * @param dimension dimension the block is in
-     * @param pos   block position
+     * @param pos       block position
      * @return new amount of light that is emitted by the block
      */
     @Override
     public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
-        if (state.get(BCBlockStateProperties.LIGHT_LEVEL) > 15) {
+        if (state.get(LIGHT_LEVEL) > 15) {
             return 15;
         }
-        return state.get(BCBlockStateProperties.LIGHT_LEVEL);
+        return state.get(LIGHT_LEVEL);
     }
 
     @Override

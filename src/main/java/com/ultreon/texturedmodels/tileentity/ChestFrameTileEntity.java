@@ -45,6 +45,7 @@ import java.util.Objects;
 /**
  * TileEntity for {@linkplain ChestFrameBlock} and all sorts of frame/illusion chest blocks
  * Contains all information about the block and the mimicked block, as well as the inventory size and stored items
+ *
  * @author PianoManu
  * @version 1.0 09/22/20
  */
@@ -55,7 +56,7 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
      * The number of players currently using this chest
      */
     protected int numPlayersUsing;
-    private final IItemHandlerModifiable items = createHandler();
+    private IItemHandlerModifiable items = createHandler();
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
     public ChestFrameTileEntity(TileEntityType<?> typeIn) {
@@ -79,7 +80,7 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
             try {
                 return Integer.parseInt(tag.getString("number"));
             } catch (NumberFormatException e) {
-                LOGGER.error("Not a valid Number Format: "+tag.getString("number"));
+                LOGGER.error("Not a valid Number Format: " + tag.getString("number"));
                 return 0;
             }
         }
@@ -166,7 +167,7 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
         double dx = (double) this.pos.getX() + 0.5D;
         double dy = (double) this.pos.getY() + 0.5D;
         double dz = (double) this.pos.getZ() + 0.5D;
-        this.dimension.playSound(null, dx, dy, dz, sound, SoundCategory.BLOCKS, 0.5f,
+        this.dimension.playSound((PlayerEntity) null, dx, dy, dz, sound, SoundCategory.BLOCKS, 0.5f,
                 this.dimension.rand.nextFloat() * 0.1f + 0.9f);
     }
 
@@ -241,9 +242,7 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
     }
 
 
-
     //=======================================FRAME STUFF=======================================//
-
 
 
     public static final ModelProperty<BlockState> MIMIC = new ModelProperty<>();
@@ -414,7 +413,7 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
     @Override
     public void delete() {
         super.delete();
-        if(itemHandler != null) {
+        if (itemHandler != null) {
             itemHandler.invalidate();
         }
     }

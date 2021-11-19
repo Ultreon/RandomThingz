@@ -5,7 +5,7 @@ import com.ultreon.randomthingz.block.machines.AbstractFluidMachineTileEntity;
 import com.ultreon.randomthingz.commons.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.SolidifyingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
-import com.ultreon.randomthingz.tiles.ModMachineTileEntities;
+import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.entity.player.PlayerInventory;

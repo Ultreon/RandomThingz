@@ -12,8 +12,8 @@ public class KeybindingHandler {
     /**
      * * I was a little but hyper, that's the reason of the name. !
      * This method handles input from keyboard or mouse, and then checks for keybinding being just pressed. Then for the
-     *     keybinds: the correct execution will be executed. For example the {@linkplain KeyBindingList#ACTION_MENU} shows
-     *     the action menu when just pressed.
+     * keybinds: the correct execution will be executed. For example the {@linkplain KeyBindingList#ACTION_MENU} shows
+     * the action menu when just pressed.
      *
      * @param event an event that executes when someone presses a key on the keyboard, or uses the mouse in some way.
      */

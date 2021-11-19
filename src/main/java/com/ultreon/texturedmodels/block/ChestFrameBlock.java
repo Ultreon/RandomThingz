@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.block;
 
-import com.ultreon.texturedmodels.TexturedModels;
+import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
@@ -47,19 +47,19 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
  * @version 1.4 10/06/20
  */
 public class ChestFrameBlock extends FrameBlock implements IWaterLoggable {
-    private static final VoxelShape INNER_CUBE = createCuboidShape(2.0, 2.0, 2.0, 14.0, 14.0, 14.0);
-    private static final VoxelShape BOTTOM_NORTH = createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 2.0);
-    private static final VoxelShape BOTTOM_EAST = createCuboidShape(14.0, 0.0, 2.0, 16.0, 2.0, 14.0);
-    private static final VoxelShape BOTTOM_SOUTH = createCuboidShape(0.0, 0.0, 14.0, 16.0, 2.0, 16.0);
-    private static final VoxelShape BOTTOM_WEST = createCuboidShape(0.0, 0.0, 2.0, 2.0, 2.0, 14.0);
-    private static final VoxelShape TOP_NORTH = createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 2.0);
-    private static final VoxelShape TOP_EAST = createCuboidShape(14.0, 14.0, 2.0, 16.0, 16.0, 14.0);
-    private static final VoxelShape TOP_SOUTH = createCuboidShape(0.0, 14.0, 14.0, 16.0, 16.0, 16.0);
-    private static final VoxelShape TOP_WEST = createCuboidShape(0.0, 14.0, 2.0, 2.0, 16.0, 14.0);
-    private static final VoxelShape NW_PILLAR = createCuboidShape(0.0, 2.0, 0.0, 2.0, 14.0, 2.0);
-    private static final VoxelShape SW_PILLAR = createCuboidShape(0.0, 2.0, 14.0, 2.0, 14.0, 16.0);
-    private static final VoxelShape NE_PILLAR = createCuboidShape(14.0, 2.0, 0.0, 16.0, 14.0, 2.0);
-    private static final VoxelShape SE_PILLAR = createCuboidShape(14.0, 2.0, 14.0, 16.0, 14.0, 16.0);
+    private static final VoxelShape INNER_CUBE = Block.createCuboidShape(2.0, 2.0, 2.0, 14.0, 14.0, 14.0);
+    private static final VoxelShape BOTTOM_NORTH = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 2.0, 2.0);
+    private static final VoxelShape BOTTOM_EAST = Block.createCuboidShape(14.0, 0.0, 2.0, 16.0, 2.0, 14.0);
+    private static final VoxelShape BOTTOM_SOUTH = Block.createCuboidShape(0.0, 0.0, 14.0, 16.0, 2.0, 16.0);
+    private static final VoxelShape BOTTOM_WEST = Block.createCuboidShape(0.0, 0.0, 2.0, 2.0, 2.0, 14.0);
+    private static final VoxelShape TOP_NORTH = Block.createCuboidShape(0.0, 14.0, 0.0, 16.0, 16.0, 2.0);
+    private static final VoxelShape TOP_EAST = Block.createCuboidShape(14.0, 14.0, 2.0, 16.0, 16.0, 14.0);
+    private static final VoxelShape TOP_SOUTH = Block.createCuboidShape(0.0, 14.0, 14.0, 16.0, 16.0, 16.0);
+    private static final VoxelShape TOP_WEST = Block.createCuboidShape(0.0, 14.0, 2.0, 2.0, 16.0, 14.0);
+    private static final VoxelShape NW_PILLAR = Block.createCuboidShape(0.0, 2.0, 0.0, 2.0, 14.0, 2.0);
+    private static final VoxelShape SW_PILLAR = Block.createCuboidShape(0.0, 2.0, 14.0, 2.0, 14.0, 16.0);
+    private static final VoxelShape NE_PILLAR = Block.createCuboidShape(14.0, 2.0, 0.0, 16.0, 14.0, 2.0);
+    private static final VoxelShape SE_PILLAR = Block.createCuboidShape(14.0, 2.0, 14.0, 16.0, 14.0, 16.0);
     private static final VoxelShape CHEST = VoxelShapes.or(INNER_CUBE, BOTTOM_EAST, BOTTOM_SOUTH, BOTTOM_WEST, BOTTOM_NORTH, TOP_EAST, TOP_SOUTH, TOP_WEST, TOP_NORTH, NW_PILLAR, SW_PILLAR, NE_PILLAR, SE_PILLAR);
 
     public ChestFrameBlock(Properties properties) {
@@ -120,7 +120,7 @@ public class ChestFrameBlock extends FrameBlock implements IWaterLoggable {
             BlockAppearanceHelper.setDesign(dimension, pos, player, item);
             BlockAppearanceHelper.setDesignTexture(dimension, pos, player, item);
             if (tileEntity instanceof ChestFrameTileEntity && state.get(CONTAINS_BLOCK)) {
-                if (!(Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(TexturedModels.MOD_ID))) {
+                if (!(Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID))) {
                     NetworkHooks.openGui((ServerPlayerEntity) player, (ChestFrameTileEntity) tileEntity, pos);
                     return ActionResultType.SUCCESS;
                 }

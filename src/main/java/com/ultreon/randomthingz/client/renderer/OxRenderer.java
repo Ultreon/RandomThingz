@@ -26,7 +26,8 @@ public class OxRenderer extends MobRenderer<OxEntity, CowModel<OxEntity>> {
     /**
      * Returns the location of an entity's texture.
      */
-    public @NotNull ResourceLocation getEntityTexture(@NotNull OxEntity entity) {
+    public @NotNull
+    ResourceLocation getEntityTexture(@NotNull OxEntity entity) {
         return BISON_TEXTURE;
     }
 }

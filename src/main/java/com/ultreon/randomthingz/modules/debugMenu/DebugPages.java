@@ -12,6 +12,6 @@ public class DebugPages {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         DebugMenu.registerPage(new WindowPage(RandomThingz.MOD_ID, "window"));
-//        DebugScreen.registerPage(new PlayerPage1(RandomThingz.MOD_ID, "player1"));
+//        DebugScreen.registerPage(new PlayerPage1(QForgeMod.MOD_ID, "player1"));
     }
 }

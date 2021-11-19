@@ -29,7 +29,7 @@ public class GetWindowsVersion {
             throw new RuntimeException("Error while getting Windows version");
         }
 
-        System.out.println(stringBuilder);
+        System.out.println(stringBuilder.toString());
 
 
         Pattern pattern = Pattern.compile("10\\.0\\.([0-9]*)");

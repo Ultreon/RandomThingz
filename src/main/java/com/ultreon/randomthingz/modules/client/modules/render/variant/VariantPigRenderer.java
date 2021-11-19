@@ -8,13 +8,13 @@ import net.minecraft.util.ResourceLocation;
 
 public class VariantPigRenderer extends PigRenderer {
 
-	public VariantPigRenderer(EntityRendererManager renderManagerIn) {
-		super(renderManagerIn);
-	}
-	
-	@Override
-	public ResourceLocation getEntityTexture(PigEntity entity) {
-		return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.PIG, MobVariantsModule.enablePig);
-	}
+    public VariantPigRenderer(EntityRendererManager renderManagerIn) {
+        super(renderManagerIn);
+    }
+
+    @Override
+    public ResourceLocation getEntityTexture(PigEntity entity) {
+        return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.PIG, MobVariantsModule.enablePig);
+    }
 
 }

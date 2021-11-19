@@ -18,7 +18,8 @@ public class SpecialsItemGroup extends ItemGroup {
     }
 
     @Override
-    public @NotNull ItemStack createIcon() {
+    public @NotNull
+    ItemStack createIcon() {
         return new ItemStack(ModItems.FIRE_SWORD.get());
     }
 }

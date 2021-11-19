@@ -23,8 +23,10 @@ import java.util.Map;
 public class AlloySmeltingRecipe implements IRecipe<IMachineInventory> {
     private final ResourceLocation recipeId;
     private final Map<Ingredient, Integer> ingredients = new LinkedHashMap<>();
-    @Getter private int processTime;
-    @Getter private ItemStack result;
+    @Getter
+    private int processTime;
+    @Getter
+    private ItemStack result;
 
     public void consumeIngredients(IMachineInventory inv) {
         ingredients.forEach(((ingredient, count) -> InventoryUtils.consumeItems(inv, ingredient, count)));

@@ -19,7 +19,8 @@ public class MachinesItemGroup extends ItemGroup {
     }
 
     @Override
-    public @NotNull ItemStack createIcon() {
+    public @NotNull
+    ItemStack createIcon() {
         return new ItemStack(ModBlocks.COAL_GENERATOR.get());
     }
 }

@@ -28,7 +28,7 @@ public class InfinityBlock extends Block {
 
         ItemStack heldItemMainhand = player.getHeldItemMainhand();
         if (heldItemMainhand.isEmpty()) {
-            player.getCombatTracker().trackDamage(new DamageSource("mine.infinity_ore"), player.getHealth(), player.getHealth());
+            player.getCombatTracker().trackDamage(new DamageSource("mine_infinity_ore"), player.getHealth(), player.getHealth());
             player.setHealth(0);
 
             Minecraft.getInstance().enqueue(() -> {
@@ -45,7 +45,7 @@ public class InfinityBlock extends Block {
                 });
             }
         } else {
-            player.getCombatTracker().trackDamage(new DamageSource("mine.infinity_ore"), player.getHealth(), player.getHealth());
+            player.getCombatTracker().trackDamage(new DamageSource("mine_infinity_ore"), player.getHealth(), player.getHealth());
             player.setHealth(0);
 
             Minecraft.getInstance().enqueue(() -> {

@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
@@ -31,7 +32,7 @@ public class HandPumpItem extends EnergyStoringItem {
     private static final int ENERGY_PER_OPERATION = 500;
 
     public HandPumpItem() {
-        super(new Properties().group(ItemGroup.TOOLS).maxStackSize(1), MAX_ENERGY, MAX_RECEIVE, ENERGY_PER_OPERATION);
+        super(new Item.Properties().group(ItemGroup.TOOLS).maxStackSize(1), MAX_ENERGY, MAX_RECEIVE, ENERGY_PER_OPERATION);
     }
 
     private static ActionResultType tryExtractFromTank(PlayerEntity player, IEnergyStorage energy, IFluidHandler fluidHandler) {

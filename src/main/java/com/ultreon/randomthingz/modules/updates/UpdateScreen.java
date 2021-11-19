@@ -69,7 +69,7 @@ public class UpdateScreen extends Screen {
 
         this.done.active = false;
         initializedAlready = true;
-        
+
         this.downloadThread = new Thread(this::downloadThread, "RandomThingzUpdateDownloader");
         this.downloadThread.start();
     }
@@ -83,7 +83,7 @@ public class UpdateScreen extends Screen {
         }
         this.done.active = true;
     }
-    
+
     private void download(URL url) {
 
         OutputStream updateStream = null;
@@ -131,12 +131,12 @@ public class UpdateScreen extends Screen {
             RandomThingz.LOGGER.info("Block size: " + currentBlockSize);
 
             // Read data.
-//            RandomThingz.LOGGER.info("Reading data...");
+//            QForgeMod.LOGGER.info("Reading data...");
             byte[] block = new byte[currentBlockSize];
             int read = read(inputStream, block, currentBlockSize);
 
             // Write data.
-//            RandomThingz.LOGGER.info("Writing data...");
+//            QForgeMod.LOGGER.info("Writing data...");
             if (read != -1) {
                 updateStream.write(block, 0, read);
                 updateStream.flush();
@@ -145,7 +145,7 @@ public class UpdateScreen extends Screen {
                 offset += read;
                 progressbar.setValue(offset);
             }
-//            RandomThingz.LOGGER.info("New offset: " + offset);
+//            QForgeMod.LOGGER.info("New offset: " + offset);
 
             // Read other bytes.
             while (read != -1) {
@@ -153,7 +153,7 @@ public class UpdateScreen extends Screen {
                 currentBlockSize = blockSize;
 
                 // Read data.
-//                RandomThingz.LOGGER.info("Reading data...");
+//                QForgeMod.LOGGER.info("Reading data...");
                 block = new byte[currentBlockSize];
                 read = read(inputStream, block, currentBlockSize);
                 if (read == -1) {
@@ -161,14 +161,14 @@ public class UpdateScreen extends Screen {
                 }
 
                 // Write data.
-//                RandomThingz.LOGGER.info("Writing data...");
+//                QForgeMod.LOGGER.info("Writing data...");
                 updateStream.write(block, 0, read);
                 updateStream.flush();
 
                 // Advance in offset.
                 offset += read;
                 progressbar.setValue(offset);
-//                RandomThingz.LOGGER.info("New offset: " + offset);
+//                QForgeMod.LOGGER.info("New offset: " + offset);
             }
 
             // Close remote input stream.
@@ -207,16 +207,16 @@ public class UpdateScreen extends Screen {
         if (c == -1) {
             return -1;
         }
-        b[off] = (byte)c;
+        b[off] = (byte) c;
 
         int i = 1;
         try {
-            for (; i < len ; i++) {
+            for (; i < len; i++) {
                 c = stream.read();
                 if (c == -1) {
                     break;
                 }
-                b[off + i] = (byte)c;
+                b[off + i] = (byte) c;
             }
         } catch (IOException ignored) {
 
@@ -256,7 +256,7 @@ public class UpdateScreen extends Screen {
             }
             drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.randomthingz.downloading_update.description", this.downloaded, this.totalSize, i), this.width / 2, 90, 0xbfbfbf);
         }
-        
+
         this.field_243276_q.func_241863_a(matrixStack, this.width / 2, 90);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }

@@ -21,7 +21,7 @@ public class BookshelfsItemGroup extends BetterItemGroup {
     public static final BookshelfsItemGroup instance = new BookshelfsItemGroup();
 
     public BookshelfsItemGroup() {
-        super(new ResourceLocation("bookshelfs"), ModBlocks.BOOKSHELVES.get(0).get());
+        super(new ResourceLocation("bookshelfs"), ModBlocks.BOOKSHELFS.get(0).get());
     }
 
     @Override
@@ -32,7 +32,7 @@ public class BookshelfsItemGroup extends BetterItemGroup {
     @Override
     public void fill(@NotNull NonNullList<ItemStack> items) {
 //        super.fill(items);
-        ArrayList<BlockRegistryObject<Block>> bookshelfs = ModBlocks.BOOKSHELVES;
+        ArrayList<BlockRegistryObject<Block>> bookshelfs = ModBlocks.BOOKSHELFS;
 
 //        for (int i = 0; i < 4; i++) {
 //            items.add(new ItemStack(Blocks.AIR));

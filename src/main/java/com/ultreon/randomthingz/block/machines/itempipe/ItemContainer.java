@@ -14,49 +14,41 @@ public class ItemContainer implements IItemHandler {
     protected ItemStack stack = ItemStack.EMPTY;
     protected int capacity;
 
-    public ItemContainer(int capacity)
-    {
+    public ItemContainer(int capacity) {
         this(capacity, e -> true);
     }
 
-    public ItemContainer(int capacity, Predicate<ItemStack> validator)
-    {
+    public ItemContainer(int capacity, Predicate<ItemStack> validator) {
         this.capacity = capacity;
         this.validator = validator;
     }
 
-    public ItemContainer setCapacity(int capacity)
-    {
+    public ItemContainer setCapacity(int capacity) {
         this.capacity = capacity;
         return this;
     }
 
-    public ItemContainer setValidator(Predicate<ItemStack> validator)
-    {
+    public ItemContainer setValidator(Predicate<ItemStack> validator) {
         if (validator != null) {
             this.validator = validator;
         }
         return this;
     }
 
-    public boolean isItemValid(ItemStack stack)
-    {
+    public boolean isItemValid(ItemStack stack) {
         return validator.test(stack);
     }
 
-    public int getCapacity()
-    {
+    public int getCapacity() {
         return capacity;
     }
 
     @Nonnull
-    public @NotNull ItemStack getStack()
-    {
+    public @NotNull ItemStack getStack() {
         return stack;
     }
 
-    public int getFluidAmount()
-    {
+    public int getFluidAmount() {
         return stack.getCount();
     }
 
@@ -94,43 +86,33 @@ public class ItemContainer implements IItemHandler {
 
     @NotNull
     @Override
-    public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate)
-    {
-        if (stack.isEmpty() || !isItemValid(stack))
-        {
+    public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+        if (stack.isEmpty() || !isItemValid(stack)) {
             return ItemStack.EMPTY;
         }
-        if (simulate)
-        {
-            if (this.stack.isEmpty())
-            {
+        if (simulate) {
+            if (this.stack.isEmpty()) {
                 return ItemStack.EMPTY;
             }
-            if (!this.stack.isItemEqual(stack))
-            {
+            if (!this.stack.isItemEqual(stack)) {
                 return ItemStack.EMPTY;
             }
             return new ItemStack(stack.getItem(), Math.min(capacity - this.stack.getCount(), stack.getCount()));
         }
-        if (this.stack.isEmpty())
-        {
+        if (this.stack.isEmpty()) {
             this.stack = new ItemStack(stack.getItem(), Math.min(capacity, stack.getCount()));
             onContentsChanged();
             return this.stack;
         }
-        if (!this.stack.isItemEqual(stack))
-        {
+        if (!this.stack.isItemEqual(stack)) {
             return ItemStack.EMPTY;
         }
         int filled = capacity - this.stack.getCount();
 
-        if (stack.getCount() < filled)
-        {
+        if (stack.getCount() < filled) {
             this.stack.grow(stack.getCount());
             filled = stack.getCount();
-        }
-        else
-        {
+        } else {
             this.stack.setCount(capacity);
         }
         if (filled > 0)
@@ -151,39 +133,32 @@ public class ItemContainer implements IItemHandler {
 
     @Nonnull
     @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate)
-    {
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
         int drained = amount;
-        if (stack.getCount() < drained)
-        {
+        if (stack.getCount() < drained) {
             drained = stack.getCount();
         }
         ItemStack stack = new ItemStack(this.stack.getItem(), drained);
-        if (!simulate && drained > 0)
-        {
+        if (!simulate && drained > 0) {
             this.stack.shrink(drained);
             onContentsChanged();
         }
         return stack;
     }
 
-    protected void onContentsChanged()
-    {
+    protected void onContentsChanged() {
 
     }
 
-    public void setStack(ItemStack stack)
-    {
+    public void setStack(ItemStack stack) {
         this.stack = stack;
     }
 
-    public boolean isEmpty()
-    {
+    public boolean isEmpty() {
         return stack.isEmpty();
     }
 
-    public int getSpace()
-    {
+    public int getSpace() {
         return Math.max(0, capacity - stack.getCount());
     }
 

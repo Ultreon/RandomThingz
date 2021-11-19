@@ -72,7 +72,7 @@ public class OptionsMenu extends AbstractActionMenu {
         settings.resourcePacks.clear();
         settings.incompatibleResourcePacks.clear();
 
-        for(ResourcePackInfo resourcePackInfo : resourcePacks.getEnabledPacks()) {
+        for (ResourcePackInfo resourcePackInfo : resourcePacks.getEnabledPacks()) {
             if (!resourcePackInfo.isOrderLocked()) {
                 settings.resourcePacks.add(resourcePackInfo.getName());
                 if (!resourcePackInfo.getCompatibility().isCompatible()) {

@@ -26,8 +26,10 @@ import java.util.List;
 public class RefiningRecipe implements IFluidRecipe<IFluidInventory> {
     private final ResourceLocation recipeId;
     private final List<FluidStack> outputs = NonNullList.create();
-    @Getter private int processTime;
-    @Getter private FluidIngredient ingredient;
+    @Getter
+    private int processTime;
+    @Getter
+    private FluidIngredient ingredient;
 
     @Override
     public boolean matches(IFluidInventory inv, World dimensionIn) {

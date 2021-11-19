@@ -31,10 +31,10 @@ public class QFMPluginLoader {
                     collect(Collectors.toList());
             Map<String, String> modids = scanData.getAnnotations().stream().
                     filter(annotationData -> MOD_TYPE.equals(annotationData.getAnnotationType())).
-                    collect(Collectors.toMap(a -> a.getClassType().getClassName(), a -> (String)a.getAnnotationData().get("value")));
+                    collect(Collectors.toMap(a -> a.getClassType().getClassName(), a -> (String) a.getAnnotationData().get("value")));
 
             for (Map.Entry<String, String> modIdMap : modids.entrySet()) {
-                LOGGER.debug(LOADING,"Attempting to register RandomThingz Plugin for Mod: {}", modIdMap.getValue());
+                LOGGER.debug(LOADING, "Attempting to register RandomThingz Plugin for Mod: {}", modIdMap.getValue());
 
                 Class<?> modClass = (Class<?>) Reflection.getField(ModList.get().getModContainerById(modIdMap.getValue()).get(), "modClass");
                 ClassLoader loader = modClass.getClassLoader();
@@ -55,7 +55,7 @@ public class QFMPluginLoader {
                             throw new RuntimeException(e);
                         }
                     }/* else if (!Objects.equals(modIdMap.getValue(), modId)) {
-                        LOGGER.warn("Random Thingz Plugin has invalid modid: " + modId + ", expected: " + modIdMap);
+                        LOGGER.warn("QForgeMod Plugin has invalid modid: " + modId + ", expected: " + modIdMap);
                     }*/
                 });
             }
