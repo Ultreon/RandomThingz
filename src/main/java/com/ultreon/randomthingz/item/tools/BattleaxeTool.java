@@ -36,6 +36,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+@Deprecated
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BattleaxeTool extends BattleaxeItem implements ITool {

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.wand;
 
-import com.ultreon.randomthingz.modules.ui.ModItemGroups;
+import com.ultreon.randomthingz.item.common.ModItemGroups;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DeadCoralWallFanBlock;
@@ -35,19 +35,20 @@ import java.util.Optional;
  *
  * @author Qboi123
  */
+@Deprecated
 public class NatureStaffItem extends Item {
     public NatureStaffItem() {
-        super(new Item.Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE));
+        super(new Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE));
     }
 
     @Deprecated //Forge: Use Player/Hand version
     public static boolean applyBonemeal(ItemStack stack, World dimensionIn, BlockPos pos) {
-        if (dimensionIn instanceof net.minecraft.world.server.ServerWorld)
-            return applyBonemeal(stack, dimensionIn, pos, net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((net.minecraft.world.server.ServerWorld) dimensionIn));
+        if (dimensionIn instanceof ServerWorld)
+            return applyBonemeal(stack, dimensionIn, pos, net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((ServerWorld) dimensionIn));
         return false;
     }
 
-    public static boolean applyBonemeal(ItemStack stack, World dimensionIn, BlockPos pos, net.minecraft.entity.player.PlayerEntity player) {
+    public static boolean applyBonemeal(ItemStack stack, World dimensionIn, BlockPos pos, PlayerEntity player) {
         BlockState blockstate = dimensionIn.getBlockState(pos);
         int hook = net.minecraftforge.event.ForgeEventFactory.onApplyBonemeal(player, dimensionIn, pos, blockstate, stack);
         if (hook != 0) return hook > 0;

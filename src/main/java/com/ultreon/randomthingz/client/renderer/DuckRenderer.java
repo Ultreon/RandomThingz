@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.client.renderer;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.client.model.FreeChickenModel;
 import com.ultreon.randomthingz.entity.DuckEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.model.ChickenModel;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,11 +17,11 @@ import org.jetbrains.annotations.NotNull;
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-public class DuckRenderer extends MobRenderer<DuckEntity, FreeChickenModel<DuckEntity>> {
+public class DuckRenderer extends MobRenderer<DuckEntity, ChickenModel<DuckEntity>> {
     private static final ResourceLocation DUCK_TEXTURES = new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/duck.png");
 
     public DuckRenderer(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn, new FreeChickenModel<>(), 0.5F);
+        super(renderManagerIn, new ChickenModel<>(), 0.5F);
     }
 
     /**

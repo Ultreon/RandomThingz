@@ -7,7 +7,7 @@ import com.ultreon.randomthingz.commons.exceptions.UnidentifiedObjectException;
 import com.ultreon.randomthingz.item.common.ItemMaterial;
 import com.ultreon.randomthingz.item.common.ModItems;
 import com.ultreon.randomthingz.item.tools.types.*;
-import com.ultreon.randomthingz.modules.ui.ModItemGroups;
+import com.ultreon.randomthingz.item.common.ModItemGroups;
 import com.ultreon.randomthingz.registration.Registration;
 import com.ultreon.randomthingz.util.builder.ArmorMaterial;
 import com.ultreon.randomthingz.util.builder.ItemTier;
@@ -29,7 +29,7 @@ import java.util.function.Supplier;
 @SuppressWarnings({"OptionalGetWithoutIsPresent", "Convert2MethodRef", "FunctionalExpressionCanBeFolded"})
 public enum Toolset {
     // Metals
-    REDSTONE(builder("redstone")
+    REDSTONE(builder("redstone", FeatureStatus.DEPRECATED)
             .material(() -> ItemMaterial.REDSTONE_ALLOY.getIngot().get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":redstone")
@@ -43,7 +43,7 @@ public enum Toolset {
                     .build())
             .tools(() -> ItemTier.builder()
                     .tier(1).maxUses(230).efficiency(2.3f).attackDamage(1.2f).enchantability(7).build())),
-    COPPER(builder("copper")
+    COPPER(builder("copper", FeatureStatus.DEPRECATED)
             .material(() -> ItemMaterial.COPPER.getIngot().get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":copper")
@@ -58,7 +58,7 @@ public enum Toolset {
             .tools(() -> ItemTier.builder()
                     .tier(2).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(11)
                     .repairMaterial(() -> Ingredient.fromItems(ItemMaterial.COPPER.getIngot().orElseThrow(() -> new NullPointerException("Copper ingot not found in OreMaterial class.")))).build())),
-    TIN(builder("tin")
+    TIN(builder("tin", FeatureStatus.DEPRECATED)
             .material(() -> ItemMaterial.TIN.getIngot().get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":tin")
@@ -178,7 +178,7 @@ public enum Toolset {
             .tools(() -> ItemTier.builder()
                     .tier(4).maxUses(1240).efficiency(8.6f).attackDamage(5.0f).enchantability(14)
                     .repairMaterial(() -> Ingredient.fromItems(ItemMaterial.PLATINUM.getIngot().orElseThrow(() -> new NullPointerException("Platinum ingot not found in OreMaterial class.")))).build())),
-    ZINC(builder("zinc")
+    ZINC(builder("zinc", FeatureStatus.DEPRECATED)
             .material(() -> ItemMaterial.ZINC.getIngot().get(), () -> Items.STICK)
             .armor(() -> TraitPack.create().all(ModTraits.POISON.get()).build(), () -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":zinc")
@@ -238,7 +238,7 @@ public enum Toolset {
             .tools(() -> TraitPack.create().all(ModTraits.RADIOACTIVE.get()).build(), () -> ItemTier.builder()
                     .tier(3).maxUses(220).efficiency(5.3f).attackDamage(1.4f).enchantability(11)
                     .repairMaterial(() -> Ingredient.fromItems(ItemMaterial.URANIUM.getIngot().orElseThrow(() -> new NullPointerException("Uranium ingot not found in OreMaterial class.")))).build())),
-    BRONZE(builder("bronze")
+    BRONZE(builder("bronze", FeatureStatus.DEPRECATED)
             .material(() -> ItemMaterial.BRONZE.getIngot().get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":bronze")
@@ -328,7 +328,7 @@ public enum Toolset {
             .tools(() -> ItemTier.builder()
                     .tier(2).maxUses(300).efficiency(5.3f).attackDamage(1.4f).enchantability(10)
                     .repairMaterial(() -> Ingredient.fromItems(ItemMaterial.BISMUTH_BRASS.getIngot().orElseThrow(() -> new NullPointerException("Bismuth Brass ingot not found in OreMaterial class.")))).build())),
-    ALUMINUM_STEEL(builder("aluminum_steel")
+    ALUMINUM_STEEL(builder("aluminum_steel", FeatureStatus.DEPRECATED)
             .material(() -> ItemMaterial.ALUMINUM_STEEL.getIngot().get(), () -> Items.STICK)
             .armor(() -> TraitPack.create().armor(ModTraits.BLAST_RESISTANT.get()).build(), () -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":aluminum_steel")
@@ -457,7 +457,7 @@ public enum Toolset {
                     ModTraits.RADIOACTIVE.get()).build(), () -> ItemTier.builder()
                     .tier(7).maxUses((int) Float.POSITIVE_INFINITY).efficiency(Float.POSITIVE_INFINITY).attackDamage(Float.POSITIVE_INFINITY).enchantability((int) Float.POSITIVE_INFINITY)
                     .repairMaterial(() -> Ingredient.fromItems(ItemMaterial.INFINITY.getIngot().orElseThrow(() -> new UnidentifiedObjectException("Infinity ingot not found in OreMaterial class.")))).build())),
-    AQUAMARINE(builder("aquamarine", FeatureStatus.WIP)
+    AQUAMARINE(builder("aquamarine", FeatureStatus.DEPRECATED)
             .material(() -> ModItems.AQUAMARINE.get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":aquamarine")
@@ -487,7 +487,7 @@ public enum Toolset {
             .tools(() -> ItemTier.builder()
                     .tier(7).maxUses(226).efficiency(6.5f).attackDamage(3.8f).enchantability(30)
                     .repairMaterial(() -> Ingredient.fromItems(ModItems.AMETHYST.get())).build())),
-    BERYL(builder("beryl", FeatureStatus.WIP)
+    BERYL(builder("beryl", FeatureStatus.DEPRECATED)
             .material(() -> ModItems.BERYL.get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":beryl")
@@ -502,7 +502,7 @@ public enum Toolset {
             .tools(() -> ItemTier.builder()
                     .tier(7).maxUses(226).efficiency(6.5f).attackDamage(3.8f).enchantability(30)
                     .repairMaterial(() -> Ingredient.fromItems(ModItems.BERYL.get())).build())),
-    AMBER(builder("amber", FeatureStatus.WIP)
+    AMBER(builder("amber", FeatureStatus.DEPRECATED)
             .material(() -> ModItems.AMBER.get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":amber")
@@ -517,7 +517,7 @@ public enum Toolset {
             .tools(() -> ItemTier.builder()
                     .tier(7).maxUses(226).efficiency(6.5f).attackDamage(3.8f).enchantability(30)
                     .repairMaterial(() -> Ingredient.fromItems(ModItems.AMBER.get())).build())),
-    MALACHITE(builder("malachite", FeatureStatus.WIP)
+    MALACHITE(builder("malachite", FeatureStatus.DEPRECATED)
             .material(() -> ModItems.MALACHITE.get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":malachite")
@@ -532,7 +532,7 @@ public enum Toolset {
             .tools(() -> ItemTier.builder()
                     .tier(7).maxUses(226).efficiency(6.5f).attackDamage(3.8f).enchantability(30)
                     .repairMaterial(() -> Ingredient.fromItems(ModItems.MALACHITE.get())).build())),
-    PERIDOT(builder("peridot", FeatureStatus.WIP)
+    PERIDOT(builder("peridot", FeatureStatus.DEPRECATED)
             .material(() -> ModItems.PERIDOT.get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":peridot")
@@ -547,8 +547,8 @@ public enum Toolset {
             .tools(() -> ItemTier.builder()
                     .tier(7).maxUses(226).efficiency(6.5f).attackDamage(3.8f).enchantability(30)
                     .repairMaterial(() -> Ingredient.fromItems(ModItems.PERIDOT.get())).build())),
-    SAPHIRE(builder("saphire", FeatureStatus.WIP)
-            .material(() -> ModItems.SAPHIRE.get(), () -> Items.STICK)
+    SAPHIRE(builder("saphire", FeatureStatus.DEPRECATED)
+            .material(() -> ModItems.SAPPHIRE.get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":saphire")
                     .maxDamageFactor(21)
@@ -557,11 +557,11 @@ public enum Toolset {
                     .knockbackResistance(0)
                     .sound(SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND)
                     .toughness(0)
-                    .repairMaterial(() -> Ingredient.fromItems(ModItems.SAPHIRE.get()))
+                    .repairMaterial(() -> Ingredient.fromItems(ModItems.SAPPHIRE.get()))
                     .build())
             .tools(() -> ItemTier.builder()
                     .tier(7).maxUses(226).efficiency(6.5f).attackDamage(3.8f).enchantability(30)
-                    .repairMaterial(() -> Ingredient.fromItems(ModItems.SAPHIRE.get())).build())),
+                    .repairMaterial(() -> Ingredient.fromItems(ModItems.SAPPHIRE.get())).build())),
     RUBY(builder("ruby", FeatureStatus.WIP)
             .material(() -> ModItems.RUBY.get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
@@ -577,7 +577,7 @@ public enum Toolset {
             .tools(() -> ItemTier.builder()
                     .tier(7).maxUses(226).efficiency(6.5f).attackDamage(3.8f).enchantability(30)
                     .repairMaterial(() -> Ingredient.fromItems(ModItems.RUBY.get())).build())),
-    TANZANITE(builder("tanzanite", FeatureStatus.WIP)
+    TANZANITE(builder("tanzanite", FeatureStatus.DEPRECATED)
             .material(() -> ModItems.TANZANITE.get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":tanzanite")
@@ -592,7 +592,7 @@ public enum Toolset {
             .tools(() -> ItemTier.builder()
                     .tier(7).maxUses(226).efficiency(6.5f).attackDamage(3.8f).enchantability(30)
                     .repairMaterial(() -> Ingredient.fromItems(ModItems.TANZANITE.get())).build())),
-    TOPAZ(builder("topaz", FeatureStatus.WIP)
+    TOPAZ(builder("topaz", FeatureStatus.DEPRECATED)
             .material(() -> ModItems.TOPAZ.get(), () -> Items.STICK)
             .armor(() -> ArmorMaterial.builder()
                     .name(RandomThingz.MOD_ID + ":topaz")
@@ -806,7 +806,7 @@ public enum Toolset {
         return name().toLowerCase(Locale.ROOT);
     }
 
-    @SuppressWarnings("SameParameterValue")
+    @SuppressWarnings({"SameParameterValue", "deprecation"})
     private static final class Builder {
         final String name;
         private Supplier<Item> baseMaterial;

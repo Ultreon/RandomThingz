@@ -8,6 +8,7 @@ import net.minecraft.entity.monster.EndermanEntity;
  *
  * @author Qboi123
  */
+@Deprecated
 public class FreeEndermanModel<T extends EndermanEntity> extends EndermanModel<T> {
     public FreeEndermanModel(float scale) {
         super(scale);

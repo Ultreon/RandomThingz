@@ -92,9 +92,9 @@ public abstract class AbstractUpdater<T extends IVersion> {
     ///////////////
 
     /**
-     * Get the updater that QForgeMod is using.
+     * Get the updater that Random Thingz is using.
      *
-     * @return the QForgeMod updater.
+     * @return the Random Thingz updater.
      */
     public static QFMUpdater getQFMUpdater() {
         return QFMUpdater.getInstance();

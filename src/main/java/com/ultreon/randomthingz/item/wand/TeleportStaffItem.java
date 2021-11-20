@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item.wand;
 
 import com.ultreon.randomthingz.item.WandItem;
-import com.ultreon.randomthingz.modules.ui.ModItemGroups;
+import com.ultreon.randomthingz.item.common.ModItemGroups;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
+@Deprecated
 public class TeleportStaffItem extends WandItem {
     public TeleportStaffItem() {
         super(420, 20, new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));

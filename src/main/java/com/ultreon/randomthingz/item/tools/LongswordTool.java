@@ -36,6 +36,7 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+@Deprecated
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class LongswordTool extends LongswordItem implements ITool {

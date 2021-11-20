@@ -5,15 +5,15 @@ import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import com.ultreon.randomthingz.item.*;
 import com.ultreon.randomthingz.item.tools.*;
 import com.ultreon.randomthingz.item.tools.trait.AbstractTrait;
+import com.ultreon.randomthingz.item.tools.types.HammerItem;
 import com.ultreon.randomthingz.item.type.IngotOrDustItem;
 import com.ultreon.randomthingz.item.type.IngredientItem;
 import com.ultreon.randomthingz.item.type.SliceableItem;
 import com.ultreon.randomthingz.item.upgrades.MachineUpgrades;
-import com.ultreon.randomthingz.item.wand.LightningStaffItem;
-import com.ultreon.randomthingz.item.wand.NatureStaffItem;
-import com.ultreon.randomthingz.item.wand.TeleportStaffItem;
-import com.ultreon.randomthingz.item.wand.WalkingStaffItem;
-import com.ultreon.randomthingz.modules.ui.ModItemGroups;
+import com.ultreon.randomthingz.item.magic.LightningStaffItem;
+import com.ultreon.randomthingz.item.magic.NatureStaffItem;
+import com.ultreon.randomthingz.item.magic.TeleportStaffItem;
+import com.ultreon.randomthingz.item.magic.WalkingStaffItem;
 import com.ultreon.randomthingz.util.color.ColorGetter;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.util.ITooltipFlag;
@@ -134,7 +134,7 @@ public final class ModItems {
     public static final ItemRegistryObject<IngotOrDustItem> RUBY_DUST = register("ruby_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> AMETHYST_DUST = register("amethyst_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> AQUAMARINE_DUST = register("aquamarine_dust", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> SAPHIRE_DUST = register("saphire_dust", IngotOrDustItem::new);
+    public static final ItemRegistryObject<IngotOrDustItem> SAPPHIRE_DUST = register("saphire_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> MALACHITE_DUST = register("malachite_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> TOPAZ_DUST = register("topaz_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> AMBER_DUST = register("amber_dust", IngotOrDustItem::new);
@@ -146,7 +146,7 @@ public final class ModItems {
     public static final ItemRegistryObject<Item> RUBY = register("ruby", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
     public static final ItemRegistryObject<Item> AMETHYST = register("amethyst", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
     public static final ItemRegistryObject<Item> AQUAMARINE = register("aquamarine", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
-    public static final ItemRegistryObject<Item> SAPHIRE = register("saphire", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
+    public static final ItemRegistryObject<Item> SAPPHIRE = register("saphire", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
     public static final ItemRegistryObject<Item> MALACHITE = register("malachite", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
     public static final ItemRegistryObject<Item> TOPAZ = register("topaz", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
     public static final ItemRegistryObject<Item> AMBER = register("amber", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
@@ -385,7 +385,8 @@ public final class ModItems {
     public static final ItemRegistryObject<AxeItem> GOLDEN_BATTLEAXE = register("golden_battleaxe", () -> new AxeItem(ItemTier.GOLD, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
     public static final ItemRegistryObject<AxeItem> IRON_BATTLEAXE = register("iron_battleaxe", () -> new AxeItem(ItemTier.IRON, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
     public static final ItemRegistryObject<AxeItem> DIAMOND_BATTLEAXE = register("diamond_battleaxe", () -> new AxeItem(ItemTier.DIAMOND, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> NETHERITE_BATTLEAXE = register("nethe3rite_battleaxe", () -> new AxeItem(ItemTier.NETHERITE, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> NETHERITE_BATTLEAXE = register("netherite_battleaxe", () -> new AxeItem(ItemTier.NETHERITE, 7.0F, -2.2f, new Item.Properties().group(ModItemGroups.TOOLS)));
+    public static final ItemRegistryObject<HammerItem> HAMMER = register("hammer", () -> new HammerItem(ItemTier.DIAMOND, 7, -3.0f, new Item.Properties().group(ModItemGroups.TOOLS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Utility Methods     //

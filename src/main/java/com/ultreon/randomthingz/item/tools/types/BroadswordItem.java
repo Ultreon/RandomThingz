@@ -23,6 +23,7 @@ import net.minecraftforge.common.ToolType;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.UUID;
 
+@Deprecated
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BroadswordItem extends SwordItem implements IHasToolType {
@@ -32,7 +33,7 @@ public class BroadswordItem extends SwordItem implements IHasToolType {
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
     public BroadswordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn.defaultMaxDamage((int) (tier.getMaxUses() * 1.1)));
+        super(tier, attackDamageIn, attackSpeedIn, builderIn.group(null).defaultMaxDamage((int) (tier.getMaxUses() * 1.1)));
         this.attackDamage = (float) attackDamageIn + (tier.getAttackDamage());
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));

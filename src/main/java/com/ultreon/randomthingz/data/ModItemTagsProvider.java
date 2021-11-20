@@ -76,21 +76,38 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         getOrCreateBuilder(ModTags.Items.DUSTS_COAL).add(CraftingItems.COAL_DUST.asItem());
 
+        Builder<Item> dusts = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "metal_craftables/dusts")));
+        Builder<Item> ingots = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "metal_craftables/ingots")));
+        Builder<Item> nuggets = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "metal_craftables/nuggets")));
+        Builder<Item> chunks = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "metal_craftables/chunks")));
+
         for (ItemMaterial metal : ItemMaterial.values()) {
             metal.getOreTag().ifPresent(tag ->
                     copy(tag, metal.getOreItemTag().get()));
             metal.getStorageBlockTag().ifPresent(tag ->
                     copy(tag, metal.getStorageBlockItemTag().get()));
-            metal.getChunksTag().ifPresent(tag ->
-                    getOrCreateBuilder(tag).add(metal.getChunks().get()));
-            metal.getDustTag().ifPresent(tag ->
-                    getOrCreateBuilder(tag).add(metal.getDust().get()));
+            metal.getChunksTag().ifPresent(tag -> {
+                if (metal.getChunks().isPresent()) {
+                    chunks.add(metal.getChunks().get());
+                    getOrCreateBuilder(tag).add(metal.getChunks().get());
+                }
+            });
+            metal.getDustTag().ifPresent(tag -> {
+                if (metal.getDust().isPresent()) {
+                    dusts.add(metal.getDust().get());
+                    getOrCreateBuilder(tag).add(metal.getDust().get());
+                }
+            });
             metal.getIngotTag().ifPresent(tag ->
-                    metal.getIngot().ifPresent(item ->
-                            getOrCreateBuilder(tag).add(item)));
+                    metal.getIngot().ifPresent(item -> {
+                        ingots.add(metal.getIngot().get());
+                        getOrCreateBuilder(tag).add(item);
+                    }));
             metal.getNuggetTag().ifPresent(tag ->
-                    metal.getNugget().ifPresent(item ->
-                            getOrCreateBuilder(tag).add(item)));
+                    metal.getNugget().ifPresent(item -> {
+                        nuggets.add(metal.getNugget().get());
+                        getOrCreateBuilder(tag).add(item);
+                    }));
         }
 
         copy(Tags.Blocks.ORES, Tags.Items.ORES);

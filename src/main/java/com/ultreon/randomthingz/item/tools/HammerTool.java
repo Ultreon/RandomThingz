@@ -46,7 +46,7 @@ public class HammerTool extends HammerItem implements ITool {
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
     public HammerTool(IItemTier tier, double attackDamageIn, double attackSpeedIn, Properties builderIn, Supplier<AbstractTrait[]> traits) {
-        super(tier, (int) attackDamageIn, (float) attackSpeedIn, builderIn);
+        super(tier, (int) attackDamageIn, (float) attackSpeedIn, builderIn.group(null));
         this.traits = traits;
         this.attackDamage = attackDamageIn + tier.getAttackDamage();
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();

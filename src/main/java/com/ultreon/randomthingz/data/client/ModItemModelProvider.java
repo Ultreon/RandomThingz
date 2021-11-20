@@ -116,7 +116,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         } catch (IllegalArgumentException e) {
             getBuilder(NameUtils.fromItem(item).getPath())
                     .parent(getExistingFile(mcLoc("item/generated")))
-                    .texture("layer0", modLoc("default"));
+                    .texture("layer0", modLoc("wip"));
         }
     }
 }

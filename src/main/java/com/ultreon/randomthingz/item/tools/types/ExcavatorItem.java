@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("SameParameterValue")
+@Deprecated
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID)
@@ -41,7 +42,7 @@ public class ExcavatorItem extends ShovelItem implements IHasToolType {
     private static final Set<Material> EFFECTIVE_ON_MATERIAL = ImmutableSet.of(Material.SNOW, Material.SNOW_BLOCK, Material.SAND, Material.EARTH, Material.CLAY);
 
     public ExcavatorItem(IItemTier tier, float attackDamageIn, float attackSpeedIn, Properties builder) {
-        super(tier, attackDamageIn, attackSpeedIn, builder.defaultMaxDamage((int) (tier.getMaxUses() * 1.7)));
+        super(tier, attackDamageIn, attackSpeedIn, builder.group(null).defaultMaxDamage((int) (tier.getMaxUses() * 1.7)));
     }
 
     public float getMiningSpeed(ItemStack stack, BlockState state) {

@@ -22,6 +22,7 @@ import net.minecraftforge.common.ToolType;
 
 import java.util.UUID;
 
+@Deprecated
 public class LongswordItem extends SwordItem implements IHasToolType {
     private final float attackDamage;
     /**
@@ -32,7 +33,7 @@ public class LongswordItem extends SwordItem implements IHasToolType {
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
     public LongswordItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Item.Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn.defaultMaxDamage((int) (tier.getMaxUses() * 1.6)));
+        super(tier, attackDamageIn, attackSpeedIn, builderIn.group(null).defaultMaxDamage((int) (tier.getMaxUses() * 1.6)));
         this.attackDamage = (float) attackDamageIn + (tier.getAttackDamage());
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));

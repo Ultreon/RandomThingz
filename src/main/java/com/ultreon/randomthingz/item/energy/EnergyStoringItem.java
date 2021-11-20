@@ -30,6 +30,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+@Deprecated
 public abstract class EnergyStoringItem extends HudItem {
     public static final ResourceLocation CHARGE = RandomThingz.rl("charge");
 

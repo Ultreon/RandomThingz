@@ -79,7 +79,7 @@ public class BabyFireCreeperCreeperEntity extends CreeperEntity implements IBaby
      * Modify vanilla's explode method to half the explosion strength of baby creepers, and charged baby creepers
      */
     @Override
-    protected void explode() {
+    public void explode() {
         if (!dimension.isClientSided) {
             Explosion.Mode mode = ForgeEventFactory.getMobGriefingEvent(dimension, this) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
             float f = isCharged() ? 1 : 0.5F;

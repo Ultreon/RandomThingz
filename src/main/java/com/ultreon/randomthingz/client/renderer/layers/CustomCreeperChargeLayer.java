@@ -17,13 +17,13 @@ import org.jetbrains.annotations.NotNull;
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-public class CustomCreeperChargeLayer<T extends CreeperEntity, M extends FreeCreeperModel<T>> extends EnergyLayer<T, M> {
+public class CustomCreeperChargeLayer<T extends CreeperEntity, M extends CreeperModel<T>> extends EnergyLayer<T, M> {
     private static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     private final CreeperModel<T> creeperModel;
 
     @SuppressWarnings("unchecked")
     public CustomCreeperChargeLayer(IEntityRenderer<T, M> p_i50947_1_) {
-        this(p_i50947_1_, (M) new FreeCreeperModel<T>(2.0F));
+        this(p_i50947_1_, (M) new CreeperModel<T>(2.0F));
     }
 
     public CustomCreeperChargeLayer(IEntityRenderer<T, M> p_i50947_1_, M creeperModel) {

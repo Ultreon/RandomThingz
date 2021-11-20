@@ -1,12 +1,11 @@
 package com.ultreon.randomthingz.item.wand;
 
 import com.ultreon.randomthingz.item.WandItem;
-import com.ultreon.randomthingz.modules.ui.ModItemGroups;
+import com.ultreon.randomthingz.item.common.ModItemGroups;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Rarity;
 import net.minecraft.stats.Stats;
@@ -24,9 +23,10 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
+@Deprecated
 public class LightningStaffItem extends WandItem {
     public LightningStaffItem() {
-        super(5, 1, new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(5, 1, new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     protected static BlockRayTraceResult rayTrace(World dimensionIn, PlayerEntity player, RayTraceContext.@NotNull FluidMode fluidMode) {

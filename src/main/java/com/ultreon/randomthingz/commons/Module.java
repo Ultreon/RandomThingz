@@ -22,7 +22,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * To check for enable/disable state use: {@link ModuleManager#isEnabled(Module)} or {@link ModuleManager#isDisabled(Module)}.<br>
  * To check for unsaved version of the enable/disable state, use: {@link ModuleManager#isUnsavedEnabled(Module)} or {@link ModuleManager#isUnsavedDisabled(Module)}.<br>
  * For submodules override {@link #isSubManagerEnabled()} with true, and use {@link #getSubmoduleManager()} to get the submodule manager, register / get the submodules there.<br>
- * The default QForgeMod modules are registered in {@link Modules}.
+ * The default Random Thingz modules are registered in {@link Modules}.
  *
  * @author Qboi123
  * @see ModuleManager

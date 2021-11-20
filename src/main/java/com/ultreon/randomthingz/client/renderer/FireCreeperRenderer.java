@@ -2,11 +2,11 @@ package com.ultreon.randomthingz.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.client.model.FreeCreeperModel;
 import com.ultreon.randomthingz.client.renderer.layers.CustomCreeperChargeLayer;
 import com.ultreon.randomthingz.entity.FireCreeperEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.model.CreeperModel;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,16 +15,17 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Fire creeper entity renderer class.
+ * Todo: make eyes emissive.
  *
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-public class FireCreeperRenderer extends MobRenderer<FireCreeperEntity, FreeCreeperModel<FireCreeperEntity>> {
+public class FireCreeperRenderer extends MobRenderer<FireCreeperEntity, CreeperModel<FireCreeperEntity>> {
     private static final ResourceLocation CREEPER_TEXTURES = new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/creeper/fire.png");
 //    private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/creeper/fire_eyes.png"));
 
     public FireCreeperRenderer(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn, new FreeCreeperModel<>(), 0.5F);
+        super(renderManagerIn, new CreeperModel<>(), 0.5F);
         this.addLayer(new CustomCreeperChargeLayer<>(this, entityModel));
     }
 

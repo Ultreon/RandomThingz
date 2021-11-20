@@ -25,7 +25,7 @@ import java.util.Objects;
 
 /**
  * Update available screen.
- * Will show after loading when there's an update available for QForgeMod.
+ * Will show after loading when there's an update available for Random Thingz.
  * Can be used for other mods using their own implementation of {@linkplain AbstractUpdater}.
  *
  * @author Qboi123
@@ -198,7 +198,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
     }
 
     /**
-     * Check for QForgeMod updates, then show the update available screen.
+     * Check for Random Thingz updates, then show the update available screen.
      *
      * @param mc  the minecraft instance.
      * @param gui the current gui.
@@ -210,10 +210,10 @@ public class UpdateAvailableScreen extends AdvancedScreen {
             return;
         }
 
-        // Get QForgeMod updater instance.
+        // Get Random Thingz updater instance.
         AbstractUpdater<RtVersion> updater = AbstractUpdater.getQFMUpdater();
 
-        // Check for QForgeMod updates.
+        // Check for Random Thingz updates.
         AbstractUpdater.UpdateInfo updateInfo = updater.checkForUpdates();
 
         // Is there a update available?

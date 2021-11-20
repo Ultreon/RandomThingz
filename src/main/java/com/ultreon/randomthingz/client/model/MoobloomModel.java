@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
  * @param <T> the moobloom entity.
  * @author Blockbench, Qboi123
  */
-@SuppressWarnings("FieldCanBeLocal")
+@SuppressWarnings({"FieldCanBeLocal", "DuplicatedCode"})
 public class MoobloomModel<T extends MoobloomEntity> extends AgeableModel<T> {
     private final ModelRenderer body;
     private final ModelRenderer fungus2;

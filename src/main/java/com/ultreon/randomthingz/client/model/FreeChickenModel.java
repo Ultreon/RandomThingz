@@ -8,6 +8,7 @@ import net.minecraft.entity.passive.ChickenEntity;
  *
  * @author Qboi123
  */
+@Deprecated
 public class FreeChickenModel<T extends ChickenEntity> extends ChickenModel<T> {
     public FreeChickenModel() {
         super();

@@ -10,10 +10,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
 
+@Deprecated
 public class References {
+    @Deprecated
     public static final String MOD_ID = "randomthingz";
+    @Deprecated
     public static final String MOD_VERSION;
+    @Deprecated
     public static final RtVersion QFM_VERSION;
+    @Deprecated
     public static final RtArgs QFM_ARGS;
 
     static {

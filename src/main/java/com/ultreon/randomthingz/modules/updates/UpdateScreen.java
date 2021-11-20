@@ -131,12 +131,12 @@ public class UpdateScreen extends Screen {
             RandomThingz.LOGGER.info("Block size: " + currentBlockSize);
 
             // Read data.
-//            QForgeMod.LOGGER.info("Reading data...");
+//            RandomThingz.LOGGER.info("Reading data...");
             byte[] block = new byte[currentBlockSize];
             int read = read(inputStream, block, currentBlockSize);
 
             // Write data.
-//            QForgeMod.LOGGER.info("Writing data...");
+//            RandomThingz.LOGGER.info("Writing data...");
             if (read != -1) {
                 updateStream.write(block, 0, read);
                 updateStream.flush();
@@ -145,7 +145,7 @@ public class UpdateScreen extends Screen {
                 offset += read;
                 progressbar.setValue(offset);
             }
-//            QForgeMod.LOGGER.info("New offset: " + offset);
+//            RandomThingz.LOGGER.info("New offset: " + offset);
 
             // Read other bytes.
             while (read != -1) {
@@ -153,7 +153,7 @@ public class UpdateScreen extends Screen {
                 currentBlockSize = blockSize;
 
                 // Read data.
-//                QForgeMod.LOGGER.info("Reading data...");
+//                RandomThingz.LOGGER.info("Reading data...");
                 block = new byte[currentBlockSize];
                 read = read(inputStream, block, currentBlockSize);
                 if (read == -1) {
@@ -161,14 +161,14 @@ public class UpdateScreen extends Screen {
                 }
 
                 // Write data.
-//                QForgeMod.LOGGER.info("Writing data...");
+//                RandomThingz.LOGGER.info("Writing data...");
                 updateStream.write(block, 0, read);
                 updateStream.flush();
 
                 // Advance in offset.
                 offset += read;
                 progressbar.setValue(offset);
-//                QForgeMod.LOGGER.info("New offset: " + offset);
+//                RandomThingz.LOGGER.info("New offset: " + offset);
             }
 
             // Close remote input stream.

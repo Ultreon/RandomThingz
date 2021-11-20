@@ -118,7 +118,7 @@ public class SettingsScreen extends Screen {
     }
 
 //    /**
-//     * Event for showing button for the settings of QForgeMod.
+//     * Event for showing button for the settings of Random Thingz.
 //     *
 //     * @param event the gui-initialization event.
 //     */

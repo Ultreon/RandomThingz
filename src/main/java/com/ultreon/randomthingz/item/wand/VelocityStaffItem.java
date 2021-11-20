@@ -7,6 +7,7 @@ import com.google.common.annotations.Beta;
  *
  * @author Qboi123
  */
+@Deprecated
 @Beta
 public class VelocityStaffItem {
 

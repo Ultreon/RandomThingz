@@ -66,7 +66,7 @@ import java.util.stream.Collectors;
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class RandomThingz {
     /**
-     * QForgeMod's Logger
+     * Random Thingz's Logger
      */
     public static final Logger LOGGER = LogManager.getLogger("RandomThingz:Generic");
 
@@ -74,19 +74,14 @@ public final class RandomThingz {
     private static final boolean MOD_TEST_PHASE = false;
 
     // Class static fields.
-    @Getter
     @Nullable
     private static RandomThingz instance;
-    @Getter
     @Nullable
     private static IProxy proxy;
-    @Getter
     @Nullable
     private static Initialization init;
 
-    @Getter
     private static final boolean clientSide;
-    @Getter
     private static final boolean serverSide;
 
     // Mod Data
@@ -277,7 +272,7 @@ public final class RandomThingz {
     }
 
     /**
-     * Get the resource location based on QForgeMod's id.
+     * Get the resource location based on Random Thingz's id.
      *
      * @param path the resource path.
      * @return a resource location.
@@ -292,32 +287,32 @@ public final class RandomThingz {
      * @return boolean.
      */
     @OnlyIn(Dist.CLIENT)
-    private static boolean isDevState0() {
+    private static boolean isModDev0() {
         return Minecraft.getInstance().getVersion().equals("MOD_DEV");
     }
 
     /**
-     * Check if QForgeMod is currently a development build.
+     * Check if Random Thingz is currently a development build.
      *
      * @return the QFM dev-state..
      */
     public static boolean isModDev() {
         try {
-            return isDevState0();
+            return isModDev0();
         } catch (NoSuchMethodError | NullPointerException e) {
             return false;
         }
     }
 
     /**
-     * Check if QForgeMod is currently a development build.
+     * Check if Random Thingz is currently a development build.
      *
      * @param def the default value if failed to detect development mode.
      * @return the QFM dev-state..
      */
     public static boolean isModDev(boolean def) {
         try {
-            return isDevState0();
+            return isModDev0();
         } catch (NoSuchMethodError | NullPointerException e) {
             return def;
         }
@@ -326,14 +321,14 @@ public final class RandomThingz {
     /**
      * Check test phase.
      *
-     * @return true if QForgeMod is in test phase, false otherwise.
+     * @return true if Random Thingz is in test phase, false otherwise.
      */
     public static boolean isTestPhase() {
         return isModDev() || MOD_TEST_PHASE;
     }
 
     /**
-     * @return true if QForgeMod is a dev test version, false otherwise.
+     * @return true if Random Thingz is a dev test version, false otherwise.
      */
     public static boolean isDevtest() {
         return RT_ARGS.getFlags().isDevTest();
@@ -363,7 +358,7 @@ public final class RandomThingz {
 
     /**
      * This will handle things that supposed to happen when the server is stopping.<br>
-     * For example: clear the server field of the QForgeMod class.
+     * For example: clear the server field of the Random Thingz class.
      *
      * @param event a {@linkplain FMLServerStoppingEvent} object.
      */
@@ -395,5 +390,28 @@ public final class RandomThingz {
         LOGGER.info("Got IMC {}", event.getIMCStream().
                 map(InterModComms.IMCMessage::getMessageSupplier).
                 collect(Collectors.toList()));
+    }
+
+    @Deprecated
+    public static @Nullable RandomThingz getInstance() {
+        return instance;
+    }
+
+    @Deprecated
+    public static @Nullable IProxy getProxy() {
+        return proxy;
+    }
+
+    @Deprecated
+    public static @Nullable Initialization getInit() {
+        return init;
+    }
+
+    public static boolean isClientSide() {
+        return clientSide;
+    }
+
+    public static boolean isServerSide() {
+        return serverSide;
     }
 }

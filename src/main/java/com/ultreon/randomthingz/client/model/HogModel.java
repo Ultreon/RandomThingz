@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.model.PigModel;
  *
  * @author Qboi123
  */
+@Deprecated
 public class HogModel<T extends HogEntity> extends PigModel<T> {
     public HogModel() {
         super();

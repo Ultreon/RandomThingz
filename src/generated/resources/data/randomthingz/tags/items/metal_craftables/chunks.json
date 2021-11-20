@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "randomthingz:iron_chunks",
+    "randomthingz:gold_chunks",
+    "randomthingz:copper_chunks",
+    "randomthingz:tin_chunks",
+    "randomthingz:silver_chunks",
+    "randomthingz:lead_chunks",
+    "randomthingz:nickel_chunks",
+    "randomthingz:platinum_chunks",
+    "randomthingz:zinc_chunks",
+    "randomthingz:bismuth_chunks",
+    "randomthingz:bauxite_chunks",
+    "randomthingz:uranium_chunks",
+    "randomthingz:cobalt_chunks",
+    "randomthingz:ultrinium_chunks",
+    "randomthingz:infinity_chunks"
+  ]
+}

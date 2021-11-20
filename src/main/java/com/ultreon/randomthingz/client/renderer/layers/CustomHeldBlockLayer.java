@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz.client.renderer.layers;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.ultreon.randomthingz.client.model.FreeEndermanModel;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.client.renderer.entity.model.EndermanModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.monster.EndermanEntity;
 import net.minecraft.util.math.vector.Vector3f;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-public class CustomHeldBlockLayer<T extends EndermanEntity, M extends FreeEndermanModel<T>> extends LayerRenderer<T, M> {
+public class CustomHeldBlockLayer<T extends EndermanEntity, M extends EndermanModel<T>> extends LayerRenderer<T, M> {
     public CustomHeldBlockLayer(IEntityRenderer<T, M> p_i50949_1_) {
         super(p_i50949_1_);
     }

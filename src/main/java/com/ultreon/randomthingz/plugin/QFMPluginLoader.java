@@ -55,7 +55,7 @@ public class QFMPluginLoader {
                             throw new RuntimeException(e);
                         }
                     }/* else if (!Objects.equals(modIdMap.getValue(), modId)) {
-                        LOGGER.warn("QForgeMod Plugin has invalid modid: " + modId + ", expected: " + modIdMap);
+                        LOGGER.warn("Random Thingz Plugin has invalid modid: " + modId + ", expected: " + modIdMap);
                     }*/
                 });
             }

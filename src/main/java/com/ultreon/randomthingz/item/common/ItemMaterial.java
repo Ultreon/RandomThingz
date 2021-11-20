@@ -5,7 +5,6 @@ import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.machines.MetalBlock;
 import com.ultreon.randomthingz.item.tools.Toolset;
-import com.ultreon.randomthingz.modules.ui.ModItemGroups;
 import com.ultreon.randomthingz.registration.Registration;
 import com.ultreon.randomthingz.world.gen.ores.DefaultOre;
 import com.ultreon.randomthingz.world.gen.ores.IOre;
@@ -119,7 +118,6 @@ public enum ItemMaterial implements IItemMaterial {
     private ItemRegistryObject<Item> gem;
     @SuppressWarnings("NonFinalFieldInEnum")
     private ItemRegistryObject<Item> nugget;
-    ;
 
     ItemMaterial(Builder builder) {
         this(builder, builder.name);

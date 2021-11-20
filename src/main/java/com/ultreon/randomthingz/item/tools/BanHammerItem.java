@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.item.tools;
 
 import com.mojang.authlib.GameProfile;
 import com.ultreon.randomthingz.commons.enums.TextColors;
-import com.ultreon.randomthingz.modules.ui.ModItemGroups;
+import com.ultreon.randomthingz.item.common.ModItemGroups;
 import com.ultreon.randomthingz.util.Targeter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item.wand;
 
 import com.ultreon.randomthingz.commons.enums.TextColors;
-import com.ultreon.randomthingz.modules.ui.ModItemGroups;
+import com.ultreon.randomthingz.item.common.ModItemGroups;
 import com.ultreon.randomthingz.util.helpers.KeyboardHelper;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.util.ITooltipFlag;
@@ -29,9 +29,10 @@ import java.util.List;
  *
  * @author Qboi123
  */
+@Deprecated
 public class WalkingStaffItem extends Item {
     public WalkingStaffItem() {
-        super(new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override

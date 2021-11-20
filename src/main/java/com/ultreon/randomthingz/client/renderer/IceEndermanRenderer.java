@@ -2,7 +2,6 @@ package com.ultreon.randomthingz.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.client.model.FreeEndermanModel;
 import com.ultreon.randomthingz.client.renderer.layers.CustomEndermanEyesLayer;
 import com.ultreon.randomthingz.client.renderer.layers.CustomHeldBlockLayer;
 import com.ultreon.randomthingz.entity.IceEndermanEntity;
@@ -11,6 +10,7 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.model.EndermanModel;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,7 +25,7 @@ import java.util.Random;
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-public class IceEndermanRenderer extends MobRenderer<IceEndermanEntity, FreeEndermanModel<IceEndermanEntity>> {
+public class IceEndermanRenderer extends MobRenderer<IceEndermanEntity, EndermanModel<IceEndermanEntity>> {
     private static final ResourceLocation ENDERMAN_TEXTURES = new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/enderman/ice.png");
 
     private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/enderman/ice_eyes.png"));
@@ -33,7 +33,7 @@ public class IceEndermanRenderer extends MobRenderer<IceEndermanEntity, FreeEnde
     private final Random rnd = new Random();
 
     public IceEndermanRenderer(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn, new FreeEndermanModel<>(0.0F), 0.5F);
+        super(renderManagerIn, new EndermanModel<>(0.0F), 0.5F);
 
         this.addLayer(new CustomEndermanEyesLayer<>(this, RENDER_TYPE));
         this.addLayer(new CustomHeldBlockLayer<>(this));
@@ -42,7 +42,7 @@ public class IceEndermanRenderer extends MobRenderer<IceEndermanEntity, FreeEnde
     @Override
     public void render(IceEndermanEntity entityIn, float entityYaw, float partialTicks, @NotNull MatrixStack matrixStackIn, @NotNull IRenderTypeBuffer bufferIn, int packedLightIn) {
         BlockState blockstate = entityIn.getHeldBlockState();
-        FreeEndermanModel<IceEndermanEntity> endermanModel = this.getEntityModel();
+        EndermanModel<IceEndermanEntity> endermanModel = this.getEntityModel();
 
         endermanModel.isCarrying = blockstate != null;
         endermanModel.isAttacking = entityIn.isScreaming();

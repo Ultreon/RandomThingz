@@ -9,7 +9,7 @@ import lombok.Data;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
- * QForgeMod Mod Flags.
+ * Random Thingz Mod Flags.
  *
  * @author Qboi123
  */

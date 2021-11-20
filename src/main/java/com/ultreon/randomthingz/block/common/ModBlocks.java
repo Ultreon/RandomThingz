@@ -36,7 +36,7 @@ import com.ultreon.randomthingz.block.trees.EucalyptusTree;
 import com.ultreon.randomthingz.commons.enums.MachineTier;
 import com.ultreon.randomthingz.item.common.ItemMaterial;
 import com.ultreon.randomthingz.modules.tiles.ModTileEntities;
-import com.ultreon.randomthingz.modules.ui.ModItemGroups;
+import com.ultreon.randomthingz.item.common.ModItemGroups;
 import com.ultreon.randomthingz.registration.Registration;
 import com.ultreon.randomthingz.tileentity.ChristmasChestTileEntity;
 import com.ultreon.randomthingz.tileentity.itemrenderer.ChristmasChestItemStackRenderer;

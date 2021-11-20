@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item.type;
 
 import com.ultreon.randomthingz.client.groups.MetalCraftablesItemGroup;
-import com.ultreon.randomthingz.modules.ui.ModItemGroups;
+import com.ultreon.randomthingz.item.common.ModItemGroups;
 import net.minecraft.item.Item;
 
 /**

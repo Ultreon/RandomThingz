@@ -8,6 +8,7 @@ import net.minecraft.entity.monster.CreeperEntity;
  *
  * @author Qboi123
  */
+@Deprecated
 public class FreeCreeperModel<T extends CreeperEntity> extends CreeperModel<T> {
     public FreeCreeperModel() {
         super();

@@ -183,7 +183,7 @@ public class MobVariantsModule extends Module {
 
     private static void registerShiny(VariantTextureType type, int count) {
         String name = type.name().toLowerCase(Locale.ROOT);
-//        shinyTextures.put(type, new ResourceLocation(QForgeMod.MOD_ID, String.format("textures/entity/variants/%s_shiny.png", name)));
+//        shinyTextures.put(type, new ResourceLocation(RandomThingz.MOD_ID, String.format("textures/entity/variants/%s_shiny.png", name)));
         for (int i = 1; i < count + 1; i++)
             textures.put(type, new ResourceLocation(RandomThingz.MOD_ID, String.format("textures/entity/variants/%s_shiny%d.png", name, i)));
     }

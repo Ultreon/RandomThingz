@@ -17,6 +17,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -119,6 +120,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
             stairsBlock(stoneType.getPolishedStairsBlock().get(), polishedStairs, polishedStairsInner, polishedStairsOuter);
             slabBlock(stoneType.getSlabBlock().get(), slab, slabTop, raw);
             slabBlock(stoneType.getPolishedSlabBlock().get(), polishedSlab, polishedSlabTop, polished);
+        }
+    }
+
+    @Override
+    public void simpleBlock(Block block) {
+        try {
+            super.simpleBlock(block);
+        } catch (IllegalArgumentException e) {
+            String name = NameUtils.from(block).getPath();
+            super.simpleBlock(block, models().cubeAll(name, modLoc("wip")));
         }
     }
 

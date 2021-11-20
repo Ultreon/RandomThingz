@@ -21,6 +21,7 @@ import net.minecraftforge.common.ToolType;
 
 import java.util.UUID;
 
+@Deprecated
 public class CutlassItem extends SwordItem implements IHasToolType {
     private final float attackDamage;
     /**
