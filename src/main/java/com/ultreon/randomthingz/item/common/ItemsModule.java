@@ -18,6 +18,7 @@ import com.ultreon.randomthingz.modules.actionmenu.MenuHandler;
 import com.ultreon.randomthingz.registration.Registration;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -70,22 +71,6 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
                 ModItemsAlt.OX_SPAWN_EGG
         );
 
-//        List<IItemProvider> spawnEggItems = Registration.ITEMS.getAllItems();
-//        for (IItemProvider spawnEggItem : spawnEggItems) {
-//            if (spawnEggItem instanceof ItemRegistryObject) {
-//                try {
-//                    @SuppressWarnings("unchecked") ItemRegistryObject<CustomSpawnEggItem<?>> spawnEgg = (ItemRegistryObject<CustomSpawnEggItem<?>>) spawnEggItem;
-//                    if (spawnEgg.asItem() instanceof CustomSpawnEggItem<?>) {
-//                        ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, tintIndex) -> {
-//                            return spawnEgg.asItem().getColor(tintIndex);
-//                        }, spawnEgg);
-//                    }
-//                } catch (ClassCastException ignored) {
-//
-//                }
-//            }
-//        }
-
         Collection<Item> dyeColorItems = Registration.getItems((item) -> item instanceof IHasDyeColor);
         for (Item dyeColorItem : dyeColorItems) {
             IHasDyeColor dyeColorProvider = (IHasDyeColor) dyeColorItem;
@@ -103,8 +88,8 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
 
     @OnlyIn(Dist.CLIENT)
     @SafeVarargs
-    private final void registerSpawnEggColorHandler(ItemColors colors, ItemRegistryObject<CustomSpawnEggItem<?>>... spawnEggs) {
-        for (ItemRegistryObject<CustomSpawnEggItem<?>> spawnEgg : spawnEggs) {
+    private final void registerSpawnEggColorHandler(ItemColors colors, ItemRegistryObject<? extends CustomSpawnEggItem<? extends Entity>>... spawnEggs) {
+        for (ItemRegistryObject<? extends CustomSpawnEggItem<? extends Entity>> spawnEgg : spawnEggs) {
             ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.asItem().getColor(tintIndex), spawnEgg);
         }
     }
@@ -127,21 +112,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
 
     @OnlyIn(Dist.CLIENT)
     private void registerGenericColorHandler(ItemColors colors) {
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.RED.getColorValue(), ModItems.RED_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.BROWN.getColorValue(), ModItems.BROWN_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.ORANGE.getColorValue(), ModItems.ORANGE_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.YELLOW.getColorValue(), ModItems.YELLOW_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.LIME.getColorValue(), ModItems.LIME_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.GREEN.getColorValue(), ModItems.GREEN_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.CYAN.getColorValue(), ModItems.CYAN_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.LIGHT_BLUE.getColorValue(), ModItems.LIGHT_BLUE_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.BLUE.getColorValue(), ModItems.BLUE_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.PURPLE.getColorValue(), ModItems.PURPLE_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.PINK.getColorValue(), ModItems.PINK_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.WHITE.getColorValue(), ModItems.WHITE_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.LIGHT_GRAY.getColorValue(), ModItems.LIGHT_GRAY_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.GRAY.getColorValue(), ModItems.GRAY_SHARD);
-//        ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> DyeColor.BLACK.getColorValue(), ModItems.BLACK_SHARD);
+
     }
 
     @Override

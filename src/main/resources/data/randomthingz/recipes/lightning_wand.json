@@ -7,7 +7,7 @@
   ],
   "key": {
     "/": {
-      "tag": "ingots/iron"
+      "tag": "forge:ingots/iron"
     },
     "*": {
       "item": "minecraft:nether_star"

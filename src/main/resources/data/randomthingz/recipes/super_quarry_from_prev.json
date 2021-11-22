@@ -6,7 +6,7 @@
   ],
   "key": {
     "X": {
-      "tag": "ingots/aluminum"
+      "tag": "forge:ingots/aluminum"
     },
     "o": {
       "tag": "randomthingz:heavy_quarry"

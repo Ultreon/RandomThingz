@@ -35,9 +35,6 @@ public class MachineType<T extends AbstractMachineBaseTileEntity, B extends T, S
             (id, inv) -> new CrusherContainer(id, inv, MachineTier.BASIC),
             (id, inv) -> new CrusherContainer(id, inv, MachineTier.STANDARD)
     );
-//    public static final MachineType<AbstractMachineBaseTileEntity, T, T, Container> ENCHANTER = new MachineType<>(
-//            () -> TileEntityType.Builder.create(EnchanterTileEntity.Basic::new, ModBlocks.BASIC_ALLOY_SMELTER.get()),
-//    );
 
     private final Lazy<TileEntityType<B>> basicTileEntityType;
     private final Lazy<TileEntityType<S>> standardTileEntityType;

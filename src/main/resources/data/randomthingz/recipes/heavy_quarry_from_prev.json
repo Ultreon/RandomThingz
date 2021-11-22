@@ -7,7 +7,7 @@
   ],
   "key": {
     "X": {
-      "tag": "ingots/tin"
+      "tag": "forge:ingots/tin"
     },
     "o": {
       "item": "randomthingz:quarry"

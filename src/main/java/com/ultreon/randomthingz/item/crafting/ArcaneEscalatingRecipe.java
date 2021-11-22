@@ -217,7 +217,6 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
 
             recipe.input = stacks;
             recipe.result = deserializeEnchantment(json.getAsJsonPrimitive("result"));
-//            recipe.input = deserializeItem(json.getAsJsonPrimitive("input"));
 
             return recipe;
         }

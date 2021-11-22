@@ -8,7 +8,7 @@ See this link for the full license: https://creativecommons.org/licenses/by-nc-s
 
 [[mods]] #mandatory
 modId="randomthingz" #mandatory
-version="36.324.3606" #mandatory
+version="36.325.3647" #mandatory
 displayName="Random Thingz: Main Mod" #mandatory
 #updateJSONURL="http://myurl.me/" #optional. Todo: add update URL for Forge.
 displayURL="https://github.com/QTechCommunity/RandomThingz" #optional

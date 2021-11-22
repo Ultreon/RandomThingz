@@ -22,7 +22,7 @@ public class GemItemMaterial implements IItemMaterial {
     private Optional<ITag.INamedTag<Item>> storageBlockItemTag;
     private Optional<ITag.INamedTag<Item>> chunksTag;
     private Optional<ITag.INamedTag<Item>> dustTag;
-    private Optional<ITag.INamedTag<Item>> ingotTag;
+    private Optional<ITag.INamedTag<Item>> gemTag;
     private Optional<ITag.INamedTag<Item>> nuggetTag;
 
     @Override
@@ -97,7 +97,12 @@ public class GemItemMaterial implements IItemMaterial {
 
     @Override
     public Optional<ITag.INamedTag<Item>> getIngotTag() {
-        return ingotTag;
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<ITag.INamedTag<Item>> getGemTag() {
+        return gemTag;
     }
 
     @Override

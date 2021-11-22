@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -268,6 +269,9 @@ public abstract class AbstractUpdater<T extends IVersion> {
                 // There went something wrong.
                 return new UpdateInfo(UpdateStatus.INCOMPATIBLE, e);
             }
+        } catch (UnknownHostException e) {
+            // The server / computer if offline.
+            return new UpdateInfo(UpdateStatus.OFFLINE, e);
         } catch (IOException e) {
             // The server / computer if offline.
             return new UpdateInfo(UpdateStatus.OFFLINE, e);
@@ -335,7 +339,7 @@ public abstract class AbstractUpdater<T extends IVersion> {
         public UpdateInfo(UpdateStatus status, Throwable throwable) {
             this.status = status;
             this.throwable = throwable;
-            if (throwable != null) {
+            if (throwable != null && !(throwable instanceof IOException)) {
                 throwable.printStackTrace();
             }
         }

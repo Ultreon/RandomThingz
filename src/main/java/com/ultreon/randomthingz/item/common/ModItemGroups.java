@@ -16,6 +16,6 @@ public class ModItemGroups {
     public static final MachinesItemGroup MACHINES = MachinesItemGroup.instance;
     public static final SpecialsItemGroup SPECIALS = SpecialsItemGroup.instance;
     public static final DungeonsItemGroup DUNGEONS = DungeonsItemGroup.instance;
-    public static final BookshelfsItemGroup BOOKSHELFS = BookshelfsItemGroup.instance;
+    public static final BookshelvesItemGroup BOOKSHELVES = BookshelvesItemGroup.instance;
     public static final OverpoweredItemGroup OVERPOWERED = OverpoweredItemGroup.instance;
 }

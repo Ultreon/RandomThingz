@@ -79,7 +79,7 @@ public final class RandomThingz {
     @Nullable
     private static IProxy proxy;
     @Nullable
-    private static Initialization init;
+    static Initialization init;
 
     private static final boolean clientSide;
     private static final boolean serverSide;
@@ -242,6 +242,7 @@ public final class RandomThingz {
         modEventBus.addListener(RandomThingz.init::serverSetup);
         modEventBus.addListener(RandomThingz.init::commonSetup);
         modEventBus.addListener(RandomThingz.init::loadComplete);
+        modEventBus.addListener(RandomThingz.init::onEntityAttributeCreation);
         modEventBus.addListener(this::enqueueIMC);
         modEventBus.addListener(this::processIMC);
 

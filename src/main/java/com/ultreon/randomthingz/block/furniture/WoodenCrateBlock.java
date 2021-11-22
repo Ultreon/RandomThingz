@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.furniture;
 
-import com.ultreon.randomthingz.block.FaceableBlock;
+import com.ultreon.randomthingz.block.DirectionalBlock;
 import com.ultreon.randomthingz.modules.tiles.ModTileEntities;
 import com.ultreon.randomthingz.tileentity.CrateTileEntity;
 import net.minecraft.block.Block;
@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
  * @see CrateTileEntity
  */
 @SuppressWarnings("deprecation")
-public class WoodenCrateBlock extends FaceableBlock {
+public class WoodenCrateBlock extends DirectionalBlock {
     public WoodenCrateBlock(Block.Properties properties) {
         super(properties);
     }

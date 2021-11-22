@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "randomthingz.refmap.json",
   "mixins": [
+    "MixinChestBlock",
     "MixinItemEntity"
   ],
   "minVersion": "0.8"

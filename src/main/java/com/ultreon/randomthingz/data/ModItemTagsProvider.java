@@ -133,7 +133,10 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         Builder<Item> excavators = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/excavators")));
         Builder<Item> hammers = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/hammers")));
         for (Toolset toolset : Toolset.values()) {
-            armors.add(toolset.getSword().get());
+            armors.add(toolset.getHelmet().get());
+            armors.add(toolset.getChestplate().get());
+            armors.add(toolset.getLeggings().get());
+            armors.add(toolset.getBoots().get());
             swords.add(toolset.getSword().get());
             axes.add(toolset.getAxe().get());
             pickaxes.add(toolset.getPickaxe().get());

@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.block;
 
+import com.ultreon.randomthingz.commons.IDeprecated;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +20,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
-public class GamePcBlock extends FaceableBlock {
+public class GamePcBlock extends DirectionalBlock implements IDeprecated {
     private static final VoxelShape SHAPE_E = VoxelShapes.create(-3d / 16, 0.25d / 16, 2d / 16, 18d / 16, 22.25d / 16, 13d / 16);
     private static final VoxelShape SHAPE_S = VoxelShapes.create(2d / 16, 0.25d / 16, -3d / 16, 13d / 16, 22.25d / 16, 18d / 16);
     private static final VoxelShape SHAPE_W = VoxelShapes.create(-3d / 16, 0.25d / 16, 2d / 16, 18d / 16, 22.25d / 16, 13d / 16);
@@ -47,14 +48,4 @@ public class GamePcBlock extends FaceableBlock {
     public float getAmbientOcclusionLightValue(@NotNull BlockState state, @NotNull IBlockReader dimensionIn, @NotNull BlockPos pos) {
         return 0.6f;
     }
-
-//    @Nullable
-//    @Override
-//    public BlockState getStateForPlacement(BlockItemUseContext context) {
-//        if (context.getPos().equals(new BlockPos(0, 255, 0))) {
-//            return super.getStateForPlacement(context);
-//        } else {
-//            return context.getDimension().getBlockState(context.getPos());
-//        }
-//    }
 }

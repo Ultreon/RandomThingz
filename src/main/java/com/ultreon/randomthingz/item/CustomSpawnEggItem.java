@@ -6,8 +6,10 @@ import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,6 +27,25 @@ public class CustomSpawnEggItem<T extends Entity> extends SpawnEggItem {
         //Note: We pass null for now so that it does not override "pick block" on skeletons or some other existing type
         super(null, primaryColor, secondaryColor, ItemDeferredRegister.getMekBaseProperties().group(ItemGroup.MISC));
         this.entityTypeIn = entityTypeIn;
+    }
+
+    @Override
+    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+        if (this.isInGroup(group)) {
+            int index = -1;
+            int i = 0;
+            for (ItemStack stack : items) {
+                if (stack.getItem() instanceof SpawnEggItem) {
+                    index = i;
+                }
+                i++;
+            }
+            if (index < 0) {
+                items.add(new ItemStack(this));
+            } else {
+                items.add(index + 1, new ItemStack(this));
+            }
+        }
     }
 
     @Override

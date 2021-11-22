@@ -164,6 +164,7 @@ public class HammerItem extends PickaxeItem implements IHasToolType {
             BlockState resultState = null;
             if (modifiedState != null && world.isAirBlock(pos.up())) {
                 world.playSound(player, pos, state.getSoundType().getBreakSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(player, pos, modifiedState.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
                 resultState = modifiedState;
             } else if (state.getBlock() instanceof CampfireBlock && state.get(CampfireBlock.LIT)) {
                 if (!world.isClientSided()) {

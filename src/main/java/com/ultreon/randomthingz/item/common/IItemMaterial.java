@@ -37,5 +37,7 @@ public interface IItemMaterial {
 
     Optional<ITag.INamedTag<Item>> getIngotTag();
 
+    Optional<ITag.INamedTag<Item>> getGemTag();
+
     Optional<ITag.INamedTag<Item>> getNuggetTag();
 }

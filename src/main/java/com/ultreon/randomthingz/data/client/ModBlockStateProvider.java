@@ -17,7 +17,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -63,13 +62,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
         dryingRack(ModBlocks.EUCALYPTUS_DRYING_RACK.get(), "randomthingz:blocks/eucalyptus_planks");
         dryingRack(ModBlocks.CHERRY_DRYING_RACK.get(), "randomthingz:blocks/cherry_planks");
 
+        simpleBlock(ModBlocks.HEAVY_QUARRY.asBlock());
+        simpleBlock(ModBlocks.SUPER_QUARRY.asBlock());
+        simpleBlock(ModBlocks.EXTREME_QUARRY.asBlock());
+        simpleBlock(ModBlocks.ULTRA_QUARRY.asBlock());
+
         simpleBlock(ModBlocks.STONE_MACHINE_FRAME.get(), models()
                 .withExistingParent("stone_machine_frame", modLoc("block/machine_frame"))
                 .texture("all", "randomthingz:blocks/machine_frame/stone"));
         simpleBlock(ModBlocks.ALLOY_MACHINE_FRAME.get(), models()
                 .withExistingParent("alloy_machine_frame", modLoc("block/machine_frame"))
                 .texture("all", "randomthingz:blocks/machine_frame/alloy"));
-        for (BlockRegistryObject<Block> block : ModBlocks.BOOKSHELFS) {
+        for (BlockRegistryObject<Block> block : ModBlocks.BOOKSHELVES) {
             RandomThingz.LOGGER.info("Generating block state and model for " + block.getRegistryName());
             simpleBlock(block.get(), models()
                     .withExistingParent(block.getName(), mcLoc("block/cube_column"))

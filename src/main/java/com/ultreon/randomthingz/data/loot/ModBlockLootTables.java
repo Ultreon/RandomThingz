@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class ModBlockLootTables extends BlockLootTables {
     @Override
     protected void addTables() {
-        for (BlockRegistryObject<Block> blockRegistryObject : ModBlocks.BOOKSHELFS) {
+        for (BlockRegistryObject<Block> blockRegistryObject : ModBlocks.BOOKSHELVES) {
             Block block = blockRegistryObject.get();
             registerLootTable(block, new LootTable.Builder()
                     .addLootPool(new LootPool.Builder()

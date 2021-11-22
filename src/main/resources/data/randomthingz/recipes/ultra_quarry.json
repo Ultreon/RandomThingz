@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "tag": "ingots/platinum"
+      "tag": "forge:ingots/platinum"
     },
     "o": {
-      "tag": "dusts/redstone"
+      "tag": "forge:dusts/redstone"
     },
     "T": {
       "item": "minecraft:diamond_pickaxe"

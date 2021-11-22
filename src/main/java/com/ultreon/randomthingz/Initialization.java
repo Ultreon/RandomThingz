@@ -23,6 +23,7 @@ import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -45,7 +46,7 @@ public class Initialization {
     private MinecraftServer server;
 
     public static MinecraftServer getServer() {
-        return Objects.requireNonNull(RandomThingz.getInit()).server;
+        return Objects.requireNonNull(RandomThingz.init).server;
     }
 
     /**
@@ -78,25 +79,28 @@ public class Initialization {
 
         // Todo: update GlobalEntityTypeAttributes.put(...) to new version.
         event.enqueueWork(() -> {
-            // Baby variants.
-            GlobalEntityTypeAttributes.put(ModEntities.BABY_CREEPER.get(), BabyCreeperEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.BABY_ENDERMAN.get(), BabyEndermanEntity.func_234287_m_().create());
-            GlobalEntityTypeAttributes.put(ModEntities.BABY_SKELETON.get(), BabySkeletonEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.BABY_STRAY.get(), BabyStrayEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.BABY_WITHER_SKELETON.get(), BabyWitherSkeletonEntity.registerAttributes().create());
-
-            // Normal variants.
-            GlobalEntityTypeAttributes.put(ModEntities.OX.get(), OxEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.HOG.get(), HogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.DUCK.get(), DuckEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.CLUCKSHROOM.get(), CluckshroomEntity.func_234187_eI_().create());
-            GlobalEntityTypeAttributes.put(ModEntities.BISON.get(), BisonEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.MOOBLOOM.get(), MoobloomEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.WARTHOG.get(), WarthogEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.ICE_ENDERMAN.get(), IceEndermanEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.FIRE_CREEPER.get(), FireCreeperEntity.registerAttributes().create());
-            GlobalEntityTypeAttributes.put(ModEntities.GLOW_SQUID.get(), GlowSquidEntity.registerAttributes().create());
         });
+    }
+
+    void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
+        // Baby variants.
+        event.put(ModEntities.BABY_CREEPER.get(), BabyCreeperEntity.registerAttributes().create());
+        event.put(ModEntities.BABY_ENDERMAN.get(), BabyEndermanEntity.func_234287_m_().create());
+        event.put(ModEntities.BABY_SKELETON.get(), BabySkeletonEntity.registerAttributes().create());
+        event.put(ModEntities.BABY_STRAY.get(), BabyStrayEntity.registerAttributes().create());
+        event.put(ModEntities.BABY_WITHER_SKELETON.get(), BabyWitherSkeletonEntity.registerAttributes().create());
+
+        // Normal variants.
+        event.put(ModEntities.OX.get(), OxEntity.registerAttributes().create());
+        event.put(ModEntities.HOG.get(), HogEntity.registerAttributes().create());
+        event.put(ModEntities.DUCK.get(), DuckEntity.registerAttributes().create());
+        event.put(ModEntities.CLUCKSHROOM.get(), CluckshroomEntity.func_234187_eI_().create());
+        event.put(ModEntities.BISON.get(), BisonEntity.registerAttributes().create());
+        event.put(ModEntities.MOOBLOOM.get(), MoobloomEntity.registerAttributes().create());
+        event.put(ModEntities.WARTHOG.get(), WarthogEntity.registerAttributes().create());
+        event.put(ModEntities.ICE_ENDERMAN.get(), IceEndermanEntity.registerAttributes().create());
+        event.put(ModEntities.FIRE_CREEPER.get(), FireCreeperEntity.registerAttributes().create());
+        event.put(ModEntities.GLOW_SQUID.get(), GlowSquidEntity.registerAttributes().create());
     }
 
     /**
@@ -171,22 +175,12 @@ public class Initialization {
         Filters.get().register(ItemGroup.REDSTONE, new ResourceLocation("randomthingz", "redstone/buttons"), new ItemStack(ModBlocks.EUCALYPTUS_BUTTON));
         Filters.get().register(ItemGroup.REDSTONE, new ResourceLocation("randomthingz", "redstone/pressure_plates"), new ItemStack(ModBlocks.EUCALYPTUS_PRESSURE_PLATE));
 
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/armors"), new ItemStack(Toolset.COPPER.getChestplate()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/swords"), new ItemStack(Toolset.COPPER.getSword()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/axes"), new ItemStack(Toolset.COPPER.getAxe()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/pickaxes"), new ItemStack(Toolset.COPPER.getPickaxe()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/shovels"), new ItemStack(Toolset.COPPER.getShovel()));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/hoes"), new ItemStack(Toolset.COPPER.getHoe()));
-//        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/longswords"), new ItemStack(Toolset.COPPER.getLongsword()));
-//        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/broadswords"), new ItemStack(Toolset.COPPER.getBroadsword()));
-//        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/katanas"), new ItemStack(Toolset.COPPER.getKatana()));
-//        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/cutlasses"), new ItemStack(Toolset.COPPER.getCutlass()));
-//        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/battleaxes"), new ItemStack(Toolset.COPPER.getBattleaxe()));
-//        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/lumber_axes"), new ItemStack(Toolset.COPPER.getLumberAxe()));
-//        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/excavators"), new ItemStack(Toolset.COPPER.getExcavator()));
-//        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/hammers"), new ItemStack(Toolset.COPPER.getHammer()));
-
-//        logger.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/armors"), new ItemStack(Items.IRON_CHESTPLATE));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/swords"), new ItemStack(Items.IRON_SWORD));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/axes"), new ItemStack(Items.IRON_AXE));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/pickaxes"), new ItemStack(Items.IRON_PICKAXE));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/shovels"), new ItemStack(Items.IRON_SHOVEL));
+        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/hoes"), new ItemStack(Items.IRON_HOE));
     }
 
     /**

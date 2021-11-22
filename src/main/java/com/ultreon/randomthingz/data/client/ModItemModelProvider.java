@@ -67,7 +67,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             metal.getHammer().ifPresent(item -> builder(item, itemHandheld));
             metal.getExcavator().ifPresent(item -> builder(item, itemHandheld));
         });
-        ModBlocks.BOOKSHELFS.forEach(block -> block.ifPresent(this::blockBuilder));
+        ModBlocks.BOOKSHELVES.forEach(block -> block.ifPresent(this::blockBuilder));
         for (StoneType stoneType : StoneType.values()) {
             stoneType.getRawBlock().ifPresent(this::blockBuilder);
             stoneType.getSlabBlock().ifPresent(this::blockBuilder);
@@ -79,6 +79,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         Arrays.stream(CraftingItems.values()).forEach(item -> builder(item, itemGenerated));
         Arrays.stream(MachineUpgrades.values()).forEach(item -> builder(item, itemGenerated));
+
+        blockBuilder(ModBlocks.HEAVY_QUARRY);
+        blockBuilder(ModBlocks.SUPER_QUARRY);
+        blockBuilder(ModBlocks.EXTREME_QUARRY);
+        blockBuilder(ModBlocks.ULTRA_QUARRY);
 
         builder(ModItems.WRENCH, itemGenerated);
         builder(ModItems.DEBUG_ITEM, itemGenerated);
