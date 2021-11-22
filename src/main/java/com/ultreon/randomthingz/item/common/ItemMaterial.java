@@ -281,6 +281,11 @@ public enum ItemMaterial implements IItemMaterial {
     }
 
     @Override
+    public Optional<ITag.INamedTag<Item>> getGemTag() {
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<ITag.INamedTag<Item>> getNuggetTag() {
         return nuggetTag != null ? Optional.of(nuggetTag) : Optional.empty();
     }

@@ -150,43 +150,33 @@ public class HammerItem extends PickaxeItem implements IHasToolType {
 
     private ActionResultType useItem(World world, BlockPos pos, ItemUseContext context) {
         BlockState state = world.getBlockState(pos);
-        if (context.getFace() == Direction.DOWN) {
-            return ActionResultType.PASS;
+        context.getFace();
+        PlayerEntity player = context.getPlayer();
+        BlockState modifiedState = state.getToolModifiedState(world, pos, player, context.getItem(), ModToolTypes.HAMMER);
+        if (modifiedState == null) {
+            modifiedState = state.getToolModifiedState(world, pos, player, context.getItem(), ToolType.PICKAXE);
+        }
+        if (modifiedState == null) {
+            modifiedState = smashables.get(world.getBlockState(pos).getBlock());
+        }
+        BlockState resultState = null;
+        if (modifiedState != null) {
+            world.playSound(player, pos, state.getSoundType().getBreakSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(player, pos, modifiedState.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+            resultState = modifiedState;
+        }
+
+        if (resultState != null) {
+            if (!world.isClientSided) {
+                world.setBlockState(pos, resultState, 11);
+                if (player != null) {
+                    context.getItem().damageItem(1, player, (p) -> p.sendBreakAnimation(context.getHand()));
+                }
+            }
+
+            return ActionResultType.func_233537_a_(world.isClientSided);
         } else {
-            PlayerEntity player = context.getPlayer();
-            BlockState modifiedState = state.getToolModifiedState(world, pos, player, context.getItem(), ModToolTypes.HAMMER);
-            if (modifiedState == null) {
-                modifiedState = state.getToolModifiedState(world, pos, player, context.getItem(), ToolType.PICKAXE);
-            }
-            if (modifiedState == null) {
-                modifiedState = smashables.get(world.getBlockState(pos).getBlock());
-            }
-            BlockState resultState = null;
-            if (modifiedState != null && world.isAirBlock(pos.up())) {
-                world.playSound(player, pos, state.getSoundType().getBreakSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
-                world.playSound(player, pos, modifiedState.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
-                resultState = modifiedState;
-            } else if (state.getBlock() instanceof CampfireBlock && state.get(CampfireBlock.LIT)) {
-                if (!world.isClientSided()) {
-                    world.playEvent(null, 1009, pos, 0);
-                }
-
-                CampfireBlock.extinguish(world, pos, state);
-                resultState = state.with(CampfireBlock.LIT, Boolean.FALSE);
-            }
-
-            if (resultState != null) {
-                if (!world.isClientSided) {
-                    world.setBlockState(pos, resultState, 11);
-                    if (player != null) {
-                        context.getItem().damageItem(1, player, (p) -> p.sendBreakAnimation(context.getHand()));
-                    }
-                }
-
-                return ActionResultType.func_233537_a_(world.isClientSided);
-            } else {
-                return ActionResultType.PASS;
-            }
+            return ActionResultType.PASS;
         }
     }
 }
