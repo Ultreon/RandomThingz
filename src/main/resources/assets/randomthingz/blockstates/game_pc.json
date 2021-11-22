@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "randomthingz:block/game_pc_north"
+    },
+    "facing=south": {
+      "model": "randomthingz:block/game_pc_south"
+    },
+    "facing=west": {
+      "model": "randomthingz:block/game_pc_west"
+    },
+    "facing=east": {
+      "model": "randomthingz:block/game_pc_east"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:ruby"
+    }
+  },
+  "result": {
+    "item": "randomthingz:ruby_block",
+    "count": 1
+  }
+}

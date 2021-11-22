@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XoX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:ingots/tin"
+    },
+    "o": {
+      "item": "randomthingz:quarry"
+    }
+  },
+  "result": {
+    "item": "randomthingz:heavy_quarry"
+  }
+}

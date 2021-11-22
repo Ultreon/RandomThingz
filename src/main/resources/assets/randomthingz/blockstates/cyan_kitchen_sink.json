@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "randomthingz:block/cyan_kitchen_sink_alt",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "randomthingz:block/cyan_kitchen_sink_alt",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "randomthingz:block/cyan_kitchen_sink_alt",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "randomthingz:block/cyan_kitchen_sink_alt",
+      "y": 270
+    }
+  }
+}

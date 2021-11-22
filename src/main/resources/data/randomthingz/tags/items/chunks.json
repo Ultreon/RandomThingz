@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "#randomthingz:chunks/iron",
+    "#randomthingz:chunks/gold",
+    "#randomthingz:chunks/copper",
+    "#randomthingz:chunks/tin",
+    "#randomthingz:chunks/silver",
+    "#randomthingz:chunks/lead",
+    "#randomthingz:chunks/nickel",
+    "#randomthingz:chunks/platinum",
+    "#randomthingz:chunks/zinc",
+    "#randomthingz:chunks/bismuth",
+    "#randomthingz:chunks/aluminum",
+    "#randomthingz:chunks/uranium"
+  ]
+}

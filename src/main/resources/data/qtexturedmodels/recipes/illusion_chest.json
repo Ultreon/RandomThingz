@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#O#",
+    "O0O",
+    "#O#"
+  ],
+  "key": {
+    "#": {
+      "item": "qtexturedmodels:frame_chest"
+    },
+	"0": {
+      "item": "minecraft:egg"
+    },
+	"O": {
+      "item": "minecraft:slime_ball"
+    }
+  },
+  "result": {
+    "item": "qtexturedmodels:illusion_chest",
+    "count": 4
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:tin_nugget"
+    }
+  },
+  "result": {
+    "item": "randomthingz:tin_ingot"
+  }
+}

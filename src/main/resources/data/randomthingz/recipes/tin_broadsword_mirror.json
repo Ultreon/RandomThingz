@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " XX",
+    "XXX",
+    "/X "
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:tin_ingot"
+    },
+    "/": {
+      "tag": "forge:sticks"
+    }
+  },
+  "result": {
+    "item": "randomthingz:tin_broadsword"
+  }
+}

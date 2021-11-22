@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    "XoX"
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "o": {
+      "tag": "randomthingz:heavy_quarry"
+    }
+  },
+  "result": {
+    "item": "randomthingz:super_quarry"
+  }
+}

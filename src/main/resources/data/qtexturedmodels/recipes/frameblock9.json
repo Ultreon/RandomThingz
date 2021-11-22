@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "qtexturedmodels:frame_wall",
+	  "count": 1
+    }
+  ],
+  "result": {
+    "item": "qtexturedmodels:frameblock",
+    "count": 1
+  }
+}

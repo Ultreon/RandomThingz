@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "randomthingz:beryl_ore"
+  },
+  "result": "randomthingz:beryl",
+  "experience": 0.7,
+  "cookingtime": 100
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:beryl_leggings"
+    ]
+  },
+  "criteria": {
+    "has_beryl": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:beryl"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:steel_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_beryl",
+      "has_the_recipe"
+    ]
+  ]
+}

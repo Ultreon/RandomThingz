@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "qtexturedmodels:frame_stairs"
+    }
+  },
+  "result": {
+    "item": "qtexturedmodels:frame_edged_slope",
+    "count": 6
+  }
+}

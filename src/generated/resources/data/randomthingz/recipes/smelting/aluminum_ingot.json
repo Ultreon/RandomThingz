@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "tag": "randomthingz:chunks/aluminum"
+    },
+    {
+      "tag": "forge:dusts/aluminum"
+    }
+  ],
+  "result": "randomthingz:aluminum_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

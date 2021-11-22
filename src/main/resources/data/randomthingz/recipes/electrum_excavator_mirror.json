@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " XX",
+    " /X",
+    "/  "
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:electrum_ingot"
+    },
+    "/": {
+      "tag": "forge:sticks"
+    }
+  },
+  "result": {
+    "item": "randomthingz:electrum_excavator"
+  }
+}

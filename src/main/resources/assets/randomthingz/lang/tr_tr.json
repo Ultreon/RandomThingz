@@ -1,0 +1,19 @@
+{
+  "block.randomthingz.elevator_white": "Beyaz Asansör",
+  "block.randomthingz.elevator_black": "Siyah Asansör",
+  "block.randomthingz.elevator_blue": "Mavi Asansör",
+  "block.randomthingz.elevator_brown": "Kahverengi Asansör",
+  "block.randomthingz.elevator_cyan": "Camgöbeği Asansör",
+  "block.randomthingz.elevator_gray": "Gri Asansör",
+  "block.randomthingz.elevator_green": "Yeşil Asansör",
+  "block.randomthingz.elevator_light_blue": "Açık Mavi Asansör",
+  "block.randomthingz.elevator_lime": "Açık Yeşil Asansör",
+  "block.randomthingz.elevator_magenta": "Pembe Asansör",
+  "block.randomthingz.elevator_orange": "Turuncu Asansör",
+  "block.randomthingz.elevator_pink": "Eflatun Asansör",
+  "block.randomthingz.elevator_purple": "Mor Asansör",
+  "block.randomthingz.elevator_red": "Kırmızı Asansör",
+  "block.randomthingz.elevator_light_gray": "Açık Gri Asansör",
+  "block.randomthingz.elevator_yellow": "Sarı Asansör",
+  "itemGroup.randomthingz_elevators": "Elevators"
+}

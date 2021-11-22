@@ -1,0 +1,37 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:leather_chestplate"
+    },
+    "title": {
+      "translate": "advancements.randomthingz.leather_armor.title"
+    },
+    "description": {
+      "translate": "advancements.randomthingz.leather_armor.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "randomthingz:mat_leather",
+  "criteria": {
+    "get_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:leather_helmet"
+          },
+          {
+            "item": "minecraft:leather_chestplate"
+          },
+          {
+            "item": "minecraft:leather_leggings"
+          },
+          {
+            "item": "minecraft:leather_boots"
+          }
+        ]
+      }
+    }
+  }
+}

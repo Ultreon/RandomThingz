@@ -1,0 +1,35 @@
+{
+  "parent": "item/generated",
+  "defaults": {
+    "textures": {
+      "layer0": "randomthingz:items/cooked_carrot"
+    },
+    "variants": {
+      "normal": {
+        "textures": {
+          "layer0": "randomthingz:items/cooked_carrot"
+        }
+      },
+      "inventory": {
+        "textures": {
+          "layer0": "randomthingz:items/cooked_carrot"
+        }
+      }
+    }
+  },
+  "textures": {
+    "layer0": "randomthingz:items/cooked_carrot"
+  },
+  "variants": {
+    "normal": {
+      "textures": {
+        "layer0": "randomthingz:items/cooked_carrot"
+      }
+    },
+    "inventory": {
+      "textures": {
+        "layer0": "randomthingz:items/cooked_carrot"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "replace": false,
+  "values": [
+    "randomthingz:redstone_alloy_nugget",
+    "randomthingz:copper_nugget",
+    "randomthingz:tin_nugget",
+    "randomthingz:silver_nugget",
+    "randomthingz:lead_nugget",
+    "randomthingz:nickel_nugget",
+    "randomthingz:platinum_nugget",
+    "randomthingz:tungsten_nugget",
+    "randomthingz:zinc_nugget",
+    "randomthingz:bismuth_nugget",
+    "randomthingz:aluminum_nugget",
+    "randomthingz:uranium_nugget",
+    "randomthingz:bronze_nugget",
+    "randomthingz:brass_nugget",
+    "randomthingz:invar_nugget",
+    "randomthingz:electrum_nugget",
+    "randomthingz:steel_nugget",
+    "randomthingz:bismuth_brass_nugget",
+    "randomthingz:aluminum_steel_nugget",
+    "randomthingz:bismuth_steel_nugget",
+    "randomthingz:signalum_nugget",
+    "randomthingz:lumium_nugget",
+    "randomthingz:enderium_nugget",
+    "randomthingz:cobalt_nugget",
+    "randomthingz:ultrinium_nugget",
+    "randomthingz:infinity_nugget"
+  ]
+}

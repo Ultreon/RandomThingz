@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    " / "
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:peridot"
+    },
+    "/": {
+      "tag": "forge:sticks"
+    }
+  },
+  "result": {
+    "item": "randomthingz:peridot_hammer"
+  }
+}

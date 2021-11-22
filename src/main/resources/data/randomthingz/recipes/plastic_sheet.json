@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "randomthingz:plastic_pellets"
+    }
+  },
+  "result": {
+    "item": "randomthingz:plastic_sheet"
+  }
+}

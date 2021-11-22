@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "qtexturedmodels:frameblock"
+    }
+  },
+  "result": {
+    "item": "qtexturedmodels:frame_trapdoor",
+    "count": 2
+  }
+}

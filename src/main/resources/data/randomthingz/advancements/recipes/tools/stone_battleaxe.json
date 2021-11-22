@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:stone_battleaxe"
+    ]
+  },
+  "criteria": {
+    "has_platinum_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:cobblestone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:stone_battleaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_platinum_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

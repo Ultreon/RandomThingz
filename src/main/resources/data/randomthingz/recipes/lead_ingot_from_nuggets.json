@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "randomthingz:lead_nugget"
+    }
+  },
+  "result": {
+    "item": "randomthingz:lead_ingot"
+  }
+}

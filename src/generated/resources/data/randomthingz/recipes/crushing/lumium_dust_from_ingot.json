@@ -1,0 +1,12 @@
+{
+  "type": "randomthingz:crushing",
+  "process_time": 200,
+  "ingredient": {
+    "tag": "forge:ingots/lumium"
+  },
+  "results": [
+    {
+      "item": "randomthingz:lumium_dust"
+    }
+  ]
+}

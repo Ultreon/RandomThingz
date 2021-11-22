@@ -1,0 +1,45 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="""(C) Copyright 2020 - QTech Community.
+This project is licensed under the CC BY-NC-SA 4.0 license.
+See this link for the full license: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+"""
+
+# Mod info.
+[[mods]] #mandatory
+modId="test" #mandatory
+version="$$MOD_VERSION$$" #mandatory
+displayName="Random Thingz: Test Mod" #mandatory
+displayURL="https://github.com/QTechCommunity/QForgeMod" #optional
+credits="Qboi123" #optional
+authors="Qboi123" #optional
+description='''
+Random Thingz: Testing Mod.
+USE ONLY FOR DEVELOPMENT PURPOSES!
+'''
+
+# Dependencies
+[[dependencies.test]]
+modId="qfilters"
+mandatory=true
+versionRange="1.3.0"
+ordering="BEFORE"
+side="CLIENT"
+[[dependencies.test]]
+modId="qmodlib"
+mandatory=true
+versionRange="[1.0-beta1,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.test]] #optional
+modId="forge" #mandatory
+mandatory=true #mandatory
+versionRange="[36,)" #mandatory
+ordering="NONE"
+side="BOTH"
+[[dependencies.test]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.5]"
+ordering="NONE"
+side="BOTH"

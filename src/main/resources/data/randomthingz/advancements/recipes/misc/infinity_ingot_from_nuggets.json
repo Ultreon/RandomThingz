@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:infinity_ingot_from_nuggets"
+    ]
+  },
+  "criteria": {
+    "has_infinity_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:infinity_nugget"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:infinity_ingot_from_nuggets"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_infinity_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

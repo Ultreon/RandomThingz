@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "randomthingz:electrum_pickaxe"
+    },
+    {
+      "item": "randomthingz:electrum_shovel"
+    },
+    {
+      "item": "randomthingz:electrum_axe"
+    },
+    {
+      "item": "randomthingz:electrum_hoe"
+    },
+    {
+      "item": "randomthingz:electrum_sword"
+    },
+    {
+      "item": "randomthingz:electrum_helmet"
+    },
+    {
+      "item": "randomthingz:electrum_chestplate"
+    },
+    {
+      "item": "randomthingz:electrum_leggings"
+    },
+    {
+      "item": "randomthingz:electrum_boots"
+    }
+  ],
+  "result": "randomthingz:electrum_nugget",
+  "experience": 0.1,
+  "cookingtime": 200
+}

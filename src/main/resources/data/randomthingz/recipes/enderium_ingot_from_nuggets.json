@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "randomthingz:enderium_nugget"
+    }
+  },
+  "result": {
+    "item": "randomthingz:enderium_ingot"
+  }
+}

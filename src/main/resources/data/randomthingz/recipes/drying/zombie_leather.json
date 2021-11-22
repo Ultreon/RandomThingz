@@ -1,0 +1,10 @@
+{
+  "type": "randomthingz:drying",
+  "process_time": 600,
+  "ingredient": {
+    "item": "minecraft:rotten_flesh"
+  },
+  "result": {
+    "item": "randomthingz:zombie_leather"
+  }
+}

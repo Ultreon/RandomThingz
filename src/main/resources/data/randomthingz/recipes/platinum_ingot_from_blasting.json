@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "randomthingz:platinum_ore"
+  },
+  "result": "randomthingz:platinum_ingot",
+  "experience": 0.7,
+  "cookingtime": 100
+}

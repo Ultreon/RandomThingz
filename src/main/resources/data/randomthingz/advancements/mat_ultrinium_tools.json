@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "item": "randomthingz:ultrinium_axe"
+    },
+    "title": {
+      "translate": "advancements.randomthingz.ultrinium_tools.title"
+    },
+    "description": {
+      "translate": "advancements.randomthingz.ultrinium_tools.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "randomthingz:mat_ultrinium",
+  "criteria": {
+    "get_tools": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:ultrinium_sword"
+          },
+          {
+            "item": "randomthingz:ultrinium_axe"
+          },
+          {
+            "item": "randomthingz:ultrinium_pickaxe"
+          },
+          {
+            "item": "randomthingz:ultrinium_shovel"
+          },
+          {
+            "item": "randomthingz:ultrinium_hoe"
+          }
+        ]
+      }
+    }
+  }
+}

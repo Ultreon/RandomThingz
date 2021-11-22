@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "randomthingz:processing_speed_upgrade",
+    "randomthingz:output_chance_upgrade",
+    "randomthingz:energy_capacity_upgrade",
+    "randomthingz:energy_efficiency_upgrade",
+    "randomthingz:range_upgrade"
+  ]
+}

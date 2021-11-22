@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:wooden_axe"
+    },
+    "title": {
+      "translate": "advancements.randomthingz.wooden_tools.title"
+    },
+    "description": {
+      "translate": "advancements.randomthingz.wooden_tools.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "randomthingz:mat_wood",
+  "criteria": {
+    "get_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:wooden_sword"
+          },
+          {
+            "item": "minecraft:wooden_axe"
+          },
+          {
+            "item": "minecraft:wooden_pickaxe"
+          },
+          {
+            "item": "minecraft:wooden_shovel"
+          },
+          {
+            "item": "minecraft:wooden_hoe"
+          }
+        ]
+      }
+    }
+  }
+}

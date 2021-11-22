@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:dusts/lumium"
+  },
+  "result": "randomthingz:lumium_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

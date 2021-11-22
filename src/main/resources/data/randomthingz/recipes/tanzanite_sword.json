@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X",
+    "X",
+    "/"
+  ],
+  "key": {
+    "X": {
+      "item": "randomthingz:tanzanite"
+    },
+    "/": {
+      "tag": "forge:sticks"
+    }
+  },
+  "result": {
+    "item": "randomthingz:tanzanite_sword",
+    "count": 1
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "display": {
+    "icon": {
+      "item": "randomthingz:infinity_sword"
+    },
+    "title": {
+      "translate": "advancements.randomthingz.infinity_tools.title"
+    },
+    "description": {
+      "translate": "advancements.randomthingz.infinity_tools.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "randomthingz:mat_infinity",
+  "criteria": {
+    "get_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:infinity_sword"
+          },
+          {
+            "item": "randomthingz:infinity_axe"
+          },
+          {
+            "item": "randomthingz:infinity_pickaxe"
+          },
+          {
+            "item": "randomthingz:infinity_shovel"
+          },
+          {
+            "item": "randomthingz:infinity_hoe"
+          }
+        ]
+      }
+    }
+  }
+}

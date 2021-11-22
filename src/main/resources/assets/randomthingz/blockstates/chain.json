@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "randomthingz:block/chain",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "randomthingz:block/chain"
+    },
+    "axis=z": {
+      "model": "randomthingz:block/chain",
+      "x": 90
+    }
+  }
+}

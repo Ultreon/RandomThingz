@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:lumium_ingot_from_lumium_block"
+    ]
+  },
+  "criteria": {
+    "has_lumium_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:lumium_block"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:lumium_ingot_from_lumium_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lumium_block",
+      "has_the_recipe"
+    ]
+  ]
+}

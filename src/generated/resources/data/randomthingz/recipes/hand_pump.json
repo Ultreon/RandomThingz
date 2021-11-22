@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "/C#",
+    " B#"
+  ],
+  "key": {
+    "/": {
+      "tag": "forge:ingots/aluminum"
+    },
+    "C": {
+      "item": "randomthingz:empty_canister"
+    },
+    "#": {
+      "tag": "forge:plastic"
+    },
+    "B": {
+      "item": "randomthingz:battery"
+    }
+  },
+  "result": {
+    "item": "randomthingz:hand_pump"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "randomthingz:items/ice_bow",
+  "textures": {
+    "layer0": "randomthingz:items/ice_bow_pulling_0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " XX",
+    " /X",
+    "/  "
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:obsidian"
+    },
+    "/": {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+  "result": {
+    "item": "randomthingz:obsidian_excavator"
+  }
+}

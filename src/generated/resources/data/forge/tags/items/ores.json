@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:ores/copper",
+    "#forge:ores/tin",
+    "#forge:ores/silver",
+    "#forge:ores/lead",
+    "#forge:ores/nickel",
+    "#forge:ores/platinum",
+    "#forge:ores/zinc",
+    "#forge:ores/bismuth",
+    "#forge:ores/aluminum",
+    "#forge:ores/uranium",
+    "#forge:ores/cobalt",
+    "#forge:ores/ultrinium",
+    "#forge:ores/infinity",
+    "#forge:ores/ruby",
+    "#forge:ores/amethyst",
+    "#forge:ores/aquamarine",
+    "#forge:ores/saphire",
+    "#forge:ores/amber",
+    "#forge:ores/peridot",
+    "#forge:ores/beryl",
+    "#forge:ores/topaz",
+    "#forge:ores/tanzanite",
+    "#forge:ores/malachite"
+  ]
+}

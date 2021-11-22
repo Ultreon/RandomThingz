@@ -1,0 +1,41 @@
+{
+	"block.qtexturedmodels.frameblock": "Châssis de bloc",
+	"block.qtexturedmodels.frame_slab": "Châssis de dalle",
+	"block.qtexturedmodels.falling_frameblock": "Châssis de bloc tombant (WIP)",
+	"block.qtexturedmodels.frame_button": "Châssis de bouton",
+	"block.qtexturedmodels.frame_stairs": "Châssis d'escaliers",
+	"block.qtexturedmodels.frame_pressure_plate": "Châssis de plaque de pression",
+	"block.qtexturedmodels.frame_door": "Châssis de porte",
+	"block.qtexturedmodels.frame_trapdoor": "Châssis de trappe",
+	"block.qtexturedmodels.frame_fence": "Châssis de barrière",
+	"block.qtexturedmodels.frame_bed": "Frame Bed",
+	"block.qtexturedmodels.frame_wall": "Frame Wall",
+	"block.qtexturedmodels.frame_ladder": "Frame Ladder",
+	"block.qtexturedmodels.frame_chest": "Frame Chest",
+	"block.qtexturedmodels.frame_fence_gate": "Frame Fence Gate",
+	"block.qtexturedmodels.frame_slope": "Châssis de rampe (WIP)",
+	"block.qtexturedmodels.frame_edged_slope": "Châssis de rampe (WIP)",
+
+	"block.qtexturedmodels.illusion_block": "Bloc illusion",
+	"block.qtexturedmodels.illusion_slab": "Dalle illusion",
+	"block.qtexturedmodels.illusion_button": "Bouton illusion",
+	"block.qtexturedmodels.illusion_stairs": "Escaliers illusions",
+	"block.qtexturedmodels.illusion_pressure_plate": "Plaque de pression illusion",
+	"block.qtexturedmodels.illusion_door": "Porte illusion",
+	"block.qtexturedmodels.illusion_trapdoor": "Trappe illusion",
+	"block.qtexturedmodels.illusion_fence": "Barrière illusion",
+	"block.qtexturedmodels.illusion_bed": "Illusion Bed",
+	"block.qtexturedmodels.illusion_wall": "Illusion Wall",
+	"block.qtexturedmodels.illusion_ladder": "Illusion Ladder",
+	"block.qtexturedmodels.illusion_chest": "Illusion Chest",
+	"block.qtexturedmodels.illusion_fence_gate": "Illusion Fence Gate",
+
+	"container.frame_chest": "Frame Chest",
+
+	"item.qtexturedmodels.hammer": "Marteau",
+	"item.qtexturedmodels.texture_wrench": "Clé à texture",
+	"item.qtexturedmodels.chisel": "Ciseau",
+	"item.qtexturedmodels.paintbrush": "Pinceau",
+
+	"itemGroup.qtexturedmodels": "QTextureModels"
+}

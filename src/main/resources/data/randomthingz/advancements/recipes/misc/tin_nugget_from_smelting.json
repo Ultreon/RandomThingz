@@ -1,0 +1,120 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:tin_nugget_from_smelting"
+    ]
+  },
+  "criteria": {
+    "has_tin_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:tin_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_tin_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:tin_shovel"
+          }
+        ]
+      }
+    },
+    "has_tin_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:tin_axe"
+          }
+        ]
+      }
+    },
+    "has_tin_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:tin_hoe"
+          }
+        ]
+      }
+    },
+    "has_tin_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:tin_sword"
+          }
+        ]
+      }
+    },
+    "has_tin_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:tin_helmet"
+          }
+        ]
+      }
+    },
+    "has_tin_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:tin_chestplate"
+          }
+        ]
+      }
+    },
+    "has_tin_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:tin_leggings"
+          }
+        ]
+      }
+    },
+    "has_tin_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:tin_boots"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:tin_nugget_from_smelting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tin_pickaxe",
+      "has_tin_shovel",
+      "has_tin_axe",
+      "has_tin_hoe",
+      "has_tin_sword",
+      "has_tin_helmet",
+      "has_tin_chestplate",
+      "has_tin_leggings",
+      "has_tin_boots",
+      "has_the_recipe"
+    ]
+  ]
+}

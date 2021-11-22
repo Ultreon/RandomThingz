@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "item": "randomthingz:steel_pickaxe"
+    },
+    {
+      "item": "randomthingz:steel_shovel"
+    },
+    {
+      "item": "randomthingz:steel_axe"
+    },
+    {
+      "item": "randomthingz:steel_hoe"
+    },
+    {
+      "item": "randomthingz:steel_sword"
+    },
+    {
+      "item": "randomthingz:steel_helmet"
+    },
+    {
+      "item": "randomthingz:steel_chestplate"
+    },
+    {
+      "item": "randomthingz:steel_leggings"
+    },
+    {
+      "item": "randomthingz:steel_boots"
+    }
+  ],
+  "result": "randomthingz:steel_nugget",
+  "experience": 8.5,
+  "cookingtime": 600
+}

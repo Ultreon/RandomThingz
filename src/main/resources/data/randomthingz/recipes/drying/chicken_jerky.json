@@ -1,0 +1,10 @@
+{
+  "type": "randomthingz:drying",
+  "process_time": 400,
+  "ingredient": {
+    "item": "minecraft:chicken"
+  },
+  "result": {
+    "item": "randomthingz:chicken_jerky"
+  }
+}

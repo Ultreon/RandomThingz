@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "randomthingz:unstable_infinity_ingot"
+    },
+    "title": {
+      "translate": "advancements.randomthingz.material_unstable_infinity.title"
+    },
+    "description": {
+      "translate": "advancements.randomthingz.material_unstable_infinity.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "randomthingz:mat_ultrinium",
+  "criteria": {
+    "get_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:unstable_infinity_ingot"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "qtexturedmodels:frame_wall",
+	"qtexturedmodels:illusion_wall",
+	"qtexturedmodels:frame_wall",
+	"qtexturedmodels:illusion_wall"
+  ]
+}

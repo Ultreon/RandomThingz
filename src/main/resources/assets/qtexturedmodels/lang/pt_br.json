@@ -1,0 +1,41 @@
+{
+	"block.qtexturedmodels.frameblock": "Armação",
+	"block.qtexturedmodels.frame_slab": "Armação de Laje",
+	"block.qtexturedmodels.falling_frameblock": "Armação (afetado pela gravidade)",
+	"block.qtexturedmodels.frame_button": "Armação de Botão de Madeira",
+	"block.qtexturedmodels.frame_stairs": "Armação de Escada",
+	"block.qtexturedmodels.frame_pressure_plate": "Armação de Placa de Pressão de Madeira",
+	"block.qtexturedmodels.frame_door": "Armação de Porta",
+	"block.qtexturedmodels.frame_trapdoor": "Armação de Alçapão",
+	"block.qtexturedmodels.frame_fence": "Armação de Cerca",
+	"block.qtexturedmodels.frame_bed": "Frame Bed",
+	"block.qtexturedmodels.frame_wall": "Frame Wall",
+	"block.qtexturedmodels.frame_ladder": "Frame Ladder",
+	"block.qtexturedmodels.frame_chest": "Frame Chest",
+	"block.qtexturedmodels.frame_fence_gate": "Frame Fence Gate",
+	"block.qtexturedmodels.frame_slope": "Frame Slope (WIP)",
+	"block.qtexturedmodels.frame_edged_slope": "Edged Frame Slope (WIP)",
+
+	"block.qtexturedmodels.illusion_block": "Bloco de Ilusão",
+	"block.qtexturedmodels.illusion_slab": "Illusion Slab",
+	"block.qtexturedmodels.illusion_button": "Illusion Button",
+	"block.qtexturedmodels.illusion_stairs": "Illusion Stairs",
+	"block.qtexturedmodels.illusion_pressure_plate": "Illusion Pressure Plate",
+	"block.qtexturedmodels.illusion_door": "Illusion Door",
+	"block.qtexturedmodels.illusion_trapdoor": "Illusion Trapdoor",
+	"block.qtexturedmodels.illusion_fence": "Illusion Fence",
+	"block.qtexturedmodels.illusion_bed": "Illusion Bed",
+	"block.qtexturedmodels.illusion_wall": "Illusion Wall",
+	"block.qtexturedmodels.illusion_ladder": "Illusion Ladder",
+	"block.qtexturedmodels.illusion_chest": "Illusion Chest",
+	"block.qtexturedmodels.illusion_fence_gate": "Illusion Fence Gate",
+
+	"container.frame_chest": "Frame Chest",
+
+	"item.qtexturedmodels.hammer": "Martelo",
+	"item.qtexturedmodels.texture_wrench": "Chave de Textura",
+	"item.qtexturedmodels.chisel": "Formão",
+	"item.qtexturedmodels.paintbrush": "Pincel",
+
+	"itemGroup.qtexturedmodels": "QTextureModels"
+}

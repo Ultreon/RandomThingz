@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:cooked_chicken_leg_from_campfire_cooking"
+    ]
+  },
+  "criteria": {
+    "has_chicken_leg": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:chicken_leg"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:cooked_chicken_leg_from_campfire_cooking"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_chicken_leg",
+      "has_the_recipe"
+    ]
+  ]
+}

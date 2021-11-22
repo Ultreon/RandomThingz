@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomthingz:eucalyptus_planks"
+    }
+  ],
+  "result": {
+    "item": "randomthingz:eucalyptus_button"
+  }
+}

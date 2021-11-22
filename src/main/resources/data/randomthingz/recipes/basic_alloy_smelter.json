@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "/X/",
+    "O/O"
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/tin"
+    },
+    "/": {
+      "tag": "forge:ingots/copper"
+    },
+    "X": {
+      "item": "randomthingz:stone_machine_frame"
+    },
+    "O": {
+      "item": "minecraft:bricks"
+    }
+  },
+  "result": {
+    "item": "randomthingz:basic_alloy_smelter"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:copper_nugget_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_copper_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:copper_pickaxe"
+          }
+        ]
+      }
+    },
+    "has_copper_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:copper_shovel"
+          }
+        ]
+      }
+    },
+    "has_copper_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:copper_axe"
+          }
+        ]
+      }
+    },
+    "has_copper_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:copper_hoe"
+          }
+        ]
+      }
+    },
+    "has_copper_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:copper_sword"
+          }
+        ]
+      }
+    },
+    "has_copper_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:copper_helmet"
+          }
+        ]
+      }
+    },
+    "has_copper_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:copper_chestplate"
+          }
+        ]
+      }
+    },
+    "has_copper_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:copper_leggings"
+          }
+        ]
+      }
+    },
+    "has_copper_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:copper_boots"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "item": "randomthingz:copper_nugget_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_copper_pickaxe",
+      "has_copper_shovel",
+      "has_copper_axe",
+      "has_copper_hoe",
+      "has_copper_sword",
+      "has_copper_helmet",
+      "has_copper_chestplate",
+      "has_copper_leggings",
+      "has_copper_boots",
+      "has_the_recipe"
+    ]
+  ]
+}

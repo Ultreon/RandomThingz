@@ -1,0 +1,41 @@
+{
+	"block.qtexturedmodels.frameblock": "Marco de bloque",
+	"block.qtexturedmodels.frame_slab": "Marco de baldosa",
+	"block.qtexturedmodels.falling_frameblock": "Marco de bloque con gravedad (affected by Gravity - WIP)",
+	"block.qtexturedmodels.frame_button": "Marco de botón de madera",
+	"block.qtexturedmodels.frame_stairs": "Marco de escaleras",
+	"block.qtexturedmodels.frame_pressure_plate": "Marco de placa de presión de madera",
+	"block.qtexturedmodels.frame_door": "Marco de puerta",
+	"block.qtexturedmodels.frame_trapdoor": "Marco de escotilla",
+	"block.qtexturedmodels.frame_fence": "Marco de valla",
+	"block.qtexturedmodels.frame_bed": "Marco de cama",
+	"block.qtexturedmodels.frame_wall": "Marco de pared",
+	"block.qtexturedmodels.frame_ladder": "Marco de escalera",
+	"block.qtexturedmodels.frame_chest": "Marco de cofre",
+	"block.qtexturedmodels.frame_fence_gate": "Marco de puerta de valla",
+	"block.qtexturedmodels.frame_slope": "Marco de pendiente (WIP)",
+	"block.qtexturedmodels.frame_edged_slope": "Marco de pendiente escalonada (WIP)",
+
+	"block.qtexturedmodels.illusion_block": "Bloque de ilusión",
+	"block.qtexturedmodels.illusion_slab": "Baldosa de ilusión",
+	"block.qtexturedmodels.illusion_button": "Botón de ilusión",
+	"block.qtexturedmodels.illusion_stairs": "Escaleras de ilusión",
+	"block.qtexturedmodels.illusion_pressure_plate": "Placa de presión de ilusión",
+	"block.qtexturedmodels.illusion_door": "Puerta de ilusión",
+	"block.qtexturedmodels.illusion_trapdoor": "Escotilla de ilusión",
+	"block.qtexturedmodels.illusion_fence": "Valla de ilusión",
+	"block.qtexturedmodels.illusion_bed": "Cama de ilusión",
+	"block.qtexturedmodels.illusion_wall": "Pared de ilusión",
+	"block.qtexturedmodels.illusion_ladder": "Escalera de ilusión",
+	"block.qtexturedmodels.illusion_chest": "Cofre de ilusión",
+	"block.qtexturedmodels.illusion_fence_gate": "Puerta de valla de ilusión",
+
+	"container.frame_chest": "Marco de cofre",
+
+	"item.qtexturedmodels.hammer": "Martillo",
+	"item.qtexturedmodels.texture_wrench": "Llave de textura",
+	"item.qtexturedmodels.chisel": "Cincel",
+	"item.qtexturedmodels.paintbrush": "Rodillo",
+
+	"itemGroup.qtexturedmodels": "QTextureModels"
+}

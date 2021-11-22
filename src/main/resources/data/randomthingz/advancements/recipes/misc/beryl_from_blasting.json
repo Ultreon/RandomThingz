@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "randomthingz:beryl_from_blasting"
+    ]
+  },
+  "criteria": {
+    "has_beryl_ore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "randomthingz:beryl_ore"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "randomthingz:steel_from_blasting"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_beryl_ore",
+      "has_the_recipe"
+    ]
+  ]
+}

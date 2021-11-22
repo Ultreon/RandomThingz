@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": [
+    {
+      "tag": "randomthingz:chunks/silver"
+    },
+    {
+      "tag": "forge:dusts/silver"
+    }
+  ],
+  "result": "randomthingz:silver_ingot",
+  "experience": 1.0,
+  "cookingtime": 100
+}

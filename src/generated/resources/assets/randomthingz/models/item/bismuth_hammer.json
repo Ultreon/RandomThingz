@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "randomthingz:items/bismuth_hammer"
+  }
+}

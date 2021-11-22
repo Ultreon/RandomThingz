@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "randomthingz:peridot_block"
+    }
+  ],
+  "result": {
+    "item": "randomthingz:peridot",
+    "count": 9
+  }
+}
