@@ -1,6 +1,7 @@
 package com.ultreon.randomthingz.entity;
 
 import com.ultreon.randomthingz.entity.common.ModEntities;
+import com.ultreon.randomthingz.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -9,6 +10,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -48,8 +50,9 @@ public class DuckEntity extends ChickenEntity {
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, TEMPTATION_ITEMS));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0D, 80)); // Fish has chance of 40 // Todo: check correct chance.
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.addGoal(6, new LookAtGoal(this, AbstractFishEntity.class, 4.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
     }
 
@@ -68,7 +71,7 @@ public class DuckEntity extends ChickenEntity {
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return null;
+        return ModSounds.ENTITY_DUCK_AMBIENT.get();
     }
 
     @Nullable
@@ -80,7 +83,7 @@ public class DuckEntity extends ChickenEntity {
     @Nullable
     @Override
     protected SoundEvent getHurtSound(@NotNull DamageSource damageSourceIn) {
-        return null;
+        return ModSounds.ENTITY_DUCK_AMBIENT.get();
     }
 
     @Override

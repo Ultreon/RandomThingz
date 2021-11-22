@@ -15,7 +15,9 @@ import com.ultreon.randomthingz.item.tools.ModTraits;
 import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
 import com.ultreon.randomthingz.modules.ui.ModMachineContainers;
 import com.ultreon.randomthingz.modules.ui.ModStats;
+import com.ultreon.randomthingz.sound.ModSounds;
 import com.ultreon.randomthingz.util.ExceptionUtil;
+import lombok.experimental.UtilityClass;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
@@ -29,6 +31,7 @@ import net.minecraft.particles.ParticleType;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -56,6 +59,7 @@ public final class Registration {
     public static final DeferredRegister<VillagerProfession> PROFESSIONS = create(ForgeRegistries.PROFESSIONS);
     public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = create(ForgeRegistries.RECIPE_SERIALIZERS);
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = create(ForgeRegistries.SOUND_EVENTS);
 
     private Registration() {
         throw ExceptionUtil.utilityConstructor();
@@ -64,10 +68,19 @@ public final class Registration {
     public static void register() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(modEventBus);
+        FLUIDS.register(modEventBus);
+        ENCHANTMENTS.register(modEventBus);
+        PAINTINGS.register(modEventBus);
+        PARTICLES.register(modEventBus);
+        ENTITIES.register(modEventBus);
+        PROFESSIONS.register(modEventBus);
+        TILE_ENTITIES.register(modEventBus);
+        POTION_TYPES.register(modEventBus);
         CONTAINERS.register(modEventBus);
         ITEMS.register(modEventBus);
         POTIONS.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
+        SOUND_EVENTS.register(modEventBus);
         ModTraits.REGISTRY.register(modEventBus);
 
         ModBlocks.register();
@@ -80,6 +93,7 @@ public final class Registration {
         ModMachineTileEntities.register();
         ModTraits.register();
         ModCriteriaTriggers.register();
+        ModSounds.register();
     }
 
     @SuppressWarnings("unchecked")
