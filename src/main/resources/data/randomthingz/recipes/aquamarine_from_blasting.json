@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "randomthingz:aquamarine_ore"
-  },
-  "result": "randomthingz:aquamarine",
-  "experience": 0.7,
-  "cookingtime": 100
-}

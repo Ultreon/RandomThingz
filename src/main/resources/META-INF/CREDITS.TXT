@@ -1,5 +1,0 @@
-#======== CREDITS: ========#
- -- StormDragon77
-  > Project: Shinier Rails
-  > Source: https://www.planetminecraft.com/texture-pack/shinier-rails
-  > Use: [BLOCK] Empowered Rails.

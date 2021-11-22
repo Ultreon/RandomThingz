@@ -1,8 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "top": "randomthingz:blocks/wooden_crate_top",
-    "front": "randomthingz:blocks/wooden_crate_front",
-    "side": "randomthingz:blocks/wooden_crate_side"
-  }
-}

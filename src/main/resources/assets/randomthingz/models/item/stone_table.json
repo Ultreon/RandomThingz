@@ -1,7 +1,0 @@
-{
-  "parent": "randomthingz:block/table",
-  "textures": {
-    "top": "block/stone",
-    "legs": "block/cobblestone"
-  }
-}

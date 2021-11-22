@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "particle": "randomthingz:blocks/topaz_block",
-    "all": "randomthingz:blocks/topaz_block"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "randomthingz:items/battery",
-    "layer1": "randomthingz:items/battery_gauge_3"
-  }
-}

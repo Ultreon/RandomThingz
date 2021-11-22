@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "randomthingz:shoarma"
-  },
-  "result": "randomthingz:cooked_shoarma",
-  "experience": 0.35,
-  "cookingtime": 200
-}

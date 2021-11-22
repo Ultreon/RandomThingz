@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "randomthingz:malachite_ore"
-  },
-  "result": "randomthingz:malachite",
-  "experience": 0.7,
-  "cookingtime": 100
-}

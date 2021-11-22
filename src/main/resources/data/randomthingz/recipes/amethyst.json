@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "randomthingz:amethyst_ore"
-  },
-  "result": "randomthingz:amethyst",
-  "experience": 0.7,
-  "cookingtime": 200
-}

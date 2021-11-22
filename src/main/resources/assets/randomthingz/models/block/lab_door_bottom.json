@@ -1,7 +1,0 @@
-{
-  "parent": "block/door_bottom",
-  "textures": {
-    "bottom": "randomthingz:blocks/lab_door_bottom",
-    "top": "randomthingz:blocks/lab_door_top"
-  }
-}

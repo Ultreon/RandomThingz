@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "randomthingz:chicken_leg"
-  },
-  "result": "randomthingz:cooked_chicken_leg",
-  "experience": 0.35,
-  "cookingtime": 200
-}
