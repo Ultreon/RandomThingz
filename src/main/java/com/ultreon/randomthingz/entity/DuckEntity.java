@@ -40,7 +40,10 @@ public class DuckEntity extends ChickenEntity {
     }
 
     public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 4.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
+        return MobEntity.func_233666_p_()
+                .createMutableAttribute(Attributes.MAX_HEALTH, 4.0D)
+                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D)
+                ;
     }
 
     @Override
@@ -50,7 +53,7 @@ public class DuckEntity extends ChickenEntity {
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, TEMPTATION_ITEMS));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.0D, 80)); // Fish has chance of 40 // Todo: check correct chance.
+        this.goalSelector.addGoal(5, new RandomSwimmingGoal(this, 1.4D, 160)); // Fish has chance of 40 // Todo: check correct chance.
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
         this.goalSelector.addGoal(6, new LookAtGoal(this, AbstractFishEntity.class, 4.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
@@ -64,8 +67,8 @@ public class DuckEntity extends ChickenEntity {
     @Nullable
     @Override
     @ParametersAreNonnullByDefault
-    public DuckEntity createChild(ServerWorld dimensionIn, AgeableEntity ageable) {  // createChild
-        return ModEntities.DUCK.get().create(this.dimension);
+    public DuckEntity createChild(ServerWorld world, AgeableEntity ageable) {  // createChild
+        return ModEntities.DUCK.get().create(world);
     }
 
     @Nullable
@@ -77,7 +80,7 @@ public class DuckEntity extends ChickenEntity {
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        return null;
+        return ModSounds.ENTITY_DUCK_AMBIENT.get();
     }
 
     @Nullable
@@ -89,25 +92,5 @@ public class DuckEntity extends ChickenEntity {
     @Override
     protected @NotNull SoundEvent getSplashSound() {
         return SoundEvents.ENTITY_GENERIC_SPLASH;
-    }
-
-    @Override
-    protected void playStepSound(@NotNull BlockPos pos, @NotNull BlockState blockIn) {
-        super.playStepSound(pos, blockIn);
-    }
-
-    @Override
-    protected void updateAITasks() {
-        super.updateAITasks();
-    }
-
-    @Override
-    public void livingTick() {
-        super.livingTick();
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void handleStatusUpdate(byte id) {
-        super.handleStatusUpdate(id);
     }
 }
