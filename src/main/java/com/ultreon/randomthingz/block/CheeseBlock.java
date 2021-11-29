@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.block;
 
+import com.ultreon.randomthingz.commons.interfaces.Sliceable;
 import com.ultreon.randomthingz.modules.ui.ModStats;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -24,7 +25,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-public class CheeseBlock extends Block {
+public class CheeseBlock extends Block implements Sliceable {
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 4);
     protected static final VoxelShape[] SHAPES = new VoxelShape[]{
             Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D),
@@ -98,5 +99,10 @@ public class CheeseBlock extends Block {
 
     public boolean allowsMovement(BlockState state, IBlockReader dimensionIn, BlockPos pos, PathType type) {
         return false;
+    }
+
+    @Override
+    public ItemStack onKnifeSlice(ItemStack stack) {
+        return ItemStack.EMPTY;
     }
 }

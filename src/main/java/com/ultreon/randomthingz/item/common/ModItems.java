@@ -353,7 +353,7 @@ public final class ModItems {
     //     Specials     //
     //////////////////////
 
-    public static final ItemRegistryObject<KnifeItem> KNIFE = register("knife", () -> new KnifeItem(ItemTier.IRON, new Item.Properties().group(ItemGroup.TOOLS).maxDamage(4)));
+    public static final ItemRegistryObject<KnifeItem> KNIFE = register("knife", () -> new KnifeItem(ItemTier.IRON, new Item.Properties().group(ItemGroup.TOOLS).maxDamage(120)));
     public static final ItemRegistryObject<MagnetItem> MAGNET = register("magnet", () -> new MagnetItem(new Item.Properties().group(ItemGroup.TOOLS).maxDamage(4)));
 
     // Wands

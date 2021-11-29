@@ -2,6 +2,7 @@ package com.ultreon.randomthingz.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.ultreon.randomthingz.commons.interfaces.Sliceable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
@@ -29,15 +30,15 @@ public class KnifeItem extends TieredItem {
     private final float attackSpeed = 1.3f;
 
     /**
-     * Modifiers applied when the item is in the mainhand of a user.
+     * Modifiers applied when the item is in the main hand of a user.
      */
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
 
     public KnifeItem(IItemTier tierIn, Properties properties) {
-        super(tierIn, properties.defaultMaxDamage(4));
+        super(tierIn, properties.defaultMaxDamage(120));
 
         // Attack damage.
-        this.attackDamage = tierIn.getAttackDamage() + 1f;
+        this.attackDamage = tierIn.getAttackDamage() + 2f;
 
         // Attributes
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
@@ -54,7 +55,6 @@ public class KnifeItem extends TieredItem {
         return this.attackSpeed;
     }
 
-    @SuppressWarnings("NullableProblems")
     @Override
     public boolean canPlayerBreakBlockWhileHolding(BlockState state, World dimensionIn, BlockPos pos, PlayerEntity player) {
         return !player.isCreative();
@@ -67,9 +67,7 @@ public class KnifeItem extends TieredItem {
     @Override
     public boolean hitEntity(ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
         // Damage item.
-        stack.damageItem(1, attacker, (entity) -> {
-            entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-        });
+        stack.damageItem(1, attacker, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
         return true;
     }
 
@@ -79,12 +77,14 @@ public class KnifeItem extends TieredItem {
     @Override
     public boolean onBlockBroken(@NotNull ItemStack stack, @NotNull World dimensionIn, BlockState state, @NotNull BlockPos pos, @NotNull LivingEntity entityLiving) {
         if (state.getBlockHardness(dimensionIn, pos) != 0.0F) {
-            stack.damageItem(2, entityLiving, (entity) -> {
-                entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
-            });
+            stack.damageItem(isBlockMinable(state) ? 1 : 2, entityLiving, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
         }
 
         return true;
+    }
+
+    public boolean isBlockMinable(BlockState state) {
+        return state.getBlock() instanceof Sliceable;
     }
 
     /**
@@ -92,7 +92,7 @@ public class KnifeItem extends TieredItem {
      */
     @Override
     public boolean canHarvestBlock(BlockState blockIn) {
-        return blockIn.matchesBlock(Blocks.COBWEB);
+        return blockIn.matchesBlock(Blocks.COBWEB) || blockIn.getBlock() instanceof Sliceable;
     }
 
     /**
@@ -130,62 +130,4 @@ public class KnifeItem extends TieredItem {
 
         return copy;
     }
-
-//    @Override
-//    public int getDamage(ItemStack stack) {
-//        return 0;
-//    }
-//
-//    @Override
-//    public int getMaxDamage(ItemStack stack) {
-//        return 145;
-//    }
-
-    //    @Override
-//    public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
-//        Entity entity1 = Targeter.getTarget(playerIn);
-//
-//        ItemStack stack = playerIn.getHeldItem(handIn);
-//
-//        if (!(entity1 instanceof ItemEntity)) {
-//            return ActionResult.resultPass(stack);
-//        }
-//
-//        ItemEntity entity = (ItemEntity) entity1;
-//        playerIn.sendMessage(new StringTextComponent(TextColors.LIGHT_RED + "Entity: " + TextColors.WHITE + Objects.toString(entity, "null")), UUID.randomUUID());
-//
-//        ItemStack stack1 = entity.getItem();
-//        Item item = stack1.getItem();
-//
-//        if (item instanceof Sliceable) {
-//            Sliceable sliceable = (Sliceable) item;
-//            ItemStack newStack = sliceable.onKnifeSlice(stack1.copy());
-//
-//            double x = entity.getPosX();
-//            double y = entity.getPosY();
-//            double z = entity.getPosZ();
-//
-//            entity1.remove(false);
-//
-//            ItemEntity entity2 = new ItemEntity(dimensionIn, x, y, z, newStack);
-//            entity2.setDefaultPickupDelay();
-//            dimensionIn.spawnEntity(entity2);
-////            playerIn.sendMessage(new StringTextComponent(TextColors.LIGHT_RED + "Entity: " + TextColors.WHITE + Objects.toString(entity, "null")), UUID.randomUUID());
-//            Entity entity3 = Targeter.getTarget(playerIn);
-//
-//            if (!(entity3 instanceof ItemEntity)) {
-//                throw new IllegalArgumentException("Entity type changed while slicing item.");
-//            }
-//
-//            ItemEntity entity4 = (ItemEntity) entity3;
-//            ItemStack stack2 = entity4.getItem();
-//            stack2.getItem();
-//
-//            stack.damageItem(1, playerIn, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
-//            return ActionResult.resultSuccess(stack);
-//        } else {
-//            stack.damageItem(2, playerIn, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
-//            return ActionResult.resultFail(stack);
-//        }
-//    }
 }

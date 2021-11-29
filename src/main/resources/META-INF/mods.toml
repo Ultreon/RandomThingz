@@ -8,10 +8,10 @@ See this link for the full license: https://creativecommons.org/licenses/by-nc-s
 
 [[mods]] #mandatory
 modId="randomthingz" #mandatory
-version="36.333.270" #mandatory
+version="36.333.3836" #mandatory
 displayName="Random Thingz: Main Mod" #mandatory
 #updateJSONURL="http://myurl.me/" #optional. Todo: add update URL for Forge.
-displayURL="https://github.com/QTechCommunity/RandomThingz" #optional
+displayURL="https://github.com/Ultreon/RandomThingz" #optional
 logoFile= "randomthingz.png" #optional
 credits="Qboi123, Laz The Artist, INDUSTRIALIST, StormDragon77, FatCow Web (TM), JustinRustin, Gengar, Miep_HD, Giovanni_5656, F1ash, Kai1907, Shadow_236, Nate the Penguin, un_roman, kekkman, sirkomplete, Etaris, Robert0213" #optional
 authors="Qboi123, Laz The Artist" #optional
