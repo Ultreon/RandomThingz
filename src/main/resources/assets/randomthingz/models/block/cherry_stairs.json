@@ -1,8 +1,8 @@
 {
   "parent": "block/stairs",
   "textures": {
-    "bottom": "randomthingz:blocks/cherry_planks",
-    "top": "randomthingz:blocks/cherry_planks",
-    "side": "randomthingz:blocks/cherry_planks"
+    "bottom": "randomthingz:block/cherry_planks",
+    "top": "randomthingz:block/cherry_planks",
+    "side": "randomthingz:block/cherry_planks"
   }
 }

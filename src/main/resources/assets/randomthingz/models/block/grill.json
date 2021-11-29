@@ -3,7 +3,7 @@
   "textures": {
     "particle": "#color",
     "legs": "minecraft:block/light_gray_concrete",
-    "mesh": "randomthingz:blocks/mesh"
+    "mesh": "randomthingz:block/mesh"
   },
   "display": {
     "gui": {

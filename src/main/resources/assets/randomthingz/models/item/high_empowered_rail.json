@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "randomthingz:blocks/high_empowered_rail"
+    "layer0": "randomthingz:block/high_empowered_rail"
   }
 }

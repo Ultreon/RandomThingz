@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "randomthingz:blocks/small_lilac"
+    "cross": "randomthingz:block/small_lilac"
   }
 }

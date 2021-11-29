@@ -6,9 +6,9 @@
     64
   ],
   "textures": {
-    "0": "randomthingz:blocks/lava_generator/lava_generator",
+    "0": "randomthingz:block/lava_generator/lava_generator",
     "1": "block/lava_still",
-    "particle": "randomthingz:blocks/lava_generator/lava_generator"
+    "particle": "randomthingz:block/lava_generator/lava_generator"
   },
   "elements": [
     {

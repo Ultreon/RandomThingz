@@ -5,10 +5,13 @@
       "item": "randomthingz:cheese_slice"
     },
     {
-      "item": "minecraft:cooked_beef"
+      "tag": "forge:food/meat"
     },
     {
-      "item": "minecraft:bread"
+      "item": "randomthingz:hamburger_bun"
+    },
+    {
+      "tag": "minecraft:mushrooms"
     }
   ],
   "result": {

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/zinc_block"
+    "all": "randomthingz:block/zinc_block"
   }
 }

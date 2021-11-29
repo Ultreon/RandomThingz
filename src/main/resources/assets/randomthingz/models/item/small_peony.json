@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "randomthingz:blocks/small_peony"
+    "layer0": "randomthingz:block/small_peony"
   }
 }

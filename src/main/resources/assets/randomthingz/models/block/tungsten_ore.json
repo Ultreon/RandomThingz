@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "particle": "randomthingz:blocks/tungsten_ore",
-    "all": "randomthingz:blocks/tungsten_ore"
+    "particle": "randomthingz:block/tungsten_ore",
+    "all": "randomthingz:block/tungsten_ore"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/alumium_block"
+    "all": "randomthingz:block/alumium_block"
   }
 }b

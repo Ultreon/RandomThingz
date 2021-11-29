@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/lead_ore"
+    "all": "randomthingz:block/lead_ore"
   }
 }

@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "particle": "randomthingz:blocks/game_pc",
-    "0": "randomthingz:blocks/game_pc"
+    "particle": "randomthingz:block/game_pc",
+    "0": "randomthingz:block/game_pc"
   },
   "elements": [
     {

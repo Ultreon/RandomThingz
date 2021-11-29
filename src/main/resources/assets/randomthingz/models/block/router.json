@@ -1,9 +1,9 @@
 {
   "__comment": "Model generated using MrCrayfish's Model Creator (https://mrcrayfish.com/tools?id=mc)",
   "textures": {
-    "1": "randomthingz:blocks/router_1",
-    "2": "randomthingz:blocks/router_2",
-    "space gray": "randomthingz:blocks/router_3"
+    "1": "randomthingz:block/router_1",
+    "2": "randomthingz:block/router_2",
+    "space gray": "randomthingz:block/router_3"
   },
   "display": {
     "gui": {

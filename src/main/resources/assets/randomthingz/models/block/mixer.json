@@ -6,8 +6,8 @@
     64
   ],
   "textures": {
-    "0": "randomthingz:blocks/mixer/mixer",
-    "particle": "randomthingz:blocks/mixer/mixer"
+    "0": "randomthingz:block/mixer/mixer",
+    "particle": "randomthingz:block/mixer/mixer"
   },
   "elements": [
     {

@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "parent": "block/block",
   "textures": {
-    "0": "randomthingz:blocks/pipe",
-    "particle": "randomthingz:blocks/pipe"
+    "0": "randomthingz:block/pipe",
+    "particle": "randomthingz:block/pipe"
   },
   "elements": [
     {

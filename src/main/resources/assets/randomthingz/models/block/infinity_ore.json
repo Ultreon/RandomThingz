@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "particle": "randomthingz:blocks/infinity_ore",
-    "all": "randomthingz:blocks/infinity_ore"
+    "particle": "randomthingz:block/infinity_ore",
+    "all": "randomthingz:block/infinity_ore"
   }
 }

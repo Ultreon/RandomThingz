@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "randomthingz:blocks/eucalyptus_sapling"
+    "layer0": "randomthingz:block/eucalyptus_sapling"
   }
 }

@@ -3,8 +3,8 @@
   "parent": "block/block",
   "ambientocclusion": false,
   "textures": {
-    "0": "randomthingz:blocks/wire",
-    "particle": "randomthingz:blocks/wire"
+    "0": "randomthingz:block/wire",
+    "particle": "randomthingz:block/wire"
   },
   "elements": [
     {

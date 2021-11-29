@@ -20,12 +20,12 @@
     }
   },
   "textures": {
-    "particle": "randomthingz:blocks/basic_crusher/front_on",
-    "down": "randomthingz:blocks/basic_crusher/bottom",
-    "up": "randomthingz:blocks/basic_crusher/top",
-    "north": "randomthingz:blocks/basic_crusher/front_on",
-    "east": "randomthingz:blocks/basic_crusher/side",
-    "south": "randomthingz:blocks/basic_crusher/back",
-    "west": "randomthingz:blocks/basic_crusher/side"
+    "particle": "randomthingz:block/basic_crusher/front_on",
+    "down": "randomthingz:block/basic_crusher/bottom",
+    "up": "randomthingz:block/basic_crusher/top",
+    "north": "randomthingz:block/basic_crusher/front_on",
+    "east": "randomthingz:block/basic_crusher/side",
+    "south": "randomthingz:block/basic_crusher/back",
+    "west": "randomthingz:block/basic_crusher/side"
   }
 }

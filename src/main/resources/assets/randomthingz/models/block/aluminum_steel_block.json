@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/aluminum_steel_block"
+    "all": "randomthingz:block/aluminum_steel_block"
   }
 }

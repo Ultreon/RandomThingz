@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "parent": "block/block",
   "textures": {
-    "0": "randomthingz:blocks/lava_generator",
-    "1": "randomthingz:blocks/lava_generator_tank",
-    "particle": "randomthingz:blocks/lava_generator"
+    "0": "randomthingz:block/lava_generator",
+    "1": "randomthingz:block/lava_generator_tank",
+    "particle": "randomthingz:block/lava_generator"
   },
   "elements": [
     {

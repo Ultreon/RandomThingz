@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_column",
   "textures": {
-    "end": "randomthingz:blocks/cherry_log_top",
-    "side": "randomthingz:blocks/cherry_log"
+    "end": "randomthingz:block/cherry_log_top",
+    "side": "randomthingz:block/cherry_log"
   }
 }

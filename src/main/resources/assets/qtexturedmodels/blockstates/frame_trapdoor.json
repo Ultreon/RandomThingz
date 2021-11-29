@@ -16,6 +16,6 @@
         "contains_block=false,facing=south,half=top,open=true": { "model": "qtexturedmodels:block/frame_trapdoor_open", "x": 180, "y": 0 },
         "contains_block=false,facing=east,half=top,open=true": { "model": "qtexturedmodels:block/frame_trapdoor_open", "x": 180, "y": 270 },
         "contains_block=false,facing=west,half=top,open=true": { "model": "qtexturedmodels:block/frame_trapdoor_open", "x": 180, "y": 90 },
-		"contains_block=true": { "model": "qtexturedmodels:block/frame_trapdoor" }
+        "contains_block=true": { "model": "qtexturedmodels:block/frame_trapdoor" }
     }
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "bites=0": {
+      "model": "randomthingz:block/cheese"
+    },
+    "bites=1": {
+      "model": "randomthingz:block/cheese_slice1"
+    },
+    "bites=2": {
+      "model": "randomthingz:block/cheese_slice2"
+    },
+    "bites=3": {
+      "model": "randomthingz:block/cheese_slice3"
+    },
+    "bites=4": {
+      "model": "randomthingz:block/cheese_slice4"
+    }
+  }
+}

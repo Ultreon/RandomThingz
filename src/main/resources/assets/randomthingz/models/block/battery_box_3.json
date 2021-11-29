@@ -2,10 +2,10 @@
   "credit": "Made with Blockbench",
   "parent": "block/block",
   "textures": {
-    "0": "randomthingz:blocks/battery_box/side",
-    "1": "randomthingz:blocks/battery_box/top",
-    "2": "randomthingz:blocks/battery_box/bottom",
-    "particle": "randomthingz:blocks/battery_box/side"
+    "0": "randomthingz:block/battery_box/side",
+    "1": "randomthingz:block/battery_box/top",
+    "2": "randomthingz:block/battery_box/bottom",
+    "particle": "randomthingz:block/battery_box/side"
   },
   "elements": [
     {

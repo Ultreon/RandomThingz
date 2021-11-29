@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "particle": "randomthingz:blocks/amethyst_ore",
-    "all": "randomthingz:blocks/amethyst_ore"
+    "particle": "randomthingz:block/amethyst_ore",
+    "all": "randomthingz:block/amethyst_ore"
   }
 }

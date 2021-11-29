@@ -1,6 +1,6 @@
 {
   "parent": "block/fence_inventory",
   "textures": {
-    "texture": "randomthingz:blocks/cherry_planks"
+    "texture": "randomthingz:block/cherry_planks"
   }
 }

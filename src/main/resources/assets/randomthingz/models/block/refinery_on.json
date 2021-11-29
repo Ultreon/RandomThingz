@@ -6,10 +6,10 @@
     64
   ],
   "textures": {
-    "0": "randomthingz:blocks/refinery/refinery",
-    "1": "randomthingz:blocks/refinery/fluid_animation",
-    "2": "randomthingz:blocks/refinery/tub_animation",
-    "particle": "randomthingz:blocks/refinery/refinery"
+    "0": "randomthingz:block/refinery/refinery",
+    "1": "randomthingz:block/refinery/fluid_animation",
+    "2": "randomthingz:block/refinery/tub_animation",
+    "particle": "randomthingz:block/refinery/refinery"
   },
   "elements": [
     {

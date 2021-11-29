@@ -1,12 +1,9 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "minecraft:milk_bucket"
-    }
-  ],
-  "result": {
-    "item": "randomthingz:cheese",
-    "count": 1
-  }
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "minecraft:milk_bucket"
+  },
+  "result": "randomthingz:cheese",
+  "experience": 0.35,
+  "cookingtime": 400
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "randomthingz:blocks/cherry_sapling"
+    "cross": "randomthingz:block/cherry_sapling"
   }
 }

@@ -1,8 +1,8 @@
 {
   "parent": "randomthingz:custom/bar_panel_top",
   "textures": {
-    "particle": "randomthingz:blocks/bar_panel_side",
-    "side": "randomthingz:blocks/bar_panel_side",
-    "end": "randomthingz:blocks/bar_panel_end"
+    "particle": "randomthingz:block/bar_panel_side",
+    "side": "randomthingz:block/bar_panel_side",
+    "end": "randomthingz:block/bar_panel_end"
   }
 }

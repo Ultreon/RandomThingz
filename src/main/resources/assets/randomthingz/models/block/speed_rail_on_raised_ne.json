@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_rail_raised_ne",
   "textures": {
-    "rail": "randomthingz:blocks/speed_rail_on"
+    "rail": "randomthingz:block/speed_rail_on"
   }
 }

@@ -12,6 +12,7 @@ import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.IntNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -97,7 +98,12 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
         } else {
             Biome biome = dimensionIn.getBiome(getPosition());
             if (biome.getCategory() == Biome.Category.FOREST || biome.getCategory() == Biome.Category.PLAINS) {
-                switch (rand.nextInt(15)) {
+                int index = rand.nextInt(15);
+                if (dataTag != null && dataTag.contains("MoobloomType", 3)) {
+                    index = dataTag.getInt("MoobloomType");
+                }
+
+                switch (index) {
                     case 1: {
                         this.setMoobloomType(Type.OXEYE_DAISY);
                         break;
@@ -154,6 +160,7 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
                         this.setMoobloomType(Type.POPPY);
                         break;
                     }
+                    case 0:
                     default: {
                         this.setMoobloomType(Type.BUTTERCUP);
                         break;
@@ -440,6 +447,17 @@ public class MoobloomEntity extends CowEntity implements IShearable, net.minecra
             this.name = nameIn;
             this.id = id;
             this.renderState = renderStateIn;
+        }
+
+        @Nullable
+        public static Type getFromBlock(Block block) {
+            for (Type type : values()) {
+                Block fromState = type.renderState.getBlock();
+                if (block.equals(fromState)) {
+                    return type;
+                }
+            }
+            return null;
         }
 
         public int getId() {

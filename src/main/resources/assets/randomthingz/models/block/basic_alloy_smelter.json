@@ -20,12 +20,12 @@
     }
   },
   "textures": {
-    "particle": "randomthingz:blocks/basic_alloy_smelter/front",
-    "down": "randomthingz:blocks/basic_alloy_smelter/bottom",
-    "up": "randomthingz:blocks/basic_alloy_smelter/top",
-    "north": "randomthingz:blocks/basic_alloy_smelter/front",
-    "east": "randomthingz:blocks/basic_alloy_smelter/side",
-    "south": "randomthingz:blocks/basic_alloy_smelter/back",
-    "west": "randomthingz:blocks/basic_alloy_smelter/side"
+    "particle": "randomthingz:block/basic_alloy_smelter/front",
+    "down": "randomthingz:block/basic_alloy_smelter/bottom",
+    "up": "randomthingz:block/basic_alloy_smelter/top",
+    "north": "randomthingz:block/basic_alloy_smelter/front",
+    "east": "randomthingz:block/basic_alloy_smelter/side",
+    "south": "randomthingz:block/basic_alloy_smelter/back",
+    "west": "randomthingz:block/basic_alloy_smelter/side"
   }
 }

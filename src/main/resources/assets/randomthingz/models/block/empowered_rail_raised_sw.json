@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_rail_raised_sw",
   "textures": {
-    "rail": "randomthingz:blocks/empowered_rail"
+    "rail": "randomthingz:block/empowered_rail"
   }
 }

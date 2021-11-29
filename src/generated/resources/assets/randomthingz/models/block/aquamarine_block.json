@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/aquamarine_block"
+    "all": "randomthingz:block/aquamarine_block"
   }
 }

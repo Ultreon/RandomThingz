@@ -1,6 +1,6 @@
 {
   "parent": "block/template_fence_gate",
   "textures": {
-    "texture": "randomthingz:blocks/eucalyptus_planks"
+    "texture": "randomthingz:block/eucalyptus_planks"
   }
 }

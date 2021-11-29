@@ -6,8 +6,8 @@
     64
   ],
   "textures": {
-    "0": "randomthingz:blocks/refinery/refinery",
-    "particle": "randomthingz:blocks/refinery/refinery"
+    "0": "randomthingz:block/refinery/refinery",
+    "particle": "randomthingz:block/refinery/refinery"
   },
   "elements": [
     {

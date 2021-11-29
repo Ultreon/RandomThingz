@@ -91,8 +91,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
             ResourceLocation polishedStairsBlock = Objects.requireNonNull(stoneType.getPolishedStairsBlock().get().getRegistryName());
 
             // Textures.
-            ResourceLocation rawBlockTexture = RandomThingz.rl("blocks/" + Objects.requireNonNull(stoneType.getRawBlock().get().getRegistryName()).getPath());
-            ResourceLocation polishedBlockTexture = RandomThingz.rl("blocks/" + Objects.requireNonNull(stoneType.getPolishedBlock().get().getRegistryName()).getPath());
+            ResourceLocation rawBlockTexture = RandomThingz.rl("block/" + Objects.requireNonNull(stoneType.getRawBlock().get().getRegistryName()).getPath());
+            ResourceLocation polishedBlockTexture = RandomThingz.rl("block/" + Objects.requireNonNull(stoneType.getPolishedBlock().get().getRegistryName()).getPath());
 
             // Cube block models.
             ModelFile raw = cubeAll(stoneType.getRawBlock().get());
@@ -151,6 +151,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     public ResourceLocation blockTexture(Block block) {
         ResourceLocation name = block.getRegistryName();
-        return new ResourceLocation(Objects.requireNonNull(name).getNamespace(), "blocks/" + name.getPath());
+        return new ResourceLocation(Objects.requireNonNull(name).getNamespace(), "block/" + name.getPath());
     }
 }

@@ -69,6 +69,7 @@ public final class RandomThingz {
      * Random Thingz's Logger
      */
     public static final Logger LOGGER = LogManager.getLogger("RandomThingz:Generic");
+    private static final boolean DEV_OVERRIDE = true;
 
     private static MinecraftServer server = null;
     private static final boolean MOD_TEST_PHASE = false;
@@ -332,7 +333,7 @@ public final class RandomThingz {
      * @return true if Random Thingz is a dev test version, false otherwise.
      */
     public static boolean isDevtest() {
-        return RT_ARGS.getFlags().isDevTest();
+        return RT_ARGS.getFlags().isDevTest() || DEV_OVERRIDE;
     }
 
     /**

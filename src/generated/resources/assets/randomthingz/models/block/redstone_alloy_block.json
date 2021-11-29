@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/redstone_alloy_block"
+    "all": "randomthingz:block/redstone_alloy_block"
   }
 }

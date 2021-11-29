@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "top": "randomthingz:blocks/atomic_tnt_top",
-    "bottom": "randomthingz:blocks/atomic_tnt_bottom",
-    "side": "randomthingz:blocks/atomic_tnt_side"
+    "top": "randomthingz:block/atomic_tnt_top",
+    "bottom": "randomthingz:block/atomic_tnt_bottom",
+    "side": "randomthingz:block/atomic_tnt_side"
   }
 }

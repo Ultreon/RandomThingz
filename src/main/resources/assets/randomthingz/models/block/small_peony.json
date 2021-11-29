@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "randomthingz:blocks/small_peony"
+    "cross": "randomthingz:block/small_peony"
   }
 }

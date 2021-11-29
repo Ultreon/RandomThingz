@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/epidote_block"
+    "all": "randomthingz:block/epidote_block"
   }
 }

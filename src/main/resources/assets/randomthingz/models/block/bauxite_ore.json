@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/bauxite_ore"
+    "all": "randomthingz:block/bauxite_ore"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/tungsten_block"
+    "all": "randomthingz:block/tungsten_block"
   }
 }

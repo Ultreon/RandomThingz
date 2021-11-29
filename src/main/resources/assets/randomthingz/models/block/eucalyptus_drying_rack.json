@@ -1,6 +1,6 @@
 {
   "parent": "randomthingz:block/drying_rack",
   "textures": {
-    "wood": "randomthingz:blocks/eucalyptus_planks"
+    "wood": "randomthingz:block/eucalyptus_planks"
   }
 }

@@ -20,12 +20,12 @@
     }
   },
   "textures": {
-    "particle": "randomthingz:blocks/coal_generator/front",
-    "down": "randomthingz:blocks/coal_generator/bottom",
-    "up": "randomthingz:blocks/coal_generator/top",
-    "north": "randomthingz:blocks/coal_generator/front",
-    "east": "randomthingz:blocks/coal_generator/side",
-    "south": "randomthingz:blocks/coal_generator/back",
-    "west": "randomthingz:blocks/coal_generator/side"
+    "particle": "randomthingz:block/coal_generator/front",
+    "down": "randomthingz:block/coal_generator/bottom",
+    "up": "randomthingz:block/coal_generator/top",
+    "north": "randomthingz:block/coal_generator/front",
+    "east": "randomthingz:block/coal_generator/side",
+    "south": "randomthingz:block/coal_generator/back",
+    "west": "randomthingz:block/coal_generator/side"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/rail_flat",
   "textures": {
-    "rail": "randomthingz:blocks/empowered_rail_on"
+    "rail": "randomthingz:block/empowered_rail_on"
   }
 }

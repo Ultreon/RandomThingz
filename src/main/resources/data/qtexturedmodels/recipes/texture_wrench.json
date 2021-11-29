@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "O",
-	"I",
-	"#"
+    "I",
+    "#"
   ],
   "key": {
     "#": {
       "item": "qtexturedmodels:frameblock"
     },
-	"I": {
+    "I": {
       "item": "minecraft:stick"
     },
-	"O": {
+    "O": {
       "item": "minecraft:gold_ingot"
     }
   },

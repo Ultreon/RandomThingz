@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
   "textures": {
-    "all": "randomthingz:blocks/eucalyptus_leaves"
+    "all": "randomthingz:block/eucalyptus_leaves"
   }
 }

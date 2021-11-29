@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/signalum_block"
+    "all": "randomthingz:block/signalum_block"
   }
 }

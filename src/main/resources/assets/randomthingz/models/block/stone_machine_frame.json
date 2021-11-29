@@ -1,6 +1,6 @@
 {
   "parent": "randomthingz:block/machine_frame",
   "textures": {
-    "all": "randomthingz:blocks/machine_frame/stone"
+    "all": "randomthingz:block/machine_frame/stone"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cross",
   "textures": {
-    "cross": "randomthingz:blocks/small_sunflower"
+    "cross": "randomthingz:block/small_sunflower"
   }
 }

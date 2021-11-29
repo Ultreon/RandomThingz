@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/platinum_block"
+    "all": "randomthingz:block/platinum_block"
   }
 }

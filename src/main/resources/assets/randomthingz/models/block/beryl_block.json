@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/beryl_block"
+    "all": "randomthingz:block/beryl_block"
   }
 }

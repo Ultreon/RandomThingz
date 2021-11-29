@@ -20,12 +20,12 @@
     }
   },
   "textures": {
-    "particle": "randomthingz:blocks/diesel_generator/front_on",
-    "down": "randomthingz:blocks/diesel_generator/bottom",
-    "up": "randomthingz:blocks/diesel_generator/top",
-    "north": "randomthingz:blocks/diesel_generator/front_on",
-    "east": "randomthingz:blocks/diesel_generator/side",
-    "south": "randomthingz:blocks/diesel_generator/back",
-    "west": "randomthingz:blocks/diesel_generator/side"
+    "particle": "randomthingz:block/diesel_generator/front_on",
+    "down": "randomthingz:block/diesel_generator/bottom",
+    "up": "randomthingz:block/diesel_generator/top",
+    "north": "randomthingz:block/diesel_generator/front_on",
+    "east": "randomthingz:block/diesel_generator/side",
+    "south": "randomthingz:block/diesel_generator/back",
+    "west": "randomthingz:block/diesel_generator/side"
   }
 }

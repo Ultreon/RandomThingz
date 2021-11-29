@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "randomthingz:blocks/morganite_ore"
+    "all": "randomthingz:block/morganite_ore"
   }
 }

@@ -32,6 +32,6 @@
         "contains_block=false,facing=south,half=upper,hinge=right,open=true": { "model": "qtexturedmodels:block/illusion_door_empty_top" },
         "contains_block=false,facing=west,half=upper,hinge=right,open=true":  { "model": "qtexturedmodels:block/illusion_door_empty_top", "y": 90 },
         "contains_block=false,facing=north,half=upper,hinge=right,open=true": { "model": "qtexturedmodels:block/illusion_door_empty_top", "y": 180 },
-		"contains_block=true":{ "model": "qtexturedmodels:block/illusion_door" }
+        "contains_block=true":{ "model": "qtexturedmodels:block/illusion_door" }
     }
 }

@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "WWW",
-	"###"
+    "###"
   ],
   "key": {
     "W": {
       "item": "minecraft:white_wool"
     },
-	"#": {
+    "#": {
       "item": "qtexturedmodels:frameblock"
     }
   },

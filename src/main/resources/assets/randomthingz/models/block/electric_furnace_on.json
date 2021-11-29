@@ -20,12 +20,12 @@
     }
   },
   "textures": {
-    "particle": "randomthingz:blocks/electric_furnace/front_on",
-    "down": "randomthingz:blocks/electric_furnace/bottom",
-    "up": "randomthingz:blocks/electric_furnace/top_on",
-    "north": "randomthingz:blocks/electric_furnace/front_on",
-    "east": "randomthingz:blocks/electric_furnace/side_on",
-    "south": "randomthingz:blocks/electric_furnace/back",
-    "west": "randomthingz:blocks/electric_furnace/side_on"
+    "particle": "randomthingz:block/electric_furnace/front_on",
+    "down": "randomthingz:block/electric_furnace/bottom",
+    "up": "randomthingz:block/electric_furnace/top_on",
+    "north": "randomthingz:block/electric_furnace/front_on",
+    "east": "randomthingz:block/electric_furnace/side_on",
+    "south": "randomthingz:block/electric_furnace/back",
+    "west": "randomthingz:block/electric_furnace/side_on"
   }
 }

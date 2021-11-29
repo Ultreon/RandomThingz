@@ -20,12 +20,12 @@
     }
   },
   "textures": {
-    "particle": "randomthingz:blocks/crusher/front",
-    "down": "randomthingz:blocks/crusher/bottom",
-    "up": "randomthingz:blocks/crusher/top",
-    "north": "randomthingz:blocks/crusher/front",
-    "east": "randomthingz:blocks/crusher/side",
-    "south": "randomthingz:blocks/crusher/back",
-    "west": "randomthingz:blocks/crusher/side"
+    "particle": "randomthingz:block/crusher/front",
+    "down": "randomthingz:block/crusher/bottom",
+    "up": "randomthingz:block/crusher/top",
+    "north": "randomthingz:block/crusher/front",
+    "east": "randomthingz:block/crusher/side",
+    "south": "randomthingz:block/crusher/back",
+    "west": "randomthingz:block/crusher/side"
   }
 }

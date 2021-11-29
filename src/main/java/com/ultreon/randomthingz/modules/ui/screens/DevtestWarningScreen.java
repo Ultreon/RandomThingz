@@ -24,7 +24,7 @@ import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-public class ModTestPhaseScreen extends Screen {
+public class DevtestWarningScreen extends Screen {
     private static boolean initializedAlready = false;
     private static boolean isSaving;
     private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
@@ -33,8 +33,8 @@ public class ModTestPhaseScreen extends Screen {
     private final Screen backScreen;
     private int ticksUntilEnable;
 
-    public ModTestPhaseScreen(Screen backScreen) {
-        super(new TranslationTextComponent("msg.randomthingz.test_phase.title"));
+    public DevtestWarningScreen(Screen backScreen) {
+        super(new TranslationTextComponent("screen.randomthingz.dev_warning.title"));
         this.backScreen = backScreen;
         this.yesButtonText = DialogTexts.GUI_YES;
         this.noButtonText = DialogTexts.GUI_NO;
@@ -63,17 +63,24 @@ public class ModTestPhaseScreen extends Screen {
             }
         }));
 
-        setButtonDelay(10);
+        setButtonDelay(100);
 
         initializedAlready = true;
     }
 
-    @SuppressWarnings("deprecation")
     public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 70, 0xffffff);
-        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.randomthingz.test_phase.description"), this.width / 2, 90, 0xbfbfbf);
-        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.randomthingz.test_phase.description.1"), this.width / 2, 100, 0xbfbfbf);
+        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("screen.randomthingz.dev_warning.description.1"), this.width / 2, 90, 0xbfbfbf);
+        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("screen.randomthingz.dev_warning.description.2"), this.width / 2, 100, 0xbfbfbf);
+        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("screen.randomthingz.dev_warning.description.3"), this.width / 2, 110, 0xbfbfbf);
+        if (this.ticksUntilEnable > 0) {
+            if (ticksUntilEnable / 20 != 1) {
+                drawCenteredString(matrixStack, this.font, new TranslationTextComponent("screen.randomthingz.dev_warning.description.4a", ticksUntilEnable / 20), width / 2, this.height / 6 + 136, 0xbfbfbf);
+            } else {
+                drawCenteredString(matrixStack, this.font, new TranslationTextComponent("screen.randomthingz.dev_warning.description.4b", ticksUntilEnable / 20), width / 2, this.height / 6 + 136, 0xbfbfbf);
+            }
+        }
         this.field_243276_q.func_241863_a(matrixStack, this.width / 2, 90);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
@@ -119,7 +126,7 @@ public class ModTestPhaseScreen extends Screen {
         if (gui instanceof MainMenuScreen) {
             if (RandomThingz.isDevtest()) {
                 if (!isInitializedAlready()) {
-                    mc.displayGuiScreen(new ModTestPhaseScreen(mc.currentScreen));
+                    mc.displayGuiScreen(new DevtestWarningScreen(mc.currentScreen));
                 }
             }
         }
