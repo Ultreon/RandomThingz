@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.network;
 
-import com.ultreon.randomthingz.modules.actionmenu.ActionMenuScreen;
+import com.ultreon.randomthingz.actionmenu.ActionMenuScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.ServerPlayerEntity;

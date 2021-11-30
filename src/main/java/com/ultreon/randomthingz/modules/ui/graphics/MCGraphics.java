@@ -1,10 +1,10 @@
-package com.ultreon.randomthingz.modules.ui.graphics;
+package com.ultreon.randomthingz.client.graphics;
 
 import com.google.common.annotations.Beta;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.ultreon.randomthingz.commons.geom.RectangleUV;
-import com.ultreon.randomthingz.modules.ui.screens.AdvancedScreen;
+import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
+import com.ultreon.randomthingz.common.geom.RectangleUV;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;

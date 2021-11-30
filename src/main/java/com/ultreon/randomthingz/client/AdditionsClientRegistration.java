@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.client;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.renderer.RenderBabyCreeper;
 import com.ultreon.randomthingz.client.renderer.RenderBabyEnderman;
-import com.ultreon.randomthingz.entity.common.ModEntities;
+import com.ultreon.randomthingz.common.entity.ModEntities;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.StrayRenderer;

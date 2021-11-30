@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.world.gen.ores;
 
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
-import com.ultreon.randomthingz.item.common.ItemMaterial;
+import com.ultreon.randomthingz.common.item.ItemMaterial;
 import com.ultreon.randomthingz.world.gen.ores.configs.DefaultOreConfig;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Blocks;

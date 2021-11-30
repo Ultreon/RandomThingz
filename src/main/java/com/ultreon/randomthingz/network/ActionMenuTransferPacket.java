@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.network;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.modules.actionmenu.ActionMenuItem;
-import com.ultreon.randomthingz.modules.actionmenu.ServerActionMenuItem;
+import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
+import com.ultreon.randomthingz.actionmenu.ServerActionMenuItem;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.text.StringTextComponent;

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.base;
 
-import com.ultreon.randomthingz.commons.OreProperties;
-import com.ultreon.randomthingz.commons.interfaces.IHasOreProperties;
+import com.ultreon.randomthingz.common.OreProperties;
+import com.ultreon.randomthingz.common.interfaces.IHasOreProperties;
 import net.minecraft.block.OreBlock;
 
 @Deprecated

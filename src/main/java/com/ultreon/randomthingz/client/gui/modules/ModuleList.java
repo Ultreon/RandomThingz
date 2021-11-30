@@ -3,10 +3,10 @@ package com.ultreon.randomthingz.client.gui.modules;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.commons.Module;
-import com.ultreon.randomthingz.commons.ModuleManager;
-import com.ultreon.randomthingz.commons.ModuleSafety;
-import com.ultreon.randomthingz.modules.ui.screens.AdvancedScreen;
+import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
+import com.ultreon.randomthingz.common.Module;
+import com.ultreon.randomthingz.common.ModuleManager;
+import com.ultreon.randomthingz.common.ModuleSafety;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -111,7 +111,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
         private final Module module;
         private final IReorderingProcessor reorderingLocalizedName;
         private final ModuleManager manager = ModuleManager.getInstance();
-        private long debugRefresh = 0;
+        private final long debugRefresh = 0;
 
         /**
          * Module list entry.

@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item;
 
-import com.ultreon.randomthingz.item.tools.ModTraits;
-import com.ultreon.randomthingz.item.tools.SwordTool;
-import com.ultreon.randomthingz.item.tools.trait.AbstractTrait;
+import com.ultreon.randomthingz.item.tool.ModTraits;
+import com.ultreon.randomthingz.item.tool.SwordTool;
+import com.ultreon.randomthingz.item.tool.trait.AbstractTrait;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemTier;
 

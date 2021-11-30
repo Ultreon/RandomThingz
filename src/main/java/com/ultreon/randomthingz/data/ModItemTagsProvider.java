@@ -4,15 +4,17 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.commons.tags.ModTags;
+import com.ultreon.randomthingz.common.item.ItemMaterial;
+import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.common.tags.ModTags;
 import com.ultreon.randomthingz.item.CraftingItems;
-import com.ultreon.randomthingz.item.common.ItemMaterial;
-import com.ultreon.randomthingz.item.tools.Toolset;
+import com.ultreon.randomthingz.item.tool.Toolset;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.data.ItemTagsProvider;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.IItemProvider;
@@ -117,6 +119,36 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 ModTags.Items.DUSTS_COAL);
         groupBuilder(Tags.Items.INGOTS, ItemMaterial::getIngotTag);
         groupBuilder(Tags.Items.NUGGETS, ItemMaterial::getNuggetTag);
+
+        Builder<Item> cookedMeat = getOrCreateBuilder(itemTag(forgeId("food/cooked_meat")))
+                .add(Items.COOKED_BEEF)
+                .add(Items.COOKED_PORKCHOP)
+                .add(Items.COOKED_CHICKEN)
+                .add(Items.COOKED_MUTTON)
+                .add(Items.COOKED_RABBIT)
+                .add(ModItems.COOKED_BACON.asItem())
+                .add(ModItems.COOKED_TOMAHAWK.asItem())
+                .add(ModItems.COOKED_MEATBALL.asItem())
+                .add(ModItems.COOKED_CHICKEN_LEG.asItem())
+                .add(ModItems.COOKED_PORK_SHANK.asItem())
+                .add(ModItems.COOKED_SHOARMA.asItem());
+
+        Builder<Item> rawMeat = getOrCreateBuilder(itemTag(forgeId("food/raw_meat")))
+                .add(Items.BEEF)
+                .add(Items.PORKCHOP)
+                .add(Items.CHICKEN)
+                .add(Items.MUTTON)
+                .add(Items.RABBIT)
+                .add(ModItems.BACON.asItem())
+                .add(ModItems.TOMAHAWK.asItem())
+                .add(ModItems.MEATBALL.asItem())
+                .add(ModItems.CHICKEN_LEG.asItem())
+                .add(ModItems.PORK_SHANK.asItem())
+                .add(ModItems.SHOARMA.asItem());
+
+        Builder<Item> meat = getOrCreateBuilder(itemTag(forgeId("food/meat")))
+                .addTag(ModTags.Items.RAW_MEAT)
+                .addTag(ModTags.Items.COOKED_MEAT);
 
         Builder<Item> armors = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/armors")));
         Builder<Item> swords = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/swords")));

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.pc.disk.qfs;
 
-import com.ultreon.randomthingz.commons.IntSize;
+import com.ultreon.randomthingz.common.IntSize;
 import com.ultreon.randomthingz.pc.disk.AbstractFile;
 import com.ultreon.randomthingz.pc.disk.Partition;
 

@@ -1,8 +1,9 @@
 package com.ultreon.randomthingz.modules.ui;
 
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
-import com.ultreon.randomthingz.commons.CoreModule;
-import com.ultreon.randomthingz.commons.ModuleSafety;
+import com.ultreon.randomthingz.common.CoreModule;
+import com.ultreon.randomthingz.common.ModuleSafety;
+import com.ultreon.randomthingz.init.ModContainers;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.fml.RegistryObject;

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.world.biome.common;
 
-import com.ultreon.randomthingz.commons.init.ObjectInit;
+import com.ultreon.randomthingz.common.init.ObjectInit;
 import com.ultreon.randomthingz.world.biome.objects.ExampleBiome;
 import com.ultreon.randomthingz.world.biome.objects.GrasslandBiome;
 import com.ultreon.randomthingz.world.gen.WorldGenerationModule;

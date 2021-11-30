@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.network;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.commons.Module;
-import com.ultreon.randomthingz.commons.ModuleManager;
+import com.ultreon.randomthingz.common.Module;
+import com.ultreon.randomthingz.common.ModuleManager;
 import lombok.Getter;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -16,9 +16,9 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class ServerModuleChangePacket {
     @Getter
-    private Module module;
+    private final Module module;
     @Getter
-    private boolean enable;
+    private final boolean enable;
     @Getter
     private CompoundNBT tag;
 

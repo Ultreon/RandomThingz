@@ -1,8 +1,7 @@
 package com.ultreon.randomthingz.entity;
 
-import com.ultreon.randomthingz.entity.common.ModEntities;
+import com.ultreon.randomthingz.common.entity.ModEntities;
 import com.ultreon.randomthingz.sound.ModSounds;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -17,11 +16,8 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;

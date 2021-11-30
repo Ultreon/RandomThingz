@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.tileentity;
 
+import com.ultreon.randomthingz.block.entity.ModTileEntities;
 import com.ultreon.randomthingz.block.furniture.WoodenCrateBlock;
-import com.ultreon.randomthingz.inventory.CrateContainer;
-import com.ultreon.randomthingz.modules.tiles.ModTileEntities;
+import com.ultreon.randomthingz.inventory.container.CrateContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

@@ -4,14 +4,14 @@ import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.modlib.silentlib.data.ExtendedShapedRecipeBuilder;
 import com.qsoftware.modlib.silentlib.data.ExtendedShapelessRecipeBuilder;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.common.ModBlocks;
-import com.ultreon.randomthingz.commons.FeatureStatus;
-import com.ultreon.randomthingz.commons.tags.ModTags;
+import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.common.FeatureStatus;
+import com.ultreon.randomthingz.common.item.ItemMaterial;
+import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.common.tags.ModTags;
 import com.ultreon.randomthingz.item.CraftingItems;
-import com.ultreon.randomthingz.item.common.ItemMaterial;
-import com.ultreon.randomthingz.item.common.ModItems;
-import com.ultreon.randomthingz.item.tools.Toolset;
-import com.ultreon.randomthingz.item.upgrades.MachineUpgrades;
+import com.ultreon.randomthingz.item.tool.Toolset;
+import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
@@ -573,6 +573,34 @@ public class ModRecipesProvider extends RecipeProvider {
                 .key('#', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .addCriterion("has_item", hasItem(ItemMaterial.REDSTONE_ALLOY.getIngotTag().get()))
                 .build(consumer);
+
+        ExtendedShapedRecipeBuilder.vanillaBuilder(ModBlocks.ATOMIC_TNT)
+                .patternLine("XCX")
+                .patternLine("/O/")
+                .patternLine("XEX")
+                .key('X', ItemMaterial.PLATINUM.getIngotTag().get())
+                .key('C', ItemMaterial.COPPER.getIngotTag().get())
+                .key('E', ItemMaterial.ELECTRUM.getIngotTag().get())
+                .key('/', ModItems.URANIUM_ROD)
+                .key('O', Items.GUNPOWDER)
+                .addCriterion("has_item", hasItem(ModItems.URANIUM_ROD))
+                .build(consumer);
+
+        ExtendedShapelessRecipeBuilder.vanillaBuilder(ModBlocks.GOLD_BUTTON)
+                .addIngredient(Items.GOLD_NUGGET)
+                .addCriterion("has_item", hasItem(Items.GOLD_NUGGET))
+                .build(consumer);
+
+        ExtendedShapelessRecipeBuilder.vanillaBuilder(ModBlocks.IRON_BUTTON)
+                .addIngredient(Items.IRON_NUGGET)
+                .addCriterion("has_item", hasItem(Items.IRON_NUGGET))
+                .build(consumer);
+
+        ExtendedShapelessRecipeBuilder.vanillaBuilder(ModBlocks.QUARTZ_BUTTON)
+                .addIngredient(Items.QUARTZ)
+                .addCriterion("has_item", hasItem(Items.QUARTZ))
+                .build(consumer);
+
     }
 
     @SuppressWarnings({"OptionalGetWithoutIsPresent"})
@@ -670,7 +698,79 @@ public class ModRecipesProvider extends RecipeProvider {
                 .key('C', ModItems.EMPTY_CANISTER)
                 .key('#', ModTags.Items.PLASTIC)
                 .key('B', ModItems.BATTERY)
+                .addCriterion("has_item", hasItem(Items.WATER_BUCKET))
                 .build(consumer);
+
+        ExtendedShapedRecipeBuilder.vanillaBuilder(ModItems.URANIUM_ROD)
+                .patternLine("/")
+                .patternLine("/")
+                .key('/', ItemMaterial.URANIUM.getIngotTag().get())
+                .build(consumer);
+
+        ExtendedShapedRecipeBuilder.vanillaBuilder(ModItems.HAMBURGER_BUN)
+                .patternLine("YY")
+                .key('Y', Items.WHEAT)
+                .build(consumer, modId("food/hamburger_bun"));
+
+        ExtendedShapedRecipeBuilder.vanillaBuilder(ModItems.CHEESE_BURGER)
+                .patternLine(" U ")
+                .patternLine("-OP")
+                .patternLine(" U ")
+                .key('U', ModItems.HAMBURGER_BUN)
+                .key('-', ModItems.CHEESE_SLICE)
+                .key('O', ModTags.Items.MEAT)
+                .key('P', Tags.Items.MUSHROOMS)
+                .build(consumer, modId("food/cheese_burger1"));
+
+        ExtendedShapedRecipeBuilder.vanillaBuilder(ModItems.CHEESE_BURGER)
+                .patternLine(" U ")
+                .patternLine("O-P")
+                .patternLine(" U ")
+                .key('U', ModItems.HAMBURGER_BUN)
+                .key('-', ModItems.CHEESE_SLICE)
+                .key('O', ModTags.Items.MEAT)
+                .key('P', Tags.Items.MUSHROOMS)
+                .build(consumer, modId("food/cheese_burger2"));
+
+        ExtendedShapedRecipeBuilder.vanillaBuilder(ModItems.CHEESE_BURGER)
+                .patternLine(" U ")
+                .patternLine("OP-")
+                .patternLine(" U ")
+                .key('U', ModItems.HAMBURGER_BUN)
+                .key('-', ModItems.CHEESE_SLICE)
+                .key('O', ModTags.Items.MEAT)
+                .key('P', Tags.Items.MUSHROOMS)
+                .build(consumer, modId("food/cheese_burger3"));
+
+        ExtendedShapedRecipeBuilder.vanillaBuilder(ModItems.CHEESE_BURGER)
+                .patternLine(" U ")
+                .patternLine("-PO")
+                .patternLine(" U ")
+                .key('U', ModItems.HAMBURGER_BUN)
+                .key('-', ModItems.CHEESE_SLICE)
+                .key('O', ModTags.Items.MEAT)
+                .key('P', Tags.Items.MUSHROOMS)
+                .build(consumer, modId("food/cheese_burger4"));
+
+        ExtendedShapedRecipeBuilder.vanillaBuilder(ModItems.CHEESE_BURGER)
+                .patternLine(" U ")
+                .patternLine("P-O")
+                .patternLine(" U ")
+                .key('U', ModItems.HAMBURGER_BUN)
+                .key('-', ModItems.CHEESE_SLICE)
+                .key('O', ModTags.Items.MEAT)
+                .key('P', Tags.Items.MUSHROOMS)
+                .build(consumer, modId("food/cheese_burger5"));
+
+        ExtendedShapedRecipeBuilder.vanillaBuilder(ModItems.CHEESE_BURGER)
+                .patternLine(" U ")
+                .patternLine("PO-")
+                .patternLine(" U ")
+                .key('U', ModItems.HAMBURGER_BUN)
+                .key('-', ModItems.CHEESE_SLICE)
+                .key('O', ModTags.Items.MEAT)
+                .key('P', Tags.Items.MUSHROOMS)
+                .build(consumer, modId("food/cheese_burger6"));
 
         for (Toolset toolset : Toolset.values()) {
             if (toolset.getStatus() == FeatureStatus.DEPRECATED) {
@@ -728,90 +828,6 @@ public class ModRecipesProvider extends RecipeProvider {
                         .key('/', () -> toolset.getHandleMaterial().get())
                         .key('X', () -> toolset.getBaseMaterial().get())
                         .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getHoe().getName() + "_mirror"));
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getKatana())
-//                        .patternLine(" X")
-//                        .patternLine("X ")
-//                        .patternLine("X/")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer);
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getKatana())
-//                        .patternLine("X ")
-//                        .patternLine(" X")
-//                        .patternLine("/X")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getKatana().getName() + "_mirror"));
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getLongsword())
-//                        .patternLine("X ")
-//                        .patternLine("X ")
-//                        .patternLine("X/")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer);
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getLongsword())
-//                        .patternLine(" X")
-//                        .patternLine(" X")
-//                        .patternLine("/X")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getLongsword().getName() + "_mirror"));
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getBroadsword())
-//                        .patternLine("XX")
-//                        .patternLine("XX")
-//                        .patternLine("/ ")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer);
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getBroadsword())
-//                        .patternLine("XX")
-//                        .patternLine("XX")
-//                        .patternLine(" /")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getBroadsword().getName() + "_mirror"));
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getHammer())
-//                        .patternLine("XXX")
-//                        .patternLine("XXX")
-//                        .patternLine(" / ")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer);
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getExcavator())
-//                        .patternLine("XX ")
-//                        .patternLine("X/ ")
-//                        .patternLine("  /")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer);
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getExcavator())
-//                        .patternLine(" XX")
-//                        .patternLine(" /X")
-//                        .patternLine("/  ")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getExcavator().getName() + "_mirror"));
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getBattleaxe())
-//                        .patternLine("XXX")
-//                        .patternLine("X/X")
-//                        .patternLine(" / ")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer);
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getLumberAxe())
-//                        .patternLine("XXX")
-//                        .patternLine("X/ ")
-//                        .patternLine(" / ")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer);
-//                ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getLumberAxe())
-//                        .patternLine("XXX")
-//                        .patternLine(" /X")
-//                        .patternLine(" / ")
-//                        .key('/', () -> toolset.getHandleMaterial().get())
-//                        .key('X', () -> toolset.getBaseMaterial().get())
-//                        .build(consumer, new ResourceLocation(RandomThingz.MOD_ID, toolset.getLumberAxe().getName() + "_mirror"));
                 if (toolset.getArmorSubMaterial() != null) {
                     ExtendedShapedRecipeBuilder.vanillaBuilder(toolset.getHelmet())
                             .patternLine("XXX")
@@ -884,6 +900,10 @@ public class ModRecipesProvider extends RecipeProvider {
                 .build(consumer, RandomThingz.rl("leather"));
     }
 
+    private ResourceLocation modId(String path) {
+        return RandomThingz.rl(path);
+    }
+
     private void registerSmelting(Consumer<IFinishedRecipe> consumer) {
         for (ItemMaterial metal : ItemMaterial.values()) {
             if (metal.getIngot().isPresent() && (metal.getChunksTag().isPresent() || metal.getDustTag().isPresent())) {
@@ -901,6 +921,10 @@ public class ModRecipesProvider extends RecipeProvider {
 
         assert (ItemMaterial.REFINED_IRON.getIngot().isPresent());
         smeltingAndBlasting(consumer, "refined_iron_ingot", Ingredient.fromTag(Tags.Items.INGOTS_IRON), ItemMaterial.REFINED_IRON.getIngot().get());
+
+        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(Items.MILK_BUCKET), ModItems.CHEESE, 0.4f, 400)
+                .addCriterion("has_item", hasItem(Items.MILK_BUCKET))
+                .build(consumer, RandomThingz.rl("food/cheese"));
     }
 
     private void smeltingAndBlasting(Consumer<IFinishedRecipe> consumer, String name, Ingredient ingredient, IItemProvider result) {

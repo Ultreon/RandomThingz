@@ -1,11 +1,11 @@
 package com.ultreon.randomthingz.block.machines.compressor;
 
 import com.google.common.collect.ImmutableList;
+import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
-import com.ultreon.randomthingz.commons.enums.MachineTier;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.CompressingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
-import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

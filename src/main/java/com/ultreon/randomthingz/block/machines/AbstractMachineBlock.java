@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines;
 
-import com.ultreon.randomthingz.commons.enums.MachineTier;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

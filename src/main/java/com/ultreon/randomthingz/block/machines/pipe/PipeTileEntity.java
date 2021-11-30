@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.pipe;
 
-import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
+import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;

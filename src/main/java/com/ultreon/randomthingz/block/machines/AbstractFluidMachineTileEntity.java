@@ -5,7 +5,7 @@ import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidInventory;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
 import com.qsoftware.modlib.silentutils.EnumUtils;
-import com.ultreon.randomthingz.commons.enums.MachineTier;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;

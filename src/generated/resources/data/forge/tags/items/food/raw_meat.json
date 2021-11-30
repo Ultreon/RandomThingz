@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:beef",
+    "minecraft:porkchop",
+    "minecraft:chicken",
+    "minecraft:mutton",
+    "minecraft:rabbit",
+    "randomthingz:bacon",
+    "randomthingz:tomahawk",
+    "randomthingz:meatball",
+    "randomthingz:chicken_leg",
+    "randomthingz:pork_shank",
+    "randomthingz:shoarma"
+  ]
+}

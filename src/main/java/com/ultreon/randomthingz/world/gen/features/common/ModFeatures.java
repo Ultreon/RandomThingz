@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.world.gen.features.common;
 
-import com.ultreon.randomthingz.block.common.ModBlocks;
+import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import lombok.experimental.UtilityClass;
 import net.minecraft.util.registry.Registry;

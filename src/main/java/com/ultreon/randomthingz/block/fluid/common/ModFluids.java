@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.fluid.common;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.common.ModBlocks;
-import com.ultreon.randomthingz.item.common.ModItems;
+import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.common.item.ModItems;
 import lombok.experimental.UtilityClass;
 import net.minecraft.fluid.FlowingFluid;
 import net.minecraft.fluid.Fluid;

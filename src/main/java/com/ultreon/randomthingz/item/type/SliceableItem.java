@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.type;
 
-import com.ultreon.randomthingz.commons.interfaces.Sliceable;
+import com.ultreon.randomthingz.common.interfaces.Sliceable;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

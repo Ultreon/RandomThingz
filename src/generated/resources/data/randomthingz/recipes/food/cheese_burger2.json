@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " U ",
+    "O-P",
+    " U "
+  ],
+  "key": {
+    "U": {
+      "item": "randomthingz:hamburger_bun"
+    },
+    "-": {
+      "item": "randomthingz:cheese_slice"
+    },
+    "O": {
+      "tag": "forge:food/meat"
+    },
+    "P": {
+      "tag": "forge:mushrooms"
+    }
+  },
+  "result": {
+    "item": "randomthingz:cheese_burger"
+  }
+}

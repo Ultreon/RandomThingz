@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.pump;
 
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
-import com.ultreon.randomthingz.modules.ui.ModMachineContainers;
+import com.ultreon.randomthingz.init.ModMachineContainers;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

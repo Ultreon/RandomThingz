@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item.magic;
 
+import com.ultreon.randomthingz.common.item.ModItemGroups;
 import com.ultreon.randomthingz.item.WandItem;
-import com.ultreon.randomthingz.item.common.ModItemGroups;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;

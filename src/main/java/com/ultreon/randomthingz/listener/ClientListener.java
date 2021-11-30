@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.listener;
 
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.modules.ModuleScreen;
-import com.ultreon.randomthingz.commons.ModuleManager;
-import com.ultreon.randomthingz.commons.interfaces.IFOVUpdateItem;
+import com.ultreon.randomthingz.common.ModuleManager;
+import com.ultreon.randomthingz.common.interfaces.IFOVUpdateItem;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;

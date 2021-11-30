@@ -2,15 +2,11 @@ package com.ultreon.randomthingz;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.ultreon.randomthingz.block.common.ModBlocksAlt;
-import com.ultreon.randomthingz.commons.Module;
-import com.ultreon.randomthingz.commons.ModuleManager;
-import com.ultreon.randomthingz.commons.internal.RtArgs;
-import com.ultreon.randomthingz.commons.internal.RtCredits;
-import com.ultreon.randomthingz.commons.internal.RtVersion;
-import com.ultreon.randomthingz.entity.common.ModEntities;
-import com.ultreon.randomthingz.item.common.ModItemsAlt;
-import com.ultreon.randomthingz.modules.ui.ModContainers;
+import com.ultreon.randomthingz.common.Module;
+import com.ultreon.randomthingz.common.ModuleManager;
+import com.ultreon.randomthingz.common.internal.RtArgs;
+import com.ultreon.randomthingz.common.internal.RtCredits;
+import com.ultreon.randomthingz.common.internal.RtVersion;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
@@ -246,14 +242,6 @@ public final class RandomThingz {
         modEventBus.addListener(RandomThingz.init::onEntityAttributeCreation);
         modEventBus.addListener(this::enqueueIMC);
         modEventBus.addListener(this::processIMC);
-
-        // Register generic listeners.
-        ModBlocksAlt.BLOCKS.register(modEventBus);
-        ModBlocksAlt.ITEMS.register(modEventBus);
-        ModItemsAlt.ITEMS.register(modEventBus);
-        ModEntities.ENTITY_TYPES.register(modEventBus);
-        ModContainers.CONTAINER_TYPES.register(modEventBus);
-//        ModTileEntities.TILE_ENTITY_TYPES.register(modEventBus);
 
         // Client-start.
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> RandomThingz.init.clientStart());

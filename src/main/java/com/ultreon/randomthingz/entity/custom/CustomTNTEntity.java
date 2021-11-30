@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.entity.custom;
 
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.CustomTNTBlock;
-import com.ultreon.randomthingz.commons.TNTProperties;
-import com.ultreon.randomthingz.entity.common.ModEntities;
+import com.ultreon.randomthingz.common.TNTProperties;
+import com.ultreon.randomthingz.common.entity.ModEntities;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

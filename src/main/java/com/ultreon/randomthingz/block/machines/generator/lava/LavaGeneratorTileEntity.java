@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.machines.generator.lava;
 
 import com.qsoftware.modlib.api.IFluidContainer;
+import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidFuelGeneratorTileEntity;
-import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;

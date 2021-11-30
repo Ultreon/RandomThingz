@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.client.renderer.layers;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.ultreon.randomthingz.block.common.ModBlocks;
+import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.entity.MoobloomEntityOld;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;

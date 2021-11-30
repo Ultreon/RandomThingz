@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.entity;
 
-import com.ultreon.randomthingz.entity.common.ModEntities;
-import com.ultreon.randomthingz.item.common.ModItems;
+import com.ultreon.randomthingz.common.entity.ModEntities;
+import com.ultreon.randomthingz.common.item.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

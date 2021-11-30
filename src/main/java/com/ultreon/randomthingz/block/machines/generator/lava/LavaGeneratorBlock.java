@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.generator.lava;
 
 import com.ultreon.randomthingz.block.machines.generator.AbstractGeneratorBlock;
-import com.ultreon.randomthingz.commons.enums.MachineTier;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

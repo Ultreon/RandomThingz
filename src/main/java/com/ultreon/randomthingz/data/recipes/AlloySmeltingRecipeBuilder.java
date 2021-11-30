@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.item.common.ItemMaterial;
+import com.ultreon.randomthingz.common.item.ItemMaterial;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.Item;

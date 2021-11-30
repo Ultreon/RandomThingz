@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.api;
 
 import com.ultreon.randomthingz.item.MachineUpgradeItem;
-import com.ultreon.randomthingz.item.upgrades.MachineUpgrades;
+import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 
 /**
  * A machine upgrade item, which goes into the upgrade slots of machines. Also see {@link

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item;
 
 import com.qsoftware.modlib.api.IFluidContainer;
-import com.ultreon.randomthingz.item.common.ModItems;
+import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.test;
 
-import com.ultreon.randomthingz.commons.ModuleManager;
+import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.test.modules.debug.DebuggingModule;
 
 public class TestModules {

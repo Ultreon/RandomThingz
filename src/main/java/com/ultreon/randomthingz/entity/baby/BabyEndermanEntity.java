@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.entity.baby;
 
-import com.ultreon.randomthingz.item.common.ModItemsAlt;
+import com.ultreon.randomthingz.common.item.ModItemsAlt;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;

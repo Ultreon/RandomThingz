@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.ultreon.randomthingz.block.common.ModBlocks;
+import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.compressor.CompressorScreen;
 import com.ultreon.randomthingz.item.crafting.CompressingRecipe;
 import com.ultreon.randomthingz.util.Constants;

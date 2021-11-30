@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.client.debug;
 
-import com.ultreon.randomthingz.commons.java.maps.SequencedHashMap;
+import com.ultreon.randomthingz.common.java.maps.SequencedHashMap;
 
 public class DebugText {
     private final SequencedHashMap<String, Object[]> left = new SequencedHashMap<>();

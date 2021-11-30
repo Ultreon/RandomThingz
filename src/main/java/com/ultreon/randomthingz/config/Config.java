@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.config;
 
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.commons.Module;
-import com.ultreon.randomthingz.commons.java.maps.SequencedHashMap;
+import com.ultreon.randomthingz.common.Module;
+import com.ultreon.randomthingz.common.java.maps.SequencedHashMap;
 import com.ultreon.randomthingz.util.ExceptionUtil;
 import com.ultreon.randomthingz.world.gen.ores.DefaultOre;
 import mcp.MethodsReturnNonnullByDefault;

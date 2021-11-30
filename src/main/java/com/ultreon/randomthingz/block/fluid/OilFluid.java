@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.fluid;
 
-import com.ultreon.randomthingz.block.common.ModBlocks;
+import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
-import com.ultreon.randomthingz.item.common.ModItems;
+import com.ultreon.randomthingz.common.item.ModItems;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FlowingFluidBlock;
@@ -54,8 +54,8 @@ public abstract class OilFluid extends FlowingFluid {
     @Override
     protected FluidAttributes createAttributes() {
         return FluidAttributes.builder(
-                        new ResourceLocation("randomthingz:blocks/oil_still"),
-                        new ResourceLocation("randomthingz:blocks/oil_flowing"))
+                        new ResourceLocation("randomthingz:block/oil_still"),
+                        new ResourceLocation("randomthingz:block/oil_flowing"))
                 .translationKey("block.randomthingz.oil")
                 .luminosity(0).density(5_000).viscosity(10_000).temperature(0)
                 .sound(SoundEvents.ITEM_BUCKET_FILL, SoundEvents.ITEM_BUCKET_EMPTY)

@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.machines.crusher;
 
-import com.ultreon.randomthingz.block.common.MachineType;
+import com.ultreon.randomthingz.block._common.MachineType;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
-import com.ultreon.randomthingz.commons.enums.MachineTier;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.CrushingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.TextUtils;

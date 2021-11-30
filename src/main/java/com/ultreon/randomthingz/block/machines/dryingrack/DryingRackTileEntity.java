@@ -1,9 +1,9 @@
 package com.ultreon.randomthingz.block.machines.dryingrack;
 
 import com.qsoftware.modlib.silentlib.util.PlayerUtils;
+import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.item.crafting.DryingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
-import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
 import com.ultreon.randomthingz.util.ParticleUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

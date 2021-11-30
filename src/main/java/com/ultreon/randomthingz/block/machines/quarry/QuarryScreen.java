@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.block.machines.quarry;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
-import com.ultreon.randomthingz.modules.ui.button.RedstoneModeButton;
+import com.ultreon.randomthingz.client.gui.widgets.button.RedstoneModeButton;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.ItemRenderer;

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.mixin;
 
-import com.ultreon.randomthingz.block.common.ModBlocks;
+import com.ultreon.randomthingz.block._common.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;

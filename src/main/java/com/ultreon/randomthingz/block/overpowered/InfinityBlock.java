@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.overpowered;
 
-import com.ultreon.randomthingz.item.tools.Toolset;
+import com.ultreon.randomthingz.item.tool.Toolset;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;

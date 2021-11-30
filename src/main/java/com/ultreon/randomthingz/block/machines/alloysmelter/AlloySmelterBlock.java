@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.machines.alloysmelter;
 
-import com.ultreon.randomthingz.block.common.MachineType;
+import com.ultreon.randomthingz.block._common.MachineType;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlock;
-import com.ultreon.randomthingz.commons.enums.MachineTier;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;

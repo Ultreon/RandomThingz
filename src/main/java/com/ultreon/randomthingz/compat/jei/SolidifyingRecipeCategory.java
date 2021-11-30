@@ -2,11 +2,11 @@ package com.ultreon.randomthingz.compat.jei;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.ultreon.randomthingz.block.common.ModBlocks;
+import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.solidifier.SolidifierScreen;
 import com.ultreon.randomthingz.block.machines.solidifier.SolidifierTileEntity;
+import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.item.CanisterItem;
-import com.ultreon.randomthingz.item.common.ModItems;
 import com.ultreon.randomthingz.item.crafting.SolidifyingRecipe;
 import com.ultreon.randomthingz.util.Constants;
 import com.ultreon.randomthingz.util.TextUtils;

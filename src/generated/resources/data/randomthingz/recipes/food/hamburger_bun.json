@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "YY"
+  ],
+  "key": {
+    "Y": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "result": {
+    "item": "randomthingz:hamburger_bun"
+  }
+}

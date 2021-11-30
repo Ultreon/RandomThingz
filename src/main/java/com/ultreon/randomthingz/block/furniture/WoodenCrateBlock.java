@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.furniture;
 
 import com.ultreon.randomthingz.block.DirectionalBlock;
-import com.ultreon.randomthingz.modules.tiles.ModTileEntities;
+import com.ultreon.randomthingz.block.entity.ModTileEntities;
 import com.ultreon.randomthingz.tileentity.CrateTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

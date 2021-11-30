@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XCX",
+    "/O/",
+    "XEX"
+  ],
+  "key": {
+    "X": {
+      "tag": "forge:ingots/platinum"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "E": {
+      "tag": "forge:ingots/electrum"
+    },
+    "/": {
+      "item": "randomthingz:uranium_rod"
+    },
+    "O": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "item": "randomthingz:atomic_tnt"
+  }
+}

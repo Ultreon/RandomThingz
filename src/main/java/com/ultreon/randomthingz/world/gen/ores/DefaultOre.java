@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.world.gen.ores;
 
 import com.qsoftware.modlib.silentlib.block.IBlockProvider;
 import com.qsoftware.modlib.silentutils.Lazy;
-import com.ultreon.randomthingz.commons.exceptions.InvalidNameException;
-import com.ultreon.randomthingz.item.common.ItemMaterial;
+import com.ultreon.randomthingz.common.exceptions.InvalidNameException;
+import com.ultreon.randomthingz.common.item.ItemMaterial;
 import com.ultreon.randomthingz.world.gen.ores.configs.DefaultOreConfig;
 import com.ultreon.randomthingz.world.gen.ores.configs.IOreConfig;
 import mcp.MethodsReturnNonnullByDefault;
@@ -40,7 +40,7 @@ public class DefaultOre implements IBlockProvider, IOre {
 
     private final String name;
     private final Map<Block, Block> oreGroundTypeMap = new HashMap<>();
-    private Predicate<BiomeLoadingEvent> predicate;
+    private final Predicate<BiomeLoadingEvent> predicate;
     private float resistance;
 
     public DefaultOre(String name, Supplier<ItemMaterial> material, int hardness, int harvestLevel, DefaultOreConfig config) {

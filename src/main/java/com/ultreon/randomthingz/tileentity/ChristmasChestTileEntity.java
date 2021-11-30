@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.tileentity;
 
-import com.ultreon.randomthingz.modules.tiles.ModTileEntities;
+import com.ultreon.randomthingz.block.entity.ModTileEntities;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.IChestLid;
 import net.minecraftforge.api.distmarker.Dist;

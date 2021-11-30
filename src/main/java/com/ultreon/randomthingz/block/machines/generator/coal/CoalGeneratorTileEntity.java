@@ -1,9 +1,9 @@
 package com.ultreon.randomthingz.block.machines.generator.coal;
 
+import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.generator.AbstractGeneratorTileEntity;
-import com.ultreon.randomthingz.commons.enums.MachineTier;
-import com.ultreon.randomthingz.commons.tags.ModTags;
-import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
+import com.ultreon.randomthingz.common.enums.MachineTier;
+import com.ultreon.randomthingz.common.tags.ModTags;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;

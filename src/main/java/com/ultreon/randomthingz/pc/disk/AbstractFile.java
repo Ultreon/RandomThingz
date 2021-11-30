@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.pc.disk;
 
 import com.google.common.annotations.Beta;
-import com.ultreon.randomthingz.commons.IntSize;
+import com.ultreon.randomthingz.common.IntSize;
 
 @Beta
 public abstract class AbstractFile {

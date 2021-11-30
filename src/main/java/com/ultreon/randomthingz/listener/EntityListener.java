@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.listener;
 
 import com.ultreon.randomthingz.RandomThingz;
+import com.ultreon.randomthingz.common.entity.ModEntities;
 import com.ultreon.randomthingz.entity.MoobloomEntity;
-import com.ultreon.randomthingz.entity.common.ModEntities;
 import com.ultreon.randomthingz.util.ListUtils;
 import lombok.experimental.UtilityClass;
 import net.minecraft.block.Block;

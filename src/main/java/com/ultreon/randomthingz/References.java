@@ -2,8 +2,8 @@ package com.ultreon.randomthingz;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.ultreon.randomthingz.commons.internal.RtArgs;
-import com.ultreon.randomthingz.commons.internal.RtVersion;
+import com.ultreon.randomthingz.common.internal.RtArgs;
+import com.ultreon.randomthingz.common.internal.RtVersion;
 
 import java.io.File;
 import java.io.InputStream;

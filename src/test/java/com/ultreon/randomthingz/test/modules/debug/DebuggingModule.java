@@ -1,11 +1,11 @@
 package com.ultreon.randomthingz.test.modules.debug;
 
 import com.ultreon.randomthingz.RandomThingz;
+import com.ultreon.randomthingz.actionmenu.MainActionMenu;
+import com.ultreon.randomthingz.actionmenu.MenuHandler;
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
-import com.ultreon.randomthingz.commons.Module;
-import com.ultreon.randomthingz.commons.ModuleSafety;
-import com.ultreon.randomthingz.modules.actionmenu.MainActionMenu;
-import com.ultreon.randomthingz.modules.actionmenu.MenuHandler;
+import com.ultreon.randomthingz.common.Module;
+import com.ultreon.randomthingz.common.ModuleSafety;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import org.jetbrains.annotations.NotNull;

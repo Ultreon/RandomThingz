@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.ultreon.randomthingz.client.MobVariantsModule;
 import com.ultreon.randomthingz.client.model.BabyCreeperModel;
 import com.ultreon.randomthingz.client.renderer.layers.BabyCreeperChargeLayer;
 import com.ultreon.randomthingz.entity.baby.BabyCreeperEntity;
-import com.ultreon.randomthingz.modules.client.modules.MobVariantsModule;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;

@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines;
 
 import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.modlib.silentutils.EnumUtils;
-import com.ultreon.randomthingz.commons.enums.MachineTier;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.MachineUpgradeItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.test.modules.debug;
 
-import com.ultreon.randomthingz.modules.actionmenu.AbstractActionMenu;
-import com.ultreon.randomthingz.modules.actionmenu.ActionMenuItem;
+import com.ultreon.randomthingz.actionmenu.AbstractActionMenu;
+import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
 import com.ultreon.randomthingz.network.Network;
 import com.ultreon.randomthingz.test.network.OreProfilePacket;
 import net.minecraft.util.text.ITextComponent;

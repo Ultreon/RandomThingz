@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.magic;
 
-import com.ultreon.randomthingz.item.common.ModItemGroups;
+import com.ultreon.randomthingz.common.item.ModItemGroups;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DeadCoralWallFanBlock;

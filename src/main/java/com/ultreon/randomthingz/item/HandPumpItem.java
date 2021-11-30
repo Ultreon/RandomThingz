@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.item;
 
 import com.qsoftware.modlib.api.IFluidContainer;
 import com.qsoftware.modlib.silentlib.util.PlayerUtils;
-import com.ultreon.randomthingz.commons.enums.TextColors;
+import com.ultreon.randomthingz.common.enums.TextColors;
 import com.ultreon.randomthingz.item.energy.EnergyStoringItem;
 import com.ultreon.randomthingz.util.EnergyUtils;
 import com.ultreon.randomthingz.util.InventoryUtils;

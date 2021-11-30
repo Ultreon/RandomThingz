@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.world.gen.ores;
 
 import com.mojang.datafixers.util.Pair;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.common.ModBlocks;
+import com.ultreon.randomthingz.block._common.ModBlocks;
 import lombok.Getter;
 import lombok.val;
 import net.minecraft.block.Block;

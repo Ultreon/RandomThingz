@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block;
 
-import com.ultreon.randomthingz.commons.TNTProperties;
+import com.ultreon.randomthingz.common.TNTProperties;
 import com.ultreon.randomthingz.effect.common.ModEffects;
 import com.ultreon.randomthingz.entity.custom.CustomTNTEntity;
 import net.minecraft.block.BlockState;

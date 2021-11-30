@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item;
 
-import com.ultreon.randomthingz.commons.enums.TextColors;
-import com.ultreon.randomthingz.item.common.ModItemGroups;
+import com.ultreon.randomthingz.common.enums.TextColors;
+import com.ultreon.randomthingz.common.item.ModItemGroups;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;

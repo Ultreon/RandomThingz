@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.ultreon.randomthingz.commons.interfaces.Sliceable;
+import com.ultreon.randomthingz.common.interfaces.Sliceable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;

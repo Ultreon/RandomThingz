@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.effect;
 
 import com.ultreon.randomthingz.block.AtomicTNTBlock;
 import com.ultreon.randomthingz.entity.damagesource.ModDamageSources;
-import com.ultreon.randomthingz.item.tools.Toolset;
+import com.ultreon.randomthingz.item.tool.Toolset;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;

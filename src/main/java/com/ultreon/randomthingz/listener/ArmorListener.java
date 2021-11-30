@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.listener;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.item.tools.Toolset;
+import com.ultreon.randomthingz.item.tool.Toolset;
 import lombok.experimental.UtilityClass;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

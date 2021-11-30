@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.listener;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.item.common.ItemMaterial;
-import com.ultreon.randomthingz.item.tools.Toolset;
+import com.ultreon.randomthingz.common.item.ItemMaterial;
+import com.ultreon.randomthingz.item.tool.Toolset;
 import lombok.experimental.UtilityClass;
 import net.minecraftforge.event.entity.item.ItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

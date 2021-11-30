@@ -7,7 +7,7 @@ import com.mojang.datafixers.util.Pair;
 import com.qsoftware.modlib.silentutils.MathUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
-import com.ultreon.randomthingz.item.upgrades.MachineUpgrades;
+import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import com.ultreon.randomthingz.util.Constants;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

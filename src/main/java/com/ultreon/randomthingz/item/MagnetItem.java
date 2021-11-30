@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item;
 
-import com.ultreon.randomthingz.commons.enums.TextColors;
+import com.ultreon.randomthingz.common.enums.TextColors;
 import com.ultreon.randomthingz.item.type.EnergyStoringItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;

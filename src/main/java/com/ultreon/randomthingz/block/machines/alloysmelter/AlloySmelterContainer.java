@@ -2,10 +2,10 @@ package com.ultreon.randomthingz.block.machines.alloysmelter;
 
 import com.qsoftware.modlib.silentlib.inventory.SlotOutputOnly;
 import com.qsoftware.modlib.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.common.MachineType;
+import com.ultreon.randomthingz.block._common.MachineType;
 import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
-import com.ultreon.randomthingz.commons.enums.MachineTier;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;

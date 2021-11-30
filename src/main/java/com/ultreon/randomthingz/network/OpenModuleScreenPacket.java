@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.network;
 
 import com.ultreon.randomthingz.client.gui.modules.ModuleScreen;
-import com.ultreon.randomthingz.commons.ModuleManager;
+import com.ultreon.randomthingz.common.ModuleManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.PacketBuffer;

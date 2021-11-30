@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.modules;
 
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
-import com.ultreon.randomthingz.commons.CoreModule;
-import com.ultreon.randomthingz.commons.ModuleSafety;
+import com.ultreon.randomthingz.common.CoreModule;
+import com.ultreon.randomthingz.common.ModuleSafety;
 import mcp.MethodsReturnNonnullByDefault;
 import org.jetbrains.annotations.NotNull;
 

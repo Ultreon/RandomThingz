@@ -1,15 +1,15 @@
 package com.ultreon.randomthingz;
 
 import com.qsoftware.modlib.silentlib.event.Greetings;
-import com.ultreon.randomthingz.block.common.ModBlocks;
+import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import com.ultreon.randomthingz.client.ModModelProperties;
 import com.ultreon.randomthingz.client.gui.settings.SettingsScreen;
+import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.config.Config;
 import com.ultreon.randomthingz.data.DataGenerators;
-import com.ultreon.randomthingz.item.common.ModItems;
-import com.ultreon.randomthingz.modules.tiles.ModMachineTileEntities;
-import com.ultreon.randomthingz.modules.ui.ModMachineContainers;
+import com.ultreon.randomthingz.init.ModMachineContainers;
 import com.ultreon.randomthingz.network.Network;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.block.Block;

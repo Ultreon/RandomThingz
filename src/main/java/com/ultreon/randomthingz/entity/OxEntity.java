@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.entity;
 
-import com.ultreon.randomthingz.entity.common.ModEntities;
+import com.ultreon.randomthingz.common.entity.ModEntities;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;

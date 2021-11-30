@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item;
 
+import com.ultreon.randomthingz.common.item.ModItemGroups;
 import com.ultreon.randomthingz.item.energy.EnergyStoringItem;
-import com.ultreon.randomthingz.item.common.ModItemGroups;
 import net.minecraft.item.Item;
 import net.minecraft.item.Rarity;
 

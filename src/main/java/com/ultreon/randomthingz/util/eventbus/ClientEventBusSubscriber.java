@@ -1,11 +1,11 @@
 package com.ultreon.randomthingz.util.eventbus;
 
 import com.ultreon.randomthingz.RandomThingz;
+import com.ultreon.randomthingz.block.entity.ModTileEntities;
+import com.ultreon.randomthingz.client.gui.screen.ExampleChestScreen;
 import com.ultreon.randomthingz.client.renderer.*;
-import com.ultreon.randomthingz.entity.common.ModEntities;
-import com.ultreon.randomthingz.modules.tiles.ModTileEntities;
-import com.ultreon.randomthingz.modules.ui.ModContainers;
-import com.ultreon.randomthingz.modules.ui.screens.ExampleChestScreen;
+import com.ultreon.randomthingz.common.entity.ModEntities;
+import com.ultreon.randomthingz.init.ModContainers;
 import com.ultreon.randomthingz.tileentity.renderer.ChristmasChestTileEntityRenderer;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;

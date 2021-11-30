@@ -1,9 +1,8 @@
 package com.ultreon.randomthingz.item;
 
-import com.ultreon.randomthingz.block.common.ModBlocks;
-import com.ultreon.randomthingz.commons.interfaces.Sliceable;
+import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.common.interfaces.Sliceable;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**

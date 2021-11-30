@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.client.gui.modules;
 
-import com.ultreon.randomthingz.commons.Module;
-import com.ultreon.randomthingz.modules.ui.screens.AdvancedScreen;
+import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
+import com.ultreon.randomthingz.common.Module;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.text.TranslationTextComponent;
 

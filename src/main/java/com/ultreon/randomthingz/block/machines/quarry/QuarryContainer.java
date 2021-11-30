@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.quarry;
 
 import com.qsoftware.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
-import com.ultreon.randomthingz.modules.ui.ModMachineContainers;
+import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;

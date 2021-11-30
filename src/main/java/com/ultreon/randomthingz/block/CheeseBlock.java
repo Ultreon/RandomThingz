@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block;
 
-import com.ultreon.randomthingz.commons.interfaces.Sliceable;
-import com.ultreon.randomthingz.modules.ui.ModStats;
+import com.ultreon.randomthingz.common.interfaces.Sliceable;
+import com.ultreon.randomthingz.init.ModStats;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -22,7 +21,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class CheeseBlock extends Block implements Sliceable {

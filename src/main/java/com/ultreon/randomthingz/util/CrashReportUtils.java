@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.util;
 
-import com.ultreon.randomthingz.modules.actionmenu.AbstractActionMenu;
-import com.ultreon.randomthingz.modules.actionmenu.ActionMenuItem;
+import com.ultreon.randomthingz.actionmenu.AbstractActionMenu;
+import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 

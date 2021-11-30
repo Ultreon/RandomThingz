@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.world.gen;
 
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
-import com.ultreon.randomthingz.commons.CoreRegisterModule;
-import com.ultreon.randomthingz.commons.ModuleSafety;
+import com.ultreon.randomthingz.common.CoreRegisterModule;
+import com.ultreon.randomthingz.common.ModuleSafety;
 import com.ultreon.randomthingz.world.biome.common.ModBiomes;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.world.biome.Biome;

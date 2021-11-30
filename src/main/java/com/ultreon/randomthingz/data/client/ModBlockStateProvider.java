@@ -4,9 +4,9 @@ import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.StoneType;
-import com.ultreon.randomthingz.block.common.ModBlocks;
+import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.dryingrack.DryingRackBlock;
-import com.ultreon.randomthingz.item.common.ItemMaterial;
+import com.ultreon.randomthingz.common.item.ItemMaterial;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.Direction;
@@ -59,8 +59,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         dryingRack(ModBlocks.JUNGLE_DRYING_RACK.get(), "block/jungle_planks");
         dryingRack(ModBlocks.OAK_DRYING_RACK.get(), "block/oak_planks");
         dryingRack(ModBlocks.SPRUCE_DRYING_RACK.get(), "block/spruce_planks");
-        dryingRack(ModBlocks.EUCALYPTUS_DRYING_RACK.get(), "randomthingz:blocks/eucalyptus_planks");
-        dryingRack(ModBlocks.CHERRY_DRYING_RACK.get(), "randomthingz:blocks/cherry_planks");
+        dryingRack(ModBlocks.EUCALYPTUS_DRYING_RACK.get(), "randomthingz:block/eucalyptus_planks");
+        dryingRack(ModBlocks.CHERRY_DRYING_RACK.get(), "randomthingz:block/cherry_planks");
 
         simpleBlock(ModBlocks.HEAVY_QUARRY.asBlock());
         simpleBlock(ModBlocks.SUPER_QUARRY.asBlock());
@@ -69,16 +69,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         simpleBlock(ModBlocks.STONE_MACHINE_FRAME.get(), models()
                 .withExistingParent("stone_machine_frame", modLoc("block/machine_frame"))
-                .texture("all", "randomthingz:blocks/machine_frame/stone"));
+                .texture("all", "randomthingz:block/machine_frame/stone"));
         simpleBlock(ModBlocks.ALLOY_MACHINE_FRAME.get(), models()
                 .withExistingParent("alloy_machine_frame", modLoc("block/machine_frame"))
-                .texture("all", "randomthingz:blocks/machine_frame/alloy"));
+                .texture("all", "randomthingz:block/machine_frame/alloy"));
         for (BlockRegistryObject<Block> block : ModBlocks.BOOKSHELVES) {
             RandomThingz.LOGGER.info("Generating block state and model for " + block.getRegistryName());
             simpleBlock(block.get(), models()
                     .withExistingParent(block.getName(), mcLoc("block/cube_column"))
                     .texture("end", "minecraft:block/oak_planks")
-                    .texture("side", "randomthingz:blocks/bookshelfs/" + block.getName()));
+                    .texture("side", "randomthingz:block/bookshelfs/" + block.getName()));
         }
 
         for (StoneType stoneType : StoneType.values()) {
