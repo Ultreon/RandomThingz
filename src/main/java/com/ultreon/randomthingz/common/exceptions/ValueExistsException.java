@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.common.exceptions;
 
-public class ValueExistsException extends Throwable {
+public class ValueExistsException extends RuntimeException {
     public ValueExistsException() {
         super();
     }

@@ -1,11 +1,12 @@
 package com.ultreon.randomthingz.common.java.lists;
 
+import com.ultreon.randomthingz.common.IntRange;
 import com.ultreon.randomthingz.common.exceptions.OutOfRangeException;
 import com.ultreon.randomthingz.common.exceptions.ValueExistsException;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntComparators;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntLists;
-import org.apache.commons.lang3.Range;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -17,14 +18,14 @@ import java.util.function.Function;
  *
  * @param <T> the type to use for the partition value.
  */
-@SuppressWarnings("unused")
-public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
-    CopyOnWriteArrayList<Double> sizes = new CopyOnWriteArrayList<>();
+@SuppressWarnings({"unused", "DuplicatedCode"})
+public class IntDynamicList<T> implements Iterable<IntDynamicList.Entry<T>> {
+    CopyOnWriteArrayList<Integer> sizes = new CopyOnWriteArrayList<>();
     CopyOnWriteArrayList<T> values = new CopyOnWriteArrayList<>();
 
-    Double totalSize = 0d;
+    Integer totalSize = 0;
 
-    public DynamicList() {
+    public IntDynamicList() {
 
     }
 
@@ -36,7 +37,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * @param value the value.
      * @return the partition index of the new partition.
      */
-    public synchronized int add(double size, T value) {
+    public synchronized int add(int size, T value) {
         if (values.contains(value)) throw new ValueExistsException();
 
         sizes.add(size);
@@ -56,7 +57,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
         sizes.clear();
         values.clear();
 
-        totalSize = 0d;
+        totalSize = 0;
     }
 
     /**
@@ -67,7 +68,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * @param value the value.
      * @return the index.
      */
-    public synchronized int insert(int index, Double size, T value) {
+    public synchronized int insert(int index, Integer size, T value) {
         if (values.contains(value)) throw new ValueExistsException();
 
         sizes.add(index, size);
@@ -84,7 +85,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * @param index the partition index.
      * @return the size.
      */
-    public synchronized Double getSize(int index) {
+    public synchronized Integer getSize(int index) {
         return sizes.get(index);
     }
 
@@ -106,13 +107,13 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * @return the range at the given index.
      * @throws NullPointerException if the index is out of range.
      */
-    public Range<Double> getRange(int index) {
-        Range<Double> range = null;
-        double currentSize = 0;
+    public IntRange getRange(int index) {
+        IntRange range = null;
+        int currentSize = 0;
         for (int i = 0; i < sizes.size(); i++) {
-            double newSize = currentSize + sizes.get(i);
+            int newSize = currentSize + sizes.get(i);
             if (i == index) {
-                range = Range.between(currentSize, newSize, Comparator.naturalOrder());
+                range = IntRange.between(currentSize, newSize, IntComparators.asIntComparator(Comparator.naturalOrder()));
             }
 
             currentSize = newSize;
@@ -131,15 +132,15 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * @param offset the index based on all ranges.
      * @return the value.
      */
-    public T getValue(double offset) {
+    public T getValue(int offset) {
         if (!((0d <= offset) && (totalSize > offset))) {
             throw new OutOfRangeException(offset, 0, totalSize);
         }
 
         T value = null;
-        double currentSize = -1;
+        int currentSize = -1;
         for (int i = 0; i < sizes.size(); i++) {
-            double newSize = currentSize + sizes.get(i);
+            int newSize = currentSize + sizes.get(i);
 
             if ((currentSize < offset) && (newSize >= offset)) {
                 value = values.get(i);
@@ -158,7 +159,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * @param size  the size for the partition to set.
      * @return the new size.
      */
-    public synchronized Double edit(T value, Double size) {
+    public synchronized Integer edit(T value, Integer size) {
         int index = indexOf(value);
 
         if (index >= sizes.size()) throw new OutOfRangeException(index, 0, sizes.size());
@@ -177,7 +178,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * @param newValue the value.
      * @return the new size.
      */
-    public synchronized Double edit(T value, Double size, T newValue) {
+    public synchronized Integer edit(T value, Integer size, T newValue) {
         int index = indexOf(value);
 
         if (index >= sizes.size()) throw new OutOfRangeException(index, 0, sizes.size());
@@ -194,22 +195,22 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      *
      * @return the ranges of all partitions.
      */
-    @SuppressWarnings({"unchecked", "ConstantConditions"})
-    public Range<Double>[] getRanges() {
-        List<Range<Double>> ranges = new ArrayList<>();
-        double currentSize = 0;
-        for (Double size : sizes) {
-            double newSize = currentSize + size;
+    @SuppressWarnings({"ConstantConditions"})
+    public IntRange[] getRanges() {
+        List<IntRange> ranges = new ArrayList<>();
+        int currentSize = 0;
+        for (Integer size : sizes) {
+            int newSize = currentSize + size;
 
-            ranges.add(Range.between(currentSize, newSize, Comparator.naturalOrder()));
+            ranges.add(IntRange.between(currentSize, newSize, IntComparators.asIntComparator(Comparator.naturalOrder())));
             currentSize = newSize;
         }
 
-        return (Range<Double>[]) ranges.toArray();
+        return (IntRange[]) ranges.toArray();
     }
 
 
-    public synchronized Double getTotalSize() {
+    public synchronized Integer getTotalSize() {
         return totalSize;
     }
 
@@ -251,7 +252,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * @param value the value to get the range from.
      * @return the index.
      */
-    public Range<Double> rangeOf(T value) {
+    public IntRange rangeOf(T value) {
         int index = values.indexOf(value);
 
         return getRange(index);
@@ -263,8 +264,8 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
      * @param value the value to get the range from.
      * @return the index.
      */
-    public List<Range<Double>> rangesOf(T value) {
-        List<Range<Double>> ranges = new ArrayList<>();
+    public List<IntRange> rangesOf(T value) {
+        List<IntRange> ranges = new ArrayList<>();
         boolean run = true;
         int index = 0;
         while (true) {
@@ -279,12 +280,12 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
         return Collections.unmodifiableList(ranges);
     }
 
-    public synchronized void map(Function<T, Double> applier) {
-        double currentSize = 0;
-        @SuppressWarnings("unchecked") CopyOnWriteArrayList<Double> sizes2 = (CopyOnWriteArrayList<Double>) sizes.clone();
+    public synchronized void map(Function<T, Integer> applier) {
+        int currentSize = 0;
+        @SuppressWarnings("unchecked") CopyOnWriteArrayList<Integer> sizes2 = (CopyOnWriteArrayList<Integer>) sizes.clone();
         for (int i = 0; i < sizes2.size(); i++) {
-            Double applierSize = applier.apply(values.get(i));
-            double newSize = currentSize + sizes2.get(i);
+            Integer applierSize = applier.apply(values.get(i));
+            int newSize = currentSize + sizes2.get(i);
             totalSize = totalSize - sizes2.get(i) + applierSize;
             sizes2.set(i, applierSize);
 
@@ -304,7 +305,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
         List<Entry<T>> entries = new ArrayList<>();
         for (int i = 0; i < values.size(); i++) {
             T value = values.get(i);
-            Double size = sizes.get(i);
+            Integer size = sizes.get(i);
             if (size == null) {
                 continue;
             }
@@ -323,9 +324,9 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
 
     public static class Entry<T> {
         private final T value;
-        private final double size;
+        private final int size;
 
-        private Entry(T value, double size) {
+        private Entry(T value, int size) {
             this.value = value;
             this.size = size;
         }
@@ -334,7 +335,7 @@ public class DynamicList<T> implements Iterable<DynamicList.Entry<T>> {
             return value;
         }
 
-        public double getSize() {
+        public int getSize() {
             return size;
         }
     }
