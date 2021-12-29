@@ -1,5 +1,21 @@
 {
   "mc_versions": {
+    "1.16.5": {
+      "unstable": {
+        "version": "2.0.1670-b7",
+        "download": "https://github.com/Ultreon/RandomThingz/releases/download/2.0.1670-b7/randomthingz-2.0.1670-b7.jar",
+        "changelog": "",
+        "dependencies": {
+          "qmodlib": {
+            "download": "https://github.com/Ultreon/ultreon-mod-lib/releases/download/1.0.40-b3/qmodlib-1.0.40-b3.jar",
+            "name": "QModLib",
+            "older_versions": [
+
+            ]
+          }
+        }
+      }
+    },
     "1.16.4": {
       "stable": {
         "version": "1.1-release1",
@@ -10,8 +26,8 @@
         }
       },
       "unstable": {
-        "version": "2.0.679-b1",
-        "download": "https://github.com/Qboi123/QForgeMod/releases/download/2.0.679-b1/randomthingz-2.0.697-b1.jar",
+        "version": "2.0.1670-b7",
+        "download": "https://github.com/Ultreon/RandomThingz/releases/download/2.0.1670-b7/randomthingz-2.0.1670-b7.jar",
         "changelog": "",
         "dependencies": {
 
