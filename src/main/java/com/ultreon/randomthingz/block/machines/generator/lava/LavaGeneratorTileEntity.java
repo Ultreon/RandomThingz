@@ -4,12 +4,12 @@ import com.qsoftware.modlib.api.IFluidContainer;
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidFuelGeneratorTileEntity;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -26,7 +26,7 @@ public class LavaGeneratorTileEntity extends AbstractFluidFuelGeneratorTileEntit
     static final int TANK_CAPACITY = 4000;
 
     public LavaGeneratorTileEntity() {
-        super(ModMachineTileEntities.lavaGenerator, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(TANK_CAPACITY, s -> s.getFluid().isIn(FluidTags.LAVA)));
+        super(ModMachineTileEntities.lavaGenerator, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(TANK_CAPACITY, s -> s.getFluid().is(FluidTags.LAVA)));
     }
 
     public IFluidHandler getTank() {
@@ -54,22 +54,22 @@ public class LavaGeneratorTileEntity extends AbstractFluidFuelGeneratorTileEntit
     }
 
     @Override
-    public boolean canInsertItem(int index, ItemStack stack, @Nullable Direction direction) {
-        return index == 0 && IFluidContainer.getBucketOrContainerFluid(stack).getFluid().isIn(FluidTags.LAVA);
+    public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
+        return index == 0 && IFluidContainer.getBucketOrContainerFluid(stack).getFluid().is(FluidTags.LAVA);
     }
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
         return index == 1;
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
+    protected Component getDefaultName() {
         return TextUtils.translate("container", "lava_generator");
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory playerInventory) {
+    protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
         return new LavaGeneratorContainer(id, playerInventory, this, this.fields);
     }
 }

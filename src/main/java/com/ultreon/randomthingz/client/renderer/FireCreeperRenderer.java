@@ -1,14 +1,14 @@
 package com.ultreon.randomthingz.client.renderer;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.renderer.layers.CustomCreeperChargeLayer;
 import com.ultreon.randomthingz.entity.FireCreeperEntity;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.model.CreeperModel;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.model.CreeperModel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -24,16 +24,16 @@ public class FireCreeperRenderer extends MobRenderer<FireCreeperEntity, CreeperM
     private static final ResourceLocation CREEPER_TEXTURES = new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/creeper/fire.png");
 //    private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/creeper/fire_eyes.png"));
 
-    public FireCreeperRenderer(EntityRendererManager renderManagerIn) {
+    public FireCreeperRenderer(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn, new CreeperModel<>(), 0.5F);
-        this.addLayer(new CustomCreeperChargeLayer<>(this, entityModel));
+        this.addLayer(new CustomCreeperChargeLayer<>(this, model));
     }
 
     @Override
-    protected void preRenderCallback(FireCreeperEntity entityLivingBaseIn, MatrixStack matrixStackIn, float partialTickTime) {
-        float f = entityLivingBaseIn.getCreeperFlashIntensity(partialTickTime);
-        float f1 = 1.0F + MathHelper.sin(f * 100.0F) * f * 0.01F;
-        f = MathHelper.clamp(f, 0.0F, 1.0F);
+    protected void scale(FireCreeperEntity entityLivingBaseIn, PoseStack matrixStackIn, float partialTickTime) {
+        float f = entityLivingBaseIn.getSwelling(partialTickTime);
+        float f1 = 1.0F + Mth.sin(f * 100.0F) * f * 0.01F;
+        f = Mth.clamp(f, 0.0F, 1.0F);
         f = f * f;
         f = f * f;
         float f2 = (1.0F + f * 0.4F) * f1;
@@ -42,16 +42,16 @@ public class FireCreeperRenderer extends MobRenderer<FireCreeperEntity, CreeperM
     }
 
     @Override
-    protected float getOverlayProgress(FireCreeperEntity livingEntityIn, float partialTicks) {
-        float f = livingEntityIn.getCreeperFlashIntensity(partialTicks);
-        return (int) (f * 10.0F) % 2 == 0 ? 0.0F : MathHelper.clamp(f, 0.5F, 1.0F);
+    protected float getWhiteOverlayProgress(FireCreeperEntity livingEntityIn, float partialTicks) {
+        float f = livingEntityIn.getSwelling(partialTicks);
+        return (int) (f * 10.0F) % 2 == 0 ? 0.0F : Mth.clamp(f, 0.5F, 1.0F);
     }
 
     /**
      * Returns the location of an entity's texture.
      */
     @Override
-    public @NotNull ResourceLocation getEntityTexture(@NotNull FireCreeperEntity entity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull FireCreeperEntity entity) {
         return CREEPER_TEXTURES;
     }
 }

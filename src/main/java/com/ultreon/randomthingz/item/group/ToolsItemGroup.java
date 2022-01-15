@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.group;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class ToolsItemGroup extends ItemGroup {
-    public static final ToolsItemGroup instance = new ToolsItemGroup(ItemGroup.GROUPS.length, "randomthingz_tools");
+public class ToolsItemGroup extends CreativeModeTab {
+    public static final ToolsItemGroup instance = new ToolsItemGroup(CreativeModeTab.TABS.length, "randomthingz_tools");
 
     public ToolsItemGroup(int index, String label) {
         super(index, label);
@@ -20,7 +20,7 @@ public class ToolsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull
-    ItemStack createIcon() {
+    ItemStack makeIcon() {
         return new ItemStack(Items.IRON_AXE);
     }
 

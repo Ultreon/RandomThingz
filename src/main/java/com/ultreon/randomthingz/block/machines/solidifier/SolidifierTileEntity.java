@@ -10,9 +10,9 @@ import com.ultreon.randomthingz.util.InventoryUtils;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
@@ -31,7 +31,7 @@ public class SolidifierTileEntity extends AbstractFluidMachineTileEntity<Solidif
 
     @Override
     public void tick() {
-        if (dimension == null || dimension.isClientSided) return;
+        if (level == null || level.isClientSide) return;
 
         tryFillTank();
 
@@ -45,7 +45,7 @@ public class SolidifierTileEntity extends AbstractFluidMachineTileEntity<Solidif
 
     private void tryFillTank() {
         // Try fill feedstock tank with fluid containers
-        ItemStack input = getStackInSlot(0);
+        ItemStack input = getItem(0);
         if (input.isEmpty()) return;
 
         FluidStack fluidStack = IFluidContainer.getBucketOrContainerFluid(input);
@@ -55,9 +55,9 @@ public class SolidifierTileEntity extends AbstractFluidMachineTileEntity<Solidif
             ItemStack containerItem = input.getContainerItem();
             input.shrink(1);
 
-            ItemStack output = getStackInSlot(1);
+            ItemStack output = getItem(1);
             if (output.isEmpty()) {
-                setInventorySlotContents(1, containerItem);
+                setItem(1, containerItem);
             } else {
                 output.grow(1);
             }
@@ -65,12 +65,12 @@ public class SolidifierTileEntity extends AbstractFluidMachineTileEntity<Solidif
     }
 
     private boolean canAcceptFluidContainer(ItemStack input, FluidStack fluid) {
-        ItemStack output = getStackInSlot(1);
+        ItemStack output = getItem(1);
         return !fluid.isEmpty()
                 && this.isFluidValid(0, fluid)
                 && this.fill(fluid, IFluidHandler.FluidAction.SIMULATE) == 1000
                 && (output.isEmpty() || InventoryUtils.canItemsStack(input.getContainerItem(), output))
-                && (output.isEmpty() || output.getCount() < output.getMaxSize());
+                && (output.isEmpty() || output.getCount() < output.getMaxStackSize());
     }
 
     @Override
@@ -96,8 +96,8 @@ public class SolidifierTileEntity extends AbstractFluidMachineTileEntity<Solidif
     @Nullable
     @Override
     public SolidifyingRecipe getRecipe() {
-        if (dimension == null) return null;
-        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.SOLIDIFYING, this, dimension).orElse(null);
+        if (level == null) return null;
+        return level.getRecipeManager().getRecipeFor(ModRecipes.Types.SOLIDIFYING, this, level).orElse(null);
     }
 
     @Override

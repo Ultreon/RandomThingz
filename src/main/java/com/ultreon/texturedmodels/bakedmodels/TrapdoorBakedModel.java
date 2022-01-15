@@ -7,18 +7,23 @@ import com.ultreon.texturedmodels.block.TrapdoorFrameBlock;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.GrassBlock;
-import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelShapes;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.model.*;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.state.properties.Half;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
 
@@ -40,7 +45,7 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
     public static final ResourceLocation TEXTURE = new ResourceLocation("minecraft", "block/oak_planks");
 
     private TextureAtlasSprite getTexture() {
-        return Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(TEXTURE);
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(TEXTURE);
     }
 
     @Nonnull
@@ -49,9 +54,9 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
         //get block saved in frame tile
         BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
-            ModelResourceLocation location = BlockModelShapes.getModelLocation(mimic);
+            ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
-                IBakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
+                BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
                 model.getBakedModel().getQuads(mimic, side, rand, extraData);
                 if (model != null) {
                     //only if model (from block saved in tile entity) exists:
@@ -62,7 +67,7 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
         return Collections.emptyList();
     }
 
-    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, IBakedModel model) {
+    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, BakedModel model) {
         if (side != null) {
             return Collections.emptyList();
         }
@@ -81,7 +86,7 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
             }
             if (textureList.size() == 0) {
                 if (Minecraft.getInstance().player != null) {
-                    Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("We're sorry, but this block can't be displayed"), true);
+                    Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("We're sorry, but this block can't be displayed"), true);
                 }
                 return Collections.emptyList();
             }
@@ -91,9 +96,9 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
                 tintIndex = 1;
             }
             List<BakedQuad> quads = new ArrayList<>();
-            Direction dir = state.get(DoorFrameBlock.FACING);
-            boolean open = state.get(TrapdoorFrameBlock.OPEN);
-            Half half = state.get(TrapDoorBlock.HALF);
+            Direction dir = state.getValue(DoorFrameBlock.FACING);
+            boolean open = state.getValue(TrapdoorFrameBlock.OPEN);
+            Half half = state.getValue(TrapDoorBlock.HALF);
             Half top = Half.TOP;
             Half bottom = Half.BOTTOM;
             Direction west = Direction.WEST;
@@ -367,7 +372,7 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isAmbientOcclusion() {
+    public boolean useAmbientOcclusion() {
         return true;
     }
 
@@ -377,28 +382,28 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isSideLit() {
+    public boolean usesBlockLight() {
         return false;
     }
 
     @Override
-    public boolean isBuiltInRenderer() {
+    public boolean isCustomRenderer() {
         return false;
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
+    public TextureAtlasSprite getParticleIcon() {
         return getTexture();
     }
 
     @Override
-    public ItemOverrideList getOverrides() {
-        return ItemOverrideList.EMPTY;
+    public ItemOverrides getOverrides() {
+        return ItemOverrides.EMPTY;
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return ItemCameraTransforms.DEFAULT;
+    public ItemTransforms getTransforms() {
+        return ItemTransforms.NO_TRANSFORMS;
     }
 }
 //========SOLI DEO GLORIA========//

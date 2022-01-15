@@ -7,8 +7,8 @@ import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
 import com.ultreon.randomthingz.client.gui.screen.confirmExit.ConfirmExitScreen;
 import com.ultreon.randomthingz.common.ModuleManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -25,27 +25,27 @@ public class WindowMenu extends AbstractActionMenu {
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
                 if (ModuleManager.getInstance().isEnabled(Modules.Client.CONFIRM_EXIT)) {
-                    mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+                    mc.setScreen(new ConfirmExitScreen(mc.screen));
                 } else {
-                    mc.shutdown();
+                    mc.stop();
                 }
             }
 
             @Override
-            public ITextComponent getText() {
-                return new TranslationTextComponent("action.randomthingz.window.close");
+            public Component getText() {
+                return new TranslatableComponent("action.randomthingz.window.close");
             }
         });
         addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                mc.getMainWindow().toggleFullscreen();
+                mc.getWindow().toggleFullScreen();
             }
 
             @Override
-            public ITextComponent getText() {
-                return new TranslationTextComponent("action.randomthingz.window.fullscreen");
+            public Component getText() {
+                return new TranslatableComponent("action.randomthingz.window.fullscreen");
             }
         });
         addClient(new ActionMenuItem() {
@@ -55,14 +55,14 @@ public class WindowMenu extends AbstractActionMenu {
             }
 
             @Override
-            public ITextComponent getText() {
-                return new TranslationTextComponent("action.randomthingz.set_debug_page");
+            public Component getText() {
+                return new TranslatableComponent("action.randomthingz.set_debug_page");
             }
 
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.dimension != null && mc.playerController != null;
+                return mc.player != null && mc.level != null && mc.gameMode != null;
             }
         });
     }

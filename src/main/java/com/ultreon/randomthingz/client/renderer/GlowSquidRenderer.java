@@ -1,17 +1,17 @@
 package com.ultreon.randomthingz.client.renderer;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Vector3f;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.renderer.layers.GlowSquidGlowLayer;
 import com.ultreon.randomthingz.entity.GlowSquidEntity;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.model.SquidModel;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.model.SquidModel;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +33,7 @@ public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, SquidModel<G
      *
      * @param renderManagerIn the {@linkplain EntityRendererManager entity render manager}.
      */
-    public GlowSquidRenderer(EntityRendererManager renderManagerIn) {
+    public GlowSquidRenderer(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn, new SquidModel<>(), 0.7F);
 
         addLayer(new GlowSquidGlowLayer<>(this));
@@ -44,12 +44,12 @@ public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, SquidModel<G
      *
      * @param entity the {@linkplain GlowSquidEntity glow squid entity}.
      */
-    public @NotNull ResourceLocation getEntityTexture(@NotNull GlowSquidEntity entity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull GlowSquidEntity entity) {
         return GLOW_SQUID_TEXTURE;
     }
 
     @Override
-    public void render(@NotNull GlowSquidEntity entityIn, float entityYaw, float partialTicks, @NotNull MatrixStack matrixStackIn, @NotNull IRenderTypeBuffer bufferIn, int packedLightIn) {
+    public void render(@NotNull GlowSquidEntity entityIn, float entityYaw, float partialTicks, @NotNull PoseStack matrixStackIn, @NotNull MultiBufferSource bufferIn, int packedLightIn) {
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
     }
 
@@ -62,13 +62,13 @@ public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, SquidModel<G
      * @param rotationYaw   the {@linkplain GlowSquidEntity#rotationYaw rotation's yaw}.
      * @param partialTicks  the {@linkplain Minecraft#getRenderPartialTicks() render partial ticks}.
      */
-    protected void applyRotations(GlowSquidEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-        float f = MathHelper.lerp(partialTicks, entityLiving.prevSquidPitch, entityLiving.squidPitch);
-        float f1 = MathHelper.lerp(partialTicks, entityLiving.prevSquidYaw, entityLiving.squidYaw);
+    protected void setupRotations(GlowSquidEntity entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+        float f = Mth.lerp(partialTicks, entityLiving.xBodyRotO, entityLiving.xBodyRot);
+        float f1 = Mth.lerp(partialTicks, entityLiving.zBodyRotO, entityLiving.zBodyRot);
         matrixStackIn.translate(0.0D, 0.5D, 0.0D);
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F - rotationYaw));
-        matrixStackIn.rotate(Vector3f.XP.rotationDegrees(f));
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f1));
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180.0F - rotationYaw));
+        matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(f));
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f1));
         matrixStackIn.translate(0.0D, -1.2F, 0.0D);
     }
 
@@ -78,7 +78,7 @@ public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, SquidModel<G
      * @param livingBase   the {@linkplain GlowSquidEntity glow squid}.
      * @param partialTicks the {@linkplain Minecraft#getRenderPartialTicks() render partial ticks}.
      */
-    protected float handleRotationFloat(GlowSquidEntity livingBase, float partialTicks) {
-        return MathHelper.lerp(partialTicks, livingBase.lastTentacleAngle, livingBase.tentacleAngle);
+    protected float getBob(GlowSquidEntity livingBase, float partialTicks) {
+        return Mth.lerp(partialTicks, livingBase.oldTentacleAngle, livingBase.tentacleAngle);
     }
 }

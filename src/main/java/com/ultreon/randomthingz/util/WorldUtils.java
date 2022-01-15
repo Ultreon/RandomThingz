@@ -2,48 +2,48 @@ package com.ultreon.randomthingz.util;
 
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.DirtMessageScreen;
-import net.minecraft.client.gui.screen.MainMenuScreen;
-import net.minecraft.client.gui.screen.MultiplayerScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.realms.RealmsBridgeScreen;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.gui.screens.GenericDirtMessageScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.realms.RealmsBridge;
 
 @UtilityClass
 public final class WorldUtils {
     public static void saveWorldThenOpenTitle() {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.dimension != null) {
-            boolean flag = mc.isIntegratedServerRunning();
+        if (mc.level != null) {
+            boolean flag = mc.isLocalServer();
             boolean flag1 = mc.isConnectedToRealms();
-            mc.dimension.sendQuittingDisconnectingPacket();
+            mc.level.disconnect();
             if (flag) {
-                mc.unloadDimension(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
+                mc.clearLevel(new GenericDirtMessageScreen(new TranslatableComponent("menu.savingLevel")));
             } else {
-                mc.unloadDimension();
+                mc.clearLevel();
             }
 
             if (flag) {
-                mc.displayGuiScreen(new MainMenuScreen());
+                mc.setScreen(new TitleScreen());
             } else if (flag1) {
-                RealmsBridgeScreen realmsbridgescreen = new RealmsBridgeScreen();
-                realmsbridgescreen.func_231394_a_(new MainMenuScreen());
+                RealmsBridge realmsbridgescreen = new RealmsBridge();
+                realmsbridgescreen.switchToRealms(new TitleScreen());
             } else {
-                mc.displayGuiScreen(new MultiplayerScreen(new MainMenuScreen()));
+                mc.setScreen(new JoinMultiplayerScreen(new TitleScreen()));
             }
         }
     }
 
     public static void saveWorldThen(Runnable runnable) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.dimension != null) {
-            boolean flag = mc.isIntegratedServerRunning();
+        if (mc.level != null) {
+            boolean flag = mc.isLocalServer();
             boolean flag1 = mc.isConnectedToRealms();
-            mc.dimension.sendQuittingDisconnectingPacket();
+            mc.level.disconnect();
             if (flag) {
-                mc.unloadDimension(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
+                mc.clearLevel(new GenericDirtMessageScreen(new TranslatableComponent("menu.savingLevel")));
             } else {
-                mc.unloadDimension();
+                mc.clearLevel();
             }
 
             runnable.run();
@@ -52,21 +52,21 @@ public final class WorldUtils {
 
     public static void saveWorldThenOpen(Screen screen) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.dimension != null) {
-            boolean flag = mc.isIntegratedServerRunning();
+        if (mc.level != null) {
+            boolean flag = mc.isLocalServer();
             boolean flag1 = mc.isConnectedToRealms();
-            mc.dimension.sendQuittingDisconnectingPacket();
+            mc.level.disconnect();
             if (flag) {
-                mc.unloadDimension(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
+                mc.clearLevel(new GenericDirtMessageScreen(new TranslatableComponent("menu.savingLevel")));
             } else {
-                mc.unloadDimension();
+                mc.clearLevel();
             }
 
-            mc.displayGuiScreen(screen);
+            mc.setScreen(screen);
         }
     }
 
     public static void saveWorldThenQuitGame() {
-        saveWorldThen(() -> Minecraft.getInstance().shutdown());
+        saveWorldThen(() -> Minecraft.getInstance().stop());
     }
 }

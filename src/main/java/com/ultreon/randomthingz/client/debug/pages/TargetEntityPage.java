@@ -3,18 +3,18 @@ package com.ultreon.randomthingz.client.debug.pages;
 import com.ultreon.randomthingz.client.debug.DebugPage;
 import com.ultreon.randomthingz.client.debug.DebugText;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public class TargetEntityPage extends DebugPage {
@@ -24,55 +24,55 @@ public class TargetEntityPage extends DebugPage {
         DebugText debugText = new DebugText();
 
         if (mc.player != null) {
-            PlayerEntity player = mc.player;
-            float playerPitch = player.rotationPitch;
-            float playerYaw = player.rotationYaw;
+            Player player = mc.player;
+            float playerPitch = player.xRot;
+            float playerYaw = player.yRot;
 
-            Vector3d playerEye = player.getEyePosition(1.0F);
+            Vec3 playerEye = player.getEyePosition(1.0F);
 
-            float f2 = MathHelper.cos(-playerYaw * ((float) Math.PI / 180F) - (float) Math.PI);
-            float f3 = MathHelper.sin(-playerYaw * ((float) Math.PI / 180F) - (float) Math.PI);
-            float f4 = -MathHelper.cos(-playerPitch * ((float) Math.PI / 180F));
-            float f5 = MathHelper.sin(-playerPitch * ((float) Math.PI / 180F));
+            float f2 = Mth.cos(-playerYaw * ((float) Math.PI / 180F) - (float) Math.PI);
+            float f3 = Mth.sin(-playerYaw * ((float) Math.PI / 180F) - (float) Math.PI);
+            float f4 = -Mth.cos(-playerPitch * ((float) Math.PI / 180F));
+            float f5 = Mth.sin(-playerPitch * ((float) Math.PI / 180F));
 
             float f6 = f3 * f4;
             float f7 = f2 * f4;
 
             double distance = 16;
 
-            Vector3d endPoint = playerEye.add((double) f6 * distance, (double) f5 * distance, (double) f7 * distance);
+            Vec3 endPoint = playerEye.add((double) f6 * distance, (double) f5 * distance, (double) f7 * distance);
 
-            if (Minecraft.getInstance().dimension != null) {
-                RayTraceResult rayTraceResult = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(playerEye, endPoint, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
-                if (rayTraceResult.getType() != RayTraceResult.Type.MISS) {
-                    endPoint = rayTraceResult.getHitVec();
+            if (Minecraft.getInstance().level != null) {
+                HitResult rayTraceResult = Minecraft.getInstance().level.clip(new ClipContext(playerEye, endPoint, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+                if (rayTraceResult.getType() != HitResult.Type.MISS) {
+                    endPoint = rayTraceResult.getLocation();
                 }
 
-                RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().dimension, player, playerEye, endPoint, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
+                HitResult rayTraceResult1 = ProjectileUtil.getEntityHitResult(Minecraft.getInstance().level, player, playerEye, endPoint, player.getBoundingBox().inflate(16.0D), entity -> !entity.equals(player));
                 if (rayTraceResult1 != null) {
                     rayTraceResult = rayTraceResult1;
                 }
-                if (rayTraceResult.getType() == RayTraceResult.Type.ENTITY) {
-                    @SuppressWarnings("ConstantConditions") EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) rayTraceResult;
+                if (rayTraceResult.getType() == HitResult.Type.ENTITY) {
+                    @SuppressWarnings("ConstantConditions") EntityHitResult entityRayTraceResult = (EntityHitResult) rayTraceResult;
 
                     Entity entity = entityRayTraceResult.getEntity();
                     EntityType<? extends Entity> type = entity.getType();
 
-                    debugText.addLeftText("translatedName", I18n.format(type.getTranslationId()));
+                    debugText.addLeftText("translatedName", I18n.get(type.getDescriptionId()));
                     debugText.addLeftText("height", type.getHeight());
-                    debugText.addLeftText("lootTable", type.getLootTable());
-                    debugText.addLeftText("name", type.getName().getString());
+                    debugText.addLeftText("lootTable", type.getDefaultLootTable());
+                    debugText.addLeftText("name", type.getDescription().getString());
                     debugText.addLeftText("registryName", type.getRegistryName());
-                    debugText.addLeftText("size", type.getSize().width, type.getSize().height);
-                    debugText.addLeftText("air", entity.getAir());
-                    debugText.addLeftText("maxAir", entity.getMaxAir());
+                    debugText.addLeftText("size", type.getDimensions().width, type.getDimensions().height);
+                    debugText.addLeftText("air", entity.getAirSupply());
+                    debugText.addLeftText("maxAir", entity.getMaxAirSupply());
                     debugText.addLeftText("brightness", entity.getBrightness());
-                    debugText.addLeftText("entityId", entity.getEntityId());
+                    debugText.addLeftText("entityId", entity.getId());
                     debugText.addLeftText("eyeHeight", entity.getEyeHeight());
-                    debugText.addLeftText("lookVec", entity.getLookVec());
-                    debugText.addLeftText("ridingEntity", entity.getRidingEntity());
-                    debugText.addLeftText("uniqueID", entity.getUniqueID());
-                    debugText.addLeftText("yOffset", entity.getYOffset());
+                    debugText.addLeftText("lookVec", entity.getLookAngle());
+                    debugText.addLeftText("ridingEntity", entity.getVehicle());
+                    debugText.addLeftText("uniqueID", entity.getUUID());
+                    debugText.addLeftText("yOffset", entity.getMyRidingOffset());
 
                     if (entity instanceof LivingEntity) {
                         LivingEntity living = (LivingEntity) entity;
@@ -80,23 +80,23 @@ public class TargetEntityPage extends DebugPage {
                         debugText.addRightText("health", living.getHealth());
                         debugText.addRightText("maxHealth", living.getMaxHealth());
                         debugText.addRightText("absorptionAmount", living.getAbsorptionAmount());
-                        debugText.addRightText("movementSpeed", living.getMovementSpeed());
-                        debugText.addRightText("aiMoveSpeed", living.getAIMoveSpeed());
-                        debugText.addRightText("activeHand", living.getActiveHand());
-                        debugText.addRightText("attackingEntity", living.getAttackingEntity());
-                        debugText.addRightText("itemInUseCount", living.getItemInUseCount());
-                        debugText.addRightText("lastAttackedEntity", living.getLastAttackedEntity());
-                        debugText.addRightText("leashPosition", living.getLeashPosition(mc.getRenderPartialTicks()));
+                        debugText.addRightText("movementSpeed", living.canSpawnSoulSpeedParticle());
+                        debugText.addRightText("aiMoveSpeed", living.getSpeed());
+                        debugText.addRightText("activeHand", living.getUsedItemHand());
+                        debugText.addRightText("attackingEntity", living.getKillCredit());
+                        debugText.addRightText("itemInUseCount", living.getUseItemRemainingTicks());
+                        debugText.addRightText("lastAttackedEntity", living.getLastHurtMob());
+                        debugText.addRightText("leashPosition", living.getRopeHoldPosition(mc.getFrameTime()));
                         debugText.addRightText("pose", living.getPose());
-                        debugText.addRightText("scale", living.getRenderScale());
-                        debugText.addRightText("revengeTarget", living.getRevengeTarget());
-                        debugText.addRightText("totalArmorValue", living.getTotalArmorValue());
+                        debugText.addRightText("scale", living.getScale());
+                        debugText.addRightText("revengeTarget", living.getLastHurtByMob());
+                        debugText.addRightText("totalArmorValue", living.getArmorValue());
                     } else if (entity instanceof ItemEntity) {
                         ItemEntity itemEntity = (ItemEntity) entity;
 
                         debugText.addRightText("age", itemEntity.getAge());
                         debugText.addRightText("item", itemEntity.getItem());
-                        debugText.addRightText("leashPosition", itemEntity.getLeashPosition(mc.getRenderPartialTicks()));
+                        debugText.addRightText("leashPosition", itemEntity.getRopeHoldPosition(mc.getFrameTime()));
                         debugText.addRightText("pose", itemEntity.getPose());
                     }
                 }

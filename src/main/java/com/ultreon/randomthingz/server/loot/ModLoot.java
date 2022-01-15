@@ -3,10 +3,10 @@ package com.ultreon.randomthingz.server.loot;
 import com.google.common.collect.ImmutableList;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.util.ExceptionUtil;
-import net.minecraft.loot.LootEntry;
-import net.minecraft.loot.LootPool;
-import net.minecraft.loot.TableLootEntry;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -42,10 +42,10 @@ public class ModLoot {
     }
 
     private static LootPool getInjectPool(String entryName) {
-        return LootPool.builder().addEntry(getInjectEntry(entryName)).bonusRolls(0, 1).name("randomthingz_inject_pool").build();
+        return LootPool.lootPool().add(getInjectEntry(entryName)).bonusRolls(0, 1).name("randomthingz_inject_pool").build();
     }
 
-    private static LootEntry.Builder<?> getInjectEntry(String name) {
-        return TableLootEntry.builder(new ResourceLocation(RandomThingz.MOD_ID, "inject/" + name)).weight(1);
+    private static LootPoolEntryContainer.Builder<?> getInjectEntry(String name) {
+        return LootTableReference.lootTableReference(new ResourceLocation(RandomThingz.MOD_ID, "inject/" + name)).setWeight(1);
     }
 }

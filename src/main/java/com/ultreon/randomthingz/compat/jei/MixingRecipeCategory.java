@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.compat.jei;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.mixer.MixerScreen;
@@ -20,10 +20,10 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import java.util.*;
@@ -49,7 +49,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
     }
 
     private static void addFluidContainers(Collection<ItemStack> list, Fluid fluid) {
-        ItemStack bucket = new ItemStack(fluid.getFilledBucket());
+        ItemStack bucket = new ItemStack(fluid.getBucket());
         if (!bucket.isEmpty()) {
             list.add(bucket);
         }
@@ -136,7 +136,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
     }
 
     @Override
-    public void draw(MixingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(MixingRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 92 - GUI_START_X, 35 - GUI_START_Y);
     }
 }

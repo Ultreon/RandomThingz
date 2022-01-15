@@ -1,19 +1,19 @@
 package com.ultreon.texturedmodels.util;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.vertex.VertexFormatElement;
 import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.model.BakedQuad;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.VertexFormatElement;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 
@@ -48,7 +48,7 @@ public class ModelHelper {
      * @param g       green value
      * @param b       blue value
      */
-    private static void putVertex(BakedQuadBuilder builder, Vector3d normal,
+    private static void putVertex(BakedQuadBuilder builder, Vec3 normal,
                                   double x, double y, double z, float u, float v, TextureAtlasSprite sprite, float r, float g, float b) {
 
         ImmutableList<VertexFormatElement> elements = builder.getVertexFormat().getElements().asList();
@@ -64,8 +64,8 @@ public class ModelHelper {
                 case UV:
                     switch (e.getIndex()) {
                         case 0:
-                            float iu = sprite.getInterpolatedU(u);
-                            float iv = sprite.getInterpolatedV(v);
+                            float iu = sprite.getU(u);
+                            float iv = sprite.getV(v);
                             builder.put(j, iu, iv);
                             break;
                         case 2:
@@ -104,11 +104,11 @@ public class ModelHelper {
      * @param tintIndex only needed for tintable blocks like grass
      * @return Baked quad i.e. the completed face of a block
      */
-    public static BakedQuad createQuad(Vector3d v1, Vector3d v2, Vector3d v3, Vector3d v4, TextureAtlasSprite sprite, float ulow, float uhigh, float vlow, float vhigh, int tintIndex) {
-        Vector3d normal = v3.subtract(v2).crossProduct(v1.subtract(v2)).normalize();
+    public static BakedQuad createQuad(Vec3 v1, Vec3 v2, Vec3 v3, Vec3 v4, TextureAtlasSprite sprite, float ulow, float uhigh, float vlow, float vhigh, int tintIndex) {
+        Vec3 normal = v3.subtract(v2).cross(v1.subtract(v2)).normalize();
 
         BakedQuadBuilder builder = new BakedQuadBuilder(sprite);
-        builder.setQuadOrientation(Direction.getFacingFromVector(normal.x, normal.y, normal.z));
+        builder.setQuadOrientation(Direction.getNearest(normal.x, normal.y, normal.z));
         builder.setApplyDiffuseLighting(true);
         builder.setQuadTint(tintIndex);
         putVertex(builder, normal, v1.x, v1.y, v1.z, ulow, vlow, sprite, 1.0f, 1.0f, 1.0f);
@@ -118,11 +118,11 @@ public class ModelHelper {
         return builder.build();
     }
 
-    public static BakedQuad createQuadInverted(Vector3d v1, Vector3d v2, Vector3d v3, Vector3d v4, TextureAtlasSprite sprite, float ulow, float uhigh, float vlow, float vhigh, int tintIndex) {
-        Vector3d normal = v3.subtract(v2).crossProduct(v1.subtract(v2)).normalize();
+    public static BakedQuad createQuadInverted(Vec3 v1, Vec3 v2, Vec3 v3, Vec3 v4, TextureAtlasSprite sprite, float ulow, float uhigh, float vlow, float vhigh, int tintIndex) {
+        Vec3 normal = v3.subtract(v2).cross(v1.subtract(v2)).normalize();
 
         BakedQuadBuilder builder = new BakedQuadBuilder(sprite);
-        builder.setQuadOrientation(Direction.getFacingFromVector(normal.x, normal.y, normal.z));
+        builder.setQuadOrientation(Direction.getNearest(normal.x, normal.y, normal.z));
         builder.setApplyDiffuseLighting(true);
         builder.setQuadTint(tintIndex);
         putVertex(builder, normal, v1.x, v1.y, v1.z, ulow, vlow, sprite, 1.0f, 1.0f, 1.0f);
@@ -159,17 +159,17 @@ public class ModelHelper {
     public static List<BakedQuad> createCuboid(float xl, float xh, float yl, float yh, float zl, float zh, TextureAtlasSprite texture, int tintIndex, boolean north, boolean south, boolean east, boolean west, boolean up, boolean down) {
         List<BakedQuad> quads = new ArrayList<>();
         //Eight corners of the block
-        Vector3d NWU = v(xl, yh, zl); //North-West-Up
-        Vector3d NEU = v(xl, yh, zh); //...
-        Vector3d NWD = v(xl, yl, zl);
-        Vector3d NED = v(xl, yl, zh);
-        Vector3d SWU = v(xh, yh, zl);
-        Vector3d SEU = v(xh, yh, zh);
-        Vector3d SWD = v(xh, yl, zl);
-        Vector3d SED = v(xh, yl, zh); //South-East-Down
+        Vec3 NWU = v(xl, yh, zl); //North-West-Up
+        Vec3 NEU = v(xl, yh, zh); //...
+        Vec3 NWD = v(xl, yl, zl);
+        Vec3 NED = v(xl, yl, zh);
+        Vec3 SWU = v(xh, yh, zl);
+        Vec3 SEU = v(xh, yh, zh);
+        Vec3 SWD = v(xh, yl, zl);
+        Vec3 SED = v(xh, yl, zh); //South-East-Down
         if (xh - xl > 1 || yh - yl > 1 || zh - zl > 1) {
             if (Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
+                Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
             }
             return quads;
         }
@@ -211,24 +211,24 @@ public class ModelHelper {
         return quads;
     }
 
-    public static List<BakedQuad> createSixFaceCuboid(float xl, float xh, float yl, float yh, float zl, float zh, BlockState mimic, IBakedModel model, IModelData extraData, Random rand, int tintIndex) {
+    public static List<BakedQuad> createSixFaceCuboid(float xl, float xh, float yl, float yh, float zl, float zh, BlockState mimic, BakedModel model, IModelData extraData, Random rand, int tintIndex) {
         return createSixFaceCuboid(xl, xh, yl, yh, zl, zh, mimic, model, extraData, rand, tintIndex, true, true, true, true, true, true);
     }
 
-    public static List<BakedQuad> createSixFaceCuboid(float xl, float xh, float yl, float yh, float zl, float zh, BlockState mimic, IBakedModel model, IModelData extraData, Random rand, int tintIndex, boolean north, boolean south, boolean east, boolean west, boolean up, boolean down) {
+    public static List<BakedQuad> createSixFaceCuboid(float xl, float xh, float yl, float yh, float zl, float zh, BlockState mimic, BakedModel model, IModelData extraData, Random rand, int tintIndex, boolean north, boolean south, boolean east, boolean west, boolean up, boolean down) {
         List<BakedQuad> quads = new ArrayList<>();
         //Eight corners of the block
-        Vector3d NWU = v(xl, yh, zl); //North-West-Up
-        Vector3d NEU = v(xl, yh, zh); //...
-        Vector3d NWD = v(xl, yl, zl);
-        Vector3d NED = v(xl, yl, zh);
-        Vector3d SWU = v(xh, yh, zl);
-        Vector3d SEU = v(xh, yh, zh);
-        Vector3d SWD = v(xh, yl, zl);
-        Vector3d SED = v(xh, yl, zh); //South-East-Down
+        Vec3 NWU = v(xl, yh, zl); //North-West-Up
+        Vec3 NEU = v(xl, yh, zh); //...
+        Vec3 NWD = v(xl, yl, zl);
+        Vec3 NED = v(xl, yl, zh);
+        Vec3 SWU = v(xh, yh, zl);
+        Vec3 SEU = v(xh, yh, zh);
+        Vec3 SWD = v(xh, yl, zl);
+        Vec3 SED = v(xh, yl, zh); //South-East-Down
         if (xh - xl > 1 || yh - yl > 1 || zh - zl > 1) {
             if (Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
+                Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
             }
             return quads;
         }
@@ -259,7 +259,7 @@ public class ModelHelper {
         List<TextureAtlasSprite> textureList = TextureHelper.getTextureFromModel(model, extraData, rand);
         if (textureList.size() == 0) {
             if (Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("We're sorry, but this block can't be displayed"), true);
+                Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("We're sorry, but this block can't be displayed"), true);
             }
             return quads;
         }
@@ -308,17 +308,17 @@ public class ModelHelper {
     public static List<BakedQuad> createSixFaceCuboid(float xl, float xh, float yl, float yh, float zl, float zh, int tintIndex, boolean north, boolean south, boolean east, boolean west, boolean up, boolean down, TextureAtlasSprite textureNorth, TextureAtlasSprite textureSouth, TextureAtlasSprite textureEast, TextureAtlasSprite textureWest, TextureAtlasSprite textureUp, TextureAtlasSprite textureDown, Boolean moveOverlay) {
         List<BakedQuad> quads = new ArrayList<>();
         //Eight corners of the block
-        Vector3d NWU = v(xl, yh, zl); //North-West-Up
-        Vector3d NEU = v(xl, yh, zh); //...
-        Vector3d NWD = v(xl, yl, zl);
-        Vector3d NED = v(xl, yl, zh);
-        Vector3d SWU = v(xh, yh, zl);
-        Vector3d SEU = v(xh, yh, zh);
-        Vector3d SWD = v(xh, yl, zl);
-        Vector3d SED = v(xh, yl, zh); //South-East-Down
+        Vec3 NWU = v(xl, yh, zl); //North-West-Up
+        Vec3 NEU = v(xl, yh, zh); //...
+        Vec3 NWD = v(xl, yl, zl);
+        Vec3 NED = v(xl, yl, zh);
+        Vec3 SWU = v(xh, yh, zl);
+        Vec3 SEU = v(xh, yh, zh);
+        Vec3 SWD = v(xh, yl, zl);
+        Vec3 SED = v(xh, yl, zh); //South-East-Down
         if (xh - xl > 1 || yh - yl > 1 || zh - zl > 1) {
             if (Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
+                Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
             }
             return quads;
         }
@@ -381,14 +381,14 @@ public class ModelHelper {
         }
         List<BakedQuad> quads = new ArrayList<>();
         //Eight corners of the block
-        Vector3d NWU = v(xl, yh, zl); //North-West-Up
-        Vector3d NEU = v(xl, yh, zh); //...
-        Vector3d NWD = v(xl, yl, zl);
-        Vector3d NED = v(xl, yl, zh);
-        Vector3d SWU = v(xh, yh, zl);
-        Vector3d SEU = v(xh, yh, zh);
-        Vector3d SWD = v(xh, yl, zl);
-        Vector3d SED = v(xh, yl, zh); //South-East-Down
+        Vec3 NWU = v(xl, yh, zl); //North-West-Up
+        Vec3 NEU = v(xl, yh, zh); //...
+        Vec3 NWD = v(xl, yl, zl);
+        Vec3 NED = v(xl, yl, zh);
+        Vec3 SWU = v(xh, yh, zl);
+        Vec3 SEU = v(xh, yh, zh);
+        Vec3 SWD = v(xh, yl, zl);
+        Vec3 SED = v(xh, yl, zh); //South-East-Down
         if (up)
             quads.add(createQuad(NWU, NEU, SEU, SWU, texture, ulow[0], uhigh[0], vlow[0], vhigh[0], tintIndex));
         if (down)
@@ -412,8 +412,8 @@ public class ModelHelper {
      * @param z z component
      * @return 3D-Vector with input values. Why am I writing this...
      */
-    private static Vector3d v(double x, double y, double z) {
-        return new Vector3d(x, y, z);
+    private static Vec3 v(double x, double y, double z) {
+        return new Vec3(x, y, z);
     }
 
     public static List<BakedQuad> createOverlay(float xl, float xh, float yl, float yh, float zl, float zh, int overlayIndex) {
@@ -427,53 +427,53 @@ public class ModelHelper {
         TextureAtlasSprite downOverlay = null;
         if (overlayIndex == 1) {
             tintIndex = 1;
-            overlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/grass_block_side_overlay"));
-            upOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/grass_block_top"));
+            overlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/grass_block_side_overlay"));
+            upOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/grass_block_top"));
         }
         if (overlayIndex == 2) {
             tintIndex = 1;
-            overlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/grass_block_side_overlay_large"));
-            upOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/grass_block_top"));
+            overlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/grass_block_side_overlay_large"));
+            upOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/grass_block_top"));
         }
         if (overlayIndex == 3) {
             tintIndex = -1;
-            overlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/grass_block_snow_overlay"));
-            upOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/snow"));
+            overlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/grass_block_snow_overlay"));
+            upOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/snow"));
         }
         if (overlayIndex == 4) {
             tintIndex = -1;
-            overlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/grass_block_snow_overlay_small"));
-            upOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/snow"));
+            overlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/grass_block_snow_overlay_small"));
+            upOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/snow"));
         }
         if (overlayIndex == 5) {
             tintIndex = 1;
-            overlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/vine"));
+            overlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/vine"));
         }
         if (overlayIndex >= 6 && overlayIndex <= 10) {
             tintIndex = -1;
             doNotMoveOverlay = false;
             if (overlayIndex == 6) {
-                overlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/stone_brick_overlay"));
-                upOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/stone_brick_overlay"));
-                downOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/stone_brick_overlay"));
+                overlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/stone_brick_overlay"));
+                upOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/stone_brick_overlay"));
+                downOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/stone_brick_overlay"));
             }
             if (overlayIndex == 7) {
-                overlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/brick_overlay"));
-                upOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/brick_overlay"));
-                downOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/brick_overlay"));
+                overlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/brick_overlay"));
+                upOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/brick_overlay"));
+                downOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/brick_overlay"));
             }
             if (overlayIndex == 8) {
-                overlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chiseled_sandstone_overlay"));
+                overlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chiseled_sandstone_overlay"));
             }
             if (overlayIndex == 9) {
-                overlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/boundary_overlay"));
-                upOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/boundary_overlay"));
-                downOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/boundary_overlay"));
+                overlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/boundary_overlay"));
+                upOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/boundary_overlay"));
+                downOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/boundary_overlay"));
             }
             if (overlayIndex == 10) {
-                overlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chiseled_stone_overlay"));
-                upOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chiseled_stone_overlay"));
-                downOverlay = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chiseled_stone_overlay"));
+                overlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chiseled_stone_overlay"));
+                upOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chiseled_stone_overlay"));
+                downOverlay = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chiseled_stone_overlay"));
             }
         }
         return ModelHelper.createSixFaceCuboid(xl, xh, yl, yh, zl, zh, tintIndex, north, south, east, west, up, down, overlay, overlay, overlay, overlay, upOverlay, downOverlay, doNotMoveOverlay);
@@ -482,17 +482,17 @@ public class ModelHelper {
     public static List<BakedQuad> createSlope(float xl, float xh, float yl, float yh, float zl, float zh, TextureAtlasSprite texture, int tintIndex, Direction direction) {
         List<BakedQuad> quads = new ArrayList<>();
         //Eight corners of the block
-        Vector3d NWU = v(xl, yh, zl); //North-West-Up
-        Vector3d NEU = v(xl, yh, zh); //...
-        Vector3d NWD = v(xl, yl, zl);
-        Vector3d NED = v(xl, yl, zh);
-        Vector3d SWU = v(xh, yh, zl);
-        Vector3d SEU = v(xh, yh, zh);
-        Vector3d SWD = v(xh, yl, zl);
-        Vector3d SED = v(xh, yl, zh); //South-East-Down
+        Vec3 NWU = v(xl, yh, zl); //North-West-Up
+        Vec3 NEU = v(xl, yh, zh); //...
+        Vec3 NWD = v(xl, yl, zl);
+        Vec3 NED = v(xl, yl, zh);
+        Vec3 SWU = v(xh, yh, zl);
+        Vec3 SEU = v(xh, yh, zh);
+        Vec3 SWD = v(xh, yl, zl);
+        Vec3 SED = v(xh, yl, zh); //South-East-Down
         if (xh - xl > 1 || yh - yl > 1 || zh - zl > 1) {
             if (Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
+                Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
             }
             return quads;
         }

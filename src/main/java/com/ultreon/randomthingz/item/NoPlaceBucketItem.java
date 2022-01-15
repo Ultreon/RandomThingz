@@ -1,14 +1,14 @@
 package com.ultreon.randomthingz.item;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
@@ -24,12 +24,12 @@ public class NoPlaceBucketItem extends BucketItem {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World dimensionIn, PlayerEntity playerIn, Hand handIn) {
-        return new ActionResult<>(ActionResultType.PASS, playerIn.getHeldItem(handIn));
+    public InteractionResultHolder<ItemStack> use(Level dimensionIn, Player playerIn, InteractionHand handIn) {
+        return new InteractionResultHolder<>(InteractionResult.PASS, playerIn.getItemInHand(handIn));
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         return new FluidBucketWrapper(stack);
     }
 }

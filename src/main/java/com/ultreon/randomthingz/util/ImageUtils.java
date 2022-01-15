@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.util;
 
-import net.minecraft.client.renderer.texture.NativeImage;
+import com.mojang.blaze3d.platform.NativeImage;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

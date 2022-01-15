@@ -5,7 +5,7 @@ import com.ultreon.randomthingz.client.gui.settings.SettingsScreen;
 import com.ultreon.randomthingz.common.Ticker;
 import com.ultreon.randomthingz.common.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
@@ -33,9 +33,9 @@ public class UpdateChecker {
         }
 
         Minecraft mc = Minecraft.getInstance();
-        Screen gui = mc.currentScreen;
+        Screen gui = mc.screen;
 
-        if (gui == null && mc.dimension == null) {
+        if (gui == null && mc.level == null) {
             return;
         }
 

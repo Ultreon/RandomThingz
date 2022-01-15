@@ -5,7 +5,7 @@ import com.ultreon.randomthingz.common.CoreModule;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import com.ultreon.randomthingz.init.ModContainers;
 import com.ultreon.randomthingz.registration.Registration;
-import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -30,11 +30,11 @@ public class UserInterfaceModule extends CoreModule {
         return "user_interface";
     }
 
-    public DeferredRegister<ContainerType<?>> getDeferredRegister() {
+    public DeferredRegister<MenuType<?>> getDeferredRegister() {
         return Registration.CONTAINERS;
     }
 
-    public Collection<RegistryObject<ContainerType<?>>> getContainers() {
+    public Collection<RegistryObject<MenuType<?>>> getContainers() {
         return Registration.CONTAINERS.getEntries();
     }
 

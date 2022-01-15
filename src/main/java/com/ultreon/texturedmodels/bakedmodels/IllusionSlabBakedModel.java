@@ -4,15 +4,19 @@ import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.block.SixWaySlabFrameBlock;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
 import com.ultreon.texturedmodels.util.ModelHelper;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.GrassBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelShapes;
-import net.minecraft.client.renderer.model.*;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
 
@@ -36,9 +40,9 @@ public class IllusionSlabBakedModel implements IDynamicBakedModel {
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
         BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
-            ModelResourceLocation location = BlockModelShapes.getModelLocation(mimic);
+            ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
-                IBakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
+                BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
                 if (model != null) {
                     return getIllusionQuads(state, side, rand, extraData, model);
                 }
@@ -47,7 +51,7 @@ public class IllusionSlabBakedModel implements IDynamicBakedModel {
         return Collections.emptyList();
     }
 
-    private List<BakedQuad> getIllusionQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, IBakedModel model) {
+    private List<BakedQuad> getIllusionQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, BakedModel model) {
         if (side != null) {
             return Collections.emptyList();
         }
@@ -58,7 +62,7 @@ public class IllusionSlabBakedModel implements IDynamicBakedModel {
                 tintIndex = 1;
             }
             List<BakedQuad> quads = new ArrayList<>();
-            switch (state.get(SixWaySlabFrameBlock.FACING)) {
+            switch (state.getValue(SixWaySlabFrameBlock.FACING)) {
                 case UP:
                     quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, 0f, 0.5f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
                     break;
@@ -80,7 +84,7 @@ public class IllusionSlabBakedModel implements IDynamicBakedModel {
             }
             int overlayIndex = extraData.getData(FrameBlockTile.OVERLAY);
             if (extraData.getData(FrameBlockTile.OVERLAY) != 0) {
-                switch (state.get(SixWaySlabFrameBlock.FACING)) {
+                switch (state.getValue(SixWaySlabFrameBlock.FACING)) {
                     case UP:
                         quads.addAll(ModelHelper.createOverlay(0f, 1f, 0f, 0.5f, 0f, 1f, overlayIndex));
                         break;
@@ -107,7 +111,7 @@ public class IllusionSlabBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isAmbientOcclusion() {
+    public boolean useAmbientOcclusion() {
         return true;
     }
 
@@ -117,28 +121,28 @@ public class IllusionSlabBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isSideLit() {
+    public boolean usesBlockLight() {
         return false;
     }
 
     @Override
-    public boolean isBuiltInRenderer() {
+    public boolean isCustomRenderer() {
         return false;
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
-        return Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/oak_planks"));
+    public TextureAtlasSprite getParticleIcon() {
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/oak_planks"));
     }
 
     @Override
-    public ItemOverrideList getOverrides() {
-        return ItemOverrideList.EMPTY;
+    public ItemOverrides getOverrides() {
+        return ItemOverrides.EMPTY;
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return ItemCameraTransforms.DEFAULT;
+    public ItemTransforms getTransforms() {
+        return ItemTransforms.NO_TRANSFORMS;
     }
 }
 //========SOLI DEO GLORIA========//

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.client.gui.modules;
 
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 /**
  * The module compatibility class.
@@ -9,14 +9,14 @@ import net.minecraft.util.text.TranslationTextComponent;
  * @author Qboi123
  */
 public enum ModuleCompatibility {
-    FULL(true, true, new TranslationTextComponent("misc.randomthingz.module.compat.full")),
-    PARTIAL(false, true, new TranslationTextComponent("misc.randomthingz.module.compat.partial")),
-    NONE(false, false, new TranslationTextComponent("misc.randomthingz.module.compat.none")),
+    FULL(true, true, new TranslatableComponent("misc.randomthingz.module.compat.full")),
+    PARTIAL(false, true, new TranslatableComponent("misc.randomthingz.module.compat.partial")),
+    NONE(false, false, new TranslatableComponent("misc.randomthingz.module.compat.none")),
     ;
 
     private final boolean compatible;
     private final boolean runnable;
-    private final ITextComponent confirmMessage;
+    private final Component confirmMessage;
 
     /**
      * Module compatibility: Constructor.
@@ -24,7 +24,7 @@ public enum ModuleCompatibility {
      * @param compatible     is the module compatible?
      * @param confirmMessage the confirm message.
      */
-    ModuleCompatibility(boolean compatible, boolean isRunnable, ITextComponent confirmMessage) {
+    ModuleCompatibility(boolean compatible, boolean isRunnable, Component confirmMessage) {
         this.compatible = compatible;
         this.runnable = isRunnable;
         this.confirmMessage = confirmMessage;
@@ -44,7 +44,7 @@ public enum ModuleCompatibility {
     /**
      * @return the confirm message.
      */
-    public ITextComponent getConfirmMessage() {
+    public Component getConfirmMessage() {
         return confirmMessage;
     }
 

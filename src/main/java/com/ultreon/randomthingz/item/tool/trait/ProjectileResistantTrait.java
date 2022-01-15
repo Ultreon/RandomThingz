@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
-import net.minecraft.util.text.Color;
+import net.minecraft.network.chat.TextColor;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 public class ProjectileResistantTrait extends AbstractTrait {
@@ -9,8 +9,8 @@ public class ProjectileResistantTrait extends AbstractTrait {
     }
 
     @Override
-    public Color getColor() {
-        return Color.fromHex("#6B5232");
+    public TextColor getColor() {
+        return TextColor.parseColor("#6B5232");
     }
 
     @Override

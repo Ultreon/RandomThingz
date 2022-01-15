@@ -2,9 +2,9 @@ package com.ultreon.randomthingz.util;
 
 import com.ultreon.randomthingz.RandomThingz;
 import lombok.experimental.UtilityClass;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Contract;
@@ -16,34 +16,34 @@ public final class TextUtils {
     private static final Pattern FORMATTING_CODE_PATTERN = Pattern.compile("(?i)\u00a7[0-9A-FK-ORa-fk-o]");
     private static final String ENERGY_FORMAT = "%,d";
 
-    public static IFormattableTextComponent translate(String prefix, String suffix, Object... params) {
+    public static MutableComponent translate(String prefix, String suffix, Object... params) {
         String key = String.format("%s.%s.%s", prefix, RandomThingz.MOD_ID, suffix);
-        return new TranslationTextComponent(key, params);
+        return new TranslatableComponent(key, params);
     }
 
-    public static IFormattableTextComponent energy(int amount) {
+    public static MutableComponent energy(int amount) {
         String s1 = String.format(ENERGY_FORMAT, amount);
         return translate("misc", "energy", s1);
     }
 
-    public static IFormattableTextComponent energyPerTick(int amount) {
+    public static MutableComponent energyPerTick(int amount) {
         String s1 = String.format(ENERGY_FORMAT, amount);
         return translate("misc", "energyPerTick", s1);
     }
 
-    public static IFormattableTextComponent energyWithMax(int amount, int max) {
+    public static MutableComponent energyWithMax(int amount, int max) {
         String s1 = String.format(ENERGY_FORMAT, amount);
         String s2 = String.format(ENERGY_FORMAT, max);
         return translate("misc", "energyWithMax", s1, s2);
     }
 
-    public static IFormattableTextComponent fluidWithMax(IFluidHandler fluidHandler, int tank) {
+    public static MutableComponent fluidWithMax(IFluidHandler fluidHandler, int tank) {
         FluidStack stack = fluidHandler.getFluidInTank(tank);
         return fluidWithMax(stack, fluidHandler.getTankCapacity(tank));
     }
 
-    public static IFormattableTextComponent fluidWithMax(FluidStack stack, int tankCapacity) {
-        ITextComponent fluidName = stack.getDisplayName();
+    public static MutableComponent fluidWithMax(FluidStack stack, int tankCapacity) {
+        Component fluidName = stack.getDisplayName();
         String s1 = String.format(ENERGY_FORMAT, stack.getAmount());
         String s2 = String.format(ENERGY_FORMAT, tankCapacity);
         return translate("misc", "fluidWithMax", fluidName, s1, s2);

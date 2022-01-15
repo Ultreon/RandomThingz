@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.common.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.tags.ITag;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 import java.util.Optional;
 
@@ -16,14 +16,14 @@ public class GemItemMaterial implements IItemMaterial {
     private Optional<Item> ingot;
     private Optional<Item> gem;
     private Optional<Item> nugget;
-    private Optional<ITag.INamedTag<Block>> oreTag;
-    private Optional<ITag.INamedTag<Block>> storageBlockTag;
-    private Optional<ITag.INamedTag<Item>> oreItemTag;
-    private Optional<ITag.INamedTag<Item>> storageBlockItemTag;
-    private Optional<ITag.INamedTag<Item>> chunksTag;
-    private Optional<ITag.INamedTag<Item>> dustTag;
-    private Optional<ITag.INamedTag<Item>> gemTag;
-    private Optional<ITag.INamedTag<Item>> nuggetTag;
+    private Optional<Tag.Named<Block>> oreTag;
+    private Optional<Tag.Named<Block>> storageBlockTag;
+    private Optional<Tag.Named<Item>> oreItemTag;
+    private Optional<Tag.Named<Item>> storageBlockItemTag;
+    private Optional<Tag.Named<Item>> chunksTag;
+    private Optional<Tag.Named<Item>> dustTag;
+    private Optional<Tag.Named<Item>> gemTag;
+    private Optional<Tag.Named<Item>> nuggetTag;
 
     @Override
     public String getName() {
@@ -66,47 +66,47 @@ public class GemItemMaterial implements IItemMaterial {
     }
 
     @Override
-    public Optional<ITag.INamedTag<Block>> getOreTag() {
+    public Optional<Tag.Named<Block>> getOreTag() {
         return oreTag;
     }
 
     @Override
-    public Optional<ITag.INamedTag<Block>> getStorageBlockTag() {
+    public Optional<Tag.Named<Block>> getStorageBlockTag() {
         return storageBlockTag;
     }
 
     @Override
-    public Optional<ITag.INamedTag<Item>> getOreItemTag() {
+    public Optional<Tag.Named<Item>> getOreItemTag() {
         return oreItemTag;
     }
 
     @Override
-    public Optional<ITag.INamedTag<Item>> getStorageBlockItemTag() {
+    public Optional<Tag.Named<Item>> getStorageBlockItemTag() {
         return storageBlockItemTag;
     }
 
     @Override
-    public Optional<ITag.INamedTag<Item>> getChunksTag() {
+    public Optional<Tag.Named<Item>> getChunksTag() {
         return chunksTag;
     }
 
     @Override
-    public Optional<ITag.INamedTag<Item>> getDustTag() {
+    public Optional<Tag.Named<Item>> getDustTag() {
         return dustTag;
     }
 
     @Override
-    public Optional<ITag.INamedTag<Item>> getIngotTag() {
+    public Optional<Tag.Named<Item>> getIngotTag() {
         return Optional.empty();
     }
 
     @Override
-    public Optional<ITag.INamedTag<Item>> getGemTag() {
+    public Optional<Tag.Named<Item>> getGemTag() {
         return gemTag;
     }
 
     @Override
-    public Optional<ITag.INamedTag<Item>> getNuggetTag() {
+    public Optional<Tag.Named<Item>> getNuggetTag() {
         return nuggetTag;
     }
 }

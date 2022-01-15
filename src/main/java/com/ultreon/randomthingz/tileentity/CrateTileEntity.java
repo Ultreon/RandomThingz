@@ -3,27 +3,27 @@ package com.ultreon.randomthingz.tileentity;
 import com.ultreon.randomthingz.block.entity.ModTileEntities;
 import com.ultreon.randomthingz.block.furniture.WoodenCrateBlock;
 import com.ultreon.randomthingz.inventory.container.CrateContainer;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -41,7 +41,7 @@ import java.util.Objects;
  * @author Qboi123
  * @see WoodenCrateBlock
  */
-public class CrateTileEntity extends LockableLootTileEntity {
+public class CrateTileEntity extends RandomizableContainerBlockEntity {
     // Item handler.
     private final IItemHandlerModifiable items = createHandler();
     // Amount players using.
@@ -50,7 +50,7 @@ public class CrateTileEntity extends LockableLootTileEntity {
     private NonNullList<ItemStack> chestContents = NonNullList.withSize(36, ItemStack.EMPTY);
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
-    public CrateTileEntity(TileEntityType<?> typeIn) {
+    public CrateTileEntity(BlockEntityType<?> typeIn) {
         super(typeIn);
     }
 
@@ -66,7 +66,7 @@ public class CrateTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return 36;
     }
 
@@ -80,60 +80,60 @@ public class CrateTileEntity extends LockableLootTileEntity {
         this.chestContents = items;
     }
 
-    public IInventory getInventory() {
-        return new Inventory(getItems().toArray(new ItemStack[]{}));
+    public Container getInventory() {
+        return new SimpleContainer(getItems().toArray(new ItemStack[]{}));
     }
 
     @Override
-    public ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container.wooden_crate");
+    public Component getDefaultName() {
+        return new TranslatableComponent("container.wooden_crate");
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
         return new CrateContainer(id, player, this);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
-        if (!this.checkLootAndWrite(compound)) {
-            ItemStackHelper.writeAllItems(compound, this.chestContents);
+    public CompoundTag save(CompoundTag compound) {
+        super.save(compound);
+        if (!this.trySaveLootTable(compound)) {
+            ContainerHelper.saveAllItems(compound, this.chestContents);
         }
         return compound;
     }
 
     @Override
     @ParametersAreNonnullByDefault
-    public void read(BlockState state, CompoundNBT compound) {
-        super.read(state, compound);
-        this.chestContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        if (!this.checkLootAndRead(compound)) {
-            ItemStackHelper.readAllItems(compound, this.chestContents);
+    public void load(BlockState state, CompoundTag compound) {
+        super.load(state, compound);
+        this.chestContents = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        if (!this.tryLoadLootTable(compound)) {
+            ContainerHelper.loadAllItems(compound, this.chestContents);
         }
     }
 
     @SuppressWarnings({"unused", "RedundantSuppression"})
     private void playSound(SoundEvent sound) {
-        double dx = (double) this.pos.getX() + 0.5d;
-        double dy = (double) this.pos.getY() + 0.5d;
-        double dz = (double) this.pos.getZ() + 0.5d;
+        double dx = (double) this.worldPosition.getX() + 0.5d;
+        double dy = (double) this.worldPosition.getY() + 0.5d;
+        double dz = (double) this.worldPosition.getZ() + 0.5d;
 
-        Objects.requireNonNull(this.dimension).playSound(null, dx, dy, dz, sound, SoundCategory.BLOCKS, 0.5f, this.dimension.rand.nextFloat() * 0.1f + 0.9f);
+        Objects.requireNonNull(this.level).playSound(null, dx, dy, dz, sound, SoundSource.BLOCKS, 0.5f, this.level.random.nextFloat() * 0.1f + 0.9f);
     }
 
     @Override
-    public boolean receiveClientEvent(int id, int type) {
+    public boolean triggerEvent(int id, int type) {
         if (id == 1) {
             this.numPlayersUsing = type;
             return true;
         } else {
-            return super.receiveClientEvent(id, type);
+            return super.triggerEvent(id, type);
         }
     }
 
     @Override
-    public void openInventory(PlayerEntity player) {
+    public void startOpen(Player player) {
         if (!player.isSpectator()) {
             if (this.numPlayersUsing < 0) {
                 this.numPlayersUsing = 0;
@@ -144,7 +144,7 @@ public class CrateTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public void closeInventory(PlayerEntity player) {
+    public void stopOpen(Player player) {
         if (!player.isSpectator()) {
             --this.numPlayersUsing;
             this.onOpenOrClose();
@@ -153,18 +153,18 @@ public class CrateTileEntity extends LockableLootTileEntity {
 
     protected void onOpenOrClose() {
         Block block = this.getBlockState().getBlock();
-        Objects.requireNonNull(this.dimension);
+        Objects.requireNonNull(this.level);
         if (block instanceof WoodenCrateBlock) {
-            this.dimension.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
-            this.dimension.notifyNeighborsOfStateChange(this.pos, block);
+            this.level.blockEvent(this.worldPosition, block, 1, this.numPlayersUsing);
+            this.level.updateNeighborsAt(this.worldPosition, block);
         }
     }
 
     @SuppressWarnings({"unused", "RedundantSuppression"})
-    public int getPlayersUsing(IBlockReader reader, BlockPos pos) {
+    public int getPlayersUsing(BlockGetter reader, BlockPos pos) {
         BlockState blockState = reader.getBlockState(pos);
         if (blockState.hasTileEntity()) {
-            TileEntity tileEntity = reader.getTileEntity(pos);
+            BlockEntity tileEntity = reader.getBlockEntity(pos);
             if (tileEntity instanceof CrateTileEntity) {
                 return ((CrateTileEntity) tileEntity).numPlayersUsing;
             }
@@ -173,8 +173,8 @@ public class CrateTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public void updateContainingBlockInfo() {
-        super.updateContainingBlockInfo();
+    public void clearCache() {
+        super.clearCache();
         if (this.itemHandler != null) {
             this.itemHandler.invalidate();
             this.itemHandler = null;
@@ -195,19 +195,19 @@ public class CrateTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public void delete() {
-        assert dimension != null;
-        BlockState blockState = dimension.getBlockState(pos);
+    public void setRemoved() {
+        assert level != null;
+        BlockState blockState = level.getBlockState(worldPosition);
         for (int i = 0; i < chestContents.size(); i++) {
             ItemStack stack = chestContents.get(i);
             chestContents.set(i, ItemStack.EMPTY);
-            TileEntity tileEntity = blockState.hasTileEntity() ? dimension.getTileEntity(pos) : null;
+            BlockEntity tileEntity = blockState.hasTileEntity() ? level.getBlockEntity(worldPosition) : null;
 
             //noinspection ConstantConditions
-            Block.spawnDrops(blockState, dimension, this.pos.add(0, 1.5, 0), tileEntity, null, stack);
+            Block.dropResources(blockState, level, this.worldPosition.offset(0, 1.5, 0), tileEntity, null, stack);
         }
 
-        super.delete();
+        super.setRemoved();
         if (itemHandler != null) {
             itemHandler.invalidate();
         }

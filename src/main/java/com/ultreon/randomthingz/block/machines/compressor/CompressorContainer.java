@@ -5,19 +5,19 @@ import com.qsoftware.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
 import com.ultreon.randomthingz.init.ModMachineContainers;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
 
 public class CompressorContainer extends AbstractMachineContainer<CompressorTileEntity> {
-    public CompressorContainer(int id, PlayerInventory playerInventory) {
-        this(id, playerInventory, new CompressorTileEntity(), new IntArray(AbstractMachineTileEntity.FIELDS_COUNT));
+    public CompressorContainer(int id, Inventory playerInventory) {
+        this(id, playerInventory, new CompressorTileEntity(), new SimpleContainerData(AbstractMachineTileEntity.FIELDS_COUNT));
     }
 
-    public CompressorContainer(int id, PlayerInventory playerInventory, CompressorTileEntity tileEntity, IIntArray fieldsIn) {
+    public CompressorContainer(int id, Inventory playerInventory, CompressorTileEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.compressor, id, tileEntity, fieldsIn);
 
         this.addSlot(new Slot(this.tileEntity, 0, 56, 35));
@@ -29,11 +29,11 @@ public class CompressorContainer extends AbstractMachineContainer<CompressorTile
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.hasStack()) {
-            ItemStack itemstack1 = slot.getStack();
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
 
             final int inventorySize = 2;
@@ -41,31 +41,31 @@ public class CompressorContainer extends AbstractMachineContainer<CompressorTile
             final int playerHotbarEnd = playerInventoryEnd + 9;
 
             if (index == 1) {
-                if (!this.mergeItemStack(itemstack1, inventorySize, playerHotbarEnd, true)) {
+                if (!this.moveItemStackTo(itemstack1, inventorySize, playerHotbarEnd, true)) {
                     return ItemStack.EMPTY;
                 }
 
-                slot.onSlotChange(itemstack1, itemstack);
+                slot.onQuickCraft(itemstack1, itemstack);
             } else if (index != 0) {
                 if (this.isCompressingIngredient(itemstack1)) {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
+                    if (!this.moveItemStackTo(itemstack1, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (index < playerInventoryEnd) {
-                    if (!this.mergeItemStack(itemstack1, playerInventoryEnd, playerHotbarEnd, false)) {
+                    if (!this.moveItemStackTo(itemstack1, playerInventoryEnd, playerHotbarEnd, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < playerHotbarEnd && !this.mergeItemStack(itemstack1, inventorySize, playerInventoryEnd, false)) {
+                } else if (index < playerHotbarEnd && !this.moveItemStackTo(itemstack1, inventorySize, playerInventoryEnd, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, inventorySize, playerHotbarEnd, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, inventorySize, playerHotbarEnd, false)) {
                 return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
 
             if (itemstack1.getCount() == itemstack.getCount()) {

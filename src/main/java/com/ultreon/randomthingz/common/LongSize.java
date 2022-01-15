@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.common;
 
 import com.ultreon.randomthingz.common.interfaces.Formattable;
 import lombok.AllArgsConstructor;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 @AllArgsConstructor
 public class LongSize extends AbstractSize implements Formattable {
@@ -27,6 +27,6 @@ public class LongSize extends AbstractSize implements Formattable {
 
     @Override
     public String toFormattedString() {
-        return TextFormatting.GOLD.toString() + this.width + TextFormatting.GRAY + " x " + TextFormatting.GOLD + this.height;
+        return ChatFormatting.GOLD.toString() + this.width + ChatFormatting.GRAY + " x " + ChatFormatting.GOLD + this.height;
     }
 }

@@ -5,17 +5,17 @@ import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.GrassBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelShapes;
+import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.model.*;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
 
@@ -25,6 +25,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 
 /**
  * Contains all information for the block model
@@ -38,7 +44,7 @@ public class ChestBakedModel implements IDynamicBakedModel {
     public static final ResourceLocation TEXTURE = new ResourceLocation("minecraft", "block/oak_planks");
 
     private TextureAtlasSprite getTexture() {
-        return Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(TEXTURE);
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(TEXTURE);
     }
 
     @Nonnull
@@ -46,9 +52,9 @@ public class ChestBakedModel implements IDynamicBakedModel {
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
         BlockState mimic = extraData.getData(ChestFrameTileEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
-            ModelResourceLocation location = BlockModelShapes.getModelLocation(mimic);
+            ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
-                IBakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
+                BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
                 if (model != null) {
                     return getMimicQuads(state, side, rand, extraData, model);
                 }
@@ -58,7 +64,7 @@ public class ChestBakedModel implements IDynamicBakedModel {
         return Collections.emptyList();
     }
 
-    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, IBakedModel model) {
+    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, BakedModel model) {
         if (side != null) {
             return Collections.emptyList();
         }
@@ -69,14 +75,14 @@ public class ChestBakedModel implements IDynamicBakedModel {
             List<TextureAtlasSprite> designTextureList = new ArrayList<>(TextureHelper.getMetalTextures());
             if (textureList.size() == 0) {
                 if (Minecraft.getInstance().player != null) {
-                    Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("We're sorry, but this block can't be displayed"), true);
+                    Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("We're sorry, but this block can't be displayed"), true);
                 }
                 return Collections.emptyList();
             }
-            designTextureList.add(Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/shulker_box")));
-            TextureAtlasSprite chestFront = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_front"));
-            TextureAtlasSprite chestSide = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_side"));
-            TextureAtlasSprite chestTop = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_top"));
+            designTextureList.add(Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/shulker_box")));
+            TextureAtlasSprite chestFront = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_front"));
+            TextureAtlasSprite chestSide = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_side"));
+            TextureAtlasSprite chestTop = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation(QTextureModels.MOD_ID, "block/chest_top"));
             TextureAtlasSprite texture;
             if (textureList.size() <= tex) {
                 extraData.setData(ChestFrameTileEntity.TEXTURE, 0);
@@ -142,7 +148,7 @@ public class ChestBakedModel implements IDynamicBakedModel {
                 int[] uhigh = {9, 9, 8, 7, 9, 7};
                 int[] vlow = {4, 7, 4, 4, 4, 4};
                 int[] vhigh = {5, 8, 8, 8, 8, 8};
-                switch (state.get(BlockStateProperties.HORIZONTAL_FACING)) {
+                switch (state.getValue(BlockStateProperties.HORIZONTAL_FACING)) {
                     case NORTH:
                         quads.addAll(ModelHelper.createCuboid(1 / 16f, 15 / 16f, 1 / 16f, 15 / 16f, 1 / 16f, 2 / 16f, chestFront, tintIndex));
                         quads.addAll(ModelHelper.createCuboid(1 / 16f, 15 / 16f, 1 / 16f, 15 / 16f, 14 / 16f, 15 / 16f, chestSide, tintIndex));
@@ -191,7 +197,7 @@ public class ChestBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isAmbientOcclusion() {
+    public boolean useAmbientOcclusion() {
         return true;
     }
 
@@ -201,28 +207,28 @@ public class ChestBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isSideLit() {
+    public boolean usesBlockLight() {
         return false;
     }
 
     @Override
-    public boolean isBuiltInRenderer() {
+    public boolean isCustomRenderer() {
         return false;
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
+    public TextureAtlasSprite getParticleIcon() {
         return getTexture();
     }
 
     @Override
-    public ItemOverrideList getOverrides() {
-        return ItemOverrideList.EMPTY;
+    public ItemOverrides getOverrides() {
+        return ItemOverrides.EMPTY;
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return ItemCameraTransforms.DEFAULT;
+    public ItemTransforms getTransforms() {
+        return ItemTransforms.NO_TRANSFORMS;
     }
 }
 //========SOLI DEO GLORIA========//

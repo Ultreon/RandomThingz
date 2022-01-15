@@ -31,8 +31,8 @@ public class RefineryTileEntity extends AbstractFluidMachineTileEntity<RefiningR
     @Nullable
     @Override
     public RefiningRecipe getRecipe() {
-        if (dimension == null) return null;
-        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.REFINING, this, dimension).orElse(null);
+        if (level == null) return null;
+        return level.getRecipeManager().getRecipeFor(ModRecipes.Types.REFINING, this, level).orElse(null);
     }
 
     @Override

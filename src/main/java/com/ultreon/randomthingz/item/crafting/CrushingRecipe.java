@@ -11,17 +11,17 @@ import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import com.ultreon.randomthingz.util.Constants;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -29,7 +29,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-public class CrushingRecipe implements IRecipe<IInventory> {
+public class CrushingRecipe implements Recipe<Container> {
     private final ResourceLocation recipeId;
     private final Map<ItemStack, Float> results = new LinkedHashMap<>();
     @Getter
@@ -44,7 +44,7 @@ public class CrushingRecipe implements IRecipe<IInventory> {
      * @param inv The crusher
      * @return Results of crushing
      */
-    public List<ItemStack> getResults(IInventory inv) {
+    public List<ItemStack> getResults(Container inv) {
         int outputUpgrades = inv instanceof AbstractMachineTileEntity
                 ? ((AbstractMachineTileEntity<?>) inv).getUpgradeCount(MachineUpgrades.OUTPUT_CHANCE)
                 : 0;
@@ -64,7 +64,7 @@ public class CrushingRecipe implements IRecipe<IInventory> {
      * @param inv The crusher
      * @return All possible results of crushing
      */
-    public Set<ItemStack> getPossibleResults(@SuppressWarnings("unused") IInventory inv) {
+    public Set<ItemStack> getPossibleResults(@SuppressWarnings("unused") Container inv) {
         return results.keySet();
     }
 
@@ -75,25 +75,25 @@ public class CrushingRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public boolean matches(IInventory inv, World dimensionIn) {
-        return this.ingredient.test(inv.getStackInSlot(0));
+    public boolean matches(Container inv, Level dimensionIn) {
+        return this.ingredient.test(inv.getItem(0));
     }
 
     @Deprecated
     @Override
-    public ItemStack getCraftingResult(IInventory inv) {
+    public ItemStack assemble(Container inv) {
         // DO NOT USE
-        return getRecipeOutput();
+        return getResultItem();
     }
 
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return true;
     }
 
     @Deprecated
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         // DO NOT USE
         return !results.isEmpty() ? results.keySet().iterator().next() : ItemStack.EMPTY;
     }
@@ -104,44 +104,44 @@ public class CrushingRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return ModRecipes.CRUSHING.get();
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return ModRecipes.Types.CRUSHING;
     }
 
     @Override
-    public boolean isDynamic() {
+    public boolean isSpecial() {
         return true;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CrushingRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CrushingRecipe> {
         @Override
-        public CrushingRecipe read(ResourceLocation recipeId, JsonObject json) {
+        public CrushingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             CrushingRecipe recipe = new CrushingRecipe(recipeId);
-            recipe.processTime = JSONUtils.getInt(json, "process_time", 400);
-            recipe.ingredient = Ingredient.deserialize(json.get("ingredient"));
+            recipe.processTime = GsonHelper.getAsInt(json, "process_time", 400);
+            recipe.ingredient = Ingredient.fromJson(json.get("ingredient"));
             JsonArray resultsArray = json.getAsJsonArray("results");
             for (JsonElement element : resultsArray) {
                 JsonObject obj = element.getAsJsonObject();
-                String itemId = JSONUtils.getString(obj, "item");
-                Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryCreate(itemId));
-                int count = JSONUtils.getInt(obj, "count", 1);
+                String itemId = GsonHelper.getAsString(obj, "item");
+                Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(itemId));
+                int count = GsonHelper.getAsInt(obj, "count", 1);
                 ItemStack stack = new ItemStack(item, count);
-                float chance = JSONUtils.getFloat(obj, "chance", 1);
+                float chance = GsonHelper.getAsFloat(obj, "chance", 1);
                 recipe.results.put(stack, chance);
             }
             return recipe;
         }
 
         @Override
-        public CrushingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        public CrushingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             CrushingRecipe recipe = new CrushingRecipe(recipeId);
             recipe.processTime = buffer.readVarInt();
-            recipe.ingredient = Ingredient.read(buffer);
+            recipe.ingredient = Ingredient.fromNetwork(buffer);
             int resultCount = buffer.readByte();
             for (int i = 0; i < resultCount; ++i) {
                 ResourceLocation itemId = buffer.readResourceLocation();
@@ -154,9 +154,9 @@ public class CrushingRecipe implements IRecipe<IInventory> {
         }
 
         @Override
-        public void write(PacketBuffer buffer, CrushingRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, CrushingRecipe recipe) {
             buffer.writeVarInt(recipe.processTime);
-            recipe.ingredient.write(buffer);
+            recipe.ingredient.toNetwork(buffer);
             buffer.writeByte(recipe.results.size());
             recipe.results.forEach((stack, chance) -> {
                 buffer.writeResourceLocation(Objects.requireNonNull(stack.getItem().getRegistryName()));

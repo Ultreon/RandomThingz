@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.common;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import net.minecraft.world.Explosion;
+import net.minecraft.world.level.Explosion;
 
 /**
  * TNT-Properties.
@@ -15,7 +15,7 @@ import net.minecraft.world.Explosion;
 @Getter
 public class TNTProperties {
     private final float radius;
-    private final Explosion.Mode mode;
+    private final Explosion.BlockInteraction mode;
     private final int fuse;
     private final boolean causesFire;
 }

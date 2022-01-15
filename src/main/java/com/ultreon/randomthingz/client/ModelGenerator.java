@@ -3,9 +3,9 @@ package com.ultreon.randomthingz.client;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import lombok.Getter;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,14 +20,14 @@ public class ModelGenerator {
     @Getter
     private static final ModelGenerator instance = new ModelGenerator();
 
-    private final Map<ResourceLocation, IBakedModel> models = new HashMap<>();
+    private final Map<ResourceLocation, BakedModel> models = new HashMap<>();
 
     private ModelGenerator() {
         for (Toolset toolset : Toolset.values()) {
         }
     }
 
-    public void addModel(IBakedModel model, ResourceLocation rl) {
+    public void addModel(BakedModel model, ResourceLocation rl) {
         this.models.put(rl, model);
     }
 
@@ -39,7 +39,7 @@ public class ModelGenerator {
 
     @SubscribeEvent
     public static void onModelBake(ModelBakeEvent event) {
-        for (Map.Entry<ResourceLocation, IBakedModel> texture : instance.models.entrySet()) {
+        for (Map.Entry<ResourceLocation, BakedModel> texture : instance.models.entrySet()) {
             event.getModelRegistry().put(texture.getKey(), texture.getValue());
         }
     }

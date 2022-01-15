@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
-import net.minecraft.util.text.Color;
+import net.minecraft.network.chat.TextColor;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 public class FireResistantTrait extends AbstractTrait {
@@ -9,15 +9,15 @@ public class FireResistantTrait extends AbstractTrait {
     }
 
     @Override
-    public Color getColor() {
-        return Color.fromHex("#E16B16");
+    public TextColor getColor() {
+        return TextColor.parseColor("#E16B16");
     }
 
     @Override
     public void onLivingDamage(LivingDamageEvent e) {
         super.onLivingDamage(e);
 
-        if (e.getSource().isFireDamage()) {
+        if (e.getSource().isFire()) {
             e.setCanceled(true);
         }
     }

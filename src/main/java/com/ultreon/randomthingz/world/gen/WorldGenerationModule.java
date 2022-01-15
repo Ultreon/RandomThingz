@@ -6,7 +6,7 @@ import com.ultreon.randomthingz.common.CoreRegisterModule;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import com.ultreon.randomthingz.world.biome.common.ModBiomes;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

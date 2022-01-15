@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.util.color;
 
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 /**
  * TODO: Currently just leaning on JEI for this...

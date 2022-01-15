@@ -7,12 +7,12 @@ import com.ultreon.randomthingz.actionmenu.SubmenuItem;
 import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
 import com.ultreon.randomthingz.util.WorldUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.advancements.AdvancementsScreen;
-import net.minecraft.client.gui.screen.OptionsScreen;
-import net.minecraft.client.gui.screen.ShareToLanScreen;
-import net.minecraft.client.gui.screen.StatsScreen;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.gui.screens.OptionsScreen;
+import net.minecraft.client.gui.screens.ShareToLanScreen;
+import net.minecraft.client.gui.screens.achievement.StatsScreen;
+import net.minecraft.client.gui.screens.advancements.AdvancementsScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
@@ -44,13 +44,13 @@ public class MinecraftMenu extends AbstractActionMenu {
     }
 
     public void client() {
-        addClient(new SubmenuItem(new MenuHandler(new TranslationTextComponent("menu.options"), optionsMenu)) {
+        addClient(new SubmenuItem(new MenuHandler(new TranslatableComponent("menu.options"), optionsMenu)) {
             @OnlyIn(Dist.CLIENT)
             @SuppressWarnings("ConstantConditions")
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                mc.displayGuiScreen(new OptionsScreen(mc.currentScreen, mc.gameSettings));
+                mc.setScreen(new OptionsScreen(mc.screen, mc.options));
             }
         });
         addClient(new ActionMenuItem() {
@@ -60,11 +60,11 @@ public class MinecraftMenu extends AbstractActionMenu {
             }
 
             @Override
-            public ITextComponent getText() {
-                if (!Minecraft.getInstance().isIntegratedServerRunning()) {
-                    return new TranslationTextComponent("menu.disconnect");
+            public Component getText() {
+                if (!Minecraft.getInstance().isLocalServer()) {
+                    return new TranslatableComponent("menu.disconnect");
                 }
-                return new TranslationTextComponent("menu.returnToMenu");
+                return new TranslatableComponent("menu.returnToMenu");
             }
         });
         addClient(new ActionMenuItem() {
@@ -72,18 +72,18 @@ public class MinecraftMenu extends AbstractActionMenu {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                mc.displayGuiScreen(new ShareToLanScreen(mc.currentScreen));
+                mc.setScreen(new ShareToLanScreen(mc.screen));
             }
 
             @Override
-            public ITextComponent getText() {
-                return new TranslationTextComponent("menu.shareToLan");
+            public Component getText() {
+                return new TranslatableComponent("menu.shareToLan");
             }
 
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.isSingleplayer() && !Objects.requireNonNull(mc.getIntegratedServer()).getPublic();
+                return mc.hasSingleplayerServer() && !Objects.requireNonNull(mc.getSingleplayerServer()).isPublished();
             }
         });
         addClient(new ActionMenuItem() {
@@ -92,13 +92,13 @@ public class MinecraftMenu extends AbstractActionMenu {
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
                 if (mc.player != null) {
-                    mc.displayGuiScreen(new StatsScreen(mc.currentScreen, mc.player.getStats()));
+                    mc.setScreen(new StatsScreen(mc.screen, mc.player.getStats()));
                 }
             }
 
             @Override
-            public ITextComponent getText() {
-                return new TranslationTextComponent("gui.stats");
+            public Component getText() {
+                return new TranslatableComponent("gui.stats");
             }
         });
         addClient(new ActionMenuItem() {
@@ -106,13 +106,13 @@ public class MinecraftMenu extends AbstractActionMenu {
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
                 if (mc.player != null) {
-                    mc.displayGuiScreen(new AdvancementsScreen(mc.player.connection.getAdvancementManager()));
+                    mc.setScreen(new AdvancementsScreen(mc.player.connection.getAdvancements()));
                 }
             }
 
             @Override
-            public ITextComponent getText() {
-                return new TranslationTextComponent("gui.advancements");
+            public Component getText() {
+                return new TranslatableComponent("gui.advancements");
             }
         });
         addClient(new ActionMenuItem() {
@@ -122,14 +122,14 @@ public class MinecraftMenu extends AbstractActionMenu {
             }
 
             @Override
-            public ITextComponent getText() {
-                return new TranslationTextComponent("action.randomthingz.set_debug_page");
+            public Component getText() {
+                return new TranslatableComponent("action.randomthingz.set_debug_page");
             }
 
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.dimension != null && mc.playerController != null;
+                return mc.player != null && mc.level != null && mc.gameMode != null;
             }
         });
     }

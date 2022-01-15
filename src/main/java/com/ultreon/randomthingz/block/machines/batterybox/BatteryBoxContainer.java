@@ -4,22 +4,22 @@ import com.qsoftware.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractEnergyStorageContainer;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
 import com.ultreon.randomthingz.init.ModMachineContainers;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.energy.CapabilityEnergy;
 
 public class BatteryBoxContainer extends AbstractEnergyStorageContainer<BatteryBoxTileEntity> {
     final BatteryBoxTileEntity tileEntity;
 
-    public BatteryBoxContainer(int id, PlayerInventory playerInventory) {
-        this(id, playerInventory, new BatteryBoxTileEntity(), new IntArray(AbstractMachineBaseTileEntity.FIELDS_COUNT));
+    public BatteryBoxContainer(int id, Inventory playerInventory) {
+        this(id, playerInventory, new BatteryBoxTileEntity(), new SimpleContainerData(AbstractMachineBaseTileEntity.FIELDS_COUNT));
     }
 
-    public BatteryBoxContainer(int id, PlayerInventory playerInventory, BatteryBoxTileEntity tileEntity, IIntArray fieldsIn) {
+    public BatteryBoxContainer(int id, Inventory playerInventory, BatteryBoxTileEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.batteryBox, id, tileEntity, fieldsIn);
         this.tileEntity = tileEntity;
 
@@ -34,11 +34,11 @@ public class BatteryBoxContainer extends AbstractEnergyStorageContainer<BatteryB
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack stackCopy = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.hasStack()) {
-            ItemStack stack = slot.getStack();
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack stack = slot.getItem();
             stackCopy = stack.copy();
 
             final int inventorySize = BatteryBoxTileEntity.INVENTORY_SIZE;
@@ -47,24 +47,24 @@ public class BatteryBoxContainer extends AbstractEnergyStorageContainer<BatteryB
 
             if (index >= inventorySize) {
                 if (this.isBattery(stack)) {
-                    if (!this.mergeItemStack(stack, 0, inventorySize, false)) {
+                    if (!this.moveItemStackTo(stack, 0, inventorySize, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (index < playerInventoryEnd) {
-                    if (!this.mergeItemStack(stack, playerInventoryEnd, playerHotbarEnd, false)) {
+                    if (!this.moveItemStackTo(stack, playerInventoryEnd, playerHotbarEnd, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < playerHotbarEnd && !this.mergeItemStack(stack, inventorySize, playerInventoryEnd, false)) {
+                } else if (index < playerHotbarEnd && !this.moveItemStackTo(stack, inventorySize, playerInventoryEnd, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(stack, inventorySize, playerHotbarEnd, false)) {
+            } else if (!this.moveItemStackTo(stack, inventorySize, playerHotbarEnd, false)) {
                 return ItemStack.EMPTY;
             }
 
             if (stack.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
 
             if (stack.getCount() == stackCopy.getCount()) {

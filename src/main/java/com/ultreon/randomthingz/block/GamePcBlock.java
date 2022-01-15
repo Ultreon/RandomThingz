@@ -2,12 +2,12 @@ package com.ultreon.randomthingz.block;
 
 import com.ultreon.randomthingz.common.IDeprecated;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -21,18 +21,18 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("deprecation")
 public class GamePcBlock extends DirectionalBlock implements IDeprecated {
-    private static final VoxelShape SHAPE_E = VoxelShapes.create(-3d / 16, 0.25d / 16, 2d / 16, 18d / 16, 22.25d / 16, 13d / 16);
-    private static final VoxelShape SHAPE_S = VoxelShapes.create(2d / 16, 0.25d / 16, -3d / 16, 13d / 16, 22.25d / 16, 18d / 16);
-    private static final VoxelShape SHAPE_W = VoxelShapes.create(-3d / 16, 0.25d / 16, 2d / 16, 18d / 16, 22.25d / 16, 13d / 16);
-    private static final VoxelShape SHAPE_N = VoxelShapes.create(2d / 16, 0.25d / 16, -3d / 16, 13d / 16, 22.25d / 16, 18d / 16);
+    private static final VoxelShape SHAPE_E = Shapes.box(-3d / 16, 0.25d / 16, 2d / 16, 18d / 16, 22.25d / 16, 13d / 16);
+    private static final VoxelShape SHAPE_S = Shapes.box(2d / 16, 0.25d / 16, -3d / 16, 13d / 16, 22.25d / 16, 18d / 16);
+    private static final VoxelShape SHAPE_W = Shapes.box(-3d / 16, 0.25d / 16, 2d / 16, 18d / 16, 22.25d / 16, 13d / 16);
+    private static final VoxelShape SHAPE_N = Shapes.box(2d / 16, 0.25d / 16, -3d / 16, 13d / 16, 22.25d / 16, 18d / 16);
 
     public GamePcBlock(Properties properties) {
         super(properties);
     }
 
     @Override
-    public @NotNull VoxelShape getShape(BlockState state, @NotNull IBlockReader dimensionIn, @NotNull BlockPos pos, @NotNull ISelectionContext context) {
-        switch (state.get(FACING)) {
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter dimensionIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+        switch (state.getValue(FACING)) {
             case EAST:
                 return SHAPE_E;
             case SOUTH:
@@ -45,7 +45,7 @@ public class GamePcBlock extends DirectionalBlock implements IDeprecated {
     }
 
     @Override
-    public float getAmbientOcclusionLightValue(@NotNull BlockState state, @NotNull IBlockReader dimensionIn, @NotNull BlockPos pos) {
+    public float getShadeBrightness(@NotNull BlockState state, @NotNull BlockGetter dimensionIn, @NotNull BlockPos pos) {
         return 0.6f;
     }
 }

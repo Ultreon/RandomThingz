@@ -1,13 +1,13 @@
 package com.ultreon.randomthingz.actionmenu;
 
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public interface IActionMenuItem {
-    default ITextComponent getText() {
-        return new StringTextComponent("...");
+    default Component getText() {
+        return new TextComponent("...");
     }
 
     @OnlyIn(Dist.CLIENT)

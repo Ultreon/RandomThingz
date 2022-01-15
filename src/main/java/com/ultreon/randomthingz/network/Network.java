@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.network;
 
 import com.ultreon.randomthingz.RandomThingz;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Connection;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fml.network.FMLHandshakeHandler;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -16,8 +16,8 @@ import java.util.Objects;
 public final class Network {
     private static final String VERSION = "randomthingz-net2";
 
-    public static NetworkManager getManager() {
-        return Objects.requireNonNull(Minecraft.getInstance().getConnection()).getNetworkManager();
+    public static Connection getManager() {
+        return Objects.requireNonNull(Minecraft.getInstance().getConnection()).getConnection();
     }
 
     public static SimpleChannel channel;
@@ -92,8 +92,8 @@ public final class Network {
         channel.send(PacketDistributor.ALL.noArg(), packet);
     }
 
-    public static void sendToClient(Object packet, ServerPlayerEntity player) {
-        channel.sendTo(packet, player.connection.netManager, NetworkDirection.PLAY_TO_CLIENT);
+    public static void sendToClient(Object packet, ServerPlayer player) {
+        channel.sendTo(packet, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
     }
 
     public static void sendToServer(Object packet) {

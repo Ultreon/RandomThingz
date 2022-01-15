@@ -8,18 +8,18 @@ import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
+public class ArcaneEscalatingRecipe implements Recipe<IMachineInventory> {
     private final ResourceLocation recipeId;
     private final Map<Ingredient, Integer> ingredients = new LinkedHashMap<>();
     @Getter
@@ -48,7 +48,7 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
     }
 
     @Override
-    public boolean matches(IMachineInventory inv, World dimensionIn) {
+    public boolean matches(IMachineInventory inv, Level dimensionIn) {
         for (Ingredient ingredient : ingredients.keySet()) {
             int required = ingredients.get(ingredient);
             int found = InventoryUtils.getTotalCount(inv, ingredient);
@@ -59,7 +59,7 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
 
         // Check for non-matching items
         for (int i = 0; i < inv.getInputSlotCount(); ++i) {
-            ItemStack stack = inv.getStackInSlot(i);
+            ItemStack stack = inv.getItem(i);
             if (!stack.isEmpty()) {
                 boolean foundMatch = false;
                 for (Ingredient ingredient : ingredients.keySet()) {
@@ -78,21 +78,21 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
     }
 
     @Override
-    public ItemStack getCraftingResult(IMachineInventory inv) {
+    public ItemStack assemble(IMachineInventory inv) {
         ItemStack out = new ItemStack(Items.ENCHANTED_BOOK);
-        out.addEnchantment(result, 1);
+        out.enchant(result, 1);
         return out;
     }
 
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return true;
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         ItemStack out = new ItemStack(Items.ENCHANTED_BOOK);
-        out.addEnchantment(result, 1);
+        out.enchant(result, 1);
         return out;
     }
 
@@ -102,21 +102,21 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return ModRecipes.ARCANE_ESCALATING.get();
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return ModRecipes.Types.ARCANE_ESCALATING;
     }
 
     @Override
-    public boolean isDynamic() {
+    public boolean isSpecial() {
         return true;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ArcaneEscalatingRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ArcaneEscalatingRecipe> {
         @SuppressWarnings("unused")
         @Deprecated
         @Nullable
@@ -148,9 +148,9 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
         }
 
         @Override
-        public ArcaneEscalatingRecipe read(ResourceLocation recipeId, JsonObject json) {
+        public ArcaneEscalatingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             ArcaneEscalatingRecipe recipe = new ArcaneEscalatingRecipe(recipeId);
-            recipe.processTime = JSONUtils.getInt(json, "process_time", 400);
+            recipe.processTime = GsonHelper.getAsInt(json, "process_time", 400);
 
             List<ItemStack> stacks = new ArrayList<>();
 
@@ -158,7 +158,7 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
                 throw new JsonSyntaxException("Expected item or items, not both.");
             }
 
-            JsonArray multiItems = JSONUtils.getJsonArray(json, "items", null);
+            JsonArray multiItems = GsonHelper.getAsJsonArray(json, "items", null);
             if (multiItems == null) {
                 ItemStack stack;
 
@@ -175,8 +175,8 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
                         }
                     } else if (element.isJsonObject()) {
                         JsonObject object = element.getAsJsonObject();
-                        int count = JSONUtils.getInt(object, "count", 1);
-                        String name = JSONUtils.getString(object, "name");
+                        int count = GsonHelper.getAsInt(object, "count", 1);
+                        String name = GsonHelper.getAsString(object, "name");
                         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(name));
 
                         stack = new ItemStack(item, count);
@@ -202,8 +202,8 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
                         }
                     } else if (element.isJsonObject()) {
                         JsonObject object = element.getAsJsonObject();
-                        int count = JSONUtils.getInt(object, "count", 1);
-                        String name = JSONUtils.getString(object, "name");
+                        int count = GsonHelper.getAsInt(object, "count", 1);
+                        String name = GsonHelper.getAsString(object, "name");
                         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(name));
 
                         stack = new ItemStack(item, count);
@@ -222,17 +222,17 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
         }
 
         @Override
-        public ArcaneEscalatingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        public ArcaneEscalatingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             ArcaneEscalatingRecipe recipe = new ArcaneEscalatingRecipe(recipeId);
             recipe.processTime = buffer.readVarInt();
-            recipe.result = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(buffer.readString()));
+            recipe.result = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(buffer.readUtf()));
             int itemCount = buffer.readInt();
 
             List<ItemStack> stacks = new ArrayList<>();
             for (int i = 0; i < itemCount; i++) {
                 ItemStack stack;
 
-                String name = buffer.readString(128);
+                String name = buffer.readUtf(128);
                 int count = buffer.readInt();
 
                 stack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(name)), count);
@@ -245,13 +245,13 @@ public class ArcaneEscalatingRecipe implements IRecipe<IMachineInventory> {
         }
 
         @Override
-        public void write(PacketBuffer buffer, ArcaneEscalatingRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, ArcaneEscalatingRecipe recipe) {
             buffer.writeVarInt(recipe.processTime);
-            buffer.writeString(NameUtils.from(recipe.result).toString());
+            buffer.writeUtf(NameUtils.from(recipe.result).toString());
 
             buffer.writeInt(recipe.input.size());
             for (ItemStack stack : recipe.input) {
-                buffer.writeString(NameUtils.fromItem(stack).toString(), 128);
+                buffer.writeUtf(NameUtils.fromItem(stack).toString(), 128);
                 buffer.writeInt(stack.getCount());
             }
         }

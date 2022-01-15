@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.entity.damagesource;
 
 import lombok.experimental.UtilityClass;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 
 import java.util.function.Function;
 

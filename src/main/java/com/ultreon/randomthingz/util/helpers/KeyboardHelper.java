@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.util.helpers;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.lwjgl.glfw.GLFW;
@@ -16,20 +16,20 @@ import org.lwjgl.glfw.GLFW;
 @SuppressWarnings("unused")
 @UtilityClass
 public class KeyboardHelper {
-    private static final long WINDOW = Minecraft.getInstance().getMainWindow().getHandle();
+    private static final long WINDOW = Minecraft.getInstance().getWindow().getWindow();
 
     @OnlyIn(Dist.CLIENT)
     public static boolean isHoldingShift() {
-        return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_SHIFT) || InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_SHIFT);
+        return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_SHIFT) || InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_SHIFT);
     }
 
     @OnlyIn(Dist.CLIENT)
     public static boolean isHoldingCtrl() {
-        return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_CONTROL) || InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_CONTROL);
+        return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_CONTROL) || InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_CONTROL);
     }
 
     @OnlyIn(Dist.CLIENT)
     public static boolean isHoldingAlt() {
-        return InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_ALT) || InputMappings.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_ALT);
+        return InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_LEFT_ALT) || InputConstants.isKeyDown(WINDOW, GLFW.GLFW_KEY_RIGHT_ALT);
     }
 }

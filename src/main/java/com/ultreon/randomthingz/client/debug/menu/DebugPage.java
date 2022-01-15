@@ -1,16 +1,16 @@
 package com.ultreon.randomthingz.client.debug.menu;
 
+import com.mojang.blaze3d.platform.Window;
 import com.ultreon.randomthingz.common.Angle;
 import com.ultreon.randomthingz.common.IntSize;
 import com.ultreon.randomthingz.common.Multiplier;
 import com.ultreon.randomthingz.common.Percentage;
 import com.ultreon.randomthingz.common.enums.MoonPhase;
 import com.ultreon.randomthingz.common.interfaces.Formattable;
-import net.minecraft.client.MainWindow;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 
@@ -23,14 +23,14 @@ public abstract class DebugPage {
     private final List<DebugEntry> linesRight = new ArrayList<>();
     private final ModContainer modContainer;
     private final Minecraft minecraft;
-    protected final MainWindow mainWindow;
+    protected final Window mainWindow;
     private final ResourceLocation resourceLocation;
 
     public DebugPage(String modId, String name) {
         // Mod container.
         this.modContainer = ModList.get().getModContainerById(modId).orElseThrow(() -> new IllegalArgumentException("Mod not found with id: " + modId));
         this.minecraft = Minecraft.getInstance();
-        this.mainWindow = this.minecraft.getMainWindow();
+        this.mainWindow = this.minecraft.getWindow();
         this.resourceLocation = new ResourceLocation(modId, name);
     }
 
@@ -67,14 +67,14 @@ public abstract class DebugPage {
     }
 
     protected static Formattable getSize(float w, float h) {
-        return () -> TextFormatting.GOLD.toString() + w + TextFormatting.GRAY + " x " + TextFormatting.GOLD + h;
+        return () -> ChatFormatting.GOLD.toString() + w + ChatFormatting.GRAY + " x " + ChatFormatting.GOLD + h;
     }
 
     protected static Formattable getPercentage(double value) {
         return new Percentage(value);
     }
 
-    protected static Color getColor(Vector3d color) {
+    protected static Color getColor(Vec3 color) {
         return new Color((float) color.x, (float) color.y, (float) color.z);
     }
 

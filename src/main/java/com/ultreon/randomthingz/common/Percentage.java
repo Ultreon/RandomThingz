@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.common;
 import com.ultreon.randomthingz.common.interfaces.Formattable;
 import lombok.Data;
 import lombok.Getter;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 /**
  * Percentage class, used for get percentage value or normalized value.<br>
@@ -28,7 +28,7 @@ public class Percentage implements Formattable {
 
     @Override
     public String toFormattedString() {
-        return TextFormatting.BLUE.toString() + Math.round(percentage) + "%";
+        return ChatFormatting.BLUE.toString() + Math.round(percentage) + "%";
     }
 
     public double getValue() {

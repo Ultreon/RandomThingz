@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.entity;
 
 import com.ultreon.randomthingz.RandomThingz;
-import net.minecraft.client.renderer.Atlases;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,7 +24,7 @@ public class TileEntityItemModels {
 
     @SubscribeEvent
     public static void onStitch(TextureStitchEvent.Pre event) {
-        if (!event.getMap().getTextureLocation().equals(Atlases.CHEST_ATLAS)) {
+        if (!event.getMap().location().equals(Sheets.CHEST_SHEET)) {
             return;
         }
 

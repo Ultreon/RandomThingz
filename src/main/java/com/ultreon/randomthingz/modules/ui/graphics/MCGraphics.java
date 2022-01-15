@@ -1,19 +1,19 @@
-package com.ultreon.randomthingz.client.graphics;
+package com.ultreon.randomthingz.modules.ui.graphics;
 
 import com.google.common.annotations.Beta;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
 import com.ultreon.randomthingz.common.geom.RectangleUV;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IReorderingProcessor;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -25,19 +25,19 @@ import java.util.List;
  */
 @Beta
 public class MCGraphics {
-    private final MatrixStack matrixStack;
+    private final PoseStack matrixStack;
     private final Screen gui;
     private final Minecraft mc;
     private final TextureManager textureManager;
     private final ItemRenderer itemRenderer;
-    private FontRenderer font;
+    private Font font;
     private Color color;
 
-    public MCGraphics(MatrixStack matrixStack, FontRenderer font, Screen gui) {
+    public MCGraphics(PoseStack matrixStack, Font font, Screen gui) {
         this.matrixStack = matrixStack;
         this.font = font;
         this.mc = Minecraft.getInstance();
-        this.gui = gui == null ? this.mc.currentScreen : gui;
+        this.gui = gui == null ? this.mc.screen : gui;
         this.textureManager = this.mc.getTextureManager();
         this.itemRenderer = this.mc.getItemRenderer();
     }
@@ -48,9 +48,9 @@ public class MCGraphics {
 
     public void drawString(String string, int x, int y, boolean shadow) {
         if (shadow) {
-            font.drawStringWithShadow(matrixStack, string, x, y, color.getRGB());
+            font.drawShadow(matrixStack, string, x, y, color.getRGB());
         } else {
-            font.drawString(matrixStack, string, x, y, color.getRGB());
+            font.draw(matrixStack, string, x, y, color.getRGB());
         }
     }
 
@@ -60,9 +60,9 @@ public class MCGraphics {
 
     public void drawString(String string, int x, int y, Color color, boolean shadow) {
         if (shadow) {
-            font.drawStringWithShadow(matrixStack, string, x, y, color.getRGB());
+            font.drawShadow(matrixStack, string, x, y, color.getRGB());
         } else {
-            font.drawString(matrixStack, string, x, y, color.getRGB());
+            font.draw(matrixStack, string, x, y, color.getRGB());
         }
     }
 
@@ -87,21 +87,21 @@ public class MCGraphics {
     }
 
     public void drawTexture(int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        textureManager.bindTexture(resource);
+        textureManager.bind(resource);
         Screen.blit(matrixStack, x, y, width, height, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
     public void drawTexture(int x, int y, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        textureManager.bindTexture(resource);
+        textureManager.bind(resource);
         Screen.blit(matrixStack, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
     public void drawTexture(int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        textureManager.bindTexture(resource);
+        textureManager.bind(resource);
         Screen.blit(matrixStack, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureHeight, textureWidth);
     }
 
-    public final void drawCenteredString(ITextComponent text, float x, float y, Color color) {
+    public final void drawCenteredString(Component text, float x, float y, Color color) {
         drawCenteredString(text.getString(), x, y, color);
     }
 
@@ -109,16 +109,16 @@ public class MCGraphics {
         drawCenteredString(text, x, y, color, false);
     }
 
-    public final void drawCenteredString(ITextComponent text, float x, float y, Color color, boolean shadow) {
+    public final void drawCenteredString(Component text, float x, float y, Color color, boolean shadow) {
         drawCenteredString(text.getString(), x, y, color, shadow);
     }
 
     @SuppressWarnings("RedundantCast")
     public final void drawCenteredString(String text, float x, float y, Color color, boolean shadow) {
         if (shadow) {
-            font.drawStringWithShadow(matrixStack, text, (float) (x - font.getStringWidth(text) / 2), y, color.getRGB());
+            font.drawShadow(matrixStack, text, (float) (x - font.width(text) / 2), y, color.getRGB());
         } else {
-            font.drawString(matrixStack, text, (float) (x - font.getStringWidth(text) / 2), y, color.getRGB());
+            font.draw(matrixStack, text, (float) (x - font.width(text) / 2), y, color.getRGB());
         }
     }
 
@@ -130,27 +130,27 @@ public class MCGraphics {
     @SuppressWarnings("deprecation")
     public final void drawItemStack(ItemStack stack, int x, int y, String altText) {
         RenderSystem.translatef(0.0F, 0.0F, 32.0F);
-        this.itemRenderer.zLevel = 200.0F;
+        this.itemRenderer.blitOffset = 200.0F;
 
-        FontRenderer font = stack.getItem().getFontRenderer(stack);
+        Font font = stack.getItem().getFontRenderer(stack);
         if (font == null) {
-            font = Minecraft.getInstance().fontRenderer;
+            font = Minecraft.getInstance().font;
         }
 
         if (this.font != null) {
             font = this.font;
         }
 
-        this.itemRenderer.renderItemAndEffectIntoGUI(stack, x, y);
-        this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
-        this.itemRenderer.zLevel = 0.0F;
+        this.itemRenderer.renderAndDecorateItem(stack, x, y);
+        this.itemRenderer.renderGuiItemDecorations(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
+        this.itemRenderer.blitOffset = 0.0F;
     }
 
-    public FontRenderer getFont() {
+    public Font getFont() {
         return font;
     }
 
-    public void setFont(FontRenderer font) {
+    public void setFont(Font font) {
         this.font = font;
     }
 
@@ -177,15 +177,15 @@ public class MCGraphics {
         }
     }
 
-    public void renderTooltip(ITextComponent text, Point point) {
+    public void renderTooltip(Component text, Point point) {
         gui.renderTooltip(matrixStack, text, point.x, point.y);
     }
 
-    public void renderTooltip(List<? extends IReorderingProcessor> tooltips, Point point) {
+    public void renderTooltip(List<? extends FormattedCharSequence> tooltips, Point point) {
         gui.renderTooltip(matrixStack, tooltips, point.x, point.y);
     }
 
-    public MatrixStack getMatrixStack() {
+    public PoseStack getMatrixStack() {
         return matrixStack;
     }
 }

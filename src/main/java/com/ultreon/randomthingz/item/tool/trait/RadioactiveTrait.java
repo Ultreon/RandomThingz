@@ -1,17 +1,17 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
 import com.ultreon.randomthingz.effect.common.ModEffects;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.text.Color;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.effect.MobEffectInstance;
 
 public class RadioactiveTrait extends AbstractPotionTrait {
     @Override
-    public Color getColor() {
-        return Color.fromHex("#009F00");
+    public TextColor getColor() {
+        return TextColor.parseColor("#009F00");
     }
 
     @Override
-    public EffectInstance getEffectInstance() {
-        return new EffectInstance(ModEffects.RADIATION.get(), 1200, 5);
+    public MobEffectInstance getEffectInstance() {
+        return new MobEffectInstance(ModEffects.RADIATION.get(), 1200, 5);
     }
 }

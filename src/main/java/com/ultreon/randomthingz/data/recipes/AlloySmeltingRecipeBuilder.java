@@ -7,14 +7,14 @@ import com.qsoftware.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
@@ -26,12 +26,12 @@ public class AlloySmeltingRecipeBuilder {
     private final ItemStack result;
     private final int processTime;
 
-    private AlloySmeltingRecipeBuilder(IItemProvider result, int count, int processTime) {
+    private AlloySmeltingRecipeBuilder(ItemLike result, int count, int processTime) {
         this.result = new ItemStack(result, count);
         this.processTime = processTime;
     }
 
-    public static AlloySmeltingRecipeBuilder builder(IItemProvider result, int count, int processTime) {
+    public static AlloySmeltingRecipeBuilder builder(ItemLike result, int count, int processTime) {
         return new AlloySmeltingRecipeBuilder(result, count, processTime);
     }
 
@@ -45,19 +45,19 @@ public class AlloySmeltingRecipeBuilder {
         return this;
     }
 
-    public AlloySmeltingRecipeBuilder ingredient(IItemProvider item, int count) {
-        return ingredient(Ingredient.fromItems(item), count);
+    public AlloySmeltingRecipeBuilder ingredient(ItemLike item, int count) {
+        return ingredient(Ingredient.of(item), count);
     }
 
-    public AlloySmeltingRecipeBuilder ingredient(ITag<Item> tag, int count) {
-        return ingredient(Ingredient.fromTag(tag), count);
+    public AlloySmeltingRecipeBuilder ingredient(Tag<Item> tag, int count) {
+        return ingredient(Ingredient.of(tag), count);
     }
 
     public AlloySmeltingRecipeBuilder ingredient(ItemMaterial metal, int count) {
         return ingredient(metal.getSmeltables(), count);
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer) {
+    public void build(Consumer<FinishedRecipe> consumer) {
         ResourceLocation resultId = NameUtils.fromItem(result);
         ResourceLocation id = new ResourceLocation(
                 "minecraft".equals(resultId.getNamespace()) ? RandomThingz.MOD_ID : resultId.getNamespace(),
@@ -65,11 +65,11 @@ public class AlloySmeltingRecipeBuilder {
         build(consumer, id);
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer, ResourceLocation id) {
+    public void build(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
         consumer.accept(new Result(id, this));
     }
 
-    public class Result implements IFinishedRecipe {
+    public class Result implements FinishedRecipe {
         private final ResourceLocation id;
         private final AlloySmeltingRecipeBuilder builder;
 
@@ -79,7 +79,7 @@ public class AlloySmeltingRecipeBuilder {
         }
 
         @Override
-        public void serialize(JsonObject json) {
+        public void serializeRecipeData(JsonObject json) {
             json.addProperty("process_time", builder.processTime);
 
             JsonArray ingredients = new JsonArray();
@@ -97,30 +97,30 @@ public class AlloySmeltingRecipeBuilder {
 
         private JsonElement serializeIngredient(Ingredient ingredient, int count) {
             JsonObject json = new JsonObject();
-            json.add("value", ingredient.serialize());
+            json.add("value", ingredient.toJson());
             json.addProperty("count", count);
             return json;
         }
 
         @Override
-        public ResourceLocation getID() {
+        public ResourceLocation getId() {
             return id;
         }
 
         @Override
-        public IRecipeSerializer<?> getSerializer() {
+        public RecipeSerializer<?> getType() {
             return ModRecipes.ALLOY_SMELTING.get();
         }
 
         @Nullable
         @Override
-        public JsonObject getAdvancementJson() {
+        public JsonObject serializeAdvancement() {
             return null;
         }
 
         @Nullable
         @Override
-        public ResourceLocation getAdvancementID() {
+        public ResourceLocation getAdvancementId() {
             return null;
         }
     }

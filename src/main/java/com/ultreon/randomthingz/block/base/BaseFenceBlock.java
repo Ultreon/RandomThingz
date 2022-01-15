@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.base;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.FenceBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FenceBlock;
 
 /**
  * Base fence block class.

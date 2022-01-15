@@ -1,38 +1,38 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
 public class BatteryBoxBlock extends Block {
     public static final IntegerProperty BATTERIES = IntegerProperty.create("batteries", 0, 6);
 
-    private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 13, 16);
+    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 13, 16);
 
     public BatteryBoxBlock() {
-        super(Properties.generate(Material.IRON).hardnessAndResistance(6.0f, 20.0f).sound(SoundType.METAL));
-        this.setDefaultState(this.getStateContainer().getBaseState().with(BATTERIES, 0));
+        super(Properties.of(Material.METAL).strength(6.0f, 20.0f).sound(SoundType.METAL));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(BATTERIES, 0));
     }
 
     @Override
@@ -42,70 +42,70 @@ public class BatteryBoxBlock extends Block {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
+    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
         return new BatteryBoxTileEntity();
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(BATTERIES);
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState();
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState();
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader dimensionIn, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter dimensionIn, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World dimensionIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!dimensionIn.isClientSided) {
+    public InteractionResult use(BlockState state, Level dimensionIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+        if (!dimensionIn.isClientSide) {
             this.interactWith(dimensionIn, pos, player);
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    public void interactWith(World dimensionIn, BlockPos pos, PlayerEntity player) {
-        TileEntity tileEntity = dimensionIn.getTileEntity(pos);
+    public void interactWith(Level dimensionIn, BlockPos pos, Player player) {
+        BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
         if (tileEntity instanceof BatteryBoxTileEntity) {
-            player.openContainer((INamedContainerProvider) tileEntity);
+            player.openMenu((MenuProvider) tileEntity);
         }
     }
 
     @Override
-    public void onBlockPlacedBy(World dimensionIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-        if (stack.hasDisplayName()) {
-            TileEntity tileentity = dimensionIn.getTileEntity(pos);
+    public void setPlacedBy(Level dimensionIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+        if (stack.hasCustomHoverName()) {
+            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
             if (tileentity instanceof BatteryBoxTileEntity) {
-                ((BatteryBoxTileEntity) tileentity).setCustomName(stack.getDisplayName());
+                ((BatteryBoxTileEntity) tileentity).setCustomName(stack.getHoverName());
             }
         }
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileentity = dimensionIn.getTileEntity(pos);
+            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
             if (tileentity instanceof BatteryBoxTileEntity) {
-                InventoryHelper.dropInventoryItems(dimensionIn, pos, (BatteryBoxTileEntity) tileentity);
-                dimensionIn.updateComparatorOutputLevel(pos, this);
+                Containers.dropContents(dimensionIn, pos, (BatteryBoxTileEntity) tileentity);
+                dimensionIn.updateNeighbourForOutputSignal(pos, this);
             }
 
-            super.onReplaced(state, dimensionIn, pos, newState, isMoving);
+            super.onRemove(state, dimensionIn, pos, newState, isMoving);
         }
     }
 }

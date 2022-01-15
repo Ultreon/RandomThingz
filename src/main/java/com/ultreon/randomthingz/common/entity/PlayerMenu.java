@@ -8,21 +8,21 @@ import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
 import com.ultreon.randomthingz.common.enums.TextColors;
 import com.ultreon.randomthingz.util.Targeter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.multiplayer.PlayerController;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.server.management.BanList;
-import net.minecraft.server.management.ProfileBanEntry;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextComponentUtils;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.multiplayer.MultiPlayerGameMode;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentUtils;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.UserBanList;
+import net.minecraft.server.players.UserBanListEntry;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -39,28 +39,28 @@ public class PlayerMenu extends AbstractActionMenu {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld dimension = mc.dimension;
-                ClientPlayerEntity player = mc.player;
-                PlayerController controller = mc.playerController;
+                ClientLevel dimension = mc.level;
+                LocalPlayer player = mc.player;
+                MultiPlayerGameMode controller = mc.gameMode;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
+                EntityHitResult result = Targeter.rayTraceEntities(player, dimension);
                 if (result != null && controller != null) {
-                    controller.attackEntity(player, result.getEntity());
+                    controller.attack(player, result.getEntity());
                 }
             }
 
             @Override
-            public ITextComponent getText() {
-                return new StringTextComponent("Attack");
+            public Component getText() {
+                return new TextComponent("Attack");
             }
 
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld dimension = mc.dimension;
-                ClientPlayerEntity player = mc.player;
+                ClientLevel dimension = mc.level;
+                LocalPlayer player = mc.player;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
+                EntityHitResult result = Targeter.rayTraceEntities(player, dimension);
                 return result != null;
             }
         });
@@ -68,28 +68,28 @@ public class PlayerMenu extends AbstractActionMenu {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld dimension = mc.dimension;
-                ClientPlayerEntity player = mc.player;
-                PlayerController controller = mc.playerController;
+                ClientLevel dimension = mc.level;
+                LocalPlayer player = mc.player;
+                MultiPlayerGameMode controller = mc.gameMode;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
+                EntityHitResult result = Targeter.rayTraceEntities(player, dimension);
                 if (result != null && controller != null) {
-                    controller.interactWithEntity(player, result.getEntity(), result, Hand.MAIN_HAND);
+                    controller.interactAt(player, result.getEntity(), result, InteractionHand.MAIN_HAND);
                 }
             }
 
             @Override
-            public ITextComponent getText() {
-                return new StringTextComponent("Interact");
+            public Component getText() {
+                return new TextComponent("Interact");
             }
 
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld dimension = mc.dimension;
-                ClientPlayerEntity player = mc.player;
+                ClientLevel dimension = mc.level;
+                LocalPlayer player = mc.player;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
+                EntityHitResult result = Targeter.rayTraceEntities(player, dimension);
                 return result != null;
             }
         });
@@ -100,14 +100,14 @@ public class PlayerMenu extends AbstractActionMenu {
             }
 
             @Override
-            public ITextComponent getText() {
-                return new StringTextComponent("Set Debug Page");
+            public Component getText() {
+                return new TextComponent("Set Debug Page");
             }
 
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.dimension != null && mc.playerController != null;
+                return mc.player != null && mc.level != null && mc.gameMode != null;
             }
         });
     }
@@ -116,28 +116,28 @@ public class PlayerMenu extends AbstractActionMenu {
     public void server() {
         add(new ServerActionMenuItem() {
             @Override
-            public void onActivate(ServerPlayerEntity player) {
-                EntityRayTraceResult entityRayTraceResult = Targeter.rayTraceEntities(player, player.getEntityDimension());
+            public void onActivate(ServerPlayer player) {
+                EntityHitResult entityRayTraceResult = Targeter.rayTraceEntities(player, player.getCommandSenderWorld());
                 if (entityRayTraceResult == null) {
                     return;
                 }
 
                 Entity entity = entityRayTraceResult.getEntity();
-                if (entity instanceof PlayerEntity) {
-                    PlayerEntity victim = ((PlayerEntity) entity);
+                if (entity instanceof Player) {
+                    Player victim = ((Player) entity);
 
-                    if (victim.dimension instanceof ServerWorld) {
+                    if (victim.level instanceof ServerLevel) {
                         if (player.getServer() != null) {
-                            BanList banlist = player.getServer().getPlayerList().getBannedPlayers();
+                            UserBanList banlist = player.getServer().getPlayerList().getBans();
                             GameProfile gameprofile = victim.getGameProfile();
 
                             if (!banlist.isBanned(gameprofile)) {
-                                ProfileBanEntry profilebanentry = new ProfileBanEntry(gameprofile, new Date(), player.getName().getString(), null, TextColors.LIGHT_RED + "The banhammer has spoken");
-                                banlist.addEntry(profilebanentry);
-                                player.sendMessage(new TranslationTextComponent("commands.ban.success", TextComponentUtils.getDisplayName(gameprofile), profilebanentry.getBanReason()), victim.getUniqueID());
-                                ServerPlayerEntity serverplayerentity = player.getServer().getPlayerList().getPlayerByUUID(gameprofile.getId());
+                                UserBanListEntry profilebanentry = new UserBanListEntry(gameprofile, new Date(), player.getName().getString(), null, TextColors.LIGHT_RED + "The banhammer has spoken");
+                                banlist.add(profilebanentry);
+                                player.sendMessage(new TranslatableComponent("commands.ban.success", ComponentUtils.getDisplayName(gameprofile), profilebanentry.getReason()), victim.getUUID());
+                                ServerPlayer serverplayerentity = player.getServer().getPlayerList().getPlayer(gameprofile.getId());
                                 if (serverplayerentity != null) {
-                                    serverplayerentity.connection.disconnect(new TranslationTextComponent("multiplayer.disconnect.banned"));
+                                    serverplayerentity.connection.disconnect(new TranslatableComponent("multiplayer.disconnect.banned"));
                                 }
                             }
                         }
@@ -146,8 +146,8 @@ public class PlayerMenu extends AbstractActionMenu {
             }
 
             @Override
-            public ITextComponent getText() {
-                return new TranslationTextComponent("action.randomthingz.player.ban");
+            public Component getText() {
+                return new TranslatableComponent("action.randomthingz.player.ban");
             }
 
             @Override
@@ -157,27 +157,27 @@ public class PlayerMenu extends AbstractActionMenu {
         });
         add(new ServerActionMenuItem() {
             @Override
-            public void onActivate(ServerPlayerEntity player) {
-                EntityRayTraceResult entityRayTraceResult = Targeter.rayTraceEntities(player, player.getEntityDimension());
+            public void onActivate(ServerPlayer player) {
+                EntityHitResult entityRayTraceResult = Targeter.rayTraceEntities(player, player.getCommandSenderWorld());
                 if (entityRayTraceResult == null) {
                     return;
                 }
 
                 Entity entity = entityRayTraceResult.getEntity();
-                if (entity instanceof PlayerEntity) {
-                    PlayerEntity victim = ((PlayerEntity) entity);
+                if (entity instanceof Player) {
+                    Player victim = ((Player) entity);
 
-                    if (victim instanceof ServerPlayerEntity) {
+                    if (victim instanceof ServerPlayer) {
                         String reason = "You've been kicked from the server.";
-                        ((ServerPlayerEntity) victim).connection.disconnect(new StringTextComponent(reason));
-                        player.sendMessage(new TranslationTextComponent("commands.kick.success", victim.getDisplayName(), reason), player.getUniqueID());
+                        ((ServerPlayer) victim).connection.disconnect(new TextComponent(reason));
+                        player.sendMessage(new TranslatableComponent("commands.kick.success", victim.getDisplayName(), reason), player.getUUID());
                     }
                 }
             }
 
             @Override
-            public ITextComponent getText() {
-                return new TranslationTextComponent("action.randomthingz.player.kick");
+            public Component getText() {
+                return new TranslatableComponent("action.randomthingz.player.kick");
             }
 
             @Override

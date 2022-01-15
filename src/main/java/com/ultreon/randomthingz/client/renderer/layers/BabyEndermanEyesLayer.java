@@ -3,23 +3,23 @@ package com.ultreon.randomthingz.client.renderer.layers;
 import com.ultreon.randomthingz.client.model.BabyEnderman;
 import com.ultreon.randomthingz.entity.baby.BabyEndermanEntity;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.AbstractEyesLayer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.EyesLayer;
+import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
-public class BabyEndermanEyesLayer extends AbstractEyesLayer<BabyEndermanEntity, BabyEnderman> {
+public class BabyEndermanEyesLayer extends EyesLayer<BabyEndermanEntity, BabyEnderman> {
 
-    private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation("textures/entity/enderman/enderman_eyes.png"));
+    private static final RenderType RENDER_TYPE = RenderType.eyes(new ResourceLocation("textures/entity/enderman/enderman_eyes.png"));
 
-    public BabyEndermanEyesLayer(IEntityRenderer<BabyEndermanEntity, BabyEnderman> renderer) {
+    public BabyEndermanEyesLayer(RenderLayerParent<BabyEndermanEntity, BabyEnderman> renderer) {
         super(renderer);
     }
 
     @Nonnull
     @Override
-    public RenderType getRenderType() {
+    public RenderType renderType() {
         return RENDER_TYPE;
     }
 }

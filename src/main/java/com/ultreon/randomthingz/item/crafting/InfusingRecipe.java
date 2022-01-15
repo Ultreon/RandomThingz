@@ -7,15 +7,15 @@ import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
 import com.ultreon.randomthingz.block.machines.infuser.InfuserTileEntity;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -59,14 +59,14 @@ public class InfusingRecipe implements IFluidRecipe<IFluidInventory> {
     }
 
     @Override
-    public boolean matches(IFluidInventory inv, World dimensionIn) {
+    public boolean matches(IFluidInventory inv, Level dimensionIn) {
         FluidStack fluidInTank = inv.getFluidInTank(0);
-        ItemStack input = inv.getStackInSlot(InfuserTileEntity.SLOT_ITEM_IN);
+        ItemStack input = inv.getItem(InfuserTileEntity.SLOT_ITEM_IN);
         return this.fluid.test(fluidInTank) && this.ingredient.test(input);
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return this.result.copy();
     }
 
@@ -76,46 +76,46 @@ public class InfusingRecipe implements IFluidRecipe<IFluidInventory> {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return ModRecipes.INFUSING.get();
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return ModRecipes.Types.INFUSING;
     }
 
     @Override
-    public boolean isDynamic() {
+    public boolean isSpecial() {
         return true;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<InfusingRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<InfusingRecipe> {
         @Override
-        public InfusingRecipe read(ResourceLocation recipeId, JsonObject json) {
-            int processTime = JSONUtils.getInt(json, "process_time");
-            Ingredient ingredient = Ingredient.deserialize(json.get("ingredient"));
+        public InfusingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+            int processTime = GsonHelper.getAsInt(json, "process_time");
+            Ingredient ingredient = Ingredient.fromJson(json.get("ingredient"));
             FluidIngredient fluid = FluidIngredient.deserialize(json.getAsJsonObject("fluid"));
-            ItemStack result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
+            ItemStack result = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "result"));
             return new InfusingRecipe(recipeId, processTime, ingredient, fluid, result);
         }
 
         @Nullable
         @Override
-        public InfusingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        public InfusingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             int processTime = buffer.readVarInt();
-            Ingredient ingredient = Ingredient.read(buffer);
+            Ingredient ingredient = Ingredient.fromNetwork(buffer);
             FluidIngredient fluid = FluidIngredient.read(buffer);
-            ItemStack result = buffer.readItemStack();
+            ItemStack result = buffer.readItem();
             return new InfusingRecipe(recipeId, processTime, ingredient, fluid, result);
         }
 
         @Override
-        public void write(PacketBuffer buffer, InfusingRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, InfusingRecipe recipe) {
             buffer.writeVarInt(recipe.processTime);
-            recipe.ingredient.write(buffer);
+            recipe.ingredient.toNetwork(buffer);
             recipe.fluid.write(buffer);
-            buffer.writeItemStack(recipe.result);
+            buffer.writeItem(recipe.result);
         }
     }
 }

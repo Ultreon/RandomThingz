@@ -1,22 +1,22 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
 import com.ultreon.randomthingz.item.tool.ToolType;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Color;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.jetbrains.annotations.NotNull;
@@ -59,7 +59,7 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @param hand      the hand where the item was held.
      * @return ?
      */
-    public boolean onRightClick(Item item, World dimension, PlayerEntity clicker, Hand hand) {
+    public boolean onRightClick(Item item, Level dimension, Player clicker, InteractionHand hand) {
         return false;
     }
 
@@ -72,7 +72,7 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @param itemSlot    the slot index of the item in the inventory.
      * @param isSelected  true if the item is selected in the hotbar.
      */
-    public void onInventoryTick(ItemStack stack, World dimensionIn, Entity entityIn, int itemSlot, boolean isSelected) {
+    public void onInventoryTick(ItemStack stack, Level dimensionIn, Entity entityIn, int itemSlot, boolean isSelected) {
 
     }
 
@@ -83,7 +83,7 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @param dimension the dimension where the tick happened.
      * @param player    the owner of the item that has this trait.
      */
-    public void onArmorTick(ItemStack stack, World dimension, PlayerEntity player) {
+    public void onArmorTick(ItemStack stack, Level dimension, Player player) {
 
     }
 
@@ -97,7 +97,7 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @param entityLiving the entity that broke the block.
      * @return ?
      */
-    public boolean onBlockBroken(ItemStack stack, World dimensionIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+    public boolean onBlockBroken(ItemStack stack, Level dimensionIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
         return true;
     }
 
@@ -108,23 +108,23 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @param player the player that dropped the stack.
      * @return ?
      */
-    public boolean onDroppedByPlayer(ItemStack stack, PlayerEntity player) {
+    public boolean onDroppedByPlayer(ItemStack stack, Player player) {
         return false;
     }
 
     /**
      * @return the translated name of this trait.
      */
-    public ITextComponent getTranslation() {
+    public Component getTranslation() {
         if (this.getRegistryName() == null) {
-            return new StringTextComponent("misc.unknown");
+            return new TextComponent("misc.unknown");
         }
-        TranslationTextComponent translationTextComponent = new TranslationTextComponent("qfm_trait." + this.getRegistryName().getNamespace() + "." + this.getRegistryName().getPath().replaceAll("/", "."));
-        translationTextComponent.setStyle(translationTextComponent.getStyle().setColor(getColor()));
+        TranslatableComponent translationTextComponent = new TranslatableComponent("qfm_trait." + this.getRegistryName().getNamespace() + "." + this.getRegistryName().getPath().replaceAll("/", "."));
+        translationTextComponent.setStyle(translationTextComponent.getStyle().withColor(getColor()));
         return translationTextComponent;
     }
 
-    public Color getColor() {
+    public TextColor getColor() {
         return null;
     }
 
@@ -162,7 +162,7 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @param player the clicker.
      * @param entity the entity that has been left clicked by the player.
      */
-    public void onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
+    public void onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
 
     }
 
@@ -174,7 +174,7 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @param player the player that has started breaking a block.
      * @return ?
      */
-    public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, PlayerEntity player) {
+    public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, Player player) {
         return false;
     }
 
@@ -248,8 +248,8 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
     /**
      * Called when this item is used when targetting a Block
      */
-    public @NotNull ActionResultType onUseItem(ItemUseContext context) {
-        return ActionResultType.FAIL;
+    public @NotNull InteractionResult onUseItem(UseOnContext context) {
+        return InteractionResult.FAIL;
     }
 
     public float getKnockback(Set<ToolType> qfmToolTypes) {

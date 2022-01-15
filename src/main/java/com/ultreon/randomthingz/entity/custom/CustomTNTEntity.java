@@ -6,17 +6,17 @@ import com.ultreon.randomthingz.common.TNTProperties;
 import com.ultreon.randomthingz.common.entity.ModEntities;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.TNTEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.item.PrimedTnt;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,10 +26,10 @@ import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public final class CustomTNTEntity extends TNTEntity {
+public final class CustomTNTEntity extends PrimedTnt {
     private final TNTProperties properties;
     private @Nullable BlockState blockState;
-    private static final Supplier<BlockState> defaultBlockState = Blocks.TNT::getDefaultState;
+    private static final Supplier<BlockState> defaultBlockState = Blocks.TNT::defaultBlockState;
     private static final TNTProperties defaultProperties = TNTProperties.builder().radius(4.0f).mode(Explosion.Mode.BREAK).fuse(80).build();
 
     public CustomTNTEntity(@NotNull BlockState blockState, World dimensionIn) {

@@ -1,25 +1,25 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractPotionTrait extends AbstractTrait {
     @Override
     public boolean onHitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, LivingEntity attacker) {
-        victim.addPotionEffect(getEffectInstance());
+        victim.addEffect(getEffectInstance());
         return super.onHitEntity(stack, victim, attacker);
     }
 
     @Override
-    public void onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
+    public void onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
         if (entity instanceof LivingEntity) {
-            ((LivingEntity) entity).addPotionEffect(getEffectInstance());
+            ((LivingEntity) entity).addEffect(getEffectInstance());
         }
     }
 
-    public abstract EffectInstance getEffectInstance();
+    public abstract MobEffectInstance getEffectInstance();
 }

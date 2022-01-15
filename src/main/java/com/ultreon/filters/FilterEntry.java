@@ -1,10 +1,10 @@
 package com.ultreon.filters;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +13,11 @@ import java.util.List;
  * Author: MrCrayfish
  */
 public class FilterEntry {
-    private ResourceLocation tag;
-    private String translationKey;
-    private ItemStack icon;
+    private final ResourceLocation tag;
+    private final String translationKey;
+    private final ItemStack icon;
     private boolean enabled = true;
-    private List<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
 
     public FilterEntry(ResourceLocation tag, ItemStack icon) {
         this.tag = tag;
@@ -33,8 +33,8 @@ public class FilterEntry {
         return this.icon;
     }
 
-    public TranslationTextComponent getName() {
-        return new TranslationTextComponent(this.translationKey);
+    public TranslatableComponent getName() {
+        return new TranslatableComponent(this.translationKey);
     }
 
     public void setEnabled(boolean enabled) {

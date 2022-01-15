@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.actionmenu;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.network.AMenuItemPermissionRequestPacket;
 import com.ultreon.randomthingz.network.Network;
 import com.ultreon.randomthingz.util.CrashReportUtils;
@@ -8,13 +8,13 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.CrashReport;
+import net.minecraft.ReportedException;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.ReportedException;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -43,13 +43,13 @@ public class ActionMenuScreen extends Screen {
     private final List<ActionMenuButton> serverButtons = new ArrayList<>();
 
     protected ActionMenuScreen(@Nullable Screen parent, AbstractActionMenu menu, int menuIndex) {
-        super(new StringTextComponent("Main"));
+        super(new TextComponent("Main"));
         this.parent = parent;
         this.menu = menu;
         this.menuIndex = menuIndex;
     }
 
-    protected ActionMenuScreen(@Nullable Screen parent, AbstractActionMenu menu, int menuIndex, ITextComponent title) {
+    protected ActionMenuScreen(@Nullable Screen parent, AbstractActionMenu menu, int menuIndex, Component title) {
         super(title);
         this.parent = parent;
         this.menu = menu;
@@ -57,15 +57,15 @@ public class ActionMenuScreen extends Screen {
     }
 
     @Override
-    public void initialize(Minecraft minecraft, int width, int height) {
+    public void init(Minecraft minecraft, int width, int height) {
         if (parent != null && initialized) {
-            parent.initialize(minecraft, width, height);
+            parent.init(minecraft, width, height);
         }
-        super.initialize(minecraft, width, height);
+        super.init(minecraft, width, height);
     }
 
     @Override
-    protected void initialize() {
+    protected void init() {
         this.buttons.clear();
         this.children.clear();
         this.serverButtons.clear();
@@ -89,7 +89,7 @@ public class ActionMenuScreen extends Screen {
                         actionMenuButton.active = item.isEnabled();
                     }
                 } catch (Throwable t) {
-                    CrashReport crashreport = CrashReport.createCrashReport(t, "Failed to load action menu item into screen.");
+                    CrashReport crashreport = CrashReport.forThrowable(t, "Failed to load action menu item into screen.");
 
                     CrashReportUtils.addActionMenuItem(crashreport, item, i, x, y);
                     throw new ReportedException(crashreport);
@@ -101,7 +101,7 @@ public class ActionMenuScreen extends Screen {
             y -= 16;
             addButton(new ActionMenuTitle(this, x, y, 150, 15));
         } catch (Throwable t) {
-            CrashReport crashreport = CrashReport.createCrashReport(t, "Failed to initialize action menu screen.");
+            CrashReport crashreport = CrashReport.forThrowable(t, "Failed to initialize action menu screen.");
 
             CrashReportUtils.addActionMenu(crashreport, menu, menuIndex);
             throw new ReportedException(crashreport);
@@ -117,14 +117,14 @@ public class ActionMenuScreen extends Screen {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         if (parent instanceof ActionMenuScreen) {
             ((ActionMenuScreen) parent).render(matrixStack, mouseX, mouseY, partialTicks, this.menuIndex);
         } else if (parent != null) {
             parent.render(matrixStack, mouseX, mouseY, partialTicks);
         }
 
-        for (Widget widget : this.buttons) {
+        for (AbstractWidget widget : this.buttons) {
             if (widget instanceof IActionMenuIndexable) {
                 IActionMenuIndexable indexable = (IActionMenuIndexable) widget;
                 indexable.setMenuIndex(0);
@@ -147,30 +147,30 @@ public class ActionMenuScreen extends Screen {
 //            wasHovered = true;
 //        }
 
-        if (mouseX < startX && Minecraft.getInstance().currentScreen == this) {
+        if (mouseX < startX && Minecraft.getInstance().screen == this) {
             if (buttonRect != null && !buttonRect.contains(mouseX, mouseY)) {
                 goBack();
             }
         }
 
         for (Screen screen : screens) {
-            Minecraft.getInstance().displayGuiScreen(screen);
+            Minecraft.getInstance().setScreen(screen);
         }
         screens.clear();
     }
 
     private void goBack() {
-        Minecraft.getInstance().displayGuiScreen(parent);
+        Minecraft.getInstance().setScreen(parent);
     }
 
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks, int childIndex) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks, int childIndex) {
         if (parent instanceof ActionMenuScreen) {
             ((ActionMenuScreen) parent).render(matrixStack, mouseX, mouseY, partialTicks, childIndex);
         } else if (parent != null) {
             parent.render(matrixStack, mouseX, mouseY, partialTicks);
         }
 
-        for (Widget widget : this.buttons) {
+        for (AbstractWidget widget : this.buttons) {
             if (widget instanceof IActionMenuIndexable) {
                 IActionMenuIndexable indexable = (IActionMenuIndexable) widget;
                 indexable.setMenuIndex(childIndex - this.menuIndex);
@@ -179,7 +179,7 @@ public class ActionMenuScreen extends Screen {
         }
 
         for (Screen screen : screens) {
-            Minecraft.getInstance().displayGuiScreen(screen);
+            Minecraft.getInstance().setScreen(screen);
         }
         screens.clear();
     }

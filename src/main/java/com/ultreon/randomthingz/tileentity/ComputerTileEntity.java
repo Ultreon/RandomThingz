@@ -1,14 +1,14 @@
 package com.ultreon.randomthingz.tileentity;
 
 import com.ultreon.randomthingz.pc.common.device.PowerSwitch;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
 
-public class ComputerTileEntity extends TileEntity implements ITickableTileEntity {
+public class ComputerTileEntity extends BlockEntity implements TickableBlockEntity {
     private PowerSwitch powerSwitch;
 
-    public ComputerTileEntity(TileEntityType<?> tileEntityTypeIn) {
+    public ComputerTileEntity(BlockEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
 

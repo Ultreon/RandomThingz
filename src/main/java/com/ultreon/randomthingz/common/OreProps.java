@@ -1,12 +1,17 @@
 package com.ultreon.randomthingz.common;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureSpreadConfig;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.feature.template.RuleTest;
 import net.minecraft.world.gen.placement.*;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.CountConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.placement.ConfiguredDecorator;
+import net.minecraft.world.level.levelgen.placement.DepthAverageConfigation;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
+import net.minecraft.world.level.levelgen.placement.FrequencyWithExtraChanceDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 
 import java.util.function.Supplier;
 
@@ -22,13 +27,13 @@ public class OreProps implements Cloneable {
     @Deprecated
     private Integer size;
     @Deprecated
-    private ConfiguredPlacement<AtSurfaceWithExtraConfig> countExtra;
+    private ConfiguredDecorator<FrequencyWithExtraChanceDecoratorConfiguration> countExtra;
     @Deprecated
-    private ConfiguredPlacement<FeatureSpreadConfig> countMultilayer;
+    private ConfiguredDecorator<CountConfiguration> countMultilayer;
     @Deprecated
-    private ConfiguredPlacement<TopSolidRangeConfig> range;
+    private ConfiguredDecorator<RangeDecoratorConfiguration> range;
     @Deprecated
-    private ConfiguredPlacement<DepthAverageConfig> depthAverage;
+    private ConfiguredDecorator<DepthAverageConfigation> depthAverage;
 
     // OreFeatureConfig
     @Deprecated
@@ -43,7 +48,7 @@ public class OreProps implements Cloneable {
 
     @Deprecated
     public ConfiguredFeature<?, ?> getConfiguredFeature() {
-        ConfiguredFeature<?, ?> feature = Feature.ORE.withConfiguration(new OreFeatureConfig(ruleTest.get(), blockState.get(), size));
+        ConfiguredFeature<?, ?> feature = Feature.ORE.configured(new OreConfiguration(ruleTest.get(), blockState.get(), size));
         if (chance != null) {
             feature = feature.chance(chance);
         }
@@ -53,23 +58,23 @@ public class OreProps implements Cloneable {
         }
 
         if (square) {
-            feature = feature.square();
+            feature = feature.squared();
         }
 
         if (countExtra != null) {
-            feature = feature.withPlacement(countExtra);
+            feature = feature.decorated(countExtra);
         }
 
         if (countMultilayer != null) {
-            feature = feature.withPlacement(countMultilayer);
+            feature = feature.decorated(countMultilayer);
         }
 
         if (range != null) {
-            feature = feature.withPlacement(range);
+            feature = feature.decorated(range);
         }
 
         if (depthAverage != null) {
-            feature = feature.withPlacement(depthAverage);
+            feature = feature.decorated(depthAverage);
         }
 
         return feature;
@@ -115,13 +120,13 @@ public class OreProps implements Cloneable {
 
         @Deprecated
         public Builder countExtra(int count, int extraChance, int extraCount) {
-            this.oreProps.countExtra = Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(count, extraChance, extraCount));
+            this.oreProps.countExtra = FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(count, extraChance, extraCount));
             return this;
         }
 
         @Deprecated
         public Builder countMultilayer(int base) {
-            this.oreProps.countMultilayer = Placement.COUNT_MULTILAYER.configure(new FeatureSpreadConfig(base));
+            this.oreProps.countMultilayer = FeatureDecorator.COUNT_MULTILAYER.configured(new CountConfiguration(base));
             return this;
         }
 
@@ -133,25 +138,25 @@ public class OreProps implements Cloneable {
 
         @Deprecated
         public Builder range(int top) {
-            this.oreProps.range = Placement.RANGE.configure(new TopSolidRangeConfig(0, 0, top));
+            this.oreProps.range = FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(0, 0, top));
             return this;
         }
 
         @Deprecated
         public Builder range(int bottom, int top) {
-            this.oreProps.range = Placement.RANGE.configure(new TopSolidRangeConfig(bottom, 0, top));
+            this.oreProps.range = FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(bottom, 0, top));
             return this;
         }
 
         @Deprecated
         public Builder range(int bottom, int topOffset, int top) {
-            this.oreProps.range = Placement.RANGE.configure(new TopSolidRangeConfig(bottom, topOffset, top));
+            this.oreProps.range = FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(bottom, topOffset, top));
             return this;
         }
 
         @Deprecated
         public Builder depthAverage(int baseline, int spread) {
-            this.oreProps.depthAverage = Placement.DEPTH_AVERAGE.configure(new DepthAverageConfig(baseline, spread));
+            this.oreProps.depthAverage = FeatureDecorator.DEPTH_AVERAGE.configured(new DepthAverageConfigation(baseline, spread));
             return this;
         }
 

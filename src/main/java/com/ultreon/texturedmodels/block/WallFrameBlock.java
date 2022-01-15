@@ -8,31 +8,36 @@ import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FenceGateBlock;
-import net.minecraft.block.FourWayBlock;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.item.*;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.LeadItem;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CrossCollisionBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -48,24 +53,24 @@ import java.util.Objects;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 //TODO make similar to vanilla walls
-public class WallFrameBlock extends FourWayBlock {
+public class WallFrameBlock extends CrossCollisionBlock {
     public static final BooleanProperty CONTAINS_BLOCK = BCBlockStateProperties.CONTAINS_BLOCK;
     public static final IntegerProperty LIGHT_LEVEL = BCBlockStateProperties.LIGHT_LEVEL;
     private final VoxelShape[] renderShapes;
 
     public WallFrameBlock(Properties properties) {
         super(4.0F, 3.0F, 16.0F, 14.0F, 24.0F, properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(NORTH, Boolean.FALSE).with(EAST, Boolean.FALSE).with(SOUTH, Boolean.FALSE).with(WEST, Boolean.FALSE).with(WATERLOGGED, Boolean.FALSE).with(CONTAINS_BLOCK, Boolean.FALSE).with(LIGHT_LEVEL, 0));
-        this.renderShapes = this.createShapes(2.0F, 1.0F, 16.0F, 6.0F, 15.0F);
+        this.registerDefaultState(this.stateDefinition.any().setValue(NORTH, Boolean.FALSE).setValue(EAST, Boolean.FALSE).setValue(SOUTH, Boolean.FALSE).setValue(WEST, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(CONTAINS_BLOCK, Boolean.FALSE).setValue(LIGHT_LEVEL, 0));
+        this.renderShapes = this.makeShapes(2.0F, 1.0F, 16.0F, 6.0F, 15.0F);
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED, CONTAINS_BLOCK, LIGHT_LEVEL);
     }
 
     @Override
-    public VoxelShape getRenderShape(BlockState state, IBlockReader dimensionIn, BlockPos pos) {
-        return this.renderShapes[this.getIndex(state)];
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter dimensionIn, BlockPos pos) {
+        return this.renderShapes[this.getAABBIndex(state)];
     }
 
     @Override
@@ -75,14 +80,14 @@ public class WallFrameBlock extends FourWayBlock {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
+    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
         return new FrameBlockTile();
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World dimension, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
-        ItemStack item = player.getHeldItem(hand);
-        if (!dimension.isClientSided) {
+    public InteractionResult use(BlockState state, Level dimension, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
+        ItemStack item = player.getItemInHand(hand);
+        if (!dimension.isClientSide) {
             BlockAppearanceHelper.setLightLevel(item, state, dimension, pos, player, hand);
             BlockAppearanceHelper.setTexture(item, state, dimension, player, pos);
             BlockAppearanceHelper.setDesign(dimension, pos, player, item);
@@ -90,112 +95,112 @@ public class WallFrameBlock extends FourWayBlock {
             BlockAppearanceHelper.setGlassColor(dimension, pos, player, hand);
             BlockAppearanceHelper.setOverlay(dimension, pos, player, item);
             if (item.getItem() instanceof BlockItem) {
-                if (state.get(BCBlockStateProperties.CONTAINS_BLOCK) || Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) {
-                    return ActionResultType.PASS;
+                if (state.getValue(BCBlockStateProperties.CONTAINS_BLOCK) || Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) {
+                    return InteractionResult.PASS;
                 }
-                TileEntity tileEntity = dimension.getTileEntity(pos);
-                int count = player.getHeldItem(hand).getCount();
+                BlockEntity tileEntity = dimension.getBlockEntity(pos);
+                int count = player.getItemInHand(hand).getCount();
                 Block heldBlock = ((BlockItem) item.getItem()).getBlock();
-                if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.get(CONTAINS_BLOCK)) {
-                    BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().getDefaultState();
+                if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
+                    BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
                     insertBlock(dimension, pos, state, handBlockState);
                     if (!player.isCreative())
-                        player.getHeldItem(hand).setCount(count - 1);
+                        player.getItemInHand(hand).setCount(count - 1);
 
-                    return ActionResultType.SUCCESS;
+                    return InteractionResult.SUCCESS;
                 }
             }
             if (item.getItem() == Items.LEAD) {
                 return LeadItem.bindPlayerMobs(player, dimension, pos);
             }
-            if (player.getHeldItem(hand).getItem() == Registration.HAMMER.get() || (!BCModConfig.HAMMER_NEEDED.get() && player.isSneaking())) {
+            if (player.getItemInHand(hand).getItem() == Registration.HAMMER.get() || (!BCModConfig.HAMMER_NEEDED.get() && player.isShiftKeyDown())) {
                 if (!player.isCreative())
                     this.dropContainedBlock(dimension, pos);
-                state = state.with(CONTAINS_BLOCK, Boolean.FALSE);
-                dimension.setBlockState(pos, state, 2);
-                return ActionResultType.SUCCESS;
+                state = state.setValue(CONTAINS_BLOCK, Boolean.FALSE);
+                dimension.setBlock(pos, state, 2);
+                return InteractionResult.SUCCESS;
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    protected void dropContainedBlock(World dimensionIn, BlockPos pos) {
-        if (!dimensionIn.isClientSided) {
-            TileEntity tileentity = dimensionIn.getTileEntity(pos);
+    protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
+        if (!dimensionIn.isClientSide) {
+            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
             if (tileentity instanceof FrameBlockTile) {
                 FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
-                    dimensionIn.playEvent(1010, pos, 0);
+                    dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clear();
                     float f = 0.7F;
-                    double d0 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
+                    double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
                     ItemStack itemstack1 = new ItemStack(blockState.getBlock());
                     ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
-                    itementity.setDefaultPickupDelay();
-                    dimensionIn.spawnEntity(itementity);
+                    itementity.setDefaultPickUpDelay();
+                    dimensionIn.addFreshEntity(itementity);
                     frameTileEntity.clear();
                 }
             }
         }
     }
 
-    public void insertBlock(IWorld dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
-        TileEntity tileentity = dimensionIn.getTileEntity(pos);
+    public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
+        BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
         if (tileentity instanceof FrameBlockTile) {
             FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
-            dimensionIn.setBlockState(pos, state.with(CONTAINS_BLOCK, Boolean.TRUE), 2);
+            dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);
         }
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             dropContainedBlock(dimensionIn, pos);
 
-            super.onReplaced(state, dimensionIn, pos, newState, isMoving);
+            super.onRemove(state, dimensionIn, pos, newState, isMoving);
         }
     }
 
     @Override
-    public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
-        if (state.get(LIGHT_LEVEL) > 15) {
+    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+        if (state.getValue(LIGHT_LEVEL) > 15) {
             return 15;
         }
-        return state.get(LIGHT_LEVEL);
+        return state.getValue(LIGHT_LEVEL);
     }
 
     //Following methods copied from vanilla FenceBlock
     @Override
     @SuppressWarnings("deprecation")
-    public VoxelShape getRayTraceShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getVisualShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
         return this.getShape(state, reader, pos, context);
     }
 
-    public boolean allowsMovement(BlockState state, IBlockReader dimensionIn, BlockPos pos, PathType type) {
+    public boolean isPathfindable(BlockState state, BlockGetter dimensionIn, BlockPos pos, PathComputationType type) {
         return false;
     }
 
     public boolean canConnect(BlockState state, boolean isSideSolid, Direction direction) {
         Block block = state.getBlock();
-        boolean flag = this.func_235493_c_(block);
-        boolean flag1 = block instanceof FenceGateBlock && FenceGateBlock.isParallel(state, direction);
-        return !cannotAttach(block) && isSideSolid || flag || flag1;
+        boolean flag = this.isSameFence(block);
+        boolean flag1 = block instanceof FenceGateBlock && FenceGateBlock.connectsToDirection(state, direction);
+        return !isExceptionForConnection(block) && isSideSolid || flag || flag1;
     }
 
-    private boolean func_235493_c_(Block block) {
-        return block.isIn(BlockTags.FENCES) && block.isIn(BlockTags.WOODEN_FENCES) == this.getDefaultState().isIn(BlockTags.WOODEN_FENCES);
+    private boolean isSameFence(Block block) {
+        return block.is(BlockTags.FENCES) && block.is(BlockTags.WOODEN_FENCES) == this.defaultBlockState().is(BlockTags.WOODEN_FENCES);
     }
 
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        IBlockReader iblockreader = context.getDimension();
-        BlockPos blockpos = context.getPos();
-        FluidState fluidstate = context.getDimension().getFluidState(context.getPos());
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        BlockGetter iblockreader = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
+        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
         BlockPos blockpos1 = blockpos.north();
         BlockPos blockpos2 = blockpos.east();
         BlockPos blockpos3 = blockpos.south();
@@ -204,7 +209,7 @@ public class WallFrameBlock extends FourWayBlock {
         BlockState blockstate1 = iblockreader.getBlockState(blockpos2);
         BlockState blockstate2 = iblockreader.getBlockState(blockpos3);
         BlockState blockstate3 = iblockreader.getBlockState(blockpos4);
-        return Objects.requireNonNull(super.getStateForPlacement(context)).with(NORTH, this.canConnect(blockstate, blockstate.isSolidSide(iblockreader, blockpos1, Direction.SOUTH), Direction.SOUTH)).with(EAST, this.canConnect(blockstate1, blockstate1.isSolidSide(iblockreader, blockpos2, Direction.WEST), Direction.WEST)).with(SOUTH, this.canConnect(blockstate2, blockstate2.isSolidSide(iblockreader, blockpos3, Direction.NORTH), Direction.NORTH)).with(WEST, this.canConnect(blockstate3, blockstate3.isSolidSide(iblockreader, blockpos4, Direction.EAST), Direction.EAST)).with(WATERLOGGED, fluidstate.getFluid() == Fluids.WATER);
+        return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(NORTH, this.canConnect(blockstate, blockstate.isFaceSturdy(iblockreader, blockpos1, Direction.SOUTH), Direction.SOUTH)).setValue(EAST, this.canConnect(blockstate1, blockstate1.isFaceSturdy(iblockreader, blockpos2, Direction.WEST), Direction.WEST)).setValue(SOUTH, this.canConnect(blockstate2, blockstate2.isFaceSturdy(iblockreader, blockpos3, Direction.NORTH), Direction.NORTH)).setValue(WEST, this.canConnect(blockstate3, blockstate3.isFaceSturdy(iblockreader, blockpos4, Direction.EAST), Direction.EAST)).setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
     }
 
     /**
@@ -215,12 +220,12 @@ public class WallFrameBlock extends FourWayBlock {
      */
     @Override
     @SuppressWarnings("deprecation")
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld dimensionIn, BlockPos currentPos, BlockPos facingPos) {
-        if (stateIn.get(WATERLOGGED)) {
-            dimensionIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(dimensionIn));
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor dimensionIn, BlockPos currentPos, BlockPos facingPos) {
+        if (stateIn.getValue(WATERLOGGED)) {
+            dimensionIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(dimensionIn));
         }
 
-        return facing.getAxis().getPlane() == Direction.Plane.HORIZONTAL ? stateIn.with(FACING_TO_PROPERTY_MAP.get(facing), this.canConnect(facingState, facingState.isSolidSide(dimensionIn, facingPos, facing.getOpposite()), facing.getOpposite())) : super.updatePostPlacement(stateIn, facing, facingState, dimensionIn, currentPos, facingPos);
+        return facing.getAxis().getPlane() == Direction.Plane.HORIZONTAL ? stateIn.setValue(PROPERTY_BY_DIRECTION.get(facing), this.canConnect(facingState, facingState.isFaceSturdy(dimensionIn, facingPos, facing.getOpposite()), facing.getOpposite())) : super.updateShape(stateIn, facing, facingState, dimensionIn, currentPos, facingPos);
     }
 }
 //========SOLI DEO GLORIA========//

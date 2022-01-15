@@ -5,12 +5,12 @@ import com.google.gson.JsonObject;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class ArcaneEscalatingRecipeBuilder {
         return this;
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer) {
+    public void build(Consumer<FinishedRecipe> consumer) {
         ResourceLocation resultId = NameUtils.from(result);
         ResourceLocation id = new ResourceLocation(
                 "minecraft".equals(resultId.getNamespace()) ? RandomThingz.MOD_ID : resultId.getNamespace(),
@@ -49,11 +49,11 @@ public class ArcaneEscalatingRecipeBuilder {
         build(consumer, id);
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer, ResourceLocation id) {
+    public void build(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
         consumer.accept(new Result(id, this));
     }
 
-    public static class Result implements IFinishedRecipe {
+    public static class Result implements FinishedRecipe {
         private final ResourceLocation id;
         private final ArcaneEscalatingRecipeBuilder builder;
 
@@ -63,7 +63,7 @@ public class ArcaneEscalatingRecipeBuilder {
         }
 
         @Override
-        public void serialize(JsonObject json) {
+        public void serializeRecipeData(JsonObject json) {
             json.addProperty("process_time", builder.processTime);
 
             if (builder.items.isEmpty()) {
@@ -99,24 +99,24 @@ public class ArcaneEscalatingRecipeBuilder {
         }
 
         @Override
-        public ResourceLocation getID() {
+        public ResourceLocation getId() {
             return id;
         }
 
         @Override
-        public IRecipeSerializer<?> getSerializer() {
+        public RecipeSerializer<?> getType() {
             return ModRecipes.ARCANE_ESCALATING.get();
         }
 
         @Nullable
         @Override
-        public JsonObject getAdvancementJson() {
+        public JsonObject serializeAdvancement() {
             return null;
         }
 
         @Nullable
         @Override
-        public ResourceLocation getAdvancementID() {
+        public ResourceLocation getAdvancementId() {
             return null;
         }
     }

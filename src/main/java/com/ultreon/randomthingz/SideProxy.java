@@ -12,17 +12,17 @@ import com.ultreon.randomthingz.data.DataGenerators;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import com.ultreon.randomthingz.network.Network;
 import com.ultreon.randomthingz.registration.Registration;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ExtensionPoint;
@@ -48,9 +48,9 @@ class SideProxy implements IProxy {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::imcProcess);
 
         // Add listeners for registry events
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(ContainerType.class, ModMachineContainers::registerAll);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(MenuType.class, ModMachineContainers::registerAll);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Fluid.class, ModFluids::registerFluids);
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, ModMachineTileEntities::registerAll);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(BlockEntityType.class, ModMachineTileEntities::registerAll);
 
         // Other events
         MinecraftForge.EVENT_BUS.addListener(this::serverAboutToStart);
@@ -60,9 +60,9 @@ class SideProxy implements IProxy {
     }
 
     @Nullable
-    private static ITextComponent getBetaWelcomeMessage(PlayerEntity p) {
+    private static Component getBetaWelcomeMessage(Player p) {
         return Config.showBetaWelcomeMessage.get()
-                ? new StringTextComponent("Thanks for trying RandomThingz! This mod is early in development, expect bugs and changes. You can disable this message in the config.")
+                ? new TextComponent("Thanks for trying RandomThingz! This mod is early in development, expect bugs and changes. You can disable this message in the config.")
                 : null;
     }
 
@@ -108,8 +108,8 @@ class SideProxy implements IProxy {
         }
 
         public void setFogColors(EntityViewRenderEvent.FogColors fog) {
-            World w = fog.getInfo().getRenderViewEntity().getEntityDimension();
-            BlockPos pos = fog.getInfo().getBlockPos();
+            Level w = fog.getInfo().getEntity().getCommandSenderWorld();
+            BlockPos pos = fog.getInfo().getBlockPosition();
             BlockState bs = w.getBlockState(pos);
             Block b = bs.getBlock();
 
@@ -133,8 +133,8 @@ class SideProxy implements IProxy {
         }
 
         public void setFogDensity(EntityViewRenderEvent.FogDensity fog) {
-            World w = fog.getInfo().getRenderViewEntity().getEntityDimension();
-            BlockPos pos = fog.getInfo().getBlockPos();
+            Level w = fog.getInfo().getEntity().getCommandSenderWorld();
+            BlockPos pos = fog.getInfo().getBlockPosition();
             BlockState bs = w.getBlockState(pos);
             Block b = bs.getBlock();
 

@@ -6,12 +6,12 @@ import com.ultreon.randomthingz.capability.EnergyStorageImpl;
 import com.ultreon.randomthingz.capability.EnergyStorageWithBatteries;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.energy.CapabilityEnergy;
 
 import javax.annotation.Nullable;
@@ -41,24 +41,24 @@ public class BatteryBoxTileEntity extends AbstractMachineBaseTileEntity {
     public void tick() {
         super.tick();
 
-        if (dimension == null || dimension.isClientSided) return;
+        if (level == null || level.isClientSide) return;
 
         if (energy.getInternalEnergyStored() > 0) {
             // Charge stored batteries
             energy.receiveEnergy(energy.extractInternalEnergy(MAX_SEND / 2, false), false);
         }
 
-        if (dimension.getGameTime() % 50 == 0) {
+        if (level.getGameTime() % 50 == 0) {
             int batteryCount = 0;
-            for (int i = 0; i < getSizeInventory(); ++i) {
-                if (!getStackInSlot(i).isEmpty()) {
+            for (int i = 0; i < getContainerSize(); ++i) {
+                if (!getItem(i).isEmpty()) {
                     ++batteryCount;
                 }
             }
 
-            int currentCount = dimension.getBlockState(pos).get(BatteryBoxBlock.BATTERIES);
+            int currentCount = level.getBlockState(worldPosition).getValue(BatteryBoxBlock.BATTERIES);
             if (batteryCount != currentCount) {
-                dimension.setBlockState(pos, dimension.getBlockState(pos).with(BatteryBoxBlock.BATTERIES, batteryCount), 3);
+                level.setBlock(worldPosition, level.getBlockState(worldPosition).setValue(BatteryBoxBlock.BATTERIES, batteryCount), 3);
             }
         }
     }
@@ -70,27 +70,27 @@ public class BatteryBoxTileEntity extends AbstractMachineBaseTileEntity {
     }
 
     @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStackIn, @Nullable Direction direction) {
         return itemStackIn.getCapability(CapabilityEnergy.ENERGY).isPresent();
     }
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
         return false;
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
+    protected Component getDefaultName() {
         return TextUtils.translate("container", "battery_box");
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory playerInventory) {
+    protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
         return new BatteryBoxContainer(id, playerInventory, this, this.getFields());
     }
 
     @Override
-    public void writeEnergy(CompoundNBT tags) {
+    public void writeEnergy(CompoundTag tags) {
         tags.putInt("Energy", energy.getInternalEnergyStored());
     }
 }

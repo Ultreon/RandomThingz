@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.block.machines.itempipe;
 
 import com.ultreon.randomthingz.RandomThingz;
 import lombok.experimental.UtilityClass;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,11 +22,11 @@ public final class ItemPipeNetworkManager {
 
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    public static ItemPipeNetwork get(IWorldReader dimension, BlockPos pos) {
+    public static ItemPipeNetwork get(LevelReader dimension, BlockPos pos) {
         return getLazy(dimension, pos).orElse(null);
     }
 
-    public static LazyOptional<ItemPipeNetwork> getLazy(IWorldReader dimension, BlockPos pos) {
+    public static LazyOptional<ItemPipeNetwork> getLazy(LevelReader dimension, BlockPos pos) {
         synchronized (NETWORK_LIST) {
             for (LazyOptional<ItemPipeNetwork> network : NETWORK_LIST) {
                 if (network.isPresent()) {
@@ -47,7 +47,7 @@ public final class ItemPipeNetworkManager {
         return lazy;
     }
 
-    public static void invalidateNetwork(IWorldReader dimension, BlockPos pos) {
+    public static void invalidateNetwork(LevelReader dimension, BlockPos pos) {
         Collection<LazyOptional<ItemPipeNetwork>> toRemove = NETWORK_LIST.stream()
                 .filter(n -> n != null && n.isPresent() && n.orElseThrow(IllegalStateException::new).contains(dimension, pos))
                 .collect(Collectors.toList());

@@ -1,27 +1,27 @@
 package com.ultreon.randomthingz.item.wand;
 
 import com.ultreon.randomthingz.common.item.ModItemGroups;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DeadCoralWallFanBlock;
-import net.minecraft.block.IGrowable;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.item.Rarity;
-import net.minecraft.particles.ParticleTypes;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.BaseCoralWallFanBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -38,26 +38,26 @@ import java.util.Optional;
 @Deprecated
 public class NatureStaffItem extends Item {
     public NatureStaffItem() {
-        super(new Properties().group(ModItemGroups.SPECIALS).rarity(Rarity.RARE));
+        super(new Properties().tab(ModItemGroups.SPECIALS).rarity(Rarity.RARE));
     }
 
     @Deprecated //Forge: Use Player/Hand version
-    public static boolean applyBonemeal(ItemStack stack, World dimensionIn, BlockPos pos) {
-        if (dimensionIn instanceof ServerWorld)
-            return applyBonemeal(stack, dimensionIn, pos, net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((ServerWorld) dimensionIn));
+    public static boolean applyBonemeal(ItemStack stack, Level dimensionIn, BlockPos pos) {
+        if (dimensionIn instanceof ServerLevel)
+            return applyBonemeal(stack, dimensionIn, pos, net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((ServerLevel) dimensionIn));
         return false;
     }
 
-    public static boolean applyBonemeal(ItemStack stack, World dimensionIn, BlockPos pos, PlayerEntity player) {
+    public static boolean applyBonemeal(ItemStack stack, Level dimensionIn, BlockPos pos, Player player) {
         BlockState blockstate = dimensionIn.getBlockState(pos);
         int hook = net.minecraftforge.event.ForgeEventFactory.onApplyBonemeal(player, dimensionIn, pos, blockstate, stack);
         if (hook != 0) return hook > 0;
-        if (blockstate.getBlock() instanceof IGrowable) {
-            IGrowable igrowable = (IGrowable) blockstate.getBlock();
-            if (igrowable.canGrow(dimensionIn, pos, blockstate, dimensionIn.isClientSided)) {
-                if (dimensionIn instanceof ServerWorld) {
-                    if (igrowable.canUseBonemeal(dimensionIn, dimensionIn.rand, pos, blockstate)) {
-                        igrowable.grow((ServerWorld) dimensionIn, dimensionIn.rand, pos, blockstate);
+        if (blockstate.getBlock() instanceof BonemealableBlock) {
+            BonemealableBlock igrowable = (BonemealableBlock) blockstate.getBlock();
+            if (igrowable.isValidBonemealTarget(dimensionIn, pos, blockstate, dimensionIn.isClientSide)) {
+                if (dimensionIn instanceof ServerLevel) {
+                    if (igrowable.isBonemealSuccess(dimensionIn, dimensionIn.random, pos, blockstate)) {
+                        igrowable.performBonemeal((ServerLevel) dimensionIn, dimensionIn.random, pos, blockstate);
                     }
                 }
 
@@ -69,42 +69,42 @@ public class NatureStaffItem extends Item {
     }
 
     @SuppressWarnings("unused")
-    public static boolean growSeagrass(ItemStack stack, World dimensionIn, BlockPos pos, @Nullable Direction side) {
-        if (dimensionIn.getBlockState(pos).matchesBlock(Blocks.WATER) && dimensionIn.getFluidState(pos).getLevel() == 8) {
-            if (dimensionIn instanceof ServerWorld) {
+    public static boolean growSeagrass(ItemStack stack, Level dimensionIn, BlockPos pos, @Nullable Direction side) {
+        if (dimensionIn.getBlockState(pos).is(Blocks.WATER) && dimensionIn.getFluidState(pos).getAmount() == 8) {
+            if (dimensionIn instanceof ServerLevel) {
                 label80:
                 for (int i = 0; i < 128; ++i) {
                     BlockPos blockpos = pos;
-                    BlockState blockState = Blocks.SEAGRASS.getDefaultState();
+                    BlockState blockState = Blocks.SEAGRASS.defaultBlockState();
 
                     for (int j = 0; j < i / 16; ++j) {
-                        blockpos = blockpos.add(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
-                        if (dimensionIn.getBlockState(blockpos).hasOpaqueCollisionShape(dimensionIn, blockpos)) {
+                        blockpos = blockpos.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
+                        if (dimensionIn.getBlockState(blockpos).isCollisionShapeFullBlock(dimensionIn, blockpos)) {
                             continue label80;
                         }
                     }
 
-                    Optional<RegistryKey<Biome>> optional = dimensionIn.func_242406_i(blockpos);
+                    Optional<ResourceKey<Biome>> optional = dimensionIn.getBiomeName(blockpos);
                     if (Objects.equals(optional, Optional.of(Biomes.WARM_OCEAN)) || Objects.equals(optional, Optional.of(Biomes.DEEP_WARM_OCEAN))) {
                         if (i == 0 && side != null && side.getAxis().isHorizontal()) {
-                            blockState = BlockTags.WALL_CORALS.getRandomElement(dimensionIn.rand).getDefaultState().with(DeadCoralWallFanBlock.FACING, side);
+                            blockState = BlockTags.WALL_CORALS.getRandomElement(dimensionIn.random).defaultBlockState().setValue(BaseCoralWallFanBlock.FACING, side);
                         } else if (random.nextInt(4) == 0) {
-                            blockState = BlockTags.UNDERWATER_BONEMEALS.getRandomElement(random).getDefaultState();
+                            blockState = BlockTags.UNDERWATER_BONEMEALS.getRandomElement(random).defaultBlockState();
                         }
                     }
 
-                    if (blockState.getBlock().isIn(BlockTags.WALL_CORALS)) {
-                        for (int k = 0; !blockState.isValidPosition(dimensionIn, blockpos) && k < 4; ++k) {
-                            blockState = blockState.with(DeadCoralWallFanBlock.FACING, Direction.Plane.HORIZONTAL.random(random));
+                    if (blockState.getBlock().is(BlockTags.WALL_CORALS)) {
+                        for (int k = 0; !blockState.canSurvive(dimensionIn, blockpos) && k < 4; ++k) {
+                            blockState = blockState.setValue(BaseCoralWallFanBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random));
                         }
                     }
 
-                    if (blockState.isValidPosition(dimensionIn, blockpos)) {
+                    if (blockState.canSurvive(dimensionIn, blockpos)) {
                         BlockState blockState1 = dimensionIn.getBlockState(blockpos);
-                        if (blockState1.matchesBlock(Blocks.WATER) && dimensionIn.getFluidState(blockpos).getLevel() == 8) {
-                            dimensionIn.setBlockState(blockpos, blockState, 3);
-                        } else if (blockState1.matchesBlock(Blocks.SEAGRASS) && random.nextInt(10) == 0) {
-                            ((IGrowable) Blocks.SEAGRASS).grow((ServerWorld) dimensionIn, random, blockpos, blockState1);
+                        if (blockState1.is(Blocks.WATER) && dimensionIn.getFluidState(blockpos).getAmount() == 8) {
+                            dimensionIn.setBlock(blockpos, blockState, 3);
+                        } else if (blockState1.is(Blocks.SEAGRASS) && random.nextInt(10) == 0) {
+                            ((BonemealableBlock) Blocks.SEAGRASS).performBonemeal((ServerLevel) dimensionIn, random, blockpos, blockState1);
                         }
                     }
                 }
@@ -116,7 +116,7 @@ public class NatureStaffItem extends Item {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void spawnBonemealParticles(IWorld dimensionIn, BlockPos posIn, int data) {
+    public static void spawnBonemealParticles(LevelAccessor dimensionIn, BlockPos posIn, int data) {
         if (data == 0) {
             data = 15;
         }
@@ -126,17 +126,17 @@ public class NatureStaffItem extends Item {
         if (!blockstate.isAir(dimensionIn, posIn)) {
             double d0 = 0.5D;
             double d1;
-            if (blockstate.matchesBlock(Blocks.WATER)) {
+            if (blockstate.is(Blocks.WATER)) {
                 data *= 3;
                 d1 = 1.0D;
                 d0 = 3.0D;
-            } else if (blockstate.isOpaqueCube(dimensionIn, posIn)) {
-                posIn = posIn.up();
+            } else if (blockstate.isSolidRender(dimensionIn, posIn)) {
+                posIn = posIn.above();
                 data *= 3;
                 d0 = 3.0D;
                 d1 = 1.0D;
             } else {
-                d1 = blockstate.getShape(dimensionIn, posIn).getEnd(Direction.Axis.Y);
+                d1 = blockstate.getShape(dimensionIn, posIn).max(Direction.Axis.Y);
             }
 
             dimensionIn.addParticle(ParticleTypes.HAPPY_VILLAGER, (double) posIn.getX() + 0.5D, (double) posIn.getY() + 0.5D, (double) posIn.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
@@ -150,7 +150,7 @@ public class NatureStaffItem extends Item {
                 double d7 = (double) posIn.getY() + random.nextDouble() * d1;
                 double d8 = (double) posIn.getZ() + d5 + random.nextDouble() * d0 * 2.0D;
                 //noinspection deprecation
-                if (!dimensionIn.getBlockState((new BlockPos(d6, d7, d8)).down()).isAir()) {
+                if (!dimensionIn.getBlockState((new BlockPos(d6, d7, d8)).below()).isAir()) {
                     dimensionIn.addParticle(ParticleTypes.HAPPY_VILLAGER, d6, d7, d8, d2, d3, d4);
                 }
             }
@@ -162,34 +162,34 @@ public class NatureStaffItem extends Item {
      * Called when this item is used when targeting a Block
      */
     public @NotNull
-    ActionResultType onUseItem(ItemUseContext context) {
-        World dimension = context.getDimension();
-        BlockPos blockPos = context.getPos();
-        BlockPos blockPos1 = blockPos.offset(context.getFace());
-        PlayerEntity player = context.getPlayer();
+    InteractionResult useOn(UseOnContext context) {
+        Level dimension = context.getLevel();
+        BlockPos blockPos = context.getClickedPos();
+        BlockPos blockPos1 = blockPos.relative(context.getClickedFace());
+        Player player = context.getPlayer();
         if (player == null) {
-            return ActionResultType.FAIL;
+            return InteractionResult.FAIL;
         }
 
-        if (applyBonemeal(context.getItem(), dimension, blockPos, player)) {
-            if (!dimension.isClientSided) {
-                dimension.playEvent(2005, blockPos, 0);
-                player.addStat(Stats.ITEM_USED.get(this));
+        if (applyBonemeal(context.getItemInHand(), dimension, blockPos, player)) {
+            if (!dimension.isClientSide) {
+                dimension.levelEvent(2005, blockPos, 0);
+                player.awardStat(Stats.ITEM_USED.get(this));
             }
 
-            return ActionResultType.func_233537_a_(dimension.isClientSided);
+            return InteractionResult.sidedSuccess(dimension.isClientSide);
         } else {
             BlockState blockstate = dimension.getBlockState(blockPos);
-            boolean flag = blockstate.isSolidSide(dimension, blockPos, context.getFace());
-            if (flag && growSeagrass(context.getItem(), dimension, blockPos1, context.getFace())) {
-                if (!dimension.isClientSided) {
-                    dimension.playEvent(2005, blockPos1, 0);
-                    player.addStat(Stats.ITEM_USED.get(this));
+            boolean flag = blockstate.isFaceSturdy(dimension, blockPos, context.getClickedFace());
+            if (flag && growSeagrass(context.getItemInHand(), dimension, blockPos1, context.getClickedFace())) {
+                if (!dimension.isClientSide) {
+                    dimension.levelEvent(2005, blockPos1, 0);
+                    player.awardStat(Stats.ITEM_USED.get(this));
                 }
 
-                return ActionResultType.func_233537_a_(dimension.isClientSided);
+                return InteractionResult.sidedSuccess(dimension.isClientSide);
             } else {
-                return ActionResultType.PASS;
+                return InteractionResult.PASS;
             }
         }
     }

@@ -5,14 +5,14 @@ import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -30,19 +30,19 @@ public final class InfusingRecipeBuilder {
         this.processTime = processTime;
     }
 
-    public static InfusingRecipeBuilder builder(IItemProvider result, int count, int processTime, Ingredient ingredient, FluidIngredient fluid) {
+    public static InfusingRecipeBuilder builder(ItemLike result, int count, int processTime, Ingredient ingredient, FluidIngredient fluid) {
         return new InfusingRecipeBuilder(ingredient, fluid, new ItemStack(result, count), processTime);
     }
 
-    public static InfusingRecipeBuilder builder(IItemProvider result, int count, int processTime, ITag<Item> ingredient, FluidIngredient fluid) {
-        return builder(result, count, processTime, Ingredient.fromTag(ingredient), fluid);
+    public static InfusingRecipeBuilder builder(ItemLike result, int count, int processTime, Tag<Item> ingredient, FluidIngredient fluid) {
+        return builder(result, count, processTime, Ingredient.of(ingredient), fluid);
     }
 
-    public static InfusingRecipeBuilder builder(IItemProvider result, int count, int processTime, IItemProvider ingredient, FluidIngredient fluid) {
-        return builder(result, count, processTime, Ingredient.fromItems(ingredient), fluid);
+    public static InfusingRecipeBuilder builder(ItemLike result, int count, int processTime, ItemLike ingredient, FluidIngredient fluid) {
+        return builder(result, count, processTime, Ingredient.of(ingredient), fluid);
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer) {
+    public void build(Consumer<FinishedRecipe> consumer) {
         ResourceLocation resultId = NameUtils.fromItem(result);
         ResourceLocation id = new ResourceLocation(
                 "minecraft".equals(resultId.getNamespace()) ? RandomThingz.MOD_ID : resultId.getNamespace(),
@@ -50,11 +50,11 @@ public final class InfusingRecipeBuilder {
         build(consumer, id);
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer, ResourceLocation id) {
+    public void build(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
         consumer.accept(new Result(id, this));
     }
 
-    public class Result implements IFinishedRecipe {
+    public class Result implements FinishedRecipe {
         private final ResourceLocation id;
         private final InfusingRecipeBuilder builder;
 
@@ -64,10 +64,10 @@ public final class InfusingRecipeBuilder {
         }
 
         @Override
-        public void serialize(JsonObject json) {
+        public void serializeRecipeData(JsonObject json) {
             json.addProperty("process_time", builder.processTime);
 
-            json.add("ingredient", builder.ingredient.serialize());
+            json.add("ingredient", builder.ingredient.toJson());
             json.add("fluid", builder.fluid.serialize());
 
             JsonObject result = new JsonObject();
@@ -79,24 +79,24 @@ public final class InfusingRecipeBuilder {
         }
 
         @Override
-        public ResourceLocation getID() {
+        public ResourceLocation getId() {
             return id;
         }
 
         @Override
-        public IRecipeSerializer<?> getSerializer() {
+        public RecipeSerializer<?> getType() {
             return ModRecipes.INFUSING.get();
         }
 
         @Nullable
         @Override
-        public JsonObject getAdvancementJson() {
+        public JsonObject serializeAdvancement() {
             return null;
         }
 
         @Nullable
         @Override
-        public ResourceLocation getAdvancementID() {
+        public ResourceLocation getAdvancementId() {
             return null;
         }
     }

@@ -9,9 +9,9 @@ import com.ultreon.randomthingz.client.render.variant.*;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -140,7 +140,7 @@ public class MobVariantsModule extends Module {
 
     @OnlyIn(Dist.CLIENT)
     public static ResourceLocation getTextureOrShiny(Entity e, VariantTextureType type, Supplier<ResourceLocation> nonShiny) {
-        UUID id = e.getUniqueID();
+        UUID id = e.getUUID();
         long most = id.getMostSignificantBits();
         long least = id.getLeastSignificantBits();
         List<ResourceLocation> styles = shinyTextures.get(type);
@@ -164,7 +164,7 @@ public class MobVariantsModule extends Module {
         if (!enabled)
             return styles.get(styles.size() - 1);
 
-        UUID id = e.getUniqueID();
+        UUID id = e.getUUID();
         long most = id.getMostSignificantBits();
         int choice = Math.abs((int) (most % styles.size()));
         return styles.get(choice);

@@ -1,11 +1,11 @@
 package com.ultreon.randomthingz.client.gui.widgets;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.network.chat.Component;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.awt.*;
@@ -13,18 +13,18 @@ import java.awt.*;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class TransparentButton extends Button {
-    public TransparentButton(int x, int y, int width, int height, ITextComponent title, IPressable pressedAction) {
+    public TransparentButton(int x, int y, int width, int height, Component title, OnPress pressedAction) {
         super(x, y, width, height, title, pressedAction);
     }
 
-    public TransparentButton(int x, int y, int width, int height, ITextComponent title, IPressable pressedAction, ITooltip onTooltip) {
+    public TransparentButton(int x, int y, int width, int height, Component title, OnPress pressedAction, OnTooltip onTooltip) {
         super(x, y, width, height, title, pressedAction, onTooltip);
     }
 
     @Override
-    public void renderWidget(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();
-        FontRenderer fontrenderer = mc.fontRenderer;
+        Font fontrenderer = mc.font;
 
         int col = new Color(0, 0, 0, 127).getRGB();
 

@@ -6,7 +6,7 @@ import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.interfaces.IFOVUpdateItem;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
@@ -32,7 +32,7 @@ public class ClientListener {
      */
     @SubscribeEvent
     public static void handleFOVUpdateEvent(FOVUpdateEvent event) {
-        ItemStack stack = event.getEntity().getActiveItemStack();
+        ItemStack stack = event.getEntity().getUseItem();
 
         if (stack.getItem() instanceof IFOVUpdateItem) {
             event.setNewfov(event.getFov() - ((IFOVUpdateItem) stack.getItem()).getFOVMod(stack, event.getEntity()));
@@ -47,8 +47,8 @@ public class ClientListener {
     @SubscribeEvent
     public static void onPlayerClientWorldOpen(GuiScreenEvent.InitGuiEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
-        if (event.getGui() == null && mc.isSingleplayer()) {
-            mc.displayGuiScreen(new ModuleScreen(Minecraft.getInstance().currentScreen, ModuleManager.getInstance()));
+        if (event.getGui() == null && mc.hasSingleplayerServer()) {
+            mc.setScreen(new ModuleScreen(Minecraft.getInstance().screen, ModuleManager.getInstance()));
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.capability;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.energy.EnergyStorage;
 
 public class EnergyStorageItemImpl extends EnergyStorage {

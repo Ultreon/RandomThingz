@@ -2,11 +2,11 @@ package com.ultreon.randomthingz.block.machines.pipe;
 
 import com.qsoftware.modlib.api.ConnectionType;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -21,18 +21,18 @@ import java.util.*;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public final class PipeNetwork implements IFluidHandler {
-    private final IWorldReader dimension;
+    private final LevelReader dimension;
     private final Map<BlockPos, Set<Connection>> connections = new HashMap<>();
     private final FluidTank fluidTank;
     private boolean connectionsBuilt;
 
-    private PipeNetwork(IWorldReader dimension, Set<BlockPos> wires) {
+    private PipeNetwork(LevelReader dimension, Set<BlockPos> wires) {
         this.dimension = dimension;
         wires.forEach(pos -> connections.put(pos, Collections.emptySet()));
         this.fluidTank = new FluidTank(1000);
     }
 
-    static PipeNetwork buildNetwork(IWorldReader dimension, BlockPos pos) {
+    static PipeNetwork buildNetwork(LevelReader dimension, BlockPos pos) {
         Set<BlockPos> pipes = buildPipeSet(dimension, pos);
 //        int energyStored = pipes.stream().mapToInt(p -> {
 //            TileEntity tileEntity = dimension.getTileEntity(p);
@@ -41,16 +41,16 @@ public final class PipeNetwork implements IFluidHandler {
         return new PipeNetwork(dimension, pipes);
     }
 
-    private static Set<BlockPos> buildPipeSet(IWorldReader dimension, BlockPos pos) {
+    private static Set<BlockPos> buildPipeSet(LevelReader dimension, BlockPos pos) {
         return buildPipeSet(dimension, pos, new HashSet<>());
     }
 
-    private static Set<BlockPos> buildPipeSet(IWorldReader dimension, BlockPos pos, Set<BlockPos> set) {
+    private static Set<BlockPos> buildPipeSet(LevelReader dimension, BlockPos pos, Set<BlockPos> set) {
         // Get all positions that have a wire connected to the wire at pos
         set.add(pos);
         for (Direction side : Direction.values()) {
-            BlockPos pos1 = pos.offset(side);
-            if (!set.contains(pos1) && dimension.getTileEntity(pos1) instanceof PipeTileEntity) {
+            BlockPos pos1 = pos.relative(side);
+            if (!set.contains(pos1) && dimension.getBlockEntity(pos1) instanceof PipeTileEntity) {
                 set.add(pos1);
                 set.addAll(buildPipeSet(dimension, pos1, set));
             }
@@ -59,8 +59,8 @@ public final class PipeNetwork implements IFluidHandler {
     }
 
     @Nullable
-    private static IFluidHandler getFluidHandler(IBlockReader dimension, BlockPos pos, Direction side) {
-        TileEntity tileEntity = dimension.getTileEntity(pos.offset(side));
+    private static IFluidHandler getFluidHandler(BlockGetter dimension, BlockPos pos, Direction side) {
+        BlockEntity tileEntity = dimension.getBlockEntity(pos.relative(side));
         if (tileEntity != null) {
             //noinspection ConstantConditions
             return tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, side.getOpposite()).orElse(null);
@@ -68,7 +68,7 @@ public final class PipeNetwork implements IFluidHandler {
         return null;
     }
 
-    public boolean contains(IWorldReader dimension, BlockPos pos) {
+    public boolean contains(LevelReader dimension, BlockPos pos) {
         return this.dimension == dimension && connections.containsKey(pos);
     }
 
@@ -99,11 +99,11 @@ public final class PipeNetwork implements IFluidHandler {
         }
     }
 
-    private Set<Connection> getConnections(IBlockReader dimension, BlockPos pos) {
+    private Set<Connection> getConnections(BlockGetter dimension, BlockPos pos) {
         // Get all connections for the wire at pos
         Set<Connection> connections = new HashSet<>();
         for (Direction direction : Direction.values()) {
-            TileEntity te = dimension.getTileEntity(pos.offset(direction));
+            BlockEntity te = dimension.getBlockEntity(pos.relative(direction));
             if (te != null && !(te instanceof PipeTileEntity) && te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).isPresent()) {
                 ConnectionType type = PipeBlock.getConnection(dimension.getBlockState(pos), direction);
                 connections.add(new Connection(this, direction, type));

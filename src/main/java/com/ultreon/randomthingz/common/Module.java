@@ -7,11 +7,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -31,7 +31,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public abstract class Module {
-    protected CompoundNBT tag = new CompoundNBT();
+    protected CompoundTag tag = new CompoundTag();
     protected final ModuleManager submoduleManager = ModuleManager.createSubmoduleManager(this);
     private ModuleManager manager;
 
@@ -93,8 +93,8 @@ public abstract class Module {
     /**
      * @return an text component containing the localized name of the module/
      */
-    public final ITextComponent getLocalizedName() {
-        return new TranslationTextComponent("module.randomthingz." + getName().replaceAll("/", "."));
+    public final Component getLocalizedName() {
+        return new TranslatableComponent("module.randomthingz." + getName().replaceAll("/", "."));
     }
 
     /**
@@ -112,14 +112,14 @@ public abstract class Module {
     /**
      * @return the written module tag.
      */
-    public CompoundNBT writeTag() {
+    public CompoundTag writeTag() {
         return this.tag;
     }
 
     /**
      * @param tag the module tag needed to read.
      */
-    public void readTag(CompoundNBT tag) {
+    public void readTag(CompoundTag tag) {
         this.tag = tag;
         ModuleManager.getInstance().setSaveSchedule(this);
     }

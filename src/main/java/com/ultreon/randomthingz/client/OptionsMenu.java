@@ -3,13 +3,14 @@ package com.ultreon.randomthingz.client;
 import com.google.common.collect.ImmutableList;
 import com.ultreon.randomthingz.actionmenu.AbstractActionMenu;
 import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
-import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AccessibilityScreen;
-import net.minecraft.client.gui.screen.*;
-import net.minecraft.resources.ResourcePackInfo;
-import net.minecraft.resources.ResourcePackList;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.Options;
+import net.minecraft.client.gui.screens.*;
+import net.minecraft.client.gui.screens.controls.ControlsScreen;
+import net.minecraft.client.gui.screens.packs.PackSelectionScreen;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -24,37 +25,37 @@ public class OptionsMenu extends AbstractActionMenu {
     @Override
     public void client() {
 
-        addClient(new ActionMenuItem(new TranslationTextComponent("options.skinCustomisation"), () -> {
+        addClient(new ActionMenuItem(new TranslatableComponent("options.skinCustomisation"), () -> {
             Minecraft mc = Minecraft.getInstance();
-            mc.displayGuiScreen(new CustomizeSkinScreen(mc.currentScreen, mc.gameSettings));
+            mc.setScreen(new SkinCustomizationScreen(mc.screen, mc.options));
         }));
-        addClient(new ActionMenuItem(new TranslationTextComponent("options.sounds"), () -> {
+        addClient(new ActionMenuItem(new TranslatableComponent("options.sounds"), () -> {
             Minecraft mc = Minecraft.getInstance();
-            mc.displayGuiScreen(new OptionsSoundsScreen(mc.currentScreen, mc.gameSettings));
+            mc.setScreen(new SoundOptionsScreen(mc.screen, mc.options));
         }));
-        addClient(new ActionMenuItem(new TranslationTextComponent("options.video"), () -> {
+        addClient(new ActionMenuItem(new TranslatableComponent("options.video"), () -> {
             Minecraft mc = Minecraft.getInstance();
-            mc.displayGuiScreen(new VideoSettingsScreen(mc.currentScreen, mc.gameSettings));
+            mc.setScreen(new VideoSettingsScreen(mc.screen, mc.options));
         }));
-        addClient(new ActionMenuItem(new TranslationTextComponent("options.controls"), () -> {
+        addClient(new ActionMenuItem(new TranslatableComponent("options.controls"), () -> {
             Minecraft mc = Minecraft.getInstance();
-            mc.displayGuiScreen(new ControlsScreen(mc.currentScreen, mc.gameSettings));
+            mc.setScreen(new ControlsScreen(mc.screen, mc.options));
         }));
-        addClient(new ActionMenuItem(new TranslationTextComponent("options.language"), () -> {
+        addClient(new ActionMenuItem(new TranslatableComponent("options.language"), () -> {
             Minecraft mc = Minecraft.getInstance();
-            mc.displayGuiScreen(new LanguageScreen(mc.currentScreen, mc.gameSettings, mc.getLanguageManager()));
+            mc.setScreen(new LanguageSelectScreen(mc.screen, mc.options, mc.getLanguageManager()));
         }));
-        addClient(new ActionMenuItem(new TranslationTextComponent("options.chat.title"), () -> {
+        addClient(new ActionMenuItem(new TranslatableComponent("options.chat.title"), () -> {
             Minecraft mc = Minecraft.getInstance();
-            mc.displayGuiScreen(new ChatOptionsScreen(mc.currentScreen, mc.gameSettings));
+            mc.setScreen(new ChatOptionsScreen(mc.screen, mc.options));
         }));
-        addClient(new ActionMenuItem(new TranslationTextComponent("options.resourcepack"), () -> {
+        addClient(new ActionMenuItem(new TranslatableComponent("options.resourcepack"), () -> {
             Minecraft mc = Minecraft.getInstance();
-            mc.displayGuiScreen(new PackScreen(mc.currentScreen, mc.getResourcePackList(), this::savePackChanges, mc.getFileResourcePacks(), new TranslationTextComponent("resourcePack.title")));
+            mc.setScreen(new PackSelectionScreen(mc.screen, mc.getResourcePackRepository(), this::savePackChanges, mc.getResourcePackDirectory(), new TranslatableComponent("resourcePack.title")));
         }));
-        addClient(new ActionMenuItem(new TranslationTextComponent("options.accessibility.title"), () -> {
+        addClient(new ActionMenuItem(new TranslatableComponent("options.accessibility.title"), () -> {
             Minecraft mc = Minecraft.getInstance();
-            mc.displayGuiScreen(new AccessibilityScreen(mc.currentScreen, mc.gameSettings));
+            mc.setScreen(new AccessibilityOptionsScreen(mc.screen, mc.options));
         }));
     }
 
@@ -65,26 +66,26 @@ public class OptionsMenu extends AbstractActionMenu {
 
     @OnlyIn(Dist.CLIENT)
     @SuppressWarnings("deprecation")
-    private void savePackChanges(ResourcePackList resourcePacks) {
+    private void savePackChanges(PackRepository resourcePacks) {
         Minecraft mc = Minecraft.getInstance();
-        GameSettings settings = mc.gameSettings;
+        Options settings = mc.options;
         List<String> packNames = ImmutableList.copyOf(settings.resourcePacks);
         settings.resourcePacks.clear();
         settings.incompatibleResourcePacks.clear();
 
-        for (ResourcePackInfo resourcePackInfo : resourcePacks.getEnabledPacks()) {
-            if (!resourcePackInfo.isOrderLocked()) {
-                settings.resourcePacks.add(resourcePackInfo.getName());
+        for (Pack resourcePackInfo : resourcePacks.getSelectedPacks()) {
+            if (!resourcePackInfo.isFixedPosition()) {
+                settings.resourcePacks.add(resourcePackInfo.getId());
                 if (!resourcePackInfo.getCompatibility().isCompatible()) {
-                    settings.incompatibleResourcePacks.add(resourcePackInfo.getName());
+                    settings.incompatibleResourcePacks.add(resourcePackInfo.getId());
                 }
             }
         }
 
-        settings.writeOptions();
+        settings.save();
         List<String> oldPackNames = ImmutableList.copyOf(settings.resourcePacks);
         if (!oldPackNames.equals(packNames)) {
-            mc.reloadResources();
+            mc.reloadResourcePacks();
         }
     }
 }

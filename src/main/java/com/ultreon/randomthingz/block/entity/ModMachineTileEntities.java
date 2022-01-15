@@ -23,9 +23,9 @@ import com.ultreon.randomthingz.block.machines.solidifier.SolidifierTileEntity;
 import com.ultreon.randomthingz.block.machines.wire.WireTileEntity;
 import com.ultreon.randomthingz.registration.Registration;
 import com.ultreon.randomthingz.util.ExceptionUtil;
-import net.minecraft.block.Block;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
@@ -36,21 +36,21 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.function.Supplier;
 
 public final class ModMachineTileEntities {
-    public static TileEntityType<BatteryBoxTileEntity> batteryBox;
-    public static TileEntityType<CoalGeneratorTileEntity> coalGenerator;
-    public static TileEntityType<CompressorTileEntity> compressor;
-    public static TileEntityType<DieselGeneratorTileEntity> dieselGenerator;
-    public static TileEntityType<DryingRackTileEntity> dryingRack;
-    public static TileEntityType<ElectricFurnaceTileEntity> electricFurnace;
-    public static TileEntityType<InfuserTileEntity> infuser;
-    public static TileEntityType<LavaGeneratorTileEntity> lavaGenerator;
-    public static TileEntityType<MixerTileEntity> mixer;
-    public static TileEntityType<PipeTileEntity> pipe;
-    public static TileEntityType<PumpTileEntity> pump;
-    public static TileEntityType<QuarryTileEntity> quarry;
-    public static TileEntityType<RefineryTileEntity> refinery;
-    public static TileEntityType<SolidifierTileEntity> solidifier;
-    public static TileEntityType<WireTileEntity> wire;
+    public static BlockEntityType<BatteryBoxTileEntity> batteryBox;
+    public static BlockEntityType<CoalGeneratorTileEntity> coalGenerator;
+    public static BlockEntityType<CompressorTileEntity> compressor;
+    public static BlockEntityType<DieselGeneratorTileEntity> dieselGenerator;
+    public static BlockEntityType<DryingRackTileEntity> dryingRack;
+    public static BlockEntityType<ElectricFurnaceTileEntity> electricFurnace;
+    public static BlockEntityType<InfuserTileEntity> infuser;
+    public static BlockEntityType<LavaGeneratorTileEntity> lavaGenerator;
+    public static BlockEntityType<MixerTileEntity> mixer;
+    public static BlockEntityType<PipeTileEntity> pipe;
+    public static BlockEntityType<PumpTileEntity> pump;
+    public static BlockEntityType<QuarryTileEntity> quarry;
+    public static BlockEntityType<RefineryTileEntity> refinery;
+    public static BlockEntityType<SolidifierTileEntity> solidifier;
+    public static BlockEntityType<WireTileEntity> wire;
 
     private ModMachineTileEntities() {
         throw ExceptionUtil.utilityConstructor();
@@ -61,7 +61,7 @@ public final class ModMachineTileEntities {
      *
      * @param event registry event.
      */
-    public static void registerAll(RegistryEvent.Register<TileEntityType<?>> event) {
+    public static void registerAll(RegistryEvent.Register<BlockEntityType<?>> event) {
         register("basic_alloy_smelter", MachineType.ALLOY_SMELTER.getBasicTileEntityType());
         register("alloy_smelter", MachineType.ALLOY_SMELTER.getStandardTileEntityType());
         register("basic_arcane_escalator", MachineType.ARCANE_ESCALATOR.getBasicTileEntityType());
@@ -85,16 +85,16 @@ public final class ModMachineTileEntities {
         wire = register("wire", WireTileEntity::new, ModBlocks.WIRE);
     }
 
-    private static <T extends TileEntity> TileEntityType<T> register(String name, Supplier<T> tileFactory, IBlockProvider block) {
+    private static <T extends BlockEntity> BlockEntityType<T> register(String name, Supplier<T> tileFactory, IBlockProvider block) {
         return register(name, tileFactory, block.asBlock());
     }
 
-    private static <T extends TileEntity> TileEntityType<T> register(String name, Supplier<T> tileFactory, Block... blocks) {
-        TileEntityType<T> type = TileEntityType.Builder.create(tileFactory, blocks).build(null);
+    private static <T extends BlockEntity> BlockEntityType<T> register(String name, Supplier<T> tileFactory, Block... blocks) {
+        BlockEntityType<T> type = BlockEntityType.Builder.of(tileFactory, blocks).build(null);
         return register(name, type);
     }
 
-    private static <T extends TileEntity> TileEntityType<T> register(String name, TileEntityType<T> type) {
+    private static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {
         if (type.getRegistryName() == null) {
             type.setRegistryName(RandomThingz.rl(name));
         }

@@ -1,14 +1,14 @@
 package com.ultreon.randomthingz.actionmenu;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.widgets.TransparentButton;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.Font;
+import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.awt.*;
@@ -30,7 +30,7 @@ public class ActionMenuButton extends TransparentButton implements IActionMenuIn
         this.item = item;
     }
 
-    public ActionMenuButton(ActionMenuScreen screen, ActionMenuItem item, int x, int y, int width, int height, ITooltip onTooltip) {
+    public ActionMenuButton(ActionMenuScreen screen, ActionMenuItem item, int x, int y, int width, int height, OnTooltip onTooltip) {
         super(x, y, width, height, item.getText(), (btn) -> item.activate(), onTooltip);
         this.screen = screen;
         this.item = item;
@@ -38,9 +38,9 @@ public class ActionMenuButton extends TransparentButton implements IActionMenuIn
 
     @SuppressWarnings("deprecation")
     @Override
-    public void renderWidget(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();
-        FontRenderer fontrenderer = mc.fontRenderer;
+        Font fontrenderer = mc.font;
 
         int col = 0;
         if (screen.getActiveItem() == this) {

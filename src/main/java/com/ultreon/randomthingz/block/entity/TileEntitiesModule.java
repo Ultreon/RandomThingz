@@ -4,7 +4,7 @@ import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.ultreon.randomthingz.common.CoreRegisterModule;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -15,8 +15,8 @@ import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class TileEntitiesModule extends CoreRegisterModule<TileEntityType<?>> {
-    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
+public class TileEntitiesModule extends CoreRegisterModule<BlockEntityType<?>> {
+    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
 
     @Override
     public ModuleSafety getSafety() {
@@ -44,12 +44,12 @@ public class TileEntitiesModule extends CoreRegisterModule<TileEntityType<?>> {
     }
 
     @Override
-    public DeferredRegister<TileEntityType<?>> getDeferredRegister() {
+    public DeferredRegister<BlockEntityType<?>> getDeferredRegister() {
         return TILE_ENTITIES;
     }
 
     @Override
-    public <O extends TileEntityType<?>> RegistryObject<O> register(String name, Supplier<O> supplier) {
+    public <O extends BlockEntityType<?>> RegistryObject<O> register(String name, Supplier<O> supplier) {
         return TILE_ENTITIES.register(name, supplier);
     }
 }

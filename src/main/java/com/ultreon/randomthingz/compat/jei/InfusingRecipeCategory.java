@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.compat.jei;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.infuser.InfuserScreen;
 import com.ultreon.randomthingz.block.machines.infuser.InfuserTileEntity;
@@ -19,10 +19,10 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.material.Fluid;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -47,7 +47,7 @@ public class InfusingRecipeCategory implements IRecipeCategory<InfusingRecipe> {
     }
 
     private static void addFluidContainers(Collection<ItemStack> list, Fluid fluid) {
-        ItemStack bucket = new ItemStack(fluid.getFilledBucket());
+        ItemStack bucket = new ItemStack(fluid.getBucket());
         if (!bucket.isEmpty()) {
             list.add(bucket);
         }
@@ -91,13 +91,13 @@ public class InfusingRecipeCategory implements IRecipeCategory<InfusingRecipe> {
         recipe.getFluidIngredient().getFluids().forEach(fluid -> addFluidContainers(feedstockContainers, fluid.getFluid()));
         ingredients.setInputLists(VanillaTypes.ITEM, Arrays.asList(
                 feedstockContainers,
-                Arrays.asList(recipe.getIngredient().getMatchingStacks())
+                Arrays.asList(recipe.getIngredient().getItems())
         ));
 
         // Output fluid containers and recipe result
         ingredients.setOutputLists(VanillaTypes.ITEM, Arrays.asList(
                 emptyContainers,
-                Collections.singletonList(recipe.getRecipeOutput())
+                Collections.singletonList(recipe.getResultItem())
         ));
     }
 
@@ -122,7 +122,7 @@ public class InfusingRecipeCategory implements IRecipeCategory<InfusingRecipe> {
     }
 
     @Override
-    public void draw(InfusingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(InfusingRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 79 - GUI_START_X, 35 - GUI_START_Y);
     }
 }

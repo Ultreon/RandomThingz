@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.group;
 
 import com.ultreon.randomthingz.common.item.ModItems;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class SpecialsItemGroup extends ItemGroup {
-    public static final SpecialsItemGroup instance = new SpecialsItemGroup(ItemGroup.GROUPS.length, "randomthingz_specials");
+public class SpecialsItemGroup extends CreativeModeTab {
+    public static final SpecialsItemGroup instance = new SpecialsItemGroup(CreativeModeTab.TABS.length, "randomthingz_specials");
 
     public SpecialsItemGroup(int index, String label) {
         super(index, label);
@@ -19,7 +19,7 @@ public class SpecialsItemGroup extends ItemGroup {
 
     @Override
     public @NotNull
-    ItemStack createIcon() {
+    ItemStack makeIcon() {
         return new ItemStack(ModItems.FIRE_SWORD.get());
     }
 }

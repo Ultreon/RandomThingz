@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.base;
 
-import net.minecraft.block.DoorBlock;
+import net.minecraft.world.level.block.DoorBlock;
 
 /**
  * Base door block.

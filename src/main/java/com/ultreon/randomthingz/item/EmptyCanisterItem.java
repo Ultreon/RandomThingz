@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class EmptyCanisterItem extends CanisterItem {
@@ -16,8 +16,8 @@ public class EmptyCanisterItem extends CanisterItem {
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (isInGroup(group)) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        if (allowdedIn(group)) {
             items.add(new ItemStack(this));
         }
     }

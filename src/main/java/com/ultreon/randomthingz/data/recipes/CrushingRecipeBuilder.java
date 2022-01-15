@@ -5,14 +5,14 @@ import com.google.gson.JsonObject;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.ItemLike;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
@@ -29,30 +29,30 @@ public final class CrushingRecipeBuilder {
         this.processTime = processTime;
     }
 
-    public static CrushingRecipeBuilder builder(IItemProvider ingredient, int processTime) {
-        return builder(Ingredient.fromItems(ingredient), processTime);
+    public static CrushingRecipeBuilder builder(ItemLike ingredient, int processTime) {
+        return builder(Ingredient.of(ingredient), processTime);
     }
 
-    public static CrushingRecipeBuilder builder(ITag<Item> ingredient, int processTime) {
-        return builder(Ingredient.fromTag(ingredient), processTime);
+    public static CrushingRecipeBuilder builder(Tag<Item> ingredient, int processTime) {
+        return builder(Ingredient.of(ingredient), processTime);
     }
 
     public static CrushingRecipeBuilder builder(Ingredient ingredient, int processTime) {
         return new CrushingRecipeBuilder(ingredient, processTime);
     }
 
-    public static CrushingRecipeBuilder crushingChunks(ITag<Item> chunks, IItemProvider dust, int processTime, float extraChance) {
+    public static CrushingRecipeBuilder crushingChunks(Tag<Item> chunks, ItemLike dust, int processTime, float extraChance) {
         return builder(chunks, processTime)
                 .result(dust, 1)
                 .result(dust, 1, extraChance);
     }
 
-    public static CrushingRecipeBuilder crushingIngot(ITag<Item> ingot, IItemProvider dust, int processTime) {
+    public static CrushingRecipeBuilder crushingIngot(Tag<Item> ingot, ItemLike dust, int processTime) {
         return builder(ingot, processTime)
                 .result(dust, 1);
     }
 
-    public static CrushingRecipeBuilder crushingOre(ITag<Item> ore, IItemProvider chunks, int processTime, @Nullable IItemProvider extra, float extraChance) {
+    public static CrushingRecipeBuilder crushingOre(Tag<Item> ore, ItemLike chunks, int processTime, @Nullable ItemLike extra, float extraChance) {
         CrushingRecipeBuilder builder = builder(ore, processTime);
         builder.result(chunks, 2);
         if (extra != null) {
@@ -61,7 +61,7 @@ public final class CrushingRecipeBuilder {
         return builder;
     }
 
-    public static CrushingRecipeBuilder crushingOre(IItemProvider ore, IItemProvider chunks, int processTime, @Nullable IItemProvider extra, float extraChance) {
+    public static CrushingRecipeBuilder crushingOre(ItemLike ore, ItemLike chunks, int processTime, @Nullable ItemLike extra, float extraChance) {
         CrushingRecipeBuilder builder = builder(ore, processTime);
         builder.result(chunks, 2);
         if (extra != null) {
@@ -70,16 +70,16 @@ public final class CrushingRecipeBuilder {
         return builder;
     }
 
-    public CrushingRecipeBuilder result(IItemProvider item, int count, float chance) {
+    public CrushingRecipeBuilder result(ItemLike item, int count, float chance) {
         results.put(new ItemStack(item, count), chance);
         return this;
     }
 
-    public CrushingRecipeBuilder result(IItemProvider item, int count) {
+    public CrushingRecipeBuilder result(ItemLike item, int count) {
         return result(item, count, 1f);
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer) {
+    public void build(Consumer<FinishedRecipe> consumer) {
         ResourceLocation resultId = NameUtils.fromItem(results.keySet().iterator().next());
         ResourceLocation id = new ResourceLocation(
                 "minecraft".equals(resultId.getNamespace()) ? RandomThingz.MOD_ID : resultId.getNamespace(),
@@ -87,11 +87,11 @@ public final class CrushingRecipeBuilder {
         build(consumer, id);
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer, ResourceLocation id) {
+    public void build(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
         consumer.accept(new Result(id, this));
     }
 
-    public class Result implements IFinishedRecipe {
+    public class Result implements FinishedRecipe {
         private final ResourceLocation id;
         private final CrushingRecipeBuilder builder;
 
@@ -101,9 +101,9 @@ public final class CrushingRecipeBuilder {
         }
 
         @Override
-        public void serialize(JsonObject json) {
+        public void serializeRecipeData(JsonObject json) {
             json.addProperty("process_time", builder.processTime);
-            json.add("ingredient", builder.ingredient.serialize());
+            json.add("ingredient", builder.ingredient.toJson());
 
             JsonArray results = new JsonArray();
             builder.results.forEach((stack, chance) ->
@@ -124,24 +124,24 @@ public final class CrushingRecipeBuilder {
         }
 
         @Override
-        public ResourceLocation getID() {
+        public ResourceLocation getId() {
             return id;
         }
 
         @Override
-        public IRecipeSerializer<?> getSerializer() {
+        public RecipeSerializer<?> getType() {
             return ModRecipes.CRUSHING.get();
         }
 
         @Nullable
         @Override
-        public JsonObject getAdvancementJson() {
+        public JsonObject serializeAdvancement() {
             return null;
         }
 
         @Nullable
         @Override
-        public ResourceLocation getAdvancementID() {
+        public ResourceLocation getAdvancementId() {
             return null;
         }
     }

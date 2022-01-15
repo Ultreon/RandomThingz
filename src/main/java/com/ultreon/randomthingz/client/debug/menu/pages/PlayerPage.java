@@ -10,6 +10,6 @@ public class PlayerPage extends DebugPage {
 
     @Override
     public boolean hasRequiredComponents() {
-        return Minecraft.getInstance().player != null && Minecraft.getInstance().playerController != null;
+        return Minecraft.getInstance().player != null && Minecraft.getInstance().gameMode != null;
     }
 }

@@ -1,34 +1,40 @@
 package com.ultreon.randomthingz.item;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.math.Matrix4f;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.hud.HudItem;
 import com.ultreon.randomthingz.common.RomanNumber;
 import com.ultreon.randomthingz.common.enums.TextColors;
 import com.ultreon.randomthingz.util.GraphicsUtil;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.locale.Language;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.FormattedText;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.text.*;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderTooltipEvent;
@@ -57,8 +63,8 @@ public abstract class WandItem extends HudItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, @NotNull World dimensionIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
-        CompoundNBT nbt = stack.getOrCreateChildTag("randomthingz");
+    public void inventoryTick(ItemStack stack, @NotNull Level dimensionIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
+        CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
         if (!nbt.contains("mana", 5)) {
             nbt.putFloat("mana", (float) this.maxMana);
         }
@@ -82,15 +88,15 @@ public abstract class WandItem extends HudItem {
      * Called when the player stops using an Item (stops holding the right mouse button).
      */
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, @NotNull World dimension, @NotNull LivingEntity entityLiving, int timeLeft) {
-        CompoundNBT nbt = stack.getOrCreateChildTag("randomthingz");
+    public void releaseUsing(ItemStack stack, @NotNull Level dimension, @NotNull LivingEntity entityLiving, int timeLeft) {
+        CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
         if (!nbt.contains("mana", 5)) {
             nbt.putFloat("mana", (float) maxMana);
         } else {
             float mana = nbt.getFloat("mana");
             if (mana <= 0f) {
-                if (entityLiving instanceof PlayerEntity) {
-                    ((PlayerEntity) entityLiving).sendStatusMessage(new StringTextComponent(TextColors.LIGHT_RED.toString() + TextColors.BOLD + "No mana left."), true);
+                if (entityLiving instanceof Player) {
+                    ((Player) entityLiving).displayClientMessage(new TextComponent(TextColors.LIGHT_RED.toString() + TextColors.BOLD + "No mana left."), true);
                 }
             } else {
                 float timeLeft1 = (float) timeLeft;
@@ -100,7 +106,7 @@ public abstract class WandItem extends HudItem {
                 }
                 if (mana - usedTime < 0f) { // 5 - 10 < 0
                     timeLeft1 = (int) (getUseDuration(stack) - mana); // 71995 = 72000 - 5
-                    ((PlayerEntity) entityLiving).sendStatusMessage(new StringTextComponent(TextColors.LIGHT_RED.toString() + TextColors.BOLD + "Mana partial used, was not enough left."), true);
+                    ((Player) entityLiving).displayClientMessage(new TextComponent(TextColors.LIGHT_RED.toString() + TextColors.BOLD + "Mana partial used, was not enough left."), true);
                 }
 
                 nbt.putFloat("mana", Math.max(mana - getTimeUsed(stack, timeLeft1), 0));
@@ -145,8 +151,8 @@ public abstract class WandItem extends HudItem {
      */
     @ParametersAreNonnullByDefault
     public @NotNull
-    UseAction getUseAction(ItemStack stack) {
-        return UseAction.BOW;
+    UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.BOW;
     }
 
     /**
@@ -154,22 +160,22 @@ public abstract class WandItem extends HudItem {
      * {@linkplain #onUseItem}.
      */
     public @NotNull
-    ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
+    InteractionResultHolder<ItemStack> use(@NotNull Level dimensionIn, Player playerIn, @NotNull InteractionHand handIn) {
+        ItemStack itemstack = playerIn.getItemInHand(handIn);
+        boolean flag = !playerIn.getProjectile(itemstack).isEmpty();
 
-        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, dimensionIn, playerIn, handIn, flag);
+        InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, dimensionIn, playerIn, handIn, flag);
         if (ret != null) return ret;
 
-        if (!playerIn.abilities.isCreativeMode && !flag) {
-            return ActionResult.resultFail(itemstack);
+        if (!playerIn.abilities.instabuild && !flag) {
+            return InteractionResultHolder.fail(itemstack);
         } else {
-            playerIn.setActiveHand(handIn);
-            return ActionResult.resultConsume(itemstack);
+            playerIn.startUsingItem(handIn);
+            return InteractionResultHolder.consume(itemstack);
         }
     }
 
-    public abstract void activate(ItemStack stack, @NotNull World dimensionIn, @NotNull LivingEntity livingIn, float charge);
+    public abstract void activate(ItemStack stack, @NotNull Level dimensionIn, @NotNull LivingEntity livingIn, float charge);
 
     public int getMaxMana() {
         return maxMana;
@@ -182,7 +188,7 @@ public abstract class WandItem extends HudItem {
      * @return the amount of mana, or -1 if it's invalid.
      */
     public int getMana(ItemStack stack) {
-        CompoundNBT nbt = stack.getOrCreateChildTag("randomthingz");
+        CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
         if (nbt.contains("mana", 3)) {
             return nbt.getInt("mana");
         }
@@ -196,7 +202,7 @@ public abstract class WandItem extends HudItem {
      * @return the amount of mana, or -1 if it's invalid.
      */
     public int getMaxMana(ItemStack stack) {
-        CompoundNBT nbt = stack.getOrCreateChildTag("randomthingz");
+        CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
         if (nbt.contains("maxMana", 3)) {
             return nbt.getInt("maxMana");
         }
@@ -210,7 +216,7 @@ public abstract class WandItem extends HudItem {
      * @return the charge time, or -1 if it's invalid.
      */
     public int getChargeTime(ItemStack stack) {
-        CompoundNBT nbt = stack.getOrCreateChildTag("randomthingz");
+        CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
         if (nbt.contains("chargeTime", 3)) {
             return nbt.getInt("chargeTime");
         }
@@ -224,7 +230,7 @@ public abstract class WandItem extends HudItem {
      * @return the charge time, or -1 if it's invalid.
      */
     public int getStrength(ItemStack stack) {
-        CompoundNBT nbt = stack.getOrCreateChildTag("randomthingz");
+        CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
         if (nbt.contains("strength", 3)) {
             return nbt.getInt("strength");
         }
@@ -232,8 +238,8 @@ public abstract class WandItem extends HudItem {
     }
 
     @Override
-    public void addInformation(ItemStack stack, @javax.annotation.Nullable World dimensionIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
-        CompoundNBT nbt = stack.getOrCreateChildTag("randomthingz");
+    public void appendHoverText(ItemStack stack, @javax.annotation.Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
+        CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
         if (dimensionIn == null) {
             return;
         }
@@ -242,26 +248,26 @@ public abstract class WandItem extends HudItem {
             boolean hasError = false;
             if (!nbt.contains("mana", 5)) {
                 hasError = true;
-                tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "Mana: N/A"));
-                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+                tooltip.add(new TextComponent(TextColors.RED + "" + TextColors.BOLD + "Mana: N/A"));
+                super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
             }
 
             if (!nbt.contains("maxMana", 3)) {
                 hasError = true;
-                tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "Max Mana: N/A"));
-                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+                tooltip.add(new TextComponent(TextColors.RED + "" + TextColors.BOLD + "Max Mana: N/A"));
+                super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
             }
 
             if (!nbt.contains("chargeTime", 3)) {
                 hasError = true;
-                tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "Charge Time: N/A"));
-                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+                tooltip.add(new TextComponent(TextColors.RED + "" + TextColors.BOLD + "Charge Time: N/A"));
+                super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
             }
 
             if (!nbt.contains("strength", 3)) {
                 hasError = true;
-                tooltip.add(new StringTextComponent(TextColors.RED + "" + TextColors.BOLD + "Strength: N/A"));
-                super.addInformation(stack, dimensionIn, tooltip, flagIn);
+                tooltip.add(new TextComponent(TextColors.RED + "" + TextColors.BOLD + "Strength: N/A"));
+                super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
             }
 
             if (hasError) {
@@ -274,26 +280,26 @@ public abstract class WandItem extends HudItem {
             if (nbt.contains("maxMana", 3)) {
                 float mana = nbt.getFloat("mana");
                 int maxMana = nbt.getInt("maxMana");
-                tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Mana: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + Math.round(mana) + " / " + maxMana));
+                tooltip.add(new TextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Mana: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + Math.round(mana) + " / " + maxMana));
             }
         }
         if (nbt.contains("chargeTime", 3)) {
             int chargeTime = nbt.getInt("chargeTime");
-            tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Charge Time: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + chargeTime));
+            tooltip.add(new TextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Charge Time: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + chargeTime));
         }
         if (nbt.contains("strength", 3)) {
             int strength = nbt.getInt("strength");
-            tooltip.add(new StringTextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Strength: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + RomanNumber.toRoman(strength)));
+            tooltip.add(new TextComponent(TextColors.LIGHT_GRAY + "" + TextColors.BOLD + "Strength: " + TextColors.LIGHT_GRAY + "" + TextColors.ITALIC + RomanNumber.toRoman(strength)));
         }
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
-        int height = mc.getMainWindow().getScaledHeight();
+    public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, LocalPlayer player) {
+        int height = mc.getWindow().getGuiScaledHeight();
 
-        World dimensionIn = player.getEntityDimension();
-        CompoundNBT nbt = stack.getOrCreateChildTag("randomthingz");
+        Level dimensionIn = player.getCommandSenderWorld();
+        CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
         if (dimensionIn == null) {
             return;
         }
@@ -310,8 +316,8 @@ public abstract class WandItem extends HudItem {
 
         val = (int) (64d * mana / maxMana);
 
-        drawItemTooltipText(gu, val, stack, Arrays.asList(new StringTextComponent(TextFormatting.BLUE + I18n.format(stack.getTranslationId())), new StringTextComponent(TextFormatting.GRAY + "" + Math.round(mana) + " / " + Math.round(maxMana))), 0, height, 96, 10, -10, mc.getMainWindow().getWidth() - 20, mc.getMainWindow().getHeight(), -1, GuiUtils.DEFAULT_BACKGROUND_COLOR, GuiUtils.DEFAULT_BORDER_COLOR_START, GuiUtils.DEFAULT_BORDER_COLOR_END, mc.fontRenderer);
-        MatrixStack matrixStack = gu.getMatrixStack();
+        drawItemTooltipText(gu, val, stack, Arrays.asList(new TextComponent(ChatFormatting.BLUE + I18n.get(stack.getDescriptionId())), new TextComponent(ChatFormatting.GRAY + "" + Math.round(mana) + " / " + Math.round(maxMana))), 0, height, 96, 10, -10, mc.getWindow().getScreenWidth() - 20, mc.getWindow().getScreenHeight(), -1, GuiUtils.DEFAULT_BACKGROUND_COLOR, GuiUtils.DEFAULT_BORDER_COLOR_START, GuiUtils.DEFAULT_BORDER_COLOR_END, mc.font);
+        PoseStack matrixStack = gu.getMatrixStack();
     }
 
     /**
@@ -322,11 +328,11 @@ public abstract class WandItem extends HudItem {
     //TODO, Validate rendering is the same as the original
     @OnlyIn(Dist.CLIENT)
     @SuppressWarnings("deprecation")
-    public void drawItemTooltipText(GraphicsUtil gu, int val, @Nonnull final ItemStack stack, List<? extends ITextProperties> textLines, int mouseX, int mouseY,
+    public void drawItemTooltipText(GraphicsUtil gu, int val, @Nonnull final ItemStack stack, List<? extends FormattedText> textLines, int mouseX, int mouseY,
                                     int minWidth, int xOffset, int yOffset,
                                     int screenWidth, int screenHeight, int maxTextWidth,
-                                    int backgroundColor, int borderColorStart, int borderColorEnd, FontRenderer font) {
-        MatrixStack matrixStack = gu.getMatrixStack();
+                                    int backgroundColor, int borderColorStart, int borderColorEnd, Font font) {
+        PoseStack matrixStack = gu.getMatrixStack();
         if (!textLines.isEmpty()) {
             RenderTooltipEvent.Pre event = new RenderTooltipEvent.Pre(stack, textLines, matrixStack, mouseX, mouseY, screenWidth, screenHeight, maxTextWidth, font);
             if (MinecraftForge.EVENT_BUS.post(event))
@@ -342,8 +348,8 @@ public abstract class WandItem extends HudItem {
             RenderSystem.disableDepthTest();
             int tooltipTextWidth = minWidth; // Added minWidth.
 
-            for (ITextProperties textLine : textLines) {
-                int textLineWidth = font.getStringPropertyWidth(textLine);
+            for (FormattedText textLine : textLines) {
+                int textLineWidth = font.width(textLine);
                 if (textLineWidth > tooltipTextWidth)
                     tooltipTextWidth = textLineWidth;
             }
@@ -371,15 +377,15 @@ public abstract class WandItem extends HudItem {
 
             if (needsWrap) {
                 int wrappedTooltipWidth = 0;
-                List<ITextProperties> wrappedTextLines = new ArrayList<>();
+                List<FormattedText> wrappedTextLines = new ArrayList<>();
                 for (int i = 0; i < textLines.size(); i++) {
-                    ITextProperties textLine = textLines.get(i);
-                    List<ITextProperties> wrappedLine = font.getCharacterManager().func_238362_b_(textLine, tooltipTextWidth, Style.EMPTY);
+                    FormattedText textLine = textLines.get(i);
+                    List<FormattedText> wrappedLine = font.getSplitter().splitLines(textLine, tooltipTextWidth, Style.EMPTY);
                     if (i == 0)
                         titleLinesCount = wrappedLine.size();
 
-                    for (ITextProperties line : wrappedLine) {
-                        int lineWidth = font.getStringPropertyWidth(line);
+                    for (FormattedText line : wrappedLine) {
+                        int lineWidth = font.width(line);
                         if (lineWidth > wrappedTooltipWidth)
                             wrappedTooltipWidth = lineWidth;
                         wrappedTextLines.add(line);
@@ -418,8 +424,8 @@ public abstract class WandItem extends HudItem {
             tooltipX += xOffset;
             tooltipY += yOffset;
 
-            matrixStack.push();
-            Matrix4f mat = matrixStack.getLast().getMatrix();
+            matrixStack.pushPose();
+            Matrix4f mat = matrixStack.last().pose();
 
             //TODO, lots of unnessesary GL calls here, we can buffer all these together.
             drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 4, tooltipX + tooltipTextWidth + 3, tooltipY - 3, backgroundColor, backgroundColor);
@@ -451,31 +457,31 @@ public abstract class WandItem extends HudItem {
 //        textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/background.png"));
 //        gu.blit(0, height - 64, 128, 64, 0, 0, 128, 64, 128, 64);
 
-            textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
             gu.blit(16, tooltipY + tooltipHeight + 4, 64, 2, 0, 2, 64, 1, 64, 3);
 
-            textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
             gu.blit(16, tooltipY + tooltipHeight + 4 - 1, 64, 2, 0, 1, 64, 1, 64, 3);
 
-            textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
             gu.blit(16, tooltipY + tooltipHeight + 4, val, 2, 0, 1, val, 1, 64, 3);
 
-            textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
             gu.blit(16, tooltipY + tooltipHeight + 4 - 1, val, 2, 0, 0, val, 1, 64, 3);
 
 //            gu.drawItemStack(stack, 56, tooltipY - 60, "");
 //            gu.drawCenteredString(Math.round(mana) + " / " + Math.round(maxMana), 64, height - 24, 0xe97fff);
             MinecraftForge.EVENT_BUS.post(new RenderTooltipEvent.PostBackground(stack, textLines, matrixStack, tooltipX, tooltipY, font, tooltipTextWidth, tooltipHeight));
 
-            IRenderTypeBuffer.Impl renderType = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
+            MultiBufferSource.BufferSource renderType = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
             matrixStack.translate(0.0D, 0.0D, zLevel);
 
             int tooltipTop = tooltipY;
 
             for (int lineNumber = 0; lineNumber < textLines.size(); ++lineNumber) {
-                ITextProperties line = textLines.get(lineNumber);
+                FormattedText line = textLines.get(lineNumber);
                 if (line != null)
-                    font.drawEntityText(LanguageMap.getInstance().func_241870_a(line), (float) tooltipX, (float) tooltipY, -1, true, mat, renderType, false, 0, 15728880);
+                    font.drawInBatch(Language.getInstance().getVisualOrder(line), (float) tooltipX, (float) tooltipY, -1, true, mat, renderType, false, 0, 15728880);
 
                 if (lineNumber + 1 == titleLinesCount)
                     tooltipY += 2;
@@ -483,8 +489,8 @@ public abstract class WandItem extends HudItem {
                 tooltipY += 10;
             }
 
-            renderType.finish();
-            matrixStack.pop();
+            renderType.endBatch();
+            matrixStack.popPose();
 
             MinecraftForge.EVENT_BUS.post(new RenderTooltipEvent.PostText(stack, textLines, matrixStack, tooltipX, tooltipTop, font, tooltipTextWidth, tooltipHeight));
 

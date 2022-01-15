@@ -1,8 +1,8 @@
 package com.ultreon.texturedmodels.util;
 
-import net.minecraft.block.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class BlockSavingHelper {
     public static void createValidBlockList() {
         List<Block> blockList = new ArrayList<>();
         for (Block b : ForgeRegistries.BLOCKS) {
-            if (b.getDefaultState().isSolid() || b.getDefaultState().isTransparent()) {
+            if (b.defaultBlockState().canOcclude() || b.defaultBlockState().useShapeForLightOcclusion()) {
                 blockList.add(b);
             }
             if (b instanceof AbstractGlassBlock) {

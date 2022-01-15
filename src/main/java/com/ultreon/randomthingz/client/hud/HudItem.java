@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz.client.hud;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.util.GraphicsUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -23,17 +23,17 @@ public abstract class HudItem extends Item {
     @SubscribeEvent
     public static void renderGameOverlay(RenderGameOverlayEvent event) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
-            MatrixStack matrixStack = event.getMatrixStack();
+            PoseStack matrixStack = event.getMatrixStack();
             Minecraft mc = Minecraft.getInstance();
 
-            ClientPlayerEntity player = mc.player;
+            LocalPlayer player = mc.player;
 
             if (player != null) {
-                ItemStack stack = player.getHeldItemMainhand();
+                ItemStack stack = player.getMainHandItem();
                 Item item = stack.getItem();
                 if (item instanceof HudItem) {
                     HudItem hudItem = (HudItem) item;
-                    GraphicsUtil gu = new GraphicsUtil(mc.getItemRenderer(), matrixStack, mc.fontRenderer);
+                    GraphicsUtil gu = new GraphicsUtil(mc.getItemRenderer(), matrixStack, mc.font);
                     hudItem.renderHud(gu, mc, stack, player);
                 }
             }
@@ -41,7 +41,7 @@ public abstract class HudItem extends Item {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public abstract void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player);
+    public abstract void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, LocalPlayer player);
 
 //    protected final void drawCenteredString(MatrixStack matrixStack, FontRenderer fontRenderer, String text, float x, float y, int color) {
 //        drawCenteredString(matrixStack, fontRenderer, text, x, y, color, false);

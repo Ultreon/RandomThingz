@@ -3,28 +3,28 @@ package com.ultreon.texturedmodels.tileentity;
 import com.ultreon.texturedmodels.block.ChestFrameBlock;
 import com.ultreon.texturedmodels.container.ChestFrameContainer;
 import com.ultreon.texturedmodels.setup.Registration;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraftforge.client.model.ModelDataManager;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.data.ModelDataMap;
@@ -49,17 +49,17 @@ import java.util.Objects;
  * @author PianoManu
  * @version 1.0 09/22/20
  */
-public class ChestFrameTileEntity extends LockableLootTileEntity {
+public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
 
     private NonNullList<ItemStack> chestContents = NonNullList.withSize(27, ItemStack.EMPTY);
     /**
      * The number of players currently using this chest
      */
     protected int numPlayersUsing;
-    private IItemHandlerModifiable items = createHandler();
+    private final IItemHandlerModifiable items = createHandler();
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
-    public ChestFrameTileEntity(TileEntityType<?> typeIn) {
+    public ChestFrameTileEntity(BlockEntityType<?> typeIn) {
         super(typeIn);
     }
 
@@ -73,7 +73,7 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
         otherTe.setItems(list);
     }
 
-    private static Integer readInteger(CompoundNBT tag) {
+    private static Integer readInteger(CompoundTag tag) {
         if (!tag.contains("number", 8)) {
             return 0;
         } else {
@@ -87,13 +87,13 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
         return 27;
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container.frame_chest");
+    protected Component getDefaultName() {
+        return new TranslatableComponent("container.frame_chest");
     }
 
     @Override
@@ -107,15 +107,15 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
         return new ChestFrameContainer(id, player, this);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundTag save(CompoundTag compound) {
         //FRAME BEGIN
         if (mimic != null) {
-            compound.put("mimic", NBTUtil.writeBlockState(mimic));
+            compound.put("mimic", NbtUtils.writeBlockState(mimic));
         }
         if (texture != null) {
             compound.put("texture", writeInteger(texture));
@@ -130,19 +130,19 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
             compound.put("glass_color", writeInteger(glassColor));
         }
         //FRAME END
-        super.write(compound);
-        if (!this.checkLootAndWrite(compound)) {
-            ItemStackHelper.readAllItems(compound, this.chestContents);
+        super.save(compound);
+        if (!this.trySaveLootTable(compound)) {
+            ContainerHelper.loadAllItems(compound, this.chestContents);
         }
         return compound;
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
-        super.read(state, compound);
+    public void load(BlockState state, CompoundTag compound) {
+        super.load(state, compound);
         //FRAME BEGIN
         if (compound.contains("mimic")) {
-            mimic = NBTUtil.readBlockState(compound.getCompound("mimic"));
+            mimic = NbtUtils.readBlockState(compound.getCompound("mimic"));
         }
         if (compound.contains("texture")) {
             texture = readInteger(compound.getCompound("texture"));
@@ -157,32 +157,32 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
             glassColor = readInteger(compound.getCompound("glass_color"));
         }
         //FRAME END
-        this.chestContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        if (!this.checkLootAndRead(compound)) {
-            ItemStackHelper.writeAllItems(compound, this.chestContents);
+        this.chestContents = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        if (!this.tryLoadLootTable(compound)) {
+            ContainerHelper.saveAllItems(compound, this.chestContents);
         }
     }
 
     private void playSound(SoundEvent sound) {
-        double dx = (double) this.pos.getX() + 0.5D;
-        double dy = (double) this.pos.getY() + 0.5D;
-        double dz = (double) this.pos.getZ() + 0.5D;
-        this.dimension.playSound((PlayerEntity) null, dx, dy, dz, sound, SoundCategory.BLOCKS, 0.5f,
-                this.dimension.rand.nextFloat() * 0.1f + 0.9f);
+        double dx = (double) this.worldPosition.getX() + 0.5D;
+        double dy = (double) this.worldPosition.getY() + 0.5D;
+        double dz = (double) this.worldPosition.getZ() + 0.5D;
+        this.level.playSound(null, dx, dy, dz, sound, SoundSource.BLOCKS, 0.5f,
+                this.level.random.nextFloat() * 0.1f + 0.9f);
     }
 
     @Override
-    public boolean receiveClientEvent(int id, int type) {
+    public boolean triggerEvent(int id, int type) {
         if (id == 1) {
             this.numPlayersUsing = type;
             return true;
         } else {
-            return super.receiveClientEvent(id, type);
+            return super.triggerEvent(id, type);
         }
     }
 
     @Override
-    public void openInventory(PlayerEntity player) {
+    public void startOpen(Player player) {
         if (!player.isSpectator()) {
             if (this.numPlayersUsing < 0) {
                 this.numPlayersUsing = 0;
@@ -193,10 +193,10 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
         }
     }
 
-    public static int getPlayersUsing(IBlockReader reader, BlockPos pos) {
+    public static int getPlayersUsing(BlockGetter reader, BlockPos pos) {
         BlockState blockstate = reader.getBlockState(pos);
         if (blockstate.hasTileEntity()) {
-            TileEntity tileentity = reader.getTileEntity(pos);
+            BlockEntity tileentity = reader.getBlockEntity(pos);
             if (tileentity instanceof ChestFrameTileEntity) {
                 return ((ChestFrameTileEntity) tileentity).numPlayersUsing;
             }
@@ -205,7 +205,7 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public void closeInventory(PlayerEntity player) {
+    public void stopOpen(Player player) {
         if (!player.isSpectator()) {
             --this.numPlayersUsing;
             this.onOpenOrClose();
@@ -215,14 +215,14 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
     protected void onOpenOrClose() {
         Block block = this.getBlockState().getBlock();
         if (block instanceof ChestFrameBlock) {
-            this.dimension.addBlockEvent(this.pos, block, 1, this.numPlayersUsing);
-            this.dimension.notifyNeighborsOfStateChange(this.pos, block);
+            this.level.blockEvent(this.worldPosition, block, 1, this.numPlayersUsing);
+            this.level.updateNeighborsAt(this.worldPosition, block);
         }
     }
 
     @Override
-    public void updateContainingBlockInfo() {
-        super.updateContainingBlockInfo();
+    public void clearCache() {
+        super.clearCache();
         if (this.itemHandler != null) {
             this.itemHandler.invalidate();
             this.itemHandler = null;
@@ -266,8 +266,8 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
 
     public void setMimic(BlockState mimic) {
         this.mimic = mimic;
-        markModified();
-        dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
     }
 
     public BlockState getMimic() {
@@ -280,8 +280,8 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
 
     public void setDesign(Integer design) {
         this.design = design;
-        markModified();
-        dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
     }
 
     public Integer getDesignTexture() {
@@ -290,8 +290,8 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
 
     public void setDesignTexture(Integer designTexture) {
         this.designTexture = designTexture;
-        markModified();
-        dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
     }
 
     public Integer getTexture() {
@@ -300,8 +300,8 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
 
     public void setTexture(Integer texture) {
         this.texture = texture;
-        markModified();
-        dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
     }
 
     public Integer getGlassColor() {
@@ -313,10 +313,10 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT tag = super.getUpdateTag();
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = super.getUpdateTag();
         if (mimic != null) {
-            tag.put("mimic", NBTUtil.writeBlockState(mimic));
+            tag.put("mimic", NbtUtils.writeBlockState(mimic));
         }
         if (texture != null) {
             tag.put("texture", writeInteger(texture));
@@ -335,51 +335,51 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
 
     @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(pos, 1, getUpdateTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return new ClientboundBlockEntityDataPacket(worldPosition, 1, getUpdateTag());
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         BlockState oldMimic = mimic;
         Integer oldTexture = texture;
         Integer oldDesign = design;
         Integer oldDesignTexture = designTexture;
         Integer oldGlassColor = glassColor;
-        CompoundNBT tag = pkt.getNbt();
+        CompoundTag tag = pkt.getTag();
         if (tag.contains("mimic")) {
-            mimic = NBTUtil.readBlockState(tag.getCompound("mimic"));
+            mimic = NbtUtils.readBlockState(tag.getCompound("mimic"));
             if (!Objects.equals(oldMimic, mimic)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
         if (tag.contains("texture")) {
             texture = readInteger(tag.getCompound("texture"));
             if (!Objects.equals(oldTexture, texture)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
         if (tag.contains("design")) {
             design = readInteger(tag.getCompound("design"));
             if (!Objects.equals(oldDesign, design)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
         if (tag.contains("design_texture")) {
             designTexture = readInteger(tag.getCompound("design_texture"));
             if (!Objects.equals(oldDesignTexture, designTexture)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
         if (tag.contains("glass_color")) {
             glassColor = readInteger(tag.getCompound("glass_color"));
             if (!Objects.equals(oldGlassColor, glassColor)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
     }
@@ -396,7 +396,7 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
                 .build();
     }
 
-    public void clear() {
+    public void clearContent() {
         this.setMimic(null);
         this.setDesign(0);
         this.setDesign(0);
@@ -404,15 +404,15 @@ public class ChestFrameTileEntity extends LockableLootTileEntity {
         this.setGlassColor(0);
     }
 
-    private static CompoundNBT writeInteger(Integer tag) {
-        CompoundNBT compoundnbt = new CompoundNBT();
+    private static CompoundTag writeInteger(Integer tag) {
+        CompoundTag compoundnbt = new CompoundTag();
         compoundnbt.putString("number", tag.toString());
         return compoundnbt;
     }
 
     @Override
-    public void delete() {
-        super.delete();
+    public void setRemoved() {
+        super.setRemoved();
         if (itemHandler != null) {
             itemHandler.invalidate();
         }

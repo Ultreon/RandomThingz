@@ -1,17 +1,17 @@
 package com.ultreon.randomthingz.entity;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.passive.SquidEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.Squid;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -23,13 +23,13 @@ import javax.annotation.Nullable;
  *
  * @author Qboi123
  */
-public class GlowSquidEntity extends SquidEntity {
-    public GlowSquidEntity(EntityType<? extends GlowSquidEntity> type, World dimensionIn) {
+public class GlowSquidEntity extends Squid {
+    public GlowSquidEntity(EntityType<? extends GlowSquidEntity> type, Level dimensionIn) {
         super(type, dimensionIn);
     }
 
-    public static AttributeModifierMap.MutableAttribute registerAttributes() {
-        return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 14.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
+    public static AttributeSupplier.Builder registerAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 14.0D).add(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 
     @Override
@@ -38,31 +38,31 @@ public class GlowSquidEntity extends SquidEntity {
     }
 
     @Override
-    protected int getExperiencePoints(@NotNull PlayerEntity player) {
-        return 4 + this.dimension.rand.nextInt(3);
+    protected int getExperienceReward(@NotNull Player player) {
+        return 4 + this.level.random.nextInt(3);
     }
 
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_SQUID_AMBIENT;
+        return SoundEvents.SQUID_AMBIENT;
     }
 
     @Nullable
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_SQUID_DEATH;
+        return SoundEvents.SQUID_DEATH;
     }
 
     @Nullable
     @Override
     protected SoundEvent getHurtSound(@NotNull DamageSource damageSourceIn) {
-        return SoundEvents.ENTITY_SQUID_HURT;
+        return SoundEvents.SQUID_HURT;
     }
 
     @Override
-    protected @NotNull SoundEvent getSplashSound() {
-        return SoundEvents.ENTITY_GENERIC_SPLASH;
+    protected @NotNull SoundEvent getSwimSplashSound() {
+        return SoundEvents.GENERIC_SPLASH;
     }
 
     @Override
@@ -71,17 +71,17 @@ public class GlowSquidEntity extends SquidEntity {
     }
 
     @Override
-    protected void updateAITasks() {
-        super.updateAITasks();
+    protected void customServerAiStep() {
+        super.customServerAiStep();
     }
 
     @Override
-    public void livingTick() {
-        super.livingTick();
+    public void aiStep() {
+        super.aiStep();
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void handleStatusUpdate(byte id) {
-        super.handleStatusUpdate(id);
+    public void handleEntityEvent(byte id) {
+        super.handleEntityEvent(id);
     }
 }

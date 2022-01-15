@@ -3,9 +3,9 @@ package com.ultreon.randomthingz.effect;
 import com.ultreon.randomthingz.block.AtomicTNTBlock;
 import com.ultreon.randomthingz.entity.damagesource.ModDamageSources;
 import com.ultreon.randomthingz.item.tool.Toolset;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.entity.LivingEntity;
 
 /**
  * Radiation potion effect, does one heart of damage very slowly. Can kill all living entities.
@@ -13,18 +13,18 @@ import net.minecraft.potion.EffectType;
  * @see Toolset#URANIUM
  * @see AtomicTNTBlock
  */
-public class RadiationEffect extends Effect {
+public class RadiationEffect extends MobEffect {
     public RadiationEffect() {
-        super(EffectType.HARMFUL, 0x408040);
+        super(MobEffectCategory.HARMFUL, 0x408040);
     }
 
     @Override
-    public void performEffect(LivingEntity entityLivingBaseIn, int amplifier) {
-        entityLivingBaseIn.attack(ModDamageSources.RADIATION, 2.0F);
+    public void applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
+        entityLivingBaseIn.hurt(ModDamageSources.RADIATION, 2.0F);
     }
 
     @Override
-    public boolean isReady(int duration, int amplifier) {
+    public boolean isDurationEffectTick(int duration, int amplifier) {
         int i;
 
         if (duration == 0) i = 0;

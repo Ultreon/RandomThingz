@@ -1,20 +1,20 @@
 package com.ultreon.randomthingz.client.gui.widgets;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public class SwitchWidget extends Widget {
+public class SwitchWidget extends AbstractWidget {
     private final ResourceLocation resourceLocation = new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/widgets/switch.png");
     private boolean state;
 
     public SwitchWidget(int x, int y, boolean state) {
-        super(x, y, 40, 20, new StringTextComponent(""));
+        super(x, y, 40, 20, new TextComponent(""));
 
         this.state = state;
     }
@@ -40,9 +40,9 @@ public class SwitchWidget extends Widget {
         this.y = yIn;
     }
 
-    public void renderWidget(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderButton(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bindTexture(this.resourceLocation);
+        minecraft.getTextureManager().bind(this.resourceLocation);
         RenderSystem.disableDepthTest();
         int u = 0;
         int v = 0;

@@ -10,8 +10,8 @@ import com.ultreon.randomthingz.entity.*;
 import com.ultreon.randomthingz.entity.baby.*;
 import com.ultreon.randomthingz.item.CustomSpawnEggItem;
 import lombok.experimental.UtilityClass;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 
 @SuppressWarnings("unused")
 @UtilityClass

@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.group;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class OverpoweredItemGroup extends ItemGroup {
-    public static final OverpoweredItemGroup instance = new OverpoweredItemGroup(ItemGroup.GROUPS.length, "randomthingz_god");
+public class OverpoweredItemGroup extends CreativeModeTab {
+    public static final OverpoweredItemGroup instance = new OverpoweredItemGroup(CreativeModeTab.TABS.length, "randomthingz_god");
 
     public OverpoweredItemGroup(int index, String label) {
         super(index, label);
@@ -19,7 +19,7 @@ public class OverpoweredItemGroup extends ItemGroup {
 
     @Override
     public @NotNull
-    ItemStack createIcon() {
+    ItemStack makeIcon() {
         return new ItemStack(Blocks.COMMAND_BLOCK);
     }
 }

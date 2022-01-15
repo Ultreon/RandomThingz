@@ -2,13 +2,13 @@ package com.ultreon.randomthingz.block.rails;
 
 import com.qsoftware.modlib.common.interfaces.IHasRenderType;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PoweredRailBlock;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.entity.item.minecart.AbstractMinecartEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.PoweredRailBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -20,17 +20,17 @@ public class EmpoweredRailBlock extends PoweredRailBlock implements IHasRenderTy
     }
 
     @Override
-    public float getRailMaxSpeed(BlockState state, World dimension, BlockPos pos, AbstractMinecartEntity cart) {
+    public float getRailMaxSpeed(BlockState state, Level dimension, BlockPos pos, AbstractMinecart cart) {
         return 0.6f;
     }
 
     @Override
-    public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
-        return state.get(POWERED) ? 10 : 0;
+    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+        return state.getValue(POWERED) ? 10 : 0;
     }
 
     @Override
     public RenderType getRenderType() {
-        return RenderType.getCutout();
+        return RenderType.cutout();
     }
 }

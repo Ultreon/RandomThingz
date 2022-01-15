@@ -1,6 +1,8 @@
 package com.ultreon.randomthingz.client.debug.menu;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.platform.Monitor;
+import com.mojang.blaze3d.platform.Window;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.qsoftware.modlib.silentlib.client.key.InputUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.hud.HudItems;
@@ -10,37 +12,41 @@ import com.ultreon.randomthingz.common.*;
 import com.ultreon.randomthingz.common.enums.MoonPhase;
 import com.ultreon.randomthingz.common.interfaces.Formattable;
 import com.ultreon.randomthingz.common.interfaces.Sliceable;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.MainWindow;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.Monitor;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.scoreboard.Team;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector2f;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.math.vector.Vector4f;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.scores.Team;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -86,7 +92,7 @@ public class DebugMenu {
 
     public static void onKeyReleased(InputEvent.KeyInputEvent event) {
         if (event.getAction() == GLFW.GLFW_RELEASE) {
-            if (event.getKey() == KeyBindingList.DEBUG_SCREEN.getKey().getKeyCode()) {
+            if (event.getKey() == KeyBindingList.DEBUG_SCREEN.getKey().getValue()) {
                 if (InputUtils.isShiftDown()) {
                     int next = DEBUG_PAGE.ordinal() - 1;
 
@@ -125,22 +131,22 @@ public class DebugMenu {
     public static void renderGameOverlay(RenderGameOverlayEvent event) {
         if (event.getType() != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
 
-        if (Minecraft.getInstance().gameSettings.showDebugInfo) {
+        if (Minecraft.getInstance().options.renderDebug) {
             return;
         }
 
-        MatrixStack matrixStack = event.getMatrixStack();
+        PoseStack matrixStack = event.getMatrixStack();
         Minecraft mc = Minecraft.getInstance();
-        MainWindow mainWindow = mc.getMainWindow();
-        Monitor monitor = mainWindow.getMonitor();
+        Window mainWindow = mc.getWindow();
+        Monitor monitor = mainWindow.findBestMonitor();
 
-        int width = mainWindow.getScaledWidth();
-        int height = mainWindow.getScaledHeight();
+        int width = mainWindow.getGuiScaledWidth();
+        int height = mainWindow.getGuiScaledHeight();
 
         int dw, dh;
         if (monitor != null) {
-            dw = monitor.getDefaultVideoMode().getWidth();
-            dh = monitor.getDefaultVideoMode().getHeight();
+            dw = monitor.getCurrentMode().getWidth();
+            dh = monitor.getCurrentMode().getHeight();
         } else {
             dw = 0;
             dh = 0;
@@ -151,19 +157,19 @@ public class DebugMenu {
         }
 
         if (DEBUG_PAGE != PAGE.NONE) {
-            mc.fontRenderer.drawStringWithShadow(matrixStack, "debugPage: " + DEBUG_PAGE.name(), 12f, height - 16f, 0xffaa00);
+            mc.font.drawShadow(matrixStack, "debugPage: " + DEBUG_PAGE.name(), 12f, height - 16f, 0xffaa00);
         }
 
         switch (DEBUG_PAGE) {
             case WINDOW: {
                 int i = 0;
-                drawLeftTopString(matrixStack, "guiScaleFactor", i++, getMultiplier(mainWindow.getGuiScaleFactor()));
-                drawLeftTopString(matrixStack, "windowSizeScaled", i++, getSize(mainWindow.getScaledWidth(), mainWindow.getScaledHeight()));
-                drawLeftTopString(matrixStack, "windowSize", i++, getSize(mainWindow.getWidth(), mainWindow.getHeight()));
-                drawLeftTopString(matrixStack, "windowHandle", i++, mainWindow.getHandle());
-                drawLeftTopString(matrixStack, "framebufferSize", i++, getSize(mainWindow.getFramebufferWidth(), mainWindow.getFramebufferHeight()));
-                drawLeftTopString(matrixStack, "refreshTate", i++, getFormatted(TextFormatting.GOLD.toString() + mainWindow.getRefreshRate() + TextFormatting.GRAY + " fps"));
-                drawLeftTopString(matrixStack, "framerateLimit", i++, getFormatted(TextFormatting.GOLD.toString() + mainWindow.getLimitFramerate() + TextFormatting.GRAY + "fps"));
+                drawLeftTopString(matrixStack, "guiScaleFactor", i++, getMultiplier(mainWindow.getGuiScale()));
+                drawLeftTopString(matrixStack, "windowSizeScaled", i++, getSize(mainWindow.getGuiScaledWidth(), mainWindow.getGuiScaledHeight()));
+                drawLeftTopString(matrixStack, "windowSize", i++, getSize(mainWindow.getScreenWidth(), mainWindow.getScreenHeight()));
+                drawLeftTopString(matrixStack, "windowHandle", i++, mainWindow.getWindow());
+                drawLeftTopString(matrixStack, "framebufferSize", i++, getSize(mainWindow.getWidth(), mainWindow.getHeight()));
+                drawLeftTopString(matrixStack, "refreshTate", i++, getFormatted(ChatFormatting.GOLD.toString() + mainWindow.getRefreshRate() + ChatFormatting.GRAY + " fps"));
+                drawLeftTopString(matrixStack, "framerateLimit", i++, getFormatted(ChatFormatting.GOLD.toString() + mainWindow.getFramerateLimit() + ChatFormatting.GRAY + "fps"));
 
                 int j = 0;
                 drawRightTopString(matrixStack, "fullscreenMode", j++, mainWindow.isFullscreen());
@@ -171,90 +177,90 @@ public class DebugMenu {
             }
             case BLOCK: {
                 if (Minecraft.getInstance().player != null) {
-                    PlayerEntity player = Minecraft.getInstance().player;
-                    float f = player.rotationPitch;
-                    float f1 = player.rotationYaw;
+                    Player player = Minecraft.getInstance().player;
+                    float f = player.xRot;
+                    float f1 = player.yRot;
 
-                    Vector3d vec3d = player.getEyePosition(1.0F);
+                    Vec3 vec3d = player.getEyePosition(1.0F);
 
-                    float f2 = MathHelper.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                    float f3 = MathHelper.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                    float f4 = -MathHelper.cos(-f * ((float) Math.PI / 180F));
-                    float f5 = MathHelper.sin(-f * ((float) Math.PI / 180F));
+                    float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+                    float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+                    float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
+                    float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
 
                     float f6 = f3 * f4;
                     float f7 = f2 * f4;
 
                     double d0 = 16;
 
-                    Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
+                    Vec3 vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
                     int i = 1;
                     int j = 1;
 
-                    BlockRayTraceResult lookingAt = null;
-                    if (Minecraft.getInstance().dimension != null) {
-                        lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
-                        if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
-                            BlockPos pos = lookingAt.getPos();
+                    BlockHitResult lookingAt = null;
+                    if (Minecraft.getInstance().level != null) {
+                        lookingAt = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player));
+                        if (lookingAt.getType() == HitResult.Type.BLOCK) {
+                            BlockPos pos = lookingAt.getBlockPos();
 
                             // now the coordinates you want are in pos. Example of use:
-                            BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
+                            BlockState blockState = Minecraft.getInstance().player.getCommandSenderWorld().getBlockState(pos);
                             Block block = blockState.getBlock();
-                            mc.fontRenderer.drawStringWithShadow(matrixStack, TextFormatting.GRAY + "-== BLOCK ==-", 12f, 12f, 0xffffff);
-                            drawLeftTopString(matrixStack, "translatedName", i++, block.getTranslatedName().getString());
+                            mc.font.drawShadow(matrixStack, ChatFormatting.GRAY + "-== BLOCK ==-", 12f, 12f, 0xffffff);
+                            drawLeftTopString(matrixStack, "translatedName", i++, block.getName().getString());
                             drawLeftTopString(matrixStack, "harvestLevel", i++, blockState.getHarvestLevel());
                             drawLeftTopString(matrixStack, "harvestTool", i++, blockState.getHarvestTool() == null ? null : blockState.getHarvestTool().getName());
-                            drawLeftTopString(matrixStack, "blockHardness", i++, blockState.getBlockHardness(player.getEntityDimension(), pos));
-                            drawLeftTopString(matrixStack, "lightValue", i++, blockState.getLightValue());
-                            drawLeftTopString(matrixStack, "opacity", i++, blockState.getOpacity(player.getEntityDimension(), pos));
-                            drawLeftTopString(matrixStack, "offset", i++, blockState.getOffset(player.getEntityDimension(), pos));
-                            drawLeftTopString(matrixStack, "playerRelativeHardness", i++, blockState.getPlayerRelativeBlockHardness(player, player.getEntityDimension(), pos));
-                            drawLeftTopString(matrixStack, "requiresTool", i++, blockState.getRequiresTool());
-                            drawLeftTopString(matrixStack, "renderType", i++, blockState.getRenderType());
-                            drawLeftTopString(matrixStack, "slipperiness", i++, blockState.getSlipperiness(player.getEntityDimension(), pos, player));
+                            drawLeftTopString(matrixStack, "blockHardness", i++, blockState.getDestroySpeed(player.getCommandSenderWorld(), pos));
+                            drawLeftTopString(matrixStack, "lightValue", i++, blockState.getLightEmission());
+                            drawLeftTopString(matrixStack, "opacity", i++, blockState.getLightBlock(player.getCommandSenderWorld(), pos));
+                            drawLeftTopString(matrixStack, "offset", i++, blockState.getOffset(player.getCommandSenderWorld(), pos));
+                            drawLeftTopString(matrixStack, "playerRelativeHardness", i++, blockState.getDestroyProgress(player, player.getCommandSenderWorld(), pos));
+                            drawLeftTopString(matrixStack, "requiresTool", i++, blockState.requiresCorrectToolForDrops());
+                            drawLeftTopString(matrixStack, "renderType", i++, blockState.getRenderShape());
+                            drawLeftTopString(matrixStack, "slipperiness", i++, blockState.getSlipperiness(player.getCommandSenderWorld(), pos, player));
                             drawLeftTopString(matrixStack, "jumpFactor", i++, block.getJumpFactor());
-                            drawLeftTopString(matrixStack, "enchantPowerBonus", i++, blockState.getEnchantPowerBonus(player.getEntityDimension(), pos));
+                            drawLeftTopString(matrixStack, "enchantPowerBonus", i++, blockState.getEnchantPowerBonus(player.getCommandSenderWorld(), pos));
                             drawLeftTopString(matrixStack, "lootTable", i++, block.getLootTable());
-                            drawLeftTopString(matrixStack, "materialColor", i++, block.getMaterialColor().colorIndex, getColor(block.getMaterialColor().colorValue));
+                            drawLeftTopString(matrixStack, "materialColor", i++, block.defaultMaterialColor().id, getColor(block.defaultMaterialColor().col));
                             drawLeftTopString(matrixStack, "offsetType", i++, block.getOffsetType());
                             drawLeftTopString(matrixStack, "registryName", i++, block.getRegistryName());
-                            drawLeftTopString(matrixStack, "defaultSlipperiness", i++, block.getSlipperiness());
+                            drawLeftTopString(matrixStack, "defaultSlipperiness", i++, block.getFriction());
                             drawLeftTopString(matrixStack, "speedFactor", i++, getMultiplier(block.getSpeedFactor()));
                         } else {
                             // not looking at a block, or too far away from one to tell
-                            Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 16, 0xff0000);
+                            Screen.drawCenteredString(matrixStack, mc.font, "<None>", width / 2, height / 2 - 16, 0xff0000);
                         }
 
-                        lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
-                        if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
-                            BlockPos pos = lookingAt.getPos();
+                        lookingAt = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.OUTLINE, ClipContext.Fluid.ANY, player));
+                        if (lookingAt.getType() == HitResult.Type.BLOCK) {
+                            BlockPos pos = lookingAt.getBlockPos();
 
                             // now the coordinates you want are in pos. Example of use:
-                            BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
+                            BlockState blockState = Minecraft.getInstance().player.getCommandSenderWorld().getBlockState(pos);
                             FluidState fluidState = blockState.getFluidState();
                             if (!fluidState.isEmpty()) {
-                                drawRightString(matrixStack, TextFormatting.GRAY + "-== Fluid ==-", 12f, 12f, 0xffffff);
+                                drawRightString(matrixStack, ChatFormatting.GRAY + "-== Fluid ==-", 12f, 12f, 0xffffff);
                                 drawRightTopString(matrixStack, "empty", j++, fluidState.isEmpty());
-                                drawRightTopString(matrixStack, "height", j++, fluidState.getHeight());
-                                drawRightTopString(matrixStack, "level", j++, fluidState.getLevel());
-                                drawRightTopString(matrixStack, "actualHeight", j++, fluidState.getFluid().getActualHeight(fluidState, player.getEntityDimension(), pos));
+                                drawRightTopString(matrixStack, "height", j++, fluidState.getOwnHeight());
+                                drawRightTopString(matrixStack, "level", j++, fluidState.getAmount());
+                                drawRightTopString(matrixStack, "actualHeight", j++, fluidState.getType().getHeight(fluidState, player.getCommandSenderWorld(), pos));
                                 try {
-                                    drawRightTopString(matrixStack, "filledBucket", j++, fluidState.getFluid().getFilledBucket());
+                                    drawRightTopString(matrixStack, "filledBucket", j++, fluidState.getType().getBucket());
                                 } catch (Throwable ignored) {
 
                                 }
-                                drawRightTopString(matrixStack, "tickRate", j++, fluidState.getFluid().getTickRate(player.getEntityDimension()));
+                                drawRightTopString(matrixStack, "tickRate", j++, fluidState.getType().getTickDelay(player.getCommandSenderWorld()));
                             } else {
                                 // not looking at a fluid, or too far away from one to tell
 //                                    Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 32, 0xff0000);
                             }
                         } else {
                             // not looking at a fluid, or too far away from one to tell
-                            Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 32, 0xff0000);
+                            Screen.drawCenteredString(matrixStack, mc.font, "<None>", width / 2, height / 2 - 32, 0xff0000);
                         }
                     } else {
-                        Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<Invalid>", width / 2, height / 2 - 32, 0xbf0000);
+                        Screen.drawCenteredString(matrixStack, mc.font, "<Invalid>", width / 2, height / 2 - 32, 0xbf0000);
                     }
                 }
                 break;
@@ -316,16 +322,16 @@ public class DebugMenu {
                 }
 
                 i = 0;
-                drawRightTopString(matrixStack, "isJava64bit", i++, (mc.isJava64bit() ? "yes" : "no"));
+                drawRightTopString(matrixStack, "isJava64bit", i++, (mc.is64Bit() ? "yes" : "no"));
                 break;
             }
             case ITEM: {
                 if (Minecraft.getInstance().player != null) {
-                    PlayerEntity player = Minecraft.getInstance().player;
-                    ItemStack stack = player.getHeldItemMainhand();
+                    Player player = Minecraft.getInstance().player;
+                    ItemStack stack = player.getMainHandItem();
                     Item item = stack.getItem();
-                    Food food = item.getFood();
-                    ItemGroup group = item.getGroup();
+                    FoodProperties food = item.getFoodProperties();
+                    CreativeModeTab group = item.getItemCategory();
 
                     //noinspection ConstantConditions
                     if (stack == null) {
@@ -337,11 +343,11 @@ public class DebugMenu {
 
                     drawLeftTopString(matrixStack, "registryName", i++, stack.getItem().getRegistryName());
                     if (food != null) {
-                        drawLeftTopString(matrixStack, "foodHealing", i++, food.getHealing());
-                        drawLeftTopString(matrixStack, "foodSaturation", i++, food.getSaturation());
+                        drawLeftTopString(matrixStack, "foodHealing", i++, food.getNutrition());
+                        drawLeftTopString(matrixStack, "foodSaturation", i++, food.getSaturationModifier());
                     }
                     if (group != null) {
-                        drawLeftTopString(matrixStack, "groupName", i++, group.getGroupName().getString());
+                        drawLeftTopString(matrixStack, "groupName", i++, group.getDisplayName().getString());
                     }
                     drawLeftTopString(matrixStack, "rarity", i++, item.getRarity(stack));
                     drawLeftTopString(matrixStack, "enchantability", i++, item.getItemEnchantability(stack));
@@ -350,105 +356,105 @@ public class DebugMenu {
                     drawLeftTopString(matrixStack, "damage", i++, item.getDamage(stack));
                     drawLeftTopString(matrixStack, "burnTime", i++, item.getBurnTime(stack));
                     drawLeftTopString(matrixStack, "count", i++, stack.getCount());
-                    drawLeftTopString(matrixStack, "repairCost", i++, stack.getRepairCost());
+                    drawLeftTopString(matrixStack, "repairCost", i++, stack.getBaseRepairCost());
                     drawLeftTopString(matrixStack, "useDuration", i++, stack.getUseDuration());
                     drawLeftTopString(matrixStack, "xpRepairRation", i++, stack.getXpRepairRatio());
 
                     int j = 0;
                     drawRightTopString(matrixStack, "complex", j++, item.isComplex());
-                    drawRightTopString(matrixStack, "immuneToFire", j++, item.isImmuneToFire());
+                    drawRightTopString(matrixStack, "immuneToFire", j++, item.isFireResistant());
                     drawRightTopString(matrixStack, "enchantable", j++, item.isEnchantable(stack));
                     drawRightTopString(matrixStack, "empty", j++, stack.isEmpty());
                     drawRightTopString(matrixStack, "isPiglinCurrency", j++, stack.isPiglinCurrency());
                     drawRightTopString(matrixStack, "repairable", j++, stack.isRepairable());
                     drawRightTopString(matrixStack, "stackable", j++, stack.isStackable());
                     drawRightTopString(matrixStack, "sliceable", j++, (item instanceof Sliceable));
-                    drawRightTopString(matrixStack, "damageable", j++, item.isDamageable());
+                    drawRightTopString(matrixStack, "damageable", j++, item.canBeDepleted());
                     drawRightTopString(matrixStack, "damaged", j++, item.isDamaged(stack));
                 }
                 break;
             }
             case ENTITY: {
                 if (Minecraft.getInstance().player != null) {
-                    PlayerEntity player = Minecraft.getInstance().player;
-                    float f = player.rotationPitch;
-                    float f1 = player.rotationYaw;
+                    Player player = Minecraft.getInstance().player;
+                    float f = player.xRot;
+                    float f1 = player.yRot;
 
-                    Vector3d vec3d = player.getEyePosition(1.0F);
+                    Vec3 vec3d = player.getEyePosition(1.0F);
 
-                    float f2 = MathHelper.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                    float f3 = MathHelper.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                    float f4 = -MathHelper.cos(-f * ((float) Math.PI / 180F));
-                    float f5 = MathHelper.sin(-f * ((float) Math.PI / 180F));
+                    float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+                    float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+                    float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
+                    float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
 
                     float f6 = f3 * f4;
                     float f7 = f2 * f4;
 
                     double d0 = 16;
 
-                    Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
+                    Vec3 vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
                     int i = 1;
                     int j = 1;
 
-                    if (Minecraft.getInstance().dimension != null) {
-                        RayTraceResult raytraceresult = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
-                        if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
-                            vec3d1 = raytraceresult.getHitVec();
+                    if (Minecraft.getInstance().level != null) {
+                        HitResult raytraceresult = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+                        if (raytraceresult.getType() != HitResult.Type.MISS) {
+                            vec3d1 = raytraceresult.getLocation();
                         }
 
-                        RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().dimension, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
+                        HitResult rayTraceResult1 = ProjectileUtil.getEntityHitResult(Minecraft.getInstance().level, player, vec3d, vec3d1, player.getBoundingBox().inflate(16.0D), entity -> !entity.equals(player));
                         if (rayTraceResult1 != null) {
                             raytraceresult = rayTraceResult1;
                         }
-                        if (raytraceresult.getType() == RayTraceResult.Type.ENTITY) {
-                            @SuppressWarnings("ConstantConditions") EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) raytraceresult;
+                        if (raytraceresult.getType() == HitResult.Type.ENTITY) {
+                            @SuppressWarnings("ConstantConditions") EntityHitResult entityRayTraceResult = (EntityHitResult) raytraceresult;
 
                             Entity entity = entityRayTraceResult.getEntity();
                             EntityType<? extends Entity> type = entity.getType();
 
-                            mc.fontRenderer.drawStringWithShadow(matrixStack, TextFormatting.GRAY + "-== Entity ==-", 12f, 12f, 0xffffff);
-                            drawLeftTopString(matrixStack, "translatedName", i++, I18n.format(type.getTranslationId()));
+                            mc.font.drawShadow(matrixStack, ChatFormatting.GRAY + "-== Entity ==-", 12f, 12f, 0xffffff);
+                            drawLeftTopString(matrixStack, "translatedName", i++, I18n.get(type.getDescriptionId()));
                             drawLeftTopString(matrixStack, "height", i++, type.getHeight());
-                            drawLeftTopString(matrixStack, "lootTable", i++, type.getLootTable());
-                            drawLeftTopString(matrixStack, "name", i++, type.getName().getString());
+                            drawLeftTopString(matrixStack, "lootTable", i++, type.getDefaultLootTable());
+                            drawLeftTopString(matrixStack, "name", i++, type.getDescription().getString());
                             drawLeftTopString(matrixStack, "registryName", i++, type.getRegistryName());
-                            drawLeftTopString(matrixStack, "size", i++, getSize(type.getSize().width, type.getSize().height));
-                            drawLeftTopString(matrixStack, "air", i++, entity.getAir());
-                            drawLeftTopString(matrixStack, "maxAir", i++, entity.getMaxAir());
+                            drawLeftTopString(matrixStack, "size", i++, getSize(type.getDimensions().width, type.getDimensions().height));
+                            drawLeftTopString(matrixStack, "air", i++, entity.getAirSupply());
+                            drawLeftTopString(matrixStack, "maxAir", i++, entity.getMaxAirSupply());
                             drawLeftTopString(matrixStack, "brightness", i++, entity.getBrightness());
-                            drawLeftTopString(matrixStack, "entityId", i++, entity.getEntityId());
+                            drawLeftTopString(matrixStack, "entityId", i++, entity.getId());
                             drawLeftTopString(matrixStack, "eyeHeight", i++, entity.getEyeHeight());
-                            drawLeftTopString(matrixStack, "lookVec", i++, entity.getLookVec());
-                            drawLeftTopString(matrixStack, "ridingEntity", i++, entity.getRidingEntity());
-                            drawLeftTopString(matrixStack, "uniqueID", i++, entity.getUniqueID());
-                            drawLeftTopString(matrixStack, "yOffset", i++, entity.getYOffset());
+                            drawLeftTopString(matrixStack, "lookVec", i++, entity.getLookAngle());
+                            drawLeftTopString(matrixStack, "ridingEntity", i++, entity.getVehicle());
+                            drawLeftTopString(matrixStack, "uniqueID", i++, entity.getUUID());
+                            drawLeftTopString(matrixStack, "yOffset", i++, entity.getMyRidingOffset());
 
                             if (entity instanceof LivingEntity) {
                                 LivingEntity living = (LivingEntity) entity;
 
-                                drawRightString(matrixStack, TextFormatting.GRAY + "-== Living Entity ==-", 12f, 12f, 0xffffff);
+                                drawRightString(matrixStack, ChatFormatting.GRAY + "-== Living Entity ==-", 12f, 12f, 0xffffff);
                                 drawRightTopString(matrixStack, "health", j++, living.getHealth());
                                 drawRightTopString(matrixStack, "maxHealth", j++, living.getMaxHealth());
                                 drawRightTopString(matrixStack, "absorptionAmount", j++, living.getAbsorptionAmount());
-                                drawRightTopString(matrixStack, "movementSpeed", j++, living.getMovementSpeed());
-                                drawRightTopString(matrixStack, "aiMoveSpeed", j++, living.getAIMoveSpeed());
-                                drawRightTopString(matrixStack, "activeHand", j++, living.getActiveHand());
-                                drawRightTopString(matrixStack, "attackingEntity", j++, living.getAttackingEntity());
-                                drawRightTopString(matrixStack, "itemInUseCount", j++, living.getItemInUseCount());
-                                drawRightTopString(matrixStack, "lastAttackedEntity", j++, living.getLastAttackedEntity());
-                                drawRightTopString(matrixStack, "leashPosition", j++, living.getLeashPosition(mc.getRenderPartialTicks()));
+                                drawRightTopString(matrixStack, "movementSpeed", j++, living.canSpawnSoulSpeedParticle());
+                                drawRightTopString(matrixStack, "aiMoveSpeed", j++, living.getSpeed());
+                                drawRightTopString(matrixStack, "activeHand", j++, living.getUsedItemHand());
+                                drawRightTopString(matrixStack, "attackingEntity", j++, living.getKillCredit());
+                                drawRightTopString(matrixStack, "itemInUseCount", j++, living.getUseItemRemainingTicks());
+                                drawRightTopString(matrixStack, "lastAttackedEntity", j++, living.getLastHurtMob());
+                                drawRightTopString(matrixStack, "leashPosition", j++, living.getRopeHoldPosition(mc.getFrameTime()));
                                 drawRightTopString(matrixStack, "pose", j++, living.getPose());
-                                drawRightTopString(matrixStack, "scale", j++, living.getRenderScale());
-                                drawRightTopString(matrixStack, "revengeTarget", j++, living.getRevengeTarget());
-                                drawRightTopString(matrixStack, "totalArmorValue", j++, living.getTotalArmorValue());
+                                drawRightTopString(matrixStack, "scale", j++, living.getScale());
+                                drawRightTopString(matrixStack, "revengeTarget", j++, living.getLastHurtByMob());
+                                drawRightTopString(matrixStack, "totalArmorValue", j++, living.getArmorValue());
                             } else if (entity instanceof ItemEntity) {
                                 ItemEntity itemEntity = (ItemEntity) entity;
 
-                                drawRightString(matrixStack, TextFormatting.GRAY + "-== Item Entity ==-", 12f, 12f, 0xffffff);
+                                drawRightString(matrixStack, ChatFormatting.GRAY + "-== Item Entity ==-", 12f, 12f, 0xffffff);
                                 drawRightTopString(matrixStack, "age", j++, itemEntity.getAge());
                                 drawRightTopString(matrixStack, "item", j++, itemEntity.getItem());
-                                drawRightTopString(matrixStack, "leashPosition", j++, itemEntity.getLeashPosition(mc.getRenderPartialTicks()));
+                                drawRightTopString(matrixStack, "leashPosition", j++, itemEntity.getRopeHoldPosition(mc.getFrameTime()));
                                 drawRightTopString(matrixStack, "pose", j++, itemEntity.getPose());
                             }
 //                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationId()), width / 2, height / 2 - 48, 0x00bf00);
@@ -462,70 +468,70 @@ public class DebugMenu {
             }
             case MINECRAFT: {
                 int i = 0;
-                drawLeftTopString(matrixStack, "version", i++, mc.getVersion());
+                drawLeftTopString(matrixStack, "version", i++, mc.getLaunchedVersion());
                 drawLeftTopString(matrixStack, "versionType", i++, mc.getVersionType());
-                drawLeftTopString(matrixStack, "name", i++, mc.getName());
-                drawLeftTopString(matrixStack, "forceUnicodeFont", i++, mc.getForceUnicodeFont());
+                drawLeftTopString(matrixStack, "name", i++, mc.name());
+                drawLeftTopString(matrixStack, "forceUnicodeFont", i++, mc.isEnforceUnicode());
 
                 int j = 0;
                 drawRightTopString(matrixStack, "demoMode", j++, mc.isDemo());
-                drawRightTopString(matrixStack, "chatEnabled", j++, mc.isChatEnabled());
-                drawRightTopString(matrixStack, "gameFocused", j++, mc.isGameFocused());
-                drawRightTopString(matrixStack, "gamePaused", j++, mc.isGamePaused());
-                drawRightTopString(matrixStack, "integratedServerRunning", j++, mc.isIntegratedServerRunning());
+                drawRightTopString(matrixStack, "chatEnabled", j++, mc.allowsChat());
+                drawRightTopString(matrixStack, "gameFocused", j++, mc.isWindowActive());
+                drawRightTopString(matrixStack, "gamePaused", j++, mc.isPaused());
+                drawRightTopString(matrixStack, "integratedServerRunning", j++, mc.isLocalServer());
                 break;
             }
             case WORLD: {
-                if (Minecraft.getInstance().dimension != null) {
-                    ClientWorld dimension = Minecraft.getInstance().dimension;
+                if (Minecraft.getInstance().level != null) {
+                    ClientLevel dimension = Minecraft.getInstance().level;
 
                     int i = 0;
-                    drawLeftTopString(matrixStack, "timeLightningFlash", i++, dimension.getTimeLightningFlash());
-                    drawLeftTopString(matrixStack, "providerName", i++, dimension.getProviderName());
-                    drawLeftTopString(matrixStack, "loadedEntities", i++, dimension.getCountLoadedEntities());
-                    drawLeftTopString(matrixStack, "nextMapId", i++, dimension.getNextMapId());
+                    drawLeftTopString(matrixStack, "timeLightningFlash", i++, dimension.getSkyFlashTime());
+                    drawLeftTopString(matrixStack, "providerName", i++, dimension.gatherChunkSourceStats());
+                    drawLeftTopString(matrixStack, "loadedEntities", i++, dimension.getEntityCount());
+                    drawLeftTopString(matrixStack, "nextMapId", i++, dimension.getFreeMapId());
                     drawLeftTopString(matrixStack, "difficulty", i++, dimension.getDifficulty().getDisplayName().getString());
                     drawLeftTopString(matrixStack, "seaLevel", i++, dimension.getSeaLevel());
                     drawLeftTopString(matrixStack, "moonPhase", i++, getMoonPhase(dimension.getMoonPhase()));
-                    drawLeftTopString(matrixStack, "spawnAngle", i++, getAngle(dimension.getDimensionInfo().getSpawnAngle()));
-                    drawLeftTopString(matrixStack, "dimension", i++, dimension.getDimensionKey().getLocation());
+                    drawLeftTopString(matrixStack, "spawnAngle", i++, getAngle(dimension.getLevelData().getSpawnAngle()));
+                    drawLeftTopString(matrixStack, "dimension", i++, dimension.dimension().location());
                     drawLeftTopString(matrixStack, "dayTime", i++, dimension.getDayTime());
                     drawLeftTopString(matrixStack, "gameTime", i++, dimension.getGameTime());
-                    drawLeftTopString(matrixStack, "cloudColor", i++, getColor(dimension.getCloudColor(mc.getRenderPartialTicks())));
+                    drawLeftTopString(matrixStack, "cloudColor", i++, getColor(dimension.getCloudColor(mc.getFrameTime())));
                     if (Minecraft.getInstance().player != null) {
-                        ClientPlayerEntity player = Minecraft.getInstance().player;
-                        drawLeftTopString(matrixStack, "skyColor", i++, getColor(dimension.getSkyColor(player.getPosition(), mc.getRenderPartialTicks())));
+                        LocalPlayer player = Minecraft.getInstance().player;
+                        drawLeftTopString(matrixStack, "skyColor", i++, getColor(dimension.getSkyColor(player.blockPosition(), mc.getFrameTime())));
                     }
-                    drawLeftTopString(matrixStack, "starBrightness", i++, getPercentage(dimension.getStarBrightness(mc.getRenderPartialTicks())));
-                    drawLeftTopString(matrixStack, "sunBrightness", i++, getPercentage(dimension.getSunBrightness(mc.getRenderPartialTicks())));
+                    drawLeftTopString(matrixStack, "starBrightness", i++, getPercentage(dimension.getStarBrightness(mc.getFrameTime())));
+                    drawLeftTopString(matrixStack, "sunBrightness", i++, getPercentage(dimension.getSkyDarken(mc.getFrameTime())));
 
                     int j = 0;
-                    drawRightTopString(matrixStack, "daytime", j++, dimension.isDaytime());
-                    drawRightTopString(matrixStack, "nightTime", j++, dimension.isNightTime());
+                    drawRightTopString(matrixStack, "daytime", j++, dimension.isDay());
+                    drawRightTopString(matrixStack, "nightTime", j++, dimension.isNight());
                     drawRightTopString(matrixStack, "raining", j++, dimension.isRaining());
                     drawRightTopString(matrixStack, "thundering", j++, dimension.isThundering());
-                    drawRightTopString(matrixStack, "saveDisabled", j++, dimension.isSaveDisabled());
+                    drawRightTopString(matrixStack, "saveDisabled", j++, dimension.noSave());
                     if (Minecraft.getInstance().player != null) {
-                        ClientPlayerEntity player = Minecraft.getInstance().player;
-                        drawRightTopString(matrixStack, "areaLoaded", j++, dimension.isAreaLoaded(player.getPosition(), 1));
+                        LocalPlayer player = Minecraft.getInstance().player;
+                        drawRightTopString(matrixStack, "areaLoaded", j++, dimension.isAreaLoaded(player.blockPosition(), 1));
                     }
                     drawRightTopString(matrixStack, "debug", j++, dimension.isDebug());
                 }
                 break;
             }
             case WORLD_INFO: {
-                if (Minecraft.getInstance().dimension != null) {
-                    ClientWorld.ClientWorldInfo dimensionInfo = Minecraft.getInstance().dimension.getDimensionInfo();
+                if (Minecraft.getInstance().level != null) {
+                    ClientLevel.ClientLevelData dimensionInfo = Minecraft.getInstance().level.getLevelData();
 
                     int i = 0;
                     drawLeftTopString(matrixStack, "spawnAngle", i++, dimensionInfo.getSpawnAngle());
                     drawLeftTopString(matrixStack, "difficulty", i++, dimensionInfo.getDifficulty());
                     drawLeftTopString(matrixStack, "dayTime", i++, dimensionInfo.getDayTime());
                     drawLeftTopString(matrixStack, "gameTime", i++, dimensionInfo.getGameTime());
-                    drawLeftTopString(matrixStack, "fogDistance", i++, dimensionInfo.getFogDistance());
-                    drawLeftTopString(matrixStack, "spawnX", i++, dimensionInfo.getSpawnX());
-                    drawLeftTopString(matrixStack, "spawnY", i++, dimensionInfo.getSpawnY());
-                    drawLeftTopString(matrixStack, "spawnZ", i++, dimensionInfo.getSpawnZ());
+                    drawLeftTopString(matrixStack, "fogDistance", i++, dimensionInfo.getClearColorScale());
+                    drawLeftTopString(matrixStack, "spawnX", i++, dimensionInfo.getXSpawn());
+                    drawLeftTopString(matrixStack, "spawnY", i++, dimensionInfo.getYSpawn());
+                    drawLeftTopString(matrixStack, "spawnZ", i++, dimensionInfo.getZSpawn());
 
                     int j = 0;
                     drawRightTopString(matrixStack, "difficultyLocked", j++, dimensionInfo.isDifficultyLocked());
@@ -537,45 +543,45 @@ public class DebugMenu {
             }
             case PLAYER_2: {
                 if (Minecraft.getInstance().player != null) {
-                    PlayerEntity player = Minecraft.getInstance().player;
+                    Player player = Minecraft.getInstance().player;
                     Team team = player.getTeam();
 
                     int i = 0;
-                    drawLeftTopString(matrixStack, "idleTime", i++, player.getIdleTime());
-                    drawLeftTopString(matrixStack, "motion", i++, player.getMotion());
+                    drawLeftTopString(matrixStack, "idleTime", i++, player.getNoActionTime());
+                    drawLeftTopString(matrixStack, "motion", i++, player.getDeltaMovement());
                     drawLeftTopString(matrixStack, "team", i++, (team != null ? team.getName() : ""));
-                    drawLeftTopString(matrixStack, "xpSeed", i++, player.getXPSeed());
-                    drawLeftTopString(matrixStack, "yOffset", i++, player.getYOffset());
+                    drawLeftTopString(matrixStack, "xpSeed", i++, player.getEnchantmentSeed());
+                    drawLeftTopString(matrixStack, "yOffset", i++, player.getMyRidingOffset());
 
                     int j = 0;
                     drawRightTopString(matrixStack, "glowing", j++, player.isGlowing());
                     drawRightTopString(matrixStack, "invisible", j++, player.isInvisible());
                     drawRightTopString(matrixStack, "onGround", j++, player.isOnGround());
-                    drawRightTopString(matrixStack, "onLadder", j++, player.isOnLadder());
+                    drawRightTopString(matrixStack, "onLadder", j++, player.onClimbable());
                 }
                 break;
             }
             case PLAYER_1: {
                 if (Minecraft.getInstance().player != null) {
-                    PlayerEntity player = Minecraft.getInstance().player;
+                    Player player = Minecraft.getInstance().player;
 
                     int i = 0;
                     drawLeftTopString(matrixStack, "luck", i++, player.getLuck());
-                    drawLeftTopString(matrixStack, "speed", i++, player.getAIMoveSpeed());
+                    drawLeftTopString(matrixStack, "speed", i++, player.getSpeed());
                     drawLeftTopString(matrixStack, "score", i++, player.getScore());
-                    drawLeftTopString(matrixStack, "totalArmorValue", i++, player.getTotalArmorValue());
+                    drawLeftTopString(matrixStack, "totalArmorValue", i++, player.getArmorValue());
                     drawLeftTopString(matrixStack, "health", i++, player.getHealth());
                     drawLeftTopString(matrixStack, "absorptionAmount", i++, player.getAbsorptionAmount());
-                    drawLeftTopString(matrixStack, "hunger", i++, player.getFoodStats().getFoodLevel());
-                    drawLeftTopString(matrixStack, "saturation", i++, player.getFoodStats().getSaturationLevel());
-                    drawLeftTopString(matrixStack, "air", i++, player.getAir());
-                    drawLeftTopString(matrixStack, "positionBlock", i++, player.getPosition());
-                    drawLeftTopString(matrixStack, "position", i++, player.getPositionVec());
-                    drawLeftTopString(matrixStack, "pitchYaw", i++, getDegrees(player.getPitchYaw().x), getDegrees(player.getPitchYaw().y));
+                    drawLeftTopString(matrixStack, "hunger", i++, player.getFoodData().getFoodLevel());
+                    drawLeftTopString(matrixStack, "saturation", i++, player.getFoodData().getSaturationLevel());
+                    drawLeftTopString(matrixStack, "air", i++, player.getAirSupply());
+                    drawLeftTopString(matrixStack, "positionBlock", i++, player.blockPosition());
+                    drawLeftTopString(matrixStack, "position", i++, player.position());
+                    drawLeftTopString(matrixStack, "pitchYaw", i++, getDegrees(player.getRotationVector().x), getDegrees(player.getRotationVector().y));
                     drawLeftTopString(matrixStack, "sleepTimer", i++, player.getSleepTimer());
-                    drawLeftTopString(matrixStack, "fireTimer", i++, player.getFireTimer());
+                    drawLeftTopString(matrixStack, "fireTimer", i++, player.getRemainingFireTicks());
                     drawLeftTopString(matrixStack, "brightness", i++, player.getBrightness());
-                    drawLeftTopString(matrixStack, "beeStingCount", i++, player.getBeeStingCount());
+                    drawLeftTopString(matrixStack, "beeStingCount", i++, player.getStingerCount());
 
                     // String to be scanned to find the pattern.
                     String pattern = "[a-zA-Z0-9_]*";
@@ -588,66 +594,66 @@ public class DebugMenu {
 
                     int j = 0;
                     drawRightTopString(matrixStack, "legalUsername", j++, m.find());
-                    drawRightTopString(matrixStack, "jumping", j++, player.isJumping);
-                    drawRightTopString(matrixStack, "sneaking", j++, player.isSneaking());
+                    drawRightTopString(matrixStack, "jumping", j++, player.jumping);
+                    drawRightTopString(matrixStack, "sneaking", j++, player.isShiftKeyDown());
                     drawRightTopString(matrixStack, "swimming", j++, player.isSwimming());
                     drawRightTopString(matrixStack, "sleeping", j++, player.isSleeping());
                     drawRightTopString(matrixStack, "sprinting", j++, player.isSprinting());
                     drawRightTopString(matrixStack, "silent", j++, player.isSilent());
-                    drawRightTopString(matrixStack, "swingInProgress", j++, player.isSwingInProgress);
-                    drawRightTopString(matrixStack, "user", j++, player.isUser());
+                    drawRightTopString(matrixStack, "swingInProgress", j++, player.swinging);
+                    drawRightTopString(matrixStack, "user", j++, player.isLocalPlayer());
                     drawRightTopString(matrixStack, "alive", j++, player.isAlive());
-                    drawRightTopString(matrixStack, "burning", j++, player.isBurning());
-                    drawRightTopString(matrixStack, "wet ", j++, player.isWet());
+                    drawRightTopString(matrixStack, "burning", j++, player.isOnFire());
+                    drawRightTopString(matrixStack, "wet ", j++, player.isInWaterOrRain());
                     drawRightTopString(matrixStack, "creative", j++, player.isCreative());
                     drawRightTopString(matrixStack, "invulnerable", j++, player.isInvulnerable());
                     drawRightTopString(matrixStack, "spectator", j++, player.isSpectator());
-                    drawRightTopString(matrixStack, "allowEdit", j++, player.isAllowEdit());
+                    drawRightTopString(matrixStack, "allowEdit", j++, player.mayBuild());
 
                     int k = 0;
                     {
-                        float f = player.rotationPitch;
-                        float f1 = player.rotationYaw;
+                        float f = player.xRot;
+                        float f1 = player.yRot;
 
-                        Vector3d vec3d = player.getEyePosition(1.0F);
+                        Vec3 vec3d = player.getEyePosition(1.0F);
 
-                        float f2 = MathHelper.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                        float f3 = MathHelper.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                        float f4 = -MathHelper.cos(-f * ((float) Math.PI / 180F));
-                        float f5 = MathHelper.sin(-f * ((float) Math.PI / 180F));
+                        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+                        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+                        float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
+                        float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
 
                         float f6 = f3 * f4;
                         float f7 = f2 * f4;
 
                         double d0 = 16;
 
-                        Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
+                        Vec3 vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
-                        BlockRayTraceResult lookingAt = null;
-                        if (Minecraft.getInstance().dimension != null) {
-                            lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
-                            if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
-                                BlockPos pos = lookingAt.getPos();
+                        BlockHitResult lookingAt = null;
+                        if (Minecraft.getInstance().level != null) {
+                            lookingAt = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player));
+                            if (lookingAt.getType() == HitResult.Type.BLOCK) {
+                                BlockPos pos = lookingAt.getBlockPos();
 
                                 // now the coordinates you want are in pos. Example of use:
-                                BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
+                                BlockState blockState = Minecraft.getInstance().player.getCommandSenderWorld().getBlockState(pos);
                                 drawTopString(matrixStack, "-== Block ==-", k++);
-                                drawTopString(matrixStack, blockState.getBlock().getTranslatedName().getString(), k++);
+                                drawTopString(matrixStack, blockState.getBlock().getName().getString(), k++);
                                 k++;
                             } else {
                                 // not looking at a block, or too far away from one to tell
 //                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 16, 0xff0000);
                             }
-                            lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.ANY, player));
-                            if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
-                                BlockPos pos = lookingAt.getPos();
+                            lookingAt = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.OUTLINE, ClipContext.Fluid.ANY, player));
+                            if (lookingAt.getType() == HitResult.Type.BLOCK) {
+                                BlockPos pos = lookingAt.getBlockPos();
 
                                 // now the coordinates you want are in pos. Example of use:
-                                BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
+                                BlockState blockState = Minecraft.getInstance().player.getCommandSenderWorld().getBlockState(pos);
                                 FluidState fluidState = blockState.getFluidState();
                                 if (!fluidState.isEmpty()) {
                                     drawTopString(matrixStack, "-== Fluid ==-", k++);
-                                    drawTopString(matrixStack, blockState.getBlock().getTranslatedName().getString(), k++);
+                                    drawTopString(matrixStack, blockState.getBlock().getName().getString(), k++);
                                     k++;
                                 } else {
                                     // not looking at a fluid, or too far away from one to tell
@@ -655,46 +661,46 @@ public class DebugMenu {
                                 }
                             } else {
                                 // not looking at a fluid, or too far away from one to tell
-                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<None>", width / 2, height / 2 - 32, 0xff0000);
+                                Screen.drawCenteredString(matrixStack, mc.font, "<None>", width / 2, height / 2 - 32, 0xff0000);
                             }
                         } else {
-                            Screen.drawCenteredString(matrixStack, mc.fontRenderer, "<Invalid>", width / 2, height / 2 - 32, 0xbf0000);
+                            Screen.drawCenteredString(matrixStack, mc.font, "<Invalid>", width / 2, height / 2 - 32, 0xbf0000);
                         }
                     }
 
                     {
-                        float f = player.rotationPitch;
-                        float f1 = player.rotationYaw;
+                        float f = player.xRot;
+                        float f1 = player.yRot;
 
-                        Vector3d vec3d = player.getEyePosition(1.0F);
+                        Vec3 vec3d = player.getEyePosition(1.0F);
 
-                        float f2 = MathHelper.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                        float f3 = MathHelper.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                        float f4 = -MathHelper.cos(-f * ((float) Math.PI / 180F));
-                        float f5 = MathHelper.sin(-f * ((float) Math.PI / 180F));
+                        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+                        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+                        float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
+                        float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
 
                         float f6 = f3 * f4;
                         float f7 = f2 * f4;
 
                         double d0 = 16;
 
-                        Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
+                        Vec3 vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
-                        if (Minecraft.getInstance().dimension != null) {
-                            RayTraceResult raytraceresult = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
-                            if (raytraceresult.getType() != RayTraceResult.Type.MISS) {
-                                vec3d1 = raytraceresult.getHitVec();
+                        if (Minecraft.getInstance().level != null) {
+                            HitResult raytraceresult = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+                            if (raytraceresult.getType() != HitResult.Type.MISS) {
+                                vec3d1 = raytraceresult.getLocation();
                             }
 
-                            RayTraceResult rayTraceResult1 = ProjectileHelper.rayTraceEntities(Minecraft.getInstance().dimension, player, vec3d, vec3d1, player.getBoundingBox().grow(16.0D), entity -> !entity.equals(player));
+                            HitResult rayTraceResult1 = ProjectileUtil.getEntityHitResult(Minecraft.getInstance().level, player, vec3d, vec3d1, player.getBoundingBox().inflate(16.0D), entity -> !entity.equals(player));
                             if (rayTraceResult1 != null) {
                                 raytraceresult = rayTraceResult1;
                             }
-                            if (raytraceresult.getType() == RayTraceResult.Type.ENTITY) {
-                                @SuppressWarnings("ConstantConditions") EntityRayTraceResult entityRayTraceResult = (EntityRayTraceResult) raytraceresult;
+                            if (raytraceresult.getType() == HitResult.Type.ENTITY) {
+                                @SuppressWarnings("ConstantConditions") EntityHitResult entityRayTraceResult = (EntityHitResult) raytraceresult;
 
                                 drawTopString(matrixStack, "-== Entity ==-", k++);
-                                drawTopString(matrixStack, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationId()), k++);
+                                drawTopString(matrixStack, I18n.get(entityRayTraceResult.getEntity().getType().getDescriptionId()), k++);
                                 k++;
 //                                Screen.drawCenteredString(matrixStack, mc.fontRenderer, I18n.format(entityRayTraceResult.getEntity().getType().getTranslationId()), width / 2, height / 2 - 48, 0x00bf00);
                             } else {
@@ -709,8 +715,8 @@ public class DebugMenu {
                 break;
             }
             case NONE: {
-                ClientWorld dimension = Minecraft.getInstance().dimension;
-                ClientPlayerEntity player = Minecraft.getInstance().player;
+                ClientLevel dimension = Minecraft.getInstance().level;
+                LocalPlayer player = Minecraft.getInstance().player;
                 if (dimension != null && player != null) {
                     String dayTimeStr = Long.toString(dimension.getDayTime() % 24000);
                     StringBuilder timeText = new StringBuilder();

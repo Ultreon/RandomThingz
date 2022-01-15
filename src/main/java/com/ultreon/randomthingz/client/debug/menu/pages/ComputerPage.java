@@ -1,11 +1,11 @@
 package com.ultreon.randomthingz.client.debug.menu.pages;
 
+import com.mojang.blaze3d.platform.Monitor;
+import com.mojang.blaze3d.platform.Window;
 import com.qsoftware.modlib.common.Size;
 import com.ultreon.randomthingz.client.debug.menu.DebugEntry;
 import com.ultreon.randomthingz.client.debug.menu.DebugPage;
-import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.Monitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +18,15 @@ public class ComputerPage extends DebugPage {
     @Override
     public List<DebugEntry> getLinesLeft() {
         Minecraft mc = Minecraft.getInstance();
-        MainWindow mainWindow = mc.getMainWindow();
-        Monitor monitor = mainWindow.getMonitor();
+        Window mainWindow = mc.getWindow();
+        Monitor monitor = mainWindow.findBestMonitor();
 
         List<DebugEntry> list = new ArrayList<>();
 
         int dw, dh;
         if (monitor != null) {
-            dw = monitor.getDefaultVideoMode().getWidth();
-            dh = monitor.getDefaultVideoMode().getHeight();
+            dw = monitor.getCurrentMode().getWidth();
+            dh = monitor.getCurrentMode().getHeight();
         } else {
             dw = 0;
             dh = 0;
@@ -87,7 +87,7 @@ public class ComputerPage extends DebugPage {
 
         }
 
-        list.add(new DebugEntry("isJava64bit", () -> (mc.isJava64bit() ? "yes" : "no")));
+        list.add(new DebugEntry("isJava64bit", () -> (mc.is64Bit() ? "yes" : "no")));
         return list;
     }
 

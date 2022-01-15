@@ -1,18 +1,18 @@
 package com.ultreon.randomthingz.client.gui.screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.ultreon.randomthingz.client.graphics.MCGraphics;
 import com.ultreon.randomthingz.common.geom.RectangleUV;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -24,7 +24,7 @@ import java.util.Objects;
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("unused")
 public abstract class AdvancedScreen extends Screen {
-    protected AdvancedScreen(ITextComponent titleIn) {
+    protected AdvancedScreen(Component titleIn) {
         super(titleIn);
     }
 
@@ -36,18 +36,18 @@ public abstract class AdvancedScreen extends Screen {
         return mouse.x >= (double) (x - 1) && mouse.x < (double) (x + width + 1) && mouse.y >= (double) (y - 1) && mouse.y < (double) (y + height + 1);
     }
 
-    public <T extends Widget> T add(T widget) {
+    public <T extends AbstractWidget> T add(T widget) {
         return addButton(widget);
     }
 
     @Override
-    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.render(new MCGraphics(matrixStack, font, this), new Point(mouseX, mouseY));
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
     @Override
-    public void fillGradient(@NotNull MatrixStack matrixStack, int x1, int y1, int x2, int y2, int colorFrom, int colorTo) {
+    public void fillGradient(@NotNull PoseStack matrixStack, int x1, int y1, int x2, int y2, int colorFrom, int colorTo) {
         super.fillGradient(matrixStack, x1, y1, x2, y2, colorFrom, colorTo);
     }
 
@@ -56,39 +56,39 @@ public abstract class AdvancedScreen extends Screen {
         mcg.renderBackground(false);
     }
 
-    public void drawTexture(MatrixStack matrixStack, Point pos, Rectangle uv, ResourceLocation resource) {
+    public void drawTexture(PoseStack matrixStack, Point pos, Rectangle uv, ResourceLocation resource) {
         this.drawTexture(matrixStack, pos.x, pos.y, uv.x, uv.y, uv.width, uv.height, resource);
     }
 
-    public void drawTexture(MatrixStack matrixStack, Rectangle rect, RectangleUV uv, Dimension textureSize, ResourceLocation resource) {
+    public void drawTexture(PoseStack matrixStack, Rectangle rect, RectangleUV uv, Dimension textureSize, ResourceLocation resource) {
         this.drawTexture(matrixStack, rect.x, rect.y, rect.width, rect.height, uv.u, uv.v, uv.uWidth, uv.vHeight, textureSize.width, textureSize.height, resource);
     }
 
-    public void drawTexture(MatrixStack matrixStack, Point pos, RectangleUV uv, Dimension textureSize, ResourceLocation resource) {
+    public void drawTexture(PoseStack matrixStack, Point pos, RectangleUV uv, Dimension textureSize, ResourceLocation resource) {
         this.drawTexture(matrixStack, pos.x, pos.y, uv.u, uv.v, uv.uWidth, uv.vHeight, textureSize.width, textureSize.height, resource);
     }
 
-    public void drawTexture(MatrixStack matrixStack, Point pos, int blitOffset, RectangleUV uv, Dimension textureSize, ResourceLocation resource) {
+    public void drawTexture(PoseStack matrixStack, Point pos, int blitOffset, RectangleUV uv, Dimension textureSize, ResourceLocation resource) {
         this.drawTexture(matrixStack, pos.x, pos.y, blitOffset, uv.u, uv.v, uv.uWidth, uv.vHeight, textureSize.width, textureSize.height, resource);
     }
 
-    public void drawTexture(MatrixStack matrixStack, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, ResourceLocation resource) {
-        Objects.requireNonNull(minecraft).textureManager.bindTexture(resource);
+    public void drawTexture(PoseStack matrixStack, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, ResourceLocation resource) {
+        Objects.requireNonNull(minecraft).textureManager.bind(resource);
         this.blit(matrixStack, x, y, uOffset, vOffset, uWidth, vHeight);
     }
 
-    public void drawTexture(MatrixStack matrixStack, int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        Objects.requireNonNull(minecraft).textureManager.bindTexture(resource);
+    public void drawTexture(PoseStack matrixStack, int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
+        Objects.requireNonNull(minecraft).textureManager.bind(resource);
         Screen.blit(matrixStack, x, y, width, height, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
-    public void drawTexture(MatrixStack matrixStack, int x, int y, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        Objects.requireNonNull(minecraft).textureManager.bindTexture(resource);
+    public void drawTexture(PoseStack matrixStack, int x, int y, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
+        Objects.requireNonNull(minecraft).textureManager.bind(resource);
         Screen.blit(matrixStack, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
-    public void drawTexture(MatrixStack matrixStack, int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        Objects.requireNonNull(minecraft).textureManager.bindTexture(resource);
+    public void drawTexture(PoseStack matrixStack, int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
+        Objects.requireNonNull(minecraft).textureManager.bind(resource);
         Screen.blit(matrixStack, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureHeight, textureWidth);
     }
 
@@ -100,24 +100,24 @@ public abstract class AdvancedScreen extends Screen {
     @SuppressWarnings("deprecation")
     public final void drawItemStack(ItemStack stack, int x, int y, String altText) {
         RenderSystem.translatef(0.0F, 0.0F, 32.0F);
-        this.itemRenderer.zLevel = 200.0F;
+        this.itemRenderer.blitOffset = 200.0F;
 
-        FontRenderer font = stack.getItem().getFontRenderer(stack);
+        Font font = stack.getItem().getFontRenderer(stack);
         if (font == null) {
-            font = Minecraft.getInstance().fontRenderer;
+            font = Minecraft.getInstance().font;
         }
 
         if (this.font != null) {
             font = this.font;
         }
 
-        this.itemRenderer.renderItemAndEffectIntoGUI(stack, x, y);
-        this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
-        this.itemRenderer.zLevel = 0.0F;
+        this.itemRenderer.renderAndDecorateItem(stack, x, y);
+        this.itemRenderer.renderGuiItemDecorations(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
+        this.itemRenderer.blitOffset = 0.0F;
     }
 
     @Override
-    public final void renderTooltip(@NotNull MatrixStack matrixStack, @NotNull ItemStack itemStack, int mouseX, int mouseY) {
+    public final void renderTooltip(@NotNull PoseStack matrixStack, @NotNull ItemStack itemStack, int mouseX, int mouseY) {
         super.renderTooltip(matrixStack, itemStack, mouseX, mouseY);
     }
 }

@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.util;
 
 import com.ultreon.randomthingz.RandomThingz;
 import lombok.experimental.UtilityClass;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 @UtilityClass
 public final class Constants {

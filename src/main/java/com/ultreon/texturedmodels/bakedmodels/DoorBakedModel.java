@@ -6,19 +6,24 @@ import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.GrassBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelShapes;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.model.*;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.state.properties.DoorHingeSide;
-import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoorHingeSide;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
 
@@ -40,7 +45,7 @@ public class DoorBakedModel implements IDynamicBakedModel {
     public static final ResourceLocation TEXTURE = new ResourceLocation("minecraft", "block/oak_planks");
 
     private TextureAtlasSprite getTexture() {
-        return Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(TEXTURE);
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(TEXTURE);
     }
 
     @Nonnull
@@ -49,9 +54,9 @@ public class DoorBakedModel implements IDynamicBakedModel {
         //get block saved in frame tile
         BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
-            ModelResourceLocation location = BlockModelShapes.getModelLocation(mimic);
+            ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
-                IBakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
+                BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
                 model.getBakedModel().getQuads(mimic, side, rand, extraData);
                 if (model != null) {
                     //only if model (from block saved in tile entity) exists:
@@ -62,7 +67,7 @@ public class DoorBakedModel implements IDynamicBakedModel {
         return Collections.emptyList();
     }
 
-    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, IBakedModel model) {
+    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, BakedModel model) {
         if (side != null) {
             return Collections.emptyList();
         }
@@ -82,15 +87,15 @@ public class DoorBakedModel implements IDynamicBakedModel {
             }
             if (textureList.size() == 0) {
                 if (Minecraft.getInstance().player != null) {
-                    Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("We're sorry, but this block can't be displayed"), true);
+                    Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("We're sorry, but this block can't be displayed"), true);
                 }
                 return Collections.emptyList();
             }
             texture = textureList.get(tex);
             List<BakedQuad> quads = new ArrayList<>();
-            Direction dir = state.get(DoorFrameBlock.FACING);
-            boolean open = state.get(DoorFrameBlock.OPEN);
-            DoorHingeSide hinge = state.get(DoorFrameBlock.HINGE);
+            Direction dir = state.getValue(DoorFrameBlock.FACING);
+            boolean open = state.getValue(DoorFrameBlock.OPEN);
+            DoorHingeSide hinge = state.getValue(DoorFrameBlock.HINGE);
             Direction west = Direction.WEST;
             Direction east = Direction.EAST;
             Direction north = Direction.NORTH;
@@ -99,7 +104,7 @@ public class DoorBakedModel implements IDynamicBakedModel {
             DoorHingeSide right = DoorHingeSide.RIGHT;
             int design = extraData.getData(FrameBlockTile.DESIGN);//int design = state.get(DoorFrameBlock.DESIGN);
             int desTex = extraData.getData(FrameBlockTile.DESIGN_TEXTURE); //state.get(DoorFrameBlock.DESIGN_TEXTURE);
-            DoubleBlockHalf half = state.get(DoorBlock.HALF);
+            DoubleBlockHalf half = state.getValue(DoorBlock.HALF);
             DoubleBlockHalf lower = DoubleBlockHalf.LOWER;
             DoubleBlockHalf upper = DoubleBlockHalf.UPPER;
             int tintIndex = -1;
@@ -334,7 +339,7 @@ public class DoorBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isAmbientOcclusion() {
+    public boolean useAmbientOcclusion() {
         return true;
     }
 
@@ -344,28 +349,28 @@ public class DoorBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isSideLit() {
+    public boolean usesBlockLight() {
         return false;
     }
 
     @Override
-    public boolean isBuiltInRenderer() {
+    public boolean isCustomRenderer() {
         return false;
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
+    public TextureAtlasSprite getParticleIcon() {
         return getTexture();
     }
 
     @Override
-    public ItemOverrideList getOverrides() {
-        return ItemOverrideList.EMPTY;
+    public ItemOverrides getOverrides() {
+        return ItemOverrides.EMPTY;
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return ItemCameraTransforms.DEFAULT;
+    public ItemTransforms getTransforms() {
+        return ItemTransforms.NO_TRANSFORMS;
     }
 }
 //========SOLI DEO GLORIA========//

@@ -7,14 +7,14 @@ import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -32,7 +32,7 @@ public class SolidifyingRecipe implements IFluidRecipe<IFluidInventory> {
     private ItemStack result;
 
     @Override
-    public boolean matches(IFluidInventory inv, World dimensionIn) {
+    public boolean matches(IFluidInventory inv, Level dimensionIn) {
         return ingredient.test(inv.getFluidInTank(0));
     }
 
@@ -52,12 +52,12 @@ public class SolidifyingRecipe implements IFluidRecipe<IFluidInventory> {
     }
 
     @Override
-    public ItemStack getCraftingResult(IFluidInventory inv) {
-        return getRecipeOutput();
+    public ItemStack assemble(IFluidInventory inv) {
+        return getResultItem();
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return result.copy();
     }
 
@@ -67,45 +67,45 @@ public class SolidifyingRecipe implements IFluidRecipe<IFluidInventory> {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return ModRecipes.SOLIDIFYING.get();
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return ModRecipes.Types.SOLIDIFYING;
     }
 
     @Override
-    public boolean isDynamic() {
+    public boolean isSpecial() {
         return true;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<SolidifyingRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<SolidifyingRecipe> {
         @Override
-        public SolidifyingRecipe read(ResourceLocation recipeId, JsonObject json) {
+        public SolidifyingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             SolidifyingRecipe recipe = new SolidifyingRecipe(recipeId);
-            recipe.processTime = JSONUtils.getInt(json, "process_time");
+            recipe.processTime = GsonHelper.getAsInt(json, "process_time");
             recipe.ingredient = FluidIngredient.deserialize(json.getAsJsonObject("ingredient"));
-            recipe.result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
+            recipe.result = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "result"));
             return recipe;
         }
 
         @Nullable
         @Override
-        public SolidifyingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        public SolidifyingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             SolidifyingRecipe recipe = new SolidifyingRecipe(recipeId);
             recipe.processTime = buffer.readVarInt();
             recipe.ingredient = FluidIngredient.read(buffer);
-            recipe.result = buffer.readItemStack();
+            recipe.result = buffer.readItem();
             return recipe;
         }
 
         @Override
-        public void write(PacketBuffer buffer, SolidifyingRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, SolidifyingRecipe recipe) {
             buffer.writeVarInt(recipe.processTime);
             recipe.ingredient.write(buffer);
-            buffer.writeItemStack(recipe.result);
+            buffer.writeItem(recipe.result);
         }
     }
 }

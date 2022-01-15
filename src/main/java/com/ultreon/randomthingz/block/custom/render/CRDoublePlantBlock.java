@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.custom.render;
 
 import com.qsoftware.modlib.common.interfaces.IHasRenderType;
-import net.minecraft.block.DoublePlantBlock;
+import net.minecraft.world.level.block.DoublePlantBlock;
 
 /**
  * Door block with custom render type.

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
 import com.ultreon.randomthingz.item.tool.ToolType;
-import net.minecraft.util.text.Color;
+import net.minecraft.network.chat.TextColor;
 
 import java.util.Set;
 
@@ -11,8 +11,8 @@ public class KnockbackTrait extends AbstractTrait {
     }
 
     @Override
-    public Color getColor() {
-        return Color.fromHex("#B0D4ED");
+    public TextColor getColor() {
+        return TextColor.parseColor("#B0D4ED");
     }
 
     @Override

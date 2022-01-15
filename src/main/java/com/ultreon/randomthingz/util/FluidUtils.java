@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.util;
 
 import lombok.experimental.UtilityClass;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -37,9 +37,9 @@ public final class FluidUtils {
      */
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    public static IFluidHandler getFluid(IWorldReader dimension, BlockPos pos) {
+    public static IFluidHandler getFluid(LevelReader dimension, BlockPos pos) {
         if (!dimension.isAreaLoaded(pos, 1)) return null;
-        TileEntity tileEntity = dimension.getTileEntity(pos);
+        BlockEntity tileEntity = dimension.getBlockEntity(pos);
         return tileEntity != null ? tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).orElse(null) : null;
     }
 

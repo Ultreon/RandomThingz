@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.client.debug.menu;
 
 import com.ultreon.randomthingz.actionmenu.AbstractActionMenu;
 import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 
 import java.util.Locale;
 
@@ -23,8 +23,8 @@ public class DebugMenuMenu extends AbstractActionMenu {
                 }
 
                 @Override
-                public ITextComponent getText() {
-                    return new StringTextComponent(page.name().toLowerCase(Locale.ROOT));
+                public Component getText() {
+                    return new TextComponent(page.name().toLowerCase(Locale.ROOT));
                 }
 
                 @Override

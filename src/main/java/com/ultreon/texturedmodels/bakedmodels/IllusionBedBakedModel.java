@@ -4,17 +4,21 @@ import com.ultreon.texturedmodels.block.BedFrameBlock;
 import com.ultreon.texturedmodels.tileentity.BedFrameTile;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
-import net.minecraft.block.BedBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.GrassBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelShapes;
-import net.minecraft.client.renderer.model.*;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.state.properties.BedPart;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
 
@@ -37,7 +41,7 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
     public static final ResourceLocation TEXTURE = new ResourceLocation("minecraft", "block/oak_planks");
 
     private TextureAtlasSprite getTexture() {
-        return Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(TEXTURE);
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(TEXTURE);
     }
 
     @Nonnull
@@ -45,9 +49,9 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
         BlockState mimic = extraData.getData(BedFrameTile.MIMIC);
         if (mimic != null) {
-            ModelResourceLocation location = BlockModelShapes.getModelLocation(mimic);
+            ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
-                IBakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
+                BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
                 if (model != null) {
                     return getMimicQuads(state, side, rand, extraData, model);
                 }
@@ -57,7 +61,7 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
         return Collections.emptyList();
     }
 
-    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, IBakedModel model) {
+    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, BakedModel model) {
         if (side != null) {
             return Collections.emptyList();
         }
@@ -83,8 +87,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                 planks = planksList.get(desTex);
             }
             //four bed support cubes (bed feet)
-            if (state.get(BedFrameBlock.PART) == BedPart.FOOT) {
-                switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+            if (state.getValue(BedFrameBlock.PART) == BedPart.FOOT) {
+                switch (state.getValue(BedBlock.FACING)) {
                     case NORTH:
                         quads.addAll(ModelHelper.createSixFaceCuboid(0f, 3 / 16f, 0f, 3 / 16f, 13 / 16f, 1f, mimic, model, extraData, rand, tintIndex));
                         quads.addAll(ModelHelper.createSixFaceCuboid(13 / 16f, 1f, 0f, 3 / 16f, 13 / 16f, 1f, mimic, model, extraData, rand, tintIndex));
@@ -104,8 +108,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                 }
 
             }
-            if (state.get(BedFrameBlock.PART) == BedPart.HEAD) {
-                switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+            if (state.getValue(BedFrameBlock.PART) == BedPart.HEAD) {
+                switch (state.getValue(BedBlock.FACING)) {
                     case SOUTH:
                         quads.addAll(ModelHelper.createSixFaceCuboid(0f, 3 / 16f, 0f, 3 / 16f, 13 / 16f, 1f, mimic, model, extraData, rand, tintIndex));
                         quads.addAll(ModelHelper.createSixFaceCuboid(13 / 16f, 1f, 0f, 3 / 16f, 13 / 16f, 1f, mimic, model, extraData, rand, tintIndex));
@@ -125,8 +129,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                 }
             }
             if (design == 0 || design == 1) {
-                if (state.get(BedFrameBlock.PART) == BedPart.FOOT) {
-                    switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+                if (state.getValue(BedFrameBlock.PART) == BedPart.FOOT) {
+                    switch (state.getValue(BedBlock.FACING)) {
                         case NORTH:
                             quads.addAll(ModelHelper.createCuboid(0f, 1f, 5 / 16f, 9 / 16f, 0f, 1f, blanket, tintIndex));
                             quads.addAll(ModelHelper.createCuboid(0f, 1f, 5 / 16f, 9 / 16f, -8 / 16f, 0f, blanket, tintIndex));
@@ -145,8 +149,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                             break;
                     }
                 }
-                if (state.get(BedFrameBlock.PART) == BedPart.HEAD) {
-                    switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+                if (state.getValue(BedFrameBlock.PART) == BedPart.HEAD) {
+                    switch (state.getValue(BedBlock.FACING)) {
                         case SOUTH:
                             quads.addAll(ModelHelper.createCuboid(0f, 1f, 5 / 16f, 10 / 16f, 8 / 16f, 1f, pillow, tintIndex));
                             break;
@@ -163,8 +167,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                 }
             }
             if (design == 1) {
-                if (state.get(BedFrameBlock.PART) == BedPart.FOOT) {
-                    switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+                if (state.getValue(BedFrameBlock.PART) == BedPart.FOOT) {
+                    switch (state.getValue(BedBlock.FACING)) {
                         case NORTH:
                             quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, 3 / 16f, 9 / 16f, 1f, 17 / 16f, mimic, model, extraData, rand, tintIndex));
                             quads.addAll(ModelHelper.createSixFaceCuboid(-1 / 16f, 0f, 3 / 16f, 9 / 16f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
@@ -188,8 +192,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                     }
 
                 }
-                if (state.get(BedFrameBlock.PART) == BedPart.HEAD) {
-                    switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+                if (state.getValue(BedFrameBlock.PART) == BedPart.HEAD) {
+                    switch (state.getValue(BedBlock.FACING)) {
                         case SOUTH:
                             quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, 3 / 16f, 9 / 16f, 1f, 17 / 16f, mimic, model, extraData, rand, tintIndex));
                             quads.addAll(ModelHelper.createSixFaceCuboid(-1 / 16f, 0f, 3 / 16f, 9 / 16f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
@@ -214,8 +218,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                 }
             }
             if (design == 2) {
-                if (state.get(BedFrameBlock.PART) == BedPart.FOOT) {
-                    switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+                if (state.getValue(BedFrameBlock.PART) == BedPart.FOOT) {
+                    switch (state.getValue(BedBlock.FACING)) {
                         case NORTH:
                             quads.addAll(ModelHelper.createCuboid(1 / 16f, 15 / 16f, 5 / 16f, 9 / 16f, 0f, 14 / 16f, blanket, tintIndex));
                             quads.addAll(ModelHelper.createCuboid(1 / 16f, 15 / 16f, 5 / 16f, 9 / 16f, -8 / 16f, 0f, blanket, tintIndex));
@@ -246,8 +250,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                             break;
                     }
                 }
-                if (state.get(BedFrameBlock.PART) == BedPart.HEAD) {
-                    switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+                if (state.getValue(BedFrameBlock.PART) == BedPart.HEAD) {
+                    switch (state.getValue(BedBlock.FACING)) {
                         case SOUTH:
                             quads.addAll(ModelHelper.createCuboid(1 / 16f, 15 / 16f, 5 / 16f, 10 / 16f, 8 / 16f, 14 / 16f, pillow, tintIndex));
                             quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1 / 16f, 5 / 16f, 10 / 16f, 0f, 14 / 16f, mimic, model, extraData, rand, tintIndex));
@@ -276,8 +280,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                 }
             }
             if (design == 3) {
-                if (state.get(BedFrameBlock.PART) == BedPart.FOOT) {
-                    switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+                if (state.getValue(BedFrameBlock.PART) == BedPart.FOOT) {
+                    switch (state.getValue(BedBlock.FACING)) {
                         case NORTH:
                             quads.addAll(ModelHelper.createCuboid(1 / 16f, 15 / 16f, 5 / 16f, 9 / 16f, 0f, 14 / 16f, blanket, tintIndex));
                             quads.addAll(ModelHelper.createCuboid(1 / 16f, 15 / 16f, 5 / 16f, 9 / 16f, -8 / 16f, 0f, blanket, tintIndex));
@@ -308,8 +312,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                             break;
                     }
                 }
-                if (state.get(BedFrameBlock.PART) == BedPart.HEAD) {
-                    switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+                if (state.getValue(BedFrameBlock.PART) == BedPart.HEAD) {
+                    switch (state.getValue(BedBlock.FACING)) {
                         case SOUTH:
                             quads.addAll(ModelHelper.createCuboid(1 / 16f, 15 / 16f, 5 / 16f, 10 / 16f, 8 / 16f, 14 / 16f, pillow, tintIndex));
                             quads.addAll(ModelHelper.createCuboid(0f, 1 / 16f, 5 / 16f, 10 / 16f, 0f, 14 / 16f, planks, tintIndex));
@@ -338,8 +342,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                 }
             }
             if (design == 4) {
-                if (state.get(BedFrameBlock.PART) == BedPart.FOOT) {
-                    switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+                if (state.getValue(BedFrameBlock.PART) == BedPart.FOOT) {
+                    switch (state.getValue(BedBlock.FACING)) {
                         case NORTH:
                             quads.addAll(ModelHelper.createCuboid(0f, 1f, 5 / 16f, 10 / 16f, 0f, 1f, blanket, tintIndex));
                             quads.addAll(ModelHelper.createCuboid(0f, 1f, 5 / 16f, 10 / 16f, -8 / 16f, 0f, blanket, tintIndex));
@@ -382,8 +386,8 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
                             break;
                     }
                 }
-                if (state.get(BedFrameBlock.PART) == BedPart.HEAD) {
-                    switch (state.get(BedBlock.HORIZONTAL_FACING)) {
+                if (state.getValue(BedFrameBlock.PART) == BedPart.HEAD) {
+                    switch (state.getValue(BedBlock.FACING)) {
                         case SOUTH:
                             quads.addAll(ModelHelper.createCuboid(0f, 1f, 5 / 16f, 10 / 16f, 9 / 16f, 1f, pillow, tintIndex));
                             break;
@@ -406,7 +410,7 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isAmbientOcclusion() {
+    public boolean useAmbientOcclusion() {
         return true;
     }
 
@@ -416,28 +420,28 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isSideLit() {
+    public boolean usesBlockLight() {
         return false;
     }
 
     @Override
-    public boolean isBuiltInRenderer() {
+    public boolean isCustomRenderer() {
         return false;
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
+    public TextureAtlasSprite getParticleIcon() {
         return getTexture();
     }
 
     @Override
-    public ItemOverrideList getOverrides() {
-        return ItemOverrideList.EMPTY;
+    public ItemOverrides getOverrides() {
+        return ItemOverrides.EMPTY;
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return ItemCameraTransforms.DEFAULT;
+    public ItemTransforms getTransforms() {
+        return ItemTransforms.NO_TRANSFORMS;
     }
 }
 //========SOLI DEO GLORIA========//

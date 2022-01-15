@@ -19,7 +19,7 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 public class ExampleBiome extends BiomeTemplate {
 //    public Biome instance;
 //    public BiomeGenerationSettings settings = new BiomeGenerationSettings.Builder()
-//            .withSurfaceBuilder(ConfiguredSurfaceBuilders.field_244178_j)
+//            .withSurfaceBuilder(ConfiguredSurfaceBuilders.GRASS)
 //            .build();
 
     public ExampleBiome() {

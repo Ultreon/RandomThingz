@@ -18,10 +18,9 @@ public class Disk {
     private final FileWriter writer;
     private final FileInputStream input;
     private final FileOutputStream output;
-    ;
     private final long size;
     private final UUID guid;
-    private PartitionTable partitionTable;
+    private final PartitionTable partitionTable;
 
     public Disk(File file) throws IOException {
         this.input = new FileInputStream(file);

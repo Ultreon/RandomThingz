@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.custom.render;
 
 import com.qsoftware.modlib.common.interfaces.IHasRenderType;
-import net.minecraft.block.TrapDoorBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
 
 /**
  * Door block with custom render type.

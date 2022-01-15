@@ -4,15 +4,15 @@ import com.qsoftware.modlib.api.providers.IBlockProvider;
 import com.qsoftware.modlib.api.providers.IItemProvider;
 import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.IItemPropertyGetter;
-import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.client.renderer.item.ItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
@@ -31,23 +31,23 @@ public class ClientRegistrationUtil {
 //        ScreenManager.registerFactory(type.getContainerType(), factory);
 //    }
 
-    public static void setPropertyOverride(IItemProvider itemProvider, ResourceLocation override, IItemPropertyGetter propertyGetter) {
-        ItemModelsProperties.registerProperty(itemProvider.asItem(), override, propertyGetter);
+    public static void setPropertyOverride(IItemProvider itemProvider, ResourceLocation override, ItemPropertyFunction propertyGetter) {
+        ItemProperties.register(itemProvider.asItem(), override, propertyGetter);
     }
 
-    public static void registerItemColorHandler(ItemColors colors, IItemColor itemColor, IItemProvider... items) {
+    public static void registerItemColorHandler(ItemColors colors, ItemColor itemColor, IItemProvider... items) {
         for (IItemProvider itemProvider : items) {
             colors.register(itemColor, itemProvider.asItem());
         }
     }
 
-    public static void registerBlockColorHandler(BlockColors blockColors, IBlockColor blockColor, IBlockProvider... blocks) {
+    public static void registerBlockColorHandler(BlockColors blockColors, BlockColor blockColor, IBlockProvider... blocks) {
         for (IBlockProvider blockProvider : blocks) {
             blockColors.register(blockColor, blockProvider.asBlock());
         }
     }
 
-    public static void registerBlockColorHandler(BlockColors blockColors, ItemColors itemColors, IBlockColor blockColor, IItemColor itemColor, IBlockProvider... blocks) {
+    public static void registerBlockColorHandler(BlockColors blockColors, ItemColors itemColors, BlockColor blockColor, ItemColor itemColor, IBlockProvider... blocks) {
         for (IBlockProvider blockProvider : blocks) {
             blockColors.register(blockColor, blockProvider.asBlock());
             itemColors.register(itemColor, blockProvider.asItem());
@@ -75,13 +75,13 @@ public class ClientRegistrationUtil {
 
     public static void setRenderLayer(RenderType type, IBlockProvider... blockProviders) {
         for (IBlockProvider blockProvider : blockProviders) {
-            RenderTypeLookup.setRenderLayer(blockProvider.asBlock(), type);
+            ItemBlockRenderTypes.setRenderLayer(blockProvider.asBlock(), type);
         }
     }
 
     public static synchronized void setRenderLayer(Predicate<RenderType> predicate, IBlockProvider... blockProviders) {
         for (IBlockProvider blockProvider : blockProviders) {
-            RenderTypeLookup.setRenderLayer(blockProvider.asBlock(), predicate);
+            ItemBlockRenderTypes.setRenderLayer(blockProvider.asBlock(), predicate);
         }
     }
 

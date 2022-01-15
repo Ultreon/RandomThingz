@@ -8,9 +8,9 @@ import com.ultreon.randomthingz.client.gui.screen.ScreenshotsScreen;
 import com.ultreon.randomthingz.common.FloatSize;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.list.ExtendedList;
+import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 @OnlyIn(Dist.CLIENT)
-public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionList.Entry> {
+public class ScreenshotSelectionList extends ObjectSelectionList<ScreenshotSelectionList.Entry> {
     private static final ResourceLocation UNKNOWN_IMAGE = new ResourceLocation("textures/misc/unknown_server.png");
     private final ScreenshotsScreen gui;
     private List<Screenshot> screenshots;
@@ -81,10 +81,10 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
 
     @Override
     protected boolean isFocused() {
-        return this.gui.getListener() == this;
+        return this.gui.getFocused() == this;
     }
 
-    public Optional<ScreenshotSelectionList.Entry> func_214376_a() {
+    public Optional<ScreenshotSelectionList.Entry> getSelectedOpt() {
         return Optional.ofNullable(this.getSelected());
     }
 
@@ -93,7 +93,7 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
     }
 
     @OnlyIn(Dist.CLIENT)
-    public final class Entry extends ExtendedList.AbstractListEntry<ScreenshotSelectionList.Entry> implements AutoCloseable {
+    public final class Entry extends ObjectSelectionList.Entry<ScreenshotSelectionList.Entry> implements AutoCloseable {
         private final Minecraft minecraft;
         private final ScreenshotsScreen gui;
         @Getter
@@ -158,28 +158,28 @@ public class ScreenshotSelectionList extends ExtendedList<ScreenshotSelectionLis
 
             RenderSystem.disableBlend();
 //         if (this.minecraft.gameSettings.touchscreen || p_230432_9_) {
-//            this.minecraft.getTextureManager().bindTexture(ScreenshotSelectionList.field_214379_d);
+//            this.minecraft.getTextureManager().bindTexture(ScreenshotSelectionList.ICON_OVERLAY_LOCATION);
 ////            AbstractGui.fill(p_230432_1_, p_230432_4_, p_230432_3_, p_230432_4_ + 32, p_230432_3_ + 32, -1601138544);
 //            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 //            int i = p_230432_7_ - p_230432_4_;
 //            boolean flag = i < 32;
 //            int j = flag ? 32 : 0;
-//            if (this.field_214451_d.isLocked()) {
+//            if (this.summary.isLocked()) {
 //               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96.0F, (float)j, 32, 32, 256, 256);
 //               if (flag) {
-//                  this.gui.func_239026_b_(this.minecraft.fontRenderer.trimStringToWidth(ScreenshotSelectionList.field_243466_v, 175));
+//                  this.gui.setToolTip(this.minecraft.fontRenderer.trimStringToWidth(ScreenshotSelectionList.WORLD_LOCKED_TOOLTIP, 175));
 //               }
-//            } else if (this.field_214451_d.markVersionInList()) {
+//            } else if (this.summary.markVersionInList()) {
 //               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 32.0F, (float)j, 32, 32, 256, 256);
-//               if (this.field_214451_d.askToOpenDimension()) {
+//               if (this.summary.askToOpenDimension()) {
 //                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96.0F, (float)j, 32, 32, 256, 256);
 //                  if (flag) {
-//                     this.gui.func_239026_b_(ImmutableList.of(ScreenshotSelectionList.field_243462_r.func_241878_f(), ScreenshotSelectionList.field_243463_s.func_241878_f()));
+//                     this.gui.setToolTip(ImmutableList.of(ScreenshotSelectionList.FROM_NEWER_TOOLTIP_1.getVisualOrderText(), ScreenshotSelectionList.FROM_NEWER_TOOLTIP_2.getVisualOrderText()));
 //                  }
 //               } else if (!SharedConstants.getVersion().isStable()) {
 //                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 64.0F, (float)j, 32, 32, 256, 256);
 //                  if (flag) {
-//                     this.gui.func_239026_b_(ImmutableList.of(ScreenshotSelectionList.field_243464_t.func_241878_f(), ScreenshotSelectionList.field_243465_u.func_241878_f()));
+//                     this.gui.setToolTip(ImmutableList.of(ScreenshotSelectionList.SNAPSHOT_TOOLTIP_1.getVisualOrderText(), ScreenshotSelectionList.SNAPSHOT_TOOLTIP_2.getVisualOrderText()));
 //                  }
 //               }
 //            } else {

@@ -2,14 +2,14 @@ package com.ultreon.texturedmodels.container;
 
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 
 import java.util.Objects;
 
@@ -19,15 +19,15 @@ import java.util.Objects;
  * @author PianoManu
  * @version 1.0 09/22/20
  */
-public class ChestFrameContainer extends Container {
+public class ChestFrameContainer extends AbstractContainerMenu {
 
     public final ChestFrameTileEntity tileEntity;
-    private final IWorldPosCallable canInteractWithCallable;
+    private final ContainerLevelAccess canInteractWithCallable;
 
-    public ChestFrameContainer(final int windowId, final PlayerInventory playerInventory, final ChestFrameTileEntity tileEntity) {
+    public ChestFrameContainer(final int windowId, final Inventory playerInventory, final ChestFrameTileEntity tileEntity) {
         super(Registration.CHEST_FRAME_CONTAINER.get(), windowId);
         this.tileEntity = tileEntity;
-        this.canInteractWithCallable = IWorldPosCallable.of(tileEntity.getDimension(), tileEntity.getPos());
+        this.canInteractWithCallable = ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos());
 
         // Main Inventory
         int startX = 8;
@@ -56,14 +56,14 @@ public class ChestFrameContainer extends Container {
         }
     }
 
-    public ChestFrameContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
+    public ChestFrameContainer(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
         this(windowId, playerInventory, getTileEntity(playerInventory, data));
     }
 
-    private static ChestFrameTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
+    private static ChestFrameTileEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
-        final TileEntity tileAtPos = playerInventory.player.dimension.getTileEntity(data.readBlockPos());
+        final BlockEntity tileAtPos = playerInventory.player.level.getBlockEntity(data.readBlockPos());
         if (tileAtPos instanceof ChestFrameTileEntity) {
             return (ChestFrameTileEntity) tileAtPos;
         }
@@ -71,28 +71,28 @@ public class ChestFrameContainer extends Container {
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, Registration.CHEST_FRAMEBLOCK.get()) || isWithinUsableDistance(canInteractWithCallable, playerIn, Registration.CHEST_ILLUSIONBLOCK.get());
+    public boolean stillValid(Player playerIn) {
+        return stillValid(canInteractWithCallable, playerIn, Registration.CHEST_FRAMEBLOCK.get()) || stillValid(canInteractWithCallable, playerIn, Registration.CHEST_ILLUSIONBLOCK.get());
     }
 
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.hasStack()) {
-            ItemStack itemStack1 = slot.getStack();
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemStack1 = slot.getItem();
             itemStack = itemStack1.copy();
             if (index < 27) {
-                if (this.mergeItemStack(itemStack1, 27, this.inventorySlots.size(), true)) {
+                if (this.moveItemStackTo(itemStack1, 27, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemStack1, 0, 27, false)) {
+            } else if (!this.moveItemStackTo(itemStack1, 0, 27, false)) {
                 return ItemStack.EMPTY;
             }
 
             if (itemStack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
         }
         return itemStack;

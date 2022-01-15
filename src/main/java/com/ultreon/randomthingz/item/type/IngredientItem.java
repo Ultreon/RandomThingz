@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item.type;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 
 /**
  * Game PC block class.
@@ -10,6 +10,6 @@ import net.minecraft.item.ItemGroup;
  */
 public class IngredientItem extends Item {
     public IngredientItem() {
-        super(new Properties().group(ItemGroup.MISC));
+        super(new Properties().tab(CreativeModeTab.TAB_MISC));
     }
 }

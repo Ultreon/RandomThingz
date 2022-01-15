@@ -3,12 +3,17 @@ package com.ultreon.randomthingz.client.debug.menu.pages;
 import com.mojang.datafixers.util.Pair;
 import com.ultreon.randomthingz.client.debug.menu.DebugEntry;
 import com.ultreon.randomthingz.client.debug.menu.DebugPage;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.util.math.*;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,54 +27,54 @@ public class BlockPage extends DebugPage {
     public List<DebugEntry> getLinesLeft() {
         List<DebugEntry> list = new ArrayList<>();
 
-        PlayerEntity player = Minecraft.getInstance().player;
+        Player player = Minecraft.getInstance().player;
         if (player == null) {
             return list;
         }
-        float f = player.rotationPitch;
-        float f1 = player.rotationYaw;
+        float f = player.xRot;
+        float f1 = player.yRot;
 
-        Vector3d vec3d = player.getEyePosition(1.0F);
+        Vec3 vec3d = player.getEyePosition(1.0F);
 
-        float f2 = MathHelper.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        float f3 = MathHelper.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        float f4 = -MathHelper.cos(-f * ((float) Math.PI / 180F));
-        float f5 = MathHelper.sin(-f * ((float) Math.PI / 180F));
+        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+        float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
+        float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
 
         float f6 = f3 * f4;
         float f7 = f2 * f4;
 
         double d0 = 16;
 
-        Vector3d vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
+        Vec3 vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
-        BlockRayTraceResult lookingAt;
-        if (Minecraft.getInstance().dimension != null) {
-            lookingAt = Minecraft.getInstance().dimension.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player));
-            if (lookingAt.getType() == RayTraceResult.Type.BLOCK) {
-                BlockPos pos = lookingAt.getPos();
+        BlockHitResult lookingAt;
+        if (Minecraft.getInstance().level != null) {
+            lookingAt = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player));
+            if (lookingAt.getType() == HitResult.Type.BLOCK) {
+                BlockPos pos = lookingAt.getBlockPos();
 
                 // now the coordinates you want are in pos. Example of use:
-                BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
+                BlockState blockState = Minecraft.getInstance().player.getCommandSenderWorld().getBlockState(pos);
                 Block block = blockState.getBlock();
-                list.add(new DebugEntry("translatedName", () -> block.getTranslatedName().getString()));
+                list.add(new DebugEntry("translatedName", () -> block.getName().getString()));
                 list.add(new DebugEntry("harvestLevel", blockState::getHarvestLevel));
                 list.add(new DebugEntry("harvestTool", () -> blockState.getHarvestTool() == null ? null : blockState.getHarvestTool().getName()));
-                list.add(new DebugEntry("blockHardness", () -> blockState.getBlockHardness(player.getEntityDimension(), pos)));
-                list.add(new DebugEntry("lightValue", blockState::getLightValue));
-                list.add(new DebugEntry("opacity", () -> blockState.getOpacity(player.getEntityDimension(), pos)));
-                list.add(new DebugEntry("offset", () -> blockState.getOffset(player.getEntityDimension(), pos)));
-                list.add(new DebugEntry("playerRelativeHardness", () -> blockState.getPlayerRelativeBlockHardness(player, player.getEntityDimension(), pos)));
-                list.add(new DebugEntry("requiresTool", blockState::getRequiresTool));
-                list.add(new DebugEntry("renderType", blockState::getRenderType));
-                list.add(new DebugEntry("slipperiness", () -> blockState.getSlipperiness(player.getEntityDimension(), pos, player)));
+                list.add(new DebugEntry("blockHardness", () -> blockState.getDestroySpeed(player.getCommandSenderWorld(), pos)));
+                list.add(new DebugEntry("lightValue", blockState::getLightEmission));
+                list.add(new DebugEntry("opacity", () -> blockState.getLightBlock(player.getCommandSenderWorld(), pos)));
+                list.add(new DebugEntry("offset", () -> blockState.getOffset(player.getCommandSenderWorld(), pos)));
+                list.add(new DebugEntry("playerRelativeHardness", () -> blockState.getDestroyProgress(player, player.getCommandSenderWorld(), pos)));
+                list.add(new DebugEntry("requiresTool", blockState::requiresCorrectToolForDrops));
+                list.add(new DebugEntry("renderType", blockState::getRenderShape));
+                list.add(new DebugEntry("slipperiness", () -> blockState.getSlipperiness(player.getCommandSenderWorld(), pos, player)));
                 list.add(new DebugEntry("jumpFactor", block::getJumpFactor));
-                list.add(new DebugEntry("enchantPowerBonus", () -> blockState.getEnchantPowerBonus(player.getEntityDimension(), pos)));
+                list.add(new DebugEntry("enchantPowerBonus", () -> blockState.getEnchantPowerBonus(player.getCommandSenderWorld(), pos)));
                 list.add(new DebugEntry("lootTable", block::getLootTable));
-                list.add(new DebugEntry("materialColor", () -> new Pair<>(block.getMaterialColor().colorIndex, getColor(block.getMaterialColor().colorValue))));
+                list.add(new DebugEntry("materialColor", () -> new Pair<>(block.defaultMaterialColor().id, getColor(block.defaultMaterialColor().col))));
                 list.add(new DebugEntry("offsetType", block::getOffsetType));
                 list.add(new DebugEntry("registryName", block::getRegistryName));
-                list.add(new DebugEntry("defaultSlipperiness", block::getSlipperiness));
+                list.add(new DebugEntry("defaultSlipperiness", block::getFriction));
                 list.add(new DebugEntry("speedFactor", () -> getMultiplier(block.getSpeedFactor())));
             }
 

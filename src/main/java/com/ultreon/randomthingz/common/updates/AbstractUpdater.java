@@ -206,7 +206,7 @@ public abstract class AbstractUpdater<T extends IVersion> {
     public UpdateInfo checkForUpdates() {
         try {
             // Get minecraft version.
-            String id = Minecraft.getInstance().getMinecraftGame().getVersion().getId();
+            String id = Minecraft.getInstance().getGame().getVersion().getId();
 
             // Open update url.
             InputStream inputStream = updateUrl.openStream();

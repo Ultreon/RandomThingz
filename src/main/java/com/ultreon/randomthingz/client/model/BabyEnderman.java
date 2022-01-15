@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.client.model;
 
 
 import com.ultreon.randomthingz.entity.baby.BabyEndermanEntity;
-import net.minecraft.client.renderer.entity.model.EndermanModel;
+import net.minecraft.client.model.EndermanModel;
 
 import javax.annotation.Nonnull;
 
@@ -13,13 +13,13 @@ public class BabyEnderman extends EndermanModel<BabyEndermanEntity> {
     }
 
     @Override
-    public void setRotationAngles(@Nonnull BabyEndermanEntity enderman, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        super.setRotationAngles(enderman, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+    public void setupAnim(@Nonnull BabyEndermanEntity enderman, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        super.setupAnim(enderman, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         //Shift the head to be in the proper place for baby endermen
-        bipedHead.rotationPointY += 5.0F;
-        if (isAttacking) {
+        head.y += 5.0F;
+        if (creepy) {
             //Shift the head when angry to only the third the distance it goes up when it is an adult
-            bipedHead.rotationPointY += 1.67F;
+            head.y += 1.67F;
         }
     }
 }

@@ -4,18 +4,22 @@ import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.GrassBlock;
-import net.minecraft.block.WoodButtonBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelShapes;
-import net.minecraft.client.renderer.model.*;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.state.properties.AttachFace;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.WoodButtonBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
 
@@ -37,7 +41,7 @@ public class ButtonPoweredBakedModel implements IDynamicBakedModel {
     public static final ResourceLocation TEXTURE = new ResourceLocation("minecraft", "block/oak_planks");
 
     private TextureAtlasSprite getTexture() {
-        return Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(TEXTURE);
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(TEXTURE);
     }
 
     @Nonnull
@@ -45,9 +49,9 @@ public class ButtonPoweredBakedModel implements IDynamicBakedModel {
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
         BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
-            ModelResourceLocation location = BlockModelShapes.getModelLocation(mimic);
+            ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
-                IBakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
+                BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
                 if (model != null) {
                     return getMimicQuads(state, side, rand, extraData, model);
                 }
@@ -56,7 +60,7 @@ public class ButtonPoweredBakedModel implements IDynamicBakedModel {
         return Collections.emptyList();
     }
 
-    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, IBakedModel model) {
+    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, BakedModel model) {
         if (side != null) {
             return Collections.emptyList();
         }
@@ -71,7 +75,7 @@ public class ButtonPoweredBakedModel implements IDynamicBakedModel {
             }
             if (textureList.size() == 0) {
                 if (Minecraft.getInstance().player != null) {
-                    Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("We're sorry, but this block can't be displayed"), true);
+                    Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("We're sorry, but this block can't be displayed"), true);
                 }
                 return Collections.emptyList();
             }
@@ -82,14 +86,14 @@ public class ButtonPoweredBakedModel implements IDynamicBakedModel {
             }
             float yl = 0f;
             float yh = 1 / 16f;
-            if (state.get(WoodButtonBlock.FACE).equals(AttachFace.CEILING)) {
+            if (state.getValue(WoodButtonBlock.FACE).equals(AttachFace.CEILING)) {
                 yl = 15 / 16f;
                 yh = 1f;
             }
             List<BakedQuad> quads = new ArrayList<>();
-            switch (state.get(WoodButtonBlock.FACE)) {
+            switch (state.getValue(WoodButtonBlock.FACE)) {
                 case WALL:
-                    switch (state.get(WoodButtonBlock.HORIZONTAL_FACING)) {
+                    switch (state.getValue(WoodButtonBlock.FACING)) {
                         case NORTH:
                             quads.addAll(ModelHelper.createCuboid(5 / 16f, 11 / 16f, 6 / 16f, 10 / 16f, 15 / 16f, 1f, texture, tintIndex));
                             break;
@@ -106,7 +110,7 @@ public class ButtonPoweredBakedModel implements IDynamicBakedModel {
                     break;
                 case FLOOR:
                 case CEILING:
-                    switch (state.get(WoodButtonBlock.HORIZONTAL_FACING)) {
+                    switch (state.getValue(WoodButtonBlock.FACING)) {
                         case EAST:
                         case WEST:
                             quads.addAll(ModelHelper.createCuboid(6 / 16f, 10 / 16f, yl, yh, 5 / 16f, 11 / 16f, texture, tintIndex));
@@ -119,9 +123,9 @@ public class ButtonPoweredBakedModel implements IDynamicBakedModel {
             }
             int overlayIndex = extraData.getData(FrameBlockTile.OVERLAY);
             if (overlayIndex != 0) {
-                switch (state.get(WoodButtonBlock.FACE)) {
+                switch (state.getValue(WoodButtonBlock.FACE)) {
                     case WALL:
-                        switch (state.get(WoodButtonBlock.HORIZONTAL_FACING)) {
+                        switch (state.getValue(WoodButtonBlock.FACING)) {
                             case NORTH:
                                 quads.addAll(ModelHelper.createOverlay(5 / 16f, 11 / 16f, 6 / 16f, 10 / 16f, 15 / 16f, 1f, overlayIndex));
                                 break;
@@ -138,7 +142,7 @@ public class ButtonPoweredBakedModel implements IDynamicBakedModel {
                         break;
                     case FLOOR:
                     case CEILING:
-                        switch (state.get(WoodButtonBlock.HORIZONTAL_FACING)) {
+                        switch (state.getValue(WoodButtonBlock.FACING)) {
                             case EAST:
                             case WEST:
                                 quads.addAll(ModelHelper.createOverlay(6 / 16f, 10 / 16f, yl, yh, 5 / 16f, 11 / 16f, overlayIndex));
@@ -156,7 +160,7 @@ public class ButtonPoweredBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isAmbientOcclusion() {
+    public boolean useAmbientOcclusion() {
         return true;
     }
 
@@ -166,28 +170,28 @@ public class ButtonPoweredBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isSideLit() {
+    public boolean usesBlockLight() {
         return false;
     }
 
     @Override
-    public boolean isBuiltInRenderer() {
+    public boolean isCustomRenderer() {
         return false;
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
+    public TextureAtlasSprite getParticleIcon() {
         return getTexture();
     }
 
     @Override
-    public ItemOverrideList getOverrides() {
-        return ItemOverrideList.EMPTY;
+    public ItemOverrides getOverrides() {
+        return ItemOverrides.EMPTY;
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return ItemCameraTransforms.DEFAULT;
+    public ItemTransforms getTransforms() {
+        return ItemTransforms.NO_TRANSFORMS;
     }
 }
 //========SOLI DEO GLORIA========//

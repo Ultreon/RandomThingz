@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.group;
 
 import com.ultreon.randomthingz.common.item.ModItems;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -10,15 +10,15 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class DungeonsItemGroup extends ItemGroup {
-    public static final DungeonsItemGroup instance = new DungeonsItemGroup(ItemGroup.GROUPS.length, "randomthingz_dungeons");
+public class DungeonsItemGroup extends CreativeModeTab {
+    public static final DungeonsItemGroup instance = new DungeonsItemGroup(CreativeModeTab.TABS.length, "randomthingz_dungeons");
 
     public DungeonsItemGroup(int index, String label) {
         super(index, label);
     }
 
     @Override
-    public @NotNull ItemStack createIcon() {
+    public @NotNull ItemStack makeIcon() {
         return new ItemStack(ModItems.DUNGEONS.get());
     }
 }

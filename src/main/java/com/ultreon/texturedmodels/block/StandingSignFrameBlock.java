@@ -1,19 +1,19 @@
 package com.ultreon.texturedmodels.block;
 
 import com.ultreon.texturedmodels.tileentity.SignFrameTile;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.StandingSignBlock;
-import net.minecraft.block.WoodType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.StateContainer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.StandingSignBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
@@ -30,11 +30,11 @@ import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL
 public class StandingSignFrameBlock extends StandingSignBlock {
     public StandingSignFrameBlock(Properties properties) {
         super(properties, WoodType.OAK);
-        this.setDefaultState(this.stateContainer.getBaseState().with(ROTATION, 0).with(WATERLOGGED, Boolean.FALSE).with(CONTAINS_BLOCK, false).with(LIGHT_LEVEL, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(ROTATION, 0).setValue(WATERLOGGED, Boolean.FALSE).setValue(CONTAINS_BLOCK, false).setValue(LIGHT_LEVEL, 0));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(ROTATION, WATERLOGGED, CONTAINS_BLOCK, LIGHT_LEVEL);
     }
 
@@ -45,20 +45,20 @@ public class StandingSignFrameBlock extends StandingSignBlock {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
+    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
         System.out.println("new tile");
         return new SignFrameTile();
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World dimensionIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        TileEntity tile = dimensionIn.getTileEntity(pos);
+    public InteractionResult use(BlockState state, Level dimensionIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+        BlockEntity tile = dimensionIn.getBlockEntity(pos);
         if (tile instanceof SignFrameTile) {
             SignFrameTile signTile = (SignFrameTile) tile;
-            player.openSignEditor(signTile);
-            return ActionResultType.SUCCESS;
+            player.openTextEdit(signTile);
+            return InteractionResult.SUCCESS;
         }
-        return ActionResultType.FAIL;
+        return InteractionResult.FAIL;
     }
 }
 //========SOLI DEO GLORIA========//

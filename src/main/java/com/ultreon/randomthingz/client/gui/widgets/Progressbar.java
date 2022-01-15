@@ -1,22 +1,22 @@
 package com.ultreon.randomthingz.client.gui.widgets;
 
 import com.google.common.annotations.Beta;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
 @Beta
-public class Progressbar extends Widget {
+public class Progressbar extends AbstractWidget {
     private static final ResourceLocation GUI_ICONS = new ResourceLocation("textures/gui/icons.png");
     private long value;
     private long length;
 
     public Progressbar(int x, int y, long value, long length) {
-        super(x, y, 182, 5, new StringTextComponent(""));
+        super(x, y, 182, 5, new TextComponent(""));
         this.value = value;
         this.length = length;
     }
@@ -26,7 +26,7 @@ public class Progressbar extends Widget {
     }
 
     public void setValue(long value) {
-        this.value = MathHelper.clamp(value, 0, length);
+        this.value = Mth.clamp(value, 0, length);
     }
 
     public long getLength() {
@@ -39,14 +39,14 @@ public class Progressbar extends Widget {
     }
 
     @Override
-    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         super.render(matrixStack, mouseX, mouseY, partialTicks);
 
-        Minecraft.getInstance().getTextureManager().bindTexture(GUI_ICONS);
+        Minecraft.getInstance().getTextureManager().bind(GUI_ICONS);
         this.renderProgressbar(matrixStack, x, y);
     }
 
-    private void renderProgressbar(MatrixStack matrixStack, int x, int y) {
+    private void renderProgressbar(PoseStack matrixStack, int x, int y) {
         this.blit(matrixStack, x, y, 0, 64, 182, 5);
 
         int i;

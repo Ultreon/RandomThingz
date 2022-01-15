@@ -3,11 +3,11 @@ package com.ultreon.randomthingz.client.renderer.layers;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.renderer.GlowSquidRenderer;
 import com.ultreon.randomthingz.entity.GlowSquidEntity;
+import net.minecraft.client.model.SquidModel;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.AbstractEyesLayer;
-import net.minecraft.client.renderer.entity.model.SquidModel;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.EyesLayer;
+import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
@@ -16,13 +16,13 @@ import javax.annotation.Nonnull;
  *
  * @param <T> the {@linkplain GlowSquidEntity glow squid entity}
  */
-public class GlowSquidGlowLayer<T extends GlowSquidEntity, M extends SquidModel<T>> extends AbstractEyesLayer<T, M> {
-    private static final RenderType RENDER_TYPE = RenderType.getEyes(new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/squid/glow_squid_e.png"));
+public class GlowSquidGlowLayer<T extends GlowSquidEntity, M extends SquidModel<T>> extends EyesLayer<T, M> {
+    private static final RenderType RENDER_TYPE = RenderType.eyes(new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/squid/glow_squid_e.png"));
 
     /**
      * @param entityRenderer the {@linkplain GlowSquidRenderer glow squid renderer}.
      */
-    public GlowSquidGlowLayer(IEntityRenderer<T, M> entityRenderer) {
+    public GlowSquidGlowLayer(RenderLayerParent<T, M> entityRenderer) {
         super(entityRenderer);
 
         if (!(entityRenderer instanceof GlowSquidRenderer)) {
@@ -32,7 +32,7 @@ public class GlowSquidGlowLayer<T extends GlowSquidEntity, M extends SquidModel<
 
     @Nonnull
     @Override
-    public RenderType getRenderType() {
+    public RenderType renderType() {
         return RENDER_TYPE;
     }
 }

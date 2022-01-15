@@ -10,23 +10,23 @@ import com.ultreon.randomthingz.util.InventoryUtils;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.IIntArray;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
 
-public abstract class AbstractMachineTileEntity<R extends IRecipe<?>> extends AbstractMachineBaseTileEntity implements IMachineInventory {
+public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends AbstractMachineBaseTileEntity implements IMachineInventory {
     public static final int FIELDS_COUNT = 7;
 
     protected float progress;
     protected int processTime;
 
-    protected final IIntArray fields = new IIntArray() {
+    protected final ContainerData fields = new ContainerData() {
         @Override
         public int get(int index) {
             switch (index) {
@@ -70,12 +70,12 @@ public abstract class AbstractMachineTileEntity<R extends IRecipe<?>> extends Ab
         }
 
         @Override
-        public int size() {
+        public int getCount() {
             return FIELDS_COUNT;
         }
     };
 
-    protected AbstractMachineTileEntity(TileEntityType<?> typeIn, int inventorySize, MachineTier tier) {
+    protected AbstractMachineTileEntity(BlockEntityType<?> typeIn, int inventorySize, MachineTier tier) {
         super(typeIn, inventorySize, tier.getEnergyCapacity(), 500, 0, tier);
     }
 

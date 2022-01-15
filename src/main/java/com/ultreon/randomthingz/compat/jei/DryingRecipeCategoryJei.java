@@ -17,9 +17,9 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,6 +90,6 @@ public class DryingRecipeCategoryJei implements IRecipeCategory<DryingRecipe> {
         arrow.draw(matrixStack, 79 - GUI_START_X, 35 - GUI_START_Y);
         FontRenderer font = Minecraft.getInstance().fontRenderer;
         ITextComponent text = TextUtils.translate("misc", "timeInSeconds", recipe.getProcessTime() / 20);
-        TextRenderUtils.renderScaled(matrixStack, font, text.func_241878_f(), 24, 20, 0.67f, 0xFFFFFF, true);
+        TextRenderUtils.renderScaled(matrixStack, font, text.getVisualOrderText(), 24, 20, 0.67f, 0xFFFFFF, true);
     }
 }

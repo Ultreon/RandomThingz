@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.client.model;
 
-import net.minecraft.client.renderer.entity.model.CreeperModel;
-import net.minecraft.entity.monster.CreeperEntity;
+import net.minecraft.client.model.CreeperModel;
+import net.minecraft.world.entity.monster.Creeper;
 
 /**
  * Free creeper entity model class.
@@ -9,7 +9,7 @@ import net.minecraft.entity.monster.CreeperEntity;
  * @author Qboi123
  */
 @Deprecated
-public class FreeCreeperModel<T extends CreeperEntity> extends CreeperModel<T> {
+public class FreeCreeperModel<T extends Creeper> extends CreeperModel<T> {
     public FreeCreeperModel() {
         super();
     }

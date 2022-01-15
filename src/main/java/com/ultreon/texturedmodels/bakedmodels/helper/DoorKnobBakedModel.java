@@ -1,21 +1,21 @@
 package com.ultreon.texturedmodels.bakedmodels.helper;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.vertex.VertexFormatElement;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.model.BakedQuad;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.VertexFormatElement;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DoorKnobBakedModel {
-    private static void putVertex(BakedQuadBuilder builder, Vector3d normal,
+    private static void putVertex(BakedQuadBuilder builder, Vec3 normal,
                                   double x, double y, double z, float u, float v, TextureAtlasSprite sprite, float r, float g, float b) {
 
         ImmutableList<VertexFormatElement> elements = builder.getVertexFormat().getElements().asList();
@@ -31,8 +31,8 @@ public class DoorKnobBakedModel {
                 case UV:
                     switch (e.getIndex()) {
                         case 0:
-                            float iu = sprite.getInterpolatedU(u);
-                            float iv = sprite.getInterpolatedV(v);
+                            float iu = sprite.getU(u);
+                            float iv = sprite.getV(v);
                             builder.put(j, iu, iv);
                             break;
                         case 2:
@@ -54,11 +54,11 @@ public class DoorKnobBakedModel {
         builder.setApplyDiffuseLighting(true);
     }
 
-    private static BakedQuad createSquareQuad(Vector3d v1, Vector3d v2, Vector3d v3, Vector3d v4, TextureAtlasSprite sprite, int flag) {
-        Vector3d normal = v3.subtract(v2).crossProduct(v1.subtract(v2)).normalize();
+    private static BakedQuad createSquareQuad(Vec3 v1, Vec3 v2, Vec3 v3, Vec3 v4, TextureAtlasSprite sprite, int flag) {
+        Vec3 normal = v3.subtract(v2).cross(v1.subtract(v2)).normalize();
 
         BakedQuadBuilder builder = new BakedQuadBuilder(sprite);
-        builder.setQuadOrientation(Direction.getFacingFromVector(normal.x, normal.y, normal.z));
+        builder.setQuadOrientation(Direction.getNearest(normal.x, normal.y, normal.z));
         builder.setApplyDiffuseLighting(true);
         float ul = 7;
         float uh = 9;
@@ -71,11 +71,11 @@ public class DoorKnobBakedModel {
         return builder.build();
     }
 
-    private static BakedQuad create1x4Quad(Vector3d v1, Vector3d v2, Vector3d v3, Vector3d v4, TextureAtlasSprite sprite, int flag) {
-        Vector3d normal = v3.subtract(v2).crossProduct(v1.subtract(v2)).normalize();
+    private static BakedQuad create1x4Quad(Vec3 v1, Vec3 v2, Vec3 v3, Vec3 v4, TextureAtlasSprite sprite, int flag) {
+        Vec3 normal = v3.subtract(v2).cross(v1.subtract(v2)).normalize();
 
         BakedQuadBuilder builder = new BakedQuadBuilder(sprite);
-        builder.setQuadOrientation(Direction.getFacingFromVector(normal.x, normal.y, normal.z));
+        builder.setQuadOrientation(Direction.getNearest(normal.x, normal.y, normal.z));
         builder.setApplyDiffuseLighting(true);
         float ul = 0;
         float uh = 4;
@@ -101,11 +101,11 @@ public class DoorKnobBakedModel {
         return builder.build();
     }
 
-    private static BakedQuad create1x5Quad(Vector3d v1, Vector3d v2, Vector3d v3, Vector3d v4, TextureAtlasSprite sprite, int flag) {
-        Vector3d normal = v3.subtract(v2).crossProduct(v1.subtract(v2)).normalize();
+    private static BakedQuad create1x5Quad(Vec3 v1, Vec3 v2, Vec3 v3, Vec3 v4, TextureAtlasSprite sprite, int flag) {
+        Vec3 normal = v3.subtract(v2).cross(v1.subtract(v2)).normalize();
 
         BakedQuadBuilder builder = new BakedQuadBuilder(sprite);
-        builder.setQuadOrientation(Direction.getFacingFromVector(normal.x, normal.y, normal.z));
+        builder.setQuadOrientation(Direction.getNearest(normal.x, normal.y, normal.z));
         builder.setApplyDiffuseLighting(true);
         float ul = 0;
         float uh = 1;
@@ -130,23 +130,23 @@ public class DoorKnobBakedModel {
     public static List<BakedQuad> createDoorKnob(float xl, float xh, float yl, float yh, float zl, float zh, int flag, int design_texture) {
         TextureAtlasSprite texture;
         if (design_texture == 0) {
-            texture = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/iron_block"));
+            texture = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/iron_block"));
         } else if (design_texture == 1) {
-            texture = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/obsidian"));
+            texture = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/obsidian"));
         } else if (design_texture == 2) {
-            texture = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/stone"));
+            texture = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/stone"));
         } else {
-            texture = Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/gold_block"));
+            texture = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/gold_block"));
         }
         List<BakedQuad> quads = new ArrayList<>();
-        Vector3d NWU = v(xl, yh, zl);
-        Vector3d NEU = v(xl, yh, zh);
-        Vector3d NWD = v(xl, yl, zl);
-        Vector3d NED = v(xl, yl, zh);
-        Vector3d SWU = v(xh, yh, zl);
-        Vector3d SEU = v(xh, yh, zh);
-        Vector3d SWD = v(xh, yl, zl);
-        Vector3d SED = v(xh, yl, zh);
+        Vec3 NWU = v(xl, yh, zl);
+        Vec3 NEU = v(xl, yh, zh);
+        Vec3 NWD = v(xl, yl, zl);
+        Vec3 NED = v(xl, yl, zh);
+        Vec3 SWU = v(xh, yh, zl);
+        Vec3 SEU = v(xh, yh, zh);
+        Vec3 SWD = v(xh, yl, zl);
+        Vec3 SED = v(xh, yl, zh);
         quads.add(createSquareQuad(NWU, NEU, SEU, SWU, texture, flag));
         quads.add(createSquareQuad(SWD, SED, NED, NWD, texture, flag));
         quads.add(createSquareQuad(NWD, NWU, SWU, SWD, texture, flag));
@@ -156,8 +156,8 @@ public class DoorKnobBakedModel {
         return quads;
     }
 
-    private static Vector3d v(double x, double y, double z) {
-        return new Vector3d(x, y, z);
+    private static Vec3 v(double x, double y, double z) {
+        return new Vec3(x, y, z);
     }
 }
 //========SOLI DEO GLORIA========//

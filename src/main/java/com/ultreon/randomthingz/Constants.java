@@ -64,6 +64,6 @@ public class Constants {
      */
     @Deprecated
     public static boolean isModDev() {
-        return Minecraft.getInstance().getVersion().equals("MOD_DEV");
+        return Minecraft.getInstance().getLaunchedVersion().equals("MOD_DEV");
     }
 }

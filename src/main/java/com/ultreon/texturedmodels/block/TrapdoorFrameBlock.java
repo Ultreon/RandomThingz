@@ -7,27 +7,27 @@ import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.TrapDoorBlock;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.IntegerProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.Half;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 
@@ -44,11 +44,11 @@ public class TrapdoorFrameBlock extends TrapDoorBlock {
 
     public TrapdoorFrameBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(OPEN, Boolean.valueOf(false)).with(HALF, Half.BOTTOM).with(POWERED, Boolean.valueOf(false)).with(WATERLOGGED, Boolean.valueOf(false)).with(CONTAINS_BLOCK, Boolean.FALSE).with(LIGHT_LEVEL, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OPEN, Boolean.valueOf(false)).setValue(HALF, Half.BOTTOM).setValue(POWERED, Boolean.valueOf(false)).setValue(WATERLOGGED, Boolean.valueOf(false)).setValue(CONTAINS_BLOCK, Boolean.FALSE).setValue(LIGHT_LEVEL, 0));
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(HORIZONTAL_FACING, OPEN, HALF, POWERED, WATERLOGGED, CONTAINS_BLOCK, LIGHT_LEVEL);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, OPEN, HALF, POWERED, WATERLOGGED, CONTAINS_BLOCK, LIGHT_LEVEL);
     }
 
     @Override
@@ -58,14 +58,14 @@ public class TrapdoorFrameBlock extends TrapDoorBlock {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
+    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
         return new FrameBlockTile();
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World dimension, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
-        ItemStack item = player.getHeldItem(hand);
-        if (!dimension.isClientSided) {
+    public InteractionResult use(BlockState state, Level dimension, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
+        ItemStack item = player.getItemInHand(hand);
+        if (!dimension.isClientSide) {
             BlockAppearanceHelper.setLightLevel(item, state, dimension, pos, player, hand);
             BlockAppearanceHelper.setTexture(item, state, dimension, player, pos);
             BlockAppearanceHelper.setDesign(dimension, pos, player, item);
@@ -73,91 +73,91 @@ public class TrapdoorFrameBlock extends TrapDoorBlock {
             BlockAppearanceHelper.setGlassColor(dimension, pos, player, hand);
             BlockAppearanceHelper.setOverlay(dimension, pos, player, item);
             if (item.getItem() instanceof BlockItem) {
-                TileEntity tileEntity = dimension.getTileEntity(pos);
-                int count = player.getHeldItem(hand).getCount();
+                BlockEntity tileEntity = dimension.getBlockEntity(pos);
+                int count = player.getItemInHand(hand).getCount();
                 Block heldBlock = ((BlockItem) item.getItem()).getBlock();
-                if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.get(CONTAINS_BLOCK)) {
-                    BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().getDefaultState();
+                if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
+                    BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
                     insertBlock(dimension, pos, state, handBlockState);
                     if (!player.isCreative())
-                        player.getHeldItem(hand).setCount(count - 1);
-                    return ActionResultType.SUCCESS;
+                        player.getItemInHand(hand).setCount(count - 1);
+                    return InteractionResult.SUCCESS;
                 }
             }
             if (!item.getItem().getRegistryName().getNamespace().equals(QTextureModels.MOD_ID)) {
-                if (state.get(OPEN)) {
-                    state = state.with(OPEN, false);
-                    dimension.playEvent(null, 1007, pos, 0);
+                if (state.getValue(OPEN)) {
+                    state = state.setValue(OPEN, false);
+                    dimension.levelEvent(null, 1007, pos, 0);
                 } else {
-                    state = state.with(OPEN, true);
-                    dimension.playEvent(null, 1013, pos, 0);
+                    state = state.setValue(OPEN, true);
+                    dimension.levelEvent(null, 1013, pos, 0);
                 }
-                dimension.setBlockState(pos, state, 2);
-                if (state.get(WATERLOGGED)) {
-                    dimension.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(dimension));
+                dimension.setBlock(pos, state, 2);
+                if (state.getValue(WATERLOGGED)) {
+                    dimension.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(dimension));
                 }
                 //this.playSound(player, dimension, pos, state.get(OPEN));
             }
-            if (player.getHeldItem(hand).getItem() == Registration.HAMMER.get() || (!BCModConfig.HAMMER_NEEDED.get() && player.isSneaking())) {
+            if (player.getItemInHand(hand).getItem() == Registration.HAMMER.get() || (!BCModConfig.HAMMER_NEEDED.get() && player.isShiftKeyDown())) {
                 if (!player.isCreative())
                     this.dropContainedBlock(dimension, pos);
-                state = state.with(CONTAINS_BLOCK, Boolean.FALSE);
-                dimension.setBlockState(pos, state, 2);
-                return ActionResultType.SUCCESS;
+                state = state.setValue(CONTAINS_BLOCK, Boolean.FALSE);
+                dimension.setBlock(pos, state, 2);
+                return InteractionResult.SUCCESS;
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    protected void dropContainedBlock(World dimensionIn, BlockPos pos) {
-        if (!dimensionIn.isClientSided) {
-            TileEntity tileentity = dimensionIn.getTileEntity(pos);
+    protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
+        if (!dimensionIn.isClientSide) {
+            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
             if (tileentity instanceof FrameBlockTile) {
                 FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
-                    dimensionIn.playEvent(1010, pos, 0);
+                    dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clear();
                     float f = 0.7F;
-                    double d0 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
+                    double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
                     ItemStack itemstack1 = new ItemStack(blockState.getBlock());
                     ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
-                    itementity.setDefaultPickupDelay();
-                    dimensionIn.spawnEntity(itementity);
+                    itementity.setDefaultPickUpDelay();
+                    dimensionIn.addFreshEntity(itementity);
                     frameTileEntity.clear();
                 }
             }
         }
     }
 
-    public void insertBlock(IWorld dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
-        TileEntity tileentity = dimensionIn.getTileEntity(pos);
+    public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
+        BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
         if (tileentity instanceof FrameBlockTile) {
             FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
-            dimensionIn.setBlockState(pos, state.with(CONTAINS_BLOCK, Boolean.TRUE), 2);
+            dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);
         }
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             dropContainedBlock(dimensionIn, pos);
 
-            super.onReplaced(state, dimensionIn, pos, newState, isMoving);
+            super.onRemove(state, dimensionIn, pos, newState, isMoving);
         }
     }
 
     @Override
-    public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
-        if (state.get(LIGHT_LEVEL) > 15) {
+    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+        if (state.getValue(LIGHT_LEVEL) > 15) {
             return 15;
         }
-        return state.get(LIGHT_LEVEL);
+        return state.getValue(LIGHT_LEVEL);
     }
 }
 //========SOLI DEO GLORIA========//

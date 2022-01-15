@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.base;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 
 /**
  * Crate block class.

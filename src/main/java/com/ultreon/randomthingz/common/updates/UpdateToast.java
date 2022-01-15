@@ -1,56 +1,56 @@
 package com.ultreon.randomthingz.common.updates;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.toasts.IToast;
-import net.minecraft.client.gui.toasts.ToastGui;
-import net.minecraft.util.IReorderingProcessor;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.components.toasts.Toast;
+import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.util.FormattedCharSequence;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class UpdateToast implements IToast {
-    private ImmutableList<IReorderingProcessor> subtitle;
-    private ITextComponent title;
+public class UpdateToast implements Toast {
+    private ImmutableList<FormattedCharSequence> subtitle;
+    private Component title;
     private final int fadeOutTicks;
 
     private long firstDrawTime;
     private boolean newDisplay;
 
     public UpdateToast(AbstractUpdater updater) {
-        this.title = new TranslationTextComponent("toasts.randomthingz.update_available.title");
-        this.subtitle = func_238537_a_(new StringTextComponent(updater.getModInfo().getDisplayName()));
+        this.title = new TranslatableComponent("toasts.randomthingz.update_available.title");
+        this.subtitle = nullToEmpty(new TextComponent(updater.getModInfo().getDisplayName()));
         this.fadeOutTicks = 160;
     }
 
-    private static ImmutableList<IReorderingProcessor> func_238537_a_(@Nullable ITextComponent p_238537_0_) {
-        return p_238537_0_ == null ? ImmutableList.of() : ImmutableList.of(p_238537_0_.func_241878_f());
+    private static ImmutableList<FormattedCharSequence> nullToEmpty(@Nullable Component p_238537_0_) {
+        return p_238537_0_ == null ? ImmutableList.of() : ImmutableList.of(p_238537_0_.getVisualOrderText());
     }
 
     @Override
-    public int func_230445_a_() {
+    public int width() {
         return this.fadeOutTicks;
     }
 
     @NotNull
-    public IToast.Visibility func_230444_a_(@NotNull MatrixStack matrixStack, @NotNull ToastGui toastGui, long ticks) {
+    public Toast.Visibility render(@NotNull PoseStack matrixStack, @NotNull ToastComponent toastGui, long ticks) {
         if (this.newDisplay) {
             this.firstDrawTime = ticks;
             this.newDisplay = false;
         }
 
-        toastGui.getMinecraft().getTextureManager().bindTexture(TEXTURE_TOASTS);
+        toastGui.getMinecraft().getTextureManager().bind(TEXTURE);
         RenderSystem.color3f(1.0F, 1.0F, 1.0F);
-        int i = this.func_230445_a_();
+        int i = this.width();
         int j = 12;
         if (i == 160 && this.subtitle.size() <= 1) {
-            toastGui.blit(matrixStack, 0, 0, 0, 64, i, this.func_238540_d_());
+            toastGui.blit(matrixStack, 0, 0, 0, 64, i, this.height());
         } else {
-            int k = this.func_238540_d_() + Math.max(0, this.subtitle.size() - 1) * 12;
+            int k = this.height() + Math.max(0, this.subtitle.size() - 1) * 12;
             int l = 28;
             int i1 = Math.min(4, k - 28);
             this.blitTextures(matrixStack, toastGui, i, 0, 0, 28);
@@ -63,19 +63,19 @@ public class UpdateToast implements IToast {
         }
 
         if (this.subtitle == null) {
-            toastGui.getMinecraft().fontRenderer.drawText(matrixStack, this.title, 18.0F, 12.0F, -256);
+            toastGui.getMinecraft().font.draw(matrixStack, this.title, 18.0F, 12.0F, -256);
         } else {
-            toastGui.getMinecraft().fontRenderer.drawText(matrixStack, this.title, 18.0F, 7.0F, -256);
+            toastGui.getMinecraft().font.draw(matrixStack, this.title, 18.0F, 7.0F, -256);
 
             for (int k1 = 0; k1 < this.subtitle.size(); ++k1) {
-                toastGui.getMinecraft().fontRenderer.func_238422_b_(matrixStack, this.subtitle.get(k1), 18.0F, (float) (18 + k1 * 12), -1);
+                toastGui.getMinecraft().font.draw(matrixStack, this.subtitle.get(k1), 18.0F, (float) (18 + k1 * 12), -1);
             }
         }
 
-        return ticks - this.firstDrawTime < 5000L ? IToast.Visibility.SHOW : IToast.Visibility.HIDE;
+        return ticks - this.firstDrawTime < 5000L ? Toast.Visibility.SHOW : Toast.Visibility.HIDE;
     }
 
-    private void blitTextures(MatrixStack p_238533_1_, ToastGui p_238533_2_, int p_238533_3_, int p_238533_4_, int p_238533_5_, int p_238533_6_) {
+    private void blitTextures(PoseStack p_238533_1_, ToastComponent p_238533_2_, int p_238533_3_, int p_238533_4_, int p_238533_5_, int p_238533_6_) {
         int i = p_238533_4_ == 0 ? 20 : 5;
         int j = Math.min(60, p_238533_3_ - i);
         p_238533_2_.blit(p_238533_1_, 0, p_238533_5_, 0, 64 + p_238533_4_, i, p_238533_6_);
@@ -87,9 +87,9 @@ public class UpdateToast implements IToast {
         p_238533_2_.blit(p_238533_1_, p_238533_3_ - j, p_238533_5_, 160 - j, 64 + p_238533_4_, j, p_238533_6_);
     }
 
-    public void setDisplayedText(ITextComponent titleComponent, @Nullable ITextComponent subtitleComponent) {
+    public void setDisplayedText(Component titleComponent, @Nullable Component subtitleComponent) {
         this.title = titleComponent;
-        this.subtitle = func_238537_a_(subtitleComponent);
+        this.subtitle = nullToEmpty(subtitleComponent);
         this.newDisplay = true;
     }
 }

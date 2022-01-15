@@ -2,11 +2,11 @@ package com.ultreon.randomthingz.util;
 
 import com.ultreon.randomthingz.block.machines.IEnergyHandler;
 import lombok.experimental.UtilityClass;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 
 @UtilityClass
 public final class EnergyUtils {
-    public static void trySendToNeighbors(IBlockReader dimension, BlockPos pos, IEnergyHandler energyHandler, int maxSend) {
+    public static void trySendToNeighbors(BlockGetter dimension, BlockPos pos, IEnergyHandler energyHandler, int maxSend) {
         for (Direction side : Direction.values()) {
             if (energyHandler.getEnergyStored() == 0) {
                 return;
@@ -25,8 +25,8 @@ public final class EnergyUtils {
         }
     }
 
-    public static void trySendTo(IBlockReader dimension, BlockPos pos, IEnergyHandler energyHandler, int maxSend, Direction side) {
-        TileEntity tileEntity = dimension.getTileEntity(pos.offset(side));
+    public static void trySendTo(BlockGetter dimension, BlockPos pos, IEnergyHandler energyHandler, int maxSend, Direction side) {
+        BlockEntity tileEntity = dimension.getBlockEntity(pos.relative(side));
         if (tileEntity != null) {
             IEnergyStorage energy = energyHandler.getEnergy(side).orElse(new EnergyStorage(0));
             tileEntity.getCapability(CapabilityEnergy.ENERGY, side.getOpposite()).ifPresent(other -> trySendEnergy(maxSend, energy, other));
@@ -53,9 +53,9 @@ public final class EnergyUtils {
      */
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    public static IEnergyStorage getEnergy(IWorldReader dimension, BlockPos pos) {
+    public static IEnergyStorage getEnergy(LevelReader dimension, BlockPos pos) {
         if (!dimension.isAreaLoaded(pos, 1)) return null;
-        TileEntity tileEntity = dimension.getTileEntity(pos);
+        BlockEntity tileEntity = dimension.getBlockEntity(pos);
         return tileEntity != null ? tileEntity.getCapability(CapabilityEnergy.ENERGY).orElse(null) : null;
     }
 

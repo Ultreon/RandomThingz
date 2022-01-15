@@ -5,14 +5,14 @@ import com.ultreon.randomthingz.block.machines.generator.AbstractGeneratorTileEn
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.common.tags.ModTags;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.block.AbstractFurnaceBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.AbstractFurnaceTileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nullable;
@@ -28,7 +28,7 @@ public class CoalGeneratorTileEntity extends AbstractGeneratorTileEntity {
     }
 
     static boolean isFuel(ItemStack stack) {
-        return stack.getItem().isIn(ModTags.Items.COAL_GENERATOR_FUELS) && AbstractFurnaceTileEntity.isFuel(stack);
+        return stack.getItem().is(ModTags.Items.COAL_GENERATOR_FUELS) && AbstractFurnaceBlockEntity.isFuel(stack);
     }
 
     private static int getBurnTime(ItemStack stack) {
@@ -37,22 +37,22 @@ public class CoalGeneratorTileEntity extends AbstractGeneratorTileEntity {
 
     @Override
     protected boolean hasFuel() {
-        return isFuel(getStackInSlot(0));
+        return isFuel(getItem(0));
     }
 
     @Override
     protected void consumeFuel() {
-        ItemStack fuel = getStackInSlot(0);
+        ItemStack fuel = getItem(0);
         burnTime = getBurnTime(fuel);
         if (burnTime > 0) {
             totalBurnTime = burnTime;
 
             if (fuel.hasContainerItem()) {
-                setInventorySlotContents(0, fuel.getContainerItem());
+                setItem(0, fuel.getContainerItem());
             } else if (!fuel.isEmpty()) {
                 fuel.shrink(1);
                 if (fuel.isEmpty()) {
-                    setInventorySlotContents(0, fuel.getContainerItem());
+                    setItem(0, fuel.getContainerItem());
                 }
             }
         }
@@ -65,12 +65,12 @@ public class CoalGeneratorTileEntity extends AbstractGeneratorTileEntity {
 
     @Override
     protected BlockState getActiveState() {
-        return getBlockState().with(AbstractFurnaceBlock.LIT, true);
+        return getBlockState().setValue(AbstractFurnaceBlock.LIT, true);
     }
 
     @Override
     protected BlockState getInactiveState() {
-        return getBlockState().with(AbstractFurnaceBlock.LIT, false);
+        return getBlockState().setValue(AbstractFurnaceBlock.LIT, false);
     }
 
     @Override
@@ -79,22 +79,22 @@ public class CoalGeneratorTileEntity extends AbstractGeneratorTileEntity {
     }
 
     @Override
-    public boolean canInsertItem(int index, ItemStack stack, @Nullable Direction direction) {
+    public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
         return isFuel(stack);
     }
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
         return !isFuel(stack);
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
+    protected Component getDefaultName() {
         return TextUtils.translate("container", "coal_generator");
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory playerInventory) {
+    protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
         return new CoalGeneratorContainer(id, playerInventory, this, this.fields);
     }
 }

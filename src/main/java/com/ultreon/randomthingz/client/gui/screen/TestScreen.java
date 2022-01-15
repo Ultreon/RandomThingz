@@ -1,9 +1,9 @@
 package com.ultreon.randomthingz.client.gui.screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.text.StringTextComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.TextComponent;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("ALL")
@@ -16,15 +16,15 @@ public class TestScreen extends Screen {
 
     @Deprecated
     public TestScreen() {
-        super(new StringTextComponent("Test Screen"));
+        super(new TextComponent("Test Screen"));
     }
 
     @Deprecated
     @Override
-    protected void initialize() {
-        super.initialize();
+    protected void init() {
+        super.init();
 
-        this.testButton = addButton(new Button(10, 10, 250, 20, new StringTextComponent("Test button"), (button) -> {
+        this.testButton = addButton(new Button(10, 10, 250, 20, new TextComponent("Test button"), (button) -> {
             i += 1;
         }));
     }
@@ -37,13 +37,13 @@ public class TestScreen extends Screen {
 
     @Deprecated
     @Override
-    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         renderBackground(matrixStack);
 
         super.render(matrixStack, mouseX, mouseY, partialTicks);
 
         if (minecraft != null) {
-            drawString(matrixStack, minecraft.fontRenderer, "Button clicked: " + i, 10, 50, 0xffffff);
+            drawString(matrixStack, minecraft.font, "Button clicked: " + i, 10, 50, 0xffffff);
         }
     }
 }

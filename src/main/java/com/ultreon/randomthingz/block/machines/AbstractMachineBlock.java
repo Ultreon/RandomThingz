@@ -1,7 +1,6 @@
 package com.ultreon.randomthingz.block.machines;
 
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
@@ -12,13 +11,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraftforge.common.ToolType;
 
 public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
     protected final MachineTier tier;
 
     public AbstractMachineBlock(MachineTier tier, Properties properties) {
-        super(properties.setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(0));
+        super(properties.requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).harvestLevel(0));
         this.tier = tier;
     }
 
@@ -27,7 +27,7 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
         int slotsFilled = 0;
         float fillRatio = 0.0F;
 
-        for (int i = 0; i < inv.getSizeInventory() - inv.getMachineTier().getUpgradeSlots(); ++i) {
+        for (int i = 0; i < inv.getContainerSize() - inv.getMachineTier().getUpgradeSlots(); ++i) {
             ItemStack itemstack = inv.getStackInSlot(i);
             if (!itemstack.isEmpty()) {
                 fillRatio += (float) itemstack.getCount() / Math.min(inv.getInventoryStackLimit(), itemstack.getMaxSize());

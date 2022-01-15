@@ -10,9 +10,9 @@ import com.ultreon.randomthingz.util.InventoryUtils;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
@@ -30,7 +30,7 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
 
     @Override
     public void tick() {
-        if (dimension == null || dimension.isClientSided) return;
+        if (level == null || level.isClientSide) return;
 
         tryFillTanks();
         tryFillFluidContainer();
@@ -45,7 +45,7 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
 
     private void tryFillTanks() {
         // Try fill feedstock tanks with fluid containers
-        ItemStack input = getStackInSlot(0);
+        ItemStack input = getItem(0);
         if (input.isEmpty()) return;
 
         FluidStack fluidStack = IFluidContainer.getBucketOrContainerFluid(input);
@@ -80,26 +80,26 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
         ItemStack containerItem = input.getContainerItem();
         input.shrink(1);
 
-        ItemStack output = getStackInSlot(1);
+        ItemStack output = getItem(1);
         if (output.isEmpty()) {
-            setInventorySlotContents(1, containerItem);
+            setItem(1, containerItem);
         } else {
             output.grow(1);
         }
     }
 
     private boolean canAcceptFluidContainer(ItemStack input, FluidStack fluid, int tank) {
-        ItemStack output = getStackInSlot(1);
+        ItemStack output = getItem(1);
         return !fluid.isEmpty()
                 && this.isFluidValid(tank, fluid)
                 && tanks[tank].fill(fluid, IFluidHandler.FluidAction.SIMULATE) == fluid.getAmount()
                 && (output.isEmpty() || InventoryUtils.canItemsStack(input.getContainerItem(), output))
-                && (output.isEmpty() || output.getCount() < output.getMaxSize());
+                && (output.isEmpty() || output.getCount() < output.getMaxStackSize());
     }
 
     private void tryFillFluidContainer() {
         // Fill empty fluid containers with output fluids
-        ItemStack input = getStackInSlot(2);
+        ItemStack input = getItem(2);
         if (input.isEmpty()) return;
 
         FluidStack fluidInInput = IFluidContainer.getBucketOrContainerFluid(input);
@@ -133,8 +133,8 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
     @Nullable
     @Override
     public MixingRecipe getRecipe() {
-        if (dimension == null) return null;
-        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.MIXING, this, dimension).orElse(null);
+        if (level == null) return null;
+        return level.getRecipeManager().getRecipeFor(ModRecipes.Types.MIXING, this, level).orElse(null);
     }
 
     @Override

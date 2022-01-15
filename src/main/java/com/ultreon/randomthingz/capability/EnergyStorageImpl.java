@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.capability;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -15,9 +15,9 @@ import java.util.EnumMap;
 
 public class EnergyStorageImpl extends EnergyStorageImplBase {
     private final EnumMap<Direction, LazyOptional<Connection>> connections = new EnumMap<>(Direction.class);
-    private final TileEntity tileEntity;
+    private final BlockEntity tileEntity;
 
-    public EnergyStorageImpl(int capacity, int maxReceive, int maxExtract, TileEntity tileEntity) {
+    public EnergyStorageImpl(int capacity, int maxReceive, int maxExtract, BlockEntity tileEntity) {
         super(capacity, maxReceive, maxExtract);
         this.tileEntity = tileEntity;
         Arrays.stream(Direction.values()).forEach(d -> connections.put(d, LazyOptional.of(Connection::new)));
@@ -73,7 +73,7 @@ public class EnergyStorageImpl extends EnergyStorageImplBase {
 
         @Override
         public int receiveEnergy(int maxReceive, boolean simulate) {
-            World dimension = EnergyStorageImpl.this.tileEntity.getDimension();
+            Level dimension = EnergyStorageImpl.this.tileEntity.getLevel();
             if (dimension == null) return 0;
 
             int received = EnergyStorageImpl.this.receiveEnergy(maxReceive, simulate);
@@ -84,7 +84,7 @@ public class EnergyStorageImpl extends EnergyStorageImplBase {
 
         @Override
         public int extractEnergy(int maxExtract, boolean simulate) {
-            World dimension = EnergyStorageImpl.this.tileEntity.getDimension();
+            Level dimension = EnergyStorageImpl.this.tileEntity.getLevel();
             if (dimension == null) return 0;
 
             long time = dimension.getGameTime();

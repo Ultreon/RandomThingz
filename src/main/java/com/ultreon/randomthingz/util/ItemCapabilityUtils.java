@@ -1,11 +1,11 @@
 package com.ultreon.randomthingz.util;
 
 import lombok.experimental.UtilityClass;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -50,9 +50,9 @@ public final class ItemCapabilityUtils {
      */
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    public static IItemHandler getItemHandler(IWorldReader dimension, BlockPos pos) {
+    public static IItemHandler getItemHandler(LevelReader dimension, BlockPos pos) {
         if (!dimension.isAreaLoaded(pos, 1)) return null;
-        TileEntity tileEntity = dimension.getTileEntity(pos);
+        BlockEntity tileEntity = dimension.getBlockEntity(pos);
         return tileEntity != null ? tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).orElse(null) : null;
     }
 

@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.block.machines.itempipe;
 
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -13,44 +13,44 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ItemPipeTileEntity extends TileEntity {
+public class ItemPipeTileEntity extends BlockEntity {
     public ItemPipeTileEntity() {
         super(ModMachineTileEntities.pipe);
     }
 
     @SuppressWarnings("unused")
     public String getPipeNetworkData() {
-        if (dimension == null) return "world is null";
+        if (level == null) return "world is null";
 
-        ItemPipeNetwork net = ItemPipeNetworkManager.get(dimension, pos);
+        ItemPipeNetwork net = ItemPipeNetworkManager.get(level, worldPosition);
         return net != null ? net.toString() : "null";
     }
 
     @Override
-    public void read(@NotNull BlockState state, @NotNull CompoundNBT compound) {
-        super.read(state, compound);
+    public void load(@NotNull BlockState state, @NotNull CompoundTag compound) {
+        super.load(state, compound);
     }
 
     @Override
-    public @NotNull CompoundNBT write(@NotNull CompoundNBT compound) {
-        return super.write(compound);
+    public @NotNull CompoundTag save(@NotNull CompoundTag compound) {
+        return super.save(compound);
     }
 
     @Override
-    public void delete() {
-        if (dimension != null) {
-            ItemPipeNetworkManager.invalidateNetwork(dimension, pos);
+    public void setRemoved() {
+        if (level != null) {
+            ItemPipeNetworkManager.invalidateNetwork(level, worldPosition);
         }
-        super.delete();
+        super.setRemoved();
     }
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (dimension != null && !removed && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && side != null) {
-            LazyOptional<ItemPipeNetwork> networkOptional = ItemPipeNetworkManager.getLazy(dimension, pos);
+        if (level != null && !remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && side != null) {
+            LazyOptional<ItemPipeNetwork> networkOptional = ItemPipeNetworkManager.getLazy(level, worldPosition);
             if (networkOptional.isPresent()) {
-                return networkOptional.orElseThrow(IllegalStateException::new).getConnection(pos, side).getLazyOptional().cast();
+                return networkOptional.orElseThrow(IllegalStateException::new).getConnection(worldPosition, side).getLazyOptional().cast();
             }
         }
         return LazyOptional.empty();

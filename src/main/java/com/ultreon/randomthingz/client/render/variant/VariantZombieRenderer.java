@@ -3,10 +3,10 @@ package com.ultreon.randomthingz.client.render.variant;
 import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.ultreon.randomthingz.client.MobVariantsModule;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.ZombieRenderer;
-import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.monster.Zombie;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -14,12 +14,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class VariantZombieRenderer extends ZombieRenderer {
-    public VariantZombieRenderer(EntityRendererManager renderManagerIn) {
+    public VariantZombieRenderer(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn);
     }
 
     @Override
-    public ResourceLocation getEntityTexture(ZombieEntity entity) {
+    public ResourceLocation getTextureLocation(Zombie entity) {
         return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.ZOMBIE, MobVariantsModule.enableZombie);
     }
 }

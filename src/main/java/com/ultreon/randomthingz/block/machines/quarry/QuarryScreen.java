@@ -1,21 +1,21 @@
 package com.ultreon.randomthingz.block.machines.quarry;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
 import com.ultreon.randomthingz.client.gui.widgets.button.RedstoneModeButton;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 
 public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
     private static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/quarry.png");
 
-    public QuarryScreen(QuarryContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    public QuarryScreen(QuarryContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
     }
 
@@ -25,89 +25,89 @@ public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
     }
 
     @Override
-    protected void initialize() {
-        super.initialize();
+    protected void init() {
+        super.init();
         this.buttons.removeIf((widget) -> widget instanceof RedstoneModeButton);
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void renderHoveredTooltip(MatrixStack matrixStack, int x, int y) {
-        if (isPointInRegion(153, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.energyWithMax(container.getEnergyStored(), container.getMaxEnergyStored()), x, y);
+    protected void renderTooltip(PoseStack matrixStack, int x, int y) {
+        if (isHovering(153, 17, 13, 51, x, y)) {
+            renderTooltip(matrixStack, TextUtils.energyWithMax(menu.getEnergyStored(), menu.getMaxEnergyStored()), x, y);
         }
-        super.renderHoveredTooltip(matrixStack, x, y);
+        super.renderTooltip(matrixStack, x, y);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
-        super.drawGuiContainerBackgroundLayer(matrixStack, partialTicks, x, y);
+    protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
+        super.renderBg(matrixStack, partialTicks, x, y);
 
         if (minecraft == null) return;
-        int xPos = (this.width - this.xSize) / 2;
-        int yPos = (this.height - this.ySize) / 2;
+        int xPos = (this.width - this.imageWidth) / 2;
+        int yPos = (this.height - this.imageHeight) / 2;
 
         // Energy meter
-        int energyBarHeight = container.getEnergyBarHeight();
+        int energyBarHeight = menu.getEnergyBarHeight();
         if (energyBarHeight > 0) {
             blit(matrixStack, xPos + 154, yPos + 68 - energyBarHeight, 176, 31, 12, energyBarHeight);
         }
 
-        FontRenderer fontRenderer = minecraft.fontRenderer;
+        Font fontRenderer = minecraft.font;
         ItemRenderer itemRenderer = minecraft.getItemRenderer();
 
-        QuarryTileEntity quarry = container.getTileEntity();
-        switch (container.getStatus()) {
+        QuarryTileEntity quarry = menu.getTileEntity();
+        switch (menu.getStatus()) {
             case NOT_INITIALIZED: {
-                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
-                fontRenderer.drawString(matrixStack, "  Not initialized yet", xPos + 5, yPos + 48, 0xbf0000);
+                fontRenderer.draw(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+                fontRenderer.draw(matrixStack, "  Not initialized yet", xPos + 5, yPos + 48, 0xbf0000);
                 break;
             }
             case ILLEGAL_POSITION: {
-                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
-                fontRenderer.drawString(matrixStack, "  Illegal Position, move to above y=5", xPos + 5, yPos + 48, 0xbf0000);
+                fontRenderer.draw(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+                fontRenderer.draw(matrixStack, "  Illegal Position, move to above y=5", xPos + 5, yPos + 48, 0xbf0000);
                 break;
             }
             case NOT_ENOUGH_ENERGY: {
-                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
-                fontRenderer.drawString(matrixStack, "  No energy", xPos + 5, yPos + 48, 0xbf0000);
+                fontRenderer.draw(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+                fontRenderer.draw(matrixStack, "  No energy", xPos + 5, yPos + 48, 0xbf0000);
                 break;
             }
             case UNIDENTIFIED_WORLD: {
-                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
-                fontRenderer.drawString(matrixStack, "  Unidentified dimension", xPos + 5, yPos + 48, 0xbf0000);
+                fontRenderer.draw(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+                fontRenderer.draw(matrixStack, "  Unidentified dimension", xPos + 5, yPos + 48, 0xbf0000);
                 break;
             }
             case PAUSED: {
-                fontRenderer.drawString(matrixStack, "Paused", xPos + 5, yPos + 48, 0xbf5f00);
-                if (minecraft.dimension != null) {
-                    itemRenderer.renderItemIntoGUI(new ItemStack(minecraft.dimension.getBlockState(container.getCurrentPos()).getBlock()), xPos + xSize - 33, yPos + 17);
+                fontRenderer.draw(matrixStack, "Paused", xPos + 5, yPos + 48, 0xbf5f00);
+                if (minecraft.level != null) {
+                    itemRenderer.renderGuiItem(new ItemStack(minecraft.level.getBlockState(menu.getCurrentPos()).getBlock()), xPos + imageWidth - 33, yPos + 17);
                 }
                 break;
             }
             case DONE: {
-                fontRenderer.drawString(matrixStack, "Done", xPos + 5, yPos + 36, 0x007f00);
+                fontRenderer.draw(matrixStack, "Done", xPos + 5, yPos + 36, 0x007f00);
                 break;
             }
             case NO_PROBLEM: {
-                fontRenderer.drawString(matrixStack, "Mining...", xPos + 5, yPos + 36, 0x3f3f3f);
-                fontRenderer.drawString(matrixStack, "Total blocks: " + container.getTotalBlocks(), xPos + 5, yPos + 48, 0x7f7f7f);
-                fontRenderer.drawString(matrixStack, "Remaining: " + container.getBlocksRemaining(), xPos + 5, yPos + 60, 0x7f7f7f);
-                fontRenderer.drawString(matrixStack, "Y: " + container.getCurrentY(), xPos + 5, yPos + 72, 0x7f7f7f);
-                if (minecraft.dimension != null) {
-                    itemRenderer.renderItemIntoGUI(new ItemStack(minecraft.dimension.getBlockState(container.getCurrentPos()).getBlock()), xPos + xSize - 33, yPos + 17);
+                fontRenderer.draw(matrixStack, "Mining...", xPos + 5, yPos + 36, 0x3f3f3f);
+                fontRenderer.draw(matrixStack, "Total blocks: " + menu.getTotalBlocks(), xPos + 5, yPos + 48, 0x7f7f7f);
+                fontRenderer.draw(matrixStack, "Remaining: " + menu.getBlocksRemaining(), xPos + 5, yPos + 60, 0x7f7f7f);
+                fontRenderer.draw(matrixStack, "Y: " + menu.getCurrentY(), xPos + 5, yPos + 72, 0x7f7f7f);
+                if (minecraft.level != null) {
+                    itemRenderer.renderGuiItem(new ItemStack(minecraft.level.getBlockState(menu.getCurrentPos()).getBlock()), xPos + imageWidth - 33, yPos + 17);
                 }
                 break;
             }
             default: {
-                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
-                fontRenderer.drawString(matrixStack, "  Unknown error", xPos + 5, yPos + 48, 0xbf0000);
+                fontRenderer.draw(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
+                fontRenderer.draw(matrixStack, "  Unknown error", xPos + 5, yPos + 48, 0xbf0000);
                 break;
             }
         }

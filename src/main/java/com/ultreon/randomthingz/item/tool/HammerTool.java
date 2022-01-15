@@ -7,26 +7,26 @@ import com.ultreon.randomthingz.item.tool.trait.AbstractTrait;
 import com.ultreon.randomthingz.item.tool.types.HammerItem;
 import com.ultreon.randomthingz.util.ItemUtils;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
@@ -45,13 +45,13 @@ public class HammerTool extends HammerItem implements ITool {
 
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
-    public HammerTool(IItemTier tier, double attackDamageIn, double attackSpeedIn, Properties builderIn, Supplier<AbstractTrait[]> traits) {
-        super(tier, (int) attackDamageIn, (float) attackSpeedIn, builderIn.group(null));
+    public HammerTool(Tier tier, double attackDamageIn, double attackSpeedIn, Properties builderIn, Supplier<AbstractTrait[]> traits) {
+        super(tier, (int) attackDamageIn, (float) attackSpeedIn, builderIn.tab(null));
         this.traits = traits;
-        this.attackDamage = attackDamageIn + tier.getAttackDamage();
+        this.attackDamage = attackDamageIn + tier.getAttackDamageBonus();
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
         this.toolAttributes = builder.build();
     }
 
@@ -66,10 +66,10 @@ public class HammerTool extends HammerItem implements ITool {
     }
 
     @Override
-    public ActionResultType onUseItem(ItemUseContext context) {
-        ActionResultType result = super.onUseItem(context);
+    public InteractionResult useOn(UseOnContext context) {
+        InteractionResult result = super.useOn(context);
         for (AbstractTrait trait : getTraits()) {
-            ActionResultType actionResultType = trait.onUseItem(context);
+            InteractionResult actionResultType = trait.onUseItem(context);
             result = ItemUtils.maxActionResult(result, actionResultType);
         }
         return result;
@@ -93,8 +93,8 @@ public class HammerTool extends HammerItem implements ITool {
     }
 
     @Override
-    public boolean isDamageable() {
-        boolean val = super.isDamageable();
+    public boolean canBeDepleted() {
+        boolean val = super.canBeDepleted();
         for (AbstractTrait trait : getTraits()) {
             val &= trait.isDamageable();
         }
@@ -102,8 +102,8 @@ public class HammerTool extends HammerItem implements ITool {
     }
 
     @Override
-    public boolean isImmuneToFire() {
-        boolean val = super.isImmuneToFire();
+    public boolean isFireResistant() {
+        boolean val = super.isFireResistant();
         for (AbstractTrait trait : getTraits()) {
             val |= trait.isImmuneToFire();
         }
@@ -112,7 +112,7 @@ public class HammerTool extends HammerItem implements ITool {
 
     @Override
     public void setDamage(ItemStack stack, int damage) {
-        if (isDamageable()) {
+        if (canBeDepleted()) {
             super.setDamage(stack, damage);
             return;
         }
@@ -123,26 +123,26 @@ public class HammerTool extends HammerItem implements ITool {
 
     @Override
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
-        if (isDamageable()) {
+        if (canBeDepleted()) {
             super.damageItem(stack, amount, entity, onBroken);
         }
         return 0;
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World dimensionIn, PlayerEntity playerIn, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level dimensionIn, Player playerIn, InteractionHand handIn) {
         boolean val = false;
         for (AbstractTrait trait : getTraits()) {
             val |= trait.onRightClick(this, dimensionIn, playerIn, handIn);
         }
         if (val) {
-            return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
+            return InteractionResultHolder.success(playerIn.getItemInHand(handIn));
         }
-        return ActionResult.resultFail(playerIn.getHeldItem(handIn));
+        return InteractionResultHolder.fail(playerIn.getItemInHand(handIn));
     }
 
     @Override
-    public boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity clicked) {
+    public boolean onLeftClickEntity(ItemStack stack, Player player, Entity clicked) {
         float smite = 0.0f;
         for (AbstractTrait trait : getTraits()) {
             float smiteValue = trait.getSmiteValue(getQfmToolTypes(), stack, player);
@@ -157,8 +157,8 @@ public class HammerTool extends HammerItem implements ITool {
         if (smite > 0.0f) {
             if (clicked instanceof LivingEntity) {
                 LivingEntity living = (LivingEntity) clicked;
-                if (living.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-                    clicked.attack(new EntityDamageSource("player", player), smite);
+                if (living.getMobType() == MobType.UNDEAD) {
+                    clicked.hurt(new EntityDamageSource("player", player), smite);
                 }
             }
         }
@@ -167,9 +167,9 @@ public class HammerTool extends HammerItem implements ITool {
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity victim, LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, LivingEntity victim, LivingEntity attacker) {
         float smite = 0.0f;
-        boolean val = super.hitEntity(stack, victim, attacker);
+        boolean val = super.hurtEnemy(stack, victim, attacker);
         for (AbstractTrait trait : getTraits()) {
             float smiteValue = trait.getSmiteValue(getQfmToolTypes(), stack, attacker);
             if (smiteValue < 0.0f) {
@@ -181,25 +181,25 @@ public class HammerTool extends HammerItem implements ITool {
         }
 
         if (smite > 0.0f) {
-            if (victim.getCreatureAttribute() == CreatureAttribute.UNDEAD) {
-                if (attacker instanceof PlayerEntity) {
-                    victim.attack(new EntityDamageSource("player", attacker), smite);
+            if (victim.getMobType() == MobType.UNDEAD) {
+                if (attacker instanceof Player) {
+                    victim.hurt(new EntityDamageSource("player", attacker), smite);
                 } else {
-                    victim.attack(new EntityDamageSource("entity", attacker), smite);
+                    victim.hurt(new EntityDamageSource("entity", attacker), smite);
                 }
             }
         }
 
         if (val) {
-            super.hitEntity(stack, victim, attacker);
+            super.hurtEnemy(stack, victim, attacker);
         }
 
         return true;
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World dimension, Entity entity, int slot, boolean selected) {
-        if (!isDamageable()) {
+    public void inventoryTick(ItemStack stack, Level dimension, Entity entity, int slot, boolean selected) {
+        if (!canBeDepleted()) {
             setDamage(stack, 0);
         }
 
@@ -209,8 +209,8 @@ public class HammerTool extends HammerItem implements ITool {
     }
 
     @Override
-    public boolean onBlockBroken(ItemStack stack, World dimension, BlockState state, BlockPos pos, LivingEntity living) {
-        boolean op = super.onBlockBroken(stack, dimension, state, pos, living);
+    public boolean mineBlock(ItemStack stack, Level dimension, BlockState state, BlockPos pos, LivingEntity living) {
+        boolean op = super.mineBlock(stack, dimension, state, pos, living);
         for (AbstractTrait trait : getTraits()) {
             op |= trait.onBlockBroken(stack, dimension, state, pos, living);
         }
@@ -218,7 +218,7 @@ public class HammerTool extends HammerItem implements ITool {
     }
 
     @Override
-    public boolean onDroppedByPlayer(ItemStack stack, PlayerEntity player) {
+    public boolean onDroppedByPlayer(ItemStack stack, Player player) {
         boolean op = super.onDroppedByPlayer(stack, player);
         for (AbstractTrait trait : getTraits()) {
             op &= trait.onDroppedByPlayer(stack, player);
@@ -228,14 +228,14 @@ public class HammerTool extends HammerItem implements ITool {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World dimension, List<ITextComponent> tooltip, ITooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, @Nullable Level dimension, List<Component> tooltip, TooltipFlag flag) {
         for (AbstractTrait trait : traits.get()) {
             tooltip.add(trait.getTranslation());
         }
     }
 
     @Override
-    public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, PlayerEntity player) {
+    public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, Player player) {
         boolean val = super.onBlockStartBreak(stack, pos, player);
         for (AbstractTrait trait : getTraits()) {
             val |= trait.onBlockStartBreak(stack, pos, player);
@@ -244,8 +244,8 @@ public class HammerTool extends HammerItem implements ITool {
     }
 
     @Override
-    public float getMiningSpeed(ItemStack stack, BlockState state) {
-        float val = super.getMiningSpeed(stack, state);
+    public float getDestroySpeed(ItemStack stack, BlockState state) {
+        float val = super.getDestroySpeed(stack, state);
         for (AbstractTrait trait : getTraits()) {
             val *= trait.getDestroyMultiplier(getQfmToolTypes(), stack, state);
         }
@@ -261,7 +261,7 @@ public class HammerTool extends HammerItem implements ITool {
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot equipmentSlot) {
         Multimap<Attribute, AttributeModifier> attributes;
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
@@ -274,7 +274,7 @@ public class HammerTool extends HammerItem implements ITool {
 
         builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Tool modifier", knockback, AttributeModifier.Operation.ADDITION));
         attributes = builder.build();
-        return equipmentSlot == EquipmentSlotType.MAINHAND ? attributes : super.getAttributeModifiers(equipmentSlot);
+        return equipmentSlot == EquipmentSlot.MAINHAND ? attributes : super.getDefaultAttributeModifiers(equipmentSlot);
     }
 
     public float getAttackDamage() {

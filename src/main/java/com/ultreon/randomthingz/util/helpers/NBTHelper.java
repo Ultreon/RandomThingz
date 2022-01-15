@@ -2,10 +2,10 @@ package com.ultreon.randomthingz.util.helpers;
 
 import com.ultreon.randomthingz.block.machines.quarry.QuarryTileEntity;
 import lombok.experimental.UtilityClass;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
 @SuppressWarnings("unused")
 @UtilityClass
 public class NBTHelper {
-    public static CompoundNBT toNBT(Object o) {
+    public static CompoundTag toNBT(Object o) {
         if (o instanceof ItemStack) {
             return writeItemStack((ItemStack) o);
         }
@@ -31,14 +31,14 @@ public class NBTHelper {
         return null;
     }
 
-    private static CompoundNBT writeQuarry(QuarryTileEntity o) {
-        CompoundNBT compound = new CompoundNBT();
-        return o.write(compound);
+    private static CompoundTag writeQuarry(QuarryTileEntity o) {
+        CompoundTag compound = new CompoundTag();
+        return o.save(compound);
     }
 
     @SuppressWarnings("ConstantConditions")
-    private static CompoundNBT writeItemStack(ItemStack i) {
-        CompoundNBT nbt = new CompoundNBT();
+    private static CompoundTag writeItemStack(ItemStack i) {
+        CompoundTag nbt = new CompoundTag();
         nbt.putInt("count", i.getCount());
         nbt.putString("item", i.getItem().getRegistryName().toString());
         nbt.putByte("type", (byte) 0);
@@ -47,7 +47,7 @@ public class NBTHelper {
 
     @SuppressWarnings("SwitchStatementWithTooFewBranches")
     @Nullable
-    public static Object fromNBT(@Nonnull CompoundNBT compound) {
+    public static Object fromNBT(@Nonnull CompoundTag compound) {
         switch (compound.getByte("type")) {
             case 0:
                 return readItemStack(compound);
@@ -56,7 +56,7 @@ public class NBTHelper {
         }
     }
 
-    private static ItemStack readItemStack(CompoundNBT compound) {
+    private static ItemStack readItemStack(CompoundTag compound) {
         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(compound.getString("item")));
         int count = compound.getInt("count");
         return new ItemStack(item, count);

@@ -28,10 +28,10 @@ import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,9 +40,9 @@ import java.util.stream.Collectors;
 public class SMechanismsJeiPlugin implements IModPlugin {
     private static final ResourceLocation PLUGIN_UID = RandomThingz.rl("plugin/main");
 
-    private static List<IRecipe<?>> getRecipesOfType(IRecipeType<?> recipeType) {
-        assert Minecraft.getInstance().dimension != null;
-        return Minecraft.getInstance().dimension.getRecipeManager().getRecipes().stream()
+    private static List<Recipe<?>> getRecipesOfType(RecipeType<?> recipeType) {
+        assert Minecraft.getInstance().level != null;
+        return Minecraft.getInstance().level.getRecipeManager().getRecipes().stream()
                 .filter(r -> r.getType() == recipeType)
                 .collect(Collectors.toList());
     }

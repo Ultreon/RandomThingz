@@ -5,17 +5,23 @@ import com.google.gson.JsonObject;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.item.crafting.*;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+
 @RequiredArgsConstructor
-public class CompressingRecipe implements IRecipe<IInventory> {
+public class CompressingRecipe implements Recipe<Container> {
     private final ResourceLocation recipeId;
     @Getter
     private int processTime;
@@ -26,23 +32,23 @@ public class CompressingRecipe implements IRecipe<IInventory> {
     private ItemStack result;
 
     @Override
-    public boolean matches(IInventory inv, World dimensionIn) {
-        ItemStack stack = inv.getStackInSlot(0);
+    public boolean matches(Container inv, Level dimensionIn) {
+        ItemStack stack = inv.getItem(0);
         return ingredient.test(stack) && stack.getCount() >= ingredientCount;
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory inv) {
+    public ItemStack assemble(Container inv) {
         return result.copy();
     }
 
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return true;
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return result;
     }
 
@@ -52,54 +58,54 @@ public class CompressingRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return ModRecipes.COMPRESSING.get();
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return ModRecipes.Types.COMPRESSING;
     }
 
     @Override
-    public boolean isDynamic() {
+    public boolean isSpecial() {
         return true;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<CompressingRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CompressingRecipe> {
         @Override
-        public CompressingRecipe read(ResourceLocation recipeId, JsonObject json) {
+        public CompressingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             CompressingRecipe recipe = new CompressingRecipe(recipeId);
-            recipe.processTime = JSONUtils.getInt(json, "process_time", 400);
+            recipe.processTime = GsonHelper.getAsInt(json, "process_time", 400);
             JsonElement ingredientJson = json.get("ingredient");
             if (ingredientJson.isJsonObject() && ingredientJson.getAsJsonObject().has("value")) {
                 JsonObject obj = ingredientJson.getAsJsonObject();
-                recipe.ingredient = Ingredient.deserialize(obj.get("value"));
-                recipe.ingredientCount = JSONUtils.getInt(obj, "count", 1);
+                recipe.ingredient = Ingredient.fromJson(obj.get("value"));
+                recipe.ingredientCount = GsonHelper.getAsInt(obj, "count", 1);
             } else {
-                recipe.ingredient = Ingredient.deserialize(ingredientJson);
-                recipe.ingredientCount = JSONUtils.getInt(ingredientJson.getAsJsonObject(), "count", 1);
+                recipe.ingredient = Ingredient.fromJson(ingredientJson);
+                recipe.ingredientCount = GsonHelper.getAsInt(ingredientJson.getAsJsonObject(), "count", 1);
             }
-            recipe.result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
+            recipe.result = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "result"));
             return recipe;
         }
 
         @Override
-        public CompressingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        public CompressingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             CompressingRecipe recipe = new CompressingRecipe(recipeId);
             recipe.processTime = buffer.readVarInt();
-            recipe.ingredient = Ingredient.read(buffer);
+            recipe.ingredient = Ingredient.fromNetwork(buffer);
             recipe.ingredientCount = buffer.readByte();
-            recipe.result = buffer.readItemStack();
+            recipe.result = buffer.readItem();
             return recipe;
         }
 
         @Override
-        public void write(PacketBuffer buffer, CompressingRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, CompressingRecipe recipe) {
             buffer.writeVarInt(recipe.processTime);
-            recipe.ingredient.write(buffer);
+            recipe.ingredient.toNetwork(buffer);
             buffer.writeByte(recipe.ingredientCount);
-            buffer.writeItemStack(recipe.result);
+            buffer.writeItem(recipe.result);
         }
     }
 }

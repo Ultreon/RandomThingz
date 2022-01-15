@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.base;
 
-import net.minecraft.block.WoodButtonBlock;
+import net.minecraft.world.level.block.WoodButtonBlock;
 
 /**
  * Game PC block class.

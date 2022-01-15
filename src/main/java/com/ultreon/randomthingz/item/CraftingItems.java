@@ -2,16 +2,16 @@ package com.ultreon.randomthingz.item;
 
 import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.registration.Registration;
-import net.minecraft.item.Food;
-import net.minecraft.item.Foods;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.food.Foods;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 
-public enum CraftingItems implements IItemProvider {
+public enum CraftingItems implements ItemLike {
     // Other dusts
     COAL_DUST,
     // Crafting items
@@ -32,7 +32,7 @@ public enum CraftingItems implements IItemProvider {
     SALMON_JERKY(Foods.SALMON),
     ;
 
-    private final Food food;
+    private final FoodProperties food;
     @SuppressWarnings("NonFinalFieldInEnum")
     private ItemRegistryObject<Item> item;
 
@@ -40,7 +40,7 @@ public enum CraftingItems implements IItemProvider {
         this(null);
     }
 
-    CraftingItems(@Nullable Food food) {
+    CraftingItems(@Nullable FoodProperties food) {
         this.food = food;
     }
 
@@ -50,11 +50,11 @@ public enum CraftingItems implements IItemProvider {
         }
     }
 
-    private static Item.Properties createProperties(@Nullable Food food) {
+    private static Item.Properties createProperties(@Nullable FoodProperties food) {
         if (food != null) {
-            return new Item.Properties().group(ItemGroup.FOOD).food(food);
+            return new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(food);
         }
-        return new Item.Properties().group(ItemGroup.MISC);
+        return new Item.Properties().tab(CreativeModeTab.TAB_MISC);
     }
 
     public String getName() {

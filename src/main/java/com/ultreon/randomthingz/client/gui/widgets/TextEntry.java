@@ -2,21 +2,21 @@ package com.ultreon.randomthingz.client.gui.widgets;
 
 import com.google.common.annotations.Beta;
 import com.ultreon.randomthingz.client.graphics.MCGraphics;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 @Beta
-public class TextEntry extends TextFieldWidget implements MCWidget {
+public class TextEntry extends EditBox implements MCWidget {
     private static final ResourceLocation TEXTURE_LEFT = new ResourceLocation("randomthingz", "textures/gui/widgets/text/entry_left");
 
-    public TextEntry(FontRenderer fontRenderer, int x, int y, int width, int height, ITextComponent text) {
+    public TextEntry(Font fontRenderer, int x, int y, int width, int height, Component text) {
         super(fontRenderer, x, y, width, height, text);
     }
 
-    public TextEntry(FontRenderer fontRenderer, int x, int y, int width, int height, @Nullable TextFieldWidget textFieldWidget, ITextComponent text) {
+    public TextEntry(Font fontRenderer, int x, int y, int width, int height, @Nullable EditBox textFieldWidget, Component text) {
         super(fontRenderer, x, y, width, height, textFieldWidget, text);
     }
 

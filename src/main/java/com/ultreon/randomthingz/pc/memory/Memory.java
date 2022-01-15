@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.pc.memory;
 
-import net.minecraft.nbt.ByteArrayNBT;
+import net.minecraft.nbt.ByteArrayTag;
 
 public class Memory {
     private final int totalSize;
@@ -16,9 +16,9 @@ public class Memory {
         this.data = data;
     }
 
-    public Memory(int totalSize, ByteArrayNBT data) {
+    public Memory(int totalSize, ByteArrayTag data) {
         this.totalSize = totalSize;
-        this.data = data.getByteArray();
+        this.data = data.getAsByteArray();
     }
 
     public int getTotalSize() {

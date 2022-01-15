@@ -3,8 +3,8 @@ package com.ultreon.randomthingz.listener;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import lombok.experimental.UtilityClass;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -30,12 +30,12 @@ public class ArmorListener {
      */
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onPlayerDamage(LivingDamageEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity) {
+        if (event.getEntityLiving() instanceof Player) {
             // Get player
-            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+            Player player = (Player) event.getEntityLiving();
 
             // Get armor list.
-            List<ItemStack> armor = (List<ItemStack>) player.getArmorInventoryList();
+            List<ItemStack> armor = (List<ItemStack>) player.getArmorSlots();
 
             // Check Armor
             if (!armor.isEmpty()) {

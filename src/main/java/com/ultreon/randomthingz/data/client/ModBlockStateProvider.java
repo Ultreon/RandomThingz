@@ -7,10 +7,10 @@ import com.ultreon.randomthingz.block.StoneType;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.dryingrack.DryingRackBlock;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
-import net.minecraft.block.Block;
+import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -144,7 +144,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .modelFile(models()
                             .withExistingParent(name, modLoc("block/drying_rack"))
                             .texture("wood", mcLoc(texture)))
-                    .rotationY((int) state.get(DryingRackBlock.FACING).getHorizontalAngle())
+                    .rotationY((int) state.getValue(DryingRackBlock.FACING).toYRot())
                     .build();
         }, DryingRackBlock.WATERLOGGED);
     }

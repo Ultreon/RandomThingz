@@ -3,15 +3,15 @@ package com.ultreon.randomthingz.item;
 import com.qsoftware.modlib.api.IFluidContainer;
 import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -29,7 +29,7 @@ public class CanisterItem extends Item implements IFluidContainer {
     }
 
     public static ItemStack getStack(@Nullable Fluid fluid, int count) {
-        IItemProvider item = fluid != null ? ModItems.CANISTER : ModItems.EMPTY_CANISTER;
+        ItemLike item = fluid != null ? ModItems.CANISTER : ModItems.EMPTY_CANISTER;
         ItemStack result = new ItemStack(item, count);
         if (fluid != null) {
             ResourceLocation fluidId = Objects.requireNonNull(fluid.getRegistryName());
@@ -53,7 +53,7 @@ public class CanisterItem extends Item implements IFluidContainer {
         if (!(stack.getItem() instanceof CanisterItem)) {
             return FluidStack.EMPTY;
         }
-        ResourceLocation fluidId = ResourceLocation.tryCreate(getFluidKey(stack));
+        ResourceLocation fluidId = ResourceLocation.tryParse(getFluidKey(stack));
         if (fluidId == null) {
             return FluidStack.EMPTY;
         }
@@ -70,10 +70,10 @@ public class CanisterItem extends Item implements IFluidContainer {
     }
 
     @Override
-    public ITextComponent getDisplayName(ItemStack stack) {
+    public Component getName(ItemStack stack) {
         FluidStack fluid = getFluid(stack);
-        ITextComponent fluidText = fluid.isEmpty() ? TextUtils.translate("misc", "empty") : fluid.getDisplayName();
-        return new TranslationTextComponent(this.getTranslationId(), fluidText);
+        Component fluidText = fluid.isEmpty() ? TextUtils.translate("misc", "empty") : fluid.getDisplayName();
+        return new TranslatableComponent(this.getDescriptionId(), fluidText);
     }
 
     @Override
@@ -87,11 +87,11 @@ public class CanisterItem extends Item implements IFluidContainer {
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (isInGroup(group)) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        if (allowdedIn(group)) {
             items.add(getStack(null));
             ForgeRegistries.FLUIDS.getValues().stream()
-                    .filter(f -> f.isSource(f.getDefaultState()))
+                    .filter(f -> f.isSource(f.defaultFluidState()))
                     .map(CanisterItem::getStack)
                     .forEach(items::add);
         }

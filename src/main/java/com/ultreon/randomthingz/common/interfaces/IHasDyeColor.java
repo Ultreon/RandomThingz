@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.common.interfaces;
 
-import net.minecraft.item.DyeColor;
+import net.minecraft.world.item.DyeColor;
 
 public interface IHasDyeColor {
     DyeColor getDyeColor();

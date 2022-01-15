@@ -37,9 +37,9 @@ public class ControllerManager {
 
         for (AbstractController controller : this.controllers) {
             controller.tick();
-            if (this.mc.currentScreen != null && this.mc.currentScreen.shouldCloseOnEsc()) {
+            if (this.mc.screen != null && this.mc.screen.shouldCloseOnEsc()) {
                 if (controller.isPressingBack()) {
-                    this.mc.currentScreen.closeScreen();
+                    this.mc.screen.onClose();
                 }
             }
         }

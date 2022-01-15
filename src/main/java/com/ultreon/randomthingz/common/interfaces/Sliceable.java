@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.common.interfaces;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Sliceable items interface.

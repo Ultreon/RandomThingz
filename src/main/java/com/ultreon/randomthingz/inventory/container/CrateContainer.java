@@ -3,14 +3,14 @@ package com.ultreon.randomthingz.inventory.container;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.init.ModContainers;
 import com.ultreon.randomthingz.tileentity.CrateTileEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -20,14 +20,14 @@ import java.util.Objects;
  *
  * @author Qboi123
  */
-public class CrateContainer extends Container {
+public class CrateContainer extends AbstractContainerMenu {
     public final CrateTileEntity tileEntity;
-    private final IWorldPosCallable canInteractWithCallable;
+    private final ContainerLevelAccess canInteractWithCallable;
 
-    public CrateContainer(final int windowId, final PlayerInventory playerInventory, final CrateTileEntity tileEntity) {
+    public CrateContainer(final int windowId, final Inventory playerInventory, final CrateTileEntity tileEntity) {
         super(ModContainers.WOODEN_CRATE.get(), windowId);
         this.tileEntity = tileEntity;
-        this.canInteractWithCallable = IWorldPosCallable.of(Objects.requireNonNull(tileEntity.getDimension()), tileEntity.getPos());
+        this.canInteractWithCallable = ContainerLevelAccess.create(Objects.requireNonNull(tileEntity.getLevel()), tileEntity.getBlockPos());
 
         // Random Thingz Inventory
         int startX = 8;
@@ -97,16 +97,16 @@ public class CrateContainer extends Container {
         }
     }
 
-    public CrateContainer(final int windowId, final PlayerInventory playerInventory, final PacketBuffer data) {
+    public CrateContainer(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
         this(windowId, playerInventory, getTileEntity(playerInventory, data));
     }
 
-    private static CrateTileEntity getTileEntity(final PlayerInventory playerInventory, final PacketBuffer data) {
+    private static CrateTileEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
 //        return tileEntity;
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
 
-        final TileEntity tileAtPos = playerInventory.player.dimension.getTileEntity(data.readBlockPos());
+        final BlockEntity tileAtPos = playerInventory.player.level.getBlockEntity(data.readBlockPos());
 
         if (tileAtPos instanceof CrateTileEntity) {
             return (CrateTileEntity) tileAtPos;
@@ -116,29 +116,29 @@ public class CrateContainer extends Container {
     }
 
     @Override
-    public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
-        return isWithinUsableDistance(canInteractWithCallable, playerIn, ModBlocks.WOODEN_CRATE.get());
+    public boolean stillValid(@NotNull Player playerIn) {
+        return stillValid(canInteractWithCallable, playerIn, ModBlocks.WOODEN_CRATE.get());
     }
 
     @Override
-    public @NotNull ItemStack transferStackInSlot(@NotNull PlayerEntity playerIn, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.hasStack()) {
-            ItemStack itemStack1 = slot.getStack();
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemStack1 = slot.getItem();
             itemStack = itemStack1.copy();
             if (index < 36) {
-                if (this.mergeItemStack(itemStack1, 36, this.inventorySlots.size(), true)) {
+                if (this.moveItemStackTo(itemStack1, 36, this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemStack1, 0, 36, false)) {
+            } else if (!this.moveItemStackTo(itemStack1, 0, 36, false)) {
                 return ItemStack.EMPTY;
             }
 
             if (itemStack1 == ItemStack.EMPTY) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
         }
         return itemStack;

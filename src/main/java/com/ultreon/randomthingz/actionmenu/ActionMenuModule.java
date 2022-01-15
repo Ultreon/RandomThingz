@@ -9,7 +9,7 @@ import com.ultreon.randomthingz.common.ModuleSafety;
 import lombok.Getter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,7 +24,7 @@ public class ActionMenuModule extends Module {
     private static final MinecraftMenu minecraftMenu = new MinecraftMenu();
 
     public ActionMenuModule() {
-        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Minecraft"), minecraftMenu));
+        MainActionMenu.registerHandler(new MenuHandler(new TextComponent("Minecraft"), minecraftMenu));
 
         if (RandomThingz.isClientSide()) {
             this.clientSide = new ClientSide(this);
@@ -92,8 +92,8 @@ public class ActionMenuModule extends Module {
         @SubscribeEvent
         public void clientTick(TickEvent.ClientTickEvent event) {
             Minecraft mc = Minecraft.getInstance();
-            if (KeyBindingList.ACTION_MENU.isPressed() && !(mc.currentScreen instanceof ActionMenuScreen)) {
-                mc.displayGuiScreen(new ActionMenuScreen(mc.currentScreen, MainActionMenu.INSTANCE, 0));
+            if (KeyBindingList.ACTION_MENU.consumeClick() && !(mc.screen instanceof ActionMenuScreen)) {
+                mc.setScreen(new ActionMenuScreen(mc.screen, MainActionMenu.INSTANCE, 0));
             }
         }
     }

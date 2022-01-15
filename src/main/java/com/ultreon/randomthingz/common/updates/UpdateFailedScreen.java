@@ -1,15 +1,15 @@
 package com.ultreon.randomthingz.common.updates;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.text2speech.Narrator;
 import com.ultreon.randomthingz.RandomThingz;
-import net.minecraft.client.gui.DialogTexts;
-import net.minecraft.client.gui.IBidiRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.settings.NarratorStatus;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.NarratorStatus;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
@@ -27,7 +27,7 @@ import java.util.Objects;
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class UpdateFailedScreen extends Screen {
     // Bidi Renderer.
-    private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
+    private final MultiLineLabel message = MultiLineLabel.EMPTY;
 
     // Back screen.
     private final Screen backScreen;
@@ -41,17 +41,17 @@ public class UpdateFailedScreen extends Screen {
      * @param backScreen the back screen.
      */
     public UpdateFailedScreen(Screen backScreen) {
-        super(new TranslationTextComponent("msg.randomthingz.update_failed.title"));
+        super(new TranslatableComponent("msg.randomthingz.update_failed.title"));
         this.backScreen = backScreen;
     }
 
     /**
      * Screen initialization.
      */
-    protected void initialize() {
-        super.initialize();
+    protected void init() {
+        super.init();
 
-        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
+        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).options.narratorStatus;
 
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
             Narrator.getNarrator().say("Downloading of Update has Failed", true);
@@ -60,9 +60,9 @@ public class UpdateFailedScreen extends Screen {
         this.buttons.clear();
         this.children.clear();
 
-        this.addButton(new Button(this.width / 2 - 50, this.height / 6 + 96, 100, 20, DialogTexts.GUI_DONE, (p_213004_1_) -> {
+        this.addButton(new Button(this.width / 2 - 50, this.height / 6 + 96, 100, 20, CommonComponents.GUI_DONE, (p_213004_1_) -> {
             if (this.minecraft != null) {
-                this.minecraft.displayGuiScreen(backScreen);
+                this.minecraft.setScreen(backScreen);
             }
         }));
 
@@ -78,11 +78,11 @@ public class UpdateFailedScreen extends Screen {
      * @param mouseY       the mouse pointer y position.
      * @param partialTicks the render partial ticks.
      */
-    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 70, 0xffffff);
-        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.randomthingz.update_failed.description"), this.width / 2, 90, 0xbfbfbf);
-        this.field_243276_q.func_241863_a(matrixStack, this.width / 2, 90);
+        drawCenteredString(matrixStack, this.font, new TranslatableComponent("msg.randomthingz.update_failed.description"), this.width / 2, 90, 0xbfbfbf);
+        this.message.renderCentered(matrixStack, this.width / 2, 90);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
@@ -94,7 +94,7 @@ public class UpdateFailedScreen extends Screen {
     public void setButtonDelay(int ticksUntilEnableIn) {
         this.ticksUntilEnable = ticksUntilEnableIn;
 
-        for (Widget widget : this.buttons) {
+        for (AbstractWidget widget : this.buttons) {
             widget.active = false;
         }
 
@@ -111,7 +111,7 @@ public class UpdateFailedScreen extends Screen {
             this.ticksUntilEnable = 0;
         }
         if (this.ticksUntilEnable == 0) {
-            for (Widget widget : this.buttons) {
+            for (AbstractWidget widget : this.buttons) {
                 widget.active = true;
             }
         }

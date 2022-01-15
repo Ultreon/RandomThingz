@@ -3,14 +3,14 @@ package com.ultreon.texturedmodels.util;
 import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.GrassColors;
-import net.minecraft.world.IBlockDisplayReader;
-import net.minecraft.world.biome.BiomeColors;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.GrassColor;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -27,8 +27,8 @@ import javax.annotation.Nullable;
  * @author PianoManu
  * @version 1.4 09/28/20
  */
-public class BlockColorHandler implements IBlockColor {
-    public static final IBlockColor INSTANCE = new BlockColorHandler();
+public class BlockColorHandler implements BlockColor {
+    public static final BlockColor INSTANCE = new BlockColorHandler();
     private static final Logger LOGGER = LogManager.getLogger();
 
     @OnlyIn(Dist.CLIENT)
@@ -36,8 +36,8 @@ public class BlockColorHandler implements IBlockColor {
     public static void registerBlockColorHandlers(final ColorHandlerEvent.Block event) {
         registerBlockColors();
         event.getBlockColors().register((x, reader, pos, u) -> reader != null
-                && pos != null ? BiomeColors.getGrassColor(reader, pos)
-                : GrassColors.get(0.5D, 1.0D), Registration.FRAMEBLOCK.get());
+                && pos != null ? BiomeColors.getAverageGrassColor(reader, pos)
+                : GrassColor.get(0.5D, 1.0D), Registration.FRAMEBLOCK.get());
     }
 
     public static void registerBlockColors() {
@@ -79,18 +79,18 @@ public class BlockColorHandler implements IBlockColor {
     }
 
     @Override
-    public int getColor(@Nonnull BlockState state, @Nullable IBlockDisplayReader lightReader, @Nullable BlockPos pos, int tintIndex) {
+    public int getColor(@Nonnull BlockState state, @Nullable BlockAndTintGetter lightReader, @Nullable BlockPos pos, int tintIndex) {
         //TODO does this work?
         if (state.getBlock() instanceof FrameBlock && lightReader != null && pos != null) {
-            TileEntity te = lightReader.getTileEntity(pos);
-            if (te instanceof FrameBlockTile && state.get(BCBlockStateProperties.CONTAINS_BLOCK)) {
+            BlockEntity te = lightReader.getBlockEntity(pos);
+            if (te instanceof FrameBlockTile && state.getValue(BCBlockStateProperties.CONTAINS_BLOCK)) {
                 BlockState containedBlock = ((FrameBlockTile) te).getMimic();
-                return BiomeColors.getGrassColor(lightReader, pos);
+                return BiomeColors.getAverageGrassColor(lightReader, pos);
 
                 //return Minecraft.getInstance().getBlockColors().getColor(containedBlock, lightReader, pos, tintIndex);
             }
         }
-        return BiomeColors.getGrassColor(lightReader, pos);
+        return BiomeColors.getAverageGrassColor(lightReader, pos);
     }
 }
 //========SOLI DEO GLORIA========//

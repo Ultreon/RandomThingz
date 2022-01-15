@@ -3,9 +3,9 @@ package com.ultreon.randomthingz.client.render.variant;
 import com.google.common.collect.ImmutableList;
 import com.ultreon.randomthingz.RandomThingz;
 import net.minecraft.client.renderer.entity.BeeRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.entity.passive.BeeEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.Bee;
 
 import java.util.List;
 import java.util.Locale;
@@ -17,12 +17,12 @@ public class VariantBeeRenderer extends BeeRenderer {
             "beequeer", "enbee", "gaybee", "interbee", "lesbeean",
             "panbee", "polysexbee", "transbee", "helen");
 
-    public VariantBeeRenderer(EntityRendererManager renderManagerIn) {
+    public VariantBeeRenderer(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn);
     }
 
     @Override
-    public ResourceLocation getEntityTexture(BeeEntity entity) {
+    public ResourceLocation getTextureLocation(Bee entity) {
         if (entity.hasCustomName()/* || MobVariantsModule.everyBeeIsLGBT*/) {
             String custName = entity.hasCustomName() ? entity.getCustomName().getString().trim() : "";
             String name = custName.toLowerCase(Locale.ROOT);
@@ -51,7 +51,7 @@ public class VariantBeeRenderer extends BeeRenderer {
             }
         }
 
-        return super.getEntityTexture(entity);
+        return super.getTextureLocation(entity);
     }
 
 }

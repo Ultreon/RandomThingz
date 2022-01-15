@@ -1,17 +1,17 @@
 package com.ultreon.randomthingz.block.machines.generator.coal;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 
 public class CoalGeneratorScreen extends AbstractMachineBaseScreen<CoalGeneratorContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/coal_generator.png");
 
-    public CoalGeneratorScreen(CoalGeneratorContainer container, PlayerInventory playerInventory, ITextComponent titleIn) {
+    public CoalGeneratorScreen(CoalGeneratorContainer container, Inventory playerInventory, Component titleIn) {
         super(container, playerInventory, titleIn);
     }
 
@@ -21,37 +21,37 @@ public class CoalGeneratorScreen extends AbstractMachineBaseScreen<CoalGenerator
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+        this.renderTooltip(matrixStack, mouseX, mouseY);
     }
 
     @Override
-    protected void renderHoveredTooltip(MatrixStack matrixStack, int x, int y) {
-        if (isPointInRegion(153, 17, 13, 51, x, y)) {
-            ITextComponent text = TextUtils.energyWithMax(container.getEnergyStored(), container.tileEntity.getMaxEnergyStored());
+    protected void renderTooltip(PoseStack matrixStack, int x, int y) {
+        if (isHovering(153, 17, 13, 51, x, y)) {
+            Component text = TextUtils.energyWithMax(menu.getEnergyStored(), menu.tileEntity.getMaxEnergyStored());
             renderTooltip(matrixStack, text, x, y);
         }
-        super.renderHoveredTooltip(matrixStack, x, y);
+        super.renderTooltip(matrixStack, x, y);
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
-        super.drawGuiContainerBackgroundLayer(matrixStack, partialTicks, x, y);
+    protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
+        super.renderBg(matrixStack, partialTicks, x, y);
 
         if (minecraft == null) return;
-        int xPos = (this.width - this.xSize) / 2;
-        int yPos = (this.height - this.ySize) / 2;
+        int xPos = (this.width - this.imageWidth) / 2;
+        int yPos = (this.height - this.imageHeight) / 2;
 
         // Fuel remaining
-        if (container.isBurning()) {
+        if (menu.isBurning()) {
             int height = getFlameIconHeight();
             blit(matrixStack, xPos + 81, yPos + 53 + 12 - height, 176, 12 - height, 14, height + 1);
         }
 
         // Energy meter
-        int energyBarHeight = container.getEnergyBarHeight();
+        int energyBarHeight = menu.getEnergyBarHeight();
         if (energyBarHeight > 0) {
             blit(matrixStack, xPos + 154, yPos + 68 - energyBarHeight, 176, 31, 12, energyBarHeight);
         }
@@ -65,8 +65,8 @@ public class CoalGeneratorScreen extends AbstractMachineBaseScreen<CoalGenerator
     }
 
     private int getFlameIconHeight() {
-        int total = container.getTotalBurnTime();
+        int total = menu.getTotalBurnTime();
         if (total == 0) total = 200;
-        return container.getBurnTime() * 13 / total;
+        return menu.getBurnTime() * 13 / total;
     }
 }

@@ -9,11 +9,11 @@ import com.ultreon.randomthingz.common.ModuleSafety;
 import com.ultreon.randomthingz.util.Targeter;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -37,8 +37,8 @@ public class EntitiesModule extends CoreRegisterModule<EntityType<?>> {
     private static final PlayerMenu playerMenu = new PlayerMenu();
 
     public EntitiesModule() {
-        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Entity"), entityMenu, EntitiesModule::enableMenu));
-        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Player"), playerMenu, EntitiesModule::enableMenu));
+        MainActionMenu.registerHandler(new MenuHandler(new TextComponent("Entity"), entityMenu, EntitiesModule::enableMenu));
+        MainActionMenu.registerHandler(new MenuHandler(new TextComponent("Player"), playerMenu, EntitiesModule::enableMenu));
     }
 
     private static boolean enableMenu() {
@@ -48,10 +48,10 @@ public class EntitiesModule extends CoreRegisterModule<EntityType<?>> {
     @OnlyIn(Dist.CLIENT)
     private static boolean clientEnableMenu() {
         Minecraft mc = Minecraft.getInstance();
-        World dimension = mc.dimension;
-        PlayerEntity player = mc.player;
+        Level dimension = mc.level;
+        Player player = mc.player;
 
-        EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
+        EntityHitResult result = Targeter.rayTraceEntities(player, dimension);
         return result != null;
     }
 

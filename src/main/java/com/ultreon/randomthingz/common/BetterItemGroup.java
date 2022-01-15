@@ -1,14 +1,14 @@
 package com.ultreon.randomthingz.common;
 
 import lombok.Getter;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
-import net.minecraft.crash.ReportedException;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.CrashReport;
+import net.minecraft.CrashReportCategory;
+import net.minecraft.ReportedException;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class BetterItemGroup extends ItemGroup {
+public class BetterItemGroup extends CreativeModeTab {
     private final ItemStack icon;
     @Getter
     private final ResourceLocation location;
@@ -30,7 +30,7 @@ public class BetterItemGroup extends ItemGroup {
         this.labelName = location.getPath().replaceAll("[/.]", "_");
     }
 
-    public BetterItemGroup(ResourceLocation location, IItemProvider itemProvider) {
+    public BetterItemGroup(ResourceLocation location, ItemLike itemProvider) {
         super(location.getNamespace() + "_" + location.getPath().replaceAll("[/.]", "_"));
         this.icon = new ItemStack(itemProvider);
         this.location = location;
@@ -42,7 +42,7 @@ public class BetterItemGroup extends ItemGroup {
     }
 
     @Override
-    public @NotNull ItemStack createIcon() {
+    public @NotNull ItemStack makeIcon() {
         return this.icon;
     }
 
@@ -55,9 +55,9 @@ public class BetterItemGroup extends ItemGroup {
             values.stream().map(function).filter(Objects::nonNull).forEach(items::add);
         } catch (Throwable t) {
 
-            CrashReport crashreport = CrashReport.createCrashReport(t, "Enum has no static values() method.");
-            CrashReportCategory crashreportcategory = crashreport.createCategory("Enum being looped in RandomThingz Item Group.");
-            crashreportcategory.addDetail("Enum Class Name", enum_::toString);
+            CrashReport crashreport = CrashReport.forThrowable(t, "Enum has no static values() method.");
+            CrashReportCategory crashreportcategory = crashreport.addCategory("Enum being looped in RandomThingz Item Group.");
+            crashreportcategory.setDetail("Enum Class Name", enum_::toString);
             throw new ReportedException(crashreport);
         }
     }
@@ -71,15 +71,15 @@ public class BetterItemGroup extends ItemGroup {
             values.stream().map(function).filter(Objects::nonNull).forEach(items::addAll);
         } catch (Throwable t) {
 
-            CrashReport crashreport = CrashReport.createCrashReport(t, "Enum has no static values() method.");
-            CrashReportCategory crashreportcategory = crashreport.createCategory("Enum being looped in RandomThingz Item Group.");
-            crashreportcategory.addDetail("Enum Class Name", enum_::toString);
+            CrashReport crashreport = CrashReport.forThrowable(t, "Enum has no static values() method.");
+            CrashReportCategory crashreportcategory = crashreport.addCategory("Enum being looped in RandomThingz Item Group.");
+            crashreportcategory.setDetail("Enum Class Name", enum_::toString);
             throw new ReportedException(crashreport);
         }
     }
 
     @SuppressWarnings("unchecked")
-    protected <T extends Enum<T>> void addEnumValuesCollection(NonNullList<ItemStack> items, Class<T> enum_, Function<T, Collection<IItemProvider>> function) {
+    protected <T extends Enum<T>> void addEnumValuesCollection(NonNullList<ItemStack> items, Class<T> enum_, Function<T, Collection<ItemLike>> function) {
         try {
             Method method = enum_.getDeclaredMethod("values");
             Collection<T> values = (Collection<T>) method.invoke(null);
@@ -87,15 +87,15 @@ public class BetterItemGroup extends ItemGroup {
             values.forEach(t -> function.apply(t).stream().filter(Objects::nonNull).forEach((item) -> items.add(new ItemStack(item))));
         } catch (Throwable t) {
 
-            CrashReport crashreport = CrashReport.createCrashReport(t, "Enum has no static values() method.");
-            CrashReportCategory crashreportcategory = crashreport.createCategory("Enum being looped in RandomThingz Item Group.");
-            crashreportcategory.addDetail("Enum Class Name", enum_::toString);
+            CrashReport crashreport = CrashReport.forThrowable(t, "Enum has no static values() method.");
+            CrashReportCategory crashreportcategory = crashreport.addCategory("Enum being looped in RandomThingz Item Group.");
+            crashreportcategory.setDetail("Enum Class Name", enum_::toString);
             throw new ReportedException(crashreport);
         }
     }
 
     @SuppressWarnings("unchecked")
-    protected <T extends Enum<T>> void addEnumValues(NonNullList<ItemStack> items, Class<T> enum_, Function<T, IItemProvider> function) {
+    protected <T extends Enum<T>> void addEnumValues(NonNullList<ItemStack> items, Class<T> enum_, Function<T, ItemLike> function) {
         try {
             Method method = enum_.getDeclaredMethod("values");
             Collection<T> values = (Collection<T>) method.invoke(null);
@@ -103,9 +103,9 @@ public class BetterItemGroup extends ItemGroup {
             values.stream().map(t -> function.apply(t) != null ? new ItemStack(function.apply(t)) : null).filter(Objects::nonNull).forEach(items::add);
         } catch (Throwable t) {
 
-            CrashReport crashreport = CrashReport.createCrashReport(t, "Enum has no static values() method.");
-            CrashReportCategory crashreportcategory = crashreport.createCategory("Enum being looped in RandomThingz Item Group.");
-            crashreportcategory.addDetail("Enum Class Name", enum_::toString);
+            CrashReport crashreport = CrashReport.forThrowable(t, "Enum has no static values() method.");
+            CrashReportCategory crashreportcategory = crashreport.addCategory("Enum being looped in RandomThingz Item Group.");
+            crashreportcategory.setDetail("Enum Class Name", enum_::toString);
             throw new ReportedException(crashreport);
         }
     }

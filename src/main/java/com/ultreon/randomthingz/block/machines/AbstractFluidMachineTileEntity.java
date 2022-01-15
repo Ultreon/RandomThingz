@@ -6,15 +6,15 @@ import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidInventory;
 import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -30,7 +30,7 @@ import java.util.stream.IntStream;
 
 public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> extends AbstractMachineTileEntity<R> implements IFluidInventory {
     protected final FluidTank[] tanks;
-    protected final IIntArray fields = new IIntArray() {
+    protected final ContainerData fields = new ContainerData() {
         @SuppressWarnings("deprecation") // Use of Registry
         @Override
         public int get(int index) {
@@ -80,13 +80,13 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
         }
 
         @Override
-        public int size() {
+        public int getCount() {
             return 7 + 2 * tanks.length;
         }
     };
     private final LazyOptional<IFluidHandler> fluidHandlerCap;
 
-    protected AbstractFluidMachineTileEntity(TileEntityType<?> typeIn, int inventorySize, int tankCount, int tankCapacity, MachineTier tier) {
+    protected AbstractFluidMachineTileEntity(BlockEntityType<?> typeIn, int inventorySize, int tankCount, int tankCapacity, MachineTier tier) {
         super(typeIn, inventorySize, tier);
         this.tanks = IntStream.range(0, tankCount).mapToObj(k -> new FluidTank(tankCapacity)).toArray(FluidTank[]::new);
         this.fluidHandlerCap = LazyOptional.of(() -> this);
@@ -121,7 +121,7 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
 
     @Override
     public void tick() {
-        if (dimension == null || dimension.isClientSided) return;
+        if (level == null || level.isClientSide) return;
 
         R recipe = getRecipe();
         if (recipe != null && canMachineRun(recipe)) {
@@ -142,7 +142,7 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
                     setInactiveState();
                 }
             } else {
-                sendUpdate(getActiveState(dimension.getBlockState(pos)));
+                sendUpdate(getActiveState(level.getBlockState(worldPosition)));
             }
         } else {
             if (recipe == null) {
@@ -153,11 +153,11 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
     }
 
     private boolean canMachineRun(R recipe) {
-        return dimension != null
+        return level != null
                 && getEnergyStored() >= getEnergyUsedPerTick()
                 && hasRoomInOutputTank(getPossibleFluidResults(recipe))
                 && hasRoomInOutput(getPossibleProcessResult(recipe))
-                && redstoneMode.shouldRun(dimension.getRedstonePowerFromNeighbors(pos) > 0);
+                && redstoneMode.shouldRun(level.getBestNeighborSignal(worldPosition) > 0);
     }
 
     private boolean hasRoomInOutputTank(Iterable<FluidStack> results) {
@@ -207,37 +207,37 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
     protected abstract void consumeIngredients(R recipe);
 
     @Override
-    public void delete() {
-        super.delete();
+    public void setRemoved() {
+        super.setRemoved();
         fluidHandlerCap.invalidate();
     }
 
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (!this.removed && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+        if (!this.remove && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.orEmpty(cap, fluidHandlerCap.cast());
         }
         return super.getCapability(cap, side);
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT tags) {
-        ListNBT list = tags.getList("Tanks", 10);
+    public void load(BlockState state, CompoundTag tags) {
+        ListTag list = tags.getList("Tanks", 10);
         for (int i = 0; i < tanks.length && i < list.size(); ++i) {
-            INBT nbt = list.get(i);
-            tanks[i].setFluid(FluidStack.loadFluidStackFromNBT((CompoundNBT) nbt));
+            Tag nbt = list.get(i);
+            tanks[i].setFluid(FluidStack.loadFluidStackFromNBT((CompoundTag) nbt));
         }
-        super.read(state, tags);
+        super.load(state, tags);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT tags) {
-        ListNBT list = new ListNBT();
+    public CompoundTag save(CompoundTag tags) {
+        ListTag list = new ListTag();
         for (FluidTank tank : tanks) {
-            list.add(tank.writeToNBT(new CompoundNBT()));
+            list.add(tank.writeToNBT(new CompoundTag()));
         }
         tags.put("Tanks", list);
-        return super.write(tags);
+        return super.save(tags);
     }
 
     @Override

@@ -1,38 +1,19 @@
 //file:noinspection GroovyUnusedAssignment
 //file:noinspection GroovyAssignabilityCheck
 //file:noinspection JCenterRepository
+
 import java.time.LocalDate
 import java.time.LocalTime
-
 buildscript {
     repositories {
-        mavenLocal()
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        maven { url='https://dist.creeper.host/Sponge/maven' }
-        jcenter()
+        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
-        maven {
-            name "sonatype"
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-        maven {
-            url "https://github.com/QTechCommunity/Maven/raw/main/"
-        }
-        maven {
-            url "https://maven.tterrag.com/"
-        }
-        maven {
-            url "https://repo.spongepowered.org/maven"
-        }
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '4.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
-        classpath group: 'commons-io', name: 'commons-io', version: '2.8.0'
-        classpath group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
         classpath "io.freefair.gradle:lombok-plugin:4.1.6"
     }
 }
@@ -41,47 +22,16 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 
 // Other plugins.
-apply plugin: 'maven'
 apply plugin: 'java-library'
 apply plugin: 'signing'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: "io.freefair.lombok"
+apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
 println('Java: ' + System.getProperty('java.version') + '\n JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ')\n Arch: ' + System.getProperty('os.arch'))
 println("OS: " + System.getProperty("os.name") + "\n OS Version: " + System.getProperty("os.version"))
-
-//// Read build number file.
-//int version1 = Integer.parseInt(project.property("version").toString())
-//int release = Integer.parseInt(project.property("versionRelease").toString())
-//String stage = project.property("versionStage").toString()
-//int stageRelease = Integer.parseInt(project.property("versionStageRelease").toString())
-//
-//String content = ""
-//String filePath = "buildnumber.txt"
-//
-//println("Current Path: " + new File('.').getAbsolutePath())
-//
-//try {
-//    content = new String(Files.readAllBytes(FileSystems.getDefault().getPath(project.getRootDir().getAbsolutePath(), filePath)))
-//} catch (IOException e) {
-//    throw new RuntimeException(e)
-//}
-//
-//String buildNrString = content
-//Integer buildNumber = Integer.valueOf(buildNrString)
-//
-//// Advance build number.
-//buildNumber++
-//println("Executing Build " + buildNumber)
-//String newBuild = buildNumber.toString()
-//
-//// Write new build number.
-//FileOutputStream output = new FileOutputStream("${projectDir}/buildnumber.txt")
-//output.write(newBuild.getBytes())
-//output.flush()
-//output.close()
 
 boolean isDevTest = Boolean.parseBoolean rootProject.property("isDevTest").toString()
 
@@ -96,13 +46,7 @@ if (isDevTest) {
     version "" + (date.year - 1985) + "." + date.dayOfYear + "." + ((time.hour * 3600 + time.minute * 60 + time.second) / SECOND_INTERVAL as Integer)
 }
 
-group 'com.qtech' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'randomthingz'
-
-jar.archiveVersion.set(version) // Set Jar archive version to the project version.
-
-sourceCompatibility = compileJava.sourceCompatibility = JavaVersion.VERSION_1_8 // Minecraft versions prior to 1.17 needs Java version 1.8
-targetCompatibility = compileJava.targetCompatibility = JavaVersion.VERSION_1_8 // Minecraft versions prior to 1.17 needs Java version 1.8
+group 'com.qtech' // https://maven.apache.org/guides/mini/guide-naming-conventions.html
 
 println "Current version: " + version
 println "Project: " + group + ":" + archivesBaseName
@@ -112,27 +56,9 @@ mixin {
     add sourceSets.main, "randomthingz.refmap.json"
 }
 
-publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/QTechCommunity/RandomThingz")
-            credentials {
-                username = System.getenv("GITHUB_USERNAME")
-                password = System.getenv("GITHUB_TOKEN")
-            }
-        }
-        maven {
-            name = "QTGithubMaven"
-            url = uri("/media/quint/DATA")
-        }
-    }
-    publications {
-        //noinspection GroovyAssignabilityCheck
-        gpr(MavenPublication) {
-            from(components.java)
-        }
-    }
+java {
+    archivesBaseName = 'randomthingz'
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
 repositories {
@@ -151,7 +77,7 @@ minecraft {
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
 //    mappings channel: 'snapshot', version: '20210309-1.16.5'
-    mappings channel: 'stable', version: 'qtech-1.16.5-19'
+    mappings channel: 'official', version: '1.18.1'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -161,7 +87,7 @@ minecraft {
     runs {
         client {
             //noinspection GroovyAssignabilityCheck
-            workingDirectory project.file('run')
+            workingDirectory project.file('runClient')
             arg "-mixin.config=randomthingz.mixins.json"
 
             // Recommended logging data for a userdev environment
@@ -169,6 +95,8 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+
+            environment 'MOD_CLASSES', 'dummy'
 
             mods {
                 randomthingz {
@@ -179,11 +107,43 @@ minecraft {
         }
 
         clientTest {
+            workingDirectory project.file('runClientTest')
             parent runs.client
 
-            arg "-mixin.config=randomthingz.mixins.json"
+            taskName "runClientTest"
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            environment 'MOD_CLASSES', 'dummy'
+
+            mods {
+                randomthingz {
+                    source sourceSets.main
+                }
+                test {
+                    source sourceSets.test
+                }
+            }
+        }
+
+        clientAlt {
+            workingDirectory project.file('runClientAlt')
+            parent runs.client
 
             taskName "runClientTest"
+
+            arg "-mixin.config=randomthingz.mixins.json"
+            arg "--username=DevAlt"
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
 
             environment 'MOD_CLASSES', 'dummy'
 
@@ -199,7 +159,7 @@ minecraft {
 
         server {
             //noinspection GroovyAssignabilityCheck
-            workingDirectory project.file('run')
+            workingDirectory project.file('runServer')
             arg "-mixin.config=randomthingz.mixins.json"
 
             // Recommended logging data for a userdev environment
@@ -218,7 +178,7 @@ minecraft {
 
         data {
             //noinspection GroovyAssignabilityCheck
-            workingDirectory project.file('run')
+            workingDirectory project.file('runData')
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -248,7 +208,6 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    jcenter()
     google()
     mavenCentral()
     mavenLocal()
@@ -257,32 +216,28 @@ repositories {
         url 'https://maven.minecraftforge.net'
     }
     maven {
-        name "Forge Maven"
-        url 'https://files.minecraftforge.net/maven'
-    }
-    maven {
         name "Sonatype"
         url "https://oss.sonatype.org/content/repositories/snapshots/"
     }
     maven { // JEI
         name "Progwml6 Maven"
-        url "http://dvs1.progwml6.com/files/maven/"
+        url "https://dvs1.progwml6.com/files/maven/"
     }
     maven { // Fallback for JEI
         name "ModMaven"
-        url "http://modmaven.k-4u.nl"
+        url "https://modmaven.k-4u.nl"
     }
     maven {
         name "SquidDev Maven"
-        url 'http://squiddev.cc/maven/'
+        url 'https://squiddev.cc/maven/'
     }
     maven {
         name "JitPack"
-        url 'http://jitpack.io'
+        url 'https://jitpack.io'
     }
     maven {
         name "ImageJ"
-        url 'http://maven.imagej.net/content/repositories/public/'
+        url 'https://maven.imagej.net/content/repositories/public/'
     }
     maven {
         name "Sponge Powered Maven"
@@ -317,11 +272,11 @@ configurations {
 // Dependencies
 dependencies {
     // Jetbrains Annotations
-    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'org.jetbrains:annotations:22.0.0'
 
     // Jamepad for Gamepads including XInput.
-    compile group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
-    testCompile group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
+    implementation group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
+    testImplementation group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
     extraLibs group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
 
     // QModLib - Qboi's Library Mod.
@@ -334,33 +289,33 @@ dependencies {
     testImplementation group: "com.qtech.commons", name: "commons", version: "1.0.+"
     extraLibs group: "com.qtech.commons", name: "commons", version: "1.0.+"
 
-    compileOnly 'org.projectlombok:lombok:1.18.18'
-    annotationProcessor 'org.projectlombok:lombok:1.18.18'
-    annotationProcessor 'org.spongepowered:mixin:0.8:processor'
-    testCompileOnly 'org.projectlombok:lombok:1.18.18'
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.18'
-    testAnnotationProcessor 'org.spongepowered:mixin:0.8:processor'
+    testAnnotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
 
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft(group: "net.minecraftforge", name: "forge", version: "${mc_version}-${forge_version}"){
+    minecraft(group: "net.minecraftforge", name: "forge", version: "1.18.1-39.0.36"){
         force true
     }
 
     // JEI
     if (project.hasProperty("jei_version")) {
-        // compile against the JEI API but do not include it at runtime
+        // implementation against the JEI API but do not include it at runtime
         compileOnly fg.deobf("mezz.jei:jei-${project.jei_version}")
         // at runtime, use the full JEI jar
         runtimeOnly fg.deobf("mezz.jei:jei-${project.jei_version}")
     }
 
     if (project.hasProperty("refined_storage_version")) {
-        compile fg.deobf("com.raoulvdberge:refinedstorage:${project.refined_storage_version}")
+        implementation fg.deobf("com.raoulvdberge:refinedstorage:${project.refined_storage_version}")
     }
     implementation 'net.sf.mgp:maven-unclasses-plugin:0.0.6'
-    implementation 'app.cash.exhaustive:exhaustive-annotation:0.1.1'
+    implementation 'app.cash.exhaustive:exhaustive-annotation:0.2.0'
 }
 
 // process mods.toml to inject variables
@@ -397,8 +352,6 @@ task replaceResources(type: Copy) {
 //    into new File(processResources.destinationDir, "META-INF")
 //    into new File("${projectDir}/src/main/resources/META-INF")
 //}
-
-import org.apache.tools.ant.filters.ReplaceTokens
 
 processResources {
 //    exclude 'META-INF/mods.toml'
@@ -461,51 +414,25 @@ jar.finalizedBy('reobfJar')
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 //publish.dependsOn('reobfJar')
 
-/**
- * Upload jars to local or ftp maven repository.
- */
-task("uploadJars", dependsOn: "build") {
-    // Set description.
-    description = "uploads JARs"
-
-    // Has local or sftp maven property.
-    if (project.hasProperty("local_maven") || project.hasProperty("sftp_maven")) {
-        // Apply plugins.
-        apply plugin: 'maven'
-
-        // Upload archives.
-        uploadArchives {
-            // Repositories.
-            repositories {
-                // Has local maven property.
-                if (project.hasProperty("local_maven")) {
-                    // Maven deployer for local repos.
-                    mavenDeployer {
-                        // Local maven repository url (in local filesystem).
-                        repository(url: "file://${local_maven}")
-                    }
-                }
-
-                // Has sftp maven property.
-                if (project.hasProperty("sftp_maven")) {
-                    // Maven deployer for sftp.
-                    repositories.mavenDeployer {
-                        configuration = configurations.deployerJars
-                        repository(url: "sftp://${sftp_maven}") {
-                             authentication(userName: "${sftp_username}", privateKey: "${sftp_key}")
-                        }
-                    }
-                }
-            }
-            return new ArrayList<>()
-        }
-    }
-}
-
 tasks.withType(Test).configureEach {
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 }
 
 tasks.withType(JavaCompile).configureEach {
     it.options.fork = true
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubMaven"
+            url = uri("${projectDir}/.maven_repo")
+        }
+    }
+    publications {
+        //noinspection GroovyAssignabilityCheck
+        gpr(MavenPublication) {
+            from components.java
+        }
+    }
 }

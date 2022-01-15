@@ -9,9 +9,9 @@ import com.ultreon.randomthingz.init.ModContainers;
 import com.ultreon.randomthingz.tileentity.renderer.ChristmasChestTileEntityRenderer;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
-import net.minecraft.client.renderer.entity.SpriteRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.StrayRenderer;
 import net.minecraft.client.renderer.entity.WitherSkeletonRenderer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -48,7 +48,7 @@ public class ClientEventBusSubscriber {
      * Register screen factories.
      */
     private static void registerScreenFactories() {
-        ScreenManager.registerFactory(ModContainers.WOODEN_CRATE.get(), ExampleChestScreen::new);
+        MenuScreens.register(ModContainers.WOODEN_CRATE.get(), ExampleChestScreen::new);
     }
 
     /**
@@ -77,8 +77,8 @@ public class ClientEventBusSubscriber {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ICE_ENDERMAN.get(), IceEndermanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FIRE_CREEPER.get(), FireCreeperRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.GLOW_SQUID.get(), GlowSquidRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LEGENDARY_ENDER_PEARL.get(), manager -> new SpriteRenderer<>(Minecraft.getInstance().getRenderManager(), Minecraft.getInstance().getItemRenderer()));
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.DYNAMITE.get(), manager -> new SpriteRenderer<>(Minecraft.getInstance().getRenderManager(), Minecraft.getInstance().getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.LEGENDARY_ENDER_PEARL.get(), manager -> new ThrownItemRenderer<>(Minecraft.getInstance().getEntityRenderDispatcher(), Minecraft.getInstance().getItemRenderer()));
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.DYNAMITE.get(), manager -> new ThrownItemRenderer<>(Minecraft.getInstance().getEntityRenderDispatcher(), Minecraft.getInstance().getItemRenderer()));
     }
 
     /**

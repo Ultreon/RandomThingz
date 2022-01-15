@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.util;
 
 import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.IResource;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -19,7 +19,7 @@ public class CustomizedTexture extends QFMTexture {
     private final InputStream stream;
 
     public CustomizedTexture(ResourceLocation location) throws IOException {
-        IResource resource = Minecraft.getInstance().getResourceManager().getResource(location);
+        Resource resource = Minecraft.getInstance().getResourceManager().getResource(location);
         stream = resource.getInputStream();
     }
 

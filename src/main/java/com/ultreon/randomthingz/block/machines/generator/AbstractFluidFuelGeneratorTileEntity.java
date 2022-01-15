@@ -6,15 +6,15 @@ import com.qsoftware.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.config.Config;
 import com.ultreon.randomthingz.util.InventoryUtils;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -29,7 +29,7 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
     public static final int FIELDS_COUNT = 9;
 
     protected final FluidTank tank;
-    protected final IIntArray fields = new IIntArray() {
+    protected final ContainerData fields = new ContainerData() {
         @SuppressWarnings("deprecation") // Use of Registry.FLUID
         @Override
         public int get(int index) {
@@ -76,13 +76,13 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
         }
 
         @Override
-        public int size() {
+        public int getCount() {
             return FIELDS_COUNT;
         }
     };
     private final LazyOptional<IFluidHandler> fluidHandlerCap;
 
-    protected AbstractFluidFuelGeneratorTileEntity(TileEntityType<?> typeIn, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, FluidTank tankIn) {
+    protected AbstractFluidFuelGeneratorTileEntity(BlockEntityType<?> typeIn, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, FluidTank tankIn) {
         super(typeIn, inventorySize, maxEnergy, maxReceive, maxExtract, MachineTier.STANDARD);
         this.tank = tankIn;
         this.fluidHandlerCap = LazyOptional.of(() -> tank);
@@ -95,9 +95,9 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
         if (canAcceptFluidContainer(item, fluid)) {
             tank.fill(fluid, IFluidHandler.FluidAction.EXECUTE);
 
-            ItemStack output = getStackInSlot(1);
+            ItemStack output = getItem(1);
             if (output.isEmpty()) {
-                setInventorySlotContents(1, item.getContainerItem());
+                setItem(1, item.getContainerItem());
             } else {
                 output.grow(1);
             }
@@ -107,12 +107,12 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
     }
 
     private boolean canAcceptFluidContainer(ItemStack item, FluidStack fluid) {
-        ItemStack output = getStackInSlot(1);
+        ItemStack output = getItem(1);
         return !fluid.isEmpty()
                 && tank.isFluidValid(0, fluid)
                 && tank.fill(fluid, IFluidHandler.FluidAction.SIMULATE) == fluid.getAmount()
                 && (output.isEmpty() || InventoryUtils.canItemsStack(item.getContainerItem(), output))
-                && (output.isEmpty() || output.getCount() < output.getMaxSize());
+                && (output.isEmpty() || output.getCount() < output.getMaxStackSize());
     }
 
     @Override
@@ -125,7 +125,7 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
     public void tick() {
         // Drain fluid containers into internal tank
         if (tank.getFluidAmount() < tank.getTankCapacity(0) - 999) {
-            ItemStack stack = getStackInSlot(0);
+            ItemStack stack = getItem(0);
             if (!stack.isEmpty()) {
                 tryFillTank(stack);
             }
@@ -134,32 +134,32 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT tags) {
-        super.read(state, tags);
+    public void load(BlockState state, CompoundTag tags) {
+        super.load(state, tags);
         if (tags.contains("FluidTank")) {
             this.tank.setFluid(FluidStack.loadFluidStackFromNBT(tags.getCompound("FluidTank")));
         }
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT tags) {
-        tags.put("FluidTank", this.tank.writeToNBT(new CompoundNBT()));
-        return super.write(tags);
+    public CompoundTag save(CompoundTag tags) {
+        tags.put("FluidTank", this.tank.writeToNBT(new CompoundTag()));
+        return super.save(tags);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         super.onDataPacket(net, packet);
-        CompoundNBT tags = packet.getNbt();
+        CompoundTag tags = packet.getTag();
         if (tags.contains("FluidTank")) {
             this.tank.setFluid(FluidStack.loadFluidStackFromNBT(tags.getCompound("FluidTank")));
         }
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT tags = super.getUpdateTag();
-        tags.put("FluidTank", this.tank.writeToNBT(new CompoundNBT()));
+    public CompoundTag getUpdateTag() {
+        CompoundTag tags = super.getUpdateTag();
+        tags.put("FluidTank", this.tank.writeToNBT(new CompoundTag()));
         return tags;
     }
 
@@ -172,8 +172,8 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
     }
 
     @Override
-    public void delete() {
-        super.delete();
+    public void setRemoved() {
+        super.setRemoved();
         fluidHandlerCap.invalidate();
     }
 }

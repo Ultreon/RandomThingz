@@ -2,15 +2,15 @@ package com.ultreon.randomthingz.item;
 
 import com.ultreon.randomthingz.common.enums.TextColors;
 import com.ultreon.randomthingz.item.type.EnergyStoringItem;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,9 +30,9 @@ public class MagnetItem extends EnergyStoringItem {
 
     @Override
     public @NotNull
-    ActionResult<ItemStack> onItemRightClick(@NotNull World dimensionIn, PlayerEntity playerIn, @NotNull Hand handIn) {
-        ItemStack stack = playerIn.getHeldItem(handIn);
-        CompoundNBT nbt = stack.getOrCreateChildTag(Objects.requireNonNull(stack.getItem().getRegistryName()).getNamespace());
+    InteractionResultHolder<ItemStack> use(@NotNull Level dimensionIn, Player playerIn, @NotNull InteractionHand handIn) {
+        ItemStack stack = playerIn.getItemInHand(handIn);
+        CompoundTag nbt = stack.getOrCreateTagElement(Objects.requireNonNull(stack.getItem().getRegistryName()).getNamespace());
         boolean magnetized;
         if (nbt.contains("magnetized")) {
             magnetized = nbt.getBoolean("magnetized");
@@ -44,37 +44,37 @@ public class MagnetItem extends EnergyStoringItem {
         }
 
         if (magnetized) {
-            playerIn.sendStatusMessage(new StringTextComponent(TextColors.LIME + "Magnet is set to " + TextColors.GREEN + TextColors.BOLD + "ON"), true);
+            playerIn.displayClientMessage(new TextComponent(TextColors.LIME + "Magnet is set to " + TextColors.GREEN + TextColors.BOLD + "ON"), true);
         } else {
-            playerIn.sendStatusMessage(new StringTextComponent(TextColors.LIGHT_RED + "Magnet is set to " + TextColors.RED + TextColors.BOLD + "OFF"), true);
+            playerIn.displayClientMessage(new TextComponent(TextColors.LIGHT_RED + "Magnet is set to " + TextColors.RED + TextColors.BOLD + "OFF"), true);
         }
 
-        return ActionResult.resultSuccess(stack);
+        return InteractionResultHolder.success(stack);
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, @NotNull World dimensionIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
-        CompoundNBT nbt = stack.getOrCreateChildTag(Objects.requireNonNull(stack.getItem().getRegistryName()).getNamespace());
+    public void inventoryTick(ItemStack stack, @NotNull Level dimensionIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
+        CompoundTag nbt = stack.getOrCreateTagElement(Objects.requireNonNull(stack.getItem().getRegistryName()).getNamespace());
         if (nbt.contains("magnetized")) {
             boolean magnetized = nbt.getBoolean("magnetized");
             if (magnetized) {
-                if (entityIn instanceof PlayerEntity) {
-                    PlayerEntity player = (PlayerEntity) entityIn;
+                if (entityIn instanceof Player) {
+                    Player player = (Player) entityIn;
 
-                    List<ItemEntity> itemEntities = player.dimension.getEntitiesWithinBox(ItemEntity.class, player.getBoundingBox().grow(10));
+                    List<ItemEntity> itemEntities = player.level.getEntitiesOfClass(ItemEntity.class, player.getBoundingBox().inflate(10));
                     for (ItemEntity item : itemEntities) {
-                        double distX = player.getPosX() - item.getPosX();
-                        double distZ = player.getPosZ() - item.getPosZ();
-                        double distY = item.getPosY() + 1.5D - item.getPosY();
+                        double distX = player.getX() - item.getX();
+                        double distZ = player.getZ() - item.getZ();
+                        double distY = item.getY() + 1.5D - item.getY();
                         double dir = Math.atan2(distZ, distX);
-                        double speed = 5F / item.getDistance(player) * 0.5;
+                        double speed = 5F / item.distanceTo(player) * 0.5;
                         if (distY < 0) {
-                            item.setMotion(item.getMotion().x, item.getMotion().y + speed, item.getMotion().z);
+                            item.setDeltaMovement(item.getDeltaMovement().x, item.getDeltaMovement().y + speed, item.getDeltaMovement().z);
                         } else if (distY > 0) {
-                            item.setMotion(item.getMotion().x, item.getMotion().y - speed, item.getMotion().z);
+                            item.setDeltaMovement(item.getDeltaMovement().x, item.getDeltaMovement().y - speed, item.getDeltaMovement().z);
                         }
-                        item.setMotion(Math.cos(dir) * speed, item.getMotion().y, item.getMotion().z);
-                        item.setMotion(item.getMotion().x, item.getMotion().y, Math.sin(dir) * speed);
+                        item.setDeltaMovement(Math.cos(dir) * speed, item.getDeltaMovement().y, item.getDeltaMovement().z);
+                        item.setDeltaMovement(item.getDeltaMovement().x, item.getDeltaMovement().y, Math.sin(dir) * speed);
                     }
                 }
 

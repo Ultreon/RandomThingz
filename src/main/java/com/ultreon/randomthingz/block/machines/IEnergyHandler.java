@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.machines;
 
 import com.ultreon.randomthingz.capability.EnergyStorageImpl;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
@@ -35,11 +35,11 @@ public interface IEnergyHandler {
         });
     }
 
-    default void readEnergy(CompoundNBT tags) {
+    default void readEnergy(CompoundTag tags) {
         setEnergyStoredDirectly(tags.getInt("Energy"));
     }
 
-    default void writeEnergy(CompoundNBT tags) {
+    default void writeEnergy(CompoundTag tags) {
         tags.putInt("Energy", getEnergyStored());
     }
 }

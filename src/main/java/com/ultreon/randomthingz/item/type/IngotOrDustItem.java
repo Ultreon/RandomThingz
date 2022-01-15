@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.item.type;
 
 import com.ultreon.randomthingz.common.item.ModItemGroups;
 import com.ultreon.randomthingz.item.group.MetalCraftablesItemGroup;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 /**
  * Item or dust item class.
@@ -13,6 +13,6 @@ import net.minecraft.item.Item;
  */
 public class IngotOrDustItem extends Item {
     public IngotOrDustItem() {
-        super(new Item.Properties().group(ModItemGroups.METAL_CRAFTABLES));
+        super(new Item.Properties().tab(ModItemGroups.METAL_CRAFTABLES));
     }
 }

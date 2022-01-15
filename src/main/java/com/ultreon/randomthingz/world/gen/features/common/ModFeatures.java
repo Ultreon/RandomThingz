@@ -3,17 +3,24 @@ package com.ultreon.randomthingz.world.gen.features.common;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import lombok.experimental.UtilityClass;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
+import net.minecraft.core.Registry;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.util.UniformInt;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
-import net.minecraft.world.gen.foliageplacer.FancyFoliagePlacer;
-import net.minecraft.world.gen.placement.ChanceConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraft.world.gen.trunkplacer.FancyTrunkPlacer;
-import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FancyFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.FancyTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
+import net.minecraft.world.level.levelgen.placement.ChanceDecoratorConfiguration;
+import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 
 import java.util.OptionalInt;
 
@@ -29,13 +36,13 @@ public final class ModFeatures {
 //    public static final ConfiguredFeature<?, ?> ORE_RUBY = register("ore_ruby", Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, ModBlocks.RUBY_BLOCK.asBlockState(), 8)).range(16).square());
 
     // Trees
-    public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> EUCALYPTUS_TREE = register("eucalyptus_tree", Feature.TREE.withConfiguration((new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.EUCALYPTUS_LOG.asBlockState()), new SimpleBlockStateProvider(ModBlocks.EUCALYPTUS_LEAVES.asBlockState()), new FancyFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(4), 4), new FancyTrunkPlacer(4, 7, 0), new TwoLayerFeature(0, 0, 0, OptionalInt.of(4)))).setIgnoreVines().setHeightmap(Heightmap.Type.MOTION_BLOCKING).build()));
-    public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CHERRY_TREE = register("cherry_tree", Feature.TREE.withConfiguration((new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(ModBlocks.CHERRY_LOG.asBlockState()), new SimpleBlockStateProvider(ModBlocks.CHERRY_LEAVES.asBlockState()), new BlobFoliagePlacer(FeatureSpread.create(2), FeatureSpread.create(4), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayerFeature(0, 0, 0))).setIgnoreVines().build()));
+    public static final ConfiguredFeature<TreeConfiguration, ?> EUCALYPTUS_TREE = register("eucalyptus_tree", Feature.TREE.configured((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(ModBlocks.EUCALYPTUS_LOG.asBlockState()), new SimpleStateProvider(ModBlocks.EUCALYPTUS_LEAVES.asBlockState()), new FancyFoliagePlacer(UniformInt.fixed(2), UniformInt.fixed(4), 4), new FancyTrunkPlacer(4, 7, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().heightmap(Heightmap.Types.MOTION_BLOCKING).build()));
+    public static final ConfiguredFeature<TreeConfiguration, ?> CHERRY_TREE = register("cherry_tree", Feature.TREE.configured((new TreeConfiguration.TreeConfigurationBuilder(new SimpleStateProvider(ModBlocks.CHERRY_LOG.asBlockState()), new SimpleStateProvider(ModBlocks.CHERRY_LEAVES.asBlockState()), new BlobFoliagePlacer(UniformInt.fixed(2), UniformInt.fixed(4), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(0, 0, 0))).ignoreVines().build()));
 
     // Lakes
-    public static final ConfiguredFeature<?, ?> LAKE_OIL = register("lake_oil", Feature.LAKE.withConfiguration(new BlockStateFeatureConfig(ModFluids.OIL.getDefaultState().getBlockState())).withPlacement(Placement.WATER_LAKE.configure(new ChanceConfig(60))));
+    public static final ConfiguredFeature<?, ?> LAKE_OIL = register("lake_oil", Feature.LAKE.configured(new BlockStateConfiguration(ModFluids.OIL.defaultFluidState().createLegacyBlock())).decorated(FeatureDecorator.WATER_LAKE.configured(new ChanceDecoratorConfiguration(60))));
 
-    private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
-        return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);
+    private static <FC extends FeatureConfiguration> ConfiguredFeature<FC, ?> register(String key, ConfiguredFeature<FC, ?> configuredFeature) {
+        return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, key, configuredFeature);
     }
 }

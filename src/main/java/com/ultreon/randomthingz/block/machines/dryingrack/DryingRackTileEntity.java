@@ -6,18 +6,18 @@ import com.ultreon.randomthingz.item.crafting.DryingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.ParticleUtils;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.core.NonNullList;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -27,7 +27,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class DryingRackTileEntity extends TileEntity implements IInventory, ITickableTileEntity {
+public class DryingRackTileEntity extends BlockEntity implements Container, TickableBlockEntity {
     private final NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
     private final LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(() -> new InvWrapper(this));
     private int processTime;
@@ -40,18 +40,18 @@ public class DryingRackTileEntity extends TileEntity implements IInventory, ITic
         return items.get(0);
     }
 
-    public boolean interact(PlayerEntity player) {
-        ItemStack stack = getStackInSlot(0);
+    public boolean interact(Player player) {
+        ItemStack stack = getItem(0);
         if (!stack.isEmpty()) {
             // Remove hanging item
             PlayerUtils.giveItem(player, stack);
-            setInventorySlotContents(0, ItemStack.EMPTY);
+            setItem(0, ItemStack.EMPTY);
             return true;
         } else {
             // Hang item on rack
-            ItemStack heldItem = player.getHeldItemMainhand();
+            ItemStack heldItem = player.getMainHandItem();
             if (!heldItem.isEmpty()) {
-                setInventorySlotContents(0, heldItem.split(1));
+                setItem(0, heldItem.split(1));
                 return true;
             }
             return false;
@@ -60,9 +60,9 @@ public class DryingRackTileEntity extends TileEntity implements IInventory, ITic
 
     @Override
     public void tick() {
-        if (this.dimension == null || this.dimension.isClientSided || isEmpty()) return;
+        if (this.level == null || this.level.isClientSide || isEmpty()) return;
 
-        DryingRecipe recipe = this.dimension.getRecipeManager().getRecipe(ModRecipes.Types.DRYING, this, this.dimension).orElse(null);
+        DryingRecipe recipe = this.level.getRecipeManager().getRecipeFor(ModRecipes.Types.DRYING, this, this.level).orElse(null);
         if (recipe != null && canWork()) {
             ++processTime;
             if (processTime >= recipe.getProcessTime()) {

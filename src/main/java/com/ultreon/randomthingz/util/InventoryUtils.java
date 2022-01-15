@@ -3,11 +3,11 @@ package com.ultreon.randomthingz.util;
 import com.ultreon.randomthingz.block.machines.refinery.RefineryTileEntity;
 import com.ultreon.randomthingz.item.CanisterItem;
 import lombok.experimental.UtilityClass;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.ItemHandlerHelper;
 
@@ -22,10 +22,10 @@ public final class InventoryUtils {
      * @param ingredient The items to match ({@linkplain net.minecraft.item.crafting.Ingredient}, etc.)
      * @return The number of items in all matching item stacks
      */
-    public static int getTotalCount(IInventory inventory, Predicate<ItemStack> ingredient) {
+    public static int getTotalCount(Container inventory, Predicate<ItemStack> ingredient) {
         int total = 0;
-        for (int i = 0; i < inventory.getSizeInventory(); ++i) {
-            ItemStack stack = inventory.getStackInSlot(i);
+        for (int i = 0; i < inventory.getContainerSize(); ++i) {
+            ItemStack stack = inventory.getItem(i);
             if (!stack.isEmpty() && ingredient.test(stack)) {
                 total += stack.getCount();
             }
@@ -41,16 +41,16 @@ public final class InventoryUtils {
      * @param ingredient The items to match ({@linkplain net.minecraft.item.crafting.Ingredient}, etc.)
      * @param amount     The total number of items to remove
      */
-    public static void consumeItems(IInventory inventory, Predicate<ItemStack> ingredient, int amount) {
+    public static void consumeItems(Container inventory, Predicate<ItemStack> ingredient, int amount) {
         int amountLeft = amount;
-        for (int i = 0; i < inventory.getSizeInventory(); ++i) {
-            ItemStack stack = inventory.getStackInSlot(i);
+        for (int i = 0; i < inventory.getContainerSize(); ++i) {
+            ItemStack stack = inventory.getItem(i);
             if (!stack.isEmpty() && ingredient.test(stack)) {
                 int toRemove = Math.min(amountLeft, stack.getCount());
 
                 stack.shrink(toRemove);
                 if (stack.isEmpty()) {
-                    inventory.setInventorySlotContents(i, ItemStack.EMPTY);
+                    inventory.setItem(i, ItemStack.EMPTY);
                 }
 
                 amountLeft -= toRemove;
@@ -64,13 +64,13 @@ public final class InventoryUtils {
     public static boolean canItemsStack(ItemStack a, ItemStack b) {
         // Determine if the item stacks can be merged
         if (a.isEmpty() || b.isEmpty()) return true;
-        return ItemHandlerHelper.canItemStacksStack(a, b) && a.getCount() + b.getCount() <= a.getMaxSize();
+        return ItemHandlerHelper.canItemStacksStack(a, b) && a.getCount() + b.getCount() <= a.getMaxStackSize();
     }
 
-    public static boolean mergeItem(IInventory inventory, ItemStack stack, int slot) {
-        ItemStack current = inventory.getStackInSlot(slot);
+    public static boolean mergeItem(Container inventory, ItemStack stack, int slot) {
+        ItemStack current = inventory.getItem(slot);
         if (current.isEmpty()) {
-            inventory.setInventorySlotContents(slot, stack);
+            inventory.setItem(slot, stack);
             return true;
         } else if (canItemsStack(stack, current)) {
             current.grow(stack.getCount());

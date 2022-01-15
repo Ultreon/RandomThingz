@@ -1,19 +1,19 @@
 package com.ultreon.randomthingz.client.gui.screen.confirmExit;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.text2speech.Narrator;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.util.WorldUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.DialogTexts;
-import net.minecraft.client.gui.IBidiRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.settings.NarratorStatus;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.NarratorStatus;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.GuiScreenEvent.BackgroundDrawnEvent;
@@ -27,23 +27,23 @@ import java.util.Objects;
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ConfirmExitScreen extends Screen {
-    private final IBidiRenderer bidi = IBidiRenderer.field_243257_a;
-    private final ITextComponent yesButtonText;
-    private final ITextComponent noButtonText;
+    private final MultiLineLabel bidi = MultiLineLabel.EMPTY;
+    private final Component yesButtonText;
+    private final Component noButtonText;
     private final Screen backScreen;
     private int ticksUntilEnable;
 
     public ConfirmExitScreen(Screen backScreen) {
-        super(new TranslationTextComponent("msg.randomthingz.confirm_exit.title"));
+        super(new TranslatableComponent("msg.randomthingz.confirm_exit.title"));
         this.backScreen = backScreen;
-        this.yesButtonText = DialogTexts.GUI_YES;
-        this.noButtonText = DialogTexts.GUI_NO;
+        this.yesButtonText = CommonComponents.GUI_YES;
+        this.noButtonText = CommonComponents.GUI_NO;
     }
 
-    protected void initialize() {
-        super.initialize();
+    protected void init() {
+        super.init();
 
-        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
+        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).options.narratorStatus;
 
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
             Narrator.getNarrator().say("Are you sure you want to exit Minecraft?", true);
@@ -55,18 +55,18 @@ public class ConfirmExitScreen extends Screen {
         this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (btn) -> {
             if (this.minecraft != null) {
                 btn.active = false;
-                if (this.minecraft.dimension != null && this.minecraft.isIntegratedServerRunning()) {
+                if (this.minecraft.level != null && this.minecraft.isLocalServer()) {
                     WorldUtils.saveWorldThenQuitGame();
                     return;
                 }
 
-                this.minecraft.shutdown();
+                this.minecraft.stop();
             }
         }));
         this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (btn) -> {
             if (this.minecraft != null) {
                 btn.active = false;
-                this.minecraft.displayGuiScreen(backScreen);
+                this.minecraft.setScreen(backScreen);
             }
         }));
 
@@ -74,7 +74,7 @@ public class ConfirmExitScreen extends Screen {
     }
 
     @SuppressWarnings("deprecation")
-    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         if (backScreen != null) {
             backScreen.render(matrixStack, mouseX, mouseY, partialTicks);
             RenderSystem.translatef(0.0F, 0.0F, 400.0F);
@@ -84,8 +84,8 @@ public class ConfirmExitScreen extends Screen {
             this.renderBackground(matrixStack);
         }
         drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 70, 0xffffff);
-        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("msg.randomthingz.confirm_exit.description"), this.width / 2, 90, 0xbfbfbf);
-        this.bidi.func_241863_a(matrixStack, this.width / 2, 90);
+        drawCenteredString(matrixStack, this.font, new TranslatableComponent("msg.randomthingz.confirm_exit.description"), this.width / 2, 90, 0xbfbfbf);
+        this.bidi.renderCentered(matrixStack, this.width / 2, 90);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
@@ -95,7 +95,7 @@ public class ConfirmExitScreen extends Screen {
     public void setButtonDelay(int ticksUntilEnableIn) {
         this.ticksUntilEnable = ticksUntilEnableIn;
 
-        for (Widget widget : this.buttons) {
+        for (AbstractWidget widget : this.buttons) {
             widget.active = false;
         }
 
@@ -104,14 +104,14 @@ public class ConfirmExitScreen extends Screen {
     public void tick() {
         super.tick();
         if (--this.ticksUntilEnable == 0) {
-            for (Widget widget : this.buttons) {
+            for (AbstractWidget widget : this.buttons) {
                 widget.active = true;
             }
         }
     }
 
     public void goBack() {
-        Minecraft.getInstance().displayGuiScreen(backScreen);
+        Minecraft.getInstance().setScreen(backScreen);
     }
 
     public boolean shouldCloseOnEsc() {
@@ -119,7 +119,7 @@ public class ConfirmExitScreen extends Screen {
     }
 
     @Override
-    public void closeScreen() {
+    public void onClose() {
         goBack();
     }
 }

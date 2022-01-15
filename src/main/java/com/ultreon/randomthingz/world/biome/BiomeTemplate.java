@@ -8,12 +8,12 @@
 package com.ultreon.randomthingz.world.biome;
 
 import lombok.Setter;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeGenerationSettings;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.biome.MobSpawnInfo;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,9 +29,9 @@ import static lombok.AccessLevel.PROTECTED;
 public class BiomeTemplate {
     private final Map<BOPClimates, Integer> weightMap = new HashMap<>();
     @Setter(PROTECTED)
-    private RegistryKey<Biome> beachBiome = Biomes.BEACH;
+    private ResourceKey<Biome> beachBiome = Biomes.BEACH;
     @Setter(PROTECTED)
-    private RegistryKey<Biome> riverBiome = Biomes.RIVER;
+    private ResourceKey<Biome> riverBiome = Biomes.RIVER;
     @Setter(PROTECTED)
     BiFunction<Double, Double, Integer> foliageColorFunction;
     @Setter(PROTECTED)
@@ -41,36 +41,36 @@ public class BiomeTemplate {
 
     public static int calculateSkyColor(float temperature) {
         float lvt_1_1_ = temperature / 3.0F;
-        lvt_1_1_ = MathHelper.clamp(lvt_1_1_, -1.0F, 1.0F);
-        return MathHelper.hsvToRGB(0.62222224F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0F);
+        lvt_1_1_ = Mth.clamp(lvt_1_1_, -1.0F, 1.0F);
+        return Mth.hsvToRgb(0.62222224F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0F);
     }
 
-    protected void configureBiome(Biome.Builder builder) {
+    protected void configureBiome(Biome.BiomeBuilder builder) {
     }
 
     protected void configureGeneration(BiomeGenerationSettings.Builder builder) {
     }
 
-    protected void configureMobSpawns(MobSpawnInfo.Builder builder) {
+    protected void configureMobSpawns(MobSpawnSettings.Builder builder) {
     }
 
-    protected void configureDefaultMobSpawns(MobSpawnInfo.Builder builder) {
-        builder.isValidSpawnBiomeForPlayer();
+    protected void configureDefaultMobSpawns(MobSpawnSettings.Builder builder) {
+        builder.setPlayerCanSpawn();
     }
 
     public final Biome build() {
-        Biome.Builder biomeBuilder = new Biome.Builder();
+        Biome.BiomeBuilder biomeBuilder = new Biome.BiomeBuilder();
 
         // Configure the biome generation
         BiomeGenerationSettings.Builder biomeGenBuilder = new BiomeGenerationSettings.Builder();
         this.configureGeneration(biomeGenBuilder);
-        biomeBuilder.withGenerationSettings(biomeGenBuilder.build());
+        biomeBuilder.generationSettings(biomeGenBuilder.build());
 
         // Configure mob spawning
-        MobSpawnInfo.Builder mobSpawnBuilder = new MobSpawnInfo.Builder();
+        MobSpawnSettings.Builder mobSpawnBuilder = new MobSpawnSettings.Builder();
         this.configureDefaultMobSpawns(mobSpawnBuilder);
         this.configureMobSpawns(mobSpawnBuilder);
-        biomeBuilder.withMobSpawnSettings(mobSpawnBuilder.build());
+        biomeBuilder.mobSpawnSettings(mobSpawnBuilder.build());
 
         // Configure and build the biome
         this.configureBiome(biomeBuilder);

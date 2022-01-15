@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.block.machines.wire;
 
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -12,7 +12,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class WireTileEntity extends TileEntity {
+public class WireTileEntity extends BlockEntity {
     int energyStored;
 
     public WireTileEntity() {
@@ -20,39 +20,39 @@ public class WireTileEntity extends TileEntity {
     }
 
     public String getWireNetworkData() {
-        if (dimension == null) return "world is null";
+        if (level == null) return "world is null";
 
-        WireNetwork net = WireNetworkManager.get(dimension, pos);
+        WireNetwork net = WireNetworkManager.get(level, worldPosition);
         return net != null ? net.toString() : "null";
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void load(BlockState state, CompoundTag compound) {
         this.energyStored = compound.getInt("EnergyStored");
-        super.read(state, compound);
+        super.load(state, compound);
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundTag save(CompoundTag compound) {
         compound.putInt("EnergyStored", energyStored);
-        return super.write(compound);
+        return super.save(compound);
     }
 
     @Override
-    public void delete() {
-        if (dimension != null) {
-            WireNetworkManager.invalidateNetwork(dimension, pos);
+    public void setRemoved() {
+        if (level != null) {
+            WireNetworkManager.invalidateNetwork(level, worldPosition);
         }
-        super.delete();
+        super.setRemoved();
     }
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (dimension != null && !removed && cap == CapabilityEnergy.ENERGY && side != null) {
-            LazyOptional<WireNetwork> networkOptional = WireNetworkManager.getLazy(dimension, pos);
+        if (level != null && !remove && cap == CapabilityEnergy.ENERGY && side != null) {
+            LazyOptional<WireNetwork> networkOptional = WireNetworkManager.getLazy(level, worldPosition);
             if (networkOptional.isPresent()) {
-                return networkOptional.orElseThrow(IllegalStateException::new).getConnection(pos, side).getLazyOptional().cast();
+                return networkOptional.orElseThrow(IllegalStateException::new).getConnection(worldPosition, side).getLazyOptional().cast();
             }
         }
         return LazyOptional.empty();

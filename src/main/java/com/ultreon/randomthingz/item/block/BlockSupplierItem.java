@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -22,8 +22,8 @@ public class BlockSupplierItem extends BlockItem {
     }
 
     @Override
-    public @NotNull String getTranslationId() {
-        return this.block.getTranslationId();
+    public @NotNull String getDescriptionId() {
+        return this.block.getDescriptionId();
     }
 
     @Override

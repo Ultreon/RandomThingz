@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.item.wand;
 
 import com.ultreon.randomthingz.common.item.ModItemGroups;
 import com.ultreon.randomthingz.item.WandItem;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -20,12 +20,12 @@ import org.jetbrains.annotations.NotNull;
 @Deprecated
 public class TeleportStaffItem extends WandItem {
     public TeleportStaffItem() {
-        super(420, 20, new Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(420, 20, new Properties().tab(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override
-    public void activate(ItemStack stack, @NotNull World dimensionIn, @NotNull LivingEntity livingIn, float charge) {
-        if (!(livingIn instanceof PlayerEntity)) {
+    public void activate(ItemStack stack, @NotNull Level dimensionIn, @NotNull LivingEntity livingIn, float charge) {
+        if (!(livingIn instanceof Player)) {
             return;
         }
 
@@ -34,22 +34,22 @@ public class TeleportStaffItem extends WandItem {
             return;
         }
 
-        PlayerEntity player = (PlayerEntity) livingIn;
+        Player player = (Player) livingIn;
 
-        if (dimensionIn instanceof ServerWorld) {
-            Vector3d vector3d = player.getLookVec();
+        if (dimensionIn instanceof ServerLevel) {
+            Vec3 vector3d = player.getLookAngle();
             double dx = vector3d.x * (4 * charge * strength);
             double dy = vector3d.y * (4 * charge * strength);
             double dz = vector3d.z * (4 * charge * strength);
 
-            double x = player.getPosX() + dx;
-            double y = player.getPosY() + dy;
-            double z = player.getPosZ() + dz;
+            double x = player.getX() + dx;
+            double y = player.getY() + dy;
+            double z = player.getZ() + dz;
 
-            player.getCooldownTracker().setCooldown(this, 20);
-            player.setPositionAndUpdate(x, y, z);
+            player.getCooldowns().addCooldown(this, 20);
+            player.teleportTo(x, y, z);
 
-            player.addStat(Stats.ITEM_USED.get(this));
+            player.awardStat(Stats.ITEM_USED.get(this));
         }
     }
 }

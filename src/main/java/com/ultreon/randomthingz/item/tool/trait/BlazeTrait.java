@@ -1,21 +1,21 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.block.AbstractFireBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CampfireBlock;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Color;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -27,12 +27,12 @@ public class BlazeTrait extends AbstractTrait {
 
     @Override
     public boolean onHitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, LivingEntity attacker) {
-        victim.setFire(10);
+        victim.setSecondsOnFire(10);
         return super.onHitEntity(stack, victim, attacker);
     }
 
-    public Color getColor() {
-        return Color.fromHex("#ff8000");
+    public TextColor getColor() {
+        return TextColor.parseColor("#ff8000");
     }
 
     /**
@@ -43,57 +43,57 @@ public class BlazeTrait extends AbstractTrait {
      * @return the result of the item use override.
      */
     @Override
-    public @NotNull ActionResultType onUseItem(ItemUseContext context) {
+    public @NotNull InteractionResult onUseItem(UseOnContext context) {
         // Get player, dimension, block position and state.
-        PlayerEntity player = context.getPlayer();
-        World dimension = context.getDimension();
-        BlockPos position = context.getPos();
+        Player player = context.getPlayer();
+        Level dimension = context.getLevel();
+        BlockPos position = context.getClickedPos();
         BlockState state = dimension.getBlockState(position); // Block state in dimension of use at position of use.
 
         // Check if the state is a campfire, and the campfire at the block state can be lit.
-        if (CampfireBlock.canBeLit(state)) {
+        if (CampfireBlock.canLight(state)) {
             // Play sound.
-            dimension.playSound(player, position, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F);
+            dimension.playSound(player, position, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F);
 
             // Set block state.
-            dimension.setBlockState(position, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
+            dimension.setBlock(position, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
 
             // Damage item.
             if (player != null) {
-                context.getItem().damageItem(1, player, (playerEntity) -> playerEntity.sendBreakAnimation(context.getHand()));
+                context.getItemInHand().hurtAndBreak(1, player, (playerEntity) -> playerEntity.broadcastBreakEvent(context.getHand()));
             }
 
             // Return action result.
-            return ActionResultType.func_233537_a_(dimension.isClientSided());
+            return InteractionResult.sidedSuccess(dimension.isClientSide());
         } else {
             // Get position from the offset of the facing from the context.
-            BlockPos offsetPos = position.offset(context.getFace());
+            BlockPos offsetPos = position.relative(context.getClickedFace());
 
             // Check if block at the offset can be lit on fire.
-            if (AbstractFireBlock.canLightBlock(dimension, offsetPos, context.getPlacementHorizontalFacing())) {
+            if (BaseFireBlock.canBePlacedAt(dimension, offsetPos, context.getHorizontalDirection())) {
                 // Play sound.
-                dimension.playSound(player, offsetPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F);
+                dimension.playSound(player, offsetPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F);
 
                 // Create block state for the fire block.
-                BlockState blockState1 = AbstractFireBlock.getFireForPlacement(dimension, offsetPos);
+                BlockState blockState1 = BaseFireBlock.getState(dimension, offsetPos);
 
                 // Set block state.
-                dimension.setBlockState(offsetPos, blockState1, 11);
+                dimension.setBlock(offsetPos, blockState1, 11);
 
                 // Get item stack from context.
-                ItemStack stack = context.getItem();
-                if (player instanceof ServerPlayerEntity) {
+                ItemStack stack = context.getItemInHand();
+                if (player instanceof ServerPlayer) {
                     // Placed block criteria trigger.
-                    CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) player, offsetPos, stack);
+                    CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayer) player, offsetPos, stack);
 
                     // Damage item by 1.
-                    stack.damageItem(1, player, (playerEntity) -> playerEntity.sendBreakAnimation(context.getHand()));
+                    stack.hurtAndBreak(1, player, (playerEntity) -> playerEntity.broadcastBreakEvent(context.getHand()));
                 }
 
-                return ActionResultType.func_233537_a_(dimension.isClientSided());
+                return InteractionResult.sidedSuccess(dimension.isClientSide());
             } else {
                 // Block at offset cannot be lit on fire.
-                return ActionResultType.FAIL;
+                return InteractionResult.FAIL;
             }
         }
     }

@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.base;
 
 import com.ultreon.randomthingz.common.OreProperties;
 import com.ultreon.randomthingz.common.interfaces.IHasOreProperties;
-import net.minecraft.block.OreBlock;
+import net.minecraft.world.level.block.OreBlock;
 
 @Deprecated
 public class BaseOreBlock extends OreBlock implements IHasOreProperties {

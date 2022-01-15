@@ -8,12 +8,12 @@ import com.ultreon.randomthingz.common.interfaces.Translatable;
 import com.ultreon.randomthingz.item.MachineUpgradeItem;
 import com.ultreon.randomthingz.registration.Registration;
 import com.ultreon.randomthingz.util.Constants;
-import net.minecraft.item.Item;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 
 import java.util.Locale;
 
-public enum MachineUpgrades implements IItemProvider, IMachineUpgrade, INamed, Translatable {
+public enum MachineUpgrades implements ItemLike, IMachineUpgrade, INamed, Translatable {
     PROCESSING_SPEED(Constants.UPGRADE_PROCESSING_SPEED_AMOUNT, 0.5f),
     OUTPUT_CHANCE(Constants.UPGRADE_SECONDARY_OUTPUT_AMOUNT, 0.25f),
     ENERGY_CAPACITY(0, 0.0f, false),

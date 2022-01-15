@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
 import com.ultreon.randomthingz.effect.common.ModEffects;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.text.Color;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.effect.MobEffectInstance;
 
 public class SharpTrait extends AbstractPotionTrait {
     public SharpTrait() {
@@ -10,12 +10,12 @@ public class SharpTrait extends AbstractPotionTrait {
     }
 
     @Override
-    public Color getColor() {
-        return Color.fromHex("#df1300");
+    public TextColor getColor() {
+        return TextColor.parseColor("#df1300");
     }
 
     @Override
-    public EffectInstance getEffectInstance() {
-        return new EffectInstance(ModEffects.BLEEDING.get(), 240, 2);
+    public MobEffectInstance getEffectInstance() {
+        return new MobEffectInstance(ModEffects.BLEEDING.get(), 240, 2);
     }
 }

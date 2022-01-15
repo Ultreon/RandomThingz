@@ -6,13 +6,13 @@ import com.ultreon.randomthingz.item.tool.ToolType;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,19 +32,19 @@ public class InfinityTrait extends AbstractTrait {
 
     @Override
     public boolean onHitEntity(@NotNull ItemStack stack, @NotNull LivingEntity victim, LivingEntity attacker) {
-        if (attacker.dimension.isClientSided) {
+        if (attacker.level.isClientSide) {
             // Don't do anything on client.
             return true;
         }
-        if (victim instanceof PlayerEntity) {
+        if (victim instanceof Player) {
             // Get victim
-            PlayerEntity playerVictim = (PlayerEntity) victim;
+            Player playerVictim = (Player) victim;
             if (isInfinite(playerVictim)) {
-                victim.attack(new DamageSourceInfinitySword(attacker).setDamageBypassesArmor(), 4.0F);
+                victim.hurt(new DamageSourceInfinitySword(attacker).bypassArmor(), 4.0F);
                 return true;
             }
             //noinspection ConstantConditions
-            if (playerVictim.getHeldItem(Hand.MAIN_HAND) != null && playerVictim.getHeldItem(Hand.MAIN_HAND).getItem() == Toolset.INFINITY.getSword().get() && playerVictim.isHandActive()) {
+            if (playerVictim.getItemInHand(InteractionHand.MAIN_HAND) != null && playerVictim.getItemInHand(InteractionHand.MAIN_HAND).getItem() == Toolset.INFINITY.getSword().get() && playerVictim.isHandActive()) {
                 return true;
             }
         }

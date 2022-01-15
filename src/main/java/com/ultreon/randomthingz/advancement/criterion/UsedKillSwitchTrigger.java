@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.advancement.criterion;
 
 import com.google.gson.JsonObject;
 import com.ultreon.randomthingz.RandomThingz;
-import net.minecraft.advancements.criterion.AbstractCriterionTrigger;
-import net.minecraft.advancements.criterion.CriterionInstance;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.loot.ConditionArrayParser;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
+import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 
-public class UsedKillSwitchTrigger extends AbstractCriterionTrigger<UsedKillSwitchTrigger.Instance> {
+public class UsedKillSwitchTrigger extends SimpleCriterionTrigger<UsedKillSwitchTrigger.Instance> {
     private static final ResourceLocation ID = RandomThingz.rl("used_kill_switch");
 
     @Override
@@ -18,17 +18,17 @@ public class UsedKillSwitchTrigger extends AbstractCriterionTrigger<UsedKillSwit
     }
 
     @Override
-    public UsedKillSwitchTrigger.Instance deserializeTrigger(JsonObject json, EntityPredicate.AndPredicate entityPredicate, ConditionArrayParser conditionsParser) {
+    public UsedKillSwitchTrigger.Instance createInstance(JsonObject json, EntityPredicate.Composite entityPredicate, DeserializationContext conditionsParser) {
 //      MinMaxBounds.FloatBound minmaxbounds$floatbound = MinMaxBounds.FloatBound.fromJson(json.get("distance"));
         return new UsedKillSwitchTrigger.Instance(entityPredicate);
     }
 
-    public void trigger(ServerPlayerEntity player) {
-        this.triggerListeners(player, Instance::test);
+    public void trigger(ServerPlayer player) {
+        this.trigger(player, Instance::test);
     }
 
-    public static class Instance extends CriterionInstance {
-        public Instance(EntityPredicate.AndPredicate player) {
+    public static class Instance extends AbstractCriterionTriggerInstance {
+        public Instance(EntityPredicate.Composite player) {
             super(UsedKillSwitchTrigger.ID, player);
         }
 

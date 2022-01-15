@@ -7,8 +7,8 @@ import com.ultreon.randomthingz.common.ModuleSafety;
 import com.ultreon.randomthingz.common.Ticker;
 import com.ultreon.randomthingz.common.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.MainMenuScreen;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -160,7 +160,7 @@ public class UpdatesModule extends Module {
             }
 
             // Is the gui the main menu?
-            if (gui instanceof MainMenuScreen) {
+            if (gui instanceof TitleScreen) {
                 // Check for updates.
                 UpdateAvailableScreen.checkUpdates(mc, gui);
             }

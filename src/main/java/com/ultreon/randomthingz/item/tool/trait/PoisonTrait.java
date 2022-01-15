@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.text.Color;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 
 public class PoisonTrait extends AbstractPotionTrait {
     public PoisonTrait() {
@@ -10,12 +10,12 @@ public class PoisonTrait extends AbstractPotionTrait {
     }
 
     @Override
-    public Color getColor() {
-        return Color.fromHex("#007F3F");
+    public TextColor getColor() {
+        return TextColor.parseColor("#007F3F");
     }
 
     @Override
-    public EffectInstance getEffectInstance() {
-        return new EffectInstance(Effects.POISON, 50, 1);
+    public MobEffectInstance getEffectInstance() {
+        return new MobEffectInstance(MobEffects.POISON, 50, 1);
     }
 }

@@ -5,7 +5,7 @@ import com.ultreon.randomthingz.effect.CurseEffect;
 import com.ultreon.randomthingz.effect.RadiationEffect;
 import com.ultreon.randomthingz.registration.Registration;
 import lombok.experimental.UtilityClass;
-import net.minecraft.potion.Effect;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.function.Supplier;
@@ -24,7 +24,7 @@ public final class ModEffects {
     //////////////////////////////
     //     Utility methods     //
     //////////////////////////////
-    private static <T extends Effect> RegistryObject<T> register(String name, Supplier<T> supplier) {
+    private static <T extends MobEffect> RegistryObject<T> register(String name, Supplier<T> supplier) {
         return Registration.POTIONS.register(name, supplier);
     }
 

@@ -1,40 +1,43 @@
 package com.ultreon.randomthingz.block.machines.dryingrack;
 
-import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class DryingRackBlock extends HorizontalBlock implements IWaterLoggable {
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+public class DryingRackBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final VoxelShape SHAPE_NORTH = Block.createCuboidShape(0, 12, 12, 16, 16, 16);
-    private static final VoxelShape SHAPE_SOUTH = Block.createCuboidShape(0, 12, 0, 16, 16, 4);
-    private static final VoxelShape SHAPE_WEST = Block.createCuboidShape(12, 12, 0, 16, 16, 16);
-    private static final VoxelShape SHAPE_EAST = Block.createCuboidShape(0, 12, 0, 4, 16, 16);
+    private static final VoxelShape SHAPE_NORTH = Block.box(0, 12, 12, 16, 16, 16);
+    private static final VoxelShape SHAPE_SOUTH = Block.box(0, 12, 0, 16, 16, 4);
+    private static final VoxelShape SHAPE_WEST = Block.box(12, 12, 0, 16, 16, 16);
+    private static final VoxelShape SHAPE_EAST = Block.box(0, 12, 0, 4, 16, 16);
 
     public DryingRackBlock() {
-        super(Properties.generate(Material.WOOD, MaterialColor.WOOD).hardnessAndResistance(2f, 3f).sound(SoundType.WOOD));
-        setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(WATERLOGGED, false));
+        super(Properties.of(Material.WOOD, MaterialColor.WOOD).strength(2f, 3f).sound(SoundType.WOOD));
+        registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -44,38 +47,38 @@ public class DryingRackBlock extends HorizontalBlock implements IWaterLoggable {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
+    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
         return new DryingRackTileEntity();
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World dimensionIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        TileEntity tileEntity = dimensionIn.getTileEntity(pos);
+    public InteractionResult use(BlockState state, Level dimensionIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+        BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
         if (tileEntity instanceof DryingRackTileEntity) {
-            return ((DryingRackTileEntity) tileEntity).interact(player) ? ActionResultType.SUCCESS : ActionResultType.PASS;
+            return ((DryingRackTileEntity) tileEntity).interact(player) ? InteractionResult.SUCCESS : InteractionResult.PASS;
         }
-        return super.onBlockActivated(state, dimensionIn, pos, player, handIn, hit);
+        return super.use(state, dimensionIn, pos, player, handIn, hit);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity tileentity = dimensionIn.getTileEntity(pos);
-            if (tileentity instanceof IInventory) {
-                InventoryHelper.dropInventoryItems(dimensionIn, pos, (IInventory) tileentity);
-                dimensionIn.updateComparatorOutputLevel(pos, this);
+            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
+            if (tileentity instanceof Container) {
+                Containers.dropContents(dimensionIn, pos, (Container) tileentity);
+                dimensionIn.updateNeighbourForOutputSignal(pos, this);
             }
 
-            super.onReplaced(state, dimensionIn, pos, newState, isMoving);
+            super.onRemove(state, dimensionIn, pos, newState, isMoving);
         }
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader dimensionIn, BlockPos pos, ISelectionContext context) {
-        Direction facing = state.get(FACING);
+    public VoxelShape getShape(BlockState state, BlockGetter dimensionIn, BlockPos pos, CollisionContext context) {
+        Direction facing = state.getValue(FACING);
         switch (facing) {
             case NORTH:
                 return SHAPE_NORTH;
@@ -92,33 +95,33 @@ public class DryingRackBlock extends HorizontalBlock implements IWaterLoggable {
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        FluidState fluidState = context.getDimension().getFluidState(context.getPos());
-        return getDefaultState()
-                .with(FACING, context.getPlacementHorizontalFacing().getOpposite())
-                .with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+        return defaultBlockState()
+                .setValue(FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(FACING, rot.rotate(state.get(FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, WATERLOGGED);
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 }

@@ -4,8 +4,8 @@ import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -20,22 +20,22 @@ public class SetRedstoneModePacket {
         this.mode = mode;
     }
 
-    public static SetRedstoneModePacket fromBytes(PacketBuffer buffer) {
+    public static SetRedstoneModePacket fromBytes(FriendlyByteBuf buffer) {
         SetRedstoneModePacket packet = new SetRedstoneModePacket();
         packet.mode = EnumUtils.byOrdinal(buffer.readByte(), RedstoneMode.IGNORED);
         return packet;
     }
 
     public static void handle(SetRedstoneModePacket packet, Supplier<NetworkEvent.Context> context) {
-        ServerPlayerEntity player = context.get().getSender();
+        ServerPlayer player = context.get().getSender();
         context.get().enqueueWork(() -> handlePacket(packet, player));
         context.get().setPacketHandled(true);
     }
 
-    private static void handlePacket(SetRedstoneModePacket packet, ServerPlayerEntity player) {
+    private static void handlePacket(SetRedstoneModePacket packet, ServerPlayer player) {
         if (player != null) {
-            if (player.openContainer instanceof AbstractMachineBaseContainer) {
-                AbstractMachineBaseTileEntity tileEntity = ((AbstractMachineBaseContainer<?>) player.openContainer).getTileEntity();
+            if (player.containerMenu instanceof AbstractMachineBaseContainer) {
+                AbstractMachineBaseTileEntity tileEntity = ((AbstractMachineBaseContainer<?>) player.containerMenu).getTileEntity();
                 if (tileEntity instanceof AbstractMachineBaseTileEntity) {
                     tileEntity.setRedstoneMode(packet.mode);
                 }
@@ -43,7 +43,7 @@ public class SetRedstoneModePacket {
         }
     }
 
-    public void toBytes(PacketBuffer buffer) {
+    public void toBytes(FriendlyByteBuf buffer) {
         buffer.writeByte(this.mode.ordinal());
     }
 }

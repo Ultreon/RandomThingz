@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.common.interfaces;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 /**
  * Entity spawns class.

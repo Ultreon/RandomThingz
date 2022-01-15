@@ -8,13 +8,13 @@ import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -32,7 +32,7 @@ public class RefiningRecipe implements IFluidRecipe<IFluidInventory> {
     private FluidIngredient ingredient;
 
     @Override
-    public boolean matches(IFluidInventory inv, World dimensionIn) {
+    public boolean matches(IFluidInventory inv, Level dimensionIn) {
         return ingredient.test(inv.getFluidInTank(0));
     }
 
@@ -59,27 +59,27 @@ public class RefiningRecipe implements IFluidRecipe<IFluidInventory> {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return ModRecipes.REFINING.get();
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return ModRecipes.Types.REFINING;
     }
 
     @Override
-    public boolean isDynamic() {
+    public boolean isSpecial() {
         return true;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<RefiningRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<RefiningRecipe> {
         @Override
-        public RefiningRecipe read(ResourceLocation recipeId, JsonObject json) {
+        public RefiningRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             RefiningRecipe recipe = new RefiningRecipe(recipeId);
-            recipe.processTime = JSONUtils.getInt(json, "process_time");
+            recipe.processTime = GsonHelper.getAsInt(json, "process_time");
             recipe.ingredient = FluidIngredient.deserialize(json.getAsJsonObject("ingredient"));
-            for (JsonElement je : JSONUtils.getJsonArray(json, "results")) {
+            for (JsonElement je : GsonHelper.getAsJsonArray(json, "results")) {
                 FluidStack stack = IFluidRecipe.deserializeFluid(je.getAsJsonObject());
                 if (!stack.isEmpty()) {
                     recipe.outputs.add(stack);
@@ -90,7 +90,7 @@ public class RefiningRecipe implements IFluidRecipe<IFluidInventory> {
 
         @Nullable
         @Override
-        public RefiningRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        public RefiningRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             RefiningRecipe recipe = new RefiningRecipe(recipeId);
             recipe.processTime = buffer.readVarInt();
             recipe.ingredient = FluidIngredient.read(buffer);
@@ -105,7 +105,7 @@ public class RefiningRecipe implements IFluidRecipe<IFluidInventory> {
         }
 
         @Override
-        public void write(PacketBuffer buffer, RefiningRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, RefiningRecipe recipe) {
             buffer.writeVarInt(recipe.processTime);
             recipe.ingredient.write(buffer);
             buffer.writeByte(recipe.outputs.size());

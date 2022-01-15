@@ -1,18 +1,18 @@
 package com.ultreon.randomthingz.block.trees;
 
 import com.ultreon.randomthingz.world.gen.features.common.ModFeatures;
-import net.minecraft.block.trees.Tree;
-import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class CherryTree extends Tree {
+public class CherryTree extends AbstractTreeGrower {
     @Nullable
     @Override
-    protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(@NotNull Random randomIn, boolean largeHive) {
+    protected ConfiguredFeature<TreeConfiguration, ?> getConfiguredFeature(@NotNull Random randomIn, boolean largeHive) {
         return ModFeatures.CHERRY_TREE;
     }
 }

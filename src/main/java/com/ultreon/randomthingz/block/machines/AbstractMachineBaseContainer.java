@@ -3,11 +3,11 @@ package com.ultreon.randomthingz.block.machines;
 import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.inventory.slot.MachineUpgradeSlot;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.util.IIntArray;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.MenuType;
 
 public class AbstractMachineBaseContainer<T extends AbstractMachineBaseTileEntity> extends AbstractEnergyStorageContainer<T> {
-    protected AbstractMachineBaseContainer(ContainerType<?> type, int id, T tileEntityIn, IIntArray fieldsIn) {
+    protected AbstractMachineBaseContainer(MenuType<?> type, int id, T tileEntityIn, ContainerData fieldsIn) {
         super(type, id, tileEntityIn, fieldsIn);
     }
 

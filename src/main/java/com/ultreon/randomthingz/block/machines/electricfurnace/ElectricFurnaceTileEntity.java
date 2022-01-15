@@ -5,12 +5,13 @@ import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
+import net.minecraft.core.Direction;
 import net.minecraft.item.crafting.*;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.*;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
@@ -48,24 +49,24 @@ public class ElectricFurnaceTileEntity extends AbstractMachineTileEntity<Abstrac
     @Override
     @Nullable
     protected AbstractCookingRecipe getRecipe() {
-        if (dimension == null) return null;
+        if (level == null) return null;
 
-        RecipeManager recipeManager = dimension.getRecipeManager();
-        Optional<BlastingRecipe> optional = recipeManager.getRecipe(IRecipeType.BLASTING, this, dimension);
+        RecipeManager recipeManager = level.getRecipeManager();
+        Optional<BlastingRecipe> optional = recipeManager.getRecipeFor(RecipeType.BLASTING, this, level);
         if (optional.isPresent()) return optional.get();
 
-        Optional<FurnaceRecipe> optional1 = recipeManager.getRecipe(IRecipeType.SMELTING, this, dimension);
+        Optional<SmeltingRecipe> optional1 = recipeManager.getRecipeFor(RecipeType.SMELTING, this, level);
         return optional1.orElse(null);
     }
 
     @Override
     protected int getProcessTime(AbstractCookingRecipe recipe) {
-        return recipe.getCookTime();
+        return recipe.getCookingTime();
     }
 
     @Override
     protected Collection<ItemStack> getProcessResults(AbstractCookingRecipe recipe) {
-        return Collections.singleton(recipe.getCraftingResult(this));
+        return Collections.singleton(recipe.assemble(this));
     }
 
     @SuppressWarnings("AssignmentOrReturnOfFieldWithMutableType")
@@ -75,22 +76,22 @@ public class ElectricFurnaceTileEntity extends AbstractMachineTileEntity<Abstrac
     }
 
     @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStackIn, @Nullable Direction direction) {
         return index == 0;
     }
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
         return index == 1;
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
+    protected Component getDefaultName() {
         return TextUtils.translate("container", "electric_furnace");
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory playerInventory) {
+    protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
         return new ElectricFurnaceContainer(id, playerInventory, this, this.fields);
     }
 

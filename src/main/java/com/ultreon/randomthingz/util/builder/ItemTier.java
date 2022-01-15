@@ -1,14 +1,14 @@
 package com.ultreon.randomthingz.util.builder;
 
 import lombok.Builder;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
 @Builder
-public class ItemTier implements IItemTier {
+public class ItemTier implements Tier {
     protected int tier;
     protected int maxUses;
     protected float efficiency;
@@ -26,32 +26,32 @@ public class ItemTier implements IItemTier {
     }
 
     @Override
-    public int getMaxUses() {
+    public int getUses() {
         return maxUses;
     }
 
     @Override
-    public float getEfficiency() {
+    public float getSpeed() {
         return efficiency;
     }
 
     @Override
-    public float getAttackDamage() {
+    public float getAttackDamageBonus() {
         return attackDamage;
     }
 
     @Override
-    public int getHarvestLevel() {
+    public int getLevel() {
         return tier;
     }
 
     @Override
-    public int getEnchantability() {
+    public int getEnchantmentValue() {
         return enchantability;
     }
 
     @Override
-    public @NotNull Ingredient getRepairMaterial() {
+    public @NotNull Ingredient getRepairIngredient() {
         return repairMaterial.get();
     }
 }

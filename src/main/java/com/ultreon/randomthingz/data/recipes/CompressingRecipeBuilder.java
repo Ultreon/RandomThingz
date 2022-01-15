@@ -4,14 +4,14 @@ import com.google.gson.JsonObject;
 import com.qsoftware.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -22,26 +22,26 @@ public class CompressingRecipeBuilder {
     private final ItemStack result;
     private final int processTime;
 
-    private CompressingRecipeBuilder(Ingredient ingredient, int ingredientCount, IItemProvider result, int resultCount, int processTime) {
+    private CompressingRecipeBuilder(Ingredient ingredient, int ingredientCount, ItemLike result, int resultCount, int processTime) {
         this.ingredient = ingredient;
         this.ingredientCount = ingredientCount;
         this.result = new ItemStack(result, resultCount);
         this.processTime = processTime;
     }
 
-    public static CompressingRecipeBuilder builder(Ingredient ingredient, int ingredientCount, IItemProvider result, int resultCount, int processTime) {
+    public static CompressingRecipeBuilder builder(Ingredient ingredient, int ingredientCount, ItemLike result, int resultCount, int processTime) {
         return new CompressingRecipeBuilder(ingredient, ingredientCount, result, resultCount, processTime);
     }
 
-    public static CompressingRecipeBuilder builder(ITag<Item> ingredient, int ingredientCount, IItemProvider result, int resultCount, int processTime) {
-        return builder(Ingredient.fromTag(ingredient), ingredientCount, result, resultCount, processTime);
+    public static CompressingRecipeBuilder builder(Tag<Item> ingredient, int ingredientCount, ItemLike result, int resultCount, int processTime) {
+        return builder(Ingredient.of(ingredient), ingredientCount, result, resultCount, processTime);
     }
 
-    public static CompressingRecipeBuilder builder(IItemProvider ingredient, int ingredientCount, IItemProvider result, int resultCount, int processTime) {
-        return builder(Ingredient.fromItems(ingredient), ingredientCount, result, resultCount, processTime);
+    public static CompressingRecipeBuilder builder(ItemLike ingredient, int ingredientCount, ItemLike result, int resultCount, int processTime) {
+        return builder(Ingredient.of(ingredient), ingredientCount, result, resultCount, processTime);
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer) {
+    public void build(Consumer<FinishedRecipe> consumer) {
         ResourceLocation resultId = NameUtils.fromItem(result);
         ResourceLocation id = new ResourceLocation(
                 "minecraft".equals(resultId.getNamespace()) ? RandomThingz.MOD_ID : resultId.getNamespace(),
@@ -49,11 +49,11 @@ public class CompressingRecipeBuilder {
         build(consumer, id);
     }
 
-    public void build(Consumer<IFinishedRecipe> consumer, ResourceLocation id) {
+    public void build(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
         consumer.accept(new Result(id, this));
     }
 
-    public class Result implements IFinishedRecipe {
+    public class Result implements FinishedRecipe {
         private final ResourceLocation id;
         private final CompressingRecipeBuilder builder;
 
@@ -63,11 +63,11 @@ public class CompressingRecipeBuilder {
         }
 
         @Override
-        public void serialize(JsonObject json) {
+        public void serializeRecipeData(JsonObject json) {
             json.addProperty("process_time", builder.processTime);
 
             JsonObject ingredient = new JsonObject();
-            ingredient.add("value", builder.ingredient.serialize());
+            ingredient.add("value", builder.ingredient.toJson());
             ingredient.addProperty("count", builder.ingredientCount);
             json.add("ingredient", ingredient);
 
@@ -80,24 +80,24 @@ public class CompressingRecipeBuilder {
         }
 
         @Override
-        public ResourceLocation getID() {
+        public ResourceLocation getId() {
             return id;
         }
 
         @Override
-        public IRecipeSerializer<?> getSerializer() {
+        public RecipeSerializer<?> getType() {
             return ModRecipes.COMPRESSING.get();
         }
 
         @Nullable
         @Override
-        public JsonObject getAdvancementJson() {
+        public JsonObject serializeAdvancement() {
             return null;
         }
 
         @Nullable
         @Override
-        public ResourceLocation getAdvancementID() {
+        public ResourceLocation getAdvancementId() {
             return null;
         }
     }

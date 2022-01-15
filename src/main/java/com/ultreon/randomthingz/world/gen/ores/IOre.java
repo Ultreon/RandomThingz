@@ -2,9 +2,9 @@ package com.ultreon.randomthingz.world.gen.ores;
 
 import com.google.common.annotations.Beta;
 import com.ultreon.randomthingz.world.gen.ores.configs.IOreConfig;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 
 import java.util.Collection;

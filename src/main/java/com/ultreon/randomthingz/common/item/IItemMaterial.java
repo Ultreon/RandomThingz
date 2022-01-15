@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.common.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.tags.ITag;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 import java.util.Optional;
 
@@ -23,21 +23,21 @@ public interface IItemMaterial {
 
     Optional<Item> getNugget();
 
-    Optional<ITag.INamedTag<Block>> getOreTag();
+    Optional<Tag.Named<Block>> getOreTag();
 
-    Optional<ITag.INamedTag<Block>> getStorageBlockTag();
+    Optional<Tag.Named<Block>> getStorageBlockTag();
 
-    Optional<ITag.INamedTag<Item>> getOreItemTag();
+    Optional<Tag.Named<Item>> getOreItemTag();
 
-    Optional<ITag.INamedTag<Item>> getStorageBlockItemTag();
+    Optional<Tag.Named<Item>> getStorageBlockItemTag();
 
-    Optional<ITag.INamedTag<Item>> getChunksTag();
+    Optional<Tag.Named<Item>> getChunksTag();
 
-    Optional<ITag.INamedTag<Item>> getDustTag();
+    Optional<Tag.Named<Item>> getDustTag();
 
-    Optional<ITag.INamedTag<Item>> getIngotTag();
+    Optional<Tag.Named<Item>> getIngotTag();
 
-    Optional<ITag.INamedTag<Item>> getGemTag();
+    Optional<Tag.Named<Item>> getGemTag();
 
-    Optional<ITag.INamedTag<Item>> getNuggetTag();
+    Optional<Tag.Named<Item>> getNuggetTag();
 }

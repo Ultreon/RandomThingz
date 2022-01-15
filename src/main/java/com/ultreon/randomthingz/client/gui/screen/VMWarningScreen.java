@@ -1,15 +1,15 @@
 package com.ultreon.randomthingz.client.gui.screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.common.enums.VMType;
-import net.minecraft.client.gui.DialogTexts;
-import net.minecraft.client.gui.IBidiRenderer;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,45 +19,45 @@ import org.jetbrains.annotations.NotNull;
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class VMWarningScreen extends Screen {
     private static final boolean initialized = false;
-    private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
-    private final ITextComponent shutdownPcText;
-    private final ITextComponent yesButtonText;
-    private final ITextComponent noButtonText;
+    private final MultiLineLabel message = MultiLineLabel.EMPTY;
+    private final Component shutdownPcText;
+    private final Component yesButtonText;
+    private final Component noButtonText;
     private final Screen backScreen;
     private final VMType vmType;
     private int ticksUntilEnable;
 
     public VMWarningScreen(Screen backScreen, VMType vmType) {
-        super(new TranslationTextComponent("msg.randomthingz.confirm_exit.title"));
+        super(new TranslatableComponent("msg.randomthingz.confirm_exit.title"));
         this.backScreen = backScreen;
         this.vmType = vmType;
-        this.yesButtonText = DialogTexts.GUI_YES;
-        this.noButtonText = DialogTexts.GUI_NO;
-        this.shutdownPcText = new TranslationTextComponent("button.randomthingz.confirm_exit.shutdown_pc");
+        this.yesButtonText = CommonComponents.GUI_YES;
+        this.noButtonText = CommonComponents.GUI_NO;
+        this.shutdownPcText = new TranslatableComponent("button.randomthingz.confirm_exit.shutdown_pc");
     }
 
-    protected void initialize() {
-        super.initialize();
+    protected void init() {
+        super.init();
 
         this.buttons.clear();
         this.children.clear();
 
         this.addButton(new Button(this.width / 2 - 50, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
             if (this.minecraft != null) {
-                this.minecraft.displayGuiScreen(backScreen);
+                this.minecraft.setScreen(backScreen);
             }
         }));
 
         setButtonDelay(10);
     }
 
-    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
 
         drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 70, 0xffffff);
-        drawCenteredString(matrixStack, this.font, new TranslationTextComponent("screen.randomthingz.vm_warning.description", this.vmType.getName()), this.width / 2, 90, 0xbfbfbf);
+        drawCenteredString(matrixStack, this.font, new TranslatableComponent("screen.randomthingz.vm_warning.description", this.vmType.getName()), this.width / 2, 90, 0xbfbfbf);
 
-        this.field_243276_q.func_241863_a(matrixStack, this.width / 2, 90);
+        this.message.renderCentered(matrixStack, this.width / 2, 90);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 

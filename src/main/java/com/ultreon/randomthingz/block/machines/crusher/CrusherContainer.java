@@ -6,19 +6,19 @@ import com.ultreon.randomthingz.block._common.MachineType;
 import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class CrusherContainer extends AbstractMachineContainer<CrusherTileEntity> {
-    public CrusherContainer(int id, PlayerInventory playerInventory, MachineTier tier) {
-        this(id, playerInventory, MachineType.CRUSHER.create(tier), new IntArray(AbstractMachineTileEntity.FIELDS_COUNT));
+    public CrusherContainer(int id, Inventory playerInventory, MachineTier tier) {
+        this(id, playerInventory, MachineType.CRUSHER.create(tier), new SimpleContainerData(AbstractMachineTileEntity.FIELDS_COUNT));
     }
 
-    public CrusherContainer(int id, PlayerInventory playerInventory, CrusherTileEntity tileEntity, IIntArray fieldsIn) {
+    public CrusherContainer(int id, Inventory playerInventory, CrusherTileEntity tileEntity, ContainerData fieldsIn) {
         super(MachineType.CRUSHER.getContainerType(tileEntity.getMachineTier()), id, tileEntity, fieldsIn);
 
         this.addSlot(new Slot(this.tileEntity, 0, 26, 35));
@@ -33,11 +33,11 @@ public class CrusherContainer extends AbstractMachineContainer<CrusherTileEntity
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+    public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.inventorySlots.get(index);
-        if (slot != null && slot.hasStack()) {
-            ItemStack itemstack1 = slot.getStack();
+        Slot slot = this.slots.get(index);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
 
             final int inventorySize = 5;
@@ -45,31 +45,31 @@ public class CrusherContainer extends AbstractMachineContainer<CrusherTileEntity
             final int playerHotbarEnd = playerInventoryEnd + 9;
 
             if (index > 0 && index < inventorySize) {
-                if (!this.mergeItemStack(itemstack1, inventorySize, playerHotbarEnd, true)) {
+                if (!this.moveItemStackTo(itemstack1, inventorySize, playerHotbarEnd, true)) {
                     return ItemStack.EMPTY;
                 }
 
-                slot.onSlotChange(itemstack1, itemstack);
+                slot.onQuickCraft(itemstack1, itemstack);
             } else if (index != 0) {
                 if (this.isCrushingIngredient(itemstack1)) {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
+                    if (!this.moveItemStackTo(itemstack1, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
                 } else if (index < playerInventoryEnd) {
-                    if (!this.mergeItemStack(itemstack1, playerInventoryEnd, playerHotbarEnd, false)) {
+                    if (!this.moveItemStackTo(itemstack1, playerInventoryEnd, playerHotbarEnd, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < playerHotbarEnd && !this.mergeItemStack(itemstack1, inventorySize, playerInventoryEnd, false)) {
+                } else if (index < playerHotbarEnd && !this.moveItemStackTo(itemstack1, inventorySize, playerInventoryEnd, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, inventorySize, playerHotbarEnd, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, inventorySize, playerHotbarEnd, false)) {
                 return ItemStack.EMPTY;
             }
 
             if (itemstack1.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
 
             if (itemstack1.getCount() == itemstack.getCount()) {

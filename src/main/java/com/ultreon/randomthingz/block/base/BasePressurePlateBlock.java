@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.base;
 
-import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.world.level.block.PressurePlateBlock;
 
 /**
  * Game PC block class.

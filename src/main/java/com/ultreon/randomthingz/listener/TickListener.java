@@ -5,9 +5,9 @@ import com.studiohartman.jamepad.ControllerManager;
 import com.studiohartman.jamepad.ControllerState;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.util.math.vector.Vector2f;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
@@ -42,22 +42,22 @@ public class TickListener {
         ControllerState currState = controllers.getState(0);
 
         Minecraft mc = Minecraft.getInstance();
-        ClientPlayerEntity player = mc.player;
+        LocalPlayer player = mc.player;
         if (player == null) {
             return;
         }
 
         if (!currState.isConnected) {
             if (attackBusy) {
-                mc.gameSettings.keyBindAttack.setPressed(false);
+                mc.options.keyAttack.setDown(false);
                 attackBusy = false;
             }
             if (useBusy) {
-                mc.gameSettings.keyBindUseItem.setPressed(false);
+                mc.options.keyUse.setDown(false);
                 useBusy = false;
             }
             if (inventoryBusy) {
-                mc.gameSettings.keyBindInventory.setPressed(false);
+                mc.options.keyInventory.setDown(false);
                 inventoryBusy = false;
             }
             if (sneakBusy) {
@@ -65,98 +65,98 @@ public class TickListener {
                 sneakBusy = false;
             }
             if (jumpBusy) {
-                mc.gameSettings.keyBindJump.setPressed(false);
+                mc.options.keyJump.setDown(false);
                 jumpBusy = false;
             }
             return;
         }
 
         if (event.phase == TickEvent.Phase.END)
-            if (mc.isGamePaused()) {
+            if (mc.isPaused()) {
                 if (currState.startJustPressed) {
-                    mc.displayGuiScreen(null);
+                    mc.setScreen(null);
                 }
             } else {
                 if (currState.startJustPressed) {
-                    mc.displayInGameMenu(false);
+                    mc.pauseGame(false);
                 }
 
                 //was plugged in or unplugged at this index.
-                if (player.openContainer == null) {
+                if (player.containerMenu == null) {
                     if (player.isOnGround()) {
-                        player.setSneaking(currState.b);
+                        player.setShiftKeyDown(currState.b);
                         sneakBusy = currState.b;
                     }
                 } else {
-                    player.closeScreen();
+                    player.closeContainer();
                 }
 
                 if (currState.leftStickMagnitude > 0.2) {
-                    Vector2f py = player.getPitchYaw();
-                    py = new Vector2f(py.x + currState.leftStickX * 90, 0);
+                    Vec2 py = player.getRotationVector();
+                    py = new Vec2(py.x + currState.leftStickX * 90, 0);
 
-                    double mul = player.getAIMoveSpeed();
-                    player.setMotion(Vector3d.fromPitchYaw(py.x, py.y).mul(mul, mul, mul));
+                    double mul = player.getSpeed();
+                    player.setDeltaMovement(Vec3.directionFromRotation(py.x, py.y).multiply(mul, mul, mul));
                 }
 
                 if (currState.rightStickMagnitude > 0.2) {
-                    Vector2f pitchYaw = player.getPitchYaw();
+                    Vec2 pitchYaw = player.getRotationVector();
                     float pitch = pitchYaw.x;
                     float yaw = pitchYaw.y;
 
-                    pitch -= Math.max(Math.min(currState.rightStickY * 10 * mc.gameSettings.mouseSensitivity, 90), -90);
-                    yaw += (currState.rightStickX * 10 * mc.gameSettings.mouseSensitivity) % 360f;
+                    pitch -= Math.max(Math.min(currState.rightStickY * 10 * mc.options.sensitivity, 90), -90);
+                    yaw += (currState.rightStickX * 10 * mc.options.sensitivity) % 360f;
 
-                    player.setPositionAndRotation(player.getPosX(), player.getPosY(), player.getPosZ(), yaw, pitch);
+                    player.absMoveTo(player.getX(), player.getY(), player.getZ(), yaw, pitch);
                 }
 
                 if (currState.lbJustPressed) {
-                    player.inventory.currentItem = Math.max(player.inventory.currentItem - 1, 0);
+                    player.inventory.selected = Math.max(player.inventory.selected - 1, 0);
                 }
                 if (currState.rbJustPressed) {
-                    player.inventory.currentItem = Math.min(player.inventory.currentItem + 1, 9);
+                    player.inventory.selected = Math.min(player.inventory.selected + 1, 9);
                 }
                 if (currState.dpadUp) {
-                    player.inventory.currentItem = Math.min(player.inventory.currentItem + 1, 9);
+                    player.inventory.selected = Math.min(player.inventory.selected + 1, 9);
                 }
 
                 if (currState.rightTrigger > 0.2) {
-                    mc.gameSettings.keyBindAttack.setPressed(true);
+                    mc.options.keyAttack.setDown(true);
                     attackBusy = true;
 
                 } else {
-                    mc.gameSettings.keyBindAttack.setPressed(false);
+                    mc.options.keyAttack.setDown(false);
                     attackBusy = false;
                 }
 
                 if (currState.leftTrigger > 0.2) {
-                    mc.gameSettings.keyBindUseItem.setPressed(true);
+                    mc.options.keyUse.setDown(true);
                     useBusy = true;
                 } else {
-                    mc.gameSettings.keyBindUseItem.setPressed(false);
+                    mc.options.keyUse.setDown(false);
                     useBusy = false;
                 }
 
                 if (currState.y) {
-                    mc.gameSettings.keyBindInventory.setPressed(true);
+                    mc.options.keyInventory.setDown(true);
                     inventoryBusy = true;
                 } else {
-                    mc.gameSettings.keyBindInventory.setPressed(false);
+                    mc.options.keyInventory.setDown(false);
                     inventoryBusy = false;
                 }
 
                 if (currState.x) {
                     inventoryBusy = true;
                 } else {
-                    mc.gameSettings.keyBindInventory.setPressed(false);
+                    mc.options.keyInventory.setDown(false);
                     inventoryBusy = false;
                 }
 
                 if (currState.a) {
-                    mc.gameSettings.keyBindJump.setPressed(true);
+                    mc.options.keyJump.setDown(true);
                     jumpBusy = true;
                 } else {
-                    mc.gameSettings.keyBindJump.setPressed(false);
+                    mc.options.keyJump.setDown(false);
                     jumpBusy = false;
                 }
             }

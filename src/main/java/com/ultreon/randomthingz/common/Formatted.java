@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.common;
 
 import com.ultreon.randomthingz.common.interfaces.Formattable;
 import lombok.Getter;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 @SuppressWarnings("unused")
 public class Formatted implements Formattable {
@@ -43,6 +43,6 @@ public class Formatted implements Formattable {
 
     @Override
     public String toFormattedString() {
-        return TextFormatting.WHITE + string;
+        return ChatFormatting.WHITE + string;
     }
 }

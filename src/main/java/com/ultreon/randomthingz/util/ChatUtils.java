@@ -1,9 +1,9 @@
 package com.ultreon.randomthingz.util;
 
 import lombok.experimental.UtilityClass;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -14,15 +14,15 @@ import org.jetbrains.annotations.NotNull;
 @Deprecated
 @UtilityClass
 public final class ChatUtils {
-    public static void broadcastMessage(@NotNull World dimensionIn, @NotNull ITextComponent msg) {
+    public static void broadcastMessage(@NotNull Level dimensionIn, @NotNull Component msg) {
         if (dimensionIn.getServer() != null) {
-            for (PlayerEntity player : dimensionIn.getServer().getPlayerList().getPlayers()) {
-                player.sendMessage(msg, player.getUniqueID());
+            for (Player player : dimensionIn.getServer().getPlayerList().getPlayers()) {
+                player.sendMessage(msg, player.getUUID());
             }
             return;
         }
-        for (PlayerEntity player : dimensionIn.getPlayers()) {
-            player.sendMessage(msg, player.getUniqueID());
+        for (Player player : dimensionIn.players()) {
+            player.sendMessage(msg, player.getUUID());
         }
     }
 }

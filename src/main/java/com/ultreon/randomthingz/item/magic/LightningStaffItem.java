@@ -2,21 +2,21 @@ package com.ultreon.randomthingz.item.magic;
 
 import com.ultreon.randomthingz.common.item.ModItemGroups;
 import com.ultreon.randomthingz.item.WandItem;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.LightningBoltEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Rarity;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -26,46 +26,46 @@ import org.jetbrains.annotations.NotNull;
  */
 public class LightningStaffItem extends WandItem {
     public LightningStaffItem() {
-        super(5, 1, new Item.Properties().group(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(5, 1, new Item.Properties().tab(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
-    protected static BlockRayTraceResult rayTrace(World dimensionIn, PlayerEntity player, RayTraceContext.@NotNull FluidMode fluidMode) {
-        final float f = player.rotationPitch;
-        final float f1 = player.rotationYaw;
-        final Vector3d vec3d = player.getEyePosition(1.0F);
-        final float f2 = MathHelper.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        final float f3 = MathHelper.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        final float f4 = -MathHelper.cos(-f * ((float) Math.PI / 180F));
-        final float f5 = MathHelper.sin(-f * ((float) Math.PI / 180F));
+    protected static BlockHitResult rayTrace(Level dimensionIn, Player player, ClipContext.@NotNull Fluid fluidMode) {
+        final float f = player.xRot;
+        final float f1 = player.yRot;
+        final Vec3 vec3d = player.getEyePosition(1.0F);
+        final float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+        final float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+        final float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
+        final float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
         final float f6 = f3 * f4;
         final float f7 = f2 * f4;
         final double reach = 128;
-        final Vector3d vec3d1 = vec3d.add((double) f6 * reach, (double) f5 * reach, (double) f7 * reach);
-        return dimensionIn.rayTraceBlocks(new RayTraceContext(vec3d, vec3d1, RayTraceContext.BlockMode.OUTLINE, fluidMode, player));
+        final Vec3 vec3d1 = vec3d.add((double) f6 * reach, (double) f5 * reach, (double) f7 * reach);
+        return dimensionIn.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.OUTLINE, fluidMode, player));
     }
 
     @Override
-    public void activate(ItemStack stack, @NotNull World dimensionIn, @NotNull LivingEntity livingIn, float charge) {
-        if (!(livingIn instanceof PlayerEntity)) {
+    public void activate(ItemStack stack, @NotNull Level dimensionIn, @NotNull LivingEntity livingIn, float charge) {
+        if (!(livingIn instanceof Player)) {
             return;
         }
 
-        final PlayerEntity playerIn = (PlayerEntity) livingIn;
+        final Player playerIn = (Player) livingIn;
 
-        if (dimensionIn instanceof ServerWorld) {
-            final ServerWorld dimension = (ServerWorld) dimensionIn;
+        if (dimensionIn instanceof ServerLevel) {
+            final ServerLevel dimension = (ServerLevel) dimensionIn;
 
-            final RayTraceResult raytraceresult = rayTrace(dimensionIn, playerIn, RayTraceContext.FluidMode.ANY);
-            final double posX = raytraceresult.getHitVec().x;
-            final double posY = Math.floor(raytraceresult.getHitVec().y);
-            final double posZ = raytraceresult.getHitVec().z;
+            final HitResult raytraceresult = rayTrace(dimensionIn, playerIn, ClipContext.Fluid.ANY);
+            final double posX = raytraceresult.getLocation().x;
+            final double posY = Math.floor(raytraceresult.getLocation().y);
+            final double posZ = raytraceresult.getLocation().z;
 
-            final LightningBoltEntity l = new LightningBoltEntity(EntityType.LIGHTNING_BOLT, dimensionIn);
-            l.setPosition(posX, posY, posZ);
-            l.setEffectOnly(false);
-            dimension.spawnEntity(l);
+            final LightningBolt l = new LightningBolt(EntityType.LIGHTNING_BOLT, dimensionIn);
+            l.setPos(posX, posY, posZ);
+            l.setVisualOnly(false);
+            dimension.addFreshEntity(l);
 
-            playerIn.addStat(Stats.ITEM_USED.get(this));
+            playerIn.awardStat(Stats.ITEM_USED.get(this));
         }
     }
 }

@@ -1,11 +1,11 @@
 package com.ultreon.randomthingz.inventory.container;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -15,12 +15,12 @@ import javax.annotation.Nullable;
  *
  * @author Qboi123
  */
-public abstract class ContainerBase extends Container {
+public abstract class ContainerBase extends AbstractContainerMenu {
 
-    protected IInventory inventory;
-    protected IInventory playerInventory;
+    protected Container inventory;
+    protected Container playerInventory;
 
-    public ContainerBase(ContainerType type, int id, IInventory playerInventory, IInventory inventory) {
+    public ContainerBase(MenuType type, int id, Container playerInventory, Container inventory) {
         super(type, id);
         this.playerInventory = playerInventory;
         this.inventory = inventory;
@@ -57,36 +57,36 @@ public abstract class ContainerBase extends Container {
     public abstract int getInventorySize();
 
     @Override
-    public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
+    public boolean stillValid(@NotNull Player playerIn) {
         return true;
     }
 
     @Nullable
-    public IInventory getPlayerInventory() {
+    public Container getPlayerInventory() {
         return playerInventory;
     }
 
     @Override
-    public @NotNull ItemStack transferStackInSlot(@NotNull PlayerEntity playerIn, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot = inventorySlots.get(index);
+        Slot slot = slots.get(index);
 
-        if (slot != null && slot.hasStack()) {
-            ItemStack stack = slot.getStack();
+        if (slot != null && slot.hasItem()) {
+            ItemStack stack = slot.getItem();
             itemStack = stack.copy();
 
             if (index < getInventorySize()) {
-                if (!this.mergeItemStack(stack, getInventorySize(), inventorySlots.size(), true)) {
+                if (!this.moveItemStackTo(stack, getInventorySize(), slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(stack, 0, getInventorySize(), false)) {
+            } else if (!this.moveItemStackTo(stack, 0, getInventorySize(), false)) {
                 return ItemStack.EMPTY;
             }
 
             if (stack.isEmpty()) {
-                slot.putStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.onSlotChanged();
+                slot.setChanged();
             }
         }
         return itemStack;

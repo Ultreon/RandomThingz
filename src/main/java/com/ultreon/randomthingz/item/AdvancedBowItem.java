@@ -1,16 +1,17 @@
 package com.ultreon.randomthingz.item;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.*;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -50,7 +51,7 @@ public class AdvancedBowItem extends BowItem {
     }
 
     public AdvancedBowItem(Properties builder, float velocity, float inaccuracy, double arrowAttackDamage, int knockback, boolean defaultFlame) {
-        super(builder.maxStackSize(1));
+        super(builder.stacksTo(1));
 
         this.velocity = velocity;
         this.inaccuracy = inaccuracy;
@@ -77,11 +78,11 @@ public class AdvancedBowItem extends BowItem {
      */
     @ParametersAreNonnullByDefault
     @Override
-    public void onPlayerStoppedUsing(ItemStack stack, World dimensionIn, LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof PlayerEntity) {
-            PlayerEntity playerentity = (PlayerEntity) entityLiving;
-            boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
-            ItemStack itemstack = playerentity.findAmmo(stack);
+    public void releaseUsing(ItemStack stack, Level dimensionIn, LivingEntity entityLiving, int timeLeft) {
+        if (entityLiving instanceof Player) {
+            Player playerentity = (Player) entityLiving;
+            boolean flag = playerentity.abilities.instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0;
+            ItemStack itemstack = playerentity.getProjectile(stack);
 
             int i = this.getUseDuration(stack) - timeLeft;
             i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, dimensionIn, playerentity, i, !itemstack.isEmpty() || flag);
@@ -94,51 +95,51 @@ public class AdvancedBowItem extends BowItem {
 
                 float f = getArrowVelocity(i);
                 if (!((double) f < 0.1D)) {
-                    boolean flag1 = playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem) itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
-                    if (!dimensionIn.isClientSided) {
+                    boolean flag1 = playerentity.abilities.instabuild || (itemstack.getItem() instanceof ArrowItem && ((ArrowItem) itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
+                    if (!dimensionIn.isClientSide) {
                         ArrowItem arrowitem = (ArrowItem) (itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-                        AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(dimensionIn, itemstack, playerentity);
+                        AbstractArrow abstractarrowentity = arrowitem.createArrow(dimensionIn, itemstack, playerentity);
                         abstractarrowentity = customArrow(abstractarrowentity);
-                        abstractarrowentity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * this.velocity, this.inaccuracy);
+                        abstractarrowentity.shootFromRotation(playerentity, playerentity.xRot, playerentity.yRot, 0.0F, f * this.velocity, this.inaccuracy);
                         if (f == 1.0F) {
-                            abstractarrowentity.setIsCritical(true);
+                            abstractarrowentity.setCritArrow(true);
                         }
 
-                        int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+                        int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
                         if (j > 0) {
-                            abstractarrowentity.setDamage((abstractarrowentity.getDamage() + (double) j * 0.5D + 0.5D) * arrowAttackDamage);
+                            abstractarrowentity.setBaseDamage((abstractarrowentity.getBaseDamage() + (double) j * 0.5D + 0.5D) * arrowAttackDamage);
                         }
 
-                        int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
+                        int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
                         if (k > 0) {
-                            abstractarrowentity.setKnockbackStrength(k * knockback);
+                            abstractarrowentity.setKnockback(k * knockback);
                         }
 
-                        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
-                            abstractarrowentity.setFire(100);
+                        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stack) > 0) {
+                            abstractarrowentity.setSecondsOnFire(100);
                         }
 
                         if (defaultFlame) {
-                            abstractarrowentity.setFire(100);
+                            abstractarrowentity.setSecondsOnFire(100);
                         }
 
-                        stack.damageItem(1, playerentity, (p_220009_1_) -> p_220009_1_.sendBreakAnimation(playerentity.getActiveHand()));
-                        if (flag1 || playerentity.abilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW)) {
-                            abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+                        stack.hurtAndBreak(1, playerentity, (p_220009_1_) -> p_220009_1_.broadcastBreakEvent(playerentity.getUsedItemHand()));
+                        if (flag1 || playerentity.abilities.instabuild && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW)) {
+                            abstractarrowentity.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                         }
 
-                        dimensionIn.spawnEntity(abstractarrowentity);
+                        dimensionIn.addFreshEntity(abstractarrowentity);
                     }
 
-                    dimensionIn.playSound(null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-                    if (!flag1 && !playerentity.abilities.isCreativeMode) {
+                    dimensionIn.playSound(null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    if (!flag1 && !playerentity.abilities.instabuild) {
                         itemstack.shrink(1);
                         if (itemstack.isEmpty()) {
-                            playerentity.inventory.deleteStack(itemstack);
+                            playerentity.inventory.removeItem(itemstack);
                         }
                     }
 
-                    playerentity.addStat(Stats.ITEM_USED.get(this));
+                    playerentity.awardStat(Stats.ITEM_USED.get(this));
                 }
             }
         }
@@ -156,8 +157,8 @@ public class AdvancedBowItem extends BowItem {
      * returns the action that specifies what animation to play when the items is being used
      */
     @ParametersAreNonnullByDefault
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.BOW;
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.BOW;
     }
 
     /**
@@ -190,7 +191,7 @@ public class AdvancedBowItem extends BowItem {
 //        return arrow;
 //    }
 //
-//    public int func_230305_d_() {
+//    public int getDefaultProjectileRange() {
 //        return 15;
 //    }
 //

@@ -1,14 +1,14 @@
 package com.ultreon.randomthingz.util;
 
 import lombok.experimental.UtilityClass;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.stream.Stream;
 
@@ -24,10 +24,10 @@ public final class TileEntityUtils {
      *
      * @param tileEntity the tile entity to update
      */
-    public static void sendUpdatePacket(TileEntity tileEntity) {
-        SUpdateTileEntityPacket packet = tileEntity.getUpdatePacket();
+    public static void sendUpdatePacket(BlockEntity tileEntity) {
+        ClientboundBlockEntityDataPacket packet = tileEntity.getUpdatePacket();
         if (packet != null) {
-            sendUpdatePacket(tileEntity.getDimension(), tileEntity.getPos(), packet);
+            sendUpdatePacket(tileEntity.getLevel(), tileEntity.getBlockPos(), packet);
         }
     }
 
@@ -36,16 +36,16 @@ public final class TileEntityUtils {
      *
      * @param tileEntity the tile entity to update
      */
-    public static void sendUpdatePacket(TileEntity tileEntity, CompoundNBT compound) {
-        SUpdateTileEntityPacket packet = new SUpdateTileEntityPacket(tileEntity.getPos(), 0, compound);
-        sendUpdatePacket(tileEntity.getDimension(), tileEntity.getPos(), packet);
+    public static void sendUpdatePacket(BlockEntity tileEntity, CompoundTag compound) {
+        ClientboundBlockEntityDataPacket packet = new ClientboundBlockEntityDataPacket(tileEntity.getBlockPos(), 0, compound);
+        sendUpdatePacket(tileEntity.getLevel(), tileEntity.getBlockPos(), packet);
     }
 
-    private static void sendUpdatePacket(World dimension, BlockPos pos, SUpdateTileEntityPacket packet) {
-        if (dimension instanceof ServerWorld) {
-            ServerWorld server = (ServerWorld) dimension;
-            Stream<ServerPlayerEntity> players = server.getChunkProvider().chunkManager.getTrackingPlayers(new ChunkPos(pos), false);
-            players.forEach(player -> player.connection.sendPacket(packet));
+    private static void sendUpdatePacket(Level dimension, BlockPos pos, ClientboundBlockEntityDataPacket packet) {
+        if (dimension instanceof ServerLevel) {
+            ServerLevel server = (ServerLevel) dimension;
+            Stream<ServerPlayer> players = server.getChunkSource().chunkMap.getPlayers(new ChunkPos(pos), false);
+            players.forEach(player -> player.connection.send(packet));
         }
     }
 }

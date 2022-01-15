@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.client.model;
 
 import com.ultreon.randomthingz.entity.HogEntity;
-import net.minecraft.client.renderer.entity.model.PigModel;
+import net.minecraft.client.model.PigModel;
 
 /**
  * Hog entity model class.

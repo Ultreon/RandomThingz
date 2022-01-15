@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.block.machines.arcaneescalator;
 
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.machines.AbstractMachineScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 
 public class ArcaneEscalatorScreen extends AbstractMachineScreen<ArcaneEscalatorContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/arcane_escalator.png");
 
-    public ArcaneEscalatorScreen(ArcaneEscalatorContainer containerIn, PlayerInventory playerInventoryIn, ITextComponent titleIn) {
+    public ArcaneEscalatorScreen(ArcaneEscalatorContainer containerIn, Inventory playerInventoryIn, Component titleIn) {
         super(containerIn, playerInventoryIn, titleIn);
     }
 

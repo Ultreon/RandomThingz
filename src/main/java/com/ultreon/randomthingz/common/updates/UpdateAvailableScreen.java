@@ -6,15 +6,15 @@ import com.ultreon.randomthingz.client.graphics.MCGraphics;
 import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
 import com.ultreon.randomthingz.common.internal.RtVersion;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.DialogTexts;
-import net.minecraft.client.gui.IBidiRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.settings.NarratorStatus;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.NarratorStatus;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
@@ -40,11 +40,11 @@ public class UpdateAvailableScreen extends AdvancedScreen {
     private static boolean initializedBefore = false;
 
     // Bidi Renderer.
-    private final IBidiRenderer field_243276_q = IBidiRenderer.field_243257_a;
+    private final MultiLineLabel message = MultiLineLabel.EMPTY;
 
     // Texts.
-    private final ITextComponent yesButtonText;
-    private final ITextComponent noButtonText;
+    private final Component yesButtonText;
+    private final Component noButtonText;
 
     // Back screen.
     private final Screen backScreen;
@@ -63,24 +63,24 @@ public class UpdateAvailableScreen extends AdvancedScreen {
      */
     public UpdateAvailableScreen(Screen backScreen, AbstractUpdater<?> updater) {
         // Super call
-        super(new TranslationTextComponent("msg.randomthingz.update_available.title"));
+        super(new TranslatableComponent("msg.randomthingz.update_available.title"));
 
         // Assign fields.
         this.backScreen = backScreen;
         this.updater = updater;
-        this.yesButtonText = DialogTexts.GUI_YES;
-        this.noButtonText = DialogTexts.GUI_NO;
+        this.yesButtonText = CommonComponents.GUI_YES;
+        this.noButtonText = CommonComponents.GUI_NO;
     }
 
     /**
      * Screen initialization.
      * Initializes the update available screen, called internally in MC Forge.
      */
-    protected void initialize() {
-        super.initialize();
+    protected void init() {
+        super.init();
 
         // Get narrator status/
-        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
+        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).options.narratorStatus;
 
         // Narrate if narrator is on.
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
@@ -94,12 +94,12 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         // Add buttons.
         this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (p_213006_1_) -> {
             if (this.minecraft != null) {
-                this.minecraft.displayGuiScreen(new UpdateScreen(backScreen, updater.getReleaseUrl(), updater.getDependencies()));
+                this.minecraft.setScreen(new UpdateScreen(backScreen, updater.getReleaseUrl(), updater.getDependencies()));
             }
         }));
         this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
             if (this.minecraft != null) {
-                this.minecraft.displayGuiScreen(backScreen);
+                this.minecraft.setScreen(backScreen);
             }
         }));
 
@@ -127,16 +127,16 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
         // Draw text.
         mcg.drawCenteredString(this.title, this.width / 2f, 70f, new Color(0xffffff));
-        mcg.drawCenteredString(new TranslationTextComponent("msg.randomthingz.update_available.description", updater.getLatestVersion().toLocalizedString()), this.width / 2f, 90f, new Color(0xbfbfbf));
+        mcg.drawCenteredString(new TranslatableComponent("msg.randomthingz.update_available.description", updater.getLatestVersion().toLocalizedString()), this.width / 2f, 90f, new Color(0xbfbfbf));
 
-        this.field_243276_q.func_241863_a(mcg.getMatrixStack(), this.width / 2, 90);
+        this.message.renderCentered(mcg.getMatrixStack(), this.width / 2, 90);
 
         // Draw help icon.
         mcg.drawTexture(1, 1, 64, 15, 16, 16, SCREEN_ICONS);
 
         // Draw help message if mouse pointer is on the help icon.
         if (isPointInRegion(1, 1, 17, 17, mouse)) {
-            mcg.renderTooltip(new TranslationTextComponent("msg.randomthingz.update_available.help"), new Point(16, mouse.y));
+            mcg.renderTooltip(new TranslatableComponent("msg.randomthingz.update_available.help"), new Point(16, mouse.y));
         }
     }
 
@@ -150,7 +150,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         this.ticksUntilEnable = ticksUntilEnableIn;
 
         // Loop widgets.
-        for (Widget widget : this.buttons) {
+        for (AbstractWidget widget : this.buttons) {
             // Set widget to inactive.
             widget.active = false;
         }
@@ -172,7 +172,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         // If ticksUntilEnable equals 0, enable all widgets.
         if (this.ticksUntilEnable == 0) {
             // Loop widgets.
-            for (Widget widget : this.buttons) {
+            for (AbstractWidget widget : this.buttons) {
                 // Set widget active.
                 widget.active = true;
             }
@@ -221,7 +221,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
             // If yes: is the update available screen initialized before?
             if (!UpdateAvailableScreen.isInitializedBefore()) {
                 // Show the update available screen.
-                mc.displayGuiScreen(new UpdateAvailableScreen(gui, updater));
+                mc.setScreen(new UpdateAvailableScreen(gui, updater));
             }
         } else if (!UpdateAvailableScreen.isInitializedBefore()) {
             // Set the initialized before value.

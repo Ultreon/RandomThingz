@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.itempipe;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,14 +52,14 @@ public class ItemContainer implements IItemHandler {
         return stack.getCount();
     }
 
-    public ItemContainer readFromNBT(CompoundNBT nbt) {
-        ItemStack stack = ItemStack.read(nbt);
+    public ItemContainer readFromNBT(CompoundTag nbt) {
+        ItemStack stack = ItemStack.of(nbt);
         setStack(stack);
         return this;
     }
 
-    public CompoundNBT writeToNBT(CompoundNBT nbt) {
-        stack.write(nbt);
+    public CompoundTag writeToNBT(CompoundTag nbt) {
+        stack.save(nbt);
         return nbt;
     }
 
@@ -94,7 +94,7 @@ public class ItemContainer implements IItemHandler {
             if (this.stack.isEmpty()) {
                 return ItemStack.EMPTY;
             }
-            if (!this.stack.isItemEqual(stack)) {
+            if (!this.stack.sameItem(stack)) {
                 return ItemStack.EMPTY;
             }
             return new ItemStack(stack.getItem(), Math.min(capacity - this.stack.getCount(), stack.getCount()));
@@ -104,7 +104,7 @@ public class ItemContainer implements IItemHandler {
             onContentsChanged();
             return this.stack;
         }
-        if (!this.stack.isItemEqual(stack)) {
+        if (!this.stack.sameItem(stack)) {
             return ItemStack.EMPTY;
         }
         int filled = capacity - this.stack.getCount();

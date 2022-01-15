@@ -3,10 +3,10 @@ package com.ultreon.randomthingz.client.renderer;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.renderer.layers.MoobloomFlowerLayerOld;
 import com.ultreon.randomthingz.entity.MoobloomEntityOld;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.model.CowModel;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.model.CowModel;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 public class MoobloomRendererOld extends MobRenderer<MoobloomEntityOld, CowModel<MoobloomEntityOld>> {
     private static final ResourceLocation MOOBLOOM_TEXTURES = new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/cow/moobloom.png");
 
-    public MoobloomRendererOld(EntityRendererManager renderManagerIn) {
+    public MoobloomRendererOld(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn, new CowModel<>(), 0.7F);
         this.addLayer(new MoobloomFlowerLayerOld<>(this));
     }
@@ -31,7 +31,7 @@ public class MoobloomRendererOld extends MobRenderer<MoobloomEntityOld, CowModel
      * Returns the location of an entity's texture.
      */
     public @NotNull
-    ResourceLocation getEntityTexture(@NotNull MoobloomEntityOld entity) {
+    ResourceLocation getTextureLocation(@NotNull MoobloomEntityOld entity) {
         return MOOBLOOM_TEXTURES;
     }
 

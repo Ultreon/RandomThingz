@@ -3,8 +3,8 @@ package com.ultreon.randomthingz.network;
 import com.ultreon.randomthingz.client.gui.modules.ModuleScreen;
 import com.ultreon.randomthingz.common.ModuleManager;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 public class OpenModuleScreenPacket {
 
-    public OpenModuleScreenPacket(PacketBuffer buffer) {
+    public OpenModuleScreenPacket(FriendlyByteBuf buffer) {
 
     }
 
@@ -28,16 +28,16 @@ public class OpenModuleScreenPacket {
 
     @OnlyIn(Dist.CLIENT)
     private <T> T handle0(Supplier<NetworkEvent.Context> context) {
-        ServerPlayerEntity player = context.get().getSender();
+        ServerPlayer player = context.get().getSender();
         context.get().enqueueWork(() -> {
             Minecraft mc = Minecraft.getInstance();
-            mc.currentScreen = new ModuleScreen(mc.currentScreen, ModuleManager.getInstance());
+            mc.screen = new ModuleScreen(mc.screen, ModuleManager.getInstance());
         });
         context.get().setPacketHandled(true);
         return null;
     }
 
-    public void toBytes(PacketBuffer buffer) {
+    public void toBytes(FriendlyByteBuf buffer) {
 
     }
 }

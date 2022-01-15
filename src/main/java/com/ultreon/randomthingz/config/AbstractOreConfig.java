@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.config;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;

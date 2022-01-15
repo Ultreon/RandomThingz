@@ -1,8 +1,8 @@
 package com.ultreon.texturedmodels.setup;
 
 import com.ultreon.texturedmodels.QTextureModels;
-import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,8 +22,8 @@ public class TextureSetup {
 
     @SubscribeEvent
     public static void onStitchEvent(TextureStitchEvent.Pre event) {
-        ResourceLocation stitching = event.getMap().getTextureLocation();
-        if (stitching.equals(AtlasTexture.LOCATION_BLOCKS_TEXTURE)) {
+        ResourceLocation stitching = event.getMap().location();
+        if (stitching.equals(TextureAtlas.LOCATION_BLOCKS)) {
             LOGGER.info("Stitching textures from QTextureModels");
             event.addSprite(loc("block/chest_front"));
             event.addSprite(loc("block/chest_side"));

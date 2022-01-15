@@ -1,12 +1,12 @@
 package com.ultreon.texturedmodels.tileentity;
 
 import com.ultreon.texturedmodels.block.FrameBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.ModelDataManager;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.data.ModelDataMap;
@@ -28,7 +28,7 @@ import static com.ultreon.texturedmodels.setup.Registration.FRAMEBLOCK_TILE;
  * @author PianoManu
  * @version 1.2 09/28/20
  */
-public class FrameBlockTile extends TileEntity {
+public class FrameBlockTile extends BlockEntity {
     public static final ModelProperty<BlockState> MIMIC = new ModelProperty<>();
     public static final ModelProperty<Integer> TEXTURE = new ModelProperty<>();
     public static final ModelProperty<Integer> DESIGN = new ModelProperty<>();
@@ -56,8 +56,8 @@ public class FrameBlockTile extends TileEntity {
 
     public void setMimic(BlockState mimic) {
         this.mimic = mimic;
-        markModified();
-        dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
     }
 
     public BlockState getMimic() {
@@ -70,8 +70,8 @@ public class FrameBlockTile extends TileEntity {
 
     public void setDesign(Integer design) {
         this.design = design;
-        markModified();
-        dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
     }
 
     public Integer getDesignTexture() {
@@ -80,8 +80,8 @@ public class FrameBlockTile extends TileEntity {
 
     public void setDesignTexture(Integer designTexture) {
         this.designTexture = designTexture;
-        markModified();
-        dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
     }
 
     public Integer getTexture() {
@@ -90,8 +90,8 @@ public class FrameBlockTile extends TileEntity {
 
     public void setTexture(Integer texture) {
         this.texture = texture;
-        markModified();
-        dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
     }
 
     public Integer getGlassColor() {
@@ -102,7 +102,7 @@ public class FrameBlockTile extends TileEntity {
         this.glassColor = colorNumber;
     }
 
-    private static Integer readInteger(CompoundNBT tag) {
+    private static Integer readInteger(CompoundTag tag) {
         if (!tag.contains("number", 8)) {
             return 0;
         } else {
@@ -121,21 +121,21 @@ public class FrameBlockTile extends TileEntity {
 
     public void setOverlay(Integer overlay) {
         this.overlay = overlay;
-        markModified();
-        dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
     }
 
     @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(pos, 1, getUpdateTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return new ClientboundBlockEntityDataPacket(worldPosition, 1, getUpdateTag());
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT tag = super.getUpdateTag();
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = super.getUpdateTag();
         if (mimic != null) {
-            tag.put("mimic", NBTUtil.writeBlockState(mimic));
+            tag.put("mimic", NbtUtils.writeBlockState(mimic));
         }
         if (texture != null) {
             tag.put("texture", writeInteger(texture));
@@ -156,54 +156,54 @@ public class FrameBlockTile extends TileEntity {
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         BlockState oldMimic = mimic;
         Integer oldTexture = texture;
         Integer oldDesign = design;
         Integer oldDesignTexture = designTexture;
         Integer oldGlassColor = glassColor;
         Integer oldOverlay = overlay;
-        CompoundNBT tag = pkt.getNbt();
+        CompoundTag tag = pkt.getTag();
         if (tag.contains("mimic")) {
-            mimic = NBTUtil.readBlockState(tag.getCompound("mimic"));
+            mimic = NbtUtils.readBlockState(tag.getCompound("mimic"));
             if (!Objects.equals(oldMimic, mimic)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
         if (tag.contains("texture")) {
             texture = readInteger(tag.getCompound("texture"));
             if (!Objects.equals(oldTexture, texture)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
         if (tag.contains("design")) {
             design = readInteger(tag.getCompound("design"));
             if (!Objects.equals(oldDesign, design)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
         if (tag.contains("design_texture")) {
             designTexture = readInteger(tag.getCompound("design_texture"));
             if (!Objects.equals(oldDesignTexture, designTexture)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
         if (tag.contains("glass_color")) {
             glassColor = readInteger(tag.getCompound("glass_color"));
             if (!Objects.equals(oldGlassColor, glassColor)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
         if (tag.contains("overlay")) {
             overlay = readInteger(tag.getCompound("overlay"));
             if (!Objects.equals(oldOverlay, overlay)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                dimension.notifyBlockUpdate(pos, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
             }
         }
     }
@@ -222,10 +222,10 @@ public class FrameBlockTile extends TileEntity {
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT tag) {
-        super.read(state, tag);
+    public void load(BlockState state, CompoundTag tag) {
+        super.load(state, tag);
         if (tag.contains("mimic")) {
-            mimic = NBTUtil.readBlockState(tag.getCompound("mimic"));
+            mimic = NbtUtils.readBlockState(tag.getCompound("mimic"));
         }
         if (tag.contains("texture")) {
             texture = readInteger(tag.getCompound("texture"));
@@ -245,9 +245,9 @@ public class FrameBlockTile extends TileEntity {
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT tag) {
+    public CompoundTag save(CompoundTag tag) {
         if (mimic != null) {
-            tag.put("mimic", NBTUtil.writeBlockState(mimic));
+            tag.put("mimic", NbtUtils.writeBlockState(mimic));
         }
         if (texture != null) {
             tag.put("texture", writeInteger(texture));
@@ -264,11 +264,11 @@ public class FrameBlockTile extends TileEntity {
         if (overlay != null) {
             tag.put("overlay", writeInteger(overlay));
         }
-        return super.write(tag);
+        return super.save(tag);
     }
 
-    private static CompoundNBT writeInteger(Integer tag) {
-        CompoundNBT compoundnbt = new CompoundNBT();
+    private static CompoundTag writeInteger(Integer tag) {
+        CompoundTag compoundnbt = new CompoundTag();
         compoundnbt.putString("number", tag.toString());
         return compoundnbt;
     }

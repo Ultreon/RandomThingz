@@ -1,22 +1,28 @@
 package com.ultreon.randomthingz.client.gui.modules;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.client.gui.screen.PackScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.list.ExtendedList;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.IReorderingProcessor;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.locale.Language;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.FormattedText;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.text.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -32,12 +38,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @OnlyIn(Dist.CLIENT)
-public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
+public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
     private static final ResourceLocation ICONS = new ResourceLocation("textures/gui/resource_packs.png");
     private static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(RandomThingz.MOD_ID, "textures/empty.png");
-    private static final ITextComponent INCOMPATIBLE_TEXT = new TranslationTextComponent("challenges.incompatible");
-    private static final ITextComponent INCOMPATIBLE_CONFIRM_TITLE = new TranslationTextComponent("challenges.incompatible.confirm.title");
-    private final ITextComponent title;
+    private static final Component INCOMPATIBLE_TEXT = new TranslatableComponent("challenges.incompatible");
+    private static final Component INCOMPATIBLE_CONFIRM_TITLE = new TranslatableComponent("challenges.incompatible.confirm.title");
+    private final Component title;
     private final ModuleScreen screen;
 
     /**
@@ -48,7 +54,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
      * @param heightIn  the list's height.
      * @param title     the list title.
      */
-    public ModuleList(ModuleScreen screen, Minecraft minecraft, int widthIn, int heightIn, ITextComponent title) {
+    public ModuleList(ModuleScreen screen, Minecraft minecraft, int widthIn, int heightIn, Component title) {
         super(minecraft, widthIn, heightIn, 32, heightIn - 55 + 4, 36);
 
         // The module screen.
@@ -73,9 +79,9 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
      * @param tessellator the tessellator.
      */
     @Override
-    protected void renderHeader(MatrixStack matrixStack, int x, int y, Tessellator tessellator) {
-        ITextComponent itextcomponent = (new StringTextComponent("")).appendSibling(this.title).mergeStyle(TextFormatting.UNDERLINE, TextFormatting.BOLD);
-        this.minecraft.fontRenderer.drawText(matrixStack, itextcomponent, (float) (x + this.width / 2 - this.minecraft.fontRenderer.getStringPropertyWidth(itextcomponent) / 2), (float) Math.min(this.y0 + 3, y), 16777215);
+    protected void renderHeader(PoseStack matrixStack, int x, int y, Tesselator tessellator) {
+        Component itextcomponent = (new TextComponent("")).append(this.title).withStyle(ChatFormatting.UNDERLINE, ChatFormatting.BOLD);
+        this.minecraft.font.draw(matrixStack, itextcomponent, (float) (x + this.width / 2 - this.minecraft.font.width(itextcomponent) / 2), (float) Math.min(this.y0 + 3, y), 16777215);
     }
 
     /**
@@ -101,7 +107,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
      */
     @SuppressWarnings("deprecation")
     @OnlyIn(Dist.CLIENT)
-    public static class ModuleEntry extends ExtendedList.AbstractListEntry<ModuleEntry> {
+    public static class ModuleEntry extends ObjectSelectionList.Entry<ModuleEntry> {
         private static final ResourceLocation MODULE_OVERLAYS = new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/overlays/modules.png");
         private static final ResourceLocation OPTIONS_BUTTON = new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/modules/buttons/options.png");
         private static final ResourceLocation MANAGER_BUTTON = new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/modules/buttons/manager.png");
@@ -109,7 +115,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
         protected final Minecraft mc;
         protected final Screen screen;
         private final Module module;
-        private final IReorderingProcessor reorderingLocalizedName;
+        private final FormattedCharSequence reorderingLocalizedName;
         private final ModuleManager manager = ModuleManager.getInstance();
         private final long debugRefresh = 0;
 
@@ -136,13 +142,13 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
          * @param text      the text component to process.
          * @return a {@linkplain IReorderingProcessor reordering processor}.
          */
-        private static IReorderingProcessor getReordering(Minecraft minecraft, ITextComponent text) {
-            int i = minecraft.fontRenderer.getStringPropertyWidth(text);
+        private static FormattedCharSequence getReordering(Minecraft minecraft, Component text) {
+            int i = minecraft.font.width(text);
             if (i > 157) {
-                ITextProperties itextproperties = ITextProperties.func_240655_a_(minecraft.fontRenderer.func_238417_a_(text, 157 - minecraft.fontRenderer.getStringWidth("...")), ITextProperties.func_240652_a_("..."));
-                return LanguageMap.getInstance().func_241870_a(itextproperties);
+                FormattedText itextproperties = FormattedText.composite(minecraft.font.substrByWidth(text, 157 - minecraft.font.width("...")), FormattedText.of("..."));
+                return Language.getInstance().getVisualOrder(itextproperties);
             } else {
-                return text.func_241878_f();
+                return text.getVisualOrderText();
             }
         }
 
@@ -161,7 +167,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
          * @param partialTicks the {@linkplain Minecraft#getRenderPartialTicks() render partial ticks}.
          */
         @SuppressWarnings("DanglingJavadoc")
-        public void render(MatrixStack matrixStack, int listIndex, int scroll, int xOffset, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean isHovered, float partialTicks) {
+        public void render(PoseStack matrixStack, int listIndex, int scroll, int xOffset, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean isHovered, float partialTicks) {
             // Get module compatibility and security.
             ModuleCompatibility compatibility = this.module.getCompatibility();
             ModuleSafety security = this.module.getSafety();
@@ -169,13 +175,13 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
             // If there's no compatibility show a red color.
             if (compatibility == ModuleCompatibility.NONE) {
                 RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-                AbstractGui.fill(matrixStack, xOffset - 1, scroll - 1, xOffset + rowWidth - 9, scroll + rowHeight + 1, 0xff770000);
+                GuiComponent.fill(matrixStack, xOffset - 1, scroll - 1, xOffset + rowWidth - 9, scroll + rowHeight + 1, 0xff770000);
             }
 
             // If there's partial compatibility show a orange yellow color.
             if (compatibility == ModuleCompatibility.PARTIAL) {
                 RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-                AbstractGui.fill(matrixStack, xOffset - 1, scroll - 1, xOffset + rowWidth - 9, scroll + rowHeight + 1, 0xff773a00);
+                GuiComponent.fill(matrixStack, xOffset - 1, scroll - 1, xOffset + rowWidth - 9, scroll + rowHeight + 1, 0xff773a00);
             }
 
             // Calculate mouse position offset for scrolling etc.
@@ -183,20 +189,20 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
             int mouseYOffset = mouseY - scroll;
 
             // Bind the icon texture.
-            this.mc.getTextureManager().bindTexture(this.module.getTextureLocation());
+            this.mc.getTextureManager().bind(this.module.getTextureLocation());
 
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-            AbstractGui.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 32, 32);
+            GuiComponent.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 32, 32);
 
             int dx = 64 + xOffset + 8;
 
             // Bind the informative icon texture overlays.
-            this.mc.getTextureManager().bindTexture(MODULE_OVERLAYS);
+            this.mc.getTextureManager().bind(MODULE_OVERLAYS);
 
             // Show icon for core modules.
             if (this.module.isCore()) {
                 dx += 18;
-                AbstractGui.blit(matrixStack, dx, scroll + 14, 64.0F, 0.0F, 16, 16, 256, 256);
+                GuiComponent.blit(matrixStack, dx, scroll + 14, 64.0F, 0.0F, 16, 16, 256, 256);
             }
 
             // Check security, show icon for experimental / risc security.
@@ -204,12 +210,12 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
                 case EXPERIMENTAL:
                     // Show experimental icon texture. (Red shield icon, white exclamation point)
                     dx += 18;
-                    AbstractGui.blit(matrixStack, dx, scroll + 14, 80.0F, 0.0F, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 80.0F, 0.0F, 16, 16, 256, 256);
                     break;
                 case RISC:
                     // Show risc icon texture. (Yellow shield icon, black exclamation point)
                     dx += 18;
-                    AbstractGui.blit(matrixStack, dx, scroll + 14, 96.0F, 0.0F, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 96.0F, 0.0F, 16, 16, 256, 256);
                     break;
                 case SAFE:
                     // Don't show any security icon texture.
@@ -221,12 +227,12 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
                 case NONE:
                     // Show no compatibility icon texture. (Red circle, white exclamation point)
                     dx += 18;
-                    AbstractGui.blit(matrixStack, dx, scroll + 14, 48.0F, 0.0F, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 48.0F, 0.0F, 16, 16, 256, 256);
                     break;
                 case PARTIAL:
                     // Show partial compatibility icon texture. (Yellow triangle, black exclamation point)
                     dx += 18;
-                    AbstractGui.blit(matrixStack, dx, scroll + 14, 32.0F, 0.0F, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 32.0F, 0.0F, 16, 16, 256, 256);
                     break;
                 case FULL:
                     // Don't show any compatibility icon texture.
@@ -238,17 +244,17 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
              *
              * @see PackScreen;
              */
-            IReorderingProcessor reorderingLocalizedName = this.reorderingLocalizedName;
+            FormattedCharSequence reorderingLocalizedName = this.reorderingLocalizedName;
 
             // Check if hovered / touchscreen support enabled.
-            if (this.mc.gameSettings.touchscreen || isHovered) {
+            if (this.mc.options.touchscreen || isHovered) {
                 // Bind icon texture for arrow.
-                this.mc.getTextureManager().bindTexture(ModuleList.ICONS);
+                this.mc.getTextureManager().bind(ModuleList.ICONS);
 
                 // Check if can be disabled.
                 if (this.module.canDisable()) {
                     // Show white overlay on top of the module icon.
-                    AbstractGui.fill(matrixStack, xOffset, scroll, xOffset + 32, scroll + 32, -1601138544);
+                    GuiComponent.fill(matrixStack, xOffset, scroll, xOffset + 32, scroll + 32, -1601138544);
                 }
 
                 // Set to full color for arrow icon to display.
@@ -260,25 +266,25 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
                     // Check hover state.
                     if (mouseXOffset < 32) {
                         // Hovered.
-                        AbstractGui.blit(matrixStack, xOffset, scroll, 0.0F, 32.0F, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 0.0F, 32.0F, 32, 32, 256, 256);
                     } else {
                         // Non-hovered.
-                        AbstractGui.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 256, 256);
                     }
                 } else if (manager.isUnsavedEnabled(this.module) && this.module.canDisable()) {
                     // Module is scheduled to be disabled when saved.
                     // Check hover state.
                     if (mouseXOffset < 32) {
                         // Hovered.
-                        AbstractGui.blit(matrixStack, xOffset, scroll, 26.0F, 32.0F, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 26.0F, 32.0F, 32, 32, 256, 256);
                     } else {
                         // Non-hovered.
-                        AbstractGui.blit(matrixStack, xOffset, scroll, 26.0F, 0.0F, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 26.0F, 0.0F, 32, 32, 256, 256);
                     }
                 }
             }
 
-            this.mc.fontRenderer.drawTextWithShadow(matrixStack, reorderingLocalizedName, (float) (xOffset + 32 + 2), (float) (scroll + 1), 16777215);
+            this.mc.font.drawShadow(matrixStack, reorderingLocalizedName, (float) (xOffset + 32 + 2), (float) (scroll + 1), 16777215);
 
             int btnX = 36;
             int btnY = 12;
@@ -286,7 +292,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
             int btnSubY = btnY + scroll;
 
             // Rendering options button.
-            this.mc.getTextureManager().bindTexture(OPTIONS_BUTTON);
+            this.mc.getTextureManager().bind(OPTIONS_BUTTON);
 
             // Check if the module of this entry has an options screen available.
             if (this.module.hasOptions()) {
@@ -304,7 +310,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
             }
 
             // Rendering submodule screen button.
-            this.mc.getTextureManager().bindTexture(MANAGER_BUTTON);
+            this.mc.getTextureManager().bind(MANAGER_BUTTON);
 
             // Check if submodule manager is enabled for the module of this entry.
             if (this.module.isSubManagerEnabled()) {
@@ -325,7 +331,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
         public boolean mouseClicked(double mouseX, double mouseY, int button) {
             // Get offset position for mouse pointer.
             double mouseXOffset = mouseX - (double) this.list.getRowLeft();
-            double mouseYOffset = mouseY - (double) this.list.getRowTop(this.list.getEventListeners().indexOf(this));
+            double mouseYOffset = mouseY - (double) this.list.getRowTop(this.list.children().indexOf(this));
 
             // Declare button position for mouse click event check for the buttons (options, submodules).
             int btnX = 36;
@@ -346,7 +352,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
                 this.module.showOptions(this.screen);
             }
             if (this.module.isSubManagerEnabled() && AdvancedScreen.isPointInRegion(btnX + 22, btnY, 19, 20, mouseXOffset, mouseYOffset)) {
-                Minecraft.getInstance().displayGuiScreen(new ModuleScreen(this.screen, this.module.getSubmoduleManager()));
+                Minecraft.getInstance().setScreen(new ModuleScreen(this.screen, this.module.getSubmoduleManager()));
             }
             // Check if is on arrow button.
             if (mouseXOffset <= 32.0D) {
@@ -365,7 +371,7 @@ public class ModuleList extends ExtendedList<ModuleList.ModuleEntry> {
                         case RISC:
                         case EXPERIMENTAL:
                             // Show confirm message, because it's insecure.
-                            ITextComponent securityText = security.getConfirmMessage();
+                            Component securityText = security.getConfirmMessage();
 
                             // Display gui screen.
                             this.mc.displayGuiScreen(new ConfirmScreen((confirmed) -> {

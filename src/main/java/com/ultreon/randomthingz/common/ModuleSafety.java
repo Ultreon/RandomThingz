@@ -2,16 +2,16 @@ package com.ultreon.randomthingz.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 @Getter
 @AllArgsConstructor
 public enum ModuleSafety {
-    SAFE(new TranslationTextComponent("misc.randomthingz.module.security.safe")),
-    RISC(new TranslationTextComponent("misc.randomthingz.module.security.risc")),
-    EXPERIMENTAL(new TranslationTextComponent("misc.randomthingz.module.security.experimental")),
+    SAFE(new TranslatableComponent("misc.randomthingz.module.security.safe")),
+    RISC(new TranslatableComponent("misc.randomthingz.module.security.risc")),
+    EXPERIMENTAL(new TranslatableComponent("misc.randomthingz.module.security.experimental")),
     ;
 
-    private final ITextComponent confirmMessage;
+    private final Component confirmMessage;
 }

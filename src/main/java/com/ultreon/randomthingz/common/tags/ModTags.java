@@ -2,12 +2,12 @@ package com.ultreon.randomthingz.common.tags;
 
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.util.ExceptionUtil;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class ModTags {
     private static ResourceLocation forgeId(String path) {
@@ -23,43 +23,43 @@ public class ModTags {
     }
 
     public static final class Blocks {
-        public static final ITag.INamedTag<Block> DRYING_RACKS = mod("drying_racks");
+        public static final Tag.Named<Block> DRYING_RACKS = mod("drying_racks");
 
         private Blocks() {
 
         }
 
-        private static ITag.INamedTag<Block> forge(String path) {
-            return BlockTags.createWrapperTag(forgeId(path).toString());
+        private static Tag.Named<Block> forge(String path) {
+            return BlockTags.bind(forgeId(path).toString());
         }
 
-        private static ITag.INamedTag<Block> mod(String path) {
-            return BlockTags.createWrapperTag(modId(path).toString());
+        private static Tag.Named<Block> mod(String path) {
+            return BlockTags.bind(modId(path).toString());
         }
     }
 
     public static final class Items {
-        public static final ITag.INamedTag<Item> DUSTS_COAL = forge("dusts/coal");
-        public static final ITag.INamedTag<Item> PLASTIC = forge("plastic");
+        public static final Tag.Named<Item> DUSTS_COAL = forge("dusts/coal");
+        public static final Tag.Named<Item> PLASTIC = forge("plastic");
 
-        public static final ITag.INamedTag<Item> CHUNKS = mod("chunks");
-        public static final ITag.INamedTag<Item> COAL_GENERATOR_FUELS = mod("coal_generator_fuels");
-        public static final ITag.INamedTag<Item> DRYING_RACKS = mod("drying_racks");
-        public static final ITag.INamedTag<Item> STEELS = mod("ingots/steels");
-        public static final ITag.INamedTag<Item> MEAT = forge("food/meat");
-        public static final ITag.INamedTag<Item> COOKED_MEAT = forge("food/cooked_meat");
-        public static final ITag.INamedTag<Item> RAW_MEAT = forge("food/raw_meat");
+        public static final Tag.Named<Item> CHUNKS = mod("chunks");
+        public static final Tag.Named<Item> COAL_GENERATOR_FUELS = mod("coal_generator_fuels");
+        public static final Tag.Named<Item> DRYING_RACKS = mod("drying_racks");
+        public static final Tag.Named<Item> STEELS = mod("ingots/steels");
+        public static final Tag.Named<Item> MEAT = forge("food/meat");
+        public static final Tag.Named<Item> COOKED_MEAT = forge("food/cooked_meat");
+        public static final Tag.Named<Item> RAW_MEAT = forge("food/raw_meat");
 
         private Items() {
 
         }
 
-        private static ITag.INamedTag<Item> forge(String path) {
-            return ItemTags.createWrapperTag(forgeId(path).toString());
+        private static Tag.Named<Item> forge(String path) {
+            return ItemTags.bind(forgeId(path).toString());
         }
 
-        private static ITag.INamedTag<Item> mod(String path) {
-            return ItemTags.createWrapperTag(modId(path).toString());
+        private static Tag.Named<Item> mod(String path) {
+            return ItemTags.bind(modId(path).toString());
         }
     }
 }

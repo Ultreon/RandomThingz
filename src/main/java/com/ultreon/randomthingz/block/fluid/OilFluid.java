@@ -4,22 +4,22 @@ import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import com.ultreon.randomthingz.common.item.ModItems;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.fluid.FlowingFluid;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.Item;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fluids.FluidAttributes;
@@ -32,22 +32,22 @@ import java.util.Random;
 @MethodsReturnNonnullByDefault
 public abstract class OilFluid extends FlowingFluid {
     @Override
-    public Fluid getFlowingFluid() {
+    public Fluid getFlowing() {
         return ModFluids.FLOWING_OIL;
     }
 
     @Override
-    public Fluid getStillFluid() {
+    public Fluid getSource() {
         return ModFluids.OIL;
     }
 
     @Override
-    public Item getFilledBucket() {
+    public Item getBucket() {
         return ModItems.OIL_BUCKET.get();
     }
 
     @Override
-    public void randomTick(World dimension, BlockPos pos, FluidState state, Random random) {
+    public void randomTick(Level dimension, BlockPos pos, FluidState state, Random random) {
 
     }
 
@@ -58,20 +58,20 @@ public abstract class OilFluid extends FlowingFluid {
                         new ResourceLocation("randomthingz:block/oil_flowing"))
                 .translationKey("block.randomthingz.oil")
                 .luminosity(0).density(5_000).viscosity(10_000).temperature(0)
-                .sound(SoundEvents.ITEM_BUCKET_FILL, SoundEvents.ITEM_BUCKET_EMPTY)
+                .sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY)
                 .build(this);
     }
 
-    private boolean isSurroundingBlockFlammable(IWorldReader dimensionIn, BlockPos pos) {
+    private boolean isSurroundingBlockFlammable(LevelReader dimensionIn, BlockPos pos) {
         return false;
     }
 
-    private boolean canBlockBurn(IWorldReader dimensionIn, BlockPos pos) {
+    private boolean canBlockBurn(LevelReader dimensionIn, BlockPos pos) {
         return false;
     }
 
     @Override
-    protected int getLevelDecreasePerBlock(IWorldReader dimensionIn) {
+    protected int getDropOff(LevelReader dimensionIn) {
         return 2;
     }
 
@@ -81,66 +81,66 @@ public abstract class OilFluid extends FlowingFluid {
     @Nullable
     @OnlyIn(Dist.CLIENT)
     @Override
-    public IParticleData getDripParticleData() {
+    public ParticleOptions getDripParticle() {
 //      return ParticleTypes.DRIPPING_LAVA;
         return null;
     }
 
     @Override
-    protected void beforeReplacingBlock(IWorld dimensionIn, BlockPos pos, BlockState state) {
+    protected void beforeDestroyingBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state) {
         this.triggerEffects(dimensionIn, pos);
     }
 
     @Override
-    public int getSlopeFindDistance(IWorldReader dimensionIn) {
-        return dimensionIn.getDimensionType().isUltrawarm() ? 4 : 2;
+    public int getSlopeFindDistance(LevelReader dimensionIn) {
+        return dimensionIn.dimensionType().ultraWarm() ? 4 : 2;
     }
 
     @Override
-    public BlockState getBlockState(FluidState state) {
-        return ModBlocks.OIL.get().getDefaultState().with(FlowingFluidBlock.LEVEL, getLevelFromState(state));
+    public BlockState createLegacyBlock(FluidState state) {
+        return ModBlocks.OIL.get().defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(state));
     }
 
     @Override
-    public boolean isEquivalentTo(Fluid fluidIn) {
+    public boolean isSame(Fluid fluidIn) {
         return fluidIn == ModFluids.OIL || fluidIn == ModFluids.FLOWING_OIL;
     }
 
     @Override
-    public boolean canDisplace(FluidState fluidState, IBlockReader blockReader, BlockPos pos, Fluid fluid, Direction direction) {
+    public boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockReader, BlockPos pos, Fluid fluid, Direction direction) {
         return false;
     }
 
     @Override
-    public int getTickRate(IWorldReader p_205569_1_) {
+    public int getTickDelay(LevelReader p_205569_1_) {
         return 30;
     }
 
     @Override
-    public int func_215667_a(World dimension, BlockPos pos, FluidState p_215667_3_, FluidState p_215667_4_) {
-        int i = this.getTickRate(dimension);
-        if (!p_215667_3_.isEmpty() && !p_215667_4_.isEmpty() && !p_215667_3_.get(FALLING) && !p_215667_4_.get(FALLING) && p_215667_4_.getActualHeight(dimension, pos) > p_215667_3_.getActualHeight(dimension, pos) && dimension.getRandom().nextInt(4) != 0) {
+    public int getSpreadDelay(Level dimension, BlockPos pos, FluidState p_215667_3_, FluidState p_215667_4_) {
+        int i = this.getTickDelay(dimension);
+        if (!p_215667_3_.isEmpty() && !p_215667_4_.isEmpty() && !p_215667_3_.getValue(FALLING) && !p_215667_4_.getValue(FALLING) && p_215667_4_.getHeight(dimension, pos) > p_215667_3_.getHeight(dimension, pos) && dimension.getRandom().nextInt(4) != 0) {
             i *= 4;
         }
 
         return i;
     }
 
-    private void triggerEffects(IWorld dimension, BlockPos pos) {
-        dimension.playEvent(1501, pos, 0);
+    private void triggerEffects(LevelAccessor dimension, BlockPos pos) {
+        dimension.levelEvent(1501, pos, 0);
     }
 
     @Override
-    protected boolean canSourcesMultiply() {
+    protected boolean canConvertToSource() {
         return false;
     }
 
     @Override
-    protected void flowInto(IWorld dimensionIn, BlockPos pos, BlockState blockStateIn, Direction direction, FluidState fluidStateIn) {
-        super.flowInto(dimensionIn, pos, blockStateIn, direction, fluidStateIn);
+    protected void spreadTo(LevelAccessor dimensionIn, BlockPos pos, BlockState blockStateIn, Direction direction, FluidState fluidStateIn) {
+        super.spreadTo(dimensionIn, pos, blockStateIn, direction, fluidStateIn);
     }
 
-    protected boolean ticksRandomly() {
+    protected boolean isRandomlyTicking() {
         return true;
     }
 
@@ -149,13 +149,13 @@ public abstract class OilFluid extends FlowingFluid {
     }
 
     public static class Flowing extends OilFluid {
-        protected void fillStateContainer(StateContainer.Builder<Fluid, FluidState> builder) {
-            super.fillStateContainer(builder);
-            builder.add(LEVEL_1_8);
+        protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
+            super.createFluidStateDefinition(builder);
+            builder.add(LEVEL);
         }
 
-        public int getLevel(FluidState state) {
-            return state.get(LEVEL_1_8);
+        public int getAmount(FluidState state) {
+            return state.getValue(LEVEL);
         }
 
         public boolean isSource(FluidState state) {
@@ -164,7 +164,7 @@ public abstract class OilFluid extends FlowingFluid {
     }
 
     public static class Source extends OilFluid {
-        public int getLevel(FluidState state) {
+        public int getAmount(FluidState state) {
             return 8;
         }
 

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.client.gui.settings;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.text2speech.Narrator;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.screen.ScreenshotsScreen;
@@ -9,13 +9,13 @@ import com.ultreon.randomthingz.common.text.Translations;
 import com.ultreon.randomthingz.common.updates.AbstractUpdater;
 import com.ultreon.randomthingz.common.updates.UpdateButton;
 import com.ultreon.randomthingz.config.Config;
-import net.minecraft.client.gui.DialogTexts;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.settings.NarratorStatus;
-import net.minecraft.util.IReorderingProcessor;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.NarratorStatus;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
@@ -40,21 +40,21 @@ public class SettingsScreen extends Screen {
     private Button modulesButton;
 
     public SettingsScreen(Screen back) {
-        super(new StringTextComponent(""));
+        super(new TextComponent(""));
         this.back = back;
     }
 
     @Override
-    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
     @Override
-    protected void initialize() {
-        super.initialize();
+    protected void init() {
+        super.init();
 
-        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).gameSettings.narrator;
+        NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).options.narratorStatus;
 
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
             Narrator.getNarrator().say("Q Forge Mod Settings Screen, such as settings for closing minecraft, and allowing Q Forge Mod to shutdown your computer.", true);
@@ -70,13 +70,13 @@ public class SettingsScreen extends Screen {
 
         dy += 30;
         this.doneButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
-                DialogTexts.GUI_DONE, this::saveAndGoBack));
+                CommonComponents.GUI_DONE, this::saveAndGoBack));
         this.cancelButton = addButton(new Button(width / 2 + 5, height / 6 + dy - 6, 150, 20,
-                DialogTexts.GUI_CANCEL, this::goBack));
+                CommonComponents.GUI_CANCEL, this::goBack));
     }
 
     private void openScreenshotsScreen(Button button) {
-        Objects.requireNonNull(this.minecraft).displayGuiScreen(new ScreenshotsScreen(this, new TranslationTextComponent("screen.randomthingz.modules")));
+        Objects.requireNonNull(this.minecraft).setScreen(new ScreenshotsScreen(this, new TranslatableComponent("screen.randomthingz.modules")));
     }
 
     @Override
@@ -84,7 +84,7 @@ public class SettingsScreen extends Screen {
         super.tick();
     }
 
-    public void tooltip(Button button, MatrixStack matrixStack, int mouseX, int mouseY) {
+    public void tooltip(Button button, PoseStack matrixStack, int mouseX, int mouseY) {
         if (button == allowShutdownPCButton) {
             // Button for allowing shutdown the PC.
             if (this.allowShutdownPCButton.isHovered()) {
@@ -93,7 +93,7 @@ public class SettingsScreen extends Screen {
                     String message =
                             "Allow RandomThingz to shutdown your pc for specific things.\n" +
                                     "Like the Kill Switch or the button on the exit confirm screen.";
-                    List<IReorderingProcessor> iReorderingProcessors = this.minecraft.fontRenderer.trimStringToWidth(new StringTextComponent(message), Math.max(this.width / 2 + 75, 170));
+                    List<FormattedCharSequence> iReorderingProcessors = this.minecraft.font.split(new TextComponent(message), Math.max(this.width / 2 + 75, 170));
 
                     // Render tooltip.
                     this.renderTooltip(matrixStack, iReorderingProcessors, mouseX, mouseY);
@@ -113,7 +113,7 @@ public class SettingsScreen extends Screen {
     public void goBack(Button button) {
         if (minecraft != null) {
             // Display previous screen.
-            minecraft.displayGuiScreen(back);
+            minecraft.setScreen(back);
         }
     }
 

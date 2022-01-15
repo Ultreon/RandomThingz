@@ -1,14 +1,14 @@
 package com.ultreon.randomthingz.util;
 
 import lombok.experimental.UtilityClass;
-import net.minecraft.util.ActionResultType;
+import net.minecraft.world.InteractionResult;
 
 @UtilityClass
 public class ItemUtils {
-    public static ActionResultType maxActionResult(ActionResultType old, ActionResultType new_) {
+    public static InteractionResult maxActionResult(InteractionResult old, InteractionResult new_) {
         if (old == null) {
             if (new_ == null) {
-                return ActionResultType.FAIL;
+                return InteractionResult.FAIL;
             }
             return new_;
         }

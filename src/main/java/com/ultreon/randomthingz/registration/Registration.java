@@ -21,21 +21,21 @@ import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.item.tool.ModTraits;
 import com.ultreon.randomthingz.sound.ModSounds;
 import com.ultreon.randomthingz.util.ExceptionUtil;
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.item.PaintingType;
-import net.minecraft.entity.merchant.villager.VillagerProfession;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.particles.ParticleType;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.Potion;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.decoration.Motive;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -50,18 +50,18 @@ import java.util.stream.Collectors;
 public final class Registration {
     public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(RandomThingz.MOD_ID);
     public static final DeferredRegister<Fluid> FLUIDS = create(ForgeRegistries.FLUIDS);
-    public static final DeferredRegister<ContainerType<?>> CONTAINERS = create(ForgeRegistries.CONTAINERS);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = create(ForgeRegistries.CONTAINERS);
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(RandomThingz.MOD_ID);
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = create(ForgeRegistries.ENCHANTMENTS);
-    public static final DeferredRegister<PaintingType> PAINTINGS = create(ForgeRegistries.PAINTING_TYPES);
+    public static final DeferredRegister<Motive> PAINTINGS = create(ForgeRegistries.PAINTING_TYPES);
     public static final DeferredRegister<Potion> POTION_TYPES = create(ForgeRegistries.POTION_TYPES);
-    public static final DeferredRegister<Effect> POTIONS = create(ForgeRegistries.POTIONS);
+    public static final DeferredRegister<MobEffect> POTIONS = create(ForgeRegistries.POTIONS);
     public static final DeferredRegister<Feature<?>> FEATURES = create(ForgeRegistries.FEATURES);
     public static final DeferredRegister<ParticleType<?>> PARTICLES = create(ForgeRegistries.PARTICLE_TYPES);
     public static final DeferredRegister<EntityType<?>> ENTITIES = create(ForgeRegistries.ENTITIES);
     public static final DeferredRegister<VillagerProfession> PROFESSIONS = create(ForgeRegistries.PROFESSIONS);
-    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZERS = create(ForgeRegistries.RECIPE_SERIALIZERS);
-    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = create(ForgeRegistries.RECIPE_SERIALIZERS);
+    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = create(ForgeRegistries.SOUND_EVENTS);
 
     private Registration() {
@@ -110,7 +110,7 @@ public final class Registration {
         return BLOCKS.getAllBlocks().stream()
                 .map(IBlockProvider::asBlock)
                 .filter(clazz::isInstance)
-                .map(block -> (T) block)
+                .map(block -> block)
                 .collect(Collectors.toList());
     }
 
@@ -118,7 +118,7 @@ public final class Registration {
     public static <T extends Block> Collection<T> getBlocks() {
         return BLOCKS.getAllBlocks().stream()
                 .map(IBlockProvider::asBlock)
-                .map(block -> (T) block)
+                .map(block -> block)
                 .collect(Collectors.toList());
     }
 

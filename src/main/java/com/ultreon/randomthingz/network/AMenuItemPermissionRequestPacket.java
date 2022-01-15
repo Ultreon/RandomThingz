@@ -2,15 +2,15 @@ package com.ultreon.randomthingz.network;
 
 import com.ultreon.randomthingz.actionmenu.ActionMenuScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
 public class AMenuItemPermissionRequestPacket {
-    public AMenuItemPermissionRequestPacket(PacketBuffer buffer) {
+    public AMenuItemPermissionRequestPacket(FriendlyByteBuf buffer) {
 
     }
 
@@ -19,13 +19,13 @@ public class AMenuItemPermissionRequestPacket {
     }
 
     public void handle(Supplier<NetworkEvent.Context> context) {
-        ServerPlayerEntity player = context.get().getSender();
+        ServerPlayer player = context.get().getSender();
         context.get().enqueueWork(() -> handlePacket(player));
         context.get().setPacketHandled(true);
     }
 
-    private void handlePacket(ServerPlayerEntity player) {
-        if (player.hasPermissionLevel(4)) {
+    private void handlePacket(ServerPlayer player) {
+        if (player.hasPermissions(4)) {
             Network.sendToClient(new Reply(true), player);
         } else {
             Network.sendToClient(new Reply(false), player);
@@ -33,14 +33,14 @@ public class AMenuItemPermissionRequestPacket {
     }
 
     @SuppressWarnings("unused")
-    public void toBytes(PacketBuffer buffer) {
+    public void toBytes(FriendlyByteBuf buffer) {
 
     }
 
     public static class Reply {
         private final boolean allowed;
 
-        public Reply(PacketBuffer buffer) {
+        public Reply(FriendlyByteBuf buffer) {
             this.allowed = buffer.readBoolean();
         }
 
@@ -49,9 +49,9 @@ public class AMenuItemPermissionRequestPacket {
         }
 
         public void handle(Supplier<NetworkEvent.Context> context) {
-            ServerPlayerEntity player = context.get().getSender();
+            ServerPlayer player = context.get().getSender();
             context.get().enqueueWork(() -> {
-                Screen currentScreen = Minecraft.getInstance().currentScreen;
+                Screen currentScreen = Minecraft.getInstance().screen;
                 if (currentScreen instanceof ActionMenuScreen) {
                     ActionMenuScreen screen = (ActionMenuScreen) currentScreen;
                     screen.handlePermission(this);
@@ -60,7 +60,7 @@ public class AMenuItemPermissionRequestPacket {
             context.get().setPacketHandled(true);
         }
 
-        public void toBytes(PacketBuffer buffer) {
+        public void toBytes(FriendlyByteBuf buffer) {
             buffer.writeBoolean(allowed);
         }
 

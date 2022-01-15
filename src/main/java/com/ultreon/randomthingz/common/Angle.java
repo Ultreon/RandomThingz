@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.common;
 import com.ultreon.randomthingz.common.interfaces.Formattable;
 import lombok.Data;
 import lombok.Getter;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 @Data
 public class Angle implements Formattable {
@@ -11,7 +11,7 @@ public class Angle implements Formattable {
     private final double degrees;
 
     public String toFormattedString() {
-        return TextFormatting.BLUE.toString() + this.degrees + ((char) 0xb0);
+        return ChatFormatting.BLUE.toString() + this.degrees + ((char) 0xb0);
     }
 
     public double getRadians() {

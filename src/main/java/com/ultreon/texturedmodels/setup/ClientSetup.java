@@ -2,7 +2,7 @@ package com.ultreon.texturedmodels.setup;
 
 import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.model.*;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoaderRegistry;

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.actionmenu;
 
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 
 public class SubmenuItem extends ActionMenuItem {
     private final IMenuHandler handler;
@@ -24,7 +24,7 @@ public class SubmenuItem extends ActionMenuItem {
     }
 
     @Override
-    public ITextComponent getText() {
+    public Component getText() {
         return handler.getText();
     }
 }

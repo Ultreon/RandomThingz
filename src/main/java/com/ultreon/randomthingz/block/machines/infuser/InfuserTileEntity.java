@@ -8,11 +8,11 @@ import com.ultreon.randomthingz.item.crafting.InfusingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
@@ -36,7 +36,7 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
 
     @Override
     public void tick() {
-        if (dimension == null || dimension.isClientSided) return;
+        if (level == null || level.isClientSide) return;
 
         tryFillTank();
 
@@ -45,12 +45,12 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
 
     @Override
     protected void consumeIngredients(InfusingRecipe recipe) {
-        decrStackSize(SLOT_ITEM_IN, 1);
+        removeItem(SLOT_ITEM_IN, 1);
     }
 
     private void tryFillTank() {
         // Try fill feedstock tank with fluid containers
-        ItemStack input = getStackInSlot(0);
+        ItemStack input = getItem(0);
         if (input.isEmpty()) return;
 
         FluidStack fluidStack = IFluidContainer.getBucketOrContainerFluid(input);
@@ -60,9 +60,9 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
             ItemStack containerItem = input.getContainerItem();
             input.shrink(1);
 
-            ItemStack output = getStackInSlot(1);
+            ItemStack output = getItem(1);
             if (output.isEmpty()) {
-                setInventorySlotContents(1, containerItem);
+                setItem(1, containerItem);
             } else {
                 output.grow(1);
             }
@@ -70,12 +70,12 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
     }
 
     private boolean canAcceptFluidContainer(ItemStack input, FluidStack fluid) {
-        ItemStack output = getStackInSlot(1);
+        ItemStack output = getItem(1);
         return !fluid.isEmpty()
                 && this.isFluidValid(0, fluid)
                 && this.fill(fluid, IFluidHandler.FluidAction.SIMULATE) == 1000
                 && (output.isEmpty() || InventoryUtils.canItemsStack(input.getContainerItem(), output))
-                && (output.isEmpty() || output.getCount() < output.getMaxSize());
+                && (output.isEmpty() || output.getCount() < output.getMaxStackSize());
     }
 
     @Override
@@ -101,8 +101,8 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
     @Nullable
     @Override
     public InfusingRecipe getRecipe() {
-        if (dimension == null) return null;
-        return dimension.getRecipeManager().getRecipe(ModRecipes.Types.INFUSING, this, dimension).orElse(null);
+        if (level == null) return null;
+        return level.getRecipeManager().getRecipeFor(ModRecipes.Types.INFUSING, this, level).orElse(null);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
 
     @Override
     protected Collection<ItemStack> getProcessResults(InfusingRecipe recipe) {
-        return Collections.singletonList(recipe.getCraftingResult(this));
+        return Collections.singletonList(recipe.assemble(this));
     }
 
     @Override
@@ -126,22 +126,22 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
     }
 
     @Override
-    public boolean canInsertItem(int index, ItemStack stack, @Nullable Direction direction) {
+    public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
         return (index == SLOT_FLUID_CONTAINER_IN && InventoryUtils.isFilledFluidContainer(stack)) || index == SLOT_ITEM_IN;
     }
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
         return index == SLOT_FLUID_CONTAINER_OUT || index == SLOT_ITEM_OUT;
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
+    protected Component getDefaultName() {
         return TextUtils.translate("container", "infuser");
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
         return new InfuserContainer(id, player, this, this.fields);
     }
 }

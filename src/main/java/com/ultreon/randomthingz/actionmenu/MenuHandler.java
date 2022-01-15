@@ -1,18 +1,18 @@
 package com.ultreon.randomthingz.actionmenu;
 
 import lombok.AllArgsConstructor;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 
 import java.util.function.Supplier;
 
 @AllArgsConstructor
 public class MenuHandler implements IMenuHandler {
-    private final ITextComponent text;
+    private final Component text;
     private final AbstractActionMenu menu;
     private final Supplier<Boolean> enabled;
 
-    public MenuHandler(ITextComponent text, AbstractActionMenu menu) {
+    public MenuHandler(Component text, AbstractActionMenu menu) {
         this.text = text;
         this.menu = menu;
         this.enabled = () -> true;
@@ -24,9 +24,9 @@ public class MenuHandler implements IMenuHandler {
     }
 
     @Override
-    public ITextComponent getText() {
+    public Component getText() {
         if (text == null) {
-            return new StringTextComponent("...");
+            return new TextComponent("...");
         }
         return text;
     }

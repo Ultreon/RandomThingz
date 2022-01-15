@@ -3,19 +3,19 @@ package com.ultreon.randomthingz.item.tool.types;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.common.IHasToolType;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.common.Mod;
 
@@ -36,76 +36,76 @@ public class HammerItem extends PickaxeItem implements IHasToolType {
 
     static {
         // Stone Bricks
-        registerSmashMapping(Blocks.CHISELED_STONE_BRICKS, Blocks.COBBLESTONE.getDefaultState());
-        registerSmashMapping(Blocks.STONE_BRICKS, Blocks.CRACKED_STONE_BRICKS.getDefaultState());
-        registerSmashMapping(Blocks.STONE_BRICK_SLAB, Blocks.COBBLESTONE_SLAB.getDefaultState());
-        registerSmashMapping(Blocks.STONE_BRICK_STAIRS, Blocks.COBBLESTONE_STAIRS.getDefaultState());
-        registerSmashMapping(Blocks.STONE_BRICK_WALL, Blocks.COBBLESTONE_WALL.getDefaultState());
+        registerSmashMapping(Blocks.CHISELED_STONE_BRICKS, Blocks.COBBLESTONE.defaultBlockState());
+        registerSmashMapping(Blocks.STONE_BRICKS, Blocks.CRACKED_STONE_BRICKS.defaultBlockState());
+        registerSmashMapping(Blocks.STONE_BRICK_SLAB, Blocks.COBBLESTONE_SLAB.defaultBlockState());
+        registerSmashMapping(Blocks.STONE_BRICK_STAIRS, Blocks.COBBLESTONE_STAIRS.defaultBlockState());
+        registerSmashMapping(Blocks.STONE_BRICK_WALL, Blocks.COBBLESTONE_WALL.defaultBlockState());
 
         // Stone
-        registerSmashMapping(Blocks.STONE_STAIRS, Blocks.COBBLESTONE_STAIRS.getDefaultState());
-        registerSmashMapping(Blocks.STONE_SLAB, Blocks.COBBLESTONE_SLAB.getDefaultState());
-        registerSmashMapping(Blocks.STONE, Blocks.COBBLESTONE.getDefaultState());
-        registerSmashMapping(Blocks.COBBLESTONE, Blocks.GRAVEL.getDefaultState());
+        registerSmashMapping(Blocks.STONE_STAIRS, Blocks.COBBLESTONE_STAIRS.defaultBlockState());
+        registerSmashMapping(Blocks.STONE_SLAB, Blocks.COBBLESTONE_SLAB.defaultBlockState());
+        registerSmashMapping(Blocks.STONE, Blocks.COBBLESTONE.defaultBlockState());
+        registerSmashMapping(Blocks.COBBLESTONE, Blocks.GRAVEL.defaultBlockState());
 
         // Sandstone
-        registerSmashMapping(Blocks.CHISELED_SANDSTONE, Blocks.SANDSTONE.getDefaultState());
-        registerSmashMapping(Blocks.SMOOTH_SANDSTONE, Blocks.SANDSTONE.getDefaultState());
-        registerSmashMapping(Blocks.CUT_SANDSTONE, Blocks.SANDSTONE.getDefaultState());
-        registerSmashMapping(Blocks.SANDSTONE, Blocks.SAND.getDefaultState());
+        registerSmashMapping(Blocks.CHISELED_SANDSTONE, Blocks.SANDSTONE.defaultBlockState());
+        registerSmashMapping(Blocks.SMOOTH_SANDSTONE, Blocks.SANDSTONE.defaultBlockState());
+        registerSmashMapping(Blocks.CUT_SANDSTONE, Blocks.SANDSTONE.defaultBlockState());
+        registerSmashMapping(Blocks.SANDSTONE, Blocks.SAND.defaultBlockState());
 
         // Red sandstone
-        registerSmashMapping(Blocks.CHISELED_RED_SANDSTONE, Blocks.RED_SANDSTONE.getDefaultState());
-        registerSmashMapping(Blocks.SMOOTH_RED_SANDSTONE, Blocks.RED_SANDSTONE.getDefaultState());
-        registerSmashMapping(Blocks.CUT_RED_SANDSTONE, Blocks.RED_SANDSTONE.getDefaultState());
-        registerSmashMapping(Blocks.RED_SANDSTONE, Blocks.RED_SAND.getDefaultState());
+        registerSmashMapping(Blocks.CHISELED_RED_SANDSTONE, Blocks.RED_SANDSTONE.defaultBlockState());
+        registerSmashMapping(Blocks.SMOOTH_RED_SANDSTONE, Blocks.RED_SANDSTONE.defaultBlockState());
+        registerSmashMapping(Blocks.CUT_RED_SANDSTONE, Blocks.RED_SANDSTONE.defaultBlockState());
+        registerSmashMapping(Blocks.RED_SANDSTONE, Blocks.RED_SAND.defaultBlockState());
 
         // Polished stones
-        registerSmashMapping(Blocks.POLISHED_ANDESITE_STAIRS, Blocks.ANDESITE_STAIRS.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_GRANITE_STAIRS, Blocks.GRANITE_STAIRS.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_DIORITE_STAIRS, Blocks.DIORITE_STAIRS.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_ANDESITE_SLAB, Blocks.ANDESITE_SLAB.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_GRANITE_SLAB, Blocks.GRANITE_SLAB.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_DIORITE_SLAB, Blocks.DIORITE_SLAB.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_ANDESITE, Blocks.ANDESITE.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_GRANITE, Blocks.GRANITE.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_DIORITE, Blocks.DIORITE.getDefaultState());
+        registerSmashMapping(Blocks.POLISHED_ANDESITE_STAIRS, Blocks.ANDESITE_STAIRS.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_GRANITE_STAIRS, Blocks.GRANITE_STAIRS.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_DIORITE_STAIRS, Blocks.DIORITE_STAIRS.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_ANDESITE_SLAB, Blocks.ANDESITE_SLAB.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_GRANITE_SLAB, Blocks.GRANITE_SLAB.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_DIORITE_SLAB, Blocks.DIORITE_SLAB.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_ANDESITE, Blocks.ANDESITE.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_GRANITE, Blocks.GRANITE.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_DIORITE, Blocks.DIORITE.defaultBlockState());
 
         // Gravel / glass to sand
-        registerSmashMapping(Blocks.GRAVEL, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.GLASS, Blocks.SAND.getDefaultState());
+        registerSmashMapping(Blocks.GRAVEL, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.GLASS, Blocks.SAND.defaultBlockState());
 
         // Blackstone
-        registerSmashMapping(Blocks.POLISHED_BLACKSTONE, Blocks.BLACKSTONE.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_BLACKSTONE_BRICK_STAIRS, Blocks.BLACKSTONE_STAIRS.getDefaultState());
-        registerSmashMapping(Blocks.POLISHED_BLACKSTONE_BRICK_WALL, Blocks.BLACKSTONE_WALL.getDefaultState());
+        registerSmashMapping(Blocks.POLISHED_BLACKSTONE, Blocks.BLACKSTONE.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.CRACKED_POLISHED_BLACKSTONE_BRICKS.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_BLACKSTONE_BRICK_STAIRS, Blocks.BLACKSTONE_STAIRS.defaultBlockState());
+        registerSmashMapping(Blocks.POLISHED_BLACKSTONE_BRICK_WALL, Blocks.BLACKSTONE_WALL.defaultBlockState());
 
         // Nether brick
-        registerSmashMapping(Blocks.CRACKED_NETHER_BRICKS, Blocks.NETHERRACK.getDefaultState());
-        registerSmashMapping(Blocks.NETHER_BRICKS, Blocks.CRACKED_NETHER_BRICKS.getDefaultState());
+        registerSmashMapping(Blocks.CRACKED_NETHER_BRICKS, Blocks.NETHERRACK.defaultBlockState());
+        registerSmashMapping(Blocks.NETHER_BRICKS, Blocks.CRACKED_NETHER_BRICKS.defaultBlockState());
 
         // Stained-glass
-        registerSmashMapping(Blocks.BLACK_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.BLUE_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.BROWN_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.CYAN_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.GRAY_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.GREEN_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.LIGHT_BLUE_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.LIGHT_GRAY_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.LIME_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.MAGENTA_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.ORANGE_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.PINK_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.PURPLE_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.RED_STAINED_GLASS_PANE, Blocks.RED_SAND.getDefaultState());
-        registerSmashMapping(Blocks.WHITE_STAINED_GLASS, Blocks.SAND.getDefaultState());
-        registerSmashMapping(Blocks.YELLOW_STAINED_GLASS, Blocks.SAND.getDefaultState());
+        registerSmashMapping(Blocks.BLACK_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.BLUE_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.BROWN_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.CYAN_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.GRAY_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.GREEN_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.LIGHT_BLUE_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.LIGHT_GRAY_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.LIME_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.MAGENTA_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.ORANGE_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.PINK_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.PURPLE_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.RED_STAINED_GLASS_PANE, Blocks.RED_SAND.defaultBlockState());
+        registerSmashMapping(Blocks.WHITE_STAINED_GLASS, Blocks.SAND.defaultBlockState());
+        registerSmashMapping(Blocks.YELLOW_STAINED_GLASS, Blocks.SAND.defaultBlockState());
     }
 
-    public HammerItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
-        super(tier, attackDamageIn, attackSpeedIn, builder.defaultMaxDamage((int) (tier.getMaxUses() * 1.8)));
+    public HammerItem(Tier tier, int attackDamageIn, float attackSpeedIn, Properties builder) {
+        super(tier, attackDamageIn, attackSpeedIn, builder.defaultDurability((int) (tier.getUses() * 1.8)));
     }
 
     /**
@@ -113,22 +113,22 @@ public class HammerItem extends PickaxeItem implements IHasToolType {
      *
      * @param blockIn the block to check harvestablity for.
      */
-    public boolean canHarvestBlock(BlockState blockIn) {
-        int i = this.getTier().getHarvestLevel();
+    public boolean isCorrectToolForDrops(BlockState blockIn) {
+        int i = this.getTier().getLevel();
         if (blockIn.getHarvestTool() == net.minecraftforge.common.ToolType.PICKAXE) {
             return i >= blockIn.getHarvestLevel();
         }
         Material material = blockIn.getMaterial();
-        return material == Material.ROCK || material == Material.IRON || material == Material.ANVIL;
+        return material == Material.STONE || material == Material.METAL || material == Material.HEAVY_METAL;
     }
 
-    public float getMiningSpeed(ItemStack stack, BlockState state) {
+    public float getDestroySpeed(ItemStack stack, BlockState state) {
         Material material = state.getMaterial();
-        if (material == Material.IRON || material == Material.ANVIL || material == Material.ROCK) {
-            return this.efficiency * 1.7f;
+        if (material == Material.METAL || material == Material.HEAVY_METAL || material == Material.STONE) {
+            return this.speed * 1.7f;
         }
-        if (getToolTypes(stack).stream().anyMatch(state::isToolEffective)) return efficiency;
-        return this.effectiveBlocks.contains(state.getBlock()) ? this.efficiency : 1.0F;
+        if (getToolTypes(stack).stream().anyMatch(state::isToolEffective)) return speed;
+        return this.blocks.contains(state.getBlock()) ? this.speed : 1.0F;
     }
 
     @Override
@@ -139,42 +139,42 @@ public class HammerItem extends PickaxeItem implements IHasToolType {
     /**
      * Called when this item is used when targeting a Block
      */
-    public ActionResultType onUseItem(ItemUseContext context) {
-        World dimension = context.getDimension();
-        BlockPos pos = context.getPos();
+    public InteractionResult useOn(UseOnContext context) {
+        Level dimension = context.getLevel();
+        BlockPos pos = context.getClickedPos();
 
         return useItem(dimension, pos, context);
     }
 
-    private ActionResultType useItem(World world, BlockPos pos, ItemUseContext context) {
+    private InteractionResult useItem(Level world, BlockPos pos, UseOnContext context) {
         BlockState state = world.getBlockState(pos);
-        context.getFace();
-        PlayerEntity player = context.getPlayer();
-        BlockState modifiedState = state.getToolModifiedState(world, pos, player, context.getItem(), ModToolTypes.HAMMER);
+        context.getClickedFace();
+        Player player = context.getPlayer();
+        BlockState modifiedState = state.getToolModifiedState(world, pos, player, context.getItemInHand(), ModToolTypes.HAMMER);
         if (modifiedState == null) {
-            modifiedState = state.getToolModifiedState(world, pos, player, context.getItem(), ToolType.PICKAXE);
+            modifiedState = state.getToolModifiedState(world, pos, player, context.getItemInHand(), ToolType.PICKAXE);
         }
         if (modifiedState == null) {
             modifiedState = smashables.get(world.getBlockState(pos).getBlock());
         }
         BlockState resultState = null;
         if (modifiedState != null) {
-            world.playSound(player, pos, state.getSoundType().getBreakSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
-            world.playSound(player, pos, modifiedState.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(player, pos, state.getSoundType().getBreakSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+            world.playSound(player, pos, modifiedState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
             resultState = modifiedState;
         }
 
         if (resultState != null) {
-            if (!world.isClientSided) {
-                world.setBlockState(pos, resultState, 11);
+            if (!world.isClientSide) {
+                world.setBlock(pos, resultState, 11);
                 if (player != null) {
-                    context.getItem().damageItem(1, player, (p) -> p.sendBreakAnimation(context.getHand()));
+                    context.getItemInHand().hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(context.getHand()));
                 }
             }
 
-            return ActionResultType.func_233537_a_(world.isClientSided);
+            return InteractionResult.sidedSuccess(world.isClientSide);
         } else {
-            return ActionResultType.PASS;
+            return InteractionResult.PASS;
         }
     }
 }

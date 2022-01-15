@@ -5,7 +5,7 @@ import com.ultreon.randomthingz.RandomThingz;
 import lombok.Getter;
 import lombok.NonNull;
 import net.minecraft.client.Minecraft;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.CompressedStreamTools;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,7 +43,7 @@ public final class ModuleManager {
     private List<Module> unsavedDisabled = new ArrayList<>();
     private Map<Module, Boolean> unsavedModules = new HashMap<>();
     private boolean initialized = false;
-    private CompoundNBT modulesNbt;
+    private CompoundTag modulesNbt;
     private Module currentModule = null;
     private File dataFile;
 

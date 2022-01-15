@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz.entity.damagesource;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -23,23 +23,23 @@ public class DamageSourceInfinitySword extends EntityDamageSource {
     }
 
     @Override
-    public @NotNull ITextComponent getDeathMessage(LivingEntity entity) {
-        ItemStack itemstack = damageSourceEntity instanceof LivingEntity ? ((LivingEntity) damageSourceEntity).getHeldItem(Hand.MAIN_HAND) : null;
+    public @NotNull Component getLocalizedDeathMessage(LivingEntity entity) {
+        ItemStack itemstack = entity instanceof LivingEntity ? entity.getItemInHand(InteractionHand.MAIN_HAND) : null;
         String s = "death.attack.infinity";
-        int rando = entity.getEntityDimension().rand.nextInt(5);
+        int rando = entity.getCommandSenderWorld().random.nextInt(5);
         if (rando != 0) {
             s = s + "." + rando;
         }
-        return new TranslationTextComponent(s, entity.getDisplayName(), Objects.requireNonNull(itemstack).getDisplayName());
+        return new TranslatableComponent(s, entity.getDisplayName(), Objects.requireNonNull(itemstack).getHoverName());
     }
 
     @Override
-    public boolean isUnblockable() {
+    public boolean isBypassArmor() {
         return true;
     }
 
     @Override
-    public boolean isDifficultyScaled() {
+    public boolean scalesWithDifficulty() {
         return false;
     }
 }

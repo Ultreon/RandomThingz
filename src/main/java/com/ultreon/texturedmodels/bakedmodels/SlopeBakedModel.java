@@ -4,19 +4,24 @@ import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.GrassBlock;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelShapes;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.model.*;
-import net.minecraft.client.renderer.texture.AtlasTexture;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.state.properties.Half;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.GrassBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
 
@@ -41,9 +46,9 @@ public class SlopeBakedModel implements IDynamicBakedModel {
         //get block saved in frame tile
         BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
-            ModelResourceLocation location = BlockModelShapes.getModelLocation(mimic);
+            ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
-                IBakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
+                BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
                 model.getBakedModel().getQuads(mimic, side, rand, extraData);
                 if (model != null) {
                     //only if model (from block saved in tile entity) exists:
@@ -54,11 +59,11 @@ public class SlopeBakedModel implements IDynamicBakedModel {
         return Collections.emptyList();
     }
 
-    private static Vector3d v(double x, double y, double z) {
-        return new Vector3d(x, y, z);
+    private static Vec3 v(double x, double y, double z) {
+        return new Vec3(x, y, z);
     }
 
-    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, IBakedModel model) {
+    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, BakedModel model) {
         List<BakedQuad> quads = new ArrayList<>();
         BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
         List<TextureAtlasSprite> texture = TextureHelper.getTextureFromModel(model, extraData, rand);
@@ -68,31 +73,31 @@ public class SlopeBakedModel implements IDynamicBakedModel {
         }
         if (texture.size() == 0) {
             if (Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("We're sorry, but this block can't be displayed"), true);
+                Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("We're sorry, but this block can't be displayed"), true);
             }
             return Collections.emptyList();
         }
         //TODO Remove when slopes are fixed
         if (Minecraft.getInstance().player != null) {
-            Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("We're sorry, but Slopes do not work at the moment"), true);
+            Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("We're sorry, but Slopes do not work at the moment"), true);
         }
         int tintIndex = -1;
         if (mimic.getBlock() instanceof GrassBlock) {
             tintIndex = 1;
         }
         double w = 0.5;
-        if (state.get(StairsBlock.HALF) == Half.TOP) {
+        if (state.getValue(StairBlock.HALF) == Half.TOP) {
             w = -0.5;
         }
         //Eight corners of the block
-        Vector3d NWU = v(0, 0.5 + w, 0); //North-West-Up
-        Vector3d NEU = v(1, 0.5 + w, 0); //...
-        Vector3d NWD = v(0, 0.5 - w, 0);
-        Vector3d NED = v(1, 0.5 - w, 0);
-        Vector3d SWU = v(0, 0.5 + w, 1);
-        Vector3d SEU = v(1, 0.5 + w, 1);
-        Vector3d SWD = v(0, 0.5 - w, 1);
-        Vector3d SED = v(1, 0.5 - w, 1); //South-East-Down
+        Vec3 NWU = v(0, 0.5 + w, 0); //North-West-Up
+        Vec3 NEU = v(1, 0.5 + w, 0); //...
+        Vec3 NWD = v(0, 0.5 - w, 0);
+        Vec3 NED = v(1, 0.5 - w, 0);
+        Vec3 SWU = v(0, 0.5 + w, 1);
+        Vec3 SEU = v(1, 0.5 + w, 1);
+        Vec3 SWD = v(0, 0.5 - w, 1);
+        Vec3 SED = v(1, 0.5 - w, 1); //South-East-Down
         //bottom face
         /*quads.add(ModelHelper.createQuad(SED, SWD, NWD, NED, texture.get(index), 0, 16, 0, 16, tintIndex));
         switch (state.get(StairsBlock.FACING)) {
@@ -138,24 +143,24 @@ public class SlopeBakedModel implements IDynamicBakedModel {
         quads.add(ModelHelper.createQuad(SWU, SEU, NEU, NWU, texture.get(index), 0, 16, 0, 16, tintIndex));
         //quads.addAll(ModelHelper.createQuad(0,1,0,1,0,1, texture.get(index), tintIndex,state.get(StairsBlock.FACING), state.get(StairsBlock.HALF))); //TODO remove or fix
         */
-        quads.addAll(createSlope(0, 1, 0, 1, 0, 1, texture.get(index), tintIndex, state.get(StairsBlock.FACING)));
+        quads.addAll(createSlope(0, 1, 0, 1, 0, 1, texture.get(index), tintIndex, state.getValue(StairBlock.FACING)));
         return quads;
     }
 
     public List<BakedQuad> createSlope(float xl, float xh, float yl, float yh, float zl, float zh, TextureAtlasSprite texture, int tintIndex, Direction direction) {
         List<BakedQuad> quads = new ArrayList<>();
         //Eight corners of the block
-        Vector3d NWU = v(xl, yh, zl); //North-West-Up
-        Vector3d SWU = v(xl, yh, zh); //...
-        Vector3d NWD = v(xl, yl, zl);
-        Vector3d SWD = v(xl, yl, zh);
-        Vector3d NEU = v(xh, yh, zl);
-        Vector3d SEU = v(xh, yh, zh);
-        Vector3d NED = v(xh, yl, zl);
-        Vector3d SED = v(xh, yl, zh); //South-East-Down
+        Vec3 NWU = v(xl, yh, zl); //North-West-Up
+        Vec3 SWU = v(xl, yh, zh); //...
+        Vec3 NWD = v(xl, yl, zl);
+        Vec3 SWD = v(xl, yl, zh);
+        Vec3 NEU = v(xh, yh, zl);
+        Vec3 SEU = v(xh, yh, zh);
+        Vec3 NED = v(xh, yl, zl);
+        Vec3 SED = v(xh, yl, zh); //South-East-Down
         if (xh - xl > 1 || yh - yl > 1 || zh - zl > 1) {
             if (Minecraft.getInstance().player != null) {
-                Minecraft.getInstance().player.sendStatusMessage(new TranslationTextComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
+                Minecraft.getInstance().player.displayClientMessage(new TranslatableComponent("An error occured with this block, please report to the mod author (PianoManu)"), true);
             }
             return quads;
         }
@@ -228,7 +233,7 @@ public class SlopeBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isAmbientOcclusion() {
+    public boolean useAmbientOcclusion() {
         return true;
     }
 
@@ -238,28 +243,28 @@ public class SlopeBakedModel implements IDynamicBakedModel {
     }
 
     @Override
-    public boolean isSideLit() {
+    public boolean usesBlockLight() {
         return false;
     }
 
     @Override
-    public boolean isBuiltInRenderer() {
+    public boolean isCustomRenderer() {
         return false;
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
-        return Minecraft.getInstance().getAtlasSpriteGetter(AtlasTexture.LOCATION_BLOCKS_TEXTURE).apply(new ResourceLocation("minecraft", "block/oak_planks"));
+    public TextureAtlasSprite getParticleIcon() {
+        return Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/oak_planks"));
     }
 
     @Override
-    public ItemOverrideList getOverrides() {
-        return ItemOverrideList.EMPTY;
+    public ItemOverrides getOverrides() {
+        return ItemOverrides.EMPTY;
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
-        return ItemCameraTransforms.DEFAULT;
+    public ItemTransforms getTransforms() {
+        return ItemTransforms.NO_TRANSFORMS;
     }
 }
 //========SOLI DEO GLORIA========//

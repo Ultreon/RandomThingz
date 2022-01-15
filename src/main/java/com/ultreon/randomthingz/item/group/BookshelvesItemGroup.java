@@ -2,9 +2,9 @@ package com.ultreon.randomthingz.item.group;
 
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.common.BetterItemGroup;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -20,7 +20,7 @@ public class BookshelvesItemGroup extends BetterItemGroup {
     }
 
     @Override
-    public @NotNull ItemStack createIcon() {
+    public @NotNull ItemStack makeIcon() {
         return new ItemStack(Blocks.BOOKSHELF);
     }
 }

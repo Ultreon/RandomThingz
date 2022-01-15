@@ -1,25 +1,25 @@
 package com.ultreon.randomthingz.block.machines;
 
 import com.qsoftware.modlib.silentutils.MathUtils;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.util.IIntArray;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.MenuType;
 
-public class AbstractEnergyStorageContainer<T extends AbstractEnergyInventoryTileEntity> extends Container {
+public class AbstractEnergyStorageContainer<T extends AbstractEnergyInventoryTileEntity> extends AbstractContainerMenu {
     protected final T tileEntity;
-    protected final IIntArray fields;
+    protected final ContainerData fields;
 
-    protected AbstractEnergyStorageContainer(ContainerType<?> type, int id, T tileEntityIn, IIntArray fieldsIn) {
+    protected AbstractEnergyStorageContainer(MenuType<?> type, int id, T tileEntityIn, ContainerData fieldsIn) {
         super(type, id);
         this.tileEntity = tileEntityIn;
         this.fields = fieldsIn;
 
-        trackIntArray(this.fields);
+        addDataSlots(this.fields);
     }
 
     @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
+    public boolean stillValid(Player playerIn) {
         // TODO
         return true;
     }
@@ -28,7 +28,7 @@ public class AbstractEnergyStorageContainer<T extends AbstractEnergyInventoryTil
         return tileEntity;
     }
 
-    public IIntArray getFields() {
+    public ContainerData getFields() {
         return fields;
     }
 

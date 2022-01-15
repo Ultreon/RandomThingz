@@ -1,21 +1,21 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.Color;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,8 +28,8 @@ public class EnderTrait extends AbstractTrait {
 
     }
 
-    public Color getColor() {
-        return Color.fromHex("#3D9964");
+    public TextColor getColor() {
+        return TextColor.parseColor("#3D9964");
     }
 
     @Override
@@ -39,13 +39,13 @@ public class EnderTrait extends AbstractTrait {
         int retries = 5;
 
         while (retries > 0) {
-            if (victim.getRNG().nextInt(16) == 0) {
-                World entityDimension = victim.getEntityDimension();
-                int x = victim.getRNG().nextInt(20) - 10;
-                int z = victim.getRNG().nextInt(20) - 10;
-                int y = entityDimension.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
+            if (victim.getRandom().nextInt(16) == 0) {
+                Level entityDimension = victim.getCommandSenderWorld();
+                int x = victim.getRandom().nextInt(20) - 10;
+                int z = victim.getRandom().nextInt(20) - 10;
+                int y = entityDimension.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
 
-                victim.teleportKeepLoaded(x, y, z);
+                victim.teleportToWithTicket(x, y, z);
                 break;
             }
 
@@ -55,52 +55,52 @@ public class EnderTrait extends AbstractTrait {
         return true;
     }
 
-    protected static BlockRayTraceResult rayTrace(World dimensionIn, PlayerEntity player) {
-        float pitch = player.rotationPitch;
-        float yaw = player.rotationYaw;
+    protected static BlockHitResult rayTrace(Level dimensionIn, Player player) {
+        float pitch = player.xRot;
+        float yaw = player.yRot;
 
         // Get the player's eye position, put is as start position.
-        Vector3d startPos = player.getEyePosition(1.0F);
+        Vec3 startPos = player.getEyePosition(1.0F);
 
         // Calculations.
-        float fz = MathHelper.cos(-yaw * ((float) Math.PI / 180F) - (float) Math.PI);
-        float fx = MathHelper.sin(-yaw * ((float) Math.PI / 180F) - (float) Math.PI);
-        float f = -MathHelper.cos(-pitch * ((float) Math.PI / 180F));
-        float lookY = MathHelper.sin(-pitch * ((float) Math.PI / 180F));
+        float fz = Mth.cos(-yaw * ((float) Math.PI / 180F) - (float) Math.PI);
+        float fx = Mth.sin(-yaw * ((float) Math.PI / 180F) - (float) Math.PI);
+        float f = -Mth.cos(-pitch * ((float) Math.PI / 180F));
+        float lookY = Mth.sin(-pitch * ((float) Math.PI / 180F));
         float lookX = fx * f;
         float lookZ = fz * f;
 
         // Ray length.
         double rayLength = 12;
-        Vector3d endPos = startPos.add((double) lookX * rayLength, (double) lookY * rayLength, (double) lookZ * rayLength);
+        Vec3 endPos = startPos.add((double) lookX * rayLength, (double) lookY * rayLength, (double) lookZ * rayLength);
 
         // Raytracing.
-        return dimensionIn.rayTraceBlocks(new RayTraceContext(startPos, endPos, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, player));
+        return dimensionIn.clip(new ClipContext(startPos, endPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
     }
 
     @Override
-    public boolean onRightClick(Item item, World dimension, PlayerEntity clicker, Hand hand) {
-        if (dimension instanceof ServerWorld) {
-            ServerWorld serverWorld = (ServerWorld) dimension;
+    public boolean onRightClick(Item item, Level dimension, Player clicker, InteractionHand hand) {
+        if (dimension instanceof ServerLevel) {
+            ServerLevel serverWorld = (ServerLevel) dimension;
 
-            RayTraceResult raytraceresult = rayTrace(serverWorld, clicker);
-            double posX = raytraceresult.getHitVec().x;
-            double posY = Math.floor(raytraceresult.getHitVec().y);
-            double posZ = raytraceresult.getHitVec().z;
+            HitResult raytraceresult = rayTrace(serverWorld, clicker);
+            double posX = raytraceresult.getLocation().x;
+            double posY = Math.floor(raytraceresult.getLocation().y);
+            double posZ = raytraceresult.getLocation().z;
 
             for (int i = 0; i < 32; ++i) {
-                clicker.dimension.addParticle(ParticleTypes.PORTAL, posX, posY + clicker.getRNG().nextDouble() * 2.0D, posZ, clicker.getRNG().nextGaussian(), 0.0D, clicker.getRNG().nextGaussian());
+                clicker.level.addParticle(ParticleTypes.PORTAL, posX, posY + clicker.getRandom().nextDouble() * 2.0D, posZ, clicker.getRandom().nextGaussian(), 0.0D, clicker.getRandom().nextGaussian());
             }
 
             if (clicker.isPassenger()) {
                 clicker.stopRiding();
             }
 
-            clicker.setPositionAndUpdate(posX, posY, posZ);
+            clicker.teleportTo(posX, posY, posZ);
             clicker.fallDistance = 0.0F;
 
-            clicker.addStat(Stats.ITEM_USED.get(item));
-            clicker.getCooldownTracker().setCooldown(item, 100);
+            clicker.awardStat(Stats.ITEM_USED.get(item));
+            clicker.getCooldowns().addCooldown(item, 100);
         }
         return true;
     }
@@ -109,17 +109,17 @@ public class EnderTrait extends AbstractTrait {
     public void onLivingDamage(LivingDamageEvent e) {
         LivingEntity livingBeing = e.getEntityLiving();
         if (e.getEntityLiving().getHealth() - e.getAmount() < 1.0f) {
-            if (livingBeing.getRNG().nextInt(5) == 0) {
+            if (livingBeing.getRandom().nextInt(5) == 0) {
                 e.setCanceled(true);
 
-                World entityDimension = livingBeing.getEntityDimension();
-                int x = livingBeing.getRNG().nextInt(20) - 10;
-                int z = livingBeing.getRNG().nextInt(20) - 10;
-                x = (int) (e.getEntityLiving().getPosX() + x);
-                z = (int) (e.getEntityLiving().getPosZ() + z);
-                int y = entityDimension.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
+                Level entityDimension = livingBeing.getCommandSenderWorld();
+                int x = livingBeing.getRandom().nextInt(20) - 10;
+                int z = livingBeing.getRandom().nextInt(20) - 10;
+                x = (int) (e.getEntityLiving().getX() + x);
+                z = (int) (e.getEntityLiving().getZ() + z);
+                int y = entityDimension.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
 
-                livingBeing.teleportKeepLoaded(x, y, z);
+                livingBeing.teleportToWithTicket(x, y, z);
                 return;
             }
         }

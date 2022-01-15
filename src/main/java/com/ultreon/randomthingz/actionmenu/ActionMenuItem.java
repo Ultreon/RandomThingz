@@ -2,15 +2,15 @@ package com.ultreon.randomthingz.actionmenu;
 
 import com.ultreon.randomthingz.network.ActionMenuTransferPacket;
 import com.ultreon.randomthingz.network.Network;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.fml.DistExecutor;
 
 import java.util.HashMap;
 import java.util.function.Supplier;
 
 public class ActionMenuItem implements IActionMenuItem {
-    private final ITextComponent text;
+    private final Component text;
     private final Supplier<Boolean> enabled;
     protected final Runnable onActivate;
 
@@ -22,11 +22,11 @@ public class ActionMenuItem implements IActionMenuItem {
     private static final HashMap<Integer, ActionMenuItem> commonRegistry = new HashMap<>();
     private static final HashMap<Integer, ActionMenuItem> serverRegistry = new HashMap<>();
 
-    public ActionMenuItem(ITextComponent text, Runnable onActivate) {
+    public ActionMenuItem(Component text, Runnable onActivate) {
         this(text, () -> true, onActivate);
     }
 
-    public ActionMenuItem(ITextComponent text, Supplier<Boolean> enabled, Runnable onActivate) {
+    public ActionMenuItem(Component text, Supplier<Boolean> enabled, Runnable onActivate) {
         this.text = text;
         this.enabled = enabled;
         this.onActivate = onActivate;
@@ -43,7 +43,7 @@ public class ActionMenuItem implements IActionMenuItem {
     }
 
     public ActionMenuItem() {
-        this(new TranslationTextComponent("misc.unknown"), () -> true, () -> {
+        this(new TranslatableComponent("misc.unknown"), () -> true, () -> {
         });
     }
 
@@ -64,7 +64,7 @@ public class ActionMenuItem implements IActionMenuItem {
     }
 
     @Override
-    public ITextComponent getText() {
+    public Component getText() {
         return text;
     }
 

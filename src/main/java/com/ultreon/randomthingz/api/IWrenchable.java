@@ -1,9 +1,9 @@
 package com.ultreon.randomthingz.api;
 
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.ActionResultType;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.context.UseOnContext;
 
 @FunctionalInterface
 public interface IWrenchable {
-    ActionResultType onWrench(ItemUseContext context);
+    InteractionResult onWrench(UseOnContext context);
 }

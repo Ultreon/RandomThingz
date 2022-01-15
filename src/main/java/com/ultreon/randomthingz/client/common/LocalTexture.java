@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.client.common;
 
+import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.texture.NativeImage;
 
 import java.io.File;
 import java.io.FileInputStream;

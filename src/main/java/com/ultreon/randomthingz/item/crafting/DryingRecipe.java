@@ -4,17 +4,18 @@ import com.google.gson.JsonObject;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 @RequiredArgsConstructor
-public class DryingRecipe implements IRecipe<IInventory> {
+public class DryingRecipe implements Recipe<Container> {
     private final ResourceLocation recipeId;
     @Getter
     private int processTime;
@@ -23,23 +24,23 @@ public class DryingRecipe implements IRecipe<IInventory> {
     private ItemStack result;
 
     @Override
-    public boolean matches(IInventory inv, World dimensionIn) {
-        ItemStack stack = inv.getStackInSlot(0);
+    public boolean matches(Container inv, Level dimensionIn) {
+        ItemStack stack = inv.getItem(0);
         return ingredient.test(stack);
     }
 
     @Override
-    public ItemStack getCraftingResult(IInventory inv) {
+    public ItemStack assemble(Container inv) {
         return result.copy();
     }
 
     @Override
-    public boolean canFit(int width, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return true;
     }
 
     @Override
-    public ItemStack getRecipeOutput() {
+    public ItemStack getResultItem() {
         return result;
     }
 
@@ -49,44 +50,44 @@ public class DryingRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return ModRecipes.DRYING.get();
     }
 
     @Override
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return ModRecipes.Types.DRYING;
     }
 
     @Override
-    public boolean isDynamic() {
+    public boolean isSpecial() {
         return true;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<DryingRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<DryingRecipe> {
         @Override
-        public DryingRecipe read(ResourceLocation recipeId, JsonObject json) {
+        public DryingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             DryingRecipe recipe = new DryingRecipe(recipeId);
-            recipe.processTime = JSONUtils.getInt(json, "process_time", 400);
-            recipe.ingredient = Ingredient.deserialize(json.get("ingredient"));
-            recipe.result = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "result"));
+            recipe.processTime = GsonHelper.getAsInt(json, "process_time", 400);
+            recipe.ingredient = Ingredient.fromJson(json.get("ingredient"));
+            recipe.result = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "result"));
             return recipe;
         }
 
         @Override
-        public DryingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+        public DryingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             DryingRecipe recipe = new DryingRecipe(recipeId);
             recipe.processTime = buffer.readVarInt();
-            recipe.ingredient = Ingredient.read(buffer);
-            recipe.result = buffer.readItemStack();
+            recipe.ingredient = Ingredient.fromNetwork(buffer);
+            recipe.result = buffer.readItem();
             return recipe;
         }
 
         @Override
-        public void write(PacketBuffer buffer, DryingRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, DryingRecipe recipe) {
             buffer.writeVarInt(recipe.processTime);
-            recipe.ingredient.write(buffer);
-            buffer.writeItemStack(recipe.result);
+            recipe.ingredient.toNetwork(buffer);
+            buffer.writeItem(recipe.result);
         }
     }
 }

@@ -10,19 +10,19 @@ import com.ultreon.randomthingz.world.gen.ores.DefaultOre;
 import com.ultreon.randomthingz.world.gen.ores.IOre;
 import com.ultreon.randomthingz.world.gen.ores.Ores;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.OreBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolType;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -84,14 +84,14 @@ public class ItemMaterial implements IItemMaterial {
     private final Supplier<Item> ingotSupplier;
     private final Supplier<Item> nuggetSupplier;
     private final Supplier<Item> gemSupplier;
-    private final ITag.INamedTag<Block> storageBlockTag;
-    private final ITag.INamedTag<Block> oreTag;
-    private final ITag.INamedTag<Item> storageBlockItemTag;
-    private final ITag.INamedTag<Item> oreItemTag;
-    private final ITag.INamedTag<Item> chunksTag;
-    private final ITag.INamedTag<Item> dustTag;
-    private final ITag.INamedTag<Item> ingotTag;
-    private final ITag.INamedTag<Item> nuggetTag;
+    private final Tag.Named<Block> storageBlockTag;
+    private final Tag.Named<Block> oreTag;
+    private final Tag.Named<Item> storageBlockItemTag;
+    private final Tag.Named<Item> oreItemTag;
+    private final Tag.Named<Item> chunksTag;
+    private final Tag.Named<Item> dustTag;
+    private final Tag.Named<Item> ingotTag;
+    private final Tag.Named<Item> nuggetTag;
     private BlockRegistryObject<Block> ore;
     private BlockRegistryObject<Block> storageBlock;
     private ItemRegistryObject<Item> chunks;
@@ -138,7 +138,7 @@ public class ItemMaterial implements IItemMaterial {
                 String name = metal.oreName + "_ore";
                 metal.ore = Registration.BLOCKS.register(name, metal.oreSupplier);
                 Registration.ITEMS.register(name, () ->
-                        new BlockItem(metal.ore.get(), new Item.Properties().group(ModItemGroups.ORES)));
+                        new BlockItem(metal.ore.get(), new Item.Properties().tab(ModItemGroups.ORES)));
             }
         }
         for (ItemMaterial metal : values()) {
@@ -146,7 +146,7 @@ public class ItemMaterial implements IItemMaterial {
                 String name = metal.getName() + "_block";
                 metal.storageBlock = Registration.BLOCKS.register(name, metal.storageBlockSupplier);
                 Registration.ITEMS.register(name, () ->
-                        new BlockItem(metal.storageBlock.get(), new Item.Properties().group(ModItemGroups.ORES)));
+                        new BlockItem(metal.storageBlock.get(), new Item.Properties().tab(ModItemGroups.ORES)));
             }
         }
     }
@@ -329,7 +329,7 @@ public class ItemMaterial implements IItemMaterial {
      * @return optional value for the ore block tag.
      */
     @Override
-    public Optional<ITag.INamedTag<Block>> getOreTag() {
+    public Optional<Tag.Named<Block>> getOreTag() {
         return oreTag != null ? Optional.of(oreTag) : Optional.empty();
     }
 
@@ -339,7 +339,7 @@ public class ItemMaterial implements IItemMaterial {
      * @return optional value for the storage block tag.
      */
     @Override
-    public Optional<ITag.INamedTag<Block>> getStorageBlockTag() {
+    public Optional<Tag.Named<Block>> getStorageBlockTag() {
         return storageBlockTag != null ? Optional.of(storageBlockTag) : Optional.empty();
     }
 
@@ -349,7 +349,7 @@ public class ItemMaterial implements IItemMaterial {
      * @return optional value for the ore item tag.
      */
     @Override
-    public Optional<ITag.INamedTag<Item>> getOreItemTag() {
+    public Optional<Tag.Named<Item>> getOreItemTag() {
         return oreItemTag != null ? Optional.of(oreItemTag) : Optional.empty();
     }
 
@@ -359,7 +359,7 @@ public class ItemMaterial implements IItemMaterial {
      * @return optional value for the storage block item tag.
      */
     @Override
-    public Optional<ITag.INamedTag<Item>> getStorageBlockItemTag() {
+    public Optional<Tag.Named<Item>> getStorageBlockItemTag() {
         return storageBlockItemTag != null ? Optional.of(storageBlockItemTag) : Optional.empty();
     }
 
@@ -369,7 +369,7 @@ public class ItemMaterial implements IItemMaterial {
      * @return optional value for the ore chunks item tag.
      */
     @Override
-    public Optional<ITag.INamedTag<Item>> getChunksTag() {
+    public Optional<Tag.Named<Item>> getChunksTag() {
         return chunksTag != null ? Optional.of(chunksTag) : Optional.empty();
     }
 
@@ -379,7 +379,7 @@ public class ItemMaterial implements IItemMaterial {
      * @return optional value for the dust item tag.
      */
     @Override
-    public Optional<ITag.INamedTag<Item>> getDustTag() {
+    public Optional<Tag.Named<Item>> getDustTag() {
         return dustTag != null ? Optional.of(dustTag) : Optional.empty();
     }
 
@@ -389,7 +389,7 @@ public class ItemMaterial implements IItemMaterial {
      * @return optional value for the ingot item tag.
      */
     @Override
-    public Optional<ITag.INamedTag<Item>> getIngotTag() {
+    public Optional<Tag.Named<Item>> getIngotTag() {
         return ingotTag != null ? Optional.of(ingotTag) : Optional.empty();
     }
 
@@ -399,7 +399,7 @@ public class ItemMaterial implements IItemMaterial {
      * @return optional value for the gem item tag.
      */
     @Override
-    public Optional<ITag.INamedTag<Item>> getGemTag() {
+    public Optional<Tag.Named<Item>> getGemTag() {
         return Optional.empty();
     }
 
@@ -409,7 +409,7 @@ public class ItemMaterial implements IItemMaterial {
      * @return optional value for the nugget item tag.
      */
     @Override
-    public Optional<ITag.INamedTag<Item>> getNuggetTag() {
+    public Optional<Tag.Named<Item>> getNuggetTag() {
         return nuggetTag != null ? Optional.of(nuggetTag) : Optional.empty();
     }
 
@@ -429,13 +429,13 @@ public class ItemMaterial implements IItemMaterial {
      * @return ingredient object containing all smeltables for the current item material.
      */
     public Ingredient getSmeltables(boolean includeIngot) {
-        Stream.Builder<ITag.INamedTag<Item>> builder = Stream.builder();
+        Stream.Builder<Tag.Named<Item>> builder = Stream.builder();
         if (includeIngot) {
             getIngotTag().ifPresent(builder::add);
         }
         getChunksTag().ifPresent(builder::add);
         getDustTag().ifPresent(builder::add);
-        return Ingredient.fromItemListStream(builder.build().map(Ingredient.TagList::new));
+        return Ingredient.fromValues(builder.build().map(Ingredient.TagValue::new));
     }
 
     public String name() {
@@ -466,13 +466,13 @@ public class ItemMaterial implements IItemMaterial {
         Supplier<Item> ingot;
         Supplier<Item> gem;
         Supplier<Item> nugget;
-        ITag.INamedTag<Block> oreTag;
-        ITag.INamedTag<Block> storageBlockTag;
-        ITag.INamedTag<Item> chunksTag;
-        ITag.INamedTag<Item> dustTag;
-        ITag.INamedTag<Item> ingotTag;
-        ITag.INamedTag<Item> gemTag;
-        ITag.INamedTag<Item> nuggetTag;
+        Tag.Named<Block> oreTag;
+        Tag.Named<Block> storageBlockTag;
+        Tag.Named<Item> chunksTag;
+        Tag.Named<Item> dustTag;
+        Tag.Named<Item> ingotTag;
+        Tag.Named<Item> gemTag;
+        Tag.Named<Item> nuggetTag;
 
         Supplier<Toolset> tools;
 
@@ -483,24 +483,24 @@ public class ItemMaterial implements IItemMaterial {
             this.name = name;
         }
 
-        public static ITag.INamedTag<Block> blockTag(String path) {
-            return BlockTags.createWrapperTag(new ResourceLocation("forge", path).toString());
+        public static Tag.Named<Block> blockTag(String path) {
+            return BlockTags.bind(new ResourceLocation("forge", path).toString());
         }
 
-        public static ITag.INamedTag<Item> itemTag(String path) {
-            return ItemTags.createWrapperTag(new ResourceLocation("forge", path).toString());
+        public static Tag.Named<Item> itemTag(String path) {
+            return ItemTags.bind(new ResourceLocation("forge", path).toString());
         }
 
-        public static ITag.INamedTag<Item> itemTag(ResourceLocation tag) {
-            return ItemTags.createWrapperTag(tag.toString());
+        public static Tag.Named<Item> itemTag(ResourceLocation tag) {
+            return ItemTags.bind(tag.toString());
         }
 
         public Builder ore(IOre ore) {
-            this.ore = () -> new OreBlock(AbstractBlock.Properties.generate(Material.ROCK)
-                    .setRequiresTool()
+            this.ore = () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE)
+                    .requiresCorrectToolForDrops()
                     .harvestTool(ToolType.PICKAXE)
                     .harvestLevel(ore.getHarvestLevel())
-                    .hardnessAndResistance(ore.getHardness(), ore.getResistance())
+                    .strength(ore.getHardness(), ore.getResistance())
                     .sound(SoundType.STONE));
             this.oreTag = blockTag("ores/" + name);
             return this;
@@ -518,19 +518,19 @@ public class ItemMaterial implements IItemMaterial {
         }
 
         public Builder chunks() {
-            this.chunks = () -> new Item(new Item.Properties().group(ModItemGroups.METAL_CRAFTABLES));
+            this.chunks = () -> new Item(new Item.Properties().tab(ModItemGroups.METAL_CRAFTABLES));
             this.chunksTag = itemTag(RandomThingz.rl("chunks/" + name));
             return this;
         }
 
         public Builder dust() {
-            this.dust = () -> new Item(new Item.Properties().group(ModItemGroups.METAL_CRAFTABLES));
+            this.dust = () -> new Item(new Item.Properties().tab(ModItemGroups.METAL_CRAFTABLES));
             this.dustTag = itemTag("dusts/" + name);
             return this;
         }
 
         public Builder ingot() {
-            this.ingot = () -> new Item(new Item.Properties().group(ModItemGroups.METAL_CRAFTABLES));
+            this.ingot = () -> new Item(new Item.Properties().tab(ModItemGroups.METAL_CRAFTABLES));
             this.ingotTag = itemTag("ingots/" + name);
             return this;
         }
@@ -541,7 +541,7 @@ public class ItemMaterial implements IItemMaterial {
         }
 
         public Builder nugget() {
-            this.nugget = () -> new Item(new Item.Properties().group(ModItemGroups.METAL_CRAFTABLES));
+            this.nugget = () -> new Item(new Item.Properties().tab(ModItemGroups.METAL_CRAFTABLES));
             this.nuggetTag = itemTag("nuggets/" + name);
             return this;
         }
@@ -552,7 +552,7 @@ public class ItemMaterial implements IItemMaterial {
         }
 
         public Builder gem() {
-            this.gem = () -> new Item(new Item.Properties().group(ItemGroup.MISC));
+            this.gem = () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC));
             this.gemTag = itemTag("gems/" + name);
             return this;
         }

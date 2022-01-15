@@ -1,12 +1,11 @@
 package com.ultreon.randomthingz.client.renderer.layers;
 
-import com.ultreon.randomthingz.client.model.FreeCreeperModel;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.EnergyLayer;
-import net.minecraft.client.renderer.entity.model.CreeperModel;
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.entity.monster.CreeperEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.model.CreeperModel;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.EnergySwirlLayer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -17,29 +16,29 @@ import org.jetbrains.annotations.NotNull;
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-public class CustomCreeperChargeLayer<T extends CreeperEntity, M extends CreeperModel<T>> extends EnergyLayer<T, M> {
+public class CustomCreeperChargeLayer<T extends Creeper, M extends CreeperModel<T>> extends EnergySwirlLayer<T, M> {
     private static final ResourceLocation LIGHTNING_TEXTURE = new ResourceLocation("textures/entity/creeper/creeper_armor.png");
     private final CreeperModel<T> creeperModel;
 
     @SuppressWarnings("unchecked")
-    public CustomCreeperChargeLayer(IEntityRenderer<T, M> p_i50947_1_) {
+    public CustomCreeperChargeLayer(RenderLayerParent<T, M> p_i50947_1_) {
         this(p_i50947_1_, (M) new CreeperModel<T>(2.0F));
     }
 
-    public CustomCreeperChargeLayer(IEntityRenderer<T, M> p_i50947_1_, M creeperModel) {
+    public CustomCreeperChargeLayer(RenderLayerParent<T, M> p_i50947_1_, M creeperModel) {
         super(p_i50947_1_);
         this.creeperModel = creeperModel;
     }
 
-    protected float func_225634_a_(float p_225634_1_) {
+    protected float xOffset(float p_225634_1_) {
         return p_225634_1_ * 0.01F;
     }
 
-    protected @NotNull ResourceLocation func_225633_a_() {
+    protected @NotNull ResourceLocation getTextureLocation() {
         return LIGHTNING_TEXTURE;
     }
 
-    protected @NotNull EntityModel<T> func_225635_b_() {
+    protected @NotNull EntityModel<T> model() {
         return this.creeperModel;
     }
 }

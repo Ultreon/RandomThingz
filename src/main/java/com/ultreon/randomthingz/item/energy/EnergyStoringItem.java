@@ -6,18 +6,18 @@ import com.ultreon.randomthingz.client.hud.HudItem;
 import com.ultreon.randomthingz.util.GraphicsUtil;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
@@ -60,7 +60,7 @@ public abstract class EnergyStoringItem extends HudItem {
 
     @Nullable
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         return new ICapabilityProvider() {
             @Nonnull
             @Override
@@ -74,7 +74,7 @@ public abstract class EnergyStoringItem extends HudItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World dimensionIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @Nullable Level dimensionIn, List<Component> tooltip, TooltipFlag flagIn) {
         // Apparently, addInformation can be called before caps are initialized
         if (CapabilityEnergy.ENERGY == null) return;
 
@@ -83,8 +83,8 @@ public abstract class EnergyStoringItem extends HudItem {
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (this.isInGroup(group)) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        if (this.allowdedIn(group)) {
             items.add(new ItemStack(this));
 
             ItemStack full = new ItemStack(this);
@@ -105,18 +105,18 @@ public abstract class EnergyStoringItem extends HudItem {
 
     @Override
     public int getRGBDurabilityForDisplay(ItemStack stack) {
-        return MathHelper.hsvToRGB((1 + getChargeRatio(stack)) / 3.0F, 1.0F, 1.0F);
+        return Mth.hsvToRgb((1 + getChargeRatio(stack)) / 3.0F, 1.0F, 1.0F);
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, ClientPlayerEntity player) {
+    public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, LocalPlayer player) {
         // Apparently, addInformation can be called before caps are initialized
         if (CapabilityEnergy.ENERGY == null) return;
 
-        int height = mc.getMainWindow().getScaledHeight();
+        int height = mc.getWindow().getGuiScaledHeight();
 
-        World dimensionIn = player.getEntityDimension();
+        Level dimensionIn = player.getCommandSenderWorld();
 
         stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
             int val;
@@ -130,19 +130,19 @@ public abstract class EnergyStoringItem extends HudItem {
             val = (int) (64d * e.getEnergyStored() / maxEnergy);
 
             TextureManager textureManager = mc.getTextureManager();
-            textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/background.png"));
+            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/background.png"));
             gu.blit(0, height - 64, 128, 64, 0, 0, 128, 64, 128, 64);
 
-            textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
+            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
             gu.blit(33, height - 11, 64, 2, 0, 2, 64, 1, 64, 3);
 
-            textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
+            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
             gu.blit(32, height - 12, 64, 2, 0, 1, 64, 1, 64, 3);
 
-            textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
+            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
             gu.blit(33, height - 11, val, 2, 0, 1, val, 1, 64, 3);
 
-            textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
+            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
             gu.blit(32, height - 12, val, 2, 0, 0, val, 1, 64, 3);
 
             gu.drawItemStack(stack, 56, height - 60, "");

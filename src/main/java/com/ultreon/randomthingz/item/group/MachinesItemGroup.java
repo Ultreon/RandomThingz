@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.group;
 
 import com.ultreon.randomthingz.block._common.ModBlocks;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -11,8 +11,8 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class MachinesItemGroup extends ItemGroup {
-    public static final MachinesItemGroup instance = new MachinesItemGroup(ItemGroup.GROUPS.length, "randomthingz_machines");
+public class MachinesItemGroup extends CreativeModeTab {
+    public static final MachinesItemGroup instance = new MachinesItemGroup(CreativeModeTab.TABS.length, "randomthingz_machines");
 
     public MachinesItemGroup(int index, String label) {
         super(index, label);
@@ -20,7 +20,7 @@ public class MachinesItemGroup extends ItemGroup {
 
     @Override
     public @NotNull
-    ItemStack createIcon() {
+    ItemStack makeIcon() {
         return new ItemStack(ModBlocks.COAL_GENERATOR.get());
     }
 

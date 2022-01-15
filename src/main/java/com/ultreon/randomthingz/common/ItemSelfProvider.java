@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.common;
 
 import com.qsoftware.modlib.api.providers.IItemProvider;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.NotNull;
 
 public class ItemSelfProvider implements IItemProvider {

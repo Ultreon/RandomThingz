@@ -9,16 +9,16 @@ import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.common.tags.ModTags;
 import com.ultreon.randomthingz.item.CraftingItems;
 import com.ultreon.randomthingz.item.tool.Toolset;
-import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.ItemTagsProvider;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.tags.ITag;
+import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.IItemProvider;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.LogManager;
@@ -48,8 +48,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         super(dataGenerator, blockTagProvider, modId, existingFileHelper);
     }
 
-    private static ITag.INamedTag<Item> itemTag(ResourceLocation id) {
-        return ItemTags.createWrapperTag(id.toString());
+    private static Tag.Named<Item> itemTag(ResourceLocation id) {
+        return ItemTags.bind(id.toString());
     }
 
     private static ResourceLocation forgeId(String path) {
@@ -58,30 +58,30 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Override
-    protected void registerTags() {
+    protected void addTags() {
         // Empties
         builder(forgeId("nuggets/coal"));
         builder(forgeId("storage_blocks/charcoal"));
 
-        getOrCreateBuilder(ModTags.Items.PLASTIC).add(CraftingItems.PLASTIC_SHEET.asItem());
+        tag(ModTags.Items.PLASTIC).add(CraftingItems.PLASTIC_SHEET.asItem());
 
-        getOrCreateBuilder(ModTags.Items.STEELS)
+        tag(ModTags.Items.STEELS)
                 .addTag(ItemMaterial.ALUMINUM_STEEL.getIngotTag().get())
                 .addTag(ItemMaterial.BISMUTH_STEEL.getIngotTag().get())
                 .addTag(ItemMaterial.STEEL.getIngotTag().get());
-        getOrCreateBuilder(ModTags.Items.COAL_GENERATOR_FUELS)
+        tag(ModTags.Items.COAL_GENERATOR_FUELS)
                 .addTag(ItemTags.COALS)
                 .addTag(itemTag(forgeId("nuggets/coal")))
                 .addTag(itemTag(forgeId("storage_blocks/charcoal")))
                 .addTag(Tags.Items.STORAGE_BLOCKS_COAL);
         copy(ModTags.Blocks.DRYING_RACKS, ModTags.Items.DRYING_RACKS);
 
-        getOrCreateBuilder(ModTags.Items.DUSTS_COAL).add(CraftingItems.COAL_DUST.asItem());
+        tag(ModTags.Items.DUSTS_COAL).add(CraftingItems.COAL_DUST.asItem());
 
-        Builder<Item> dusts = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "metal_craftables/dusts")));
-        Builder<Item> ingots = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "metal_craftables/ingots")));
-        Builder<Item> nuggets = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "metal_craftables/nuggets")));
-        Builder<Item> chunks = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "metal_craftables/chunks")));
+        TagAppender<Item> dusts = tag(itemTag(new ResourceLocation(modId, "metal_craftables/dusts")));
+        TagAppender<Item> ingots = tag(itemTag(new ResourceLocation(modId, "metal_craftables/ingots")));
+        TagAppender<Item> nuggets = tag(itemTag(new ResourceLocation(modId, "metal_craftables/nuggets")));
+        TagAppender<Item> chunks = tag(itemTag(new ResourceLocation(modId, "metal_craftables/chunks")));
 
         for (ItemMaterial metal : ItemMaterial.values()) {
             metal.getOreTag().ifPresent(tag ->
@@ -91,24 +91,24 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             metal.getChunksTag().ifPresent(tag -> {
                 if (metal.getChunks().isPresent()) {
                     chunks.add(metal.getChunks().get());
-                    getOrCreateBuilder(tag).add(metal.getChunks().get());
+                    tag(tag).add(metal.getChunks().get());
                 }
             });
             metal.getDustTag().ifPresent(tag -> {
                 if (metal.getDust().isPresent()) {
                     dusts.add(metal.getDust().get());
-                    getOrCreateBuilder(tag).add(metal.getDust().get());
+                    tag(tag).add(metal.getDust().get());
                 }
             });
             metal.getIngotTag().ifPresent(tag ->
                     metal.getIngot().ifPresent(item -> {
                         ingots.add(metal.getIngot().get());
-                        getOrCreateBuilder(tag).add(item);
+                        tag(tag).add(item);
                     }));
             metal.getNuggetTag().ifPresent(tag ->
                     metal.getNugget().ifPresent(item -> {
                         nuggets.add(metal.getNugget().get());
-                        getOrCreateBuilder(tag).add(item);
+                        tag(tag).add(item);
                     }));
         }
 
@@ -120,7 +120,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         groupBuilder(Tags.Items.INGOTS, ItemMaterial::getIngotTag);
         groupBuilder(Tags.Items.NUGGETS, ItemMaterial::getNuggetTag);
 
-        Builder<Item> cookedMeat = getOrCreateBuilder(itemTag(forgeId("food/cooked_meat")))
+        TagAppender<Item> cookedMeat = tag(itemTag(forgeId("food/cooked_meat")))
                 .add(Items.COOKED_BEEF)
                 .add(Items.COOKED_PORKCHOP)
                 .add(Items.COOKED_CHICKEN)
@@ -133,7 +133,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.COOKED_PORK_SHANK.asItem())
                 .add(ModItems.COOKED_SHOARMA.asItem());
 
-        Builder<Item> rawMeat = getOrCreateBuilder(itemTag(forgeId("food/raw_meat")))
+        TagAppender<Item> rawMeat = tag(itemTag(forgeId("food/raw_meat")))
                 .add(Items.BEEF)
                 .add(Items.PORKCHOP)
                 .add(Items.CHICKEN)
@@ -146,24 +146,24 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.PORK_SHANK.asItem())
                 .add(ModItems.SHOARMA.asItem());
 
-        Builder<Item> meat = getOrCreateBuilder(itemTag(forgeId("food/meat")))
+        TagAppender<Item> meat = tag(itemTag(forgeId("food/meat")))
                 .addTag(ModTags.Items.RAW_MEAT)
                 .addTag(ModTags.Items.COOKED_MEAT);
 
-        Builder<Item> armors = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/armors")));
-        Builder<Item> swords = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/swords")));
-        Builder<Item> axes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/axes")));
-        Builder<Item> pickaxes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/pickaxes")));
-        Builder<Item> shovels = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/shovels")));
-        Builder<Item> hoes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/hoes")));
-        Builder<Item> longswords = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/longswords")));
-        Builder<Item> broadswords = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/broadswords")));
-        Builder<Item> katanas = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/katanas")));
-        Builder<Item> cutlasses = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/cutlasses")));
-        Builder<Item> battleaxes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/battleaxes")));
-        Builder<Item> lumberAxes = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/lumber_axes")));
-        Builder<Item> excavators = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/excavators")));
-        Builder<Item> hammers = getOrCreateBuilder(itemTag(new ResourceLocation(modId, "tools/hammers")));
+        TagAppender<Item> armors = tag(itemTag(new ResourceLocation(modId, "tools/armors")));
+        TagAppender<Item> swords = tag(itemTag(new ResourceLocation(modId, "tools/swords")));
+        TagAppender<Item> axes = tag(itemTag(new ResourceLocation(modId, "tools/axes")));
+        TagAppender<Item> pickaxes = tag(itemTag(new ResourceLocation(modId, "tools/pickaxes")));
+        TagAppender<Item> shovels = tag(itemTag(new ResourceLocation(modId, "tools/shovels")));
+        TagAppender<Item> hoes = tag(itemTag(new ResourceLocation(modId, "tools/hoes")));
+        TagAppender<Item> longswords = tag(itemTag(new ResourceLocation(modId, "tools/longswords")));
+        TagAppender<Item> broadswords = tag(itemTag(new ResourceLocation(modId, "tools/broadswords")));
+        TagAppender<Item> katanas = tag(itemTag(new ResourceLocation(modId, "tools/katanas")));
+        TagAppender<Item> cutlasses = tag(itemTag(new ResourceLocation(modId, "tools/cutlasses")));
+        TagAppender<Item> battleaxes = tag(itemTag(new ResourceLocation(modId, "tools/battleaxes")));
+        TagAppender<Item> lumberAxes = tag(itemTag(new ResourceLocation(modId, "tools/lumber_axes")));
+        TagAppender<Item> excavators = tag(itemTag(new ResourceLocation(modId, "tools/excavators")));
+        TagAppender<Item> hammers = tag(itemTag(new ResourceLocation(modId, "tools/hammers")));
         for (Toolset toolset : Toolset.values()) {
             armors.add(toolset.getHelmet().get());
             armors.add(toolset.getChestplate().get());

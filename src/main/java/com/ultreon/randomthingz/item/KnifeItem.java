@@ -3,21 +3,21 @@ package com.ultreon.randomthingz.item;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.ultreon.randomthingz.common.interfaces.Sliceable;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.TieredItem;
+import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -34,16 +34,16 @@ public class KnifeItem extends TieredItem {
      */
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
 
-    public KnifeItem(IItemTier tierIn, Properties properties) {
-        super(tierIn, properties.defaultMaxDamage(120));
+    public KnifeItem(Tier tierIn, Properties properties) {
+        super(tierIn, properties.defaultDurability(120));
 
         // Attack damage.
-        this.attackDamage = tierIn.getAttackDamage() + 2f;
+        this.attackDamage = tierIn.getAttackDamageBonus() + 2f;
 
         // Attributes
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", this.attackSpeed, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", this.attackSpeed, AttributeModifier.Operation.ADDITION));
         this.attributeModifiers = builder.build();
     }
 
@@ -56,7 +56,7 @@ public class KnifeItem extends TieredItem {
     }
 
     @Override
-    public boolean canPlayerBreakBlockWhileHolding(BlockState state, World dimensionIn, BlockPos pos, PlayerEntity player) {
+    public boolean canAttackBlock(BlockState state, Level dimensionIn, BlockPos pos, Player player) {
         return !player.isCreative();
     }
 
@@ -65,9 +65,9 @@ public class KnifeItem extends TieredItem {
      * the damage on the stack.
      */
     @Override
-    public boolean hitEntity(ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
+    public boolean hurtEnemy(ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
         // Damage item.
-        stack.damageItem(1, attacker, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+        stack.hurtAndBreak(1, attacker, (entity) -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         return true;
     }
 
@@ -75,9 +75,9 @@ public class KnifeItem extends TieredItem {
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
     @Override
-    public boolean onBlockBroken(@NotNull ItemStack stack, @NotNull World dimensionIn, BlockState state, @NotNull BlockPos pos, @NotNull LivingEntity entityLiving) {
-        if (state.getBlockHardness(dimensionIn, pos) != 0.0F) {
-            stack.damageItem(isBlockMinable(state) ? 1 : 2, entityLiving, (entity) -> entity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
+    public boolean mineBlock(@NotNull ItemStack stack, @NotNull Level dimensionIn, BlockState state, @NotNull BlockPos pos, @NotNull LivingEntity entityLiving) {
+        if (state.getDestroySpeed(dimensionIn, pos) != 0.0F) {
+            stack.hurtAndBreak(isBlockMinable(state) ? 1 : 2, entityLiving, (entity) -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
 
         return true;
@@ -91,8 +91,8 @@ public class KnifeItem extends TieredItem {
      * Check whether this Item can harvest the given Block
      */
     @Override
-    public boolean canHarvestBlock(BlockState blockIn) {
-        return blockIn.matchesBlock(Blocks.COBWEB) || blockIn.getBlock() instanceof Sliceable;
+    public boolean isCorrectToolForDrops(BlockState blockIn) {
+        return blockIn.is(Blocks.COBWEB) || blockIn.getBlock() instanceof Sliceable;
     }
 
     /**
@@ -100,16 +100,16 @@ public class KnifeItem extends TieredItem {
      */
     @SuppressWarnings("deprecation")
     @Override
-    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(@NotNull EquipmentSlotType equipmentSlot) {
-        return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(equipmentSlot);
+    public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot equipmentSlot) {
+        return equipmentSlot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
     }
 
-    public float getMiningSpeed(@NotNull ItemStack stack, BlockState state) {
-        if (state.matchesBlock(Blocks.COBWEB)) {
+    public float getDestroySpeed(@NotNull ItemStack stack, BlockState state) {
+        if (state.is(Blocks.COBWEB)) {
             return 15.0F;
         } else {
             Material material = state.getMaterial();
-            return material != Material.PLANTS && material != Material.TALL_PLANTS && material != Material.CORAL && !state.isIn(BlockTags.LEAVES) && material != Material.GOURD ? 1.0F : 1.5F;
+            return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && material != Material.CORAL && !state.is(BlockTags.LEAVES) && material != Material.VEGETABLE ? 1.0F : 1.5F;
         }
     }
 
@@ -121,9 +121,9 @@ public class KnifeItem extends TieredItem {
     @Override
     public ItemStack getContainerItem(ItemStack itemStack) {
         ItemStack copy = itemStack.copy();
-        if (copy.isDamageable()) {
-            copy.setDamage(copy.getDamage() + 1);
-            if (copy.getDamage() == copy.getMaxDamage()) {
+        if (copy.isDamageableItem()) {
+            copy.setDamageValue(copy.getDamageValue() + 1);
+            if (copy.getDamageValue() == copy.getMaxDamage()) {
                 return ItemStack.EMPTY;
             }
         }

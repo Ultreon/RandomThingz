@@ -19,10 +19,10 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluid;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -47,7 +47,7 @@ public class SolidifyingRecipeCategory implements IRecipeCategory<SolidifyingRec
     }
 
     private static void addFluidContainers(Collection<ItemStack> list, Fluid fluid) {
-        ItemStack bucket = new ItemStack(fluid.getFilledBucket());
+        ItemStack bucket = new ItemStack(fluid.getBucket());
         if (!bucket.isEmpty()) {
             list.add(bucket);
         }

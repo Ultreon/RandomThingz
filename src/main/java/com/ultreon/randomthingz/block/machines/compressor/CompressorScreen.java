@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.block.machines.compressor;
 
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.machines.AbstractMachineScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 
 public class CompressorScreen extends AbstractMachineScreen<CompressorContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/compressor.png");
 
-    public CompressorScreen(CompressorContainer containerIn, PlayerInventory playerInventoryIn, ITextComponent titleIn) {
+    public CompressorScreen(CompressorContainer containerIn, Inventory playerInventoryIn, Component titleIn) {
         super(containerIn, playerInventoryIn, titleIn);
     }
 

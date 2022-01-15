@@ -4,9 +4,9 @@ import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.ultreon.randomthingz.client.MobVariantsModule;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.entity.CowRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.Cow;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -15,12 +15,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class VariantCowRenderer extends CowRenderer {
 
-    public VariantCowRenderer(EntityRendererManager renderManagerIn) {
+    public VariantCowRenderer(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn);
     }
 
     @Override
-    public ResourceLocation getEntityTexture(CowEntity entity) {
+    public ResourceLocation getTextureLocation(Cow entity) {
         return MobVariantsModule.getTextureOrShiny(entity, MobVariantsModule.VariantTextureType.COW, MobVariantsModule.enableCow);
     }
 

@@ -2,23 +2,23 @@ package com.ultreon.randomthingz.block.machines.generator;
 
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlock;
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public abstract class AbstractGeneratorBlock extends AbstractMachineBlock {
-    public AbstractGeneratorBlock(MachineTier tier, AbstractBlock.Properties properties) {
+    public AbstractGeneratorBlock(MachineTier tier, BlockBehaviour.Properties properties) {
         super(tier, properties);
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable IBlockReader dimensionIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, dimensionIn, tooltip, flagIn);
+    public void appendHoverText(ItemStack stack, @Nullable BlockGetter dimensionIn, List<Component> tooltip, TooltipFlag flagIn) {
+        super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
         // TODO: Show energy production rate and fuel consumption rate?
     }
 }

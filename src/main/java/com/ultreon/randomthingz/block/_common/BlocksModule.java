@@ -7,8 +7,8 @@ import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.ultreon.randomthingz.common.CoreRegisterWrapperModule;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
-import net.minecraft.fluid.Fluid;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

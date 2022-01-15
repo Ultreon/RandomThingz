@@ -1,7 +1,7 @@
 package com.ultreon.texturedmodels.util;
 
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 /**
  * Some properties needed for frame blocks

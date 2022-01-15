@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.common;
 import com.ultreon.randomthingz.common.interfaces.Formattable;
 import com.ultreon.randomthingz.util.helpers.MathHelper;
 import lombok.Data;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 @Data
 public class Multiplier implements Formattable {
@@ -12,10 +12,10 @@ public class Multiplier implements Formattable {
     @Override
     public String toFormattedString() {
         if (MathHelper.getDecimalPlaces(value) == 0) {
-            return TextFormatting.GOLD.toString() + Math.round(value) + TextFormatting.GRAY + "x";
+            return ChatFormatting.GOLD.toString() + Math.round(value) + ChatFormatting.GRAY + "x";
         }
 
-        return TextFormatting.GOLD.toString() + value + TextFormatting.GRAY + "x";
+        return ChatFormatting.GOLD.toString() + value + ChatFormatting.GRAY + "x";
     }
 
     public Percentage toPercentage() {

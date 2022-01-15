@@ -1,19 +1,19 @@
 package com.ultreon.randomthingz.entity.baby;
 
 import com.ultreon.randomthingz.common.item.ModItemsAlt;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.monster.CreeperEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -24,80 +24,80 @@ import javax.annotation.Nonnull;
  *
  * @author QTech Community.
  */
-public class BabyFireCreeperCreeperEntity extends CreeperEntity implements IBabyEntity {
+public class BabyFireCreeperCreeperEntity extends Creeper implements IBabyEntity {
 
-    private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(BabyFireCreeperCreeperEntity.class, DataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_CHILD = SynchedEntityData.defineId(BabyFireCreeperCreeperEntity.class, EntityDataSerializers.BOOLEAN);
 
-    public BabyFireCreeperCreeperEntity(EntityType<BabyFireCreeperCreeperEntity> type, World dimension) {
+    public BabyFireCreeperCreeperEntity(EntityType<BabyFireCreeperCreeperEntity> type, Level dimension) {
         super(type, dimension);
-        setChild(true);
+        setBaby(true);
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        getDataManager().register(IS_CHILD, false);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        getEntityData().define(IS_CHILD, false);
     }
 
     @Override
-    public boolean isChild() {
-        return getDataManager().get(IS_CHILD);
+    public boolean isBaby() {
+        return getEntityData().get(IS_CHILD);
     }
 
     @Override
-    public void setChild(boolean child) {
+    public void setBaby(boolean child) {
         setChild(IS_CHILD, child);
     }
 
     @Override
-    public void notifyDataManagerChange(@Nonnull DataParameter<?> key) {
+    public void onSyncedDataUpdated(@Nonnull EntityDataAccessor<?> key) {
         if (IS_CHILD.equals(key)) {
-            recalculateSize();
+            refreshDimensions();
         }
-        super.notifyDataManagerChange(key);
+        super.onSyncedDataUpdated(key);
     }
 
     @Override
-    protected int getExperiencePoints(@Nonnull PlayerEntity player) {
-        if (isChild()) {
-            experienceValue = (int) (experienceValue * 2.5F);
+    protected int getExperienceReward(@Nonnull Player player) {
+        if (isBaby()) {
+            xpReward = (int) (xpReward * 2.5F);
         }
-        return super.getExperiencePoints(player);
+        return super.getExperienceReward(player);
     }
 
     @Override
-    public double getYOffset() {
-        return isChild() ? 0 : super.getYOffset();
+    public double getMyRidingOffset() {
+        return isBaby() ? 0 : super.getMyRidingOffset();
     }
 
     @Override
-    protected float getStandingEyeHeight(@Nonnull Pose pose, @Nonnull EntitySize size) {
-        return isChild() ? 0.88F : super.getStandingEyeHeight(pose, size);
+    protected float getStandingEyeHeight(@Nonnull Pose pose, @Nonnull EntityDimensions size) {
+        return isBaby() ? 0.88F : super.getStandingEyeHeight(pose, size);
     }
 
     /**
      * Modify vanilla's explode method to half the explosion strength of baby creepers, and charged baby creepers
      */
     @Override
-    public void explode() {
-        if (!dimension.isClientSided) {
-            Explosion.Mode mode = ForgeEventFactory.getMobGriefingEvent(dimension, this) ? Explosion.Mode.DESTROY : Explosion.Mode.NONE;
-            float f = isCharged() ? 1 : 0.5F;
+    public void explodeCreeper() {
+        if (!level.isClientSide) {
+            Explosion.BlockInteraction mode = ForgeEventFactory.getMobGriefingEvent(level, this) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+            float f = isPowered() ? 1 : 0.5F;
             dead = true;
-            dimension.createExplosion(this, getPosX(), getPosY(), getPosZ(), explosionRadius * f, mode);
-            delete();
+            level.explode(this, getX(), getY(), getZ(), explosionRadius * f, mode);
+            remove();
             spawnLingeringCloud();
         }
     }
 
     @Override
-    public ItemStack getPickedResult(RayTraceResult target) {
+    public ItemStack getPickedResult(HitResult target) {
         return new ItemStack(ModItemsAlt.BABY_CREEPER_SPAWN_EGG.asItem());
     }
 
     @Nonnull
     @Override
-    public IPacket<?> getSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

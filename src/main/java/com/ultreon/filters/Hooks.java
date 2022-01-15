@@ -1,21 +1,21 @@
 package com.ultreon.filters;
 
-import net.minecraft.client.gui.DisplayEffectsScreen;
-import net.minecraft.client.gui.screen.inventory.CreativeScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 
 /**
  * Author: MrCrayfish
  */
 public class Hooks {
-    public static int getPotionEffectOffset(DisplayEffectsScreen screen) {
-        if (screen instanceof CreativeScreen) {
+    public static int getPotionEffectOffset(EffectRenderingInventoryScreen screen) {
+        if (screen instanceof CreativeModeInventoryScreen) {
             return 172;
         }
         return 124;
     }
 
-    public static int getEffectsGuiOffset(DisplayEffectsScreen screen) {
-        if (screen instanceof CreativeScreen) {
+    public static int getEffectsGuiOffset(EffectRenderingInventoryScreen screen) {
+        if (screen instanceof CreativeModeInventoryScreen) {
             return 182;
         }
         return 160;

@@ -17,10 +17,10 @@ import com.ultreon.randomthingz.item.DyeColorizedItem;
 import com.ultreon.randomthingz.item.MaterialColorizedItem;
 import com.ultreon.randomthingz.registration.Registration;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -41,7 +41,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
     private static final ItemMenu itemMenu = new ItemMenu();
 
     public ItemsModule() {
-        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Item"), itemMenu));
+        MainActionMenu.registerHandler(new MenuHandler(new TextComponent("Item"), itemMenu));
     }
 
     @Override
@@ -80,7 +80,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
         Collection<Item> materialColorItems = Registration.getItems((item) -> item instanceof IHasMaterialColor);
         for (Item materialColorItem : materialColorItems) {
             IHasMaterialColor materialColorProvider = (IHasMaterialColor) materialColorItem;
-            ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, tintIndex) -> materialColorProvider.getMaterialColor().colorValue, () -> materialColorItem);
+            ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, tintIndex) -> materialColorProvider.getMaterialColor().col, () -> materialColorItem);
         }
 
         registerGenericColorHandler(itemColors);
@@ -106,7 +106,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
     @SafeVarargs
     private final void registerMaterialColorHandler(ItemColors colors, ItemRegistryObject<MaterialColorizedItem>... materialColorItems) {
         for (ItemRegistryObject<MaterialColorizedItem> materialColorized : materialColorItems) {
-            ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> materialColorized.asItem().getMaterialColor().colorValue, materialColorized);
+            ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> materialColorized.asItem().getMaterialColor().col, materialColorized);
         }
     }
 

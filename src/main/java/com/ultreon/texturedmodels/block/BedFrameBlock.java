@@ -8,33 +8,33 @@ import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.BedBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.merchant.villager.VillagerEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.state.*;
-import net.minecraft.state.properties.BedPart;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
@@ -60,10 +60,10 @@ public class BedFrameBlock extends BedBlock {
 
     public BedFrameBlock(DyeColor colorIn, Properties properties) {
         super(colorIn, properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(CONTAINS_BLOCK, false).with(LIGHT_LEVEL, 0).with(PART, BedPart.FOOT).with(OCCUPIED, Boolean.FALSE).with(HORIZONTAL_FACING, Direction.NORTH));//.with(TEXTURE,0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(CONTAINS_BLOCK, false).setValue(LIGHT_LEVEL, 0).setValue(PART, BedPart.FOOT).setValue(OCCUPIED, Boolean.FALSE).setValue(HORIZONTAL_FACING, Direction.NORTH));//.with(TEXTURE,0));
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(CONTAINS_BLOCK, LIGHT_LEVEL, PART, OCCUPIED, HORIZONTAL_FACING);//, TEXTURE);
     }
 
@@ -74,71 +74,71 @@ public class BedFrameBlock extends BedBlock {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
+    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
         return new BedFrameTile();
     }
 
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World dimension, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
-        ItemStack item = player.getHeldItem(hand);
-        if (!dimension.isClientSided) {
-            if ((state.get(CONTAINS_BLOCK) && !item.getItem().isIn(Tags.Items.DYES) && !Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) || item.isEmpty()) {
+    public InteractionResult use(BlockState state, Level dimension, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
+        ItemStack item = player.getItemInHand(hand);
+        if (!dimension.isClientSide) {
+            if ((state.getValue(CONTAINS_BLOCK) && !item.getItem().is(Tags.Items.DYES) && !Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) || item.isEmpty()) {
                 //Taken from BedBlock, should work similar to vanilla beds
-                if (state.get(PART) != BedPart.HEAD) {
-                    pos = pos.offset(state.get(HORIZONTAL_FACING));
+                if (state.getValue(PART) != BedPart.HEAD) {
+                    pos = pos.relative(state.getValue(HORIZONTAL_FACING));
                     state = dimension.getBlockState(pos);
-                    if (!state.matchesBlock(this)) {
-                        return ActionResultType.CONSUME;
+                    if (!state.is(this)) {
+                        return InteractionResult.CONSUME;
                     }
                 }
 
-                if (!doesBedWork(dimension)) {
-                    dimension.deleteBlock(pos, false);
-                    BlockPos blockpos = pos.offset(state.get(HORIZONTAL_FACING).getOpposite());
-                    if (dimension.getBlockState(blockpos).matchesBlock(this)) {
-                        dimension.deleteBlock(blockpos, false);
+                if (!canSetSpawn(dimension)) {
+                    dimension.removeBlock(pos, false);
+                    BlockPos blockpos = pos.relative(state.getValue(HORIZONTAL_FACING).getOpposite());
+                    if (dimension.getBlockState(blockpos).is(this)) {
+                        dimension.removeBlock(blockpos, false);
                     }
 
-                    dimension.createExplosion(null, DamageSource.causeBedExplosionDamage(), null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 5.0F, true, Explosion.Mode.DESTROY);
-                    return ActionResultType.SUCCESS;
-                } else if (state.get(OCCUPIED)) {
-                    if (!this.func_226861_a_(dimension, pos)) {
-                        player.sendStatusMessage(new TranslationTextComponent("block.minecraft.bed.occupied"), true);
+                    dimension.explode(null, DamageSource.badRespawnPointExplosion(), null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 5.0F, true, Explosion.BlockInteraction.DESTROY);
+                    return InteractionResult.SUCCESS;
+                } else if (state.getValue(OCCUPIED)) {
+                    if (!this.kickVillagerOutOfBed(dimension, pos)) {
+                        player.displayClientMessage(new TranslatableComponent("block.minecraft.bed.occupied"), true);
                     }
 
-                    return ActionResultType.SUCCESS;
+                    return InteractionResult.SUCCESS;
                 } else {
-                    player.trySleep(pos).ifLeft((p_220173_1_) -> {
+                    player.startSleepInBed(pos).ifLeft((p_220173_1_) -> {
                         if (p_220173_1_ != null) {
-                            player.sendStatusMessage(Objects.requireNonNull(p_220173_1_.getMessage()), true);
+                            player.displayClientMessage(Objects.requireNonNull(p_220173_1_.getMessage()), true);
                         }
 
                     });
-                    return ActionResultType.SUCCESS;
+                    return InteractionResult.SUCCESS;
                 }
             }
-            if (state.get(CONTAINS_BLOCK) && player.isSneaking()) {
+            if (state.getValue(CONTAINS_BLOCK) && player.isShiftKeyDown()) {
                 this.dropContainedBlock(dimension, pos);
-                state = state.with(CONTAINS_BLOCK, Boolean.FALSE);
-                dimension.setBlockState(pos, state, 2);
+                state = state.setValue(CONTAINS_BLOCK, Boolean.FALSE);
+                dimension.setBlock(pos, state, 2);
             } else {
                 if (item.getItem() instanceof BlockItem) {
-                    TileEntity tileEntity = dimension.getTileEntity(pos);
-                    int count = player.getHeldItem(hand).getCount();
+                    BlockEntity tileEntity = dimension.getBlockEntity(pos);
+                    int count = player.getItemInHand(hand).getCount();
                     Block heldBlock = ((BlockItem) item.getItem()).getBlock();
-                    if (tileEntity instanceof BedFrameTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.get(CONTAINS_BLOCK)) {
-                        BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().getDefaultState();
+                    if (tileEntity instanceof BedFrameTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
+                        BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
                         insertBlock(dimension, pos, state, handBlockState);
                         if (!player.isCreative())
-                            player.getHeldItem(hand).setCount(count - 1);
+                            player.getItemInHand(hand).setCount(count - 1);
                     }
                 }
             }
-            if (player.getHeldItem(hand).getItem() == Registration.HAMMER.get() || (!BCModConfig.HAMMER_NEEDED.get() && player.isSneaking())) {
+            if (player.getItemInHand(hand).getItem() == Registration.HAMMER.get() || (!BCModConfig.HAMMER_NEEDED.get() && player.isShiftKeyDown())) {
                 if (!player.isCreative())
                     this.dropContainedBlock(dimension, pos);
-                state = state.with(CONTAINS_BLOCK, Boolean.FALSE);
-                dimension.setBlockState(pos, state, 2);
+                state = state.setValue(CONTAINS_BLOCK, Boolean.FALSE);
+                dimension.setBlock(pos, state, 2);
             }
             BlockAppearanceHelper.setLightLevel(item, state, dimension, pos, player, hand);
             BlockAppearanceHelper.setTexture(item, state, dimension, player, pos);
@@ -147,75 +147,75 @@ public class BedFrameBlock extends BedBlock {
             BlockAppearanceHelper.setWoolColor(dimension, pos, player, hand);
             BlockAppearanceHelper.setOverlay(dimension, pos, player, item);
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
-    private boolean func_226861_a_(World dimension, BlockPos pos) {
-        List<VillagerEntity> list = dimension.getEntitiesWithinBox(VillagerEntity.class, new AxisAlignedBB(pos), LivingEntity::isSleeping);
+    private boolean kickVillagerOutOfBed(Level dimension, BlockPos pos) {
+        List<Villager> list = dimension.getEntitiesOfClass(Villager.class, new AABB(pos), LivingEntity::isSleeping);
         if (list.isEmpty()) {
             return false;
         } else {
-            list.get(0).wakeUp();
+            list.get(0).stopSleeping();
             return true;
         }
     }
 
     @SuppressWarnings("unused")
-    protected void dropContainedBlock(World dimensionIn, BlockPos pos) {
-        if (!dimensionIn.isClientSided) {
-            TileEntity tileentity = dimensionIn.getTileEntity(pos);
+    protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
+        if (!dimensionIn.isClientSide) {
+            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
             if (tileentity instanceof BedFrameTile) {
                 BedFrameTile frameTileEntity = (BedFrameTile) tileentity;
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
-                    dimensionIn.playEvent(1010, pos, 0);
+                    dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clear();
                     float f = 0.7F;
-                    double d0 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (dimensionIn.rand.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
+                    double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
                     ItemStack itemstack1 = blockState.getBlock().asItem().getDefaultInstance();
                     ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
-                    itementity.setDefaultPickupDelay();
-                    dimensionIn.spawnEntity(itementity);
+                    itementity.setDefaultPickUpDelay();
+                    dimensionIn.addFreshEntity(itementity);
                 }
                 frameTileEntity.clear();
             }
         }
     }
 
-    public void insertBlock(IWorld dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
-        TileEntity tileentity = dimensionIn.getTileEntity(pos);
+    public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
+        BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
         if (tileentity instanceof BedFrameTile) {
             BedFrameTile frameTileEntity = (BedFrameTile) tileentity;
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
-            dimensionIn.setBlockState(pos, state.with(CONTAINS_BLOCK, Boolean.TRUE), 2);
+            dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);
         }
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             dropContainedBlock(dimensionIn, pos);
 
-            super.onReplaced(state, dimensionIn, pos, newState, isMoving);
+            super.onRemove(state, dimensionIn, pos, newState, isMoving);
         }
     }
 
     @Override
-    public int getLightValue(BlockState state, IBlockReader dimension, BlockPos pos) {
-        if (state.get(LIGHT_LEVEL) > 15) {
+    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+        if (state.getValue(LIGHT_LEVEL) > 15) {
             return 15;
         }
-        return state.get(LIGHT_LEVEL);
+        return state.getValue(LIGHT_LEVEL);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
+    public RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 }
 //========SOLI DEO GLORIA========//

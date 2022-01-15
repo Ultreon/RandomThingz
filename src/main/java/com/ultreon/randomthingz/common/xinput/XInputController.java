@@ -3,8 +3,8 @@ package com.ultreon.randomthingz.common.xinput;
 import com.studiohartman.jamepad.ControllerManager;
 import com.studiohartman.jamepad.ControllerState;
 import lombok.Getter;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.vector.Vector2f;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec2;
 
 public class XInputController extends AbstractController {
     @Getter
@@ -23,11 +23,11 @@ public class XInputController extends AbstractController {
         this.state = this.manager.getState(this.index);
     }
 
-    public Vector2f getPlayerHorizontalMotion(PlayerEntity entity) {
-        float walkSpeed = entity.abilities.getWalkSpeed();
+    public Vec2 getPlayerHorizontalMotion(Player entity) {
+        float walkSpeed = entity.abilities.getWalkingSpeed();
         float x = this.state.leftStickX * walkSpeed;
         float y = this.state.leftStickY * walkSpeed;
-        return new Vector2f(x, y);
+        return new Vec2(x, y);
     }
 
     public boolean isJumping() {

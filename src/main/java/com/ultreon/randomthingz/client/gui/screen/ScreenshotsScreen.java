@@ -11,18 +11,18 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.DialogTexts;
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.NativeImage;
-import net.minecraft.client.renderer.texture.Texture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -70,7 +70,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
      * @param backScreen back screen.
      * @param titleIn    the screen title.
      */
-    public ScreenshotsScreen(Screen backScreen, ITextComponent titleIn) {
+    public ScreenshotsScreen(Screen backScreen, Component titleIn) {
         super(titleIn);
         this.backScreen = backScreen;
 
@@ -78,7 +78,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
     }
 
     private void reload() {
-        File dir = new File(Minecraft.getInstance().gameDir, "screenshots");
+        File dir = new File(Minecraft.getInstance().gameDirectory, "screenshots");
         if (dir.exists()) {
             this.files.addAll(Arrays.asList(Objects.requireNonNull(dir.listFiles())));
         }
@@ -102,7 +102,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
             active.set(true);
             RenderSystem.recordRenderCall(() -> {
                 ResourceLocation location = new ResourceLocation(RandomThingz.MOD_ID, "screenshots_screen/" + file.getName().toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9/._-]", "_"));
-                Texture texture0 = Minecraft.getInstance().getTextureManager().getTexture(location);
+                AbstractTexture texture0 = Minecraft.getInstance().getTextureManager().getTexture(location);
 
                 DynamicTexture texture;
 
@@ -137,12 +137,12 @@ public class ScreenshotsScreen extends AdvancedScreen {
     }
 
     @Override
-    protected void initialize() {
-        super.initialize();
+    protected void init() {
+        super.init();
 
-        this.list = this.addListener(new ScreenshotSelectionList(this, Minecraft.getInstance(),
+        this.list = this.addWidget(new ScreenshotSelectionList(this, Minecraft.getInstance(),
                 200, this.height - 50, 10, this.height - 40, null));
-        this.addButton(new Button(10, this.height - 30, 200, 20, DialogTexts.GUI_BACK, (btn) -> this.goBack()));
+        this.addButton(new Button(10, this.height - 30, 200, 20, CommonComponents.GUI_BACK, (btn) -> this.goBack()));
     }
 
     /**

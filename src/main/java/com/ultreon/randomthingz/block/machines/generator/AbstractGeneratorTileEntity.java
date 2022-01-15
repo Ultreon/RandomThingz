@@ -4,13 +4,13 @@ import com.qsoftware.modlib.api.RedstoneMode;
 import com.qsoftware.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import net.minecraft.block.AbstractFurnaceBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.IIntArray;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTileEntity {
     public static final int FIELDS_COUNT = 7;
@@ -18,7 +18,7 @@ public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTil
     protected int burnTime;
     protected int totalBurnTime;
 
-    protected final IIntArray fields = new IIntArray() {
+    protected final ContainerData fields = new ContainerData() {
         @Override
         public int get(int index) {
             switch (index) {
@@ -62,12 +62,12 @@ public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTil
         }
 
         @Override
-        public int size() {
+        public int getCount() {
             return FIELDS_COUNT;
         }
     };
 
-    protected AbstractGeneratorTileEntity(TileEntityType<?> typeIn, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, MachineTier tier) {
+    protected AbstractGeneratorTileEntity(BlockEntityType<?> typeIn, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, MachineTier tier) {
         super(typeIn, inventorySize, maxEnergy, maxReceive, maxExtract, tier);
     }
 
@@ -78,11 +78,11 @@ public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTil
     protected abstract int getEnergyCreatedPerTick();
 
     protected BlockState getActiveState() {
-        return getBlockState().with(AbstractFurnaceBlock.LIT, true);
+        return getBlockState().setValue(AbstractFurnaceBlock.LIT, true);
     }
 
     protected BlockState getInactiveState() {
-        return getBlockState().with(AbstractFurnaceBlock.LIT, false);
+        return getBlockState().setValue(AbstractFurnaceBlock.LIT, false);
     }
 
     @Override
@@ -105,45 +105,45 @@ public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTil
     }
 
     protected boolean canRun() {
-        return dimension != null
-                && redstoneMode.shouldRun(dimension.isBlockPowered(pos))
+        return level != null
+                && redstoneMode.shouldRun(level.hasNeighborSignal(worldPosition))
                 && getEnergyStored() < getMaxEnergyStored();
     }
 
     protected void sendUpdate(BlockState newState, boolean force) {
-        if (dimension == null) return;
-        BlockState oldState = dimension.getBlockState(pos);
+        if (level == null) return;
+        BlockState oldState = level.getBlockState(worldPosition);
         if (oldState != newState || force) {
-            dimension.setBlockState(pos, newState, 3);
-            dimension.notifyBlockUpdate(pos, oldState, newState, 3);
+            level.setBlock(worldPosition, newState, 3);
+            level.sendBlockUpdated(worldPosition, oldState, newState, 3);
         }
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT tags) {
-        super.read(state, tags);
+    public void load(BlockState state, CompoundTag tags) {
+        super.load(state, tags);
         this.burnTime = tags.getInt("BurnTime");
         this.totalBurnTime = tags.getInt("TotalBurnTime");
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT tags) {
+    public CompoundTag save(CompoundTag tags) {
         tags.putInt("BurnTime", this.burnTime);
         tags.putInt("TotalBurnTime", this.totalBurnTime);
-        return super.write(tags);
+        return super.save(tags);
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         super.onDataPacket(net, packet);
-        CompoundNBT tags = packet.getNbt();
+        CompoundTag tags = packet.getTag();
         this.burnTime = tags.getInt("BurnTime");
         this.totalBurnTime = tags.getInt("TotalBurnTime");
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT tags = super.getUpdateTag();
+    public CompoundTag getUpdateTag() {
+        CompoundTag tags = super.getUpdateTag();
         tags.putInt("BurnTime", this.burnTime);
         tags.putInt("TotalBurnTime", this.totalBurnTime);
         return tags;

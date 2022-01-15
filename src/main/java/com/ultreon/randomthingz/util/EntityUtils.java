@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.util;
 
 import com.google.common.annotations.Beta;
 import lombok.experimental.UtilityClass;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 
 /**
  * Entity utilities
@@ -21,7 +21,7 @@ public final class EntityUtils {
      */
     public static void instantKill(LivingEntity entity, DamageSource damageSource) {
         // Redirect to default method.
-        instantKill(entity, damageSource.damageType);
+        instantKill(entity, damageSource.msgId);
     }
 
     /**
@@ -34,9 +34,9 @@ public final class EntityUtils {
     @SuppressWarnings("JavadocReference")
     public static void instantKill(LivingEntity entity, String damageType) {
         // Set damage source
-        DamageSource damageSrc = new DamageSource(damageType).setDamageBypassesArmor().setDamageIsAbsolute().setDamageAllowedInCreativeMode();
+        DamageSource damageSrc = new DamageSource(damageType).bypassArmor().bypassMagic().bypassInvul();
 
-        entity.attack(damageSrc, Float.POSITIVE_INFINITY);
+        entity.hurt(damageSrc, Float.POSITIVE_INFINITY);
 
 //        // Get health
 //        float currentHealth = entity.getHealth();

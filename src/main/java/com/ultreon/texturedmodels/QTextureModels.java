@@ -5,8 +5,8 @@ import com.ultreon.texturedmodels.setup.RenderSetup;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.util.BlockColorHandler;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -104,9 +104,9 @@ public class QTextureModels {
     /**
      * Registering my ItemGroup for all blocks and items from BlockCarpentry
      */
-    public static class QTexturedModelsItemGroup extends ItemGroup {
+    public static class QTexturedModelsItemGroup extends CreativeModeTab {
 
-        public static final QTexturedModelsItemGroup QTEXTUREMODELS = new QTexturedModelsItemGroup(ItemGroup.GROUPS.length, "qtexturedmodels");
+        public static final QTexturedModelsItemGroup QTEXTUREMODELS = new QTexturedModelsItemGroup(CreativeModeTab.TABS.length, "qtexturedmodels");
 
         private QTexturedModelsItemGroup(int index, String label) {
             super(index, label);
@@ -114,7 +114,7 @@ public class QTextureModels {
 
         @Override
         @Nonnull
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(Registration.FRAMEBLOCK.get());
         }
     }

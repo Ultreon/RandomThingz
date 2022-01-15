@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.IIntArray;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public abstract class AbstractMachineBaseTileEntity extends AbstractEnergyInventoryTileEntity {
     public static final int FIELDS_COUNT = 5;
@@ -19,7 +19,7 @@ public abstract class AbstractMachineBaseTileEntity extends AbstractEnergyInvent
 
     protected RedstoneMode redstoneMode = RedstoneMode.IGNORED;
 
-    protected final IIntArray fields = new IIntArray() {
+    protected final ContainerData fields = new ContainerData() {
         @Override
         public int get(int index) {
             switch (index) {
@@ -53,12 +53,12 @@ public abstract class AbstractMachineBaseTileEntity extends AbstractEnergyInvent
         }
 
         @Override
-        public int size() {
+        public int getCount() {
             return FIELDS_COUNT;
         }
     };
 
-    protected AbstractMachineBaseTileEntity(TileEntityType<?> typeIn, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, MachineTier tier) {
+    protected AbstractMachineBaseTileEntity(BlockEntityType<?> typeIn, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, MachineTier tier) {
         super(typeIn, inventorySize + tier.getUpgradeSlots(), maxEnergy, maxReceive, maxExtract);
         this.tier = tier;
     }

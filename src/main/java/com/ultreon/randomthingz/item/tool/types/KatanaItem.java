@@ -3,20 +3,20 @@ package com.ultreon.randomthingz.item.tool.types;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.ultreon.randomthingz.common.IHasToolType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SwordItem;
+import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ToolType;
 
 import java.util.UUID;
@@ -31,26 +31,26 @@ public class KatanaItem extends SwordItem implements IHasToolType {
 
     protected static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.nameUUIDFromBytes("Attack Knockback".getBytes());
 
-    public KatanaItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
-        super(tier, attackDamageIn, attackSpeedIn, builderIn.group(null).defaultMaxDamage((int) (tier.getMaxUses() * 1.4)));
-        this.attackDamage = (float) attackDamageIn + (tier.getAttackDamage() * 2);
+    public KatanaItem(Tier tier, int attackDamageIn, float attackSpeedIn, Properties builderIn) {
+        super(tier, attackDamageIn, attackSpeedIn, builderIn.tab(null).defaultDurability((int) (tier.getUses() * 1.4)));
+        this.attackDamage = (float) attackDamageIn + (tier.getAttackDamageBonus() * 2);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", attackSpeedIn, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(ATTACK_KNOCKBACK_MODIFIER, "Weapon modifier", 1.5, AttributeModifier.Operation.ADDITION));
         this.attributeModifiers = builder.build();
     }
 
-    public float getAttackDamage() {
+    public float getDamage() {
         return this.attackDamage;
     }
 
-    public float getMiningSpeed(ItemStack stack, BlockState state) {
-        if (state.matchesBlock(Blocks.COBWEB)) {
+    public float getDestroySpeed(ItemStack stack, BlockState state) {
+        if (state.is(Blocks.COBWEB)) {
             return 20.0F;
         } else {
             Material material = state.getMaterial();
-            return material != Material.PLANTS && material != Material.TALL_PLANTS && material != Material.CORAL && !state.isIn(BlockTags.LEAVES) && material != Material.GOURD ? 1.0F : 1.75F;
+            return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && material != Material.CORAL && !state.is(BlockTags.LEAVES) && material != Material.VEGETABLE ? 1.0F : 1.75F;
         }
     }
 
@@ -58,9 +58,9 @@ public class KatanaItem extends SwordItem implements IHasToolType {
      * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
      * the damage on the stack.
      */
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damageItem(1, attacker, (entity) -> {
-            entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.hurtAndBreak(1, attacker, (entity) -> {
+            entity.broadcastBreakEvent(EquipmentSlot.MAINHAND);
         });
         return true;
     }
@@ -68,10 +68,10 @@ public class KatanaItem extends SwordItem implements IHasToolType {
     /**
      * Called when a Block is destroyed using this Item. Return true to trigger the "Use Item" statistic.
      */
-    public boolean onBlockBroken(ItemStack stack, World dimensionIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-        if (state.getBlockHardness(dimensionIn, pos) > 0.2F) {
-            stack.damageItem(2, entityLiving, (entity) -> {
-                entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+    public boolean mineBlock(ItemStack stack, Level dimensionIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+        if (state.getDestroySpeed(dimensionIn, pos) > 0.2F) {
+            stack.hurtAndBreak(2, entityLiving, (entity) -> {
+                entity.broadcastBreakEvent(EquipmentSlot.MAINHAND);
             });
         }
 
@@ -81,8 +81,8 @@ public class KatanaItem extends SwordItem implements IHasToolType {
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
-        return equipmentSlot == EquipmentSlotType.MAINHAND ? this.attributeModifiers : super.getAttributeModifiers(equipmentSlot);
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot equipmentSlot) {
+        return equipmentSlot == EquipmentSlot.MAINHAND ? this.attributeModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
     }
 
     @Override

@@ -4,9 +4,9 @@ import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleManager;
 import lombok.Getter;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -20,10 +20,10 @@ public class PlayerModuleChangePacket {
     @Getter
     private final boolean enable;
     @Getter
-    private CompoundNBT tag;
+    private CompoundTag tag;
 
-    public PlayerModuleChangePacket(PacketBuffer buffer) {
-        String moduleName = buffer.readString();
+    public PlayerModuleChangePacket(FriendlyByteBuf buffer) {
+        String moduleName = buffer.readUtf();
         this.module = Objects.requireNonNull(ModuleManager.getInstance().getModule(moduleName), "Invalid module, got module with name: " + moduleName);
         this.enable = buffer.readBoolean();
     }
@@ -34,7 +34,7 @@ public class PlayerModuleChangePacket {
     }
 
     public static void handle(PlayerModuleChangePacket packet, Supplier<NetworkEvent.Context> context) {
-        ServerPlayerEntity player = context.get().getSender();
+        ServerPlayer player = context.get().getSender();
         if (context.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
             context.get().enqueueWork(() -> {
                 if (player != null) {
@@ -52,8 +52,8 @@ public class PlayerModuleChangePacket {
         context.get().setPacketHandled(true);
     }
 
-    public void toBytes(PacketBuffer buffer) {
-        buffer.writeString(this.module.getName());
+    public void toBytes(FriendlyByteBuf buffer) {
+        buffer.writeUtf(this.module.getName());
         buffer.writeBoolean(this.enable);
     }
 }

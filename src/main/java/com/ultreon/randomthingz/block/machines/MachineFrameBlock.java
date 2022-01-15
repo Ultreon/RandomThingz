@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines;
 
-import net.minecraft.block.StainedGlassBlock;
-import net.minecraft.item.DyeColor;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.StainedGlassBlock;
 
 /**
  * Machine frame block. Currently this extends StainedGlassBlock to work around a Forge bug (#32)

@@ -10,7 +10,7 @@ import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import lombok.NonNull;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.TextComponent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
@@ -29,7 +29,7 @@ public class ClientTweaksModule extends Module {
 
 //        registerSubmodule();
 
-        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Window"), windowMenu));
+        MainActionMenu.registerHandler(new MenuHandler(new TextComponent("Window"), windowMenu));
     }
 
     @Override

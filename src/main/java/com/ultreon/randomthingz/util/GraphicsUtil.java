@@ -1,19 +1,19 @@
 package com.ultreon.randomthingz.util;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.math.Matrix4f;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.text.ITextProperties;
-import net.minecraft.util.text.LanguageMap;
-import net.minecraft.util.text.Style;
+import net.minecraft.locale.Language;
+import net.minecraft.network.chat.FormattedText;
+import net.minecraft.network.chat.Style;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.gui.GuiUtils;
@@ -26,29 +26,29 @@ import static net.minecraftforge.fml.client.gui.GuiUtils.drawGradientRect;
 
 public final class GraphicsUtil {
     private final ItemRenderer itemRenderer;
-    private final MatrixStack matrixStack;
-    private final FontRenderer fontRenderer;
+    private final PoseStack matrixStack;
+    private final Font fontRenderer;
 
-    public GraphicsUtil(ItemRenderer itemRenderer, MatrixStack matrixStack, FontRenderer fontRenderer) {
+    public GraphicsUtil(ItemRenderer itemRenderer, PoseStack matrixStack, Font fontRenderer) {
         this.itemRenderer = itemRenderer;
         this.matrixStack = matrixStack;
         this.fontRenderer = fontRenderer;
     }
 
     public void blit(int x, int y, int blitOffset, int width, int height, TextureAtlasSprite sprite) {
-        ContainerScreen.blit(matrixStack, x, y, blitOffset, width, height, sprite);
+        AbstractContainerScreen.blit(matrixStack, x, y, blitOffset, width, height, sprite);
     }
 
     public void blit(int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureHeight, int textureWidth) {
-        ContainerScreen.blit(matrixStack, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureHeight, textureWidth);
+        AbstractContainerScreen.blit(matrixStack, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureHeight, textureWidth);
     }
 
     public void blit(int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight) {
-        ContainerScreen.blit(matrixStack, x, y, width, height, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
+        AbstractContainerScreen.blit(matrixStack, x, y, width, height, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
     public void blit(int x, int y, float uOffset, float vOffset, int width, int height, int textureWidth, int textureHeight) {
-        ContainerScreen.blit(matrixStack, x, y, uOffset, vOffset, width, height, textureWidth, textureHeight);
+        AbstractContainerScreen.blit(matrixStack, x, y, uOffset, vOffset, width, height, textureWidth, textureHeight);
     }
 
     public final void drawCenteredString(String text, float x, float y, int color) {
@@ -57,9 +57,9 @@ public final class GraphicsUtil {
 
     public final void drawCenteredString(String text, float x, float y, int color, boolean shadow) {
         if (shadow) {
-            fontRenderer.drawStringWithShadow(matrixStack, text, x - (int) ((float) fontRenderer.getStringWidth(text) / 2), y, color);
+            fontRenderer.drawShadow(matrixStack, text, x - (int) ((float) fontRenderer.width(text) / 2), y, color);
         } else {
-            fontRenderer.drawString(matrixStack, text, x - (int) ((float) fontRenderer.getStringWidth(text) / 2), y, color);
+            fontRenderer.draw(matrixStack, text, x - (int) ((float) fontRenderer.width(text) / 2), y, color);
         }
     }
 
@@ -72,16 +72,16 @@ public final class GraphicsUtil {
     public final void drawItemStack(ItemStack stack, int x, int y, String altText) {
         RenderSystem.translatef(0.0F, 0.0F, 32.0F);
 //        this.setBlitOffset(200);
-        this.itemRenderer.zLevel = 200.0F;
-        FontRenderer font = stack.getItem().getFontRenderer(stack);
-        if (font == null) font = Minecraft.getInstance().fontRenderer;
-        this.itemRenderer.renderItemAndEffectIntoGUI(stack, x, y);
-        this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
+        this.itemRenderer.blitOffset = 200.0F;
+        Font font = stack.getItem().getFontRenderer(stack);
+        if (font == null) font = Minecraft.getInstance().font;
+        this.itemRenderer.renderAndDecorateItem(stack, x, y);
+        this.itemRenderer.renderGuiItemDecorations(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
 //        this.setBlitOffset(0);
-        this.itemRenderer.zLevel = 0.0F;
+        this.itemRenderer.blitOffset = 0.0F;
     }
 
-    public static void drawTooltip(MatrixStack matrixStack, List<? extends ITextProperties> tooltips, int width, int height, FontRenderer font, int x, int y) {
+    public static void drawTooltip(PoseStack matrixStack, List<? extends FormattedText> tooltips, int width, int height, Font font, int x, int y) {
         GuiUtils.drawHoveringText(matrixStack, tooltips, x, y, width, height, -1, font);
     }
 
@@ -91,10 +91,10 @@ public final class GraphicsUtil {
      * @see GuiUtils#drawHoveringText(MatrixStack, List, int, int, int, int, int, int, int, int, FontRenderer)
      */
     //TODO, Validate rendering is the same as the original
-    public void drawItemTooltipText(@Nonnull final ItemStack stack, List<? extends ITextProperties> textLines, int mouseX, int mouseY,
+    public void drawItemTooltipText(@Nonnull final ItemStack stack, List<? extends FormattedText> textLines, int mouseX, int mouseY,
                                     int minWidth, int xOffset, int yOffset,
                                     int screenWidth, int screenHeight, int maxTextWidth,
-                                    int backgroundColor, int borderColorStart, int borderColorEnd, FontRenderer font) {
+                                    int backgroundColor, int borderColorStart, int borderColorEnd, Font font) {
         if (!textLines.isEmpty()) {
             RenderTooltipEvent.Pre event = new RenderTooltipEvent.Pre(stack, textLines, matrixStack, mouseX, mouseY, screenWidth, screenHeight, maxTextWidth, font);
             if (MinecraftForge.EVENT_BUS.post(event))
@@ -110,8 +110,8 @@ public final class GraphicsUtil {
             RenderSystem.disableDepthTest();
             int tooltipTextWidth = minWidth; // Added minWidth.
 
-            for (ITextProperties textLine : textLines) {
-                int textLineWidth = font.getStringPropertyWidth(textLine);
+            for (FormattedText textLine : textLines) {
+                int textLineWidth = font.width(textLine);
                 if (textLineWidth > tooltipTextWidth)
                     tooltipTextWidth = textLineWidth;
             }
@@ -139,15 +139,15 @@ public final class GraphicsUtil {
 
             if (needsWrap) {
                 int wrappedTooltipWidth = 0;
-                List<ITextProperties> wrappedTextLines = new ArrayList<>();
+                List<FormattedText> wrappedTextLines = new ArrayList<>();
                 for (int i = 0; i < textLines.size(); i++) {
-                    ITextProperties textLine = textLines.get(i);
-                    List<ITextProperties> wrappedLine = font.getCharacterManager().func_238362_b_(textLine, tooltipTextWidth, Style.EMPTY);
+                    FormattedText textLine = textLines.get(i);
+                    List<FormattedText> wrappedLine = font.getSplitter().splitLines(textLine, tooltipTextWidth, Style.EMPTY);
                     if (i == 0)
                         titleLinesCount = wrappedLine.size();
 
-                    for (ITextProperties line : wrappedLine) {
-                        int lineWidth = font.getStringPropertyWidth(line);
+                    for (FormattedText line : wrappedLine) {
+                        int lineWidth = font.width(line);
                         if (lineWidth > wrappedTooltipWidth)
                             wrappedTooltipWidth = lineWidth;
                         wrappedTextLines.add(line);
@@ -186,8 +186,8 @@ public final class GraphicsUtil {
             tooltipX += xOffset;
             tooltipY += yOffset;
 
-            matrixStack.push();
-            Matrix4f mat = matrixStack.getLast().getMatrix();
+            matrixStack.pushPose();
+            Matrix4f mat = matrixStack.last().pose();
 
             //TODO, lots of unnessesary GL calls here, we can buffer all these together.
             drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 4, tooltipX + tooltipTextWidth + 3, tooltipY - 3, backgroundColor, backgroundColor);
@@ -213,15 +213,15 @@ public final class GraphicsUtil {
 
             MinecraftForge.EVENT_BUS.post(new RenderTooltipEvent.PostBackground(stack, textLines, matrixStack, tooltipX, tooltipY, font, tooltipTextWidth, tooltipHeight));
 
-            IRenderTypeBuffer.Impl renderType = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
+            MultiBufferSource.BufferSource renderType = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
             matrixStack.translate(0.0D, 0.0D, zLevel);
 
             int tooltipTop = tooltipY;
 
             for (int lineNumber = 0; lineNumber < textLines.size(); ++lineNumber) {
-                ITextProperties line = textLines.get(lineNumber);
+                FormattedText line = textLines.get(lineNumber);
                 if (line != null)
-                    font.drawEntityText(LanguageMap.getInstance().func_241870_a(line), (float) tooltipX, (float) tooltipY, -1, true, mat, renderType, false, 0, 15728880);
+                    font.drawInBatch(Language.getInstance().getVisualOrder(line), (float) tooltipX, (float) tooltipY, -1, true, mat, renderType, false, 0, 15728880);
 
                 if (lineNumber + 1 == titleLinesCount)
                     tooltipY += 2;
@@ -229,8 +229,8 @@ public final class GraphicsUtil {
                 tooltipY += 10;
             }
 
-            renderType.finish();
-            matrixStack.pop();
+            renderType.endBatch();
+            matrixStack.popPose();
 
             MinecraftForge.EVENT_BUS.post(new RenderTooltipEvent.PostText(stack, textLines, matrixStack, tooltipX, tooltipTop, font, tooltipTextWidth, tooltipHeight));
 
@@ -239,7 +239,7 @@ public final class GraphicsUtil {
         }
     }
 
-    public MatrixStack getMatrixStack() {
+    public PoseStack getMatrixStack() {
         return matrixStack;
     }
 }

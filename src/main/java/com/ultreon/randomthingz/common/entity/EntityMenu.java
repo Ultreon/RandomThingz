@@ -5,13 +5,13 @@ import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
 import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
 import com.ultreon.randomthingz.util.Targeter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.multiplayer.PlayerController;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.multiplayer.MultiPlayerGameMode;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -26,28 +26,28 @@ public class EntityMenu extends AbstractActionMenu {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld dimension = mc.dimension;
-                ClientPlayerEntity player = mc.player;
-                PlayerController controller = mc.playerController;
+                ClientLevel dimension = mc.level;
+                LocalPlayer player = mc.player;
+                MultiPlayerGameMode controller = mc.gameMode;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
+                EntityHitResult result = Targeter.rayTraceEntities(player, dimension);
                 if (result != null && controller != null) {
-                    controller.attackEntity(player, result.getEntity());
+                    controller.attack(player, result.getEntity());
                 }
             }
 
             @Override
-            public ITextComponent getText() {
-                return new StringTextComponent("Attack");
+            public Component getText() {
+                return new TextComponent("Attack");
             }
 
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld dimension = mc.dimension;
-                ClientPlayerEntity player = mc.player;
+                ClientLevel dimension = mc.level;
+                LocalPlayer player = mc.player;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
+                EntityHitResult result = Targeter.rayTraceEntities(player, dimension);
                 return result != null;
             }
         });
@@ -55,28 +55,28 @@ public class EntityMenu extends AbstractActionMenu {
             @Override
             public void onActivate() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld dimension = mc.dimension;
-                ClientPlayerEntity player = mc.player;
-                PlayerController controller = mc.playerController;
+                ClientLevel dimension = mc.level;
+                LocalPlayer player = mc.player;
+                MultiPlayerGameMode controller = mc.gameMode;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
+                EntityHitResult result = Targeter.rayTraceEntities(player, dimension);
                 if (result != null && controller != null) {
-                    controller.interactWithEntity(player, result.getEntity(), result, Hand.MAIN_HAND);
+                    controller.interactAt(player, result.getEntity(), result, InteractionHand.MAIN_HAND);
                 }
             }
 
             @Override
-            public ITextComponent getText() {
-                return new StringTextComponent("Interact");
+            public Component getText() {
+                return new TextComponent("Interact");
             }
 
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                ClientWorld dimension = mc.dimension;
-                ClientPlayerEntity player = mc.player;
+                ClientLevel dimension = mc.level;
+                LocalPlayer player = mc.player;
 
-                EntityRayTraceResult result = Targeter.rayTraceEntities(player, dimension);
+                EntityHitResult result = Targeter.rayTraceEntities(player, dimension);
                 return result != null;
             }
         });
@@ -87,14 +87,14 @@ public class EntityMenu extends AbstractActionMenu {
             }
 
             @Override
-            public ITextComponent getText() {
-                return new StringTextComponent("Set Debug Page");
+            public Component getText() {
+                return new TextComponent("Set Debug Page");
             }
 
             @Override
             public boolean isEnabled() {
                 Minecraft mc = Minecraft.getInstance();
-                return mc.player != null && mc.dimension != null && mc.playerController != null;
+                return mc.player != null && mc.level != null && mc.gameMode != null;
             }
         });
     }

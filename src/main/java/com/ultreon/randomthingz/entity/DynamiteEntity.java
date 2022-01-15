@@ -2,17 +2,17 @@ package com.ultreon.randomthingz.entity;
 
 import com.ultreon.randomthingz.common.entity.ModEntities;
 import com.ultreon.randomthingz.common.item.ModItems;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileItemEntity;
-import net.minecraft.item.Item;
-import net.minecraft.network.IPacket;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,17 +24,17 @@ import javax.annotation.Nullable;
  * @author Qboi123
  */
 @SuppressWarnings({"deprecation", "unused"})
-public class DynamiteEntity extends ProjectileItemEntity {
+public class DynamiteEntity extends ThrowableItemProjectile {
 
-    public DynamiteEntity(EntityType<? extends DynamiteEntity> p_i50153_1_, World dimension) {
+    public DynamiteEntity(EntityType<? extends DynamiteEntity> p_i50153_1_, Level dimension) {
         super(p_i50153_1_, dimension);
     }
 
-    public DynamiteEntity(World dimensionIn, LivingEntity throwerIn) {
+    public DynamiteEntity(Level dimensionIn, LivingEntity throwerIn) {
         super(ModEntities.DYNAMITE.getEntityType(), throwerIn, dimensionIn);
     }
 
-    public DynamiteEntity(World dimensionIn, double x, double y, double z) {
+    public DynamiteEntity(Level dimensionIn, double x, double y, double z) {
         super(ModEntities.DYNAMITE.getEntityType(), x, y, z, dimensionIn);
     }
 
@@ -43,20 +43,20 @@ public class DynamiteEntity extends ProjectileItemEntity {
     }
 
     @Override
-    public @NotNull IPacket<?> getSpawnPacket() {
+    public @NotNull Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
     /**
      * Called when this EntityFireball hits a block or entity.
      */
-    protected void onImpact(@NotNull RayTraceResult result) {
-        super.onImpact(result);
-        Entity entity = this.getShooter();
+    protected void onHit(@NotNull HitResult result) {
+        super.onHit(result);
+        Entity entity = this.getOwner();
 
-        if (!this.dimension.isClientSided && !this.removed) {
-            this.dimension.createExplosion(this, this.getPosX(), this.getPosY(), this.getPosZ(), 4f, false, Explosion.Mode.BREAK);
-            this.delete();
+        if (!this.level.isClientSide && !this.removed) {
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), 4f, false, Explosion.BlockInteraction.BREAK);
+            this.remove();
         }
     }
 
@@ -64,9 +64,9 @@ public class DynamiteEntity extends ProjectileItemEntity {
      * Called to update the entity's position/logic.
      */
     public void tick() {
-        Entity entity = this.getShooter();
-        if (entity instanceof PlayerEntity && !entity.isAlive()) {
-            this.delete();
+        Entity entity = this.getOwner();
+        if (entity instanceof Player && !entity.isAlive()) {
+            this.remove();
         } else {
             super.tick();
         }
@@ -74,7 +74,7 @@ public class DynamiteEntity extends ProjectileItemEntity {
     }
 
     @Nullable
-    public Entity changeDimension(@NotNull ServerWorld server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
+    public Entity changeDimension(@NotNull ServerLevel server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
         Entity entity = this.getShooter();
         if (entity != null && entity.dimension.getDimensionKey() != server.getDimensionKey()) {
             this.setShooter(null);

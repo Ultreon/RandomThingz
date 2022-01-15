@@ -3,23 +3,23 @@ package com.ultreon.randomthingz.block.furniture;
 import com.ultreon.randomthingz.block.DirectionalBlock;
 import com.ultreon.randomthingz.block.entity.ModTileEntities;
 import com.ultreon.randomthingz.tileentity.CrateTileEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,57 +44,57 @@ public class WoodenCrateBlock extends DirectionalBlock {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader dimension) {
+    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
         return ModTileEntities.EXAMPLE_CHEST.get().create();
     }
 
     @Override
     public @NotNull
-    ActionResultType onBlockActivated(@NotNull BlockState state, World dimensionIn, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand handIn, @NotNull BlockRayTraceResult result) {
-        if (!dimensionIn.isClientSided()) {
-            TileEntity tile = dimensionIn.getTileEntity(pos);
+    InteractionResult use(@NotNull BlockState state, Level dimensionIn, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand handIn, @NotNull BlockHitResult result) {
+        if (!dimensionIn.isClientSide()) {
+            BlockEntity tile = dimensionIn.getBlockEntity(pos);
 
             if (tile instanceof CrateTileEntity) {
-                NetworkHooks.openGui((ServerPlayerEntity) player, (CrateTileEntity) tile, pos);
-                return ActionResultType.SUCCESS;
+                NetworkHooks.openGui((ServerPlayer) player, (CrateTileEntity) tile, pos);
+                return InteractionResult.SUCCESS;
             }
         }
-        return ActionResultType.FAIL;
+        return InteractionResult.FAIL;
 //        return super.onBlockActivated(state, dimensionIn, pos, player, handIn, result);
     }
 
     @Override
-    public void onReplaced(BlockState state, @NotNull World dimensionIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @NotNull Level dimensionIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            TileEntity te = dimensionIn.getTileEntity(pos);
+            BlockEntity te = dimensionIn.getBlockEntity(pos);
             if (te instanceof CrateTileEntity) {
-                InventoryHelper.dropInventoryItems(dimensionIn, pos, new Inventory(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
+                Containers.dropContents(dimensionIn, pos, new SimpleContainer(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
             }
         }
     }
 
     @Override
-    public boolean removedByPlayer(BlockState state, World dimension, BlockPos pos, PlayerEntity player, boolean willHarvest, FluidState fluid) {
-        TileEntity te = dimension.getTileEntity(pos);
+    public boolean removedByPlayer(BlockState state, Level dimension, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        BlockEntity te = dimension.getBlockEntity(pos);
         if (te instanceof CrateTileEntity) {
-            InventoryHelper.dropInventoryItems(dimension, pos, ((CrateTileEntity) te).getInventory());
+            Containers.dropContents(dimension, pos, ((CrateTileEntity) te).getInventory());
         }
         return super.removedByPlayer(state, dimension, pos, player, willHarvest, fluid);
     }
 
 
     @Override
-    public void onPlayerDestroy(@NotNull IWorld dimensionIn, @NotNull BlockPos pos, @NotNull BlockState state) {
-        super.onPlayerDestroy(dimensionIn, pos, state);
+    public void destroy(@NotNull LevelAccessor dimensionIn, @NotNull BlockPos pos, @NotNull BlockState state) {
+        super.destroy(dimensionIn, pos, state);
     }
 
     @Override
-    public void onExplosionDestroy(@NotNull World dimensionIn, @NotNull BlockPos pos, @NotNull Explosion explosionIn) {
-        super.onExplosionDestroy(dimensionIn, pos, explosionIn);
+    public void wasExploded(@NotNull Level dimensionIn, @NotNull BlockPos pos, @NotNull Explosion explosionIn) {
+        super.wasExploded(dimensionIn, pos, explosionIn);
 
-        TileEntity te = dimensionIn.getTileEntity(pos);
+        BlockEntity te = dimensionIn.getBlockEntity(pos);
         if (te instanceof CrateTileEntity) {
-            InventoryHelper.dropInventoryItems(dimensionIn, pos, new Inventory(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
+            Containers.dropContents(dimensionIn, pos, new SimpleContainer(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
         }
     }
 }

@@ -1,17 +1,17 @@
 package com.ultreon.randomthingz.actionmenu;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.widget.Widget;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.components.AbstractWidget;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.awt.*;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ActionMenuTitle extends Widget implements IActionMenuIndexable {
+public class ActionMenuTitle extends AbstractWidget implements IActionMenuIndexable {
     private int menuIndex;
 
     public ActionMenuTitle(ActionMenuScreen screen, int x, int y, int width, int height) {
@@ -19,11 +19,11 @@ public class ActionMenuTitle extends Widget implements IActionMenuIndexable {
     }
 
     @Override
-    public void renderWidget(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
-        FontRenderer fontrenderer = minecraft.fontRenderer;
+        Font fontrenderer = minecraft.font;
 
-        int width = fontrenderer.getStringWidth(this.getMessage().getString()) + 2;
+        int width = fontrenderer.width(this.getMessage().getString()) + 2;
 
         Color color = new Color(0, 0, 0, 127 / (menuIndex + 1));
         int col = color.getRGB();

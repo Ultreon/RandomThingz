@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.group;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class OresItemGroup extends ItemGroup {
-    public static final OresItemGroup instance = new OresItemGroup(ItemGroup.GROUPS.length, "randomthingz_ores");
+public class OresItemGroup extends CreativeModeTab {
+    public static final OresItemGroup instance = new OresItemGroup(CreativeModeTab.TABS.length, "randomthingz_ores");
 
     public OresItemGroup(int index, String label) {
         super(index, label);
@@ -19,7 +19,7 @@ public class OresItemGroup extends ItemGroup {
 
     @Override
     public @NotNull
-    ItemStack createIcon() {
+    ItemStack makeIcon() {
         return new ItemStack(Blocks.DIAMOND_ORE);
     }
 }

@@ -9,10 +9,10 @@ import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.MainMenuScreen;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.WorldLoadProgressScreen;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.client.gui.screens.LevelLoadingScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -42,8 +42,8 @@ public class ConfirmExitModule extends Module {
             if (event.getKey() == 256 && closePrompt && quitOnEscInTitle) {
                 if (!escPress) {
                     escPress = true;
-                    if (mc.currentScreen instanceof MainMenuScreen) {
-                        mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+                    if (mc.screen instanceof TitleScreen) {
+                        mc.setScreen(new ConfirmExitScreen(mc.screen));
                     }
                 }
             }
@@ -60,28 +60,28 @@ public class ConfirmExitModule extends Module {
         Minecraft mc = Minecraft.getInstance();
 
         if (event.getSource() == WindowCloseEvent.Source.GENERIC) {
-            if (mc.dimension == null && mc.currentScreen == null) {
+            if (mc.level == null && mc.screen == null) {
                 event.setCanceled(true);
                 return;
             }
 
-            if (mc.currentScreen instanceof WorldLoadProgressScreen) {
+            if (mc.screen instanceof LevelLoadingScreen) {
                 event.setCanceled(true);
                 return;
             }
 
             if (closePrompt) {
-                if (mc.dimension != null && !closePromptIngame) {
+                if (mc.level != null && !closePromptIngame) {
                     return;
                 }
                 event.setCanceled(true);
-                if (!(mc.currentScreen instanceof ConfirmExitScreen)) {
-                    mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+                if (!(mc.screen instanceof ConfirmExitScreen)) {
+                    mc.setScreen(new ConfirmExitScreen(mc.screen));
                 }
             }
         } else if (event.getSource() == WindowCloseEvent.Source.QUIT_BUTTON) {
-            if (closePrompt && closePromptQuitButton && !(mc.currentScreen instanceof ConfirmExitScreen)) {
-                mc.displayGuiScreen(new ConfirmExitScreen(mc.currentScreen));
+            if (closePrompt && closePromptQuitButton && !(mc.screen instanceof ConfirmExitScreen)) {
+                mc.setScreen(new ConfirmExitScreen(mc.screen));
             }
         }
     }
@@ -138,11 +138,11 @@ public class ConfirmExitModule extends Module {
     @Override
     public void showOptions(Screen backScreen) {
         Minecraft mc = Minecraft.getInstance();
-        mc.displayGuiScreen(new ConfirmExitOptions(backScreen, this));
+        mc.setScreen(new ConfirmExitOptions(backScreen, this));
     }
 
     @Override
-    public CompoundNBT writeTag() {
+    public CompoundTag writeTag() {
         this.tag.putBoolean("QuitOnEscInTitle", this.quitOnEscInTitle);
         this.tag.putBoolean("ClosePrompt", this.closePrompt);
         this.tag.putBoolean("ClosePromptIngame", this.closePromptIngame);
@@ -152,7 +152,7 @@ public class ConfirmExitModule extends Module {
     }
 
     @Override
-    public void readTag(CompoundNBT tag) {
+    public void readTag(CompoundTag tag) {
         this.quitOnEscInTitle = tag.getBoolean("QuitOnEscInTitle");
         this.closePrompt = tag.getBoolean("ClosePrompt");
         this.closePromptIngame = tag.getBoolean("ClosePromptIngame");

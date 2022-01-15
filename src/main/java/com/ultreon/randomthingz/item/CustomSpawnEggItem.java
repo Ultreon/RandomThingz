@@ -3,13 +3,13 @@ package com.ultreon.randomthingz.item;
 import com.qsoftware.modlib.api.NBTConstants;
 import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
 import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.NonNullList;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraftforge.common.util.Constants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,13 +25,13 @@ public class CustomSpawnEggItem<T extends Entity> extends SpawnEggItem {
     @SuppressWarnings("ConstantConditions")
     public CustomSpawnEggItem(EntityTypeRegistryObject<T> entityTypeIn, int primaryColor, int secondaryColor) {
         //Note: We pass null for now so that it does not override "pick block" on skeletons or some other existing type
-        super(null, primaryColor, secondaryColor, ItemDeferredRegister.getMekBaseProperties().group(ItemGroup.MISC));
+        super(null, primaryColor, secondaryColor, ItemDeferredRegister.getMekBaseProperties().tab(CreativeModeTab.TAB_MISC));
         this.entityTypeIn = entityTypeIn;
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-        if (this.isInGroup(group)) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
+        if (this.allowdedIn(group)) {
             int index = -1;
             int i = 0;
             for (ItemStack stack : items) {
@@ -49,11 +49,11 @@ public class CustomSpawnEggItem<T extends Entity> extends SpawnEggItem {
     }
 
     @Override
-    public @NotNull EntityType<? extends Entity> getType(@Nullable CompoundNBT nbt) {
+    public @NotNull EntityType<? extends Entity> getType(@Nullable CompoundTag nbt) {
         if (nbt != null && nbt.contains(NBTConstants.ENTITY_TAG, Constants.NBT.TAG_COMPOUND)) {
-            CompoundNBT entityTag = nbt.getCompound(NBTConstants.ENTITY_TAG);
+            CompoundTag entityTag = nbt.getCompound(NBTConstants.ENTITY_TAG);
             if (entityTag.contains(NBTConstants.ID, Constants.NBT.TAG_STRING)) {
-                return EntityType.byKey(entityTag.getString(NBTConstants.ID)).orElse(entityTypeIn.get());
+                return EntityType.byString(entityTag.getString(NBTConstants.ID)).orElse(entityTypeIn.get());
             }
         }
         return entityTypeIn.get();

@@ -7,11 +7,11 @@ import com.ultreon.randomthingz.block.machines.dryingrack.DryingRackBlock;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
 import com.ultreon.randomthingz.common.tags.ModTags;
 import com.ultreon.randomthingz.registration.Registration;
-import net.minecraft.block.Block;
-import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.tags.ITag;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.LogManager;
@@ -42,22 +42,22 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     @Override
-    protected void registerTags() {
-        getOrCreateBuilder(ModTags.Blocks.DRYING_RACKS).add(Registration.getBlocks(DryingRackBlock.class).toArray(new Block[0]));
+    protected void addTags() {
+        tag(ModTags.Blocks.DRYING_RACKS).add(Registration.getBlocks(DryingRackBlock.class).toArray(new Block[0]));
 
         for (ItemMaterial metal : ItemMaterial.values()) {
             metal.getOreTag().ifPresent(tag ->
-                    getOrCreateBuilder(tag).add(metal.getOre().get()));
+                    tag(tag).add(metal.getOre().get()));
             metal.getStorageBlockTag().ifPresent(tag ->
-                    getOrCreateBuilder(tag).add(metal.getStorageBlock().get()));
+                    tag(tag).add(metal.getStorageBlock().get()));
         }
 
         groupBuilder(Tags.Blocks.ORES, ItemMaterial::getOreTag);
         groupBuilder(Tags.Blocks.STORAGE_BLOCKS, ItemMaterial::getStorageBlockTag);
     }
 
-    private void groupBuilder(ITag.INamedTag<Block> tag, Function<ItemMaterial, Optional<ITag.INamedTag<Block>>> tagGetter) {
-        Builder<Block> builder = getOrCreateBuilder(tag);
+    private void groupBuilder(Tag.Named<Block> tag, Function<ItemMaterial, Optional<Tag.Named<Block>>> tagGetter) {
+        TagAppender<Block> builder = tag(tag);
         for (ItemMaterial metal : ItemMaterial.values()) {
             tagGetter.apply(metal).ifPresent(builder::addTag);
         }
@@ -71,20 +71,20 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @SuppressWarnings({"ConstantConditions", "DuplicatedCode"})
     @Override
-    public void act(@NotNull DirectoryCache cache) {
+    public void run(@NotNull HashCache cache) {
         // Temp fix that removes the broken safety check
-        this.tagToBuilder.clear();
-        this.registerTags();
-        this.tagToBuilder.forEach((p_240524_4_, p_240524_5_) -> {
-            JsonObject jsonobject = p_240524_5_.serialize();
-            Path path = this.createPath(p_240524_4_);
+        this.builders.clear();
+        this.addTags();
+        this.builders.forEach((p_240524_4_, p_240524_5_) -> {
+            JsonObject jsonobject = p_240524_5_.serializeToJson();
+            Path path = this.getPath(p_240524_4_);
             if (path == null)
                 return; //Forge: Allow running this data provider without writing it. Recipe provider needs valid tags.
 
             try {
                 String s = GSON.toJson(jsonobject);
-                String s1 = HASH_FUNCTION.hashUnencodedChars(s).toString();
-                if (!Objects.equals(cache.getPreviousHash(path), s1) || !Files.exists(path)) {
+                String s1 = SHA1.hashUnencodedChars(s).toString();
+                if (!Objects.equals(cache.getHash(path), s1) || !Files.exists(path)) {
                     Files.createDirectories(path.getParent());
 
                     try (BufferedWriter bufferedwriter = Files.newBufferedWriter(path)) {
@@ -92,7 +92,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                     }
                 }
 
-                cache.recordHash(path, s1);
+                cache.putNew(path, s1);
             } catch (IOException ioexception) {
                 LOGGER.error("Couldn't write tags to {}", path, ioexception);
             }

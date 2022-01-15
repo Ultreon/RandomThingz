@@ -19,9 +19,9 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,7 +109,7 @@ public class CrushingRecipeCategoryJei implements IRecipeCategory<CrushingRecipe
             if (chance < 1) {
                 int asPercent = (int) (100 * chance);
                 String text = asPercent < 1 ? "<1%" : asPercent + "%";
-                TextRenderUtils.renderScaled(matrixStack, font, new StringTextComponent(text).func_241878_f(), 57 + 18 * i, 20, 0.75f, 0xFFFFFF, true);
+                TextRenderUtils.renderScaled(matrixStack, font, new StringTextComponent(text).getVisualOrderText(), 57 + 18 * i, 20, 0.75f, 0xFFFFFF, true);
             }
         }
     }

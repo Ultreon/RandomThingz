@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.compat.jei;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterScreen;
 import com.ultreon.randomthingz.item.crafting.AlloySmeltingRecipe;
@@ -14,9 +14,9 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -69,9 +69,9 @@ public class EnchantingRecipeCategoryJei implements IRecipeCategory<AlloySmeltin
     @Override
     public void setIngredients(AlloySmeltingRecipe recipe, IIngredients ingredients) {
         ingredients.setInputLists(VanillaTypes.ITEM, recipe.getIngredientMap().keySet().stream()
-                .map(ingredient -> Arrays.asList(ingredient.getMatchingStacks()))
+                .map(ingredient -> Arrays.asList(ingredient.getItems()))
                 .collect(Collectors.toList()));
-        ingredients.setOutput(VanillaTypes.ITEM, recipe.getRecipeOutput());
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
     }
 
     @Override
@@ -87,7 +87,7 @@ public class EnchantingRecipeCategoryJei implements IRecipeCategory<AlloySmeltin
         for (Map.Entry<Ingredient, Integer> entry : recipe.getIngredientMap().entrySet()) {
             Ingredient ingredient = entry.getKey();
             Integer count = entry.getValue();
-            itemStacks.set(i++, Arrays.stream(ingredient.getMatchingStacks())
+            itemStacks.set(i++, Arrays.stream(ingredient.getItems())
                     .map(s -> {
                         ItemStack stack = s.copy();
                         stack.setCount(count);
@@ -96,11 +96,11 @@ public class EnchantingRecipeCategoryJei implements IRecipeCategory<AlloySmeltin
                     .collect(Collectors.toList())
             );
         }
-        itemStacks.set(4, recipe.getRecipeOutput());
+        itemStacks.set(4, recipe.getResultItem());
     }
 
     @Override
-    public void draw(AlloySmeltingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(AlloySmeltingRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 92 - GUI_START_X, 35 - GUI_START_Y);
     }
 }

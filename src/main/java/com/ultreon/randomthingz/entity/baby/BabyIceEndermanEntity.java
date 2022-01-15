@@ -1,18 +1,18 @@
 package com.ultreon.randomthingz.entity.baby;
 
 import com.ultreon.randomthingz.common.item.ModItemsAlt;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.monster.EndermanEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
@@ -22,65 +22,65 @@ import javax.annotation.Nonnull;
  *
  * @author QTech Community.
  */
-public class BabyIceEndermanEntity extends EndermanEntity implements IBabyEntity {
+public class BabyIceEndermanEntity extends EnderMan implements IBabyEntity {
 
-    private static final DataParameter<Boolean> IS_CHILD = EntityDataManager.createKey(BabyIceEndermanEntity.class, DataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_CHILD = SynchedEntityData.defineId(BabyIceEndermanEntity.class, EntityDataSerializers.BOOLEAN);
 
-    public BabyIceEndermanEntity(EntityType<BabyIceEndermanEntity> type, World dimension) {
+    public BabyIceEndermanEntity(EntityType<BabyIceEndermanEntity> type, Level dimension) {
         super(type, dimension);
-        setChild(true);
+        setBaby(true);
     }
 
     @Override
-    protected void registerData() {
-        super.registerData();
-        getDataManager().register(IS_CHILD, false);
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        getEntityData().define(IS_CHILD, false);
     }
 
     @Override
-    public boolean isChild() {
-        return getDataManager().get(IS_CHILD);
+    public boolean isBaby() {
+        return getEntityData().get(IS_CHILD);
     }
 
     @Override
-    public void setChild(boolean child) {
+    public void setBaby(boolean child) {
         setChild(IS_CHILD, child);
     }
 
     @Override
-    public void notifyDataManagerChange(@Nonnull DataParameter<?> key) {
+    public void onSyncedDataUpdated(@Nonnull EntityDataAccessor<?> key) {
         if (IS_CHILD.equals(key)) {
-            recalculateSize();
+            refreshDimensions();
         }
-        super.notifyDataManagerChange(key);
+        super.onSyncedDataUpdated(key);
     }
 
     @Override
-    protected int getExperiencePoints(@Nonnull PlayerEntity player) {
-        if (isChild()) {
-            experienceValue = (int) (experienceValue * 2.5F);
+    protected int getExperienceReward(@Nonnull Player player) {
+        if (isBaby()) {
+            xpReward = (int) (xpReward * 2.5F);
         }
-        return super.getExperiencePoints(player);
+        return super.getExperienceReward(player);
     }
 
     @Override
-    public double getYOffset() {
-        return isChild() ? 0 : super.getYOffset();
+    public double getMyRidingOffset() {
+        return isBaby() ? 0 : super.getMyRidingOffset();
     }
 
     @Override
-    protected float getStandingEyeHeight(@Nonnull Pose pose, @Nonnull EntitySize size) {
-        return this.isChild() ? 1.3F : super.getStandingEyeHeight(pose, size);
+    protected float getStandingEyeHeight(@Nonnull Pose pose, @Nonnull EntityDimensions size) {
+        return this.isBaby() ? 1.3F : super.getStandingEyeHeight(pose, size);
     }
 
     @Override
-    public ItemStack getPickedResult(RayTraceResult target) {
+    public ItemStack getPickedResult(HitResult target) {
         return new ItemStack(ModItemsAlt.BABY_ENDERMAN_SPAWN_EGG.asItem());
     }
 
     @Nonnull
     @Override
-    public IPacket<?> getSpawnPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

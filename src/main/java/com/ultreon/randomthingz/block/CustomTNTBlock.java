@@ -2,15 +2,15 @@ package com.ultreon.randomthingz.block;
 
 import com.ultreon.randomthingz.common.TNTProperties;
 import com.ultreon.randomthingz.entity.custom.CustomTNTEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.TNTBlock;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.TntBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
  * @param <T> the super block.
  * @author Qboi123
  */
-public abstract class CustomTNTBlock<T extends CustomTNTBlock<T>> extends TNTBlock {
+public abstract class CustomTNTBlock<T extends CustomTNTBlock<T>> extends TntBlock {
     private final TNTProperties tntProperties;
 
     public CustomTNTBlock(Properties properties, TNTProperties tntProperties) {
@@ -28,31 +28,31 @@ public abstract class CustomTNTBlock<T extends CustomTNTBlock<T>> extends TNTBlo
     }
 
     @Override
-    public void catchFire(BlockState state, World dimension, BlockPos pos, @Nullable Direction face, @Nullable LivingEntity igniter) {
+    public void catchFire(BlockState state, Level dimension, BlockPos pos, @Nullable Direction face, @Nullable LivingEntity igniter) {
         this.explode(dimension, pos, igniter);
     }
 
     @SuppressWarnings("unused")
     @Deprecated //Forge: Prefer using IForgeBlock#catchFire
-    public static void explode(World dimension, BlockPos dimensionIn) {
+    public static void explode(Level dimension, BlockPos dimensionIn) {
 
     }
 
     @Deprecated //Forge: Prefer using IForgeBlock#catchFire
-    private void explode(World dimensionIn, BlockPos pos, @javax.annotation.Nullable LivingEntity entityIn) {
-        if (!dimensionIn.isClientSided) {
-            CustomTNTEntity tntEntity = new CustomTNTEntity(this.getDefaultState(), dimensionIn, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, entityIn);
-            dimensionIn.spawnEntity(tntEntity);
-            dimensionIn.playSound(null, tntEntity.getPosX(), tntEntity.getPosY(), tntEntity.getPosZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+    private void explode(Level dimensionIn, BlockPos pos, @javax.annotation.Nullable LivingEntity entityIn) {
+        if (!dimensionIn.isClientSide) {
+            CustomTNTEntity tntEntity = new CustomTNTEntity(this.defaultBlockState(), dimensionIn, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, entityIn);
+            dimensionIn.addFreshEntity(tntEntity);
+            dimensionIn.playSound(null, tntEntity.getX(), tntEntity.getY(), tntEntity.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
     }
 
     @Override
-    public void onExplosionDestroy(World dimensionIn, BlockPos pos, Explosion explosionIn) {
-        if (!dimensionIn.isClientSided) {
-            CustomTNTEntity tntEntity = new CustomTNTEntity(this.getDefaultState(), dimensionIn, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, explosionIn.getExplosivePlacedBy());
-            tntEntity.setFuse((short) (dimensionIn.rand.nextInt(tntEntity.getFuse() / 4) + tntEntity.getFuse() / 8));
-            dimensionIn.spawnEntity(tntEntity);
+    public void wasExploded(Level dimensionIn, BlockPos pos, Explosion explosionIn) {
+        if (!dimensionIn.isClientSide) {
+            CustomTNTEntity tntEntity = new CustomTNTEntity(this.defaultBlockState(), dimensionIn, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, explosionIn.getSourceMob());
+            tntEntity.setFuse((short) (dimensionIn.random.nextInt(tntEntity.getLife() / 4) + tntEntity.getLife() / 8));
+            dimensionIn.addFreshEntity(tntEntity);
         }
     }
 
@@ -60,11 +60,11 @@ public abstract class CustomTNTBlock<T extends CustomTNTBlock<T>> extends TNTBlo
         return tntProperties;
     }
 
-    public void afterExplosion(World dimension, BlockPos pos, BlockState state, CustomTNTEntity tntEntity) {
+    public void afterExplosion(Level dimension, BlockPos pos, BlockState state, CustomTNTEntity tntEntity) {
 
     }
 
-    public void beforeExplosion(World dimension, BlockPos entityBlockPosition, @Nullable BlockState blockState, CustomTNTEntity customTNTEntity) {
+    public void beforeExplosion(Level dimension, BlockPos entityBlockPosition, @Nullable BlockState blockState, CustomTNTEntity customTNTEntity) {
 
     }
 }
