@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.machines.generator.lava;
 
 import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.generator.AbstractFluidFuelGeneratorTileEntity;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidGeneratorContainer;
+import com.ultreon.randomthingz.block.machines.generator.FluidFuelGeneratorBlockEntity;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,12 +13,12 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 
-public class LavaGeneratorContainer extends AbstractFluidGeneratorContainer<LavaGeneratorTileEntity> {
+public class LavaGeneratorContainer extends AbstractFluidGeneratorContainer<LavaGeneratorBlockEntity> {
     public LavaGeneratorContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new LavaGeneratorTileEntity(), new SimpleContainerData(AbstractFluidFuelGeneratorTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, new LavaGeneratorBlockEntity(), new SimpleContainerData(FluidFuelGeneratorBlockEntity.FIELDS_COUNT));
     }
 
-    public LavaGeneratorContainer(int id, Inventory playerInventory, LavaGeneratorTileEntity tileEntity, ContainerData fieldsIn) {
+    public LavaGeneratorContainer(int id, Inventory playerInventory, LavaGeneratorBlockEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.lavaGenerator, id, tileEntity, fieldsIn);
 
         this.addSlot(new Slot(tileEntity, 0, 80, 16));

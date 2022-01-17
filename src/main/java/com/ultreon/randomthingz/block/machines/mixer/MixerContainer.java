@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.mixer;
 
 import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
 import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,12 +15,12 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
-public class MixerContainer extends AbstractMachineBaseContainer<MixerTileEntity> {
+public class MixerContainer extends BaseMachineBaseContainer<MixerBlockEntity> {
     public MixerContainer(int id, Inventory player) {
-        this(id, player, null, new SimpleContainerData(MixerTileEntity.FIELDS_COUNT));
+        this(id, player, null, new SimpleContainerData(MixerBlockEntity.FIELDS_COUNT));
     }
 
-    public MixerContainer(int id, Inventory player, @Nullable MixerTileEntity tileEntity, ContainerData fields) {
+    public MixerContainer(int id, Inventory player, @Nullable MixerBlockEntity tileEntity, ContainerData fields) {
         super(ModMachineContainers.mixer, id, tileEntity, fields);
 
         if (this.tileEntity != null) {

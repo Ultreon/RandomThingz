@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.compat.jei;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.matrix.PoseStack;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.compressor.CompressorScreen;
 import com.ultreon.randomthingz.item.crafting.CompressingRecipe;
@@ -14,8 +14,8 @@ import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,7 +90,7 @@ public class CompressingRecipeCategoryJei implements IRecipeCategory<Compressing
     }
 
     @Override
-    public void draw(CompressingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(CompressingRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 79 - GUI_START_X, 35 - GUI_START_Y);
     }
 }

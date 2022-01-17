@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.compat.jei;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.matrix.PoseStack;
 import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.machines.solidifier.SolidifierBlockEntity;
 import com.ultreon.randomthingz.block.machines.solidifier.SolidifierScreen;
-import com.ultreon.randomthingz.block.machines.solidifier.SolidifierTileEntity;
 import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.item.CanisterItem;
 import com.ultreon.randomthingz.item.crafting.SolidifyingRecipe;
@@ -101,7 +101,7 @@ public class SolidifyingRecipeCategory implements IRecipeCategory<SolidifyingRec
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, SolidifyingRecipe recipe, IIngredients ingredients) {
         IGuiFluidStackGroup fluidStacks = recipeLayout.getFluidStacks();
-        final int capacity = SolidifierTileEntity.TANK_CAPACITY;
+        final int capacity = SolidifierBlockEntity.TANK_CAPACITY;
         fluidStacks.init(0, true, 25, 5, 12, 50, capacity, true, null);
 
         fluidStacks.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
@@ -117,7 +117,7 @@ public class SolidifyingRecipeCategory implements IRecipeCategory<SolidifyingRec
     }
 
     @Override
-    public void draw(SolidifyingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(SolidifyingRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 79 - GUI_START_X, 35 - GUI_START_Y);
     }
 }

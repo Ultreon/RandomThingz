@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -49,11 +49,9 @@ public class AMenuItemPermissionRequestPacket {
         }
 
         public void handle(Supplier<NetworkEvent.Context> context) {
-            ServerPlayer player = context.get().getSender();
             context.get().enqueueWork(() -> {
                 Screen currentScreen = Minecraft.getInstance().screen;
-                if (currentScreen instanceof ActionMenuScreen) {
-                    ActionMenuScreen screen = (ActionMenuScreen) currentScreen;
+                if (currentScreen instanceof ActionMenuScreen screen) {
                     screen.handlePermission(this);
                 }
             });

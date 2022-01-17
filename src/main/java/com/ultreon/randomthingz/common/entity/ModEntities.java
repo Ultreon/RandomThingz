@@ -7,7 +7,7 @@ import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.common.init.ObjectInit;
 import com.ultreon.randomthingz.entity.*;
 import com.ultreon.randomthingz.entity.baby.*;
-import com.ultreon.randomthingz.entity.custom.CustomTNTEntity;
+import com.ultreon.randomthingz.entity.custom.CustomPrimedTnt;
 import lombok.experimental.UtilityClass;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -38,7 +38,7 @@ public class ModEntities extends ObjectInit<EntityType<?>> {
     public static final EntityTypeRegistryObject<GlowSquidEntity> GLOW_SQUID = register("glow_squid", EntityType.Builder.of(GlowSquidEntity::new, MobCategory.WATER_CREATURE).sized(0.8F, 0.8F).clientTrackingRange(8));
     // Sprites
     public static final EntityTypeRegistryObject<LegendaryEnderPearlEntity> LEGENDARY_ENDER_PEARL = register("legendary_ender_pearl", EntityType.Builder.<LegendaryEnderPearlEntity>of(LegendaryEnderPearlEntity::new, MobCategory.MISC).sized(1.0f, 1.0f));
-    public static final EntityTypeRegistryObject<CustomTNTEntity> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<CustomTNTEntity>of((entityType, dimension) -> new CustomTNTEntity(ModBlocks.ATOMIC_TNT.get().defaultBlockState(), dimension), MobCategory.MISC).sized(1.0f, 1.0f));
+    public static final EntityTypeRegistryObject<CustomPrimedTnt> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<CustomPrimedTnt>of((entityType, dimension) -> new CustomPrimedTnt(ModBlocks.ATOMIC_TNT.get().defaultBlockState(), dimension), MobCategory.MISC).sized(1.0f, 1.0f));
     public static final EntityTypeRegistryObject<DynamiteEntity> DYNAMITE = register("dynamite", EntityType.Builder.<DynamiteEntity>of(DynamiteEntity::new, MobCategory.MISC).sized(1.0f, 1.0f));
 
     /**

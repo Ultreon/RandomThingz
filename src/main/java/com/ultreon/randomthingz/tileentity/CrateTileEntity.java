@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -29,8 +30,9 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
@@ -49,12 +51,12 @@ public class CrateTileEntity extends RandomizableContainerBlockEntity {
     private NonNullList<ItemStack> chestContents = NonNullList.withSize(36, ItemStack.EMPTY);
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
-    public CrateTileEntity(BlockEntityType<?> typeIn) {
-        super(typeIn);
+    public CrateTileEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
+        super(typeIn, pos, state);
     }
 
-    public CrateTileEntity() {
-        this(ModTileEntities.EXAMPLE_CHEST.get());
+    public CrateTileEntity(BlockPos pos, BlockState state) {
+        this(ModTileEntities.EXAMPLE_CHEST.get(), pos, state);
     }
 
     @SuppressWarnings({"unused", "RedundantSuppression"})
@@ -79,7 +81,7 @@ public class CrateTileEntity extends RandomizableContainerBlockEntity {
         this.chestContents = items;
     }
 
-    public AbstractContainerMenu getInventory() {
+    public Container getInventory() {
         return new SimpleContainer(getItems().toArray(new ItemStack[]{}));
     }
 
@@ -104,8 +106,8 @@ public class CrateTileEntity extends RandomizableContainerBlockEntity {
 
     @Override
     @ParametersAreNonnullByDefault
-    public void load(BlockState state, CompoundTag compound) {
-        super.load(state, compound);
+    public void load(CompoundTag compound) {
+        super.load(compound);
         this.chestContents = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         if (!this.tryLoadLootTable(compound)) {
             ContainerHelper.loadAllItems(compound, this.chestContents);
@@ -162,7 +164,7 @@ public class CrateTileEntity extends RandomizableContainerBlockEntity {
     @SuppressWarnings({"unused", "RedundantSuppression"})
     public int getPlayersUsing(BlockGetter reader, BlockPos pos) {
         BlockState blockState = reader.getBlockState(pos);
-        if (blockState.hasTileEntity()) {
+        if (blockState.hasBlockEntity()) {
             BlockEntity tileEntity = reader.getBlockEntity(pos);
             if (tileEntity instanceof CrateTileEntity) {
                 return ((CrateTileEntity) tileEntity).numPlayersUsing;
@@ -172,17 +174,17 @@ public class CrateTileEntity extends RandomizableContainerBlockEntity {
     }
 
     @Override
-    public void clearCache() {
-        super.clearCache();
+    public void clearRemoved() {
+        super.clearRemoved();
         if (this.itemHandler != null) {
             this.itemHandler.invalidate();
             this.itemHandler = null;
         }
     }
 
-    @Nullable
+    @Nonnull
     @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @NotNull Direction side) {
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return itemHandler.cast();
         }
@@ -200,7 +202,7 @@ public class CrateTileEntity extends RandomizableContainerBlockEntity {
         for (int i = 0; i < chestContents.size(); i++) {
             ItemStack stack = chestContents.get(i);
             chestContents.set(i, ItemStack.EMPTY);
-            BlockEntity tileEntity = blockState.hasTileEntity() ? level.getBlockEntity(worldPosition) : null;
+            BlockEntity tileEntity = blockState.hasBlockEntity() ? level.getBlockEntity(worldPosition) : null;
 
             //noinspection ConstantConditions
             Block.dropResources(blockState, level, this.worldPosition.offset(0, 1.5, 0), tileEntity, null, stack);

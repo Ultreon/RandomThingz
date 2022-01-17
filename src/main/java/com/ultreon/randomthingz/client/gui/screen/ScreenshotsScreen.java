@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.client.gui.screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.matrix.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.common.Resizer;
@@ -168,7 +168,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
 
         super.render(matrixStack, mouseX, mouseY, partialTicks);

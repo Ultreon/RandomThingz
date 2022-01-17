@@ -1103,7 +1103,7 @@ public class DebugMenu {
         return sb.toString();
     }
 
-    private static void drawTopString(MatrixStack matrixStack, String text, int line) {
+    private static void drawTopString(PoseStack matrixStack, String text, int line) {
         // Declare local variables before draw.
         FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
         int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
@@ -1112,7 +1112,7 @@ public class DebugMenu {
         fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f, 12f + (line * 12), 0xffffff);
     }
 
-    private static void drawLeftTopString(MatrixStack matrixStack, String text, int line, Object obj, Object... objects) {
+    private static void drawLeftTopString(PoseStack matrixStack, String text, int line, Object obj, Object... objects) {
         // Declare local variables before draw.
         FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
 
@@ -1122,7 +1122,7 @@ public class DebugMenu {
         fontRenderer.drawStringWithShadow(matrixStack, text, 12f, 12f + (line * 12), 0xffffff);
     }
 
-    private static void drawRightTopString(MatrixStack matrixStack, String text, int line, Object obj, Object... objects) {
+    private static void drawRightTopString(PoseStack matrixStack, String text, int line, Object obj, Object... objects) {
         // Declare local variables before draw.
         FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
         int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
@@ -1134,7 +1134,7 @@ public class DebugMenu {
     }
 
     @SuppressWarnings("unused")
-    private static void drawBottomString(MatrixStack matrixStack, String text, int line) {
+    private static void drawBottomString(PoseStack matrixStack, String text, int line) {
         // Declare local variables before draw.
         FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
         int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
@@ -1145,7 +1145,7 @@ public class DebugMenu {
     }
 
     @SuppressWarnings("unused")
-    private static void drawLeftBottomString(MatrixStack matrixStack, String text, int line) {
+    private static void drawLeftBottomString(PoseStack matrixStack, String text, int line) {
         // Declare local variables before draw.
         FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
         int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
@@ -1155,7 +1155,7 @@ public class DebugMenu {
     }
 
     @SuppressWarnings("unused")
-    private static void drawRightBottomString(MatrixStack matrixStack, String text, int line) {
+    private static void drawRightBottomString(PoseStack matrixStack, String text, int line) {
         // Declare local variables before draw.
         FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
         int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
@@ -1166,7 +1166,7 @@ public class DebugMenu {
     }
 
     @SuppressWarnings({"unused", "SameParameterValue"})
-    private static void drawRightString(MatrixStack matrixStack, String text, float mx, float y, int color) {
+    private static void drawRightString(PoseStack matrixStack, String text, float mx, float y, int color) {
         // Declare local variables before draw.
         FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
         int width = Minecraft.getInstance().getMainWindow().getScaledWidth();

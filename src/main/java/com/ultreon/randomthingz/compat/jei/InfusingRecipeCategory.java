@@ -3,8 +3,8 @@ package com.ultreon.randomthingz.compat.jei;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.machines.infuser.InfuserBlockEntity;
 import com.ultreon.randomthingz.block.machines.infuser.InfuserScreen;
-import com.ultreon.randomthingz.block.machines.infuser.InfuserTileEntity;
 import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.item.CanisterItem;
 import com.ultreon.randomthingz.item.crafting.InfusingRecipe;
@@ -104,7 +104,7 @@ public class InfusingRecipeCategory implements IRecipeCategory<InfusingRecipe> {
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, InfusingRecipe recipe, IIngredients ingredients) {
         IGuiFluidStackGroup fluidStacks = recipeLayout.getFluidStacks();
-        final int capacity = InfuserTileEntity.TANK_CAPACITY;
+        final int capacity = InfuserBlockEntity.TANK_CAPACITY;
         fluidStacks.init(0, true, 25, 5, 12, 50, capacity, true, null);
 
         fluidStacks.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));

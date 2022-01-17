@@ -50,7 +50,7 @@ public class RefineryBlock extends AbstractMachineBlock {
     @org.jetbrains.annotations.Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new RefineryTileEntity(pos, state);
+        return new RefineryBlockEntity(pos, state);
     }
 
     @Override

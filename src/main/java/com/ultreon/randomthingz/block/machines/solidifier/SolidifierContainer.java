@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.solidifier;
 
 import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
 import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,12 +15,12 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
-public class SolidifierContainer extends AbstractMachineBaseContainer<SolidifierTileEntity> {
+public class SolidifierContainer extends BaseMachineBaseContainer<SolidifierBlockEntity> {
     public SolidifierContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, null, new SimpleContainerData(SolidifierTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, null, new SimpleContainerData(SolidifierBlockEntity.FIELDS_COUNT));
     }
 
-    public SolidifierContainer(int id, Inventory playerInventory, @Nullable SolidifierTileEntity tileEntity, ContainerData fieldsIn) {
+    public SolidifierContainer(int id, Inventory playerInventory, @Nullable SolidifierBlockEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.solidifier, id, tileEntity, fieldsIn);
 
         if (this.tileEntity != null) {

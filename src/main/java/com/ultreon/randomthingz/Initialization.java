@@ -2,6 +2,7 @@
 package com.ultreon.randomthingz;
 
 import com.ultreon.filters.Filters;
+import com.ultreon.randomthingz.block.ModBlockTags;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
 import com.ultreon.randomthingz.client.input.KeyBindingList;
@@ -200,6 +201,7 @@ public class Initialization {
     void clientStart() {
         logger.info("Hello client!");
         ModuleManager.getInstance().clientStart();
+        ModBlockTags.init();
     }
 
     /**

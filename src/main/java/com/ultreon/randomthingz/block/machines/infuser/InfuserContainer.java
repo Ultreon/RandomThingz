@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.infuser;
 
 import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
 import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,18 +14,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public class InfuserContainer extends AbstractMachineBaseContainer<InfuserTileEntity> {
+public class InfuserContainer extends BaseMachineBaseContainer<InfuserBlockEntity> {
     public InfuserContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new InfuserTileEntity(), new SimpleContainerData(InfuserTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, new InfuserBlockEntity(), new SimpleContainerData(InfuserBlockEntity.FIELDS_COUNT));
     }
 
-    public InfuserContainer(int id, Inventory playerInventory, InfuserTileEntity tileEntity, ContainerData fieldsIn) {
+    public InfuserContainer(int id, Inventory playerInventory, InfuserBlockEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.infuser, id, tileEntity, fieldsIn);
 
-        this.addSlot(new Slot(this.tileEntity, InfuserTileEntity.SLOT_FLUID_CONTAINER_IN, 8, 16));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, InfuserTileEntity.SLOT_FLUID_CONTAINER_OUT, 8, 59));
-        this.addSlot(new Slot(this.tileEntity, InfuserTileEntity.SLOT_ITEM_IN, 54, 35));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, InfuserTileEntity.SLOT_ITEM_OUT, 116, 35));
+        this.addSlot(new Slot(this.tileEntity, InfuserBlockEntity.SLOT_FLUID_CONTAINER_IN, 8, 16));
+        this.addSlot(new SlotOutputOnly(this.tileEntity, InfuserBlockEntity.SLOT_FLUID_CONTAINER_OUT, 8, 59));
+        this.addSlot(new Slot(this.tileEntity, InfuserBlockEntity.SLOT_ITEM_IN, 54, 35));
+        this.addSlot(new SlotOutputOnly(this.tileEntity, InfuserBlockEntity.SLOT_ITEM_OUT, 116, 35));
 
         InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
 

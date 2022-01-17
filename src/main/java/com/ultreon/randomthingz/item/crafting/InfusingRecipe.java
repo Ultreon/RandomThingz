@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidInventory;
 import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidRecipe;
 import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
-import com.ultreon.randomthingz.block.machines.infuser.InfuserTileEntity;
+import com.ultreon.randomthingz.block.machines.infuser.InfuserBlockEntity;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.network.FriendlyByteBuf;
@@ -61,7 +61,7 @@ public class InfusingRecipe implements BaseFluidRecipe<BaseFluidInventory> {
     @Override
     public boolean matches(BaseFluidInventory inv, Level dimensionIn) {
         FluidStack fluidInTank = inv.getFluidInTank(0);
-        ItemStack input = inv.getItem(InfuserTileEntity.SLOT_ITEM_IN);
+        ItemStack input = inv.getItem(InfuserBlockEntity.SLOT_ITEM_IN);
         return this.fluid.test(fluidInTank) && this.ingredient.test(input);
     }
 

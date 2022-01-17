@@ -29,7 +29,7 @@ public class AlloySmelterBlock extends AbstractMachineBlock {
     @Override
     protected void openContainer(Level dimensionIn, BlockPos pos, Player player) {
         BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
-        if (tileEntity instanceof AlloySmelterTileEntity) {
+        if (tileEntity instanceof AlloySmelterBlockEntity) {
             player.openMenu((MenuProvider) tileEntity);
         }
     }

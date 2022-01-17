@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.block.machines.electricfurnace;
 
 import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
 import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
+import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
 import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
-import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,12 +13,12 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
-public class ElectricFurnaceContainer extends AbstractMachineContainer<ElectricFurnaceTileEntity> {
+public class ElectricFurnaceContainer extends AbstractMachineContainer<ElectricFurnaceBlockEntity> {
     public ElectricFurnaceContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, null, new SimpleContainerData(AbstractMachineTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, null, new SimpleContainerData(AbstractMachineBlockEntity.FIELDS_COUNT));
     }
 
-    public ElectricFurnaceContainer(int id, Inventory playerInventory, @Nullable ElectricFurnaceTileEntity tileEntity, ContainerData fieldsIn) {
+    public ElectricFurnaceContainer(int id, Inventory playerInventory, @Nullable ElectricFurnaceBlockEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.electricFurnace, id, tileEntity, fieldsIn);
 
         if (tileEntity != null) {

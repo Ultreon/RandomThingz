@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.item.crafting;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
-import com.ultreon.randomthingz.block.machines.IMachineInventory;
+import com.ultreon.randomthingz.block.machines.MachineInventory;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import lombok.Getter;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 @RequiredArgsConstructor
-public class EnchantingRecipe implements Recipe<IMachineInventory> {
+public class EnchantingRecipe implements Recipe<MachineInventory> {
     private final ResourceLocation recipeId;
     @Getter
     private Item input;
@@ -34,12 +34,12 @@ public class EnchantingRecipe implements Recipe<IMachineInventory> {
     private int processTime;
     private Enchantment result;
 
-    public void consumeIngredients(IMachineInventory inv) {
+    public void consumeIngredients(MachineInventory inv) {
         InventoryUtils.consumeItems(inv, (stack) -> stack.getItem() == input, 1);
     }
 
     @Override
-    public boolean matches(IMachineInventory inv, Level dimensionIn) {
+    public boolean matches(MachineInventory inv, Level dimensionIn) {
         int required = 1;
         int found = InventoryUtils.getTotalCount(inv, (stack) -> stack.getItem() == input);
         if (found < required) {
@@ -63,7 +63,7 @@ public class EnchantingRecipe implements Recipe<IMachineInventory> {
     }
 
     @Override
-    public ItemStack assemble(IMachineInventory inv) {
+    public ItemStack assemble(MachineInventory inv) {
         ItemStack stack = new ItemStack(Items.ENCHANTED_BOOK);
         stack.enchant(result, 1);
         return stack;

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.util.helpers;
 
-import com.ultreon.randomthingz.block.machines.quarry.QuarryTileEntity;
+import com.ultreon.randomthingz.block.machines.quarry.QuarryBlockEntity;
 import lombok.experimental.UtilityClass;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -23,14 +23,14 @@ public class NBTHelper {
             return writeItemStack((ItemStack) o);
         }
 
-        if (o instanceof QuarryTileEntity) {
-            return writeQuarry((QuarryTileEntity) o);
+        if (o instanceof QuarryBlockEntity) {
+            return writeQuarry((QuarryBlockEntity) o);
         }
 
         return null;
     }
 
-    private static CompoundTag writeQuarry(QuarryTileEntity o) {
+    private static CompoundTag writeQuarry(QuarryBlockEntity o) {
         CompoundTag compound = new CompoundTag();
         return o.save(compound);
     }

@@ -42,15 +42,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 import org.jetbrains.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static net.minecraftforge.fml.client.gui.GuiUtils.drawGradientRect;
-
-import net.minecraft.world.item.Item.Properties;
 
 public abstract class WandItem extends HudItem {
     private final int maxMana;
@@ -325,7 +322,7 @@ public abstract class WandItem extends HudItem {
     /**
      * Use this version if calling from somewhere where ItemStack context is available.
      *
-     * @see GuiUtils#drawHoveringText(MatrixStack, List, int, int, int, int, int, int, int, int, FontRenderer)
+     * @see GuiUtils#drawHoveringText(PoseStack, List, int, int, int, int, int, int, int, int, FontRenderer)
      */
     //TODO, Validate rendering is the same as the original
     @OnlyIn(Dist.CLIENT)

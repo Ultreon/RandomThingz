@@ -51,7 +51,7 @@ public class DoorFrameBlock extends DoorBlock {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 

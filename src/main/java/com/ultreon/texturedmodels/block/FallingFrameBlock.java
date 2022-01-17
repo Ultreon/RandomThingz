@@ -53,7 +53,7 @@ public class FallingFrameBlock extends FallingBlock {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 

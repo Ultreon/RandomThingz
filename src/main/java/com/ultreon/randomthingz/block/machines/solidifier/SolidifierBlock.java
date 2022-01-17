@@ -38,7 +38,7 @@ public class SolidifierBlock extends AbstractMachineBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SolidifierTileEntity(pos, state);
+        return new SolidifierBlockEntity(pos, state);
     }
 
     @Override

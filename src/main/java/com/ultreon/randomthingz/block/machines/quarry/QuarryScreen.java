@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.quarry;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
+import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
 import com.ultreon.randomthingz.client.gui.widgets.button.RedstoneModeButton;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.client.gui.Font;
@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
-public class QuarryScreen extends AbstractMachineBaseScreen<QuarryContainer> {
+public class QuarryScreen extends AbstractMachineContainerScreen<QuarryContainer> {
     private static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/quarry.png");
 
     public QuarryScreen(QuarryContainer screenContainer, Inventory inv, Component titleIn) {

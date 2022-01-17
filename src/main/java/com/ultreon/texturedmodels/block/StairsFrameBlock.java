@@ -55,7 +55,7 @@ public class StairsFrameBlock extends StairBlock {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 

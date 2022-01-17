@@ -2,15 +2,15 @@ package com.ultreon.randomthingz.block.machines.pump;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
-import com.ultreon.randomthingz.block.machines.refinery.RefineryTileEntity;
+import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
+import com.ultreon.randomthingz.block.machines.refinery.RefineryBlockEntity;
 import com.ultreon.randomthingz.util.TextUtils;
 import com.ultreon.randomthingz.util.render.RenderUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class PumpScreen extends AbstractMachineBaseScreen<PumpContainer> {
+public class PumpScreen extends AbstractMachineContainerScreen<PumpContainer> {
     private static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/pump.png");
 
     public PumpScreen(PumpContainer screenContainer, Inventory inv, Component titleIn) {
@@ -32,7 +32,7 @@ public class PumpScreen extends AbstractMachineBaseScreen<PumpContainer> {
     @Override
     protected void renderTooltip(PoseStack matrixStack, int x, int y) {
         if (isHovering(135, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(), RefineryTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(), RefineryBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(153, 17, 13, 51, x, y)) {
             renderTooltip(matrixStack, TextUtils.energyWithMax(menu.getEnergyStored(), menu.getMaxEnergyStored()), x, y);
@@ -55,6 +55,6 @@ public class PumpScreen extends AbstractMachineBaseScreen<PumpContainer> {
         }
 
         // Tank
-        RenderUtils.renderGuiTank(menu.getFluidInTank(), RefineryTileEntity.TANK_CAPACITY, xPos + 136, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(), RefineryBlockEntity.TANK_CAPACITY, xPos + 136, yPos + 18, 0, 12, 50);
     }
 }

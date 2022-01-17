@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.block.machines.mixer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
+import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
 import com.ultreon.randomthingz.util.TextUtils;
 import com.ultreon.randomthingz.util.render.RenderUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class MixerScreen extends AbstractMachineBaseScreen<MixerContainer> {
+public class MixerScreen extends AbstractMachineContainerScreen<MixerContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/mixer.png");
 
     public MixerScreen(MixerContainer container, Inventory playerInventory, Component titleIn) {
@@ -31,19 +31,19 @@ public class MixerScreen extends AbstractMachineBaseScreen<MixerContainer> {
     @Override
     protected void renderTooltip(PoseStack matrixStack, int x, int y) {
         if (isHovering(28, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(0), MixerTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(0), MixerBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(44, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(1), MixerTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(1), MixerBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(60, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(2), MixerTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(2), MixerBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(76, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(3), MixerTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(3), MixerBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(116, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(4), MixerTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(4), MixerBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(153, 17, 13, 51, x, y)) {
             renderTooltip(matrixStack, TextUtils.energyWithMax(menu.getEnergyStored(), menu.getMaxEnergyStored()), x, y);
@@ -71,10 +71,10 @@ public class MixerScreen extends AbstractMachineBaseScreen<MixerContainer> {
         }
 
         // Tanks
-        RenderUtils.renderGuiTank(menu.getFluidInTank(0), MixerTileEntity.TANK_CAPACITY, xPos + 29, yPos + 18, 0, 12, 50);
-        RenderUtils.renderGuiTank(menu.getFluidInTank(1), MixerTileEntity.TANK_CAPACITY, xPos + 45, yPos + 18, 0, 12, 50);
-        RenderUtils.renderGuiTank(menu.getFluidInTank(2), MixerTileEntity.TANK_CAPACITY, xPos + 61, yPos + 18, 0, 12, 50);
-        RenderUtils.renderGuiTank(menu.getFluidInTank(3), MixerTileEntity.TANK_CAPACITY, xPos + 77, yPos + 18, 0, 12, 50);
-        RenderUtils.renderGuiTank(menu.getFluidInTank(4), MixerTileEntity.TANK_CAPACITY, xPos + 117, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(0), MixerBlockEntity.TANK_CAPACITY, xPos + 29, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(1), MixerBlockEntity.TANK_CAPACITY, xPos + 45, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(2), MixerBlockEntity.TANK_CAPACITY, xPos + 61, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(3), MixerBlockEntity.TANK_CAPACITY, xPos + 77, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(4), MixerBlockEntity.TANK_CAPACITY, xPos + 117, yPos + 18, 0, 12, 50);
     }
 }

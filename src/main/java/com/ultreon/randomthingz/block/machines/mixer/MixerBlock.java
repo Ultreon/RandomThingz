@@ -50,7 +50,7 @@ public class MixerBlock extends AbstractMachineBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new MixerTileEntity(pos, state);
+        return new MixerBlockEntity(pos, state);
     }
 
     @Nullable

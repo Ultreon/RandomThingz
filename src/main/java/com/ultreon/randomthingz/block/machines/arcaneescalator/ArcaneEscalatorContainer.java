@@ -3,8 +3,8 @@ package com.ultreon.randomthingz.block.machines.arcaneescalator;
 import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
 import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block._common.MachineType;
+import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
 import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
-import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -14,18 +14,18 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 @SuppressWarnings("ConstantConditions")
-public class ArcaneEscalatorContainer extends AbstractMachineContainer<ArcaneEscalatorTileEntity> {
+public class ArcaneEscalatorContainer extends AbstractMachineContainer<ArcaneEscalatorBlockEntity> {
     public ArcaneEscalatorContainer(int id, Inventory playerInventory, MachineTier tier) {
-        this(id, playerInventory, MachineType.ARCANE_ESCALATOR.create(tier), new SimpleContainerData(AbstractMachineTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, MachineType.ARCANE_ESCALATOR.create(tier), new SimpleContainerData(AbstractMachineBlockEntity.FIELDS_COUNT));
     }
 
-    protected ArcaneEscalatorContainer(int id, Inventory playerInventory, ArcaneEscalatorTileEntity tileEntityIn, ContainerData fieldsIn) {
+    protected ArcaneEscalatorContainer(int id, Inventory playerInventory, ArcaneEscalatorBlockEntity tileEntityIn, ContainerData fieldsIn) {
         super(MachineType.ARCANE_ESCALATOR.getContainerType(tileEntityIn.getMachineTier()), id, tileEntityIn, fieldsIn);
 
-        for (int i = 0; i < ArcaneEscalatorTileEntity.INPUT_SLOT_COUNT; ++i) {
+        for (int i = 0; i < ArcaneEscalatorBlockEntity.INPUT_SLOT_COUNT; ++i) {
             this.addSlot(new Slot(this.tileEntity, i, 17 + 18 * i, 35));
         }
-        this.addSlot(new SlotOutputOnly(this.tileEntity, ArcaneEscalatorTileEntity.INPUT_SLOT_COUNT, 126, 35));
+        this.addSlot(new SlotOutputOnly(this.tileEntity, ArcaneEscalatorBlockEntity.INPUT_SLOT_COUNT, 126, 35));
 
         InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
         this.addUpgradeSlots();

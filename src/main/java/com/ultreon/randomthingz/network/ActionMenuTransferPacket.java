@@ -6,7 +6,7 @@ import com.ultreon.randomthingz.actionmenu.ServerActionMenuItem;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;

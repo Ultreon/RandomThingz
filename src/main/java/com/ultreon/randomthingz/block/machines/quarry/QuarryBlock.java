@@ -65,7 +65,7 @@ public class QuarryBlock extends AbstractMachineBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 //        return new QuarryTileEntity(this.defaultTier);
-        return new QuarryTileEntity(pos, state);
+        return new QuarryBlockEntity(pos, state);
     }
 
     @Override

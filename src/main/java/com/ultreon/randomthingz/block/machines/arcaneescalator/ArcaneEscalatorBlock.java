@@ -28,7 +28,7 @@ public class ArcaneEscalatorBlock extends AbstractMachineBlock {
     @Override
     protected void openContainer(Level dimensionIn, BlockPos pos, Player player) {
         BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
-        if (tileEntity instanceof ArcaneEscalatorTileEntity) {
+        if (tileEntity instanceof ArcaneEscalatorBlockEntity) {
             player.openMenu((MenuProvider) tileEntity);
         }
     }

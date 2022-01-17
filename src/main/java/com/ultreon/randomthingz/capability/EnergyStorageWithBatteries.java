@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.capability;
 
 import net.minecraft.core.Direction;
-import net.minecraft.world.AbstractContainerMenu;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
@@ -11,9 +11,9 @@ import net.minecraftforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class EnergyStorageWithBatteries<T extends BlockEntity & AbstractContainerMenu> extends EnergyStorageImpl {
-    private final AbstractContainerMenu inventory;
-    private final LazyOptional<EnergyStorageWithBatteries> lazy;
+public class EnergyStorageWithBatteries<T extends BlockEntity & Container> extends EnergyStorageImpl {
+    private final Container container;
+    private final LazyOptional<EnergyStorageWithBatteries<?>> lazy;
 
     protected int energyInternal;
     protected int capacityInternal;
@@ -22,7 +22,7 @@ public class EnergyStorageWithBatteries<T extends BlockEntity & AbstractContaine
 
     public EnergyStorageWithBatteries(T tileEntity, int capacity, int maxReceive, int maxExtract) {
         super(capacity, maxReceive, maxExtract, tileEntity);
-        this.inventory = tileEntity;
+        this.container = tileEntity;
         this.capacityInternal = capacity;
         this.maxReceive = maxReceive;
         this.maxExtract = maxExtract;
@@ -40,8 +40,8 @@ public class EnergyStorageWithBatteries<T extends BlockEntity & AbstractContaine
 
     private int getBatteryCount() {
         int count = 0;
-        for (int i = 0; i < inventory.getContainerSize(); ++i) {
-            if (isBattery(inventory.getItem(i))) {
+        for (int i = 0; i < container.getContainerSize(); ++i) {
+            if (isBattery(container.getItem(i))) {
                 ++count;
             }
         }
@@ -57,8 +57,8 @@ public class EnergyStorageWithBatteries<T extends BlockEntity & AbstractContaine
         if (batteryCount > 0) {
             int perBattery = left / batteryCount;
 
-            for (int i = 0; i < inventory.getContainerSize(); ++i) {
-                ItemStack stack = inventory.getItem(i);
+            for (int i = 0; i < container.getContainerSize(); ++i) {
+                ItemStack stack = container.getItem(i);
                 LazyOptional<IEnergyStorage> optional = stack.getCapability(CapabilityEnergy.ENERGY);
 
                 if (optional.isPresent()) {
@@ -88,8 +88,8 @@ public class EnergyStorageWithBatteries<T extends BlockEntity & AbstractContaine
         if (batteryCount > 0) {
             int perBattery = (maxExtract - internalExtract) / batteryCount;
 
-            for (int i = 0; i < inventory.getContainerSize(); ++i) {
-                ItemStack stack = inventory.getItem(i);
+            for (int i = 0; i < container.getContainerSize(); ++i) {
+                ItemStack stack = container.getItem(i);
                 LazyOptional<IEnergyStorage> optional = stack.getCapability(CapabilityEnergy.ENERGY);
 
                 if (optional.isPresent()) {
@@ -113,8 +113,8 @@ public class EnergyStorageWithBatteries<T extends BlockEntity & AbstractContaine
     @Override
     public int getEnergyStored() {
         int ret = energyInternal;
-        for (int i = 0; i < inventory.getContainerSize(); ++i) {
-            ItemStack stack = inventory.getItem(i);
+        for (int i = 0; i < container.getContainerSize(); ++i) {
+            ItemStack stack = container.getItem(i);
             LazyOptional<IEnergyStorage> optional = stack.getCapability(CapabilityEnergy.ENERGY);
 
             if (optional.isPresent()) {
@@ -127,8 +127,8 @@ public class EnergyStorageWithBatteries<T extends BlockEntity & AbstractContaine
     @Override
     public int getMaxEnergyStored() {
         int ret = capacityInternal;
-        for (int i = 0; i < inventory.getContainerSize(); ++i) {
-            ItemStack stack = inventory.getItem(i);
+        for (int i = 0; i < container.getContainerSize(); ++i) {
+            ItemStack stack = container.getItem(i);
             LazyOptional<IEnergyStorage> optional = stack.getCapability(CapabilityEnergy.ENERGY);
 
             if (optional.isPresent()) {

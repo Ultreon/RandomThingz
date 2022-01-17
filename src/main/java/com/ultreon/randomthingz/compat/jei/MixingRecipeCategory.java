@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.machines.mixer.MixerBlockEntity;
 import com.ultreon.randomthingz.block.machines.mixer.MixerScreen;
-import com.ultreon.randomthingz.block.machines.mixer.MixerTileEntity;
 import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.item.CanisterItem;
 import com.ultreon.randomthingz.item.crafting.MixingRecipe;
@@ -110,7 +110,7 @@ public class MixingRecipeCategory implements IRecipeCategory<MixingRecipe> {
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, MixingRecipe recipe, IIngredients ingredients) {
         IGuiFluidStackGroup fluidStacks = recipeLayout.getFluidStacks();
-        final int capacity = MixerTileEntity.TANK_CAPACITY;
+        final int capacity = MixerBlockEntity.TANK_CAPACITY;
         fluidStacks.init(0, true, 24, 5, 12, 50, capacity, true, null);
         fluidStacks.init(1, true, 40, 5, 12, 50, capacity, true, null);
         fluidStacks.init(2, true, 56, 5, 12, 50, capacity, true, null);

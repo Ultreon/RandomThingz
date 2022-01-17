@@ -23,11 +23,9 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.energy.IEnergyStorage;
-
 import org.jetbrains.annotations.Nullable;
-import java.util.Map;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import java.util.Map;
 
 public class WireBlock extends PipeBlock implements IWrenchable {
     public static final EnumProperty<ConnectionType> NORTH = EnumProperty.create("north", ConnectionType.class);
@@ -107,7 +105,7 @@ public class WireBlock extends PipeBlock implements IWrenchable {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 

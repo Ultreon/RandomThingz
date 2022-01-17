@@ -104,7 +104,7 @@ public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBloc
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 

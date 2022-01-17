@@ -52,7 +52,7 @@ public class FenceFrameBlock extends FenceBlock {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 

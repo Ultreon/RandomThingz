@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 /**
- * TileEntity for {@linkplain StandingSignFrameBlock} and {@linkplain WallSignFrameBlock}
+ * BlockEntity for {@linkplain StandingSignFrameBlock} and {@linkplain WallSignFrameBlock}
  * Contains all information about the block and the mimicked block
  *
  * @author PianoManu
@@ -142,7 +142,7 @@ public class SignFrameTile extends SignBlockEntity {
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(worldPosition, 1, getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this, (entity) -> entity.getUpdateTag());
     }
 
     @Override

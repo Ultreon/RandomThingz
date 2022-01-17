@@ -31,7 +31,7 @@ public final class ItemPipeNetwork implements IItemHandler {
     static ItemPipeNetwork buildNetwork(LevelReader dimension, BlockPos pos) {
         Set<BlockPos> pipes = buildPipeSet(dimension, pos);
 //        int energyStored = pipes.stream().mapToInt(p -> {
-//            TileEntity tileEntity = dimension.getTileEntity(p);
+//            BlockEntity tileEntity = dimension.getTileEntity(p);
 //            return tileEntity instanceof PipeTileEntity ? ((PipeTileEntity) tileEntity).energyStored : 0;
 //        }).sum();
         return new ItemPipeNetwork(dimension, pipes);

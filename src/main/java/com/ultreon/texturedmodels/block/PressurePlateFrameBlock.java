@@ -51,7 +51,7 @@ public class PressurePlateFrameBlock extends PressurePlateBlock {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 

@@ -1,9 +1,11 @@
 package com.ultreon.texturedmodels.tileentity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.ModelDataManager;
@@ -20,7 +22,7 @@ import java.util.Objects;
 import static com.ultreon.texturedmodels.setup.Registration.BED_FRAME_TILE;
 
 /**
- * TileEntity for frame beds, you can customize both pillow and blanket
+ * BlockEntity for frame beds, you can customize both pillow and blanket
  *
  * @author PianoManu
  * @version 1.1 09/17/20
@@ -45,14 +47,14 @@ public class BedFrameTile extends BlockEntity {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public BedFrameTile() {
-        super(BED_FRAME_TILE.get());
+    public BedFrameTile(BlockPos pos, BlockState state) {
+        super(BED_FRAME_TILE.get(), pos, state);
     }
 
     public void setMimic(BlockState mimic) {
         this.mimic = mimic;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+        Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public BlockState getMimic() {
@@ -79,7 +81,7 @@ public class BedFrameTile extends BlockEntity {
     public void setPillowColor(Integer pillowColor) {
         this.pillowColor = pillowColor;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+        Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public Integer getBlanketColor() {
@@ -89,7 +91,7 @@ public class BedFrameTile extends BlockEntity {
     public void setBlanketColor(Integer blanketColor) {
         this.blanketColor = blanketColor;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+        Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public Integer getDesign() {
@@ -99,7 +101,7 @@ public class BedFrameTile extends BlockEntity {
     public void setDesign(Integer design) {
         this.design = design;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+        Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public Integer getDesignTexture() {
@@ -109,17 +111,17 @@ public class BedFrameTile extends BlockEntity {
     public void setDesignTexture(Integer designTexture) {
         this.designTexture = designTexture;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+        Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(worldPosition, 1, getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::getUpdateTag);
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag() {
         CompoundTag tag = super.getUpdateTag();
         if (mimic != null) {
             tag.put("mimic", NbtUtils.writeBlockState(mimic));
@@ -151,46 +153,46 @@ public class BedFrameTile extends BlockEntity {
         Integer oldDesign = design;
         Integer oldDesignTexture = designTexture;
         CompoundTag tag = pkt.getTag();
-        if (tag.contains("mimic")) {
+        if (Objects.requireNonNull(tag).contains("mimic")) {
             mimic = NbtUtils.readBlockState(tag.getCompound("mimic"));
             if (!Objects.equals(oldMimic, mimic)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("texture")) {
             texture = readInteger(tag.getCompound("texture"));
             if (!Objects.equals(oldTexture, texture)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("blanket")) {
             blanketColor = readInteger(tag.getCompound("blanket"));
             if (!Objects.equals(oldBlanket, blanketColor)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("pillow")) {
             pillowColor = readInteger(tag.getCompound("pillow"));
             if (!Objects.equals(oldPillow, pillowColor)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("design")) {
             design = readInteger(tag.getCompound("design"));
             if (!Objects.equals(oldDesign, design)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("design_texture")) {
             designTexture = readInteger(tag.getCompound("design_texture"));
             if (!Objects.equals(oldDesignTexture, designTexture)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
     }
@@ -209,8 +211,8 @@ public class BedFrameTile extends BlockEntity {
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(state, tag);
+    public void load(@NotNull CompoundTag tag) {
+        super.load(tag);
         if (tag.contains("mimic")) {
             mimic = NbtUtils.readBlockState(tag.getCompound("mimic"));
         }
@@ -232,7 +234,7 @@ public class BedFrameTile extends BlockEntity {
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag) {
+    public @NotNull CompoundTag save(@NotNull CompoundTag tag) {
         super.save(tag);
         if (mimic != null) {
             tag.put("mimic", NbtUtils.writeBlockState(mimic));

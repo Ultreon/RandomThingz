@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.util;
 
-import com.ultreon.randomthingz.block.machines.refinery.RefineryTileEntity;
+import com.ultreon.randomthingz.block.machines.refinery.RefineryBlockEntity;
 import com.ultreon.randomthingz.item.CanisterItem;
 import lombok.experimental.UtilityClass;
 import net.minecraft.world.Container;
@@ -92,6 +92,6 @@ public final class InventoryUtils {
     }
 
     public static boolean canFluidsStack(FluidStack stack, FluidStack output) {
-        return output.isEmpty() || (output.isFluidEqual(stack) && output.getAmount() + stack.getAmount() <= RefineryTileEntity.TANK_CAPACITY);
+        return output.isEmpty() || (output.isFluidEqual(stack) && output.getAmount() + stack.getAmount() <= RefineryBlockEntity.TANK_CAPACITY);
     }
 }

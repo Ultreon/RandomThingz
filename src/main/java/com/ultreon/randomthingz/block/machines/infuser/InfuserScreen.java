@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.block.machines.infuser;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
+import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
 import com.ultreon.randomthingz.util.TextUtils;
 import com.ultreon.randomthingz.util.render.RenderUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class InfuserScreen extends AbstractMachineBaseScreen<InfuserContainer> {
+public class InfuserScreen extends AbstractMachineContainerScreen<InfuserContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/infuser.png");
 
     public InfuserScreen(InfuserContainer container, Inventory playerInventory, Component titleIn) {
@@ -31,7 +31,7 @@ public class InfuserScreen extends AbstractMachineBaseScreen<InfuserContainer> {
     @Override
     protected void renderTooltip(PoseStack matrixStack, int x, int y) {
         if (isHovering(29, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(0), InfuserTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(0), InfuserBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(153, 17, 13, 51, x, y)) {
             renderTooltip(matrixStack, TextUtils.energyWithMax(menu.getEnergyStored(), menu.getMaxEnergyStored()), x, y);
@@ -59,6 +59,6 @@ public class InfuserScreen extends AbstractMachineBaseScreen<InfuserContainer> {
         }
 
         // Tanks
-        RenderUtils.renderGuiTank(menu.getFluidInTank(0), InfuserTileEntity.TANK_CAPACITY, xPos + 30, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(0), InfuserBlockEntity.TANK_CAPACITY, xPos + 30, yPos + 18, 0, 12, 50);
     }
 }

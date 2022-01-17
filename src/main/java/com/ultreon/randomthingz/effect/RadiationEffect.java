@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.effect;
 
-import com.ultreon.randomthingz.block.AtomicTNTBlock;
+import com.ultreon.randomthingz.block.AtomicTntBlock;
 import com.ultreon.randomthingz.entity.damagesource.ModDamageSources;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import net.minecraft.world.effect.MobEffect;
@@ -11,7 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
  * Radiation potion effect, does one heart of damage very slowly. Can kill all living entities.
  *
  * @see Toolset#URANIUM
- * @see AtomicTNTBlock
+ * @see AtomicTntBlock
  */
 public class RadiationEffect extends MobEffect {
     public RadiationEffect() {

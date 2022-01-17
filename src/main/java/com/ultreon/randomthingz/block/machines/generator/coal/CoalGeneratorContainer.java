@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.machines.generator.coal;
 
 import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
-import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
+import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -11,14 +11,14 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class CoalGeneratorContainer extends AbstractMachineBaseContainer<CoalGeneratorTileEntity> {
-    final CoalGeneratorTileEntity tileEntity;
+public class CoalGeneratorContainer extends BaseMachineBaseContainer<CoalGeneratorBlockEntity> {
+    final CoalGeneratorBlockEntity tileEntity;
 
     public CoalGeneratorContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new CoalGeneratorTileEntity(), new SimpleContainerData(AbstractMachineTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, new CoalGeneratorBlockEntity(), new SimpleContainerData(AbstractMachineBlockEntity.FIELDS_COUNT));
     }
 
-    public CoalGeneratorContainer(int id, Inventory playerInventory, CoalGeneratorTileEntity tileEntity, ContainerData fieldsIn) {
+    public CoalGeneratorContainer(int id, Inventory playerInventory, CoalGeneratorBlockEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.coalGenerator, id, tileEntity, fieldsIn);
         this.tileEntity = tileEntity;
 
@@ -86,6 +86,6 @@ public class CoalGeneratorContainer extends AbstractMachineBaseContainer<CoalGen
     }
 
     private boolean isFuel(ItemStack stack) {
-        return CoalGeneratorTileEntity.isFuel(stack);
+        return CoalGeneratorBlockEntity.isFuel(stack);
     }
 }

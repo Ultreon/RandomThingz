@@ -2,13 +2,13 @@ package com.ultreon.randomthingz.block.machines.generator.coal;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
+import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 
-public class CoalGeneratorScreen extends AbstractMachineBaseScreen<CoalGeneratorContainer> {
+public class CoalGeneratorScreen extends AbstractMachineContainerScreen<CoalGeneratorContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/coal_generator.png");
 
     public CoalGeneratorScreen(CoalGeneratorContainer container, Inventory playerInventory, Component titleIn) {

@@ -1,6 +1,7 @@
 package com.ultreon.randomthingz.block.machines.wire;
 
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -8,15 +9,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class WireTileEntity extends BlockEntity {
     int energyStored;
 
-    public WireTileEntity() {
-        super(ModMachineTileEntities.wire);
+    public WireTileEntity(BlockPos pos, BlockState state) {
+        super(ModMachineTileEntities.wire, pos, state);
     }
 
     public String getWireNetworkData() {

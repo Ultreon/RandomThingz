@@ -28,7 +28,7 @@ public class CoalGeneratorBlock extends AbstractMachineBlock {
     @Override
     protected void openContainer(Level dimensionIn, BlockPos pos, Player player) {
         BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
-        if (tileEntity instanceof CoalGeneratorTileEntity) {
+        if (tileEntity instanceof CoalGeneratorBlockEntity) {
             player.openMenu((MenuProvider) tileEntity);
         }
     }
@@ -36,7 +36,7 @@ public class CoalGeneratorBlock extends AbstractMachineBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockGetter dimensionIn) {
-        return new CoalGeneratorTileEntity();
+        return new CoalGeneratorBlockEntity();
     }
 
     @Override

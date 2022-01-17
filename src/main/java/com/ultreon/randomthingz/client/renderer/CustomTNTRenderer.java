@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import com.ultreon.randomthingz.entity.custom.CustomTNTEntity;
+import com.ultreon.randomthingz.entity.custom.CustomPrimedTnt;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -15,13 +15,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
-public class CustomTNTRenderer extends EntityRenderer<CustomTNTEntity> {
+public class CustomTNTRenderer extends EntityRenderer<CustomPrimedTnt> {
     public CustomTNTRenderer(EntityRenderDispatcher renderManagerIn) {
         super(renderManagerIn);
         this.shadowRadius = 0.5F;
     }
 
-    public void render(CustomTNTEntity entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn, @NotNull MultiBufferSource bufferIn, int packedLightIn) {
+    public void render(CustomPrimedTnt entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn, @NotNull MultiBufferSource bufferIn, int packedLightIn) {
         matrixStackIn.pushPose();
         matrixStackIn.translate(0.0D, 0.5D, 0.0D);
         if ((float) entityIn.getLife() - partialTicks + 1.0f < 10.0f) {
@@ -36,7 +36,7 @@ public class CustomTNTRenderer extends EntityRenderer<CustomTNTEntity> {
         matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-90.0f));
         matrixStackIn.translate(-0.5D, -0.5D, 0.5D);
         matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(90.0f));
-        TntMinecartRenderer.renderWhiteSolidBlock(entityIn.getBlockState(), matrixStackIn, bufferIn, packedLightIn, entityIn.getLife() / 5 % 2 == 0);
+        TntMinecartRenderer.renderWhiteSolidBlock(entityIn.getState(), matrixStackIn, bufferIn, packedLightIn, entityIn.getLife() / 5 % 2 == 0);
         matrixStackIn.popPose();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
     }
@@ -45,7 +45,7 @@ public class CustomTNTRenderer extends EntityRenderer<CustomTNTEntity> {
      * Returns the location of an entity's texture.
      */
     @SuppressWarnings("deprecation")
-    public @NotNull ResourceLocation getTextureLocation(@NotNull CustomTNTEntity entity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull CustomPrimedTnt entity) {
         return TextureAtlas.LOCATION_BLOCKS;
     }
 }

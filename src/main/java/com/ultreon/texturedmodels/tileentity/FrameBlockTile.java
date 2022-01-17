@@ -23,7 +23,7 @@ import java.util.Objects;
 import static com.ultreon.texturedmodels.setup.Registration.FRAMEBLOCK_TILE;
 
 /**
- * TileEntity for {@linkplain FrameBlock} and all sorts of frame blocks
+ * BlockEntity for {@linkplain FrameBlock} and all sorts of frame blocks
  * Contains all information about the block and the mimicked block
  *
  * @author PianoManu

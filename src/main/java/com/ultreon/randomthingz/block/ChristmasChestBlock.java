@@ -1,14 +1,13 @@
 package com.ultreon.randomthingz.block;
 
 import com.ultreon.randomthingz.tileentity.ChristmasChestTileEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.function.Supplier;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 /**
  * Christmas chest block.
@@ -21,7 +20,7 @@ public class ChristmasChestBlock extends ChestBlock {
     }
 
     @Override
-    public ChristmasChestTileEntity newBlockEntity(BlockGetter worldIn) {
-        return new ChristmasChestTileEntity();
+    public ChristmasChestTileEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ChristmasChestTileEntity(pos, state);
     }
 }

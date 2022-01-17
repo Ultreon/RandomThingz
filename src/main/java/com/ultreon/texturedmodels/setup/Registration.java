@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ToolType;
-import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -122,7 +122,7 @@ public class Registration {
     public static final RegistryObject<ChestFrameBlock> CHEST_FRAMEBLOCK = BLOCKS.register("frame_chest", () -> new ChestFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> CHEST_FRAME_ITEM = ITEMS.register("frame_chest", () -> new BlockItem(CHEST_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
     public static final RegistryObject<BlockEntityType<ChestFrameTileEntity>> CHEST_FRAME_TILE = TILES.register("frame_chest", () -> BlockEntityType.Builder.of(ChestFrameTileEntity::new, CHEST_FRAMEBLOCK.get()).build(null));
-    public static final RegistryObject<MenuType<ChestFrameContainer>> CHEST_FRAME_CONTAINER = CONTAINERS.register("frame_chest", () -> IForgeContainerType.create(ChestFrameContainer::new));
+    public static final RegistryObject<MenuType<ChestFrameContainer>> CHEST_FRAME_CONTAINER = CONTAINERS.register("frame_chest", () -> IForgeMenuType.create(ChestFrameContainer::new));
 
     public static final RegistryObject<FenceGateFrameBlock> FENCE_GATE_FRAMEBLOCK = BLOCKS.register("frame_fence_gate", () -> new FenceGateFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> FENCE_GATE_FRAME_ITEM = ITEMS.register("frame_fence_gate", () -> new BlockItem(FENCE_GATE_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
@@ -187,7 +187,7 @@ public class Registration {
     public static final RegistryObject<ChestFrameBlock> CHEST_ILLUSIONBLOCK = BLOCKS.register("illusion_chest", () -> new ChestFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> CHEST_ILLUSION_ITEM = ITEMS.register("illusion_chest", () -> new BlockItem(CHEST_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
     public static final RegistryObject<BlockEntityType<ChestFrameTileEntity>> CHEST_ILLUSION_TILE = TILES.register("illusion_chest", () -> BlockEntityType.Builder.of(ChestFrameTileEntity::new, CHEST_ILLUSIONBLOCK.get()).build(null));
-    public static final RegistryObject<MenuType<IllusionChestContainer>> CHEST_ILLUSION_CONTAINER = CONTAINERS.register("illusion_chest", () -> IForgeContainerType.create(IllusionChestContainer::new));
+    public static final RegistryObject<MenuType<IllusionChestContainer>> CHEST_ILLUSION_CONTAINER = CONTAINERS.register("illusion_chest", () -> IForgeMenuType.create(IllusionChestContainer::new));
 
     public static final RegistryObject<FenceGateFrameBlock> FENCE_GATE_ILLUSIONBLOCK = BLOCKS.register("illusion_fence_gate", () -> new FenceGateFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> FENCE_GATE_ILLUSION_ITEM = ITEMS.register("illusion_fence_gate", () -> new BlockItem(FENCE_GATE_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));

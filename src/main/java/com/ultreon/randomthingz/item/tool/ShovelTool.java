@@ -122,9 +122,9 @@ public class ShovelTool extends ShovelItem implements ITool {
     }
 
     @Override
-    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
+    public <T extends LivingEntity> int hurtAndBreak(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
         if (canBeDepleted()) {
-            super.damageItem(stack, amount, entity, onBroken);
+            super.hurtAndBreak(stack, amount, entity, onBroken);
         }
         return 0;
     }

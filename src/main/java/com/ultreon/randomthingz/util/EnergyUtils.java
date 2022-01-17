@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.util;
 
-import com.ultreon.randomthingz.block.machines.IEnergyHandler;
+import com.ultreon.randomthingz.block.machines.EnergyHandler;
 import lombok.experimental.UtilityClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 
 @UtilityClass
 public final class EnergyUtils {
-    public static void trySendToNeighbors(BlockGetter dimension, BlockPos pos, IEnergyHandler energyHandler, int maxSend) {
+    public static void trySendToNeighbors(BlockGetter dimension, BlockPos pos, EnergyHandler energyHandler, int maxSend) {
         for (Direction side : Direction.values()) {
             if (energyHandler.getEnergyStored() == 0) {
                 return;
@@ -24,7 +24,7 @@ public final class EnergyUtils {
         }
     }
 
-    public static void trySendTo(BlockGetter dimension, BlockPos pos, IEnergyHandler energyHandler, int maxSend, Direction side) {
+    public static void trySendTo(BlockGetter dimension, BlockPos pos, EnergyHandler energyHandler, int maxSend, Direction side) {
         BlockEntity tileEntity = dimension.getBlockEntity(pos.relative(side));
         if (tileEntity != null) {
             IEnergyStorage energy = energyHandler.getEnergy(side).orElse(new EnergyStorage(0));

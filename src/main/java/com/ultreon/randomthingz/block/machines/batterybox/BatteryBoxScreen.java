@@ -1,6 +1,5 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.util.TextUtils;
@@ -35,7 +34,7 @@ public class BatteryBoxScreen extends AbstractContainerScreen<BatteryBoxContaine
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
         if (minecraft == null) return;
-        GlStateManager._color4f(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
         int xPos = (this.width - this.imageWidth) / 2;
         int yPos = (this.height - this.imageHeight) / 2;

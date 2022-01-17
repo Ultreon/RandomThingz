@@ -240,8 +240,8 @@ public class AdvancedBowItem extends BowItem {
 //                            abstractarrowentity.setFire(100);
 //                        }
 //
-//                        stack.damageItem(1, playerentity, (p_220009_1_) -> {
-//                            p_220009_1_.sendBreakAnimation(playerentity.getActiveHand());
+//                        stack.hurtAndBreak(1, playerentity, (p_220009_1_) -> {
+//                            p_220009_1_.broadcastBreakEvent(playerentity.getActiveHand());
 //                        });
 //                        if (flag1 || playerentity.abilities.isCreativeMode && (itemstack.getItem() == Items.SPECTRAL_ARROW || itemstack.getItem() == Items.TIPPED_ARROW)) {
 //                            abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
@@ -250,7 +250,7 @@ public class AdvancedBowItem extends BowItem {
 //                        dimensionIn.spawnEntity(abstractarrowentity);
 //                    }
 //
-//                    dimensionIn.playSound((Player)null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+//                    dimensionIn.playSound((Player)null, playerentity.getX(), playerentity.getY(), playerentity.getZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0f, 1.0f / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 //                    if (!flag1 && !playerentity.abilities.isCreativeMode) {
 //                        itemstack.shrink(1);
 //                        if (itemstack.isEmpty()) {

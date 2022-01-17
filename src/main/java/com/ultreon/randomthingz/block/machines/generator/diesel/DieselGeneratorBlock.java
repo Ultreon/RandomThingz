@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.generator.diesel;
 
-import com.ultreon.randomthingz.block.machines.generator.AbstractGeneratorBlock;
+import com.ultreon.randomthingz.block.machines.generator.BaseGeneratorBlock;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class DieselGeneratorBlock extends AbstractGeneratorBlock {
+public class DieselGeneratorBlock extends BaseGeneratorBlock {
     public DieselGeneratorBlock() {
         super(MachineTier.STANDARD, BlockBehaviour.Properties.of(Material.METAL).strength(6, 20).sound(SoundType.METAL));
     }
@@ -26,7 +26,7 @@ public class DieselGeneratorBlock extends AbstractGeneratorBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockGetter dimensionIn) {
-        return new DieselGeneratorTileEntity();
+        return new DieselGeneratorBlockEntity();
     }
 
     @Override

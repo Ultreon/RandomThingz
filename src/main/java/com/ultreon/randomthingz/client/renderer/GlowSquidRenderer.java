@@ -57,7 +57,7 @@ public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, SquidModel<G
      * Method to apply rotations.
      *
      * @param entityLiving  the {@linkplain GlowSquidEntity glow squid}.
-     * @param matrixStackIn the {@linkplain MatrixStack matrix stack}
+     * @param matrixStackIn the {@linkplain PoseStack matrix stack}
      * @param ageInTicks    the {@linkplain GlowSquidEntity#ticksExisted age in ticks of the glow squid}.
      * @param rotationYaw   the {@linkplain GlowSquidEntity#rotationYaw rotation's yaw}.
      * @param partialTicks  the {@linkplain Minecraft#getRenderPartialTicks() render partial ticks}.

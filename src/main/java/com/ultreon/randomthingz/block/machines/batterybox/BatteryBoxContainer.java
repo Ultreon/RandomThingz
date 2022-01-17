@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
 import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.AbstractEnergyStorageContainer;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
+import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
+import com.ultreon.randomthingz.block.machines.BaseEnergyStorageContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,14 +12,14 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.energy.CapabilityEnergy;
 
-public class BatteryBoxContainer extends AbstractEnergyStorageContainer<BatteryBoxTileEntity> {
-    final BatteryBoxTileEntity tileEntity;
+public class BatteryBoxContainer extends BaseEnergyStorageContainer<BatteryBoxBlockEntity> {
+    final BatteryBoxBlockEntity tileEntity;
 
     public BatteryBoxContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new BatteryBoxTileEntity(pos, state), new SimpleContainerData(AbstractMachineBaseTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, new BatteryBoxBlockEntity(pos, state), new SimpleContainerData(AbstractMachineBaseBlockEntity.FIELDS_COUNT));
     }
 
-    public BatteryBoxContainer(int id, Inventory playerInventory, BatteryBoxTileEntity tileEntity, ContainerData fieldsIn) {
+    public BatteryBoxContainer(int id, Inventory playerInventory, BatteryBoxBlockEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.batteryBox, id, tileEntity, fieldsIn);
         this.tileEntity = tileEntity;
 
@@ -41,7 +41,7 @@ public class BatteryBoxContainer extends AbstractEnergyStorageContainer<BatteryB
             ItemStack stack = slot.getItem();
             stackCopy = stack.copy();
 
-            final int inventorySize = BatteryBoxTileEntity.INVENTORY_SIZE;
+            final int inventorySize = BatteryBoxBlockEntity.INVENTORY_SIZE;
             final int playerInventoryEnd = inventorySize + 27;
             final int playerHotbarEnd = playerInventoryEnd + 9;
 

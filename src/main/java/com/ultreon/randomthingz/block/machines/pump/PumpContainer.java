@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.pump;
 
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import net.minecraft.core.Registry;
@@ -14,12 +14,12 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
-public class PumpContainer extends AbstractMachineBaseContainer<PumpTileEntity> {
+public class PumpContainer extends BaseMachineBaseContainer<PumpBlockEntity> {
     public PumpContainer(int id, Inventory inventory) {
-        this(id, inventory, null, new SimpleContainerData(PumpTileEntity.FIELDS_COUNT));
+        this(id, inventory, null, new SimpleContainerData(PumpBlockEntity.FIELDS_COUNT));
     }
 
-    public PumpContainer(int id, Inventory playerInventory, @Nullable PumpTileEntity tileEntity, ContainerData fields) {
+    public PumpContainer(int id, Inventory playerInventory, @Nullable PumpBlockEntity tileEntity, ContainerData fields) {
         super(ModMachineContainers.pump, id, tileEntity, fields);
 
         if (this.tileEntity != null) {

@@ -40,16 +40,16 @@ public class InfinityOreBlock extends OreBlock {
                 heldItemMainhand.getItem() != Toolset.INFINITY.getHoe().get() &&
                 heldItemMainhand.getItem() != Toolset.INFINITY.getSword().get() &&
                 heldItemMainhand.getItem() != Toolset.INFINITY.getAxe().get()) {
-            if (heldItemMainhand.isDamageable()) {
-                player.getHeldItemMainhand().damageItem(player.getHeldItemMainhand().getMaxDamage(), player, (entity) -> {
-                    entity.sendBreakAnimation(EquipmentSlot.MAINHAND);
+            if (heldItemMainhand.isDamageableItem()) {
+                player.getMainHandItem().hurtAndBreak(player.getMainHandItem().getMaxDamage(), player, (entity) -> {
+                    entity.broadcastBreakEvent(EquipmentSlot.MAINHAND);
                 });
             }
         } else {
             player.getCombatTracker().recordDamage(new DamageSource("mine_infinity_ore"), player.getHealth(), player.getHealth());
             player.setHealth(0);
 
-            Minecraft.getInstance().enqueue(() -> {
+            Minecraft.getInstance().tell(() -> {
                 player.die(new DamageSource("mine.infinity_ore"));
             });
         }

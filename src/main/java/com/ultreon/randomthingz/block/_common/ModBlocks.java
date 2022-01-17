@@ -71,7 +71,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -240,7 +239,7 @@ public final class ModBlocks {
     //     Miscellaneous     //
     ///////////////////////////
     public static final BlockRegistryObject<Block> ASPHALT = registerMiscellaneous("asphalt", () -> new Block(Block.Properties.of(Material.STONE).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).harvestLevel(0).strength(1.2F, 4.5F).sound(SoundType.STONE)));
-    public static final BlockRegistryObject<AtomicTNTBlock> ATOMIC_TNT = registerMiscellaneous("atomic_tnt", () -> new AtomicTNTBlock(Block.Properties.of(Material.EXPLOSIVE).instabreak().sound(SoundType.GRASS)));
+    public static final BlockRegistryObject<AtomicTntBlock> ATOMIC_TNT = registerMiscellaneous("atomic_tnt", () -> new AtomicTntBlock(Block.Properties.of(Material.EXPLOSIVE).instabreak().sound(SoundType.GRASS)));
 
     //////////////////
     //     Wood     //

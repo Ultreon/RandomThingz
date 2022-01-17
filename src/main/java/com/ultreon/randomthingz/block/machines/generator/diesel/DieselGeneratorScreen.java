@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.block.machines.generator.diesel;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
+import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
 import com.ultreon.randomthingz.util.TextUtils;
 import com.ultreon.randomthingz.util.render.RenderUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class DieselGeneratorScreen extends AbstractMachineBaseScreen<DieselGeneratorContainer> {
+public class DieselGeneratorScreen extends AbstractMachineContainerScreen<DieselGeneratorContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/fluid_generator.png");
 
     public DieselGeneratorScreen(DieselGeneratorContainer screenContainer, Inventory inv, Component titleIn) {

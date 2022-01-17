@@ -8,7 +8,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.entity.player.ServerPlayerEntity;
 import net.minecraftforge.fml.network.NetworkDirection;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.Objects;
 import java.util.function.Supplier;

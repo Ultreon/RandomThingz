@@ -51,7 +51,7 @@ public class TrapdoorFrameBlock extends TrapDoorBlock {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 

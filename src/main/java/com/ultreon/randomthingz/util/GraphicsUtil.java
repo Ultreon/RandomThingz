@@ -88,7 +88,7 @@ public final class GraphicsUtil {
     /**
      * Use this version if calling from somewhere where ItemStack context is available.
      *
-     * @see GuiUtils#drawHoveringText(MatrixStack, List, int, int, int, int, int, int, int, int, FontRenderer)
+     * @see GuiUtils#drawHoveringText(PoseStack, List, int, int, int, int, int, int, int, int, FontRenderer)
      */
     //TODO, Validate rendering is the same as the original
     public void drawItemTooltipText(@NotNull final ItemStack stack, List<? extends FormattedText> textLines, int mouseX, int mouseY,

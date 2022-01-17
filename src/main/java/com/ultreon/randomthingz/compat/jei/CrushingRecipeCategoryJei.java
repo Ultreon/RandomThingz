@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.compat.jei;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.matrix.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import com.ultreon.modlib.embedded.silentlib.util.TextRenderUtils;
 import com.ultreon.randomthingz.block._common.ModBlocks;
@@ -98,7 +98,7 @@ public class CrushingRecipeCategoryJei implements IRecipeCategory<CrushingRecipe
     }
 
     @Override
-    public void draw(CrushingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(CrushingRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 49 - GUI_START_X, 35 - GUI_START_Y);
 
         FontRenderer font = Minecraft.getInstance().fontRenderer;

@@ -36,7 +36,7 @@ public class InfuserBlock extends AbstractMachineBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockGetter dimensionIn) {
-        return new InfuserTileEntity();
+        return new InfuserBlockEntity();
     }
 
     @Override

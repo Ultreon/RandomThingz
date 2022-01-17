@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.block.machines.refinery;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
+import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
 import com.ultreon.randomthingz.util.TextUtils;
 import com.ultreon.randomthingz.util.render.RenderUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class RefineryScreen extends AbstractMachineBaseScreen<RefineryContainer> {
+public class RefineryScreen extends AbstractMachineContainerScreen<RefineryContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/refinery.png");
 
     public RefineryScreen(RefineryContainer container, Inventory playerInventory, Component titleIn) {
@@ -31,19 +31,19 @@ public class RefineryScreen extends AbstractMachineBaseScreen<RefineryContainer>
     @Override
     protected void renderTooltip(PoseStack matrixStack, int x, int y) {
         if (isHovering(28, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(0), RefineryTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(0), RefineryBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(68, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(1), RefineryTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(1), RefineryBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(84, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(2), RefineryTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(2), RefineryBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(100, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(3), RefineryTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(3), RefineryBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(116, 17, 13, 51, x, y)) {
-            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(4), RefineryTileEntity.TANK_CAPACITY), x, y);
+            renderTooltip(matrixStack, TextUtils.fluidWithMax(menu.getFluidInTank(4), RefineryBlockEntity.TANK_CAPACITY), x, y);
         }
         if (isHovering(153, 17, 13, 51, x, y)) {
             renderTooltip(matrixStack, TextUtils.energyWithMax(menu.getEnergyStored(), menu.getMaxEnergyStored()), x, y);
@@ -71,10 +71,10 @@ public class RefineryScreen extends AbstractMachineBaseScreen<RefineryContainer>
         }
 
         // Tanks
-        RenderUtils.renderGuiTank(menu.getFluidInTank(0), RefineryTileEntity.TANK_CAPACITY, xPos + 29, yPos + 18, 0, 12, 50);
-        RenderUtils.renderGuiTank(menu.getFluidInTank(1), RefineryTileEntity.TANK_CAPACITY, xPos + 69, yPos + 18, 0, 12, 50);
-        RenderUtils.renderGuiTank(menu.getFluidInTank(2), RefineryTileEntity.TANK_CAPACITY, xPos + 85, yPos + 18, 0, 12, 50);
-        RenderUtils.renderGuiTank(menu.getFluidInTank(3), RefineryTileEntity.TANK_CAPACITY, xPos + 101, yPos + 18, 0, 12, 50);
-        RenderUtils.renderGuiTank(menu.getFluidInTank(4), RefineryTileEntity.TANK_CAPACITY, xPos + 117, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(0), RefineryBlockEntity.TANK_CAPACITY, xPos + 29, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(1), RefineryBlockEntity.TANK_CAPACITY, xPos + 69, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(2), RefineryBlockEntity.TANK_CAPACITY, xPos + 85, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(3), RefineryBlockEntity.TANK_CAPACITY, xPos + 101, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(4), RefineryBlockEntity.TANK_CAPACITY, xPos + 117, yPos + 18, 0, 12, 50);
     }
 }

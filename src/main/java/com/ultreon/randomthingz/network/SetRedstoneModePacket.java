@@ -2,11 +2,11 @@ package com.ultreon.randomthingz.network;
 
 import com.ultreon.modlib.api.RedstoneMode;
 import com.ultreon.modlib.embedded.silentutils.EnumUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
+import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
+import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -34,9 +34,9 @@ public class SetRedstoneModePacket {
 
     private static void handlePacket(SetRedstoneModePacket packet, ServerPlayer player) {
         if (player != null) {
-            if (player.containerMenu instanceof AbstractMachineBaseContainer) {
-                AbstractMachineBaseTileEntity tileEntity = ((AbstractMachineBaseContainer<?>) player.containerMenu).getTileEntity();
-                if (tileEntity instanceof AbstractMachineBaseTileEntity) {
+            if (player.containerMenu instanceof BaseMachineBaseContainer) {
+                AbstractMachineBaseBlockEntity tileEntity = ((BaseMachineBaseContainer<?>) player.containerMenu).getTileEntity();
+                if (tileEntity instanceof AbstractMachineBaseBlockEntity) {
                     tileEntity.setRedstoneMode(packet.mode);
                 }
             }

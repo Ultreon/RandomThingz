@@ -1,8 +1,9 @@
 package com.ultreon.randomthingz.block.machines.dryingrack;
 
+import com.ultreon.texturedmodels.tileentity.ITickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.AbstractContainerMenu;
+import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -12,6 +13,8 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -26,7 +29,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class DryingRackBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
+public class DryingRackBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape SHAPE_NORTH = Block.box(0, 12, 12, 16, 16, 16);
@@ -39,15 +42,16 @@ public class DryingRackBlock extends HorizontalDirectionalBlock implements Simpl
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 
+    @Nullable
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new DryingRackTileEntity(pos, state);
     }
 
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new DryingRackTileEntity(pos, state);
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
+        return ITickable::tickTE;
     }
 
     @SuppressWarnings("deprecation")
@@ -64,9 +68,9 @@ public class DryingRackBlock extends HorizontalDirectionalBlock implements Simpl
     @Override
     public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof AbstractContainerMenu) {
-                Containers.dropContents(dimensionIn, pos, (AbstractContainerMenu) tileentity);
+            BlockEntity entity = dimensionIn.getBlockEntity(pos);
+            if (entity instanceof Container container) {
+                Containers.dropContents(dimensionIn, pos, container);
                 dimensionIn.updateNeighbourForOutputSignal(pos, this);
             }
 
@@ -78,18 +82,12 @@ public class DryingRackBlock extends HorizontalDirectionalBlock implements Simpl
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter dimensionIn, BlockPos pos, CollisionContext context) {
         Direction facing = state.getValue(FACING);
-        switch (facing) {
-            case NORTH:
-                return SHAPE_NORTH;
-            case SOUTH:
-                return SHAPE_SOUTH;
-            case WEST:
-                return SHAPE_WEST;
-            case EAST:
-                return SHAPE_EAST;
-            default:
-                return SHAPE_NORTH;
-        }
+        return switch (facing) {
+            case SOUTH -> SHAPE_SOUTH;
+            case WEST -> SHAPE_WEST;
+            case EAST -> SHAPE_EAST;
+            default -> SHAPE_NORTH;
+        };
     }
 
     @Nullable
@@ -101,7 +99,6 @@ public class DryingRackBlock extends HorizontalDirectionalBlock implements Simpl
                 .setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));

@@ -67,7 +67,7 @@ public class IllusionChestContainer extends AbstractContainerMenu {
         if (tileAtPos instanceof ChestFrameTileEntity) {
             return (ChestFrameTileEntity) tileAtPos;
         }
-        throw new IllegalStateException("TileEntity should be of type ChestFrameTileEntity but is " + tileAtPos);
+        throw new IllegalStateException("BlockEntity should be of type ChestFrameTileEntity but is " + tileAtPos);
     }
 
     @Override

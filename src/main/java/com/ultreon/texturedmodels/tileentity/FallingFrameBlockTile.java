@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 /**
- * Currently unused - TileEntity for falling blocks, which are not implemented right now (may be removed or rewritten in future)
+ * Currently unused - BlockEntity for falling blocks, which are not implemented right now (may be removed or rewritten in future)
  *
  * @author PianoManu
  * @version 1.0 08/29/20
@@ -84,7 +84,7 @@ public class FallingFrameBlockTile extends FrameBlockTile {
     public void read(CompoundTag tag) {
         super.read(tag);
         if (tag.contains("mimic")) {
-            mimic = NBTUtil.readBlockState(tag.getCompound("mimic"));
+            mimic = NbtUtils.readBlockState(tag.getCompound("mimic"));
         }
     }*/
 

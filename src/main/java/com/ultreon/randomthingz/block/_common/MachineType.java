@@ -1,13 +1,13 @@
 package com.ultreon.randomthingz.block._common;
 
 import com.ultreon.modlib.embedded.silentlib.util.Lazy;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
+import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
+import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterBlockEntity;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterContainer;
-import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterTileEntity;
+import com.ultreon.randomthingz.block.machines.arcaneescalator.ArcaneEscalatorBlockEntity;
 import com.ultreon.randomthingz.block.machines.arcaneescalator.ArcaneEscalatorContainer;
-import com.ultreon.randomthingz.block.machines.arcaneescalator.ArcaneEscalatorTileEntity;
+import com.ultreon.randomthingz.block.machines.crusher.CrusherBlockEntity;
 import com.ultreon.randomthingz.block.machines.crusher.CrusherContainer;
-import com.ultreon.randomthingz.block.machines.crusher.CrusherTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -16,22 +16,22 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public class MachineType<T extends AbstractMachineBaseTileEntity, B extends T, S extends T, C extends AbstractContainerMenu> {
-    public static final MachineType<ArcaneEscalatorTileEntity, ArcaneEscalatorTileEntity.Basic, ArcaneEscalatorTileEntity, ArcaneEscalatorContainer> ARCANE_ESCALATOR = new MachineType<>(
-            () -> BlockEntityType.Builder.of(ArcaneEscalatorTileEntity.Basic::new, ModBlocks.BASIC_ARCANE_ESCALATOR.get()),
-            () -> BlockEntityType.Builder.of(ArcaneEscalatorTileEntity::new, ModBlocks.ARCANE_ESCALATOR.get()),
+public class MachineType<T extends AbstractMachineBaseBlockEntity, B extends T, S extends T, C extends AbstractContainerMenu> {
+    public static final MachineType<ArcaneEscalatorBlockEntity, ArcaneEscalatorBlockEntity.Basic, ArcaneEscalatorBlockEntity, ArcaneEscalatorContainer> ARCANE_ESCALATOR = new MachineType<>(
+            () -> BlockEntityType.Builder.of(ArcaneEscalatorBlockEntity.Basic::new, ModBlocks.BASIC_ARCANE_ESCALATOR.get()),
+            () -> BlockEntityType.Builder.of(ArcaneEscalatorBlockEntity::new, ModBlocks.ARCANE_ESCALATOR.get()),
             (id, inv) -> new ArcaneEscalatorContainer(id, inv, MachineTier.BASIC),
             (id, inv) -> new ArcaneEscalatorContainer(id, inv, MachineTier.STANDARD)
     );
-    public static final MachineType<AlloySmelterTileEntity, AlloySmelterTileEntity.Basic, AlloySmelterTileEntity, AlloySmelterContainer> ALLOY_SMELTER = new MachineType<>(
-            () -> BlockEntityType.Builder.of(AlloySmelterTileEntity.Basic::new, ModBlocks.BASIC_ALLOY_SMELTER.get()),
-            () -> BlockEntityType.Builder.of(AlloySmelterTileEntity::new, ModBlocks.ALLOY_SMELTER.get()),
+    public static final MachineType<AlloySmelterBlockEntity, AlloySmelterBlockEntity.Basic, AlloySmelterBlockEntity, AlloySmelterContainer> ALLOY_SMELTER = new MachineType<>(
+            () -> BlockEntityType.Builder.of(AlloySmelterBlockEntity.Basic::new, ModBlocks.BASIC_ALLOY_SMELTER.get()),
+            () -> BlockEntityType.Builder.of(AlloySmelterBlockEntity::new, ModBlocks.ALLOY_SMELTER.get()),
             (id, inv) -> new AlloySmelterContainer(id, inv, MachineTier.BASIC),
             (id, inv) -> new AlloySmelterContainer(id, inv, MachineTier.STANDARD)
     );
-    public static final MachineType<CrusherTileEntity, CrusherTileEntity.Basic, CrusherTileEntity, CrusherContainer> CRUSHER = new MachineType<>(
-            () -> BlockEntityType.Builder.of(CrusherTileEntity.Basic::new, ModBlocks.BASIC_CRUSHER.get()),
-            () -> BlockEntityType.Builder.of(CrusherTileEntity::new, ModBlocks.CRUSHER.get()),
+    public static final MachineType<CrusherBlockEntity, CrusherBlockEntity.Basic, CrusherBlockEntity, CrusherContainer> CRUSHER = new MachineType<>(
+            () -> BlockEntityType.Builder.of(CrusherBlockEntity.Basic::new, ModBlocks.BASIC_CRUSHER.get()),
+            () -> BlockEntityType.Builder.of(CrusherBlockEntity::new, ModBlocks.CRUSHER.get()),
             (id, inv) -> new CrusherContainer(id, inv, MachineTier.BASIC),
             (id, inv) -> new CrusherContainer(id, inv, MachineTier.STANDARD)
     );

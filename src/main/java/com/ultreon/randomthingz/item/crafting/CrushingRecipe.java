@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
 import com.ultreon.modlib.embedded.silentutils.MathUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
+import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import com.ultreon.randomthingz.util.Constants;
@@ -45,8 +45,8 @@ public class CrushingRecipe implements Recipe<Container> {
      * @return Results of crushing
      */
     public List<ItemStack> getResults(Container inv) {
-        int outputUpgrades = inv instanceof AbstractMachineTileEntity
-                ? ((AbstractMachineTileEntity<?>) inv).getUpgradeCount(MachineUpgrades.OUTPUT_CHANCE)
+        int outputUpgrades = inv instanceof AbstractMachineBlockEntity
+                ? ((AbstractMachineBlockEntity<?>) inv).getUpgradeCount(MachineUpgrades.OUTPUT_CHANCE)
                 : 0;
         return results.entrySet().stream()
                 .filter(e -> {

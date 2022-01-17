@@ -10,7 +10,6 @@ import com.ultreon.texturedmodels.util.BlockSavingHelper;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.item.*;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -38,12 +37,10 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
 import org.jetbrains.annotations.Nullable;
+
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 /**
  * Main class for frame walls - all important block info can be found here
@@ -76,7 +73,7 @@ public class WallFrameBlock extends CrossCollisionBlock {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 

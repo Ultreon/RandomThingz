@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.compat.jei;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.matrix.PoseStack;
 import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.machines.refinery.RefineryBlockEntity;
 import com.ultreon.randomthingz.block.machines.refinery.RefineryScreen;
-import com.ultreon.randomthingz.block.machines.refinery.RefineryTileEntity;
 import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.item.CanisterItem;
 import com.ultreon.randomthingz.item.crafting.RefiningRecipe;
@@ -107,7 +107,7 @@ public class RefiningRecipeCategory implements IRecipeCategory<RefiningRecipe> {
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, RefiningRecipe recipe, IIngredients ingredients) {
         IGuiFluidStackGroup fluidStacks = recipeLayout.getFluidStacks();
-        final int capacity = RefineryTileEntity.TANK_CAPACITY;
+        final int capacity = RefineryBlockEntity.TANK_CAPACITY;
         fluidStacks.init(0, true, 24, 5, 12, 50, capacity, true, null);
         fluidStacks.init(1, false, 64, 5, 12, 50, capacity, true, null);
         fluidStacks.init(2, false, 80, 5, 12, 50, capacity, true, null);
@@ -133,7 +133,7 @@ public class RefiningRecipeCategory implements IRecipeCategory<RefiningRecipe> {
     }
 
     @Override
-    public void draw(RefiningRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(RefiningRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 43 - GUI_START_X, 35 - GUI_START_Y);
     }
 }

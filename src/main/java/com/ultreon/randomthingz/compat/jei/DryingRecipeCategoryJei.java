@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.compat.jei;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.matrix.PoseStack;
 import com.ultreon.modlib.embedded.silentlib.util.TextRenderUtils;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.compressor.CompressorScreen;
@@ -86,7 +86,7 @@ public class DryingRecipeCategoryJei implements IRecipeCategory<DryingRecipe> {
     }
 
     @Override
-    public void draw(DryingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(DryingRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 79 - GUI_START_X, 35 - GUI_START_Y);
         FontRenderer font = Minecraft.getInstance().fontRenderer;
         Component text = TextUtils.translate("misc", "timeInSeconds", recipe.getProcessTime() / 20);

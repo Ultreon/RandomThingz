@@ -65,7 +65,7 @@ public class PumpBlock extends AbstractMachineBlock {
 
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return new PumpTileEntity(pos, state);
+        return new PumpBlockEntity(pos, state);
     }
 
     @Nullable

@@ -29,7 +29,7 @@ public class CrusherBlock extends AbstractMachineBlock {
     @Override
     protected void openContainer(Level dimensionIn, BlockPos pos, Player player) {
         BlockEntity entity = dimensionIn.getBlockEntity(pos);
-        if (entity instanceof CrusherTileEntity) {
+        if (entity instanceof CrusherBlockEntity) {
             player.openMenu((MenuProvider) entity);
             player.awardStat(ModStats.INTERACT_WITH_CRUSHER);
         }

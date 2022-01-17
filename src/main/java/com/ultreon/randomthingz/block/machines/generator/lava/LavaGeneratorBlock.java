@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.generator.lava;
 
-import com.ultreon.randomthingz.block.machines.generator.AbstractGeneratorBlock;
+import com.ultreon.randomthingz.block.machines.generator.BaseGeneratorBlock;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class LavaGeneratorBlock extends AbstractGeneratorBlock {
+public class LavaGeneratorBlock extends BaseGeneratorBlock {
 
     private static final VoxelShape SHAPE = Shapes.or(Block.box(1, 0, 1, 15, 3, 15), Block.box(2, 3, 2, 14, 16, 14));
 
@@ -38,7 +38,7 @@ public class LavaGeneratorBlock extends AbstractGeneratorBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockGetter dimensionIn) {
-        return new LavaGeneratorTileEntity();
+        return new LavaGeneratorBlockEntity();
     }
 
     @Override

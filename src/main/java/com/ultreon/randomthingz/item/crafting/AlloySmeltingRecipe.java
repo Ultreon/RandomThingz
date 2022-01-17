@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.item.crafting;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.ultreon.randomthingz.block.machines.IMachineInventory;
+import com.ultreon.randomthingz.block.machines.MachineInventory;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import lombok.Getter;
@@ -20,7 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class AlloySmeltingRecipe implements Recipe<IMachineInventory> {
+public class AlloySmeltingRecipe implements Recipe<MachineInventory> {
     private final ResourceLocation recipeId;
     private final Map<Ingredient, Integer> ingredients = new LinkedHashMap<>();
     @Getter
@@ -28,7 +28,7 @@ public class AlloySmeltingRecipe implements Recipe<IMachineInventory> {
     @Getter
     private ItemStack result;
 
-    public void consumeIngredients(IMachineInventory inv) {
+    public void consumeIngredients(MachineInventory inv) {
         ingredients.forEach(((ingredient, count) -> InventoryUtils.consumeItems(inv, ingredient, count)));
     }
 
@@ -37,7 +37,7 @@ public class AlloySmeltingRecipe implements Recipe<IMachineInventory> {
     }
 
     @Override
-    public boolean matches(IMachineInventory inv, Level dimensionIn) {
+    public boolean matches(MachineInventory inv, Level dimensionIn) {
         for (Ingredient ingredient : ingredients.keySet()) {
             int required = ingredients.get(ingredient);
             int found = InventoryUtils.getTotalCount(inv, ingredient);
@@ -67,7 +67,7 @@ public class AlloySmeltingRecipe implements Recipe<IMachineInventory> {
     }
 
     @Override
-    public ItemStack assemble(IMachineInventory inv) {
+    public ItemStack assemble(MachineInventory inv) {
         return result.copy();
     }
 

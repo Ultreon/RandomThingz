@@ -28,7 +28,7 @@ public class ElectricFurnaceBlock extends AbstractMachineBlock {
     @Override
     protected void openContainer(Level dimensionIn, BlockPos pos, Player player) {
         BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
-        if (tileEntity instanceof ElectricFurnaceTileEntity) {
+        if (tileEntity instanceof ElectricFurnaceBlockEntity) {
             player.openMenu((MenuProvider) tileEntity);
             player.awardStat(Stats.INTERACT_WITH_FURNACE);
         }
@@ -37,7 +37,7 @@ public class ElectricFurnaceBlock extends AbstractMachineBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ElectricFurnaceTileEntity(pos, state);
+        return new ElectricFurnaceBlockEntity(pos, state);
     }
 
     @Override

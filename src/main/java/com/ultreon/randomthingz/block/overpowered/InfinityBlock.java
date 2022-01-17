@@ -22,35 +22,30 @@ public class InfinityBlock extends Block {
         super(properties);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void attack(@NotNull BlockState state, @NotNull Level dimensionIn, @NotNull BlockPos pos, @NotNull Player player) {
         super.attack(state, dimensionIn, pos, player);
 
-        ItemStack heldItemMainhand = player.getMainHandItem();
-        if (heldItemMainhand.isEmpty()) {
+        ItemStack mainHand = player.getMainHandItem();
+        if (mainHand.isEmpty()) {
             player.getCombatTracker().recordDamage(new DamageSource("mine_infinity_ore"), player.getHealth(), player.getHealth());
             player.setHealth(0);
 
-            Minecraft.getInstance().tell(() -> {
-                player.die(new DamageSource("mine.infinity_ore"));
-            });
-        } else if (heldItemMainhand.getItem() != Toolset.INFINITY.getShovel().get() &&
-                heldItemMainhand.getItem() != Toolset.INFINITY.getPickaxe().get() &&
-                heldItemMainhand.getItem() != Toolset.INFINITY.getHoe().get() &&
-                heldItemMainhand.getItem() != Toolset.INFINITY.getSword().get() &&
-                heldItemMainhand.getItem() != Toolset.INFINITY.getAxe().get()) {
-            if (heldItemMainhand.isDamageable()) {
-                player.getHeldItemMainhand().damageItem(player.getHeldItemMainhand().getMaxDamage(), player, (entity) -> {
-                    entity.sendBreakAnimation(EquipmentSlot.MAINHAND);
-                });
+            Minecraft.getInstance().tell(() -> player.die(new DamageSource("mine.infinity_ore")));
+        } else if (mainHand.getItem() != Toolset.INFINITY.getShovel().get() &&
+                mainHand.getItem() != Toolset.INFINITY.getPickaxe().get() &&
+                mainHand.getItem() != Toolset.INFINITY.getHoe().get() &&
+                mainHand.getItem() != Toolset.INFINITY.getSword().get() &&
+                mainHand.getItem() != Toolset.INFINITY.getAxe().get()) {
+            if (mainHand.isDamageableItem()) {
+                player.getMainHandItem().hurtAndBreak(player.getMainHandItem().getMaxDamage(), player, (entity) -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
             }
         } else {
             player.getCombatTracker().recordDamage(new DamageSource("mine_infinity_ore"), player.getHealth(), player.getHealth());
             player.setHealth(0);
 
-            Minecraft.getInstance().enqueue(() -> {
-                player.die(new DamageSource("mine.infinity_ore"));
-            });
+            Minecraft.getInstance().tell(() -> player.die(new DamageSource("mine.infinity_ore")));
         }
     }
 }

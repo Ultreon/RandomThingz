@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.world.gen.ores;
 
 import com.google.common.annotations.Beta;
-import com.ultreon.randomthingz.item.tier.ToolTier;
+import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import com.ultreon.randomthingz.world.gen.ores.configs.IOreConfig;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,5 +39,5 @@ public interface IOre {
 
     float getResistance();
 
-    ToolTier getRequiredTier();
+    ToolRequirement getToolRequirement();
 }

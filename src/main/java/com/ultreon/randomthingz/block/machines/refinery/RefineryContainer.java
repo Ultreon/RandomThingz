@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.refinery;
 
 import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
 import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,12 +15,12 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
-public class RefineryContainer extends AbstractMachineBaseContainer<RefineryTileEntity> {
+public class RefineryContainer extends BaseMachineBaseContainer<RefineryBlockEntity> {
     public RefineryContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, null, new SimpleContainerData(RefineryTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, null, new SimpleContainerData(RefineryBlockEntity.FIELDS_COUNT));
     }
 
-    public RefineryContainer(int id, Inventory playerInventory, @Nullable RefineryTileEntity tileEntity, ContainerData fieldsIn) {
+    public RefineryContainer(int id, Inventory playerInventory, @Nullable RefineryBlockEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.refinery, id, tileEntity, fieldsIn);
 
         if (this.tileEntity != null) {

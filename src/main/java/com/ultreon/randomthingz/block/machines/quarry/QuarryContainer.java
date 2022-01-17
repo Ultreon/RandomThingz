@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.quarry;
 
 import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
@@ -13,12 +13,12 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
-public class QuarryContainer extends AbstractMachineBaseContainer<QuarryTileEntity> {
+public class QuarryContainer extends BaseMachineBaseContainer<QuarryBlockEntity> {
     public QuarryContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, null, new SimpleContainerData(QuarryTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, null, new SimpleContainerData(QuarryBlockEntity.FIELDS_COUNT));
     }
 
-    public QuarryContainer(int id, Inventory playerInventory, @Nullable QuarryTileEntity tileEntity, ContainerData fields) {
+    public QuarryContainer(int id, Inventory playerInventory, @Nullable QuarryBlockEntity tileEntity, ContainerData fields) {
         super(ModMachineContainers.quarry, id, tileEntity, fields);
 
         InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
@@ -66,11 +66,11 @@ public class QuarryContainer extends AbstractMachineBaseContainer<QuarryTileEnti
 //        return value == 1;
 //    }
 
-    public QuarryTileEntity.Status getStatus() {
+    public QuarryBlockEntity.Status getStatus() {
         int upper = fields.get(21) & 0xFFFF;
         int lower = fields.get(20) & 0xFFFF;
         int i = (upper << 16) + lower;
-        return QuarryTileEntity.Status.values()[i];
+        return QuarryBlockEntity.Status.values()[i];
     }
 
 //    public boolean isIllegalPosition() {

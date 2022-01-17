@@ -11,18 +11,17 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -32,20 +31,15 @@ import org.jetbrains.annotations.Nullable;
  * @see CrateTileEntity
  */
 @SuppressWarnings("deprecation")
-public class WoodenCrateBlock extends DirectionalBlock {
+public class WoodenCrateBlock extends DirectionalBlock implements EntityBlock {
     public WoodenCrateBlock(Block.Properties properties) {
         super(properties);
     }
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return ModTileEntities.EXAMPLE_CHEST.get().create();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return ModTileEntities.EXAMPLE_CHEST.get().create(pos, state);
     }
 
     @Override
@@ -74,12 +68,12 @@ public class WoodenCrateBlock extends DirectionalBlock {
     }
 
     @Override
-    public boolean removedByPlayer(BlockState state, Level dimension, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+    public boolean onDestroyedByPlayer(BlockState state, Level dimension, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         BlockEntity te = dimension.getBlockEntity(pos);
         if (te instanceof CrateTileEntity) {
             Containers.dropContents(dimension, pos, ((CrateTileEntity) te).getInventory());
         }
-        return super.removedByPlayer(state, dimension, pos, player, willHarvest, fluid);
+        return super.onDestroyedByPlayer(state, dimension, pos, player, willHarvest, fluid);
     }
 
 

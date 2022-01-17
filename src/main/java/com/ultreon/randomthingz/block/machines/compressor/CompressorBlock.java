@@ -28,7 +28,7 @@ public class CompressorBlock extends AbstractMachineBlock {
     @Override
     protected void openContainer(Level dimensionIn, BlockPos pos, Player player) {
         BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
-        if (tileEntity instanceof CompressorTileEntity) {
+        if (tileEntity instanceof CompressorBlockEntity) {
             player.openMenu((MenuProvider) tileEntity);
         }
     }
@@ -36,7 +36,7 @@ public class CompressorBlock extends AbstractMachineBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockGetter dimensionIn) {
-        return new CompressorTileEntity();
+        return new CompressorBlockEntity();
     }
 
     @Override

@@ -35,14 +35,14 @@ public class BatteryBoxBlock extends Block {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 
     @Nullable
     @Override
     public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new BatteryBoxTileEntity(pos, state);
+        return new BatteryBoxBlockEntity(pos, state);
     }
 
     @Override
@@ -72,14 +72,14 @@ public class BatteryBoxBlock extends Block {
     @Override
     public InteractionResult use(BlockState state, Level dimensionIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if (!dimensionIn.isClientSide) {
-            this.interactWith(dimensionIn, pos, player);
+            this.openContainer(dimensionIn, pos, player);
         }
         return InteractionResult.SUCCESS;
     }
 
-    public void interactWith(Level dimensionIn, BlockPos pos, Player player) {
+    public void openContainer(Level dimensionIn, BlockPos pos, Player player) {
         BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
-        if (tileEntity instanceof BatteryBoxTileEntity) {
+        if (tileEntity instanceof BatteryBoxBlockEntity) {
             player.openMenu((MenuProvider) tileEntity);
         }
     }
@@ -88,8 +88,8 @@ public class BatteryBoxBlock extends Block {
     public void setPlacedBy(Level dimensionIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         if (stack.hasCustomHoverName()) {
             BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof BatteryBoxTileEntity) {
-                ((BatteryBoxTileEntity) tileentity).setCustomName(stack.getHoverName());
+            if (tileentity instanceof BatteryBoxBlockEntity) {
+                ((BatteryBoxBlockEntity) tileentity).setCustomName(stack.getHoverName());
             }
         }
     }
@@ -99,8 +99,8 @@ public class BatteryBoxBlock extends Block {
     public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof BatteryBoxTileEntity) {
-                Containers.dropContents(dimensionIn, pos, (BatteryBoxTileEntity) tileentity);
+            if (tileentity instanceof BatteryBoxBlockEntity) {
+                Containers.dropContents(dimensionIn, pos, (BatteryBoxBlockEntity) tileentity);
                 dimensionIn.updateNeighbourForOutputSignal(pos, this);
             }
 

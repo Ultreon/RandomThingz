@@ -49,7 +49,7 @@ public class TagButton extends Button {
         Minecraft mc = Minecraft.getInstance();
         RenderSystem.setShaderTexture(0, TABS);
 
-        GlStateManager._color4f(1.0f, 1.0f, 1.0f, this.alpha);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
         GlStateManager._disableLighting();
         GlStateManager._enableBlend();
         GlStateManager._blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA.value, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value, GlStateManager.SourceFactor.ONE.value, GlStateManager.DestFactor.ZERO.value);

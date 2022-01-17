@@ -43,11 +43,11 @@ public abstract class HudItem extends Item {
     @OnlyIn(Dist.CLIENT)
     public abstract void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, LocalPlayer player);
 
-//    protected final void drawCenteredString(MatrixStack matrixStack, FontRenderer fontRenderer, String text, float x, float y, int color) {
+//    protected final void drawCenteredString(PoseStack matrixStack, FontRenderer fontRenderer, String text, float x, float y, int color) {
 //        drawCenteredString(matrixStack, fontRenderer, text, x, y, color, false);
 //    }
 //
-//    protected final void drawCenteredString(MatrixStack matrixStack, FontRenderer fontRenderer, String text, float x, float y, int color, boolean shadow) {
+//    protected final void drawCenteredString(PoseStack matrixStack, FontRenderer fontRenderer, String text, float x, float y, int color, boolean shadow) {
 //        if (shadow) {
 //            fontRenderer.drawStringWithShadow(matrixStack, text, (float) (x - fontRenderer.getStringWidth(text) / 2), y, color);
 //        } else {

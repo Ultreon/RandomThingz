@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.generator;
 
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public abstract class AbstractFluidGeneratorContainer<T extends AbstractFluidFuelGeneratorTileEntity> extends AbstractMachineBaseContainer<T> {
+public abstract class AbstractFluidGeneratorContainer<T extends FluidFuelGeneratorBlockEntity> extends BaseMachineBaseContainer<T> {
     public AbstractFluidGeneratorContainer(MenuType<?> type, int id, T tileEntityIn, ContainerData fieldsIn) {
         super(type, id, tileEntityIn, fieldsIn);
     }

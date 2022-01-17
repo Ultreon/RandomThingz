@@ -4,15 +4,15 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.modlib.api.RedstoneMode;
 import com.ultreon.modlib.embedded.silentutils.EnumUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.TextComponent;
 
 public class RedstoneModeButton extends Button {
-    private final AbstractMachineBaseContainer container;
+    private final BaseMachineBaseContainer container;
 
-    public RedstoneModeButton(AbstractMachineBaseContainer container, int x, int y, int width, int height, OnPress onPress) {
+    public RedstoneModeButton(BaseMachineBaseContainer container, int x, int y, int width, int height, OnPress onPress) {
         super(x, y, width, height, new TextComponent(""), button -> {
             ((RedstoneModeButton) button).cycleMode();
             onPress.onPress(button);
@@ -39,5 +39,9 @@ public class RedstoneModeButton extends Button {
 
         blit(matrixStack, this.x, this.y, 0, 0, this.width, this.height, 16, 16);
         GlStateManager._enableDepthTest();
+    }
+
+    public boolean isHovered() {
+        return isHovered;
     }
 }

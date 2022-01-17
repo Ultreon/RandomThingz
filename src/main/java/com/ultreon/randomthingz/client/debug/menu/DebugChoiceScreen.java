@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.client.debug.menu;
 /*
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.matrix.PoseStack;
 import com.ultreon.forgemod.RandomThingz;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.screen.Screen;
@@ -76,13 +76,13 @@ public class DebugChoiceScreen extends Screen {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         this.renderForeground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
-    private void renderForeground(MatrixStack matrixStack) {
+    private void renderForeground(PoseStack matrixStack) {
         int x = width / 2 - textureWidth / 2;
         int y = height / 2 - textureHeight / 2;
 

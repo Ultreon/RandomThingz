@@ -35,7 +35,7 @@ public class IconButton extends Button {
     @Override
     public void renderButton(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         RenderSystem.setShaderTexture(0, WIDGETS_LOCATION);
-        GlStateManager._color4f(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         GlStateManager._enableBlend();
         GlStateManager._blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA.value, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value, GlStateManager.SourceFactor.ONE.value, GlStateManager.DestFactor.ZERO.value);
         GlStateManager._blendFunc(GlStateManager.SourceFactor.SRC_ALPHA.value, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value);
@@ -43,7 +43,7 @@ public class IconButton extends Button {
         this.blit(matrixStack, this.x, this.y, 0, 46 + offset * 20, this.width / 2, this.height);
         this.blit(matrixStack, this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + offset * 20, this.width / 2, this.height);
         if (!this.active) {
-            GlStateManager._color4f(0.5F, 0.5F, 0.5F, 1.0f);
+            RenderSystem.setShaderColor(0.5F, 0.5F, 0.5F, 1.0f);
         }
         RenderSystem.setShaderTexture(0, this.iconResource);
         this.blit(matrixStack, this.x + 2, this.y + 2, this.iconU, this.iconV, 16, 16);

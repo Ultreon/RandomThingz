@@ -4,6 +4,7 @@ import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.BedFrameTile;
+import com.ultreon.texturedmodels.tileentity.ITickable;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
@@ -11,7 +12,6 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.state.*;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -30,6 +30,8 @@ import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -67,22 +69,23 @@ public class BedFrameBlock extends BedBlock {
         builder.add(CONTAINS_BLOCK, LIGHT_LEVEL, PART, OCCUPIED, HORIZONTAL_FACING);//, TEXTURE);
     }
 
+    @Nullable
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new BedFrameTile(pos, state);
     }
 
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new BedFrameTile();
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> entityType) {
+        return ITickable::tickTE;
     }
 
     @Override
     public InteractionResult use(BlockState state, Level dimension, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
         ItemStack item = player.getItemInHand(hand);
         if (!dimension.isClientSide) {
-            if ((state.getValue(CONTAINS_BLOCK) && !item.getItem().is(Tags.Items.DYES) && !Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) || item.isEmpty()) {
+            if ((state.getValue(CONTAINS_BLOCK) && !item.is(Tags.Items.DYES) && !Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID)) || item.isEmpty()) {
                 //Taken from BedBlock, should work similar to vanilla beds
                 if (state.getValue(PART) != BedPart.HEAD) {
                     pos = pos.relative(state.getValue(HORIZONTAL_FACING));
@@ -163,9 +166,8 @@ public class BedFrameBlock extends BedBlock {
     @SuppressWarnings("unused")
     protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
         if (!dimensionIn.isClientSide) {
-            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof BedFrameTile) {
-                BedFrameTile frameTileEntity = (BedFrameTile) tileentity;
+            BlockEntity entity = dimensionIn.getBlockEntity(pos);
+            if (entity instanceof BedFrameTile frameTileEntity) {
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
                     dimensionIn.levelEvent(1010, pos, 0);
@@ -174,8 +176,8 @@ public class BedFrameBlock extends BedBlock {
                     double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
                     double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
                     double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    ItemStack itemstack1 = blockState.getBlock().asItem().getDefaultInstance();
-                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
+                    ItemStack stack = blockState.getBlock().asItem().getDefaultInstance();
+                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
                     itementity.setDefaultPickUpDelay();
                     dimensionIn.addFreshEntity(itementity);
                 }
@@ -185,9 +187,8 @@ public class BedFrameBlock extends BedBlock {
     }
 
     public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
-        BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-        if (tileentity instanceof BedFrameTile) {
-            BedFrameTile frameTileEntity = (BedFrameTile) tileentity;
+        BlockEntity entity = dimensionIn.getBlockEntity(pos);
+        if (entity instanceof BedFrameTile frameTileEntity) {
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
             dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);
@@ -213,7 +214,6 @@ public class BedFrameBlock extends BedBlock {
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NbtIo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -128,7 +128,7 @@ public final class ModuleManager {
 
         // Write changes.
         RandomThingz.LOGGER.info("Saving module data...");
-        CompressedStreamTools.saveCompressed(this.modulesNbt, dataFile);
+        NbtIo.writeCompressed(this.modulesNbt, dataFile);
         RandomThingz.LOGGER.info("Module data saved!");
     }
 
@@ -180,7 +180,7 @@ public final class ModuleManager {
     public void initialize() throws IOException {
         File configFolder;
         if (RandomThingz.isClientSide()) {
-            configFolder = new File(Minecraft.getInstance().gameDir, "randomthingz-data/config");
+            configFolder = new File(Minecraft.getInstance().gameDirectory, "randomthingz-data/config");
         } else if (RandomThingz.isServerSide()) {
             configFolder = new File("randomthingz-data/config").getAbsoluteFile();
         } else {
@@ -197,7 +197,7 @@ public final class ModuleManager {
         boolean wasValid;
         this.dataFile = new File(configFolder, getDataPrefix() + "modules.nbt");
         try {
-            a = CompressedStreamTools.loadCompressed(this.dataFile);
+            a = NbtIo.readCompressed(this.dataFile);
             if (a == null) {
                 a = new CompoundTag();
             }

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.client.gui.widgets;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.matrix.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.ultreon.randomthingz.client.common.Resizer;
 import com.ultreon.randomthingz.client.common.Screenshot;
@@ -121,7 +121,7 @@ public class ScreenshotSelectionList extends ObjectSelectionList<ScreenshotSelec
 
         @SuppressWarnings("deprecation")
         @Override
-        public void render(@NotNull MatrixStack matrixStack, int p_230432_2_, int scroll, int xOffset, int p_230432_5_, int p_230432_6_, int p_230432_7_, int p_230432_8_, boolean p_230432_9_, float p_230432_10_) {
+        public void render(@NotNull PoseStack matrixStack, int p_230432_2_, int scroll, int xOffset, int p_230432_5_, int p_230432_6_, int p_230432_7_, int p_230432_8_, boolean p_230432_9_, float p_230432_10_) {
             String name = this.file.getName();
             String size;
 

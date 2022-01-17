@@ -32,16 +32,12 @@ public class GamePcBlock extends DirectionalBlock implements IDeprecated {
 
     @Override
     public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter dimensionIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
-        switch (state.getValue(FACING)) {
-            case EAST:
-                return SHAPE_E;
-            case SOUTH:
-                return SHAPE_S;
-            case WEST:
-                return SHAPE_W;
-            default:
-                return SHAPE_N;
-        }
+        return switch (state.getValue(FACING)) {
+            case EAST -> SHAPE_E;
+            case SOUTH -> SHAPE_S;
+            case WEST -> SHAPE_W;
+            default -> SHAPE_N;
+        };
     }
 
     @Override

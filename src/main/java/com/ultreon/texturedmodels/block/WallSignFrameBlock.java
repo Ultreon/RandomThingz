@@ -15,13 +15,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.BlockHitResult;
-
 import org.jetbrains.annotations.Nullable;
 
 import static com.ultreon.texturedmodels.util.BCBlockStateProperties.CONTAINS_BLOCK;
 import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 /**
  * Main class for wall frame signs - all important block info can be found here
@@ -42,7 +39,7 @@ public class WallSignFrameBlock extends WallSignBlock {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
+    public boolean hasBlockEntity(BlockState state) {
         return true;
     }
 

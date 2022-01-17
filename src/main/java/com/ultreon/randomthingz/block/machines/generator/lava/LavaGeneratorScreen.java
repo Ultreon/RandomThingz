@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.block.machines.generator.lava;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseScreen;
+import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
 import com.ultreon.randomthingz.util.TextUtils;
 import com.ultreon.randomthingz.util.render.RenderUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class LavaGeneratorScreen extends AbstractMachineBaseScreen<LavaGeneratorContainer> {
+public class LavaGeneratorScreen extends AbstractMachineContainerScreen<LavaGeneratorContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/fluid_generator.png");
 
     public LavaGeneratorScreen(LavaGeneratorContainer container, Inventory playerInventory, Component titleIn) {
@@ -31,7 +31,7 @@ public class LavaGeneratorScreen extends AbstractMachineBaseScreen<LavaGenerator
     @Override
     protected void renderTooltip(PoseStack matrixStack, int x, int y) {
         if (isHovering(135, 17, 13, 51, x, y)) {
-            Component text = TextUtils.fluidWithMax(menu.getFluidInTank(), LavaGeneratorTileEntity.TANK_CAPACITY);
+            Component text = TextUtils.fluidWithMax(menu.getFluidInTank(), LavaGeneratorBlockEntity.TANK_CAPACITY);
             renderTooltip(matrixStack, text, x, y);
         }
         if (isHovering(153, 17, 13, 51, x, y)) {
@@ -56,6 +56,6 @@ public class LavaGeneratorScreen extends AbstractMachineBaseScreen<LavaGenerator
         }
 
         // Fluid tank
-        RenderUtils.renderGuiTank(menu.getFluidInTank(), LavaGeneratorTileEntity.TANK_CAPACITY, xPos + 136, yPos + 18, 0, 12, 50);
+        RenderUtils.renderGuiTank(menu.getFluidInTank(), LavaGeneratorBlockEntity.TANK_CAPACITY, xPos + 136, yPos + 18, 0, 12, 50);
     }
 }

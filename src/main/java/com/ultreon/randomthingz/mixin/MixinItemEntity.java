@@ -22,20 +22,20 @@ public abstract class MixinItemEntity extends Entity {
         super(entityTypeIn, dimensionIn);
     }
 
-    @Inject(at = @At("HEAD"), method = "attack(Lnet/minecraft/util/DamageSource;F)Z", cancellable = true, remap = false)
-    private void attack(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callback) {
+    @Inject(at = @At("HEAD"), method = "hurt", cancellable = true, remap = false)
+    private void hurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callback) {
         if (source.isFire()) {
             if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FIRE_PROTECTION, this.getItem()) > 0) {
                 callback.setReturnValue(false);
             } else {
                 if (getItem().getItem() == Items.GUNPOWDER) {
-                    remove(false);
+                    remove(RemovalReason.KILLED);
                     getCommandSenderWorld().explode(null, getX(), getY(), getZ(), ((float) getItem().getCount()) / 2, false, Explosion.BlockInteraction.BREAK);
                 } else if (getItem().getItem() == Items.TNT) {
-                    remove(false);
+                    remove(RemovalReason.KILLED);
                     getCommandSenderWorld().explode(null, getX(), getY(), getZ(), getItem().getCount() * 4, false, Explosion.BlockInteraction.BREAK);
                 } else if (getItem().getItem() == Items.TNT_MINECART) {
-                    remove(false);
+                    remove(RemovalReason.KILLED);
                     getCommandSenderWorld().explode(null, getX(), getY(), getZ(), getItem().getCount() * 4, false, Explosion.BlockInteraction.BREAK);
                 }
             }
@@ -45,13 +45,13 @@ public abstract class MixinItemEntity extends Entity {
 //            } else {
 //                if (getItem().getItem() == Items.GUNPOWDER) {
 //                    remove(false);
-//                    getEntityDimension().createExplosion(null, getPosX(), getPosY(), getPosZ(), getItem().getCount(), false, Explosion.Mode.BREAK);
+//                    getEntityDimension().createExplosion(null, getX(), getY(), getZ(), getItem().getCount(), false, Explosion.BlockInteraction.BREAK);
 //                } else if (getItem().getItem() == Items.TNT) {
 //                    remove(false);
-//                    getEntityDimension().createExplosion(null, getPosX(), getPosY(), getPosZ(), getItem().getCount() * 4, false, Explosion.Mode.BREAK);
+//                    getEntityDimension().createExplosion(null, getX(), getY(), getZ(), getItem().getCount() * 4, false, Explosion.BlockInteraction.BREAK);
 //                } else if (getItem().getItem() == Items.TNT_MINECART) {
 //                    remove(false);
-//                    getEntityDimension().createExplosion(null, getPosX(), getPosY(), getPosZ(), getItem().getCount() * 4, false, Explosion.Mode.BREAK);
+//                    getEntityDimension().createExplosion(null, getX(), getY(), getZ(), getItem().getCount() * 4, false, Explosion.BlockInteraction.BREAK);
 //                }
 //            }
         } else if (source == DamageSource.CACTUS) {

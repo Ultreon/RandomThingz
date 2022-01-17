@@ -39,10 +39,11 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
 import java.util.Objects;
 
 /**
- * TileEntity for {@linkplain ChestFrameBlock} and all sorts of frame/illusion chest blocks
+ * BlockEntity for {@linkplain ChestFrameBlock} and all sorts of frame/illusion chest blocks
  * Contains all information about the block and the mimicked block, as well as the inventory size and stored items
  *
  * @author PianoManu
@@ -58,12 +59,12 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
     private final IItemHandlerModifiable items = createHandler();
     private LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
 
-    public ChestFrameTileEntity(BlockEntityType<?> typeIn) {
-        super(typeIn);
+    public ChestFrameTileEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
+        super(typeIn, pos, state);
     }
 
-    public ChestFrameTileEntity() {
-        this(Registration.CHEST_FRAME_TILE.get());
+    public ChestFrameTileEntity(BlockPos pos, BlockState state) {
+        this(Registration.CHEST_FRAME_TILE.get(), pos, state);
     }
 
     public static void swapContents(ChestFrameTileEntity te, ChestFrameTileEntity otherTe) {
@@ -137,8 +138,8 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
     }
 
     @Override
-    public void load(BlockState state, CompoundTag compound) {
-        super.load(state, compound);
+    public void load(@NotNull CompoundTag compound) {
+        super.load(compound);
         //FRAME BEGIN
         if (compound.contains("mimic")) {
             mimic = NbtUtils.readBlockState(compound.getCompound("mimic"));
@@ -166,7 +167,7 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
         double dx = (double) this.worldPosition.getX() + 0.5D;
         double dy = (double) this.worldPosition.getY() + 0.5D;
         double dz = (double) this.worldPosition.getZ() + 0.5D;
-        this.level.playSound(null, dx, dy, dz, sound, SoundSource.BLOCKS, 0.5f,
+        Objects.requireNonNull(this.level).playSound(null, dx, dy, dz, sound, SoundSource.BLOCKS, 0.5f,
                 this.level.random.nextFloat() * 0.1f + 0.9f);
     }
 
@@ -194,7 +195,7 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
 
     public static int getPlayersUsing(BlockGetter reader, BlockPos pos) {
         BlockState blockstate = reader.getBlockState(pos);
-        if (blockstate.hasTileEntity()) {
+        if (blockstate.hasBlockEntity()) {
             BlockEntity tileentity = reader.getBlockEntity(pos);
             if (tileentity instanceof ChestFrameTileEntity) {
                 return ((ChestFrameTileEntity) tileentity).numPlayersUsing;
@@ -214,22 +215,23 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
     protected void onOpenOrClose() {
         Block block = this.getBlockState().getBlock();
         if (block instanceof ChestFrameBlock) {
-            this.level.blockEvent(this.worldPosition, block, 1, this.numPlayersUsing);
+            Objects.requireNonNull(this.level).blockEvent(this.worldPosition, block, 1, this.numPlayersUsing);
             this.level.updateNeighborsAt(this.worldPosition, block);
         }
     }
 
     @Override
-    public void clearCache() {
-        super.clearCache();
+    public void clearRemoved() {
+        super.clearRemoved();
         if (this.itemHandler != null) {
             this.itemHandler.invalidate();
             this.itemHandler = null;
         }
     }
 
+    @Nonnull
     @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @NotNull Direction side) {
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return itemHandler.cast();
         }
@@ -266,7 +268,7 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
     public void setMimic(BlockState mimic) {
         this.mimic = mimic;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+        Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public BlockState getMimic() {
@@ -280,7 +282,7 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
     public void setDesign(Integer design) {
         this.design = design;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+        Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public Integer getDesignTexture() {
@@ -290,7 +292,7 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
     public void setDesignTexture(Integer designTexture) {
         this.designTexture = designTexture;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+        Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public Integer getTexture() {
@@ -300,7 +302,7 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
     public void setTexture(Integer texture) {
         this.texture = texture;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+        Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public Integer getGlassColor() {
@@ -311,6 +313,7 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
         this.glassColor = colorNumber;
     }
 
+    @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
         CompoundTag tag = super.getUpdateTag();
@@ -335,7 +338,7 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(worldPosition, 1, getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::getUpdateTag);
     }
 
     @Override
@@ -346,39 +349,39 @@ public class ChestFrameTileEntity extends RandomizableContainerBlockEntity {
         Integer oldDesignTexture = designTexture;
         Integer oldGlassColor = glassColor;
         CompoundTag tag = pkt.getTag();
-        if (tag.contains("mimic")) {
+        if (Objects.requireNonNull(tag).contains("mimic")) {
             mimic = NbtUtils.readBlockState(tag.getCompound("mimic"));
             if (!Objects.equals(oldMimic, mimic)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("texture")) {
             texture = readInteger(tag.getCompound("texture"));
             if (!Objects.equals(oldTexture, texture)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("design")) {
             design = readInteger(tag.getCompound("design"));
             if (!Objects.equals(oldDesign, design)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("design_texture")) {
             designTexture = readInteger(tag.getCompound("design_texture"));
             if (!Objects.equals(oldDesignTexture, designTexture)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("glass_color")) {
             glassColor = readInteger(tag.getCompound("glass_color"));
             if (!Objects.equals(oldGlassColor, glassColor)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
+                Objects.requireNonNull(level).sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
     }
