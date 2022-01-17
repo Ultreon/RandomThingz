@@ -14,8 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
-import net.minecraftforge.client.event.GuiContainerEvent;
-import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.lwjgl.glfw.GLFW;
@@ -48,25 +47,24 @@ public class Events {
     }
 
     @SubscribeEvent
-    public void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
-        if (event.getGui() instanceof CreativeModeInventoryScreen) {
+    public void onScreenInit(ScreenEvent.InitScreenEvent.Post event) {
+        if (event.getScreen() instanceof CreativeModeInventoryScreen screen) {
             if (!this.updatedFilters) {
                 this.updateFilters();
                 this.updatedFilters = true;
             }
 
             this.viewingFilterTab = false;
-            this.guiCenterX = ((CreativeModeInventoryScreen) event.getGui()).getGuiLeft();
-            this.guiCenterY = ((CreativeModeInventoryScreen) event.getGui()).getGuiTop();
+            this.guiCenterX = ((CreativeModeInventoryScreen) event.getScreen()).getGuiLeft();
+            this.guiCenterY = ((CreativeModeInventoryScreen) event.getScreen()).getGuiTop();
 
-            event.addWidget(this.btnScrollUp = new IconButton(this.guiCenterX - 22, this.guiCenterY - 12, new TranslatableComponent("gui.button.filters.scroll_filters_up"), button -> this.scrollUp(), ICONS, 0, 0));
-            event.addWidget(this.btnScrollDown = new IconButton(this.guiCenterX - 22, this.guiCenterY + 127, new TranslatableComponent("gui.button.filters.scroll_filters_down"), button -> this.scrollDown(), ICONS, 16, 0));
-            event.addWidget(this.btnEnableAll = new IconButton(this.guiCenterX - 50, this.guiCenterY + 10, new TranslatableComponent("gui.button.filters.enable_filters"), button -> this.enableAllFilters(), ICONS, 32, 0));
-            event.addWidget(this.btnDisableAll = new IconButton(this.guiCenterX - 50, this.guiCenterY + 32, new TranslatableComponent("gui.button.filters.disable_filters"), button -> this.disableAllFilters(), ICONS, 48, 0));
+            event.getScreen().addRenderableWidget(this.btnScrollUp = new IconButton(this.guiCenterX - 22, this.guiCenterY - 12, new TranslatableComponent("gui.button.filters.scroll_filters_up"), button -> this.scrollUp(), ICONS, 0, 0));
+            event.getScreen().addRenderableWidget(this.btnScrollDown = new IconButton(this.guiCenterX - 22, this.guiCenterY + 127, new TranslatableComponent("gui.button.filters.scroll_filters_down"), button -> this.scrollDown(), ICONS, 16, 0));
+            event.getScreen().addRenderableWidget(this.btnEnableAll = new IconButton(this.guiCenterX - 50, this.guiCenterY + 10, new TranslatableComponent("gui.button.filters.enable_filters"), button -> this.enableAllFilters(), ICONS, 32, 0));
+            event.getScreen().addRenderableWidget(this.btnDisableAll = new IconButton(this.guiCenterX - 50, this.guiCenterY + 32, new TranslatableComponent("gui.button.filters.disable_filters"), button -> this.disableAllFilters(), ICONS, 48, 0));
 
             this.hideButtons();
 
-            CreativeModeInventoryScreen screen = (CreativeModeInventoryScreen) event.getGui();
             this.updateTagButtons(screen);
 
             CreativeModeTab group = this.getGroup(screen.getSelectedTab());
@@ -81,11 +79,11 @@ public class Events {
     }
 
     @SubscribeEvent
-    public void onScreenClick(GuiScreenEvent.MouseClickedEvent.Pre event) {
+    public void onScreenClick(ScreenEvent.MouseClickedEvent.Pre event) {
         if (event.getButton() != GLFW.GLFW_MOUSE_BUTTON_LEFT)
             return;
 
-        if (event.getGui() instanceof CreativeModeInventoryScreen) {
+        if (event.getScreen() instanceof CreativeModeInventoryScreen) {
             for (Button button : this.buttons) {
                 if (button.isMouseOver(event.getMouseX(), event.getMouseY())) {
                     if (button.mouseClicked(event.getMouseX(), event.getMouseY(), event.getButton())) {
@@ -107,9 +105,8 @@ public class Events {
     }
 
     @SubscribeEvent
-    public void onScreenDrawPre(GuiScreenEvent.DrawScreenEvent.Pre event) {
-        if (event.getGui() instanceof CreativeModeInventoryScreen) {
-            CreativeModeInventoryScreen screen = (CreativeModeInventoryScreen) event.getGui();
+    public void onScreenDrawPre(ScreenEvent.DrawScreenEvent.Pre event) {
+        if (event.getScreen() instanceof CreativeModeInventoryScreen screen) {
             CreativeModeTab group = this.getGroup(screen.getSelectedTab());
 
             if (Filters.get().hasFilters(group)) {
@@ -124,25 +121,21 @@ public class Events {
     }
 
     @SubscribeEvent
-    public void onScreenDrawBackground(GuiContainerEvent.DrawBackground event) {
-        if (event.getGuiContainer() instanceof CreativeModeInventoryScreen) {
-            CreativeModeInventoryScreen screen = (CreativeModeInventoryScreen) event.getGuiContainer();
+    public void onScreenDrawBackground(ScreenEvent.DrawScreenEvent event) {
+        if (event.getScreen() instanceof CreativeModeInventoryScreen screen) {
             CreativeModeTab group = this.getGroup(screen.getSelectedTab());
 
             if (Filters.get().hasFilters(group)) {
                 /* Render buttons */
                 this.buttons.forEach(button ->
-                {
-                    button.render(event.getMatrixStack(), event.getMouseX(), event.getMouseY(), Minecraft.getInstance().getFrameTime());
-                });
+                        button.render(event.getPoseStack(), event.getMouseX(), event.getMouseY(), Minecraft.getInstance().getFrameTime()));
             }
         }
     }
 
     @SubscribeEvent
-    public void onScreenDrawPost(GuiScreenEvent.DrawScreenEvent.Post event) {
-        if (event.getGui() instanceof CreativeModeInventoryScreen) {
-            CreativeModeInventoryScreen screen = (CreativeModeInventoryScreen) event.getGui();
+    public void onScreenDrawPost(ScreenEvent.DrawScreenEvent.Post event) {
+        if (event.getScreen() instanceof CreativeModeInventoryScreen screen) {
             CreativeModeTab group = this.getGroup(screen.getSelectedTab());
 
             if (Filters.get().hasFilters(group)) {
@@ -150,25 +143,25 @@ public class Events {
                 this.buttons.forEach(button ->
                 {
                     if (button.isMouseOver(event.getMouseX(), event.getMouseY())) {
-                        screen.renderTooltip(event.getMatrixStack(), button.getFilter().getName(), event.getMouseX(), event.getMouseY());
+                        screen.renderTooltip(event.getPoseStack(), button.getFilter().getName(), event.getMouseX(), event.getMouseY());
                     }
                 });
 
                 if (this.btnEnableAll.isMouseOver(event.getMouseX(), event.getMouseY())) {
-                    screen.renderTooltip(event.getMatrixStack(), this.btnEnableAll.getMessage(), event.getMouseX(), event.getMouseY());
+                    screen.renderTooltip(event.getPoseStack(), this.btnEnableAll.getMessage(), event.getMouseX(), event.getMouseY());
                 }
 
                 if (this.btnDisableAll.isMouseOver(event.getMouseX(), event.getMouseY())) {
-                    screen.renderTooltip(event.getMatrixStack(), this.btnDisableAll.getMessage(), event.getMouseX(), event.getMouseY());
+                    screen.renderTooltip(event.getPoseStack(), this.btnDisableAll.getMessage(), event.getMouseX(), event.getMouseY());
                 }
             }
         }
     }
 
+    @SuppressWarnings("UnnecessaryLocalVariable")
     @SubscribeEvent
-    public void onMouseScroll(GuiScreenEvent.MouseScrollEvent.Pre event) {
-        if (event.getGui() instanceof CreativeModeInventoryScreen) {
-            CreativeModeInventoryScreen creativeScreen = (CreativeModeInventoryScreen) event.getGui();
+    public void onMouseScroll(ScreenEvent.MouseScrollEvent.Pre event) {
+        if (event.getScreen() instanceof CreativeModeInventoryScreen creativeScreen) {
             int guiLeft = creativeScreen.getGuiLeft();
             int guiTop = creativeScreen.getGuiTop();
             int startX = guiLeft - 32;
@@ -299,8 +292,7 @@ public class Events {
 
     private void scrollUp() {
         Screen screen = Minecraft.getInstance().screen;
-        if (screen instanceof CreativeModeInventoryScreen) {
-            CreativeModeInventoryScreen creativeScreen = (CreativeModeInventoryScreen) screen;
+        if (screen instanceof CreativeModeInventoryScreen creativeScreen) {
             CreativeModeTab group = this.getGroup(creativeScreen.getSelectedTab());
             List<FilterEntry> entries = this.getFilters(group);
             if (entries != null) {
@@ -315,8 +307,7 @@ public class Events {
 
     private void scrollDown() {
         Screen screen = Minecraft.getInstance().screen;
-        if (screen instanceof CreativeModeInventoryScreen) {
-            CreativeModeInventoryScreen creativeScreen = (CreativeModeInventoryScreen) screen;
+        if (screen instanceof CreativeModeInventoryScreen creativeScreen) {
             CreativeModeTab group = this.getGroup(creativeScreen.getSelectedTab());
             List<FilterEntry> entries = this.getFilters(group);
             if (entries != null) {
@@ -331,8 +322,7 @@ public class Events {
 
     private void enableAllFilters() {
         Screen screen = Minecraft.getInstance().screen;
-        if (screen instanceof CreativeModeInventoryScreen) {
-            CreativeModeInventoryScreen creativeScreen = (CreativeModeInventoryScreen) screen;
+        if (screen instanceof CreativeModeInventoryScreen creativeScreen) {
             CreativeModeTab group = this.getGroup(creativeScreen.getSelectedTab());
             List<FilterEntry> entries = this.getFilters(group);
             if (entries != null) {
@@ -345,8 +335,7 @@ public class Events {
 
     private void disableAllFilters() {
         Screen screen = Minecraft.getInstance().screen;
-        if (screen instanceof CreativeModeInventoryScreen) {
-            CreativeModeInventoryScreen creativeScreen = (CreativeModeInventoryScreen) screen;
+        if (screen instanceof CreativeModeInventoryScreen creativeScreen) {
             CreativeModeTab group = this.getGroup(creativeScreen.getSelectedTab());
             List<FilterEntry> entries = this.getFilters(group);
             if (entries != null) {

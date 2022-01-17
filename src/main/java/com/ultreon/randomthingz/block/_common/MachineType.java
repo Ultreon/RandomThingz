@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block._common;
 
-import com.qsoftware.modlib.silentlib.util.Lazy;
+import com.ultreon.modlib.embedded.silentlib.util.Lazy;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterContainer;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterTileEntity;

@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.common.updates;
 
 import com.mojang.text2speech.Narrator;
+import com.ultreon.modlib.graphics.MCGraphics;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.client.graphics.MCGraphics;
 import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
 import com.ultreon.randomthingz.common.internal.RtVersion;
 import net.minecraft.client.Minecraft;
@@ -10,6 +10,7 @@ import net.minecraft.client.NarratorStatus;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -88,16 +89,15 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         }
 
         // Clear widgets.
-        this.buttons.clear();
-        this.children.clear();
+        this.clearWidgets();
 
         // Add buttons.
-        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (p_213006_1_) -> {
+        this.addRenderableWidget(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (p_213006_1_) -> {
             if (this.minecraft != null) {
                 this.minecraft.setScreen(new UpdateScreen(backScreen, updater.getReleaseUrl(), updater.getDependencies()));
             }
         }));
-        this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
+        this.addRenderableWidget(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
             if (this.minecraft != null) {
                 this.minecraft.setScreen(backScreen);
             }
@@ -129,7 +129,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         mcg.drawCenteredString(this.title, this.width / 2f, 70f, new Color(0xffffff));
         mcg.drawCenteredString(new TranslatableComponent("msg.randomthingz.update_available.description", updater.getLatestVersion().toLocalizedString()), this.width / 2f, 90f, new Color(0xbfbfbf));
 
-        this.message.renderCentered(mcg.getMatrixStack(), this.width / 2, 90);
+        this.message.renderCentered(mcg.getPoseStack(), this.width / 2, 90);
 
         // Draw help icon.
         mcg.drawTexture(1, 1, 64, 15, 16, 16, SCREEN_ICONS);
@@ -150,9 +150,11 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         this.ticksUntilEnable = ticksUntilEnableIn;
 
         // Loop widgets.
-        for (AbstractWidget widget : this.buttons) {
+        for (GuiEventListener listener : this.children) {
             // Set widget to inactive.
-            widget.active = false;
+            if (listener instanceof AbstractWidget widget) {
+                widget.active = false;
+            }
         }
 
     }
@@ -172,9 +174,11 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         // If ticksUntilEnable equals 0, enable all widgets.
         if (this.ticksUntilEnable == 0) {
             // Loop widgets.
-            for (AbstractWidget widget : this.buttons) {
+            for (GuiEventListener listener : this.children) {
                 // Set widget active.
-                widget.active = true;
+                if (listener instanceof AbstractWidget widget) {
+                    widget.active = true;
+                }
             }
         }
     }

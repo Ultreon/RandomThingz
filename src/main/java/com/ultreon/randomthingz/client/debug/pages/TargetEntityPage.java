@@ -28,7 +28,7 @@ public class TargetEntityPage extends DebugPage {
             float playerPitch = player.xRot;
             float playerYaw = player.yRot;
 
-            Vec3 playerEye = player.getEyePosition(1.0F);
+            Vec3 playerEye = player.getEyePosition(1.0f);
 
             float f2 = Mth.cos(-playerYaw * ((float) Math.PI / 180F) - (float) Math.PI);
             float f3 = Mth.sin(-playerYaw * ((float) Math.PI / 180F) - (float) Math.PI);

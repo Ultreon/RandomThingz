@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.custom.render;
 
-import com.qsoftware.modlib.common.interfaces.IHasRenderType;
+import com.ultreon.modlib.common.interfaces.IHasRenderType;
 import net.minecraft.world.level.block.DoublePlantBlock;
 
 /**

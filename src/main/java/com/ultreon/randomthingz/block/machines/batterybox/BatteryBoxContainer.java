@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
-import com.qsoftware.modlib.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractEnergyStorageContainer;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
 import com.ultreon.randomthingz.init.ModMachineContainers;
@@ -16,7 +16,7 @@ public class BatteryBoxContainer extends AbstractEnergyStorageContainer<BatteryB
     final BatteryBoxTileEntity tileEntity;
 
     public BatteryBoxContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new BatteryBoxTileEntity(), new SimpleContainerData(AbstractMachineBaseTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, new BatteryBoxTileEntity(pos, state), new SimpleContainerData(AbstractMachineBaseTileEntity.FIELDS_COUNT));
     }
 
     public BatteryBoxContainer(int id, Inventory playerInventory, BatteryBoxTileEntity tileEntity, ContainerData fieldsIn) {

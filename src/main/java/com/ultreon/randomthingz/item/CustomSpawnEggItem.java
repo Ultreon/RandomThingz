@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item;
 
-import com.qsoftware.modlib.api.NBTConstants;
-import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
-import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
+import com.ultreon.modlib.api.NBTConstants;
+import com.ultreon.modlib.embedded.silentlib.registry.EntityTypeRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemDeferredRegister;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;

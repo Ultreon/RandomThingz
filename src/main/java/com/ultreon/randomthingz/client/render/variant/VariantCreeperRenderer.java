@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.client.render.variant;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.ultreon.randomthingz.client.MobVariantsModule;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.entity.CreeperRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;

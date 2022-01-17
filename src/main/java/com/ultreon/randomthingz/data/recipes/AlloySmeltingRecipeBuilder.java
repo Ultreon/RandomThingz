@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.data.recipes;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.qsoftware.modlib.silentlib.util.NameUtils;
+import com.ultreon.modlib.embedded.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
@@ -15,8 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;

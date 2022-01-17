@@ -11,8 +11,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @UtilityClass
 public final class EnergyUtils {

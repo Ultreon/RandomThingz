@@ -8,17 +8,17 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID)
-public final class WireNetworkManager {
+public final class WireConnection {
     private static final Collection<LazyOptional<WireNetwork>> NETWORK_LIST = Collections.synchronizedList(new ArrayList<>());
 
-    private WireNetworkManager() {
+    private WireConnection() {
         throw new IllegalAccessError("Utility class");
     }
 
@@ -53,7 +53,7 @@ public final class WireNetworkManager {
         Collection<LazyOptional<WireNetwork>> toRemove = NETWORK_LIST.stream()
                 .filter(n -> n != null && n.isPresent() && n.orElseThrow(IllegalStateException::new).contains(dimension, pos))
                 .collect(Collectors.toList());
-        toRemove.forEach(WireNetworkManager::invalidateNetwork);
+        toRemove.forEach(WireConnection::invalidateNetwork);
     }
 
     private static void invalidateNetwork(LazyOptional<WireNetwork> network) {

@@ -8,18 +8,21 @@ import com.ultreon.randomthingz.common.internal.RtArgs;
 import com.ultreon.randomthingz.common.internal.RtCredits;
 import com.ultreon.randomthingz.common.internal.RtVersion;
 import lombok.Getter;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.CrashReport;
+import net.minecraft.CrashReportCategory;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.ReportedException;
 import net.minecraft.client.Minecraft;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
-import net.minecraft.crash.ReportedException;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.FolderName;
+import net.minecraft.world.level.storage.LevelResource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -27,9 +30,6 @@ import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -207,13 +207,13 @@ public final class RandomThingz {
             ModuleManager.getInstance().initialize();
         } catch (IOException e) {
             CrashReport report = new CrashReport("RandomThingz Modules being initialized", e);
-            CrashReportCategory reportCategory = report.createCategory("Module details");
+            CrashReportCategory reportCategory = report.addCategory("Module details");
             try {
                 ModuleManager manager = ModuleManager.getInstance();
                 Module currentModule = manager.getCurrentModule();
 
-                reportCategory.addDetail("Module Name", currentModule::getName);
-                reportCategory.addDetail("Enabled", () -> manager.isEnabledInConfig(currentModule) ? "Yes" : "No");
+                reportCategory.setDetail("Module Name", currentModule::getName);
+                reportCategory.setDetail("Enabled", () -> manager.isEnabledInConfig(currentModule) ? "Yes" : "No");
             } catch (Throwable ignored) {
 
             }
@@ -249,16 +249,16 @@ public final class RandomThingz {
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public void onMainMenuInit(GuiScreenEvent.InitGuiEvent.Post event) {
+    public void onMainMenuInit(ScreenEvent.InitScreenEvent.Post event) {
 
     }
 
     public static File getDataFile() {
-        return server.getSaveSubfolder(new FolderName("randomthingz-data")).toFile();
+        return server.getWorldPath(new LevelResource("randomthingz-data")).toFile();
     }
 
     public static Path getDataPath() {
-        return server.getSaveSubfolder(new FolderName("randomthingz-data"));
+        return server.getWorldPath(new LevelResource("randomthingz-data"));
     }
 
     /**
@@ -278,7 +278,7 @@ public final class RandomThingz {
      */
     @OnlyIn(Dist.CLIENT)
     private static boolean isModDev0() {
-        return Minecraft.getInstance().getVersion().equals("MOD_DEV");
+        return Minecraft.getInstance().getLaunchedVersion().equals("MOD_DEV");
     }
 
     /**
@@ -329,10 +329,10 @@ public final class RandomThingz {
      * This will handle things that supposed to happen when the server is starting.<br>
      * For example: server start event for the mod initializer.<br>
      *
-     * @param event a {@linkplain FMLServerStartingEvent} object.
+     * @param event a {@linkplain ServerStartingEvent} object.
      */
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public void onServerStarting(ServerStartingEvent event) {
         Objects.requireNonNull(init).serverStart(event);
 
         // Server field.
@@ -341,7 +341,7 @@ public final class RandomThingz {
     }
 
     @SubscribeEvent
-    public void onServerStarted(FMLServerStartedEvent event) {
+    public void onServerStarted(ServerStartedEvent event) {
         LOGGER.debug(getDataFile().getAbsolutePath());
         LOGGER.debug(getDataPath().toAbsolutePath().toString());
     }
@@ -350,10 +350,10 @@ public final class RandomThingz {
      * This will handle things that supposed to happen when the server is stopping.<br>
      * For example: clear the server field of the Random Thingz class.
      *
-     * @param event a {@linkplain FMLServerStoppingEvent} object.
+     * @param event a {@linkplain ServerStoppingEvent} object.
      */
     @SubscribeEvent
-    public void onServerStopped(FMLServerStoppingEvent event) {
+    public void onServerStopped(ServerStoppingEvent event) {
         // Server field.
         LOGGER.info("Minecraft Server has been stopped, nullifying server field...");
         server = null;
@@ -378,7 +378,7 @@ public final class RandomThingz {
      */
     private void processIMC(final InterModProcessEvent event) {
         LOGGER.info("Got IMC {}", event.getIMCStream().
-                map(InterModComms.IMCMessage::getMessageSupplier).
+                map(InterModComms.IMCMessage::messageSupplier).
                 collect(Collectors.toList()));
     }
 

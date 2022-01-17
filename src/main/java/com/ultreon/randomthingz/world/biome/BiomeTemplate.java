@@ -40,9 +40,9 @@ public class BiomeTemplate {
     private BiFunction<Double, Double, Integer> waterColorFunction;
 
     public static int calculateSkyColor(float temperature) {
-        float lvt_1_1_ = temperature / 3.0F;
-        lvt_1_1_ = Mth.clamp(lvt_1_1_, -1.0F, 1.0F);
-        return Mth.hsvToRgb(0.62222224F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0F);
+        float lvt_1_1_ = temperature / 3.0f;
+        lvt_1_1_ = Mth.clamp(lvt_1_1_, -1.0f, 1.0f);
+        return Mth.hsvToRgb(0.62222224F - lvt_1_1_ * 0.05F, 0.5F + lvt_1_1_ * 0.1F, 1.0f);
     }
 
     protected void configureBiome(Biome.BiomeBuilder builder) {

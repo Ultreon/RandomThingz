@@ -2,9 +2,9 @@ package com.ultreon.randomthingz.world.biome.objects;
 
 import com.ultreon.randomthingz.world.biome.BOPClimates;
 import com.ultreon.randomthingz.world.biome.BiomeTemplate;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.*;
+import net.minecraft.world.entity.EntityClassification;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.structure.StructureFeatures;
@@ -32,7 +32,7 @@ public class ExampleBiome extends BiomeTemplate {
         builder.precipitation(Biome.RainType.SNOW)
                 .category(Biome.Category.PLAINS)
                 .category(Biome.Category.PLAINS)
-                .depth(0.125F).scale(5.0F).temperature(0.8F).downfall(0.4F)
+                .depth(0.125F).scale(5.0f).temperature(0.8F).downfall(0.4F)
                 .withGenerationSettings(BiomeGenerationSettings.DEFAULT_SETTINGS);
 
         builder.setEffects((new BiomeAmbience.Builder())

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.network;
 
-import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.modlib.silentutils.EnumUtils;
+import com.ultreon.modlib.api.RedstoneMode;
+import com.ultreon.modlib.embedded.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
 import net.minecraft.network.FriendlyByteBuf;

@@ -22,7 +22,7 @@ public class CustomCreeperChargeLayer<T extends Creeper, M extends CreeperModel<
 
     @SuppressWarnings("unchecked")
     public CustomCreeperChargeLayer(RenderLayerParent<T, M> p_i50947_1_) {
-        this(p_i50947_1_, (M) new CreeperModel<T>(2.0F));
+        this(p_i50947_1_, (M) new CreeperModel<T>(2.0f));
     }
 
     public CustomCreeperChargeLayer(RenderLayerParent<T, M> p_i50947_1_, M creeperModel) {

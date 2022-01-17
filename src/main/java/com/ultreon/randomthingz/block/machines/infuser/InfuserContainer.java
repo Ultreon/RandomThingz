@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.infuser;
 
-import com.qsoftware.modlib.silentlib.inventory.SlotOutputOnly;
-import com.qsoftware.modlib.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.core.Registry;

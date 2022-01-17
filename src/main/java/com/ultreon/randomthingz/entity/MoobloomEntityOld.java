@@ -3,9 +3,6 @@ package com.ultreon.randomthingz.entity;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -34,8 +31,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerBlock;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
@@ -78,12 +75,12 @@ public class MoobloomEntityOld extends Cow implements Shearable, net.minecraftfo
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, new TargetPredicate(this)));
-        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0f));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
     }
 
     public float getWalkTargetValue(BlockPos pos, LevelReader dimensionIn) {
-        return dimensionIn.getBlockState(pos.below()).is(Blocks.MYCELIUM) ? 10.0F : dimensionIn.getBrightness(pos) - 0.5F;
+        return dimensionIn.getBlockState(pos.below()).is(Blocks.MYCELIUM) ? 10.0f : dimensionIn.getBrightness(pos) - 0.5F;
     }
 
     protected void defineSynchedData() {
@@ -115,7 +112,7 @@ public class MoobloomEntityOld extends Cow implements Shearable, net.minecraftfo
                 soundevent = SoundEvents.MOOSHROOM_MILK;
             }
 
-            this.playSound(soundevent, 1.0F, 1.0F);
+            this.playSound(soundevent, 1.0f, 1.0f);
             return InteractionResult.sidedSuccess(this.level.isClientSide);
         } else if (itemstack.getItem().is(ItemTags.SMALL_FLOWERS)) {
             if (this.hasStewEffect != null) {
@@ -139,7 +136,7 @@ public class MoobloomEntityOld extends Cow implements Shearable, net.minecraftfo
 
                 this.hasStewEffect = pair.getLeft();
                 this.effectDuration = pair.getRight();
-                this.playSound(SoundEvents.MOOSHROOM_EAT, 2.0F, 1.0F);
+                this.playSound(SoundEvents.MOOSHROOM_EAT, 2.0f, 1.0f);
             }
 
             return InteractionResult.sidedSuccess(this.level.isClientSide);
@@ -149,7 +146,7 @@ public class MoobloomEntityOld extends Cow implements Shearable, net.minecraftfo
     }
 
     public void shear(@NotNull SoundSource category) {
-        this.level.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, category, 1.0F, 1.0F);
+        this.level.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, category, 1.0f, 1.0f);
         if (!this.level.isClientSide()) {
             ((ServerLevel) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
             this.remove();
@@ -223,14 +220,14 @@ public class MoobloomEntityOld extends Cow implements Shearable, net.minecraftfo
     }
 
     @Override
-    public boolean isShearable(@javax.annotation.Nonnull ItemStack item, Level dimension, BlockPos pos) {
+    public boolean isShearable(@org.jetbrains.annotations.NotNull ItemStack item, Level dimension, BlockPos pos) {
         return readyForShearing();
     }
 
-    @javax.annotation.Nonnull
+    @org.jetbrains.annotations.NotNull
     @Override
-    public java.util.List<ItemStack> onSheared(@javax.annotation.Nullable Player player, @javax.annotation.Nonnull ItemStack item, Level dimension, BlockPos pos, int fortune) {
-        dimension.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
+    public java.util.List<ItemStack> onSheared(@org.jetbrains.annotations.Nullable Player player, @org.jetbrains.annotations.NotNull ItemStack item, Level dimension, BlockPos pos, int fortune) {
+        dimension.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0f, 1.0f);
         if (!dimension.isClientSide()) {
             ((ServerLevel) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
             this.remove();

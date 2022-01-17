@@ -1,6 +1,5 @@
 package com.ultreon.randomthingz.client;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.actionmenu.MainActionMenu;
 import com.ultreon.randomthingz.actionmenu.MenuHandler;
@@ -9,7 +8,8 @@ import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import lombok.NonNull;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.TextComponent;
 
 import javax.annotation.ParametersAreNonnullByDefault;

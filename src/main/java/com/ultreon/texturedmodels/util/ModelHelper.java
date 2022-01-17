@@ -556,4 +556,3 @@ public class ModelHelper {
         return quads;
     }
 }
-//========SOLI DEO GLORIA========//

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.entity;
 
-import com.qsoftware.modlib.silentlib.block.IBlockProvider;
+import com.ultreon.modlib.embedded.silentlib.block.IBlockProvider;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block._common.MachineType;
 import com.ultreon.randomthingz.block._common.ModBlocks;
@@ -72,8 +72,8 @@ public final class ModMachineTileEntities {
         coalGenerator = register("coal_generator", CoalGeneratorTileEntity::new, ModBlocks.COAL_GENERATOR);
         compressor = register("compressor", CompressorTileEntity::new, ModBlocks.COMPRESSOR);
         dieselGenerator = register("diesel_generator", DieselGeneratorTileEntity::new, ModBlocks.DIESEL_GENERATOR);
-        dryingRack = register("drying_rack", DryingRackTileEntity::new, Registration.getBlocks(DryingRackBlock.class).toArray(new Block[0]));
-        electricFurnace = register("electric_furnace", ElectricFurnaceTileEntity::new, ModBlocks.ELECTRIC_FURNACE);
+        dryingRack = register("drying_rack", () -> new DryingRackTileEntity(pos, state), Registration.getBlocks(DryingRackBlock.class).toArray(new Block[0]));
+        electricFurnace = register("electric_furnace", () -> new ElectricFurnaceTileEntity(pos, state), ModBlocks.ELECTRIC_FURNACE);
         lavaGenerator = register("lava_generator", LavaGeneratorTileEntity::new, ModBlocks.LAVA_GENERATOR);
         mixer = register("mixer", MixerTileEntity::new, ModBlocks.MIXER);
         infuser = register("infuser", InfuserTileEntity::new, ModBlocks.INFUSER);
@@ -81,7 +81,7 @@ public final class ModMachineTileEntities {
         pump = register("pump", PumpTileEntity::new, ModBlocks.PUMP);
         quarry = register("quarry", QuarryTileEntity::new, ModBlocks.QUARRY);
         refinery = register("refinery", RefineryTileEntity::new, ModBlocks.REFINERY);
-        solidifier = register("solidifier", SolidifierTileEntity::new, ModBlocks.SOLIDIFIER);
+        solidifier = register("solidifier", () -> new SolidifierTileEntity(pos, state), ModBlocks.SOLIDIFIER);
         wire = register("wire", WireTileEntity::new, ModBlocks.WIRE);
     }
 

@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.client.debug.menu;
 import com.mojang.blaze3d.platform.Monitor;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.qsoftware.modlib.silentlib.client.key.InputUtils;
+import com.ultreon.modlib.embedded.silentlib.client.key.InputUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.hud.HudItems;
 import com.ultreon.randomthingz.client.hud.IHasHud;
@@ -20,13 +20,13 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.*;
 import net.minecraft.util.math.vector.Vector2f;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraft.util.math.vector.Vector4f;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -51,9 +51,9 @@ import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
@@ -135,7 +135,7 @@ public class DebugMenu {
             return;
         }
 
-        PoseStack matrixStack = event.getMatrixStack();
+        PoseStack matrixStack = event.getPoseStack();
         Minecraft mc = Minecraft.getInstance();
         Window mainWindow = mc.getWindow();
         Monitor monitor = mainWindow.findBestMonitor();
@@ -181,7 +181,7 @@ public class DebugMenu {
                     float f = player.xRot;
                     float f1 = player.yRot;
 
-                    Vec3 vec3d = player.getEyePosition(1.0F);
+                    Vec3 vec3d = player.getEyePosition(1.0f);
 
                     float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
                     float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
@@ -380,7 +380,7 @@ public class DebugMenu {
                     float f = player.xRot;
                     float f1 = player.yRot;
 
-                    Vec3 vec3d = player.getEyePosition(1.0F);
+                    Vec3 vec3d = player.getEyePosition(1.0f);
 
                     float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
                     float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
@@ -615,7 +615,7 @@ public class DebugMenu {
                         float f = player.xRot;
                         float f1 = player.yRot;
 
-                        Vec3 vec3d = player.getEyePosition(1.0F);
+                        Vec3 vec3d = player.getEyePosition(1.0f);
 
                         float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
                         float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
@@ -672,7 +672,7 @@ public class DebugMenu {
                         float f = player.xRot;
                         float f1 = player.yRot;
 
-                        Vec3 vec3d = player.getEyePosition(1.0F);
+                        Vec3 vec3d = player.getEyePosition(1.0f);
 
                         float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
                         float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
@@ -756,11 +756,11 @@ public class DebugMenu {
 
                     drawLeftTopString(matrixStack, "Time Phase", i++, new Formatted(timePhase));
 
-                    if (!dimension.isClientSided) {
+                    if (!dimension.isClientSide) {
                         Biome biome = dimension.getBiome(player.getPosition());
                         ResourceLocation location = biome.getRegistryName();
                         if (location != null) {
-                            @Nonnull ResourceLocation registryName = location;
+                            @NotNull ResourceLocation registryName = location;
                             drawLeftTopString(matrixStack, "Current Biome", i++, new Formatted(I18n.format("biome." + registryName.getNamespace() + "." + registryName.getPath())));
                         }
                     }
@@ -1027,9 +1027,9 @@ public class DebugMenu {
             }
 
             sb.append(s);
-        } else if (obj instanceof ITextComponent) {
-            ITextComponent e = (ITextComponent) obj;
-            sb.append(TextFormatting.GRAY).append("ITextComponent: ");
+        } else if (obj instanceof Component) {
+            Component e = (Component) obj;
+            sb.append(TextFormatting.GRAY).append("Component: ");
             sb.append(format(e.getString()));
         } else if (obj instanceof ItemStack) {
             ItemStack e = (ItemStack) obj;
@@ -1051,7 +1051,7 @@ public class DebugMenu {
             sb.append(TextFormatting.GOLD).append(rl.getNamespace());
             sb.append(TextFormatting.GRAY).append(":");
             sb.append(TextFormatting.YELLOW).append(rl.getPath());
-        } else if (obj instanceof PlayerEntity) {
+        } else if (obj instanceof Player) {
             Entity e = (Entity) obj;
             sb.append(TextFormatting.GRAY).append("Player: ");
             sb.append(format(e.getName().getString()));

@@ -42,7 +42,7 @@ public class DebugItem extends Item {
             });
 
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(e -> {
-                ItemStack stackInSlot = e.getStackInSlot(0);
+                ItemStack stackInSlot = e.getItem(0);
                 String text = stackInSlot.getCount() + "x " + stackInSlot.getItem().getRegistryName();
                 player.sendMessage(new TextComponent("Item Stack: ").append(new TextComponent(text)), Util.NIL_UUID);
                 player.sendMessage(new TextComponent(e.getClass().getName()).withStyle(ChatFormatting.ITALIC), Util.NIL_UUID);

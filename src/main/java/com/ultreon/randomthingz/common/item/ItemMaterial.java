@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.common.item;
 
-import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
-import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.machines.MetalBlock;
 import com.ultreon.randomthingz.item.tool.Toolset;
@@ -9,7 +9,7 @@ import com.ultreon.randomthingz.registration.Registration;
 import com.ultreon.randomthingz.world.gen.ores.DefaultOre;
 import com.ultreon.randomthingz.world.gen.ores.IOre;
 import com.ultreon.randomthingz.world.gen.ores.Ores;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.common.ToolType;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
@@ -102,6 +101,7 @@ public class ItemMaterial implements IItemMaterial {
 
     private static final List<ItemMaterial> values = new ArrayList<>();
     private static final Map<String, ItemMaterial> map = new HashMap<>();
+    private final Collection<Tag.Named<Block>> dataGenTags = new ArrayList<>();
 
     ItemMaterial(Builder builder) {
         this(builder, builder.name);
@@ -127,6 +127,7 @@ public class ItemMaterial implements IItemMaterial {
         this.dustTag = builder.dustTag;
         this.ingotTag = builder.ingotTag;
         this.nuggetTag = builder.nuggetTag;
+        this.dataGenTags.addAll(builder.dataGenTags);
 
         map.put(oreName, this);
         values.add(this);
@@ -138,7 +139,7 @@ public class ItemMaterial implements IItemMaterial {
                 String name = metal.oreName + "_ore";
                 metal.ore = Registration.BLOCKS.register(name, metal.oreSupplier);
                 Registration.ITEMS.register(name, () ->
-                        new BlockItem(metal.ore.get(), new Item.Properties().tab(ModItemGroups.ORES)));
+                        new BlockItem(metal.ore.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
             }
         }
         for (ItemMaterial metal : values()) {
@@ -146,7 +147,7 @@ public class ItemMaterial implements IItemMaterial {
                 String name = metal.getName() + "_block";
                 metal.storageBlock = Registration.BLOCKS.register(name, metal.storageBlockSupplier);
                 Registration.ITEMS.register(name, () ->
-                        new BlockItem(metal.storageBlock.get(), new Item.Properties().tab(ModItemGroups.ORES)));
+                        new BlockItem(metal.storageBlock.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
             }
         }
     }
@@ -454,6 +455,10 @@ public class ItemMaterial implements IItemMaterial {
         return map.get(name);
     }
 
+    public Collection<Tag.Named<Block>> getDataGenTags() {
+        return Collections.unmodifiableCollection(dataGenTags);
+    }
+
     /**
      * @author Qboi
      */
@@ -475,6 +480,7 @@ public class ItemMaterial implements IItemMaterial {
         Tag.Named<Item> nuggetTag;
 
         Supplier<Toolset> tools;
+        private final List<Tag.Named<Block>> dataGenTags = new ArrayList<>();
 
         /**
          * @param name name of the item material.
@@ -498,10 +504,10 @@ public class ItemMaterial implements IItemMaterial {
         public Builder ore(IOre ore) {
             this.ore = () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .requiresCorrectToolForDrops()
-                    .harvestTool(ToolType.PICKAXE)
-                    .harvestLevel(ore.getHarvestLevel())
                     .strength(ore.getHardness(), ore.getResistance())
                     .sound(SoundType.STONE));
+            this.dataGenTags.add(BlockTags.MINEABLE_WITH_PICKAXE);
+            this.dataGenTags.add(BlockTags.NEEDS_IRON_TOOL);
             this.oreTag = blockTag("ores/" + name);
             return this;
         }
@@ -518,19 +524,19 @@ public class ItemMaterial implements IItemMaterial {
         }
 
         public Builder chunks() {
-            this.chunks = () -> new Item(new Item.Properties().tab(ModItemGroups.METAL_CRAFTABLES));
+            this.chunks = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
             this.chunksTag = itemTag(RandomThingz.rl("chunks/" + name));
             return this;
         }
 
         public Builder dust() {
-            this.dust = () -> new Item(new Item.Properties().tab(ModItemGroups.METAL_CRAFTABLES));
+            this.dust = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
             this.dustTag = itemTag("dusts/" + name);
             return this;
         }
 
         public Builder ingot() {
-            this.ingot = () -> new Item(new Item.Properties().tab(ModItemGroups.METAL_CRAFTABLES));
+            this.ingot = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
             this.ingotTag = itemTag("ingots/" + name);
             return this;
         }
@@ -541,7 +547,7 @@ public class ItemMaterial implements IItemMaterial {
         }
 
         public Builder nugget() {
-            this.nugget = () -> new Item(new Item.Properties().tab(ModItemGroups.METAL_CRAFTABLES));
+            this.nugget = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
             this.nuggetTag = itemTag("nuggets/" + name);
             return this;
         }

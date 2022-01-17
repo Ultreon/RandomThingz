@@ -11,10 +11,10 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class MetalCraftablesItemGroup extends CreativeModeTab {
-    public static final MetalCraftablesItemGroup instance = new MetalCraftablesItemGroup(CreativeModeTab.TABS.length, "randomthingz_metal_craftables");
+public class MetalCraftablesTab extends CreativeModeTab {
+    public static final MetalCraftablesTab instance = new MetalCraftablesTab(CreativeModeTab.TABS.length, "randomthingz_metal_craftables");
 
-    public MetalCraftablesItemGroup(int index, String label) {
+    public MetalCraftablesTab(int index, String label) {
         super(index, label);
     }
 

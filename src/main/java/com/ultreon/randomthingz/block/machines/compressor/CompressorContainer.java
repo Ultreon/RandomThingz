@@ -1,16 +1,16 @@
 package com.ultreon.randomthingz.block.machines.compressor;
 
-import com.qsoftware.modlib.silentlib.inventory.SlotOutputOnly;
-import com.qsoftware.modlib.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
 import com.ultreon.randomthingz.init.ModMachineContainers;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
 public class CompressorContainer extends AbstractMachineContainer<CompressorTileEntity> {
     public CompressorContainer(int id, Inventory playerInventory) {

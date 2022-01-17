@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz.block._common;
 
-import com.qsoftware.modlib.silentlib.registry.BlockDeferredRegister;
-import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.BlockDeferredRegister;
+import com.ultreon.modlib.embedded.silentlib.registry.BlockRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.ultreon.randomthingz.common.CoreRegisterWrapperModule;
 import com.ultreon.randomthingz.common.ModuleSafety;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.DeferredRegister;

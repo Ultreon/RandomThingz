@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.item.crafting.*;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -70,7 +69,7 @@ public class DryingRecipe implements Recipe<Container> {
             DryingRecipe recipe = new DryingRecipe(recipeId);
             recipe.processTime = GsonHelper.getAsInt(json, "process_time", 400);
             recipe.ingredient = Ingredient.fromJson(json.get("ingredient"));
-            recipe.result = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "result"));
+            recipe.result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
             return recipe;
         }
 

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item;
 
 import com.ultreon.randomthingz.common.enums.TextColors;
-import com.ultreon.randomthingz.common.item.ModItemGroups;
+import com.ultreon.randomthingz.common.item.ModCreativeTabs;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class UnstableInfinityIngot extends Item {
     public UnstableInfinityIngot() {
-        super(new Properties().tab(ModItemGroups.OVERPOWERED).rarity(Rarity.RARE).stacksTo(4));
+        super(new Properties().tab(ModCreativeTabs.OVERPOWERED).rarity(Rarity.RARE).stacksTo(4));
     }
 
     @Override

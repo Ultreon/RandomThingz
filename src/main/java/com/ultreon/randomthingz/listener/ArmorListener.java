@@ -62,12 +62,12 @@ public class ArmorListener {
      */
     @SubscribeEvent
     public static void onPlayerAttacked(LivingAttackEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity) {
+        if (event.getEntityLiving() instanceof Player) {
             // Get player
-            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+            Player player = (Player) event.getEntityLiving();
 
             // Get armor list.
-            List<ItemStack> armor = (List<ItemStack>) player.getArmorInventoryList();
+            List<ItemStack> armor = (List<ItemStack>) player.getArmorSlots();
 
             // Check Armor
             if (!armor.isEmpty()) {
@@ -94,12 +94,12 @@ public class ArmorListener {
      */
     @SubscribeEvent
     public static void onPlayerHurt(LivingHurtEvent event) {
-        if (event.getEntityLiving() instanceof PlayerEntity) {
+        if (event.getEntityLiving() instanceof Player) {
             // Get player
-            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+            Player player = (Player) event.getEntityLiving();
 
             // Get armor list.
-            List<ItemStack> armor = (List<ItemStack>) player.getArmorInventoryList();
+            List<ItemStack> armor = (List<ItemStack>) player.getArmorSlots();
 
             // Check Armor
             if (!armor.isEmpty()) {

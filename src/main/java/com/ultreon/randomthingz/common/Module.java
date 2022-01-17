@@ -6,14 +6,14 @@ import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**
@@ -150,7 +150,7 @@ public abstract class Module {
     /**
      * Mark the data dirty, the next time the modules data will be saved this module will be included.
      */
-    public final void markModified() {
+    public final void setChanged() {
         ModuleManager.getInstance().setSaveSchedule(this);
     }
 

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.generator.diesel;
 
-import com.qsoftware.modlib.api.IFluidContainer;
+import com.ultreon.modlib.api.FluidContainer;
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidFuelGeneratorTileEntity;
 import com.ultreon.randomthingz.util.InventoryUtils;
@@ -16,8 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class DieselGeneratorTileEntity extends AbstractFluidFuelGeneratorTileEntity {
     // Energy constants
@@ -56,7 +55,7 @@ public class DieselGeneratorTileEntity extends AbstractFluidFuelGeneratorTileEnt
     public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
         return index == 0
                 && InventoryUtils.isFilledFluidContainer(stack)
-                && tank.isFluidValid(IFluidContainer.getBucketOrContainerFluid(stack));
+                && tank.isFluidValid(FluidContainer.getBucketOrContainerFluid(stack));
     }
 
     @Override

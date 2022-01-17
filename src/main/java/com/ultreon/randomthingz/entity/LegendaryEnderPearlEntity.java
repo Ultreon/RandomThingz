@@ -2,24 +2,23 @@ package com.ultreon.randomthingz.entity;
 
 import com.ultreon.randomthingz.common.entity.ModEntities;
 import com.ultreon.randomthingz.common.item.ModItems;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Legendary Ender Pearl entity class.
@@ -51,7 +50,7 @@ public class LegendaryEnderPearlEntity extends ThrowableItemProjectile {
      */
     protected void onHitEntity(@NotNull EntityHitResult p_213868_1_) {
         super.onHitEntity(p_213868_1_);
-        p_213868_1_.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 0.0F);
+        p_213868_1_.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 0.0f);
     }
 
     @Override
@@ -75,19 +74,19 @@ public class LegendaryEnderPearlEntity extends ThrowableItemProjectile {
             if (entity instanceof ServerPlayer) {
                 ServerPlayer serverplayerentity = (ServerPlayer) entity;
                 if (serverplayerentity.connection.getConnection().isConnected() && serverplayerentity.level == this.level && !serverplayerentity.isSleeping()) {
-                    net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(serverplayerentity, this.getX(), this.getY(), this.getZ(), 5.0F);
+                    net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(serverplayerentity, this.getX(), this.getY(), this.getZ(), 5.0f);
                     if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) { // Don't indent to lower patch size
                         if (entity.isPassenger()) {
                             entity.stopRiding();
                         }
 
                         entity.teleportTo(event.getTargetX(), event.getTargetY(), event.getTargetZ());
-                        entity.fallDistance = 0.0F;
+                        entity.fallDistance = 0.0f;
                     } //Forge: End
                 }
             } else if (entity != null) {
                 entity.teleportTo(this.getX(), this.getY(), this.getZ());
-                entity.fallDistance = 0.0F;
+                entity.fallDistance = 0.0f;
             }
 
             this.remove();
@@ -110,7 +109,7 @@ public class LegendaryEnderPearlEntity extends ThrowableItemProjectile {
     @Nullable
     public Entity changeDimension(@NotNull ServerLevel server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
         Entity entity = this.getShooter();
-        if (entity != null && entity.dimension.getDimensionKey() != server.getDimensionKey()) {
+        if (entity != null && entity.level.getDimensionKey() != server.getDimensionKey()) {
             this.setShooter(null);
         }
 

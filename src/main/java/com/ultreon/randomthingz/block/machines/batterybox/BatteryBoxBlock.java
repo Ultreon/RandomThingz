@@ -22,8 +22,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class BatteryBoxBlock extends Block {
     public static final IntegerProperty BATTERIES = IntegerProperty.create("batteries", 0, 6);
@@ -43,7 +42,7 @@ public class BatteryBoxBlock extends Block {
     @Nullable
     @Override
     public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new BatteryBoxTileEntity();
+        return new BatteryBoxTileEntity(pos, state);
     }
 
     @Override

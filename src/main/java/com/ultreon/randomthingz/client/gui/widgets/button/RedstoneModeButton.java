@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.client.gui.widgets.button;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.modlib.silentutils.EnumUtils;
+import com.ultreon.modlib.api.RedstoneMode;
+import com.ultreon.modlib.embedded.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
@@ -34,7 +34,7 @@ public class RedstoneModeButton extends Button {
     @Override
     public void renderButton(PoseStack matrixStack, int p_renderWidget_1_, int p_renderWidget_2_, float p_renderWidget_3_) {
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bind(container.getRedstoneMode().getTexture());
+        RenderSystem.setShaderTexture(0, container.getRedstoneMode().getTexture());
         GlStateManager._disableDepthTest();
 
         blit(matrixStack, this.x, this.y, 0, 0, this.width, this.height, 16, 16);

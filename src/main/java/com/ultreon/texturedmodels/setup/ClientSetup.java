@@ -56,4 +56,3 @@ public class ClientSetup {
         ModelLoaderRegistry.registerLoader(new ResourceLocation(QTextureModels.MOD_ID, "illusion_fence_gate_loader"), new IllusionFenceGateModelLoader());
     }
 }
-//========SOLI DEO GLORIA========//

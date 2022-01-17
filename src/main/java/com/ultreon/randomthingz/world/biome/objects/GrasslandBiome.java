@@ -2,9 +2,9 @@ package com.ultreon.randomthingz.world.biome.objects;
 
 import com.ultreon.randomthingz.world.biome.BOPClimates;
 import com.ultreon.randomthingz.world.biome.BiomeTemplate;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.*;
+import net.minecraft.world.entity.EntityClassification;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.feature.structure.StructureFeatures;

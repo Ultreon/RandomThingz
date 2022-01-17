@@ -15,8 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Legendary Ender Pearl entity class.
@@ -76,7 +75,7 @@ public class DynamiteEntity extends ThrowableItemProjectile {
     @Nullable
     public Entity changeDimension(@NotNull ServerLevel server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
         Entity entity = this.getShooter();
-        if (entity != null && entity.dimension.getDimensionKey() != server.getDimensionKey()) {
+        if (entity != null && entity.level.getDimensionKey() != server.getDimensionKey()) {
             this.setShooter(null);
         }
 

@@ -56,189 +56,189 @@ public class MoobloomModel<T extends MoobloomEntity> extends AgeableListModel<T>
         texHeight = 64;
 
         body = new ModelPart(this);
-        body.setPos(0.0F, 5.0F, 2.0F);
-        setRotationAngle(body, 1.5708F, 0.0F, 0.0F);
-        body.texOffs(18, 4).addBox(-6.0F, -10.0F, -7.0F, 12.0F, 18.0F, 10.0F, 0.0F, true);
-        body.texOffs(52, 0).addBox(-2.0F, 2.0F, -8.0F, 4.0F, 6.0F, 1.0F, 0.0F, true);
+        body.setPos(0.0f, 5.0f, 2.0f);
+        setRotationAngle(body, 1.5708F, 0.0f, 0.0f);
+        body.texOffs(18, 4).addBox(-6.0f, -10.0f, -7.0f, 12.0f, 18.0f, 10.0f, 0.0f, true);
+        body.texOffs(52, 0).addBox(-2.0f, 2.0f, -8.0f, 4.0f, 6.0f, 1.0f, 0.0f, true);
 
         fungus2 = new ModelPart(this);
-        fungus2.setPos(4.0F, -0.5F, -8.0F);
+        fungus2.setPos(4.0f, -0.5F, -8.0f);
         body.addChild(fungus2);
-        setRotationAngle(fungus2, -1.5708F, 0.0F, -0.7854F);
-        fungus2.texOffs(64, 0).addBox(-6.0F, -19.5F, -6.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
-        fungus2.texOffs(64, 0).addBox(-6.0F, -19.5F, -6.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(fungus2, -1.5708F, 0.0f, -0.7854F);
+        fungus2.texOffs(64, 0).addBox(-6.0f, -19.5F, -6.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
+        fungus2.texOffs(64, 0).addBox(-6.0f, -19.5F, -6.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         bone7 = new ModelPart(this);
         bone7.setPos(-2.2929F, -4.5F, -7.1213F);
         fungus2.addChild(bone7);
-        setRotationAngle(bone7, 0.0F, -0.7854F, 0.0F);
-        bone7.texOffs(0, 32).addBox(0.3284F, -14.0F, -1.5F, 3.0F, 8.0F, 3.0F, 0.0F, false);
+        setRotationAngle(bone7, 0.0f, -0.7854F, 0.0f);
+        bone7.texOffs(0, 32).addBox(0.3284F, -14.0f, -1.5F, 3.0f, 8.0f, 3.0f, 0.0f, false);
 
         bone2 = new ModelPart(this);
-        bone2.setPos(-1.0F, -15.5F, -6.0F);
+        bone2.setPos(-1.0f, -15.5F, -6.0f);
         fungus2.addChild(bone2);
-        setRotationAngle(bone2, 0.0F, 1.5708F, 0.0F);
-        bone2.texOffs(64, 0).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
-        bone2.texOffs(64, 0).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(bone2, 0.0f, 1.5708F, 0.0f);
+        bone2.texOffs(64, 0).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
+        bone2.texOffs(64, 0).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         cactus2 = new ModelPart(this);
         cactus2.setPos(-1.8787F, -14.5F, -7.1213F);
         fungus2.addChild(cactus2);
-        setRotationAngle(cactus2, 0.0F, -0.7854F, -0.2182F);
-        cactus2.texOffs(12, 32).addBox(-2.0F, -4.0F, -2.0F, 4.0F, 8.0F, 4.0F, 0.0F, false);
-        cactus2.texOffs(12, 32).addBox(-2.0919F, -8.9001F, -2.0081F, 4.0F, 5.0F, 4.0F, 0.0F, false);
-        cactus2.texOffs(24, 52).addBox(-3.4845F, -13.7441F, -3.0155F, 6.0F, 6.0F, 6.0F, 0.0F, false);
+        setRotationAngle(cactus2, 0.0f, -0.7854F, -0.2182F);
+        cactus2.texOffs(12, 32).addBox(-2.0f, -4.0f, -2.0f, 4.0f, 8.0f, 4.0f, 0.0f, false);
+        cactus2.texOffs(12, 32).addBox(-2.0919F, -8.9001F, -2.0081F, 4.0f, 5.0f, 4.0f, 0.0f, false);
+        cactus2.texOffs(24, 52).addBox(-3.4845F, -13.7441F, -3.0155F, 6.0f, 6.0f, 6.0f, 0.0f, false);
 
         bone10 = new ModelPart(this);
-        bone10.setPos(0.0F, 0.0F, 0.0F);
+        bone10.setPos(0.0f, 0.0f, 0.0f);
         cactus2.addChild(bone10);
-        bone10.texOffs(13, 34).addBox(-3.0F, -1.0F, -2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone10.texOffs(13, 34).addBox(2.0F, -3.0F, -2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone10.texOffs(13, 34).addBox(2.0F, 2.0F, -2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone10.texOffs(13, 34).addBox(-3.0F, 1.0F, 2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone10.texOffs(13, 33).addBox(-2.0F, -1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
-        bone10.texOffs(13, 33).addBox(2.0F, -2.0F, 2.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
-        bone10.texOffs(13, 33).addBox(2.0F, 3.0F, 2.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
-        bone10.texOffs(13, 33).addBox(-2.0F, 3.0F, -3.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
+        bone10.texOffs(13, 34).addBox(-3.0f, -1.0f, -2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone10.texOffs(13, 34).addBox(2.0f, -3.0f, -2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone10.texOffs(13, 34).addBox(2.0f, 2.0f, -2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone10.texOffs(13, 34).addBox(-3.0f, 1.0f, 2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone10.texOffs(13, 33).addBox(-2.0f, -1.0f, 2.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
+        bone10.texOffs(13, 33).addBox(2.0f, -2.0f, 2.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
+        bone10.texOffs(13, 33).addBox(2.0f, 3.0f, 2.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
+        bone10.texOffs(13, 33).addBox(-2.0f, 3.0f, -3.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
 
         fungus3 = new ModelPart(this);
-        fungus3.setPos(4.0F, 10.0F, -7.5F);
+        fungus3.setPos(4.0f, 10.0f, -7.5F);
         body.addChild(fungus3);
-        setRotationAngle(fungus3, -1.5708F, 0.0F, 0.0F);
-        fungus3.texOffs(64, 0).addBox(-5.0F, -18.0F, -5.5F, 10.0F, 8.0F, 0.0F, 0.0F, false);
-        fungus3.texOffs(64, 0).addBox(-5.0F, -18.0F, -5.5F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(fungus3, -1.5708F, 0.0f, 0.0f);
+        fungus3.texOffs(64, 0).addBox(-5.0f, -18.0f, -5.5F, 10.0f, 8.0f, 0.0f, 0.0f, false);
+        fungus3.texOffs(64, 0).addBox(-5.0f, -18.0f, -5.5F, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         bone8 = new ModelPart(this);
-        bone8.setPos(-2.2929F, -15.0F, -7.6213F);
+        bone8.setPos(-2.2929F, -15.0f, -7.6213F);
         fungus3.addChild(bone8);
-        setRotationAngle(bone8, 0.0F, -0.7854F, 0.0F);
-        bone8.texOffs(0, 32).addBox(1.7071F, -3.0F, -2.1213F, 3.0F, 8.0F, 3.0F, 0.0F, false);
+        setRotationAngle(bone8, 0.0f, -0.7854F, 0.0f);
+        bone8.texOffs(0, 32).addBox(1.7071F, -3.0f, -2.1213F, 3.0f, 8.0f, 3.0f, 0.0f, false);
 
         bone3 = new ModelPart(this);
-        bone3.setPos(0.0F, -14.0F, -5.5F);
+        bone3.setPos(0.0f, -14.0f, -5.5F);
         fungus3.addChild(bone3);
-        setRotationAngle(bone3, 0.0F, 1.5708F, 0.0F);
-        bone3.texOffs(64, 0).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
-        bone3.texOffs(64, 0).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(bone3, 0.0f, 1.5708F, 0.0f);
+        bone3.texOffs(64, 0).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
+        bone3.texOffs(64, 0).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         cactus3 = new ModelPart(this);
-        cactus3.setPos(-1.0F, -13.0F, -6.5F);
+        cactus3.setPos(-1.0f, -13.0f, -6.5F);
         fungus3.addChild(cactus3);
         setRotationAngle(cactus3, 0.2399F, -0.4253F, -0.1006F);
-        cactus3.texOffs(12, 32).addBox(-2.0F, -4.0F, -2.0F, 4.0F, 8.0F, 4.0F, 0.0F, false);
-        cactus3.texOffs(24, 52).addBox(-3.4061F, -6.9333F, -2.662F, 6.0F, 6.0F, 6.0F, 0.0F, false);
+        cactus3.texOffs(12, 32).addBox(-2.0f, -4.0f, -2.0f, 4.0f, 8.0f, 4.0f, 0.0f, false);
+        cactus3.texOffs(24, 52).addBox(-3.4061F, -6.9333F, -2.662F, 6.0f, 6.0f, 6.0f, 0.0f, false);
 
         bone11 = new ModelPart(this);
-        bone11.setPos(0.0F, 0.0F, 0.0F);
+        bone11.setPos(0.0f, 0.0f, 0.0f);
         cactus3.addChild(bone11);
-        bone11.texOffs(13, 34).addBox(-3.0F, -1.0F, -2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone11.texOffs(13, 34).addBox(2.0F, -3.0F, -2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone11.texOffs(13, 34).addBox(2.0F, 2.0F, -2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone11.texOffs(13, 34).addBox(-3.0F, 1.0F, 2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone11.texOffs(13, 33).addBox(-2.0F, -1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
-        bone11.texOffs(13, 33).addBox(2.0F, -2.0F, 2.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
-        bone11.texOffs(13, 33).addBox(2.0F, 3.0F, 2.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
-        bone11.texOffs(13, 33).addBox(-2.0F, 3.0F, -3.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
+        bone11.texOffs(13, 34).addBox(-3.0f, -1.0f, -2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone11.texOffs(13, 34).addBox(2.0f, -3.0f, -2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone11.texOffs(13, 34).addBox(2.0f, 2.0f, -2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone11.texOffs(13, 34).addBox(-3.0f, 1.0f, 2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone11.texOffs(13, 33).addBox(-2.0f, -1.0f, 2.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
+        bone11.texOffs(13, 33).addBox(2.0f, -2.0f, 2.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
+        bone11.texOffs(13, 33).addBox(2.0f, 3.0f, 2.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
+        bone11.texOffs(13, 33).addBox(-2.0f, 3.0f, -3.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
 
         fungus4 = new ModelPart(this);
-        fungus4.setPos(4.0F, -0.5F, 0.0F);
+        fungus4.setPos(4.0f, -0.5F, 0.0f);
         body.addChild(fungus4);
-        setRotationAngle(fungus4, -1.5708F, 0.0F, -0.7854F);
-        fungus4.texOffs(64, 8).addBox(-6.0F, -19.5F, -6.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
-        fungus4.texOffs(64, 8).addBox(-6.0F, -19.5F, -6.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(fungus4, -1.5708F, 0.0f, -0.7854F);
+        fungus4.texOffs(64, 8).addBox(-6.0f, -19.5F, -6.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
+        fungus4.texOffs(64, 8).addBox(-6.0f, -19.5F, -6.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         bone5 = new ModelPart(this);
-        bone5.setPos(-1.0F, -15.5F, -6.0F);
+        bone5.setPos(-1.0f, -15.5F, -6.0f);
         fungus4.addChild(bone5);
-        setRotationAngle(bone5, 0.0F, 1.5708F, 0.0F);
-        bone5.texOffs(64, 8).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
-        bone5.texOffs(64, 8).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(bone5, 0.0f, 1.5708F, 0.0f);
+        bone5.texOffs(64, 8).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
+        bone5.texOffs(64, 8).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         fungus5 = new ModelPart(this);
-        fungus5.setPos(4.0F, 10.0F, 0.5F);
+        fungus5.setPos(4.0f, 10.0f, 0.5F);
         body.addChild(fungus5);
-        setRotationAngle(fungus5, -1.5708F, 0.0F, 0.0F);
-        fungus5.texOffs(64, 8).addBox(-5.0F, -18.0F, -5.5F, 10.0F, 8.0F, 0.0F, 0.0F, false);
-        fungus5.texOffs(64, 8).addBox(-5.0F, -18.0F, -5.5F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(fungus5, -1.5708F, 0.0f, 0.0f);
+        fungus5.texOffs(64, 8).addBox(-5.0f, -18.0f, -5.5F, 10.0f, 8.0f, 0.0f, 0.0f, false);
+        fungus5.texOffs(64, 8).addBox(-5.0f, -18.0f, -5.5F, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         bone6 = new ModelPart(this);
-        bone6.setPos(0.0F, -14.0F, -5.5F);
+        bone6.setPos(0.0f, -14.0f, -5.5F);
         fungus5.addChild(bone6);
-        setRotationAngle(bone6, 0.0F, 1.5708F, 0.0F);
-        bone6.texOffs(64, 8).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
-        bone6.texOffs(64, 8).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(bone6, 0.0f, 1.5708F, 0.0f);
+        bone6.texOffs(64, 8).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
+        bone6.texOffs(64, 8).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         head = new ModelPart(this);
-        head.setPos(0.0F, 4.0F, -8.0F);
-        head.texOffs(0, 0).addBox(-4.0F, -4.0F, -6.0F, 8.0F, 8.0F, 6.0F, 0.0F, true);
-        head.texOffs(22, 0).addBox(4.0F, -5.0F, -4.0F, 1.0F, 3.0F, 1.0F, 0.0F, true);
-        head.texOffs(22, 0).addBox(-5.0F, -5.0F, -4.0F, 1.0F, 3.0F, 1.0F, 0.0F, true);
-        head.texOffs(0, 0).addBox(-6.0F, -2.0F, -5.0F, 2.0F, 2.0F, 1.0F, 0.0F, true);
+        head.setPos(0.0f, 4.0f, -8.0f);
+        head.texOffs(0, 0).addBox(-4.0f, -4.0f, -6.0f, 8.0f, 8.0f, 6.0f, 0.0f, true);
+        head.texOffs(22, 0).addBox(4.0f, -5.0f, -4.0f, 1.0f, 3.0f, 1.0f, 0.0f, true);
+        head.texOffs(22, 0).addBox(-5.0f, -5.0f, -4.0f, 1.0f, 3.0f, 1.0f, 0.0f, true);
+        head.texOffs(0, 0).addBox(-6.0f, -2.0f, -5.0f, 2.0f, 2.0f, 1.0f, 0.0f, true);
 
         head_sub_0 = new ModelPart(this);
-        head_sub_0.setPos(0.0F, 20.0F, 8.0F);
+        head_sub_0.setPos(0.0f, 20.0f, 8.0f);
         head.addChild(head_sub_0);
-        head_sub_0.texOffs(0, 32).addBox(-1.5F, -32.0F, -12.5F, 3.0F, 8.0F, 3.0F, 0.0F, true);
+        head_sub_0.texOffs(0, 32).addBox(-1.5F, -32.0f, -12.5F, 3.0f, 8.0f, 3.0f, 0.0f, true);
 
         head_sub_1 = new ModelPart(this);
-        head_sub_1.setPos(0.0F, 40.0F, 16.0F);
+        head_sub_1.setPos(0.0f, 40.0f, 16.0f);
         head.addChild(head_sub_1);
-        head_sub_1.texOffs(0, 0).addBox(4.0F, -42.0F, -21.0F, 2.0F, 2.0F, 1.0F, 0.0F, true);
-        head_sub_1.texOffs(53, 10).addBox(-2.0F, -38.0F, -22.5F, 4.0F, 2.0F, 1.0F, 0.0F, true);
+        head_sub_1.texOffs(0, 0).addBox(4.0f, -42.0f, -21.0f, 2.0f, 2.0f, 1.0f, 0.0f, true);
+        head_sub_1.texOffs(53, 10).addBox(-2.0f, -38.0f, -22.5F, 4.0f, 2.0f, 1.0f, 0.0f, true);
 
         fungus = new ModelPart(this);
-        fungus.setPos(0.0F, -8.0F, -3.0F);
+        fungus.setPos(0.0f, -8.0f, -3.0f);
         head.addChild(fungus);
-        setRotationAngle(fungus, 0.0F, -1.1345F, 0.0F);
-        fungus.texOffs(64, 0).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
-        fungus.texOffs(64, 8).addBox(-5.0F, -12.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(fungus, 0.0f, -1.1345F, 0.0f);
+        fungus.texOffs(64, 0).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
+        fungus.texOffs(64, 8).addBox(-5.0f, -12.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         bone = new ModelPart(this);
-        bone.setPos(0.0F, 0.0F, 0.0F);
+        bone.setPos(0.0f, 0.0f, 0.0f);
         fungus.addChild(bone);
-        setRotationAngle(bone, 0.0F, 1.5708F, 0.0F);
-        bone.texOffs(64, 0).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(bone, 0.0f, 1.5708F, 0.0f);
+        bone.texOffs(64, 0).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         bone4 = new ModelPart(this);
-        bone4.setPos(0.0F, -8.0F, 0.0F);
+        bone4.setPos(0.0f, -8.0f, 0.0f);
         fungus.addChild(bone4);
-        setRotationAngle(bone4, 0.0F, 1.5708F, 0.0F);
-        bone4.texOffs(64, 8).addBox(-5.0F, -4.0F, 0.0F, 10.0F, 8.0F, 0.0F, 0.0F, false);
+        setRotationAngle(bone4, 0.0f, 1.5708F, 0.0f);
+        bone4.texOffs(64, 8).addBox(-5.0f, -4.0f, 0.0f, 10.0f, 8.0f, 0.0f, 0.0f, false);
 
         cactus = new ModelPart(this);
-        cactus.setPos(0.0F, 1.0F, 0.0F);
+        cactus.setPos(0.0f, 1.0f, 0.0f);
         fungus.addChild(cactus);
         setRotationAngle(cactus, 0.1922F, -0.4293F, -0.0808F);
-        cactus.texOffs(12, 32).addBox(-2.0F, -4.0F, -2.0F, 4.0F, 8.0F, 4.0F, 0.0F, false);
-        cactus.texOffs(0, 52).addBox(-2.7653F, -9.348F, -3.3967F, 6.0F, 6.0F, 6.0F, 0.0F, false);
+        cactus.texOffs(12, 32).addBox(-2.0f, -4.0f, -2.0f, 4.0f, 8.0f, 4.0f, 0.0f, false);
+        cactus.texOffs(0, 52).addBox(-2.7653F, -9.348F, -3.3967F, 6.0f, 6.0f, 6.0f, 0.0f, false);
 
         bone9 = new ModelPart(this);
-        bone9.setPos(0.0F, 0.0F, 0.0F);
+        bone9.setPos(0.0f, 0.0f, 0.0f);
         cactus.addChild(bone9);
-        bone9.texOffs(13, 34).addBox(-3.0F, -1.0F, -2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone9.texOffs(13, 34).addBox(2.0F, -3.0F, -2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone9.texOffs(13, 34).addBox(2.0F, 2.0F, -2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone9.texOffs(13, 34).addBox(-3.0F, 1.0F, 2.0F, 1.0F, 1.0F, 0.0F, 0.0F, false);
-        bone9.texOffs(13, 33).addBox(-2.0F, -1.0F, 2.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
-        bone9.texOffs(13, 33).addBox(2.0F, -2.0F, 2.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
-        bone9.texOffs(13, 33).addBox(2.0F, 3.0F, 2.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
-        bone9.texOffs(13, 33).addBox(-2.0F, 3.0F, -3.0F, 0.0F, 1.0F, 1.0F, 0.0F, false);
+        bone9.texOffs(13, 34).addBox(-3.0f, -1.0f, -2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone9.texOffs(13, 34).addBox(2.0f, -3.0f, -2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone9.texOffs(13, 34).addBox(2.0f, 2.0f, -2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone9.texOffs(13, 34).addBox(-3.0f, 1.0f, 2.0f, 1.0f, 1.0f, 0.0f, 0.0f, false);
+        bone9.texOffs(13, 33).addBox(-2.0f, -1.0f, 2.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
+        bone9.texOffs(13, 33).addBox(2.0f, -2.0f, 2.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
+        bone9.texOffs(13, 33).addBox(2.0f, 3.0f, 2.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
+        bone9.texOffs(13, 33).addBox(-2.0f, 3.0f, -3.0f, 0.0f, 1.0f, 1.0f, 0.0f, false);
 
         leg1 = new ModelPart(this);
-        leg1.setPos(4.0F, 12.0F, 7.0F);
-        leg1.texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, true);
+        leg1.setPos(4.0f, 12.0f, 7.0f);
+        leg1.texOffs(0, 16).addBox(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, 0.0f, true);
 
         leg2 = new ModelPart(this);
-        leg2.setPos(-4.0F, 12.0F, 7.0F);
-        leg2.texOffs(0, 16).addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, 0.0F, true);
+        leg2.setPos(-4.0f, 12.0f, 7.0f);
+        leg2.texOffs(0, 16).addBox(-2.0f, 0.0f, -2.0f, 4.0f, 12.0f, 4.0f, 0.0f, true);
 
         leg3 = new ModelPart(this);
-        leg3.setPos(4.0F, 12.0F, -6.0F);
-        leg3.texOffs(0, 16).addBox(-2.0F, 0.0F, -1.0F, 4.0F, 12.0F, 4.0F, 0.0F, true);
+        leg3.setPos(4.0f, 12.0f, -6.0f);
+        leg3.texOffs(0, 16).addBox(-2.0f, 0.0f, -1.0f, 4.0f, 12.0f, 4.0f, 0.0f, true);
 
         leg4 = new ModelPart(this);
-        leg4.setPos(-4.0F, 12.0F, -6.0F);
-        leg4.texOffs(0, 16).addBox(-2.0F, 0.0F, -1.0F, 4.0F, 12.0F, 4.0F, 0.0F, true);
+        leg4.setPos(-4.0f, 12.0f, -6.0f);
+        leg4.texOffs(0, 16).addBox(-2.0f, 0.0f, -1.0f, 4.0f, 12.0f, 4.0f, 0.0f, true);
     }
 
     @Override

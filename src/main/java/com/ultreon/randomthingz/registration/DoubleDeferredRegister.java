@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.registration;
 
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;

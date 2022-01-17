@@ -10,10 +10,10 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class OresItemGroup extends CreativeModeTab {
-    public static final OresItemGroup instance = new OresItemGroup(CreativeModeTab.TABS.length, "randomthingz_ores");
+public class OresTab extends CreativeModeTab {
+    public static final OresTab instance = new OresTab(CreativeModeTab.TABS.length, "randomthingz_ores");
 
-    public OresItemGroup(int index, String label) {
+    public OresTab(int index, String label) {
         super(index, label);
     }
 

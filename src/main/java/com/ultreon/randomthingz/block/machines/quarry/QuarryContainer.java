@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.quarry;
 
-import com.qsoftware.modlib.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.core.BlockPos;
@@ -10,14 +10,15 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
 public class QuarryContainer extends AbstractMachineBaseContainer<QuarryTileEntity> {
     public QuarryContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new QuarryTileEntity(), new SimpleContainerData(QuarryTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, null, new SimpleContainerData(QuarryTileEntity.FIELDS_COUNT));
     }
 
-    public QuarryContainer(int id, Inventory playerInventory, QuarryTileEntity tileEntity, ContainerData fields) {
+    public QuarryContainer(int id, Inventory playerInventory, @Nullable QuarryTileEntity tileEntity, ContainerData fields) {
         super(ModMachineContainers.quarry, id, tileEntity, fields);
 
         InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);

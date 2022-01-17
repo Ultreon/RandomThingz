@@ -32,7 +32,7 @@ public final class Targeter {
             float f = player.xRot;
             float f1 = player.yRot;
 
-            Vec3 vec3d = player.getEyePosition(1.0F);
+            Vec3 vec3d = player.getEyePosition(1.0f);
 
             float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
             float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
@@ -70,7 +70,7 @@ public final class Targeter {
         float f = player.xRot;
         float f1 = player.yRot;
 
-        Vec3 vec3d = player.getEyePosition(1.0F);
+        Vec3 vec3d = player.getEyePosition(1.0f);
 
         float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
         float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);

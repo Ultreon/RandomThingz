@@ -6,8 +6,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EnergySwirlLayer;
 import net.minecraft.resources.ResourceLocation;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class BabyCreeperChargeLayer extends EnergySwirlLayer<BabyCreeperEntity, BabyCreeperModel> {
 
@@ -23,13 +22,13 @@ public class BabyCreeperChargeLayer extends EnergySwirlLayer<BabyCreeperEntity, 
         return modifier * 0.01F;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     protected ResourceLocation getTextureLocation() {
         return LIGHTNING_TEXTURE;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     protected EntityModel<BabyCreeperEntity> model() {
         return this.creeperModel;

@@ -1,11 +1,12 @@
 package com.ultreon.randomthingz.block.machines.itempipe;
 
 import com.google.common.collect.Maps;
-import com.qsoftware.modlib.api.ConnectionType;
+import com.ultreon.modlib.api.ConnectionType;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.api.IWrenchable;
 import com.ultreon.randomthingz.util.ItemCapabilityUtils;
-import mcp.MethodsReturnNonnullByDefault;
+import com.ultreon.texturedmodels.tileentity.ITickable;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,8 +17,11 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -25,14 +29,14 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Map;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemPipeBlock extends PipeBlock implements IWrenchable {
+public class ItemPipeBlock extends PipeBlock implements IWrenchable, EntityBlock {
     public static final EnumProperty<ConnectionType> NORTH = EnumProperty.create("north", ConnectionType.class);
     public static final EnumProperty<ConnectionType> EAST = EnumProperty.create("east", ConnectionType.class);
     public static final EnumProperty<ConnectionType> SOUTH = EnumProperty.create("south", ConnectionType.class);
@@ -102,15 +106,10 @@ public class ItemPipeBlock extends PipeBlock implements IWrenchable {
         return state.getValue(FACING_TO_PROPERTY_MAP.get(side));
     }
 
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new ItemPipeTileEntity();
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
+        return ITickable::tickTE;
     }
 
     @Override
@@ -129,7 +128,7 @@ public class ItemPipeBlock extends PipeBlock implements IWrenchable {
                 BlockState state1 = cycleProperty(state, FACING_TO_PROPERTY_MAP.get(side));
                 if (other != null && other.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).isPresent()) {
                     dimension.setBlock(pos, state1, 18);
-                    ItemPipeNetworkManager.invalidateNetwork(dimension, pos);
+                    ItemPipeConnection.invalidateNetwork(dimension, pos);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -162,7 +161,7 @@ public class ItemPipeBlock extends PipeBlock implements IWrenchable {
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor dimensionIn, BlockPos currentPos, BlockPos facingPos) {
         if (dimensionIn.getBlockEntity(facingPos) instanceof ItemPipeTileEntity)
-            ItemPipeNetworkManager.invalidateNetwork(dimensionIn, currentPos);
+            ItemPipeConnection.invalidateNetwork(dimensionIn, currentPos);
 
         EnumProperty<ConnectionType> property = FACING_TO_PROPERTY_MAP.get(facing);
         ConnectionType current = stateIn.getValue(property);

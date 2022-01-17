@@ -35,8 +35,8 @@ public class BatteryBoxScreen extends AbstractContainerScreen<BatteryBoxContaine
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
         if (minecraft == null) return;
-        GlStateManager._color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        minecraft.getTextureManager().bind(TEXTURE);
+        GlStateManager._color4f(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderTexture(0, TEXTURE);
         int xPos = (this.width - this.imageWidth) / 2;
         int yPos = (this.height - this.imageHeight) / 2;
         blit(matrixStack, xPos, yPos, 0, 0, this.imageWidth, this.imageHeight);

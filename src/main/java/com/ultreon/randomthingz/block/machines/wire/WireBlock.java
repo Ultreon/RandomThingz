@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.wire;
 
 import com.google.common.collect.Maps;
-import com.qsoftware.modlib.api.ConnectionType;
+import com.ultreon.modlib.api.ConnectionType;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.api.IWrenchable;
 import com.ultreon.randomthingz.util.EnergyUtils;
@@ -24,8 +24,10 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.energy.IEnergyStorage;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.Map;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class WireBlock extends PipeBlock implements IWrenchable {
     public static final EnumProperty<ConnectionType> NORTH = EnumProperty.create("north", ConnectionType.class);
@@ -129,7 +131,7 @@ public class WireBlock extends PipeBlock implements IWrenchable {
             if (!(other instanceof WireTileEntity)) {
                 BlockState state1 = cycleProperty(state, FACING_TO_PROPERTY_MAP.get(side));
                 dimension.setBlock(pos, state1, 18);
-                WireNetworkManager.invalidateNetwork(dimension, pos);
+                WireConnection.invalidateNetwork(dimension, pos);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -161,7 +163,7 @@ public class WireBlock extends PipeBlock implements IWrenchable {
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor dimensionIn, BlockPos currentPos, BlockPos facingPos) {
         if (dimensionIn.getBlockEntity(facingPos) instanceof WireTileEntity)
-            WireNetworkManager.invalidateNetwork(dimensionIn, currentPos);
+            WireConnection.invalidateNetwork(dimensionIn, currentPos);
 
         EnumProperty<ConnectionType> property = FACING_TO_PROPERTY_MAP.get(facing);
         ConnectionType current = stateIn.getValue(property);

@@ -7,10 +7,10 @@ import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.item.*;
+import net.minecraft.world.item.*;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -39,9 +39,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 /**
  * Main class for frame walls - all important block info can be found here
@@ -59,9 +61,9 @@ public class WallFrameBlock extends CrossCollisionBlock {
     private final VoxelShape[] renderShapes;
 
     public WallFrameBlock(Properties properties) {
-        super(4.0F, 3.0F, 16.0F, 14.0F, 24.0F, properties);
+        super(4.0f, 3.0f, 16.0f, 14.0f, 24.0f, properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(NORTH, Boolean.FALSE).setValue(EAST, Boolean.FALSE).setValue(SOUTH, Boolean.FALSE).setValue(WEST, Boolean.FALSE).setValue(WATERLOGGED, Boolean.FALSE).setValue(CONTAINS_BLOCK, Boolean.FALSE).setValue(LIGHT_LEVEL, 0));
-        this.renderShapes = this.makeShapes(2.0F, 1.0F, 16.0F, 6.0F, 15.0F);
+        this.renderShapes = this.makeShapes(2.0f, 1.0f, 16.0f, 6.0f, 15.0f);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -168,7 +170,7 @@ public class WallFrameBlock extends CrossCollisionBlock {
     }
 
     @Override
-    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+    public int getLightEmission(BlockState state, BlockGetter dimension, BlockPos pos) {
         if (state.getValue(LIGHT_LEVEL) > 15) {
             return 15;
         }
@@ -222,10 +224,10 @@ public class WallFrameBlock extends CrossCollisionBlock {
     @SuppressWarnings("deprecation")
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor dimensionIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.getValue(WATERLOGGED)) {
-            dimensionIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(dimensionIn));
+            dimensionIn.getFluidTicks().schedule(new ScheduledTick<>(Fluids.WATER, currentPos, Fluids.WATER.getTickDelay(dimensionIn), 0));
         }
 
         return facing.getAxis().getPlane() == Direction.Plane.HORIZONTAL ? stateIn.setValue(PROPERTY_BY_DIRECTION.get(facing), this.canConnect(facingState, facingState.isFaceSturdy(dimensionIn, facingPos, facing.getOpposite()), facing.getOpposite())) : super.updateShape(stateIn, facing, facingState, dimensionIn, currentPos, facingPos);
     }
 }
-//========SOLI DEO GLORIA========//
+

@@ -1,23 +1,26 @@
 package com.ultreon.randomthingz.block.machines;
 
-import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.modlib.silentutils.EnumUtils;
+import com.ultreon.modlib.api.RedstoneMode;
+import com.ultreon.modlib.embedded.silentutils.EnumUtils;
 import com.ultreon.randomthingz.inventory.slot.MachineUpgradeSlot;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
+import org.jetbrains.annotations.Nullable;
 
 public class AbstractMachineBaseContainer<T extends AbstractMachineBaseTileEntity> extends AbstractEnergyStorageContainer<T> {
-    protected AbstractMachineBaseContainer(MenuType<?> type, int id, T tileEntityIn, ContainerData fieldsIn) {
+    protected AbstractMachineBaseContainer(MenuType<?> type, int id, @Nullable T tileEntityIn, ContainerData fieldsIn) {
         super(type, id, tileEntityIn, fieldsIn);
     }
 
     protected final void addUpgradeSlots() {
-        int upgradeSlots = this.tileEntity.tier.getUpgradeSlots();
-        int inventorySize = this.tileEntity.getSizeInventory();
-        for (int i = 0; i < upgradeSlots; ++i) {
-            int index = inventorySize - upgradeSlots + i;
-            int xPosition = 6 + 18 * i;
-            this.addSlot(new MachineUpgradeSlot(this.tileEntity, index, xPosition, -13));
+        if (this.tileEntity != null) {
+            int upgradeSlots = this.tileEntity.tier.getUpgradeSlots();
+            int inventorySize = this.tileEntity.getContainerSize();
+            for (int i = 0; i < upgradeSlots; ++i) {
+                int index = inventorySize - upgradeSlots + i;
+                int xPosition = 6 + 18 * i;
+                this.addSlot(new MachineUpgradeSlot(this.tileEntity, index, xPosition, -13));
+            }
         }
     }
 

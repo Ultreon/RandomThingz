@@ -37,6 +37,6 @@ public class DuckRenderer extends MobRenderer<DuckEntity, ChickenModel<DuckEntit
     protected float getBob(DuckEntity livingBase, float partialTicks) {
         float f = Mth.lerp(partialTicks, livingBase.oFlap, livingBase.flap);
         float f1 = Mth.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.flapSpeed);
-        return (Mth.sin(f) + 1.0F) * f1;
+        return (Mth.sin(f) + 1.0f) * f1;
     }
 }

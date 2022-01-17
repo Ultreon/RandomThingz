@@ -2,7 +2,6 @@ package com.ultreon.randomthingz.client.gui.widgets;
 
 import com.google.common.annotations.Beta;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -42,7 +41,7 @@ public class Progressbar extends AbstractWidget {
     public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         super.render(matrixStack, mouseX, mouseY, partialTicks);
 
-        Minecraft.getInstance().getTextureManager().bind(GUI_ICONS);
+        RenderSystem.setShaderTexture(0, GUI_ICONS);
         this.renderProgressbar(matrixStack, x, y);
     }
 

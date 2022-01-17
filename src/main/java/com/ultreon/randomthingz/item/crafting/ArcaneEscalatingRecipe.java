@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.item.crafting;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
-import com.qsoftware.modlib.silentlib.util.NameUtils;
+import com.ultreon.modlib.embedded.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.block.machines.IMachineInventory;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.InventoryUtils;
@@ -22,8 +22,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;

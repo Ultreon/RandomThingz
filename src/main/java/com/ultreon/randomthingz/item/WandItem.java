@@ -42,13 +42,15 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static net.minecraftforge.fml.client.gui.GuiUtils.drawGradientRect;
+
+import net.minecraft.world.item.Item.Properties;
 
 public abstract class WandItem extends HudItem {
     private final int maxMana;
@@ -238,7 +240,7 @@ public abstract class WandItem extends HudItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @javax.annotation.Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, @org.jetbrains.annotations.Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
         CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
         if (dimensionIn == null) {
             return;
@@ -317,7 +319,7 @@ public abstract class WandItem extends HudItem {
         val = (int) (64d * mana / maxMana);
 
         drawItemTooltipText(gu, val, stack, Arrays.asList(new TextComponent(ChatFormatting.BLUE + I18n.get(stack.getDescriptionId())), new TextComponent(ChatFormatting.GRAY + "" + Math.round(mana) + " / " + Math.round(maxMana))), 0, height, 96, 10, -10, mc.getWindow().getScreenWidth() - 20, mc.getWindow().getScreenHeight(), -1, GuiUtils.DEFAULT_BACKGROUND_COLOR, GuiUtils.DEFAULT_BORDER_COLOR_START, GuiUtils.DEFAULT_BORDER_COLOR_END, mc.font);
-        PoseStack matrixStack = gu.getMatrixStack();
+        PoseStack matrixStack = gu.getPoseStack();
     }
 
     /**
@@ -328,11 +330,11 @@ public abstract class WandItem extends HudItem {
     //TODO, Validate rendering is the same as the original
     @OnlyIn(Dist.CLIENT)
     @SuppressWarnings("deprecation")
-    public void drawItemTooltipText(GraphicsUtil gu, int val, @Nonnull final ItemStack stack, List<? extends FormattedText> textLines, int mouseX, int mouseY,
+    public void drawItemTooltipText(GraphicsUtil gu, int val, @NotNull final ItemStack stack, List<? extends FormattedText> textLines, int mouseX, int mouseY,
                                     int minWidth, int xOffset, int yOffset,
                                     int screenWidth, int screenHeight, int maxTextWidth,
                                     int backgroundColor, int borderColorStart, int borderColorEnd, Font font) {
-        PoseStack matrixStack = gu.getMatrixStack();
+        PoseStack matrixStack = gu.getPoseStack();
         if (!textLines.isEmpty()) {
             RenderTooltipEvent.Pre event = new RenderTooltipEvent.Pre(stack, textLines, matrixStack, mouseX, mouseY, screenWidth, screenHeight, maxTextWidth, font);
             if (MinecraftForge.EVENT_BUS.post(event))
@@ -457,16 +459,16 @@ public abstract class WandItem extends HudItem {
 //        textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/background.png"));
 //        gu.blit(0, height - 64, 128, 64, 0, 0, 128, 64, 128, 64);
 
-            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
             gu.blit(16, tooltipY + tooltipHeight + 4, 64, 2, 0, 2, 64, 1, 64, 3);
 
-            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
             gu.blit(16, tooltipY + tooltipHeight + 4 - 1, 64, 2, 0, 1, 64, 1, 64, 3);
 
-            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
             gu.blit(16, tooltipY + tooltipHeight + 4, val, 2, 0, 1, val, 1, 64, 3);
 
-            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
             gu.blit(16, tooltipY + tooltipHeight + 4 - 1, val, 2, 0, 0, val, 1, 64, 3);
 
 //            gu.drawItemStack(stack, 56, tooltipY - 60, "");

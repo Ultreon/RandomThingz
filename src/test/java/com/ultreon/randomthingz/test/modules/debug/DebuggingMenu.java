@@ -4,7 +4,7 @@ import com.ultreon.randomthingz.actionmenu.AbstractActionMenu;
 import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
 import com.ultreon.randomthingz.network.Network;
 import com.ultreon.randomthingz.test.network.OreProfilePacket;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.text.StringTextComponent;
 
 public class DebuggingMenu extends AbstractActionMenu {
@@ -20,7 +20,7 @@ public class DebuggingMenu extends AbstractActionMenu {
             }
 
             @Override
-            public ITextComponent getText() {
+            public Component getText() {
                 return new StringTextComponent("Start Ore Profiler");
             }
         });
@@ -31,7 +31,7 @@ public class DebuggingMenu extends AbstractActionMenu {
             }
 
             @Override
-            public ITextComponent getText() {
+            public Component getText() {
                 return new StringTextComponent("Stop Ore Profiler");
             }
         });

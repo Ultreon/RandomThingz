@@ -172,4 +172,3 @@ public class HandleBakedModel {
         return new Vec3(x, y, z);
     }
 }
-//========SOLI DEO GLORIA========//

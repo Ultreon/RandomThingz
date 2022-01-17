@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.wand;
 
-import com.ultreon.randomthingz.common.item.ModItemGroups;
+import com.ultreon.randomthingz.common.item.ModCreativeTabs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -25,8 +25,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -38,7 +38,7 @@ import java.util.Optional;
 @Deprecated
 public class NatureStaffItem extends Item {
     public NatureStaffItem() {
-        super(new Properties().tab(ModItemGroups.SPECIALS).rarity(Rarity.RARE));
+        super(new Properties().tab(ModCreativeTabs.SPECIALS).rarity(Rarity.RARE));
     }
 
     @Deprecated //Forge: Use Player/Hand version

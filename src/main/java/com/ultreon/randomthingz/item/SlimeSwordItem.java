@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.item;
 import com.ultreon.randomthingz.item.tool.ModTraits;
 import com.ultreon.randomthingz.item.tool.SwordTool;
 import com.ultreon.randomthingz.item.tool.trait.AbstractTrait;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.item.Tiers;
 
 import javax.annotation.ParametersAreNonnullByDefault;

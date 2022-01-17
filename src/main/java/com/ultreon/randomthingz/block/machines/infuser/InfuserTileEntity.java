@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.infuser;
 
-import com.qsoftware.modlib.api.IFluidContainer;
+import com.ultreon.modlib.api.FluidContainer;
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.AbstractFluidMachineTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
@@ -15,8 +15,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -53,7 +53,7 @@ public class InfuserTileEntity extends AbstractFluidMachineTileEntity<InfusingRe
         ItemStack input = getItem(0);
         if (input.isEmpty()) return;
 
-        FluidStack fluidStack = IFluidContainer.getBucketOrContainerFluid(input);
+        FluidStack fluidStack = FluidContainer.getBucketOrContainerFluid(input);
         if (canAcceptFluidContainer(input, fluidStack)) {
             this.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
 

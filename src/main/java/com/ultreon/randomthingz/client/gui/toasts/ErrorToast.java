@@ -8,8 +8,7 @@ import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ErrorToast implements Toast {
     private ImmutableList<FormattedCharSequence> subtitle;
@@ -41,8 +40,8 @@ public class ErrorToast implements Toast {
             this.newDisplay = false;
         }
 
-        toastGui.getMinecraft().getTextureManager().bind(TEXTURE);
-        RenderSystem.color3f(1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        RenderSystem.color3f(1.0f, 1.0f, 1.0f);
         int i = this.width();
         int j = 12;
         if (i == 160 && this.subtitle.size() <= 1) {
@@ -61,12 +60,12 @@ public class ErrorToast implements Toast {
         }
 
         if (this.subtitle == null) {
-            toastGui.getMinecraft().font.draw(matrixStack, this.title, 18.0F, 12.0F, -256);
+            toastGui.getMinecraft().font.draw(matrixStack, this.title, 18.0f, 12.0f, -256);
         } else {
-            toastGui.getMinecraft().font.draw(matrixStack, this.title, 18.0F, 7.0F, -256);
+            toastGui.getMinecraft().font.draw(matrixStack, this.title, 18.0f, 7.0f, -256);
 
             for (int k1 = 0; k1 < this.subtitle.size(); ++k1) {
-                toastGui.getMinecraft().font.draw(matrixStack, this.subtitle.get(k1), 18.0F, (float) (18 + k1 * 12), -1);
+                toastGui.getMinecraft().font.draw(matrixStack, this.subtitle.get(k1), 18.0f, (float) (18 + k1 * 12), -1);
             }
         }
 

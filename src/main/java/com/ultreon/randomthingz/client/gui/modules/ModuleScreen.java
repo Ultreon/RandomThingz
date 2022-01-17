@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.client.gui.modules;
 
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.ultreon.modlib.graphics.MCGraphics;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.client.graphics.MCGraphics;
 import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
 import com.ultreon.randomthingz.client.gui.toasts.ErrorToast;
 import com.ultreon.randomthingz.common.Module;
@@ -19,8 +19,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.io.IOException;
 import java.util.List;
@@ -68,12 +68,12 @@ public class ModuleScreen extends Screen {
 
     @Override
     protected void init() {
-        Button cancelButton = this.addButton(new Button(this.width / 2 + 5, this.height - 48, 150, 20, CommonComponents.GUI_CANCEL, (p_238903_1_) -> {
+        Button cancelButton = this.addRenderableWidget(new Button(this.width / 2 + 5, this.height - 48, 150, 20, CommonComponents.GUI_CANCEL, (p_238903_1_) -> {
             manager.discardChanges();
             this.onClose();
         }));
 
-        Button doneButton = this.addButton(new Button(this.width / 2 - 155, this.height - 48, 150, 20, CommonComponents.GUI_DONE, (p_238903_1_) -> {
+        Button doneButton = this.addRenderableWidget(new Button(this.width / 2 - 155, this.height - 48, 150, 20, CommonComponents.GUI_DONE, (p_238903_1_) -> {
             try {
                 manager.saveChanges();
             } catch (IOException e) {

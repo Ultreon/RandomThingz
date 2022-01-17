@@ -11,7 +11,7 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
@@ -39,10 +39,9 @@ public class VMWarningScreen extends Screen {
     protected void init() {
         super.init();
 
-        this.buttons.clear();
-        this.children.clear();
+        this.clearWidgets();
 
-        this.addButton(new Button(this.width / 2 - 50, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
+        this.addRenderableWidget(new Button(this.width / 2 - 50, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
             if (this.minecraft != null) {
                 this.minecraft.setScreen(backScreen);
             }
@@ -92,9 +91,9 @@ public class VMWarningScreen extends Screen {
     }
 
     @SubscribeEvent
-    public static void onMainScreenInit(GuiScreenEvent.InitGuiEvent.Pre event) {
+    public static void onMainScreenInit(ScreenEvent.InitScreenEvent.Pre event) {
 //        Minecraft mc = Minecraft.getInstance();
-//        Screen gui = event.getGui();
+//        Screen gui = event.getScreen();
 //        if (gui instanceof MainMenuScreen) {
 //            if (VMType.isGuestVM()) {
 //                if (!isInitializedAlready()) {

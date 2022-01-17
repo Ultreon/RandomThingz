@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.magic;
 
-import com.ultreon.randomthingz.common.item.ModItemGroups;
+import com.ultreon.randomthingz.common.item.ModCreativeTabs;
 import com.ultreon.randomthingz.item.WandItem;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
@@ -26,13 +26,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public class LightningStaffItem extends WandItem {
     public LightningStaffItem() {
-        super(5, 1, new Item.Properties().tab(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(5, 1, new Item.Properties().tab(ModCreativeTabs.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     protected static BlockHitResult rayTrace(Level dimensionIn, Player player, ClipContext.@NotNull Fluid fluidMode) {
-        final float f = player.xRot;
-        final float f1 = player.yRot;
-        final Vec3 vec3d = player.getEyePosition(1.0F);
+        final float f = player.getXRot();
+        final float f1 = player.getYRot();
+        final Vec3 vec3d = player.getEyePosition(1.0f);
         final float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
         final float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
         final float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));

@@ -1,19 +1,18 @@
 package com.ultreon.randomthingz.capability;
 
 import net.minecraft.core.Direction;
-import net.minecraft.world.Container;
+import net.minecraft.world.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-public class EnergyStorageWithBatteries<T extends BlockEntity & Container> extends EnergyStorageImpl {
-    private final Container inventory;
+public class EnergyStorageWithBatteries<T extends BlockEntity & AbstractContainerMenu> extends EnergyStorageImpl {
+    private final AbstractContainerMenu inventory;
     private final LazyOptional<EnergyStorageWithBatteries> lazy;
 
     protected int energyInternal;
@@ -154,9 +153,9 @@ public class EnergyStorageWithBatteries<T extends BlockEntity & Container> exten
         return maxReceive > 0;
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public <S> LazyOptional<S> getCapability(@Nonnull Capability<S> cap, @Nullable Direction side) {
+    public <S> LazyOptional<S> getCapability(@NotNull Capability<S> cap, @Nullable Direction side) {
         return CapabilityEnergy.ENERGY.orEmpty(cap, lazy.cast());
     }
 }

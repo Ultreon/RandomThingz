@@ -8,8 +8,7 @@ import net.minecraft.world.item.SignItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class FrameSignItem extends SignItem {
     public FrameSignItem(Properties propertiesIn, Block floorBlockIn, Block wallBlockIn) {
@@ -26,4 +25,3 @@ public class FrameSignItem extends SignItem {
         return flag;
     }
 }
-//========SOLI DEO GLORIA========//

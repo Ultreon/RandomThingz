@@ -1,14 +1,12 @@
 package com.ultreon.randomthingz.inventory.container;
 
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Base container class.
@@ -17,10 +15,10 @@ import javax.annotation.Nullable;
  */
 public abstract class ContainerBase extends AbstractContainerMenu {
 
-    protected Container inventory;
-    protected Container playerInventory;
+    protected AbstractContainerMenu inventory;
+    protected AbstractContainerMenu playerInventory;
 
-    public ContainerBase(MenuType type, int id, Container playerInventory, Container inventory) {
+    public ContainerBase(MenuType type, int id, AbstractContainerMenu playerInventory, AbstractContainerMenu inventory) {
         super(type, id);
         this.playerInventory = playerInventory;
         this.inventory = inventory;
@@ -62,7 +60,7 @@ public abstract class ContainerBase extends AbstractContainerMenu {
     }
 
     @Nullable
-    public Container getPlayerInventory() {
+    public AbstractContainerMenu getInventory() {
         return playerInventory;
     }
 

@@ -56,16 +56,15 @@ public class UpdateScreen extends Screen {
             Narrator.getNarrator().say("Downloading Update", true);
         }
 
-        this.buttons.clear();
-        this.children.clear();
+        this.clearWidgets();
 
-        this.done = this.addButton(new Button(this.width / 2 - 50, this.height / 6 + 96, 100, 20, CommonComponents.GUI_DONE, (p_213004_1_) -> {
+        this.done = this.addRenderableWidget(new Button(this.width / 2 - 50, this.height / 6 + 96, 100, 20, CommonComponents.GUI_DONE, (p_213004_1_) -> {
             if (this.minecraft != null) {
                 this.minecraft.setScreen(this.failed ? new UpdateFailedScreen(this.backScreen) : new UpdateDownloadedScreen(this.backScreen));
             }
         }));
 
-        this.progressbar = this.addButton(new Progressbar(this.width / 2 - 91, 120, 0, 100));
+        this.progressbar = this.addRenderableWidget(new Progressbar(this.width / 2 - 91, 120, 0, 100));
 
         this.done.active = false;
         initializedAlready = true;

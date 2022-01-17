@@ -21,8 +21,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -133,9 +133,7 @@ public class EnchantingRecipe implements Recipe<IMachineInventory> {
             recipe.processTime = GsonHelper.getAsInt(json, "process_time", 400);
             recipe.result = deserializeEnchantment(json.getAsJsonPrimitive("result"));
 
-            GsonHelper.getAsJsonArray(json, "input").forEach(element -> {
-                recipe.input = deserializeItem(element);
-            });
+            GsonHelper.getAsJsonArray(json, "input").forEach(element -> recipe.input = deserializeItem(element));
 
             return recipe;
         }

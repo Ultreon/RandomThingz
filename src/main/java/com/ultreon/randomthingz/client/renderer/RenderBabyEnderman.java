@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 /**
@@ -30,14 +30,14 @@ public class RenderBabyEnderman extends MobRenderer<BabyEndermanEntity, BabyEnde
     }
 
     @Override
-    public void render(BabyEndermanEntity enderman, float entityYaw, float partialTicks, @Nonnull PoseStack matrix, @Nonnull MultiBufferSource renderer, int packedLightIn) {
+    public void render(BabyEndermanEntity enderman, float entityYaw, float partialTicks, @NotNull PoseStack matrix, @NotNull MultiBufferSource renderer, int packedLightIn) {
         BabyEnderman model = getModel();
         model.carrying = enderman.getCarriedBlock() != null;
         model.creepy = enderman.isCreepy();
         super.render(enderman, entityYaw, partialTicks, matrix, renderer, packedLightIn);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Vec3 getRenderOffset(BabyEndermanEntity enderman, float partialTicks) {
         if (enderman.isCreepy()) {
@@ -46,9 +46,9 @@ public class RenderBabyEnderman extends MobRenderer<BabyEndermanEntity, BabyEnde
         return super.getRenderOffset(enderman, partialTicks);
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public ResourceLocation getTextureLocation(@Nonnull BabyEndermanEntity enderman) {
+    public ResourceLocation getTextureLocation(@NotNull BabyEndermanEntity enderman) {
         return ENDERMAN_TEXTURES;
     }
 }

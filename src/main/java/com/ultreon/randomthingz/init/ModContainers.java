@@ -6,14 +6,14 @@ import com.ultreon.randomthingz.inventory.container.CrateContainer;
 import lombok.experimental.UtilityClass;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeContainerType;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
 /**
- * Container types initialization class.
+ * AbstractContainerMenu types initialization class.
  *
  * @author Qboi123
  */

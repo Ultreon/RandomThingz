@@ -34,13 +34,13 @@ public class BlockAppearanceHelper {
     public static int setLightLevel(ItemStack item, BlockState state, Level dimension, BlockPos pos, Player player, InteractionHand hand) {
         if (item.getItem() == Items.GLOWSTONE_DUST && state.getValue(LIGHT_LEVEL) < 13) {
             int count = player.getItemInHand(hand).getCount();
-            dimension.setBlockAndUpdate(pos, state.setValue(LIGHT_LEVEL, state.getBlock().getLightValue(state, dimension, pos) + 3));
+            dimension.setBlockAndUpdate(pos, state.setValue(LIGHT_LEVEL, state.getBlock().getLightEmission(state, dimension, pos) + 3));
             player.getItemInHand(hand).setCount(count - 1);
             player.displayClientMessage(new TranslatableComponent("Light Level: " + (state.getValue(LIGHT_LEVEL) + 3)), true);
         }
         if ((item.getItem() == Items.COAL || item.getItem() == Items.CHARCOAL) && state.getValue(LIGHT_LEVEL) < 15) {
             int count = player.getItemInHand(hand).getCount();
-            dimension.setBlockAndUpdate(pos, state.setValue(LIGHT_LEVEL, state.getBlock().getLightValue(state, dimension, pos) + 1));
+            dimension.setBlockAndUpdate(pos, state.setValue(LIGHT_LEVEL, state.getBlock().getLightEmission(state, dimension, pos) + 1));
             player.getItemInHand(hand).setCount(count - 1);
             player.displayClientMessage(new TranslatableComponent("Light Level: " + (state.getValue(LIGHT_LEVEL) + 1)), true);
         }
@@ -129,7 +129,7 @@ public class BlockAppearanceHelper {
                 } else {
                     fte.setDesignTexture(0);
                 }
-                //player.sendMessage(new TranslationTextComponent("message.frame.design_texture"));
+                //player.sendMessage(new TranslatableComponent("message.frame.design_texture"));
                 player.displayClientMessage(new TranslatableComponent("Design Texture: " + fte.getDesignTexture()), true);
             }
             if (tileEntity instanceof BedFrameTile) {
@@ -139,7 +139,7 @@ public class BlockAppearanceHelper {
                 } else {
                     fte.setDesignTexture(0);
                 }
-                //player.sendMessage(new TranslationTextComponent("message.frame.design_texture"));
+                //player.sendMessage(new TranslatableComponent("message.frame.design_texture"));
                 player.displayClientMessage(new TranslatableComponent("Design Texture: " + fte.getDesignTexture()), true);
             }
             if (tileEntity instanceof ChestFrameTileEntity) {
@@ -149,7 +149,7 @@ public class BlockAppearanceHelper {
                 } else {
                     fte.setDesignTexture(0);
                 }
-                //player.sendMessage(new TranslationTextComponent("message.frame.design_texture"));
+                //player.sendMessage(new TranslatableComponent("message.frame.design_texture"));
                 player.displayClientMessage(new TranslatableComponent("Design Texture: " + fte.getDesignTexture()), true);
             }
         }
@@ -161,7 +161,7 @@ public class BlockAppearanceHelper {
             if (tileEntity instanceof FrameBlockTile) {
                 FrameBlockTile fte = (FrameBlockTile) tileEntity;
                 fte.setGlassColor(dyeItemToInt(player.getItemInHand(hand).getItem()) + 1); //plus 1, because 0 is undyed glass
-                //player.sendStatusMessage(new TranslationTextComponent("Glass Color: " + glassColorToString(fte.getGlassColor()-1)), true);
+                //player.sendStatusMessage(new TranslatableComponent("Glass Color: " + glassColorToString(fte.getGlassColor()-1)), true);
             }
         }
     }
@@ -177,7 +177,7 @@ public class BlockAppearanceHelper {
                 if (dimension.getBlockState(pos).getValue(BedFrameBlock.PART) == BedPart.HEAD) {
                     fte.setPillowColor(dyeItemToInt(player.getItemInHand(hand).getItem()));
                 }
-                //player.sendStatusMessage(new TranslationTextComponent("Glass Color: " + glassColorToString(fte.getGlassColor()-1)), true);
+                //player.sendStatusMessage(new TranslatableComponent("Glass Color: " + glassColorToString(fte.getGlassColor()-1)), true);
             }
         }
     }
@@ -246,4 +246,3 @@ public class BlockAppearanceHelper {
         }
     }
 }
-//========SOLI DEO GLORIA========//

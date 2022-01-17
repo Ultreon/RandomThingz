@@ -10,13 +10,14 @@ import net.minecraft.client.NarratorStatus;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.GuiScreenEvent.BackgroundDrawnEvent;
+import net.minecraftforge.client.event.ScreenEvent.BackgroundDrawnEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
@@ -49,10 +50,9 @@ public class ConfirmExitScreen extends Screen {
             Narrator.getNarrator().say("Are you sure you want to exit Minecraft?", true);
         }
 
-        this.buttons.clear();
-        this.children.clear();
+        this.clearWidgets();
 
-        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (btn) -> {
+        this.addRenderableWidget(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (btn) -> {
             if (this.minecraft != null) {
                 btn.active = false;
                 if (this.minecraft.level != null && this.minecraft.isLocalServer()) {
@@ -63,7 +63,7 @@ public class ConfirmExitScreen extends Screen {
                 this.minecraft.stop();
             }
         }));
-        this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (btn) -> {
+        this.addRenderableWidget(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (btn) -> {
             if (this.minecraft != null) {
                 btn.active = false;
                 this.minecraft.setScreen(backScreen);
@@ -77,7 +77,7 @@ public class ConfirmExitScreen extends Screen {
     public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         if (backScreen != null) {
             backScreen.render(matrixStack, mouseX, mouseY, partialTicks);
-            RenderSystem.translatef(0.0F, 0.0F, 400.0F);
+            RenderSystem.translatef(0.0f, 0.0f, 400.0f);
             this.fillGradient(matrixStack, 0, 0, this.width, this.height, -1072689136, -804253680);
             MinecraftForge.EVENT_BUS.post(new BackgroundDrawnEvent(this, matrixStack));
         } else {
@@ -95,8 +95,10 @@ public class ConfirmExitScreen extends Screen {
     public void setButtonDelay(int ticksUntilEnableIn) {
         this.ticksUntilEnable = ticksUntilEnableIn;
 
-        for (AbstractWidget widget : this.buttons) {
-            widget.active = false;
+        for (GuiEventListener listener : this.children) {
+            if (listener instanceof AbstractWidget widget) {
+                widget.active = false;
+            }
         }
 
     }
@@ -104,8 +106,10 @@ public class ConfirmExitScreen extends Screen {
     public void tick() {
         super.tick();
         if (--this.ticksUntilEnable == 0) {
-            for (AbstractWidget widget : this.buttons) {
-                widget.active = true;
+            for (GuiEventListener listener : this.children) {
+                if (listener instanceof AbstractWidget widget) {
+                    widget.active = false;
+                }
             }
         }
     }

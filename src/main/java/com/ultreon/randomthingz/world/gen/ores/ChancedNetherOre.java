@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.world.gen.ores;
 
 import com.ultreon.randomthingz.common.item.ItemMaterial;
 import com.ultreon.randomthingz.world.gen.ores.configs.ChancedOreConfig;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;

@@ -5,17 +5,16 @@ import com.ultreon.randomthingz.block.machines.generator.AbstractGeneratorTileEn
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.common.tags.ModTags;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeHooks;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class CoalGeneratorTileEntity extends AbstractGeneratorTileEntity {
     // Energy constants

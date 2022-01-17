@@ -61,17 +61,17 @@ public class SettingsScreen extends Screen {
         }
 
         int dy = -30;
-        addButton(new UpdateButton(AbstractUpdater.getQFMUpdater(), width / 2 - 155, height / 6 + dy - 6, 310));
+        addRenderableWidget(new UpdateButton(AbstractUpdater.getQFMUpdater(), width / 2 - 155, height / 6 + dy - 6, 310));
 
         dy += 30;
         dy += 30;
-        this.modulesButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 310, 20,
+        this.modulesButton = addRenderableWidget(new Button(width / 2 - 155, height / 6 + dy - 6, 310, 20,
                 Translations.getScreen("settings", "screenshots"), this::openScreenshotsScreen, this::tooltip));
 
         dy += 30;
-        this.doneButton = addButton(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
+        this.doneButton = addRenderableWidget(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
                 CommonComponents.GUI_DONE, this::saveAndGoBack));
-        this.cancelButton = addButton(new Button(width / 2 + 5, height / 6 + dy - 6, 150, 20,
+        this.cancelButton = addRenderableWidget(new Button(width / 2 + 5, height / 6 + dy - 6, 150, 20,
                 CommonComponents.GUI_CANCEL, this::goBack));
     }
 
@@ -123,11 +123,11 @@ public class SettingsScreen extends Screen {
 //     * @param event the gui-initialization event.
 //     */
 //    @SubscribeEvent
-//    public static void onOptionsScreenInit(GuiScreenEvent.InitGuiEvent event) {
-//        if (event.getGui() instanceof OptionsScreen) {
-//            event.addWidget(new Button(event.getGui().width / 2 - 155 - 40, event.getGui().height / 6 + 120 - 6, 30, 20, new StringTextComponent("RandomThingz"), (p_213060_1_) -> {
-////            event.getGui().getMinecraft().displayGuiScreen(new SettingsScreen(new TranslationTextComponent("screen.randomthingz.settings.title")));
-//                event.getGui().getMinecraft().displayGuiScreen(new SettingsScreen(event.getGui(), new StringTextComponent("RT")));
+//    public static void onOptionsScreenInit(ScreenEvent.InitScreenEvent event) {
+//        if (event.getScreen() instanceof OptionsScreen) {
+//            event.addWidget(new Button(event.getScreen().width / 2 - 155 - 40, event.getScreen().height / 6 + 120 - 6, 30, 20, new StringTextComponent("RandomThingz"), (p_213060_1_) -> {
+////            event.getScreen().getMinecraft().displayGuiScreen(new SettingsScreen(new TranslatableComponent("screen.randomthingz.settings.title")));
+//                event.getScreen().getMinecraft().displayGuiScreen(new SettingsScreen(event.getScreen(), new StringTextComponent("RT")));
 //            }));
 //        }
 //    }

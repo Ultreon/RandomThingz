@@ -19,8 +19,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class QuarryBlock extends AbstractMachineBlock {
@@ -39,7 +38,7 @@ public class QuarryBlock extends AbstractMachineBlock {
     }
 
     @Override
-    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+    public int getLightEmission(BlockState state, BlockGetter dimension, BlockPos pos) {
         return 0;
     }
 
@@ -64,9 +63,9 @@ public class QuarryBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockGetter dimensionIn) {
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 //        return new QuarryTileEntity(this.defaultTier);
-        return new QuarryTileEntity();
+        return new QuarryTileEntity(pos, state);
     }
 
     @Override

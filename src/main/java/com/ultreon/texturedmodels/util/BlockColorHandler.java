@@ -17,9 +17,8 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This class ensures that blocks of grass take on the correct color
@@ -79,7 +78,7 @@ public class BlockColorHandler implements BlockColor {
     }
 
     @Override
-    public int getColor(@Nonnull BlockState state, @Nullable BlockAndTintGetter lightReader, @Nullable BlockPos pos, int tintIndex) {
+    public int getColor(@NotNull BlockState state, @Nullable BlockAndTintGetter lightReader, @Nullable BlockPos pos, int tintIndex) {
         //TODO does this work?
         if (state.getBlock() instanceof FrameBlock && lightReader != null && pos != null) {
             BlockEntity te = lightReader.getBlockEntity(pos);
@@ -93,4 +92,3 @@ public class BlockColorHandler implements BlockColor {
         return BiomeColors.getAverageGrassColor(lightReader, pos);
     }
 }
-//========SOLI DEO GLORIA========//

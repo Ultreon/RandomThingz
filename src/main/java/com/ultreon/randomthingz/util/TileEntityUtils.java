@@ -32,7 +32,7 @@ public final class TileEntityUtils {
     }
 
     /**
-     * Sends an update packet to clients tracking a tile entity with a specific CompoundNBT
+     * Sends an update packet to clients tracking a tile entity with a specific CompoundTag
      *
      * @param tileEntity the tile entity to update
      */

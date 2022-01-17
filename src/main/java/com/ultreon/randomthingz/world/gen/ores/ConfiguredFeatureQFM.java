@@ -6,12 +6,12 @@ import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class ConfiguredFeatureQFM<FC extends FeatureConfiguration, F extends Feature<FC>> extends ConfiguredFeature<FC, F> {
-    private float chance = 1.0F;
+    private float chance = 1.0f;
 
     public ConfiguredFeatureQFM(F feature, FC config) {
 
@@ -25,7 +25,7 @@ public class ConfiguredFeatureQFM<FC extends FeatureConfiguration, F extends Fea
     }
 
     @Override
-    public boolean place(@Nonnull WorldGenLevel reader, @Nonnull ChunkGenerator chunkGenerator, @Nonnull Random rand, @Nonnull BlockPos pos) {
+    public boolean place(@NotNull WorldGenLevel reader, @NotNull ChunkGenerator chunkGenerator, @NotNull Random rand, @NotNull BlockPos pos) {
         rand.nextFloat();
         if (rand.nextFloat() < chance) {
             return super.place(reader, chunkGenerator, rand, pos);

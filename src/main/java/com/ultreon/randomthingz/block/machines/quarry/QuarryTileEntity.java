@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.quarry;
 
-import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.modlib.silentutils.EnumUtils;
+import com.ultreon.modlib.api.RedstoneMode;
+import com.ultreon.modlib.embedded.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
@@ -30,13 +30,11 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -47,7 +45,7 @@ import java.util.Objects;
  *
  * @author Qboi123
  */
-@SuppressWarnings({"deprecation", "CommentedOutCode"})
+@SuppressWarnings({"CommentedOutCode"})
 public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     // Constants
     public static final int DEPTH = 5;
@@ -96,55 +94,39 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
          */
         @Override
         public int get(int index) {
-            switch (index) {
+            return switch (index) {
                 //Minecraft actually sends fields as shorts, so we need to split energy into 2 fields
-                case 0:
-                    // Energy lower bytes
-                    return getEnergyStored() & 0xFFFF;
-                case 1:
-                    // Energy upper bytes
-                    return (getEnergyStored() >> 16) & 0xFFFF;
-                case 2:
-                    return getMaxEnergyStored() & 0xFFFF;
-                case 3:
-                    return (getMaxEnergyStored() >> 16) & 0xFFFF;
-                case 4:
-                    return QuarryTileEntity.this.redstoneMode.ordinal();
-                case 6:
-                    return getCurrentX() & 0xFFFF;
-                case 7:
-                    return (getCurrentX() >> 16) & 0xFFFF;
-                case 8:
-                    return getCurrentY() & 0xFFFF;
-                case 9:
-                    return (getCurrentY() >> 16) & 0xFFFF;
-                case 10:
-                    return getCurrentZ() & 0xFFFF;
-                case 11:
-                    return (getCurrentZ() >> 16) & 0xFFFF;
+                case 0 ->
+                        // Energy lower bytes
+                        getEnergyStored() & 0xFFFF;
+                case 1 ->
+                        // Energy upper bytes
+                        (getEnergyStored() >> 16) & 0xFFFF;
+                case 2 -> getMaxEnergyStored() & 0xFFFF;
+                case 3 -> (getMaxEnergyStored() >> 16) & 0xFFFF;
+                case 4 -> QuarryTileEntity.this.redstoneMode.ordinal();
+                case 6 -> getCurrentX() & 0xFFFF;
+                case 7 -> (getCurrentX() >> 16) & 0xFFFF;
+                case 8 -> getCurrentY() & 0xFFFF;
+                case 9 -> (getCurrentY() >> 16) & 0xFFFF;
+                case 10 -> getCurrentZ() & 0xFFFF;
+                case 11 -> (getCurrentZ() >> 16) & 0xFFFF;
 //                case 12:
 //                    return getBreakProgress() & 0xFFFF;
 //                case 13:
 //                    return (getBreakProgress() >> 16) & 0xFFFF;
-                case 14:
-                    return getBlocksRemaining() & 0xFFFF;
-                case 15:
-                    return (getBlocksRemaining() >> 16) & 0xFFFF;
-                case 16:
-                    return getTotalBlocks() & 0xFFFF;
-                case 17:
-                    return (getTotalBlocks() >> 16) & 0xFFFF;
+                case 14 -> getBlocksRemaining() & 0xFFFF;
+                case 15 -> (getBlocksRemaining() >> 16) & 0xFFFF;
+                case 16 -> getTotalBlocks() & 0xFFFF;
+                case 17 -> (getTotalBlocks() >> 16) & 0xFFFF;
 //                case 18:
 //                    return getBreakProcessTime() & 0xFFFF;
 //                case 19:
 //                    return (getBreakProcessTime() >> 16) & 0xFFFF;
-                case 20:
-                    return getStatus().ordinal() & 0xFFFF;
-                case 21:
-                    return (getStatus().ordinal() >> 16) & 0xFFFF;
-                default:
-                    return 0;
-            }
+                case 20 -> getStatus().ordinal() & 0xFFFF;
+                case 21 -> (getStatus().ordinal() >> 16) & 0xFFFF;
+                default -> 0;
+            };
         }
 
         /**
@@ -158,9 +140,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         @Override
         public void set(int index, int value) {
             switch (index) {
-                case 4:
-                    QuarryTileEntity.this.redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
-                    break;
+                case 4 -> QuarryTileEntity.this.redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
             }
         }
 
@@ -193,8 +173,8 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     /**
      * Constructor.
      */
-    public QuarryTileEntity() {
-        super(ModMachineTileEntities.quarry, 0, 10_000, 100, 0, MachineTier.SUPER);
+    public QuarryTileEntity(BlockPos pos, BlockState state) {
+        super(ModMachineTileEntities.quarry, pos, state, 0, 10_000, 100, 0, MachineTier.SUPER);
     }
 
     /**
@@ -325,7 +305,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         if (!this.initialized) {
             this.status = Status.NOT_ENOUGH_ENERGY;
             setInactiveState();
-            initialize();
+            init();
             return;
         } else if (this.getEnergyStored() < this.getEnergyUsedPerTick()) {
             this.status = Status.NOT_ENOUGH_ENERGY;
@@ -377,7 +357,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
             BlockState blockState = level.getBlockState(newPos);
             breakProcessTime = blockState.getDestroySpeed(level, worldPosition);
         } else {
-            int i = (int) ((breakProcessTime / breakProgress) * 10.0F);
+            int i = (int) ((breakProcessTime / breakProgress) * 10.0f);
             level.destroyBlockProgress(this.worldPosition.hashCode(), posToBreak, i);
             breakProgress += 0.2f * ((getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) * 2f) + 1f);
         }
@@ -404,7 +384,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
      */
     @SuppressWarnings("unused")
     @Deprecated
-    private void initialize() {
+    private void init() {
         this.initialized = true;
         this.x = this.worldPosition.getX() - 1;
         this.y = this.worldPosition.getY() - 1;
@@ -451,11 +431,10 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
             this.level.sendBlockUpdated(this.worldPosition, oldState, newState, 3);
             this.level.updateNeighborsAt(this.worldPosition, newState.getBlock());
 
-//            markModified();
+//            setChanged();
 
-            if (this.level instanceof ServerLevel) {
-                ServerLevel serverWorld = (ServerLevel) this.level;
-                serverWorld.getServer().getPlayerList().getPlayers().forEach((player) -> player.connection.send(new ClientboundBlockUpdatePacket(serverWorld, worldPosition)));
+            if (this.level instanceof ServerLevel serverLevel) {
+                serverLevel.getServer().getPlayerList().getPlayers().forEach((player) -> player.connection.send(new ClientboundBlockUpdatePacket(serverLevel, worldPosition)));
             }
         }
     }
@@ -492,12 +471,12 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
 
         assert this.level != null;
         blockState = this.level.getBlockState(pos);
-        if (blockState.isAir(this.level, pos)) return false;
+        if (blockState.isAir()) return false;
         else {
             FluidState fluidState = this.level.getFluidState(pos);
             this.level.levelEvent(2001, pos, Block.getId(blockState));
             if (dropBlock) {
-                BlockEntity tileEntity = blockState.hasTileEntity() ? this.level.getBlockEntity(pos) : null;
+                BlockEntity tileEntity = blockState.hasBlockEntity() ? this.level.getBlockEntity(pos) : null;
                 BlockPos up = this.worldPosition.above();
                 BlockEntity upTe = this.level.getBlockEntity(up);
                 if (upTe != null) {
@@ -517,7 +496,6 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
                                 continue;
                             }
                             if (!this.level.isClientSide && !stack.isEmpty() && this.level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && !this.level.restoringBlockSnapshots) {
-                                float f = 0.5F;
                                 double d0 = (double) (this.level.random.nextFloat() * 0.5F) + 0.25D;
                                 double d1 = (double) (this.level.random.nextFloat() * 0.5F) + 0.25D;
                                 double d2 = (double) (this.level.random.nextFloat() * 0.5F) + 0.25D;
@@ -569,12 +547,11 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     /**
      * Read quarry tile-entity data from a nbt compound.
      *
-     * @param state the block state of the tile entity.
      * @param nbt   the quarry nbt data to read from.
      */
     @Override
-    public void load(BlockState state, CompoundTag nbt) {
-        super.load(state, nbt);
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
         this.initialized = nbt.getBoolean("Initialized");
         this.x = nbt.getInt("CurrentX");
         this.y = nbt.getInt("CurrentY");
@@ -588,7 +565,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
         try {
             this.tier = MachineTier.valueOf(nbt.getString("Tier"));
         } catch (IllegalArgumentException e) {
-            Block block = this.level.getBlockState(this.worldPosition).getBlock();
+            Block block = Objects.requireNonNull(this.level).getBlockState(this.worldPosition).getBlock();
             if (block instanceof QuarryBlock) {
                 this.tier = ((QuarryBlock) block).getDefaultTier();
             } else {
@@ -603,7 +580,7 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         super.onDataPacket(net, packet);
         CompoundTag nbt = packet.getTag();
-        this.initialized = nbt.getBoolean("Initialized");
+        this.initialized = Objects.requireNonNull(nbt).getBoolean("Initialized");
         this.x = nbt.getInt("CurrentX");
         this.y = nbt.getInt("CurrentY");
         this.z = nbt.getInt("CurrentZ");
@@ -714,17 +691,6 @@ public class QuarryTileEntity extends AbstractMachineBaseTileEntity {
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
         return new QuarryContainer(id, player, this, this.fields);
-    }
-
-    /**
-     * @param cap  a non-null capability.
-     * @param side the side of the block.
-     * @param <T>  capability type.
-     * @return
-     */
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        return super.getCapability(cap, side);
     }
 
     /**

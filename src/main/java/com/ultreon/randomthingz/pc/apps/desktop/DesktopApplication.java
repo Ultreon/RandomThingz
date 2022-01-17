@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.pc.apps.desktop;
 
 import com.ultreon.randomthingz.pc.common.computerapi.*;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.awt.*;

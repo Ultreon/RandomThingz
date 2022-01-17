@@ -6,7 +6,7 @@ import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.tool.trait.AbstractTrait;
 import com.ultreon.randomthingz.item.tool.types.HammerItem;
 import com.ultreon.randomthingz.util.ItemUtils;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

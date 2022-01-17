@@ -3,10 +3,10 @@ package com.ultreon.randomthingz.item.tool;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.tool.trait.*;
 import lombok.experimental.UtilityClass;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryBuilder;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;

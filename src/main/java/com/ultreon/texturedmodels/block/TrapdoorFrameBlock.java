@@ -28,8 +28,7 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Main class for frame trapdoors - all important block info can be found here
@@ -94,7 +93,7 @@ public class TrapdoorFrameBlock extends TrapDoorBlock {
                 }
                 dimension.setBlock(pos, state, 2);
                 if (state.getValue(WATERLOGGED)) {
-                    dimension.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(dimension));
+                    dimension.getFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(dimension));
                 }
                 //this.playSound(player, dimension, pos, state.get(OPEN));
             }
@@ -153,11 +152,10 @@ public class TrapdoorFrameBlock extends TrapDoorBlock {
     }
 
     @Override
-    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+    public int getLightEmission(BlockState state, BlockGetter dimension, BlockPos pos) {
         if (state.getValue(LIGHT_LEVEL) > 15) {
             return 15;
         }
         return state.getValue(LIGHT_LEVEL);
     }
 }
-//========SOLI DEO GLORIA========//

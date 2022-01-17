@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.generator.lava;
 
-import com.qsoftware.modlib.api.IFluidContainer;
+import com.ultreon.modlib.api.FluidContainer;
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidFuelGeneratorTileEntity;
 import com.ultreon.randomthingz.util.TextUtils;
@@ -13,8 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class LavaGeneratorTileEntity extends AbstractFluidFuelGeneratorTileEntity {
     // Energy constants
@@ -55,7 +54,7 @@ public class LavaGeneratorTileEntity extends AbstractFluidFuelGeneratorTileEntit
 
     @Override
     public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
-        return index == 0 && IFluidContainer.getBucketOrContainerFluid(stack).getFluid().is(FluidTags.LAVA);
+        return index == 0 && FluidContainer.getBucketOrContainerFluid(stack).getFluid().is(FluidTags.LAVA);
     }
 
     @Override

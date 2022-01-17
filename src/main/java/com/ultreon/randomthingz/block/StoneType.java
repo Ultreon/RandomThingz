@@ -1,9 +1,9 @@
 package com.ultreon.randomthingz.block;
 
-import com.qsoftware.modlib.silentlib.registry.BlockDeferredRegister;
-import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
-import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
-import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.BlockDeferredRegister;
+import com.ultreon.modlib.embedded.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemDeferredRegister;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;

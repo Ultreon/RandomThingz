@@ -4,6 +4,7 @@ import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.ITickable;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
@@ -20,24 +21,30 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.ticks.ScheduledTick;
 import net.minecraftforge.common.extensions.IForgeBlockState;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 
 import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
-import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
 /**
  * Main class for frameblocks - all important block info can be found here
@@ -47,7 +54,7 @@ import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
  * @version 1.7 10/20/20
  */
 @SuppressWarnings("deprecation")
-public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterloggedBlock {
+public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterloggedBlock, EntityBlock {
     /**
      * Block property (can be seed when pressing F3 in-game)
      * This is needed, because we need to detect whether the blockstate has changed
@@ -84,29 +91,15 @@ public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterlo
         builder.add(WATERLOGGED, CONTAINS_BLOCK, LIGHT_LEVEL);
     }
 
-    /**
-     * Yep, it's a complex block structure, so we need a tile entity
-     *
-     * @param state regardless of its state, it always has a TileEntity
-     * @return regardless of its state, it always has a TileEntity -> returns true every time
-     */
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+        return new FrameBlockTile(pos, state);
     }
 
-    /**
-     * When placed, this method is called and a new FrameBlockTile is created
-     * This is needed to store a block inside the frame, change its light value etc.
-     *
-     * @param state     regardless of its state, we always create the TileEntity
-     * @param dimension regardless of the dimension it's in, we always create the TileEntity
-     * @return the new empty FrameBlock-TileEntity
-     */
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new FrameBlockTile();
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
+        return ITickable::tickTE;
     }
 
     /**
@@ -125,7 +118,7 @@ public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterlo
      * @return see {@linkplain ActionResultType}
      */
     @Override
-    public InteractionResult use(BlockState state, Level dimension, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, Level dimension, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult trace) {
         ItemStack item = player.getItemInHand(hand);
         if (!dimension.isClientSide) {
             BlockAppearanceHelper.setLightLevel(item, state, dimension, pos, player, hand);
@@ -167,21 +160,19 @@ public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterlo
      */
     protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
         if (!dimensionIn.isClientSide) {
-            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof FrameBlockTile) {
-                FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
+            BlockEntity entity = dimensionIn.getBlockEntity(pos);
+            if (entity instanceof FrameBlockTile frameTileEntity) {
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
                     dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clear();
-                    float f = 0.7F;
                     double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
                     double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
                     double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    ItemStack itemstack1 = new ItemStack(blockState.getBlock());
-                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
-                    itementity.setDefaultPickUpDelay();
-                    dimensionIn.addFreshEntity(itementity);
+                    ItemStack stack = new ItemStack(blockState.getBlock());
+                    ItemEntity item = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
+                    item.setDefaultPickUpDelay();
+                    dimensionIn.addFreshEntity(item);
                     frameTileEntity.clear();
                 }
             }
@@ -199,8 +190,7 @@ public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterlo
      */
     public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
         BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-        if (tileentity instanceof FrameBlockTile) {
-            FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
+        if (tileentity instanceof FrameBlockTile frameTileEntity) {
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
             dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);
@@ -217,14 +207,14 @@ public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterlo
      * @param isMoving    whether the block has some sort of motion (should never be moving - false)
      */
     @Override
-    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @NotNull Level dimensionIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             dropContainedBlock(dimensionIn, pos);
 
             super.onRemove(state, dimensionIn, pos, newState, isMoving);
         }
         if (state.getValue(WATERLOGGED)) {
-            dimensionIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(dimensionIn));
+            dimensionIn.getFluidTicks().schedule(new ScheduledTick<Fluid>(Fluids.WATER, pos, Fluids.WATER.getTickDelay(dimensionIn), 0));
         }
     }
 
@@ -237,7 +227,7 @@ public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterlo
     }
 
     //unused
-    public boolean useShapeForLightOcclusion(BlockState state) {
+    public boolean useShapeForLightOcclusion(@NotNull BlockState state) {
         //return this.isTransparent;
         return true;
     }
@@ -251,7 +241,7 @@ public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterlo
      * @return new amount of light that is emitted by the block
      */
     @Override
-    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+    public int getLightEmission(BlockState state, BlockGetter dimension, BlockPos pos) {
         if (state.getValue(LIGHT_LEVEL) > 15) {
             return 15;
         }
@@ -270,9 +260,9 @@ public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterlo
     }
 
     @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor dimensionIn, BlockPos currentPos, BlockPos facingPos) {
+    public @NotNull BlockState updateShape(BlockState stateIn, @NotNull Direction facing, @NotNull BlockState facingState, @NotNull LevelAccessor dimensionIn, @NotNull BlockPos currentPos, @NotNull BlockPos facingPos) {
         if (stateIn.getValue(WATERLOGGED)) {
-            dimensionIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(dimensionIn));
+            dimensionIn.getFluidTicks().schedule(new ScheduledTick<>(Fluids.WATER, currentPos, Fluids.WATER.getTickDelay(dimensionIn), 0));
         }
 
         return super.updateShape(stateIn, facing, facingState, dimensionIn, currentPos, facingPos);
@@ -280,17 +270,16 @@ public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterlo
 
     @Override
     @SuppressWarnings("deprecation")
-    public FluidState getFluidState(BlockState state) {
+    public @NotNull FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState state, BlockGetter dimensionIn, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter dimensionIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         if (!state.getValue(CONTAINS_BLOCK)) {
             return CUBE;
         }
         return Shapes.block();
     }
 }
-//========SOLI DEO GLORIA========//

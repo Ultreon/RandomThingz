@@ -66,7 +66,7 @@ public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, SquidModel<G
         float f = Mth.lerp(partialTicks, entityLiving.xBodyRotO, entityLiving.xBodyRot);
         float f1 = Mth.lerp(partialTicks, entityLiving.zBodyRotO, entityLiving.zBodyRot);
         matrixStackIn.translate(0.0D, 0.5D, 0.0D);
-        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180.0F - rotationYaw));
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180.0f - rotationYaw));
         matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(f));
         matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f1));
         matrixStackIn.translate(0.0D, -1.2F, 0.0D);

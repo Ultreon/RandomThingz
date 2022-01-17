@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item;
 
-import com.qsoftware.modlib.api.IFluidContainer;
-import com.qsoftware.modlib.silentlib.util.PlayerUtils;
+import com.ultreon.modlib.api.FluidContainer;
+import com.ultreon.modlib.embedded.silentlib.util.PlayerUtils;
 import com.ultreon.randomthingz.common.enums.TextColors;
 import com.ultreon.randomthingz.item.energy.EnergyStoringItem;
 import com.ultreon.randomthingz.util.EnergyUtils;
@@ -54,7 +54,7 @@ public class HandPumpItem extends EnergyStoringItem {
     }
 
     private static void giveFilledContainer(Player player, IEnergyStorage energy, ItemStack emptyContainer, FluidStack fluidStack) {
-        ItemStack filledContainer = IFluidContainer.fillBucketOrFluidContainer(emptyContainer, fluidStack);
+        ItemStack filledContainer = FluidContainer.fillBucketOrFluidContainer(emptyContainer, fluidStack);
         energy.extractEnergy(ENERGY_PER_OPERATION, false);
         PlayerUtils.giveItem(player, filledContainer);
     }

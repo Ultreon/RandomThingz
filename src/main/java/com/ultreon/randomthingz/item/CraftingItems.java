@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item;
 
-import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
@@ -8,8 +8,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import org.apache.commons.lang3.StringUtils;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public enum CraftingItems implements ItemLike {
     // Other dusts

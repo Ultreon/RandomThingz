@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.config;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.ultreon.randomthingz.world.gen.ores.DefaultOre;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import javax.annotation.ParametersAreNonnullByDefault;

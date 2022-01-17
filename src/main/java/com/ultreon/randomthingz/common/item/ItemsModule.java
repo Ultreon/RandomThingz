@@ -1,8 +1,7 @@
 package com.ultreon.randomthingz.common.item;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
-import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
-import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemDeferredRegister;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.actionmenu.MainActionMenu;
 import com.ultreon.randomthingz.actionmenu.MenuHandler;
@@ -16,7 +15,8 @@ import com.ultreon.randomthingz.item.CustomSpawnEggItem;
 import com.ultreon.randomthingz.item.DyeColorizedItem;
 import com.ultreon.randomthingz.item.MaterialColorizedItem;
 import com.ultreon.randomthingz.registration.Registration;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.Entity;

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item;
 
-import com.qsoftware.modlib.silentutils.MathUtils;
+import com.ultreon.modlib.embedded.silentutils.MathUtils;
 import com.ultreon.randomthingz.api.IMachineUpgrade;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.network.chat.Component;
@@ -13,8 +13,10 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.List;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class MachineUpgradeItem extends Item {
     private final IMachineUpgrade upgrade;

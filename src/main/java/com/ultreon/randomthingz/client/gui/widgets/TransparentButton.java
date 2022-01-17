@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.client.gui.widgets;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;

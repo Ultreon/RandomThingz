@@ -9,7 +9,7 @@ import com.ultreon.randomthingz.common.interfaces.IVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -146,13 +146,13 @@ public class UpdatesModule extends Module {
          * On screen initialize event.
          * Catches the main menu initialization.
          *
-         * @param event a {@linkplain GuiScreenEvent.InitGuiEvent.Post} event.
+         * @param event a {@linkplain ScreenEvent.InitScreenEvent.Post} event.
          */
         @SubscribeEvent
-        public void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
+        public void onScreenInit(ScreenEvent.InitScreenEvent.Post event) {
             // Get gui and the Minecraft instance.
             Minecraft mc = Minecraft.getInstance();
-            Screen gui = event.getGui();
+            Screen gui = event.getScreen();
 
             // Return if already initialized.
             if (UpdateAvailableScreen.isInitializedBefore()) {

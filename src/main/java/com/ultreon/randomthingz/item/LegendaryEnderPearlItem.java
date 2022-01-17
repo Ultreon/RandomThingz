@@ -34,7 +34,7 @@ public class LegendaryEnderPearlItem extends EnderpearlItem {
         if (!dimensionIn.isClientSide) {
             LegendaryEnderPearlEntity enderPearlEntity = new LegendaryEnderPearlEntity(dimensionIn, playerIn);
             enderPearlEntity.setItem(itemstack);
-            enderPearlEntity.shootFromRotation(playerIn, playerIn.xRot, playerIn.yRot, 0.0F, 1.5F, 1.0F);
+            enderPearlEntity.shootFromRotation(playerIn, playerIn.xRot, playerIn.yRot, 0.0f, 1.5F, 1.0f);
             dimensionIn.addFreshEntity(enderPearlEntity);
         }
 

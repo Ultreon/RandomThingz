@@ -5,15 +5,16 @@ import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.util.TextUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.item.crafting.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -31,8 +32,8 @@ public class ElectricFurnaceTileEntity extends AbstractMachineTileEntity<Abstrac
     private static final int[] SLOTS_OUTPUT = {1};
     private static final int[] SLOTS_ALL = {0, 1};
 
-    public ElectricFurnaceTileEntity() {
-        super(ModMachineTileEntities.electricFurnace, INVENTORY_SIZE, MachineTier.STANDARD);
+    public ElectricFurnaceTileEntity(BlockPos pos, BlockState state) {
+        super(ModMachineTileEntities.electricFurnace, pos, state, INVENTORY_SIZE, MachineTier.STANDARD);
     }
 
     @Override

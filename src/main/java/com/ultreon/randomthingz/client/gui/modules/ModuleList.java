@@ -8,8 +8,8 @@ import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.ModuleSafety;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.ChatFormatting;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -67,7 +67,7 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
         this.centerListVertically = false;
 
         // Set to render header.
-        this.setRenderHeader(true, (int) (9.0F * 1.5F));
+        this.setRenderHeader(true, (int) (9.0f * 1.5F));
     }
 
     /**
@@ -174,13 +174,13 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
 
             // If there's no compatibility show a red color.
             if (compatibility == ModuleCompatibility.NONE) {
-                RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+                RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
                 GuiComponent.fill(matrixStack, xOffset - 1, scroll - 1, xOffset + rowWidth - 9, scroll + rowHeight + 1, 0xff770000);
             }
 
             // If there's partial compatibility show a orange yellow color.
             if (compatibility == ModuleCompatibility.PARTIAL) {
-                RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+                RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
                 GuiComponent.fill(matrixStack, xOffset - 1, scroll - 1, xOffset + rowWidth - 9, scroll + rowHeight + 1, 0xff773a00);
             }
 
@@ -189,20 +189,20 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
             int mouseYOffset = mouseY - scroll;
 
             // Bind the icon texture.
-            this.mc.getTextureManager().bind(this.module.getTextureLocation());
+            RenderSystem.setShaderTexture(0, this.module.getTextureLocation());
 
-            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-            GuiComponent.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 32, 32);
+            RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+            GuiComponent.blit(matrixStack, xOffset, scroll, 0.0f, 0.0f, 32, 32, 32, 32);
 
             int dx = 64 + xOffset + 8;
 
             // Bind the informative icon texture overlays.
-            this.mc.getTextureManager().bind(MODULE_OVERLAYS);
+            RenderSystem.setShaderTexture(0, MODULE_OVERLAYS);
 
             // Show icon for core modules.
             if (this.module.isCore()) {
                 dx += 18;
-                GuiComponent.blit(matrixStack, dx, scroll + 14, 64.0F, 0.0F, 16, 16, 256, 256);
+                GuiComponent.blit(matrixStack, dx, scroll + 14, 64.0f, 0.0f, 16, 16, 256, 256);
             }
 
             // Check security, show icon for experimental / risc security.
@@ -210,12 +210,12 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                 case EXPERIMENTAL:
                     // Show experimental icon texture. (Red shield icon, white exclamation point)
                     dx += 18;
-                    GuiComponent.blit(matrixStack, dx, scroll + 14, 80.0F, 0.0F, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 80.0f, 0.0f, 16, 16, 256, 256);
                     break;
                 case RISC:
                     // Show risc icon texture. (Yellow shield icon, black exclamation point)
                     dx += 18;
-                    GuiComponent.blit(matrixStack, dx, scroll + 14, 96.0F, 0.0F, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 96.0f, 0.0f, 16, 16, 256, 256);
                     break;
                 case SAFE:
                     // Don't show any security icon texture.
@@ -227,12 +227,12 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                 case NONE:
                     // Show no compatibility icon texture. (Red circle, white exclamation point)
                     dx += 18;
-                    GuiComponent.blit(matrixStack, dx, scroll + 14, 48.0F, 0.0F, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 48.0f, 0.0f, 16, 16, 256, 256);
                     break;
                 case PARTIAL:
                     // Show partial compatibility icon texture. (Yellow triangle, black exclamation point)
                     dx += 18;
-                    GuiComponent.blit(matrixStack, dx, scroll + 14, 32.0F, 0.0F, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 32.0f, 0.0f, 16, 16, 256, 256);
                     break;
                 case FULL:
                     // Don't show any compatibility icon texture.
@@ -249,7 +249,7 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
             // Check if hovered / touchscreen support enabled.
             if (this.mc.options.touchscreen || isHovered) {
                 // Bind icon texture for arrow.
-                this.mc.getTextureManager().bind(ModuleList.ICONS);
+                RenderSystem.setShaderTexture(0, ModuleList.ICONS);
 
                 // Check if can be disabled.
                 if (this.module.canDisable()) {
@@ -258,7 +258,7 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                 }
 
                 // Set to full color for arrow icon to display.
-                RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+                RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
                 // Normal arrow button state.
                 if (!manager.isUnsavedEnabled(this.module)) {
@@ -266,20 +266,20 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                     // Check hover state.
                     if (mouseXOffset < 32) {
                         // Hovered.
-                        GuiComponent.blit(matrixStack, xOffset, scroll, 0.0F, 32.0F, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 0.0f, 32.0f, 32, 32, 256, 256);
                     } else {
                         // Non-hovered.
-                        GuiComponent.blit(matrixStack, xOffset, scroll, 0.0F, 0.0F, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 0.0f, 0.0f, 32, 32, 256, 256);
                     }
                 } else if (manager.isUnsavedEnabled(this.module) && this.module.canDisable()) {
                     // Module is scheduled to be disabled when saved.
                     // Check hover state.
                     if (mouseXOffset < 32) {
                         // Hovered.
-                        GuiComponent.blit(matrixStack, xOffset, scroll, 26.0F, 32.0F, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 26.0f, 32.0f, 32, 32, 256, 256);
                     } else {
                         // Non-hovered.
-                        GuiComponent.blit(matrixStack, xOffset, scroll, 26.0F, 0.0F, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 26.0f, 0.0f, 32, 32, 256, 256);
                     }
                 }
             }
@@ -292,7 +292,7 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
             int btnSubY = btnY + scroll;
 
             // Rendering options button.
-            this.mc.getTextureManager().bind(OPTIONS_BUTTON);
+            RenderSystem.setShaderTexture(0, OPTIONS_BUTTON);
 
             // Check if the module of this entry has an options screen available.
             if (this.module.hasOptions()) {
@@ -310,7 +310,7 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
             }
 
             // Rendering submodule screen button.
-            this.mc.getTextureManager().bind(MANAGER_BUTTON);
+            RenderSystem.setShaderTexture(0, MANAGER_BUTTON);
 
             // Check if submodule manager is enabled for the module of this entry.
             if (this.module.isSubManagerEnabled()) {
@@ -386,7 +386,7 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                                         this.mc.displayGuiScreen(this.screen);
                                     } else if (!compatibility.isCompatible() && compatibility.isRunnable()) {
                                         // Get the confirm message for the compatibility.
-                                        ITextComponent compatText = compatibility.getConfirmMessage();
+                                        Component compatText = compatibility.getConfirmMessage();
 
                                         // Show confirm message, because compatibility is partial.
                                         this.mc.displayGuiScreen(new ConfirmScreen((p_238921_1_) -> {
@@ -413,7 +413,7 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                             break;
                         case PARTIAL:
                             // Show confirm message, because compatibility is partial.
-                            ITextComponent textComponent = compatibility.getConfirmMessage();
+                            Component textComponent = compatibility.getConfirmMessage();
                             this.mc.displayGuiScreen(new ConfirmScreen((p_238921_1_) -> {
                                 if (p_238921_1_) {
                                     this.manager.enable(this.module);

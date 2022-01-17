@@ -50,4 +50,3 @@ public class RenderSetup {
         //ScreenManager.registerFactory(Registration.STANDING_SIGN_FRAME_CONTAINER.get(), EditSignScreen::new);
     }
 }
-//========SOLI DEO GLORIA========//

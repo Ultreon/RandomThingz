@@ -2,6 +2,7 @@ package com.ultreon.texturedmodels.tileentity;
 
 import com.ultreon.texturedmodels.block.StandingSignFrameBlock;
 import com.ultreon.texturedmodels.block.WallSignFrameBlock;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.Connection;
@@ -12,12 +13,11 @@ import net.minecraftforge.client.model.ModelDataManager;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.data.ModelDataMap;
 import net.minecraftforge.client.model.data.ModelProperty;
-import net.minecraftforge.common.util.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
@@ -46,15 +46,15 @@ public class SignFrameTile extends SignBlockEntity {
     private Integer designTexture = 0;
     private Integer glassColor = 0;
 
-    public SignFrameTile() {
-        super();
+    public SignFrameTile(BlockPos pos, BlockState state) {
+        super(pos, state);
         System.out.println("new sign tile");
     }
 
     private static CompoundTag writeInteger(Integer tag) {
-        CompoundTag compoundnbt = new CompoundTag();
-        compoundnbt.putString("number", tag.toString());
-        return compoundnbt;
+        CompoundTag compoundTag = new CompoundTag();
+        compoundTag.putString("number", tag.toString());
+        return compoundTag;
     }
 
     private static Integer readInteger(CompoundTag tag) {
@@ -77,7 +77,7 @@ public class SignFrameTile extends SignBlockEntity {
     public void setMimic(BlockState mimic) {
         this.mimic = mimic;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public Integer getDesign() {
@@ -87,7 +87,7 @@ public class SignFrameTile extends SignBlockEntity {
     public void setDesign(Integer design) {
         this.design = design;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public Integer getDesignTexture() {
@@ -97,7 +97,7 @@ public class SignFrameTile extends SignBlockEntity {
     public void setDesignTexture(Integer designTexture) {
         this.designTexture = designTexture;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public Integer getTexture() {
@@ -107,7 +107,7 @@ public class SignFrameTile extends SignBlockEntity {
     public void setTexture(Integer texture) {
         this.texture = texture;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public Integer getGlassColor() {
@@ -142,7 +142,7 @@ public class SignFrameTile extends SignBlockEntity {
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return new ClientboundBlockEntityDataPacket(worldPosition, 1, getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(worldPosition, 1, getUpdateTag());
     }
 
     @Override
@@ -157,40 +157,40 @@ public class SignFrameTile extends SignBlockEntity {
             mimic = NbtUtils.readBlockState(tag.getCompound("mimic"));
             if (!Objects.equals(oldMimic, mimic)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("texture")) {
             texture = readInteger(tag.getCompound("texture"));
             if (!Objects.equals(oldTexture, texture)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("design")) {
             design = readInteger(tag.getCompound("design"));
             if (!Objects.equals(oldDesign, design)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("design_texture")) {
             designTexture = readInteger(tag.getCompound("design_texture"));
             if (!Objects.equals(oldDesignTexture, designTexture)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
         if (tag.contains("glass_color")) {
             glassColor = readInteger(tag.getCompound("glass_color"));
             if (!Objects.equals(oldGlassColor, glassColor)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public IModelData getModelData() {
         return new ModelDataMap.Builder()
@@ -203,7 +203,7 @@ public class SignFrameTile extends SignBlockEntity {
     }
 
     @Override
-    public void load(BlockState state, CompoundTag tag) {
+    public void load(CompoundTag tag) {
         super.load(state, tag);
         if (tag.contains("mimic")) {
             mimic = NbtUtils.readBlockState(tag.getCompound("mimic"));
@@ -250,4 +250,3 @@ public class SignFrameTile extends SignBlockEntity {
         this.setGlassColor(0);
     }
 }
-//========SOLI DEO GLORIA========//

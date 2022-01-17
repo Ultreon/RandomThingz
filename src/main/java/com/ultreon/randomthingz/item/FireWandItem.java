@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item;
 
-import com.ultreon.randomthingz.common.item.ModItemGroups;
+import com.ultreon.randomthingz.common.item.ModCreativeTabs;
 import com.ultreon.randomthingz.common.item.ModItems;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
@@ -28,7 +28,7 @@ public class FireWandItem extends WandItem {
     private static final int EXPLOSION_BASE = 4;
 
     public FireWandItem() {
-        super(80, 20, new Item.Properties().tab(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(80, 20, new Item.Properties().tab(ModCreativeTabs.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override

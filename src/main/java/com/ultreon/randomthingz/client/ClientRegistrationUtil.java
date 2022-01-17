@@ -1,18 +1,18 @@
 package com.ultreon.randomthingz.client;
 
-import com.qsoftware.modlib.api.providers.IBlockProvider;
-import com.qsoftware.modlib.api.providers.IItemProvider;
-import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.color.block.BlockColors;
+import com.ultreon.modlib.api.providers.IBlockProvider;
+import com.ultreon.modlib.api.providers.IItemProvider;
+import com.ultreon.modlib.embedded.silentlib.registry.EntityTypeRegistryObject;
 import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.color.item.ItemColors;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.client.renderer.item.ItemPropertyFunction;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
@@ -27,7 +27,7 @@ public class ClientRegistrationUtil {
         RenderingRegistry.registerEntityRenderingHandler(entityTypeRO.getEntityType(), renderFactory);
     }
 
-//    public static <C extends Container, U extends Screen & IHasContainer<C>> void registerScreen(ContainerTypeRegistryObject<C> type, IScreenFactory<C, U> factory) {
+//    public static <C extends AbstractContainerMenu, U extends Screen & IHasContainer<C>> void registerScreen(ContainerTypeRegistryObject<C> type, IScreenFactory<C, U> factory) {
 //        ScreenManager.registerFactory(type.getContainerType(), factory);
 //    }
 

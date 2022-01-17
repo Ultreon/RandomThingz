@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.common.item;
 
-import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
-import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
-import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.EntityTypeRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemDeferredRegister;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.common.entity.ModEntities;
 import com.ultreon.randomthingz.common.init.ObjectInit;

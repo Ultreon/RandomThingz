@@ -42,7 +42,7 @@ public class SwitchWidget extends AbstractWidget {
 
     public void renderButton(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft minecraft = Minecraft.getInstance();
-        minecraft.getTextureManager().bind(this.resourceLocation);
+        RenderSystem.setShaderTexture(0, this.resourceLocation);
         RenderSystem.disableDepthTest();
         int u = 0;
         int v = 0;

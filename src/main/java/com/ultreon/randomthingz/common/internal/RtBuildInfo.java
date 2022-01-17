@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.common.internal;
 
 import com.google.gson.JsonObject;
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.ultreon.randomthingz.common.annotation.MethodsReturnNonnullByDefault;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.minecraft.FieldsAreNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.time.LocalDateTime;

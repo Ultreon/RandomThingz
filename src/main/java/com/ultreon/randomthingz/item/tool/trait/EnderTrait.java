@@ -60,7 +60,7 @@ public class EnderTrait extends AbstractTrait {
         float yaw = player.yRot;
 
         // Get the player's eye position, put is as start position.
-        Vec3 startPos = player.getEyePosition(1.0F);
+        Vec3 startPos = player.getEyePosition(1.0f);
 
         // Calculations.
         float fz = Mth.cos(-yaw * ((float) Math.PI / 180F) - (float) Math.PI);
@@ -97,7 +97,7 @@ public class EnderTrait extends AbstractTrait {
             }
 
             clicker.teleportTo(posX, posY, posZ);
-            clicker.fallDistance = 0.0F;
+            clicker.fallDistance = 0.0f;
 
             clicker.awardStat(Stats.ITEM_USED.get(item));
             clicker.getCooldowns().addCooldown(item, 100);

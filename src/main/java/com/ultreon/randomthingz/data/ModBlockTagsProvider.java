@@ -3,6 +3,7 @@ package com.ultreon.randomthingz.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.ultreon.randomthingz.block.machines.MetalBlock;
 import com.ultreon.randomthingz.block.machines.dryingrack.DryingRackBlock;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
 import com.ultreon.randomthingz.common.tags.ModTags;
@@ -10,6 +11,7 @@ import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.HashCache;
 import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
@@ -50,6 +52,23 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                     tag(tag).add(metal.getOre().get()));
             metal.getStorageBlockTag().ifPresent(tag ->
                     tag(tag).add(metal.getStorageBlock().get()));
+            metal.getDataGenTags().forEach(tag -> {
+                metal.getStorageBlock().ifPresent(block -> {
+                    tag(tag).add(block);
+                });
+                metal.getOre().ifPresent(block -> {
+                    tag(tag).add(block);
+                });
+            });
+        }
+
+        TagAppender<Block> mineableWithPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE);
+        TagAppender<Block> needsStoneTool = tag(BlockTags.NEEDS_IRON_TOOL);
+        for (Block block : Registration.getBlocks()) {
+            if (block instanceof MetalBlock) {
+                mineableWithPickaxe.add(block);
+                needsStoneTool.add(block);
+            }
         }
 
         groupBuilder(Tags.Blocks.ORES, ItemMaterial::getOreTag);

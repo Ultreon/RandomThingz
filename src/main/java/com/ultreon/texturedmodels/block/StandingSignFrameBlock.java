@@ -1,21 +1,22 @@
 package com.ultreon.texturedmodels.block;
 
+import com.ultreon.texturedmodels.tileentity.ITickable;
 import com.ultreon.texturedmodels.tileentity.SignFrameTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.BlockHitResult;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import static com.ultreon.texturedmodels.util.BCBlockStateProperties.CONTAINS_BLOCK;
 import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
@@ -39,15 +40,14 @@ public class StandingSignFrameBlock extends StandingSignBlock {
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new SignFrameTile(pos, state);
     }
 
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        System.out.println("new tile");
-        return new SignFrameTile();
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
+        return ITickable::tickTE;
     }
 
     @Override
@@ -61,4 +61,3 @@ public class StandingSignFrameBlock extends StandingSignBlock {
         return InteractionResult.FAIL;
     }
 }
-//========SOLI DEO GLORIA========//

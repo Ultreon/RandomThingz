@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.wire;
 
-import com.qsoftware.modlib.api.ConnectionType;
+import com.ultreon.modlib.api.ConnectionType;
 import com.ultreon.randomthingz.util.EnergyUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

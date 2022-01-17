@@ -142,7 +142,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
 
         this.list = this.addWidget(new ScreenshotSelectionList(this, Minecraft.getInstance(),
                 200, this.height - 50, 10, this.height - 40, null));
-        this.addButton(new Button(10, this.height - 30, 200, 20, CommonComponents.GUI_BACK, (btn) -> this.goBack()));
+        this.addRenderableWidget(new Button(10, this.height - 30, 200, 20, CommonComponents.GUI_BACK, (btn) -> this.goBack()));
     }
 
     /**
@@ -183,14 +183,14 @@ public class ScreenshotsScreen extends AdvancedScreen {
         this.minecraft.getTextureManager().bindTexture(BACKGROUND_LOCATION);
 
         // Color.
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
         // Render dirt.
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        bufferbuilder.pos(0.0D, this.height, 0.0D).tex(0.0F, (float) this.height / 32.0F).color(64, 64, 64, 255).endVertex();
-        bufferbuilder.pos(224, this.height, 0.0D).tex((float) 224 / 32.0F, (float) this.height / 32.0F).color(64, 64, 64, 255).endVertex();
-        bufferbuilder.pos(224, this.height - 40d, 0.0D).tex((float) 224 / 32.0F, ((float) this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
-        bufferbuilder.pos(0.0D, this.height - 40d, 0.0D).tex(0.0F, ((float) this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(0.0D, this.height, 0.0D).tex(0.0f, (float) this.height / 32.0f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(224, this.height, 0.0D).tex((float) 224 / 32.0f, (float) this.height / 32.0f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(224, this.height - 40d, 0.0D).tex((float) 224 / 32.0f, ((float) this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.pos(0.0D, this.height - 40d, 0.0D).tex(0.0f, ((float) this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
 
         // Draw
         tessellator.draw();

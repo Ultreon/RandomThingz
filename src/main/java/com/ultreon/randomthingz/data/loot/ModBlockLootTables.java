@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.data.loot;
 
-import com.qsoftware.modlib.api.providers.IBlockProvider;
-import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.api.providers.IBlockProvider;
+import com.ultreon.modlib.embedded.silentlib.registry.BlockRegistryObject;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;

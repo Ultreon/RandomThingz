@@ -33,7 +33,7 @@ public class DynamiteItem extends Item {
         if (!dimensionIn.isClientSide) {
             DynamiteEntity dynamiteEntity = new DynamiteEntity(dimensionIn, playerIn);
             dynamiteEntity.setItem(itemstack);
-            dynamiteEntity.shootFromRotation(playerIn, playerIn.xRot, playerIn.yRot, 0.0F, 1.5F, 1.0F);
+            dynamiteEntity.shootFromRotation(playerIn, playerIn.xRot, playerIn.yRot, 0.0f, 1.5F, 1.0f);
             dimensionIn.addFreshEntity(dynamiteEntity);
         }
 

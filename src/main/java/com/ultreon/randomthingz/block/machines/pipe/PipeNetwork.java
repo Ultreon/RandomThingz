@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.pipe;
 
-import com.qsoftware.modlib.api.ConnectionType;
-import mcp.MethodsReturnNonnullByDefault;
+import com.ultreon.modlib.api.ConnectionType;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -12,9 +12,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 
@@ -34,10 +34,6 @@ public final class PipeNetwork implements IFluidHandler {
 
     static PipeNetwork buildNetwork(LevelReader dimension, BlockPos pos) {
         Set<BlockPos> pipes = buildPipeSet(dimension, pos);
-//        int energyStored = pipes.stream().mapToInt(p -> {
-//            TileEntity tileEntity = dimension.getTileEntity(p);
-//            return tileEntity instanceof PipeTileEntity ? ((PipeTileEntity) tileEntity).energyStored : 0;
-//        }).sum();
         return new PipeNetwork(dimension, pipes);
     }
 
@@ -157,7 +153,7 @@ public final class PipeNetwork implements IFluidHandler {
         return 1;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public FluidStack getFluidInTank(int tank) {
         return fluidTank.getFluidInTank(tank);
@@ -169,7 +165,7 @@ public final class PipeNetwork implements IFluidHandler {
     }
 
     @Override
-    public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
+    public boolean isFluidValid(int tank, @NotNull FluidStack stack) {
         return fluidTank.isFluidValid(tank, stack);
     }
 
@@ -178,13 +174,13 @@ public final class PipeNetwork implements IFluidHandler {
         return fluidTank.fill(resource, action);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public FluidStack drain(FluidStack resource, FluidAction action) {
         return fluidTank.drain(resource, action);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public FluidStack drain(int maxDrain, FluidAction action) {
         return fluidTank.drain(maxDrain, action);
@@ -212,7 +208,7 @@ public final class PipeNetwork implements IFluidHandler {
             return 1;
         }
 
-        @Nonnull
+        @NotNull
         @Override
         public FluidStack getFluidInTank(int tank) {
             return network.fluidTank.getFluid();
@@ -224,7 +220,7 @@ public final class PipeNetwork implements IFluidHandler {
         }
 
         @Override
-        public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
+        public boolean isFluidValid(int tank, @NotNull FluidStack stack) {
             return network.fluidTank.isFluidValid(tank, stack);
         }
 
@@ -236,7 +232,7 @@ public final class PipeNetwork implements IFluidHandler {
             return network.fluidTank.fill(resource, action);
         }
 
-        @Nonnull
+        @NotNull
         @Override
         public FluidStack drain(FluidStack resource, FluidAction action) {
             if (!type.canExtract()) {
@@ -245,7 +241,7 @@ public final class PipeNetwork implements IFluidHandler {
             return network.fluidTank.drain(resource, action);
         }
 
-        @Nonnull
+        @NotNull
         @Override
         public FluidStack drain(int maxDrain, FluidAction action) {
             if (!type.canExtract()) {

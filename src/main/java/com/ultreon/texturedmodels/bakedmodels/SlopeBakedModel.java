@@ -24,9 +24,9 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.model.data.IDynamicBakedModel;
 import net.minecraftforge.client.model.data.IModelData;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,9 +40,9 @@ import java.util.Random;
  * @version 1.3 10/20/20
  */
 public class SlopeBakedModel implements IDynamicBakedModel {
-    @Nonnull
+    @NotNull
     @Override
-    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData) {
+    public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
         //get block saved in frame tile
         BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
@@ -63,7 +63,7 @@ public class SlopeBakedModel implements IDynamicBakedModel {
         return new Vec3(x, y, z);
     }
 
-    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @Nonnull Random rand, @Nonnull IModelData extraData, BakedModel model) {
+    public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData, BakedModel model) {
         List<BakedQuad> quads = new ArrayList<>();
         BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
         List<TextureAtlasSprite> texture = TextureHelper.getTextureFromModel(model, extraData, rand);
@@ -267,4 +267,3 @@ public class SlopeBakedModel implements IDynamicBakedModel {
         return ItemTransforms.NO_TRANSFORMS;
     }
 }
-//========SOLI DEO GLORIA========//

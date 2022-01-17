@@ -1,13 +1,13 @@
 package com.ultreon.randomthingz.client.gui.screen.confirmExit;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
-import com.qsoftware.modlib.event.WindowCloseEvent;
+import com.ultreon.modlib.event.WindowCloseEvent;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.ModuleSafety;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LevelLoadingScreen;
 import net.minecraft.client.gui.screens.Screen;

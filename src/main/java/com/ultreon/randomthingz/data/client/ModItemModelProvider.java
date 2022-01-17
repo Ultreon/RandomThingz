@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.data.client;
 
-import com.qsoftware.modlib.silentlib.block.IBlockProvider;
-import com.qsoftware.modlib.silentlib.util.NameUtils;
+import com.ultreon.modlib.embedded.silentlib.block.IBlockProvider;
+import com.ultreon.modlib.embedded.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.StoneType;
 import com.ultreon.randomthingz.block._common.ModBlocks;
@@ -11,9 +11,9 @@ import com.ultreon.randomthingz.item.CraftingItems;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import com.ultreon.randomthingz.registration.Registration;
-import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;

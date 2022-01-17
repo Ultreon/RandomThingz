@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.machines.generator;
 
-import com.qsoftware.modlib.api.IFluidContainer;
-import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.modlib.silentutils.EnumUtils;
+import com.ultreon.modlib.api.FluidContainer;
+import com.ultreon.modlib.api.RedstoneMode;
+import com.ultreon.modlib.embedded.silentutils.EnumUtils;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.config.Config;
 import com.ultreon.randomthingz.util.InventoryUtils;
@@ -21,9 +21,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGeneratorTileEntity {
     public static final int FIELDS_COUNT = 9;
@@ -91,7 +90,7 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
     protected abstract int getFuelBurnTime(FluidStack fluid);
 
     protected void tryFillTank(ItemStack item) {
-        FluidStack fluid = IFluidContainer.getBucketOrContainerFluid(item);
+        FluidStack fluid = FluidContainer.getBucketOrContainerFluid(item);
         if (canAcceptFluidContainer(item, fluid)) {
             tank.fill(fluid, IFluidHandler.FluidAction.EXECUTE);
 
@@ -164,7 +163,7 @@ public abstract class AbstractFluidFuelGeneratorTileEntity extends AbstractGener
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             return fluidHandlerCap.cast();
         }

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.common;
 
-import net.minecraftforge.common.ToolType;
+import com.ultreon.randomthingz.item.tool.ToolType;
 
 public interface IHasToolType {
     ToolType getToolType();

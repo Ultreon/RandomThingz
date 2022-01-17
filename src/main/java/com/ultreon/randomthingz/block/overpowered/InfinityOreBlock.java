@@ -3,8 +3,8 @@ package com.ultreon.randomthingz.block.overpowered;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -42,15 +42,15 @@ public class InfinityOreBlock extends OreBlock {
                 heldItemMainhand.getItem() != Toolset.INFINITY.getAxe().get()) {
             if (heldItemMainhand.isDamageable()) {
                 player.getHeldItemMainhand().damageItem(player.getHeldItemMainhand().getMaxDamage(), player, (entity) -> {
-                    entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+                    entity.sendBreakAnimation(EquipmentSlot.MAINHAND);
                 });
             }
         } else {
-            player.getCombatTracker().trackDamage(new DamageSource("mine_infinity_ore"), player.getHealth(), player.getHealth());
+            player.getCombatTracker().recordDamage(new DamageSource("mine_infinity_ore"), player.getHealth(), player.getHealth());
             player.setHealth(0);
 
             Minecraft.getInstance().enqueue(() -> {
-                player.onDeath(new DamageSource("mine.infinity_ore"));
+                player.die(new DamageSource("mine.infinity_ore"));
             });
         }
     }

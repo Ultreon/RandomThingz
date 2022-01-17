@@ -16,8 +16,8 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.io.File;
 import java.util.List;
 import java.util.Optional;
@@ -136,10 +136,10 @@ public class ScreenshotSelectionList extends ObjectSelectionList<ScreenshotSelec
             this.minecraft.fontRenderer.drawString(matrixStack, name, (float) (xOffset + 32 + 3), (float) (scroll + 1), 0xffffff);
             this.minecraft.fontRenderer.drawString(matrixStack, size, (float) (xOffset + 32 + 3), (float) (scroll + 9 + 3), 0x808080);
             this.minecraft.fontRenderer.drawText(matrixStack, description, (float) (xOffset + 32 + 3), (float) (scroll + 9 + 9 + 3), 0x808080);
-            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
             this.minecraft.getTextureManager().bindTexture(this.texture != null ? this.textureLocation : ScreenshotSelectionList.UNKNOWN_IMAGE);
             RenderSystem.enableBlend();
-//         AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0.0F, 0.0F, 32, 32, 32, 32);
+//         AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0.0f, 0.0f, 32, 32, 32, 32);
 
             if (this.texture != null) {
                 int imgWidth = this.texture.getTextureData().getWidth();
@@ -160,30 +160,30 @@ public class ScreenshotSelectionList extends ObjectSelectionList<ScreenshotSelec
 //         if (this.minecraft.gameSettings.touchscreen || p_230432_9_) {
 //            this.minecraft.getTextureManager().bindTexture(ScreenshotSelectionList.ICON_OVERLAY_LOCATION);
 ////            AbstractGui.fill(p_230432_1_, p_230432_4_, p_230432_3_, p_230432_4_ + 32, p_230432_3_ + 32, -1601138544);
-//            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+//            RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
 //            int i = p_230432_7_ - p_230432_4_;
 //            boolean flag = i < 32;
 //            int j = flag ? 32 : 0;
 //            if (this.summary.isLocked()) {
-//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96.0F, (float)j, 32, 32, 256, 256);
+//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96.0f, (float)j, 32, 32, 256, 256);
 //               if (flag) {
 //                  this.gui.setToolTip(this.minecraft.fontRenderer.trimStringToWidth(ScreenshotSelectionList.WORLD_LOCKED_TOOLTIP, 175));
 //               }
 //            } else if (this.summary.markVersionInList()) {
-//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 32.0F, (float)j, 32, 32, 256, 256);
+//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 32.0f, (float)j, 32, 32, 256, 256);
 //               if (this.summary.askToOpenDimension()) {
-//                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96.0F, (float)j, 32, 32, 256, 256);
+//                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96.0f, (float)j, 32, 32, 256, 256);
 //                  if (flag) {
 //                     this.gui.setToolTip(ImmutableList.of(ScreenshotSelectionList.FROM_NEWER_TOOLTIP_1.getVisualOrderText(), ScreenshotSelectionList.FROM_NEWER_TOOLTIP_2.getVisualOrderText()));
 //                  }
 //               } else if (!SharedConstants.getVersion().isStable()) {
-//                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 64.0F, (float)j, 32, 32, 256, 256);
+//                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 64.0f, (float)j, 32, 32, 256, 256);
 //                  if (flag) {
 //                     this.gui.setToolTip(ImmutableList.of(ScreenshotSelectionList.SNAPSHOT_TOOLTIP_1.getVisualOrderText(), ScreenshotSelectionList.SNAPSHOT_TOOLTIP_2.getVisualOrderText()));
 //                  }
 //               }
 //            } else {
-//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0.0F, (float)j, 32, 32, 256, 256);
+//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0.0f, (float)j, 32, 32, 256, 256);
 //            }
 //         }
         }

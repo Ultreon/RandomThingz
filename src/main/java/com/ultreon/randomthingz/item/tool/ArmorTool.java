@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.item.tool;
 import com.google.common.collect.Streams;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.tool.trait.AbstractTrait;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.Entity;

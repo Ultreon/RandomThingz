@@ -10,10 +10,10 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class DungeonsItemGroup extends CreativeModeTab {
-    public static final DungeonsItemGroup instance = new DungeonsItemGroup(CreativeModeTab.TABS.length, "randomthingz_dungeons");
+public class DungeonsTab extends CreativeModeTab {
+    public static final DungeonsTab instance = new DungeonsTab(CreativeModeTab.TABS.length, "randomthingz_dungeons");
 
-    public DungeonsItemGroup(int index, String label) {
+    public DungeonsTab(int index, String label) {
         super(index, label);
     }
 

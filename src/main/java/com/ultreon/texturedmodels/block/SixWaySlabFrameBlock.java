@@ -33,13 +33,13 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 
-import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED; net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
-ecraft.world.level.block.state.properties.BlockStateProperties* Main class for frame "slabs", they can be placed in six different ways (that's the reason for this class name) - all important block info can be found here
+/**
  * Visit {@linkplain FrameBlock} for a better documentation
  *
  * @author PianoManu
@@ -192,7 +192,7 @@ public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBloc
     }
 
     @Override
-    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+    public int getLightEmission(BlockState state, BlockGetter dimension, BlockPos pos) {
         if (state.getValue(LIGHT_LEVEL) > 15) {
             return 15;
         }
@@ -208,10 +208,9 @@ public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBloc
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor dimensionIn, BlockPos currentPos, BlockPos facingPos) {
         if (stateIn.getValue(WATERLOGGED)) {
-            dimensionIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(dimensionIn));
+            dimensionIn.getFluidTicks().schedule(new ScheduledTick<>(Fluids.WATER, currentPos, Fluids.WATER.getTickDelay(dimensionIn), 0));
         }
 
         return super.updateShape(stateIn, facing, facingState, dimensionIn, currentPos, facingPos);
     }
 }
-//========SOLI DEO GLORIA========//

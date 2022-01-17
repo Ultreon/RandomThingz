@@ -2,7 +2,6 @@ package com.ultreon.randomthingz.entity;
 
 import com.ultreon.randomthingz.common.entity.ModEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.entity.ai.goal.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -24,8 +23,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 /**

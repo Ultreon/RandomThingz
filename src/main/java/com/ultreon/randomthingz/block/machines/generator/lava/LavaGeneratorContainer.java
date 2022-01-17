@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.generator.lava;
 
-import com.qsoftware.modlib.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidFuelGeneratorTileEntity;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidGeneratorContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;

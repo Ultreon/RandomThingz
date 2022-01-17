@@ -6,8 +6,8 @@ import com.ultreon.randomthingz.world.biome.objects.GrasslandBiome;
 import com.ultreon.randomthingz.world.gen.WorldGenerationModule;
 import lombok.experimental.UtilityClass;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 

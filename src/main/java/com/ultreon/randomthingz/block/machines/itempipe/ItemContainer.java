@@ -5,12 +5,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.function.Predicate;
 
 public class ItemContainer implements IItemHandler {
     protected Predicate<ItemStack> validator;
-    @Nonnull
+    @NotNull
     protected ItemStack stack = ItemStack.EMPTY;
     protected int capacity;
 
@@ -43,7 +42,7 @@ public class ItemContainer implements IItemHandler {
         return capacity;
     }
 
-    @Nonnull
+    @NotNull
     public @NotNull ItemStack getStack() {
         return stack;
     }
@@ -120,7 +119,7 @@ public class ItemContainer implements IItemHandler {
         return new ItemStack(this.stack.getItem(), filled);
     }
 
-//    @Nonnull
+//    @NotNull
 //    @Override
 //    public FluidStack extractItem(FluidStack resource, IItemHandler.FluidAction action)
 //    {
@@ -131,7 +130,7 @@ public class ItemContainer implements IItemHandler {
 //        return drain(resource.getAmount(), action);
 //    }
 
-    @Nonnull
+    @NotNull
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
         int drained = amount;

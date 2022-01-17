@@ -4,15 +4,15 @@ import com.ultreon.randomthingz.entity.damagesource.DamageSourceInfinitySword;
 import com.ultreon.randomthingz.init.ModStats;
 import com.ultreon.randomthingz.item.tool.ToolType;
 import com.ultreon.randomthingz.item.tool.Toolset;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.World;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,34 +36,33 @@ public class InfinityTrait extends AbstractTrait {
             // Don't do anything on client.
             return true;
         }
-        if (victim instanceof Player) {
+        if (victim instanceof Player playerVictim) {
             // Get victim
-            Player playerVictim = (Player) victim;
             if (isInfinite(playerVictim)) {
-                victim.hurt(new DamageSourceInfinitySword(attacker).bypassArmor(), 4.0F);
+                victim.hurt(new DamageSourceInfinitySword(attacker).bypassArmor(), 4.0f);
                 return true;
             }
             //noinspection ConstantConditions
-            if (playerVictim.getItemInHand(InteractionHand.MAIN_HAND) != null && playerVictim.getItemInHand(InteractionHand.MAIN_HAND).getItem() == Toolset.INFINITY.getSword().get() && playerVictim.isHandActive()) {
+            if (playerVictim.getItemInHand(InteractionHand.MAIN_HAND) != null && playerVictim.getItemInHand(InteractionHand.MAIN_HAND).getItem() == Toolset.INFINITY.getSword().get() && playerVictim.isUsingItem()) {
                 return true;
             }
         }
 
         // Combat tracking.
-        victim.recentlyHit = 60;
-        victim.getCombatTracker().trackDamage(new DamageSourceInfinitySword(attacker), victim.getHealth(), victim.getHealth());
+        victim.lastHurtByPlayerTime = 60;
+        victim.getCombatTracker().recordDamage(new DamageSourceInfinitySword(attacker), victim.getHealth(), victim.getHealth());
         victim.setHealth(0);
 
         // Death event.
-        victim.onDeath(new EntityDamageSource("infinity", attacker));
+        victim.die(new EntityDamageSource("infinity", attacker));
 
         return true;
     }
 
     @SuppressWarnings("RedundantIfStatement")
-    public static boolean isInfinite(PlayerEntity player) {
+    public static boolean isInfinite(Player player) {
         // Get armor list.
-        List<ItemStack> armor = (List<ItemStack>) player.getArmorInventoryList();
+        List<ItemStack> armor = (List<ItemStack>) player.getArmorSlots();
 
         // Check Armor
         if (!armor.isEmpty()) {
@@ -86,30 +85,29 @@ public class InfinityTrait extends AbstractTrait {
     }
 
     @Override
-    public void onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity) {
-        if (!entity.dimension.isClientSided && entity instanceof PlayerEntity) {
-            PlayerEntity victim = (PlayerEntity) entity;
+    public void onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
+        if (!entity.level.isClientSide && entity instanceof Player victim) {
             if (victim.isCreative() && !(victim.getHealth() <= 0) && victim.getHealth() > 0 && !isInfinite(victim)) {
-                victim.getCombatTracker().trackDamage(new DamageSourceInfinitySword(player), victim.getHealth(), victim.getHealth());
+                victim.getCombatTracker().recordDamage(new DamageSourceInfinitySword(player), victim.getHealth(), victim.getHealth());
                 victim.setHealth(0);
-                victim.onDeath(new EntityDamageSource("infinity", player));
-                player.addStat(ModStats.INFINITY_KILL, 1);
+                victim.die(new EntityDamageSource("infinity", player));
+                player.awardStat(ModStats.INFINITY_KILL, 1);
             }
-        } else if (!entity.dimension.isClientSided && !(entity instanceof LivingEntity)) {
-            if (entity.ticksExisted > 100) {
-                entity.delete();
+        } else if (!entity.level.isClientSide && !(entity instanceof LivingEntity)) {
+            if (entity.tickCount > 100) {
+                entity.remove(Entity.RemovalReason.DISCARDED);
             }
         }
     }
 
     @Override
-    public boolean onBlockBroken(ItemStack stack, World dimensionIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
+    public boolean onBlockBroken(ItemStack stack, Level dimensionIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
         return true;
     }
 
     @Override
-    public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, PlayerEntity player) {
-        player.dimension.destroyBlock(pos, true);
+    public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, Player player) {
+        player.level.destroyBlock(pos, true);
         return true;
     }
 

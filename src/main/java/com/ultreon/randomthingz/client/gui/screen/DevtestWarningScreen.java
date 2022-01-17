@@ -15,7 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
@@ -49,15 +49,14 @@ public class DevtestWarningScreen extends Screen {
             Narrator.getNarrator().say("The RandomThingz is in a test phase, do you want to continue?", true);
         }
 
-        this.buttons.clear();
-        this.children.clear();
+        this.clearWidgets();
 
-        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (p_213006_1_) -> {
+        this.addRenderableWidget(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (p_213006_1_) -> {
             if (this.minecraft != null) {
                 this.minecraft.setScreen(backScreen);
             }
         }));
-        this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
+        this.addRenderableWidget(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
             if (this.minecraft != null) {
                 this.minecraft.stop();
             }
@@ -91,8 +90,10 @@ public class DevtestWarningScreen extends Screen {
     public void setButtonDelay(int ticksUntilEnableIn) {
         this.ticksUntilEnable = ticksUntilEnableIn;
 
-        for (AbstractWidget widget : this.buttons) {
-            widget.active = false;
+        for (GuiEventListener listener : this.children) {
+            if (listener instanceof AbstractWidget widget) {
+                widget.active = false;
+            }
         }
 
     }
@@ -105,8 +106,10 @@ public class DevtestWarningScreen extends Screen {
             this.ticksUntilEnable = 0;
         }
         if (this.ticksUntilEnable == 0) {
-            for (AbstractWidget widget : this.buttons) {
-                widget.active = true;
+            for (GuiEventListener listener : this.children) {
+                if (listener instanceof AbstractWidget widget) {
+                    widget.active = false;
+                }
             }
         }
     }
@@ -120,9 +123,9 @@ public class DevtestWarningScreen extends Screen {
     }
 
     @SubscribeEvent
-    public static void onMainScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
+    public static void onMainScreenInit(ScreenEvent.InitScreenEvent.Post event) {
         Minecraft mc = Minecraft.getInstance();
-        Screen gui = event.getGui();
+        Screen gui = event.getScreen();
         if (gui instanceof TitleScreen) {
             if (RandomThingz.isDevtest()) {
                 if (!isInitializedAlready()) {

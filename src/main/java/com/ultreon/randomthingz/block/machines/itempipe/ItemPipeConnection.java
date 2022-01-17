@@ -1,42 +1,36 @@
-package com.ultreon.randomthingz.block.machines.pipe;
+package com.ultreon.randomthingz.block.machines.itempipe;
 
 import com.ultreon.randomthingz.RandomThingz;
-import mcp.MethodsReturnNonnullByDefault;
+import lombok.experimental.UtilityClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+@UtilityClass
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID)
-public final class PipeNetworkManager {
-    private static final Collection<LazyOptional<PipeNetwork>> NETWORK_LIST = Collections.synchronizedList(new ArrayList<>());
-
-    private PipeNetworkManager() {
-        throw new IllegalAccessError("Utility class");
-    }
+public final class ItemPipeConnection {
+    private static final Collection<LazyOptional<ItemPipeNetwork>> NETWORK_LIST = Collections.synchronizedList(new ArrayList<>());
 
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    public static PipeNetwork get(LevelReader dimension, BlockPos pos) {
+    public static ItemPipeNetwork get(LevelReader dimension, BlockPos pos) {
         return getLazy(dimension, pos).orElse(null);
     }
 
-    public static LazyOptional<PipeNetwork> getLazy(LevelReader dimension, BlockPos pos) {
+    public static LazyOptional<ItemPipeNetwork> getLazy(LevelReader dimension, BlockPos pos) {
         synchronized (NETWORK_LIST) {
-            for (LazyOptional<PipeNetwork> network : NETWORK_LIST) {
+            for (LazyOptional<ItemPipeNetwork> network : NETWORK_LIST) {
                 if (network.isPresent()) {
-                    PipeNetwork net = network.orElseThrow(IllegalStateException::new);
+                    ItemPipeNetwork net = network.orElseThrow(IllegalStateException::new);
                     if (net.contains(dimension, pos)) {
 //                    RandomThingz.LOGGER.debug("get network {}", network);
                         return network;
@@ -46,24 +40,24 @@ public final class PipeNetworkManager {
         }
 
         // Create new
-        PipeNetwork network = PipeNetwork.buildNetwork(dimension, pos);
-        LazyOptional<PipeNetwork> lazy = LazyOptional.of(() -> network);
+        ItemPipeNetwork network = ItemPipeNetwork.buildNetwork(dimension, pos);
+        LazyOptional<ItemPipeNetwork> lazy = LazyOptional.of(() -> network);
         NETWORK_LIST.add(lazy);
         RandomThingz.LOGGER.debug("create network {}", network);
         return lazy;
     }
 
     public static void invalidateNetwork(LevelReader dimension, BlockPos pos) {
-        Collection<LazyOptional<PipeNetwork>> toRemove = NETWORK_LIST.stream()
+        Collection<LazyOptional<ItemPipeNetwork>> toRemove = NETWORK_LIST.stream()
                 .filter(n -> n != null && n.isPresent() && n.orElseThrow(IllegalStateException::new).contains(dimension, pos))
                 .collect(Collectors.toList());
-        toRemove.forEach(PipeNetworkManager::invalidateNetwork);
+        toRemove.forEach(ItemPipeConnection::invalidateNetwork);
     }
 
-    private static void invalidateNetwork(LazyOptional<PipeNetwork> network) {
+    private static void invalidateNetwork(LazyOptional<ItemPipeNetwork> network) {
         RandomThingz.LOGGER.debug("invalidateNetwork {}", network);
         NETWORK_LIST.removeIf(n -> n.isPresent() && n.equals(network));
-        network.ifPresent(PipeNetwork::invalidate);
+        network.ifPresent(ItemPipeNetwork::invalidate);
         network.invalidate();
     }
 
@@ -71,6 +65,6 @@ public final class PipeNetworkManager {
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         NETWORK_LIST.stream()
                 .filter(n -> n != null && n.isPresent())
-                .forEach(n -> n.ifPresent(PipeNetwork::moveFluids));
+                .forEach(n -> n.ifPresent(ItemPipeNetwork::moveItems));
     }
 }

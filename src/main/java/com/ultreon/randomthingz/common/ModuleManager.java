@@ -12,7 +12,6 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -65,11 +64,11 @@ public final class ModuleManager {
         this.parent = null;
     }
 
-    public static ModuleManager createSubmoduleManager(@Nonnull Module module) {
+    public static ModuleManager createSubmoduleManager(@NotNull Module module) {
         return new ModuleManager(module);
     }
 
-    public <T extends Module> T register(@Nonnull T module) {
+    public <T extends Module> T register(@NotNull T module) {
         if (this.parent != null) {
             module.setParent(this.parent);
         }
@@ -99,7 +98,7 @@ public final class ModuleManager {
             Boolean setEnabled = entry.getValue();
 
             // Set module state.
-            CompoundNBT moduleCompound = this.modulesNbt.getCompound(module.getName());
+            CompoundTag moduleCompound = this.modulesNbt.getCompound(module.getName());
             moduleCompound.putBoolean("Enabled", setEnabled);
             moduleCompound.put("Tag", module.writeTag());
             this.modulesNbt.put(module.getName(), moduleCompound);
@@ -133,7 +132,7 @@ public final class ModuleManager {
         RandomThingz.LOGGER.info("Module data saved!");
     }
 
-    public void enable(@Nonnull Module module) {
+    public void enable(@NotNull Module module) {
         // Update lists, and add write cache.
         this.unsavedModules.put(module, true);
         this.unsavedDisabled.remove(module);
@@ -149,11 +148,11 @@ public final class ModuleManager {
         RandomThingz.LOGGER.debug("Module enable is scheduled for: " + module.getName());
     }
 
-    public boolean isEnabled(@Nonnull Module module) {
+    public boolean isEnabled(@NotNull Module module) {
         return this.enabled.contains(module);
     }
 
-    public boolean isDisabled(@Nonnull Module module) {
+    public boolean isDisabled(@NotNull Module module) {
         return this.disabled.contains(module);
     }
 
@@ -194,16 +193,16 @@ public final class ModuleManager {
             }
         }
 
-        CompoundNBT a;
+        CompoundTag a;
         boolean wasValid;
         this.dataFile = new File(configFolder, getDataPrefix() + "modules.nbt");
         try {
             a = CompressedStreamTools.loadCompressed(this.dataFile);
             if (a == null) {
-                a = new CompoundNBT();
+                a = new CompoundTag();
             }
         } catch (IOException e) {
-            a = new CompoundNBT();
+            a = new CompoundTag();
         }
 
         this.modulesNbt = a;
@@ -217,7 +216,7 @@ public final class ModuleManager {
 
             boolean enabled;
             if (this.modulesNbt.contains(name, 10)) {
-                CompoundNBT moduleInfo = this.modulesNbt.getCompound(name);
+                CompoundTag moduleInfo = this.modulesNbt.getCompound(name);
                 enabled = moduleInfo.getBoolean("Enabled");
                 module.readTag(moduleInfo.getCompound("Tag"));
             } else {
@@ -279,7 +278,7 @@ public final class ModuleManager {
         String name = module.getName();
         boolean enabled;
         if (this.modulesNbt.contains(name, 10)) {
-            CompoundNBT moduleInfo = this.modulesNbt.getCompound(name);
+            CompoundTag moduleInfo = this.modulesNbt.getCompound(name);
             enabled = moduleInfo.getBoolean("Enabled");
         } else {
             enabled = module.isDefaultEnabled();

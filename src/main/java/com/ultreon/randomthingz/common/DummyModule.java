@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.common;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

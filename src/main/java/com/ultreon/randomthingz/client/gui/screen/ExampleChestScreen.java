@@ -62,7 +62,7 @@ public class ExampleChestScreen extends AbstractContainerScreen<CrateContainer> 
         RenderSystem.color4f(1.0f, 1.0f, 1.0f, 0.5f);
         if (this.minecraft != null) {
             // Bind texture for background image render.
-            this.minecraft.getTextureManager().bind(BACKGROUND_TEXTURE);
+            RenderSystem.setShaderTexture(0, BACKGROUND_TEXTURE);
 
             // Calculate x and y coordinates.
             int x = (this.width - this.imageWidth) / 2;

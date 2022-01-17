@@ -11,10 +11,10 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class MachinesItemGroup extends CreativeModeTab {
-    public static final MachinesItemGroup instance = new MachinesItemGroup(CreativeModeTab.TABS.length, "randomthingz_machines");
+public class MachinesTab extends CreativeModeTab {
+    public static final MachinesTab instance = new MachinesTab(CreativeModeTab.TABS.length, "randomthingz_machines");
 
-    public MachinesItemGroup(int index, String label) {
+    public MachinesTab(int index, String label) {
         super(index, label);
     }
 

@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.world.gen.ores.configs;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 

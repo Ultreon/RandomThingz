@@ -14,8 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.fml.network.NetworkHooks;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Baby skeleton entity class.
@@ -48,7 +47,7 @@ public class BabySkeletonEntity extends Skeleton implements IBabyEntity {
     }
 
     @Override
-    public void onSyncedDataUpdated(@Nonnull EntityDataAccessor<?> key) {
+    public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> key) {
         if (IS_CHILD.equals(key)) {
             refreshDimensions();
         }
@@ -56,7 +55,7 @@ public class BabySkeletonEntity extends Skeleton implements IBabyEntity {
     }
 
     @Override
-    protected int getExperienceReward(@Nonnull Player player) {
+    protected int getExperienceReward(@NotNull Player player) {
         if (isBaby()) {
             xpReward = (int) (xpReward * 2.5F);
         }
@@ -69,7 +68,7 @@ public class BabySkeletonEntity extends Skeleton implements IBabyEntity {
     }
 
     @Override
-    protected float getStandingEyeHeight(@Nonnull Pose pose, @Nonnull EntityDimensions size) {
+    protected float getStandingEyeHeight(@NotNull Pose pose, @NotNull EntityDimensions size) {
         return this.isBaby() ? 0.93F : super.getStandingEyeHeight(pose, size);
     }
 
@@ -78,7 +77,7 @@ public class BabySkeletonEntity extends Skeleton implements IBabyEntity {
         return new ItemStack(ModItemsAlt.BABY_SKELETON_SPAWN_EGG.asItem());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);

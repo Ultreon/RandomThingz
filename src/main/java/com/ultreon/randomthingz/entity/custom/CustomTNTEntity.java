@@ -4,17 +4,17 @@ import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.CustomTNTBlock;
 import com.ultreon.randomthingz.common.TNTProperties;
 import com.ultreon.randomthingz.common.entity.ModEntities;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.IPacket;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -32,7 +32,7 @@ public final class CustomTNTEntity extends PrimedTnt {
     private static final Supplier<BlockState> defaultBlockState = Blocks.TNT::defaultBlockState;
     private static final TNTProperties defaultProperties = TNTProperties.builder().radius(4.0f).mode(Explosion.Mode.BREAK).fuse(80).build();
 
-    public CustomTNTEntity(@NotNull BlockState blockState, World dimensionIn) {
+    public CustomTNTEntity(@NotNull BlockState blockState, Level dimensionIn) {
         super(ModEntities.CUSTOM_TNT.get(), dimensionIn);
 
         Block block = blockState.getBlock();
@@ -46,7 +46,7 @@ public final class CustomTNTEntity extends PrimedTnt {
         this.properties = properties != null ? properties : defaultProperties;
     }
 
-    public CustomTNTEntity(@NotNull BlockState blockState, World dimensionIn, double x, double y, double z, @Nullable LivingEntity igniter) {
+    public CustomTNTEntity(@NotNull BlockState blockState, Level dimensionIn, double x, double y, double z, @Nullable LivingEntity igniter) {
         this(blockState, dimensionIn);
         this.setPosition(x, y, z);
 
@@ -72,11 +72,11 @@ public final class CustomTNTEntity extends PrimedTnt {
     }
 
     @Override
-    public void readAdditional(@NotNull CompoundNBT compound) {
+    public void readAdditional(@NotNull CompoundTag compound) {
         super.readAdditional(compound);
 
         compound.contains(RandomThingz.NBT_NAME);
-        CompoundNBT blockStateNbt = compound.getCompound(RandomThingz.NBT_NAME);
+        CompoundTag blockStateNbt = compound.getCompound(RandomThingz.NBT_NAME);
         BlockState state = NBTUtil.readBlockState(blockStateNbt);
         if (!(state.getBlock() instanceof CustomTNTBlock<?>)) {
             Minecraft.getInstance().runAsync(() -> this.remove(false));
@@ -86,10 +86,10 @@ public final class CustomTNTEntity extends PrimedTnt {
     }
 
     @Override
-    protected void writeAdditional(@NotNull CompoundNBT compound) {
+    protected void writeAdditional(@NotNull CompoundTag compound) {
         super.writeAdditional(compound);
 
-        CompoundNBT qfmNbt = new CompoundNBT();
+        CompoundTag qfmNbt = new CompoundTag();
         qfmNbt.put("BlockState", NBTUtil.writeBlockState(this.blockState == null ? defaultBlockState.get() : blockState));
         compound.put(RandomThingz.NBT_NAME, qfmNbt);
     }
@@ -101,7 +101,7 @@ public final class CustomTNTEntity extends PrimedTnt {
 
     @Override
     protected void explode() {
-        World dimension = this.dimension;
+        Level dimension = this.dimension;
         BlockPos pos = this.getPosition();
         BlockState state = this.blockState;
         Block blockBefore = this.blockState.getBlock();

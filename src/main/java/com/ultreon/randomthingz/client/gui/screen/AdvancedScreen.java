@@ -2,22 +2,21 @@ package com.ultreon.randomthingz.client.gui.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
-import com.ultreon.randomthingz.client.graphics.MCGraphics;
+import com.ultreon.modlib.graphics.MCGraphics;
 import com.ultreon.randomthingz.common.geom.RectangleUV;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.client.Minecraft;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.client.RenderProperties;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.awt.*;
-import java.util.Objects;
 
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -37,7 +36,7 @@ public abstract class AdvancedScreen extends Screen {
     }
 
     public <T extends AbstractWidget> T add(T widget) {
-        return addButton(widget);
+        return addRenderableWidget(widget);
     }
 
     @Override
@@ -73,22 +72,22 @@ public abstract class AdvancedScreen extends Screen {
     }
 
     public void drawTexture(PoseStack matrixStack, int x, int y, int uOffset, int vOffset, int uWidth, int vHeight, ResourceLocation resource) {
-        Objects.requireNonNull(minecraft).textureManager.bind(resource);
+        RenderSystem.setShaderTexture(0, resource);
         this.blit(matrixStack, x, y, uOffset, vOffset, uWidth, vHeight);
     }
 
     public void drawTexture(PoseStack matrixStack, int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        Objects.requireNonNull(minecraft).textureManager.bind(resource);
+        RenderSystem.setShaderTexture(0, resource);
         Screen.blit(matrixStack, x, y, width, height, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
     public void drawTexture(PoseStack matrixStack, int x, int y, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        Objects.requireNonNull(minecraft).textureManager.bind(resource);
+        RenderSystem.setShaderTexture(0, resource);
         Screen.blit(matrixStack, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
     public void drawTexture(PoseStack matrixStack, int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        Objects.requireNonNull(minecraft).textureManager.bind(resource);
+        RenderSystem.setShaderTexture(0, resource);
         Screen.blit(matrixStack, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureHeight, textureWidth);
     }
 
@@ -99,20 +98,14 @@ public abstract class AdvancedScreen extends Screen {
      */
     @SuppressWarnings("deprecation")
     public final void drawItemStack(ItemStack stack, int x, int y, String altText) {
-        RenderSystem.translatef(0.0F, 0.0F, 32.0F);
+        PoseStack posestack = RenderSystem.getModelViewStack();
+        posestack.translate(0.0D, 0.0D, 32.0D);
+        RenderSystem.applyModelViewMatrix();
         this.itemRenderer.blitOffset = 200.0F;
-
-        Font font = stack.getItem().getFontRenderer(stack);
-        if (font == null) {
-            font = Minecraft.getInstance().font;
-        }
-
-        if (this.font != null) {
-            font = this.font;
-        }
-
+        Font font = RenderProperties.get(stack).getFont(stack);
+        if (font == null) font = this.font;
         this.itemRenderer.renderAndDecorateItem(stack, x, y);
-        this.itemRenderer.renderGuiItemDecorations(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
+        this.itemRenderer.renderGuiItemDecorations(font, stack, x, y, altText);
         this.itemRenderer.blitOffset = 0.0F;
     }
 

@@ -9,6 +9,7 @@ import net.minecraft.client.NarratorStatus;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -57,10 +58,9 @@ public class UpdateDownloadedScreen extends Screen {
             Narrator.getNarrator().say("Downloading Update for Q Forge Mod is complete", true);
         }
 
-        this.buttons.clear();
-        this.children.clear();
+        this.clearWidgets();
 
-        this.addButton(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, CommonComponents.GUI_YES, (p_213004_1_) -> {
+        this.addRenderableWidget(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, CommonComponents.GUI_YES, (p_213004_1_) -> {
             if (this.minecraft != null) {
                 File updateFolder = new File(Minecraft.getInstance().gameDirectory.getAbsolutePath(), "updates");
                 if (!updateFolder.exists()) {
@@ -72,7 +72,7 @@ public class UpdateDownloadedScreen extends Screen {
             }
         }));
 
-        this.addButton(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, CommonComponents.GUI_NO, (p_213004_1_) -> {
+        this.addRenderableWidget(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, CommonComponents.GUI_NO, (p_213004_1_) -> {
             if (this.minecraft != null) {
                 this.minecraft.setScreen(backScreen);
             }
@@ -111,8 +111,10 @@ public class UpdateDownloadedScreen extends Screen {
     public void setButtonDelay(int ticksUntilEnableIn) {
         this.ticksUntilEnable = ticksUntilEnableIn;
 
-        for (AbstractWidget widget : this.buttons) {
-            widget.active = false;
+        for (GuiEventListener listener : this.children) {
+            if (listener instanceof AbstractWidget widget) {
+                widget.active = false;
+            }
         }
 
     }
@@ -129,8 +131,10 @@ public class UpdateDownloadedScreen extends Screen {
             this.ticksUntilEnable = 0;
         }
         if (this.ticksUntilEnable == 0) {
-            for (AbstractWidget widget : this.buttons) {
-                widget.active = true;
+            for (GuiEventListener listener : this.children) {
+                if (listener instanceof AbstractWidget widget) {
+                    widget.active = false;
+                }
             }
         }
     }

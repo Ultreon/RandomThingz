@@ -6,13 +6,15 @@ import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.CrushingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.stream.IntStream;
 
@@ -30,12 +32,12 @@ public class CrusherTileEntity extends AbstractMachineTileEntity<CrushingRecipe>
     private static final int[] SLOTS_OUTPUT = IntStream.range(INPUT_SLOT_COUNT, INVENTORY_SIZE).toArray();
     private static final int[] SLOTS_ALL = IntStream.range(0, INVENTORY_SIZE).toArray();
 
-    public CrusherTileEntity() {
-        this(MachineTier.STANDARD);
+    public CrusherTileEntity(BlockPos pos, BlockState state) {
+        this(MachineTier.STANDARD, pos, state);
     }
 
-    public CrusherTileEntity(MachineTier tier) {
-        super(MachineType.CRUSHER.getTileEntityType(tier), INVENTORY_SIZE, tier);
+    public CrusherTileEntity(MachineTier tier, BlockPos pos, BlockState state) {
+        super(MachineType.CRUSHER.getTileEntityType(tier), pos, state, INVENTORY_SIZE, tier);
     }
 
     @Override
@@ -83,28 +85,28 @@ public class CrusherTileEntity extends AbstractMachineTileEntity<CrushingRecipe>
     }
 
     @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStackIn, @Nullable Direction direction) {
         return index < INPUT_SLOT_COUNT;
     }
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
         return index >= INPUT_SLOT_COUNT;
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
+    protected Component getDefaultName() {
         return TextUtils.translate("container", "crusher");
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory playerInventory) {
+    protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
         return new CrusherContainer(id, playerInventory, this, this.fields);
     }
 
     public static class Basic extends CrusherTileEntity {
-        public Basic() {
-            super(MachineTier.BASIC);
+        public Basic(BlockPos pos, BlockState state) {
+            super(MachineTier.BASIC, pos, state);
         }
     }
 }

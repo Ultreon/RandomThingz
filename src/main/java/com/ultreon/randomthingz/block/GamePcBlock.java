@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block;
 
 import com.ultreon.randomthingz.common.IDeprecated;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;

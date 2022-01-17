@@ -1,39 +1,39 @@
 package com.ultreon.randomthingz.block.machines.dryingrack;
 
-import com.qsoftware.modlib.silentlib.util.PlayerUtils;
+import com.ultreon.modlib.embedded.silentlib.util.PlayerUtils;
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.item.crafting.DryingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.ParticleUtils;
-import net.minecraft.block.BlockState;
+import com.ultreon.texturedmodels.tileentity.ITickable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-public class DryingRackTileEntity extends BlockEntity implements Container, TickableBlockEntity {
+public class DryingRackTileEntity extends BlockEntity implements Container, ITickable {
     private final NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
     private final LazyOptional<IItemHandler> itemHandlerCap = LazyOptional.of(() -> new InvWrapper(this));
     private int processTime;
 
-    public DryingRackTileEntity() {
-        super(ModMachineTileEntities.dryingRack);
+    public DryingRackTileEntity(BlockPos pos, BlockState state) {
+        super(ModMachineTileEntities.dryingRack, pos, state);
     }
 
     public ItemStack getItem() {
@@ -66,11 +66,11 @@ public class DryingRackTileEntity extends BlockEntity implements Container, Tick
         if (recipe != null && canWork()) {
             ++processTime;
             if (processTime >= recipe.getProcessTime()) {
-                setInventorySlotContents(0, recipe.getCraftingResult(this));
+                setItem(0, recipe.getResultItem());
                 processTime = 0;
             }
             if (processTime % 10 == 0) {
-                ParticleUtils.spawn(dimension, ParticleTypes.SMOKE, pos, 1, 0.1, 0.1, 0.1, 0.01);
+                ParticleUtils.spawn(level, ParticleTypes.SMOKE, worldPosition, 1, 0.1, 0.1, 0.1, 0.01);
             }
         } else {
             processTime = 0;
@@ -78,92 +78,92 @@ public class DryingRackTileEntity extends BlockEntity implements Container, Tick
     }
 
     private boolean canWork() {
-        return dimension != null && !dimension.getBlockState(pos).get(DryingRackBlock.WATERLOGGED);
+        return level != null && !level.getBlockState(worldPosition).getValue(DryingRackBlock.WATERLOGGED);
     }
 
     @Override
-    public void markModified() {
-        super.markModified();
+    public void setChanged() {
+        super.setChanged();
         sendUpdate();
     }
 
     private void sendUpdate() {
-        if (this.dimension != null) {
-            BlockState state = this.dimension.getBlockState(this.pos);
-            this.dimension.notifyBlockUpdate(this.pos, state, state, 3);
+        if (this.level != null) {
+            BlockState state = this.level.getBlockState(this.worldPosition);
+            this.level.sendBlockUpdated(this.worldPosition, state, state, 3);
         }
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getContainerSize() {
+        return 1;
+    }
+    
+    @Override
+    public int getMaxStackSize() {
         return 1;
     }
 
     @Override
-    public int getInventoryStackLimit() {
-        return 1;
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack) {
+    public boolean canPlaceItem(int index, ItemStack stack) {
         return isEmpty();
     }
 
     @Override
     public boolean isEmpty() {
-        return getStackInSlot(0).isEmpty();
+        return getItem(0).isEmpty();
     }
 
     @Override
-    public ItemStack getStackInSlot(int index) {
+    public ItemStack getItem(int index) {
         return this.items.get(0);
     }
 
     @Override
-    public ItemStack decrStackSize(int index, int count) {
-        ItemStack result = ItemStackHelper.getAndSplit(this.items, index, count);
-        this.markModified();
+    public ItemStack removeItem(int index, int count) {
+        ItemStack result = ContainerHelper.removeItem(this.items, index, count);
+        this.setChanged();
+        return result;
+    }
+    
+    @Override
+    public ItemStack removeItemNoUpdate(int index) {
+        ItemStack result = ContainerHelper.takeItem(this.items, index);
+        this.setChanged();
         return result;
     }
 
     @Override
-    public ItemStack deleteStackFromSlot(int index) {
-        ItemStack result = ItemStackHelper.getAndRemove(this.items, index);
-        this.markModified();
-        return result;
-    }
-
-    @Override
-    public void setInventorySlotContents(int index, ItemStack stack) {
+    public void setItem(int index, ItemStack stack) {
         this.items.set(0, stack);
-        this.markModified();
+        this.setChanged();
     }
 
     @Override
-    public boolean isUsableByPlayer(PlayerEntity player) {
+    public boolean stillValid(Player player) {
         return true;
     }
 
     @Override
-    public void clear() {
+    public void clearContent() {
         this.items.clear();
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
-        super.read(state, compound);
+    public void load(CompoundTag compound) {
+        super.load(compound);
         if (compound.contains("Item")) {
-            setInventorySlotContents(0, ItemStack.read(compound.getCompound("Item")));
+            setItem(0, ItemStack.of(compound.getCompound("Item")));
         }
         this.processTime = compound.getInt("ProcessTime");
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        super.write(compound);
+    public CompoundTag save(CompoundTag compound) {
+        super.save(compound);
         ItemStack stack = getItem();
         if (!stack.isEmpty()) {
-            compound.put("Item", stack.write(new CompoundNBT()));
+            compound.put("Item", stack.save(new CompoundTag()));
         }
         compound.putInt("ProcessTime", this.processTime);
         return compound;
@@ -171,40 +171,41 @@ public class DryingRackTileEntity extends BlockEntity implements Container, Tick
 
     @Nullable
     @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 0, getUpdateTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::getUpdateTag);
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT nbt = super.getUpdateTag();
+    public CompoundTag getUpdateTag() {
+        CompoundTag nbt = super.getUpdateTag();
         ItemStack stack = getItem();
         if (!stack.isEmpty()) {
-            nbt.put("Item", stack.write(new CompoundNBT()));
+            nbt.put("Item", stack.save(new CompoundTag()));
         }
         return nbt;
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        if (pkt.getNbt().contains("Item")) {
-            this.items.set(0, ItemStack.read(pkt.getNbt().getCompound("Item")));
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        if (pkt.getTag().contains("Item")) {
+            this.items.set(0, ItemStack.of(pkt.getTag().getCompound("Item")));
         } else {
             this.items.set(0, ItemStack.EMPTY);
         }
     }
 
+    @NotNull
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (!this.removed && side != null && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (!this.remove && side != null && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return itemHandlerCap.cast();
         }
         return super.getCapability(cap, side);
     }
 
     @Override
-    public void delete() {
-        super.delete();
+    public void setRemoved() {
+        super.setRemoved();
         itemHandlerCap.invalidate();
     }
 }

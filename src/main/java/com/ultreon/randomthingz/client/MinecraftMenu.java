@@ -32,13 +32,13 @@ public class MinecraftMenu extends AbstractActionMenu {
 //            @Override
 //            public void onActivate(ServerPlayerEntity player) {
 //                RandomThingz.LOGGER.debug("Got activation for initiating server shutdown.");
-//                player.sendMessage(new TranslationTextComponent("commands.stop.stopping"), player.getUniqueID());
+//                player.sendMessage(new TranslatableComponent("commands.stop.stopping"), player.getUniqueID());
 //                player.getServer().initiateShutdown(false);
 //            }
 //
 //            @Override
-//            public ITextComponent getText() {
-//                return new TranslationTextComponent("action.randomthingz.stop_server");
+//            public Component getText() {
+//                return new TranslatableComponent("action.randomthingz.stop_server");
 //            }
 //        });
     }

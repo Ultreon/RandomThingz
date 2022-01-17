@@ -3,13 +3,13 @@ package com.ultreon.randomthingz.compat.computercraft;
 
 import com.ultreon.forgemod.RandomThingz;
 import com.ultreon.forgemod.blocks.machines.AbstractMachineBaseTileEntity;
-import com.qsoftware.modlib.api.RedstoneMode;
+import com.ultreon.modlib.api.RedstoneMode;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IPeripheral;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -22,7 +22,7 @@ public class MachinePeripheral implements IPeripheral {
         this.machine = machine;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public String getType() {
         return TYPE;

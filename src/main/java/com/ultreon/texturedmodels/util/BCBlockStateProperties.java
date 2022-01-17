@@ -23,4 +23,3 @@ public class BCBlockStateProperties {
      */
     public static final IntegerProperty LIGHT_LEVEL = IntegerProperty.create("light_level", 0, 15);
 }
-//========SOLI DEO GLORIA========//

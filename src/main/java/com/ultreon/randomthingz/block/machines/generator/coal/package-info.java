@@ -2,6 +2,6 @@
 @MethodsReturnNonnullByDefault
 package com.ultreon.randomthingz.block.machines.generator.coal;
 
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

@@ -12,9 +12,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
-
-import javax.annotation.Nullable;
 
 @UtilityClass
 public final class RenderUtils {
@@ -39,7 +38,7 @@ public final class RenderUtils {
         int renderAmount = (int) Math.max(Math.min(height, amount * height / tankCapacity), 1);
         int posY = (int) (y + height - renderAmount);
 
-        Minecraft.getInstance().getTextureManager().bind(TextureAtlas.LOCATION_BLOCKS);
+        RenderSystem.setShaderTexture(0, TextureAtlas.LOCATION_BLOCKS);
         int color = stack.getFluid().getAttributes().getColor();
         float r = ((color >> 16) & 0xFF) / 255f;
         float g = ((color >> 8) & 0xFF) / 255f;

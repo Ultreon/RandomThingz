@@ -1,18 +1,20 @@
 package com.ultreon.texturedmodels.tileentity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.ModelDataManager;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.client.model.data.ModelDataMap;
 import net.minecraftforge.client.model.data.ModelProperty;
-import net.minecraftforge.common.util.Constants;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
@@ -26,15 +28,15 @@ public class FallingFrameBlockTile extends FrameBlockTile {
 
     private BlockState mimic;
 
-    public FallingFrameBlockTile(BlockState mimic) {
-        super();
-        this.mimic = mimic;
+    public FallingFrameBlockTile(BlockPos pos, BlockState state) {
+        super(pos, state);
+        this.mimic = state;
     }
 
     public void setMimic(BlockState mimic) {
         this.mimic = mimic;
         setChanged();
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
     }
 
     public BlockState getMimic() {
@@ -54,7 +56,7 @@ public class FallingFrameBlockTile extends FrameBlockTile {
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return new ClientboundBlockEntityDataPacket(worldPosition, 1, getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::getUpdateTag);
     }
 
     @Override
@@ -65,12 +67,12 @@ public class FallingFrameBlockTile extends FrameBlockTile {
             mimic = NbtUtils.readBlockState(tag.getCompound("mimic"));
             if (!Objects.equals(oldMimic, mimic)) {
                 ModelDataManager.requestModelDataRefresh(this);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE + Constants.BlockFlags.NOTIFY_NEIGHBORS);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL + Block.UPDATE_NEIGHBORS);
             }
         }
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public IModelData getModelData() {
         return new ModelDataMap.Builder()
@@ -79,7 +81,7 @@ public class FallingFrameBlockTile extends FrameBlockTile {
     }
 
     /*@Override
-    public void read(CompoundNBT tag) {
+    public void read(CompoundTag tag) {
         super.read(tag);
         if (tag.contains("mimic")) {
             mimic = NBTUtil.readBlockState(tag.getCompound("mimic"));
@@ -98,4 +100,3 @@ public class FallingFrameBlockTile extends FrameBlockTile {
         this.setMimic(null);
     }
 }
-//========SOLI DEO GLORIA========//

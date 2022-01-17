@@ -3,14 +3,14 @@ package com.ultreon.randomthingz.client.debug.menu;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.ultreon.forgemod.RandomThingz;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class DebugChoiceScreen extends Screen {
     private static final int MAX_BUTTONS = 6;
     private static final Button[] BUTTONS = new Button[MAX_BUTTONS];
 
-    protected DebugChoiceScreen(ITextComponent titleIn) {
+    protected DebugChoiceScreen(Component titleIn) {
         super(titleIn);
     }
 
@@ -41,8 +41,8 @@ public class DebugChoiceScreen extends Screen {
     protected void initialize() {
         this.textureX = this.width / 2 - this.textureWidth / 2;
         this.textureY = this.height / 2 - this.textureHeight / 2;
-        this.leftButton = addButton(new Button(textureX + 4, textureY + 4, 20, 20, new StringTextComponent("<"), this::prev));
-        this.rightButton = addButton(new Button(textureX + textureWidth - 4, textureY + 4, 20, 20, new StringTextComponent(">"), this::next));
+        this.leftButton = addRenderableWidget(new Button(textureX + 4, textureY + 4, 20, 20, new StringTextComponent("<"), this::prev));
+        this.rightButton = addRenderableWidget(new Button(textureX + textureWidth - 4, textureY + 4, 20, 20, new StringTextComponent(">"), this::next));
 
         refreshButtons();
     }
@@ -58,7 +58,7 @@ public class DebugChoiceScreen extends Screen {
             DebugPage page = pages.get(i).get();
             ResourceLocation name = page.getRegistryName();
             if (name != null ) {
-                BUTTONS[j] = addButton(new Button(x, y, 124, 20, new TranslationTextComponent("debugMenu." + name.getNamespace() + "." + name.getPath().toLowerCase(Locale.ROOT).replaceAll("/", ".")), (btn) -> menu.setPage(page)));
+                BUTTONS[j] = addRenderableWidget(new Button(x, y, 124, 20, new TranslatableComponent("debugMenu." + name.getNamespace() + "." + name.getPath().toLowerCase(Locale.ROOT).replaceAll("/", ".")), (btn) -> menu.setPage(page)));
             }
             y += 20;
             j++;

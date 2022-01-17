@@ -2,6 +2,6 @@
 @MethodsReturnNonnullByDefault
 package com.ultreon.randomthingz.block.furniture;
 
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;

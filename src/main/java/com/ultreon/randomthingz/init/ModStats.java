@@ -16,6 +16,10 @@ public class ModStats {
 
     public static final Stat<ResourceLocation> EAT_CHEESE_SLICE = registerCustomStat("eat_cheese_slice");
     public static final Stat<ResourceLocation> INFINITY_KILL = registerCustomStat("infinity_kill");
+    public static final Stat<ResourceLocation> INTERACT_WITH_CRUSHER = registerCustomStat("interact_with_crusher");
+    public static final Stat<ResourceLocation> INTERACT_WITH_COMPRESSOR = registerCustomStat("interact_with_compressor");
+    public static final Stat<ResourceLocation> INTERACT_WITH_DRYING_RACK = registerCustomStat("interact_with_drying_rack");
+    public static final Stat<ResourceLocation> INTERACT_WITH_ELECTRIC_FURNACE = registerCustomStat("interact_with_electric_furnace");
 
     @SuppressWarnings("SameParameterValue")
     private static Stat<ResourceLocation> registerCustomStat(String name) {

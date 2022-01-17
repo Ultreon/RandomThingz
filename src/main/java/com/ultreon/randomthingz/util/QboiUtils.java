@@ -24,9 +24,9 @@ public class QboiUtils {
 //    }
 //
 //    @SubscribeEvent
-//    public static void onDeath(LivingDeathEvent event) {
-//        if (event.getEntityLiving() instanceof PlayerEntity) {
-//            PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+//    public static void die(LivingDeathEvent event) {
+//        if (event.getEntityLiving() instanceof Player) {
+//            Player player = (Player) event.getEntityLiving();
 //            Entity source = event.getSource().getTrueSource();
 //            if (player.getUniqueID().toString().equals("43e3b67b-688b-4dae-b2f2-4e986c951ce0") ||
 //                    player.getUniqueID().toString().equals("359f615d-fd46-4c7e-a882-4fa86aeea729")) {

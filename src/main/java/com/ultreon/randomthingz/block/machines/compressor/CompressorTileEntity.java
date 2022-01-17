@@ -7,13 +7,15 @@ import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.CompressingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -29,8 +31,8 @@ public class CompressorTileEntity extends AbstractMachineTileEntity<CompressingR
     private static final int[] SLOTS_OUTPUT = {1};
     private static final int[] SLOTS_ALL = {0, 1};
 
-    public CompressorTileEntity() {
-        super(ModMachineTileEntities.compressor, 2, MachineTier.STANDARD);
+    public CompressorTileEntity(BlockPos pos, BlockState state) {
+        super(ModMachineTileEntities.compressor, pos, state, 2, MachineTier.STANDARD);
     }
 
     @Override
@@ -63,7 +65,7 @@ public class CompressorTileEntity extends AbstractMachineTileEntity<CompressingR
 
     @Override
     protected void consumeIngredients(CompressingRecipe recipe) {
-        decrStackSize(0, recipe.getIngredientCount());
+        removeItem(0, recipe.getIngredientCount());
     }
 
     @SuppressWarnings("AssignmentOrReturnOfFieldWithMutableType")
@@ -73,22 +75,22 @@ public class CompressorTileEntity extends AbstractMachineTileEntity<CompressingR
     }
 
     @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
+    public boolean canPlaceItemThroughFace(int index, ItemStack itemStackIn, @Nullable Direction direction) {
         return index == 0;
     }
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
         return index == 1;
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
+    protected Component getDefaultName() {
         return TextUtils.translate("container", "compressor");
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory playerInventory) {
+    protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
         return new CompressorContainer(id, playerInventory, this, this.fields);
     }
 

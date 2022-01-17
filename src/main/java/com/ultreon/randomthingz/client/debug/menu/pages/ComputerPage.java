@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.client.debug.menu.pages;
 
 import com.mojang.blaze3d.platform.Monitor;
 import com.mojang.blaze3d.platform.Window;
-import com.qsoftware.modlib.common.Size;
+import com.ultreon.modlib.common.Size;
 import com.ultreon.randomthingz.client.debug.menu.DebugEntry;
 import com.ultreon.randomthingz.client.debug.menu.DebugPage;
 import net.minecraft.client.Minecraft;

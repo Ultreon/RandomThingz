@@ -6,7 +6,7 @@ import com.ultreon.randomthingz.effect.RadiationEffect;
 import com.ultreon.randomthingz.registration.Registration;
 import lombok.experimental.UtilityClass;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 

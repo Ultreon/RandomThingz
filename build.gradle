@@ -90,7 +90,7 @@ minecraft {
             workingDirectory project.file('runClient')
             arg "-mixin.config=randomthingz.mixins.json"
 
-            // Recommended logging data for a userdev environment
+            // Recommended logging data for a user-dev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
@@ -112,7 +112,7 @@ minecraft {
 
             taskName "runClientTest"
 
-            // Recommended logging data for a userdev environment
+            // Recommended logging data for a user-dev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
@@ -134,12 +134,12 @@ minecraft {
             workingDirectory project.file('runClientAlt')
             parent runs.client
 
-            taskName "runClientTest"
+            taskName "runClientAlt"
 
             arg "-mixin.config=randomthingz.mixins.json"
             arg "--username=DevAlt"
 
-            // Recommended logging data for a userdev environment
+            // Recommended logging data for a user-dev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
@@ -162,7 +162,7 @@ minecraft {
             workingDirectory project.file('runServer')
             arg "-mixin.config=randomthingz.mixins.json"
 
-            // Recommended logging data for a userdev environment
+            // Recommended logging data for a user-dev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
@@ -180,13 +180,13 @@ minecraft {
             //noinspection GroovyAssignabilityCheck
             workingDirectory project.file('runData')
 
-            // Recommended logging data for a userdev environment
+            // Recommended logging data for a user-dev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            // Specify the forgemod for data generation, where to output the resulting resource, and where to look for existing resources.
+            // Specify the forge mod for data generation, where to output the resulting resource, and where to look for existing resources.
             args '--mod', 'randomthingz',
                     '--all',
                     '--output', file('src/generated/resources/'),
@@ -280,9 +280,9 @@ dependencies {
     extraLibs group: 'com.github.WilliamAHartman', name: 'Jamepad', version: '1.3.2'
 
     // QModLib - Qboi's Library Mod.
-    compileOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.40-b3", changing: true)
-    testCompileOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.40-b3", changing: true)
-    runtimeOnly fg.deobf(group: "com.qsoftware", name: "qmodlib", version: "1.0.40-b3", changing: true)
+    compileOnly fg.deobf(group: "com.ultreon.mods", name: "modding-lib", version: "1.18.1-1.0.80-beta4")
+    testCompileOnly fg.deobf(group: "com.ultreon.mods", name: "modding-lib", version: "1.18.1-1.0.80-beta4")
+    runtimeOnly fg.deobf(group: "com.ultreon.mods", name: "modding-lib", version: "1.18.1-1.0.80-beta4")
 
     // QModLib - Qboi's Library Mod.
     implementation group: "com.qtech.commons", name: "commons", version: "1.0.+"
@@ -293,20 +293,18 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
     testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.18'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
     testAnnotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
 
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
-    // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft(group: "net.minecraftforge", name: "forge", version: "1.18.1-39.0.36"){
-        force true
-    }
+    // The user-dev artifact is a special name and will get all sorts of transformations applied to it.
+    minecraft(group: "net.minecraftforge", name: "forge", version: "1.18.1-39.0.36")
 
     // JEI
     if (project.hasProperty("jei_version")) {
         // implementation against the JEI API but do not include it at runtime
-        compileOnly fg.deobf("mezz.jei:jei-${project.jei_version}")
+        compileOnly fg.deobf("mezz.jei:jei-${project.jei_version}:api")
         // at runtime, use the full JEI jar
         runtimeOnly fg.deobf("mezz.jei:jei-${project.jei_version}")
     }
@@ -342,22 +340,8 @@ task replaceResources(type: Copy) {
     into new File("${projectDir}/src/main/resources", "META-INF")
 }
 
-//// task to add mods.toml to all relevant folders
-//task qfmArgs(type: Copy) {
-//    from("${projectDir}/qfm_args.json")
-//    outputs.upToDateWhen {
-//        false
-//    }
-//
-//    into new File(processResources.destinationDir, "META-INF")
-//    into new File("${projectDir}/src/main/resources/META-INF")
-//}
-
 processResources {
-//    exclude 'META-INF/mods.toml'
-//    exclude 'META-INF/qfm_args.json'
     finalizedBy replaceResources
-//    finalizedBy qfmArgs
 }
 
 task sourcesJar(type: Jar) {
@@ -403,7 +387,6 @@ jar {
 }
 
 tasks.withType(ProcessResources).configureEach {
-//    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
 
 }
 
@@ -428,6 +411,7 @@ publishing {
             name = "GitHubMaven"
             url = uri("${projectDir}/.maven_repo")
         }
+        mavenLocal()
     }
     publications {
         //noinspection GroovyAssignabilityCheck

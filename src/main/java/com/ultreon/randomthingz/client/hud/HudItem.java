@@ -23,7 +23,7 @@ public abstract class HudItem extends Item {
     @SubscribeEvent
     public static void renderGameOverlay(RenderGameOverlayEvent event) {
         if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
-            PoseStack matrixStack = event.getMatrixStack();
+            PoseStack matrixStack = event.getPoseStack();
             Minecraft mc = Minecraft.getInstance();
 
             LocalPlayer player = mc.player;
@@ -63,15 +63,15 @@ public abstract class HudItem extends Item {
 //    protected final void drawItemStack(ItemStack stack, int x, int y, String altText) {
 //        this.itemRenderer = Minecraft.getInstance().getItemRenderer();
 //
-//        RenderSystem.translatef(0.0F, 0.0F, 32.0F);
+//        RenderSystem.translatef(0.0f, 0.0f, 32.0f);
 ////        this.setBlitOffset(200);
-//        this.itemRenderer.zLevel = 200.0F;
+//        this.itemRenderer.zLevel = 200.0f;
 //        net.minecraft.client.gui.FontRenderer font = stack.getItem().getFontRenderer(stack);
 //        if (font == null) font = Minecraft.getInstance().fontRenderer;
 //        this.itemRenderer.renderItemAndEffectIntoGUI(stack, x, y);
 //        this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
 ////        this.setBlitOffset(0);
-//        this.itemRenderer.zLevel = 0.0F;
+//        this.itemRenderer.zLevel = 0.0f;
 //    }
 
 }

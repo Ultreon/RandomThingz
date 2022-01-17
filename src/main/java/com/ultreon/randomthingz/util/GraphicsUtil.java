@@ -17,8 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.gui.GuiUtils;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,15 +70,15 @@ public final class GraphicsUtil {
      */
     @SuppressWarnings("deprecation")
     public final void drawItemStack(ItemStack stack, int x, int y, String altText) {
-        RenderSystem.translatef(0.0F, 0.0F, 32.0F);
+        RenderSystem.translatef(0.0f, 0.0f, 32.0f);
 //        this.setBlitOffset(200);
-        this.itemRenderer.blitOffset = 200.0F;
+        this.itemRenderer.blitOffset = 200.0f;
         Font font = stack.getItem().getFontRenderer(stack);
         if (font == null) font = Minecraft.getInstance().font;
         this.itemRenderer.renderAndDecorateItem(stack, x, y);
         this.itemRenderer.renderGuiItemDecorations(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
 //        this.setBlitOffset(0);
-        this.itemRenderer.blitOffset = 0.0F;
+        this.itemRenderer.blitOffset = 0.0f;
     }
 
     public static void drawTooltip(PoseStack matrixStack, List<? extends FormattedText> tooltips, int width, int height, Font font, int x, int y) {
@@ -91,7 +91,7 @@ public final class GraphicsUtil {
      * @see GuiUtils#drawHoveringText(MatrixStack, List, int, int, int, int, int, int, int, int, FontRenderer)
      */
     //TODO, Validate rendering is the same as the original
-    public void drawItemTooltipText(@Nonnull final ItemStack stack, List<? extends FormattedText> textLines, int mouseX, int mouseY,
+    public void drawItemTooltipText(@NotNull final ItemStack stack, List<? extends FormattedText> textLines, int mouseX, int mouseY,
                                     int minWidth, int xOffset, int yOffset,
                                     int screenWidth, int screenHeight, int maxTextWidth,
                                     int backgroundColor, int borderColorStart, int borderColorEnd, Font font) {
@@ -239,7 +239,7 @@ public final class GraphicsUtil {
         }
     }
 
-    public PoseStack getMatrixStack() {
+    public PoseStack getPoseStack() {
         return matrixStack;
     }
 }

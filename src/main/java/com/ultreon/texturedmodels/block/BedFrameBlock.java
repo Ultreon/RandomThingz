@@ -7,7 +7,7 @@ import com.ultreon.texturedmodels.tileentity.BedFrameTile;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -36,8 +36,8 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Objects;
@@ -99,7 +99,7 @@ public class BedFrameBlock extends BedBlock {
                         dimension.removeBlock(blockpos, false);
                     }
 
-                    dimension.explode(null, DamageSource.badRespawnPointExplosion(), null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 5.0F, true, Explosion.BlockInteraction.DESTROY);
+                    dimension.explode(null, DamageSource.badRespawnPointExplosion(), null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 5.0f, true, Explosion.BlockInteraction.DESTROY);
                     return InteractionResult.SUCCESS;
                 } else if (state.getValue(OCCUPIED)) {
                     if (!this.kickVillagerOutOfBed(dimension, pos)) {
@@ -205,7 +205,7 @@ public class BedFrameBlock extends BedBlock {
     }
 
     @Override
-    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+    public int getLightEmission(BlockState state, BlockGetter dimension, BlockPos pos) {
         if (state.getValue(LIGHT_LEVEL) > 15) {
             return 15;
         }
@@ -218,4 +218,3 @@ public class BedFrameBlock extends BedBlock {
         return RenderShape.MODEL;
     }
 }
-//========SOLI DEO GLORIA========//

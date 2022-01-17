@@ -10,10 +10,10 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class SpecialsItemGroup extends CreativeModeTab {
-    public static final SpecialsItemGroup instance = new SpecialsItemGroup(CreativeModeTab.TABS.length, "randomthingz_specials");
+public class SpecialsTab extends CreativeModeTab {
+    public static final SpecialsTab instance = new SpecialsTab(CreativeModeTab.TABS.length, "randomthingz_specials");
 
-    public SpecialsItemGroup(int index, String label) {
+    public SpecialsTab(int index, String label) {
         super(index, label);
     }
 

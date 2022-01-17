@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.test.network;
 import com.ultreon.randomthingz.network.LoginPacket;
 import com.ultreon.randomthingz.test.TestMod;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Connection;
 import net.minecraftforge.fml.network.FMLHandshakeHandler;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -14,8 +14,8 @@ import java.util.Objects;
 public final class Network {
     private static final String VERSION = "randomthingz-test-net1";
 
-    public static NetworkManager getClientManager() {
-        return Objects.requireNonNull(Minecraft.getInstance().getConnection()).getNetworkManager();
+    public static Connection getClientManager() {
+        return Objects.requireNonNull(Minecraft.getInstance().getConnection()).getConnection();
     }
 
     public static SimpleChannel channel;

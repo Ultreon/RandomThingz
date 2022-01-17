@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.datafixers.util.Pair;
-import com.qsoftware.modlib.silentlib.util.TextRenderUtils;
+import com.ultreon.modlib.embedded.silentlib.util.TextRenderUtils;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.crusher.CrusherScreen;
 import com.ultreon.randomthingz.item.crafting.CrushingRecipe;

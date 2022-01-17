@@ -10,8 +10,7 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.level.block.state.BlockState;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class BabyEndermanHeldBlockLayer extends RenderLayer<BabyEndermanEntity, BabyEnderman> {
 
@@ -20,7 +19,7 @@ public class BabyEndermanHeldBlockLayer extends RenderLayer<BabyEndermanEntity, 
     }
 
     @Override
-    public void render(@Nonnull PoseStack matrix, @Nonnull MultiBufferSource renderer, int light, BabyEndermanEntity enderman, float limbSwing, float limbSwingAmount,
+    public void render(@NotNull PoseStack matrix, @NotNull MultiBufferSource renderer, int light, BabyEndermanEntity enderman, float limbSwing, float limbSwingAmount,
                        float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         BlockState blockstate = enderman.getCarriedBlock();
         if (blockstate != null) {

@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.registration;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraftforge.registries.RegistryObject;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Supplier;
 
@@ -18,7 +18,7 @@ public class WrappedRegistryObject<T extends IForgeRegistryEntry<? super T>> imp
         this.registryObject = registryObject;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public T get() {
         return registryObject.get();

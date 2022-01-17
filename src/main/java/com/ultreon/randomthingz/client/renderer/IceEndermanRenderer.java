@@ -33,7 +33,7 @@ public class IceEndermanRenderer extends MobRenderer<IceEndermanEntity, Enderman
     private final Random rnd = new Random();
 
     public IceEndermanRenderer(EntityRenderDispatcher renderManagerIn) {
-        super(renderManagerIn, new EndermanModel<>(0.0F), 0.5F);
+        super(renderManagerIn, new EndermanModel<>(0.0f), 0.5F);
 
         this.addLayer(new CustomEndermanEyesLayer<>(this, RENDER_TYPE));
         this.addLayer(new CustomHeldBlockLayer<>(this));

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.itempipe;
 
-import com.qsoftware.modlib.api.ConnectionType;
+import com.ultreon.modlib.api.ConnectionType;
 import com.ultreon.randomthingz.util.ItemCapabilityUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,9 +12,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.*;
 
 public final class ItemPipeNetwork implements IItemHandler {
@@ -152,7 +151,7 @@ public final class ItemPipeNetwork implements IItemHandler {
     }
 
     @Override
-    public boolean isItemValid(int tank, @Nonnull ItemStack stack) {
+    public boolean isItemValid(int tank, @NotNull ItemStack stack) {
         return itemTank.isItemValid(tank, stack);
     }
 
@@ -163,8 +162,8 @@ public final class ItemPipeNetwork implements IItemHandler {
 
     @NotNull
     @Override
-    public ItemStack getStackInSlot(int slot) {
-        return itemTank.getStackInSlot(slot);
+    public ItemStack getItem(int slot) {
+        return itemTank.getItem(slot);
     }
 
     @NotNull
@@ -202,7 +201,7 @@ public final class ItemPipeNetwork implements IItemHandler {
         }
 
         @Override
-        public boolean isItemValid(int tank, @Nonnull ItemStack stack) {
+        public boolean isItemValid(int tank, @NotNull ItemStack stack) {
             return network.itemTank.isItemValid(tank, stack);
         }
 
@@ -213,7 +212,7 @@ public final class ItemPipeNetwork implements IItemHandler {
 
         @NotNull
         @Override
-        public ItemStack getStackInSlot(int slot) {
+        public ItemStack getItem(int slot) {
             return network.itemTank.getStack();
         }
 

@@ -27,7 +27,7 @@ public abstract class AdvancedContainerScreen<T extends AbstractContainerMenu> e
 
     public void add(AbstractWidget widget) {
         if (widget instanceof AbstractButton) {
-            addButton((AbstractButton) widget);
+            addRenderableWidget((AbstractButton) widget);
         }
 
         this.widgets.add(widget);

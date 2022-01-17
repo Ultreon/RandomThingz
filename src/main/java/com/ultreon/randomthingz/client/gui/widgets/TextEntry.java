@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.client.gui.widgets;
 
 import com.google.common.annotations.Beta;
-import com.ultreon.randomthingz.client.graphics.MCGraphics;
+import com.ultreon.modlib.graphics.MCGraphics;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;

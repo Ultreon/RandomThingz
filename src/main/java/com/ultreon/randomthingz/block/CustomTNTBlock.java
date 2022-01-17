@@ -39,11 +39,11 @@ public abstract class CustomTNTBlock<T extends CustomTNTBlock<T>> extends TntBlo
     }
 
     @Deprecated //Forge: Prefer using IForgeBlock#catchFire
-    private void explode(Level dimensionIn, BlockPos pos, @javax.annotation.Nullable LivingEntity entityIn) {
+    private void explode(Level dimensionIn, BlockPos pos, @org.jetbrains.annotations.Nullable LivingEntity entityIn) {
         if (!dimensionIn.isClientSide) {
             CustomTNTEntity tntEntity = new CustomTNTEntity(this.defaultBlockState(), dimensionIn, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, entityIn);
             dimensionIn.addFreshEntity(tntEntity);
-            dimensionIn.playSound(null, tntEntity.getX(), tntEntity.getY(), tntEntity.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
+            dimensionIn.playSound(null, tntEntity.getX(), tntEntity.getY(), tntEntity.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0f, 1.0f);
         }
     }
 

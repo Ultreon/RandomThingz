@@ -16,12 +16,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 import static com.ultreon.texturedmodels.QTextureModels.MOD_ID;
 
@@ -98,11 +97,11 @@ public class QTextureModels {
      * Server stuff (currently unused)
      */
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public void onServerStarting(ServerStartingEvent event) {
     }
 
     /**
-     * Registering my ItemGroup for all blocks and items from BlockCarpentry
+     * Registering my CreativeModeTab for all blocks and items from BlockCarpentry
      */
     public static class QTexturedModelsItemGroup extends CreativeModeTab {
 
@@ -113,11 +112,10 @@ public class QTextureModels {
         }
 
         @Override
-        @Nonnull
+        @NotNull
         public ItemStack makeIcon() {
             return new ItemStack(Registration.FRAMEBLOCK.get());
         }
     }
 }
 //This mod is dedicated to the living God and His son, Jesus. Without His support, I would never have had enough strength and perseverance to get this project working and publish it. Learn to hear His voice, it will transform your life. (Based on a quote from Covert_Jaguar, creator of RailCraft)
-//========SOLI DEO GLORIA========//

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.generator.diesel;
 
-import com.qsoftware.modlib.api.IFluidContainer;
+import com.ultreon.modlib.api.FluidContainer;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidFuelGeneratorTileEntity;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidGeneratorContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
@@ -23,7 +23,7 @@ public class DieselGeneratorContainer extends AbstractFluidGeneratorContainer<Di
         this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
         this.addSlot(new Slot(this.tileEntity, 1, 80, 59));
 
-        com.qsoftware.modlib.silentlib.util.InventoryUtils.createPlayerSlots(player, 8, 84).forEach(this::addSlot);
+        com.ultreon.modlib.embedded.silentlib.util.InventoryUtils.createPlayerSlots(player, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
     }
@@ -36,6 +36,6 @@ public class DieselGeneratorContainer extends AbstractFluidGeneratorContainer<Di
     @Override
     protected boolean isFuel(ItemStack stack) {
         return InventoryUtils.isFilledFluidContainer(stack)
-                && IFluidContainer.getBucketOrContainerFluid(stack).getFluid().is(DieselGeneratorTileEntity.FUEL_TAG);
+                && FluidContainer.getBucketOrContainerFluid(stack).getFluid().is(DieselGeneratorTileEntity.FUEL_TAG);
     }
 }

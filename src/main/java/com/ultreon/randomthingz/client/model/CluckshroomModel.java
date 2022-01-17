@@ -35,85 +35,85 @@ public class CluckshroomModel<T extends CluckshroomEntity> extends AgeableListMo
         texHeight = 32;
 
         head = new ModelPart(this);
-        head.setPos(0.0F, 15.0F, -4.0F);
-        head.texOffs(19, 5).addBox(-2.0F, -6.0F, -2.0F, 4.0F, 6.0F, 3.0F, 0.0F, false);
+        head.setPos(0.0f, 15.0f, -4.0f);
+        head.texOffs(19, 5).addBox(-2.0f, -6.0f, -2.0f, 4.0f, 6.0f, 3.0f, 0.0f, false);
 
         mushroom1 = new ModelPart(this);
-        mushroom1.setPos(0.0F, 0.0F, 0.0F);
+        mushroom1.setPos(0.0f, 0.0f, 0.0f);
         head.addChild(mushroom1);
-        setRotationAngle(mushroom1, 0.0F, 0.48F, 0.0F);
-        mushroom1.texOffs(5, 0).addBox(0.0F, -13.0F, -4.0F, 0.0F, 7.0F, 7.0F, 0.0F, false);
+        setRotationAngle(mushroom1, 0.0f, 0.48F, 0.0f);
+        mushroom1.texOffs(5, 0).addBox(0.0f, -13.0f, -4.0f, 0.0f, 7.0f, 7.0f, 0.0f, false);
 
         mushroom2 = new ModelPart(this);
-        mushroom2.setPos(0.0F, 0.0F, 0.0F);
+        mushroom2.setPos(0.0f, 0.0f, 0.0f);
         head.addChild(mushroom2);
-        setRotationAngle(mushroom2, 0.0F, -1.0908F, 0.0F);
-        mushroom2.texOffs(5, 0).addBox(-0.5F, -13.0F, -3.5F, 0.0F, 7.0F, 7.0F, 0.0F, false);
+        setRotationAngle(mushroom2, 0.0f, -1.0908F, 0.0f);
+        mushroom2.texOffs(5, 0).addBox(-0.5F, -13.0f, -3.5F, 0.0f, 7.0f, 7.0f, 0.0f, false);
 
         body = new ModelPart(this);
-        body.setPos(0.0F, 16.0F, 0.0F);
+        body.setPos(0.0f, 16.0f, 0.0f);
 
         rotation = new ModelPart(this);
-        rotation.setPos(0.0F, 0.0F, 0.0F);
+        rotation.setPos(0.0f, 0.0f, 0.0f);
         body.addChild(rotation);
-        setRotationAngle(rotation, 1.5708F, 0.0F, 0.0F);
-        rotation.texOffs(19, 14).addBox(-3.0F, -4.0F, -3.0F, 6.0F, 8.0F, 6.0F, 0.0F, false);
+        setRotationAngle(rotation, 1.5708F, 0.0f, 0.0f);
+        rotation.texOffs(19, 14).addBox(-3.0f, -4.0f, -3.0f, 6.0f, 8.0f, 6.0f, 0.0f, false);
 
         mushroom3 = new ModelPart(this);
-        mushroom3.setPos(0.0F, 0.0F, 0.0F);
+        mushroom3.setPos(0.0f, 0.0f, 0.0f);
         body.addChild(mushroom3);
-        setRotationAngle(mushroom3, 0.0F, -1.0908F, 0.0F);
-        mushroom3.texOffs(5, 0).addBox(-1.0F, -10.0F, -2.5F, 0.0F, 7.0F, 7.0F, 0.0F, false);
+        setRotationAngle(mushroom3, 0.0f, -1.0908F, 0.0f);
+        mushroom3.texOffs(5, 0).addBox(-1.0f, -10.0f, -2.5F, 0.0f, 7.0f, 7.0f, 0.0f, false);
 
         mushroom4 = new ModelPart(this);
-        mushroom4.setPos(0.0F, 0.0F, 0.0F);
+        mushroom4.setPos(0.0f, 0.0f, 0.0f);
         body.addChild(mushroom4);
-        setRotationAngle(mushroom4, 0.0F, 0.48F, 0.0F);
-        mushroom4.texOffs(5, 0).addBox(-1.0F, -10.0F, -4.5F, 0.0F, 7.0F, 7.0F, 0.0F, false);
+        setRotationAngle(mushroom4, 0.0f, 0.48F, 0.0f);
+        mushroom4.texOffs(5, 0).addBox(-1.0f, -10.0f, -4.5F, 0.0f, 7.0f, 7.0f, 0.0f, false);
 
         mushroom5 = new ModelPart(this);
-        mushroom5.setPos(0.0F, 0.0F, 0.0F);
+        mushroom5.setPos(0.0f, 0.0f, 0.0f);
         body.addChild(mushroom5);
-        setRotationAngle(mushroom5, 0.0F, -1.0908F, 0.0F);
-        mushroom5.texOffs(5, 0).addBox(2.0F, -10.0F, -4.5F, 0.0F, 7.0F, 7.0F, 0.0F, false);
+        setRotationAngle(mushroom5, 0.0f, -1.0908F, 0.0f);
+        mushroom5.texOffs(5, 0).addBox(2.0f, -10.0f, -4.5F, 0.0f, 7.0f, 7.0f, 0.0f, false);
 
         mushroom6 = new ModelPart(this);
-        mushroom6.setPos(0.0F, 0.0F, 0.0F);
+        mushroom6.setPos(0.0f, 0.0f, 0.0f);
         body.addChild(mushroom6);
-        setRotationAngle(mushroom6, 0.0F, 0.48F, 0.0F);
-        mushroom6.texOffs(5, 0).addBox(1.0F, -10.0F, -1.5F, 0.0F, 7.0F, 7.0F, 0.0F, false);
+        setRotationAngle(mushroom6, 0.0f, 0.48F, 0.0f);
+        mushroom6.texOffs(5, 0).addBox(1.0f, -10.0f, -1.5F, 0.0f, 7.0f, 7.0f, 0.0f, false);
 
         rightLeg = new ModelPart(this);
-        rightLeg.setPos(2.0F, 19.0F, 1.0F);
-        rightLeg.texOffs(45, 5).addBox(-2.0F, 0.0F, -3.0F, 3.0F, 5.0F, 3.0F, 0.0F, false);
+        rightLeg.setPos(2.0f, 19.0f, 1.0f);
+        rightLeg.texOffs(45, 5).addBox(-2.0f, 0.0f, -3.0f, 3.0f, 5.0f, 3.0f, 0.0f, false);
 
         leftLeg = new ModelPart(this);
-        leftLeg.setPos(-1.0F, 19.0F, 1.0F);
-        leftLeg.texOffs(45, 5).addBox(-2.0F, 0.0F, -3.0F, 3.0F, 5.0F, 3.0F, 0.0F, false);
+        leftLeg.setPos(-1.0f, 19.0f, 1.0f);
+        leftLeg.texOffs(45, 5).addBox(-2.0f, 0.0f, -3.0f, 3.0f, 5.0f, 3.0f, 0.0f, false);
 
 //		rightWing = new ModelRenderer(this);
-//		rightWing.setRotationPoint(4.0F, 8.0F, 0.0F);
-//		rightWing.setTextureOffset(43, 18).addBox(-8.0F, -5.0F, -3.0F, 1.0F, 4.0F, 6.0F, 0.0F, false);
+//		rightWing.setRotationPoint(4.0f, 8.0f, 0.0f);
+//		rightWing.setTextureOffset(43, 18).addBox(-8.0f, -5.0f, -3.0f, 1.0f, 4.0f, 6.0f, 0.0f, false);
 //
 //		leftWing = new ModelRenderer(this);
-//		leftWing.setRotationPoint(-4.0F, 8.0F, 0.0F);
-//		leftWing.setTextureOffset(43, 18).addBox(7.0F, -5.0F, -3.0F, 1.0F, 4.0F, 6.0F, 0.0F, false);
+//		leftWing.setRotationPoint(-4.0f, 8.0f, 0.0f);
+//		leftWing.setTextureOffset(43, 18).addBox(7.0f, -5.0f, -3.0f, 1.0f, 4.0f, 6.0f, 0.0f, false);
 
         rightWing = new ModelPart(this, 43, 18);
-        rightWing.addBox(0.0F, 0.0F, -3.0F, 1.0F, 4.0F, 6.0F);
-        rightWing.setPos(-4.0F, 13.0F, 0.0F);
+        rightWing.addBox(0.0f, 0.0f, -3.0f, 1.0f, 4.0f, 6.0f);
+        rightWing.setPos(-4.0f, 13.0f, 0.0f);
 
         leftWing = new ModelPart(this, 43, 18);
-        leftWing.addBox(-1.0F, 0.0F, -3.0F, 1.0F, 4.0F, 6.0F);
-        leftWing.setPos(4.0F, 13.0F, 0.0F);
+        leftWing.addBox(-1.0f, 0.0f, -3.0f, 1.0f, 4.0f, 6.0f);
+        leftWing.setPos(4.0f, 13.0f, 0.0f);
 
         bill = new ModelPart(this);
-        bill.setPos(0.0F, 15.0F, -4.0F);
-        bill.texOffs(33, 5).addBox(-2.0F, -4.0F, -4.0F, 4.0F, 2.0F, 2.0F, 0.0F, false);
+        bill.setPos(0.0f, 15.0f, -4.0f);
+        bill.texOffs(33, 5).addBox(-2.0f, -4.0f, -4.0f, 4.0f, 2.0f, 2.0f, 0.0f, false);
 
         chin = new ModelPart(this);
-        chin.setPos(0.0F, 15.0F, -4.0F);
-        chin.texOffs(34, 10).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 2.0F, 1.0F, 0.0F, false);
+        chin.setPos(0.0f, 15.0f, -4.0f);
+        chin.texOffs(34, 10).addBox(-1.0f, -2.0f, -3.0f, 2.0f, 2.0f, 1.0f, 0.0f, false);
     }
 
     @Override

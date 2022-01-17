@@ -24,7 +24,7 @@ public class TestScreen extends Screen {
     protected void init() {
         super.init();
 
-        this.testButton = addButton(new Button(10, 10, 250, 20, new TextComponent("Test button"), (button) -> {
+        this.testButton = addRenderableWidget(new Button(10, 10, 250, 20, new TextComponent("Test button"), (button) -> {
             i += 1;
         }));
     }

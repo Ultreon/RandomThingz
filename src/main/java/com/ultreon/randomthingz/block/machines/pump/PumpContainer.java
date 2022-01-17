@@ -12,19 +12,22 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.Nullable;
 
 public class PumpContainer extends AbstractMachineBaseContainer<PumpTileEntity> {
-    public PumpContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new PumpTileEntity(), new SimpleContainerData(PumpTileEntity.FIELDS_COUNT));
+    public PumpContainer(int id, Inventory inventory) {
+        this(id, inventory, null, new SimpleContainerData(PumpTileEntity.FIELDS_COUNT));
     }
 
-    public PumpContainer(int id, Inventory playerInventory, PumpTileEntity tileEntity, ContainerData fields) {
+    public PumpContainer(int id, Inventory playerInventory, @Nullable PumpTileEntity tileEntity, ContainerData fields) {
         super(ModMachineContainers.pump, id, tileEntity, fields);
 
-        this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
-        this.addSlot(new Slot(this.tileEntity, 1, 80, 59));
+        if (this.tileEntity != null) {
+            this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
+            this.addSlot(new Slot(this.tileEntity, 1, 80, 59));
+        }
 
-        com.qsoftware.modlib.silentlib.util.InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        com.ultreon.modlib.embedded.silentlib.util.InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
     }
@@ -39,51 +42,52 @@ public class PumpContainer extends AbstractMachineBaseContainer<PumpTileEntity> 
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
-        ItemStack itemstack = ItemStack.EMPTY;
+        if (this.tileEntity == null) return ItemStack.EMPTY;
+        ItemStack emptyStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
-            ItemStack itemstack1 = slot.getItem();
-            itemstack = itemstack1.copy();
+        if (slot.hasItem()) {
+            ItemStack slotStack = slot.getItem();
+            emptyStack = slotStack.copy();
 
-            final int inventorySize = this.tileEntity.getContainerSize();
-            final int playerInventoryEnd = inventorySize + 27;
-            final int playerHotbarEnd = playerInventoryEnd + 9;
+            final int size = this.tileEntity.getContainerSize();
+            final int inventoryEnd = size + 27;
+            final int hotbarEnd = inventoryEnd + 9;
 
             if (index == 1) {
-                if (!this.moveItemStackTo(itemstack1, inventorySize, playerHotbarEnd, true)) {
+                if (!this.moveItemStackTo(slotStack, size, hotbarEnd, true)) {
                     return ItemStack.EMPTY;
                 }
 
-                slot.onQuickCraft(itemstack1, itemstack);
-            } else if (index >= inventorySize) {
-                if (InventoryUtils.isEmptyFluidContainer(itemstack1) || InventoryUtils.isFilledFluidContainer(itemstack1)) {
-                    if (!this.moveItemStackTo(itemstack1, 0, inventorySize - 1, false)) {
+                slot.onQuickCraft(slotStack, emptyStack);
+            } else if (index >= size) {
+                if (InventoryUtils.isEmptyFluidContainer(slotStack) || InventoryUtils.isFilledFluidContainer(slotStack)) {
+                    if (!this.moveItemStackTo(slotStack, 0, size - 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < playerInventoryEnd) {
-                    if (!this.moveItemStackTo(itemstack1, playerInventoryEnd, playerHotbarEnd, false)) {
+                } else if (index < inventoryEnd) {
+                    if (!this.moveItemStackTo(slotStack, inventoryEnd, hotbarEnd, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < playerHotbarEnd && !this.moveItemStackTo(itemstack1, inventorySize, playerInventoryEnd, false)) {
+                } else if (index < hotbarEnd && !this.moveItemStackTo(slotStack, size, inventoryEnd, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemstack1, inventorySize, playerHotbarEnd, false)) {
+            } else if (!this.moveItemStackTo(slotStack, size, hotbarEnd, false)) {
                 return ItemStack.EMPTY;
             }
 
-            if (itemstack1.isEmpty()) {
+            if (slotStack.isEmpty()) {
                 slot.set(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
             }
 
-            if (itemstack1.getCount() == itemstack.getCount()) {
+            if (slotStack.getCount() == emptyStack.getCount()) {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(playerIn, itemstack1);
+            slot.onTake(playerIn, slotStack);
         }
 
-        return itemstack;
+        return emptyStack;
     }
 }

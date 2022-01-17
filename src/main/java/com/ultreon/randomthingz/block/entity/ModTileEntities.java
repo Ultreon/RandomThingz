@@ -7,7 +7,7 @@ import com.ultreon.randomthingz.tileentity.CrateTileEntity;
 import lombok.experimental.UtilityClass;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 

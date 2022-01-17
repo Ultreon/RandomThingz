@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.magic;
 
-import com.ultreon.randomthingz.common.item.ModItemGroups;
+import com.ultreon.randomthingz.common.item.ModCreativeTabs;
 import com.ultreon.randomthingz.item.WandItem;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class TeleportStaffItem extends WandItem {
     public TeleportStaffItem() {
-        super(420, 20, new Properties().tab(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(420, 20, new Properties().tab(ModCreativeTabs.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override

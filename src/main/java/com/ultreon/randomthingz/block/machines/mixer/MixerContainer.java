@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.mixer;
 
-import com.qsoftware.modlib.silentlib.inventory.SlotOutputOnly;
-import com.qsoftware.modlib.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.core.Registry;
@@ -13,19 +13,22 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.Nullable;
 
 public class MixerContainer extends AbstractMachineBaseContainer<MixerTileEntity> {
     public MixerContainer(int id, Inventory player) {
-        this(id, player, new MixerTileEntity(), new SimpleContainerData(MixerTileEntity.FIELDS_COUNT));
+        this(id, player, null, new SimpleContainerData(MixerTileEntity.FIELDS_COUNT));
     }
 
-    public MixerContainer(int id, Inventory player, MixerTileEntity tileEntity, ContainerData fields) {
+    public MixerContainer(int id, Inventory player, @Nullable MixerTileEntity tileEntity, ContainerData fields) {
         super(ModMachineContainers.mixer, id, tileEntity, fields);
 
-        this.addSlot(new Slot(this.tileEntity, 0, 8, 16));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 8, 59));
-        this.addSlot(new Slot(this.tileEntity, 2, 134, 16));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, 3, 134, 59));
+        if (this.tileEntity != null) {
+            this.addSlot(new Slot(this.tileEntity, 0, 8, 16));
+            this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 8, 59));
+            this.addSlot(new Slot(this.tileEntity, 2, 134, 16));
+            this.addSlot(new SlotOutputOnly(this.tileEntity, 3, 134, 59));
+        }
 
         InventoryUtils.createPlayerSlots(player, 8, 84).forEach(this::addSlot);
 
@@ -50,51 +53,52 @@ public class MixerContainer extends AbstractMachineBaseContainer<MixerTileEntity
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
-        ItemStack itemstack = ItemStack.EMPTY;
+        ItemStack emptyStack = ItemStack.EMPTY;
+        if (this.tileEntity == null) return emptyStack;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
-            ItemStack itemstack1 = slot.getItem();
-            itemstack = itemstack1.copy();
+        if (slot.hasItem()) {
+            ItemStack slotStack = slot.getItem();
+            emptyStack = slotStack.copy();
 
-            final int inventorySize = this.tileEntity.getContainerSize();
-            final int playerInventoryEnd = inventorySize + 27;
-            final int playerHotbarEnd = playerInventoryEnd + 9;
+            final int size = this.tileEntity.getContainerSize();
+            final int invEnd = size + 27;
+            final int hotbarEnd = invEnd + 9;
 
             if (index == 1 || index == 3) {
-                if (!this.moveItemStackTo(itemstack1, inventorySize, playerHotbarEnd, true)) {
+                if (!this.moveItemStackTo(slotStack, size, hotbarEnd, true)) {
                     return ItemStack.EMPTY;
                 }
 
-                slot.onQuickCraft(itemstack1, itemstack);
-            } else if (index >= inventorySize) {
-                if (com.ultreon.randomthingz.util.InventoryUtils.isEmptyFluidContainer(itemstack1) || com.ultreon.randomthingz.util.InventoryUtils.isFilledFluidContainer(itemstack1)) {
-                    if (!this.moveItemStackTo(itemstack1, 0, inventorySize - 1, false)) {
+                slot.onQuickCraft(slotStack, emptyStack);
+            } else if (index >= size) {
+                if (com.ultreon.randomthingz.util.InventoryUtils.isEmptyFluidContainer(slotStack) || com.ultreon.randomthingz.util.InventoryUtils.isFilledFluidContainer(slotStack)) {
+                    if (!this.moveItemStackTo(slotStack, 0, size - 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < playerInventoryEnd) {
-                    if (!this.moveItemStackTo(itemstack1, playerInventoryEnd, playerHotbarEnd, false)) {
+                } else if (index < invEnd) {
+                    if (!this.moveItemStackTo(slotStack, invEnd, hotbarEnd, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < playerHotbarEnd && !this.moveItemStackTo(itemstack1, inventorySize, playerInventoryEnd, false)) {
+                } else if (index < hotbarEnd && !this.moveItemStackTo(slotStack, size, invEnd, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemstack1, inventorySize, playerHotbarEnd, false)) {
+            } else if (!this.moveItemStackTo(slotStack, size, hotbarEnd, false)) {
                 return ItemStack.EMPTY;
             }
 
-            if (itemstack1.isEmpty()) {
+            if (slotStack.isEmpty()) {
                 slot.set(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
             }
 
-            if (itemstack1.getCount() == itemstack.getCount()) {
+            if (slotStack.getCount() == emptyStack.getCount()) {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(playerIn, itemstack1);
+            slot.onTake(playerIn, slotStack);
         }
 
-        return itemstack;
+        return emptyStack;
     }
 }

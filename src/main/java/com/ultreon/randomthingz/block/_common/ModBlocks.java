@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block._common;
 
-import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
-import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.DirectionalBlock;
 import com.ultreon.randomthingz.block.*;
@@ -37,15 +37,14 @@ import com.ultreon.randomthingz.block.trees.CherryTree;
 import com.ultreon.randomthingz.block.trees.EucalyptusTree;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
-import com.ultreon.randomthingz.common.item.ModItemGroups;
+import com.ultreon.randomthingz.common.item.ModCreativeTabs;
 import com.ultreon.randomthingz.item.block.DeprecatedBlockItem;
 import com.ultreon.randomthingz.registration.Registration;
 import com.ultreon.randomthingz.tileentity.ChristmasChestTileEntity;
 import com.ultreon.randomthingz.tileentity.itemrenderer.ChristmasChestItemStackRenderer;
 import lombok.experimental.UtilityClass;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.ChatFormatting;
-import net.minecraft.block.*;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -77,8 +76,8 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -229,7 +228,7 @@ public final class ModBlocks {
             return RenderType.cutout();
         }
     });
-    public static final BlockRegistryObject<DoorBlock> IRON_BARRIER_DOOR = registerRedstone("iron_barrier_door", () -> new CRDoorBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(5.0F).sound(SoundType.METAL).noOcclusion()) {
+    public static final BlockRegistryObject<DoorBlock> IRON_BARRIER_DOOR = registerRedstone("iron_barrier_door", () -> new CRDoorBlock(Block.Properties.of(Material.METAL, MaterialColor.METAL).requiresCorrectToolForDrops().harvestTool(ToolType.PICKAXE).strength(5.0f).sound(SoundType.METAL).noOcclusion()) {
         @OnlyIn(Dist.CLIENT)
         @Override
         public RenderType getRenderType() {
@@ -442,7 +441,7 @@ public final class ModBlocks {
 
     private static BlockRegistryObject<LiquidBlock> registerFluid(String name, Supplier<FlowingFluid> fluid) {
         return registerNoItem(name, () ->
-                new LiquidBlock(fluid, Block.Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops()));
+                new LiquidBlock(fluid, Block.Properties.of(Material.WATER).noCollission().strength(100.0f).noDrops()));
     }
 
     private static <T extends Block> Supplier<DeprecatedBlockItem> item(BlockRegistryObject<T> block) {
@@ -462,11 +461,11 @@ public final class ModBlocks {
     }
 
     private static <T extends Block> Supplier<DeprecatedBlockItem> machineItem(BlockRegistryObject<T> block) {
-        return () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModItemGroups.MACHINES));
+        return () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModCreativeTabs.MACHINES));
     }
 
     private static <T extends Block> Supplier<DeprecatedBlockItem> chestItem(BlockRegistryObject<T> block, Supplier<Callable<?>> renderMethod) {
-        return DistExecutor.unsafeRunForDist(() -> () -> () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModItemGroups.MACHINES).setISTER(() -> () -> (BlockEntityWithoutLevelRenderer) renderMethod.get().call())), () -> () -> () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModItemGroups.MACHINES)));
+        return DistExecutor.unsafeRunForDist(() -> () -> () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModCreativeTabs.MACHINES).setISTER(() -> () -> (BlockEntityWithoutLevelRenderer) renderMethod.get().call())), () -> () -> () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModCreativeTabs.MACHINES)));
     }
 
     private static <T extends Block> Supplier<DeprecatedBlockItem> ingredientItem(BlockRegistryObject<T> block) {
@@ -474,7 +473,7 @@ public final class ModBlocks {
     }
 
     private static <T extends Block> Supplier<DeprecatedBlockItem> specialItem(BlockRegistryObject<T> block) {
-        return () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModItemGroups.SPECIALS));
+        return () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModCreativeTabs.SPECIALS));
     }
 
     private static <T extends Block> Supplier<DeprecatedBlockItem> oreItem(BlockRegistryObject<T> block) {
@@ -498,7 +497,7 @@ public final class ModBlocks {
     }
 
     private static <T extends Block> Supplier<DeprecatedBlockItem> bookshelfItem(BlockRegistryObject<T> block) {
-        return () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModItemGroups.BOOKSHELVES));
+        return () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModCreativeTabs.BOOKSHELVES));
     }
 
     private static LeavesBlock createLeavesBlock() {

@@ -63,21 +63,21 @@ public class ConfirmExitOptions extends ModuleOptionsScreen<ConfirmExitModule> {
         ConfirmExitOptions.closePromptIngame = tag.getBoolean("ClosePromptIngame");
         ConfirmExitOptions.closePromptQuitButton = tag.getBoolean("ClosePromptQuitButton");
 
-//        this.testSwitch = addButton(new SwitchWidget(width / 2 - 40 / 2, height / 2 - 20 / 2, false));
+//        this.testSwitch = addRenderableWidget(new SwitchWidget(width / 2 - 40 / 2, height / 2 - 20 / 2, false));
         // Options for Confirm Exit screen.
-        this.quitOnEscInTitleButton = addButton(new Button(width / 2 - 105, height / 6 - 6, 200, 20,
+        this.quitOnEscInTitleButton = addRenderableWidget(new Button(width / 2 - 105, height / 6 - 6, 200, 20,
                 Translations.getScreen("quit_settings", "quit_on_esc_in_title").append(quitOnEscInTitle ? CommonComponents.OPTION_ON.getString() : CommonComponents.OPTION_OFF.getString()), this::toggleExitOnEscInTitle, this::tooltip));
-        this.closePromptButton = addButton(new Button(width / 2 - 105, height / 6 + 30 - 6, 200, 20,
+        this.closePromptButton = addRenderableWidget(new Button(width / 2 - 105, height / 6 + 30 - 6, 200, 20,
                 Translations.getScreen("quit_settings", "close_prompt").append(closePrompt ? CommonComponents.OPTION_ON.getString() : CommonComponents.OPTION_OFF.getString()), this::toggleClosePrompt, this::tooltip));
-        this.closePromptIngameButton = addButton(new Button(width / 2 - 105, height / 6 + 90 - 6, 200, 20,
+        this.closePromptIngameButton = addRenderableWidget(new Button(width / 2 - 105, height / 6 + 90 - 6, 200, 20,
                 Translations.getScreen("quit_settings", "close_prompt_ingame").append(closePromptIngame ? CommonComponents.OPTION_ON.getString() : CommonComponents.OPTION_OFF.getString()), this::toggleClosePromptIngame, this::tooltip));
-        this.closePromptQuitButtonButton = addButton(new Button(width / 2 - 105, height / 6 + 60 - 6, 200, 20,
+        this.closePromptQuitButtonButton = addRenderableWidget(new Button(width / 2 - 105, height / 6 + 60 - 6, 200, 20,
                 Translations.getScreen("quit_settings", "close_prompt_quit_button").append(closePromptQuitButton ? CommonComponents.OPTION_ON.getString() : CommonComponents.OPTION_OFF.getString()), this::toggleClosePromptQuitButton, this::tooltip));
 
         // Done and Cancel buttons.
-        addButton(new Button(width / 2 - 155, height / 6 + 120 - 6, 150, 20,
+        addRenderableWidget(new Button(width / 2 - 155, height / 6 + 120 - 6, 150, 20,
                 CommonComponents.GUI_DONE, this::saveAndGoBack));
-        addButton(new Button(width / 2 + 5, height / 6 + 120 - 6, 150, 20,
+        addRenderableWidget(new Button(width / 2 + 5, height / 6 + 120 - 6, 150, 20,
                 CommonComponents.GUI_CANCEL, this::goBack));
     }
 
@@ -158,7 +158,7 @@ public class ConfirmExitOptions extends ModuleOptionsScreen<ConfirmExitModule> {
         this.module.setClosePromptQuitButton(closePromptQuitButton);
 
         // Mark dirty, so it will be saved.
-        this.module.markModified();
+        this.module.setChanged();
 
         // Go back.
         goBack(button);

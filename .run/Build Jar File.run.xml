@@ -11,9 +11,6 @@
       <option name="taskNames">
         <list>
           <option value="build" />
-          <option value="jar" />
-          <option value="uploadJars" />
-          <option value="uploadArchives" />
         </list>
       </option>
       <option name="vmOptions" value="" />

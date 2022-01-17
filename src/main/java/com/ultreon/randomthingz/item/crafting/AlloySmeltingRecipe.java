@@ -8,7 +8,6 @@ import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.item.crafting.*;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -118,7 +117,7 @@ public class AlloySmeltingRecipe implements Recipe<IMachineInventory> {
         public AlloySmeltingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             AlloySmeltingRecipe recipe = new AlloySmeltingRecipe(recipeId);
             recipe.processTime = GsonHelper.getAsInt(json, "process_time", 400);
-            recipe.result = ShapedRecipe.itemFromJson(GsonHelper.getAsJsonObject(json, "result"));
+            recipe.result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
 
             GsonHelper.getAsJsonArray(json, "ingredients").forEach(element -> {
                 Ingredient ingredient = deserializeIngredient(element);

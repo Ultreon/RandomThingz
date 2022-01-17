@@ -1,6 +1,7 @@
 package com.ultreon.randomthingz.item.upgrade;
 
-import com.qsoftware.modlib.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.api.providers.ItemProvider;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.api.IMachineUpgrade;
 import com.ultreon.randomthingz.common.interfaces.INamed;
@@ -9,11 +10,11 @@ import com.ultreon.randomthingz.item.MachineUpgradeItem;
 import com.ultreon.randomthingz.registration.Registration;
 import com.ultreon.randomthingz.util.Constants;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.ItemLike;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
-public enum MachineUpgrades implements ItemLike, IMachineUpgrade, INamed, Translatable {
+public enum MachineUpgrades implements ItemProvider, IMachineUpgrade, INamed, Translatable {
     PROCESSING_SPEED(Constants.UPGRADE_PROCESSING_SPEED_AMOUNT, 0.5f),
     OUTPUT_CHANCE(Constants.UPGRADE_SECONDARY_OUTPUT_AMOUNT, 0.25f),
     ENERGY_CAPACITY(0, 0.0f, false),
@@ -23,7 +24,6 @@ public enum MachineUpgrades implements ItemLike, IMachineUpgrade, INamed, Transl
     private final float upgradeValue;
     private final float energyUsage;
     private final boolean displayValueAsPercentage;
-    @SuppressWarnings("NonFinalFieldInEnum")
     private ItemRegistryObject<MachineUpgradeItem> item;
 
     MachineUpgrades(float upgradeValue, float energyUsage) {
@@ -63,6 +63,7 @@ public enum MachineUpgrades implements ItemLike, IMachineUpgrade, INamed, Transl
         return name().toLowerCase(Locale.ROOT) + "_upgrade";
     }
 
+    @NotNull
     @Override
     public Item asItem() {
         return item.get();

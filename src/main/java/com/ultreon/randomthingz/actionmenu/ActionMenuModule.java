@@ -7,7 +7,7 @@ import com.ultreon.randomthingz.client.input.KeyBindingList;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import lombok.Getter;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.common.MinecraftForge;

@@ -4,44 +4,49 @@ import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
+import com.ultreon.texturedmodels.tileentity.ITickable;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.Containers;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.ticks.ScheduledTick;
+import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
 import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
-import static net.minecraft.state.properties.BlockStateProperties.HORIZONTAL_FACING;
-import static net.minecraft.state.properties.BlockStateProperties.WATERLOGGED;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
 
-import net.net.minimport net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
-ecraft.world.level.block.state.properties.BlockStateProperties* Main class for frame chests - all important block info can be found here
+/**
+ *for frame chests - all important block info can be found here
  * Visit {@linkplain FrameBlock} for a better documentation
  *
  * @author PianoManu
@@ -84,18 +89,19 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+        return Registration.CHEST_FRAME_TILE.get().create(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
+        return ITickable::tickTE;
     }
 
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return Registration.CHEST_FRAME_TILE.get().create();
-    }
-
-    @Override
-    public InteractionResult use(BlockState state, Level dimension, BlockPos pos, Player player,
-                                             InteractionHand hand, BlockHitResult result) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, Level dimension, @NotNull BlockPos pos, Player player,
+                                          @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
         ItemStack item = player.getItemInHand(hand);
         if (!dimension.isClientSide) {
             BlockEntity tileEntity = dimension.getBlockEntity(pos);
@@ -133,21 +139,19 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
     @Override
     protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
         if (!dimensionIn.isClientSide) {
-            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof ChestFrameTileEntity) {
-                ChestFrameTileEntity frameTileEntity = (ChestFrameTileEntity) tileentity;
-                BlockState blockState = frameTileEntity.getMimic();
-                if (!(blockState == null)) {
+            BlockEntity entity = dimensionIn.getBlockEntity(pos);
+            if (entity instanceof ChestFrameTileEntity frameTileEntity) {
+                BlockState state = frameTileEntity.getMimic();
+                if (!(state == null)) {
                     dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clearContent();
-                    float f = 0.7F;
-                    double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    ItemStack itemstack1 = new ItemStack(blockState.getBlock());
-                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
-                    itementity.setDefaultPickUpDelay();
-                    dimensionIn.addFreshEntity(itementity);
+                    double x = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
+                    double y = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
+                    double z = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
+                    ItemStack stack = new ItemStack(state.getBlock());
+                    ItemEntity item = new ItemEntity(dimensionIn, (double) pos.getX() + x, (double) pos.getY() + y, (double) pos.getZ() + z, stack);
+                    item.setDefaultPickUpDelay();
+                    dimensionIn.addFreshEntity(item);
                     frameTileEntity.clearContent();
                 }
             }
@@ -156,9 +160,8 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
 
     @Override
     public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
-        BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-        if (tileentity instanceof ChestFrameTileEntity) {
-            ChestFrameTileEntity frameTileEntity = (ChestFrameTileEntity) tileentity;
+        BlockEntity entity = dimensionIn.getBlockEntity(pos);
+        if (entity instanceof ChestFrameTileEntity frameTileEntity) {
             frameTileEntity.clearContent();
             frameTileEntity.setMimic(handBlock);
             dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);
@@ -166,7 +169,7 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @NotNull Level dimensionIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity te = dimensionIn.getBlockEntity(pos);
             if (te instanceof ChestFrameTileEntity) {
@@ -177,24 +180,21 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public FluidState getFluidState(BlockState state) {
+    public @NotNull FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor dimensionIn, BlockPos currentPos, BlockPos facingPos) {
-        if (stateIn.getValue(WATERLOGGED)) {
-            dimensionIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(dimensionIn));
+    public @NotNull BlockState updateShape(BlockState state, @NotNull Direction facing, @NotNull BlockState facingState, @NotNull LevelAccessor level, @NotNull BlockPos pos, @NotNull BlockPos facingPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.getFluidTicks().schedule(new ScheduledTick<>(Fluids.WATER, pos, Fluids.WATER.getTickDelay(level), 0));
         }
 
-        return super.updateShape(stateIn, facing, facingState, dimensionIn, currentPos, facingPos);
+        return super.updateShape(state, facing, facingState, level, pos, facingPos);
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState state, BlockGetter dimensionIn, BlockPos pos, CollisionContext context) {
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter dimensionIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return CHEST;
     }
 }
-//========SOLI DEO GLORIA========//

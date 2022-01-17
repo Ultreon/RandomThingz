@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.data.recipes;
 
-import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
-import com.qsoftware.modlib.silentlib.data.ExtendedShapedRecipeBuilder;
-import com.qsoftware.modlib.silentlib.data.ExtendedShapelessRecipeBuilder;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
+import com.ultreon.modlib.embedded.silentlib.data.ExtendedShapedRecipeBuilder;
+import com.ultreon.modlib.embedded.silentlib.data.ExtendedShapelessRecipeBuilder;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.common.FeatureStatus;
@@ -27,8 +27,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 

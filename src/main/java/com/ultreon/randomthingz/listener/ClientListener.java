@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.FOVUpdateEvent;
-import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -45,9 +45,9 @@ public class ClientListener {
      * @param event a FML server started event.
      */
     @SubscribeEvent
-    public static void onPlayerClientWorldOpen(GuiScreenEvent.InitGuiEvent.Pre event) {
+    public static void onPlayerClientWorldOpen(ScreenEvent.InitScreenEvent.Pre event) {
         Minecraft mc = Minecraft.getInstance();
-        if (event.getGui() == null && mc.hasSingleplayerServer()) {
+        if (event.getScreen() == null && mc.hasSingleplayerServer()) {
             mc.setScreen(new ModuleScreen(Minecraft.getInstance().screen, ModuleManager.getInstance()));
         }
     }

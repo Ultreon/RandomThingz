@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.util.builder;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import lombok.Builder;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -17,11 +17,12 @@ import java.util.function.Supplier;
  *
  * @author Qboi123
  */
+@SuppressWarnings("ClassCanBeRecord")
 @Builder
 @FieldsAreNonnullByDefault
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ArmorMaterial implements ArmorMaterial {
+public final class ArmorMaterial implements net.minecraft.world.item.ArmorMaterial {
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
     private final String name;
     private final int maxDamageFactor;

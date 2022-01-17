@@ -10,10 +10,10 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Qboi123
  */
-public class OverpoweredItemGroup extends CreativeModeTab {
-    public static final OverpoweredItemGroup instance = new OverpoweredItemGroup(CreativeModeTab.TABS.length, "randomthingz_god");
+public class OverpoweredTab extends CreativeModeTab {
+    public static final OverpoweredTab instance = new OverpoweredTab(CreativeModeTab.TABS.length, "randomthingz_god");
 
-    public OverpoweredItemGroup(int index, String label) {
+    public OverpoweredTab(int index, String label) {
         super(index, label);
     }
 

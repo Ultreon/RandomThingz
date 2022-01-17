@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.pc.common.computerapi;
 
 import lombok.Getter;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.awt.*;

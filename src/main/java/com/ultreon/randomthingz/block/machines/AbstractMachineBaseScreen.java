@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.qsoftware.modlib.api.RedstoneMode;
+import com.ultreon.modlib.api.RedstoneMode;
 import com.ultreon.randomthingz.client.gui.widgets.button.RedstoneModeButton;
 import com.ultreon.randomthingz.inventory.slot.MachineUpgradeSlot;
 import com.ultreon.randomthingz.network.Network;
@@ -25,7 +25,7 @@ public abstract class AbstractMachineBaseScreen<C extends AbstractMachineBaseCon
     @Override
     protected void init() {
         super.init();
-        this.addButton(new RedstoneModeButton(menu, this.leftPos - 16, this.topPos, 16, 16, button -> {
+        this.addRenderableWidget(new RedstoneModeButton(menu, this.leftPos - 16, this.topPos, 16, 16, button -> {
             RedstoneMode mode = ((RedstoneModeButton) button).getMode();
             Network.channel.sendToServer(new SetRedstoneModePacket(mode));
         }));
@@ -46,8 +46,8 @@ public abstract class AbstractMachineBaseScreen<C extends AbstractMachineBaseCon
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
         if (minecraft == null) return;
-        GlStateManager._color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        minecraft.getTextureManager().bind(getGuiTexture());
+        GlStateManager._color4f(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderTexture(0, getGuiTexture());
         int xPos = (this.width - this.imageWidth) / 2;
         int yPos = (this.height - this.imageHeight) / 2;
         blit(matrixStack, xPos, yPos, 0, 0, this.imageWidth, this.imageHeight);
@@ -60,8 +60,8 @@ public abstract class AbstractMachineBaseScreen<C extends AbstractMachineBaseCon
 
     @Override
     protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int x, int y) {
-        this.font.drawString(matrixStack, this.title.getString(), 8.0F, 6.0F, 4210752);
-//        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float)(this.ySize - 96 + 2), 4210752);
+        this.font.drawString(matrixStack, this.title.getString(), 8.0f, 6.0f, 4210752);
+//        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0f, (float)(this.ySize - 96 + 2), 4210752);
 
         for (Widget widget : this.buttons) {
             if (widget.isHovered() && widget instanceof RedstoneModeButton) {

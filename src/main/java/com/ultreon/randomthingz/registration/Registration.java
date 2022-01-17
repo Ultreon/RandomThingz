@@ -1,9 +1,9 @@
 package com.ultreon.randomthingz.registration;
 
-import com.qsoftware.modlib.api.providers.IItemProvider;
-import com.qsoftware.modlib.silentlib.block.IBlockProvider;
-import com.qsoftware.modlib.silentlib.registry.BlockDeferredRegister;
-import com.qsoftware.modlib.silentlib.registry.ItemDeferredRegister;
+import com.ultreon.modlib.api.providers.IItemProvider;
+import com.ultreon.modlib.embedded.silentlib.block.IBlockProvider;
+import com.ultreon.modlib.embedded.silentlib.registry.BlockDeferredRegister;
+import com.ultreon.modlib.embedded.silentlib.registry.ItemDeferredRegister;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.advancement.criterion.common.ModCriteriaTriggers;
 import com.ultreon.randomthingz.block._common.ModBlocks;

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.common.entity;
 
-import com.qsoftware.modlib.silentlib.registry.EntityTypeDeferredRegister;
-import com.qsoftware.modlib.silentlib.registry.EntityTypeRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.registry.EntityTypeDeferredRegister;
+import com.ultreon.modlib.embedded.silentlib.registry.EntityTypeRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.common.init.ObjectInit;

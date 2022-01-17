@@ -9,8 +9,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 /**
  * Hog entity model class.
  */
@@ -27,8 +25,8 @@ public abstract class BaseScreen<T extends AbstractContainerMenu> extends Abstra
 
     @Override
     protected void renderBg(@NotNull PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        Objects.requireNonNull(minecraft).getTextureManager().bind(texture);
+        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderTexture(0, texture);
         blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }
 

@@ -44,4 +44,3 @@ public class TextureSetup {
         return new ResourceLocation(QTextureModels.MOD_ID, name);
     }
 }
-//========SOLI DEO GLORIA========//

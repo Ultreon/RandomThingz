@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.dryingrack;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.Container;
+import net.minecraft.world.AbstractContainerMenu;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -24,8 +24,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class DryingRackBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -48,7 +47,7 @@ public class DryingRackBlock extends HorizontalDirectionalBlock implements Simpl
     @Nullable
     @Override
     public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new DryingRackTileEntity();
+        return new DryingRackTileEntity(pos, state);
     }
 
     @SuppressWarnings("deprecation")
@@ -66,8 +65,8 @@ public class DryingRackBlock extends HorizontalDirectionalBlock implements Simpl
     public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof Container) {
-                Containers.dropContents(dimensionIn, pos, (Container) tileentity);
+            if (tileentity instanceof AbstractContainerMenu) {
+                Containers.dropContents(dimensionIn, pos, (AbstractContainerMenu) tileentity);
                 dimensionIn.updateNeighbourForOutputSignal(pos, this);
             }
 

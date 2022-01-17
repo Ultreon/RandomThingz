@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz;
 
-import com.qsoftware.modlib.silentlib.event.Greetings;
+import com.ultreon.modlib.embedded.silentlib.event.Greetings;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
@@ -30,8 +30,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 class SideProxy implements IProxy {
     private MinecraftServer server = null;

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.data.client;
 
-import com.qsoftware.modlib.silentlib.registry.BlockRegistryObject;
-import com.qsoftware.modlib.silentlib.util.NameUtils;
+import com.ultreon.modlib.embedded.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.embedded.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.StoneType;
 import com.ultreon.randomthingz.block._common.ModBlocks;
@@ -15,8 +15,8 @@ import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -25,7 +25,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         super(gen, RandomThingz.MOD_ID, exFileHelper);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public String getName() {
         return "RandomThingz - Block States and Models";

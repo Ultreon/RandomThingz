@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.crusher;
 
-import com.qsoftware.modlib.silentlib.inventory.SlotOutputOnly;
-import com.qsoftware.modlib.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block._common.MachineType;
 import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
@@ -36,7 +36,7 @@ public class CrusherContainer extends AbstractMachineContainer<CrusherTileEntity
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
 

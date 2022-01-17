@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import java.util.Objects;
 
 /**
- * Here you can find all information about the Chest Illusion Container, like number of slots and stored itemStacks
+ * Here you can find all information about the Chest Illusion AbstractContainerMenu, like number of slots and stored itemStacks
  *
  * @author PianoManu
  * @version 1.0 09/22/20
@@ -98,4 +98,3 @@ public class IllusionChestContainer extends AbstractContainerMenu {
         return itemStack;
     }
 }
-//========SOLI DEO GLORIA========//

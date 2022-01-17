@@ -9,9 +9,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemPipeTileEntity extends BlockEntity {
     public ItemPipeTileEntity() {
@@ -22,7 +20,7 @@ public class ItemPipeTileEntity extends BlockEntity {
     public String getPipeNetworkData() {
         if (level == null) return "world is null";
 
-        ItemPipeNetwork net = ItemPipeNetworkManager.get(level, worldPosition);
+        ItemPipeNetwork net = ItemPipeConnection.get(level, worldPosition);
         return net != null ? net.toString() : "null";
     }
 
@@ -39,16 +37,16 @@ public class ItemPipeTileEntity extends BlockEntity {
     @Override
     public void setRemoved() {
         if (level != null) {
-            ItemPipeNetworkManager.invalidateNetwork(level, worldPosition);
+            ItemPipeConnection.invalidateNetwork(level, worldPosition);
         }
         super.setRemoved();
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (level != null && !remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && side != null) {
-            LazyOptional<ItemPipeNetwork> networkOptional = ItemPipeNetworkManager.getLazy(level, worldPosition);
+            LazyOptional<ItemPipeNetwork> networkOptional = ItemPipeConnection.getLazy(level, worldPosition);
             if (networkOptional.isPresent()) {
                 return networkOptional.orElseThrow(IllegalStateException::new).getConnection(worldPosition, side).getLazyOptional().cast();
             }

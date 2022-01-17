@@ -5,15 +5,15 @@ import joptsimple.internal.Strings;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.Item;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.stats.StatType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.ContainerType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.Nullable;
 
 @RequiredArgsConstructor
@@ -75,43 +75,43 @@ public enum Translations {
         }
     }
 
-    public static TranslationTextComponent get(String object, ResourceLocation resource) {
-        return new TranslationTextComponent(object + "." + resource.getNamespace() + "." + resource.getPath().replaceAll("/", "."));
+    public static TranslatableComponent get(String object, ResourceLocation resource) {
+        return new TranslatableComponent(object + "." + resource.getNamespace() + "." + resource.getPath().replaceAll("/", "."));
     }
 
-    public static TranslationTextComponent get(object object, ResourceLocation resource) {
-        return new TranslationTextComponent(object.getName() + "." + resource.getNamespace() + "." + resource.getPath().replaceAll("/", "."));
+    public static TranslatableComponent get(object object, ResourceLocation resource) {
+        return new TranslatableComponent(object.getName() + "." + resource.getNamespace() + "." + resource.getPath().replaceAll("/", "."));
     }
 
-    public static TranslationTextComponent getTooltip(String object, String variant) {
-        return new TranslationTextComponent(getKey("tooltip", object, variant));
+    public static TranslatableComponent getTooltip(String object, String variant) {
+        return new TranslatableComponent(getKey("tooltip", object, variant));
     }
 
-    public static TranslationTextComponent getButton(String object, String msg) {
-        return new TranslationTextComponent(getKey("button", object, msg));
+    public static TranslatableComponent getButton(String object, String msg) {
+        return new TranslatableComponent(getKey("button", object, msg));
     }
 
-    public static TranslationTextComponent getMessage(String object, String msg) {
-        return new TranslationTextComponent(getKey("msg", object, msg));
+    public static TranslatableComponent getMessage(String object, String msg) {
+        return new TranslatableComponent(getKey("msg", object, msg));
     }
 
-    public static TranslationTextComponent getItem(String object, String... path) {
-        return new TranslationTextComponent(getKey("item", object, path));
+    public static TranslatableComponent getItem(String object, String... path) {
+        return new TranslatableComponent(getKey("item", object, path));
     }
 
-    public static TranslationTextComponent getBlock(String object, String... path) {
-        return new TranslationTextComponent(getKey("block", object, path));
+    public static TranslatableComponent getBlock(String object, String... path) {
+        return new TranslatableComponent(getKey("block", object, path));
     }
 
-    public static TranslationTextComponent getFluid(String object, String... path) {
-        return new TranslationTextComponent(getKey("fluid", object, path));
+    public static TranslatableComponent getFluid(String object, String... path) {
+        return new TranslatableComponent(getKey("fluid", object, path));
     }
 
-    public static TranslationTextComponent getScreen(String object, String... path) {
-        return new TranslationTextComponent(getKey("screen", object, path));
+    public static TranslatableComponent getScreen(String object, String... path) {
+        return new TranslatableComponent(getKey("screen", object, path));
     }
 
-    public static TranslationTextComponent getMisc(String object, String... path) {
-        return new TranslationTextComponent(getKey("misc", object, path));
+    public static TranslatableComponent getMisc(String object, String... path) {
+        return new TranslatableComponent(getKey("misc", object, path));
     }
 }

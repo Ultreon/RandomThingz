@@ -17,8 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.fml.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import java.util.Random;
 
 /**
@@ -57,7 +57,7 @@ public class BabyStrayEntity extends Stray implements IBabyEntity {
     }
 
     @Override
-    public void onSyncedDataUpdated(@Nonnull EntityDataAccessor<?> key) {
+    public void onSyncedDataUpdated(@NotNull EntityDataAccessor<?> key) {
         if (IS_CHILD.equals(key)) {
             refreshDimensions();
         }
@@ -65,7 +65,7 @@ public class BabyStrayEntity extends Stray implements IBabyEntity {
     }
 
     @Override
-    protected int getExperienceReward(@Nonnull Player player) {
+    protected int getExperienceReward(@NotNull Player player) {
         if (isBaby()) {
             xpReward = (int) (xpReward * 2.5F);
         }
@@ -78,7 +78,7 @@ public class BabyStrayEntity extends Stray implements IBabyEntity {
     }
 
     @Override
-    protected float getStandingEyeHeight(@Nonnull Pose pose, @Nonnull EntityDimensions size) {
+    protected float getStandingEyeHeight(@NotNull Pose pose, @NotNull EntityDimensions size) {
         return this.isBaby() ? 0.93F : super.getStandingEyeHeight(pose, size);
     }
 
@@ -87,7 +87,7 @@ public class BabyStrayEntity extends Stray implements IBabyEntity {
         return new ItemStack(ModItemsAlt.BABY_STRAY_SPAWN_EGG.asItem());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);

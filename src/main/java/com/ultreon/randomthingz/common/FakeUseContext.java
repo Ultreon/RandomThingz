@@ -6,8 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.phys.BlockHitResult;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Fake use context for block-item uses class.
@@ -22,7 +21,7 @@ public class FakeUseContext extends BlockPlaceContext {
         rayTraceResult = hit;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public BlockPos getClickedPos() {
         return rayTraceResult.getBlockPos();

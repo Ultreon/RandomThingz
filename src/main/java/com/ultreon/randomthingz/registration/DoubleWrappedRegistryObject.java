@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.registration;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @FieldsAreNonnullByDefault
@@ -19,12 +19,12 @@ public class DoubleWrappedRegistryObject<PRIMARY extends IForgeRegistryEntry<? s
         this.secondaryRO = secondaryRO;
     }
 
-    @Nonnull
+    @NotNull
     public PRIMARY getPrimary() {
         return primaryRO.get();
     }
 
-    @Nonnull
+    @NotNull
     public SECONDARY getSecondary() {
         return secondaryRO.get();
     }

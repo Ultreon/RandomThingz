@@ -32,7 +32,7 @@ public abstract class MixinChestBlock extends AbstractChestBlock<ChestBlockEntit
 
     @Shadow @Final public static BooleanProperty WATERLOGGED;
 
-    @Shadow @javax.annotation.Nullable protected abstract Direction getDirectionToAttach(BlockPlaceContext context, Direction direction);
+    @Shadow @org.jetbrains.annotations.Nullable protected abstract Direction getDirectionToAttach(BlockPlaceContext context, Direction direction);
 
     public MixinChestBlock(Properties builder, Supplier<BlockEntityType<? extends ChestBlockEntity>> tileEntityTypeSupplier) {
         super(builder, tileEntityTypeSupplier);

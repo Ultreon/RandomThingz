@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item;
 
-import com.qsoftware.modlib.api.IFluidContainer;
+import com.ultreon.modlib.api.FluidContainer;
 import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.core.NonNullList;
@@ -14,11 +14,11 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 
-public class CanisterItem extends Item implements IFluidContainer {
+public class CanisterItem extends Item implements FluidContainer {
     public CanisterItem(Properties properties) {
         super(properties);
         //addPropertyOverride(RandomThingz.getId("fluid_level"), (stack, dimension, entity) -> getFluid(stack).getAmount());
@@ -40,7 +40,7 @@ public class CanisterItem extends Item implements IFluidContainer {
 
 /*    @Nullable
     @Override
-    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         return new FluidCanisterWrapper(stack);
     }*/
 

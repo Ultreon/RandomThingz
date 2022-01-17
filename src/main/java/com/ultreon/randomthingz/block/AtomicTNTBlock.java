@@ -3,14 +3,14 @@ package com.ultreon.randomthingz.block;
 import com.ultreon.randomthingz.common.TNTProperties;
 import com.ultreon.randomthingz.effect.common.ModEffects;
 import com.ultreon.randomthingz.entity.custom.CustomTNTEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
@@ -25,8 +25,8 @@ public class AtomicTNTBlock extends CustomTNTBlock<AtomicTNTBlock> {
     }
 
     @Override
-    public void afterExplosion(World dimension, BlockPos pos, BlockState state, CustomTNTEntity tntEntity) {
-        System.out.println("World: " + dimension);
+    public void afterExplosion(Level dimension, BlockPos pos, BlockState state, CustomTNTEntity tntEntity) {
+        System.out.println("Level: " + dimension);
         System.out.println("Pos: " + pos);
         System.out.println("State: " + state);
         List<Entity> affectedEntities = dimension.getEntitiesWithinBoxExcludingEntity(null, new AxisAlignedBB(pos.getX() - 50, pos.getY() - 100, pos.getZ() - 50, pos.getX() + 50, pos.getY() + 300, pos.getZ() + 50));

@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.item.tool;
 
 import com.mojang.authlib.GameProfile;
 import com.ultreon.randomthingz.common.enums.TextColors;
-import com.ultreon.randomthingz.common.item.ModItemGroups;
+import com.ultreon.randomthingz.common.item.ModCreativeTabs;
 import com.ultreon.randomthingz.util.Targeter;
 import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -31,7 +31,7 @@ import java.util.Date;
  */
 public class BanHammerItem extends Item {
     public BanHammerItem() {
-        super(new Item.Properties().tab(ModItemGroups.OVERPOWERED).rarity(Rarity.EPIC));
+        super(new Item.Properties().tab(ModCreativeTabs.OVERPOWERED).rarity(Rarity.EPIC));
     }
 
     @Override

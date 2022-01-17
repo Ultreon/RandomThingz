@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.generator;
 
-import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.modlib.silentutils.EnumUtils;
+import com.ultreon.modlib.api.RedstoneMode;
+import com.ultreon.modlib.embedded.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.nbt.CompoundTag;
@@ -68,7 +68,7 @@ public abstract class AbstractGeneratorTileEntity extends AbstractMachineBaseTil
     };
 
     protected AbstractGeneratorTileEntity(BlockEntityType<?> typeIn, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, MachineTier tier) {
-        super(typeIn, inventorySize, maxEnergy, maxReceive, maxExtract, tier);
+        super(typeIn, pos, state, inventorySize, maxEnergy, maxReceive, maxExtract, tier);
     }
 
     protected abstract boolean hasFuel();

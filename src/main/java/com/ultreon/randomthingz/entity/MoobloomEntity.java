@@ -4,8 +4,6 @@ import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.common.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.entity.*;
-import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -18,7 +16,10 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.Shearable;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -34,9 +35,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -61,7 +62,7 @@ public class MoobloomEntity extends Cow implements Shearable, net.minecraftforge
      * @return ...
      */
     public float getWalkTargetValue(BlockPos pos, LevelReader dimensionIn) {
-        return dimensionIn.getBlockState(pos.below()).is(Blocks.MYCELIUM) ? 10.0F : dimensionIn.getBrightness(pos) - 0.5F;
+        return dimensionIn.getBlockState(pos.below()).is(Blocks.MYCELIUM) ? 10.0f : dimensionIn.getBrightness(pos) - 0.5F;
     }
 
 //   public static boolean checkMushroomSpawnRules(EntityType<MoobloomEntity> p_223318_0_, IWorld p_223318_1_, SpawnReason p_223318_2_, BlockPos p_223318_3_, Random p_223318_4_) {
@@ -73,7 +74,7 @@ public class MoobloomEntity extends Cow implements Shearable, net.minecraftforge
 //      if (!uuid.equals(this.lightningUUID)) {
 //         this.setMoobloomType(this.getMoobloomType() == MooshroomEntity.Type.RED ? MooshroomEntity.Type.BROWN : MooshroomEntity.Type.RED);
 //         this.lightningUUID = uuid;
-////         this.playSound(SoundEvents.ENTITY_MOOSHROOM_CONVERT, 2.0F, 1.0F);
+////         this.playSound(SoundEvents.ENTITY_MOOSHROOM_CONVERT, 2.0f, 1.0f);
 //      }
 //
 //   }
@@ -229,7 +230,7 @@ public class MoobloomEntity extends Cow implements Shearable, net.minecraftforge
                 soundevent = SoundEvents.MOOSHROOM_MILK;
             }
 
-            this.playSound(soundevent, 1.0F, 1.0F);
+            this.playSound(soundevent, 1.0f, 1.0f);
             return InteractionResult.sidedSuccess(this.level.isClientSide);
         } else if (this.getMoobloomType().getRenderState().getBlock().asItem().getClass().isAssignableFrom(itemstack.getItem().getClass())) {
             if (this.hasStewEffect != null) {
@@ -253,7 +254,7 @@ public class MoobloomEntity extends Cow implements Shearable, net.minecraftforge
 
                 this.hasStewEffect = pair.getLeft();
                 this.effectDuration = pair.getRight();
-                this.playSound(SoundEvents.MOOSHROOM_EAT, 2.0F, 1.0F);
+                this.playSound(SoundEvents.MOOSHROOM_EAT, 2.0f, 1.0f);
             }
 
             return InteractionResult.sidedSuccess(this.level.isClientSide);
@@ -270,7 +271,7 @@ public class MoobloomEntity extends Cow implements Shearable, net.minecraftforge
     @Override
     @SuppressWarnings("deprecation")
     public void shear(SoundSource category) {
-        this.level.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, category, 1.0F, 1.0F);
+        this.level.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, category, 1.0f, 1.0f);
         if (!this.level.isClientSide()) {
             ((ServerLevel) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
             this.remove();
@@ -381,14 +382,14 @@ public class MoobloomEntity extends Cow implements Shearable, net.minecraftforge
     }
 
     @Override
-    public boolean isShearable(@Nonnull ItemStack item, Level dimension, BlockPos pos) {
+    public boolean isShearable(@NotNull ItemStack item, Level dimension, BlockPos pos) {
         return readyForShearing();
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public java.util.List<ItemStack> onSheared(@Nullable Player player, @Nonnull ItemStack item, Level dimension, BlockPos pos, int fortune) {
-        dimension.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
+    public java.util.List<ItemStack> onSheared(@Nullable Player player, @NotNull ItemStack item, Level dimension, BlockPos pos, int fortune) {
+        dimension.playSound(null, this, SoundEvents.MOOSHROOM_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0f, 1.0f);
         if (!dimension.isClientSide()) {
             ((ServerLevel) this.level).sendParticles(ParticleTypes.EXPLOSION, this.getX(), this.getY(0.5D), this.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D);
             this.remove();

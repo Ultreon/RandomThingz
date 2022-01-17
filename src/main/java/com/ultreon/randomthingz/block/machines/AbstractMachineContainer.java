@@ -2,9 +2,10 @@ package com.ultreon.randomthingz.block.machines;
 
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AbstractMachineContainer<T extends AbstractMachineTileEntity<?>> extends AbstractMachineBaseContainer<T> {
-    protected AbstractMachineContainer(MenuType<?> containerTypeIn, int id, T tileEntityIn, ContainerData fieldsIn) {
+    protected AbstractMachineContainer(MenuType<?> containerTypeIn, int id, @Nullable T tileEntityIn, ContainerData fieldsIn) {
         super(containerTypeIn, id, tileEntityIn, fieldsIn);
     }
 

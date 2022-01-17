@@ -1,3 +1,4 @@
+
 package com.ultreon.randomthingz;
 
 import com.ultreon.filters.Filters;
@@ -8,7 +9,7 @@ import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.entity.ModEntities;
 import com.ultreon.randomthingz.common.interfaces.IHasRenderType;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
-import com.ultreon.randomthingz.common.item.ModItemGroups;
+import com.ultreon.randomthingz.common.item.ModCreativeTabs;
 import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.entity.*;
 import com.ultreon.randomthingz.entity.baby.*;
@@ -18,7 +19,6 @@ import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.item.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.CreativeModeTab;
@@ -28,12 +28,12 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Objects;
@@ -113,15 +113,11 @@ public class Initialization {
      * @param event a {@linkplain FMLClientSetupEvent} object.
      */
     void clientSetup(@SuppressWarnings("unused") FMLClientSetupEvent event) {
-        // do something that can only be done on the client
-
         ModuleManager.getInstance().clientSetup();
-//        ((IReloadableResourceManager)Minecraft.getInstance().getResourceManager()).addReloadListener(QFMResouces::new);
 
         this.logger.info("Setting render layers for blocks.");
         for (Block block : Registration.getBlocks()) {
-            if (block instanceof IHasRenderType) {
-                IHasRenderType hasRenderType = (IHasRenderType) block;
+            if (block instanceof IHasRenderType hasRenderType) {
                 ItemBlockRenderTypes.setRenderLayer(block, hasRenderType.getRenderType());
             }
         }
@@ -133,21 +129,21 @@ public class Initialization {
         }
 
         for (Item item : Registration.getItems((item) -> item instanceof AdvancedBowItem)) {
-            ItemProperties.register(item, new ResourceLocation("pull"), (p_239429_0_, p_239429_1_, p_239429_2_) -> {
-                if (p_239429_2_ == null) {
-                    return 0.0F;
+            ItemProperties.register(item, new ResourceLocation("pull"), (stack, level, entity, param) -> {
+                if (entity == null) {
+                    return 0.0f;
                 } else {
-                    return p_239429_2_.getUseItem() != p_239429_0_ ? 0.0F : (float) (p_239429_0_.getUseDuration() - p_239429_2_.getUseItemRemainingTicks()) / 20.0F;
+                    return entity.getUseItem() != stack ? 0.0f : (float) (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0f;
                 }
             });
 
-            ItemProperties.register(item, new ResourceLocation("pulling"), (p_239428_0_, p_239428_1_, p_239428_2_) -> p_239428_2_ != null && p_239428_2_.isUsingItem() && p_239428_2_.getUseItem() == p_239428_0_ ? 1.0F : 0.0F);
+            ItemProperties.register(item, new ResourceLocation("pulling"), (stack, level, entity, param) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0f : 0.0f);
         }
 
-        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("randomthingz", "metal_craftables/dusts"), new ItemStack(ItemMaterial.IRON.getDust().orElse(Items.AIR)));
-        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("randomthingz", "metal_craftables/nuggets"), new ItemStack(Items.IRON_NUGGET));
-        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("randomthingz", "metal_craftables/ingots"), new ItemStack(Items.IRON_INGOT));
-        Filters.get().register(ModItemGroups.METAL_CRAFTABLES, new ResourceLocation("randomthingz", "metal_craftables/chunks"), new ItemStack(ItemMaterial.IRON.getChunks().orElse(Items.AIR)));
+        Filters.get().register(ModCreativeTabs.METAL_CRAFTABLES, new ResourceLocation("randomthingz", "metal_craftables/dusts"), new ItemStack(ItemMaterial.IRON.getDust().orElse(Items.AIR)));
+        Filters.get().register(ModCreativeTabs.METAL_CRAFTABLES, new ResourceLocation("randomthingz", "metal_craftables/nuggets"), new ItemStack(Items.IRON_NUGGET));
+        Filters.get().register(ModCreativeTabs.METAL_CRAFTABLES, new ResourceLocation("randomthingz", "metal_craftables/ingots"), new ItemStack(Items.IRON_INGOT));
+        Filters.get().register(ModCreativeTabs.METAL_CRAFTABLES, new ResourceLocation("randomthingz", "metal_craftables/chunks"), new ItemStack(ItemMaterial.IRON.getChunks().orElse(Items.AIR)));
 
         Filters.get().register(CreativeModeTab.TAB_DECORATIONS, new ResourceLocation("randomthingz", "nature/flowers"), new ItemStack(Items.POPPY));
         Filters.get().register(CreativeModeTab.TAB_DECORATIONS, new ResourceLocation("randomthingz", "nature/saplings"), new ItemStack(Items.OAK_SAPLING));
@@ -156,43 +152,43 @@ public class Initialization {
         Filters.get().register(CreativeModeTab.TAB_MISC, new ResourceLocation("randomthingz", "fluids/liquid"), new ItemStack(ModItems.OIL_BUCKET));
         Filters.get().register(CreativeModeTab.TAB_MISC, new ResourceLocation("randomthingz", "fluids/gas"), new ItemStack(ModItems.ETHANE_BUCKET));
 
-        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/knifes"), new ItemStack(ModItems.DUNGEONS_ETERNAL_KNIFE));
-        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/swords"), new ItemStack(ModItems.DUNGEONS_DIAMOND_SWORD));
-        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/axes"), new ItemStack(ModItems.DUNGEONS_DIAMOND_AXE));
-        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/pickaxes"), new ItemStack(ModItems.DUNGEONS_DIAMOND_PICKAXE));
-        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/hammers"), new ItemStack(ModItems.DUNGEONS_GREAT_HAMMER));
-        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/scythes"), new ItemStack(ModItems.DUNGEONS_FROST_SCYTHE));
-        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/flails"), new ItemStack(ModItems.DUNGEONS_FLAIL));
-        Filters.get().register(ModItemGroups.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/bows"), new ItemStack(ModItems.DUNGEONS_HUNTERS_BOW));
+        Filters.get().register(ModCreativeTabs.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/knifes"), new ItemStack(ModItems.DUNGEONS_ETERNAL_KNIFE));
+        Filters.get().register(ModCreativeTabs.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/swords"), new ItemStack(ModItems.DUNGEONS_DIAMOND_SWORD));
+        Filters.get().register(ModCreativeTabs.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/axes"), new ItemStack(ModItems.DUNGEONS_DIAMOND_AXE));
+        Filters.get().register(ModCreativeTabs.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/pickaxes"), new ItemStack(ModItems.DUNGEONS_DIAMOND_PICKAXE));
+        Filters.get().register(ModCreativeTabs.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/hammers"), new ItemStack(ModItems.DUNGEONS_GREAT_HAMMER));
+        Filters.get().register(ModCreativeTabs.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/scythes"), new ItemStack(ModItems.DUNGEONS_FROST_SCYTHE));
+        Filters.get().register(ModCreativeTabs.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/flails"), new ItemStack(ModItems.DUNGEONS_FLAIL));
+        Filters.get().register(ModCreativeTabs.DUNGEONS, new ResourceLocation("randomthingz", "dungeons/bows"), new ItemStack(ModItems.DUNGEONS_HUNTERS_BOW));
 
-        Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("randomthingz", "machines1/basic"), new ItemStack(Blocks.STONE));
-        Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("randomthingz", "machines1/advanced"), new ItemStack(Blocks.IRON_BLOCK));
-        Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("randomthingz", "machines1/drying_racks"), new ItemStack(ModBlocks.OAK_DRYING_RACK));
-        Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("randomthingz", "machines1/storage"), new ItemStack(ModItems.BATTERY));
-        Filters.get().register(ModItemGroups.MACHINES, new ResourceLocation("randomthingz", "machines1/generators"), new ItemStack(ModBlocks.COAL_GENERATOR));
+        Filters.get().register(ModCreativeTabs.MACHINES, new ResourceLocation("randomthingz", "machines1/basic"), new ItemStack(Blocks.STONE));
+        Filters.get().register(ModCreativeTabs.MACHINES, new ResourceLocation("randomthingz", "machines1/advanced"), new ItemStack(Blocks.IRON_BLOCK));
+        Filters.get().register(ModCreativeTabs.MACHINES, new ResourceLocation("randomthingz", "machines1/drying_racks"), new ItemStack(ModBlocks.OAK_DRYING_RACK));
+        Filters.get().register(ModCreativeTabs.MACHINES, new ResourceLocation("randomthingz", "machines1/storage"), new ItemStack(ModItems.BATTERY));
+        Filters.get().register(ModCreativeTabs.MACHINES, new ResourceLocation("randomthingz", "machines1/generators"), new ItemStack(ModBlocks.COAL_GENERATOR));
 
-        Filters.get().register(ModItemGroups.OVERPOWERED, new ResourceLocation("randomthingz", "overpowered/infinity"), new ItemStack(Toolset.INFINITY.getAxe()));
-        Filters.get().register(ModItemGroups.OVERPOWERED, new ResourceLocation("randomthingz", "overpowered/tools"), new ItemStack(ModItems.KILL_SWITCH));
-        Filters.get().register(ModItemGroups.OVERPOWERED, new ResourceLocation("randomthingz", "overpowered/wands"), new ItemStack(ModItems.WALKING_STAFF));
+        Filters.get().register(ModCreativeTabs.OVERPOWERED, new ResourceLocation("randomthingz", "overpowered/infinity"), new ItemStack(Toolset.INFINITY.getAxe()));
+        Filters.get().register(ModCreativeTabs.OVERPOWERED, new ResourceLocation("randomthingz", "overpowered/tools"), new ItemStack(ModItems.KILL_SWITCH));
+        Filters.get().register(ModCreativeTabs.OVERPOWERED, new ResourceLocation("randomthingz", "overpowered/wands"), new ItemStack(ModItems.WALKING_STAFF));
 
-        Filters.get().register(ItemGroup.REDSTONE, new ResourceLocation("randomthingz", "redstone/doors"), new ItemStack(ModBlocks.SHOPPING_DOOR));
-        Filters.get().register(ItemGroup.REDSTONE, new ResourceLocation("randomthingz", "redstone/buttons"), new ItemStack(ModBlocks.EUCALYPTUS_BUTTON));
-        Filters.get().register(ItemGroup.REDSTONE, new ResourceLocation("randomthingz", "redstone/pressure_plates"), new ItemStack(ModBlocks.EUCALYPTUS_PRESSURE_PLATE));
+        Filters.get().register(CreativeModeTab.TAB_REDSTONE, new ResourceLocation("randomthingz", "redstone/doors"), new ItemStack(ModBlocks.SHOPPING_DOOR));
+        Filters.get().register(CreativeModeTab.TAB_REDSTONE, new ResourceLocation("randomthingz", "redstone/buttons"), new ItemStack(ModBlocks.EUCALYPTUS_BUTTON));
+        Filters.get().register(CreativeModeTab.TAB_REDSTONE, new ResourceLocation("randomthingz", "redstone/pressure_plates"), new ItemStack(ModBlocks.EUCALYPTUS_PRESSURE_PLATE));
 
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/armors"), new ItemStack(Items.IRON_CHESTPLATE));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/swords"), new ItemStack(Items.IRON_SWORD));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/axes"), new ItemStack(Items.IRON_AXE));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/pickaxes"), new ItemStack(Items.IRON_PICKAXE));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/shovels"), new ItemStack(Items.IRON_SHOVEL));
-        Filters.get().register(ModItemGroups.TOOLS, new ResourceLocation("randomthingz", "tools/hoes"), new ItemStack(Items.IRON_HOE));
+        Filters.get().register(ModCreativeTabs.TOOLS, new ResourceLocation("randomthingz", "tools/armors"), new ItemStack(Items.IRON_CHESTPLATE));
+        Filters.get().register(ModCreativeTabs.TOOLS, new ResourceLocation("randomthingz", "tools/swords"), new ItemStack(Items.IRON_SWORD));
+        Filters.get().register(ModCreativeTabs.TOOLS, new ResourceLocation("randomthingz", "tools/axes"), new ItemStack(Items.IRON_AXE));
+        Filters.get().register(ModCreativeTabs.TOOLS, new ResourceLocation("randomthingz", "tools/pickaxes"), new ItemStack(Items.IRON_PICKAXE));
+        Filters.get().register(ModCreativeTabs.TOOLS, new ResourceLocation("randomthingz", "tools/shovels"), new ItemStack(Items.IRON_SHOVEL));
+        Filters.get().register(ModCreativeTabs.TOOLS, new ResourceLocation("randomthingz", "tools/hoes"), new ItemStack(Items.IRON_HOE));
     }
 
     /**
      * Do things on server start.
      *
-     * @param event a {@linkplain FMLServerStartingEvent} object.
+     * @param event a {@linkplain ServerStartingEvent} object.
      */
-    void serverStart(@SuppressWarnings("unused") FMLServerStartingEvent event) {
+    void serverStart(@SuppressWarnings("unused") ServerStartingEvent event) {
         logger.info("Hello server!");
         ModuleManager.getInstance().serverStart();
         server = event.getServer();

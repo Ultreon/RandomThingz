@@ -47,9 +47,9 @@ public class TagButton extends Button {
     @Override
     public void renderButton(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();
-        mc.getTextureManager().bind(TABS);
+        RenderSystem.setShaderTexture(0, TABS);
 
-        GlStateManager._color4f(1.0F, 1.0F, 1.0F, this.alpha);
+        GlStateManager._color4f(1.0f, 1.0f, 1.0f, this.alpha);
         GlStateManager._disableLighting();
         GlStateManager._enableBlend();
         GlStateManager._blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA.value, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value, GlStateManager.SourceFactor.ONE.value, GlStateManager.DestFactor.ZERO.value);
@@ -63,10 +63,10 @@ public class TagButton extends Button {
         GlStateManager._enableRescaleNormal();
         Lighting.turnBackOn();
         ItemRenderer renderer = mc.getItemRenderer();
-        renderer.blitOffset = 100.0F;
+        renderer.blitOffset = 100.0f;
         renderer.renderAndDecorateItem(this.stack, x + 8, y + 6);
         renderer.renderGuiItemDecorations(mc.font, this.stack, x + 8, y + 6);
-        renderer.blitOffset = 100.0F;
+        renderer.blitOffset = 100.0f;
     }
 
     private void drawRotatedTexture(int x, int y, int textureX, int textureY, int width, int height) {

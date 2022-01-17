@@ -76,7 +76,7 @@ public class KnifeItem extends TieredItem {
      */
     @Override
     public boolean mineBlock(@NotNull ItemStack stack, @NotNull Level dimensionIn, BlockState state, @NotNull BlockPos pos, @NotNull LivingEntity entityLiving) {
-        if (state.getDestroySpeed(dimensionIn, pos) != 0.0F) {
+        if (state.getDestroySpeed(dimensionIn, pos) != 0.0f) {
             stack.hurtAndBreak(isBlockMinable(state) ? 1 : 2, entityLiving, (entity) -> entity.broadcastBreakEvent(EquipmentSlot.MAINHAND));
         }
 
@@ -106,10 +106,10 @@ public class KnifeItem extends TieredItem {
 
     public float getDestroySpeed(@NotNull ItemStack stack, BlockState state) {
         if (state.is(Blocks.COBWEB)) {
-            return 15.0F;
+            return 15.0f;
         } else {
             Material material = state.getMaterial();
-            return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && material != Material.CORAL && !state.is(BlockTags.LEAVES) && material != Material.VEGETABLE ? 1.0F : 1.5F;
+            return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && material != Material.CORAL && !state.is(BlockTags.LEAVES) && material != Material.VEGETABLE ? 1.0f : 1.5F;
         }
     }
 

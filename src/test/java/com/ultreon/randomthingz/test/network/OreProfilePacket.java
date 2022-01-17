@@ -2,11 +2,11 @@ package com.ultreon.randomthingz.test.network;
 
 import com.ultreon.randomthingz.test.modules.debug.OreProfiler;
 import lombok.Getter;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.entity.player.ServerPlayerEntity;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 
@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 public class OreProfilePacket {
     private boolean isStart;
     @Getter
-    private CompoundNBT tag;
+    private CompoundTag tag;
 
     public OreProfilePacket() {
     }

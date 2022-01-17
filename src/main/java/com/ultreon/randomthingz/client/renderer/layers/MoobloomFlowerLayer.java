@@ -32,21 +32,21 @@ public class MoobloomFlowerLayer<T extends MoobloomEntity> extends RenderLayer<T
             BlockRenderDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRenderer();
             BlockState blockState = entitylivingbaseIn.getMoobloomType().getRenderState();
 
-            int i = LivingEntityRenderer.getOverlayCoords(entitylivingbaseIn, 0.0F);
+            int i = LivingEntityRenderer.getOverlayCoords(entitylivingbaseIn, 0.0f);
             matrixStackIn.pushPose();
             matrixStackIn.translate(0.2F, -0.35F, 0.5D);
-            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-48.0F));
-            matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
+            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-48.0f));
+            matrixStackIn.scale(-1.0f, -1.0f, 1.0f);
             matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
             blockrendererdispatcher.renderSingleBlock(blockState, matrixStackIn, bufferIn, packedLightIn, i);
             matrixStackIn.popPose();
 
             matrixStackIn.pushPose();
             matrixStackIn.translate(0.2F, -0.35F, 0.5D);
-            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(42.0F));
+            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(42.0f));
             matrixStackIn.translate(0.1F, 0.0D, -0.6F);
-            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-48.0F));
-            matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
+            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-48.0f));
+            matrixStackIn.scale(-1.0f, -1.0f, 1.0f);
             matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
             blockrendererdispatcher.renderSingleBlock(blockState, matrixStackIn, bufferIn, packedLightIn, i);
             matrixStackIn.popPose();
@@ -54,8 +54,8 @@ public class MoobloomFlowerLayer<T extends MoobloomEntity> extends RenderLayer<T
             matrixStackIn.pushPose();
             this.getParentModel().getHead().translateAndRotate(matrixStackIn);
             matrixStackIn.translate(0.0D, -0.7F, -0.2F);
-            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-78.0F));
-            matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
+            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-78.0f));
+            matrixStackIn.scale(-1.0f, -1.0f, 1.0f);
             matrixStackIn.translate(-0.5D, -0.5D, -0.5D);
             blockrendererdispatcher.renderSingleBlock(blockState, matrixStackIn, bufferIn, packedLightIn, i);
             matrixStackIn.popPose();

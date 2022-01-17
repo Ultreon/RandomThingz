@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.compat.jei;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.mixer.MixerScreen;
 import com.ultreon.randomthingz.block.machines.mixer.MixerTileEntity;

@@ -25,8 +25,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
 
@@ -147,11 +146,10 @@ public class ButtonFrameBlock extends WoodButtonBlock {
     }
 
     @Override
-    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+    public int getLightEmission(BlockState state, BlockGetter dimension, BlockPos pos) {
         if (state.getValue(LIGHT_LEVEL) > 15) {
             return 15;
         }
         return state.getValue(LIGHT_LEVEL);
     }
 }
-//========SOLI DEO GLORIA========//

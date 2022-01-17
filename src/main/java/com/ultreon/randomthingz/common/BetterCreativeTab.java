@@ -16,21 +16,21 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class BetterItemGroup extends CreativeModeTab {
+public class BetterCreativeTab extends CreativeModeTab {
     private final ItemStack icon;
     @Getter
     private final ResourceLocation location;
     @Getter
     private final String labelName;
 
-    public BetterItemGroup(ResourceLocation location, ItemStack icon) {
+    public BetterCreativeTab(ResourceLocation location, ItemStack icon) {
         super(location.getNamespace() + "_" + location.getPath().replaceAll("[/.]", "_"));
         this.icon = icon;
         this.location = location;
         this.labelName = location.getPath().replaceAll("[/.]", "_");
     }
 
-    public BetterItemGroup(ResourceLocation location, ItemLike itemProvider) {
+    public BetterCreativeTab(ResourceLocation location, ItemLike itemProvider) {
         super(location.getNamespace() + "_" + location.getPath().replaceAll("[/.]", "_"));
         this.icon = new ItemStack(itemProvider);
         this.location = location;

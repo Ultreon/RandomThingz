@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.tool.types;
 
-import net.minecraftforge.common.ToolType;
+import com.ultreon.randomthingz.item.tool.ToolType;
 
 public final class ModToolTypes {
     public static final ToolType HAMMER = ToolType.get("hammer");

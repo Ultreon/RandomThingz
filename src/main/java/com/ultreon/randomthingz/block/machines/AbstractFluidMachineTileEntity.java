@@ -1,11 +1,12 @@
 package com.ultreon.randomthingz.block.machines;
 
-import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.modlib.api.crafting.recipe.fluid.FluidIngredient;
-import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidInventory;
-import com.qsoftware.modlib.api.crafting.recipe.fluid.IFluidRecipe;
-import com.qsoftware.modlib.silentutils.EnumUtils;
+import com.ultreon.modlib.api.RedstoneMode;
+import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidInventory;
+import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidRecipe;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
+import com.ultreon.modlib.embedded.silentutils.EnumUtils;
 import com.ultreon.randomthingz.common.enums.MachineTier;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -21,14 +22,14 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.IntStream;
 
-public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> extends AbstractMachineTileEntity<R> implements IFluidInventory {
+public abstract class AbstractFluidMachineTileEntity<R extends BaseFluidRecipe<?>> extends AbstractMachineTileEntity<R> implements BaseFluidInventory {
     protected final FluidTank[] tanks;
     protected final ContainerData fields = new ContainerData() {
         @SuppressWarnings("deprecation") // Use of Registry
@@ -67,15 +68,9 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
         @Override
         public void set(int index, int value) {
             switch (index) {
-                case 4:
-                    redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
-                    break;
-                case 5:
-                    progress = value;
-                    break;
-                case 6:
-                    processTime = value;
-                    break;
+                case 4 -> redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
+                case 5 -> progress = value;
+                case 6 -> processTime = value;
             }
         }
 
@@ -86,8 +81,8 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
     };
     private final LazyOptional<IFluidHandler> fluidHandlerCap;
 
-    protected AbstractFluidMachineTileEntity(BlockEntityType<?> typeIn, int inventorySize, int tankCount, int tankCapacity, MachineTier tier) {
-        super(typeIn, inventorySize, tier);
+    protected AbstractFluidMachineTileEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, int tankCount, int tankCapacity, MachineTier tier) {
+        super(typeIn, pos, state, inventorySize, tier);
         this.tanks = IntStream.range(0, tankCount).mapToObj(k -> new FluidTank(tankCapacity)).toArray(FluidTank[]::new);
         this.fluidHandlerCap = LazyOptional.of(() -> this);
     }
@@ -212,8 +207,9 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
         fluidHandlerCap.invalidate();
     }
 
+    @NotNull
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (!this.remove && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.orEmpty(cap, fluidHandlerCap.cast());
         }
@@ -221,13 +217,13 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
     }
 
     @Override
-    public void load(BlockState state, CompoundTag tags) {
+    public void load(CompoundTag tags) {
         ListTag list = tags.getList("Tanks", 10);
         for (int i = 0; i < tanks.length && i < list.size(); ++i) {
             Tag nbt = list.get(i);
             tanks[i].setFluid(FluidStack.loadFluidStackFromNBT((CompoundTag) nbt));
         }
-        super.load(state, tags);
+        super.load(tags);
     }
 
     @Override
@@ -245,6 +241,7 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
         return tanks.length;
     }
 
+    @NotNull
     @Override
     public FluidStack getFluidInTank(int tank) {
         if (tank < 0 || tank >= tanks.length) {
@@ -262,7 +259,7 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
     }
 
     @Override
-    public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
+    public boolean isFluidValid(int tank, @NotNull FluidStack stack) {
         if (tank < 0 || tank >= tanks.length) {
             return false;
         }
@@ -280,6 +277,7 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
         return 0;
     }
 
+    @NotNull
     @Override
     public FluidStack drain(FluidStack resource, IFluidHandler.FluidAction action) {
         if (resource.isEmpty()) {
@@ -295,6 +293,7 @@ public abstract class AbstractFluidMachineTileEntity<R extends IFluidRecipe<?>> 
         return FluidStack.EMPTY;
     }
 
+    @NotNull
     @Override
     public FluidStack drain(int maxDrain, IFluidHandler.FluidAction action) {
         for (int i = getInputTanks(); i < getInputTanks() + getOutputTanks(); ++i) {

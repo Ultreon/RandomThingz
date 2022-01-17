@@ -5,8 +5,7 @@ import com.ultreon.randomthingz.entity.baby.BabyCreeperEntity;
 import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
-
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class BabyCreeperModel extends AgeableListModel<BabyCreeperEntity> {
 
@@ -44,20 +43,20 @@ public class BabyCreeperModel extends AgeableListModel<BabyCreeperEntity> {
         this.leg4.setPos(2, 18, -4);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     protected Iterable<ModelPart> headParts() {
         return ImmutableList.of(this.head);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     protected Iterable<ModelPart> bodyParts() {
         return ImmutableList.of(this.body, this.leg1, this.leg2, this.leg3, this.leg4);
     }
 
     @Override
-    public void setupAnim(@Nonnull BabyCreeperEntity creeper, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(@NotNull BabyCreeperEntity creeper, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
         this.head.xRot = headPitch * ((float) Math.PI / 180F);
         this.leg1.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;

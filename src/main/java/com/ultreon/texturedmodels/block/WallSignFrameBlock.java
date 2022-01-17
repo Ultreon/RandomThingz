@@ -16,10 +16,12 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.phys.BlockHitResult;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 import static com.ultreon.texturedmodels.util.BCBlockStateProperties.CONTAINS_BLOCK;
 import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 /**
  * Main class for wall frame signs - all important block info can be found here
@@ -48,7 +50,7 @@ public class WallSignFrameBlock extends WallSignBlock {
     @Override
     public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
         System.out.println("new tile");
-        return new SignFrameTile();
+        return new SignFrameTile(pos, state);
     }
 
     @Override
@@ -62,4 +64,3 @@ public class WallSignFrameBlock extends WallSignBlock {
         return InteractionResult.FAIL;
     }
 }
-//========SOLI DEO GLORIA========//

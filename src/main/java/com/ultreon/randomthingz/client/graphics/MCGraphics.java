@@ -14,7 +14,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.RenderProperties;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.awt.*;
@@ -22,7 +23,10 @@ import java.util.List;
 
 /**
  * @author Qboi123
+ * @deprecated replaced by {@link com.ultreon.modlib.graphics.MCGraphics} in Ultreon Modding Library
  */
+@SuppressWarnings("ALL")
+@Deprecated(forRemoval = true, since = "2.0.1968")
 @Beta
 public class MCGraphics {
     private final PoseStack matrixStack;
@@ -87,17 +91,17 @@ public class MCGraphics {
     }
 
     public void drawTexture(int x, int y, int width, int height, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        textureManager.bind(resource);
+        RenderSystem.setShaderTexture(0, resource);
         Screen.blit(matrixStack, x, y, width, height, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
     public void drawTexture(int x, int y, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        textureManager.bind(resource);
+        RenderSystem.setShaderTexture(0, resource);
         Screen.blit(matrixStack, x, y, uOffset, vOffset, uWidth, vHeight, textureWidth, textureHeight);
     }
 
     public void drawTexture(int x, int y, int blitOffset, float uOffset, float vOffset, int uWidth, int vHeight, int textureWidth, int textureHeight, ResourceLocation resource) {
-        textureManager.bind(resource);
+        RenderSystem.setShaderTexture(0, resource);
         Screen.blit(matrixStack, x, y, blitOffset, uOffset, vOffset, uWidth, vHeight, textureHeight, textureWidth);
     }
 
@@ -129,20 +133,14 @@ public class MCGraphics {
      */
     @SuppressWarnings("deprecation")
     public final void drawItemStack(ItemStack stack, int x, int y, String altText) {
-        RenderSystem.translatef(0.0F, 0.0F, 32.0F);
+        PoseStack posestack = RenderSystem.getModelViewStack();
+        posestack.translate(0.0D, 0.0D, 32.0D);
+        RenderSystem.applyModelViewMatrix();
         this.itemRenderer.blitOffset = 200.0F;
-
-        Font font = stack.getItem().getFontRenderer(stack);
-        if (font == null) {
-            font = Minecraft.getInstance().font;
-        }
-
-        if (this.font != null) {
-            font = this.font;
-        }
-
+        Font font = RenderProperties.get(stack).getFont(stack);
+        if (font == null) font = this.font;
         this.itemRenderer.renderAndDecorateItem(stack, x, y);
-        this.itemRenderer.renderGuiItemDecorations(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
+        this.itemRenderer.renderGuiItemDecorations(font, stack, x, y, altText);
         this.itemRenderer.blitOffset = 0.0F;
     }
 
@@ -165,7 +163,7 @@ public class MCGraphics {
     public void renderBackground(boolean forceTransparent) {
         if (forceTransparent) {
             gui.fillGradient(matrixStack, 0, 0, gui.width, gui.height, -1072689136, -804253680);
-            MinecraftForge.EVENT_BUS.post(new GuiScreenEvent.BackgroundDrawnEvent(gui, matrixStack));
+            MinecraftForge.EVENT_BUS.post(new ScreenEvent.BackgroundDrawnEvent(gui, matrixStack));
         } else {
             gui.renderBackground(this.matrixStack);
         }
@@ -185,7 +183,7 @@ public class MCGraphics {
         gui.renderTooltip(matrixStack, tooltips, point.x, point.y);
     }
 
-    public PoseStack getMatrixStack() {
+    public PoseStack getPoseStack() {
         return matrixStack;
     }
 }

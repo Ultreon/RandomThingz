@@ -2,36 +2,28 @@ package com.ultreon.randomthingz.tileentity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
-import it.unimi.dsi.fastutil.ints.Int2IntFunction;
-import net.minecraft.block.*;
-import net.minecraft.client.renderer.Sheets;
+import com.mojang.math.Vector3f;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
-import net.minecraft.world.level.block.state.properties.ChestType;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BrightnessCombiner;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.DoubleBlockCombiner;
-import net.minecraft.core.Direction;
-import com.mojang.math.Vector3f;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
-
-import net.minecraft.world.level.block.AbstractChestBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.state.BlockState;
 
 @OnlyIn(Dist.CLIENT)
 public class ChristmasChestTileEntityRenderer<T extends BlockEntity & LidBlockEntity> extends BlockEntityRenderer<T> {
@@ -50,32 +42,32 @@ public class ChristmasChestTileEntityRenderer<T extends BlockEntity & LidBlockEn
         Calendar calendar = Calendar.getInstance();
 
         this.singleBottom = new ModelPart(64, 64, 0, 19);
-        this.singleBottom.addBox(1.0F, 0.0F, 1.0F, 14.0F, 10.0F, 14.0F, 0.0F);
+        this.singleBottom.addBox(1.0f, 0.0f, 1.0f, 14.0f, 10.0f, 14.0f, 0.0f);
         this.singleLid = new ModelPart(64, 64, 0, 0);
-        this.singleLid.addBox(1.0F, 0.0F, 0.0F, 14.0F, 5.0F, 14.0F, 0.0F);
-        this.singleLid.y = 9.0F;
-        this.singleLid.z = 1.0F;
+        this.singleLid.addBox(1.0f, 0.0f, 0.0f, 14.0f, 5.0f, 14.0f, 0.0f);
+        this.singleLid.y = 9.0f;
+        this.singleLid.z = 1.0f;
         this.singleLatch = new ModelPart(64, 64, 0, 0);
-        this.singleLatch.addBox(7.0F, -1.0F, 15.0F, 2.0F, 4.0F, 1.0F, 0.0F);
-        this.singleLatch.y = 8.0F;
+        this.singleLatch.addBox(7.0f, -1.0f, 15.0f, 2.0f, 4.0f, 1.0f, 0.0f);
+        this.singleLatch.y = 8.0f;
         this.rightBottom = new ModelPart(64, 64, 0, 19);
-        this.rightBottom.addBox(1.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
+        this.rightBottom.addBox(1.0f, 0.0f, 1.0f, 15.0f, 10.0f, 14.0f, 0.0f);
         this.rightLid = new ModelPart(64, 64, 0, 0);
-        this.rightLid.addBox(1.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
-        this.rightLid.y = 9.0F;
-        this.rightLid.z = 1.0F;
+        this.rightLid.addBox(1.0f, 0.0f, 0.0f, 15.0f, 5.0f, 14.0f, 0.0f);
+        this.rightLid.y = 9.0f;
+        this.rightLid.z = 1.0f;
         this.rightLatch = new ModelPart(64, 64, 0, 0);
-        this.rightLatch.addBox(15.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
-        this.rightLatch.y = 8.0F;
+        this.rightLatch.addBox(15.0f, -1.0f, 15.0f, 1.0f, 4.0f, 1.0f, 0.0f);
+        this.rightLatch.y = 8.0f;
         this.leftBottom = new ModelPart(64, 64, 0, 19);
-        this.leftBottom.addBox(0.0F, 0.0F, 1.0F, 15.0F, 10.0F, 14.0F, 0.0F);
+        this.leftBottom.addBox(0.0f, 0.0f, 1.0f, 15.0f, 10.0f, 14.0f, 0.0f);
         this.leftLid = new ModelPart(64, 64, 0, 0);
-        this.leftLid.addBox(0.0F, 0.0F, 0.0F, 15.0F, 5.0F, 14.0F, 0.0F);
-        this.leftLid.y = 9.0F;
-        this.leftLid.z = 1.0F;
+        this.leftLid.addBox(0.0f, 0.0f, 0.0f, 15.0f, 5.0f, 14.0f, 0.0f);
+        this.leftLid.y = 9.0f;
+        this.leftLid.z = 1.0f;
         this.leftLatch = new ModelPart(64, 64, 0, 0);
-        this.leftLatch.addBox(0.0F, -1.0F, 15.0F, 1.0F, 4.0F, 1.0F, 0.0F);
-        this.leftLatch.y = 8.0F;
+        this.leftLatch.addBox(0.0f, -1.0f, 15.0f, 1.0f, 4.0f, 1.0f, 0.0f);
+        this.leftLatch.y = 8.0f;
     }
 
     public void render(T tileEntityIn, float partialTicks, @NotNull PoseStack matrixStackIn, @NotNull MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
@@ -100,8 +92,8 @@ public class ChristmasChestTileEntityRenderer<T extends BlockEntity & LidBlockEn
             }
 
             float f1 = iCallbackWrapper.apply(ChestBlock.opennessCombiner(tileEntityIn)).get(partialTicks);
-            f1 = 1.0F - f1;
-            f1 = 1.0F - f1 * f1 * f1;
+            f1 = 1.0f - f1;
+            f1 = 1.0f - f1 * f1 * f1;
             int i = iCallbackWrapper.apply(new BrightnessCombiner<>()).applyAsInt(combinedLightIn);
             Material renderMaterial = this.getMaterial(tileEntityIn, chestType);
             VertexConsumer iVertexBuilder = renderMaterial.buffer(bufferIn, RenderType::entityCutout);

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.qsoftware.modlib.silentlib.util.TextRenderUtils;
+import com.ultreon.modlib.embedded.silentlib.util.TextRenderUtils;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.compressor.CompressorScreen;
 import com.ultreon.randomthingz.item.crafting.DryingRecipe;
@@ -17,8 +17,8 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -89,7 +89,7 @@ public class DryingRecipeCategoryJei implements IRecipeCategory<DryingRecipe> {
     public void draw(DryingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         arrow.draw(matrixStack, 79 - GUI_START_X, 35 - GUI_START_Y);
         FontRenderer font = Minecraft.getInstance().fontRenderer;
-        ITextComponent text = TextUtils.translate("misc", "timeInSeconds", recipe.getProcessTime() / 20);
+        Component text = TextUtils.translate("misc", "timeInSeconds", recipe.getProcessTime() / 20);
         TextRenderUtils.renderScaled(matrixStack, font, text.getVisualOrderText(), 24, 20, 0.67f, 0xFFFFFF, true);
     }
 }

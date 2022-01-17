@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.common;
 
-import com.qsoftware.modlib.silentlib.registry.DeferredRegisterWrapper;
-import com.qsoftware.modlib.silentlib.registry.RegistryObjectWrapper;
+import com.ultreon.modlib.embedded.silentlib.registry.DeferredRegisterWrapper;
+import com.ultreon.modlib.embedded.silentlib.registry.RegistryObjectWrapper;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistryEntry;

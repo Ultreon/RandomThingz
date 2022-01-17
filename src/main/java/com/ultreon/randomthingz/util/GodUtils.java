@@ -67,7 +67,7 @@ public class GodUtils {
     }
 
     @SubscribeEvent
-    public static void onDeath(LivingDeathEvent event) {
+    public static void die(LivingDeathEvent event) {
         if (event.getEntityLiving() instanceof Player) {
             Player player = (Player) event.getEntityLiving();
             Entity source = event.getSource().getEntity();

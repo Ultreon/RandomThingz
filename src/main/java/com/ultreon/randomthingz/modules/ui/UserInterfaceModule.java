@@ -6,8 +6,8 @@ import com.ultreon.randomthingz.common.ModuleSafety;
 import com.ultreon.randomthingz.init.ModContainers;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;

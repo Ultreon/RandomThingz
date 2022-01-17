@@ -2,19 +2,19 @@ package com.ultreon.texturedmodels.container;
 
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 
 import java.util.Objects;
 
 /**
- * Here you can find all information about the Chest Frame Container, like number of slots and stored itemStacks
+ * Here you can find all information about the Chest Frame AbstractContainerMenu, like number of slots and stored itemStacks
  *
  * @author PianoManu
  * @version 1.0 09/22/20
@@ -98,4 +98,3 @@ public class ChestFrameContainer extends AbstractContainerMenu {
         return itemStack;
     }
 }
-//========SOLI DEO GLORIA========//

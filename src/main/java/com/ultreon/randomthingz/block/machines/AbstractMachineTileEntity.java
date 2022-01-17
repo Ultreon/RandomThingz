@@ -1,23 +1,24 @@
 package com.ultreon.randomthingz.block.machines;
 
-import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.modlib.silentutils.EnumUtils;
+import com.ultreon.modlib.api.RedstoneMode;
+import com.ultreon.modlib.embedded.silentutils.EnumUtils;
 import com.ultreon.randomthingz.capability.EnergyStorageImpl;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import com.ultreon.randomthingz.util.Constants;
 import com.ultreon.randomthingz.util.InventoryUtils;
-import net.minecraft.block.AbstractFurnaceBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 
 public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends AbstractMachineBaseTileEntity implements IMachineInventory {
@@ -29,43 +30,33 @@ public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends Abs
     protected final ContainerData fields = new ContainerData() {
         @Override
         public int get(int index) {
-            switch (index) {
+            return switch (index) {
                 //Minecraft actually sends fields as shorts, so we need to split energy into 2 fields
-                case 0:
-                    // Energy lower bytes
-                    return AbstractMachineTileEntity.this.getEnergyStored() & 0xFFFF;
-                case 1:
-                    // Energy upper bytes
-                    return (AbstractMachineTileEntity.this.getEnergyStored() >> 16) & 0xFFFF;
-                case 2:
-                    // Max energy lower bytes
-                    return AbstractMachineTileEntity.this.getMaxEnergyStored() & 0xFFFF;
-                case 3:
-                    // Max energy upper bytes
-                    return (AbstractMachineTileEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
-                case 4:
-                    return AbstractMachineTileEntity.this.redstoneMode.ordinal();
-                case 5:
-                    return (int) AbstractMachineTileEntity.this.progress;
-                case 6:
-                    return AbstractMachineTileEntity.this.processTime;
-                default:
-                    return 0;
-            }
+                case 0 ->
+                        // Energy lower bytes
+                        AbstractMachineTileEntity.this.getEnergyStored() & 0xFFFF;
+                case 1 ->
+                        // Energy upper bytes
+                        (AbstractMachineTileEntity.this.getEnergyStored() >> 16) & 0xFFFF;
+                case 2 ->
+                        // Max energy lower bytes
+                        AbstractMachineTileEntity.this.getMaxEnergyStored() & 0xFFFF;
+                case 3 ->
+                        // Max energy upper bytes
+                        (AbstractMachineTileEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
+                case 4 -> AbstractMachineTileEntity.this.redstoneMode.ordinal();
+                case 5 -> (int) AbstractMachineTileEntity.this.progress;
+                case 6 -> AbstractMachineTileEntity.this.processTime;
+                default -> 0;
+            };
         }
 
         @Override
         public void set(int index, int value) {
             switch (index) {
-                case 4:
-                    AbstractMachineTileEntity.this.redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
-                    break;
-                case 5:
-                    AbstractMachineTileEntity.this.progress = value;
-                    break;
-                case 6:
-                    AbstractMachineTileEntity.this.processTime = value;
-                    break;
+                case 4 -> AbstractMachineTileEntity.this.redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
+                case 5 -> AbstractMachineTileEntity.this.progress = value;
+                case 6 -> AbstractMachineTileEntity.this.processTime = value;
             }
         }
 
@@ -75,8 +66,8 @@ public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends Abs
         }
     };
 
-    protected AbstractMachineTileEntity(BlockEntityType<?> typeIn, int inventorySize, MachineTier tier) {
-        super(typeIn, inventorySize, tier.getEnergyCapacity(), 500, 0, tier);
+    protected AbstractMachineTileEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, MachineTier tier) {
+        super(typeIn, pos, state, inventorySize, tier.getEnergyCapacity(), 500, 0, tier);
     }
 
     @Override
@@ -87,11 +78,11 @@ public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends Abs
     protected abstract int getEnergyUsedPerTick();
 
     protected BlockState getActiveState(BlockState currentState) {
-        return currentState.with(AbstractFurnaceBlock.LIT, true);
+        return currentState.setValue(AbstractFurnaceBlock.LIT, true);
     }
 
     protected BlockState getInactiveState(BlockState currentState) {
-        return currentState.with(AbstractFurnaceBlock.LIT, false);
+        return currentState.setValue(AbstractFurnaceBlock.LIT, false);
     }
 
     /**
@@ -154,22 +145,22 @@ public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends Abs
     }
 
     protected void sendUpdate(BlockState newState) {
-        if (dimension == null) return;
-        BlockState oldState = dimension.getBlockState(pos);
+        if (level == null) return;
+        BlockState oldState = level.getBlockState(worldPosition);
         if (oldState != newState) {
-            dimension.setBlockState(pos, newState, 3);
-            dimension.notifyBlockUpdate(pos, oldState, newState, 3);
+            level.setBlock(worldPosition, newState, 3);
+            level.sendBlockUpdated(worldPosition, oldState, newState, 3);
         }
     }
 
     protected void setInactiveState() {
-        if (dimension == null) return;
-        sendUpdate(getInactiveState(dimension.getBlockState(pos)));
+        if (level == null) return;
+        sendUpdate(getInactiveState(level.getBlockState(worldPosition)));
     }
 
     @Override
     public void tick() {
-        if (dimension == null || dimension.isClientSided) return;
+        if (level == null || level.isClientSide) return;
 
         R recipe = getRecipe();
         if (recipe != null && canMachineRun(recipe)) {
@@ -188,7 +179,7 @@ public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends Abs
                     setInactiveState();
                 }
             } else {
-                sendUpdate(getActiveState(dimension.getBlockState(pos)));
+                sendUpdate(getActiveState(level.getBlockState(worldPosition)));
             }
         } else {
             if (recipe == null) {
@@ -199,10 +190,10 @@ public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends Abs
     }
 
     private boolean canMachineRun(R recipe) {
-        return dimension != null
+        return level != null
                 && getEnergyStored() >= getEnergyUsedPerTick()
                 && hasRoomInOutput(getPossibleProcessResult(recipe))
-                && redstoneMode.shouldRun(dimension.getRedstonePowerFromNeighbors(pos) > 0);
+                && redstoneMode.shouldRun(level.getBestNeighborSignal(worldPosition) > 0);
     }
 
     protected boolean hasRoomInOutput(Iterable<ItemStack> results) {
@@ -216,7 +207,7 @@ public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends Abs
 
     private boolean hasRoomForOutputItem(ItemStack stack) {
         for (int i : getOutputSlots()) {
-            ItemStack output = getStackInSlot(i);
+            ItemStack output = getItem(i);
             if (InventoryUtils.canItemsStack(stack, output)) {
                 return true;
             }
@@ -227,10 +218,10 @@ public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends Abs
     protected void storeResultItem(ItemStack stack) {
         // Merge the item into any output slot it can fit in
         for (int i : getOutputSlots()) {
-            ItemStack output = getStackInSlot(i);
+            ItemStack output = getItem(i);
             if (InventoryUtils.canItemsStack(stack, output)) {
                 if (output.isEmpty()) {
-                    setInventorySlotContents(i, stack);
+                    setItem(i, stack);
                 } else {
                     output.setCount(output.getCount() + stack.getCount());
                 }
@@ -240,40 +231,40 @@ public abstract class AbstractMachineTileEntity<R extends Recipe<?>> extends Abs
     }
 
     protected void consumeIngredients(R recipe) {
-        decrStackSize(0, 1);
+        removeItem(0, 1);
     }
 
     @Override
-    public IIntArray getFields() {
+    public ContainerData getFields() {
         return fields;
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT tags) {
-        super.read(state, tags);
+    public void load(CompoundTag tags) {
+        super.load(tags);
         this.progress = tags.getInt("Progress");
         this.processTime = tags.getInt("ProcessTime");
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT tags) {
-        super.write(tags);
+    public CompoundTag save(CompoundTag tags) {
+        super.save(tags);
         tags.putInt("Progress", (int) this.progress);
         tags.putInt("ProcessTime", this.processTime);
         return tags;
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         super.onDataPacket(net, packet);
-        CompoundNBT tags = packet.getNbt();
+        CompoundTag tags = packet.getTag();
         this.progress = tags.getInt("Progress");
         this.processTime = tags.getInt("ProcessTime");
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT tags = super.getUpdateTag();
+    public CompoundTag getUpdateTag() {
+        CompoundTag tags = super.getUpdateTag();
         tags.putInt("Progress", (int) this.progress);
         tags.putInt("ProcessTime", this.processTime);
         return tags;

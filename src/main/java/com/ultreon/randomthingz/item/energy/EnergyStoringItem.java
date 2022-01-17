@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.item.energy;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.capability.EnergyStorageItemImpl;
 import com.ultreon.randomthingz.client.hud.HudItem;
@@ -25,9 +26,9 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
 
 @Deprecated
@@ -62,9 +63,9 @@ public abstract class EnergyStoringItem extends HudItem {
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
         return new ICapabilityProvider() {
-            @Nonnull
+            @NotNull
             @Override
-            public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+            public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
                 if (cap == CapabilityEnergy.ENERGY)
                     return LazyOptional.of(() -> new EnergyStorageItemImpl(stack, maxEnergy, maxReceive, maxExtract)).cast();
                 return LazyOptional.empty();
@@ -75,7 +76,7 @@ public abstract class EnergyStoringItem extends HudItem {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level dimensionIn, List<Component> tooltip, TooltipFlag flagIn) {
-        // Apparently, addInformation can be called before caps are initialized
+        // Apparently, appendHoverText can be called before caps are initialized
         if (CapabilityEnergy.ENERGY == null) return;
 
         stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(e ->
@@ -94,24 +95,24 @@ public abstract class EnergyStoringItem extends HudItem {
     }
 
     @Override
-    public boolean showDurabilityBar(ItemStack stack) {
+    public boolean isBarVisible(ItemStack stack) {
         return true;
     }
 
     @Override
-    public double getDurabilityForDisplay(ItemStack stack) {
-        return 1 - getChargeRatio(stack);
+    public int getBarWidth(ItemStack stack) {
+        return (int) (1 - getChargeRatio(stack));
     }
 
     @Override
-    public int getRGBDurabilityForDisplay(ItemStack stack) {
-        return Mth.hsvToRgb((1 + getChargeRatio(stack)) / 3.0F, 1.0F, 1.0F);
+    public int getBarColor(ItemStack stack) {
+        return Mth.hsvToRgb((1 + getChargeRatio(stack)) / 3.0f, 1.0f, 1.0f);
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
     public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, LocalPlayer player) {
-        // Apparently, addInformation can be called before caps are initialized
+        // Apparently, appendHoverText can be called before caps are initialized
         if (CapabilityEnergy.ENERGY == null) return;
 
         int height = mc.getWindow().getGuiScaledHeight();
@@ -130,19 +131,19 @@ public abstract class EnergyStoringItem extends HudItem {
             val = (int) (64d * e.getEnergyStored() / maxEnergy);
 
             TextureManager textureManager = mc.getTextureManager();
-            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/background.png"));
+            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/background.png"));
             gu.blit(0, height - 64, 128, 64, 0, 0, 128, 64, 128, 64);
 
-            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
+            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
             gu.blit(33, height - 11, 64, 2, 0, 2, 64, 1, 64, 3);
 
-            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
+            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
             gu.blit(32, height - 12, 64, 2, 0, 1, 64, 1, 64, 3);
 
-            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
+            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
             gu.blit(33, height - 11, val, 2, 0, 1, val, 1, 64, 3);
 
-            textureManager.bind(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
+            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
             gu.blit(32, height - 12, val, 2, 0, 0, val, 1, 64, 3);
 
             gu.drawItemStack(stack, 56, height - 60, "");

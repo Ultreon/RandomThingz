@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.effect;
 
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -52,7 +52,7 @@ public class CurseEffect extends MobEffect {
         Random rng = entity.getRandom();
         switch (rng.nextInt(13)) {
             case 0: {
-                entity.hurt(DAMAGE_SOURCE, 1.0F);
+                entity.hurt(DAMAGE_SOURCE, 1.0f);
                 break;
             }
             case 1: {

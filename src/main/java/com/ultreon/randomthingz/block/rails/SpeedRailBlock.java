@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.rails;
 
-import com.qsoftware.modlib.common.interfaces.IHasRenderType;
-import mcp.MethodsReturnNonnullByDefault;
+import com.ultreon.modlib.common.interfaces.IHasRenderType;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
@@ -25,7 +25,7 @@ public class SpeedRailBlock extends PoweredRailBlock implements IHasRenderType {
     }
 
     @Override
-    public int getLightValue(BlockState state, BlockGetter dimension, BlockPos pos) {
+    public int getLightEmission(BlockState state, BlockGetter dimension, BlockPos pos) {
         return state.getValue(POWERED) ? 5 : 0;
     }
 

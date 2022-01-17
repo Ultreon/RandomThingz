@@ -1,9 +1,9 @@
 package com.ultreon.randomthingz.block.machines.pump;
 
-import com.qsoftware.modlib.api.IFluidContainer;
-import com.qsoftware.modlib.api.RedstoneMode;
-import com.qsoftware.modlib.silentlib.util.TimeUtils;
-import com.qsoftware.modlib.silentutils.EnumUtils;
+import com.ultreon.modlib.api.FluidContainer;
+import com.ultreon.modlib.api.RedstoneMode;
+import com.ultreon.modlib.embedded.silentlib.util.TimeUtils;
+import com.ultreon.modlib.embedded.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
@@ -29,9 +29,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PumpTileEntity extends AbstractMachineBaseTileEntity {
     public static final int ENERGY_PER_BUCKET = 500;
@@ -67,10 +66,8 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
 
         @Override
         public void set(int index, int value) {
-            switch (index) {
-                case 4:
-                    redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
-                    break;
+            if (index == 4) {
+                redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
             }
         }
 
@@ -81,8 +78,8 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
     };
     private final LazyOptional<IFluidHandler> fluidCap = LazyOptional.of(() -> tank);
 
-    public PumpTileEntity() {
-        super(ModMachineTileEntities.pump, 2, 10_000, 100, 0, MachineTier.STANDARD);
+    public PumpTileEntity(BlockPos pos, BlockState state) {
+        super(ModMachineTileEntities.pump, pos, state, 2, 10_000, 100, 0, MachineTier.STANDARD);
     }
 
     private int getHorizontalRange() {
@@ -147,12 +144,12 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
         ItemStack input = getItem(0);
         if (input.isEmpty()) return;
 
-        FluidStack fluidInInput = IFluidContainer.getBucketOrContainerFluid(input);
+        FluidStack fluidInInput = FluidContainer.getBucketOrContainerFluid(input);
         if (!fluidInInput.isEmpty()) return;
 
         FluidStack fluidInTank = tank.getFluidInTank(0);
         if (fluidInTank.getAmount() >= 1000) {
-            ItemStack filled = IFluidContainer.fillBucketOrFluidContainer(input, fluidInTank);
+            ItemStack filled = FluidContainer.fillBucketOrFluidContainer(input, fluidInTank);
             if (!filled.isEmpty() && InventoryUtils.mergeItem(this, filled, 1)) {
                 tank.drain(1000, IFluidHandler.FluidAction.EXECUTE);
                 input.shrink(1);
@@ -193,9 +190,9 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
     }
 
     @Override
-    public void load(BlockState state, CompoundTag tags) {
+    public void load(CompoundTag tags) {
         this.tank.readFromNBT(tags.getCompound("Tank"));
-        super.load(state, tags);
+        super.load(tags);
     }
 
     @Override
@@ -205,7 +202,7 @@ public class PumpTileEntity extends AbstractMachineBaseTileEntity {
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (!this.remove && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.orEmpty(cap, fluidCap.cast());
         }

@@ -6,15 +6,17 @@ import com.ultreon.randomthingz.capability.EnergyStorageImpl;
 import com.ultreon.randomthingz.capability.EnergyStorageWithBatteries;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.util.TextUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.energy.CapabilityEnergy;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.stream.IntStream;
 
 public class BatteryBoxTileEntity extends AbstractMachineBaseTileEntity {
@@ -27,8 +29,8 @@ public class BatteryBoxTileEntity extends AbstractMachineBaseTileEntity {
 
     private final EnergyStorageWithBatteries<BatteryBoxTileEntity> energy;
 
-    public BatteryBoxTileEntity() {
-        super(ModMachineTileEntities.batteryBox, 6, MAX_ENERGY, MAX_RECEIVE, MAX_SEND, MachineTier.BASIC);
+    public BatteryBoxTileEntity(BlockPos pos, BlockState state) {
+        super(ModMachineTileEntities.batteryBox, pos, state, 6, MAX_ENERGY, MAX_RECEIVE, MAX_SEND, MachineTier.BASIC);
         this.energy = new EnergyStorageWithBatteries<>(this, MAX_ENERGY, MAX_RECEIVE, MAX_SEND);
     }
 

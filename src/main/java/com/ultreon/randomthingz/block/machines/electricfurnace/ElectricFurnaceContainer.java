@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.electricfurnace;
 
-import com.qsoftware.modlib.silentlib.inventory.SlotOutputOnly;
-import com.qsoftware.modlib.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
 import com.ultreon.randomthingz.block.machines.AbstractMachineTileEntity;
 import com.ultreon.randomthingz.init.ModMachineContainers;
@@ -11,17 +11,20 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 public class ElectricFurnaceContainer extends AbstractMachineContainer<ElectricFurnaceTileEntity> {
     public ElectricFurnaceContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new ElectricFurnaceTileEntity(), new SimpleContainerData(AbstractMachineTileEntity.FIELDS_COUNT));
+        this(id, playerInventory, null, new SimpleContainerData(AbstractMachineTileEntity.FIELDS_COUNT));
     }
 
-    public ElectricFurnaceContainer(int id, Inventory playerInventory, ElectricFurnaceTileEntity tileEntity, ContainerData fieldsIn) {
+    public ElectricFurnaceContainer(int id, Inventory playerInventory, @Nullable ElectricFurnaceTileEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.electricFurnace, id, tileEntity, fieldsIn);
 
-        this.addSlot(new Slot(this.tileEntity, 0, 56, 35));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 117, 35));
+        if (tileEntity != null) {
+            this.addSlot(new Slot(tileEntity, 0, 56, 35));
+            this.addSlot(new SlotOutputOnly(tileEntity, 1, 117, 35));
+        }
 
         InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
 
@@ -32,7 +35,7 @@ public class ElectricFurnaceContainer extends AbstractMachineContainer<ElectricF
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
 

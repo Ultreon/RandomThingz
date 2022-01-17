@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz.world.gen.ores;
 
-import com.qsoftware.modlib.silentlib.block.IBlockProvider;
-import com.qsoftware.modlib.silentutils.Lazy;
+import com.ultreon.modlib.embedded.silentlib.block.IBlockProvider;
+import com.ultreon.modlib.embedded.silentutils.Lazy;
 import com.ultreon.randomthingz.common.exceptions.InvalidNameException;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
 import com.ultreon.randomthingz.world.gen.ores.configs.DefaultOreConfig;
 import com.ultreon.randomthingz.world.gen.ores.configs.IOreConfig;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;

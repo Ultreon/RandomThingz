@@ -7,11 +7,12 @@ import com.ultreon.randomthingz.util.CrashReportUtils;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.CrashReport;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.ReportedException;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Widget;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -66,8 +67,7 @@ public class ActionMenuScreen extends Screen {
 
     @Override
     protected void init() {
-        this.buttons.clear();
-        this.children.clear();
+        this.clearWidgets();
         this.serverButtons.clear();
 
         try {
@@ -81,7 +81,7 @@ public class ActionMenuScreen extends Screen {
             for (int i = items.size() - 1; i >= 0; i--) {
                 ActionMenuItem item = items.get(i);
                 try {
-                    ActionMenuButton actionMenuButton = addButton(new ActionMenuButton(this, item, x, y, 150, 15));
+                    ActionMenuButton actionMenuButton = addRenderableWidget(new ActionMenuButton(this, item, x, y, 150, 15));
                     if (item.isServerVariant()) {
                         actionMenuButton.active = false;
                         serverButtons.add(actionMenuButton);
@@ -99,7 +99,7 @@ public class ActionMenuScreen extends Screen {
             }
 
             y -= 16;
-            addButton(new ActionMenuTitle(this, x, y, 150, 15));
+            addRenderableWidget(new ActionMenuTitle(this, x, y, 150, 15));
         } catch (Throwable t) {
             CrashReport crashreport = CrashReport.forThrowable(t, "Failed to initialize action menu screen.");
 
@@ -124,9 +124,8 @@ public class ActionMenuScreen extends Screen {
             parent.render(matrixStack, mouseX, mouseY, partialTicks);
         }
 
-        for (AbstractWidget widget : this.buttons) {
-            if (widget instanceof IActionMenuIndexable) {
-                IActionMenuIndexable indexable = (IActionMenuIndexable) widget;
+        for (GuiEventListener widget : this.children) {
+            if (widget instanceof IActionMenuIndexable indexable) {
                 indexable.setMenuIndex(0);
             }
         }
@@ -170,9 +169,8 @@ public class ActionMenuScreen extends Screen {
             parent.render(matrixStack, mouseX, mouseY, partialTicks);
         }
 
-        for (AbstractWidget widget : this.buttons) {
-            if (widget instanceof IActionMenuIndexable) {
-                IActionMenuIndexable indexable = (IActionMenuIndexable) widget;
+        for (Widget widget : this.renderables) {
+            if (widget instanceof IActionMenuIndexable indexable) {
                 indexable.setMenuIndex(childIndex - this.menuIndex);
             }
             widget.render(matrixStack, mouseX, mouseY, partialTicks);

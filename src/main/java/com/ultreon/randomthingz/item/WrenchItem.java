@@ -14,7 +14,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class WrenchItem extends Item {
     public WrenchItem() {

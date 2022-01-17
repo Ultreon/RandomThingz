@@ -9,8 +9,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class WireTileEntity extends BlockEntity {
     int energyStored;
@@ -22,7 +22,7 @@ public class WireTileEntity extends BlockEntity {
     public String getWireNetworkData() {
         if (level == null) return "world is null";
 
-        WireNetwork net = WireNetworkManager.get(level, worldPosition);
+        WireNetwork net = WireConnection.get(level, worldPosition);
         return net != null ? net.toString() : "null";
     }
 
@@ -41,16 +41,16 @@ public class WireTileEntity extends BlockEntity {
     @Override
     public void setRemoved() {
         if (level != null) {
-            WireNetworkManager.invalidateNetwork(level, worldPosition);
+            WireConnection.invalidateNetwork(level, worldPosition);
         }
         super.setRemoved();
     }
 
-    @Nonnull
+    @NotNull
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (level != null && !remove && cap == CapabilityEnergy.ENERGY && side != null) {
-            LazyOptional<WireNetwork> networkOptional = WireNetworkManager.getLazy(level, worldPosition);
+            LazyOptional<WireNetwork> networkOptional = WireConnection.getLazy(level, worldPosition);
             if (networkOptional.isPresent()) {
                 return networkOptional.orElseThrow(IllegalStateException::new).getConnection(worldPosition, side).getLazyOptional().cast();
             }

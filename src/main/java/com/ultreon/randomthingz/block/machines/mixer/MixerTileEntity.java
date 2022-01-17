@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.mixer;
 
-import com.qsoftware.modlib.api.IFluidContainer;
+import com.ultreon.modlib.api.FluidContainer;
 import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
 import com.ultreon.randomthingz.block.machines.AbstractFluidMachineTileEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
@@ -8,15 +8,17 @@ import com.ultreon.randomthingz.item.crafting.MixingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import com.ultreon.randomthingz.util.TextUtils;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.util.Direction;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 
 public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe> {
@@ -24,8 +26,8 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
     public static final int TANK_CAPACITY = 4_000;
     public static final int ENERGY_PER_TICK = 100;
 
-    public MixerTileEntity() {
-        super(ModMachineTileEntities.mixer, 4, 5, TANK_CAPACITY, MachineTier.STANDARD);
+    public MixerTileEntity(BlockPos pos, BlockState state) {
+        super(ModMachineTileEntities.mixer, pos, state, 4, 5, TANK_CAPACITY, MachineTier.STANDARD);
     }
 
     @Override
@@ -44,11 +46,11 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
     }
 
     private void tryFillTanks() {
-        // Try fill feedstock tanks with fluid containers
+        // Try to fill feedstock tanks with fluid containers
         ItemStack input = getItem(0);
         if (input.isEmpty()) return;
 
-        FluidStack fluidStack = IFluidContainer.getBucketOrContainerFluid(input);
+        FluidStack fluidStack = FluidContainer.getBucketOrContainerFluid(input);
         int tankIndex = findTankWithFluid(fluidStack);
         if (tankIndex > -1) {
             if (canAcceptFluidContainer(input, fluidStack, tankIndex)) {
@@ -102,12 +104,12 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
         ItemStack input = getItem(2);
         if (input.isEmpty()) return;
 
-        FluidStack fluidInInput = IFluidContainer.getBucketOrContainerFluid(input);
+        FluidStack fluidInInput = FluidContainer.getBucketOrContainerFluid(input);
         if (!fluidInInput.isEmpty()) return;
 
         FluidStack fluidInTank = getFluidInTank(4);
         if (fluidInTank.getAmount() >= 1000) {
-            ItemStack filled = IFluidContainer.fillBucketOrFluidContainer(input, fluidInTank);
+            ItemStack filled = FluidContainer.fillBucketOrFluidContainer(input, fluidInTank);
             if (!filled.isEmpty() && InventoryUtils.mergeItem(this, filled, 3)) {
                 tanks[4].drain(1000, IFluidHandler.FluidAction.EXECUTE);
                 input.shrink(1);
@@ -153,22 +155,22 @@ public class MixerTileEntity extends AbstractFluidMachineTileEntity<MixingRecipe
     }
 
     @Override
-    public boolean canInsertItem(int index, ItemStack stack, @Nullable Direction direction) {
+    public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
         return (index == 0 && InventoryUtils.isFilledFluidContainer(stack)) || (index == 2 && InventoryUtils.isEmptyFluidContainer(stack));
     }
 
     @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
+    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
         return index == 1 || index == 3;
     }
 
     @Override
-    protected ITextComponent getDefaultName() {
+    protected Component getDefaultName() {
         return TextUtils.translate("container", "mixer");
     }
 
     @Override
-    protected Container createMenu(int id, PlayerInventory player) {
+    protected AbstractContainerMenu createMenu(int id, Inventory player) {
         return new MixerContainer(id, player, this, this.fields);
     }
 }

@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz.config;
 
-import com.qsoftware.modlib.api.annotations.FieldsAreNonnullByDefault;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.java.maps.SequencedHashMap;
 import com.ultreon.randomthingz.util.ExceptionUtil;
 import com.ultreon.randomthingz.world.gen.ores.DefaultOre;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.FieldsAreNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -67,7 +67,7 @@ public final class Config {
                         "A generator with less fluid in the tank will not be able to run.")
                 .defineInRange("machine.fluidGenerators.injectionVolume", 100, 1, 1000);
 
-        // World Gen/Ore
+        // Level Gen/Ore
         {
             builder.push("world");
 

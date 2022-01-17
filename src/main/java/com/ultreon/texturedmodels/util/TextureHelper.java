@@ -131,4 +131,3 @@ public class TextureHelper {
         return new ResourceLocation(nameSpace, path);
     }
 }
-//========SOLI DEO GLORIA========//

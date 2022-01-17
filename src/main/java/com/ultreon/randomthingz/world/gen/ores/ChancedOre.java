@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.world.gen.ores;
 
 import com.ultreon.randomthingz.common.item.ItemMaterial;
 import com.ultreon.randomthingz.world.gen.ores.configs.ChancedOreConfig;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -10,6 +10,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.ReplaceBlockConfiguration;
 import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -45,9 +46,9 @@ public class ChancedOre extends DefaultOre {
     public ConfiguredFeature<?, ?> generate() {
         int bottom = config.getMinHeight();
         if (config.getVeinSize() <= 2) {
-            return new ConfiguredFeatureQFM<>(Feature.EMERALD_ORE, new ReplaceBlockConfiguration(Blocks.STONE.defaultBlockState(), this.asBlockState()))
+            return new ConfiguredFeatureQFM<>(Feature.REPLACE_SINGLE_BLOCK, new ReplaceBlockConfiguration(Blocks.STONE.defaultBlockState(), this.asBlockState()))
                     .setChance(1f / (float) config.getChance())
-                    .decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(bottom, bottom, config.getMaxHeight())))
+                    .placed(PlacementModifierType.HEIGHT_RANGE.codec(new RangeDecoratorConfiguration(bottom, bottom, config.getMaxHeight())))
                     .squared()
                     .count(config.getVeinCount());
         }

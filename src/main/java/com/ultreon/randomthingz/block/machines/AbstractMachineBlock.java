@@ -1,17 +1,17 @@
 package com.ultreon.randomthingz.block.machines;
 
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.inventory.ContaienrHelper;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.INamedContainerProvider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolType;
 
 public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
@@ -23,24 +23,24 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
     }
 
     private static int calcRedstoneFromInventory(AbstractMachineBaseTileEntity inv) {
-        // Copied from Container.calcRedstoneFromInventory
+        // Copied from AbstractContainerMenu.calcRedstoneFromInventory
         int slotsFilled = 0;
-        float fillRatio = 0.0F;
+        float fillRatio = 0.0f;
 
         for (int i = 0; i < inv.getContainerSize() - inv.getMachineTier().getUpgradeSlots(); ++i) {
-            ItemStack itemstack = inv.getStackInSlot(i);
+            ItemStack itemstack = inv.getItem(i);
             if (!itemstack.isEmpty()) {
-                fillRatio += (float) itemstack.getCount() / Math.min(inv.getInventoryStackLimit(), itemstack.getMaxSize());
+                fillRatio += (float) itemstack.getCount() / Math.min(inv.getMaxStackSize(), itemstack.getMaxSize());
                 ++slotsFilled;
             }
         }
 
-        fillRatio = fillRatio / (float) inv.getSizeInventory();
-        return MathHelper.floor(fillRatio * 14.0F) + (slotsFilled > 0 ? 1 : 0);
+        fillRatio = fillRatio / (float) inv.getContainerSize();
+        return MathHelper.floor(fillRatio * 14.0f) + (slotsFilled > 0 ? 1 : 0);
     }
 
     @Override
-    protected void interactWith(World dimensionIn, BlockPos pos, PlayerEntity player) {
+    protected void interactWith(Level dimensionIn, BlockPos pos, Player player) {
         TileEntity tileEntity = dimensionIn.getTileEntity(pos);
         if (tileEntity instanceof INamedContainerProvider) {
             player.openContainer((INamedContainerProvider) tileEntity);
@@ -48,11 +48,11 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
     }
 
     @Override
-    public void onReplaced(BlockState state, World dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity tileentity = dimensionIn.getTileEntity(pos);
             if (tileentity instanceof IInventory) {
-                InventoryHelper.dropInventoryItems(dimensionIn, pos, (IInventory) tileentity);
+                ContaienrHelper.dropInventoryItems(dimensionIn, pos, (IInventory) tileentity);
                 dimensionIn.updateComparatorOutputLevel(pos, this);
             }
 
@@ -62,7 +62,7 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public int getComparatorInputOverride(BlockState blockState, World dimensionIn, BlockPos pos) {
+    public int getComparatorInputOverride(BlockState blockState, Level dimensionIn, BlockPos pos) {
         TileEntity tileEntity = dimensionIn.getTileEntity(pos);
         if (tileEntity instanceof AbstractMachineBaseTileEntity) {
             return calcRedstoneFromInventory((AbstractMachineBaseTileEntity) tileEntity);
