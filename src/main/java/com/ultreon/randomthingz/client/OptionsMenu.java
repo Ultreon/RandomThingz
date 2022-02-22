@@ -17,14 +17,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.List;
 
 public class OptionsMenu extends AbstractActionMenu {
-    @SuppressWarnings("ConstantConditions")
     public OptionsMenu() {
 
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void client() {
-
         addClient(new ActionMenuItem(new TranslatableComponent("options.skinCustomisation"), () -> {
             Minecraft mc = Minecraft.getInstance();
             mc.setScreen(new SkinCustomizationScreen(mc.screen, mc.options));
@@ -65,7 +64,6 @@ public class OptionsMenu extends AbstractActionMenu {
     }
 
     @OnlyIn(Dist.CLIENT)
-    @SuppressWarnings("deprecation")
     private void savePackChanges(PackRepository resourcePacks) {
         Minecraft mc = Minecraft.getInstance();
         Options settings = mc.options;

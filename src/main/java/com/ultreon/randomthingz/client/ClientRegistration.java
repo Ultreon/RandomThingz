@@ -3,14 +3,14 @@ package com.ultreon.randomthingz.client;
 import com.google.common.annotations.Beta;
 import com.ultreon.randomthingz.RandomThingz;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelBakeEvent;
@@ -93,7 +93,7 @@ public class ClientRegistration {
     public static void loadComplete(FMLLoadCompleteEvent evt) {
         EntityRenderDispatcher entityRenderManager = Minecraft.getInstance().getEntityRenderDispatcher();
         //Add our own custom armor layer to the various player renderers
-        for (Entry<String, PlayerRenderer> entry : entityRenderManager.getSkinMap().entrySet()) {
+        for (Entry<String, EntityRenderer<? extends Player>> entry : entityRenderManager.getSkinMap().entrySet()) {
             addCustomArmorLayer(entry.getValue());
         }
         // Add our own custom armor layer to everything that has an armor layer
@@ -109,10 +109,11 @@ public class ClientRegistration {
     /**
      * Registers a custom armor layer.
      * Todo: Implement
+     * @param renderer
      */
     @SuppressWarnings({"unused", "CommentedOutCode"})
     @Beta
-    private static <T extends LivingEntity, M extends HumanoidModel<T>, A extends HumanoidModel<T>> void addCustomArmorLayer(LivingEntityRenderer<T, M> renderer) {
+    private static <T extends LivingEntity, M extends HumanoidModel<T>, A extends HumanoidModel<T>> void addCustomArmorLayer(EntityRenderer<? extends Player> renderer) {
 //        for (LayerRenderer<T, M> layerRenderer : new ArrayList<>(renderer.layerRenderers)) {
 //            // Only allow an exact match, so we don't add to modded entities that only have a modded extended armor layer
 //            if (layerRenderer.getClass() == BipedArmorLayer.class) {

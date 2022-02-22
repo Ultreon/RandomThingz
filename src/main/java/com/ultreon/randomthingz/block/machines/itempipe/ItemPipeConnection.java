@@ -50,7 +50,7 @@ public final class ItemPipeConnection {
     public static void invalidateNetwork(LevelReader dimension, BlockPos pos) {
         Collection<LazyOptional<ItemPipeNetwork>> toRemove = NETWORK_LIST.stream()
                 .filter(n -> n != null && n.isPresent() && n.orElseThrow(IllegalStateException::new).contains(dimension, pos))
-                .collect(Collectors.toList());
+                .toList();
         toRemove.forEach(ItemPipeConnection::invalidateNetwork);
     }
 

@@ -48,7 +48,7 @@ public abstract class AbstractMachineContainerScreen<C extends BaseMachineBaseCo
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int x, int y) {
         if (minecraft == null) return;
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         RenderSystem.setShaderTexture(0, getGuiTexture());
         int xPos = (this.width - this.imageWidth) / 2;
         int yPos = (this.height - this.imageHeight) / 2;
@@ -62,8 +62,8 @@ public abstract class AbstractMachineContainerScreen<C extends BaseMachineBaseCo
 
     @Override
     protected void renderLabels(PoseStack matrixStack, int x, int y) {
-        this.font.draw(matrixStack, this.title.getString(), 8.0f, 6.0f, 4210752);
-//        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0f, (float)(this.ySize - 96 + 2), 4210752);
+        this.font.draw(matrixStack, this.title.getString(), 8f, 6f, 4210752);
+//        this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8f, (float)(this.ySize - 96 + 2), 4210752);
 
         for (GuiEventListener listener : this.children) {
             if (listener instanceof RedstoneModeButton button && button.isHovered()) {

@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class ElectricFurnaceScreen extends AbstractMachineScreen<ElectricFurnaceContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/electric_furnace.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/electric_furnace.png");
 
     public ElectricFurnaceScreen(ElectricFurnaceContainer containerIn, Inventory playerInventory, Component titleIn) {
         super(containerIn, playerInventory, titleIn);

@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -13,8 +14,8 @@ import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
-import org.lwjgl.opengl.GL11;
 
+@SuppressWarnings("unused")
 @UtilityClass
 public final class RenderUtils {
     public static void renderGuiTank(IFluidHandler fluidHandler, int tank, double x, double y, double zLevel, double width, double height) {
@@ -23,6 +24,7 @@ public final class RenderUtils {
         renderGuiTank(stack, tankCapacity, x, y, zLevel, width, height);
     }
 
+    @SuppressWarnings("deprecation")
     public static void renderGuiTank(FluidStack stack, int tankCapacity, double x, double y, double zLevel, double width, double height) {
         // Adapted from Ender IO
         int amount = stack.getAmount();
@@ -43,7 +45,7 @@ public final class RenderUtils {
         float r = ((color >> 16) & 0xFF) / 255f;
         float g = ((color >> 8) & 0xFF) / 255f;
         float b = (color & 0xFF) / 255f;
-        RenderSystem.color3f(r, g, b);
+        RenderSystem.setShaderColor(0f, r, g, b);
 
         RenderSystem.enableBlend();
         for (int i = 0; i < width; i += 16) {
@@ -61,16 +63,18 @@ public final class RenderUtils {
 
                 Tesselator tessellator = Tesselator.getInstance();
                 BufferBuilder tes = tessellator.getBuilder();
-                tes.begin(GL11.GL_QUADS, DefaultVertexFormat.POSITION_TEX);
-                tes.vertex(drawX, drawY + drawHeight, 0).uv(minU, minV + (maxV - minV) * drawHeight / 16F).endVertex();
-                tes.vertex(drawX + drawWidth, drawY + drawHeight, 0).uv(minU + (maxU - minU) * drawWidth / 16F, minV + (maxV - minV) * drawHeight / 16F).endVertex();
-                tes.vertex(drawX + drawWidth, drawY, 0).uv(minU + (maxU - minU) * drawWidth / 16F, minV).endVertex();
+                tes.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+                float outV = minV + (maxV - minV) * drawHeight / 16f;
+                tes.vertex(drawX, drawY + drawHeight, 0).uv(minU, outV).endVertex();
+                float outU = minU + (maxU - minU) * drawWidth / 16f;
+                tes.vertex(drawX + drawWidth, drawY + drawHeight, 0).uv(outU, outV).endVertex();
+                tes.vertex(drawX + drawWidth, drawY, 0).uv(outU, minV).endVertex();
                 tes.vertex(drawX, drawY, 0).uv(minU, minV).endVertex();
                 tessellator.end();
             }
         }
         RenderSystem.disableBlend();
-        RenderSystem.color3f(1, 1, 1);
+        RenderSystem.setShaderColor(1, 1, 1, 1);
     }
 
     @Nullable

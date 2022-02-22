@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.crafting;
 
 import com.google.gson.JsonObject;
-import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidInventory;
-import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidRecipe;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidInventory;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidRecipe;
 import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import lombok.Getter;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
-public class MixingRecipe implements BaseFluidRecipe<BaseFluidInventory> {
+public class MixingRecipe implements FluidRecipe<FluidInventory> {
     private final ResourceLocation recipeId;
     private final List<FluidIngredient> ingredients = NonNullList.create();
     @Getter
@@ -33,7 +33,7 @@ public class MixingRecipe implements BaseFluidRecipe<BaseFluidInventory> {
     private FluidStack result;
 
     @Override
-    public boolean matches(BaseFluidInventory inv, Level dimensionIn) {
+    public boolean matches(FluidInventory inv, Level dimensionIn) {
         final int inputTanks = Math.min(4, inv.getTanks());
         Set<Integer> matchedTanks = new HashSet<>();
 
@@ -52,7 +52,7 @@ public class MixingRecipe implements BaseFluidRecipe<BaseFluidInventory> {
     }
 
     @Override
-    public List<FluidStack> getFluidResults(BaseFluidInventory inv) {
+    public List<FluidStack> getFluidResults(FluidInventory inv) {
         return getFluidOutputs();
     }
 
@@ -93,7 +93,7 @@ public class MixingRecipe implements BaseFluidRecipe<BaseFluidInventory> {
             recipe.processTime = GsonHelper.getAsInt(json, "process_time");
             GsonHelper.getAsJsonArray(json, "ingredients").forEach(e ->
                     recipe.ingredients.add(FluidIngredient.deserialize(e.getAsJsonObject())));
-            recipe.result = BaseFluidRecipe.deserializeFluid(GsonHelper.getAsJsonObject(json, "result"));
+            recipe.result = FluidRecipe.deserializeFluid(GsonHelper.getAsJsonObject(json, "result"));
             return recipe;
         }
 
@@ -106,7 +106,7 @@ public class MixingRecipe implements BaseFluidRecipe<BaseFluidInventory> {
             for (int i = 0; i < ingredientCount; ++i) {
                 recipe.ingredients.add(FluidIngredient.read(buffer));
             }
-            recipe.result = BaseFluidRecipe.readFluid(buffer);
+            recipe.result = FluidRecipe.readFluid(buffer);
             return recipe;
         }
 
@@ -115,7 +115,7 @@ public class MixingRecipe implements BaseFluidRecipe<BaseFluidInventory> {
             buffer.writeVarInt(recipe.processTime);
             buffer.writeByte(recipe.ingredients.size());
             recipe.ingredients.forEach(ingredient -> ingredient.write(buffer));
-            BaseFluidRecipe.writeFluid(buffer, recipe.result);
+            FluidRecipe.writeFluid(buffer, recipe.result);
         }
     }
 }

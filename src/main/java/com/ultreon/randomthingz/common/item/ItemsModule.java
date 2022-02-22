@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.common.item;
 
-import com.ultreon.modlib.embedded.silentlib.registry.ItemDeferredRegister;
-import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.silentlib.registry.ItemDeferredRegister;
+import com.ultreon.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.actionmenu.MainActionMenu;
 import com.ultreon.randomthingz.actionmenu.MenuHandler;
@@ -54,8 +54,6 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
     public void registerItemColorHandlers(ColorHandlerEvent.Item event) {
         ItemColors itemColors = event.getItemColors();
         registerSpawnEggColorHandler(itemColors,
-                ModItemsAlt.BABY_CREEPER_SPAWN_EGG,
-                ModItemsAlt.BABY_ENDERMAN_SPAWN_EGG,
                 ModItemsAlt.BABY_SKELETON_SPAWN_EGG,
                 ModItemsAlt.BABY_STRAY_SPAWN_EGG,
                 ModItemsAlt.BABY_WITHER_SKELETON_SPAWN_EGG,
@@ -74,7 +72,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
         Collection<Item> dyeColorItems = Registration.getItems((item) -> item instanceof IHasDyeColor);
         for (Item dyeColorItem : dyeColorItems) {
             IHasDyeColor dyeColorProvider = (IHasDyeColor) dyeColorItem;
-            ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, tintIndex) -> dyeColorProvider.getDyeColor().getColorValue(), () -> dyeColorItem);
+            ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, tintIndex) -> dyeColorProvider.getDyeColor().getMaterialColor().col, () -> dyeColorItem);
         }
 
         Collection<Item> materialColorItems = Registration.getItems((item) -> item instanceof IHasMaterialColor);
@@ -88,7 +86,7 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
 
     @OnlyIn(Dist.CLIENT)
     @SafeVarargs
-    private final void registerSpawnEggColorHandler(ItemColors colors, ItemRegistryObject<? extends CustomSpawnEggItem<? extends Entity>>... spawnEggs) {
+    private void registerSpawnEggColorHandler(ItemColors colors, ItemRegistryObject<? extends CustomSpawnEggItem<? extends Entity>>... spawnEggs) {
         for (ItemRegistryObject<? extends CustomSpawnEggItem<? extends Entity>> spawnEgg : spawnEggs) {
             ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> spawnEgg.asItem().getColor(tintIndex), spawnEgg);
         }
@@ -96,15 +94,15 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
 
     @OnlyIn(Dist.CLIENT)
     @SafeVarargs
-    private final void registerDyeColorHandler(ItemColors colors, ItemRegistryObject<DyeColorizedItem>... dyeColorItems) {
+    private void registerDyeColorHandler(ItemColors colors, ItemRegistryObject<DyeColorizedItem>... dyeColorItems) {
         for (ItemRegistryObject<DyeColorizedItem> dyeColorized : dyeColorItems) {
-            ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> dyeColorized.asItem().getDyeColor().getColorValue(), dyeColorized);
+            ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> dyeColorized.asItem().getDyeColor().getMaterialColor().col, dyeColorized);
         }
     }
 
     @OnlyIn(Dist.CLIENT)
     @SafeVarargs
-    private final void registerMaterialColorHandler(ItemColors colors, ItemRegistryObject<MaterialColorizedItem>... materialColorItems) {
+    private void registerMaterialColorHandler(ItemColors colors, ItemRegistryObject<MaterialColorizedItem>... materialColorItems) {
         for (ItemRegistryObject<MaterialColorizedItem> materialColorized : materialColorItems) {
             ClientRegistrationUtil.registerItemColorHandler(colors, (stack, tintIndex) -> materialColorized.asItem().getMaterialColor().col, materialColorized);
         }

@@ -13,8 +13,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.gui.components.ObjectSelectionList;
-import net.minecraft.client.gui.screen.ConfirmScreen;
-import net.minecraft.client.gui.screen.PackScreen;
+import net.minecraft.client.gui.screens.ConfirmScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
@@ -23,7 +22,6 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.util.text.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -34,7 +32,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  *
  * @author Qboi123
  */
-@SuppressWarnings({"unused", "deprecation"})
+@SuppressWarnings({"unused"})
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @OnlyIn(Dist.CLIENT)
@@ -67,7 +65,7 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
         this.centerListVertically = false;
 
         // Set to render header.
-        this.setRenderHeader(true, (int) (9.0f * 1.5F));
+        this.setRenderHeader(true, (int) (9f * 1.5F));
     }
 
     /**
@@ -80,8 +78,8 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
      */
     @Override
     protected void renderHeader(PoseStack matrixStack, int x, int y, Tesselator tessellator) {
-        Component itextcomponent = (new TextComponent("")).append(this.title).withStyle(ChatFormatting.UNDERLINE, ChatFormatting.BOLD);
-        this.minecraft.font.draw(matrixStack, itextcomponent, (float) (x + this.width / 2 - this.minecraft.font.width(itextcomponent) / 2), (float) Math.min(this.y0 + 3, y), 16777215);
+        Component component = (new TextComponent("")).append(this.title).withStyle(ChatFormatting.UNDERLINE, ChatFormatting.BOLD);
+        this.minecraft.font.draw(matrixStack, component, (float) (x + this.width / 2 - this.minecraft.font.width(component) / 2), (float) Math.min(this.y0 + 3, y), 16777215);
     }
 
     /**
@@ -105,7 +103,6 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
      *
      * @author Qboi123
      */
-    @SuppressWarnings("deprecation")
     @OnlyIn(Dist.CLIENT)
     public static class ModuleEntry extends ObjectSelectionList.Entry<ModuleEntry> {
         private static final ResourceLocation MODULE_OVERLAYS = new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/overlays/modules.png");
@@ -140,13 +137,13 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
          *
          * @param minecraft the minecraft instance.
          * @param text      the text component to process.
-         * @return a {@linkplain IReorderingProcessor reordering processor}.
+         * @return a {@linkplain FormattedCharSequence formatted character sequence}.
          */
         private static FormattedCharSequence getReordering(Minecraft minecraft, Component text) {
             int i = minecraft.font.width(text);
             if (i > 157) {
-                FormattedText itextproperties = FormattedText.composite(minecraft.font.substrByWidth(text, 157 - minecraft.font.width("...")), FormattedText.of("..."));
-                return Language.getInstance().getVisualOrder(itextproperties);
+                FormattedText formattedText = FormattedText.composite(minecraft.font.substrByWidth(text, 157 - minecraft.font.width("...")), FormattedText.of("..."));
+                return Language.getInstance().getVisualOrder(formattedText);
             } else {
                 return text.getVisualOrderText();
             }
@@ -164,7 +161,7 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
          * @param mouseX       real mouse x coordinate.
          * @param mouseY       real mouse y coordinate.
          * @param isHovered    ...
-         * @param partialTicks the {@linkplain Minecraft#getRenderPartialTicks() render partial ticks}.
+         * @param partialTicks the {@linkplain Minecraft#getFrameTime() Minecraft's frame-time}.
          */
         @SuppressWarnings("DanglingJavadoc")
         public void render(PoseStack matrixStack, int listIndex, int scroll, int xOffset, int rowWidth, int rowHeight, int mouseX, int mouseY, boolean isHovered, float partialTicks) {
@@ -174,13 +171,13 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
 
             // If there's no compatibility show a red color.
             if (compatibility == ModuleCompatibility.NONE) {
-                RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+                RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
                 GuiComponent.fill(matrixStack, xOffset - 1, scroll - 1, xOffset + rowWidth - 9, scroll + rowHeight + 1, 0xff770000);
             }
 
-            // If there's partial compatibility show a orange yellow color.
+            // If there's partial compatibility show an orange yellow color.
             if (compatibility == ModuleCompatibility.PARTIAL) {
-                RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+                RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
                 GuiComponent.fill(matrixStack, xOffset - 1, scroll - 1, xOffset + rowWidth - 9, scroll + rowHeight + 1, 0xff773a00);
             }
 
@@ -191,8 +188,8 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
             // Bind the icon texture.
             RenderSystem.setShaderTexture(0, this.module.getTextureLocation());
 
-            RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
-            GuiComponent.blit(matrixStack, xOffset, scroll, 0.0f, 0.0f, 32, 32, 32, 32);
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+            GuiComponent.blit(matrixStack, xOffset, scroll, 0f, 0f, 32, 32, 32, 32);
 
             int dx = 64 + xOffset + 8;
 
@@ -202,7 +199,7 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
             // Show icon for core modules.
             if (this.module.isCore()) {
                 dx += 18;
-                GuiComponent.blit(matrixStack, dx, scroll + 14, 64.0f, 0.0f, 16, 16, 256, 256);
+                GuiComponent.blit(matrixStack, dx, scroll + 14, 64f, 0f, 16, 16, 256, 256);
             }
 
             // Check security, show icon for experimental / risc security.
@@ -210,12 +207,12 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                 case EXPERIMENTAL:
                     // Show experimental icon texture. (Red shield icon, white exclamation point)
                     dx += 18;
-                    GuiComponent.blit(matrixStack, dx, scroll + 14, 80.0f, 0.0f, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 80f, 0f, 16, 16, 256, 256);
                     break;
                 case RISC:
                     // Show risc icon texture. (Yellow shield icon, black exclamation point)
                     dx += 18;
-                    GuiComponent.blit(matrixStack, dx, scroll + 14, 96.0f, 0.0f, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 96f, 0f, 16, 16, 256, 256);
                     break;
                 case SAFE:
                     // Don't show any security icon texture.
@@ -227,12 +224,12 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                 case NONE:
                     // Show no compatibility icon texture. (Red circle, white exclamation point)
                     dx += 18;
-                    GuiComponent.blit(matrixStack, dx, scroll + 14, 48.0f, 0.0f, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 48f, 0f, 16, 16, 256, 256);
                     break;
                 case PARTIAL:
                     // Show partial compatibility icon texture. (Yellow triangle, black exclamation point)
                     dx += 18;
-                    GuiComponent.blit(matrixStack, dx, scroll + 14, 32.0f, 0.0f, 16, 16, 256, 256);
+                    GuiComponent.blit(matrixStack, dx, scroll + 14, 32f, 0f, 16, 16, 256, 256);
                     break;
                 case FULL:
                     // Don't show any compatibility icon texture.
@@ -251,14 +248,14 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                 // Bind icon texture for arrow.
                 RenderSystem.setShaderTexture(0, ModuleList.ICONS);
 
-                // Check if can be disabled.
+                // Check if it can be disabled.
                 if (this.module.canDisable()) {
                     // Show white overlay on top of the module icon.
                     GuiComponent.fill(matrixStack, xOffset, scroll, xOffset + 32, scroll + 32, -1601138544);
                 }
 
                 // Set to full color for arrow icon to display.
-                RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+                RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
                 // Normal arrow button state.
                 if (!manager.isUnsavedEnabled(this.module)) {
@@ -266,20 +263,20 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                     // Check hover state.
                     if (mouseXOffset < 32) {
                         // Hovered.
-                        GuiComponent.blit(matrixStack, xOffset, scroll, 0.0f, 32.0f, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 0f, 32f, 32, 32, 256, 256);
                     } else {
                         // Non-hovered.
-                        GuiComponent.blit(matrixStack, xOffset, scroll, 0.0f, 0.0f, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 0f, 0f, 32, 32, 256, 256);
                     }
                 } else if (manager.isUnsavedEnabled(this.module) && this.module.canDisable()) {
                     // Module is scheduled to be disabled when saved.
                     // Check hover state.
                     if (mouseXOffset < 32) {
                         // Hovered.
-                        GuiComponent.blit(matrixStack, xOffset, scroll, 26.0f, 32.0f, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 26f, 32f, 32, 32, 256, 256);
                     } else {
                         // Non-hovered.
-                        GuiComponent.blit(matrixStack, xOffset, scroll, 26.0f, 0.0f, 32, 32, 256, 256);
+                        GuiComponent.blit(matrixStack, xOffset, scroll, 26f, 0f, 32, 32, 256, 256);
                     }
                 }
             }
@@ -364,17 +361,15 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
 
                     // Switch security state enum.
                     switch (security) {
-                        case SAFE:
-                            // Just enable the module. It's safe, so no warnings should be needed.
-                            this.manager.enable(this.module);
-                            break;
-                        case RISC:
-                        case EXPERIMENTAL:
+                        case SAFE ->
+                                // Just enable the module. It's safe, so no warnings should be needed.
+                                this.manager.enable(this.module);
+                        case RISC, EXPERIMENTAL -> {
                             // Show confirm message, because it's insecure.
                             Component securityText = security.getConfirmMessage();
 
                             // Display gui screen.
-                            this.mc.displayGuiScreen(new ConfirmScreen((confirmed) -> {
+                            this.mc.setScreen(new ConfirmScreen((confirmed) -> {
                                 // Check if confirmed.
                                 if (confirmed) {
                                     // Switch compatibility state enum.
@@ -382,28 +377,28 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                                         // Just enable the module.
                                         this.manager.enable(this.module);
 
-                                        // Return back to module screen.
-                                        this.mc.displayGuiScreen(this.screen);
+                                        // Return to module screen.
+                                        this.mc.setScreen(this.screen);
                                     } else if (!compatibility.isCompatible() && compatibility.isRunnable()) {
-                                        // Get the confirm message for the compatibility.
+                                        // Get the confirmation message for the compatibility.
                                         Component compatText = compatibility.getConfirmMessage();
 
                                         // Show confirm message, because compatibility is partial.
-                                        this.mc.displayGuiScreen(new ConfirmScreen((p_238921_1_) -> {
+                                        this.mc.setScreen(new ConfirmScreen((p_238921_1_) -> {
                                             if (p_238921_1_) {
                                                 this.manager.enable(this.module);
                                             }
-                                            this.mc.displayGuiScreen(this.screen);
+                                            this.mc.setScreen(this.screen);
 
                                         }, ModuleList.INCOMPATIBLE_CONFIRM_TITLE, compatText));
                                     } // Note: Don't enable if no compatibility.
                                 } else {
-                                    this.mc.displayGuiScreen(this.screen);
+                                    this.mc.setScreen(this.screen);
                                 }
                             }, ModuleList.INCOMPATIBLE_CONFIRM_TITLE, securityText));
-                            break;
-                        default:
-                            break;
+                        }
+                        default -> {
+                        }
                     }
 
                     switch (compatibility) {
@@ -414,11 +409,11 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
                         case PARTIAL:
                             // Show confirm message, because compatibility is partial.
                             Component textComponent = compatibility.getConfirmMessage();
-                            this.mc.displayGuiScreen(new ConfirmScreen((p_238921_1_) -> {
+                            this.mc.setScreen(new ConfirmScreen((p_238921_1_) -> {
                                 if (p_238921_1_) {
                                     this.manager.enable(this.module);
                                 }
-                                this.mc.displayGuiScreen(this.screen);
+                                this.mc.setScreen(this.screen);
 
                             }, ModuleList.INCOMPATIBLE_CONFIRM_TITLE, textComponent));
                             break;
@@ -450,6 +445,11 @@ public class ModuleList extends ObjectSelectionList<ModuleList.ModuleEntry> {
             }
 
             return false;
+        }
+
+        @Override
+        public Component getNarration() {
+            return module.getLocalizedName();
         }
     }
 }

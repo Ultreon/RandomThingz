@@ -1,7 +1,7 @@
 package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.block.FrameBlock;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
 import net.minecraft.client.Minecraft;
@@ -47,7 +47,7 @@ public class EdgedSlopeBakedModel implements IDynamicBakedModel {
     @NotNull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null && state != null) {
@@ -64,11 +64,11 @@ public class EdgedSlopeBakedModel implements IDynamicBakedModel {
         if (side != null) {
             return Collections.emptyList();
         }
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
-        Integer design = extraData.getData(FrameBlockTile.DESIGN);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
+        Integer design = extraData.getData(FrameBlockEntity.DESIGN);
         if (mimic != null && state != null) {
             List<TextureAtlasSprite> texture = TextureHelper.getTextureFromModel(model, extraData, rand);
-            int index = extraData.getData(FrameBlockTile.TEXTURE);
+            int index = extraData.getData(FrameBlockEntity.TEXTURE);
             if (index >= texture.size()) {
                 index = 0;
             }

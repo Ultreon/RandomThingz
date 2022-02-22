@@ -2,16 +2,11 @@ package com.ultreon.randomthingz;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.ultreon.randomthingz.common.Module;
-import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.internal.RtArgs;
 import com.ultreon.randomthingz.common.internal.RtCredits;
 import com.ultreon.randomthingz.common.internal.RtVersion;
 import lombok.Getter;
-import net.minecraft.CrashReport;
-import net.minecraft.CrashReportCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.ReportedException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -20,6 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.MavenVersionStringHelper;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
@@ -27,6 +23,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -37,7 +35,6 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -83,9 +80,10 @@ public final class RandomThingz {
 
     // Mod Data
     public static final String MOD_ID = "randomthingz";
-    public static final String MOD_NAME = "Random Thingz";
     public static final String NBT_NAME = "RandomThingz";
+    public static final String MOD_NAME;
     public static final String MOD_VERSION;
+    public static final String MOD_DESCRIPTION;
     public static final RtCredits RT_CREDITS;
 
     static {
@@ -153,6 +151,10 @@ public final class RandomThingz {
         }
     };
 
+    public static final URL UPDATE_URL;
+    public static final String LICENSE;
+    public static final File MOD_FILE;
+
     static {
         if (new File("/mnt/chromeos").exists()) {
             throw new UnsupportedOperationException("Tried to run RandomThingz on Chrome OS (Linux subsystem), this is unsupported.");
@@ -181,8 +183,16 @@ public final class RandomThingz {
         JsonObject o = gson.fromJson(isr, JsonObject.class);
 
         RT_ARGS = new RtArgs(o);
-        MOD_VERSION = RT_ARGS.getVersion().getName();
+//        MOD_VERSION = RT_ARGS.getVersion().getName();
         RT_VERSION = RT_ARGS.getVersion().toVersionObject();
+
+        ModContainer container = ModList.get().getModContainerById(MOD_ID).orElseThrow();
+        MOD_NAME = container.getModInfo().getDisplayName();
+        MOD_VERSION = MavenVersionStringHelper.artifactVersionToString(container.getModInfo().getVersion());
+        MOD_DESCRIPTION = container.getModInfo().getDescription();
+        LICENSE = container.getModInfo().getOwningFile().getLicense();
+        MOD_FILE = container.getModInfo().getOwningFile().getFile().getFilePath().toFile();
+        UPDATE_URL = container.getModInfo().getUpdateURL().orElse(null);
     }
 
     // Getters
@@ -202,24 +212,10 @@ public final class RandomThingz {
         RandomThingz.instance = this;
         RandomThingz.proxy = DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);
         RandomThingz.init = new Initialization(this);
+        Loader loader = new Loader();
 
-        try {
-            ModuleManager.getInstance().initialize();
-        } catch (IOException e) {
-            CrashReport report = new CrashReport("RandomThingz Modules being initialized", e);
-            CrashReportCategory reportCategory = report.addCategory("Module details");
-            try {
-                ModuleManager manager = ModuleManager.getInstance();
-                Module currentModule = manager.getCurrentModule();
-
-                reportCategory.setDetail("Module Name", currentModule::getName);
-                reportCategory.setDetail("Enabled", () -> manager.isEnabledInConfig(currentModule) ? "Yes" : "No");
-            } catch (Throwable ignored) {
-
-            }
-
-            throw new ReportedException(report);
-        }
+        loader.initModules();
+        loader.initLootInjections();
 
         // Assign constants.
         Constants.logger = LOGGER;
@@ -267,7 +263,7 @@ public final class RandomThingz {
      * @param path the resource path.
      * @return a resource location.
      */
-    public static ResourceLocation rl(String path) {
+    public static ResourceLocation res(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
 

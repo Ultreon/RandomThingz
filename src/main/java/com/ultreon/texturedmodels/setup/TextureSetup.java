@@ -22,7 +22,7 @@ public class TextureSetup {
 
     @SubscribeEvent
     public static void onStitchEvent(TextureStitchEvent.Pre event) {
-        ResourceLocation stitching = event.getMap().location();
+        ResourceLocation stitching = event.getAtlas().location();
         if (stitching.equals(TextureAtlas.LOCATION_BLOCKS)) {
             LOGGER.info("Stitching textures from QTextureModels");
             event.addSprite(loc("block/chest_front"));

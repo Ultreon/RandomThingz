@@ -3,7 +3,7 @@ package com.ultreon.texturedmodels.block;
 import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.tileentity.ITickable;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
@@ -60,7 +60,7 @@ public class FenceGateFrameBlock extends FenceGateBlock implements SimpleWaterlo
 
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return new FrameBlockTile(pos, state);
+        return new FrameBlockEntity(pos, state);
     }
 
     @Nullable
@@ -95,10 +95,10 @@ public class FenceGateFrameBlock extends FenceGateBlock implements SimpleWaterlo
                     BlockEntity tileEntity = dimension.getBlockEntity(pos);
                     int count = player.getItemInHand(hand).getCount();
                     Block heldBlock = ((BlockItem) item.getItem()).getBlock();
-                    if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
-                        ((FrameBlockTile) tileEntity).clear();
+                    if (tileEntity instanceof FrameBlockEntity && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
+                        ((FrameBlockEntity) tileEntity).clear();
                         BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
-                        ((FrameBlockTile) tileEntity).setMimic(handBlockState);
+                        ((FrameBlockEntity) tileEntity).setMimic(handBlockState);
                         insertBlock(dimension, pos, state, handBlockState);
                         if (!player.isCreative())
                             player.getItemInHand(hand).setCount(count - 1);
@@ -119,14 +119,14 @@ public class FenceGateFrameBlock extends FenceGateBlock implements SimpleWaterlo
     protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
         if (!dimensionIn.isClientSide) {
             BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof FrameBlockTile frameTileEntity) {
+            if (tileentity instanceof FrameBlockEntity frameTileEntity) {
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
                     dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clear();
-                    double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
+                    double d0 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
+                    double d1 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .060000002f + 0.6D;
+                    double d2 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
                     ItemStack itemstack1 = new ItemStack(blockState.getBlock());
                     ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
                     itementity.setDefaultPickUpDelay();
@@ -139,7 +139,7 @@ public class FenceGateFrameBlock extends FenceGateBlock implements SimpleWaterlo
 
     public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
         BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-        if (tileentity instanceof FrameBlockTile frameTileEntity) {
+        if (tileentity instanceof FrameBlockEntity frameTileEntity) {
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
             dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);

@@ -3,7 +3,8 @@ package com.ultreon.texturedmodels.block;
 import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
+import com.ultreon.texturedmodels.tileentity.ITickable;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
@@ -19,14 +20,18 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -41,32 +46,33 @@ import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL
  * @author PianoManu
  * @version 1.4 10/06/20
  */
-public class StairsFrameBlock extends StairBlock {
+public class StairsFrameBlock extends StairBlock implements EntityBlock {
 
     public static final BooleanProperty CONTAINS_BLOCK = BCBlockStateProperties.CONTAINS_BLOCK;
 
     public StairsFrameBlock(Supplier<BlockState> state, Properties properties) {
         super(state, properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(CONTAINS_BLOCK, Boolean.FALSE).setValue(FACING, Direction.NORTH).setValue(HALF, Half.BOTTOM).setValue(SHAPE, StairsShape.STRAIGHT).setValue(WATERLOGGED, Boolean.valueOf(false)).setValue(LIGHT_LEVEL, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(CONTAINS_BLOCK, Boolean.FALSE).setValue(FACING, Direction.NORTH).setValue(HALF, Half.BOTTOM).setValue(SHAPE, StairsShape.STRAIGHT).setValue(WATERLOGGED, Boolean.FALSE).setValue(LIGHT_LEVEL, 0));
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(CONTAINS_BLOCK, FACING, HALF, SHAPE, WATERLOGGED, LIGHT_LEVEL);
     }
 
+    @Nullable
     @Override
-    public boolean hasBlockEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+        return new FrameBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new FrameBlockTile();
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level p_153212_, @NotNull BlockState p_153213_, @NotNull BlockEntityType<T> p_153214_) {
+        return ITickable::tickTE;
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level dimension, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, Level dimension, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult trace) {
         ItemStack item = player.getItemInHand(hand);
         if (!dimension.isClientSide) {
             BlockAppearanceHelper.setLightLevel(item, state, dimension, pos, player, hand);
@@ -80,10 +86,10 @@ public class StairsFrameBlock extends StairBlock {
                 }
                 BlockEntity tileEntity = dimension.getBlockEntity(pos);
                 int count = player.getItemInHand(hand).getCount();
-                if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(((BlockItem) item.getItem()).getBlock()) && !state.getValue(CONTAINS_BLOCK)) {
-                    ((FrameBlockTile) tileEntity).clear();
+                if (tileEntity instanceof FrameBlockEntity && !item.isEmpty() && BlockSavingHelper.isValidBlock(((BlockItem) item.getItem()).getBlock()) && !state.getValue(CONTAINS_BLOCK)) {
+                    ((FrameBlockEntity) tileEntity).clear();
                     BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
-                    ((FrameBlockTile) tileEntity).setMimic(handBlockState);
+                    ((FrameBlockEntity) tileEntity).setMimic(handBlockState);
                     insertBlock(dimension, pos, state, handBlockState);
                     if (!player.isCreative())
                         player.getItemInHand(hand).setCount(count - 1);
@@ -102,19 +108,17 @@ public class StairsFrameBlock extends StairBlock {
 
     private void dropContainedBlock(Level dimensionIn, BlockPos pos) {
         if (!dimensionIn.isClientSide) {
-            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof FrameBlockTile) {
-                FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
+            BlockEntity blockEntity = dimensionIn.getBlockEntity(pos);
+            if (blockEntity instanceof FrameBlockEntity frameTileEntity) {
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
                     dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clear();
-                    float f = 0.7F;
-                    double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    ItemStack itemstack1 = new ItemStack(blockState.getBlock());
-                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
+                    double d0 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
+                    double d1 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .060000002f + 0.6D;
+                    double d2 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
+                    ItemStack stack1 = new ItemStack(blockState.getBlock());
+                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack1);
                     itementity.setDefaultPickUpDelay();
                     dimensionIn.addFreshEntity(itementity);
                     frameTileEntity.clear();
@@ -124,9 +128,8 @@ public class StairsFrameBlock extends StairBlock {
     }
 
     public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
-        BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-        if (tileentity instanceof FrameBlockTile) {
-            FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
+        BlockEntity blockEntity = dimensionIn.getBlockEntity(pos);
+        if (blockEntity instanceof FrameBlockEntity frameTileEntity) {
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
             dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);
@@ -134,7 +137,7 @@ public class StairsFrameBlock extends StairBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @NotNull Level dimensionIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             dropContainedBlock(dimensionIn, pos);
 

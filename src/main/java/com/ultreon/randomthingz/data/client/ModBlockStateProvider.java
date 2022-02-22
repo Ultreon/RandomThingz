@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.data.client;
 
-import com.ultreon.modlib.embedded.silentlib.registry.BlockRegistryObject;
-import com.ultreon.modlib.embedded.silentlib.util.NameUtils;
+import com.ultreon.modlib.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.StoneType;
 import com.ultreon.randomthingz.block._common.ModBlocks;
@@ -35,7 +35,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         Arrays.stream(ItemMaterial.values()).forEach(metal -> {
-            metal.getOre().ifPresent(this::simpleBlock);
+            metal.getStoneOre().ifPresent(this::simpleBlock);
+            metal.getDeepslateOre().ifPresent(this::simpleBlock);
             metal.getStorageBlock().ifPresent(this::simpleBlock);
         });
 
@@ -91,8 +92,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
             ResourceLocation polishedStairsBlock = Objects.requireNonNull(stoneType.getPolishedStairsBlock().get().getRegistryName());
 
             // Textures.
-            ResourceLocation rawBlockTexture = RandomThingz.rl("block/" + Objects.requireNonNull(stoneType.getRawBlock().get().getRegistryName()).getPath());
-            ResourceLocation polishedBlockTexture = RandomThingz.rl("block/" + Objects.requireNonNull(stoneType.getPolishedBlock().get().getRegistryName()).getPath());
+            ResourceLocation rawBlockTexture = RandomThingz.res("block/" + Objects.requireNonNull(stoneType.getRawBlock().get().getRegistryName()).getPath());
+            ResourceLocation polishedBlockTexture = RandomThingz.res("block/" + Objects.requireNonNull(stoneType.getPolishedBlock().get().getRegistryName()).getPath());
 
             // Cube block models.
             ModelFile raw = cubeAll(stoneType.getRawBlock().get());
@@ -102,22 +103,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
             simpleBlock(stoneType.getPolishedBlock().get(), polished);
 
             // Stairs
-            ModelFile stairs = models().stairs(RandomThingz.rl("block/" + stairsBlock.getPath()).toString(), rawBlockTexture, rawBlockTexture, rawBlockTexture);
-            ModelFile stairsInner = models().stairsInner(RandomThingz.rl("block/" + "inner_" + stairsBlock.getPath()).toString(), rawBlockTexture, rawBlockTexture, rawBlockTexture);
-            ModelFile stairsOuter = models().stairsOuter(RandomThingz.rl("block/" + "outer_" + stairsBlock.getPath()).toString(), rawBlockTexture, rawBlockTexture, rawBlockTexture);
+            ModelFile stairs = models().stairs(RandomThingz.res("block/" + stairsBlock.getPath()).toString(), rawBlockTexture, rawBlockTexture, rawBlockTexture);
+            ModelFile stairsInner = models().stairsInner(RandomThingz.res("block/" + "inner_" + stairsBlock.getPath()).toString(), rawBlockTexture, rawBlockTexture, rawBlockTexture);
+            ModelFile stairsOuter = models().stairsOuter(RandomThingz.res("block/" + "outer_" + stairsBlock.getPath()).toString(), rawBlockTexture, rawBlockTexture, rawBlockTexture);
 
             // Polished Stairs
-            ModelFile polishedStairs = models().stairs(RandomThingz.rl("block/" + polishedStairsBlock.getPath()).toString(), polishedBlockTexture, polishedBlockTexture, polishedBlockTexture);
-            ModelFile polishedStairsInner = models().stairsInner(RandomThingz.rl("block/" + "inner_" + polishedStairsBlock.getPath()).toString(), polishedBlockTexture, polishedBlockTexture, polishedBlockTexture);
-            ModelFile polishedStairsOuter = models().stairsOuter(RandomThingz.rl("block/" + "outer_" + polishedStairsBlock.getPath()).toString(), polishedBlockTexture, polishedBlockTexture, polishedBlockTexture);
+            ModelFile polishedStairs = models().stairs(RandomThingz.res("block/" + polishedStairsBlock.getPath()).toString(), polishedBlockTexture, polishedBlockTexture, polishedBlockTexture);
+            ModelFile polishedStairsInner = models().stairsInner(RandomThingz.res("block/" + "inner_" + polishedStairsBlock.getPath()).toString(), polishedBlockTexture, polishedBlockTexture, polishedBlockTexture);
+            ModelFile polishedStairsOuter = models().stairsOuter(RandomThingz.res("block/" + "outer_" + polishedStairsBlock.getPath()).toString(), polishedBlockTexture, polishedBlockTexture, polishedBlockTexture);
 
             // Slab
-            ModelFile slab = models().slab(RandomThingz.rl("block/" + slabBlock.getPath()).toString(), rawBlockTexture, rawBlockTexture, rawBlockTexture);
-            ModelFile slabTop = models().slabTop(RandomThingz.rl("block/" + slabBlock.getPath() + "_top").toString(), rawBlockTexture, rawBlockTexture, rawBlockTexture);
+            ModelFile slab = models().slab(RandomThingz.res("block/" + slabBlock.getPath()).toString(), rawBlockTexture, rawBlockTexture, rawBlockTexture);
+            ModelFile slabTop = models().slabTop(RandomThingz.res("block/" + slabBlock.getPath() + "_top").toString(), rawBlockTexture, rawBlockTexture, rawBlockTexture);
 
             // Polished Slab
-            ModelFile polishedSlab = models().slab(RandomThingz.rl("block/" + polishedSlabBlock.getPath()).toString(), polishedBlockTexture, polishedBlockTexture, polishedBlockTexture);
-            ModelFile polishedSlabTop = models().slabTop(RandomThingz.rl("block/" + polishedSlabBlock.getPath() + "_top").toString(), polishedBlockTexture, polishedBlockTexture, polishedBlockTexture);
+            ModelFile polishedSlab = models().slab(RandomThingz.res("block/" + polishedSlabBlock.getPath()).toString(), polishedBlockTexture, polishedBlockTexture, polishedBlockTexture);
+            ModelFile polishedSlabTop = models().slabTop(RandomThingz.res("block/" + polishedSlabBlock.getPath() + "_top").toString(), polishedBlockTexture, polishedBlockTexture, polishedBlockTexture);
 
             // Block States
             stairsBlock(stoneType.getStairsBlock().get(), stairs, stairsInner, stairsOuter);

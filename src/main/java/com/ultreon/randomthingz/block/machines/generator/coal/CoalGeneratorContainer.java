@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.generator.coal;
 
-import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
 import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;

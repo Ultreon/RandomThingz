@@ -67,7 +67,7 @@ public class MagnetItem extends EnergyStoringItem {
                         double distZ = player.getZ() - item.getZ();
                         double distY = item.getY() + 1.5D - item.getY();
                         double dir = Math.atan2(distZ, distX);
-                        double speed = 5F / item.distanceTo(player) * 0.5;
+                        double speed = 5f / item.distanceTo(player) * 0.5;
                         if (distY < 0) {
                             item.setDeltaMovement(item.getDeltaMovement().x, item.getDeltaMovement().y + speed, item.getDeltaMovement().z);
                         } else if (distY > 0) {

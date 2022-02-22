@@ -2,7 +2,7 @@ package com.ultreon.randomthingz;
 
 import com.ultreon.randomthingz.actionmenu.ActionMenuModule;
 import com.ultreon.randomthingz.block._common.BlocksModule;
-import com.ultreon.randomthingz.block.entity.TileEntitiesModule;
+import com.ultreon.randomthingz.block.entity.BlockEntitiesModule;
 import com.ultreon.randomthingz.client.ClientTweaksModule;
 import com.ultreon.randomthingz.client.debug.menu.DebugMenuModule;
 import com.ultreon.randomthingz.client.gui.screen.confirmExit.ConfirmExitModule;
@@ -49,7 +49,7 @@ public class Modules {
         public static final BlocksModule BLOCKS = new BlocksModule();
         public static final ItemsModule ITEMS = new ItemsModule();
         public static final EntitiesModule ENTITIES = new EntitiesModule();
-        public static final TileEntitiesModule TILE_ENTITIES = new TileEntitiesModule();
+        public static final BlockEntitiesModule TILE_ENTITIES = new BlockEntitiesModule();
         public static final WorldGenerationModule BIOMES = new WorldGenerationModule();
         public static final OresModule ORES = new OresModule();
         public static final UpdatesModule UPDATES = new UpdatesModule();

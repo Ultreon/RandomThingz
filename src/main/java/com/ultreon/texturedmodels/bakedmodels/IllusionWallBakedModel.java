@@ -2,7 +2,7 @@ package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.block.FenceFrameBlock;
 import com.ultreon.texturedmodels.block.FrameBlock;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.BlockModelShaper;
@@ -38,7 +38,7 @@ public class IllusionWallBakedModel implements IDynamicBakedModel {
     @NotNull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
@@ -55,8 +55,8 @@ public class IllusionWallBakedModel implements IDynamicBakedModel {
         if (side != null) {
             return Collections.emptyList();
         }
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
-        Integer design = extraData.getData(FrameBlockTile.DESIGN);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
+        Integer design = extraData.getData(FrameBlockEntity.DESIGN);
         if (mimic != null && state != null) {
             int tintIndex = -1;
             if (mimic.getBlock() instanceof GrassBlock) {
@@ -195,7 +195,7 @@ public class IllusionWallBakedModel implements IDynamicBakedModel {
                     quads.addAll(ModelHelper.createSixFaceCuboid(0f, 4 / 16f, 0f, 2 / 16f, 5 / 16f, 11 / 16f, mimic, model, extraData, rand, tintIndex));
                 }
             }
-            int overlayIndex = extraData.getData(FrameBlockTile.OVERLAY);
+            int overlayIndex = extraData.getData(FrameBlockEntity.OVERLAY);
             if (overlayIndex != 0) {
                 quads.addAll(ModelHelper.createOverlay(4 / 16f, 12 / 16f, 0f, 1f, 4 / 16f, 12 / 16f, overlayIndex));
             }

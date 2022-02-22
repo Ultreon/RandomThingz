@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.machines.quarry;
 
 import com.ultreon.modlib.api.RedstoneMode;
-import com.ultreon.modlib.embedded.silentutils.EnumUtils;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.modlib.silentutils.EnumUtils;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
@@ -174,7 +174,7 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
      * Constructor.
      */
     public QuarryBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.quarry, pos, state, 0, 10_000, 100, 0, MachineTier.SUPER);
+        super(ModMachines.QUARRY, pos, state, 0, 10_000, 100, 0, MachineTier.SUPER);
     }
 
     /**
@@ -289,7 +289,7 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
      *       <ol>
      *           <li>Calculate block break animation index.</li>
      *           <li>Send block break animation to dimension, with breaker id -1 for current mining block.</li>
-     *           <li>Advance break progress by 0.04f * the process speed upgrade count.</li>
+     *           <li>Advance break progress by .04f * the process speed upgrade count.</li>
      *       </ol>
      *   </li>
      *
@@ -357,9 +357,9 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
             BlockState blockState = level.getBlockState(newPos);
             breakProcessTime = blockState.getDestroySpeed(level, worldPosition);
         } else {
-            int i = (int) ((breakProcessTime / breakProgress) * 10.0f);
+            int i = (int) ((breakProcessTime / breakProgress) * 10f);
             level.destroyBlockProgress(this.worldPosition.hashCode(), posToBreak, i);
-            breakProgress += 0.2f * ((getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) * 2f) + 1f);
+            breakProgress += .2f * ((getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) * 2f) + 1f);
         }
 
         // Process
@@ -496,9 +496,9 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
                                 continue;
                             }
                             if (!this.level.isClientSide && !stack.isEmpty() && this.level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS) && !this.level.restoringBlockSnapshots) {
-                                double d0 = (double) (this.level.random.nextFloat() * 0.5F) + 0.25D;
-                                double d1 = (double) (this.level.random.nextFloat() * 0.5F) + 0.25D;
-                                double d2 = (double) (this.level.random.nextFloat() * 0.5F) + 0.25D;
+                                double d0 = (double) (this.level.random.nextFloat() * .5f) + 0.25D;
+                                double d1 = (double) (this.level.random.nextFloat() * .5f) + 0.25D;
+                                double d2 = (double) (this.level.random.nextFloat() * .5f) + 0.25D;
                                 ItemEntity itementity = new ItemEntity(this.level, (double) this.worldPosition.getX() + d0, this.worldPosition.getY() + 2.5d + d1, (double) this.worldPosition.getZ() + d2, stack);
                                 itementity.setDefaultPickUpDelay();
                                 this.level.addFreshEntity(itementity);

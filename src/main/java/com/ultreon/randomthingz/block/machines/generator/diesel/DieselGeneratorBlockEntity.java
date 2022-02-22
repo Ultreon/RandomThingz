@@ -1,7 +1,8 @@
 package com.ultreon.randomthingz.block.machines.generator.diesel;
 
 import com.ultreon.modlib.api.FluidContainer;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.generator.FluidFuelGeneratorBlockEntity;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import com.ultreon.randomthingz.util.TextUtils;
@@ -30,7 +31,11 @@ public class DieselGeneratorBlockEntity extends FluidFuelGeneratorBlockEntity {
     static final Tag.Named<Fluid> FUEL_TAG = FluidTags.bind(new ResourceLocation("forge", "diesel").toString());
 
     public DieselGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.dieselGenerator, pos, state, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(4000, s -> s.getFluid().is(FUEL_TAG)));
+        super(ModMachines.DIESEL_GENERATOR, pos, state, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(4000, s -> s.getFluid().is(FUEL_TAG)));
+    }
+
+    public DieselGeneratorBlockEntity() {
+        this(BlockPos.ZERO, ModBlocks.DIESEL_GENERATOR.asBlockState());
     }
 
     @Override

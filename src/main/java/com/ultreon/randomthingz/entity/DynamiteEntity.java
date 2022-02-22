@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author Qboi123
  */
-@SuppressWarnings({"deprecation", "unused"})
+@SuppressWarnings({"unused"})
 public class DynamiteEntity extends ThrowableItemProjectile {
 
     public DynamiteEntity(EntityType<? extends DynamiteEntity> p_i50153_1_, Level dimension) {
@@ -53,9 +53,9 @@ public class DynamiteEntity extends ThrowableItemProjectile {
         super.onHit(result);
         Entity entity = this.getOwner();
 
-        if (!this.level.isClientSide && !this.removed) {
+        if (!this.level.isClientSide && !this.isRemoved()) {
             this.level.explode(this, this.getX(), this.getY(), this.getZ(), 4f, false, Explosion.BlockInteraction.BREAK);
-            this.remove();
+            this.discard();
         }
     }
 
@@ -65,7 +65,7 @@ public class DynamiteEntity extends ThrowableItemProjectile {
     public void tick() {
         Entity entity = this.getOwner();
         if (entity instanceof Player && !entity.isAlive()) {
-            this.remove();
+            this.discard();
         } else {
             super.tick();
         }
@@ -74,9 +74,9 @@ public class DynamiteEntity extends ThrowableItemProjectile {
 
     @Nullable
     public Entity changeDimension(@NotNull ServerLevel server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
-        Entity entity = this.getShooter();
-        if (entity != null && entity.level.getDimensionKey() != server.getDimensionKey()) {
-            this.setShooter(null);
+        Entity entity = this.getOwner();
+        if (entity != null && entity.level.dimension() != server.dimension()) {
+            this.setOwner(null);
         }
 
         return super.changeDimension(server, teleporter);

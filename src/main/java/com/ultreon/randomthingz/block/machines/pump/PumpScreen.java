@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class PumpScreen extends AbstractMachineContainerScreen<PumpContainer> {
-    private static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/pump.png");
+    private static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/pump.png");
 
     public PumpScreen(PumpContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);

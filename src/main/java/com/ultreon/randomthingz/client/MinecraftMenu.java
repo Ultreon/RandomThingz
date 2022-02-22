@@ -27,20 +27,7 @@ public class MinecraftMenu extends AbstractActionMenu {
     }
 
     public void server() {
-//        addServer(new ServerActionMenuItem() {
-//            @SuppressWarnings("ConstantConditions")
-//            @Override
-//            public void onActivate(ServerPlayerEntity player) {
-//                RandomThingz.LOGGER.debug("Got activation for initiating server shutdown.");
-//                player.sendMessage(new TranslatableComponent("commands.stop.stopping"), player.getUniqueID());
-//                player.getServer().initiateShutdown(false);
-//            }
-//
-//            @Override
-//            public Component getText() {
-//                return new TranslatableComponent("action.randomthingz.stop_server");
-//            }
-//        });
+
     }
 
     public void client() {

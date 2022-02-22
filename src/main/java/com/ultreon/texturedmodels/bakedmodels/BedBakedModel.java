@@ -1,8 +1,8 @@
 package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.block.BedFrameBlock;
-import com.ultreon.texturedmodels.tileentity.BedFrameTile;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.BedFrameBlockEntity;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
 import net.minecraft.client.Minecraft;
@@ -49,7 +49,7 @@ public class BedBakedModel implements IDynamicBakedModel {
     @NotNull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        BlockState mimic = extraData.getData(BedFrameTile.MIMIC);
+        BlockState mimic = extraData.getData(BedFrameBlockEntity.MIMIC);
         if (mimic != null) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
@@ -67,14 +67,14 @@ public class BedBakedModel implements IDynamicBakedModel {
         if (side != null) {
             return Collections.emptyList();
         }
-        BlockState mimic = extraData.getData(BedFrameTile.MIMIC);
-        int tex = extraData.getData(BedFrameTile.TEXTURE);
+        BlockState mimic = extraData.getData(BedFrameBlockEntity.MIMIC);
+        int tex = extraData.getData(BedFrameBlockEntity.TEXTURE);
         if (mimic != null && state != null) {// && extraData.getData(BedFrameTile.PILLOW)!=null && extraData.getData(BedFrameTile.BLANKET)!=null) {
             List<TextureAtlasSprite> textureList = TextureHelper.getTextureFromModel(model, extraData, rand);
             TextureAtlasSprite texture;
             if (textureList.size() <= tex) {
                 //texture = textureList.get(0);
-                extraData.setData(FrameBlockTile.TEXTURE, 0);
+                extraData.setData(FrameBlockEntity.TEXTURE, 0);
                 tex = 0;
             }
             if (textureList.size() == 0) {
@@ -89,15 +89,15 @@ public class BedBakedModel implements IDynamicBakedModel {
                 tintIndex = 1;
             }
             List<BakedQuad> quads = new ArrayList<>(ModelHelper.createCuboid(0f, 1f, 3 / 16f, 5 / 16f, 0f, 1f, texture, tintIndex));
-            TextureAtlasSprite pillow = TextureHelper.getWoolTextures().get(extraData.getData(BedFrameTile.PILLOW));
-            TextureAtlasSprite blanket = TextureHelper.getWoolTextures().get(extraData.getData(BedFrameTile.BLANKET));
-            Integer design = extraData.getData(BedFrameTile.DESIGN);
+            TextureAtlasSprite pillow = TextureHelper.getWoolTextures().get(extraData.getData(BedFrameBlockEntity.PILLOW));
+            TextureAtlasSprite blanket = TextureHelper.getWoolTextures().get(extraData.getData(BedFrameBlockEntity.BLANKET));
+            Integer design = extraData.getData(BedFrameBlockEntity.DESIGN);
             if (design == null) {
                 return quads;
             }
             List<TextureAtlasSprite> planksList = TextureHelper.getPlanksTextures();
             TextureAtlasSprite planks;
-            Integer desTex = extraData.getData(BedFrameTile.DESIGN_TEXTURE);
+            Integer desTex = extraData.getData(BedFrameBlockEntity.DESIGN_TEXTURE);
             if (desTex == null || desTex < 0 || desTex > 7) {
                 return quads;
             } else {

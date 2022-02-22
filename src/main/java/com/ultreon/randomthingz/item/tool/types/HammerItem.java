@@ -123,7 +123,7 @@ public class HammerItem extends PickaxeItem implements IHasToolType {
 //            return this.speed * 1.7f;
 //        }
 //        if (getToolTypes(stack).stream().anyMatch(state::isToolEffective)) return speed;
-//        return this.blocks.contains(state.getBlock()) ? this.speed : 1.0f;
+//        return this.blocks.contains(state.getBlock()) ? this.speed : 1f;
 //    }
 //
 //    @Override
@@ -154,8 +154,8 @@ public class HammerItem extends PickaxeItem implements IHasToolType {
 //        }
 //        BlockState resultState = null;
 //        if (modifiedState != null) {
-//            world.playSound(player, pos, state.getSoundType().getBreakSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
-//            world.playSound(player, pos, modifiedState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0f, 1.0f);
+//            world.playSound(player, pos, state.getSoundType().getBreakSound(), SoundSource.BLOCKS, 1f, 1f);
+//            world.playSound(player, pos, modifiedState.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1f, 1f);
 //            resultState = modifiedState;
 //        }
 //
@@ -163,7 +163,7 @@ public class HammerItem extends PickaxeItem implements IHasToolType {
 //            if (!world.isClientSide) {
 //                world.setBlock(pos, resultState, 11);
 //                if (player != null) {
-//                    context.getItemInHand().hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(context.getHand()));
+//                    context.getItemInHand().damageItem(1, player, (p) -> p.broadcastBreakEvent(context.getHand()));
 //                }
 //            }
 //

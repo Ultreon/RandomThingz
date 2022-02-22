@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.crafting;
 
 import com.google.gson.JsonObject;
-import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidInventory;
-import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidRecipe;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidInventory;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidRecipe;
 import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import lombok.Getter;
@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class SolidifyingRecipe implements BaseFluidRecipe<BaseFluidInventory> {
+public class SolidifyingRecipe implements FluidRecipe<FluidInventory> {
     private final ResourceLocation recipeId;
     @Getter
     private int processTime;
@@ -32,12 +32,12 @@ public class SolidifyingRecipe implements BaseFluidRecipe<BaseFluidInventory> {
     private ItemStack result;
 
     @Override
-    public boolean matches(BaseFluidInventory inv, Level dimensionIn) {
+    public boolean matches(FluidInventory inv, Level dimensionIn) {
         return ingredient.test(inv.getFluidInTank(0));
     }
 
     @Override
-    public List<FluidStack> getFluidResults(BaseFluidInventory inv) {
+    public List<FluidStack> getFluidResults(FluidInventory inv) {
         return getFluidOutputs();
     }
 
@@ -52,7 +52,7 @@ public class SolidifyingRecipe implements BaseFluidRecipe<BaseFluidInventory> {
     }
 
     @Override
-    public ItemStack assemble(BaseFluidInventory inv) {
+    public ItemStack assemble(FluidInventory inv) {
         return getResultItem();
     }
 

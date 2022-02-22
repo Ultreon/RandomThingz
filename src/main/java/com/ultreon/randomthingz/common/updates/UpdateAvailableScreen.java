@@ -4,6 +4,7 @@ import com.mojang.text2speech.Narrator;
 import com.ultreon.modlib.graphics.MCGraphics;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
+import com.ultreon.randomthingz.common.interfaces.IVersion;
 import com.ultreon.randomthingz.common.internal.RtVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.NarratorStatus;
@@ -52,6 +53,8 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
     // AbstractUpdater.
     private final AbstractUpdater<?> updater;
+    private final IVersion latestVersion;
+    private final IVersion currentVersion;
 
     // Values.
     private int ticksUntilEnable;
@@ -71,6 +74,9 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         this.updater = updater;
         this.yesButtonText = CommonComponents.GUI_YES;
         this.noButtonText = CommonComponents.GUI_NO;
+
+        this.latestVersion = updater.getLatestVersion();
+        this.currentVersion = updater.getCurrentVersion();
     }
 
     /**
@@ -127,7 +133,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
         // Draw text.
         mcg.drawCenteredString(this.title, this.width / 2f, 70f, new Color(0xffffff));
-        mcg.drawCenteredString(new TranslatableComponent("msg.randomthingz.update_available.description", updater.getLatestVersion().toLocalizedString()), this.width / 2f, 90f, new Color(0xbfbfbf));
+        mcg.drawCenteredString(new TranslatableComponent("msg.randomthingz.update_available.description", latestVersion.toLocalizedString()), this.width / 2f, 90f, new Color(0xbfbfbf));
 
         this.message.renderCentered(mcg.getPoseStack(), this.width / 2, 90);
 
@@ -234,5 +240,13 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
         // Set updater debug to false.
         AbstractUpdater.DEBUG = false;
+    }
+
+    public IVersion getLatestVersion() {
+        return latestVersion;
+    }
+
+    public IVersion getCurrentVersion() {
+        return currentVersion;
     }
 }

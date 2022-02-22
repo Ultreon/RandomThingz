@@ -63,7 +63,7 @@ public class CheeseBlock extends Block implements Sliceable {
             return InteractionResult.PASS;
         } else {
             player.awardStat(ModStats.EAT_CHEESE_SLICE);
-            player.getFoodData().eat(2, 0.4F);
+            player.getFoodData().eat(2, .4f);
             int i = state.getValue(BITES);
             if (i < 4) {
                 dimension.setBlock(pos, state.setValue(BITES, i + 1), 3);

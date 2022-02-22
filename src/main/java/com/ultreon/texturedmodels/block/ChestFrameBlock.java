@@ -3,7 +3,7 @@ package com.ultreon.texturedmodels.block;
 import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
-import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
+import com.ultreon.texturedmodels.tileentity.ChestFrameBlockEntity;
 import com.ultreon.texturedmodels.tileentity.ITickable;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
@@ -108,7 +108,7 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
             if (item.getItem() instanceof BlockItem) {
                 int count = player.getItemInHand(hand).getCount();
                 Block heldBlock = ((BlockItem) item.getItem()).getBlock();
-                if (tileEntity instanceof ChestFrameTileEntity && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
+                if (tileEntity instanceof ChestFrameBlockEntity && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
                     BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
                     insertBlock(dimension, pos, state, handBlockState);
                     if (!player.isCreative())
@@ -126,9 +126,9 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
             BlockAppearanceHelper.setTexture(item, state, dimension, player, pos);
             BlockAppearanceHelper.setDesign(dimension, pos, player, item);
             BlockAppearanceHelper.setDesignTexture(dimension, pos, player, item);
-            if (tileEntity instanceof ChestFrameTileEntity && state.getValue(CONTAINS_BLOCK)) {
+            if (tileEntity instanceof ChestFrameBlockEntity && state.getValue(CONTAINS_BLOCK)) {
                 if (!(Objects.requireNonNull(item.getItem().getRegistryName()).getNamespace().equals(QTextureModels.MOD_ID))) {
-                    NetworkHooks.openGui((ServerPlayer) player, (ChestFrameTileEntity) tileEntity, pos);
+                    NetworkHooks.openGui((ServerPlayer) player, (ChestFrameBlockEntity) tileEntity, pos);
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -140,14 +140,14 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
     protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
         if (!dimensionIn.isClientSide) {
             BlockEntity entity = dimensionIn.getBlockEntity(pos);
-            if (entity instanceof ChestFrameTileEntity frameTileEntity) {
+            if (entity instanceof ChestFrameBlockEntity frameTileEntity) {
                 BlockState state = frameTileEntity.getMimic();
                 if (!(state == null)) {
                     dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clearContent();
-                    double x = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    double y = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double z = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
+                    double x = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
+                    double y = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .060000002f + 0.6D;
+                    double z = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
                     ItemStack stack = new ItemStack(state.getBlock());
                     ItemEntity item = new ItemEntity(dimensionIn, (double) pos.getX() + x, (double) pos.getY() + y, (double) pos.getZ() + z, stack);
                     item.setDefaultPickUpDelay();
@@ -161,7 +161,7 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
     @Override
     public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
         BlockEntity entity = dimensionIn.getBlockEntity(pos);
-        if (entity instanceof ChestFrameTileEntity frameTileEntity) {
+        if (entity instanceof ChestFrameBlockEntity frameTileEntity) {
             frameTileEntity.clearContent();
             frameTileEntity.setMimic(handBlock);
             dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);
@@ -172,9 +172,9 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
     public void onRemove(BlockState state, @NotNull Level dimensionIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity te = dimensionIn.getBlockEntity(pos);
-            if (te instanceof ChestFrameTileEntity) {
+            if (te instanceof ChestFrameBlockEntity) {
                 dropContainedBlock(dimensionIn, pos);
-                Containers.dropContents(dimensionIn, pos, ((ChestFrameTileEntity) te).getItems());
+                Containers.dropContents(dimensionIn, pos, ((ChestFrameBlockEntity) te).getItems());
             }
         }
     }

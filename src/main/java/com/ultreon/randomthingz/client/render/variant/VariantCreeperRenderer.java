@@ -4,7 +4,7 @@ import com.ultreon.randomthingz.client.MobVariantsModule;
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.entity.CreeperRenderer;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Creeper;
 
@@ -14,8 +14,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class VariantCreeperRenderer extends CreeperRenderer {
-    public VariantCreeperRenderer(EntityRenderDispatcher renderManagerIn) {
-        super(renderManagerIn);
+    public VariantCreeperRenderer(EntityRendererProvider.Context ctx) {
+        super(ctx);
     }
 
     @Override

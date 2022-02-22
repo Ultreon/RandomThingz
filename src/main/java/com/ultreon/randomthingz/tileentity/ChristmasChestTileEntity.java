@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.tileentity;
 
+import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModTileEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
@@ -13,5 +14,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class ChristmasChestTileEntity extends ChestBlockEntity {
     public ChristmasChestTileEntity(BlockPos pos, BlockState state) {
         super(ModTileEntities.CHRISTMAS_CHEST.get(), pos, state);
+    }
+
+    public ChristmasChestTileEntity() {
+        this(BlockPos.ZERO, ModBlocks.CHRISTMAS_CHEST.asBlockState());
     }
 }

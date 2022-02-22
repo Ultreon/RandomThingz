@@ -43,7 +43,7 @@ public class ItemContainer implements IItemHandler {
     }
 
     @NotNull
-    public @NotNull ItemStack getStack() {
+    public ItemStack getStack() {
         return stack;
     }
 

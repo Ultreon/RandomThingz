@@ -1,6 +1,5 @@
 package com.ultreon.randomthingz.client.gui.screen.confirmExit;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.text2speech.Narrator;
 import com.ultreon.randomthingz.RandomThingz;
@@ -28,7 +27,7 @@ import java.util.Objects;
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ConfirmExitScreen extends Screen {
-    private final MultiLineLabel bidi = MultiLineLabel.EMPTY;
+    private final MultiLineLabel label = MultiLineLabel.EMPTY;
     private final Component yesButtonText;
     private final Component noButtonText;
     private final Screen backScreen;
@@ -73,20 +72,19 @@ public class ConfirmExitScreen extends Screen {
         setButtonDelay(10);
     }
 
-    @SuppressWarnings("deprecation")
-    public void render(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull PoseStack pose, int mouseX, int mouseY, float partialTicks) {
         if (backScreen != null) {
-            backScreen.render(matrixStack, mouseX, mouseY, partialTicks);
-            RenderSystem.translatef(0.0f, 0.0f, 400.0f);
-            this.fillGradient(matrixStack, 0, 0, this.width, this.height, -1072689136, -804253680);
-            MinecraftForge.EVENT_BUS.post(new BackgroundDrawnEvent(this, matrixStack));
+            backScreen.render(pose, mouseX, mouseY, partialTicks);
+            pose.translate(0f, 0f, 400f);
+            this.fillGradient(pose, 0, 0, this.width, this.height, -1072689136, -804253680);
+            MinecraftForge.EVENT_BUS.post(new BackgroundDrawnEvent(this, pose));
         } else {
-            this.renderBackground(matrixStack);
+            this.renderBackground(pose);
         }
-        drawCenteredString(matrixStack, this.font, this.title, this.width / 2, 70, 0xffffff);
-        drawCenteredString(matrixStack, this.font, new TranslatableComponent("msg.randomthingz.confirm_exit.description"), this.width / 2, 90, 0xbfbfbf);
-        this.bidi.renderCentered(matrixStack, this.width / 2, 90);
-        super.render(matrixStack, mouseX, mouseY, partialTicks);
+        drawCenteredString(pose, this.font, this.title, this.width / 2, 70, 0xffffff);
+        drawCenteredString(pose, this.font, new TranslatableComponent("msg.randomthingz.confirm_exit.description"), this.width / 2, 90, 0xbfbfbf);
+        this.label.renderCentered(pose, this.width / 2, 90);
+        super.render(pose, mouseX, mouseY, partialTicks);
     }
 
     /**

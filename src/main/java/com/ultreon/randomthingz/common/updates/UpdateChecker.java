@@ -13,6 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.HashMap;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class UpdateChecker {
     private static final int delay = 10;
     private static final int tickDelay = 20 * delay;
@@ -52,7 +53,7 @@ public class UpdateChecker {
                 AbstractUpdater.UpdateInfo updateInfo = updater.checkForUpdates();
                 IVersion latest = updater.getLatestVersion();
                 if (!latestKnownMap.containsKey(updater)) {
-                    latestKnownMap.put(updater, updater.getCurrentModVersion());
+                    latestKnownMap.put(updater, updater.getCurrentVersion());
                 }
                 IVersion latestKnown = latestKnownMap.get(updater);
                 if (latestKnown == null || latest == null) {
@@ -65,7 +66,7 @@ public class UpdateChecker {
                     if (updateInfo.getStatus() == AbstractUpdater.UpdateStatus.UPDATE_AVAILABLE) {
                         RandomThingz.LOGGER.info("Update available for " + updater.getModInfo().getModId());
                         UpdateToast systemToast = new UpdateToast(updater);
-                        mc.getToastGui().add(systemToast);
+                        mc.getToasts().addToast(systemToast);
                     }
                 }
             }

@@ -30,7 +30,7 @@ public class MinecraftPage extends DebugPage {
         Minecraft mc = Minecraft.getInstance();
 
         list.add(new DebugEntry("demoMode", mc::isDemo));
-        list.add(new DebugEntry("chatEnabled", mc::allowsChat));
+//        list.add(new DebugEntry("chatEnabled", mc::allowsChat));
         list.add(new DebugEntry("gameFocused", mc::isWindowActive));
         list.add(new DebugEntry("gamePaused", mc::isPaused));
         list.add(new DebugEntry("integratedServerRunning", mc::isLocalServer));

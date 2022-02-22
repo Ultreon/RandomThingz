@@ -35,21 +35,20 @@ public class BanHammerItem extends Item {
     }
 
     @Override
-    public boolean hurtEnemy(@NotNull ItemStack stack, @NotNull LivingEntity victim, @NotNull LivingEntity player) {
-        if (victim instanceof Player) {
-            Player playerVictim = (Player) victim;
-            if (playerVictim.level instanceof ServerLevel) {
-                if (player.getServer() != null) {
-                    UserBanList banlist = player.getServer().getPlayerList().getBans();
-                    GameProfile gameprofile = playerVictim.getGameProfile();
+    public boolean hurtEnemy(@NotNull ItemStack stack, @NotNull LivingEntity victim, @NotNull LivingEntity executor) {
+        if (victim instanceof Player target) {
+            if (target.level instanceof ServerLevel) {
+                if (executor.getServer() != null) {
+                    UserBanList banList = executor.getServer().getPlayerList().getBans();
+                    GameProfile profile = target.getGameProfile();
 
-                    if (!banlist.isBanned(gameprofile)) {
-                        UserBanListEntry profilebanentry = new UserBanListEntry(gameprofile, new Date(), player.getName().getString(), null, TextColors.LIGHT_RED + "The banhammer has spoken");
-                        banlist.add(profilebanentry);
-                        player.sendMessage(new TranslatableComponent("commands.ban.success", ComponentUtils.getDisplayName(gameprofile), profilebanentry.getReason()), playerVictim.getUUID());
-                        ServerPlayer serverplayerentity = player.getServer().getPlayerList().getPlayer(gameprofile.getId());
-                        if (serverplayerentity != null) {
-                            serverplayerentity.connection.disconnect(new TranslatableComponent("multiplayer.disconnect.banned"));
+                    if (!banList.isBanned(profile)) {
+                        UserBanListEntry banEntry = new UserBanListEntry(profile, new Date(), executor.getName().getString(), null, TextColors.LIGHT_RED + "The ban-hammer has spoken");
+                        banList.add(banEntry);
+                        executor.sendMessage(new TranslatableComponent("commands.ban.success", ComponentUtils.getDisplayName(profile), banEntry.getReason()), target.getUUID());
+                        ServerPlayer serverPlayer = executor.getServer().getPlayerList().getPlayer(profile.getId());
+                        if (serverPlayer != null) {
+                            serverPlayer.connection.disconnect(new TranslatableComponent("multiplayer.disconnect.banned"));
                         }
                     }
                 }
@@ -60,30 +59,29 @@ public class BanHammerItem extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level dimensionIn, Player playerIn, InteractionHand handIn) {
-        super.use(dimensionIn, playerIn, handIn);
+    public InteractionResultHolder<ItemStack> use(Level level, Player executor, InteractionHand hand) {
+        super.use(level, executor, hand);
 
-        ItemStack stack = playerIn.getItemInHand(handIn);
-        Entity entity = Targeter.getTarget(playerIn);
-        if (entity == null) {
+        ItemStack stack = executor.getItemInHand(hand);
+        Entity victim = Targeter.getTarget(executor);
+        if (victim == null) {
             return InteractionResultHolder.fail(stack);
         }
 
-        if (!entity.level.isClientSide && entity instanceof Player) {
-            Player victim = (Player) entity;
-            if (victim.level instanceof ServerLevel) {
-                if (playerIn.getServer() != null) {
-                    UserBanList banlist = playerIn.getServer().getPlayerList().getBans();
-                    GameProfile gameprofile = victim.getGameProfile();
+        if (victim instanceof Player player) {
+            if (player.level instanceof ServerLevel) {
+                if (executor.getServer() != null) {
+                    UserBanList banList = executor.getServer().getPlayerList().getBans();
+                    GameProfile profile = player.getGameProfile();
 
-                    if (!banlist.isBanned(gameprofile)) {
-                        UserBanListEntry profilebanentry = new UserBanListEntry(gameprofile, new Date(), playerIn.getName().getString(), null, TextColors.LIGHT_RED + "The banhammer has spoken");
-                        banlist.add(profilebanentry);
-                        playerIn.sendMessage(new TranslatableComponent("commands.ban.success", ComponentUtils.getDisplayName(gameprofile), profilebanentry.getReason()), victim.getUUID());
-                        ServerPlayer serverplayerentity = playerIn.getServer().getPlayerList().getPlayer(gameprofile.getId());
-                        if (serverplayerentity != null) {
-                            serverplayerentity.connection.disconnect(new TranslatableComponent("multiplayer.disconnect.banned"));
-                            playerIn.awardStat(Stats.ITEM_USED.get(this));
+                    if (!banList.isBanned(profile)) {
+                        UserBanListEntry banEntry = new UserBanListEntry(profile, new Date(), executor.getName().getString(), null, TextColors.LIGHT_RED + "The ban-hammer has spoken");
+                        banList.add(banEntry);
+                        executor.sendMessage(new TranslatableComponent("commands.ban.success", ComponentUtils.getDisplayName(profile), banEntry.getReason()), player.getUUID());
+                        ServerPlayer serverPlayer = executor.getServer().getPlayerList().getPlayer(profile.getId());
+                        if (serverPlayer != null) {
+                            serverPlayer.connection.disconnect(new TranslatableComponent("multiplayer.disconnect.banned"));
+                            executor.awardStat(Stats.ITEM_USED.get(this));
 
                             return InteractionResultHolder.success(stack);
                         }
@@ -92,44 +90,43 @@ public class BanHammerItem extends Item {
                     }
                 }
             }
-        } else if (!entity.level.isClientSide) {
-            if (entity.level instanceof ServerLevel) {
-                entity.remove();
-                playerIn.sendMessage(new TranslatableComponent("commands.ban.success", entity.getName(), "The banhammer has spoken!"), entity.getUUID());
-                playerIn.awardStat(Stats.ITEM_USED.get(this));
+        } else if (!victim.level.isClientSide) {
+            if (victim.level instanceof ServerLevel) {
+                victim.discard();
+                executor.sendMessage(new TranslatableComponent("commands.ban.success", victim.getName(), "The ban-hammer has spoken!"), victim.getUUID());
+                executor.awardStat(Stats.ITEM_USED.get(this));
 
                 return InteractionResultHolder.success(stack);
             }
         }
 
-        return super.use(dimensionIn, playerIn, handIn);
+        return super.use(level, executor, hand);
     }
 
     @Override
-    public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-        if (!entity.level.isClientSide && entity instanceof Player) {
-            Player victim = (Player) entity;
-            if (victim.level instanceof ServerLevel) {
-                if (player.getServer() != null) {
-                    UserBanList banlist = player.getServer().getPlayerList().getBans();
-                    GameProfile gameprofile = victim.getGameProfile();
+    public boolean onLeftClickEntity(ItemStack stack, Player executor, Entity victim) {
+        if (!victim.level.isClientSide && victim instanceof Player target) {
+            if (target.level instanceof ServerLevel) {
+                if (executor.getServer() != null) {
+                    UserBanList banList = executor.getServer().getPlayerList().getBans();
+                    GameProfile profile = target.getGameProfile();
 
-                    if (!banlist.isBanned(gameprofile)) {
-                        UserBanListEntry profilebanentry = new UserBanListEntry(gameprofile, new Date(), player.getName().getString(), null, TextColors.LIGHT_RED + "The banhammer has spoken");
-                        banlist.add(profilebanentry);
-                        player.sendMessage(new TranslatableComponent("commands.ban.success", ComponentUtils.getDisplayName(gameprofile), profilebanentry.getReason()), victim.getUUID());
-                        ServerPlayer serverplayerentity = player.getServer().getPlayerList().getPlayer(gameprofile.getId());
-                        if (serverplayerentity != null) {
-                            serverplayerentity.connection.disconnect(new TranslatableComponent("multiplayer.disconnect.banned"));
-                            player.awardStat(Stats.ITEM_USED.get(this));
+                    if (!banList.isBanned(profile)) {
+                        UserBanListEntry banEntry = new UserBanListEntry(profile, new Date(), executor.getName().getString(), null, TextColors.LIGHT_RED + "The ban-hammer has spoken");
+                        banList.add(banEntry);
+                        executor.sendMessage(new TranslatableComponent("commands.ban.success", ComponentUtils.getDisplayName(profile), banEntry.getReason()), target.getUUID());
+                        ServerPlayer serverPlayer = executor.getServer().getPlayerList().getPlayer(profile.getId());
+                        if (serverPlayer != null) {
+                            serverPlayer.connection.disconnect(new TranslatableComponent("multiplayer.disconnect.banned"));
+                            executor.awardStat(Stats.ITEM_USED.get(this));
                         }
                     }
                 }
             }
-        } else if (!entity.level.isClientSide) {
-            if (entity.level instanceof ServerLevel) {
-                entity.remove();
-                player.sendMessage(new TranslatableComponent("commands.ban.success", entity.getName(), "The banhammer has spoken!"), entity.getUUID());
+        } else if (!victim.level.isClientSide) {
+            if (victim.level instanceof ServerLevel) {
+                victim.discard();
+                executor.sendMessage(new TranslatableComponent("commands.ban.success", victim.getName(), "The ban-hammer has spoken!"), victim.getUUID());
             }
         }
 

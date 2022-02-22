@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "qtexturedmodels:frameblock",
+    "qtexturedmodels:frame_walk_thru",
+    "qtexturedmodels:frame_slab",
+    "qtexturedmodels:illusion_block",
+    "qtexturedmodels:frame_button",
+    "qtexturedmodels:frame_pressure_plate",
+    "qtexturedmodels:frame_stairs",
+    "qtexturedmodels:frame_door",
+    "qtexturedmodels:frame_trapdoor",
+    "qtexturedmodels:frame_fence",
+    "qtexturedmodels:frame_bed",
+    "qtexturedmodels:frame_wall",
+    "qtexturedmodels:frame_chest",
+    "qtexturedmodels:frame_fence_gate",
+    "qtexturedmodels:frame_slope",
+    "qtexturedmodels:frame_edged_slope",
+    "qtexturedmodels:illusion_slab",
+    "qtexturedmodels:illusion_button",
+    "qtexturedmodels:illusion_pressure_plate",
+    "qtexturedmodels:illusion_stairs",
+    "qtexturedmodels:illusion_door",
+    "qtexturedmodels:illusion_trapdoor",
+    "qtexturedmodels:illusion_fence",
+    "qtexturedmodels:illusion_bed",
+    "qtexturedmodels:illusion_wall",
+    "qtexturedmodels:illusion_chest",
+    "qtexturedmodels:illusion_fence_gate"
+  ]
+}

@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public class UsedKillSwitchTrigger extends SimpleCriterionTrigger<UsedKillSwitchTrigger.Instance> {
-    private static final ResourceLocation ID = RandomThingz.rl("used_kill_switch");
+    private static final ResourceLocation ID = RandomThingz.res("used_kill_switch");
 
     @Override
     public ResourceLocation getId() {

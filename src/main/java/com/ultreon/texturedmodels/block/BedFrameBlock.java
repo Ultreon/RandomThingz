@@ -3,7 +3,7 @@ package com.ultreon.texturedmodels.block;
 import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
-import com.ultreon.texturedmodels.tileentity.BedFrameTile;
+import com.ultreon.texturedmodels.tileentity.BedFrameBlockEntity;
 import com.ultreon.texturedmodels.tileentity.ITickable;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
@@ -72,7 +72,7 @@ public class BedFrameBlock extends BedBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new BedFrameTile(pos, state);
+        return new BedFrameBlockEntity(pos, state);
     }
 
     @Nullable
@@ -102,7 +102,7 @@ public class BedFrameBlock extends BedBlock {
                         dimension.removeBlock(blockpos, false);
                     }
 
-                    dimension.explode(null, DamageSource.badRespawnPointExplosion(), null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 5.0f, true, Explosion.BlockInteraction.DESTROY);
+                    dimension.explode(null, DamageSource.badRespawnPointExplosion(), null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 5f, true, Explosion.BlockInteraction.DESTROY);
                     return InteractionResult.SUCCESS;
                 } else if (state.getValue(OCCUPIED)) {
                     if (!this.kickVillagerOutOfBed(dimension, pos)) {
@@ -129,7 +129,7 @@ public class BedFrameBlock extends BedBlock {
                     BlockEntity tileEntity = dimension.getBlockEntity(pos);
                     int count = player.getItemInHand(hand).getCount();
                     Block heldBlock = ((BlockItem) item.getItem()).getBlock();
-                    if (tileEntity instanceof BedFrameTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
+                    if (tileEntity instanceof BedFrameBlockEntity && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
                         BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
                         insertBlock(dimension, pos, state, handBlockState);
                         if (!player.isCreative())
@@ -167,15 +167,15 @@ public class BedFrameBlock extends BedBlock {
     protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
         if (!dimensionIn.isClientSide) {
             BlockEntity entity = dimensionIn.getBlockEntity(pos);
-            if (entity instanceof BedFrameTile frameTileEntity) {
+            if (entity instanceof BedFrameBlockEntity frameTileEntity) {
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
                     dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clear();
-                    float f = 0.7F;
-                    double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
+                    float f = .7f;
+                    double d0 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
+                    double d1 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .060000002f + 0.6D;
+                    double d2 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
                     ItemStack stack = blockState.getBlock().asItem().getDefaultInstance();
                     ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack);
                     itementity.setDefaultPickUpDelay();
@@ -188,7 +188,7 @@ public class BedFrameBlock extends BedBlock {
 
     public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
         BlockEntity entity = dimensionIn.getBlockEntity(pos);
-        if (entity instanceof BedFrameTile frameTileEntity) {
+        if (entity instanceof BedFrameBlockEntity frameTileEntity) {
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
             dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);

@@ -3,14 +3,14 @@ package com.ultreon.randomthingz.pc.common.computerapi;
 import com.ultreon.randomthingz.pc.common.device.AbstractBios;
 import com.ultreon.randomthingz.tileentity.ComputerTileEntity;
 
-public class Computer {
+public abstract class Computer {
     private AbstractFileSystem fileSystem;
     private final Screen screen;
-    private final ComputerTileEntity tileEntity;
+    protected final ComputerTileEntity tileEntity;
 
-    public Computer(ComputerTileEntity tileEntity, AbstractBios bios) {
+    public Computer(ComputerTileEntity tileEntity) {
         this.tileEntity = tileEntity;
-        this.screen = bios.getScreenDriver();
+        this.screen = createBios().getScreenDriver();
     }
 
     public Screen getScreen() {
@@ -23,5 +23,15 @@ public class Computer {
 
     public void requestShutdown() {
 
+    }
+
+    public abstract AbstractBios createBios();
+
+    public void tick() {
+
+    }
+
+    public Screen getOrCreateScreen() {
+        return screen;
     }
 }

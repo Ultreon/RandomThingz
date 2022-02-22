@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class AlloySmelterBlock extends AbstractMachineBlock {
     public AlloySmelterBlock(MachineTier tier) {
-        super(tier, BlockBehaviour.Properties.of(Material.METAL).strength(6.0f, 20.0f).sound(SoundType.METAL));
+        super(tier, BlockBehaviour.Properties.of(Material.METAL).strength(6f, 20f).sound(SoundType.METAL));
     }
 
     @Override
@@ -36,8 +36,8 @@ public class AlloySmelterBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockGetter dimensionIn) {
-        return MachineType.ALLOY_SMELTER.getTileEntityType(tier).create();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return MachineType.ALLOY_SMELTER.getTileEntityType(tier).create(pos, state);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class AlloySmelterBlock extends AbstractMachineBlock {
             double d1 = pos.getY();
             double d2 = (double) pos.getZ() + 0.5D;
             if (rand.nextDouble() < 0.1D) {
-                dimensionIn.playLocalSound(d0, d1, d2, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0f, 1.0f, false);
+                dimensionIn.playLocalSound(d0, d1, d2, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1f, 1f, false);
             }
 
             Direction direction = stateIn.getValue(FACING);

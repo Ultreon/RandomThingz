@@ -4,7 +4,7 @@ import com.ultreon.texturedmodels.bakedmodels.helper.HandleBakedModel;
 import com.ultreon.texturedmodels.block.DoorFrameBlock;
 import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.block.TrapdoorFrameBlock;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
 import net.minecraft.client.Minecraft;
@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
@@ -52,12 +51,12 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
         //get block saved in frame tile
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
                 BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
-                model.getBakedModel().getQuads(mimic, side, rand, extraData);
+                model.getQuads(mimic, side, rand, extraData);
                 if (model != null) {
                     //only if model (from block saved in tile entity) exists:
                     return getMimicQuads(state, side, rand, extraData, model);
@@ -72,16 +71,16 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
             return Collections.emptyList();
         }
 
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
-        int tex = extraData.getData(FrameBlockTile.TEXTURE);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
+        int tex = extraData.getData(FrameBlockEntity.TEXTURE);
         if (mimic != null && state != null) {
             //get texture from block in tile entity and apply it to the quads
             List<TextureAtlasSprite> glassBlockList = TextureHelper.getGlassTextures();
-            TextureAtlasSprite glass = glassBlockList.get(extraData.getData(FrameBlockTile.GLASS_COLOR));
+            TextureAtlasSprite glass = glassBlockList.get(extraData.getData(FrameBlockEntity.GLASS_COLOR));
             List<TextureAtlasSprite> textureList = TextureHelper.getTextureFromModel(model, extraData, rand);
             TextureAtlasSprite texture;
             if (textureList.size() <= tex) {
-                extraData.setData(FrameBlockTile.TEXTURE, 0);
+                extraData.setData(FrameBlockEntity.TEXTURE, 0);
                 tex = 0;
             }
             if (textureList.size() == 0) {
@@ -105,8 +104,8 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
             Direction east = Direction.EAST;
             Direction north = Direction.NORTH;
             Direction south = Direction.SOUTH;
-            int design = extraData.getData(FrameBlockTile.DESIGN);
-            int desTex = extraData.getData(FrameBlockTile.DESIGN_TEXTURE);
+            int design = extraData.getData(FrameBlockEntity.DESIGN);
+            int desTex = extraData.getData(FrameBlockEntity.DESIGN_TEXTURE);
 
             if (design == 0 || design == 1) {
                 if (dir == north && open) {
@@ -350,7 +349,7 @@ public class TrapdoorBakedModel implements IDynamicBakedModel {
                     }
                 }
             }
-            int overlayIndex = extraData.getData(FrameBlockTile.OVERLAY);
+            int overlayIndex = extraData.getData(FrameBlockEntity.OVERLAY);
             if (overlayIndex != 0) {
                 if (dir == north && open) {
                     quads.addAll(ModelHelper.createOverlay(0f, 1f, 0f, 1f, 13 / 16f, 1f, overlayIndex));

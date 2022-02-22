@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.data.client;
 
-import com.ultreon.modlib.embedded.silentlib.block.IBlockProvider;
-import com.ultreon.modlib.embedded.silentlib.util.NameUtils;
+import com.ultreon.modlib.silentlib.block.BlockLike;
+import com.ultreon.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.StoneType;
 import com.ultreon.randomthingz.block._common.ModBlocks;
@@ -12,7 +12,7 @@ import com.ultreon.randomthingz.item.tool.Toolset;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -34,15 +34,16 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        Registration.BLOCKS.getAllBlocks().stream().filter((block) -> block.asBlock().getClass().getPackage().getName().startsWith("com.ultreon.forgemod.blocks.machines")).forEach(block -> blockBuilder(block.asBlock()));
+        Registration.BLOCKS.getAllBlocks().stream().filter((block) -> block.asBlock().getClass().getPackage().getName().startsWith("com.ultreon.randomthingz.block.machines")).forEach(block -> blockBuilder(block.asBlock()));
 
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
         ModelFile itemHandheld = getExistingFile(mcLoc("item/handheld"));
-        ModelFile itemHandheldDouble = getExistingFile(modLoc("item/handheld_double_size"));
 
         //noinspection OverlyLongLambda
         Arrays.stream(ItemMaterial.values()).forEach(metal -> {
-            metal.getOre().ifPresent(this::blockBuilder);
+            metal.getStoneOre().ifPresent(this::blockBuilder);
+            metal.getDeepslateOre().ifPresent(this::blockBuilder);
+            metal.getNetherOre().ifPresent(this::blockBuilder);
             metal.getStorageBlock().ifPresent(this::blockBuilder);
             metal.getChunks().ifPresent(item -> builder(item, itemGenerated));
             metal.getDust().ifPresent(item -> builder(item, itemGenerated));
@@ -59,13 +60,6 @@ public class ModItemModelProvider extends ItemModelProvider {
             metal.getPickaxe().ifPresent(item -> builder(item, itemHandheld));
             metal.getShovel().ifPresent(item -> builder(item, itemHandheld));
             metal.getHoe().ifPresent(item -> builder(item, itemHandheld));
-            metal.getLongsword().ifPresent(item -> builder(item, itemHandheldDouble));
-            metal.getKatana().ifPresent(item -> builder(item, itemHandheld));
-            metal.getBroadsword().ifPresent(item -> builder(item, itemHandheld));
-            metal.getLumberAxe().ifPresent(item -> builder(item, itemHandheld));
-            metal.getBattleaxe().ifPresent(item -> builder(item, itemHandheld));
-            metal.getHammer().ifPresent(item -> builder(item, itemHandheld));
-            metal.getExcavator().ifPresent(item -> builder(item, itemHandheld));
         });
         ModBlocks.BOOKSHELVES.forEach(block -> block.ifPresent(this::blockBuilder));
         for (StoneType stoneType : StoneType.values()) {
@@ -91,7 +85,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         builder(ModItems.HAND_PUMP, itemGenerated);
     }
 
-    private void blockBuilder(IBlockProvider block) {
+    private void blockBuilder(BlockLike block) {
         blockBuilder(block.asBlock());
     }
 
@@ -108,12 +102,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
     }
 
-    private void builder(IItemProvider item, ModelFile parent) {
+    private void builder(ItemLike item, ModelFile parent) {
         String name = NameUtils.fromItem(item).getPath();
         builder(item, parent, "items/" + name);
     }
 
-    private void builder(IItemProvider item, ModelFile parent, String texture) {
+    private void builder(ItemLike item, ModelFile parent, String texture) {
         try {
             getBuilder(NameUtils.fromItem(item).getPath())
                     .parent(parent)

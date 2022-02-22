@@ -3,7 +3,6 @@ package com.ultreon.texturedmodels.model;
 import com.mojang.datafixers.util.Pair;
 import com.ultreon.texturedmodels.bakedmodels.ChestBakedModel;
 import com.ultreon.texturedmodels.bakedmodels.FrameBakedModel;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;

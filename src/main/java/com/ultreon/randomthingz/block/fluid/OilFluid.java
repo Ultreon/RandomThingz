@@ -145,7 +145,7 @@ public abstract class OilFluid extends FlowingFluid {
     }
 
     protected float getExplosionResistance() {
-        return 100.0f;
+        return 100f;
     }
 
     public static class Flowing extends OilFluid {

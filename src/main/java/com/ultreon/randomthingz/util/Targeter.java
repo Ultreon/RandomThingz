@@ -29,15 +29,15 @@ public final class Targeter {
     @Nullable
     public static EntityHitResult rayTraceEntities(Player player, Level dimension) {
         if (player != null && dimension != null) {
-            float f = player.xRot;
-            float f1 = player.yRot;
+            float f = player.getXRot();
+            float f1 = player.getYRot();
 
-            Vec3 vec3d = player.getEyePosition(1.0f);
+            Vec3 vec3d = player.getEyePosition(1f);
 
-            float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-            float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-            float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
-            float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
+            float f2 = Mth.cos(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+            float f3 = Mth.sin(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+            float f4 = -Mth.cos(-f * ((float) Math.PI / 180f));
+            float f5 = Mth.sin(-f * ((float) Math.PI / 180f));
 
             float f6 = f3 * f4;
             float f7 = f2 * f4;
@@ -67,15 +67,15 @@ public final class Targeter {
     @OnlyIn(Dist.CLIENT)
     @Nullable
     public static <T extends Entity> Entity getTarget(Player player) {
-        float f = player.xRot;
-        float f1 = player.yRot;
+        float f = player.getXRot();
+        float f1 = player.getYRot();
 
-        Vec3 vec3d = player.getEyePosition(1.0f);
+        Vec3 vec3d = player.getEyePosition(1f);
 
-        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
-        float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
+        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+        float f4 = -Mth.cos(-f * ((float) Math.PI / 180f));
+        float f5 = Mth.sin(-f * ((float) Math.PI / 180f));
 
         float f6 = f3 * f4;
         float f7 = f2 * f4;

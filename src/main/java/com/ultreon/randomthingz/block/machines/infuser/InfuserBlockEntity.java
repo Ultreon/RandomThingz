@@ -1,7 +1,8 @@
 package com.ultreon.randomthingz.block.machines.infuser;
 
 import com.ultreon.modlib.api.FluidContainer;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.AbstractFluidMachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.InfusingRecipe;
@@ -33,7 +34,11 @@ public class InfuserBlockEntity extends AbstractFluidMachineBlockEntity<Infusing
     public static final int SLOT_ITEM_OUT = 3;
 
     public InfuserBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.infuser, pos, state, 4, 1, TANK_CAPACITY, MachineTier.STANDARD);
+        super(ModMachines.INFUSER, pos, state, 4, 1, TANK_CAPACITY, MachineTier.STANDARD);
+    }
+
+    public InfuserBlockEntity() {
+        this(BlockPos.ZERO, ModBlocks.INFUSER.asBlockState());
     }
 
     @Override

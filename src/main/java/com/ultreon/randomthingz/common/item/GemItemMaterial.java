@@ -7,9 +7,11 @@ import net.minecraft.world.level.block.Block;
 import java.util.Optional;
 
 @SuppressWarnings({"unused", "OptionalUsedAsFieldOrParameterType"})
-public class GemItemMaterial implements IItemMaterial {
+public class GemItemMaterial implements BaseItemMaterial {
     private String name;
-    private Optional<Block> ore;
+    private Optional<Block> stoneOre;
+    private Optional<Block> deepslateOre;
+    private Optional<Block> netherOre;
     private Optional<Block> storageBlock;
     private Optional<Item> chunks;
     private Optional<Item> dust;
@@ -31,8 +33,18 @@ public class GemItemMaterial implements IItemMaterial {
     }
 
     @Override
-    public Optional<Block> getOre() {
-        return ore;
+    public Optional<Block> getStoneOre() {
+        return stoneOre;
+    }
+
+    @Override
+    public Optional<Block> getDeepslateOre() {
+        return deepslateOre;
+    }
+
+    @Override
+    public Optional<Block> getNetherOre() {
+        return netherOre;
     }
 
     @Override

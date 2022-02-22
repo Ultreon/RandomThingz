@@ -2,9 +2,9 @@ package com.ultreon.randomthingz.block.machines.pump;
 
 import com.ultreon.modlib.api.FluidContainer;
 import com.ultreon.modlib.api.RedstoneMode;
-import com.ultreon.modlib.embedded.silentlib.util.TimeUtils;
-import com.ultreon.modlib.embedded.silentutils.EnumUtils;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.modlib.silentlib.util.TimeUtils;
+import com.ultreon.modlib.silentutils.EnumUtils;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
@@ -19,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.BucketPickup;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,27 +42,21 @@ public class PumpBlockEntity extends AbstractMachineBaseBlockEntity {
         @SuppressWarnings("deprecation") // Use of Registry
         @Override
         public int get(int index) {
-            switch (index) {
+            return switch (index) {
                 //Minecraft actually sends fields as shorts, so we need to split energy into 2 fields
-                case 0:
-                    // Energy lower bytes
-                    return getEnergyStored() & 0xFFFF;
-                case 1:
-                    // Energy upper bytes
-                    return (getEnergyStored() >> 16) & 0xFFFF;
-                case 2:
-                    return getMaxEnergyStored() & 0xFFFF;
-                case 3:
-                    return (getMaxEnergyStored() >> 16) & 0xFFFF;
-                case 4:
-                    return redstoneMode.ordinal();
-                case 7:
-                    return Registry.FLUID.getId(tank.getFluid().getFluid());
-                case 8:
-                    return tank.getFluid().getAmount();
-                default:
-                    return 0;
-            }
+                case 0 ->
+                        // Energy lower bytes
+                        getEnergyStored() & 0xFFFF;
+                case 1 ->
+                        // Energy upper bytes
+                        (getEnergyStored() >> 16) & 0xFFFF;
+                case 2 -> getMaxEnergyStored() & 0xFFFF;
+                case 3 -> (getMaxEnergyStored() >> 16) & 0xFFFF;
+                case 4 -> redstoneMode.ordinal();
+                case 7 -> Registry.FLUID.getId(tank.getFluid().getFluid());
+                case 8 -> tank.getFluid().getAmount();
+                default -> 0;
+            };
         }
 
         @Override
@@ -79,7 +74,7 @@ public class PumpBlockEntity extends AbstractMachineBaseBlockEntity {
     private final LazyOptional<IFluidHandler> fluidCap = LazyOptional.of(() -> tank);
 
     public PumpBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.pump, pos, state, 2, 10_000, 100, 0, MachineTier.STANDARD);
+        super(ModMachines.PUMP, pos, state, 2, 10_000, 100, 0, MachineTier.STANDARD);
     }
 
     private int getHorizontalRange() {
@@ -127,7 +122,7 @@ public class PumpBlockEntity extends AbstractMachineBaseBlockEntity {
     private boolean tryPumpFluid(BlockPos.MutableBlockPos blockPos, int x, int y, int z, BlockState state) {
         if (state.getBlock() instanceof BucketPickup) {
             assert level != null;
-            Fluid fluid = ((BucketPickup) state.getBlock()).takeLiquid(level, blockPos, state);
+            Fluid fluid = ((BucketItem) ((BucketPickup) state.getBlock()).pickupBlock(level, blockPos, state).getItem()).getFluid();
             FluidStack fluidStack = new FluidStack(fluid, 1000);
 
             if (!fluidStack.isEmpty() && tank.fill(fluidStack, IFluidHandler.FluidAction.SIMULATE) == 1000) {
@@ -202,7 +197,7 @@ public class PumpBlockEntity extends AbstractMachineBaseBlockEntity {
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+    public <T> @NotNull LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (!this.remove && cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.orEmpty(cap, fluidCap.cast());
         }

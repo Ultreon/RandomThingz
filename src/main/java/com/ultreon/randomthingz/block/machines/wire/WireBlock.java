@@ -5,6 +5,7 @@ import com.ultreon.modlib.api.ConnectionType;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.api.IWrenchable;
 import com.ultreon.randomthingz.util.EnergyUtils;
+import com.ultreon.texturedmodels.tileentity.ITickable;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,8 +16,11 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -27,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
-public class WireBlock extends PipeBlock implements IWrenchable {
+public class WireBlock extends PipeBlock implements IWrenchable, EntityBlock {
     public static final EnumProperty<ConnectionType> NORTH = EnumProperty.create("north", ConnectionType.class);
     public static final EnumProperty<ConnectionType> EAST = EnumProperty.create("east", ConnectionType.class);
     public static final EnumProperty<ConnectionType> SOUTH = EnumProperty.create("south", ConnectionType.class);
@@ -44,7 +48,7 @@ public class WireBlock extends PipeBlock implements IWrenchable {
     });
 
     public WireBlock(Properties properties) {
-        super(0.125f, properties);
+        super(.125f, properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(NORTH, ConnectionType.NONE)
                 .setValue(EAST, ConnectionType.NONE)
@@ -85,7 +89,7 @@ public class WireBlock extends PipeBlock implements IWrenchable {
 
     private static ConnectionType createConnection(BlockGetter dimensionIn, BlockPos pos, Direction side, ConnectionType current) {
         BlockEntity tileEntity = dimensionIn.getBlockEntity(pos.relative(side));
-        if (tileEntity instanceof WireTileEntity) {
+        if (tileEntity instanceof WireBlockEntity) {
             return ConnectionType.BOTH;
         } else if (tileEntity != null) {
             IEnergyStorage energy = EnergyUtils.getEnergyFromSideOrNull(tileEntity, side.getOpposite());
@@ -104,15 +108,16 @@ public class WireBlock extends PipeBlock implements IWrenchable {
         return state.getValue(FACING_TO_PROPERTY_MAP.get(side));
     }
 
+    @Nullable
     @Override
-    public boolean hasBlockEntity(BlockState state) {
-        return true;
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new WireBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new WireTileEntity();
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
+        return ITickable::tickTE;
     }
 
     @Override
@@ -126,7 +131,7 @@ public class WireBlock extends PipeBlock implements IWrenchable {
         Direction side = getClickedConnection(relative);
         if (side != null) {
             BlockEntity other = dimension.getBlockEntity(pos.relative(side));
-            if (!(other instanceof WireTileEntity)) {
+            if (!(other instanceof WireBlockEntity)) {
                 BlockState state1 = cycleProperty(state, FACING_TO_PROPERTY_MAP.get(side));
                 dimension.setBlock(pos, state1, 18);
                 WireConnection.invalidateNetwork(dimension, pos);
@@ -160,7 +165,7 @@ public class WireBlock extends PipeBlock implements IWrenchable {
     @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor dimensionIn, BlockPos currentPos, BlockPos facingPos) {
-        if (dimensionIn.getBlockEntity(facingPos) instanceof WireTileEntity)
+        if (dimensionIn.getBlockEntity(facingPos) instanceof WireBlockEntity)
             WireConnection.invalidateNetwork(dimensionIn, currentPos);
 
         EnumProperty<ConnectionType> property = FACING_TO_PROPERTY_MAP.get(facing);

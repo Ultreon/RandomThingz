@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.data.recipes;
 
 import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
-import com.ultreon.modlib.embedded.silentlib.data.ExtendedShapedRecipeBuilder;
-import com.ultreon.modlib.embedded.silentlib.data.ExtendedShapelessRecipeBuilder;
+import com.ultreon.modlib.silentlib.data.ExtendedShapedRecipeBuilder;
+import com.ultreon.modlib.silentlib.data.ExtendedShapelessRecipeBuilder;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.common.FeatureStatus;
@@ -13,14 +13,11 @@ import com.ultreon.randomthingz.item.CraftingItems;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -36,8 +33,8 @@ public class ModRecipesProvider extends RecipeProvider {
     private static final int CRUSHING_CHUNKS_TIME = 300;
     private static final int CRUSHING_INGOT_TIME = 200;
     private static final int CRUSHING_ORE_TIME = 400;
-    private static final float CRUSHING_CHUNKS_EXTRA_CHANCE = 0.1f;
-    private static final float CRUSHING_ORE_STONE_CHANCE = 0.1f;
+    private static final float CRUSHING_CHUNKS_EXTRA_CHANCE = .1f;
+    private static final float CRUSHING_ORE_STONE_CHANCE = .1f;
 
     public ModRecipesProvider(DataGenerator generatorIn) {
         super(generatorIn);
@@ -127,7 +124,7 @@ public class ModRecipesProvider extends RecipeProvider {
             }
             if (metal.getIngotTag().isPresent() && metal.getDust().isPresent()) {
                 crushingIngot(metal.getIngotTag().get(), metal.getDust().get())
-                        .build(consumer, RandomThingz.rl("crushing/" + metal.getName() + "_dust_from_ingot"));
+                        .build(consumer, RandomThingz.res("crushing/" + metal.getName() + "_dust_from_ingot"));
             }
         }
 
@@ -135,7 +132,7 @@ public class ModRecipesProvider extends RecipeProvider {
         CrushingRecipeBuilder.builder(Tags.Items.ORES_COAL, CRUSHING_ORE_TIME)
                 .result(Items.COAL, 2)
                 .result(Items.COBBLESTONE, 1, CRUSHING_ORE_STONE_CHANCE)
-                .result(Items.DIAMOND, 1, 0.001f)
+                .result(Items.DIAMOND, 1, .001f)
                 .build(consumer);
         CrushingRecipeBuilder.builder(Tags.Items.ORES_LAPIS, CRUSHING_ORE_TIME)
                 .result(Items.LAPIS_LAZULI, 12)
@@ -148,13 +145,13 @@ public class ModRecipesProvider extends RecipeProvider {
         crushingOreBonus(Tags.Items.ORES_EMERALD, Items.EMERALD).build(consumer);
         crushingOre(Tags.Items.ORES_GOLD, ItemMaterial.GOLD.getChunks().get(), Blocks.COBBLESTONE).build(consumer);
         crushingOre(Blocks.NETHER_GOLD_ORE, ItemMaterial.GOLD.getChunks().get(), Blocks.NETHERRACK)
-                .build(consumer, RandomThingz.rl("crushing/gold_chunks_nether"));
+                .build(consumer, RandomThingz.res("crushing/gold_chunks_nether"));
         crushingOre(Tags.Items.ORES_IRON, ItemMaterial.IRON.getChunks().get(), Blocks.COBBLESTONE).build(consumer);
 
         CrushingRecipeBuilder.builder(Blocks.ANCIENT_DEBRIS, 2 * CRUSHING_ORE_TIME)
                 .result(Items.NETHERITE_SCRAP, 2)
-                .result(Items.NETHERITE_SCRAP, 1, 0.1f)
-                .result(Items.NETHERITE_SCRAP, 1, 0.01f)
+                .result(Items.NETHERITE_SCRAP, 1, .1f)
+                .result(Items.NETHERITE_SCRAP, 1, .01f)
                 .build(consumer);
 
         // Others
@@ -174,25 +171,25 @@ public class ModRecipesProvider extends RecipeProvider {
                 .result(Blocks.GRAVEL, 1)
                 .build(consumer);
         CrushingRecipeBuilder.builder(ItemTags.LOGS, 200)
-                .result(Items.PAPER, 1, 0.75f)
-                .result(Items.PAPER, 1, 0.25f)
-                .result(Items.STICK, 1, 0.25f)
-                .result(Items.STICK, 1, 0.25f)
+                .result(Items.PAPER, 1, .75f)
+                .result(Items.PAPER, 1, .25f)
+                .result(Items.STICK, 1, .25f)
+                .result(Items.STICK, 1, .25f)
                 .build(consumer);
         CrushingRecipeBuilder.builder(
                         Ingredient.of(Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_PILLAR, Blocks.CHISELED_QUARTZ_BLOCK, Blocks.SMOOTH_QUARTZ),
                         200)
                 .result(Items.QUARTZ, 4)
-                .build(consumer, RandomThingz.rl("crushing/quartz_from_blocks"));
+                .build(consumer, RandomThingz.res("crushing/quartz_from_blocks"));
         CrushingRecipeBuilder.builder(Ingredient.of(Blocks.RED_SANDSTONE, Blocks.CHISELED_RED_SANDSTONE), 200)
                 .result(Blocks.RED_SAND, 4)
-                .build(consumer, RandomThingz.rl("crushing/red_sand_from_sandstone"));
+                .build(consumer, RandomThingz.res("crushing/red_sand_from_sandstone"));
         CrushingRecipeBuilder.builder(Ingredient.of(Blocks.SANDSTONE, Blocks.CHISELED_SANDSTONE), 200)
                 .result(Blocks.SAND, 4)
-                .build(consumer, RandomThingz.rl("crushing/sand_from_sandstone"));
+                .build(consumer, RandomThingz.res("crushing/sand_from_sandstone"));
         CrushingRecipeBuilder.builder(Blocks.GRAVEL, 200)
                 .result(Blocks.SAND, 1)
-                .result(Items.FLINT, 1, 0.1f)
+                .result(Items.FLINT, 1, .1f)
                 .build(consumer);
     }
 
@@ -235,8 +232,8 @@ public class ModRecipesProvider extends RecipeProvider {
     public static CrushingRecipeBuilder crushingOreBonus(Tag<Item> ore, ItemLike item) {
         return CrushingRecipeBuilder.builder(ore, CRUSHING_ORE_TIME)
                 .result(item, 2)
-                .result(item, 1, 0.1f)
-                .result(Blocks.COBBLESTONE, 1, 0.1f);
+                .result(item, 1, .1f)
+                .result(Blocks.COBBLESTONE, 1, .1f);
     }
 
     @Override
@@ -245,7 +242,7 @@ public class ModRecipesProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
+    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
         registerCrafting(consumer);
         registerSmelting(consumer);
         registerAlloySmelting(consumer);
@@ -268,12 +265,12 @@ public class ModRecipesProvider extends RecipeProvider {
                         .patternLine("###")
                         .patternLine("###")
                         .key('#', metal.getNuggetTag().get())
-                        .build(consumer, RandomThingz.rl("metals/" + metal.getName() + "_ingot_from_nugget"));
+                        .build(consumer, RandomThingz.res("metals/" + metal.getName() + "_ingot_from_nugget"));
             }
             if (metal.getNugget().isPresent() && metal.getIngotTag().isPresent()) {
                 ExtendedShapelessRecipeBuilder.vanillaBuilder(metal.getNugget().get(), 9)
                         .addIngredient(metal.getIngotTag().get())
-                        .build(consumer, RandomThingz.rl("metals/" + metal.getName() + "_nugget"));
+                        .build(consumer, RandomThingz.res("metals/" + metal.getName() + "_nugget"));
             }
             if (metal.getStorageBlock().isPresent() && metal.getIngotTag().isPresent()) {
                 ExtendedShapedRecipeBuilder.vanillaBuilder(metal.getStorageBlock().get())
@@ -281,12 +278,12 @@ public class ModRecipesProvider extends RecipeProvider {
                         .patternLine("###")
                         .patternLine("###")
                         .key('#', metal.getIngotTag().get())
-                        .build(consumer, RandomThingz.rl("metals/" + metal.getName() + "_block"));
+                        .build(consumer, RandomThingz.res("metals/" + metal.getName() + "_block"));
             }
             if (metal.getIngot().isPresent() && metal.getStorageBlockItemTag().isPresent()) {
                 ExtendedShapelessRecipeBuilder.vanillaBuilder(metal.getIngot().get(), 9)
                         .addIngredient(metal.getStorageBlockItemTag().get())
-                        .build(consumer, RandomThingz.rl("metals/" + metal.getName() + "_ingot_from_block"));
+                        .build(consumer, RandomThingz.res("metals/" + metal.getName() + "_ingot_from_block"));
             }
         }
     }
@@ -387,7 +384,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .define('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .define('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .unlockedBy("has_item", has(ModBlocks.ALLOY_MACHINE_FRAME))
-                .save(consumer, RandomThingz.rl("alloy_smelter_from_basic"));
+                .save(consumer, RandomThingz.res("alloy_smelter_from_basic"));
 
         ShapedRecipeBuilder.shaped(ModBlocks.BASIC_CRUSHER)
                 .pattern("###")
@@ -423,7 +420,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .define('X', ModBlocks.ALLOY_MACHINE_FRAME)
                 .define('D', Tags.Items.GEMS_DIAMOND)
                 .unlockedBy("has_item", has(ModBlocks.ALLOY_MACHINE_FRAME))
-                .save(consumer, RandomThingz.rl("crusher_from_basic"));
+                .save(consumer, RandomThingz.res("crusher_from_basic"));
 
         ShapedRecipeBuilder.shaped(ModBlocks.COMPRESSOR)
                 .pattern("#D#")
@@ -897,18 +894,18 @@ public class ModRecipesProvider extends RecipeProvider {
 
         ExtendedShapelessRecipeBuilder.vanillaBuilder(ModItems.EMPTY_CANISTER)
                 .addIngredient(ModItems.CANISTER)
-                .build(consumer, RandomThingz.rl("canister_clear"));
+                .build(consumer, RandomThingz.res("canister_clear"));
 
         ExtendedShapelessRecipeBuilder.vanillaBuilder(Items.LEATHER)
                 .addIngredient(CraftingItems.ZOMBIE_LEATHER, 4)
-                .build(consumer, RandomThingz.rl("leather"));
+                .build(consumer, RandomThingz.res("leather"));
     }
 
     private ResourceLocation modId(String path) {
-        return RandomThingz.rl(path);
+        return RandomThingz.res(path);
     }
 
-    private void registerSmelting(Consumer<IFinishedRecipe> consumer) {
+    private void registerSmelting(Consumer<FinishedRecipe> consumer) {
         for (ItemMaterial metal : ItemMaterial.values()) {
             if (metal.getIngot().isPresent() && (metal.getChunksTag().isPresent() || metal.getDustTag().isPresent())) {
                 smeltingAndBlasting(consumer, metal.getName() + "_ingot",
@@ -916,7 +913,7 @@ public class ModRecipesProvider extends RecipeProvider {
             }
             if (metal.getIngot().isPresent() && metal.getOreItemTag().isPresent()) {
                 smeltingAndBlasting(consumer, metal.getName() + "_ingot_from_ore",
-                        Ingredient.fromTag(metal.getOreItemTag().get()), metal.getIngot().get());
+                        Ingredient.of(metal.getOreItemTag().get()), metal.getIngot().get());
             }
         }
 
@@ -924,19 +921,19 @@ public class ModRecipesProvider extends RecipeProvider {
         smeltingAndBlasting(consumer, "gold_ingot", ItemMaterial.GOLD.getSmeltables(false), Items.GOLD_INGOT);
 
         assert (ItemMaterial.REFINED_IRON.getIngot().isPresent());
-        smeltingAndBlasting(consumer, "refined_iron_ingot", Ingredient.fromTag(Tags.Items.INGOTS_IRON), ItemMaterial.REFINED_IRON.getIngot().get());
+        smeltingAndBlasting(consumer, "refined_iron_ingot", Ingredient.of(Tags.Items.INGOTS_IRON), ItemMaterial.REFINED_IRON.getIngot().get());
 
-        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(Items.MILK_BUCKET), ModItems.CHEESE, 0.4f, 400)
-                .addCriterion("has_item", hasItem(Items.MILK_BUCKET))
-                .build(consumer, RandomThingz.rl("food/cheese"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(Items.MILK_BUCKET), ModItems.CHEESE, .4f, 400)
+                .unlockedBy("has_item", has(Items.MILK_BUCKET))
+                .save(consumer, RandomThingz.res("food/cheese"));
     }
 
-    private void smeltingAndBlasting(Consumer<IFinishedRecipe> consumer, String name, Ingredient ingredient, IItemProvider result) {
-        CookingRecipeBuilder.smeltingRecipe(ingredient, result, 1f, 200)
-                .addCriterion("has_item", hasItem(Blocks.FURNACE))
-                .build(consumer, RandomThingz.rl("smelting/" + name));
-        CookingRecipeBuilder.blastingRecipe(ingredient, result, 1f, 100)
-                .addCriterion("has_item", hasItem(Blocks.FURNACE))
-                .build(consumer, RandomThingz.rl("blasting/" + name));
+    private void smeltingAndBlasting(Consumer<FinishedRecipe> consumer, String name, Ingredient ingredient, ItemLike result) {
+        SimpleCookingRecipeBuilder.smelting(ingredient, result, 1f, 200)
+                .unlockedBy("has_item", has(Blocks.FURNACE))
+                .save(consumer, RandomThingz.res("smelting/" + name));
+        SimpleCookingRecipeBuilder.blasting(ingredient, result, 1f, 100)
+                .unlockedBy("has_item", has(Blocks.FURNACE))
+                .save(consumer, RandomThingz.res("blasting/" + name));
     }
 }

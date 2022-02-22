@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class CrusherScreen extends AbstractMachineScreen<CrusherContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/crusher.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/crusher.png");
 
     public CrusherScreen(CrusherContainer containerIn, Inventory playerInventoryIn, Component titleIn) {
         super(containerIn, playerInventoryIn, titleIn);

@@ -51,64 +51,21 @@ public class CurseEffect extends MobEffect {
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         Random rng = entity.getRandom();
         switch (rng.nextInt(13)) {
-            case 0: {
-                entity.hurt(DAMAGE_SOURCE, 1.0f);
-                break;
-            }
-            case 1: {
-                entity.setDeltaMovement(((rng.nextDouble() - 0.5d) * 2d) * 10d, ((rng.nextDouble() - 0.5d) * 2d) * 10d, ((rng.nextDouble() - 0.5d) * 2d) * 10d);
-                break;
-            }
-            case 2: {
-                entity.setJumping(rng.nextBoolean());
-                break;
-            }
-            case 3: {
-                entity.setShiftKeyDown(rng.nextBoolean());
-                break;
-            }
-            case 4: {
-                entity.lerpMotion(((rng.nextDouble() - 0.5d) * 2d) * 10d, ((rng.nextDouble() - 0.5d) * 2d) * 10d, ((rng.nextDouble() - 0.5d) * 2d) * 10d);
-                break;
-            }
-            case 5: {
-                entity.teleportTo(entity.getX(), entity.getY() + rng.nextInt(20), entity.getZ());
-                break;
-            }
-            case 6: {
-                entity.addEffect(new MobEffectInstance(MobEffects.POISON, 12000, 5));
-                break;
-            }
-            case 7: {
-                entity.addEffect(new MobEffectInstance(MobEffects.WITHER, 12000, 5));
-                break;
-            }
-            case 8: {
-                entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 12000, 5));
-                break;
-            }
-            case 9: {
-                entity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 12000, 5));
-                break;
-            }
-            case 10: {
-                entity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 12000, 5));
-                break;
-            }
-            case 11: {
-                entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 12000, 5));
-                break;
-            }
-            case 12: {
-                entity.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 12000, 3));
-                break;
-            }
-            case 13: {
-                entity.setSecondsOnFire(2);
-                break;
-            }
-            default: {
-                break;
+            case 0 -> entity.hurt(DAMAGE_SOURCE, 1f);
+            case 1 -> entity.setDeltaMovement(((rng.nextDouble() - 0.5d) * 2d) * 10d, ((rng.nextDouble() - 0.5d) * 2d) * 10d, ((rng.nextDouble() - 0.5d) * 2d) * 10d);
+            case 2 -> entity.setJumping(rng.nextBoolean());
+            case 3 -> entity.setShiftKeyDown(rng.nextBoolean());
+            case 4 -> entity.lerpMotion(((rng.nextDouble() - 0.5d) * 2d) * 10d, ((rng.nextDouble() - 0.5d) * 2d) * 10d, ((rng.nextDouble() - 0.5d) * 2d) * 10d);
+            case 5 -> entity.teleportTo(entity.getX(), entity.getY() + rng.nextInt(20), entity.getZ());
+            case 6 -> entity.addEffect(new MobEffectInstance(MobEffects.POISON, 12000, 5));
+            case 7 -> entity.addEffect(new MobEffectInstance(MobEffects.WITHER, 12000, 5));
+            case 8 -> entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 12000, 5));
+            case 9 -> entity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 12000, 5));
+            case 10 -> entity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 12000, 5));
+            case 11 -> entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 12000, 5));
+            case 12 -> entity.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 12000, 3));
+            case 13 -> entity.setSecondsOnFire(2);
+            default -> {
             }
         }
     }

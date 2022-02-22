@@ -2,6 +2,10 @@ package com.ultreon.randomthingz.block.furniture;
 
 import com.ultreon.randomthingz.block.DirectionalBlock;
 import com.ultreon.randomthingz.block.entity.ModTileEntities;
+import com.ultreon.randomthingz.common.RequiresToolMat;
+import com.ultreon.randomthingz.common.RequiresToolType;
+import com.ultreon.randomthingz.item.tier.ToolRequirement;
+import com.ultreon.randomthingz.item.tool.ToolType;
 import com.ultreon.randomthingz.tileentity.CrateTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
  * @see CrateTileEntity
  */
 @SuppressWarnings("deprecation")
-public class WoodenCrateBlock extends DirectionalBlock implements EntityBlock {
+public class WoodenCrateBlock extends DirectionalBlock implements EntityBlock, RequiresToolMat, RequiresToolType {
     public WoodenCrateBlock(Block.Properties properties) {
         super(properties);
     }
@@ -90,5 +94,15 @@ public class WoodenCrateBlock extends DirectionalBlock implements EntityBlock {
         if (te instanceof CrateTileEntity) {
             Containers.dropContents(dimensionIn, pos, new SimpleContainer(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
         }
+    }
+
+    @Override
+    public @Nullable ToolRequirement getRequirement() {
+        return null;
+    }
+
+    @Override
+    public @Nullable ToolType getToolType() {
+        return ToolType.AXE;
     }
 }

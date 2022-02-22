@@ -1,8 +1,10 @@
 package com.ultreon.randomthingz.client.gui.widgets;
 
 import com.google.common.annotations.Beta;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -59,4 +61,8 @@ public class Progressbar extends AbstractWidget {
         }
     }
 
+    @Override
+    public void updateNarration(NarrationElementOutput output) {
+        defaultButtonNarrationText(output);
+    }
 }

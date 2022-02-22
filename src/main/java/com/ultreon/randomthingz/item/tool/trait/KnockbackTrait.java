@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
-import com.ultreon.randomthingz.item.tool.ToolType;
+import com.ultreon.randomthingz.item.ItemType;
 import net.minecraft.network.chat.TextColor;
 
 import java.util.Set;
@@ -16,7 +16,7 @@ public class KnockbackTrait extends AbstractTrait {
     }
 
     @Override
-    public float getKnockback(Set<ToolType> qfmToolTypes) {
-        return 2.0f;
+    public float getKnockback(Set<ItemType> qfmToolTypes) {
+        return 2f;
     }
 }

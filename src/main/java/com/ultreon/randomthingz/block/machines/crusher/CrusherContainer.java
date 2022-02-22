@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.crusher;
 
-import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
-import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block._common.MachineType;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
 import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;

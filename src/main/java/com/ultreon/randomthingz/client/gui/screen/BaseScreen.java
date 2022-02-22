@@ -25,7 +25,7 @@ public abstract class BaseScreen<T extends AbstractContainerMenu> extends Abstra
 
     @Override
     protected void renderBg(@NotNull PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         RenderSystem.setShaderTexture(0, texture);
         blit(matrixStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
     }

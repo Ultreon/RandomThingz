@@ -32,11 +32,11 @@ public class LightningStaffItem extends WandItem {
     protected static BlockHitResult rayTrace(Level dimensionIn, Player player, ClipContext.@NotNull Fluid fluidMode) {
         final float f = player.getXRot();
         final float f1 = player.getYRot();
-        final Vec3 vec3d = player.getEyePosition(1.0f);
-        final float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        final float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        final float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
-        final float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
+        final Vec3 vec3d = player.getEyePosition(1f);
+        final float f2 = Mth.cos(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+        final float f3 = Mth.sin(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+        final float f4 = -Mth.cos(-f * ((float) Math.PI / 180f));
+        final float f5 = Mth.sin(-f * ((float) Math.PI / 180f));
         final float f6 = f3 * f4;
         final float f7 = f2 * f4;
         final double reach = 128;

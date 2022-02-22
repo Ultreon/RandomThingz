@@ -24,7 +24,7 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
     private static int calcRedstoneFromInventory(AbstractMachineBaseBlockEntity inv) {
         // Copied from AbstractContainerMenu.calcRedstoneFromInventory
         int slotsFilled = 0;
-        float fillRatio = 0.0f;
+        float fillRatio = 0f;
 
         for (int i = 0; i < inv.getContainerSize() - inv.getMachineTier().getUpgradeSlots(); ++i) {
             ItemStack itemstack = inv.getItem(i);
@@ -35,7 +35,7 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
         }
 
         fillRatio = fillRatio / (float) inv.getContainerSize();
-        return Mth.floor(fillRatio * 14.0f) + (slotsFilled > 0 ? 1 : 0);
+        return Mth.floor(fillRatio * 14f) + (slotsFilled > 0 ? 1 : 0);
     }
 
     @Override

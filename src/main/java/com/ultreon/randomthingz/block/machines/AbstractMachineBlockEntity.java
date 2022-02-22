@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines;
 
 import com.ultreon.modlib.api.RedstoneMode;
-import com.ultreon.modlib.embedded.silentutils.EnumUtils;
+import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.capability.EnergyStorageImpl;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;

@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.client.gui.hud;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.ultreon.modlib.utils.GraphicsUtil;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.util.GraphicsUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.Item;
@@ -22,8 +22,8 @@ public abstract class HudItem extends Item {
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void renderGameOverlay(RenderGameOverlayEvent event) {
-        if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
-            PoseStack matrixStack = event.getPoseStack();
+        if (event.getType() == RenderGameOverlayEvent.ElementType.LAYER) {
+            PoseStack matrixStack = event.getMatrixStack();
             Minecraft mc = Minecraft.getInstance();
 
             LocalPlayer player = mc.player;
@@ -31,8 +31,7 @@ public abstract class HudItem extends Item {
             if (player != null) {
                 ItemStack stack = player.getMainHandItem();
                 Item item = stack.getItem();
-                if (item instanceof HudItem) {
-                    HudItem hudItem = (HudItem) item;
+                if (item instanceof HudItem hudItem) {
                     GraphicsUtil gu = new GraphicsUtil(mc.getItemRenderer(), matrixStack, mc.font);
                     hudItem.renderHud(gu, mc, stack, player);
                 }
@@ -63,15 +62,15 @@ public abstract class HudItem extends Item {
 //    protected final void drawItemStack(ItemStack stack, int x, int y, String altText) {
 //        this.itemRenderer = Minecraft.getInstance().getItemRenderer();
 //
-//        RenderSystem.translatef(0.0f, 0.0f, 32.0f);
+//        RenderSystem.translatef(0f, 0f, 32f);
 ////        this.setBlitOffset(200);
-//        this.itemRenderer.zLevel = 200.0f;
+//        this.itemRenderer.zLevel = 200f;
 //        net.minecraft.client.gui.FontRenderer font = stack.getItem().getFontRenderer(stack);
 //        if (font == null) font = Minecraft.getInstance().fontRenderer;
 //        this.itemRenderer.renderItemAndEffectIntoGUI(stack, x, y);
 //        this.itemRenderer.renderItemOverlayIntoGUI(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
 ////        this.setBlitOffset(0);
-//        this.itemRenderer.zLevel = 0.0f;
+//        this.itemRenderer.zLevel = 0f;
 //    }
 
 }

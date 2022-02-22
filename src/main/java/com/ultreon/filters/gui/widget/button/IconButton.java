@@ -1,6 +1,7 @@
 package com.ultreon.filters.gui.widget.button;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
@@ -10,9 +11,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Author: MrCrayfish
+ * @author MrCrayfish
  */
-@SuppressWarnings("deprecation")
 @OnlyIn(Dist.CLIENT)
 public class IconButton extends Button {
     private ResourceLocation iconResource;
@@ -35,15 +35,15 @@ public class IconButton extends Button {
     @Override
     public void renderButton(@NotNull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         RenderSystem.setShaderTexture(0, WIDGETS_LOCATION);
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         GlStateManager._enableBlend();
         GlStateManager._blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA.value, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value, GlStateManager.SourceFactor.ONE.value, GlStateManager.DestFactor.ZERO.value);
         GlStateManager._blendFunc(GlStateManager.SourceFactor.SRC_ALPHA.value, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value);
-        int offset = this.getYImage(this.isHovered());
+        int offset = this.getYImage(this.isHovered);
         this.blit(matrixStack, this.x, this.y, 0, 46 + offset * 20, this.width / 2, this.height);
         this.blit(matrixStack, this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + offset * 20, this.width / 2, this.height);
         if (!this.active) {
-            RenderSystem.setShaderColor(0.5F, 0.5F, 0.5F, 1.0f);
+            RenderSystem.setShaderColor(.5f, .5f, .5f, 1f);
         }
         RenderSystem.setShaderTexture(0, this.iconResource);
         this.blit(matrixStack, this.x + 2, this.y + 2, this.iconU, this.iconV, 16, 16);

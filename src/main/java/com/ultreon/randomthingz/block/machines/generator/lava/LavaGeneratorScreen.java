@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class LavaGeneratorScreen extends AbstractMachineContainerScreen<LavaGeneratorContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/fluid_generator.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/fluid_generator.png");
 
     public LavaGeneratorScreen(LavaGeneratorContainer container, Inventory playerInventory, Component titleIn) {
         super(container, playerInventory, titleIn);

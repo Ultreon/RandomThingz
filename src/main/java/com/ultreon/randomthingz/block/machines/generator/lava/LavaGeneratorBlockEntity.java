@@ -1,7 +1,8 @@
 package com.ultreon.randomthingz.block.machines.generator.lava;
 
 import com.ultreon.modlib.api.FluidContainer;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.generator.FluidFuelGeneratorBlockEntity;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.core.BlockPos;
@@ -27,7 +28,11 @@ public class LavaGeneratorBlockEntity extends FluidFuelGeneratorBlockEntity {
     static final int TANK_CAPACITY = 4000;
 
     public LavaGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.lavaGenerator, pos, state, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(TANK_CAPACITY, s -> s.getFluid().is(FluidTags.LAVA)));
+        super(ModMachines.LAVA_GENERATOR, pos, state, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(TANK_CAPACITY, s -> s.getFluid().is(FluidTags.LAVA)));
+    }
+
+    public LavaGeneratorBlockEntity() {
+        this(BlockPos.ZERO, ModBlocks.LAVA_GENERATOR.asBlockState());
     }
 
     public IFluidHandler getTank() {

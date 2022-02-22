@@ -13,10 +13,10 @@ public class QboiUtils {
 //        if (event.player.getUniqueID().toString().equals("43e3b67b-688b-4dae-b2f2-4e986c951ce0") ||
 //                event.player.getUniqueID().toString().equals("359f615d-fd46-4c7e-a882-4fa86aeea729")) {
 //            if (event.player.getFoodStats().getFoodLevel() == 0) {
-//                event.player.heal(0.5f);
+//                event.player.heal(.5f);
 //            }
 //            if (event.player.getAir() == 0) {
-//                event.player.heal(0.5f);
+//                event.player.heal(.5f);
 //            }
 //            Objects.requireNonNull(event.player.getAttribute(Attributes.MAX_HEALTH)).setBaseValue(40.0d);
 //            Objects.requireNonNull(event.player.getAttribute(Attributes.LUCK)).setBaseValue(5.0d);

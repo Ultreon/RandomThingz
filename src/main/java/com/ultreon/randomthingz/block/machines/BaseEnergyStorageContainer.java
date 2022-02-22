@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines;
 
-import com.ultreon.modlib.embedded.silentutils.MathUtils;
+import com.ultreon.modlib.silentutils.MathUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;

@@ -29,7 +29,7 @@ public final class ModFluids {
     public static void registerFluids(RegistryEvent.Register<Fluid> event) {
         ForgeFlowingFluid.Properties oilProps = new ForgeFlowingFluid.Properties(
                 () -> OIL, () -> FLOWING_OIL, FluidAttributes
-                .builder(RandomThingz.rl("blocks/oil_still"), RandomThingz.rl("blocks/oil_flowing"))
+                .builder(RandomThingz.res("blocks/oil_still"), RandomThingz.res("blocks/oil_flowing"))
                 .density(5_000)
                 .color(0xff00000)
                 .viscosity(5000))
@@ -53,7 +53,7 @@ public final class ModFluids {
     }
 
     private static <T extends Fluid> T register(String name, T fluid) {
-        ResourceLocation id = RandomThingz.rl(name);
+        ResourceLocation id = RandomThingz.res(name);
         fluid.setRegistryName(id);
         ForgeRegistries.FLUIDS.register(fluid);
         return fluid;
@@ -61,13 +61,13 @@ public final class ModFluids {
 
     private static ForgeFlowingFluid.Properties properties(String name, Supplier<Fluid> still, Supplier<Fluid> flowing) {
         String tex = "blocks/" + name;
-        return new ForgeFlowingFluid.Properties(still, flowing, FluidAttributes.builder(RandomThingz.rl(tex + "_still"), RandomThingz.rl(tex + "_flowing")));
+        return new ForgeFlowingFluid.Properties(still, flowing, FluidAttributes.builder(RandomThingz.res(tex + "_still"), RandomThingz.res(tex + "_flowing")));
     }
 
     private static ForgeFlowingFluid.Properties propertiesGas(String name, Supplier<Fluid> still) {
         String tex = "blocks/" + name;
         //noinspection ReturnOfNull -- null-returning Supplier for flowing fluid
-        return new ForgeFlowingFluid.Properties(still, () -> null, FluidAttributes.builder(RandomThingz.rl(tex), RandomThingz.rl(tex)).gaseous());
+        return new ForgeFlowingFluid.Properties(still, () -> null, FluidAttributes.builder(RandomThingz.res(tex), RandomThingz.res(tex)).gaseous());
     }
 
     public static void register() {

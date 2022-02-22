@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.machines;
 
 import com.ultreon.modlib.api.RedstoneMode;
-import com.ultreon.modlib.api.providers.ItemProvider;
-import com.ultreon.modlib.embedded.silentutils.EnumUtils;
+import com.ultreon.modlib.api.holders.ItemHolder;
+import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.MachineUpgradeItem;
 import net.minecraft.core.BlockPos;
@@ -13,6 +13,8 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Objects;
 
 public abstract class AbstractMachineBaseBlockEntity extends AbstractBaseEnergyInventoryBlockEntity {
     public static final int FIELDS_COUNT = 5;
@@ -72,7 +74,7 @@ public abstract class AbstractMachineBaseBlockEntity extends AbstractBaseEnergyI
         return tier;
     }
 
-    public int getUpgradeCount(ItemProvider upgradeItem) {
+    public int getUpgradeCount(ItemHolder upgradeItem) {
         int count = 0;
         for (int i = getContainerSize() - tier.getUpgradeSlots(); i < getContainerSize(); ++i) {
             ItemStack stack = getItem(i);
@@ -116,7 +118,7 @@ public abstract class AbstractMachineBaseBlockEntity extends AbstractBaseEnergyI
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         super.onDataPacket(net, packet);
         CompoundTag tags = packet.getTag();
-        this.redstoneMode = EnumUtils.byOrdinal(tags.getByte("RedstoneMode"), RedstoneMode.IGNORED);
+        this.redstoneMode = EnumUtils.byOrdinal(Objects.requireNonNull(tags).getByte("RedstoneMode"), RedstoneMode.IGNORED);
     }
 
     @Override

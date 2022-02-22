@@ -1,14 +1,13 @@
 package com.ultreon.randomthingz.registration;
 
-import com.ultreon.modlib.api.providers.IItemProvider;
-import com.ultreon.modlib.embedded.silentlib.block.IBlockProvider;
-import com.ultreon.modlib.embedded.silentlib.registry.BlockDeferredRegister;
-import com.ultreon.modlib.embedded.silentlib.registry.ItemDeferredRegister;
+import com.ultreon.modlib.silentlib.block.BlockLike;
+import com.ultreon.modlib.silentlib.registry.BlockDeferredRegister;
+import com.ultreon.modlib.silentlib.registry.ItemDeferredRegister;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.advancement.criterion.common.ModCriteriaTriggers;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block._common.ModBlocksAlt;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import com.ultreon.randomthingz.common.entity.ModEntities;
 import com.ultreon.randomthingz.common.item.ModItems;
@@ -32,6 +31,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -44,8 +44,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public final class Registration {
     public static final BlockDeferredRegister BLOCKS = new BlockDeferredRegister(RandomThingz.MOD_ID);
@@ -54,14 +54,14 @@ public final class Registration {
     public static final ItemDeferredRegister ITEMS = new ItemDeferredRegister(RandomThingz.MOD_ID);
     public static final DeferredRegister<Enchantment> ENCHANTMENTS = create(ForgeRegistries.ENCHANTMENTS);
     public static final DeferredRegister<Motive> PAINTINGS = create(ForgeRegistries.PAINTING_TYPES);
-    public static final DeferredRegister<Potion> POTION_TYPES = create(ForgeRegistries.POTION_TYPES);
-    public static final DeferredRegister<MobEffect> POTIONS = create(ForgeRegistries.POTIONS);
+    public static final DeferredRegister<Potion> POTION_TYPES = create(ForgeRegistries.POTIONS);
+    public static final DeferredRegister<MobEffect> POTIONS = create(ForgeRegistries.MOB_EFFECTS);
     public static final DeferredRegister<Feature<?>> FEATURES = create(ForgeRegistries.FEATURES);
     public static final DeferredRegister<ParticleType<?>> PARTICLES = create(ForgeRegistries.PARTICLE_TYPES);
     public static final DeferredRegister<EntityType<?>> ENTITIES = create(ForgeRegistries.ENTITIES);
     public static final DeferredRegister<VillagerProfession> PROFESSIONS = create(ForgeRegistries.PROFESSIONS);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = create(ForgeRegistries.RECIPE_SERIALIZERS);
-    public static final DeferredRegister<BlockEntityType<?>> TILE_ENTITIES = create(ForgeRegistries.TILE_ENTITIES);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = create(ForgeRegistries.BLOCK_ENTITIES);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = create(ForgeRegistries.SOUND_EVENTS);
 
     private Registration() {
@@ -77,7 +77,7 @@ public final class Registration {
         PARTICLES.register(modEventBus);
         ENTITIES.register(modEventBus);
         PROFESSIONS.register(modEventBus);
-        TILE_ENTITIES.register(modEventBus);
+        BLOCK_ENTITIES.register(modEventBus);
         POTION_TYPES.register(modEventBus);
         CONTAINERS.register(modEventBus);
         ITEMS.register(modEventBus);
@@ -99,43 +99,52 @@ public final class Registration {
         ModMachineContainers.register();
         ModItems.register();
         ModRecipes.register();
-        ModMachineTileEntities.register();
+        ModMachines.register();
         ModTraits.register();
         ModCriteriaTriggers.register();
         ModSounds.register();
     }
 
-    @SuppressWarnings("unchecked")
     public static <T extends Block> Collection<T> getBlocks(Class<T> clazz) {
         return BLOCKS.getAllBlocks().stream()
-                .map(IBlockProvider::asBlock)
+                .map(BlockLike::asBlock)
                 .filter(clazz::isInstance)
-                .map(block -> block)
-                .collect(Collectors.toList());
+                .map(clazz::cast)
+                .toList();
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T extends Block> Collection<T> getBlocks() {
+    public static List<Block> getBlocks(Predicate<Block> predicate) {
         return BLOCKS.getAllBlocks().stream()
-                .map(IBlockProvider::asBlock)
-                .map(block -> block)
-                .collect(Collectors.toList());
+                .map(BlockLike::asBlock)
+                .filter(predicate)
+                .toList();
     }
 
-    @SuppressWarnings("unchecked")
+    public static List<Block> getBlocks() {
+        return BLOCKS.getAllBlocks().stream()
+                .map(BlockLike::asBlock)
+                .toList();
+    }
+
     public static <T extends Item> Collection<T> getItems(Class<T> clazz) {
         return ITEMS.getAllItems().stream()
-                .map(IItemProvider::asItem)
+                .map(ItemLike::asItem)
                 .filter(clazz::isInstance)
-                .map(item -> (T) item)
-                .collect(Collectors.toList());
+                .map(clazz::cast)
+                .toList();
     }
 
     public static Collection<Item> getItems(Predicate<Item> predicate) {
         return ITEMS.getAllItems().stream()
-                .map(IItemProvider::asItem)
+                .map(ItemLike::asItem)
                 .filter(predicate)
-                .collect(Collectors.toList());
+                .toList();
+    }
+
+    public static Collection<Item> getItems() {
+        return ITEMS.getAllItems().stream()
+                .map(ItemLike::asItem)
+                .toList();
     }
 
     private static <T extends IForgeRegistryEntry<T>> DeferredRegister<T> create(IForgeRegistry<T> registry) {

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.tool;
 
-import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.common.FeatureStatus;
 import com.ultreon.randomthingz.common.exceptions.UnidentifiedObjectException;
@@ -34,9 +34,9 @@ public enum Toolset {
                     .maxDamageFactor(8)
                     .damageReduction(new int[]{1, 3, 4, 2})
                     .enchantability(5)
-                    .knockbackResistance(-0.8f)
+                    .knockbackResistance(-.8f)
                     .sound(SoundEvents.ARMOR_EQUIP_DIAMOND)
-                    .toughness(0.5F)
+                    .toughness(.5f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.REDSTONE_ALLOY.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -50,7 +50,7 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.COPPER.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -65,7 +65,7 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.TIN.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -78,13 +78,13 @@ public enum Toolset {
                     .maxDamageFactor(17)
                     .damageReduction(new int[]{3, 6, 7, 3})
                     .enchantability(9)
-                    .knockbackResistance(0.05f)
+                    .knockbackResistance(.05f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.5F)
+                    .toughness(.5f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.COMPRESSED_IRON.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
-                    .tier(2).maxUses(350).efficiency(7.0f).attackDamage(2.5f).enchantability(10)
+                    .tier(2).maxUses(350).efficiency(7f).attackDamage(2.5f).enchantability(10)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.COPPER.getIngot().orElseThrow(() -> new NullPointerException("Copper ingot not found in OreMaterial class.")))).build())),
     OBSIDIAN(builder("obsidian")
             .material(() -> Items.OBSIDIAN, () -> Items.BLAZE_ROD, () -> Items.BLAZE_ROD)
@@ -93,13 +93,13 @@ public enum Toolset {
                     .maxDamageFactor(131)
                     .damageReduction(new int[]{4, 8, 10, 6})
                     .enchantability(17)
-                    .knockbackResistance(0.2f)
+                    .knockbackResistance(.2f)
                     .sound(SoundEvents.ARMOR_EQUIP_NETHERITE)
-                    .toughness(4.0f)
+                    .toughness(4f)
                     .repairMaterial(() -> Ingredient.of(Items.OBSIDIAN))
                     .build())
             .tools(() -> TraitPack.create().all(ModTraits.SHARP.get(), ModTraits.BLAZE.get()).build(), () -> ItemTier.builder()
-                    .tier(4).maxUses(4738).efficiency(10.0f).attackDamage(6f).enchantability(17)
+                    .tier(4).maxUses(4738).efficiency(10f).attackDamage(6f).enchantability(17)
                     .repairMaterial(() -> Ingredient.of(Items.OBSIDIAN)).build())),
     SILVER(builder("silver")
             .material(() -> ItemMaterial.SILVER.getIngot().get(), () -> Items.STICK)
@@ -110,7 +110,7 @@ public enum Toolset {
                     .enchantability(48)
                     .knockbackResistance(1f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.SILVER.getIngot().get()))
                     .build())
             .tools(() -> TraitPack.create().all(ModTraits.HOLY.get()).build(), () -> ItemTier.builder()
@@ -123,13 +123,13 @@ public enum Toolset {
                     .maxDamageFactor(14)
                     .damageReduction(new int[]{4, 9, 12, 7})
                     .enchantability(4)
-                    .knockbackResistance(1.0f)
+                    .knockbackResistance(1f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(4.0f)
+                    .toughness(4f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.LEAD.getIngot().get()))
                     .build())
             .tools(() -> TraitPack.create().all(ModTraits.POISON.get(), ModTraits.SHARP.get()).build(), () -> ItemTier.builder()
-                    .tier(3).maxUses(450).efficiency(7.0f).attackDamage(3.0f).enchantability(7)
+                    .tier(3).maxUses(450).efficiency(7f).attackDamage(3f).enchantability(7)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.LEAD.getIngot().orElseThrow(() -> new NullPointerException("Lead ingot not found in OreMaterial class.")))).build())),
     TUNGSTEN(builder("tungsten", FeatureStatus.DEPRECATED)
             .material(() -> ItemMaterial.TUNGSTEN.getIngot().get(), () -> Items.STICK)
@@ -140,11 +140,11 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.TUNGSTEN.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
-                    .tier(3).maxUses(760).efficiency(7.5f).attackDamage(3.0f).enchantability(9)
+                    .tier(3).maxUses(760).efficiency(7.5f).attackDamage(3f).enchantability(9)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.TUNGSTEN.getIngot().get())).build())),
     NICKEL(builder("nickel", FeatureStatus.DEPRECATED)
             .material(() -> ItemMaterial.NICKEL.getIngot().get(), () -> Items.STICK)
@@ -155,7 +155,7 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.NICKEL.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -170,11 +170,11 @@ public enum Toolset {
                     .enchantability(14)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.PLATINUM.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
-                    .tier(4).maxUses(1240).efficiency(8.6f).attackDamage(5.0f).enchantability(14)
+                    .tier(4).maxUses(1240).efficiency(8.6f).attackDamage(5f).enchantability(14)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.PLATINUM.getIngot().orElseThrow(() -> new NullPointerException("Platinum ingot not found in OreMaterial class.")))).build())),
     ZINC(builder("zinc", FeatureStatus.DEPRECATED)
             .material(() -> ItemMaterial.ZINC.getIngot().get(), () -> Items.STICK)
@@ -185,7 +185,7 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.ZINC.getIngot().get()))
                     .build())
             .tools(() -> TraitPack.create().all(ModTraits.POISON.get()).build(), () -> ItemTier.builder()
@@ -200,7 +200,7 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.BISMUTH.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -215,11 +215,11 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.ALUMINUM.getIngot().get()))
                     .build())
             .tools(() -> TraitPack.create().all(ModTraits.SHARP.get()).build(), () -> ItemTier.builder()
-                    .tier(2).maxUses(180).efficiency(5.6f).attackDamage(3.0f).enchantability(9)
+                    .tier(2).maxUses(180).efficiency(5.6f).attackDamage(3f).enchantability(9)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.ALUMINUM.getIngot().orElseThrow(() -> new NullPointerException("Aluminum ingot not found in OreMaterial class.")))).build())),
     URANIUM(builder("uranium")
             .material(() -> ItemMaterial.URANIUM.getIngot().get(), () -> Items.STICK)
@@ -230,7 +230,7 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.URANIUM.getIngot().get()))
                     .build())
             .tools(() -> TraitPack.create().all(ModTraits.RADIOACTIVE.get()).build(), () -> ItemTier.builder()
@@ -245,7 +245,7 @@ public enum Toolset {
                     .enchantability(9)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.BRONZE.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -260,7 +260,7 @@ public enum Toolset {
                     .enchantability(9)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.BRASS.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -275,7 +275,7 @@ public enum Toolset {
                     .enchantability(9)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.INVAR.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -290,11 +290,11 @@ public enum Toolset {
                     .enchantability(11)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.ELECTRUM.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
-                    .tier(1).maxUses(283).efficiency(4.5f).attackDamage(2.0f).enchantability(11)
+                    .tier(1).maxUses(283).efficiency(4.5f).attackDamage(2f).enchantability(11)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.ELECTRUM.getIngot().orElseThrow(() -> new NullPointerException("Electrum ingot not found in OreMaterial class.")))).build())),
     STEEL(builder("steel")
             .material(() -> ItemMaterial.STEEL.getIngot().get(), () -> Items.STICK)
@@ -305,7 +305,7 @@ public enum Toolset {
                     .enchantability(9)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(1.0f)
+                    .toughness(1f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.STEEL.getIngot().get()))
                     .build())
             .tools(() -> TraitPack.create().tools(ModTraits.KNOCKBACK.get(), ModTraits.SHARP.get()).build(), () -> ItemTier.builder()
@@ -320,7 +320,7 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.BISMUTH_BRASS.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -335,7 +335,7 @@ public enum Toolset {
                     .enchantability(9)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.ALUMINUM_STEEL.getIngot().get()))
                     .build())
             .tools(() -> TraitPack.create().tools(ModTraits.SHARP.get()).build(), () -> ItemTier.builder()
@@ -350,7 +350,7 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.BISMUTH_STEEL.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -365,7 +365,7 @@ public enum Toolset {
                     .enchantability(10)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.SIGNALUM.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
@@ -380,11 +380,11 @@ public enum Toolset {
                     .enchantability(36)
                     .knockbackResistance(0f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(0.0f)
+                    .toughness(0f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.LUMIUM.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
-                    .tier(2).maxUses(200).efficiency(5.0f).attackDamage(2.7f).enchantability(36)
+                    .tier(2).maxUses(200).efficiency(5f).attackDamage(2.7f).enchantability(36)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.LUMIUM.getIngot().orElseThrow(() -> new NullPointerException("Lumium ingot not found in OreMaterial class.")))).build())),
     ENDERIUM(builder("enderium")
             .material(() -> ItemMaterial.ENDERIUM.getIngot().get(), () -> Items.STICK)
@@ -393,13 +393,13 @@ public enum Toolset {
                     .maxDamageFactor(42)
                     .damageReduction(new int[]{4, 10, 12, 3})
                     .enchantability(56)
-                    .knockbackResistance(0.2f)
+                    .knockbackResistance(.2f)
                     .sound(SoundEvents.ARMOR_EQUIP_IRON)
-                    .toughness(4.0f)
+                    .toughness(4f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.ENDERIUM.getIngot().get()))
                     .build())
             .tools(() -> TraitPack.create().tools(ModTraits.ENDER.get()).build(), () -> ItemTier.builder()
-                    .tier(2).maxUses(2340).efficiency(9.0f).attackDamage(7.0f).enchantability(56)
+                    .tier(2).maxUses(2340).efficiency(9f).attackDamage(7f).enchantability(56)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.ENDERIUM.getIngot().orElseThrow(() -> new NullPointerException("Enderium ingot not found in OreMaterial class.")))).build())),
     COBALT(builder("cobalt", FeatureStatus.WIP)
             .material(() -> ItemMaterial.COBALT.getIngot().get(), () -> Items.STICK)
@@ -408,13 +408,13 @@ public enum Toolset {
                     .maxDamageFactor(64)
                     .damageReduction(new int[]{28, 48, 56, 35})
                     .enchantability(24)
-                    .knockbackResistance(0.2f)
+                    .knockbackResistance(.2f)
                     .sound(SoundEvents.ARMOR_EQUIP_NETHERITE)
-                    .toughness(6.0f)
+                    .toughness(6f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.COBALT.getIngot().get()))
                     .build())
             .tools(() -> ItemTier.builder()
-                    .tier(5).maxUses(6535).efficiency(27.5f).attackDamage(31.0f).enchantability(93)
+                    .tier(5).maxUses(6535).efficiency(27.5f).attackDamage(31f).enchantability(93)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.COBALT.getIngot().orElseThrow(() -> new UnidentifiedObjectException("Cobalt ingot not found in OreMaterial class.")))).build())),
     ULTRINIUM(builder("ultrinium")
             .material(() -> ItemMaterial.ULTRINIUM.getIngot().get(), () -> Items.STICK)
@@ -425,11 +425,11 @@ public enum Toolset {
                     .enchantability(224)
                     .knockbackResistance(1f)
                     .sound(SoundEvents.ARMOR_EQUIP_NETHERITE)
-                    .toughness(64.0f)
+                    .toughness(64f)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.ULTRINIUM.getIngot().get()))
                     .build())
             .tools(() -> TraitPack.create().armor(ModTraits.HOLY.get(), ModTraits.WITHER.get(), ModTraits.POISON.get()).build(), () -> ItemTier.builder()
-                    .tier(6).maxUses(65536).efficiency(102.8f).attackDamage(127.0f).enchantability(224)
+                    .tier(6).maxUses(65536).efficiency(102.8f).attackDamage(127f).enchantability(224)
                     .repairMaterial(() -> Ingredient.of(ItemMaterial.ULTRINIUM.getIngot().orElseThrow(() -> new UnidentifiedObjectException("Ultrinium ingot not found in OreMaterial class.")))).build())),
     INFINITY(builder("infinity")
             .material(() -> ItemMaterial.INFINITY.getIngot().get(), () -> Items.STICK)
@@ -468,7 +468,7 @@ public enum Toolset {
                     .repairMaterial(() -> Ingredient.of(ModItems.AQUAMARINE.get()))
                     .build())
             .tools(() -> ItemTier.builder()
-                    .tier(7).maxUses(226).efficiency(9.0f).attackDamage(3.2f).enchantability(13)
+                    .tier(7).maxUses(226).efficiency(9f).attackDamage(3.2f).enchantability(13)
                     .repairMaterial(() -> Ingredient.of(ModItems.AQUAMARINE.get())).build())),
     AMETHYST(builder("amethyst", FeatureStatus.DEPRECATED)
             .material(() -> ModItems.AMETHYST.get(), () -> Items.STICK)
@@ -875,7 +875,7 @@ public enum Toolset {
                         tooltip.add(new TranslatableComponent("misc.randomthingz.wip"));
                     }
                 };
-                this.axe = () -> new AxeTool(itemTier.get(), 5.0f, -3.0f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().axe) {
+                this.axe = () -> new AxeTool(itemTier.get(), 5f, -3f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().axe) {
                     @Override
                     public void appendHoverText(ItemStack stack, @Nullable Level dimension, List<Component> tooltip, TooltipFlag flag) {
                         super.appendHoverText(stack, dimension, tooltip, flag);
@@ -889,14 +889,14 @@ public enum Toolset {
                         tooltip.add(new TranslatableComponent("misc.randomthingz.wip"));
                     }
                 };
-                this.shovel = () -> new ShovelTool(itemTier.get(), 1.5f, -3.0f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().shovel) {
+                this.shovel = () -> new ShovelTool(itemTier.get(), 1.5f, -3f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().shovel) {
                     @Override
                     public void appendHoverText(ItemStack stack, @Nullable Level dimension, List<Component> tooltip, TooltipFlag flag) {
                         super.appendHoverText(stack, dimension, tooltip, flag);
                         tooltip.add(new TranslatableComponent("misc.randomthingz.wip"));
                     }
                 };
-                this.hoe = () -> new HoeTool(itemTier.get(), (int) -(itemTier.get().getAttackDamageBonus() - 1), -1.0f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().hoe) {
+                this.hoe = () -> new HoeTool(itemTier.get(), (int) -(itemTier.get().getAttackDamageBonus() - 1), -1f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().hoe) {
                     @Override
                     public void appendHoverText(ItemStack stack, @Nullable Level dimension, List<Component> tooltip, TooltipFlag flag) {
                         super.appendHoverText(stack, dimension, tooltip, flag);
@@ -905,10 +905,10 @@ public enum Toolset {
                 };
             } else if (status == FeatureStatus.NORMAL) {
                 this.sword = () -> new SwordTool(itemTier.get(), 3, -2.4f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().sword);
-                this.axe = () -> new AxeTool(itemTier.get(), 5.0f, -3.0f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().axe);
+                this.axe = () -> new AxeTool(itemTier.get(), 5f, -3f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().axe);
                 this.pickaxe = () -> new PickaxeTool(itemTier.get(), 1, -2.8f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().pickaxe);
-                this.shovel = () -> new ShovelTool(itemTier.get(), 1.5f, -3.0f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().shovel);
-                this.hoe = () -> new HoeTool(itemTier.get(), (int) -(itemTier.get().getAttackDamageBonus() - 1), -1.0f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().hoe);
+                this.shovel = () -> new ShovelTool(itemTier.get(), 1.5f, -3f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().shovel);
+                this.hoe = () -> new HoeTool(itemTier.get(), (int) -(itemTier.get().getAttackDamageBonus() - 1), -1f, new Item.Properties().tab(ModCreativeTabs.TOOLS), () -> pack.get().hoe);
             } else if (status == FeatureStatus.DEPRECATED) {
                 this.sword = () -> new SwordTool(itemTier.get(), 3, -2.4f, new Item.Properties(), () -> pack.get().sword) {
                     @Override
@@ -917,7 +917,7 @@ public enum Toolset {
                         tooltip.add(new TranslatableComponent("misc.randomthingz.deprecated"));
                     }
                 };
-                this.axe = () -> new AxeTool(itemTier.get(), 5.0f, -3.0f, new Item.Properties(), () -> pack.get().axe) {
+                this.axe = () -> new AxeTool(itemTier.get(), 5f, -3f, new Item.Properties(), () -> pack.get().axe) {
                     @Override
                     public void appendHoverText(ItemStack stack, @Nullable Level dimension, List<Component> tooltip, TooltipFlag flag) {
                         super.appendHoverText(stack, dimension, tooltip, flag);
@@ -931,14 +931,14 @@ public enum Toolset {
                         tooltip.add(new TranslatableComponent("misc.randomthingz.deprecated"));
                     }
                 };
-                this.shovel = () -> new ShovelTool(itemTier.get(), 1.5f, -3.0f, new Item.Properties(), () -> pack.get().shovel) {
+                this.shovel = () -> new ShovelTool(itemTier.get(), 1.5f, -3f, new Item.Properties(), () -> pack.get().shovel) {
                     @Override
                     public void appendHoverText(ItemStack stack, @Nullable Level dimension, List<Component> tooltip, TooltipFlag flag) {
                         super.appendHoverText(stack, dimension, tooltip, flag);
                         tooltip.add(new TranslatableComponent("misc.randomthingz.deprecated"));
                     }
                 };
-                this.hoe = () -> new HoeTool(itemTier.get(), (int) -(itemTier.get().getAttackDamageBonus() - 1), -1.0f, new Item.Properties(), () -> pack.get().hoe) {
+                this.hoe = () -> new HoeTool(itemTier.get(), (int) -(itemTier.get().getAttackDamageBonus() - 1), -1f, new Item.Properties(), () -> pack.get().hoe) {
                     @Override
                     public void appendHoverText(ItemStack stack, @Nullable Level dimension, List<Component> tooltip, TooltipFlag flag) {
                         super.appendHoverText(stack, dimension, tooltip, flag);

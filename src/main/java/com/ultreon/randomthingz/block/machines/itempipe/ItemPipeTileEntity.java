@@ -1,6 +1,7 @@
 package com.ultreon.randomthingz.block.machines.itempipe;
 
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block.entity.ModMachines;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -12,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemPipeTileEntity extends BlockEntity {
-    public ItemPipeTileEntity() {
-        super(ModMachineTileEntities.pipe);
+    public ItemPipeTileEntity(BlockPos pos, BlockState state) {
+        super(ModMachines.PIPE, pos, state);
     }
 
     @SuppressWarnings("unused")
@@ -25,8 +26,8 @@ public class ItemPipeTileEntity extends BlockEntity {
     }
 
     @Override
-    public void load(@NotNull BlockState state, @NotNull CompoundTag compound) {
-        super.load(state, compound);
+    public void load(@NotNull CompoundTag compound) {
+        super.load(compound);
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.time.Duration;
 
+@SuppressWarnings("unused")
 public interface SystemBattery {
     boolean isAvailable();
 

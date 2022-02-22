@@ -2,7 +2,7 @@ package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.block.FenceFrameBlock;
 import com.ultreon.texturedmodels.block.FrameBlock;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
 import net.minecraft.client.Minecraft;
@@ -46,7 +46,7 @@ public class FenceBakedModel implements IDynamicBakedModel {
     @NotNull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null && state != null) {
@@ -61,16 +61,16 @@ public class FenceBakedModel implements IDynamicBakedModel {
 
     @NotNull
     public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, IModelData extraData, BakedModel model) {
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
-        Integer design = extraData.getData(FrameBlockTile.DESIGN);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
+        Integer design = extraData.getData(FrameBlockEntity.DESIGN);
         if (side != null) {
             return Collections.emptyList();
         }
         if (mimic != null && state != null) {
-            int index = extraData.getData(FrameBlockTile.TEXTURE);
+            int index = extraData.getData(FrameBlockEntity.TEXTURE);
             List<TextureAtlasSprite> texture = TextureHelper.getTextureFromModel(model, extraData, rand);
             if (texture.size() <= index) {
-                extraData.setData(FrameBlockTile.TEXTURE, 0);
+                extraData.setData(FrameBlockEntity.TEXTURE, 0);
                 index = 0;
             }
             if (texture.size() == 0) {
@@ -187,7 +187,7 @@ public class FenceBakedModel implements IDynamicBakedModel {
                     quads.addAll(ModelHelper.createCuboid(0f, 3 / 16f, 12 / 16f, 14 / 16f, 7 / 16f, 9 / 16f, texture.get(index), tintIndex));
                 }
             }
-            int overlayIndex = extraData.getData(FrameBlockTile.OVERLAY);
+            int overlayIndex = extraData.getData(FrameBlockEntity.OVERLAY);
             if (overlayIndex != 0) {
                 quads.addAll(ModelHelper.createOverlay(6 / 16f, 10 / 16f, 0f, 1f, 6 / 16f, 10 / 16f, overlayIndex));
             }

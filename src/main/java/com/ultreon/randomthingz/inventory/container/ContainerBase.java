@@ -1,24 +1,25 @@
 package com.ultreon.randomthingz.inventory.container;
 
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Base container class.
  *
  * @author Qboi123
  */
+@Deprecated(forRemoval = true)
 public abstract class ContainerBase extends AbstractContainerMenu {
 
-    protected AbstractContainerMenu inventory;
-    protected AbstractContainerMenu playerInventory;
+    protected Container inventory;
+    protected Container playerInventory;
 
-    public ContainerBase(MenuType type, int id, AbstractContainerMenu playerInventory, AbstractContainerMenu inventory) {
+    public ContainerBase(MenuType type, int id, Container playerInventory, Container inventory) {
         super(type, id);
         this.playerInventory = playerInventory;
         this.inventory = inventory;
@@ -59,8 +60,7 @@ public abstract class ContainerBase extends AbstractContainerMenu {
         return true;
     }
 
-    @Nullable
-    public AbstractContainerMenu getInventory() {
+    public Container getInventory() {
         return playerInventory;
     }
 
@@ -68,8 +68,7 @@ public abstract class ContainerBase extends AbstractContainerMenu {
     public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = slots.get(index);
-
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack stack = slot.getItem();
             itemStack = stack.copy();
 

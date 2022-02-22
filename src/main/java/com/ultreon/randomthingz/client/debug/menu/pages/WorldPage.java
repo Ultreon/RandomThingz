@@ -5,6 +5,7 @@ import com.ultreon.randomthingz.client.debug.menu.DebugPage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class WorldPage extends DebugPage {
         list.add(new DebugEntry("cloudColor", () -> getColor(dimension.getCloudColor(mc.getFrameTime()))));
         if (Minecraft.getInstance().player != null) {
             LocalPlayer player = Minecraft.getInstance().player;
-            list.add(new DebugEntry("skyColor", () -> getColor(dimension.getSkyColor(player.blockPosition(), mc.getFrameTime()))));
+            list.add(new DebugEntry("skyColor", () -> getColor(dimension.getSkyColor(Vec3.atCenterOf(player.blockPosition()), mc.getFrameTime()))));
         }
         list.add(new DebugEntry("starBrightness", () -> getPercentage(dimension.getStarBrightness(mc.getFrameTime()))));
         list.add(new DebugEntry("sunBrightness", () -> getPercentage(dimension.getSkyDarken(mc.getFrameTime()))));
@@ -59,10 +60,10 @@ public class WorldPage extends DebugPage {
         list.add(new DebugEntry("raining", dimension::isRaining));
         list.add(new DebugEntry("thundering", dimension::isThundering));
         list.add(new DebugEntry("saveDisabled", dimension::noSave));
-        if (Minecraft.getInstance().player != null) {
-            LocalPlayer player = Minecraft.getInstance().player;
-            list.add(new DebugEntry("areaLoaded", () -> dimension.isAreaLoaded(player.blockPosition(), 1)));
-        }
+//        if (Minecraft.getInstance().player != null) {
+//            LocalPlayer player = Minecraft.getInstance().player;
+//            list.add(new DebugEntry("areaLoaded", () -> dimension.isAreaLoaded(player.blockPosition(), 1)));
+//        }
         list.add(new DebugEntry("debug", dimension::isDebug));
         return list;
     }

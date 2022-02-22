@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
-import com.ultreon.randomthingz.item.tool.ToolType;
+import com.ultreon.randomthingz.item.ItemType;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +18,7 @@ public class HolyTrait extends AbstractTrait {
     }
 
     @Override
-    public float getSmiteValue(Set<ToolType> qfmToolTypes, ItemStack stack, LivingEntity attacker) {
-        return 8.0f;
+    public float getSmiteValue(Set<ItemType> qfmToolTypes, ItemStack stack, LivingEntity attacker) {
+        return 8f;
     }
 }

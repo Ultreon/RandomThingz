@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class InfuserScreen extends AbstractMachineContainerScreen<InfuserContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/infuser.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/infuser.png");
 
     public InfuserScreen(InfuserContainer container, Inventory playerInventory, Component titleIn) {
         super(container, playerInventory, titleIn);

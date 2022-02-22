@@ -53,7 +53,7 @@ public class ItemPipeBlock extends PipeBlock implements IWrenchable, EntityBlock
     });
 
     public ItemPipeBlock(Properties properties) {
-        super(0.125f, properties);
+        super(.125f, properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(NORTH, ConnectionType.NONE)
                 .setValue(EAST, ConnectionType.NONE)
@@ -104,6 +104,12 @@ public class ItemPipeBlock extends PipeBlock implements IWrenchable, EntityBlock
 
     public static ConnectionType getConnection(BlockState state, Direction side) {
         return state.getValue(FACING_TO_PROPERTY_MAP.get(side));
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ItemPipeTileEntity(pos, state);
     }
 
     @Nullable

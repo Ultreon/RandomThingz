@@ -20,7 +20,7 @@ public class RadiationEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entityLivingBaseIn, int amplifier) {
-        entityLivingBaseIn.hurt(ModDamageSources.RADIATION, 2.0f);
+        entityLivingBaseIn.hurt(ModDamageSources.RADIATION, 2f);
     }
 
     @Override

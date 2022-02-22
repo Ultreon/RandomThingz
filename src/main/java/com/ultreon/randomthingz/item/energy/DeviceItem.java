@@ -1,10 +1,11 @@
 package com.ultreon.randomthingz.item.energy;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.ultreon.modlib.utils.GraphicsUtil;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.capability.EnergyStorageItemImpl;
 import com.ultreon.randomthingz.client.hud.HudItem;
-import com.ultreon.randomthingz.util.GraphicsUtil;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -32,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public abstract class DeviceItem extends HudItem {
-    public static final ResourceLocation CHARGE = RandomThingz.rl("charge");
+    public static final ResourceLocation CHARGE = RandomThingz.res("charge");
 
     private final int maxEnergy;
     private final int maxReceive;
@@ -105,12 +106,12 @@ public abstract class DeviceItem extends HudItem {
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return Mth.hsvToRgb((1 + getChargeRatio(stack)) / 3.0f, 1.0f, 1.0f);
+        return Mth.hsvToRgb((1 + getChargeRatio(stack)) / 3f, 1f, 1f);
     }
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, LocalPlayer player) {
+    public void renderHud(PoseStack pose, GraphicsUtil gu, Minecraft mc, ItemStack stack, LocalPlayer player) {
         // Apparently, appendHoverText can be called before caps are initialized
         if (CapabilityEnergy.ENERGY == null) return;
 
@@ -145,7 +146,7 @@ public abstract class DeviceItem extends HudItem {
             RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/energy_item/bar.png"));
             gu.blit(32, height - 12, val, 2, 0, 0, val, 1, 64, 3);
 
-            gu.drawItemStack(stack, 56, height - 60, "");
+            gu.drawItemStack(RenderSystem.getModelViewStack(), stack, 56, height - 60, "");
             gu.drawCenteredString(Math.round(e.getEnergyStored()) + " / " + Math.round(e.getMaxEnergyStored()), 64, height - 24, 0xff7f7f);
         });
     }

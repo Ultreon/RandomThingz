@@ -23,10 +23,10 @@ public class DoorKnobBakedModel {
             VertexFormatElement e = elements.get(j);
             switch (e.getUsage()) {
                 case POSITION:
-                    builder.put(j, (float) x, (float) y, (float) z, 1.0f);
+                    builder.put(j, (float) x, (float) y, (float) z, 1f);
                     break;
                 case COLOR:
-                    builder.put(j, r, g, b, 1.0f);
+                    builder.put(j, r, g, b, 1f);
                     break;
                 case UV:
                     switch (e.getIndex()) {
@@ -64,10 +64,10 @@ public class DoorKnobBakedModel {
         float uh = 9;
         float vl = 7;
         float vh = 9;
-        putVertex(builder, normal, v1.x, v1.y, v1.z, ul, vl, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v2.x, v2.y, v2.z, ul, vh, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v3.x, v3.y, v3.z, uh, vh, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v4.x, v4.y, v4.z, uh, vl, sprite, 1.0f, 1.0f, 1.0f);
+        putVertex(builder, normal, v1.x, v1.y, v1.z, ul, vl, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v2.x, v2.y, v2.z, ul, vh, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v3.x, v3.y, v3.z, uh, vh, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v4.x, v4.y, v4.z, uh, vl, sprite, 1f, 1f, 1f);
         return builder.build();
     }
 
@@ -94,10 +94,10 @@ public class DoorKnobBakedModel {
             uh = 1;
             vh = 5;
         }
-        putVertex(builder, normal, v1.x, v1.y, v1.z, ul, vl, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v2.x, v2.y, v2.z, ul, vh, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v3.x, v3.y, v3.z, uh, vh, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v4.x, v4.y, v4.z, uh, vl, sprite, 1.0f, 1.0f, 1.0f);
+        putVertex(builder, normal, v1.x, v1.y, v1.z, ul, vl, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v2.x, v2.y, v2.z, ul, vh, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v3.x, v3.y, v3.z, uh, vh, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v4.x, v4.y, v4.z, uh, vl, sprite, 1f, 1f, 1f);
         return builder.build();
     }
 
@@ -120,10 +120,10 @@ public class DoorKnobBakedModel {
             vh = 4;
             uh = 5;
         }
-        putVertex(builder, normal, v1.x, v1.y, v1.z, ul, vl, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v2.x, v2.y, v2.z, ul, vh, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v3.x, v3.y, v3.z, uh, vh, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v4.x, v4.y, v4.z, uh, vl, sprite, 1.0f, 1.0f, 1.0f);
+        putVertex(builder, normal, v1.x, v1.y, v1.z, ul, vl, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v2.x, v2.y, v2.z, ul, vh, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v3.x, v3.y, v3.z, uh, vh, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v4.x, v4.y, v4.z, uh, vl, sprite, 1f, 1f, 1f);
         return builder.build();
     }
 

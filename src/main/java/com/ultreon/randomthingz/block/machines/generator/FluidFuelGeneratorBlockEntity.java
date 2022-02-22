@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.generator;
 
 import com.ultreon.modlib.api.FluidContainer;
 import com.ultreon.modlib.api.RedstoneMode;
-import com.ultreon.modlib.embedded.silentutils.EnumUtils;
+import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.config.Config;
 import com.ultreon.randomthingz.util.InventoryUtils;
@@ -154,7 +154,7 @@ public abstract class FluidFuelGeneratorBlockEntity extends GeneratorBlockEntity
 
     @Nonnull
     @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+    public <T> @NotNull LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             return fluidHandlerCap.cast();
         }

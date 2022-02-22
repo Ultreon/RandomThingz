@@ -1540,6 +1540,10 @@
   "misc.randomthingz.failed_save": "Failed to save %s!",
   "misc.randomthingz.modules": "Module Config",
   "misc.randomthingz.wip": "This feature is Work in Progress",
+  "misc.randomthingz.missing_no": "Missing №",
+  "misc.ok": "OK",
+  "misc.true": "True",
+  "misc.false": "False",
   "key.randomthingz.debug_screen": "Show / Hide Debug Screen",
   "key.categories.randomthingz": "Random Thingz keys",
   "msg.randomthingz.confirm_exit.title": "Exit Confirmation",
@@ -1659,5 +1663,20 @@
   "gui.tag_filter.randomthingz.dungeons.bows": "Bows",
   "gui.tag_filter.randomthingz.overpowered.infinity": "Infinity",
   "gui.tag_filter.randomthingz.overpowered.tools": "Tools",
-  "gui.tag_filter.randomthingz.overpowered.wands": "Wands"
+  "gui.tag_filter.randomthingz.overpowered.wands": "Wands",
+
+  "type.randomthingz.block_pos": "at %s, %s, %s",
+  "type.randomthingz.size2": "%s×%s",
+  "type.randomthingz.size3": "%s×%s×%s",
+  "type.randomthingz.size4": "%s×%s×%s×%s",
+  "type.randomthingz.vec2": "%s, %s",
+  "type.randomthingz.vec3": "%s, %s, %s",
+  "type.randomthingz.vec4": "%s, %s, %s, %s",
+  "type.randomthingz.item_stack": "%1$sx of %2$s",
+  "type.randomthingz.percentage": "%s%%",
+  "type.randomthingz.multiplier": "%sx",
+  "type.randomthingz.mod": "Mod named %s",
+  "type.randomthingz.player": "Player named %s",
+  "type.randomthingz.living_entity": "%1$s named %2$s",
+  "type.randomthingz.modification": "Modification named %s"
 }

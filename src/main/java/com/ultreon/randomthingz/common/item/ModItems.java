@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.common.item;
 
-import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import com.ultreon.randomthingz.item.*;
 import com.ultreon.randomthingz.item.magic.LightningStaffItem;
@@ -69,27 +69,27 @@ public final class ModItems {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Food     //
     //////////////////
-    public static final ItemRegistryObject<Item> HAMBURGER_BUN = register("hamburger_bun", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 60, 1), 0.7f).build())));
-    public static final ItemRegistryObject<Item> CHEESE_BURGER = register("cheese_burger", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 60, 1), 0.7f).build())));
-    public static final ItemRegistryObject<Item> CHEESE_SLICE = register("cheese_slice", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(0.2f).build())));
+    public static final ItemRegistryObject<Item> HAMBURGER_BUN = register("hamburger_bun", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(.2f).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 60, 1), .7f).build())));
+    public static final ItemRegistryObject<Item> CHEESE_BURGER = register("cheese_burger", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(.2f).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 60, 1), .7f).build())));
+    public static final ItemRegistryObject<Item> CHEESE_SLICE = register("cheese_slice", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(.2f).build())));
     public static final ItemRegistryObject<CheeseItem> CHEESE = register("cheese", () -> new CheeseItem(new Item.Properties().tab(CreativeModeTab.TAB_FOOD), (stack) -> new ItemStack(CHEESE_SLICE, stack.getCount() * 6)));
-    public static final ItemRegistryObject<Item> COOKED_CARROT = register("cooked_carrot", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(3).saturationMod(0.25f).build())));
-    public static final ItemRegistryObject<Item> BAKED_APPLE = register("baked_apple", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.3f).build())));
+    public static final ItemRegistryObject<Item> COOKED_CARROT = register("cooked_carrot", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(3).saturationMod(.25f).build())));
+    public static final ItemRegistryObject<Item> BAKED_APPLE = register("baked_apple", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(4).saturationMod(.3f).build())));
     public static final ItemRegistryObject<Item> FLOUR = register("flour", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD)));
     public static final ItemRegistryObject<Item> DOUGH = register("dough", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD)));
-    public static final ItemRegistryObject<Item> FRIED_EGG = register("fried_egg", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(0.13f).build())));
-    public static final ItemRegistryObject<Item> BACON = register("bacon", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(0.13f).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 200), 0.8f).build())));
-    public static final ItemRegistryObject<Item> COOKED_BACON = register("cooked_bacon", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(5).saturationMod(0.40f).build())));
-    public static final ItemRegistryObject<Item> CHICKEN_LEG = register("chicken_leg", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(0.1f).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 400), 0.9f).build())));
-    public static final ItemRegistryObject<Item> COOKED_CHICKEN_LEG = register("cooked_chicken_leg", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.35f).build())));
-    public static final ItemRegistryObject<Item> MEATBALL = register("meatball", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(0.15f).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 100), 1f).build())));
-    public static final ItemRegistryObject<Item> COOKED_MEATBALL = register("cooked_meatball", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(3).saturationMod(0.225f).build())));
-    public static final ItemRegistryObject<Item> SHOARMA = register("shoarma", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(2).saturationMod(0.15f).build())));
-    public static final ItemRegistryObject<Item> COOKED_SHOARMA = register("cooked_shoarma", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(8).saturationMod(0.45f).build())));
-    public static final ItemRegistryObject<Item> PORK_SHANK = register("pork_shank", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(2).saturationMod(0.15f).build())));
-    public static final ItemRegistryObject<Item> COOKED_PORK_SHANK = register("cooked_pork_shank", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(7).saturationMod(0.375f).build())));
-    public static final ItemRegistryObject<Item> TOMAHAWK = register("tomahawk", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(2).saturationMod(0.215f).build())));
-    public static final ItemRegistryObject<Item> COOKED_TOMAHAWK = register("cooked_tomahawk", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(7).saturationMod(0.415f).build())));
+    public static final ItemRegistryObject<Item> FRIED_EGG = register("fried_egg", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(.13f).build())));
+    public static final ItemRegistryObject<Item> BACON = register("bacon", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(.13f).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 200), .8f).build())));
+    public static final ItemRegistryObject<Item> COOKED_BACON = register("cooked_bacon", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(5).saturationMod(.40f).build())));
+    public static final ItemRegistryObject<Item> CHICKEN_LEG = register("chicken_leg", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(.1f).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 400), .9f).build())));
+    public static final ItemRegistryObject<Item> COOKED_CHICKEN_LEG = register("cooked_chicken_leg", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(4).saturationMod(.35f).build())));
+    public static final ItemRegistryObject<Item> MEATBALL = register("meatball", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(1).saturationMod(.15f).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 100), 1f).build())));
+    public static final ItemRegistryObject<Item> COOKED_MEATBALL = register("cooked_meatball", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(3).saturationMod(.225f).build())));
+    public static final ItemRegistryObject<Item> SHOARMA = register("shoarma", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(2).saturationMod(.15f).build())));
+    public static final ItemRegistryObject<Item> COOKED_SHOARMA = register("cooked_shoarma", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(8).saturationMod(.45f).build())));
+    public static final ItemRegistryObject<Item> PORK_SHANK = register("pork_shank", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(2).saturationMod(.15f).build())));
+    public static final ItemRegistryObject<Item> COOKED_PORK_SHANK = register("cooked_pork_shank", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(7).saturationMod(.375f).build())));
+    public static final ItemRegistryObject<Item> TOMAHAWK = register("tomahawk", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(2).saturationMod(.215f).build())));
+    public static final ItemRegistryObject<Item> COOKED_TOMAHAWK = register("cooked_tomahawk", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(new FoodProperties.Builder().nutrition(7).saturationMod(.415f).build())));
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Nature     //
@@ -109,8 +109,8 @@ public final class ModItems {
             .stacksTo(128)
             .food(new FoodProperties.Builder()
                     .nutrition(1)
-                    .saturationMod(0.2f)
-                    .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 60, 1), 0.7f)
+                    .saturationMod(.2f)
+                    .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 60, 1), .7f)
                     .build())));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -118,8 +118,8 @@ public final class ModItems {
     ///////////////////////
 
     // Bows
-    public static final ItemRegistryObject<AdvancedBowItem> BLAZE_BOW = register("blaze_bow", () -> new AdvancedBowItem(new Item.Properties().tab(CreativeModeTab.TAB_COMBAT), 6.25f, 1.0f, 6, 1, true));
-    public static final ItemRegistryObject<AdvancedBowItem> ICE_BOW = register("ice_bow", () -> new AdvancedBowItem(new Item.Properties().tab(CreativeModeTab.TAB_COMBAT), 2f, 1.0f, 8, 2));
+    public static final ItemRegistryObject<CustomBowItem> BLAZE_BOW = register("blaze_bow", () -> new CustomBowItem(new Item.Properties().tab(CreativeModeTab.TAB_COMBAT), 6.25f, 1f, 6, 1, true));
+    public static final ItemRegistryObject<CustomBowItem> ICE_BOW = register("ice_bow", () -> new CustomBowItem(new Item.Properties().tab(CreativeModeTab.TAB_COMBAT), 2f, 1f, 8, 2));
 
     // Rods
     public static final ItemRegistryObject<IngredientItem> URANIUM_ROD = register("uranium_rod", IngredientItem::new);
@@ -135,7 +135,7 @@ public final class ModItems {
     public static final ItemRegistryObject<IngotOrDustItem> RUBY_DUST = register("ruby_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> AMETHYST_DUST = register("amethyst_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> AQUAMARINE_DUST = register("aquamarine_dust", IngotOrDustItem::new);
-    public static final ItemRegistryObject<IngotOrDustItem> SAPPHIRE_DUST = register("saphire_dust", IngotOrDustItem::new);
+    public static final ItemRegistryObject<IngotOrDustItem> SAPPHIRE_DUST = register("sapphire_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> MALACHITE_DUST = register("malachite_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> TOPAZ_DUST = register("topaz_dust", IngotOrDustItem::new);
     public static final ItemRegistryObject<IngotOrDustItem> AMBER_DUST = register("amber_dust", IngotOrDustItem::new);
@@ -147,7 +147,7 @@ public final class ModItems {
     public static final ItemRegistryObject<Item> RUBY = register("ruby", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     public static final ItemRegistryObject<Item> AMETHYST = register("amethyst", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     public static final ItemRegistryObject<Item> AQUAMARINE = register("aquamarine", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-    public static final ItemRegistryObject<Item> SAPPHIRE = register("saphire", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+    public static final ItemRegistryObject<Item> SAPPHIRE = register("sapphire", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     public static final ItemRegistryObject<Item> MALACHITE = register("malachite", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     public static final ItemRegistryObject<Item> TOPAZ = register("topaz", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     public static final ItemRegistryObject<Item> AMBER = register("amber", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
@@ -161,7 +161,7 @@ public final class ModItems {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Dungeons     //
     //////////////////////
-    public static final ItemRegistryObject<AdvancedBowItem> DUNGEONS_HUNTERS_BOW = register("hunters_bow", () -> new AdvancedBowItem(new Item.Properties().tab(ModCreativeTabs.DUNGEONS), 4.0f, 1.0f, 1.75d) {
+    public static final ItemRegistryObject<CustomBowItem> DUNGEONS_HUNTERS_BOW = register("hunters_bow", () -> new CustomBowItem(new Item.Properties().tab(ModCreativeTabs.DUNGEONS), 4f, 1f, 1.75d) {
         @Override
         public void appendHoverText(@NotNull ItemStack stack, @Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
             tooltip.add(new TranslatableComponent("desc.randomthingz.mc_dungeons"));
@@ -252,35 +252,35 @@ public final class ModItems {
             super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_SPIRIT_KNIFE = register("spirit_knife", () -> new SwordItem(Tiers.DIAMOND, 2, -1.0f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_SPIRIT_KNIFE = register("spirit_knife", () -> new SwordItem(Tiers.DIAMOND, 2, -1f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
         @Override
         public void appendHoverText(@NotNull ItemStack stack, @Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
             tooltip.add(new TranslatableComponent("desc.randomthingz.mc_dungeons"));
             super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_GOLD = register("the_last_laugh_gold", () -> new SwordItem(Tiers.GOLD, 3, -0.5f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_GOLD = register("the_last_laugh_gold", () -> new SwordItem(Tiers.GOLD, 3, -.5f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
         @Override
         public void appendHoverText(@NotNull ItemStack stack, @Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
             tooltip.add(new TranslatableComponent("desc.randomthingz.mc_dungeons"));
             super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_SILVER = register("the_last_laugh_silver", () -> new SwordItem(Tiers.IRON, 2, -0.5f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_THE_LAST_LAUGH_SILVER = register("the_last_laugh_silver", () -> new SwordItem(Tiers.IRON, 2, -.5f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
         @Override
         public void appendHoverText(@NotNull ItemStack stack, @Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
             tooltip.add(new TranslatableComponent("desc.randomthingz.mc_dungeons"));
             super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_DIAMOND_SWORD = register("dungeons_diamond_sword", () -> new SwordItem(Tiers.DIAMOND, 4, -2.0f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_DIAMOND_SWORD = register("dungeons_diamond_sword", () -> new SwordItem(Tiers.DIAMOND, 4, -2f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
         @Override
         public void appendHoverText(@NotNull ItemStack stack, @Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
             tooltip.add(new TranslatableComponent("desc.randomthingz.mc_dungeons"));
             super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_IRON_SWORD = register("dungeons_iron_sword", () -> new SwordItem(Tiers.IRON, 4, -2.0f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_IRON_SWORD = register("dungeons_iron_sword", () -> new SwordItem(Tiers.IRON, 4, -2f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
         @Override
         public void appendHoverText(@NotNull ItemStack stack, @Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
             tooltip.add(new TranslatableComponent("desc.randomthingz.mc_dungeons"));
@@ -315,14 +315,14 @@ public final class ModItems {
             super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_FLAIL = register("flail", () -> new SwordItem(Tiers.STONE, 5, -3.0f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_FLAIL = register("flail", () -> new SwordItem(Tiers.STONE, 5, -3f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
         @Override
         public void appendHoverText(@NotNull ItemStack stack, @Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
             tooltip.add(new TranslatableComponent("desc.randomthingz.mc_dungeons"));
             super.appendHoverText(stack, dimensionIn, tooltip, flagIn);
         }
     });
-    public static final ItemRegistryObject<SwordItem> DUNGEONS_SUNS_GRACE = register("suns_grace", () -> new SwordItem(Tiers.STONE, 5, -3.0f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
+    public static final ItemRegistryObject<SwordItem> DUNGEONS_SUNS_GRACE = register("suns_grace", () -> new SwordItem(Tiers.STONE, 5, -3f, new Item.Properties().tab(ModCreativeTabs.DUNGEONS)) {
         @Override
         public void appendHoverText(@NotNull ItemStack stack, @Nullable Level dimensionIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
             tooltip.add(new TranslatableComponent("desc.randomthingz.mc_dungeons"));
@@ -363,7 +363,7 @@ public final class ModItems {
     public static final ItemRegistryObject<TeleportStaffItem> TELEPORT_STAFF = register("teleport_wand", TeleportStaffItem::new);
 
     // Stone Level
-    public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordTool(Tiers.STONE, 8, -2.0f, new Item.Properties().tab(ModCreativeTabs.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.WITHER.get()}));
+    public static final ItemRegistryObject<SwordItem> STONE_SWORD_OF_DOOM = register("stone_sword_of_doom", () -> new SwordTool(Tiers.STONE, 8, -2f, new Item.Properties().tab(ModCreativeTabs.SPECIALS).rarity(Rarity.RARE), () -> new AbstractTrait[]{ModTraits.WITHER.get()}));
 
     // Iron Level
     public static final ItemRegistryObject<AxeItem> EMERGENCY_FIRE_AXE = register("emergency_fire_axe", () -> new AxeItem(Tiers.IRON, 2, -2.55f, new Item.Properties().tab(ModCreativeTabs.SPECIALS).rarity(Rarity.UNCOMMON)));
@@ -374,20 +374,20 @@ public final class ModItems {
     // Diamond Level
     public static final ItemRegistryObject<AxeItem> LEVIATHAN_AXE = register("leviathan_axe", () -> new AxeItem(Tiers.DIAMOND, 5, -2.55f, new Item.Properties().tab(ModCreativeTabs.SPECIALS)));
     public static final ItemRegistryObject<AxeItem> ADAMANTANIUM_AXE_RED = register("adamantanium_axe_red", () -> new AxeItem(Tiers.DIAMOND, 5, -1.875f, new Item.Properties().tab(ModCreativeTabs.SPECIALS)));
-    public static final ItemRegistryObject<SwordItem> DIAMOND_QUARTZ_SWORD = register("diamond_quartz_sword", () -> new SwordItem(Tiers.DIAMOND, 6, -2.0f, new Item.Properties().tab(ModCreativeTabs.SPECIALS)));
+    public static final ItemRegistryObject<SwordItem> DIAMOND_QUARTZ_SWORD = register("diamond_quartz_sword", () -> new SwordItem(Tiers.DIAMOND, 6, -2f, new Item.Properties().tab(ModCreativeTabs.SPECIALS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Tools     //
     ///////////////////
 
     // Tools - Vanilla
-    public static final ItemRegistryObject<AxeItem> WOODEN_BATTLEAXE = register("wooden_battleaxe", () -> new AxeItem(Tiers.WOOD, 7.0f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> STONE_BATTLEAXE = register("stone_battleaxe", () -> new AxeItem(Tiers.STONE, 7.0f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> GOLDEN_BATTLEAXE = register("golden_battleaxe", () -> new AxeItem(Tiers.GOLD, 7.0f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> IRON_BATTLEAXE = register("iron_battleaxe", () -> new AxeItem(Tiers.IRON, 7.0f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> DIAMOND_BATTLEAXE = register("diamond_battleaxe", () -> new AxeItem(Tiers.DIAMOND, 7.0f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
-    public static final ItemRegistryObject<AxeItem> NETHERITE_BATTLEAXE = register("netherite_battleaxe", () -> new AxeItem(Tiers.NETHERITE, 7.0f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
-    public static final ItemRegistryObject<HammerItem> HAMMER = register("hammer", () -> new HammerItem(Tiers.DIAMOND, 7, -3.0f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> WOODEN_BATTLEAXE = register("wooden_battleaxe", () -> new AxeItem(Tiers.WOOD, 7f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> STONE_BATTLEAXE = register("stone_battleaxe", () -> new AxeItem(Tiers.STONE, 7f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> GOLDEN_BATTLEAXE = register("golden_battleaxe", () -> new AxeItem(Tiers.GOLD, 7f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> IRON_BATTLEAXE = register("iron_battleaxe", () -> new AxeItem(Tiers.IRON, 7f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> DIAMOND_BATTLEAXE = register("diamond_battleaxe", () -> new AxeItem(Tiers.DIAMOND, 7f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
+    public static final ItemRegistryObject<AxeItem> NETHERITE_BATTLEAXE = register("netherite_battleaxe", () -> new AxeItem(Tiers.NETHERITE, 7f, -2.2f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
+    public static final ItemRegistryObject<HammerItem> HAMMER = register("hammer", () -> new HammerItem(Tiers.DIAMOND, 7, -3f, new Item.Properties().tab(ModCreativeTabs.TOOLS)));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //     Utility Methods     //

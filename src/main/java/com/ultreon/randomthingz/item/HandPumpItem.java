@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item;
 
 import com.ultreon.modlib.api.FluidContainer;
-import com.ultreon.modlib.embedded.silentlib.util.PlayerUtils;
+import com.ultreon.modlib.silentlib.util.PlayerUtils;
 import com.ultreon.randomthingz.common.enums.TextColors;
 import com.ultreon.randomthingz.item.energy.EnergyStoringItem;
 import com.ultreon.randomthingz.util.EnergyUtils;
@@ -11,6 +11,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -60,12 +61,12 @@ public class HandPumpItem extends EnergyStoringItem {
     }
 
     private static ItemStack takeFluidContainer(Player player) {
-        for (int i = 0; i < player.inventory.items.size(); ++i) {
-            ItemStack stack = player.inventory.getItem(i);
+        for (int i = 0; i < player.getInventory().items.size(); ++i) {
+            ItemStack stack = player.getInventory().getItem(i);
             if (InventoryUtils.isEmptyFluidContainer(stack)) {
                 ItemStack split = stack.split(1);
                 if (stack.isEmpty()) {
-                    player.inventory.setItem(i, ItemStack.EMPTY);
+                    player.getInventory().setItem(i, ItemStack.EMPTY);
                 }
                 return split;
             }
@@ -108,7 +109,7 @@ public class HandPumpItem extends EnergyStoringItem {
         if (state.getBlock() instanceof BucketPickup) {
             ItemStack emptyContainer = takeFluidContainer(player);
             if (!emptyContainer.isEmpty()) {
-                Fluid fluid = ((BucketPickup) state.getBlock()).takeLiquid(dimension, posOpposite, state);
+                Fluid fluid = ((BucketItem)((BucketPickup) state.getBlock()).pickupBlock(dimension, posOpposite, state).getItem()).getFluid();
                 FluidStack fluidStack = new FluidStack(fluid, 1000);
                 if (!fluidStack.isEmpty()) {
                     giveFilledContainer(player, energy, emptyContainer, fluidStack);

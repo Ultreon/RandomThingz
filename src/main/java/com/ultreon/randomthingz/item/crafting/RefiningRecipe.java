@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.item.crafting;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidInventory;
-import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidRecipe;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidInventory;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidRecipe;
 import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import lombok.Getter;
@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class RefiningRecipe implements BaseFluidRecipe<BaseFluidInventory> {
+public class RefiningRecipe implements FluidRecipe<FluidInventory> {
     private final ResourceLocation recipeId;
     private final List<FluidStack> outputs = NonNullList.create();
     @Getter
@@ -32,12 +32,12 @@ public class RefiningRecipe implements BaseFluidRecipe<BaseFluidInventory> {
     private FluidIngredient ingredient;
 
     @Override
-    public boolean matches(BaseFluidInventory inv, Level dimensionIn) {
+    public boolean matches(FluidInventory inv, Level dimensionIn) {
         return ingredient.test(inv.getFluidInTank(0));
     }
 
     @Override
-    public List<FluidStack> getFluidResults(BaseFluidInventory inv) {
+    public List<FluidStack> getFluidResults(FluidInventory inv) {
         return getFluidOutputs();
     }
 
@@ -80,7 +80,7 @@ public class RefiningRecipe implements BaseFluidRecipe<BaseFluidInventory> {
             recipe.processTime = GsonHelper.getAsInt(json, "process_time");
             recipe.ingredient = FluidIngredient.deserialize(json.getAsJsonObject("ingredient"));
             for (JsonElement je : GsonHelper.getAsJsonArray(json, "results")) {
-                FluidStack stack = BaseFluidRecipe.deserializeFluid(je.getAsJsonObject());
+                FluidStack stack = FluidRecipe.deserializeFluid(je.getAsJsonObject());
                 if (!stack.isEmpty()) {
                     recipe.outputs.add(stack);
                 }
@@ -96,7 +96,7 @@ public class RefiningRecipe implements BaseFluidRecipe<BaseFluidInventory> {
             recipe.ingredient = FluidIngredient.read(buffer);
             int count = buffer.readByte();
             for (int i = 0; i < count; ++i) {
-                FluidStack stack = BaseFluidRecipe.readFluid(buffer);
+                FluidStack stack = FluidRecipe.readFluid(buffer);
                 if (!stack.isEmpty()) {
                     recipe.outputs.add(stack);
                 }
@@ -109,7 +109,7 @@ public class RefiningRecipe implements BaseFluidRecipe<BaseFluidInventory> {
             buffer.writeVarInt(recipe.processTime);
             recipe.ingredient.write(buffer);
             buffer.writeByte(recipe.outputs.size());
-            recipe.outputs.forEach(s -> BaseFluidRecipe.writeFluid(buffer, s));
+            recipe.outputs.forEach(s -> FluidRecipe.writeFluid(buffer, s));
         }
     }
 }

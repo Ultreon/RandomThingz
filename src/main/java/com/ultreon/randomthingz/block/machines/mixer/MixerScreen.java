@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class MixerScreen extends AbstractMachineContainerScreen<MixerContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/mixer.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/mixer.png");
 
     public MixerScreen(MixerContainer container, Inventory playerInventory, Component titleIn) {
         super(container, playerInventory, titleIn);

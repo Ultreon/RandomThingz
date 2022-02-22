@@ -148,7 +148,7 @@ public abstract class AbstractUpdater<T extends IVersion> {
      *
      * @return the current mod's version.
      */
-    public abstract T getCurrentModVersion();
+    public abstract T getCurrentVersion();
 
     /**
      * Get latest mod version.
@@ -185,7 +185,7 @@ public abstract class AbstractUpdater<T extends IVersion> {
      * @return true if there's an update available, false otherwise.
      */
     public boolean hasUpdate() {
-        return latestVersion != null && getCurrentModVersion().compareTo(latestVersion) < 0;
+        return latestVersion != null && getCurrentVersion().compareTo(latestVersion) < 0;
     }
 
     /**
@@ -250,7 +250,7 @@ public abstract class AbstractUpdater<T extends IVersion> {
                 this.release = new Release(this, modContainer.getModInfo().getDisplayName(), url, this.dependencies);
 
                 // Check if up to date.
-                if (getCurrentModVersion().compareTo(latestVersion) < 0) {
+                if (getCurrentVersion().compareTo(latestVersion) < 0) {
                     // Close reader and stream.
                     targetReader.close();
                     inputStream.close();

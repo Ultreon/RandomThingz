@@ -48,7 +48,7 @@ public class ElectricFurnaceBlock extends AbstractMachineBlock {
             double d1 = pos.getY();
             double d2 = (double) pos.getZ() + 0.5D;
             if (rand.nextDouble() < 0.1D) {
-                dimensionIn.playLocalSound(d0, d1, d2, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0f, 1.0f, false);
+                dimensionIn.playLocalSound(d0, d1, d2, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1f, 1f, false);
             }
 
             Direction direction = stateIn.getValue(FACING);

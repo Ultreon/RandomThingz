@@ -25,73 +25,70 @@ public class EntityPage extends DebugPage {
 
     @Override
     public final List<DebugEntry> getLinesLeft() {
-        List<DebugEntry> list = new ArrayList<>();
+        List<DebugEntry> entries = new ArrayList<>();
         Player player = Minecraft.getInstance().player;
         if (player == null) {
-            list.add(new DebugEntry("$PLAYER$", null));
-            return list;
+            entries.add(new DebugEntry("$PLAYER$", null));
+            return entries;
         }
-        float f = player.xRot;
-        float f1 = player.yRot;
+        float xRot = player.getXRot();
+        float yRot = player.getYRot();
 
-        Vec3 vec3d = player.getEyePosition(1.0f);
+        Vec3 eye = player.getEyePosition(1f);
 
-        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
-        float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
+        float f2 = Mth.cos(-yRot * ((float) Math.PI / 180f) - (float) Math.PI);
+        float f3 = Mth.sin(-yRot * ((float) Math.PI / 180f) - (float) Math.PI);
+        float f4 = -Mth.cos(-xRot * ((float) Math.PI / 180f));
+        float f5 = Mth.sin(-xRot * ((float) Math.PI / 180f));
 
         float f6 = f3 * f4;
         float f7 = f2 * f4;
 
         double d0 = 16;
 
-        Vec3 vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
+        Vec3 hitPos = eye.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
         Minecraft mc = Minecraft.getInstance();
-        ClientLevel dimension = mc.level;
-        if (dimension == null) {
-            list.add(new DebugEntry("$WORLD$", null));
-            return list;
+        ClientLevel level = mc.level;
+        if (level == null) {
+            entries.add(new DebugEntry("$WORLD$", null));
+            return entries;
         }
 
-        int i = 1;
-        int j = 1;
-
-        HitResult raytraceresult = dimension.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-        if (raytraceresult.getType() != HitResult.Type.MISS) {
-            vec3d1 = raytraceresult.getLocation();
+        HitResult blockHit = level.clip(new ClipContext(eye, hitPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+        if (blockHit.getType() != HitResult.Type.MISS) {
+            hitPos = blockHit.getLocation();
         }
 
-        HitResult rayTraceResult1 = ProjectileUtil.getEntityHitResult(dimension, player, vec3d, vec3d1, player.getBoundingBox().inflate(16.0D), entity -> !entity.equals(player));
-        if (rayTraceResult1 != null) {
-            raytraceresult = rayTraceResult1;
+        HitResult entityHit = ProjectileUtil.getEntityHitResult(level, player, eye, hitPos, player.getBoundingBox().inflate(16.0D), entity -> !entity.equals(player));
+        if (entityHit != null) {
+            blockHit = entityHit;
         }
-        if (raytraceresult.getType() == HitResult.Type.ENTITY) {
-            @SuppressWarnings("ConstantConditions") EntityHitResult entityRayTraceResult = (EntityHitResult) raytraceresult;
+        if (blockHit.getType() == HitResult.Type.ENTITY) {
+            @SuppressWarnings("ConstantConditions") EntityHitResult entityHitResult = (EntityHitResult) blockHit;
 
-            Entity entity = entityRayTraceResult.getEntity();
+            Entity entity = entityHitResult.getEntity();
             EntityType<? extends Entity> type = entity.getType();
 
-            list.add(new DebugEntry("translatedName", I18n.get(type.getDescriptionId())));
-            list.add(new DebugEntry("height", type.getHeight()));
-            list.add(new DebugEntry("lootTable", type.getDefaultLootTable()));
-            list.add(new DebugEntry("name", type.getDescription().getString()));
-            list.add(new DebugEntry("registryName", type.getRegistryName()));
-            list.add(new DebugEntry("size", getSize(type.getDimensions().width, type.getDimensions().height)));
-            list.add(new DebugEntry("air", entity.getAirSupply()));
-            list.add(new DebugEntry("maxAir", entity.getMaxAirSupply()));
-            list.add(new DebugEntry("brightness", entity.getBrightness()));
-            list.add(new DebugEntry("entityId", entity.getId()));
-            list.add(new DebugEntry("eyeHeight", entity.getEyeHeight()));
-            list.add(new DebugEntry("lookVec", entity.getLookAngle()));
-            list.add(new DebugEntry("ridingEntity", entity.getVehicle()));
-            list.add(new DebugEntry("uniqueID", entity.getUUID()));
-            list.add(new DebugEntry("yOffset", entity.getMyRidingOffset()));
+            entries.add(new DebugEntry("translatedName", I18n.get(type.getDescriptionId())));
+            entries.add(new DebugEntry("height", type.getHeight()));
+            entries.add(new DebugEntry("target", type.getDefaultLootTable()));
+            entries.add(new DebugEntry("name", type.getDescription().getString()));
+            entries.add(new DebugEntry("registryName", type.getRegistryName()));
+            entries.add(new DebugEntry("size", getSize(type.getDimensions().width, type.getDimensions().height)));
+            entries.add(new DebugEntry("air", entity.getAirSupply()));
+            entries.add(new DebugEntry("maxAir", entity.getMaxAirSupply()));
+            entries.add(new DebugEntry("brightness", entity.getBrightness()));
+            entries.add(new DebugEntry("entityId", entity.getId()));
+            entries.add(new DebugEntry("eyeHeight", entity.getEyeHeight()));
+            entries.add(new DebugEntry("lookVec", entity.getLookAngle()));
+            entries.add(new DebugEntry("ridingEntity", entity.getVehicle()));
+            entries.add(new DebugEntry("uniqueID", entity.getUUID()));
+            entries.add(new DebugEntry("yOffset", entity.getMyRidingOffset()));
         } else {
-            list.add(new DebugEntry("$ENTITY$", null));
-            return list;
+            entries.add(new DebugEntry("$ENTITY$", null));
+            return entries;
         }
-        return list;
+        return entries;
     }
 
     @Override

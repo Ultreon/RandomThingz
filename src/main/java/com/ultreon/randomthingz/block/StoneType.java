@@ -1,9 +1,9 @@
 package com.ultreon.randomthingz.block;
 
-import com.ultreon.modlib.embedded.silentlib.registry.BlockDeferredRegister;
-import com.ultreon.modlib.embedded.silentlib.registry.BlockRegistryObject;
-import com.ultreon.modlib.embedded.silentlib.registry.ItemDeferredRegister;
-import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.silentlib.registry.BlockDeferredRegister;
+import com.ultreon.modlib.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.silentlib.registry.ItemDeferredRegister;
+import com.ultreon.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -41,12 +41,12 @@ public enum StoneType {
     }
 
     public void register(BlockDeferredRegister blocks, ItemDeferredRegister items) {
-        this.rawBlock = blocks.register(this.name, () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6.0f)));
-        this.stairsBlock = blocks.register(this.name + "_stairs", () -> new StairBlock(() -> rawBlock.get().defaultBlockState(), BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6.0f)));
-        this.slabBlock = blocks.register(this.name + "_slab", () -> new SlabBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6.0f)));
-        this.polishedBlock = blocks.register("polished_" + this.name, () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6.0f)));
-        this.polishedStairsBlock = blocks.register("polished_" + this.name + "_stairs", () -> new StairBlock(() -> polishedBlock.get().defaultBlockState(), BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6.0f)));
-        this.polishedSlabBlock = blocks.register("polished_" + this.name + "_slab", () -> new SlabBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6.0f)));
+        this.rawBlock = blocks.register(this.name, () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6f)));
+        this.stairsBlock = blocks.register(this.name + "_stairs", () -> new StairBlock(() -> rawBlock.get().defaultBlockState(), BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6f)));
+        this.slabBlock = blocks.register(this.name + "_slab", () -> new SlabBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6f)));
+        this.polishedBlock = blocks.register("polished_" + this.name, () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6f)));
+        this.polishedStairsBlock = blocks.register("polished_" + this.name + "_stairs", () -> new StairBlock(() -> polishedBlock.get().defaultBlockState(), BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6f)));
+        this.polishedSlabBlock = blocks.register("polished_" + this.name + "_slab", () -> new SlabBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5f, 6f)));
         this.rawBlockItem = items.register(this.name, () -> new BlockItem(this.rawBlock.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
         this.stairsBlockItem = items.register(this.name + "_stairs", () -> new BlockItem(this.stairsBlock.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
         this.slabBlockItem = items.register(this.name + "_slab", () -> new BlockItem(this.slabBlock.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));

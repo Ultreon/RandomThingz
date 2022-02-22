@@ -3,7 +3,7 @@ package com.ultreon.texturedmodels.bakedmodels;
 import com.ultreon.texturedmodels.bakedmodels.helper.DoorKnobBakedModel;
 import com.ultreon.texturedmodels.block.DoorFrameBlock;
 import com.ultreon.texturedmodels.block.FrameBlock;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
 import net.minecraft.client.Minecraft;
@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
@@ -52,12 +51,12 @@ public class DoorBakedModel implements IDynamicBakedModel {
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
         //get block saved in frame tile
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
                 BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
-                model.getBakedModel().getQuads(mimic, side, rand, extraData);
+                model.getQuads(mimic, side, rand, extraData);
                 if (model != null) {
                     //only if model (from block saved in tile entity) exists:
                     return getMimicQuads(state, side, rand, extraData, model);
@@ -72,17 +71,17 @@ public class DoorBakedModel implements IDynamicBakedModel {
             return Collections.emptyList();
         }
 
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
-        int tex = extraData.getData(FrameBlockTile.TEXTURE);
-        if (mimic != null && state != null && extraData.getData(FrameBlockTile.DESIGN) != null && extraData.getData(FrameBlockTile.DESIGN_TEXTURE) != null) {
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
+        int tex = extraData.getData(FrameBlockEntity.TEXTURE);
+        if (mimic != null && state != null && extraData.getData(FrameBlockEntity.DESIGN) != null && extraData.getData(FrameBlockEntity.DESIGN_TEXTURE) != null) {
             //get texture from block in tile entity and apply it to the quads
             List<TextureAtlasSprite> glassBlockList = TextureHelper.getGlassTextures();
-            TextureAtlasSprite glass = glassBlockList.get(extraData.getData(FrameBlockTile.GLASS_COLOR));
+            TextureAtlasSprite glass = glassBlockList.get(extraData.getData(FrameBlockEntity.GLASS_COLOR));
             List<TextureAtlasSprite> textureList = TextureHelper.getTextureFromModel(model, extraData, rand);
             TextureAtlasSprite texture;
             if (textureList.size() <= tex) {
                 //texture = textureList.get(0);
-                extraData.setData(FrameBlockTile.TEXTURE, 0);
+                extraData.setData(FrameBlockEntity.TEXTURE, 0);
                 tex = 0;
             }
             if (textureList.size() == 0) {
@@ -102,8 +101,8 @@ public class DoorBakedModel implements IDynamicBakedModel {
             Direction south = Direction.SOUTH;
             DoorHingeSide left = DoorHingeSide.LEFT;
             DoorHingeSide right = DoorHingeSide.RIGHT;
-            int design = extraData.getData(FrameBlockTile.DESIGN);//int design = state.get(DoorFrameBlock.DESIGN);
-            int desTex = extraData.getData(FrameBlockTile.DESIGN_TEXTURE); //state.get(DoorFrameBlock.DESIGN_TEXTURE);
+            int design = extraData.getData(FrameBlockEntity.DESIGN);//int design = state.get(DoorFrameBlock.DESIGN);
+            int desTex = extraData.getData(FrameBlockEntity.DESIGN_TEXTURE); //state.get(DoorFrameBlock.DESIGN_TEXTURE);
             DoubleBlockHalf half = state.getValue(DoorBlock.HALF);
             DoubleBlockHalf lower = DoubleBlockHalf.LOWER;
             DoubleBlockHalf upper = DoubleBlockHalf.UPPER;
@@ -320,7 +319,7 @@ public class DoorBakedModel implements IDynamicBakedModel {
                     quads.addAll(ModelHelper.createCuboid(3 / 16f, 13 / 16f, 7 / 16f, 9 / 16f, 0f, 3 / 16f, texture, tintIndex));
                 }
             }
-            int overlayIndex = extraData.getData(FrameBlockTile.OVERLAY);
+            int overlayIndex = extraData.getData(FrameBlockEntity.OVERLAY);
             if (overlayIndex != 0) {
                 if (northSide) {
                     quads.addAll(ModelHelper.createOverlay(0f, 1f, 0f, 1f, 13 / 16f, 1f, overlayIndex));

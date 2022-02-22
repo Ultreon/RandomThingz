@@ -31,7 +31,7 @@ public final class WireNetwork implements IEnergyStorage {
         Set<BlockPos> wires = buildWireSet(dimension, pos);
         int energyStored = wires.stream().mapToInt(p -> {
             BlockEntity tileEntity = dimension.getBlockEntity(p);
-            return tileEntity instanceof WireTileEntity ? ((WireTileEntity) tileEntity).energyStored : 0;
+            return tileEntity instanceof WireBlockEntity ? ((WireBlockEntity) tileEntity).energyStored : 0;
         }).sum();
         return new WireNetwork(dimension, wires, energyStored);
     }
@@ -45,7 +45,7 @@ public final class WireNetwork implements IEnergyStorage {
         set.add(pos);
         for (Direction side : Direction.values()) {
             BlockPos pos1 = pos.relative(side);
-            if (!set.contains(pos1) && dimension.getBlockEntity(pos1) instanceof WireTileEntity) {
+            if (!set.contains(pos1) && dimension.getBlockEntity(pos1) instanceof WireBlockEntity) {
                 set.add(pos1);
                 set.addAll(buildWireSet(dimension, pos1, set));
             }
@@ -76,8 +76,8 @@ public final class WireNetwork implements IEnergyStorage {
         int energyPerWire = energyStored / getWireCount();
         connections.keySet().forEach(p -> {
             BlockEntity tileEntity = dimension.getBlockEntity(p);
-            if (tileEntity instanceof WireTileEntity) {
-                ((WireTileEntity) tileEntity).energyStored = energyPerWire;
+            if (tileEntity instanceof WireBlockEntity) {
+                ((WireBlockEntity) tileEntity).energyStored = energyPerWire;
             }
         });
     }
@@ -168,7 +168,7 @@ public final class WireNetwork implements IEnergyStorage {
         Set<Connection> connections = new HashSet<>();
         for (Direction direction : Direction.values()) {
             BlockEntity te = dimension.getBlockEntity(pos.relative(direction));
-            if (te != null && !(te instanceof WireTileEntity) && te.getCapability(CapabilityEnergy.ENERGY).isPresent()) {
+            if (te != null && !(te instanceof WireBlockEntity) && te.getCapability(CapabilityEnergy.ENERGY).isPresent()) {
                 ConnectionType type = WireBlock.getConnection(dimension.getBlockState(pos), direction);
                 connections.add(new Connection(this, direction, type));
             }

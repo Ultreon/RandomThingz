@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item;
 
-import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;

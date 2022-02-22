@@ -47,19 +47,19 @@ public class GodUtils {
     public static void onGodTick(TickEvent.PlayerTickEvent event) {
         if (isGod(event.player)) {
             if (event.player.getFoodData().getFoodLevel() == 0) {
-                event.player.heal(0.5f);
+                event.player.heal(.5f);
             }
             if (event.player.getAirSupply() == 0) {
-                event.player.heal(0.5f);
+                event.player.heal(.5f);
             }
             Objects.requireNonNull(event.player.getAttribute(Attributes.MAX_HEALTH)).setBaseValue(40.0d);
             Objects.requireNonNull(event.player.getAttribute(Attributes.LUCK)).setBaseValue(5.0d);
-            event.player.heal(0.125f);
+            event.player.heal(.125f);
 
             if (event.player.isEffectiveAi()) {
-                if (event.player instanceof ServerPlayer) {
-                    ServerPlayer player = (ServerPlayer) event.player;
-                    player.abilities.mayfly = true;
+                if (event.player instanceof ServerPlayer player) {
+                    player.getAbilities().mayfly = true;
+                    player.onUpdateAbilities();
                     player.setAirSupply(player.getMaxAirSupply());
                 }
             }
@@ -68,12 +68,10 @@ public class GodUtils {
 
     @SubscribeEvent
     public static void die(LivingDeathEvent event) {
-        if (event.getEntityLiving() instanceof Player) {
-            Player player = (Player) event.getEntityLiving();
+        if (event.getEntityLiving() instanceof Player player) {
             Entity source = event.getSource().getEntity();
             if (isGod(player)) {
-                if (source instanceof LivingEntity) {
-                    LivingEntity entity = (LivingEntity) source;
+                if (source instanceof LivingEntity entity) {
                     if (entity instanceof Player) {
                         if (!isGod((Player) entity)) {
                             entity.addEffect(new MobEffectInstance(ModEffects.CURSE.orElseThrow(() -> new IllegalArgumentException("The curse effect could not be applied, this Minecraft instance is possible cursed.")), Integer.MAX_VALUE, 1, false, false));
@@ -90,12 +88,10 @@ public class GodUtils {
 
     @SubscribeEvent
     public static void onDamage(LivingDamageEvent event) {
-        if (event.getEntityLiving() instanceof Player) {
-            Player player = (Player) event.getEntityLiving();
+        if (event.getEntityLiving() instanceof Player player) {
             Entity source = event.getSource().getEntity();
             if (isGod(player)) {
-                if (source instanceof LivingEntity) {
-                    LivingEntity entity = (LivingEntity) source;
+                if (source instanceof LivingEntity entity) {
                     if (entity instanceof Player) {
                         event.setCanceled(true);
                         entity.heal(event.getAmount());

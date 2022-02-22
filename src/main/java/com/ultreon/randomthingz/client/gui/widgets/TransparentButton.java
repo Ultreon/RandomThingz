@@ -24,7 +24,7 @@ public class TransparentButton extends Button {
     @Override
     public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();
-        Font fontrenderer = mc.font;
+        Font font = mc.font;
 
         int col = new Color(0, 0, 0, 127).getRGB();
 
@@ -36,7 +36,7 @@ public class TransparentButton extends Button {
 
         int j;
         if (this.active) {
-            if (isHovered()) {
+            if (isHovered) {
                 j = hov;
             } else {
                 j = nrm;
@@ -45,10 +45,10 @@ public class TransparentButton extends Button {
             j = dis;
         }
 
-        if (isHovered() && active) {
-            drawCenteredString(matrixStack, fontrenderer, this.getMessage(), (this.x + this.width / 2) + 1, (this.y + (this.height - 8) / 2) + 1, j);
+        if (isHovered && active) {
+            drawCenteredString(matrixStack, font, this.getMessage(), (this.x + this.width / 2) + 1, (this.y + (this.height - 8) / 2) + 1, j);
         } else {
-            drawCenteredString(matrixStack, fontrenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
+            drawCenteredString(matrixStack, font, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
         }
     }
 }

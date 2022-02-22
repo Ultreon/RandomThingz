@@ -20,8 +20,8 @@ public class WindowPage extends DebugPage {
 //        list.add(new DebugEntry("windowSize", getSize(mainWindow.getWidth(),  mainWindow.getHeight())));
 //        list.add(new DebugEntry("windowHandle", mainWindow.getHandle()));
 //        list.add(new DebugEntry("framebufferSize", getSize(mainWindow.getFramebufferWidth(), mainWindow.getFramebufferHeight())));
-//        list.add(new DebugEntry("refreshTate", getFormatted(TextFormatting.GOLD.toString() + mainWindow.getRefreshRate() + TextFormatting.GRAY + " fps")));
-//        list.add(new DebugEntry("framerateLimit", getFormatted(TextFormatting.GOLD.toString() + mainWindow.getLimitFramerate() + TextFormatting.GRAY + "fps")));
+//        list.add(new DebugEntry("refreshTate", getFormatted(ChatFormatting.GOLD.toString() + mainWindow.getRefreshRate() + ChatFormatting.GRAY + " fps")));
+//        list.add(new DebugEntry("framerateLimit", getFormatted(ChatFormatting.GOLD.toString() + mainWindow.getLimitFramerate() + ChatFormatting.GRAY + "fps")));
 //        return list;
 //    }
 }

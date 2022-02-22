@@ -1,7 +1,7 @@
 package com.ultreon.texturedmodels.container;
 
 import com.ultreon.texturedmodels.setup.Registration;
-import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
+import com.ultreon.texturedmodels.tileentity.ChestFrameBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -21,10 +21,10 @@ import java.util.Objects;
  */
 public class IllusionChestContainer extends AbstractContainerMenu {
 
-    public final ChestFrameTileEntity tileEntity;
+    public final ChestFrameBlockEntity tileEntity;
     private final ContainerLevelAccess canInteractWithCallable;
 
-    public IllusionChestContainer(final int windowId, final Inventory playerInventory, final ChestFrameTileEntity tileEntity) {
+    public IllusionChestContainer(final int windowId, final Inventory playerInventory, final ChestFrameBlockEntity tileEntity) {
         super(Registration.CHEST_ILLUSION_CONTAINER.get(), windowId);
         this.tileEntity = tileEntity;
         this.canInteractWithCallable = ContainerLevelAccess.create(tileEntity.getLevel(), tileEntity.getBlockPos());
@@ -60,12 +60,12 @@ public class IllusionChestContainer extends AbstractContainerMenu {
         this(windowId, playerInventory, getTileEntity(playerInventory, data));
     }
 
-    private static ChestFrameTileEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
+    private static ChestFrameBlockEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
         final BlockEntity tileAtPos = playerInventory.player.level.getBlockEntity(data.readBlockPos());
-        if (tileAtPos instanceof ChestFrameTileEntity) {
-            return (ChestFrameTileEntity) tileAtPos;
+        if (tileAtPos instanceof ChestFrameBlockEntity) {
+            return (ChestFrameBlockEntity) tileAtPos;
         }
         throw new IllegalStateException("BlockEntity should be of type ChestFrameTileEntity but is " + tileAtPos);
     }

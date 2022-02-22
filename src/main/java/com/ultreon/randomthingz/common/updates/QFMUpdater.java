@@ -33,7 +33,7 @@ public class QFMUpdater extends AbstractUpdater<RtVersion> {
     }
 
     @Override
-    public RtVersion getCurrentModVersion() {
+    public RtVersion getCurrentVersion() {
         return RandomThingz.RT_VERSION;
     }
 }

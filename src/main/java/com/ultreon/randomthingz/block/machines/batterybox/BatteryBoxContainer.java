@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
-import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
 import com.ultreon.randomthingz.block.machines.BaseEnergyStorageContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
@@ -11,18 +11,22 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.energy.CapabilityEnergy;
+import org.jetbrains.annotations.Nullable;
 
 public class BatteryBoxContainer extends BaseEnergyStorageContainer<BatteryBoxBlockEntity> {
     final BatteryBoxBlockEntity tileEntity;
 
     public BatteryBoxContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new BatteryBoxBlockEntity(pos, state), new SimpleContainerData(AbstractMachineBaseBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, new BatteryBoxBlockEntity(), new SimpleContainerData(AbstractMachineBaseBlockEntity.FIELDS_COUNT));
     }
 
-    public BatteryBoxContainer(int id, Inventory playerInventory, BatteryBoxBlockEntity tileEntity, ContainerData fieldsIn) {
+    public BatteryBoxContainer(int id, Inventory playerInventory, @Nullable BatteryBoxBlockEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.batteryBox, id, tileEntity, fieldsIn);
         this.tileEntity = tileEntity;
 
+        if (this.tileEntity == null) {
+            return;
+        }
         this.addSlot(new Slot(this.tileEntity, 0, 71, 19));
         this.addSlot(new Slot(this.tileEntity, 1, 71, 37));
         this.addSlot(new Slot(this.tileEntity, 2, 71, 55));
@@ -37,7 +41,7 @@ public class BatteryBoxContainer extends BaseEnergyStorageContainer<BatteryBoxBl
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack stackCopy = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack stack = slot.getItem();
             stackCopy = stack.copy();
 

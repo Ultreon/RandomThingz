@@ -2,6 +2,7 @@ package com.ultreon.randomthingz.block.machines.infuser;
 
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlock;
 import com.ultreon.randomthingz.common.enums.MachineTier;
+import com.ultreon.texturedmodels.tileentity.ITickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -13,6 +14,8 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -35,8 +38,14 @@ public class InfuserBlock extends AbstractMachineBlock {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockGetter dimensionIn) {
-        return new InfuserBlockEntity();
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new InfuserBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
+        return ITickable::tickTE;
     }
 
     @Override
@@ -47,7 +56,7 @@ public class InfuserBlock extends AbstractMachineBlock {
             double d1 = pos.getY();
             double d2 = (double) pos.getZ() + 0.5D;
             if (rand.nextDouble() < 0.1D) {
-                dimensionIn.playLocalSound(d0, d1, d2, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0f, 1.0f, false);
+                dimensionIn.playLocalSound(d0, d1, d2, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1f, 1f, false);
             }
 
             Direction direction = stateIn.getValue(FACING);

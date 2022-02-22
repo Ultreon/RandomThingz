@@ -34,17 +34,16 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @JeiPlugin
 public class SMechanismsJeiPlugin implements IModPlugin {
-    private static final ResourceLocation PLUGIN_UID = RandomThingz.rl("plugin/main");
+    private static final ResourceLocation PLUGIN_UID = RandomThingz.res("plugin/main");
 
     private static List<Recipe<?>> getRecipesOfType(RecipeType<?> recipeType) {
         assert Minecraft.getInstance().level != null;
         return Minecraft.getInstance().level.getRecipeManager().getRecipes().stream()
                 .filter(r -> r.getType() == recipeType)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -127,6 +126,6 @@ public class SMechanismsJeiPlugin implements IModPlugin {
 
     @Override
     public void registerItemSubtypes(ISubtypeRegistration registration) {
-        registration.registerSubtypeInterpreter(ModItems.CANISTER.get(), CanisterItem::getFluidKey);
+        registration.registerSubtypeInterpreter(ModItems.CANISTER.get(), (ingredient, context) -> CanisterItem.getFluidKey(ingredient));
     }
 }

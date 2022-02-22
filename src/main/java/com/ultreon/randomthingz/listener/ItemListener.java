@@ -31,8 +31,9 @@ public class ItemListener {
                 event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getIngot().get() ||
                 event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getNugget().get() ||
                 event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getDust().get() ||
-                event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getStorageBlock().get().asItem().getItem() ||
-                event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getOre().get().asItem().getItem()) {
+                event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getStorageBlock().get().asItem().asItem() ||
+                event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getStoneOre().get().asItem().asItem() ||
+                event.getEntityItem().getItem().getItem() == ItemMaterial.INFINITY.getDeepslateOre().get().asItem().asItem()) {
             event.getEntityItem().setInvulnerable(true);
         }
     }

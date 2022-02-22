@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class ArcaneEscalatorScreen extends AbstractMachineScreen<ArcaneEscalatorContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/arcane_escalator.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/arcane_escalator.png");
 
     public ArcaneEscalatorScreen(ArcaneEscalatorContainer containerIn, Inventory playerInventoryIn, Component titleIn) {
         super(containerIn, playerInventoryIn, titleIn);

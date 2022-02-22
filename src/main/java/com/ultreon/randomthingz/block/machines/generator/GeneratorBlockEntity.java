@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.generator;
 
 import com.ultreon.modlib.api.RedstoneMode;
-import com.ultreon.modlib.embedded.silentutils.EnumUtils;
+import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.core.BlockPos;

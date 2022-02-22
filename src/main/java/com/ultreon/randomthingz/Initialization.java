@@ -14,7 +14,7 @@ import com.ultreon.randomthingz.common.item.ModCreativeTabs;
 import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.entity.*;
 import com.ultreon.randomthingz.entity.baby.*;
-import com.ultreon.randomthingz.item.AdvancedBowItem;
+import com.ultreon.randomthingz.item.CustomBowItem;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.client.Minecraft;
@@ -45,7 +45,7 @@ import java.util.Objects;
  * @author Qboi123
  * @see RandomThingz
  */
-public class Initialization {
+class Initialization {
     private final Logger logger;
     private final RandomThingz mod;
     private MinecraftServer server;
@@ -89,23 +89,23 @@ public class Initialization {
 
     void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
         // Baby variants.
-        event.put(ModEntities.BABY_CREEPER.get(), BabyCreeperEntity.createAttributes().build());
-        event.put(ModEntities.BABY_ENDERMAN.get(), BabyEndermanEntity.createAttributes().build());
-        event.put(ModEntities.BABY_SKELETON.get(), BabySkeletonEntity.createAttributes().build());
-        event.put(ModEntities.BABY_STRAY.get(), BabyStrayEntity.createAttributes().build());
-        event.put(ModEntities.BABY_WITHER_SKELETON.get(), BabyWitherSkeletonEntity.createAttributes().build());
+        event.put(ModEntities.BABY_CREEPER.get(), BabyCreeper.createAttributes().build());
+        event.put(ModEntities.BABY_ENDERMAN.get(), BabyEnderman.createAttributes().build());
+        event.put(ModEntities.BABY_SKELETON.get(), BabySkeleton.createAttributes().build());
+        event.put(ModEntities.BABY_STRAY.get(), BabyStray.createAttributes().build());
+        event.put(ModEntities.BABY_WITHER_SKELETON.get(), BabyWitherSkeleton.createAttributes().build());
 
         // Normal variants.
-        event.put(ModEntities.OX.get(), OxEntity.registerAttributes().build());
-        event.put(ModEntities.HOG.get(), HogEntity.registerAttributes().build());
-        event.put(ModEntities.DUCK.get(), DuckEntity.registerAttributes().build());
-        event.put(ModEntities.CLUCKSHROOM.get(), CluckshroomEntity.createAttributes().build());
-        event.put(ModEntities.BISON.get(), BisonEntity.registerAttributes().build());
-        event.put(ModEntities.MOOBLOOM.get(), MoobloomEntity.createAttributes().build());
-        event.put(ModEntities.WARTHOG.get(), WarthogEntity.registerAttributes().build());
-        event.put(ModEntities.ICE_ENDERMAN.get(), IceEndermanEntity.registerAttributes().build());
-        event.put(ModEntities.FIRE_CREEPER.get(), FireCreeperEntity.registerAttributes().build());
-        event.put(ModEntities.GLOW_SQUID.get(), GlowSquidEntity.registerAttributes().build());
+        event.put(ModEntities.OX.get(), Ox.registerAttributes().build());
+        event.put(ModEntities.HOG.get(), Hog.registerAttributes().build());
+        event.put(ModEntities.DUCK.get(), Duck.registerAttributes().build());
+        event.put(ModEntities.CLUCKSHROOM.get(), Cluckshroom.createAttributes().build());
+        event.put(ModEntities.BISON.get(), Bison.registerAttributes().build());
+        event.put(ModEntities.MOOBLOOM.get(), Moobloom.createAttributes().build());
+        event.put(ModEntities.WARTHOG.get(), Warthog.registerAttributes().build());
+        event.put(ModEntities.ICE_ENDERMAN.get(), IceEnderman.registerAttributes().build());
+        event.put(ModEntities.FIRE_CREEPER.get(), FireCreeper.registerAttributes().build());
+        event.put(ModEntities.GLOW_SQUID.get(), GlowSquid.registerAttributes().build());
     }
 
     /**
@@ -129,16 +129,16 @@ public class Initialization {
             DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.PLAYER_1;
         }
 
-        for (Item item : Registration.getItems((item) -> item instanceof AdvancedBowItem)) {
+        for (Item item : Registration.getItems((item) -> item instanceof CustomBowItem)) {
             ItemProperties.register(item, new ResourceLocation("pull"), (stack, level, entity, param) -> {
                 if (entity == null) {
-                    return 0.0f;
+                    return 0f;
                 } else {
-                    return entity.getUseItem() != stack ? 0.0f : (float) (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20.0f;
+                    return entity.getUseItem() != stack ? 0f : (float) (stack.getUseDuration() - entity.getUseItemRemainingTicks()) / 20f;
                 }
             });
 
-            ItemProperties.register(item, new ResourceLocation("pulling"), (stack, level, entity, param) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0f : 0.0f);
+            ItemProperties.register(item, new ResourceLocation("pulling"), (stack, level, entity, param) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1f : 0f);
         }
 
         Filters.get().register(ModCreativeTabs.METAL_CRAFTABLES, new ResourceLocation("randomthingz", "metal_craftables/dusts"), new ItemStack(ItemMaterial.IRON.getDust().orElse(Items.AIR)));

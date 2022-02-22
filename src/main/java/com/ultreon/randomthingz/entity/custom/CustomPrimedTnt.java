@@ -31,7 +31,7 @@ public final class CustomPrimedTnt extends PrimedTnt {
     private final TntProperties properties;
     private @Nullable BlockState state;
     private static final Supplier<BlockState> defaultBlockState = Blocks.TNT::defaultBlockState;
-    private static final TntProperties defaultProperties = TntProperties.builder().radius(4.0f).mode(Explosion.BlockInteraction.BREAK).fuse(80).build();
+    private static final TntProperties defaultProperties = TntProperties.builder().radius(4f).mode(Explosion.BlockInteraction.BREAK).fuse(80).build();
 
     public CustomPrimedTnt(@NotNull BlockState state, Level level) {
         super(ModEntities.CUSTOM_TNT.get(), level);
@@ -50,8 +50,8 @@ public final class CustomPrimedTnt extends PrimedTnt {
         this(state, level);
         this.setPos(x, y, z);
 
-        double d0 = level.random.nextDouble() * (double) ((float) Math.PI * 2F);
-        this.setDeltaMovement(-Math.sin(d0) * 0.02D, 0.2F, -Math.cos(d0) * 0.02D);
+        double d0 = level.random.nextDouble() * (double) ((float) Math.PI * 2f);
+        this.setDeltaMovement(-Math.sin(d0) * 0.02D, .2f, -Math.cos(d0) * 0.02D);
         this.setFuse(properties.getFuse());
         this.xo = x;
         this.yo = y;
@@ -108,7 +108,7 @@ public final class CustomPrimedTnt extends PrimedTnt {
         if (blockBefore instanceof CustomTntBlock<?> customTNTBlock) {
             customTNTBlock.beforeExplosion(dimension, pos, state, this);
         }
-        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 4.0F, Explosion.BlockInteraction.BREAK);
+        this.level.explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 4f, Explosion.BlockInteraction.BREAK);
         Block blockAfter = state.getBlock();
         if (blockAfter instanceof CustomTntBlock<?> customTNTBlock) {
             customTNTBlock.afterExplosion(dimension, pos, state, this);

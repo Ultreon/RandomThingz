@@ -1,10 +1,11 @@
 package com.ultreon.randomthingz.common;
 
-import com.ultreon.modlib.api.providers.IItemProvider;
+import com.ultreon.modlib.api.holders.ItemHolder;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.NotNull;
 
-public class ItemSelfProvider implements IItemProvider {
+@SuppressWarnings({"ClassCanBeRecord", "unused"})
+public class ItemSelfProvider implements ItemHolder {
     private final Item item;
 
     public ItemSelfProvider(Item item) {

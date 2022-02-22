@@ -1,7 +1,7 @@
 package com.ultreon.texturedmodels.block;
 
 import com.ultreon.texturedmodels.tileentity.ITickable;
-import com.ultreon.texturedmodels.tileentity.SignFrameTile;
+import com.ultreon.texturedmodels.tileentity.SignFrameBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -41,7 +41,7 @@ public class StandingSignFrameBlock extends StandingSignBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SignFrameTile(pos, state);
+        return new SignFrameBlockEntity(pos, state);
     }
 
     @Nullable
@@ -53,8 +53,8 @@ public class StandingSignFrameBlock extends StandingSignBlock {
     @Override
     public InteractionResult use(BlockState state, Level dimensionIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         BlockEntity tile = dimensionIn.getBlockEntity(pos);
-        if (tile instanceof SignFrameTile) {
-            SignFrameTile signTile = (SignFrameTile) tile;
+        if (tile instanceof SignFrameBlockEntity) {
+            SignFrameBlockEntity signTile = (SignFrameBlockEntity) tile;
             player.openTextEdit(signTile);
             return InteractionResult.SUCCESS;
         }

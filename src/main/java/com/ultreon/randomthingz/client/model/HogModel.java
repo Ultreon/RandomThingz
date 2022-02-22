@@ -1,7 +1,8 @@
 package com.ultreon.randomthingz.client.model;
 
-import com.ultreon.randomthingz.entity.HogEntity;
+import com.ultreon.randomthingz.entity.Hog;
 import net.minecraft.client.model.PigModel;
+import net.minecraft.client.model.geom.ModelPart;
 
 /**
  * Hog entity model class.
@@ -9,12 +10,8 @@ import net.minecraft.client.model.PigModel;
  * @author Qboi123
  */
 @Deprecated
-public class HogModel<T extends HogEntity> extends PigModel<T> {
-    public HogModel() {
-        super();
-    }
-
-    public HogModel(float scale) {
-        super(scale);
+public class HogModel<T extends Hog> extends PigModel<T> {
+    public HogModel(ModelPart modelPart) {
+        super(modelPart);
     }
 }

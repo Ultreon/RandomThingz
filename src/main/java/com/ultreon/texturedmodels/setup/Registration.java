@@ -4,9 +4,9 @@ import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.block.*;
 import com.ultreon.texturedmodels.container.ChestFrameContainer;
 import com.ultreon.texturedmodels.container.IllusionChestContainer;
-import com.ultreon.texturedmodels.tileentity.BedFrameTile;
-import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.BedFrameBlockEntity;
+import com.ultreon.texturedmodels.tileentity.ChestFrameBlockEntity;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -39,7 +38,7 @@ import org.apache.logging.log4j.Logger;
 public class Registration {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, QTextureModels.MOD_ID);
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, QTextureModels.MOD_ID);
-    private static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, QTextureModels.MOD_ID);
+    private static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, QTextureModels.MOD_ID);
     //WHAT THE FACK???
     private static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, QTextureModels.MOD_ID);
     //private static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, BlockCarpentryMain.MOD_ID);
@@ -49,24 +48,20 @@ public class Registration {
 
     public static final RegistryObject<FrameBlock> FRAMEBLOCK = BLOCKS.register("frameblock", () -> new FrameBlock(Block.Properties.of(Material.WOOD)
             .sound(SoundType.WOOD)
-            .strength(0.4f)
-            .harvestTool(ToolType.AXE)
-            .harvestLevel(0)
+            .strength(.4f)
             .dynamicShape()
             .noOcclusion()));
     public static final RegistryObject<Item> FRAMEBLOCK_ITEM = ITEMS.register("frameblock", () -> new BlockItem(FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> FRAMEBLOCK_TILE = TILES.register("frameblock", () -> BlockEntityType.Builder.of(FrameBlockTile::new, FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> FRAMEBLOCK_TILE = TILES.register("frameblock", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<FrameBlock> FRAME_WALK_THRU = BLOCKS.register("frame_walk_thru", () -> new FrameBlock(Block.Properties.of(Material.WOOD)
             .sound(SoundType.WOOD)
-            .strength(0.4f)
-            .harvestTool(ToolType.AXE)
-            .harvestLevel(0)
+            .strength(.4f)
             .dynamicShape()
             .noOcclusion()
             .noCollission()));
     public static final RegistryObject<Item> FRAME_WALK_THRU_ITEM = ITEMS.register("frame_walk_thru", () -> new BlockItem(FRAME_WALK_THRU.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> FRAME_WALK_THRU_TILE = TILES.register("frame_walk_thru", () -> BlockEntityType.Builder.of(FrameBlockTile::new, FRAME_WALK_THRU.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> FRAME_WALK_THRU_TILE = TILES.register("frame_walk_thru", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, FRAME_WALK_THRU.get()).build(null));
 
     //fixme or deleteme
     //public static final RegistryObject<FallingFrameBlock> FALLING_FRAMEBLOCK = BLOCKS.register("falling_frameblock", () -> new FallingFrameBlock(Block.Properties.from(FRAMEBLOCK.get()).notSolid()));
@@ -75,58 +70,58 @@ public class Registration {
 
     public static final RegistryObject<SixWaySlabFrameBlock> SLAB_FRAMEBLOCK = BLOCKS.register("frame_slab", () -> new SixWaySlabFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> SLAB_FRAME_ITEM = ITEMS.register("frame_slab", () -> new BlockItem(SLAB_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> SLAB_FRAME_TILE = TILES.register("frame_slab", () -> BlockEntityType.Builder.of(FrameBlockTile::new, SLAB_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> SLAB_FRAME_TILE = TILES.register("frame_slab", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, SLAB_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<FrameBlock> ILLUSION_BLOCK = BLOCKS.register("illusion_block", () -> new FrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> ILLUSION_BLOCK_ITEM = ITEMS.register("illusion_block", () -> new BlockItem(ILLUSION_BLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> ILLUSION_BLOCK_TILE = TILES.register("illusion_block", () -> BlockEntityType.Builder.of(FrameBlockTile::new, ILLUSION_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> ILLUSION_BLOCK_TILE = TILES.register("illusion_block", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, ILLUSION_BLOCK.get()).build(null));
 
     public static final RegistryObject<ButtonFrameBlock> BUTTON_FRAMEBLOCK = BLOCKS.register("frame_button", () -> new ButtonFrameBlock(Block.Properties.copy(FRAMEBLOCK.get()).noOcclusion().noCollission()));
     public static final RegistryObject<Item> BUTTON_FRAME_ITEM = ITEMS.register("frame_button", () -> new BlockItem(BUTTON_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> BUTTON_FRAME_TILE = TILES.register("frame_button", () -> BlockEntityType.Builder.of(FrameBlockTile::new, BUTTON_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> BUTTON_FRAME_TILE = TILES.register("frame_button", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, BUTTON_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<PressurePlateFrameBlock> PRESSURE_PLATE_FRAMEBLOCK = BLOCKS.register("frame_pressure_plate", () -> new PressurePlateFrameBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.copy(FRAMEBLOCK.get()).noOcclusion().noCollission()));
     public static final RegistryObject<Item> PRESSURE_PLATE_FRAME_ITEM = ITEMS.register("frame_pressure_plate", () -> new BlockItem(PRESSURE_PLATE_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> PRESSURE_PLATE_FRAME_TILE = TILES.register("frame_pressure_plate", () -> BlockEntityType.Builder.of(FrameBlockTile::new, BUTTON_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> PRESSURE_PLATE_FRAME_TILE = TILES.register("frame_pressure_plate", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, BUTTON_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<StairsFrameBlock> STAIRS_FRAMEBLOCK = BLOCKS.register("frame_stairs", () -> new StairsFrameBlock(() -> FRAMEBLOCK.get().defaultBlockState(), Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> STAIRS_FRAME_ITEM = ITEMS.register("frame_stairs", () -> new BlockItem(STAIRS_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> STAIRS_FRAME_TILE = TILES.register("frame_stairs", () -> BlockEntityType.Builder.of(FrameBlockTile::new, STAIRS_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> STAIRS_FRAME_TILE = TILES.register("frame_stairs", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, STAIRS_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<DoorFrameBlock> DOOR_FRAMEBLOCK = BLOCKS.register("frame_door", () -> new DoorFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> DOOR_FRAME_ITEM = ITEMS.register("frame_door", () -> new BlockItem(DOOR_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> DOOR_FRAME_TILE = TILES.register("frame_door", () -> BlockEntityType.Builder.of(FrameBlockTile::new, DOOR_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> DOOR_FRAME_TILE = TILES.register("frame_door", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, DOOR_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<TrapdoorFrameBlock> TRAPDOOR_FRAMEBLOCK = BLOCKS.register("frame_trapdoor", () -> new TrapdoorFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> TRAPDOOR_FRAME_ITEM = ITEMS.register("frame_trapdoor", () -> new BlockItem(TRAPDOOR_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> TRAPDOOR_FRAME_TILE = TILES.register("frame_trapdoor", () -> BlockEntityType.Builder.of(FrameBlockTile::new, TRAPDOOR_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> TRAPDOOR_FRAME_TILE = TILES.register("frame_trapdoor", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, TRAPDOOR_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<FenceFrameBlock> FENCE_FRAMEBLOCK = BLOCKS.register("frame_fence", () -> new FenceFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> FENCE_FRAME_ITEM = ITEMS.register("frame_fence", () -> new BlockItem(FENCE_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> FENCE_FRAME_TILE = TILES.register("frame_fence", () -> BlockEntityType.Builder.of(FrameBlockTile::new, FENCE_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> FENCE_FRAME_TILE = TILES.register("frame_fence", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, FENCE_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<BedFrameBlock> BED_FRAMEBLOCK = BLOCKS.register("frame_bed", () -> new BedFrameBlock(DyeColor.BROWN, Block.Properties.copy(FRAMEBLOCK.get()).noOcclusion()));
     public static final RegistryObject<Item> BED_FRAME_ITEM = ITEMS.register("frame_bed", () -> new BlockItem(BED_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<BedFrameTile>> BED_FRAME_TILE = TILES.register("frame_bed", () -> BlockEntityType.Builder.of(BedFrameTile::new, BED_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<BedFrameBlockEntity>> BED_FRAME_TILE = TILES.register("frame_bed", () -> BlockEntityType.Builder.of(BedFrameBlockEntity::new, BED_FRAMEBLOCK.get()).build(null));
     //TODO this does not work...
     public static final RegistryObject<PoiType> BED_FRAME_POI = POI_TYPES.register("frame_bed", () -> new PoiType("frame_bed_poit", PoiType.getBlockStates(Registration.BED_FRAMEBLOCK.get()), 1, 1));
 
     public static final RegistryObject<WallFrameBlock> WALL_FRAMEBLOCK = BLOCKS.register("frame_wall", () -> new WallFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> WALL_FRAME_ITEM = ITEMS.register("frame_wall", () -> new BlockItem(WALL_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> WALL_FRAME_TILE = TILES.register("frame_wall", () -> BlockEntityType.Builder.of(FrameBlockTile::new, WALL_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> WALL_FRAME_TILE = TILES.register("frame_wall", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, WALL_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<LadderFrameBlock> LADDER_FRAMEBLOCK = BLOCKS.register("frame_ladder", () -> new LadderFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> LADDER_FRAME_ITEM = ITEMS.register("frame_ladder", () -> new BlockItem(LADDER_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> LADDER_FRAME_TILE = TILES.register("frame_ladder", () -> BlockEntityType.Builder.of(FrameBlockTile::new, LADDER_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> LADDER_FRAME_TILE = TILES.register("frame_ladder", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, LADDER_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<ChestFrameBlock> CHEST_FRAMEBLOCK = BLOCKS.register("frame_chest", () -> new ChestFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> CHEST_FRAME_ITEM = ITEMS.register("frame_chest", () -> new BlockItem(CHEST_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<ChestFrameTileEntity>> CHEST_FRAME_TILE = TILES.register("frame_chest", () -> BlockEntityType.Builder.of(ChestFrameTileEntity::new, CHEST_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ChestFrameBlockEntity>> CHEST_FRAME_TILE = TILES.register("frame_chest", () -> BlockEntityType.Builder.of(ChestFrameBlockEntity::new, CHEST_FRAMEBLOCK.get()).build(null));
     public static final RegistryObject<MenuType<ChestFrameContainer>> CHEST_FRAME_CONTAINER = CONTAINERS.register("frame_chest", () -> IForgeMenuType.create(ChestFrameContainer::new));
 
     public static final RegistryObject<FenceGateFrameBlock> FENCE_GATE_FRAMEBLOCK = BLOCKS.register("frame_fence_gate", () -> new FenceGateFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> FENCE_GATE_FRAME_ITEM = ITEMS.register("frame_fence_gate", () -> new BlockItem(FENCE_GATE_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> FENCE_GATE_FRAME_TILE = TILES.register("frame_fence_gate", () -> BlockEntityType.Builder.of(FrameBlockTile::new, FENCE_GATE_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> FENCE_GATE_FRAME_TILE = TILES.register("frame_fence_gate", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, FENCE_GATE_FRAMEBLOCK.get()).build(null));
 
     //disabled signs - TODO fix signs
     //public static final RegistryObject<StandingSignFrameBlock> STANDING_SIGN_FRAMEBLOCK = BLOCKS.register("standing_frame_sign", () -> new StandingSignFrameBlock(Block.Properties.from(FRAMEBLOCK.get())));
@@ -137,61 +132,61 @@ public class Registration {
     //TODO WIP - may be removed or rewritten in the future
     public static final RegistryObject<SlopeFrameBlock> SLOPE_FRAMEBLOCK = BLOCKS.register("frame_slope", () -> new SlopeFrameBlock(() -> FRAMEBLOCK.get().defaultBlockState(), Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> SLOPE_FRAME_ITEM = ITEMS.register("frame_slope", () -> new BlockItem(SLOPE_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> SLOPE_FRAME_TILE = TILES.register("frame_slope", () -> BlockEntityType.Builder.of(FrameBlockTile::new, SLOPE_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> SLOPE_FRAME_TILE = TILES.register("frame_slope", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, SLOPE_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<SlopeFrameBlock> EDGED_SLOPE_FRAMEBLOCK = BLOCKS.register("frame_edged_slope", () -> new SlopeFrameBlock(() -> FRAMEBLOCK.get().defaultBlockState(), Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> EDGED_SLOPE_FRAME_ITEM = ITEMS.register("frame_edged_slope", () -> new BlockItem(EDGED_SLOPE_FRAMEBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> EDGED_SLOPE_FRAME_TILE = TILES.register("frame_edged_slope", () -> BlockEntityType.Builder.of(FrameBlockTile::new, EDGED_SLOPE_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> EDGED_SLOPE_FRAME_TILE = TILES.register("frame_edged_slope", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, EDGED_SLOPE_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<SixWaySlabFrameBlock> SLAB_ILLUSIONBLOCK = BLOCKS.register("illusion_slab", () -> new SixWaySlabFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> SLAB_ILLUSION_ITEM = ITEMS.register("illusion_slab", () -> new BlockItem(SLAB_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> SLAB_ILLUSION_TILE = TILES.register("illusion_slab", () -> BlockEntityType.Builder.of(FrameBlockTile::new, SLAB_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> SLAB_ILLUSION_TILE = TILES.register("illusion_slab", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, SLAB_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<ButtonFrameBlock> BUTTON_ILLUSIONBLOCK = BLOCKS.register("illusion_button", () -> new ButtonFrameBlock(Block.Properties.copy(FRAMEBLOCK.get()).noOcclusion().noCollission()));
     public static final RegistryObject<Item> BUTTON_ILLUSION_ITEM = ITEMS.register("illusion_button", () -> new BlockItem(BUTTON_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> BUTTON_ILLUSION_TILE = TILES.register("illusion_button", () -> BlockEntityType.Builder.of(FrameBlockTile::new, BUTTON_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> BUTTON_ILLUSION_TILE = TILES.register("illusion_button", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, BUTTON_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<PressurePlateFrameBlock> PRESSURE_PLATE_ILLUSIONBLOCK = BLOCKS.register("illusion_pressure_plate", () -> new PressurePlateFrameBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Block.Properties.copy(FRAMEBLOCK.get()).noOcclusion().noCollission()));
     public static final RegistryObject<Item> PRESSURE_PLATE_ILLUSION_ITEM = ITEMS.register("illusion_pressure_plate", () -> new BlockItem(PRESSURE_PLATE_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> PRESSURE_PLATE_ILLUSION_TILE = TILES.register("illusion_pressure_plate", () -> BlockEntityType.Builder.of(FrameBlockTile::new, BUTTON_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> PRESSURE_PLATE_ILLUSION_TILE = TILES.register("illusion_pressure_plate", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, BUTTON_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<StairsFrameBlock> STAIRS_ILLUSIONBLOCK = BLOCKS.register("illusion_stairs", () -> new StairsFrameBlock(() -> FRAMEBLOCK.get().defaultBlockState(), Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> STAIRS_ILLUSION_ITEM = ITEMS.register("illusion_stairs", () -> new BlockItem(STAIRS_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> STAIRS_ILLUSION_TILE = TILES.register("illusion_stairs", () -> BlockEntityType.Builder.of(FrameBlockTile::new, STAIRS_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> STAIRS_ILLUSION_TILE = TILES.register("illusion_stairs", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, STAIRS_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<DoorFrameBlock> DOOR_ILLUSIONBLOCK = BLOCKS.register("illusion_door", () -> new DoorFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> DOOR_ILLUSION_ITEM = ITEMS.register("illusion_door", () -> new BlockItem(DOOR_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> DOOR_ILLUSION_TILE = TILES.register("illusion_door", () -> BlockEntityType.Builder.of(FrameBlockTile::new, DOOR_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> DOOR_ILLUSION_TILE = TILES.register("illusion_door", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, DOOR_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<TrapdoorFrameBlock> TRAPDOOR_ILLUSIONBLOCK = BLOCKS.register("illusion_trapdoor", () -> new TrapdoorFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> TRAPDOOR_ILLUSION_ITEM = ITEMS.register("illusion_trapdoor", () -> new BlockItem(TRAPDOOR_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> TRAPDOOR_ILLUSION_TILE = TILES.register("illusion_trapdoor", () -> BlockEntityType.Builder.of(FrameBlockTile::new, TRAPDOOR_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> TRAPDOOR_ILLUSION_TILE = TILES.register("illusion_trapdoor", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, TRAPDOOR_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<FenceFrameBlock> FENCE_ILLUSIONBLOCK = BLOCKS.register("illusion_fence", () -> new FenceFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> FENCE_ILLUSION_ITEM = ITEMS.register("illusion_fence", () -> new BlockItem(FENCE_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> FENCE_ILLUSION_TILE = TILES.register("illusion_fence", () -> BlockEntityType.Builder.of(FrameBlockTile::new, FENCE_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> FENCE_ILLUSION_TILE = TILES.register("illusion_fence", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, FENCE_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<BedFrameBlock> BED_ILLUSIONBLOCK = BLOCKS.register("illusion_bed", () -> new BedFrameBlock(DyeColor.BROWN, Block.Properties.copy(FRAMEBLOCK.get()).noOcclusion()));
     public static final RegistryObject<Item> BED_ILLUSION_ITEM = ITEMS.register("illusion_bed", () -> new BlockItem(BED_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<BedFrameTile>> BED_ILLUSION_TILE = TILES.register("illusion_bed", () -> BlockEntityType.Builder.of(BedFrameTile::new, BED_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<BedFrameBlockEntity>> BED_ILLUSION_TILE = TILES.register("illusion_bed", () -> BlockEntityType.Builder.of(BedFrameBlockEntity::new, BED_FRAMEBLOCK.get()).build(null));
     public static final RegistryObject<PoiType> BED_ILLUSION_POI = POI_TYPES.register("illusion_bed", () -> new PoiType("illusion_bed", PoiType.getBlockStates(Registration.BED_ILLUSIONBLOCK.get()), 1, PoiType.ALL, 1));
 
     public static final RegistryObject<WallFrameBlock> WALL_ILLUSIONBLOCK = BLOCKS.register("illusion_wall", () -> new WallFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> WALL_ILLUSION_ITEM = ITEMS.register("illusion_wall", () -> new BlockItem(WALL_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> WALL_ILLUSION_TILE = TILES.register("illusion_wall", () -> BlockEntityType.Builder.of(FrameBlockTile::new, WALL_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> WALL_ILLUSION_TILE = TILES.register("illusion_wall", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, WALL_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<LadderFrameBlock> LADDER_ILLUSIONBLOCK = BLOCKS.register("illusion_ladder", () -> new LadderFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> LADDER_ILLUSION_ITEM = ITEMS.register("illusion_ladder", () -> new BlockItem(LADDER_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> LADDER_ILLUSION_TILE = TILES.register("illusion_ladder", () -> BlockEntityType.Builder.of(FrameBlockTile::new, LADDER_FRAMEBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> LADDER_ILLUSION_TILE = TILES.register("illusion_ladder", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, LADDER_FRAMEBLOCK.get()).build(null));
 
     public static final RegistryObject<ChestFrameBlock> CHEST_ILLUSIONBLOCK = BLOCKS.register("illusion_chest", () -> new ChestFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> CHEST_ILLUSION_ITEM = ITEMS.register("illusion_chest", () -> new BlockItem(CHEST_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<ChestFrameTileEntity>> CHEST_ILLUSION_TILE = TILES.register("illusion_chest", () -> BlockEntityType.Builder.of(ChestFrameTileEntity::new, CHEST_ILLUSIONBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ChestFrameBlockEntity>> CHEST_ILLUSION_TILE = TILES.register("illusion_chest", () -> BlockEntityType.Builder.of(ChestFrameBlockEntity::new, CHEST_ILLUSIONBLOCK.get()).build(null));
     public static final RegistryObject<MenuType<IllusionChestContainer>> CHEST_ILLUSION_CONTAINER = CONTAINERS.register("illusion_chest", () -> IForgeMenuType.create(IllusionChestContainer::new));
 
     public static final RegistryObject<FenceGateFrameBlock> FENCE_GATE_ILLUSIONBLOCK = BLOCKS.register("illusion_fence_gate", () -> new FenceGateFrameBlock(Block.Properties.copy(FRAMEBLOCK.get())));
     public static final RegistryObject<Item> FENCE_GATE_ILLUSION_ITEM = ITEMS.register("illusion_fence_gate", () -> new BlockItem(FENCE_GATE_ILLUSIONBLOCK.get(), new Item.Properties().tab(QTextureModels.QTexturedModelsItemGroup.QTEXTUREMODELS)));
-    public static final RegistryObject<BlockEntityType<FrameBlockTile>> FENCE_GATE_ILLUSION_TILE = TILES.register("illusion_fence_gate", () -> BlockEntityType.Builder.of(FrameBlockTile::new, FENCE_GATE_ILLUSIONBLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FrameBlockEntity>> FENCE_GATE_ILLUSION_TILE = TILES.register("illusion_fence_gate", () -> BlockEntityType.Builder.of(FrameBlockEntity::new, FENCE_GATE_ILLUSIONBLOCK.get()).build(null));
 
     public static void initialize() {
         LOGGER.info("Registering blocks from QTextureModels");

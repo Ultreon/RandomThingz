@@ -32,7 +32,7 @@ public abstract class MixinChestBlock extends AbstractChestBlock<ChestBlockEntit
 
     @Shadow @Final public static BooleanProperty WATERLOGGED;
 
-    @Shadow @org.jetbrains.annotations.Nullable protected abstract Direction getDirectionToAttach(BlockPlaceContext context, Direction direction);
+    @Shadow @javax.annotation.Nullable protected abstract Direction candidatePartnerFacing(BlockPlaceContext p_51495_, Direction p_51496_);
 
     public MixinChestBlock(Properties builder, Supplier<BlockEntityType<? extends ChestBlockEntity>> tileEntityTypeSupplier) {
         super(builder, tileEntityTypeSupplier);
@@ -47,7 +47,7 @@ public abstract class MixinChestBlock extends AbstractChestBlock<ChestBlockEntit
         boolean flag = context.isSecondaryUseActive();
         Direction direction1 = context.getClickedFace();
         if (direction1.getAxis().isHorizontal() && flag) {
-            Direction direction2 = this.getDirectionToAttach(context, direction1.getOpposite());
+            Direction direction2 = this.candidatePartnerFacing(context, direction1.getOpposite());
             if (direction2 != null && direction2.getAxis() != direction1.getAxis()) {
                 direction = direction2;
                 chesttype = direction2.getCounterClockWise() == direction1.getOpposite() ? ChestType.RIGHT : ChestType.LEFT;
@@ -55,12 +55,13 @@ public abstract class MixinChestBlock extends AbstractChestBlock<ChestBlockEntit
         }
 
         if (chesttype == ChestType.SINGLE && !flag) {
-            if (direction == this.getDirectionToAttach(context, direction.getClockWise())) {
+            if (direction == this.candidatePartnerFacing(context, direction.getClockWise())) {
                 chesttype = ChestType.LEFT;
-            } else if (direction == this.getDirectionToAttach(context, direction.getCounterClockWise())) {
+            } else if (direction == this.candidatePartnerFacing(context, direction.getCounterClockWise())) {
                 chesttype = ChestType.RIGHT;
             }
         }
+
 
         BlockState state;
         if (this == Blocks.CHEST && ModBlocks.CHRISTMAS_CHEST.isPresent()) {

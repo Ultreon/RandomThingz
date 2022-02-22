@@ -1,7 +1,7 @@
 package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.block.FrameBlock;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
 import net.minecraft.client.Minecraft;
@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
@@ -44,12 +43,12 @@ public class SlopeBakedModel implements IDynamicBakedModel {
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
         //get block saved in frame tile
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
                 BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
-                model.getBakedModel().getQuads(mimic, side, rand, extraData);
+                model.getQuads(mimic, side, rand, extraData);
                 if (model != null) {
                     //only if model (from block saved in tile entity) exists:
                     return getMimicQuads(state, side, rand, extraData, model);
@@ -65,9 +64,9 @@ public class SlopeBakedModel implements IDynamicBakedModel {
 
     public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData, BakedModel model) {
         List<BakedQuad> quads = new ArrayList<>();
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         List<TextureAtlasSprite> texture = TextureHelper.getTextureFromModel(model, extraData, rand);
-        int index = extraData.getData(FrameBlockTile.TEXTURE);
+        int index = extraData.getData(FrameBlockEntity.TEXTURE);
         if (index >= texture.size()) {
             index = 0;
         }

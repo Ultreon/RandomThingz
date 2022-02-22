@@ -9,7 +9,7 @@ public final class ModSounds {
     public static final RegistryObject<SoundEvent> ENTITY_DUCK_AMBIENT = register("entity.duck.ambient");
 
     private static RegistryObject<SoundEvent> register(String path) {
-        return Registration.SOUND_EVENTS.register(path, () -> new SoundEvent(RandomThingz.rl(path)));
+        return Registration.SOUND_EVENTS.register(path, () -> new SoundEvent(RandomThingz.res(path)));
     }
 
     public static void register() {

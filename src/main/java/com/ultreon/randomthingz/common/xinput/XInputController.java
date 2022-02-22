@@ -23,8 +23,8 @@ public class XInputController extends AbstractController {
         this.state = this.manager.getState(this.index);
     }
 
-    public Vec2 getPlayerHorizontalMotion(Player entity) {
-        float walkSpeed = entity.abilities.getWalkingSpeed();
+    public Vec2 getPlayerHorizontalMotion(Player player) {
+        float walkSpeed = player.getAbilities().getWalkingSpeed();
         float x = this.state.leftStickX * walkSpeed;
         float y = this.state.leftStickY * walkSpeed;
         return new Vec2(x, y);

@@ -200,7 +200,7 @@ public class UpdatesModule extends Module {
                     AbstractUpdater.UpdateInfo updateInfo = updater.checkForUpdates();
                     IVersion latest = updater.getLatestVersion();
                     if (!latestKnownMap.containsKey(updater)) {
-                        latestKnownMap.put(updater, updater.getCurrentModVersion());
+                        latestKnownMap.put(updater, updater.getCurrentVersion());
                     }
                     IVersion latestKnown = latestKnownMap.get(updater);
                     if (latestKnown == null || latest == null) {

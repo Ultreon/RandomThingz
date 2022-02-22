@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Author: MrCrayfish
+ * @author MrCrayfish
  */
 @Mod(Reference.MOD_ID)
 public class Filters {

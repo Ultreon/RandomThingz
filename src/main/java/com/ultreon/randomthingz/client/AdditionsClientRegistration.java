@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.client;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.client.renderer.RenderBabyCreeper;
-import com.ultreon.randomthingz.client.renderer.RenderBabyEnderman;
+import com.ultreon.randomthingz.client.renderer.BabyCreeperRenderer;
+import com.ultreon.randomthingz.client.renderer.BabyEndermanRenderer;
 import com.ultreon.randomthingz.common.entity.ModEntities;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
@@ -21,8 +21,8 @@ public class AdditionsClientRegistration {
 //        new AdditionsKeyHandler();
 
         //Register entity rendering handlers
-        ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_CREEPER, RenderBabyCreeper::new);
-        ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_ENDERMAN, RenderBabyEnderman::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_CREEPER, BabyCreeperRenderer::new);
+        ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_ENDERMAN, BabyEndermanRenderer::new);
         ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_SKELETON, SkeletonRenderer::new);
         ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_STRAY, StrayRenderer::new);
         ClientRegistrationUtil.registerEntityRenderingHandler(ModEntities.BABY_WITHER_SKELETON, WitherSkeletonRenderer::new);

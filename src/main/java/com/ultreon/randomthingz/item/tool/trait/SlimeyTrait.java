@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
-import com.ultreon.randomthingz.item.tool.ToolType;
+import com.ultreon.randomthingz.item.ItemType;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -22,7 +22,7 @@ public class SlimeyTrait extends AbstractTrait {
             return true;
         }
 
-        victim.getCommandSenderWorld().playLocalSound(victim.getX(), victim.getY(), victim.getZ(), SoundEvents.SLIME_BLOCK_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f, false);
+        victim.getCommandSenderWorld().playLocalSound(victim.getX(), victim.getY(), victim.getZ(), SoundEvents.SLIME_BLOCK_PLACE, SoundSource.BLOCKS, 1f, 1f, false);
         return true;
     }
 
@@ -32,7 +32,7 @@ public class SlimeyTrait extends AbstractTrait {
     }
 
     @Override
-    public float getKnockback(Set<ToolType> qfmToolTypes) {
-        return 4.0f;
+    public float getKnockback(Set<ItemType> qfmToolTypes) {
+        return 4f;
     }
 }

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item.upgrade;
 
-import com.ultreon.modlib.api.providers.ItemProvider;
-import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.api.holders.ItemHolder;
+import com.ultreon.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.api.IMachineUpgrade;
 import com.ultreon.randomthingz.common.interfaces.INamed;
@@ -14,12 +14,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
-public enum MachineUpgrades implements ItemProvider, IMachineUpgrade, INamed, Translatable {
-    PROCESSING_SPEED(Constants.UPGRADE_PROCESSING_SPEED_AMOUNT, 0.5f),
-    OUTPUT_CHANCE(Constants.UPGRADE_SECONDARY_OUTPUT_AMOUNT, 0.25f),
-    ENERGY_CAPACITY(0, 0.0f, false),
+public enum MachineUpgrades implements ItemHolder, IMachineUpgrade, INamed, Translatable {
+    PROCESSING_SPEED(Constants.UPGRADE_PROCESSING_SPEED_AMOUNT, .5f),
+    OUTPUT_CHANCE(Constants.UPGRADE_SECONDARY_OUTPUT_AMOUNT, .25f),
+    ENERGY_CAPACITY(0, 0f, false),
     ENERGY_EFFICIENCY(Constants.UPGRADE_ENERGY_EFFICIENCY_AMOUNT, Constants.UPGRADE_ENERGY_EFFICIENCY_AMOUNT),
-    RANGE(Constants.UPGRADE_RANGE_AMOUNT, 0.15f, false);
+    RANGE(Constants.UPGRADE_RANGE_AMOUNT, .15f, false);
 
     private final float upgradeValue;
     private final float energyUsage;

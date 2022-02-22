@@ -9,12 +9,12 @@ import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -83,21 +83,21 @@ public class MobVariantsModule extends Module {
         registerShiny(VariantTextureType.LLAMA, 1);
 
         if (enableCow)
-            RenderingRegistry.registerEntityRenderingHandler(EntityType.COW, VariantCowRenderer::new);
+            EntityRenderers.register(EntityType.COW, VariantCowRenderer::new);
         if (enablePig)
-            RenderingRegistry.registerEntityRenderingHandler(EntityType.PIG, VariantPigRenderer::new);
+            EntityRenderers.register(EntityType.PIG, VariantPigRenderer::new);
         if (enableChicken)
-            RenderingRegistry.registerEntityRenderingHandler(EntityType.CHICKEN, VariantChickenRenderer::new);
+            EntityRenderers.register(EntityType.CHICKEN, VariantChickenRenderer::new);
         if (enableCreeper)
-            RenderingRegistry.registerEntityRenderingHandler(EntityType.CREEPER, VariantCreeperRenderer::new);
+            EntityRenderers.register(EntityType.CREEPER, VariantCreeperRenderer::new);
         if (enableZombie)
-            RenderingRegistry.registerEntityRenderingHandler(EntityType.ZOMBIE, VariantZombieRenderer::new);
+            EntityRenderers.register(EntityType.ZOMBIE, VariantZombieRenderer::new);
         if (enableShinyRabbit)
-            RenderingRegistry.registerEntityRenderingHandler(EntityType.RABBIT, VariantRabbitRenderer::new);
+            EntityRenderers.register(EntityType.RABBIT, VariantRabbitRenderer::new);
         if (enableShinyLlama)
-            RenderingRegistry.registerEntityRenderingHandler(EntityType.LLAMA, VariantLlamaRenderer::new);
+            EntityRenderers.register(EntityType.LLAMA, VariantLlamaRenderer::new);
         if (enableLGBTBees)
-            RenderingRegistry.registerEntityRenderingHandler(EntityType.BEE, VariantBeeRenderer::new);
+            EntityRenderers.register(EntityType.BEE, VariantBeeRenderer::new);
     }
 
     @Override

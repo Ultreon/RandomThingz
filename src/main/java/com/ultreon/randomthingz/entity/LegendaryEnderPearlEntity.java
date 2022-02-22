@@ -16,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author Qboi123
  */
-@SuppressWarnings({"deprecation", "unused"})
+@SuppressWarnings({"unused"})
 public class LegendaryEnderPearlEntity extends ThrowableItemProjectile {
 
     public LegendaryEnderPearlEntity(EntityType<? extends LegendaryEnderPearlEntity> p_i50153_1_, Level dimension) {
@@ -50,7 +51,7 @@ public class LegendaryEnderPearlEntity extends ThrowableItemProjectile {
      */
     protected void onHitEntity(@NotNull EntityHitResult p_213868_1_) {
         super.onHitEntity(p_213868_1_);
-        p_213868_1_.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 0.0f);
+        p_213868_1_.getEntity().hurt(DamageSource.thrown(this, this.getOwner()), 0f);
     }
 
     @Override
@@ -70,26 +71,25 @@ public class LegendaryEnderPearlEntity extends ThrowableItemProjectile {
             this.level.addParticle(ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * 2.0D, this.getZ(), this.random.nextGaussian(), 0.0D, this.random.nextGaussian());
         }
 
-        if (!this.level.isClientSide && !this.removed) {
-            if (entity instanceof ServerPlayer) {
-                ServerPlayer serverplayerentity = (ServerPlayer) entity;
-                if (serverplayerentity.connection.getConnection().isConnected() && serverplayerentity.level == this.level && !serverplayerentity.isSleeping()) {
-                    net.minecraftforge.event.entity.living.EnderTeleportEvent event = new net.minecraftforge.event.entity.living.EnderTeleportEvent(serverplayerentity, this.getX(), this.getY(), this.getZ(), 5.0f);
+        if (!this.level.isClientSide && !this.isRemoved()) {
+            if (entity instanceof ServerPlayer player) {
+                if (player.connection.getConnection().isConnected() && player.level == this.level && !player.isSleeping()) {
+                    EntityTeleportEvent event = new EntityTeleportEvent(player, this.getX(), this.getY(), this.getZ());
                     if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) { // Don't indent to lower patch size
                         if (entity.isPassenger()) {
                             entity.stopRiding();
                         }
 
                         entity.teleportTo(event.getTargetX(), event.getTargetY(), event.getTargetZ());
-                        entity.fallDistance = 0.0f;
+                        entity.fallDistance = 0f;
                     } //Forge: End
                 }
             } else if (entity != null) {
                 entity.teleportTo(this.getX(), this.getY(), this.getZ());
-                entity.fallDistance = 0.0f;
+                entity.fallDistance = 0f;
             }
 
-            this.remove();
+            this.discard();
         }
     }
 
@@ -99,7 +99,7 @@ public class LegendaryEnderPearlEntity extends ThrowableItemProjectile {
     public void tick() {
         Entity entity = this.getOwner();
         if (entity instanceof Player && !entity.isAlive()) {
-            this.remove();
+            this.discard();
         } else {
             super.tick();
         }
@@ -108,9 +108,9 @@ public class LegendaryEnderPearlEntity extends ThrowableItemProjectile {
 
     @Nullable
     public Entity changeDimension(@NotNull ServerLevel server, net.minecraftforge.common.util.@NotNull ITeleporter teleporter) {
-        Entity entity = this.getShooter();
-        if (entity != null && entity.level.getDimensionKey() != server.getDimensionKey()) {
-            this.setShooter(null);
+        Entity entity = this.getOwner();
+        if (entity != null && entity.level.dimension() != server.dimension()) {
+            this.setOwner(null);
         }
 
         return super.changeDimension(server, teleporter);

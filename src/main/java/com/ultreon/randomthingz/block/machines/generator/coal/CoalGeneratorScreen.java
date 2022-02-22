@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class CoalGeneratorScreen extends AbstractMachineContainerScreen<CoalGeneratorContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/coal_generator.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/coal_generator.png");
 
     public CoalGeneratorScreen(CoalGeneratorContainer container, Inventory playerInventory, Component titleIn) {
         super(container, playerInventory, titleIn);

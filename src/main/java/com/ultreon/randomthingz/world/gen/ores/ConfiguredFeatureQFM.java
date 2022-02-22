@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 
 public class ConfiguredFeatureQFM<FC extends FeatureConfiguration, F extends Feature<FC>> extends ConfiguredFeature<FC, F> {
-    private float chance = 1.0f;
+    private float chance = 1f;
 
     public ConfiguredFeatureQFM(F feature, FC config) {
 

@@ -22,7 +22,10 @@ import java.util.List;
 
 /**
  * @author Qboi123
+ * @deprecated replaced with {@linkplain com.ultreon.modlib.graphics.MCGraphics}
  */
+@SuppressWarnings("UnstableApiUsage")
+@Deprecated(forRemoval = true)
 @Beta
 public class MCGraphics {
     private final PoseStack matrixStack;
@@ -127,23 +130,24 @@ public class MCGraphics {
      * <p>
      * The z index is increased by 32 (and not decreased afterwards), and the item is then rendered at z=200.
      */
+    @Deprecated(forRemoval = true)
     @SuppressWarnings("deprecation")
     public final void drawItemStack(ItemStack stack, int x, int y, String altText) {
-        RenderSystem.translatef(0.0f, 0.0f, 32.0f);
-        this.itemRenderer.blitOffset = 200.0f;
-
-        Font font = stack.getItem().getFontRenderer(stack);
-        if (font == null) {
-            font = Minecraft.getInstance().font;
-        }
-
-        if (this.font != null) {
-            font = this.font;
-        }
-
-        this.itemRenderer.renderAndDecorateItem(stack, x, y);
-        this.itemRenderer.renderGuiItemDecorations(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
-        this.itemRenderer.blitOffset = 0.0f;
+//        RenderSystem.translatef(0f, 0f, 32f);
+//        this.itemRenderer.blitOffset = 200f;
+//
+//        Font font = stack.getItem().getFontRenderer(stack);
+//        if (font == null) {
+//            font = Minecraft.getInstance().font;
+//        }
+//
+//        if (this.font != null) {
+//            font = this.font;
+//        }
+//
+//        this.itemRenderer.renderAndDecorateItem(stack, x, y);
+//        this.itemRenderer.renderGuiItemDecorations(font, stack, x, y - (stack.isEmpty() ? 0 : 8), altText);
+//        this.itemRenderer.blitOffset = 0f;
     }
 
     public Font getFont() {

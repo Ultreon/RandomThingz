@@ -1,67 +1,76 @@
 package com.ultreon.randomthingz.client.model;
 
-import com.google.common.collect.ImmutableList;
-import com.ultreon.randomthingz.entity.baby.BabyCreeperEntity;
+import com.ultreon.randomthingz.RandomThingz;
+import com.ultreon.randomthingz.entity.baby.BabyCreeper;
 import net.minecraft.client.model.AgeableListModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
-public class BabyCreeperModel extends AgeableListModel<BabyCreeperEntity> {
+import java.util.List;
 
-    private final ModelPart head;
-    private final ModelPart body;
-    private final ModelPart leg1;
-    private final ModelPart leg2;
-    private final ModelPart leg3;
-    private final ModelPart leg4;
+@OnlyIn(Dist.CLIENT)
+public class BabyCreeperModel<T extends BabyCreeper> extends AgeableListModel<T> {
+   // This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
+   public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(RandomThingz.MOD_ID, "baby_creeper_model"), "main");
 
-    public BabyCreeperModel() {
-        this(0);
-    }
+   private final ModelPart root;
+   private final ModelPart head;
+   private final ModelPart body;
+   private final ModelPart rightHindLeg;
+   private final ModelPart leftHindLeg;
+   private final ModelPart rightFrontLeg;
+   private final ModelPart leftFrontLeg;
 
-    public BabyCreeperModel(float size) {
-        this.head = new ModelPart(this, 0, 0);
-        this.head.addBox(-4, -8, -4, 8, 8, 8, size);
-        //Only real difference between this model and the vanilla creeper model is the "fix" for the head's rotation point
-        // the other difference is extending ageable model instead
-        this.head.setPos(0, 10, -2);
-        this.body = new ModelPart(this, 16, 16);
-        this.body.addBox(-4, 0, -2, 8, 12, 4, size);
-        this.body.setPos(0, 6, 0);
-        this.leg1 = new ModelPart(this, 0, 16);
-        this.leg1.addBox(-2, 0, -2, 4, 6, 4, size);
-        this.leg1.setPos(-2, 18, 4);
-        this.leg2 = new ModelPart(this, 0, 16);
-        this.leg2.addBox(-2, 0, -2, 4, 6, 4, size);
-        this.leg2.setPos(2, 18, 4);
-        this.leg3 = new ModelPart(this, 0, 16);
-        this.leg3.addBox(-2, 0, -2, 4, 6, 4, size);
-        this.leg3.setPos(-2, 18, -4);
-        this.leg4 = new ModelPart(this, 0, 16);
-        this.leg4.addBox(-2, 0, -2, 4, 6, 4, size);
-        this.leg4.setPos(2, 18, -4);
-    }
+   public BabyCreeperModel(ModelPart p_170524_) {
+      this.root = p_170524_;
+      this.head = p_170524_.getChild("head");
+      this.body = p_170524_.getChild("body");
+      this.leftHindLeg = p_170524_.getChild("right_hind_leg");
+      this.rightHindLeg = p_170524_.getChild("left_hind_leg");
+      this.leftFrontLeg = p_170524_.getChild("right_front_leg");
+      this.rightFrontLeg = p_170524_.getChild("left_front_leg");
+   }
 
-    @NotNull
-    @Override
-    protected Iterable<ModelPart> headParts() {
-        return ImmutableList.of(this.head);
-    }
+   public static LayerDefinition createBodyLayer(CubeDeformation p_170526_) {
+      MeshDefinition meshdefinition = new MeshDefinition();
+      PartDefinition partdefinition = meshdefinition.getRoot();
+      partdefinition.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4f, -8f, -4f, 8f, 8f, 8f, p_170526_), PartPose.offset(0f, 6f, 0f));
+      partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-4f, 0f, -2f, 8f, 12f, 4f, p_170526_), PartPose.offset(0f, 6f, 0f));
+      CubeListBuilder cubelistbuilder = CubeListBuilder.create().texOffs(0, 16).addBox(-2f, 0f, -2f, 4f, 6f, 4f, p_170526_);
+      partdefinition.addOrReplaceChild("right_hind_leg", cubelistbuilder, PartPose.offset(-2f, 18f, 4f));
+      partdefinition.addOrReplaceChild("left_hind_leg", cubelistbuilder, PartPose.offset(2f, 18f, 4f));
+      partdefinition.addOrReplaceChild("right_front_leg", cubelistbuilder, PartPose.offset(-2f, 18f, -4f));
+      partdefinition.addOrReplaceChild("left_front_leg", cubelistbuilder, PartPose.offset(2f, 18f, -4f));
+      return LayerDefinition.create(meshdefinition, 64, 32);
+   }
 
-    @NotNull
-    @Override
-    protected Iterable<ModelPart> bodyParts() {
-        return ImmutableList.of(this.body, this.leg1, this.leg2, this.leg3, this.leg4);
-    }
+   public ModelPart root() {
+      return this.root;
+   }
 
-    @Override
-    public void setupAnim(@NotNull BabyCreeperEntity creeper, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.head.yRot = netHeadYaw * ((float) Math.PI / 180F);
-        this.head.xRot = headPitch * ((float) Math.PI / 180F);
-        this.leg1.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        this.leg2.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-        this.leg3.xRot = Mth.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
-        this.leg4.xRot = Mth.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-    }
+   public void setupAnim(@NotNull T entity, float p_102464_, float p_102465_, float p_102466_, float p_102467_, float p_102468_) {
+      this.head.yRot = p_102467_ * ((float)Math.PI / 180f);
+      this.head.xRot = p_102468_ * ((float)Math.PI / 180f);
+      this.rightHindLeg.xRot = Mth.cos(p_102464_ * .6662f) * 1.4F * p_102465_;
+      this.leftHindLeg.xRot = Mth.cos(p_102464_ * .6662f + (float)Math.PI) * 1.4F * p_102465_;
+      this.rightFrontLeg.xRot = Mth.cos(p_102464_ * .6662f + (float)Math.PI) * 1.4F * p_102465_;
+      this.leftFrontLeg.xRot = Mth.cos(p_102464_ * .6662f) * 1.4F * p_102465_;
+   }
+
+   @Override
+   protected @NotNull Iterable<ModelPart> headParts() {
+      return List.of(head);
+   }
+
+   @Override
+   protected @NotNull Iterable<ModelPart> bodyParts() {
+      return List.of(body, leftFrontLeg, rightFrontLeg, leftHindLeg, rightHindLeg);
+   }
 }

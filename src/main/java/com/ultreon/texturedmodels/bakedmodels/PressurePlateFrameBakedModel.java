@@ -1,7 +1,7 @@
 package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.block.FrameBlock;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
 import net.minecraft.client.Minecraft;
@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
@@ -48,13 +47,13 @@ public class PressurePlateFrameBakedModel implements IDynamicBakedModel {
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
 
         //Block in Slab
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
             //location of blockModel of block in Slab
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
                 BakedModel model = Minecraft.getInstance().getModelManager().getModel(location);
-                model.getBakedModel().getQuads(mimic, side, rand, extraData);
+                model.getQuads(mimic, side, rand, extraData);
                 if (model != null) {
                     return getMimicQuads(state, side, rand, extraData, model);
                 }
@@ -67,14 +66,14 @@ public class PressurePlateFrameBakedModel implements IDynamicBakedModel {
         if (side != null) {
             return Collections.emptyList();
         }
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
-        int tex = extraData.getData(FrameBlockTile.TEXTURE);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
+        int tex = extraData.getData(FrameBlockEntity.TEXTURE);
         if (mimic != null) {
             List<TextureAtlasSprite> textureList = TextureHelper.getTextureFromModel(model, extraData, rand);
             TextureAtlasSprite texture;
             if (textureList.size() <= tex) {
                 //texture = textureList.get(0);
-                extraData.setData(FrameBlockTile.TEXTURE, 0);
+                extraData.setData(FrameBlockEntity.TEXTURE, 0);
                 tex = 0;
             }
             if (textureList.size() == 0) {
@@ -90,7 +89,7 @@ public class PressurePlateFrameBakedModel implements IDynamicBakedModel {
             }
             List<BakedQuad> quads = new ArrayList<>();
             quads.addAll(ModelHelper.createCuboid(1 / 16f, 15 / 16f, 0f, 1 / 16f, 1 / 16f, 15 / 16f, texture, tintIndex));
-            int overlayIndex = extraData.getData(FrameBlockTile.OVERLAY);
+            int overlayIndex = extraData.getData(FrameBlockEntity.OVERLAY);
             if (overlayIndex != 0) {
                 quads.addAll(ModelHelper.createOverlay(1 / 16f, 15 / 16f, 0f, 1 / 16f, 1 / 16f, 15 / 16f, overlayIndex));
             }

@@ -1,7 +1,7 @@
 package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.block.FrameBlock;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.BlockModelShaper;
@@ -45,7 +45,7 @@ public class IllusionFenceGateBakedModel implements IDynamicBakedModel {
     @NotNull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null && state != null) {
@@ -60,8 +60,8 @@ public class IllusionFenceGateBakedModel implements IDynamicBakedModel {
 
     @NotNull
     public List<BakedQuad> getMimicQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, IModelData extraData, BakedModel model) {
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
-        Integer design = extraData.getData(FrameBlockTile.DESIGN);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
+        Integer design = extraData.getData(FrameBlockEntity.DESIGN);
         if (side != null) {
             return Collections.emptyList();
         }

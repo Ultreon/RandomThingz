@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.item.crafting;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
-import com.ultreon.modlib.embedded.silentlib.util.NameUtils;
+import com.ultreon.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.block.machines.MachineInventory;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.InventoryUtils;

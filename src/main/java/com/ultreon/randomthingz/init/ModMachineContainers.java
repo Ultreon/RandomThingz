@@ -107,7 +107,7 @@ public final class ModMachineContainers {
     }
 
     private static <C extends AbstractContainerMenu> MenuType<C> register(String name, MenuType<C> containerType) {
-        containerType.setRegistryName(RandomThingz.rl(name));
+        containerType.setRegistryName(RandomThingz.res(name));
         ForgeRegistries.CONTAINERS.register(containerType);
         return containerType;
     }

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block._common;
 
-import com.ultreon.modlib.embedded.silentlib.registry.BlockDeferredRegister;
-import com.ultreon.modlib.embedded.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.silentlib.registry.BlockDeferredRegister;
+import com.ultreon.modlib.silentlib.registry.BlockRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.ultreon.randomthingz.common.CoreRegisterWrapperModule;

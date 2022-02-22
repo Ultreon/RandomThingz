@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.client.renderer;
 
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.model.CluckshroomModel;
-import com.ultreon.randomthingz.entity.CluckshroomEntity;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import com.ultreon.randomthingz.entity.Cluckshroom;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -17,17 +17,17 @@ import org.jetbrains.annotations.NotNull;
  * @author Qboi123
  */
 @OnlyIn(Dist.CLIENT)
-public class CluckshroomRenderer extends MobRenderer<CluckshroomEntity, CluckshroomModel<CluckshroomEntity>> {
+public class CluckshroomRenderer extends MobRenderer<Cluckshroom, CluckshroomModel<Cluckshroom>> {
     private static final ResourceLocation CLUCKSHROOM_TEXTURE = new ResourceLocation(RandomThingz.MOD_ID, "textures/entity/cluckshroom.png");
 
-    public CluckshroomRenderer(EntityRenderDispatcher renderManagerIn) {
-        super(renderManagerIn, new CluckshroomModel<>(), 0.5F);
+    public CluckshroomRenderer(EntityRendererProvider.Context ctx) {
+        super(ctx, new CluckshroomModel<>(ctx.bakeLayer(CluckshroomModel.LAYER_LOCATION)), .5f);
     }
 
     /**
      * Returns the location of an entity's texture.
      */
-    public @NotNull ResourceLocation getTextureLocation(@NotNull CluckshroomEntity entity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull Cluckshroom entity) {
         return CLUCKSHROOM_TEXTURE;
     }
 
@@ -35,9 +35,9 @@ public class CluckshroomRenderer extends MobRenderer<CluckshroomEntity, Cluckshr
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
     @Override
-    protected float getBob(CluckshroomEntity livingBase, float partialTicks) {
+    protected float getBob(Cluckshroom livingBase, float partialTicks) {
         float f = Mth.lerp(partialTicks, livingBase.oFlap, livingBase.flap);
         float f1 = Mth.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.flapSpeed);
-        return (Mth.sin(f) + 1.0f) * f1;
+        return (Mth.sin(f) + 1f) * f1;
     }
 }

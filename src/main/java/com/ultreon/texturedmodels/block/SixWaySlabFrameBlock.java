@@ -3,7 +3,8 @@ package com.ultreon.texturedmodels.block;
 import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
+import com.ultreon.texturedmodels.tileentity.ITickable;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
@@ -20,8 +21,11 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -33,6 +37,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.ticks.ScheduledTick;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -46,11 +52,11 @@ import static net.minecraft.world.level.block.state.properties.BlockStatePropert
  * @version 1.6 10/21/20
  */
 @SuppressWarnings("deprecation")
-public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBlock {
+public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBlock, EntityBlock {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty CONTAINS_BLOCK = BCBlockStateProperties.CONTAINS_BLOCK;
     public static final IntegerProperty LIGHT_LEVEL = BCBlockStateProperties.LIGHT_LEVEL;
-    //everything is inverted because when placing, we would need to take the opposite - I figured it out when I completed my work and I don't want to change everything again
+    //everything is inverted because when placing, we would need to take the opposite - I figured it out when I completed my work, and I don't want to change everything again
     protected static final VoxelShape BOTTOM = Block.box(0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D);
     protected static final VoxelShape TOP = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
     protected static final VoxelShape EAST = Block.box(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D);
@@ -69,21 +75,15 @@ public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBloc
 
     @Override
     @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState state, BlockGetter dimensionIn, BlockPos pos, CollisionContext context) {
-        switch (state.getValue(FACING)) {
-            case EAST:
-                return EAST;
-            case NORTH:
-                return NORTH;
-            case SOUTH:
-                return SOUTH;
-            case WEST:
-                return WEST;
-            case UP:
-                return TOP;
-            default:
-                return BOTTOM;
-        }
+    public @NotNull VoxelShape getShape(BlockState state, @NotNull BlockGetter dimensionIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+        return switch (state.getValue(FACING)) {
+            case EAST -> EAST;
+            case NORTH -> NORTH;
+            case SOUTH -> SOUTH;
+            case WEST -> WEST;
+            case UP -> TOP;
+            default -> BOTTOM;
+        };
     }
 
     @Override
@@ -97,25 +97,26 @@ public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBloc
                 return this.defaultBlockState().setValue(FACING, context.getClickedFace());
             }
         } else {
-            BlockState blockstate1 = this.defaultBlockState().setValue(FACING, Direction.UP).setValue(WATERLOGGED, Boolean.valueOf(fluidstate.getType() == Fluids.WATER));
+            BlockState blockState = this.defaultBlockState().setValue(FACING, Direction.UP).setValue(WATERLOGGED, fluidstate.getType() == Fluids.WATER);
             Direction direction = context.getClickedFace();
-            return direction != Direction.DOWN && (direction == Direction.UP || !(context.getClickLocation().y - (double) blockpos.getY() > 0.5D)) ? blockstate1 : blockstate1.setValue(FACING, Direction.DOWN);
+            return direction != Direction.DOWN && (direction == Direction.UP || !(context.getClickLocation().y - (double) blockpos.getY() > 0.5D)) ? blockState : blockState.setValue(FACING, Direction.DOWN);
         }
-    }
-
-    @Override
-    public boolean hasBlockEntity(BlockState state) {
-        return true;
     }
 
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new FrameBlockTile();
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+        return new FrameBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level p_153212_, @NotNull BlockState p_153213_, @NotNull BlockEntityType<T> p_153214_) {
+        return ITickable::tickTE;
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level dimension, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, Level dimension, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult trace) {
         ItemStack item = player.getItemInHand(hand);
         if (!dimension.isClientSide) {
             BlockAppearanceHelper.setLightLevel(item, state, dimension, pos, player, hand);
@@ -130,7 +131,7 @@ public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBloc
                 BlockEntity tileEntity = dimension.getBlockEntity(pos);
                 int count = player.getItemInHand(hand).getCount();
                 Block heldBlock = ((BlockItem) item.getItem()).getBlock();
-                if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
+                if (tileEntity instanceof FrameBlockEntity && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
                     BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
                     insertBlock(dimension, pos, state, handBlockState);
                     if (!player.isCreative())
@@ -151,19 +152,17 @@ public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBloc
 
     protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
         if (!dimensionIn.isClientSide) {
-            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof FrameBlockTile) {
-                FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
+            BlockEntity blockEntity = dimensionIn.getBlockEntity(pos);
+            if (blockEntity instanceof FrameBlockEntity frameTileEntity) {
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
                     dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clear();
-                    float f = 0.7F;
-                    double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    ItemStack itemstack1 = new ItemStack(blockState.getBlock());
-                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
+                    double d0 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
+                    double d1 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .060000002f + 0.6D;
+                    double d2 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
+                    ItemStack stack1 = new ItemStack(blockState.getBlock());
+                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack1);
                     itementity.setDefaultPickUpDelay();
                     dimensionIn.addFreshEntity(itementity);
                     frameTileEntity.clear();
@@ -173,9 +172,8 @@ public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBloc
     }
 
     public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
-        BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-        if (tileentity instanceof FrameBlockTile) {
-            FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
+        BlockEntity blockEntity = dimensionIn.getBlockEntity(pos);
+        if (blockEntity instanceof FrameBlockEntity frameTileEntity) {
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
             dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);
@@ -183,7 +181,7 @@ public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBloc
     }
 
     @Override
-    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @NotNull Level dimensionIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             dropContainedBlock(dimensionIn, pos);
 
@@ -201,12 +199,12 @@ public class SixWaySlabFrameBlock extends Block implements SimpleWaterloggedBloc
 
     @Override
     @SuppressWarnings("deprecation")
-    public FluidState getFluidState(BlockState state) {
+    public @NotNull FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor dimensionIn, BlockPos currentPos, BlockPos facingPos) {
+    public @NotNull BlockState updateShape(BlockState stateIn, @NotNull Direction facing, @NotNull BlockState facingState, @NotNull LevelAccessor dimensionIn, @NotNull BlockPos currentPos, @NotNull BlockPos facingPos) {
         if (stateIn.getValue(WATERLOGGED)) {
             dimensionIn.getFluidTicks().schedule(new ScheduledTick<>(Fluids.WATER, currentPos, Fluids.WATER.getTickDelay(dimensionIn), 0));
         }

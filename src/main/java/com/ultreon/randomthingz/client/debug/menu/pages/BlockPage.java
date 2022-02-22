@@ -6,7 +6,6 @@ import com.ultreon.randomthingz.client.debug.menu.DebugPage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.util.math.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.block.Block;
@@ -31,15 +30,15 @@ public class BlockPage extends DebugPage {
         if (player == null) {
             return list;
         }
-        float f = player.xRot;
-        float f1 = player.yRot;
+        float f = player.getXRot();
+        float f1 = player.getYRot();
 
-        Vec3 vec3d = player.getEyePosition(1.0f);
+        Vec3 vec3d = player.getEyePosition(1f);
 
-        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-        float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
-        float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
+        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+        float f4 = -Mth.cos(-f * ((float) Math.PI / 180f));
+        float f5 = Mth.sin(-f * ((float) Math.PI / 180f));
 
         float f6 = f3 * f4;
         float f7 = f2 * f4;
@@ -58,8 +57,6 @@ public class BlockPage extends DebugPage {
                 BlockState blockState = Minecraft.getInstance().player.getCommandSenderWorld().getBlockState(pos);
                 Block block = blockState.getBlock();
                 list.add(new DebugEntry("translatedName", () -> block.getName().getString()));
-                list.add(new DebugEntry("harvestLevel", blockState::getHarvestLevel));
-                list.add(new DebugEntry("harvestTool", () -> blockState.getHarvestTool() == null ? null : blockState.getHarvestTool().getName()));
                 list.add(new DebugEntry("blockHardness", () -> blockState.getDestroySpeed(player.getCommandSenderWorld(), pos)));
                 list.add(new DebugEntry("lightValue", blockState::getLightEmission));
                 list.add(new DebugEntry("opacity", () -> blockState.getLightBlock(player.getCommandSenderWorld(), pos)));
@@ -67,10 +64,10 @@ public class BlockPage extends DebugPage {
                 list.add(new DebugEntry("playerRelativeHardness", () -> blockState.getDestroyProgress(player, player.getCommandSenderWorld(), pos)));
                 list.add(new DebugEntry("requiresTool", blockState::requiresCorrectToolForDrops));
                 list.add(new DebugEntry("renderType", blockState::getRenderShape));
-                list.add(new DebugEntry("slipperiness", () -> blockState.getSlipperiness(player.getCommandSenderWorld(), pos, player)));
+                list.add(new DebugEntry("slipperiness", () -> blockState.getFriction(player.getCommandSenderWorld(), pos, player)));
                 list.add(new DebugEntry("jumpFactor", block::getJumpFactor));
                 list.add(new DebugEntry("enchantPowerBonus", () -> blockState.getEnchantPowerBonus(player.getCommandSenderWorld(), pos)));
-                list.add(new DebugEntry("lootTable", block::getLootTable));
+                list.add(new DebugEntry("target", block::getLootTable));
                 list.add(new DebugEntry("materialColor", () -> new Pair<>(block.defaultMaterialColor().id, getColor(block.defaultMaterialColor().col))));
                 list.add(new DebugEntry("offsetType", block::getOffsetType));
                 list.add(new DebugEntry("registryName", block::getRegistryName));
@@ -86,7 +83,7 @@ public class BlockPage extends DebugPage {
 //                BlockState blockState = Minecraft.getInstance().player.getEntityDimension().getBlockState(pos);
 //                FluidState fluidState = blockState.getFluidState();
 //                if (!fluidState.isEmpty()) {
-//                    drawRightString(matrixStack, TextFormatting.GRAY + "-== Fluid ==-", 12f, 12f, 0xffffff);
+//                    drawRightString(matrixStack, ChatFormatting.GRAY + "-== Fluid ==-", 12f, 12f, 0xffffff);
 //                    drawRightTopString(matrixStack, "empty", j++, fluidState.isEmpty());
 //                    drawRightTopString(matrixStack, "height", j++, fluidState.getHeight());
 //                    drawRightTopString(matrixStack, "level", j++, fluidState.getLevel());

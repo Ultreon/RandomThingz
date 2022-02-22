@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines;
 
 import com.ultreon.modlib.api.RedstoneMode;
-import com.ultreon.modlib.embedded.silentutils.EnumUtils;
+import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.inventory.slot.MachineUpgradeSlot;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;

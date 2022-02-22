@@ -13,6 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
@@ -33,13 +34,12 @@ public class EucalyptusLeafItem extends Item {
         if (!dimensionIn.isClientSide) entityLiving.removeEffectNoUpdate(MobEffects.HUNGER);
 
 
-        if (entityLiving instanceof ServerPlayer) {
-            ServerPlayer serverplayerentity = (ServerPlayer) entityLiving;
-            CriteriaTriggers.CONSUME_ITEM.trigger(serverplayerentity, stack);
-            serverplayerentity.awardStat(Stats.ITEM_USED.get(this));
+        if (entityLiving instanceof ServerPlayer player) {
+            CriteriaTriggers.CONSUME_ITEM.trigger(player, stack);
+            player.awardStat(Stats.ITEM_USED.get(this));
         }
 
-        if (entityLiving instanceof Player && !((Player) entityLiving).abilities.instabuild) {
+        if (entityLiving instanceof Player && !((Player) entityLiving).getAbilities().instabuild) {
             stack.shrink(1);
         }
 
@@ -55,7 +55,7 @@ public class EucalyptusLeafItem extends Item {
     }
 
     /**
-     * returns the action that specifies what animation to play when the items is being used
+     * returns the action that specifies what animation to play when the items are being used
      */
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
@@ -64,7 +64,7 @@ public class EucalyptusLeafItem extends Item {
 
     /**
      * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-     * {@linkplain #onUseItem}.
+     * {@linkplain #useOn(UseOnContext)}.
      */
     public InteractionResultHolder<ItemStack> use(Level dimensionIn, Player playerIn, InteractionHand handIn) {
         playerIn.startUsingItem(handIn);

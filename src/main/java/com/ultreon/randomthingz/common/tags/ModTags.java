@@ -14,6 +14,10 @@ public class ModTags {
         return new ResourceLocation("forge", path);
     }
 
+    private static ResourceLocation mcId(String path) {
+        return new ResourceLocation(ResourceLocation.DEFAULT_NAMESPACE, path);
+    }
+
     private static ResourceLocation modId(String path) {
         return new ResourceLocation(RandomThingz.MOD_ID, path);
     }
@@ -24,9 +28,14 @@ public class ModTags {
 
     public static final class Blocks {
         public static final Tag.Named<Block> DRYING_RACKS = mod("drying_racks");
+        public static final Tag.Named<Block> MINEABLE_WITH_SWORD = mc("mineable/sword");
 
         private Blocks() {
 
+        }
+
+        private static Tag.Named<Block> mc(String path) {
+            return BlockTags.bind(mcId(path).toString());
         }
 
         private static Tag.Named<Block> forge(String path) {
@@ -52,6 +61,10 @@ public class ModTags {
 
         private Items() {
 
+        }
+
+        private static Tag.Named<Item> mc(String path) {
+            return ItemTags.bind(mcId(path).toString());
         }
 
         private static Tag.Named<Item> forge(String path) {

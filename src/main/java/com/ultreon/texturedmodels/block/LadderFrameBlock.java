@@ -3,7 +3,7 @@ package com.ultreon.texturedmodels.block;
 import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
@@ -19,11 +19,13 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
@@ -38,12 +40,12 @@ import static com.ultreon.texturedmodels.util.BCBlockStateProperties.LIGHT_LEVEL
  * @author PianoManu
  * @version 1.4 10/06/20
  */
-public class LadderFrameBlock extends LadderBlock {
+public class LadderFrameBlock extends LadderBlock implements EntityBlock {
     //public static final BooleanProperty CONTAINS_BLOCK = BCBlockStateProperties.CONTAINS_BLOCK;
 
     public LadderFrameBlock(Properties builder) {
         super(builder);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.valueOf(false)).setValue(CONTAINS_BLOCK, false).setValue(LIGHT_LEVEL, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, Boolean.FALSE).setValue(CONTAINS_BLOCK, false).setValue(LIGHT_LEVEL, 0));
     }
 
     @Override
@@ -51,20 +53,15 @@ public class LadderFrameBlock extends LadderBlock {
         builder.add(FACING, WATERLOGGED, CONTAINS_BLOCK, LIGHT_LEVEL);
     }
 
-    @Override
-    public boolean hasBlockEntity(BlockState state) {
-        return true;
-    }
-
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
-        return new FrameBlockTile();
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+        return new FrameBlockEntity(pos, state);
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public InteractionResult use(BlockState state, Level dimension, BlockPos pos, Player player, InteractionHand hand, BlockHitResult trace) {
+    public @NotNull InteractionResult use(@NotNull BlockState state, Level dimension, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult trace) {
         ItemStack item = player.getItemInHand(hand);
         if (!dimension.isClientSide) {
             BlockAppearanceHelper.setLightLevel(item, state, dimension, pos, player, hand);
@@ -79,7 +76,7 @@ public class LadderFrameBlock extends LadderBlock {
                 BlockEntity tileEntity = dimension.getBlockEntity(pos);
                 int count = player.getItemInHand(hand).getCount();
                 Block heldBlock = ((BlockItem) item.getItem()).getBlock();
-                if (tileEntity instanceof FrameBlockTile && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
+                if (tileEntity instanceof FrameBlockEntity && !item.isEmpty() && BlockSavingHelper.isValidBlock(heldBlock) && !state.getValue(CONTAINS_BLOCK)) {
                     BlockState handBlockState = ((BlockItem) item.getItem()).getBlock().defaultBlockState();
                     insertBlock(dimension, pos, state, handBlockState);
                     if (!player.isCreative())
@@ -99,19 +96,17 @@ public class LadderFrameBlock extends LadderBlock {
 
     protected void dropContainedBlock(Level dimensionIn, BlockPos pos) {
         if (!dimensionIn.isClientSide) {
-            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof FrameBlockTile) {
-                FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
+            BlockEntity blockEntity = dimensionIn.getBlockEntity(pos);
+            if (blockEntity instanceof FrameBlockEntity frameTileEntity) {
                 BlockState blockState = frameTileEntity.getMimic();
                 if (!(blockState == null)) {
                     dimensionIn.levelEvent(1010, pos, 0);
                     frameTileEntity.clear();
-                    float f = 0.7F;
-                    double d0 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    double d1 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-                    double d2 = (double) (dimensionIn.random.nextFloat() * 0.7F) + (double) 0.15F;
-                    ItemStack itemstack1 = new ItemStack(blockState.getBlock());
-                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, itemstack1);
+                    double d0 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
+                    double d1 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .060000002f + 0.6D;
+                    double d2 = (double) (dimensionIn.random.nextFloat() * .7f) + (double) .15f;
+                    ItemStack stack1 = new ItemStack(blockState.getBlock());
+                    ItemEntity itementity = new ItemEntity(dimensionIn, (double) pos.getX() + d0, (double) pos.getY() + d1, (double) pos.getZ() + d2, stack1);
                     itementity.setDefaultPickUpDelay();
                     dimensionIn.addFreshEntity(itementity);
                     frameTileEntity.clear();
@@ -121,9 +116,8 @@ public class LadderFrameBlock extends LadderBlock {
     }
 
     public void insertBlock(LevelAccessor dimensionIn, BlockPos pos, BlockState state, BlockState handBlock) {
-        BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-        if (tileentity instanceof FrameBlockTile) {
-            FrameBlockTile frameTileEntity = (FrameBlockTile) tileentity;
+        BlockEntity blockEntity = dimensionIn.getBlockEntity(pos);
+        if (blockEntity instanceof FrameBlockEntity frameTileEntity) {
             frameTileEntity.clear();
             frameTileEntity.setMimic(handBlock);
             dimensionIn.setBlock(pos, state.setValue(CONTAINS_BLOCK, Boolean.TRUE), 2);
@@ -132,7 +126,7 @@ public class LadderFrameBlock extends LadderBlock {
 
     @Override
     @SuppressWarnings("deprecation")
-    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, @NotNull Level dimensionIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             dropContainedBlock(dimensionIn, pos);
 

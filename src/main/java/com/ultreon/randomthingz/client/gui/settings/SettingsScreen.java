@@ -4,23 +4,18 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.text2speech.Narrator;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.screen.ScreenshotsScreen;
-import com.ultreon.randomthingz.common.annotation.Used;
-import com.ultreon.randomthingz.common.text.Translations;
 import com.ultreon.randomthingz.common.updates.AbstractUpdater;
 import com.ultreon.randomthingz.common.updates.UpdateButton;
 import com.ultreon.randomthingz.config.Config;
 import net.minecraft.client.NarratorStatus;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings({"FieldCanBeLocal"})
@@ -28,16 +23,6 @@ import java.util.Objects;
 public class SettingsScreen extends Screen {
 
     private final Screen back;
-    @Used
-    private Button doneButton;
-    @Used
-    private Button cancelButton;
-    @Used
-    private Button quitSettingsButton;
-    @Used
-    private Button allowShutdownPCButton;
-    @Used
-    private Button modulesButton;
 
     public SettingsScreen(Screen back) {
         super(new TextComponent(""));
@@ -65,14 +50,8 @@ public class SettingsScreen extends Screen {
 
         dy += 30;
         dy += 30;
-        this.modulesButton = addRenderableWidget(new Button(width / 2 - 155, height / 6 + dy - 6, 310, 20,
-                Translations.getScreen("settings", "screenshots"), this::openScreenshotsScreen, this::tooltip));
 
         dy += 30;
-        this.doneButton = addRenderableWidget(new Button(width / 2 - 155, height / 6 + dy - 6, 150, 20,
-                CommonComponents.GUI_DONE, this::saveAndGoBack));
-        this.cancelButton = addRenderableWidget(new Button(width / 2 + 5, height / 6 + dy - 6, 150, 20,
-                CommonComponents.GUI_CANCEL, this::goBack));
     }
 
     private void openScreenshotsScreen(Button button) {
@@ -85,21 +64,7 @@ public class SettingsScreen extends Screen {
     }
 
     public void tooltip(Button button, PoseStack matrixStack, int mouseX, int mouseY) {
-        if (button == allowShutdownPCButton) {
-            // Button for allowing shutdown the PC.
-            if (this.allowShutdownPCButton.isHovered()) {
-                if (this.minecraft != null) {
-                    // Declare variables for tooltip rendering.
-                    String message =
-                            "Allow RandomThingz to shutdown your pc for specific things.\n" +
-                                    "Like the Kill Switch or the button on the exit confirm screen.";
-                    List<FormattedCharSequence> iReorderingProcessors = this.minecraft.font.split(new TextComponent(message), Math.max(this.width / 2 + 75, 170));
 
-                    // Render tooltip.
-                    this.renderTooltip(matrixStack, iReorderingProcessors, mouseX, mouseY);
-                }
-            }
-        }
     }
 
     public void saveAndGoBack(Button button) {

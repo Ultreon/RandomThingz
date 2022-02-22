@@ -4,12 +4,12 @@ import lombok.experimental.UtilityClass;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.util.Constants;
 
 /**
  * Item stack helper class.
- * Currently used for write or read {@linkplain ItemStack item stacks} to or from {@linkplain CompoundTag}
+ * Currently, used for write or read {@linkplain ItemStack item stacks} to or from {@linkplain CompoundTag}
  *
  * @author MrCrayfish
  */
@@ -38,7 +38,7 @@ public class ItemStackHelper {
     }
 
     public static void loadAllItems(String key, CompoundTag tag, NonNullList<ItemStack> list) {
-        ListTag listTag = tag.getList(key, Constants.NBT.TAG_COMPOUND);
+        ListTag listTag = tag.getList(key, Tag.TAG_COMPOUND);
         for (int i = 0; i < listTag.size(); i++) {
             CompoundTag slotCompound = listTag.getCompound(i);
             int j = slotCompound.getByte("Slot") & 255;

@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class AlloySmelterScreen extends AbstractMachineScreen<AlloySmelterContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/alloy_smelter.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/alloy_smelter.png");
 
     public AlloySmelterScreen(AlloySmelterContainer containerIn, Inventory playerInventoryIn, Component titleIn) {
         super(containerIn, playerInventoryIn, titleIn);

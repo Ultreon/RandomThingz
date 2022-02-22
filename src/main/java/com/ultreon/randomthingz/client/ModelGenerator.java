@@ -23,8 +23,7 @@ public class ModelGenerator {
     private final Map<ResourceLocation, BakedModel> models = new HashMap<>();
 
     private ModelGenerator() {
-        for (Toolset toolset : Toolset.values()) {
-        }
+
     }
 
     public void addModel(BakedModel model, ResourceLocation rl) {

@@ -53,7 +53,7 @@ public class BlazeTrait extends AbstractTrait {
         // Check if the state is a campfire, and the campfire at the block state can be lit.
         if (CampfireBlock.canLight(state)) {
             // Play sound.
-            dimension.playSound(player, position, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0f, new Random().nextFloat() * 0.4F + 0.8F);
+            dimension.playSound(player, position, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1f, new Random().nextFloat() * .4f + .8f);
 
             // Set block state.
             dimension.setBlock(position, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
@@ -72,7 +72,7 @@ public class BlazeTrait extends AbstractTrait {
             // Check if block at the offset can be lit on fire.
             if (BaseFireBlock.canBePlacedAt(dimension, offsetPos, context.getHorizontalDirection())) {
                 // Play sound.
-                dimension.playSound(player, offsetPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0f, new Random().nextFloat() * 0.4F + 0.8F);
+                dimension.playSound(player, offsetPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1f, new Random().nextFloat() * .4f + .8f);
 
                 // Create block state for the fire block.
                 BlockState blockState1 = BaseFireBlock.getState(dimension, offsetPos);

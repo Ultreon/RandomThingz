@@ -1,11 +1,8 @@
 package com.ultreon.filters.gui.widget.button;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
 import com.ultreon.filters.FilterEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
@@ -16,9 +13,9 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Author: MrCrayfish
+ * @author MrCrayfish
  */
-@SuppressWarnings({"SameParameterValue", "deprecation"})
+@SuppressWarnings({"SameParameterValue"})
 public class TagButton extends Button {
     private static final ResourceLocation TABS = new ResourceLocation("textures/gui/container/creative_inventory/tabs.png");
 
@@ -49,8 +46,8 @@ public class TagButton extends Button {
         Minecraft mc = Minecraft.getInstance();
         RenderSystem.setShaderTexture(0, TABS);
 
-        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, this.alpha);
-        GlStateManager._disableLighting();
+        RenderSystem.setShaderColor(1f, 1f, 1f, this.alpha);
+//        GlStateManager._disableLighting();
         GlStateManager._enableBlend();
         GlStateManager._blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA.value, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value, GlStateManager.SourceFactor.ONE.value, GlStateManager.DestFactor.ZERO.value);
         GlStateManager._blendFunc(GlStateManager.SourceFactor.SRC_ALPHA.value, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA.value);
@@ -60,21 +57,19 @@ public class TagButton extends Button {
         int textureY = this.toggled ? 32 : 0;
         this.drawRotatedTexture(this.x, this.y, textureX, textureY, width, 28);
 
-        GlStateManager._enableRescaleNormal();
-        Lighting.turnBackOn();
         ItemRenderer renderer = mc.getItemRenderer();
-        renderer.blitOffset = 100.0f;
+        renderer.blitOffset = 100f;
         renderer.renderAndDecorateItem(this.stack, x + 8, y + 6);
         renderer.renderGuiItemDecorations(mc.font, this.stack, x + 8, y + 6);
-        renderer.blitOffset = 100.0f;
+        renderer.blitOffset = 100f;
     }
 
     private void drawRotatedTexture(int x, int y, int textureX, int textureY, int width, int height) {
-        float scaleX = 0.00390625F;
-        float scaleY = 0.00390625F;
+        float scaleX = .00390625f;
+        float scaleY = .00390625f;
         Tesselator tessellator = Tesselator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuilder();
-        bufferbuilder.begin(7, DefaultVertexFormat.POSITION_TEX);
+        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
         bufferbuilder.vertex(x, y + height, 0.0).uv(((float) (textureX + height) * scaleX), (float) (textureY) * scaleY).endVertex();
         bufferbuilder.vertex(x + width, y + height, 0.0).uv(((float) (textureX + height) * scaleX), (float) (textureY + width) * scaleY).endVertex();
         bufferbuilder.vertex(x + width, y, 0.0).uv(((float) (textureX) * scaleX), (float) (textureY + width) * scaleY).endVertex();

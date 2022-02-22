@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class AtomicTntBlock extends CustomTntBlock<AtomicTntBlock> {
     public AtomicTntBlock(Properties properties) {
-        super(properties, TntProperties.builder().radius(48.0f).fuse(200).causesFire(true).mode(Explosion.BlockInteraction.DESTROY).build());
+        super(properties, TntProperties.builder().radius(48f).fuse(200).causesFire(true).mode(Explosion.BlockInteraction.DESTROY).build());
     }
 
     @Override

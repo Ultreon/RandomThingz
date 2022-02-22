@@ -43,7 +43,7 @@ public class DryingRackTileEntityRenderer implements BlockEntityRenderer<DryingR
             poses.translate(posX, posY, posZ);
             poses.mulPose(new Quaternion(0, 180 - facing.toYRot(), 0, true));
 
-            float scale = 0.75f;
+            float scale = .75f;
             poses.scale(scale, scale, scale);
 
             ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();

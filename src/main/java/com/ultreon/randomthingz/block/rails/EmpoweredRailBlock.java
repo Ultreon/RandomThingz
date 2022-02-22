@@ -21,7 +21,7 @@ public class EmpoweredRailBlock extends PoweredRailBlock implements IHasRenderTy
 
     @Override
     public float getRailMaxSpeed(BlockState state, Level dimension, BlockPos pos, AbstractMinecart cart) {
-        return 0.6f;
+        return .6f;
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.data.recipes;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.ultreon.modlib.embedded.silentlib.util.NameUtils;
+import com.ultreon.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -91,7 +91,8 @@ public final class CrushingRecipeBuilder {
         consumer.accept(new Result(id, this));
     }
 
-    public class Result implements FinishedRecipe {
+    @SuppressWarnings("ClassCanBeRecord")
+    public static class Result implements FinishedRecipe {
         private final ResourceLocation id;
         private final CrushingRecipeBuilder builder;
 

@@ -1,7 +1,8 @@
 package com.ultreon.randomthingz.block.machines.compressor;
 
 import com.google.common.collect.ImmutableList;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.CompressingRecipe;
@@ -32,7 +33,11 @@ public class CompressorBlockEntity extends AbstractMachineBlockEntity<Compressin
     private static final int[] SLOTS_ALL = {0, 1};
 
     public CompressorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.compressor, pos, state, 2, MachineTier.STANDARD);
+        super(ModMachines.COMPRESSOR, pos, state, 2, MachineTier.STANDARD);
+    }
+
+    public CompressorBlockEntity() {
+        this(BlockPos.ZERO, ModBlocks.COMPRESSOR.asBlockState());
     }
 
     @Override
@@ -60,7 +65,7 @@ public class CompressorBlockEntity extends AbstractMachineBlockEntity<Compressin
 
     @Override
     protected Collection<ItemStack> getProcessResults(CompressingRecipe recipe) {
-        return Collections.singleton(recipe.getCraftingResult(this));
+        return Collections.singleton(recipe.getResultItem());
     }
 
     @Override

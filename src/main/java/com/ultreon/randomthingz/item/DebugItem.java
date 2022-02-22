@@ -30,9 +30,9 @@ public class DebugItem extends Item {
         Player player = context.getPlayer();
         if (player == null) return InteractionResult.PASS;
 
-        Level dimension = context.getLevel();
+        Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        BlockEntity tileEntity = dimension.getBlockEntity(pos);
+        BlockEntity tileEntity = level.getBlockEntity(pos);
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
                 Component energyText = TextUtils.energyWithMax(e.getEnergyStored(), e.getMaxEnergyStored());
@@ -42,7 +42,7 @@ public class DebugItem extends Item {
             });
 
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(e -> {
-                ItemStack stackInSlot = e.getItem(0);
+                ItemStack stackInSlot = e.getStackInSlot(0);
                 String text = stackInSlot.getCount() + "x " + stackInSlot.getItem().getRegistryName();
                 player.sendMessage(new TextComponent("Item Stack: ").append(new TextComponent(text)), Util.NIL_UUID);
                 player.sendMessage(new TextComponent(e.getClass().getName()).withStyle(ChatFormatting.ITALIC), Util.NIL_UUID);
@@ -56,11 +56,9 @@ public class DebugItem extends Item {
             });
 
             for (Direction side : Direction.values()) {
-                BlockEntity other = dimension.getBlockEntity(pos.relative(side));
+                BlockEntity other = level.getBlockEntity(pos.relative(side));
                 if (other != null) {
-                    other.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
-                        player.sendMessage(new TextComponent(side + ": " + other.getClass().getSimpleName()), Util.NIL_UUID);
-                    });
+                    other.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> player.sendMessage(new TextComponent(side + ": " + other.getClass().getSimpleName()), Util.NIL_UUID));
                 }
             }
 

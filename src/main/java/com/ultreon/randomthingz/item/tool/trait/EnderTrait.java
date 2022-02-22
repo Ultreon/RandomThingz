@@ -56,17 +56,17 @@ public class EnderTrait extends AbstractTrait {
     }
 
     protected static BlockHitResult rayTrace(Level dimensionIn, Player player) {
-        float pitch = player.xRot;
-        float yaw = player.yRot;
+        float pitch = player.getXRot();
+        float yaw = player.getYRot();
 
         // Get the player's eye position, put is as start position.
-        Vec3 startPos = player.getEyePosition(1.0f);
+        Vec3 startPos = player.getEyePosition(1f);
 
         // Calculations.
-        float fz = Mth.cos(-yaw * ((float) Math.PI / 180F) - (float) Math.PI);
-        float fx = Mth.sin(-yaw * ((float) Math.PI / 180F) - (float) Math.PI);
-        float f = -Mth.cos(-pitch * ((float) Math.PI / 180F));
-        float lookY = Mth.sin(-pitch * ((float) Math.PI / 180F));
+        float fz = Mth.cos(-yaw * ((float) Math.PI / 180f) - (float) Math.PI);
+        float fx = Mth.sin(-yaw * ((float) Math.PI / 180f) - (float) Math.PI);
+        float f = -Mth.cos(-pitch * ((float) Math.PI / 180f));
+        float lookY = Mth.sin(-pitch * ((float) Math.PI / 180f));
         float lookX = fx * f;
         float lookZ = fz * f;
 
@@ -97,7 +97,7 @@ public class EnderTrait extends AbstractTrait {
             }
 
             clicker.teleportTo(posX, posY, posZ);
-            clicker.fallDistance = 0.0f;
+            clicker.fallDistance = 0f;
 
             clicker.awardStat(Stats.ITEM_USED.get(item));
             clicker.getCooldowns().addCooldown(item, 100);
@@ -108,7 +108,7 @@ public class EnderTrait extends AbstractTrait {
     @Override
     public void onLivingDamage(LivingDamageEvent e) {
         LivingEntity livingBeing = e.getEntityLiving();
-        if (e.getEntityLiving().getHealth() - e.getAmount() < 1.0f) {
+        if (e.getEntityLiving().getHealth() - e.getAmount() < 1f) {
             if (livingBeing.getRandom().nextInt(5) == 0) {
                 e.setCanceled(true);
 

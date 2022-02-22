@@ -1,7 +1,8 @@
 package com.ultreon.randomthingz.client.gui.screen;
 
-import com.mojang.blaze3d.matrix.PoseStack;
+import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.common.Resizer;
 import com.ultreon.randomthingz.client.common.Screenshot;
@@ -12,14 +13,10 @@ import lombok.NonNull;
 import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.texture.NativeImage;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -37,7 +34,6 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-@SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, value = Dist.CLIENT)
 public class ScreenshotsScreen extends AdvancedScreen {
     // No getter / setter.
@@ -91,7 +87,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
         this.loadThread.start();
     }
 
-    @SuppressWarnings("BusyWait")
+    @SuppressWarnings({"BusyWait", "ConstantConditions"})
     @SneakyThrows
     private void loadShots() {
         this.loaded = 0;
@@ -102,19 +98,19 @@ public class ScreenshotsScreen extends AdvancedScreen {
             active.set(true);
             RenderSystem.recordRenderCall(() -> {
                 ResourceLocation location = new ResourceLocation(RandomThingz.MOD_ID, "screenshots_screen/" + file.getName().toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9/._-]", "_"));
-                AbstractTexture texture0 = Minecraft.getInstance().getTextureManager().getTexture(location);
+                AbstractTexture tex = Minecraft.getInstance().getTextureManager().getTexture(location, null);
 
                 DynamicTexture texture;
 
-                if (texture0 == null) {
+                if (tex == null) {
                     texture = this.loadTexture(location, file);
 
                     if (texture == null) {
                         location = null;
                     }
                 } else {
-                    if (texture0 instanceof DynamicTexture) {
-                        texture = (DynamicTexture) texture0;
+                    if (tex instanceof DynamicTexture) {
+                        texture = (DynamicTexture) tex;
                     } else {
                         texture = null;
                         location = null;
@@ -146,7 +142,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
     }
 
     /**
-     * Refresh the screen shot cache.
+     * Refresh the screenshot cache.
      */
     public void refresh() {
         ScreenshotSelectionList.Entry selected = this.list.getSelected();
@@ -176,28 +172,28 @@ public class ScreenshotsScreen extends AdvancedScreen {
         this.list.render(matrixStack, mouseX, mouseY, partialTicks);
 
         // Buffer and tessellator.
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        Tesselator tessellator = Tesselator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuilder();
 
         // Dirt texture.
-        this.minecraft.getTextureManager().bindTexture(BACKGROUND_LOCATION);
+        RenderSystem.setShaderTexture(0, BACKGROUND_LOCATION);
 
         // Color.
-        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
         // Render dirt.
-        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        bufferbuilder.pos(0.0D, this.height, 0.0D).tex(0.0f, (float) this.height / 32.0f).color(64, 64, 64, 255).endVertex();
-        bufferbuilder.pos(224, this.height, 0.0D).tex((float) 224 / 32.0f, (float) this.height / 32.0f).color(64, 64, 64, 255).endVertex();
-        bufferbuilder.pos(224, this.height - 40d, 0.0D).tex((float) 224 / 32.0f, ((float) this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
-        bufferbuilder.pos(0.0D, this.height - 40d, 0.0D).tex(0.0f, ((float) this.height - 40f) / 32.0f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+        bufferbuilder.vertex(0.0D, this.height, 0.0D).uv(0f, (float) this.height / 32f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.vertex(224, this.height, 0.0D).uv((float) 224 / 32f, (float) this.height / 32f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.vertex(224, this.height - 40d, 0.0D).uv((float) 224 / 32f, ((float) this.height - 40f) / 32f).color(64, 64, 64, 255).endVertex();
+        bufferbuilder.vertex(0.0D, this.height - 40d, 0.0D).uv(0f, ((float) this.height - 40f) / 32f).color(64, 64, 64, 255).endVertex();
 
         // Draw
-        tessellator.draw();
+        tessellator.end();
 
         // Render all children.
-        for (Widget child : this.buttons) {
-            child.render(matrixStack, mouseX, mouseY, partialTicks);
+        for (Widget renderable : this.renderables) {
+            renderable.render(matrixStack, mouseX, mouseY, partialTicks);
         }
 
         if (this.loaded != this.total) {
@@ -210,47 +206,11 @@ public class ScreenshotsScreen extends AdvancedScreen {
             DynamicTexture texture = currentScreenshot.getTexture();
             ResourceLocation location = currentScreenshot.getResourceLocation();
 
-            this.minecraft.textureManager.bindTexture(location);
+            RenderSystem.setShaderTexture(0, location);
 
             if (texture != null) {
-                int imgWidth = texture.getTextureData().getWidth();
-                int imgHeight = texture.getTextureData().getHeight();
-
-//            int centerX;
-//            int width;
-//            int height;
-//            if (imgWidth > imgHeight) {
-//                this.aspectRatio = (float) (imgWidth / (double) imgHeight);
-//                this.orientation = AspectRatio.Orientation.LANDSCAPE;
-//
-//                centerX = this.width / 2;
-//                width = this.width - 20;
-//                height = (int) (width / aspectRatio);
-//
-//                if (height > this.height - 20) {
-//                    this.aspectRatio = (float) (imgHeight / (double) imgWidth);
-//                    this.orientation = AspectRatio.Orientation.PORTRAIT;
-//
-//                    centerX = this.width / 2;
-//                    height = this.height - 20;
-//                    width = (int) (height / aspectRatio);
-//                }
-//            } else {
-//                this.aspectRatio = (float) (imgHeight / (double) imgWidth);
-//                this.orientation = AspectRatio.Orientation.PORTRAIT;
-//
-//                centerX = this.width / 2;
-//                height = this.height - 20;
-//                width = (int) (height / aspectRatio);
-//                if (width > this.width - 20) {
-//                    this.aspectRatio = (float) (imgWidth / (double) imgHeight);
-//                    this.orientation = AspectRatio.Orientation.LANDSCAPE;
-//
-//                    centerX = (this.width) / 2;
-//                    width = this.width - 20;
-//                    height = (int) (width / aspectRatio);
-//                }
-//            }
+                int imgWidth = texture.getPixels().getWidth();
+                int imgHeight = texture.getPixels().getHeight();
 
                 Resizer resizer = new Resizer(imgWidth, imgHeight);
                 FloatSize size = resizer.thumbnail(this.width - 10 - 220, this.height - 20);
@@ -284,7 +244,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
 
             Minecraft mc = Minecraft.getInstance();
 
-            mc.getTextureManager().readTexture(location, texture);
+            mc.getTextureManager().getTexture(location, texture);
             return texture;
         } catch (Throwable t) {
             RandomThingz.LOGGER.error("Couldn't read image: {}", file.getAbsolutePath(), t);
@@ -297,7 +257,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
      */
     private void goBack() {
         // Go back to the previous screen.
-        Objects.requireNonNull(this.minecraft).displayGuiScreen(this.backScreen);
+        Objects.requireNonNull(this.minecraft).setScreen(this.backScreen);
     }
 
     /**
@@ -314,13 +274,10 @@ public class ScreenshotsScreen extends AdvancedScreen {
         Minecraft mc = Minecraft.getInstance();
 
         // Get current screen.
-        Screen screen = mc.currentScreen;
+        Screen screen = mc.screen;
 
         // Check if current screen is the screenshots screen.
-        if (screen instanceof ScreenshotsScreen) {
-            // Cast
-            ScreenshotsScreen screenshots = (ScreenshotsScreen) screen;
-
+        if (screen instanceof ScreenshotsScreen screenshots) {
             // Navigate
             if (event.getKey() == 263) screenshots.prevShot();
             if (event.getKey() == 262) screenshots.nextShot();
@@ -348,7 +305,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
     }
 
     @Override
-    public void closeScreen() {
+    public void onClose() {
         this.goBack();
     }
 
@@ -360,34 +317,4 @@ public class ScreenshotsScreen extends AdvancedScreen {
     public List<Screenshot> getScreenshots() {
         return Collections.unmodifiableList(this.screenshots);
     }
-
-//    @Override
-//    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-//        return this.list.mouseClicked(mouseX, mouseY, button);
-//    }
-//    @Override
-//    public boolean mouseReleased(double mouseX, double mouseY, int button) {
-//        return this.list.mouseReleased(mouseX, mouseY, button);
-//    }
-//    @Override
-//    public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
-//        return this.list.mouseDragged(mouseX, mouseY, button, dragX, dragY);
-//    }
-//    @Override
-//    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-//        return this.list.mouseScrolled(mouseX, mouseY, delta);
-//    }
-//    @Override
-//    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-//        super.keyPressed(keyCode, s)
-//        return this.list.keyPressed(keyCode, scanCode, modifiers);
-//    }
-//    @Override
-//    public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
-//        return this.list.keyReleased(keyCode, scanCode, modifiers);
-//    }
-//    @Override
-//    public boolean charTyped(char codePoint, int modifiers) {
-//        return this.list.charTyped(codePoint, modifiers);
-//    }
 }

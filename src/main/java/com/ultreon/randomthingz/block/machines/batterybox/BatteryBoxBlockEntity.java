@@ -1,6 +1,7 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
 import com.ultreon.randomthingz.capability.EnergyStorageImpl;
 import com.ultreon.randomthingz.capability.EnergyStorageWithBatteries;
@@ -30,8 +31,12 @@ public class BatteryBoxBlockEntity extends AbstractMachineBaseBlockEntity {
     private final EnergyStorageWithBatteries<BatteryBoxBlockEntity> energy;
 
     public BatteryBoxBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.batteryBox, pos, state, 6, MAX_ENERGY, MAX_RECEIVE, MAX_SEND, MachineTier.BASIC);
+        super(ModMachines.BATTERY_BOX, pos, state, 6, MAX_ENERGY, MAX_RECEIVE, MAX_SEND, MachineTier.BASIC);
         this.energy = new EnergyStorageWithBatteries<>(this, MAX_ENERGY, MAX_RECEIVE, MAX_SEND);
+    }
+
+    public BatteryBoxBlockEntity() {
+        this(BlockPos.ZERO, ModBlocks.BATTERY_BOX.asBlockState());
     }
 
     @Override

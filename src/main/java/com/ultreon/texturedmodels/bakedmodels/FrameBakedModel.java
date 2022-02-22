@@ -1,7 +1,7 @@
 package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.block.FrameBlock;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
 import net.minecraft.client.Minecraft;
@@ -46,9 +46,9 @@ public class FrameBakedModel implements IDynamicBakedModel {
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
 
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
-        Integer design = extraData.getData(FrameBlockTile.DESIGN);
-        Integer desTex = extraData.getData(FrameBlockTile.DESIGN_TEXTURE);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
+        Integer design = extraData.getData(FrameBlockEntity.DESIGN);
+        Integer desTex = extraData.getData(FrameBlockEntity.DESIGN_TEXTURE);
         if (side != null) {
             return Collections.emptyList();
         }
@@ -60,9 +60,9 @@ public class FrameBakedModel implements IDynamicBakedModel {
                     //TODO what about full blocks with different side textures -> IllusionBlock
                     List<TextureAtlasSprite> textureList = TextureHelper.getTextureFromModel(model, extraData, rand);
                     TextureAtlasSprite texture;
-                    Integer tex = extraData.getData(FrameBlockTile.TEXTURE);
+                    Integer tex = extraData.getData(FrameBlockEntity.TEXTURE);
                     if (textureList.size() <= tex) {
-                        extraData.setData(FrameBlockTile.TEXTURE, 0);
+                        extraData.setData(FrameBlockEntity.TEXTURE, 0);
                         tex = 0;
                     }
                     if (textureList.size() == 0) {
@@ -77,7 +77,7 @@ public class FrameBakedModel implements IDynamicBakedModel {
                         tintIndex = 1;
                     }
                     List<BakedQuad> quads = new ArrayList<>(ModelHelper.createCuboid(0f, 1f, 0f, 1f, 0f, 1f, texture, tintIndex));
-                    int overlayIndex = extraData.getData(FrameBlockTile.OVERLAY);
+                    int overlayIndex = extraData.getData(FrameBlockEntity.OVERLAY);
                     if (overlayIndex != 0) {
                         quads.addAll(ModelHelper.createOverlay(0f, 1f, 0f, 1f, 0f, 1f, overlayIndex));
                     }

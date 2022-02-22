@@ -21,7 +21,7 @@ public class SpeedRailBlock extends PoweredRailBlock implements IHasRenderType {
 
     @Override
     public float getRailMaxSpeed(BlockState state, Level dimension, BlockPos pos, AbstractMinecart cart) {
-        return 0.8f;
+        return .8f;
     }
 
     @Override

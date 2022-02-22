@@ -24,7 +24,7 @@ public final class Network {
 
     static {
         int id = 0;
-        channel = NetworkRegistry.ChannelBuilder.named(RandomThingz.rl("network"))
+        channel = NetworkRegistry.ChannelBuilder.named(RandomThingz.res("network"))
                 .clientAcceptedVersions(s -> Objects.equals(s, VERSION))
                 .serverAcceptedVersions(s -> Objects.equals(s, VERSION))
                 .networkProtocolVersion(() -> VERSION)

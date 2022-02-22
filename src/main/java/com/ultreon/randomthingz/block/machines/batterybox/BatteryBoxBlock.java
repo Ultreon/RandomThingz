@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
+import com.ultreon.texturedmodels.tileentity.ITickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -12,9 +13,12 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -24,25 +28,26 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class BatteryBoxBlock extends Block {
+public class BatteryBoxBlock extends Block implements EntityBlock {
     public static final IntegerProperty BATTERIES = IntegerProperty.create("batteries", 0, 6);
 
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 13, 16);
 
     public BatteryBoxBlock() {
-        super(Properties.of(Material.METAL).strength(6.0f, 20.0f).sound(SoundType.METAL));
+        super(Properties.of(Material.METAL).strength(6f, 20f).sound(SoundType.METAL));
         this.registerDefaultState(this.getStateDefinition().any().setValue(BATTERIES, 0));
-    }
-
-    @Override
-    public boolean hasBlockEntity(BlockState state) {
-        return true;
     }
 
     @Nullable
     @Override
-    public BlockEntity createTileEntity(BlockState state, BlockGetter dimension) {
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new BatteryBoxBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
+        return ITickable::tickTE;
     }
 
     @Override
@@ -85,11 +90,11 @@ public class BatteryBoxBlock extends Block {
     }
 
     @Override
-    public void setPlacedBy(Level dimensionIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level dimensionIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (stack.hasCustomHoverName()) {
-            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof BatteryBoxBlockEntity) {
-                ((BatteryBoxBlockEntity) tileentity).setCustomName(stack.getHoverName());
+            BlockEntity entity = dimensionIn.getBlockEntity(pos);
+            if (entity instanceof BatteryBoxBlockEntity) {
+                ((BatteryBoxBlockEntity) entity).setCustomName(stack.getHoverName());
             }
         }
     }
@@ -98,9 +103,9 @@ public class BatteryBoxBlock extends Block {
     @Override
     public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity tileentity = dimensionIn.getBlockEntity(pos);
-            if (tileentity instanceof BatteryBoxBlockEntity) {
-                Containers.dropContents(dimensionIn, pos, (BatteryBoxBlockEntity) tileentity);
+            BlockEntity entity = dimensionIn.getBlockEntity(pos);
+            if (entity instanceof BatteryBoxBlockEntity) {
+                Containers.dropContents(dimensionIn, pos, (BatteryBoxBlockEntity) entity);
                 dimensionIn.updateNeighbourForOutputSignal(pos, this);
             }
 

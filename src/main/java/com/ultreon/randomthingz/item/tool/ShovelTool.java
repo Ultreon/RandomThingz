@@ -3,6 +3,7 @@ package com.ultreon.randomthingz.item.tool;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.ultreon.randomthingz.RandomThingz;
+import com.ultreon.randomthingz.item.ItemType;
 import com.ultreon.randomthingz.item.tool.trait.AbstractTrait;
 import com.ultreon.randomthingz.util.ItemUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -56,8 +57,8 @@ public class ShovelTool extends ShovelItem implements ITool {
     }
 
     @Override
-    public Set<ToolType> getQfmToolTypes() {
-        return new HashSet<>(Collections.singletonList(ToolType.SHOVEL));
+    public Set<ItemType> getQfmToolTypes() {
+        return Set.of(ItemType.SHOVEL);
     }
 
     @Override
@@ -122,9 +123,9 @@ public class ShovelTool extends ShovelItem implements ITool {
     }
 
     @Override
-    public <T extends LivingEntity> int hurtAndBreak(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
+    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
         if (canBeDepleted()) {
-            super.hurtAndBreak(stack, amount, entity, onBroken);
+            super.damageItem(stack, amount, entity, onBroken);
         }
         return 0;
     }
@@ -143,10 +144,10 @@ public class ShovelTool extends ShovelItem implements ITool {
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, Player player, Entity clicked) {
-        float smite = 0.0f;
+        float smite = 0f;
         for (AbstractTrait trait : getTraits()) {
             float smiteValue = trait.getSmiteValue(getQfmToolTypes(), stack, player);
-            if (smiteValue < 0.0f) {
+            if (smiteValue < 0f) {
                 RandomThingz.LOGGER.warn("Smite value is less that zero, this can cause weird behavior");
             }
 
@@ -154,9 +155,8 @@ public class ShovelTool extends ShovelItem implements ITool {
             trait.onLeftClickEntity(stack, player, clicked);
         }
 
-        if (smite > 0.0f) {
-            if (clicked instanceof LivingEntity) {
-                LivingEntity living = (LivingEntity) clicked;
+        if (smite > 0f) {
+            if (clicked instanceof LivingEntity living) {
                 if (living.getMobType() == MobType.UNDEAD) {
                     clicked.hurt(new EntityDamageSource("player", player), smite);
                 }
@@ -168,11 +168,11 @@ public class ShovelTool extends ShovelItem implements ITool {
 
     @Override
     public boolean hurtEnemy(ItemStack stack, LivingEntity victim, LivingEntity attacker) {
-        float smite = 0.0f;
+        float smite = 0f;
         boolean val = super.hurtEnemy(stack, victim, attacker);
         for (AbstractTrait trait : getTraits()) {
             float smiteValue = trait.getSmiteValue(getQfmToolTypes(), stack, attacker);
-            if (smiteValue < 0.0f) {
+            if (smiteValue < 0f) {
                 RandomThingz.LOGGER.warn("Smite value is less that zero, this can cause weird behavior");
             }
 
@@ -180,7 +180,7 @@ public class ShovelTool extends ShovelItem implements ITool {
             val &= trait.onHitEntity(stack, victim, attacker);
         }
 
-        if (smite > 0.0f) {
+        if (smite > 0f) {
             if (victim.getMobType() == MobType.UNDEAD) {
                 if (attacker instanceof Player) {
                     victim.hurt(new EntityDamageSource("player", attacker), smite);

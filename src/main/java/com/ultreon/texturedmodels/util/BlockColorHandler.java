@@ -2,7 +2,7 @@ package com.ultreon.texturedmodels.util;
 
 import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.setup.Registration;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.renderer.BiomeColors;
@@ -82,8 +82,8 @@ public class BlockColorHandler implements BlockColor {
         //TODO does this work?
         if (state.getBlock() instanceof FrameBlock && lightReader != null && pos != null) {
             BlockEntity te = lightReader.getBlockEntity(pos);
-            if (te instanceof FrameBlockTile && state.getValue(BCBlockStateProperties.CONTAINS_BLOCK)) {
-                BlockState containedBlock = ((FrameBlockTile) te).getMimic();
+            if (te instanceof FrameBlockEntity && state.getValue(BCBlockStateProperties.CONTAINS_BLOCK)) {
+                BlockState containedBlock = ((FrameBlockEntity) te).getMimic();
                 return BiomeColors.getAverageGrassColor(lightReader, pos);
 
                 //return Minecraft.getInstance().getBlockColors().getColor(containedBlock, lightReader, pos, tintIndex);

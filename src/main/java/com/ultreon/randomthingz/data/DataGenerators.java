@@ -7,7 +7,7 @@ import com.ultreon.randomthingz.data.recipes.ModRecipesProvider;
 import lombok.experimental.UtilityClass;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 @UtilityClass
 public final class DataGenerators {

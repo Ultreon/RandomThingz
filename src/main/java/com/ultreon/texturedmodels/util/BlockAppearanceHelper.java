@@ -2,9 +2,9 @@ package com.ultreon.texturedmodels.util;
 
 import com.ultreon.texturedmodels.block.BedFrameBlock;
 import com.ultreon.texturedmodels.setup.Registration;
-import com.ultreon.texturedmodels.tileentity.BedFrameTile;
-import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.BedFrameBlockEntity;
+import com.ultreon.texturedmodels.tileentity.ChestFrameBlockEntity;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
@@ -56,8 +56,8 @@ public class BlockAppearanceHelper {
     public static void setTexture(ItemStack item, BlockState state, Level dimension, Player player, BlockPos pos) {
         if (item.getItem() == Registration.TEXTURE_WRENCH.get() && !player.isShiftKeyDown() && state.getValue(CONTAINS_BLOCK)) {
             BlockEntity tileEntity = dimension.getBlockEntity(pos);
-            if (tileEntity instanceof FrameBlockTile) {
-                FrameBlockTile fte = (FrameBlockTile) tileEntity;
+            if (tileEntity instanceof FrameBlockEntity) {
+                FrameBlockEntity fte = (FrameBlockEntity) tileEntity;
                 if (fte.getTexture() < 5) { //six sides possible
                     fte.setTexture(fte.getTexture() + 1);
                 } else {
@@ -65,8 +65,8 @@ public class BlockAppearanceHelper {
                 }
                 player.displayClientMessage(new TranslatableComponent("Texture: " + fte.getTexture()), true);
             }
-            if (tileEntity instanceof BedFrameTile) {
-                BedFrameTile fte = (BedFrameTile) tileEntity;
+            if (tileEntity instanceof BedFrameBlockEntity) {
+                BedFrameBlockEntity fte = (BedFrameBlockEntity) tileEntity;
                 if (fte.getTexture() < 5) { //six sides possible
                     fte.setTexture(fte.getTexture() + 1);
                 } else {
@@ -74,8 +74,8 @@ public class BlockAppearanceHelper {
                 }
                 player.displayClientMessage(new TranslatableComponent("Texture: " + fte.getTexture()), true);
             }
-            if (tileEntity instanceof ChestFrameTileEntity) {
-                ChestFrameTileEntity fte = (ChestFrameTileEntity) tileEntity;
+            if (tileEntity instanceof ChestFrameBlockEntity) {
+                ChestFrameBlockEntity fte = (ChestFrameBlockEntity) tileEntity;
                 if (fte.getTexture() < 5) { //six sides possible
                     fte.setTexture(fte.getTexture() + 1);
                 } else {
@@ -89,8 +89,8 @@ public class BlockAppearanceHelper {
     public static void setDesign(Level dimension, BlockPos pos, Player player, ItemStack item) {
         if (item.getItem() == Registration.CHISEL.get() && !player.isShiftKeyDown()) {
             BlockEntity tileEntity = dimension.getBlockEntity(pos);
-            if (tileEntity instanceof FrameBlockTile) {
-                FrameBlockTile fte = (FrameBlockTile) tileEntity;
+            if (tileEntity instanceof FrameBlockEntity) {
+                FrameBlockEntity fte = (FrameBlockEntity) tileEntity;
                 if (fte.getDesign() < fte.maxDesigns) {
                     fte.setDesign(fte.getDesign() + 1);
                 } else {
@@ -98,8 +98,8 @@ public class BlockAppearanceHelper {
                 }
                 player.displayClientMessage(new TranslatableComponent("Design: " + fte.getDesign()), true);
             }
-            if (tileEntity instanceof BedFrameTile) {
-                BedFrameTile fte = (BedFrameTile) tileEntity;
+            if (tileEntity instanceof BedFrameBlockEntity) {
+                BedFrameBlockEntity fte = (BedFrameBlockEntity) tileEntity;
                 if (fte.getDesign() < fte.maxDesigns) {
                     fte.setDesign(fte.getDesign() + 1);
                 } else {
@@ -107,8 +107,8 @@ public class BlockAppearanceHelper {
                 }
                 player.displayClientMessage(new TranslatableComponent("Design: " + fte.getDesign()), true);
             }
-            if (tileEntity instanceof ChestFrameTileEntity) {
-                ChestFrameTileEntity fte = (ChestFrameTileEntity) tileEntity;
+            if (tileEntity instanceof ChestFrameBlockEntity) {
+                ChestFrameBlockEntity fte = (ChestFrameBlockEntity) tileEntity;
                 if (fte.getDesign() < fte.maxDesigns) {
                     fte.setDesign(fte.getDesign() + 1);
                 } else {
@@ -122,8 +122,8 @@ public class BlockAppearanceHelper {
     public static void setDesignTexture(Level dimension, BlockPos pos, Player player, ItemStack item) {
         if (item.getItem() == Registration.PAINTBRUSH.get() && !player.isShiftKeyDown()) {
             BlockEntity tileEntity = dimension.getBlockEntity(pos);
-            if (tileEntity instanceof FrameBlockTile) {
-                FrameBlockTile fte = (FrameBlockTile) tileEntity;
+            if (tileEntity instanceof FrameBlockEntity) {
+                FrameBlockEntity fte = (FrameBlockEntity) tileEntity;
                 if (fte.getDesignTexture() < fte.maxDesignTextures) {
                     fte.setDesignTexture(fte.getDesignTexture() + 1);
                 } else {
@@ -132,8 +132,8 @@ public class BlockAppearanceHelper {
                 //player.sendMessage(new TranslatableComponent("message.frame.design_texture"));
                 player.displayClientMessage(new TranslatableComponent("Design Texture: " + fte.getDesignTexture()), true);
             }
-            if (tileEntity instanceof BedFrameTile) {
-                BedFrameTile fte = (BedFrameTile) tileEntity;
+            if (tileEntity instanceof BedFrameBlockEntity) {
+                BedFrameBlockEntity fte = (BedFrameBlockEntity) tileEntity;
                 if (fte.getDesignTexture() < 7) {
                     fte.setDesignTexture(fte.getDesignTexture() + 1);
                 } else {
@@ -142,8 +142,8 @@ public class BlockAppearanceHelper {
                 //player.sendMessage(new TranslatableComponent("message.frame.design_texture"));
                 player.displayClientMessage(new TranslatableComponent("Design Texture: " + fte.getDesignTexture()), true);
             }
-            if (tileEntity instanceof ChestFrameTileEntity) {
-                ChestFrameTileEntity fte = (ChestFrameTileEntity) tileEntity;
+            if (tileEntity instanceof ChestFrameBlockEntity) {
+                ChestFrameBlockEntity fte = (ChestFrameBlockEntity) tileEntity;
                 if (fte.getDesignTexture() < fte.maxDesignTextures) {
                     fte.setDesignTexture(fte.getDesignTexture() + 1);
                 } else {
@@ -158,8 +158,8 @@ public class BlockAppearanceHelper {
     public static void setGlassColor(Level dimension, BlockPos pos, Player player, InteractionHand hand) {
         if (BlockSavingHelper.isDyeItem(player.getItemInHand(hand).getItem())) {
             BlockEntity tileEntity = dimension.getBlockEntity(pos);
-            if (tileEntity instanceof FrameBlockTile) {
-                FrameBlockTile fte = (FrameBlockTile) tileEntity;
+            if (tileEntity instanceof FrameBlockEntity) {
+                FrameBlockEntity fte = (FrameBlockEntity) tileEntity;
                 fte.setGlassColor(dyeItemToInt(player.getItemInHand(hand).getItem()) + 1); //plus 1, because 0 is undyed glass
                 //player.sendStatusMessage(new TranslatableComponent("Glass Color: " + glassColorToString(fte.getGlassColor()-1)), true);
             }
@@ -169,8 +169,8 @@ public class BlockAppearanceHelper {
     public static void setWoolColor(Level dimension, BlockPos pos, Player player, InteractionHand hand) {
         if (BlockSavingHelper.isDyeItem(player.getItemInHand(hand).getItem())) {
             BlockEntity tileEntity = dimension.getBlockEntity(pos);
-            if (tileEntity instanceof BedFrameTile) {
-                BedFrameTile fte = (BedFrameTile) tileEntity;
+            if (tileEntity instanceof BedFrameBlockEntity) {
+                BedFrameBlockEntity fte = (BedFrameBlockEntity) tileEntity;
                 if (dimension.getBlockState(pos).getValue(BedFrameBlock.PART) == BedPart.FOOT) {
                     fte.setBlanketColor(dyeItemToInt(player.getItemInHand(hand).getItem()));
                 }
@@ -202,8 +202,8 @@ public class BlockAppearanceHelper {
     public static void setOverlay(Level dimension, BlockPos pos, Player player, ItemStack itemStack) {
         if (itemStack.getItem().equals(Items.GRASS)) {
             BlockEntity tileEntity = dimension.getBlockEntity(pos);
-            if (tileEntity instanceof FrameBlockTile) {
-                FrameBlockTile fte = (FrameBlockTile) tileEntity;
+            if (tileEntity instanceof FrameBlockEntity) {
+                FrameBlockEntity fte = (FrameBlockEntity) tileEntity;
                 if (fte.getOverlay() == 1) {
                     fte.setOverlay(2);
                     player.displayClientMessage(new TranslatableComponent("Activated Large Grass Overlay"), true);
@@ -215,8 +215,8 @@ public class BlockAppearanceHelper {
         }
         if (itemStack.getItem().equals(Items.SNOWBALL)) {
             BlockEntity tileEntity = dimension.getBlockEntity(pos);
-            if (tileEntity instanceof FrameBlockTile) {
-                FrameBlockTile fte = (FrameBlockTile) tileEntity;
+            if (tileEntity instanceof FrameBlockEntity) {
+                FrameBlockEntity fte = (FrameBlockEntity) tileEntity;
                 if (fte.getOverlay() == 3) {
                     fte.setOverlay(4);
                     player.displayClientMessage(new TranslatableComponent("Activated Small Snow Overlay"), true);
@@ -228,16 +228,16 @@ public class BlockAppearanceHelper {
         }
         if (itemStack.getItem().equals(Items.VINE)) {
             BlockEntity tileEntity = dimension.getBlockEntity(pos);
-            if (tileEntity instanceof FrameBlockTile) {
-                FrameBlockTile fte = (FrameBlockTile) tileEntity;
+            if (tileEntity instanceof FrameBlockEntity) {
+                FrameBlockEntity fte = (FrameBlockEntity) tileEntity;
                 fte.setOverlay(5);
                 player.displayClientMessage(new TranslatableComponent("Activated Vine Overlay"), true);
             }
         }
         if (itemStack.getItem().equals(Items.GUNPOWDER)) {
             BlockEntity tileEntity = dimension.getBlockEntity(pos);
-            if (tileEntity instanceof FrameBlockTile) {
-                FrameBlockTile fte = (FrameBlockTile) tileEntity;
+            if (tileEntity instanceof FrameBlockEntity) {
+                FrameBlockEntity fte = (FrameBlockEntity) tileEntity;
                 if (fte.getOverlay() > 5 && fte.getOverlay() < 10) {
                     fte.setOverlay(fte.getOverlay() + 1);
                 } else fte.setOverlay(6);

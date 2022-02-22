@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class SolidifierScreen extends AbstractMachineContainerScreen<SolidifierContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/solidifier.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/solidifier.png");
 
     public SolidifierScreen(SolidifierContainer container, Inventory playerInventory, Component titleIn) {
         super(container, playerInventory, titleIn);

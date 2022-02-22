@@ -136,12 +136,12 @@ public class MCGraphics {
         PoseStack posestack = RenderSystem.getModelViewStack();
         posestack.translate(0.0D, 0.0D, 32.0D);
         RenderSystem.applyModelViewMatrix();
-        this.itemRenderer.blitOffset = 200.0F;
+        this.itemRenderer.blitOffset = 200f;
         Font font = RenderProperties.get(stack).getFont(stack);
         if (font == null) font = this.font;
         this.itemRenderer.renderAndDecorateItem(stack, x, y);
         this.itemRenderer.renderGuiItemDecorations(font, stack, x, y, altText);
-        this.itemRenderer.blitOffset = 0.0F;
+        this.itemRenderer.blitOffset = 0f;
     }
 
     public Font getFont() {

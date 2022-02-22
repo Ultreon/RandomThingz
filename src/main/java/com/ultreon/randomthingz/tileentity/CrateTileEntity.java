@@ -120,7 +120,7 @@ public class CrateTileEntity extends RandomizableContainerBlockEntity {
         double dy = (double) this.worldPosition.getY() + 0.5d;
         double dz = (double) this.worldPosition.getZ() + 0.5d;
 
-        Objects.requireNonNull(this.level).playSound(null, dx, dy, dz, sound, SoundSource.BLOCKS, 0.5f, this.level.random.nextFloat() * 0.1f + 0.9f);
+        Objects.requireNonNull(this.level).playSound(null, dx, dy, dz, sound, SoundSource.BLOCKS, .5f, this.level.random.nextFloat() * .1f + .9f);
     }
 
     @Override

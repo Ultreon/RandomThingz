@@ -3,7 +3,10 @@ package com.ultreon.randomthingz.client.debug.menu;
 import com.mojang.blaze3d.platform.Monitor;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.ultreon.modlib.embedded.silentlib.client.key.InputUtils;
+import com.mojang.math.Vector3d;
+import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
+import com.ultreon.modlib.silentlib.client.key.InputUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.hud.HudItems;
 import com.ultreon.randomthingz.client.hud.IHasHud;
@@ -14,20 +17,15 @@ import com.ultreon.randomthingz.common.interfaces.Formattable;
 import com.ultreon.randomthingz.common.interfaces.Sliceable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.vector.Vector2f;
-import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.math.vector.Vector4f;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,13 +37,11 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
 import net.minecraft.world.scores.Team;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -129,13 +125,13 @@ public class DebugMenu {
 
     @SuppressWarnings({"UnusedAssignment", "StatementWithEmptyBody"})
     public static void renderGameOverlay(RenderGameOverlayEvent event) {
-        if (event.getType() != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
+        if (event.getType() != RenderGameOverlayEvent.ElementType.LAYER) return;
 
         if (Minecraft.getInstance().options.renderDebug) {
             return;
         }
 
-        PoseStack matrixStack = event.getPoseStack();
+        PoseStack matrixStack = event.getMatrixStack();
         Minecraft mc = Minecraft.getInstance();
         Window mainWindow = mc.getWindow();
         Monitor monitor = mainWindow.findBestMonitor();
@@ -178,15 +174,15 @@ public class DebugMenu {
             case BLOCK: {
                 if (Minecraft.getInstance().player != null) {
                     Player player = Minecraft.getInstance().player;
-                    float f = player.xRot;
-                    float f1 = player.yRot;
+                    float f = player.getXRot();
+                    float f1 = player.getYRot();
 
-                    Vec3 vec3d = player.getEyePosition(1.0f);
+                    Vec3 vec3d = player.getEyePosition(1f);
 
-                    float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                    float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                    float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
-                    float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
+                    float f2 = Mth.cos(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+                    float f3 = Mth.sin(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+                    float f4 = -Mth.cos(-f * ((float) Math.PI / 180f));
+                    float f5 = Mth.sin(-f * ((float) Math.PI / 180f));
 
                     float f6 = f3 * f4;
                     float f7 = f2 * f4;
@@ -209,19 +205,17 @@ public class DebugMenu {
                             Block block = blockState.getBlock();
                             mc.font.drawShadow(matrixStack, ChatFormatting.GRAY + "-== BLOCK ==-", 12f, 12f, 0xffffff);
                             drawLeftTopString(matrixStack, "translatedName", i++, block.getName().getString());
-                            drawLeftTopString(matrixStack, "harvestLevel", i++, blockState.getHarvestLevel());
-                            drawLeftTopString(matrixStack, "harvestTool", i++, blockState.getHarvestTool() == null ? null : blockState.getHarvestTool().getName());
                             drawLeftTopString(matrixStack, "blockHardness", i++, blockState.getDestroySpeed(player.getCommandSenderWorld(), pos));
-                            drawLeftTopString(matrixStack, "lightValue", i++, blockState.getLightEmission());
+                            drawLeftTopString(matrixStack, "lightValue", i++, blockState.getLightEmission(Minecraft.getInstance().level, Minecraft.getInstance().player.blockPosition()));
                             drawLeftTopString(matrixStack, "opacity", i++, blockState.getLightBlock(player.getCommandSenderWorld(), pos));
                             drawLeftTopString(matrixStack, "offset", i++, blockState.getOffset(player.getCommandSenderWorld(), pos));
                             drawLeftTopString(matrixStack, "playerRelativeHardness", i++, blockState.getDestroyProgress(player, player.getCommandSenderWorld(), pos));
                             drawLeftTopString(matrixStack, "requiresTool", i++, blockState.requiresCorrectToolForDrops());
                             drawLeftTopString(matrixStack, "renderType", i++, blockState.getRenderShape());
-                            drawLeftTopString(matrixStack, "slipperiness", i++, blockState.getSlipperiness(player.getCommandSenderWorld(), pos, player));
+                            drawLeftTopString(matrixStack, "slipperiness", i++, blockState.getFriction(player.getCommandSenderWorld(), pos, player));
                             drawLeftTopString(matrixStack, "jumpFactor", i++, block.getJumpFactor());
                             drawLeftTopString(matrixStack, "enchantPowerBonus", i++, blockState.getEnchantPowerBonus(player.getCommandSenderWorld(), pos));
-                            drawLeftTopString(matrixStack, "lootTable", i++, block.getLootTable());
+                            drawLeftTopString(matrixStack, "target", i++, block.getLootTable());
                             drawLeftTopString(matrixStack, "materialColor", i++, block.defaultMaterialColor().id, getColor(block.defaultMaterialColor().col));
                             drawLeftTopString(matrixStack, "offsetType", i++, block.getOffsetType());
                             drawLeftTopString(matrixStack, "registryName", i++, block.getRegistryName());
@@ -354,7 +348,6 @@ public class DebugMenu {
                     drawLeftTopString(matrixStack, "stackLimit", i++, item.getItemStackLimit(stack));
                     drawLeftTopString(matrixStack, "maxDamage", i++, item.getMaxDamage(stack));
                     drawLeftTopString(matrixStack, "damage", i++, item.getDamage(stack));
-                    drawLeftTopString(matrixStack, "burnTime", i++, item.getBurnTime(stack));
                     drawLeftTopString(matrixStack, "count", i++, stack.getCount());
                     drawLeftTopString(matrixStack, "repairCost", i++, stack.getBaseRepairCost());
                     drawLeftTopString(matrixStack, "useDuration", i++, stack.getUseDuration());
@@ -377,15 +370,15 @@ public class DebugMenu {
             case ENTITY: {
                 if (Minecraft.getInstance().player != null) {
                     Player player = Minecraft.getInstance().player;
-                    float f = player.xRot;
-                    float f1 = player.yRot;
+                    float f = player.getXRot();
+                    float f1 = player.getYRot();
 
-                    Vec3 vec3d = player.getEyePosition(1.0f);
+                    Vec3 vec3d = player.getEyePosition(1f);
 
-                    float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                    float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                    float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
-                    float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
+                    float f2 = Mth.cos(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+                    float f3 = Mth.sin(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+                    float f4 = -Mth.cos(-f * ((float) Math.PI / 180f));
+                    float f5 = Mth.sin(-f * ((float) Math.PI / 180f));
 
                     float f6 = f3 * f4;
                     float f7 = f2 * f4;
@@ -398,17 +391,17 @@ public class DebugMenu {
                     int j = 1;
 
                     if (Minecraft.getInstance().level != null) {
-                        HitResult raytraceresult = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-                        if (raytraceresult.getType() != HitResult.Type.MISS) {
-                            vec3d1 = raytraceresult.getLocation();
+                        HitResult hitResult = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+                        if (hitResult.getType() != HitResult.Type.MISS) {
+                            vec3d1 = hitResult.getLocation();
                         }
 
                         HitResult rayTraceResult1 = ProjectileUtil.getEntityHitResult(Minecraft.getInstance().level, player, vec3d, vec3d1, player.getBoundingBox().inflate(16.0D), entity -> !entity.equals(player));
                         if (rayTraceResult1 != null) {
-                            raytraceresult = rayTraceResult1;
+                            hitResult = rayTraceResult1;
                         }
-                        if (raytraceresult.getType() == HitResult.Type.ENTITY) {
-                            @SuppressWarnings("ConstantConditions") EntityHitResult entityRayTraceResult = (EntityHitResult) raytraceresult;
+                        if (hitResult.getType() == HitResult.Type.ENTITY) {
+                            @SuppressWarnings("ConstantConditions") EntityHitResult entityRayTraceResult = (EntityHitResult) hitResult;
 
                             Entity entity = entityRayTraceResult.getEntity();
                             EntityType<? extends Entity> type = entity.getType();
@@ -416,7 +409,7 @@ public class DebugMenu {
                             mc.font.drawShadow(matrixStack, ChatFormatting.GRAY + "-== Entity ==-", 12f, 12f, 0xffffff);
                             drawLeftTopString(matrixStack, "translatedName", i++, I18n.get(type.getDescriptionId()));
                             drawLeftTopString(matrixStack, "height", i++, type.getHeight());
-                            drawLeftTopString(matrixStack, "lootTable", i++, type.getDefaultLootTable());
+                            drawLeftTopString(matrixStack, "target", i++, type.getDefaultLootTable());
                             drawLeftTopString(matrixStack, "name", i++, type.getDescription().getString());
                             drawLeftTopString(matrixStack, "registryName", i++, type.getRegistryName());
                             drawLeftTopString(matrixStack, "size", i++, getSize(type.getDimensions().width, type.getDimensions().height));
@@ -430,8 +423,7 @@ public class DebugMenu {
                             drawLeftTopString(matrixStack, "uniqueID", i++, entity.getUUID());
                             drawLeftTopString(matrixStack, "yOffset", i++, entity.getMyRidingOffset());
 
-                            if (entity instanceof LivingEntity) {
-                                LivingEntity living = (LivingEntity) entity;
+                            if (entity instanceof LivingEntity living) {
 
                                 drawRightString(matrixStack, ChatFormatting.GRAY + "-== Living Entity ==-", 12f, 12f, 0xffffff);
                                 drawRightTopString(matrixStack, "health", j++, living.getHealth());
@@ -448,8 +440,7 @@ public class DebugMenu {
                                 drawRightTopString(matrixStack, "scale", j++, living.getScale());
                                 drawRightTopString(matrixStack, "revengeTarget", j++, living.getLastHurtByMob());
                                 drawRightTopString(matrixStack, "totalArmorValue", j++, living.getArmorValue());
-                            } else if (entity instanceof ItemEntity) {
-                                ItemEntity itemEntity = (ItemEntity) entity;
+                            } else if (entity instanceof ItemEntity itemEntity) {
 
                                 drawRightString(matrixStack, ChatFormatting.GRAY + "-== Item Entity ==-", 12f, 12f, 0xffffff);
                                 drawRightTopString(matrixStack, "age", j++, itemEntity.getAge());
@@ -475,7 +466,6 @@ public class DebugMenu {
 
                 int j = 0;
                 drawRightTopString(matrixStack, "demoMode", j++, mc.isDemo());
-                drawRightTopString(matrixStack, "chatEnabled", j++, mc.allowsChat());
                 drawRightTopString(matrixStack, "gameFocused", j++, mc.isWindowActive());
                 drawRightTopString(matrixStack, "gamePaused", j++, mc.isPaused());
                 drawRightTopString(matrixStack, "integratedServerRunning", j++, mc.isLocalServer());
@@ -500,7 +490,7 @@ public class DebugMenu {
                     drawLeftTopString(matrixStack, "cloudColor", i++, getColor(dimension.getCloudColor(mc.getFrameTime())));
                     if (Minecraft.getInstance().player != null) {
                         LocalPlayer player = Minecraft.getInstance().player;
-                        drawLeftTopString(matrixStack, "skyColor", i++, getColor(dimension.getSkyColor(player.blockPosition(), mc.getFrameTime())));
+                        drawLeftTopString(matrixStack, "skyColor", i++, getColor(dimension.getSkyColor(player.position(), mc.getFrameTime())));
                     }
                     drawLeftTopString(matrixStack, "starBrightness", i++, getPercentage(dimension.getStarBrightness(mc.getFrameTime())));
                     drawLeftTopString(matrixStack, "sunBrightness", i++, getPercentage(dimension.getSkyDarken(mc.getFrameTime())));
@@ -511,10 +501,6 @@ public class DebugMenu {
                     drawRightTopString(matrixStack, "raining", j++, dimension.isRaining());
                     drawRightTopString(matrixStack, "thundering", j++, dimension.isThundering());
                     drawRightTopString(matrixStack, "saveDisabled", j++, dimension.noSave());
-                    if (Minecraft.getInstance().player != null) {
-                        LocalPlayer player = Minecraft.getInstance().player;
-                        drawRightTopString(matrixStack, "areaLoaded", j++, dimension.isAreaLoaded(player.blockPosition(), 1));
-                    }
                     drawRightTopString(matrixStack, "debug", j++, dimension.isDebug());
                 }
                 break;
@@ -554,7 +540,7 @@ public class DebugMenu {
                     drawLeftTopString(matrixStack, "yOffset", i++, player.getMyRidingOffset());
 
                     int j = 0;
-                    drawRightTopString(matrixStack, "glowing", j++, player.isGlowing());
+                    drawRightTopString(matrixStack, "glowing", j++, player.isCurrentlyGlowing());
                     drawRightTopString(matrixStack, "invisible", j++, player.isInvisible());
                     drawRightTopString(matrixStack, "onGround", j++, player.isOnGround());
                     drawRightTopString(matrixStack, "onLadder", j++, player.onClimbable());
@@ -612,15 +598,15 @@ public class DebugMenu {
 
                     int k = 0;
                     {
-                        float f = player.xRot;
-                        float f1 = player.yRot;
+                        float f = player.getXRot();
+                        float f1 = player.getYRot();
 
-                        Vec3 vec3d = player.getEyePosition(1.0f);
+                        Vec3 vec3d = player.getEyePosition(1f);
 
-                        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                        float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
-                        float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
+                        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+                        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+                        float f4 = -Mth.cos(-f * ((float) Math.PI / 180f));
+                        float f5 = Mth.sin(-f * ((float) Math.PI / 180f));
 
                         float f6 = f3 * f4;
                         float f7 = f2 * f4;
@@ -669,15 +655,15 @@ public class DebugMenu {
                     }
 
                     {
-                        float f = player.xRot;
-                        float f1 = player.yRot;
+                        float f = player.getXRot();
+                        float f1 = player.getYRot();
 
-                        Vec3 vec3d = player.getEyePosition(1.0f);
+                        Vec3 vec3d = player.getEyePosition(1f);
 
-                        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
-                        float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
-                        float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
+                        float f2 = Mth.cos(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+                        float f3 = Mth.sin(-f1 * ((float) Math.PI / 180f) - (float) Math.PI);
+                        float f4 = -Mth.cos(-f * ((float) Math.PI / 180f));
+                        float f5 = Mth.sin(-f * ((float) Math.PI / 180f));
 
                         float f6 = f3 * f4;
                         float f7 = f2 * f4;
@@ -687,17 +673,17 @@ public class DebugMenu {
                         Vec3 vec3d1 = vec3d.add((double) f6 * d0, (double) f5 * d0, (double) f7 * d0);
 
                         if (Minecraft.getInstance().level != null) {
-                            HitResult raytraceresult = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-                            if (raytraceresult.getType() != HitResult.Type.MISS) {
-                                vec3d1 = raytraceresult.getLocation();
+                            HitResult hitResult = Minecraft.getInstance().level.clip(new ClipContext(vec3d, vec3d1, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+                            if (hitResult.getType() != HitResult.Type.MISS) {
+                                vec3d1 = hitResult.getLocation();
                             }
 
                             HitResult rayTraceResult1 = ProjectileUtil.getEntityHitResult(Minecraft.getInstance().level, player, vec3d, vec3d1, player.getBoundingBox().inflate(16.0D), entity -> !entity.equals(player));
                             if (rayTraceResult1 != null) {
-                                raytraceresult = rayTraceResult1;
+                                hitResult = rayTraceResult1;
                             }
-                            if (raytraceresult.getType() == HitResult.Type.ENTITY) {
-                                @SuppressWarnings("ConstantConditions") EntityHitResult entityRayTraceResult = (EntityHitResult) raytraceresult;
+                            if (hitResult.getType() == HitResult.Type.ENTITY) {
+                                @SuppressWarnings("ConstantConditions") EntityHitResult entityRayTraceResult = (EntityHitResult) hitResult;
 
                                 drawTopString(matrixStack, "-== Entity ==-", k++);
                                 drawTopString(matrixStack, I18n.get(entityRayTraceResult.getEntity().getType().getDescriptionId()), k++);
@@ -757,14 +743,14 @@ public class DebugMenu {
                     drawLeftTopString(matrixStack, "Time Phase", i++, new Formatted(timePhase));
 
                     if (!dimension.isClientSide) {
-                        Biome biome = dimension.getBiome(player.getPosition());
+                        Biome biome = dimension.getBiome(player.getOnPos());
                         ResourceLocation location = biome.getRegistryName();
                         if (location != null) {
                             @NotNull ResourceLocation registryName = location;
-                            drawLeftTopString(matrixStack, "Current Biome", i++, new Formatted(I18n.format("biome." + registryName.getNamespace() + "." + registryName.getPath())));
+                            drawLeftTopString(matrixStack, "Current Biome", i++, new Formatted(I18n.get("biome." + registryName.getNamespace() + "." + registryName.getPath())));
                         }
                     }
-                    drawLeftTopString(matrixStack, "Current Pos", i++, new Formatted(player.getPosition().getCoordinatesAsString()));
+                    drawLeftTopString(matrixStack, "Current Pos", i++, new Formatted(player.getOnPos().toShortString()));
                 }
             }
             default: {
@@ -786,14 +772,14 @@ public class DebugMenu {
     }
 
     private static com.ultreon.randomthingz.common.interfaces.Formattable getSize(float w, float h) {
-        return () -> TextFormatting.GOLD.toString() + w + TextFormatting.GRAY + " x " + TextFormatting.GOLD + h;
+        return () -> ChatFormatting.GOLD.toString() + w + ChatFormatting.GRAY + " x " + ChatFormatting.GOLD + h;
     }
 
     private static com.ultreon.randomthingz.common.interfaces.Formattable getPercentage(double value) {
         return new Percentage(value);
     }
 
-    private static Color getColor(Vector3d color) {
+    private static Color getColor(Vec3 color) {
         return new Color((float) color.x, (float) color.y, (float) color.z);
     }
 
@@ -820,13 +806,13 @@ public class DebugMenu {
     public static String format(String text, Object obj, Object... objects) {
         StringBuilder sb = new StringBuilder();
 
-//        sb.append(TextFormatting.DARK_AQUA).append(text);
-        sb.append(TextFormatting.GRAY).append(text);
-        sb.append(TextFormatting.GRAY).append(": ");
+//        sb.append(ChatFormatting.DARK_AQUA).append(text);
+        sb.append(ChatFormatting.GRAY).append(text);
+        sb.append(ChatFormatting.GRAY).append(": ");
         sb.append(format(obj));
 
         for (Object object : objects) {
-            sb.append(TextFormatting.GRAY).append(", ");
+            sb.append(ChatFormatting.GRAY).append(", ");
             sb.append(format(object));
         }
 
@@ -837,80 +823,76 @@ public class DebugMenu {
         StringBuilder sb = new StringBuilder();
 
         if (obj == null) {
-            sb.append(TextFormatting.LIGHT_PURPLE);
+            sb.append(ChatFormatting.LIGHT_PURPLE);
             sb.append("null");
         } else if (obj instanceof String) {
-            sb.append(TextFormatting.GOLD);
+            sb.append(ChatFormatting.GOLD);
             sb.append("\"");
             sb.append(obj.toString()
-                    .replaceAll("\\\\", TextFormatting.WHITE + "\\\\" + TextFormatting.GOLD)
-                    .replaceAll("\n", TextFormatting.WHITE + "\\n" + TextFormatting.GOLD)
-                    .replaceAll("\r", TextFormatting.WHITE + "\\r" + TextFormatting.GOLD)
-                    .replaceAll("\t", TextFormatting.WHITE + "\\t" + TextFormatting.GOLD)
-                    .replaceAll("\b", TextFormatting.WHITE + "\\b" + TextFormatting.GOLD)
-                    .replaceAll("\f", TextFormatting.WHITE + "\\f" + TextFormatting.GOLD));
+                    .replaceAll("\\\\", ChatFormatting.WHITE + "\\\\" + ChatFormatting.GOLD)
+                    .replaceAll("\n", ChatFormatting.WHITE + "\\n" + ChatFormatting.GOLD)
+                    .replaceAll("\r", ChatFormatting.WHITE + "\\r" + ChatFormatting.GOLD)
+                    .replaceAll("\t", ChatFormatting.WHITE + "\\t" + ChatFormatting.GOLD)
+                    .replaceAll("\b", ChatFormatting.WHITE + "\\b" + ChatFormatting.GOLD)
+                    .replaceAll("\f", ChatFormatting.WHITE + "\\f" + ChatFormatting.GOLD));
             sb.append("\"");
         } else if (obj instanceof Character) {
-            sb.append(TextFormatting.GOLD);
+            sb.append(ChatFormatting.GOLD);
             sb.append("'");
             if (obj.equals('\\')) {
-                sb.append(TextFormatting.WHITE);
+                sb.append(ChatFormatting.WHITE);
                 sb.append("\\\\");
             } else if (obj.equals('\n')) {
-                sb.append(TextFormatting.WHITE);
+                sb.append(ChatFormatting.WHITE);
                 sb.append("\\n");
             } else if (obj.equals('\r')) {
-                sb.append(TextFormatting.WHITE);
+                sb.append(ChatFormatting.WHITE);
                 sb.append("\\r");
             } else if (obj.equals('\t')) {
-                sb.append(TextFormatting.WHITE);
+                sb.append(ChatFormatting.WHITE);
                 sb.append("\\t");
             } else if (obj.equals('\b')) {
-                sb.append(TextFormatting.WHITE);
+                sb.append(ChatFormatting.WHITE);
                 sb.append("\\b");
             } else if (obj.equals('\f')) {
-                sb.append(TextFormatting.WHITE);
+                sb.append(ChatFormatting.WHITE);
                 sb.append("\\f");
             } else {
                 sb.append(obj);
             }
-            sb.append(TextFormatting.GOLD);
+            sb.append(ChatFormatting.GOLD);
             sb.append("'");
         } else if (obj instanceof Integer) {
-            sb.append(TextFormatting.YELLOW);
+            sb.append(ChatFormatting.YELLOW);
             sb.append(obj);
         } else if (obj instanceof Short) {
-            sb.append(TextFormatting.YELLOW);
+            sb.append(ChatFormatting.YELLOW);
             sb.append(obj);
             sb.append("s");
         } else if (obj instanceof Byte) {
-            sb.append(TextFormatting.YELLOW);
+            sb.append(ChatFormatting.YELLOW);
             sb.append(obj);
             sb.append("b");
         } else if (obj instanceof Long) {
-            sb.append(TextFormatting.YELLOW);
+            sb.append(ChatFormatting.YELLOW);
             sb.append(obj);
             sb.append("L");
         } else if (obj instanceof Float) {
-            sb.append(TextFormatting.YELLOW);
+            sb.append(ChatFormatting.YELLOW);
             sb.append(obj);
             sb.append("f");
         } else if (obj instanceof Double) {
-            sb.append(TextFormatting.YELLOW);
+            sb.append(ChatFormatting.YELLOW);
             sb.append(obj);
             sb.append("d");
         } else if (obj instanceof Boolean) {
-            sb.append(TextFormatting.LIGHT_PURPLE);
+            sb.append(ChatFormatting.LIGHT_PURPLE);
             sb.append(obj);
-        } else if (obj instanceof Enum<?>) {
-            Enum<?> e = (Enum<?>) obj;
-
-            sb.append(TextFormatting.GREEN).append(e);
-        } else if (obj instanceof List) {
-            sb.append(TextFormatting.GRAY);
+        } else if (obj instanceof Enum<?> e) {
+            sb.append(ChatFormatting.GREEN).append(e);
+        } else if (obj instanceof List<?> list) {
+            sb.append(ChatFormatting.GRAY);
             sb.append("[");
-
-            List<?> list = (List<?>) obj;
 
             Iterator<?> it = list.iterator();
             if (!it.hasNext()) {
@@ -920,17 +902,15 @@ public class DebugMenu {
 
             for (; ; ) {
                 Object e = it.next();
-                sb.append(e == list ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this List" + TextFormatting.GRAY + ")") : format(e));
+                sb.append(e == list ? (ChatFormatting.GRAY + "(" + ChatFormatting.WHITE + "this List" + ChatFormatting.GRAY + ")") : format(e));
                 if (!it.hasNext()) {
-                    return sb.append(TextFormatting.GRAY).append(']').toString();
+                    return sb.append(ChatFormatting.GRAY).append(']').toString();
                 }
-                sb.append(TextFormatting.GRAY).append(',').append(' ');
+                sb.append(ChatFormatting.GRAY).append(',').append(' ');
             }
-        } else if (obj instanceof Set<?>) {
-            sb.append(TextFormatting.GRAY);
+        } else if (obj instanceof Set<?> set) {
+            sb.append(ChatFormatting.GRAY);
             sb.append("{");
-
-            Set<?> set = (Set<?>) obj;
 
             Iterator<?> it = set.iterator();
             if (!it.hasNext()) {
@@ -940,17 +920,15 @@ public class DebugMenu {
 
             for (; ; ) {
                 Object e = it.next();
-                sb.append(e == set ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this Set" + TextFormatting.GRAY + ")") : format(e));
+                sb.append(e == set ? (ChatFormatting.GRAY + "(" + ChatFormatting.WHITE + "this Set" + ChatFormatting.GRAY + ")") : format(e));
                 if (!it.hasNext()) {
-                    return sb.append(TextFormatting.GRAY).append('}').toString();
+                    return sb.append(ChatFormatting.GRAY).append('}').toString();
                 }
-                sb.append(TextFormatting.GRAY).append(',').append(' ');
+                sb.append(ChatFormatting.GRAY).append(',').append(' ');
             }
-        } else if (obj instanceof Map<?, ?>) {
-            sb.append(TextFormatting.GRAY);
+        } else if (obj instanceof Map<?, ?> map) {
+            sb.append(ChatFormatting.GRAY);
             sb.append("{");
-
-            Map<?, ?> map = (Map<?, ?>) obj;
 
             Iterator<? extends Map.Entry<?, ?>> it = map.entrySet().iterator();
             if (!it.hasNext()) {
@@ -960,113 +938,93 @@ public class DebugMenu {
 
             for (; ; ) {
                 Map.Entry<?, ?> e = it.next();
-                sb.append(e.getKey() == map ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this Map" + TextFormatting.GRAY + ")") : format(e.getKey()));
-                sb.append(TextFormatting.GRAY).append(": ");
-                sb.append(e.getValue() == map ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this Map" + TextFormatting.GRAY + ")") : format(e.getValue()));
+                sb.append(e.getKey() == map ? (ChatFormatting.GRAY + "(" + ChatFormatting.WHITE + "this Map" + ChatFormatting.GRAY + ")") : format(e.getKey()));
+                sb.append(ChatFormatting.GRAY).append(": ");
+                sb.append(e.getValue() == map ? (ChatFormatting.GRAY + "(" + ChatFormatting.WHITE + "this Map" + ChatFormatting.GRAY + ")") : format(e.getValue()));
                 if (!it.hasNext()) {
-                    return sb.append(TextFormatting.GRAY).append('}').toString();
+                    return sb.append(ChatFormatting.GRAY).append('}').toString();
                 }
-                sb.append(TextFormatting.GRAY).append(", ");
+                sb.append(ChatFormatting.GRAY).append(", ");
             }
-        } else if (obj instanceof Map.Entry<?, ?>) {
-            sb.append(TextFormatting.GRAY);
+        } else if (obj instanceof Map.Entry<?, ?> e) {
+            sb.append(ChatFormatting.GRAY);
 
-            Map.Entry<?, ?> e = (Map.Entry<?, ?>) obj;
-
-            sb.append(e.getKey() == e ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this Entry" + TextFormatting.GRAY + ")") : format(e.getKey()));
-            sb.append(TextFormatting.GRAY).append(": ");
-            sb.append(e.getValue() == e ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this Entry" + TextFormatting.GRAY + ")") : format(e.getValue()));
-            sb.append(TextFormatting.GRAY).append(", ");
-        } else if (obj instanceof Vector2f) {
-            Vector2f v = (Vector2f) obj;
-            sb.append(TextFormatting.GRAY).append("x: ");
+            sb.append(e.getKey() == e ? (ChatFormatting.GRAY + "(" + ChatFormatting.WHITE + "this Entry" + ChatFormatting.GRAY + ")") : format(e.getKey()));
+            sb.append(ChatFormatting.GRAY).append(": ");
+            sb.append(e.getValue() == e ? (ChatFormatting.GRAY + "(" + ChatFormatting.WHITE + "this Entry" + ChatFormatting.GRAY + ")") : format(e.getValue()));
+            sb.append(ChatFormatting.GRAY).append(", ");
+        } else if (obj instanceof Vec2 v) {
+            sb.append(ChatFormatting.GRAY).append("x: ");
             sb.append(format(v.x));
-            sb.append(TextFormatting.GRAY).append(", y: ");
+            sb.append(ChatFormatting.GRAY).append(", y: ");
             sb.append(format(v.y));
-        } else if (obj instanceof Vector3f) {
-            Vector3f v = (Vector3f) obj;
-            sb.append(TextFormatting.GRAY).append("x: ");
-            sb.append(format(v.getX()));
-            sb.append(TextFormatting.GRAY).append(", y: ");
-            sb.append(format(v.getY()));
-            sb.append(TextFormatting.GRAY).append(", z: ");
-            sb.append(format(v.getZ()));
-        } else if (obj instanceof Vector3d) {
-            Vector3d v = (Vector3d) obj;
-            sb.append(TextFormatting.GRAY).append("x: ");
-            sb.append(format(v.getX()));
-            sb.append(TextFormatting.GRAY).append(", y: ");
-            sb.append(format(v.getY()));
-            sb.append(TextFormatting.GRAY).append(", z: ");
-            sb.append(format(v.getZ()));
-        } else if (obj instanceof Vector4f) {
-            Vector4f v = (Vector4f) obj;
-            sb.append(TextFormatting.GRAY).append("x: ");
-            sb.append(format(v.getX()));
-            sb.append(TextFormatting.GRAY).append(", y: ");
-            sb.append(format(v.getY()));
-            sb.append(TextFormatting.GRAY).append(", z: ");
-            sb.append(format(v.getZ()));
-            sb.append(TextFormatting.GRAY).append(", w: ");
-            sb.append(format(v.getW()));
-        } else if (obj instanceof BlockPos) {
-            BlockPos v = (BlockPos) obj;
-            sb.append(TextFormatting.GRAY).append("x: ");
+        } else if (obj instanceof Vector3f v) {
+            sb.append(ChatFormatting.GRAY).append("x: ");
+            sb.append(format(v.x()));
+            sb.append(ChatFormatting.GRAY).append(", y: ");
+            sb.append(format(v.y()));
+            sb.append(ChatFormatting.GRAY).append(", z: ");
+            sb.append(format(v.z()));
+        } else if (obj instanceof Vector3d v) {
+            sb.append(ChatFormatting.GRAY).append("x: ");
+            sb.append(format(v.x));
+            sb.append(ChatFormatting.GRAY).append(", y: ");
+            sb.append(format(v.y));
+            sb.append(ChatFormatting.GRAY).append(", z: ");
+            sb.append(format(v.z));
+        } else if (obj instanceof Vector4f v) {
+            sb.append(ChatFormatting.GRAY).append("x: ");
+            sb.append(format(v.x()));
+            sb.append(ChatFormatting.GRAY).append(", y: ");
+            sb.append(format(v.y()));
+            sb.append(ChatFormatting.GRAY).append(", z: ");
+            sb.append(format(v.z()));
+            sb.append(ChatFormatting.GRAY).append(", w: ");
+            sb.append(format(v.w()));
+        } else if (obj instanceof BlockPos v) {
+            sb.append(ChatFormatting.GRAY).append("x: ");
             sb.append(format(Math.round(v.getX())));
-            sb.append(TextFormatting.GRAY).append(", y: ");
+            sb.append(ChatFormatting.GRAY).append(", y: ");
             sb.append(format(Math.round(v.getY())));
-            sb.append(TextFormatting.GRAY).append(", z: ");
+            sb.append(ChatFormatting.GRAY).append(", z: ");
             sb.append(format(Math.round(v.getZ())));
-        } else if (obj instanceof Color) {
-            Color c = (Color) obj;
-            sb.append(TextFormatting.GRAY).append("#");
-            sb.append(TextFormatting.BLUE);
+        } else if (obj instanceof Color c) {
+            sb.append(ChatFormatting.GRAY).append("#");
+            sb.append(ChatFormatting.BLUE);
             String s = Integer.toHexString(c.getRGB());
-            for (int i = 0; i < 8 - s.length(); i++) {
-                sb.append("0");
-            }
+            sb.append("0".repeat(8 - s.length()));
 
             sb.append(s);
-        } else if (obj instanceof Component) {
-            Component e = (Component) obj;
-            sb.append(TextFormatting.GRAY).append("Component: ");
+        } else if (obj instanceof Component e) {
+            sb.append(ChatFormatting.GRAY).append("Component: ");
             sb.append(format(e.getString()));
-        } else if (obj instanceof ItemStack) {
-            ItemStack e = (ItemStack) obj;
-            sb.append(TextFormatting.BLUE).append(e.getItem().getRegistryName()).append(" ");
-            sb.append(TextFormatting.GRAY).append(e.getCount()).append("x");
-        } else if (obj instanceof com.ultreon.randomthingz.common.interfaces.Formattable) {
-            com.ultreon.randomthingz.common.interfaces.Formattable e = (Formattable) obj;
+        } else if (obj instanceof ItemStack e) {
+            sb.append(ChatFormatting.BLUE).append(e.getItem().getRegistryName()).append(" ");
+            sb.append(ChatFormatting.GRAY).append(e.getCount()).append("x");
+        } else if (obj instanceof Formattable e) {
             sb.append(e.toFormattedString());
-        } else if (obj instanceof IForgeRegistryEntry<?>) {
-            IForgeRegistryEntry<?> ifrEntry = (IForgeRegistryEntry<?>) obj;
+        } else if (obj instanceof IForgeRegistryEntry<?> ifrEntry) {
             sb.append(format(ifrEntry.getRegistryType()));
-            sb.append(TextFormatting.GRAY).append("@");
+            sb.append(ChatFormatting.GRAY).append("@");
             sb.append(format(ifrEntry.getRegistryName()));
-        } else if (obj instanceof IForgeRegistry<?>) {
-            IForgeRegistry<?> ifr = (IForgeRegistry<?>) obj;
+        } else if (obj instanceof IForgeRegistry<?> ifr) {
             sb.append(format(ifr.getRegistryName()));
-        } else if (obj instanceof ResourceLocation) {
-            ResourceLocation rl = (ResourceLocation) obj;
-            sb.append(TextFormatting.GOLD).append(rl.getNamespace());
-            sb.append(TextFormatting.GRAY).append(":");
-            sb.append(TextFormatting.YELLOW).append(rl.getPath());
+        } else if (obj instanceof ResourceLocation rl) {
+            sb.append(ChatFormatting.GOLD).append(rl.getNamespace());
+            sb.append(ChatFormatting.GRAY).append(":");
+            sb.append(ChatFormatting.YELLOW).append(rl.getPath());
         } else if (obj instanceof Player) {
             Entity e = (Entity) obj;
-            sb.append(TextFormatting.GRAY).append("Player: ");
+            sb.append(ChatFormatting.GRAY).append("Player: ");
             sb.append(format(e.getName().getString()));
-        } else if (obj instanceof Entity) {
-            Entity e = (Entity) obj;
-            sb.append(TextFormatting.GRAY).append("Entity: ");
-            sb.append(format(e.getUniqueID()));
-        } else if (obj instanceof UUID) {
-            UUID uuid = (UUID) obj;
-            sb.append(TextFormatting.GOLD).append(uuid.toString().replaceAll("-", TextFormatting.GRAY + "-" + TextFormatting.GOLD));
-        } else if (obj instanceof Collection<?>) {
-            sb.append(TextFormatting.GRAY);
+        } else if (obj instanceof Entity e) {
+            sb.append(ChatFormatting.GRAY).append("Entity: ");
+            sb.append(format(e.getUUID()));
+        } else if (obj instanceof UUID uuid) {
+            sb.append(ChatFormatting.GOLD).append(uuid.toString().replaceAll("-", ChatFormatting.GRAY + "-" + ChatFormatting.GOLD));
+        } else if (obj instanceof Collection<?> collection) {
+            sb.append(ChatFormatting.GRAY);
             sb.append("(");
-
-            Collection<?> collection = (Collection<?>) obj;
 
             Iterator<?> it = collection.iterator();
             if (!it.hasNext()) {
@@ -1076,28 +1034,27 @@ public class DebugMenu {
 
             for (; ; ) {
                 Object e = it.next();
-                sb.append(e == collection ? (TextFormatting.GRAY + "(" + TextFormatting.WHITE + "this Collection" + TextFormatting.GRAY + ")") : format(e));
+                sb.append(e == collection ? (ChatFormatting.GRAY + "(" + ChatFormatting.WHITE + "this Collection" + ChatFormatting.GRAY + ")") : format(e));
                 if (!it.hasNext()) {
-                    return sb.append(TextFormatting.GRAY).append(')').toString();
+                    return sb.append(ChatFormatting.GRAY).append(')').toString();
                 }
-                sb.append(TextFormatting.GRAY).append(',').append(' ');
+                sb.append(ChatFormatting.GRAY).append(',').append(' ');
             }
-        } else if (obj instanceof Class<?>) {
-            Class<?> c = (Class<?>) obj;
+        } else if (obj instanceof Class<?> c) {
 
-            sb.append(TextFormatting.AQUA);
-            sb.append(c.getPackage().getName().replaceAll("\\.", TextFormatting.GRAY + "." + TextFormatting.AQUA));
-            sb.append(TextFormatting.GRAY).append(".").append(TextFormatting.AQUA);
-            sb.append(TextFormatting.DARK_AQUA);
+            sb.append(ChatFormatting.AQUA);
+            sb.append(c.getPackage().getName().replaceAll("\\.", ChatFormatting.GRAY + "." + ChatFormatting.AQUA));
+            sb.append(ChatFormatting.GRAY).append(".").append(ChatFormatting.AQUA);
+            sb.append(ChatFormatting.DARK_AQUA);
             sb.append(c.getSimpleName());
         } else {
             Class<?> c = obj.getClass();
-            sb.append(TextFormatting.AQUA);
-            sb.append(c.getPackage().getName().replaceAll("\\.", TextFormatting.GRAY + "." + TextFormatting.AQUA));
-            sb.append(TextFormatting.GRAY).append(".").append(TextFormatting.AQUA);
-            sb.append(TextFormatting.DARK_AQUA);
+            sb.append(ChatFormatting.AQUA);
+            sb.append(c.getPackage().getName().replaceAll("\\.", ChatFormatting.GRAY + "." + ChatFormatting.AQUA));
+            sb.append(ChatFormatting.GRAY).append(".").append(ChatFormatting.AQUA);
+            sb.append(ChatFormatting.DARK_AQUA);
             sb.append(c.getSimpleName());
-            sb.append(TextFormatting.GRAY).append("@").append(TextFormatting.YELLOW);
+            sb.append(ChatFormatting.GRAY).append("@").append(ChatFormatting.YELLOW);
             sb.append(Integer.toHexString(obj.hashCode()));
         }
         return sb.toString();
@@ -1105,73 +1062,73 @@ public class DebugMenu {
 
     private static void drawTopString(PoseStack matrixStack, String text, int line) {
         // Declare local variables before draw.
-        FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
-        int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
+        Font fontRenderer = Minecraft.getInstance().font;
+        int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f, 12f + (line * 12), 0xffffff);
+        fontRenderer.drawShadow(matrixStack, text, width / 2f - fontRenderer.width(text) / 2f, 12f + (line * 12), 0xffffff);
     }
 
     private static void drawLeftTopString(PoseStack matrixStack, String text, int line, Object obj, Object... objects) {
         // Declare local variables before draw.
-        FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
+        Font fontRenderer = Minecraft.getInstance().font;
 
         text = format(text, obj, objects);
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, 12f, 12f + (line * 12), 0xffffff);
+        fontRenderer.drawShadow(matrixStack, text, 12f, 12f + (line * 12), 0xffffff);
     }
 
     private static void drawRightTopString(PoseStack matrixStack, String text, int line, Object obj, Object... objects) {
         // Declare local variables before draw.
-        FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
-        int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
+        Font fontRenderer = Minecraft.getInstance().font;
+        int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
 
         text = format(text, obj, objects);
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width - 12 - fontRenderer.getStringWidth(text), 12f + (line * 12), 0xffffff);
+        fontRenderer.drawShadow(matrixStack, text, width - 12 - fontRenderer.width(text), 12f + (line * 12), 0xffffff);
     }
 
     @SuppressWarnings("unused")
     private static void drawBottomString(PoseStack matrixStack, String text, int line) {
         // Declare local variables before draw.
-        FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
-        int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        Font fontRenderer = Minecraft.getInstance().font;
+        int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        int height = Minecraft.getInstance().getWindow().getGuiScaledWidth();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width / 2f - fontRenderer.getStringWidth(text) / 2f, height - 29f - (line * 12), 0xffffff);
+        fontRenderer.drawShadow(matrixStack, text, width / 2f - fontRenderer.width(text) / 2f, height - 29f - (line * 12), 0xffffff);
     }
 
     @SuppressWarnings("unused")
     private static void drawLeftBottomString(PoseStack matrixStack, String text, int line) {
         // Declare local variables before draw.
-        FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
-        int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        Font fontRenderer = Minecraft.getInstance().font;
+        int height = Minecraft.getInstance().getWindow().getGuiScaledWidth();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, 12, height - 29f - (line * 12), 0xffffff);
+        fontRenderer.drawShadow(matrixStack, text, 12, height - 29f - (line * 12), 0xffffff);
     }
 
     @SuppressWarnings("unused")
     private static void drawRightBottomString(PoseStack matrixStack, String text, int line) {
         // Declare local variables before draw.
-        FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
-        int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
-        int height = Minecraft.getInstance().getMainWindow().getScaledHeight();
+        Font fontRenderer = Minecraft.getInstance().font;
+        int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        int height = Minecraft.getInstance().getWindow().getGuiScaledWidth();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width - 12 - fontRenderer.getStringWidth(text), height - 29f - (line * 12), 0xffffff);
+        fontRenderer.drawShadow(matrixStack, text, width - 12 - fontRenderer.width(text), height - 29f - (line * 12), 0xffffff);
     }
 
     @SuppressWarnings({"unused", "SameParameterValue"})
     private static void drawRightString(PoseStack matrixStack, String text, float mx, float y, int color) {
         // Declare local variables before draw.
-        FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
-        int width = Minecraft.getInstance().getMainWindow().getScaledWidth();
+        Font fontRenderer = Minecraft.getInstance().font;
+        int width = Minecraft.getInstance().getWindow().getGuiScaledWidth();
 
         // Draw text.
-        fontRenderer.drawStringWithShadow(matrixStack, text, width - mx - fontRenderer.getStringWidth(text), y, color);
+        fontRenderer.drawShadow(matrixStack, text, width - mx - fontRenderer.width(text), y, color);
     }
 }

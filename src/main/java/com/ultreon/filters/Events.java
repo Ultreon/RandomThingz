@@ -231,7 +231,7 @@ public class Events {
             Set<Item> removed = new HashSet<>();
             List<Item> items = ForgeRegistries.ITEMS.getValues().stream()
                     .filter(item -> item.getItemCategory() == group || item == Items.ENCHANTED_BOOK)
-                    .collect(Collectors.toList());
+                    .toList();
             items.forEach(item ->
             {
                 for (ResourceLocation location : item.getTags()) {

@@ -6,11 +6,13 @@ import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.ArcaneEscalatingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.TextUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -29,12 +31,12 @@ public class ArcaneEscalatorBlockEntity extends AbstractMachineBlockEntity<Arcan
     private static final int[] SLOTS_OUTPUT = {INPUT_SLOT_COUNT};
     private static final int[] SLOTS_ALL = IntStream.range(0, INPUT_SLOT_COUNT + 1).toArray();
 
-    public ArcaneEscalatorBlockEntity() {
-        this(MachineTier.STANDARD);
+    public ArcaneEscalatorBlockEntity(BlockPos pos, BlockState state) {
+        this(pos, state, MachineTier.STANDARD);
     }
 
-    public ArcaneEscalatorBlockEntity(MachineTier tier) {
-        super(MachineType.ARCANE_ESCALATOR.getTileEntityType(tier), SLOTS_ALL.length, tier);
+    public ArcaneEscalatorBlockEntity(BlockPos pos, BlockState state, MachineTier tier) {
+        super(MachineType.ARCANE_ESCALATOR.getTileEntityType(tier), pos, state, SLOTS_ALL.length, tier);
     }
 
     @Override
@@ -62,7 +64,7 @@ public class ArcaneEscalatorBlockEntity extends AbstractMachineBlockEntity<Arcan
 
     @Override
     protected Collection<ItemStack> getProcessResults(ArcaneEscalatingRecipe recipe) {
-        return Collections.singleton(recipe.getCraftingResult(this));
+        return Collections.singleton(recipe.getResultItem());
     }
 
     @Override
@@ -102,8 +104,8 @@ public class ArcaneEscalatorBlockEntity extends AbstractMachineBlockEntity<Arcan
     }
 
     public static class Basic extends ArcaneEscalatorBlockEntity {
-        public Basic() {
-            super(MachineTier.BASIC);
+        public Basic(BlockPos pos, BlockState state) {
+            super(pos, state, MachineTier.BASIC);
         }
     }
 }

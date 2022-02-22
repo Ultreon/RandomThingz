@@ -1,11 +1,13 @@
 package com.ultreon.randomthingz.block.machines.alloysmelter;
 
-import com.ultreon.modlib.embedded.silentlib.inventory.SlotOutputOnly;
-import com.ultreon.modlib.embedded.silentlib.util.InventoryUtils;
+import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block._common.MachineType;
+import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
 import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
 import com.ultreon.randomthingz.common.enums.MachineTier;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -20,6 +22,10 @@ public class AlloySmelterContainer extends AbstractMachineContainer<AlloySmelter
 
     protected AlloySmelterContainer(int id, Inventory playerInventory, AlloySmelterBlockEntity tileEntityIn, ContainerData fieldsIn) {
         super(MachineType.ALLOY_SMELTER.getContainerType(tileEntityIn.getMachineTier()), id, tileEntityIn, fieldsIn);
+
+        if (this.tileEntity == null) {
+            return;
+        }
 
         for (int i = 0; i < AlloySmelterBlockEntity.INPUT_SLOT_COUNT; ++i) {
             this.addSlot(new Slot(this.tileEntity, i, 17 + 18 * i, 35));
@@ -37,6 +43,10 @@ public class AlloySmelterContainer extends AbstractMachineContainer<AlloySmelter
         if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
+
+            if (this.tileEntity == null) {
+                return itemstack;
+            }
 
             final int inventorySize = this.tileEntity.getContainerSize();
             final int playerInventoryEnd = inventorySize + 27;

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item;
 
-import com.ultreon.modlib.embedded.silentutils.MathUtils;
+import com.ultreon.modlib.silentutils.MathUtils;
 import com.ultreon.randomthingz.api.IMachineUpgrade;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.network.chat.Component;

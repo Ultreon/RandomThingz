@@ -1,6 +1,7 @@
 package com.ultreon.randomthingz.block.machines.generator.coal;
 
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.generator.GeneratorBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.common.tags.ModTags;
@@ -11,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,15 +26,19 @@ public class CoalGeneratorBlockEntity extends GeneratorBlockEntity {
     public static final int ENERGY_CREATED_PER_TICK = 60;
 
     public CoalGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.coalGenerator, pos, state, 1, MAX_ENERGY, 0, MAX_SEND, MachineTier.BASIC);
+        super(ModMachines.COAL_GENERATOR, pos, state, 1, MAX_ENERGY, 0, MAX_SEND, MachineTier.BASIC);
+    }
+
+    public CoalGeneratorBlockEntity() {
+        this(BlockPos.ZERO, ModBlocks.COAL_GENERATOR.asBlockState());
     }
 
     static boolean isFuel(ItemStack stack) {
-        return stack.getItem().is(ModTags.Items.COAL_GENERATOR_FUELS) && AbstractFurnaceBlockEntity.isFuel(stack);
+        return stack.is(ModTags.Items.COAL_GENERATOR_FUELS) && AbstractFurnaceBlockEntity.isFuel(stack);
     }
 
     private static int getBurnTime(ItemStack stack) {
-        return ForgeHooks.getBurnTime(stack);
+        return ForgeHooks.getBurnTime(stack, RecipeType.SMELTING);
     }
 
     @Override

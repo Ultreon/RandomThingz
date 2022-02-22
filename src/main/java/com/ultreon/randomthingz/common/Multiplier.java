@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.common;
 
 import com.ultreon.randomthingz.common.interfaces.Formattable;
-import com.ultreon.randomthingz.util.helpers.Mth;
+import com.ultreon.randomthingz.util.helpers.MathHelper;
 import lombok.Data;
 import net.minecraft.ChatFormatting;
 
@@ -11,7 +11,7 @@ public class Multiplier implements Formattable {
 
     @Override
     public String toFormattedString() {
-        if (Mth.getDecimalPlaces(value) == 0) {
+        if (MathHelper.getDecimalPlaces(value) == 0) {
             return ChatFormatting.GOLD.toString() + Math.round(value) + ChatFormatting.GRAY + "x";
         }
 

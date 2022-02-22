@@ -1,31 +1,17 @@
 package com.ultreon.randomthingz.item;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.math.Matrix4f;
+import com.ultreon.modlib.utils.GraphicsUtil;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.hud.HudItem;
 import com.ultreon.randomthingz.common.RomanNumber;
 import com.ultreon.randomthingz.common.enums.TextColors;
-import com.ultreon.randomthingz.util.GraphicsUtil;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.locale.Language;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.FormattedText;
-import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.text.*;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -34,20 +20,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RenderTooltipEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.gui.GuiUtils;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static net.minecraftforge.fml.client.gui.GuiUtils.drawGradientRect;
 
 public abstract class WandItem extends HudItem {
     private final int maxMana;
@@ -156,7 +136,7 @@ public abstract class WandItem extends HudItem {
 
     /**
      * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-     * {@linkplain #onUseItem}.
+     * {@linkplain #useOn(UseOnContext)}.
      */
     public @NotNull
     InteractionResultHolder<ItemStack> use(@NotNull Level dimensionIn, Player playerIn, @NotNull InteractionHand handIn) {
@@ -166,7 +146,7 @@ public abstract class WandItem extends HudItem {
         InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, dimensionIn, playerIn, handIn, flag);
         if (ret != null) return ret;
 
-        if (!playerIn.abilities.instabuild && !flag) {
+        if (!playerIn.getAbilities().instabuild && !flag) {
             return InteractionResultHolder.fail(itemstack);
         } else {
             playerIn.startUsingItem(handIn);
@@ -294,14 +274,11 @@ public abstract class WandItem extends HudItem {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void renderHud(GraphicsUtil gu, Minecraft mc, ItemStack stack, LocalPlayer player) {
+    public void renderHud(PoseStack pose, GraphicsUtil gu, Minecraft mc, ItemStack stack, LocalPlayer player) {
         int height = mc.getWindow().getGuiScaledHeight();
 
-        Level dimensionIn = player.getCommandSenderWorld();
+        Level level = player.getCommandSenderWorld();
         CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
-        if (dimensionIn == null) {
-            return;
-        }
 
         float mana = nbt.getFloat("mana");
         int maxMana = nbt.getInt("maxMana");
@@ -315,187 +292,186 @@ public abstract class WandItem extends HudItem {
 
         val = (int) (64d * mana / maxMana);
 
-        drawItemTooltipText(gu, val, stack, Arrays.asList(new TextComponent(ChatFormatting.BLUE + I18n.get(stack.getDescriptionId())), new TextComponent(ChatFormatting.GRAY + "" + Math.round(mana) + " / " + Math.round(maxMana))), 0, height, 96, 10, -10, mc.getWindow().getScreenWidth() - 20, mc.getWindow().getScreenHeight(), -1, GuiUtils.DEFAULT_BACKGROUND_COLOR, GuiUtils.DEFAULT_BORDER_COLOR_START, GuiUtils.DEFAULT_BORDER_COLOR_END, mc.font);
+//        drawItemTooltipText(gu, val, stack, Arrays.asList(new TextComponent(ChatFormatting.BLUE + I18n.get(stack.getDescriptionId())), new TextComponent(ChatFormatting.GRAY + "" + Math.round(mana) + " / " + Math.round(maxMana))), 0, height, 96, 10, -10, mc.getWindow().getScreenWidth() - 20, mc.getWindow().getScreenHeight(), -1, GuiUtils.DEFAULT_BACKGROUND_COLOR, GuiUtils.DEFAULT_BORDER_COLOR_START, GuiUtils.DEFAULT_BORDER_COLOR_END, mc.font);
         PoseStack matrixStack = gu.getPoseStack();
     }
 
-    /**
-     * Use this version if calling from somewhere where ItemStack context is available.
-     *
-     * @see GuiUtils#drawHoveringText(PoseStack, List, int, int, int, int, int, int, int, int, FontRenderer)
-     */
-    //TODO, Validate rendering is the same as the original
-    @OnlyIn(Dist.CLIENT)
-    @SuppressWarnings("deprecation")
-    public void drawItemTooltipText(GraphicsUtil gu, int val, @NotNull final ItemStack stack, List<? extends FormattedText> textLines, int mouseX, int mouseY,
-                                    int minWidth, int xOffset, int yOffset,
-                                    int screenWidth, int screenHeight, int maxTextWidth,
-                                    int backgroundColor, int borderColorStart, int borderColorEnd, Font font) {
-        PoseStack matrixStack = gu.getPoseStack();
-        if (!textLines.isEmpty()) {
-            RenderTooltipEvent.Pre event = new RenderTooltipEvent.Pre(stack, textLines, matrixStack, mouseX, mouseY, screenWidth, screenHeight, maxTextWidth, font);
-            if (MinecraftForge.EVENT_BUS.post(event))
-                return;
-            mouseX = event.getX();
-            mouseY = event.getY();
-            screenWidth = event.getScreenWidth();
-            screenHeight = event.getScreenHeight();
-            maxTextWidth = event.getMaxWidth();
-            font = event.getFontRenderer();
-
-            RenderSystem.disableRescaleNormal();
-            RenderSystem.disableDepthTest();
-            int tooltipTextWidth = minWidth; // Added minWidth.
-
-            for (FormattedText textLine : textLines) {
-                int textLineWidth = font.width(textLine);
-                if (textLineWidth > tooltipTextWidth)
-                    tooltipTextWidth = textLineWidth;
-            }
-
-            boolean needsWrap = false;
-
-            int titleLinesCount = 1;
-            int tooltipX = mouseX + 12;
-            if (tooltipX + tooltipTextWidth + 4 > screenWidth) {
-                tooltipX = mouseX - 16 - tooltipTextWidth;
-                if (tooltipX < 4) // if the tooltip doesn't fit on the screen
-                {
-                    if (mouseX > screenWidth / 2)
-                        tooltipTextWidth = mouseX - 12 - 8;
-                    else
-                        tooltipTextWidth = screenWidth - 16 - mouseX;
-                    needsWrap = true;
-                }
-            }
-
-            if (maxTextWidth > 0 && tooltipTextWidth > maxTextWidth) {
-                tooltipTextWidth = maxTextWidth;
-                needsWrap = true;
-            }
-
-            if (needsWrap) {
-                int wrappedTooltipWidth = 0;
-                List<FormattedText> wrappedTextLines = new ArrayList<>();
-                for (int i = 0; i < textLines.size(); i++) {
-                    FormattedText textLine = textLines.get(i);
-                    List<FormattedText> wrappedLine = font.getSplitter().splitLines(textLine, tooltipTextWidth, Style.EMPTY);
-                    if (i == 0)
-                        titleLinesCount = wrappedLine.size();
-
-                    for (FormattedText line : wrappedLine) {
-                        int lineWidth = font.width(line);
-                        if (lineWidth > wrappedTooltipWidth)
-                            wrappedTooltipWidth = lineWidth;
-                        wrappedTextLines.add(line);
-                    }
-                }
-                tooltipTextWidth = wrappedTooltipWidth;
-                textLines = wrappedTextLines;
-
-                if (mouseX > screenWidth / 2)
-                    tooltipX = mouseX - 16 - tooltipTextWidth;
-                else
-                    tooltipX = mouseX + 12;
-            }
-
-            int tooltipY = mouseY - 12;
-            int tooltipHeight = 8;
-
-            if (textLines.size() > 1) {
-                tooltipHeight += (textLines.size() - 1) * 10;
-                if (textLines.size() > titleLinesCount)
-                    tooltipHeight += 2; // gap between title lines and next lines
-            }
-
-            if (tooltipY < 4)
-                tooltipY = 4;
-            else if (tooltipY + tooltipHeight + 4 > screenHeight)
-                tooltipY = screenHeight - tooltipHeight - 4;
-
-            final int zLevel = 10; // Was 400
-            RenderTooltipEvent.Color colorEvent = new RenderTooltipEvent.Color(stack, textLines, matrixStack, tooltipX, tooltipY, font, backgroundColor, borderColorStart, borderColorEnd);
-            MinecraftForge.EVENT_BUS.post(colorEvent);
-            backgroundColor = colorEvent.getBackground();
-            borderColorStart = colorEvent.getBorderStart();
-            borderColorEnd = colorEvent.getBorderEnd();
-
-            tooltipX += xOffset;
-            tooltipY += yOffset;
-
-            matrixStack.pushPose();
-            Matrix4f mat = matrixStack.last().pose();
-
-            //TODO, lots of unnessesary GL calls here, we can buffer all these together.
-            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 4, tooltipX + tooltipTextWidth + 3, tooltipY - 3, backgroundColor, backgroundColor);
-            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY + tooltipHeight + 3, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 4, backgroundColor, backgroundColor);
-            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
-            drawGradientRect(mat, zLevel, tooltipX - 4, tooltipY - 3, tooltipX - 3, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
-            drawGradientRect(mat, zLevel, tooltipX + tooltipTextWidth + 3, tooltipY - 3, tooltipX + tooltipTextWidth + 4, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
-            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3 + 1, tooltipX - 3 + 1, tooltipY + tooltipHeight + 3 - 1, borderColorStart, borderColorEnd);
-            drawGradientRect(mat, zLevel, tooltipX + tooltipTextWidth + 2, tooltipY - 3 + 1, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3 - 1, borderColorStart, borderColorEnd);
-            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3, tooltipX + tooltipTextWidth + 3, tooltipY - 3 + 1, borderColorStart, borderColorStart);
-            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY + tooltipHeight + 2, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3, borderColorEnd, borderColorEnd);
-
-            drawGradientRect(mat, zLevel, tooltipX, tooltipY - 4 - 24, tooltipX + 24, tooltipY - 4, 0xff9f9f9f, 0xff9f9f9f);
-            drawGradientRect(mat, zLevel, tooltipX, tooltipY - 4 - 24, tooltipX + 24, tooltipY - 4, 0xff9f9f9f, 0xff9f9f9f);
-
-            drawGradientRect(mat, zLevel, tooltipX + 1, tooltipY - 4 - 23, tooltipX + 23, tooltipY - 5, 0xff5f5f5f, 0xff5f5f5f);
-            drawGradientRect(mat, zLevel, tooltipX + 1, tooltipY - 4 - 23, tooltipX + 23, tooltipY - 5, 0xff5f5f5f, 0xff5f5f5f);
-
-            drawGradientRect(mat, zLevel, tooltipX + 2, tooltipY - 4 - 22, tooltipX + 22, tooltipY - 6, 0xff9f9f9f, 0xff9f9f9f);
-            drawGradientRect(mat, zLevel, tooltipX + 2, tooltipY - 4 - 22, tooltipX + 22, tooltipY - 6, 0xff9f9f9f, 0xff9f9f9f);
-
-            gu.drawItemStack(stack, tooltipX + 8, tooltipY - 4 - 8, "");
-
-            Screen.fill(matrixStack, tooltipX + 16 - 3, tooltipY + tooltipHeight + 4, tooltipX + 80 + 2, tooltipY + tooltipHeight + 4 + 2 + 4 + 3, 0xff9f9f9f);
-            Screen.fill(matrixStack, tooltipX + 16 - 2, tooltipY + tooltipHeight + 4 + 1, tooltipX + 80 + 1, tooltipY + tooltipHeight + 4 + 2 + 4 + 2, 0xff5f5f5f);
-            Screen.fill(matrixStack, tooltipX + 16 - 1, tooltipY + tooltipHeight + 4 + 2, tooltipX + 80, tooltipY + tooltipHeight + 4 + 2 + 4 + 1, 0xff9f9f9f);
-
-            TextureManager textureManager = Minecraft.getInstance().getTextureManager();
-//        textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/background.png"));
-//        gu.blit(0, height - 64, 128, 64, 0, 0, 128, 64, 128, 64);
-
-            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
-            gu.blit(16, tooltipY + tooltipHeight + 4, 64, 2, 0, 2, 64, 1, 64, 3);
-
-            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
-            gu.blit(16, tooltipY + tooltipHeight + 4 - 1, 64, 2, 0, 1, 64, 1, 64, 3);
-
-            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
-            gu.blit(16, tooltipY + tooltipHeight + 4, val, 2, 0, 1, val, 1, 64, 3);
-
-            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
-            gu.blit(16, tooltipY + tooltipHeight + 4 - 1, val, 2, 0, 0, val, 1, 64, 3);
-
-//            gu.drawItemStack(stack, 56, tooltipY - 60, "");
-//            gu.drawCenteredString(Math.round(mana) + " / " + Math.round(maxMana), 64, height - 24, 0xe97fff);
-            MinecraftForge.EVENT_BUS.post(new RenderTooltipEvent.PostBackground(stack, textLines, matrixStack, tooltipX, tooltipY, font, tooltipTextWidth, tooltipHeight));
-
-            MultiBufferSource.BufferSource renderType = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
-            matrixStack.translate(0.0D, 0.0D, zLevel);
-
-            int tooltipTop = tooltipY;
-
-            for (int lineNumber = 0; lineNumber < textLines.size(); ++lineNumber) {
-                FormattedText line = textLines.get(lineNumber);
-                if (line != null)
-                    font.drawInBatch(Language.getInstance().getVisualOrder(line), (float) tooltipX, (float) tooltipY, -1, true, mat, renderType, false, 0, 15728880);
-
-                if (lineNumber + 1 == titleLinesCount)
-                    tooltipY += 2;
-
-                tooltipY += 10;
-            }
-
-            renderType.endBatch();
-            matrixStack.popPose();
-
-            MinecraftForge.EVENT_BUS.post(new RenderTooltipEvent.PostText(stack, textLines, matrixStack, tooltipX, tooltipTop, font, tooltipTextWidth, tooltipHeight));
-
-            RenderSystem.enableDepthTest();
-            RenderSystem.enableRescaleNormal();
-        }
-    }
+//    /**
+//     * Use this version if calling from somewhere where ItemStack context is available.
+//     *
+//     * @see GuiUtils#drawHoveringText(PoseStack, List, int, int, int, int, int, int, int, int, FontRenderer)
+//     */
+//    //TODO, Validate rendering is the same as the original
+//    @OnlyIn(Dist.CLIENT)
+//    @SuppressWarnings("deprecation")
+//    public void drawItemTooltipText(GraphicsUtil gu, int val, @NotNull final ItemStack stack, List<ClientTooltipComponent> textLines, int mouseX, int mouseY,
+//                                    int minWidth, int xOffset, int yOffset,
+//                                    int screenWidth, int screenHeight, int maxTextWidth,
+//                                    int backgroundColor, int borderColorStart, int borderColorEnd, Font font) {
+//        PoseStack matrixStack = gu.getPoseStack();
+//        if (!textLines.isEmpty()) {
+//            RenderTooltipEvent.Pre event = new RenderTooltipEvent.Pre(stack, matrixStack, mouseX, mouseY, screenWidth, screenHeight, font, textLines);
+//            if (MinecraftForge.EVENT_BUS.post(event))
+//                return;
+//            mouseX = event.getX();
+//            mouseY = event.getY();
+//            screenWidth = event.getScreenWidth();
+//            screenHeight = event.getScreenHeight();
+//
+//            RenderSystem.rescdisableRescaleNormal();
+//            RenderSystem.disableDepthTest();
+//            int tooltipTextWidth = minWidth; // Added minWidth.
+//
+//            for (FormattedText textLine : textLines) {
+//                int textLineWidth = font.width(textLine);
+//                if (textLineWidth > tooltipTextWidth)
+//                    tooltipTextWidth = textLineWidth;
+//            }
+//
+//            boolean needsWrap = false;
+//
+//            int titleLinesCount = 1;
+//            int tooltipX = mouseX + 12;
+//            if (tooltipX + tooltipTextWidth + 4 > screenWidth) {
+//                tooltipX = mouseX - 16 - tooltipTextWidth;
+//                if (tooltipX < 4) // if the tooltip doesn't fit on the screen
+//                {
+//                    if (mouseX > screenWidth / 2)
+//                        tooltipTextWidth = mouseX - 12 - 8;
+//                    else
+//                        tooltipTextWidth = screenWidth - 16 - mouseX;
+//                    needsWrap = true;
+//                }
+//            }
+//
+//            if (maxTextWidth > 0 && tooltipTextWidth > maxTextWidth) {
+//                tooltipTextWidth = maxTextWidth;
+//                needsWrap = true;
+//            }
+//
+//            if (needsWrap) {
+//                int wrappedTooltipWidth = 0;
+//                List<FormattedText> wrappedTextLines = new ArrayList<>();
+//                for (int i = 0; i < textLines.size(); i++) {
+//                    ClientTooltipComponent textLine = textLines.get(i);
+//                    textLine.sp
+//                    List<FormattedText> wrappedLine = font.getSplitter().splitLines(textLine, tooltipTextWidth, Style.EMPTY);
+//                    if (i == 0)
+//                        titleLinesCount = wrappedLine.size();
+//
+//                    for (FormattedText line : wrappedLine) {
+//                        int lineWidth = font.width(line);
+//                        if (lineWidth > wrappedTooltipWidth)
+//                            wrappedTooltipWidth = lineWidth;
+//                        wrappedTextLines.add(line);
+//                    }
+//                }
+//                tooltipTextWidth = wrappedTooltipWidth;
+//                textLines = wrappedTextLines;
+//
+//                if (mouseX > screenWidth / 2)
+//                    tooltipX = mouseX - 16 - tooltipTextWidth;
+//                else
+//                    tooltipX = mouseX + 12;
+//            }
+//
+//            int tooltipY = mouseY - 12;
+//            int tooltipHeight = 8;
+//
+//            if (textLines.size() > 1) {
+//                tooltipHeight += (textLines.size() - 1) * 10;
+//                if (textLines.size() > titleLinesCount)
+//                    tooltipHeight += 2; // gap between title lines and next lines
+//            }
+//
+//            if (tooltipY < 4)
+//                tooltipY = 4;
+//            else if (tooltipY + tooltipHeight + 4 > screenHeight)
+//                tooltipY = screenHeight - tooltipHeight - 4;
+//
+//            final int zLevel = 10; // Was 400
+//            RenderTooltipEvent.Color colorEvent = new RenderTooltipEvent.Color(stack, textLines, matrixStack, tooltipX, tooltipY, font, backgroundColor, borderColorStart, borderColorEnd);
+//            MinecraftForge.EVENT_BUS.post(colorEvent);
+//            backgroundColor = colorEvent.getBackground();
+//            borderColorStart = colorEvent.getBorderStart();
+//            borderColorEnd = colorEvent.getBorderEnd();
+//
+//            tooltipX += xOffset;
+//            tooltipY += yOffset;
+//
+//            matrixStack.pushPose();
+//            Matrix4f mat = matrixStack.last().pose();
+//
+//            //TODO, lots of unnessesary GL calls here, we can buffer all these together.
+//            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 4, tooltipX + tooltipTextWidth + 3, tooltipY - 3, backgroundColor, backgroundColor);
+//            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY + tooltipHeight + 3, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 4, backgroundColor, backgroundColor);
+//            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
+//            drawGradientRect(mat, zLevel, tooltipX - 4, tooltipY - 3, tooltipX - 3, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
+//            drawGradientRect(mat, zLevel, tooltipX + tooltipTextWidth + 3, tooltipY - 3, tooltipX + tooltipTextWidth + 4, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
+//            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3 + 1, tooltipX - 3 + 1, tooltipY + tooltipHeight + 3 - 1, borderColorStart, borderColorEnd);
+//            drawGradientRect(mat, zLevel, tooltipX + tooltipTextWidth + 2, tooltipY - 3 + 1, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3 - 1, borderColorStart, borderColorEnd);
+//            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3, tooltipX + tooltipTextWidth + 3, tooltipY - 3 + 1, borderColorStart, borderColorStart);
+//            drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY + tooltipHeight + 2, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3, borderColorEnd, borderColorEnd);
+//
+//            drawGradientRect(mat, zLevel, tooltipX, tooltipY - 4 - 24, tooltipX + 24, tooltipY - 4, 0xff9f9f9f, 0xff9f9f9f);
+//            drawGradientRect(mat, zLevel, tooltipX, tooltipY - 4 - 24, tooltipX + 24, tooltipY - 4, 0xff9f9f9f, 0xff9f9f9f);
+//
+//            drawGradientRect(mat, zLevel, tooltipX + 1, tooltipY - 4 - 23, tooltipX + 23, tooltipY - 5, 0xff5f5f5f, 0xff5f5f5f);
+//            drawGradientRect(mat, zLevel, tooltipX + 1, tooltipY - 4 - 23, tooltipX + 23, tooltipY - 5, 0xff5f5f5f, 0xff5f5f5f);
+//
+//            drawGradientRect(mat, zLevel, tooltipX + 2, tooltipY - 4 - 22, tooltipX + 22, tooltipY - 6, 0xff9f9f9f, 0xff9f9f9f);
+//            drawGradientRect(mat, zLevel, tooltipX + 2, tooltipY - 4 - 22, tooltipX + 22, tooltipY - 6, 0xff9f9f9f, 0xff9f9f9f);
+//
+//            gu.drawItemStack(stack, tooltipX + 8, tooltipY - 4 - 8, "");
+//
+//            Screen.fill(matrixStack, tooltipX + 16 - 3, tooltipY + tooltipHeight + 4, tooltipX + 80 + 2, tooltipY + tooltipHeight + 4 + 2 + 4 + 3, 0xff9f9f9f);
+//            Screen.fill(matrixStack, tooltipX + 16 - 2, tooltipY + tooltipHeight + 4 + 1, tooltipX + 80 + 1, tooltipY + tooltipHeight + 4 + 2 + 4 + 2, 0xff5f5f5f);
+//            Screen.fill(matrixStack, tooltipX + 16 - 1, tooltipY + tooltipHeight + 4 + 2, tooltipX + 80, tooltipY + tooltipHeight + 4 + 2 + 4 + 1, 0xff9f9f9f);
+//
+//            TextureManager textureManager = Minecraft.getInstance().getTextureManager();
+////        textureManager.bindTexture(new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/background.png"));
+////        gu.blit(0, height - 64, 128, 64, 0, 0, 128, 64, 128, 64);
+//
+//            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+//            gu.blit(16, tooltipY + tooltipHeight + 4, 64, 2, 0, 2, 64, 1, 64, 3);
+//
+//            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+//            gu.blit(16, tooltipY + tooltipHeight + 4 - 1, 64, 2, 0, 1, 64, 1, 64, 3);
+//
+//            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+//            gu.blit(16, tooltipY + tooltipHeight + 4, val, 2, 0, 1, val, 1, 64, 3);
+//
+//            RenderSystem.setShaderTexture(0, new ResourceLocation(RandomThingz.MOD_ID, "textures/gui/wand/bar.png"));
+//            gu.blit(16, tooltipY + tooltipHeight + 4 - 1, val, 2, 0, 0, val, 1, 64, 3);
+//
+////            gu.drawItemStack(stack, 56, tooltipY - 60, "");
+////            gu.drawCenteredString(Math.round(mana) + " / " + Math.round(maxMana), 64, height - 24, 0xe97fff);
+//            MinecraftForge.EVENT_BUS.post(new RenderTooltipEvent.PostBackground(stack, textLines, matrixStack, tooltipX, tooltipY, font, tooltipTextWidth, tooltipHeight));
+//
+//            MultiBufferSource.BufferSource renderType = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
+//            matrixStack.translate(0.0D, 0.0D, zLevel);
+//
+//            int tooltipTop = tooltipY;
+//
+//            for (int lineNumber = 0; lineNumber < textLines.size(); ++lineNumber) {
+//                FormattedText line = textLines.get(lineNumber);
+//                if (line != null)
+//                    font.drawInBatch(Language.getInstance().getVisualOrder(line), (float) tooltipX, (float) tooltipY, -1, true, mat, renderType, false, 0, 15728880);
+//
+//                if (lineNumber + 1 == titleLinesCount)
+//                    tooltipY += 2;
+//
+//                tooltipY += 10;
+//            }
+//
+//            renderType.endBatch();
+//            matrixStack.popPose();
+//
+//            MinecraftForge.EVENT_BUS.post(new RenderTooltipEvent.PostText(stack, textLines, matrixStack, tooltipX, tooltipTop, font, tooltipTextWidth, tooltipHeight));
+//
+//            RenderSystem.enableDepthTest();
+//            RenderSystem.enableRescaleNormal();
+//        }
+//    }
 
 }

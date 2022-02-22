@@ -2,7 +2,7 @@ package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.block.FrameBlock;
-import com.ultreon.texturedmodels.tileentity.ChestFrameTileEntity;
+import com.ultreon.texturedmodels.tileentity.ChestFrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
 import net.minecraft.client.Minecraft;
@@ -47,7 +47,7 @@ public class IllusionChestBakedModel implements IDynamicBakedModel {
     @NotNull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        BlockState mimic = extraData.getData(ChestFrameTileEntity.MIMIC);
+        BlockState mimic = extraData.getData(ChestFrameBlockEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
@@ -65,7 +65,7 @@ public class IllusionChestBakedModel implements IDynamicBakedModel {
         if (side != null) {
             return Collections.emptyList();
         }
-        BlockState mimic = extraData.getData(ChestFrameTileEntity.MIMIC);
+        BlockState mimic = extraData.getData(ChestFrameBlockEntity.MIMIC);
         if (mimic != null && state != null) {
             List<TextureAtlasSprite> designTextureList = new ArrayList<>(TextureHelper.getMetalTextures());
             designTextureList.add(Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(new ResourceLocation("minecraft", "block/shulker_box")));
@@ -76,8 +76,8 @@ public class IllusionChestBakedModel implements IDynamicBakedModel {
             if (mimic.getBlock() instanceof GrassBlock) {
                 tintIndex = 1;
             }
-            int design = extraData.getData(ChestFrameTileEntity.DESIGN);
-            int desTex = extraData.getData(ChestFrameTileEntity.DESIGN_TEXTURE);
+            int design = extraData.getData(ChestFrameBlockEntity.DESIGN);
+            int desTex = extraData.getData(ChestFrameBlockEntity.DESIGN_TEXTURE);
             TextureAtlasSprite designTexture = designTextureList.get(desTex);
             List<BakedQuad> quads = new ArrayList<>();
             if (design == 0) {

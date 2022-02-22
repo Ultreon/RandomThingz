@@ -8,6 +8,7 @@ import net.minecraft.client.NarratorStatus;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.MultiLineLabel;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.CommonComponents;
@@ -26,7 +27,6 @@ import java.util.Objects;
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class DevtestWarningScreen extends Screen {
     private static boolean initializedAlready = false;
-    private static boolean isSaving;
     private final MultiLineLabel message = MultiLineLabel.EMPTY;
     private final Component yesButtonText;
     private final Component noButtonText;

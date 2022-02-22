@@ -7,12 +7,11 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
 import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID)
 public final class WireConnection {
@@ -52,7 +51,7 @@ public final class WireConnection {
     public static void invalidateNetwork(LevelReader dimension, BlockPos pos) {
         Collection<LazyOptional<WireNetwork>> toRemove = NETWORK_LIST.stream()
                 .filter(n -> n != null && n.isPresent() && n.orElseThrow(IllegalStateException::new).contains(dimension, pos))
-                .collect(Collectors.toList());
+                .toList();
         toRemove.forEach(WireConnection::invalidateNetwork);
     }
 

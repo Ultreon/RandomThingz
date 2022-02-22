@@ -1,13 +1,14 @@
 package com.ultreon.randomthingz.common.item;
 
-import com.ultreon.modlib.embedded.silentlib.registry.BlockRegistryObject;
-import com.ultreon.modlib.embedded.silentlib.registry.ItemRegistryObject;
+import com.ultreon.modlib.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.machines.MetalBlock;
+import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import com.ultreon.randomthingz.registration.Registration;
-import com.ultreon.randomthingz.world.gen.ores.DefaultOre;
-import com.ultreon.randomthingz.world.gen.ores.IOre;
+import com.ultreon.randomthingz.world.gen.ores.ItemMaterialOre;
+import com.ultreon.randomthingz.world.gen.ores.Ore;
 import com.ultreon.randomthingz.world.gen.ores.Ores;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
@@ -32,9 +34,9 @@ import java.util.stream.Stream;
 @SuppressWarnings("unused")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class ItemMaterial implements IItemMaterial {
+public class ItemMaterial implements BaseItemMaterial {
     // Metals
-    public static final ItemMaterial REDSTONE_ALLOY = new ItemMaterial(builderAlloy("redstone_alloy", 2));
+    public static final ItemMaterial REDSTONE_ALLOY = new ItemMaterial(builderAlloy("redstone_alloy", ToolRequirement.IRON));
     public static final ItemMaterial REFINED_IRON = new ItemMaterial(builder("refined_iron").ingot());
     public static final ItemMaterial COMPRESSED_IRON = new ItemMaterial(builder("compressed_iron").ingot());
     public static final ItemMaterial IRON = new ItemMaterial(builder("iron").chunks().dust().ingotTagOnly().nuggetTagOnly());
@@ -45,38 +47,40 @@ public class ItemMaterial implements IItemMaterial {
     public static final ItemMaterial LEAD = new ItemMaterial(builderBaseWithOre("lead", Ores.LEAD));
     public static final ItemMaterial NICKEL = new ItemMaterial(builderBaseWithOre("nickel", Ores.NICKEL));
     public static final ItemMaterial PLATINUM = new ItemMaterial(builderBaseWithOre("platinum", Ores.PLATINUM));
-    public static final ItemMaterial TUNGSTEN = new ItemMaterial(builderAlloy("tungsten", 2));
+    public static final ItemMaterial TUNGSTEN = new ItemMaterial(builderAlloy("tungsten", ToolRequirement.IRON));
     public static final ItemMaterial ZINC = new ItemMaterial(builderBaseWithOre("zinc", Ores.ZINC));
     public static final ItemMaterial BISMUTH = new ItemMaterial(builderBaseWithOre("bismuth", Ores.BISMUTH));
     public static final ItemMaterial ALUMINUM = new ItemMaterial(builderBaseWithOre("aluminum", Ores.BAUXITE), "bauxite");
     public static final ItemMaterial URANIUM = new ItemMaterial(builderBaseWithOre("uranium", Ores.URANIUM));
-    public static final ItemMaterial BRONZE = new ItemMaterial(builderAlloy("bronze", 1));
-    public static final ItemMaterial BRASS = new ItemMaterial(builderAlloy("brass", 1));
-    public static final ItemMaterial INVAR = new ItemMaterial(builderAlloy("invar", 1));
-    public static final ItemMaterial ELECTRUM = new ItemMaterial(builderAlloy("electrum", 1));
-    public static final ItemMaterial STEEL = new ItemMaterial(builderAlloy("steel", 1));
-    public static final ItemMaterial BISMUTH_BRASS = new ItemMaterial(builderAlloy("bismuth_brass", 1));
-    public static final ItemMaterial ALUMINUM_STEEL = new ItemMaterial(builderAlloy("aluminum_steel", 1));
-    public static final ItemMaterial BISMUTH_STEEL = new ItemMaterial(builderAlloy("bismuth_steel", 1));
-    public static final ItemMaterial SIGNALUM = new ItemMaterial(builderAlloy("signalum", 1));
-    public static final ItemMaterial LUMIUM = new ItemMaterial(builderAlloy("lumium", 1));
-    public static final ItemMaterial ENDERIUM = new ItemMaterial(builderAlloy("enderium", 3));
+    public static final ItemMaterial BRONZE = new ItemMaterial(builderAlloy("bronze", ToolRequirement.STONE));
+    public static final ItemMaterial BRASS = new ItemMaterial(builderAlloy("brass", ToolRequirement.STONE));
+    public static final ItemMaterial INVAR = new ItemMaterial(builderAlloy("invar", ToolRequirement.STONE));
+    public static final ItemMaterial ELECTRUM = new ItemMaterial(builderAlloy("electrum", ToolRequirement.STONE));
+    public static final ItemMaterial STEEL = new ItemMaterial(builderAlloy("steel", ToolRequirement.STONE));
+    public static final ItemMaterial BISMUTH_BRASS = new ItemMaterial(builderAlloy("bismuth_brass", ToolRequirement.STONE));
+    public static final ItemMaterial ALUMINUM_STEEL = new ItemMaterial(builderAlloy("aluminum_steel", ToolRequirement.STONE));
+    public static final ItemMaterial BISMUTH_STEEL = new ItemMaterial(builderAlloy("bismuth_steel", ToolRequirement.STONE));
+    public static final ItemMaterial SIGNALUM = new ItemMaterial(builderAlloy("signalum", ToolRequirement.STONE));
+    public static final ItemMaterial LUMIUM = new ItemMaterial(builderAlloy("lumium", ToolRequirement.STONE));
+    public static final ItemMaterial ENDERIUM = new ItemMaterial(builderAlloy("enderium", ToolRequirement.DIAMOND));
     public static final ItemMaterial COBALT = new ItemMaterial(builderBaseWithOre("cobalt", Ores.COBALT));
     public static final ItemMaterial ULTRINIUM = new ItemMaterial(builderBaseWithOre("ultrinium", Ores.ULTRINIUM));
     public static final ItemMaterial INFINITY = new ItemMaterial(builderBaseWithOre("infinity", Ores.INFINITY));
-    public static final ItemMaterial RUBY = new ItemMaterial(builder("ruby").ore(Ores.RUBY).storageBlock(2));
-    public static final ItemMaterial AMETHYST = new ItemMaterial(builder("amethyst").ore(Ores.AMETHYST).storageBlock(2));
-    public static final ItemMaterial AQUAMARINE = new ItemMaterial(builder("aquamarine").ore(Ores.AQUAMARINE).storageBlock(2));
-    public static final ItemMaterial SAPHIRE = new ItemMaterial(builder("saphire").ore(Ores.SAPHIRE).storageBlock(2));
-    public static final ItemMaterial AMBER = new ItemMaterial(builder("amber").ore(Ores.AMBER).storageBlock(2));
-    public static final ItemMaterial PERIDOT = new ItemMaterial(builder("peridot").ore(Ores.PERIDOT).storageBlock(2));
-    public static final ItemMaterial BERYL = new ItemMaterial(builder("beryl").ore(Ores.BERYL).storageBlock(2));
-    public static final ItemMaterial TOPAZ = new ItemMaterial(builder("topaz").ore(Ores.TOPAZ).storageBlock(2));
-    public static final ItemMaterial TANZANITE = new ItemMaterial(builder("tanzanite").ore(Ores.TANZANITE).storageBlock(2));
-    public static final ItemMaterial MALACHITE = new ItemMaterial(builder("malachite").ore(Ores.MALACHITE).storageBlock(2));
+    public static final ItemMaterial RUBY = new ItemMaterial(builder("ruby").overworldOre(Ores.RUBY).storageBlock(ToolRequirement.IRON));
+    public static final ItemMaterial AMETHYST = new ItemMaterial(builder("amethyst").overworldOre(Ores.AMETHYST).storageBlock(ToolRequirement.IRON));
+    public static final ItemMaterial AQUAMARINE = new ItemMaterial(builder("aquamarine").overworldOre(Ores.AQUAMARINE).storageBlock(ToolRequirement.IRON));
+    public static final ItemMaterial SAPPHIRE = new ItemMaterial(builder("sapphire").overworldOre(Ores.SAPPHIRE).storageBlock(ToolRequirement.IRON));
+    public static final ItemMaterial AMBER = new ItemMaterial(builder("amber").overworldOre(Ores.AMBER).storageBlock(ToolRequirement.IRON));
+    public static final ItemMaterial PERIDOT = new ItemMaterial(builder("peridot").overworldOre(Ores.PERIDOT).storageBlock(ToolRequirement.IRON));
+    public static final ItemMaterial BERYL = new ItemMaterial(builder("beryl").overworldOre(Ores.BERYL).storageBlock(ToolRequirement.IRON));
+    public static final ItemMaterial TOPAZ = new ItemMaterial(builder("topaz").overworldOre(Ores.TOPAZ).storageBlock(ToolRequirement.IRON));
+    public static final ItemMaterial TANZANITE = new ItemMaterial(builder("tanzanite").overworldOre(Ores.TANZANITE).storageBlock(ToolRequirement.IRON));
+    public static final ItemMaterial MALACHITE = new ItemMaterial(builder("malachite").overworldOre(Ores.MALACHITE).storageBlock(ToolRequirement.IRON));
 
     private final String oreName;
-    private final Supplier<Block> oreSupplier;
+    private final Supplier<Block> stoneOreSupplier;
+    private final Supplier<Block> deepslateOreSupplier;
+    private final Supplier<Block> netherOreSupplier;
     private final Supplier<Block> storageBlockSupplier;
     private final Supplier<Item> chunksSupplier;
     private final Supplier<Item> dustSupplier;
@@ -91,7 +95,10 @@ public class ItemMaterial implements IItemMaterial {
     private final Tag.Named<Item> dustTag;
     private final Tag.Named<Item> ingotTag;
     private final Tag.Named<Item> nuggetTag;
-    private BlockRegistryObject<Block> ore;
+    private final ToolRequirement harvestRequirement;
+    private BlockRegistryObject<Block> stoneOre;
+    private BlockRegistryObject<Block> deepslateOre;
+    private BlockRegistryObject<Block> netherOre;
     private BlockRegistryObject<Block> storageBlock;
     private ItemRegistryObject<Item> chunks;
     private ItemRegistryObject<Item> dust;
@@ -113,7 +120,9 @@ public class ItemMaterial implements IItemMaterial {
         }
         this.oreName = oreName;
         this.storageBlockSupplier = builder.storageBlock;
-        this.oreSupplier = builder.ore;
+        this.stoneOreSupplier = builder.stoneOre;
+        this.deepslateOreSupplier = builder.deepslateOre;
+        this.netherOreSupplier = builder.netherOre;
         this.chunksSupplier = builder.chunks;
         this.dustSupplier = builder.dust;
         this.ingotSupplier = builder.ingot;
@@ -127,6 +136,7 @@ public class ItemMaterial implements IItemMaterial {
         this.dustTag = builder.dustTag;
         this.ingotTag = builder.ingotTag;
         this.nuggetTag = builder.nuggetTag;
+        this.harvestRequirement = builder.harvestRequirement;
         this.dataGenTags.addAll(builder.dataGenTags);
 
         map.put(oreName, this);
@@ -135,11 +145,23 @@ public class ItemMaterial implements IItemMaterial {
 
     public static void registerBlocks() {
         for (ItemMaterial metal : values()) {
-            if (metal.oreSupplier != null) {
+            if (metal.stoneOreSupplier != null) {
                 String name = metal.oreName + "_ore";
-                metal.ore = Registration.BLOCKS.register(name, metal.oreSupplier);
+                metal.stoneOre = Registration.BLOCKS.register(name, metal.stoneOreSupplier);
                 Registration.ITEMS.register(name, () ->
-                        new BlockItem(metal.ore.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
+                        new BlockItem(metal.stoneOre.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
+            }
+            if (metal.deepslateOreSupplier != null) {
+                String name = "deepslate_" + metal.oreName + "_ore";
+                metal.deepslateOre = Registration.BLOCKS.register(name, metal.deepslateOreSupplier);
+                Registration.ITEMS.register(name, () ->
+                        new BlockItem(metal.deepslateOre.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
+            }
+            if (metal.netherOreSupplier != null) {
+                String name = "nether_" + metal.oreName + "_ore";
+                metal.netherOre = Registration.BLOCKS.register(name, metal.netherOreSupplier);
+                Registration.ITEMS.register(name, () ->
+                        new BlockItem(metal.netherOre.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
             }
         }
         for (ItemMaterial metal : values()) {
@@ -184,7 +206,7 @@ public class ItemMaterial implements IItemMaterial {
     /**
      * Creates base builder with ore.
      *
-     * @deprecated replaced by {@link #builderBaseWithOre(String, IOre)}.
+     * @deprecated replaced by {@link #builderBaseWithOre(String, Ore)}.
      * @param name name of the material.
      * @param ore ore object.
      * @param harvestLevel the material's harvest level.
@@ -192,7 +214,7 @@ public class ItemMaterial implements IItemMaterial {
      */
     @SuppressWarnings("unused")
     @Deprecated
-    public static Builder builderBaseWithOre(String name, IOre ore, @Deprecated int harvestLevel) {
+    public static Builder builderBaseWithOre(String name, Ore ore, @Deprecated int harvestLevel) {
         return builderBaseWithOre(name, ore);
     }
 
@@ -203,25 +225,25 @@ public class ItemMaterial implements IItemMaterial {
      * @param ore ore object.
      * @return the item material builder.
      */
-    public static Builder builderBaseWithOre(String name, IOre ore) {
-        return builder(name).storageBlock(ore.getHarvestLevel()).ore(ore).chunks().dust().ingot().nugget();
+    public static Builder builderBaseWithOre(String name, Ore ore) {
+        return builder(name).harvestRequirement(ore.getToolRequirement()).storageBlock(ore.getToolRequirement()).overworldOre(ore).chunks().dust().ingot().nugget();
     }
 
     /**
      * Creates alloy material builder.
      *
      * @param name name of the material.
-     * @param harvestLevel the material's harvest level.
+     * @param toolRequirement the material's harvest level.
      * @return the item material builder.
      */
-    public static Builder builderAlloy(String name, @Deprecated int harvestLevel) {
-        return builder(name).storageBlock(harvestLevel).dust().ingot().nugget();
+    public static Builder builderAlloy(String name, ToolRequirement toolRequirement) {
+        return builder(name).storageBlock(toolRequirement).dust().ingot().nugget();
     }
 
     /**
      * Creates gem material builder.
      *
-     * @deprecated replaced by {@link #builderGem(String, DefaultOre)}.
+     * @deprecated replaced by {@link #builderGem(String, ItemMaterialOre)}.
      * @param name name of the material.
      * @param ore the ore object for the gem.
      * @param harvestLevel the material's harvest level.
@@ -229,7 +251,7 @@ public class ItemMaterial implements IItemMaterial {
      */
     @SuppressWarnings("unused")
     @Deprecated
-    public static Builder builderGem(String name, DefaultOre ore, @Deprecated int harvestLevel) {
+    public static Builder builderGem(String name, ItemMaterialOre ore, @Deprecated int harvestLevel) {
         return builderGem(name, ore);
     }
 
@@ -240,8 +262,8 @@ public class ItemMaterial implements IItemMaterial {
      * @param ore the ore object for the gem.
      * @return the item material builder.
      */
-    public static Builder builderGem(String name, DefaultOre ore) {
-        return builder(name).storageBlock(ore.getHarvestLevel()).ore(ore).dust().gem();
+    public static Builder builderGem(String name, ItemMaterialOre ore) {
+        return builder(name).storageBlock(ore.getToolRequirement()).overworldOre(ore).dust().gem();
     }
 
     /**
@@ -255,13 +277,33 @@ public class ItemMaterial implements IItemMaterial {
     }
 
     /**
-     * Get the ore block.
+     * Get the stone ore block.
      *
-     * @return optional value for ore block.
+     * @return optional value for the stone ore block.
      */
     @Override
-    public Optional<Block> getOre() {
-        return ore != null ? Optional.of(ore.get()) : Optional.empty();
+    public Optional<Block> getStoneOre() {
+        return stoneOre != null ? Optional.of(stoneOre.get()) : Optional.empty();
+    }
+
+    /**
+     * Get the deepslate ore block.
+     *
+     * @return optional value for the deepslate ore block.
+     */
+    @Override
+    public Optional<Block> getDeepslateOre() {
+        return deepslateOre != null ? Optional.of(deepslateOre.get()) : Optional.empty();
+    }
+
+    /**
+     * Get the nether ore block.
+     *
+     * @return optional value for the nether ore block.
+     */
+    @Override
+    public Optional<Block> getNetherOre() {
+        return netherOre != null ? Optional.of(netherOre.get()) : Optional.empty();
     }
 
     /**
@@ -414,6 +456,10 @@ public class ItemMaterial implements IItemMaterial {
         return nuggetTag != null ? Optional.of(nuggetTag) : Optional.empty();
     }
 
+    public ToolRequirement getHarvestRequirement() {
+        return harvestRequirement;
+    }
+
     /**
      * Get all smeltables ingredient.
      *
@@ -464,7 +510,9 @@ public class ItemMaterial implements IItemMaterial {
      */
     public static class Builder {
         final String name;
-        Supplier<Block> ore;
+        Supplier<Block> stoneOre;
+        Supplier<Block> deepslateOre;
+        Supplier<Block> netherOre;
         Supplier<Block> storageBlock;
         Supplier<Item> chunks;
         Supplier<Item> dust;
@@ -478,6 +526,7 @@ public class ItemMaterial implements IItemMaterial {
         Tag.Named<Item> ingotTag;
         Tag.Named<Item> gemTag;
         Tag.Named<Item> nuggetTag;
+        ToolRequirement harvestRequirement;
 
         Supplier<Toolset> tools;
         private final List<Tag.Named<Block>> dataGenTags = new ArrayList<>();
@@ -501,14 +550,35 @@ public class ItemMaterial implements IItemMaterial {
             return ItemTags.bind(tag.toString());
         }
 
-        public Builder ore(IOre ore) {
-            this.ore = () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE)
+        public Builder overworldOre(Ore ore) {
+            this.stoneOre = () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE)
                     .requiresCorrectToolForDrops()
                     .strength(ore.getHardness(), ore.getResistance())
                     .sound(SoundType.STONE));
+            this.deepslateOre = () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.DEEPSLATE)
+                    .requiresCorrectToolForDrops()
+                    .strength(ore.getHardness(), ore.getResistance())
+                    .sound(SoundType.DEEPSLATE));
             this.dataGenTags.add(BlockTags.MINEABLE_WITH_PICKAXE);
-            this.dataGenTags.add(BlockTags.NEEDS_IRON_TOOL);
-            this.oreTag = blockTag("ores/" + name);
+            this.dataGenTags.add(ore.getToolRequirement().getTag());
+            this.harvestRequirement = ore.getToolRequirement();
+            if (oreTag == null) {
+                this.oreTag = blockTag("ores/" + name);
+            }
+            return this;
+        }
+
+        public Builder netherOre(Ore ore, ToolRequirement toolRequirement) {
+            this.netherOre = () -> new OreBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.NETHER)
+                    .requiresCorrectToolForDrops()
+                    .strength(ore.getHardness(), ore.getResistance())
+                    .sound(SoundType.NETHERRACK));
+            this.dataGenTags.add(BlockTags.MINEABLE_WITH_PICKAXE);
+            this.dataGenTags.add(toolRequirement.getTag());
+            this.harvestRequirement = toolRequirement;
+            if (oreTag == null) {
+                this.oreTag = blockTag("ores/" + name);
+            }
             return this;
         }
 
@@ -517,15 +587,16 @@ public class ItemMaterial implements IItemMaterial {
             return this;
         }
 
-        public Builder storageBlock(int harvestLevel) {
-            this.storageBlock = () -> new MetalBlock(harvestLevel);
+        public Builder storageBlock(ToolRequirement tool) {
+            this.storageBlock = () -> new MetalBlock(tool);
             this.storageBlockTag = blockTag("storage_blocks/" + name);
+            this.harvestRequirement = tool;
             return this;
         }
 
         public Builder chunks() {
             this.chunks = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
-            this.chunksTag = itemTag(RandomThingz.rl("chunks/" + name));
+            this.chunksTag = itemTag(RandomThingz.res("chunks/" + name));
             return this;
         }
 
@@ -560,6 +631,11 @@ public class ItemMaterial implements IItemMaterial {
         public Builder gem() {
             this.gem = () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC));
             this.gemTag = itemTag("gems/" + name);
+            return this;
+        }
+
+        public Builder harvestRequirement(ToolRequirement toolRequirement) {
+            this.harvestRequirement = toolRequirement;
             return this;
         }
     }

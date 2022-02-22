@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class DieselGeneratorScreen extends AbstractMachineContainerScreen<DieselGeneratorContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/fluid_generator.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/fluid_generator.png");
 
     public DieselGeneratorScreen(DieselGeneratorContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);

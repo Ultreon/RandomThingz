@@ -4,12 +4,15 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.texturedmodels.container.ChestFrameContainer;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Here's where you can find all information about the Frame Chest Screen (GUI)
@@ -33,8 +36,6 @@ public class ChestFrameScreen extends AbstractContainerScreen<ChestFrameContaine
     public ChestFrameScreen(ChestFrameContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);
         this.passEvents = false;
-        int i = 222;
-        int j = 114;
         this.inventoryRows = 3;
         this.imageHeight = 114 + this.inventoryRows * 18;
         this.inventoryLabelY = this.imageHeight - 94;
@@ -44,7 +45,7 @@ public class ChestFrameScreen extends AbstractContainerScreen<ChestFrameContaine
      * Used to draw background and tooltips (items are highlighted, when hovering over them)
      */
     @Override
-    public void render(PoseStack matrixStack, final int mouseX, final int mouseY, final float partialTicks) {
+    public void render(@NotNull PoseStack matrixStack, final int mouseX, final int mouseY, final float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);
@@ -54,21 +55,22 @@ public class ChestFrameScreen extends AbstractContainerScreen<ChestFrameContaine
      * Yeah, it draws the foreground layer of the GUI
      */
     @Override
-    protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
+    protected void renderLabels(@NotNull PoseStack matrixStack, int mouseX, int mouseY) {
         super.renderLabels(matrixStack, mouseX, mouseY);
-        this.font.draw(matrixStack, this.title.getString(), 8.0f, 6.0f, 4210752);
+        this.font.draw(matrixStack, this.title.getString(), 8f, 6f, 4210752);
     }
 
     /**
-     * I just took this from the Vanilla Chest Screen {@linkplain net.minecraft.client.gui.screen.inventory.ChestScreen}
+     * I just took this from the Vanilla Chest Screen {@linkplain ContainerScreen}
      */
     @Override
-    protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+    protected void renderBg(@NotNull PoseStack pose, float partialTicks, int mouseX, int mouseY) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         RenderSystem.setShaderTexture(0, CHEST_GUI_TEXTURE);
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
-        this.blit(matrixStack, i, j, 0, 0, this.imageWidth, this.inventoryRows * 18 + 17);
-        this.blit(matrixStack, i, j + this.inventoryRows * 18 + 17, 0, 126, this.imageWidth, 96);
+        this.blit(pose, i, j, 0, 0, this.imageWidth, this.inventoryRows * 18 + 17);
+        this.blit(pose, i, j + this.inventoryRows * 18 + 17, 0, 126, this.imageWidth, 96);
     }
 }

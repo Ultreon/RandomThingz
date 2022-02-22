@@ -9,6 +9,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,21 +25,21 @@ public class DynamiteItem extends Item {
 
     /**
      * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-     * {@linkplain #onUseItem}.
+     * {@linkplain #useOn(UseOnContext)}.
      */
-    public @NotNull InteractionResultHolder<ItemStack> use(Level dimensionIn, Player playerIn, @NotNull InteractionHand handIn) {
-        ItemStack itemstack = playerIn.getItemInHand(handIn);
-        dimensionIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-        playerIn.getCooldowns().addCooldown(this, 5);
-        if (!dimensionIn.isClientSide) {
-            DynamiteEntity dynamiteEntity = new DynamiteEntity(dimensionIn, playerIn);
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, @NotNull InteractionHand handIn) {
+        ItemStack itemstack = player.getItemInHand(handIn);
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.NEUTRAL, .5f, .4f / (player.getRandom().nextFloat() * .4f + .8f));
+        player.getCooldowns().addCooldown(this, 5);
+        if (!level.isClientSide) {
+            DynamiteEntity dynamiteEntity = new DynamiteEntity(level, player);
             dynamiteEntity.setItem(itemstack);
-            dynamiteEntity.shootFromRotation(playerIn, playerIn.xRot, playerIn.yRot, 0.0f, 1.5F, 1.0f);
-            dimensionIn.addFreshEntity(dynamiteEntity);
+            dynamiteEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 1.5F, 1f);
+            level.addFreshEntity(dynamiteEntity);
         }
 
-        playerIn.awardStat(Stats.ITEM_USED.get(this));
+        player.awardStat(Stats.ITEM_USED.get(this));
 
-        return InteractionResultHolder.sidedSuccess(itemstack, dimensionIn.isClientSide());
+        return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
     }
 }

@@ -8,12 +8,14 @@ import com.ultreon.randomthingz.core.SystemBattery;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("UnusedReturnValue")
 public interface Kernel32 extends StdCallLibrary {
-    Kernel32 INSTANCE = Native.loadLibrary("Kernel32", Kernel32.class);
+    Kernel32 INSTANCE = Native.load("Kernel32", Kernel32.class);
 
     /**
      * @see <a href="https://docs.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status">Microsoft documentation.</a>
      */
+    @SuppressWarnings("unused")
     class SYSTEM_POWER_STATUS extends Structure {
         public byte ACLineStatus;
         public byte BatteryFlag;
@@ -24,7 +26,7 @@ public interface Kernel32 extends StdCallLibrary {
 
         @Override
         protected List<String> getFieldOrder() {
-            ArrayList<String> fields = new ArrayList<String>();
+            ArrayList<String> fields = new ArrayList<>();
             fields.add("ACLineStatus");
             fields.add("BatteryFlag");
             fields.add("BatteryLifePercent");
@@ -39,11 +41,11 @@ public interface Kernel32 extends StdCallLibrary {
          * @return ac line status
          */
         public SystemBattery.ACLineStatus getACLineStatus() {
-            switch (ACLineStatus) {
-                case (0): return SystemBattery.ACLineStatus.OFFLINE;
-                case (1): return SystemBattery.ACLineStatus.ONLINE;
-                default: return SystemBattery.ACLineStatus.UNKNOWN;
-            }
+            return switch (ACLineStatus) {
+                case (0) -> SystemBattery.ACLineStatus.OFFLINE;
+                case (1) -> SystemBattery.ACLineStatus.ONLINE;
+                default -> SystemBattery.ACLineStatus.UNKNOWN;
+            };
         }
 
         /**
@@ -51,14 +53,14 @@ public interface Kernel32 extends StdCallLibrary {
          * @return battery flag
          */
         public SystemBattery.BatteryFlag getBatteryFlag() {
-            switch (BatteryFlag) {
-                case (1): return SystemBattery.BatteryFlag.HIGH; // "High, more than 66 percent";
-                case (2): return SystemBattery.BatteryFlag.LOW; // "Low, less than 33 percent";
-                case (4): return SystemBattery.BatteryFlag.CRITICAL; // "Critical, less than five percent";
-                case (8): return SystemBattery.BatteryFlag.CHARGING; // "Charging";
-                case ((byte) 128): return SystemBattery.BatteryFlag.NO_BATTERY; // "No system battery";
-                default: return SystemBattery.BatteryFlag.UNKNOWN; // "Unknown";
-            }
+            return switch (BatteryFlag) {
+                case (1) -> SystemBattery.BatteryFlag.HIGH; // "High, more than 66 percent";
+                case (2) -> SystemBattery.BatteryFlag.LOW; // "Low, less than 33 percent";
+                case (4) -> SystemBattery.BatteryFlag.CRITICAL; // "Critical, less than five percent";
+                case (8) -> SystemBattery.BatteryFlag.CHARGING; // "Charging";
+                case ((byte) 128) -> SystemBattery.BatteryFlag.NO_BATTERY; // "No system battery";
+                default -> SystemBattery.BatteryFlag.UNKNOWN; // "Unknown";
+            };
         }
 
         /**

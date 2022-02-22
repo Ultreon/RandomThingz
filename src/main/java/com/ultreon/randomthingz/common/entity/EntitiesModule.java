@@ -3,7 +3,6 @@ package com.ultreon.randomthingz.common.entity;
 import com.ultreon.randomthingz.actionmenu.MainActionMenu;
 import com.ultreon.randomthingz.actionmenu.MenuHandler;
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
-import com.ultreon.randomthingz.client.model.AdditionsModelCache;
 import com.ultreon.randomthingz.common.CoreRegisterModule;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import com.ultreon.randomthingz.util.Targeter;
@@ -16,10 +15,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -60,18 +55,6 @@ public class EntitiesModule extends CoreRegisterModule<EntityType<?>> {
         return ModuleSafety.SAFE;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
-    public void onModelRegistry(ModelRegistryEvent event) {
-        AdditionsModelCache.INSTANCE.setup();
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    @SubscribeEvent
-    public void onModelBake(ModelBakeEvent event) {
-        AdditionsModelCache.INSTANCE.onBake(event);
-    }
-
     @Override
     public void onEnable() {
         ModEntities.register();
@@ -86,8 +69,7 @@ public class EntitiesModule extends CoreRegisterModule<EntityType<?>> {
     }
 
     private void enableClient() {
-        MinecraftForge.EVENT_BUS.addListener(this::onModelRegistry);
-        MinecraftForge.EVENT_BUS.addListener(this::onModelBake);
+
     }
 
     @Override

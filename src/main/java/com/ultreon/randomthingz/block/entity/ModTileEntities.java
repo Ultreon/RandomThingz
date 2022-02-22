@@ -28,7 +28,7 @@ public class ModTileEntities extends ObjectInit<BlockEntityType<?>> {
      * @return an registry object of the tile-entity type.
      */
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, Supplier<BlockEntityType<T>> supplier) {
-        return TileEntitiesModule.TILE_ENTITIES.register(name, supplier);
+        return BlockEntitiesModule.BLOCE_ENTITIES.register(name, supplier);
     }
 
     public static void register() {

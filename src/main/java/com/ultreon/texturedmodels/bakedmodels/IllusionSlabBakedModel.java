@@ -2,7 +2,7 @@ package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.block.FrameBlock;
 import com.ultreon.texturedmodels.block.SixWaySlabFrameBlock;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.BlockModelShaper;
@@ -38,7 +38,7 @@ public class IllusionSlabBakedModel implements IDynamicBakedModel {
     @NotNull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         if (mimic != null && !(mimic.getBlock() instanceof FrameBlock)) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
@@ -55,7 +55,7 @@ public class IllusionSlabBakedModel implements IDynamicBakedModel {
         if (side != null) {
             return Collections.emptyList();
         }
-        BlockState mimic = extraData.getData(FrameBlockTile.MIMIC);
+        BlockState mimic = extraData.getData(FrameBlockEntity.MIMIC);
         if (mimic != null && state != null) {
             int tintIndex = -1;
             if (mimic.getBlock() instanceof GrassBlock) {
@@ -64,44 +64,44 @@ public class IllusionSlabBakedModel implements IDynamicBakedModel {
             List<BakedQuad> quads = new ArrayList<>();
             switch (state.getValue(SixWaySlabFrameBlock.FACING)) {
                 case UP:
-                    quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, 0f, 0.5f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
+                    quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, 0f, .5f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
                     break;
                 case DOWN:
-                    quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, 0.5f, 1f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
+                    quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, .5f, 1f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
                     break;
                 case WEST:
-                    quads.addAll(ModelHelper.createSixFaceCuboid(0.5f, 1f, 0f, 1f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
+                    quads.addAll(ModelHelper.createSixFaceCuboid(.5f, 1f, 0f, 1f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
                     break;
                 case SOUTH:
-                    quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, 0f, 1f, 0f, 0.5f, mimic, model, extraData, rand, tintIndex));
+                    quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, 0f, 1f, 0f, .5f, mimic, model, extraData, rand, tintIndex));
                     break;
                 case NORTH:
-                    quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, 0f, 1f, 0.5f, 1f, mimic, model, extraData, rand, tintIndex));
+                    quads.addAll(ModelHelper.createSixFaceCuboid(0f, 1f, 0f, 1f, .5f, 1f, mimic, model, extraData, rand, tintIndex));
                     break;
                 case EAST:
-                    quads.addAll(ModelHelper.createSixFaceCuboid(0f, 0.5f, 0f, 1f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
+                    quads.addAll(ModelHelper.createSixFaceCuboid(0f, .5f, 0f, 1f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
                     break;
             }
-            int overlayIndex = extraData.getData(FrameBlockTile.OVERLAY);
-            if (extraData.getData(FrameBlockTile.OVERLAY) != 0) {
+            int overlayIndex = extraData.getData(FrameBlockEntity.OVERLAY);
+            if (extraData.getData(FrameBlockEntity.OVERLAY) != 0) {
                 switch (state.getValue(SixWaySlabFrameBlock.FACING)) {
                     case UP:
-                        quads.addAll(ModelHelper.createOverlay(0f, 1f, 0f, 0.5f, 0f, 1f, overlayIndex));
+                        quads.addAll(ModelHelper.createOverlay(0f, 1f, 0f, .5f, 0f, 1f, overlayIndex));
                         break;
                     case DOWN:
-                        quads.addAll(ModelHelper.createOverlay(0f, 1f, 0.5f, 1f, 0f, 1f, overlayIndex));
+                        quads.addAll(ModelHelper.createOverlay(0f, 1f, .5f, 1f, 0f, 1f, overlayIndex));
                         break;
                     case WEST:
-                        quads.addAll(ModelHelper.createOverlay(0.5f, 1f, 0f, 1f, 0f, 1f, overlayIndex));
+                        quads.addAll(ModelHelper.createOverlay(.5f, 1f, 0f, 1f, 0f, 1f, overlayIndex));
                         break;
                     case SOUTH:
-                        quads.addAll(ModelHelper.createOverlay(0f, 1f, 0f, 1f, 0f, 0.5f, overlayIndex));
+                        quads.addAll(ModelHelper.createOverlay(0f, 1f, 0f, 1f, 0f, .5f, overlayIndex));
                         break;
                     case NORTH:
-                        quads.addAll(ModelHelper.createOverlay(0f, 1f, 0f, 1f, 0.5f, 1f, overlayIndex));
+                        quads.addAll(ModelHelper.createOverlay(0f, 1f, 0f, 1f, .5f, 1f, overlayIndex));
                         break;
                     case EAST:
-                        quads.addAll(ModelHelper.createOverlay(0f, 0.5f, 0f, 1f, 0f, 1f, overlayIndex));
+                        quads.addAll(ModelHelper.createOverlay(0f, .5f, 0f, 1f, 0f, 1f, overlayIndex));
                         break;
                 }
             }

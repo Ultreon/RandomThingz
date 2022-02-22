@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
 public class QuarryScreen extends AbstractMachineContainerScreen<QuarryContainer> {
-    private static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/quarry.png");
+    private static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/quarry.png");
 
     public QuarryScreen(QuarryContainer screenContainer, Inventory inv, Component titleIn) {
         super(screenContainer, inv, titleIn);

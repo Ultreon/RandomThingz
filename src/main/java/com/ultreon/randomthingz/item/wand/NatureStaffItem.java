@@ -29,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 
 /**
  * Nature staff item class.
@@ -42,22 +43,21 @@ public class NatureStaffItem extends Item {
     }
 
     @Deprecated //Forge: Use Player/Hand version
-    public static boolean applyBonemeal(ItemStack stack, Level dimensionIn, BlockPos pos) {
-        if (dimensionIn instanceof ServerLevel)
-            return applyBonemeal(stack, dimensionIn, pos, net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((ServerLevel) dimensionIn));
+    public static boolean applyBonemeal(ItemStack stack, Level level, BlockPos pos) {
+        if (level instanceof ServerLevel)
+            return applyBonemeal(stack, level, pos, net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((ServerLevel) level));
         return false;
     }
 
-    public static boolean applyBonemeal(ItemStack stack, Level dimensionIn, BlockPos pos, Player player) {
-        BlockState blockstate = dimensionIn.getBlockState(pos);
-        int hook = net.minecraftforge.event.ForgeEventFactory.onApplyBonemeal(player, dimensionIn, pos, blockstate, stack);
+    public static boolean applyBonemeal(ItemStack stack, Level level, BlockPos pos, Player player) {
+        BlockState blockstate = level.getBlockState(pos);
+        int hook = net.minecraftforge.event.ForgeEventFactory.onApplyBonemeal(player, level, pos, blockstate, stack);
         if (hook != 0) return hook > 0;
-        if (blockstate.getBlock() instanceof BonemealableBlock) {
-            BonemealableBlock igrowable = (BonemealableBlock) blockstate.getBlock();
-            if (igrowable.isValidBonemealTarget(dimensionIn, pos, blockstate, dimensionIn.isClientSide)) {
-                if (dimensionIn instanceof ServerLevel) {
-                    if (igrowable.isBonemealSuccess(dimensionIn, dimensionIn.random, pos, blockstate)) {
-                        igrowable.performBonemeal((ServerLevel) dimensionIn, dimensionIn.random, pos, blockstate);
+        if (blockstate.getBlock() instanceof BonemealableBlock bonemealable) {
+            if (bonemealable.isValidBonemealTarget(level, pos, blockstate, level.isClientSide)) {
+                if (level instanceof ServerLevel) {
+                    if (bonemealable.isBonemealSuccess(level, level.random, pos, blockstate)) {
+                        bonemealable.performBonemeal((ServerLevel) level, level.random, pos, blockstate);
                     }
                 }
 
@@ -69,42 +69,42 @@ public class NatureStaffItem extends Item {
     }
 
     @SuppressWarnings("unused")
-    public static boolean growSeagrass(ItemStack stack, Level dimensionIn, BlockPos pos, @Nullable Direction side) {
-        if (dimensionIn.getBlockState(pos).is(Blocks.WATER) && dimensionIn.getFluidState(pos).getAmount() == 8) {
-            if (dimensionIn instanceof ServerLevel) {
-                label80:
-                for (int i = 0; i < 128; ++i) {
+    public static boolean growSeagrass(ItemStack stack, Level level, BlockPos pos, @Nullable Direction side) {
+        Random random = level.getRandom();
+        if (level.getBlockState(pos).is(Blocks.WATER) && level.getFluidState(pos).getAmount() == 8) {
+            if (level instanceof ServerLevel) {
+                label80: for (int i = 0; i < 128; ++i) {
                     BlockPos blockpos = pos;
                     BlockState blockState = Blocks.SEAGRASS.defaultBlockState();
 
                     for (int j = 0; j < i / 16; ++j) {
-                        blockpos = blockpos.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
-                        if (dimensionIn.getBlockState(blockpos).isCollisionShapeFullBlock(dimensionIn, blockpos)) {
+                        blockpos = blockpos.offset(level.getRandom().nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
+                        if (level.getBlockState(blockpos).isCollisionShapeFullBlock(level, blockpos)) {
                             continue label80;
                         }
                     }
 
-                    Optional<ResourceKey<Biome>> optional = dimensionIn.getBiomeName(blockpos);
-                    if (Objects.equals(optional, Optional.of(Biomes.WARM_OCEAN)) || Objects.equals(optional, Optional.of(Biomes.DEEP_WARM_OCEAN))) {
+                    Optional<ResourceKey<Biome>> optional = level.getBiomeName(blockpos);
+                    if (Objects.equals(optional, Optional.of(Biomes.WARM_OCEAN)) || Objects.equals(optional, Optional.of(Biomes.DEEP_LUKEWARM_OCEAN))) {
                         if (i == 0 && side != null && side.getAxis().isHorizontal()) {
-                            blockState = BlockTags.WALL_CORALS.getRandomElement(dimensionIn.random).defaultBlockState().setValue(BaseCoralWallFanBlock.FACING, side);
+                            blockState = BlockTags.WALL_CORALS.getRandomElement(level.random).defaultBlockState().setValue(BaseCoralWallFanBlock.FACING, side);
                         } else if (random.nextInt(4) == 0) {
                             blockState = BlockTags.UNDERWATER_BONEMEALS.getRandomElement(random).defaultBlockState();
                         }
                     }
 
-                    if (blockState.getBlock().is(BlockTags.WALL_CORALS)) {
-                        for (int k = 0; !blockState.canSurvive(dimensionIn, blockpos) && k < 4; ++k) {
+                    if (blockState.is(BlockTags.WALL_CORALS)) {
+                        for (int k = 0; !blockState.canSurvive(level, blockpos) && k < 4; ++k) {
                             blockState = blockState.setValue(BaseCoralWallFanBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random));
                         }
                     }
 
-                    if (blockState.canSurvive(dimensionIn, blockpos)) {
-                        BlockState blockState1 = dimensionIn.getBlockState(blockpos);
-                        if (blockState1.is(Blocks.WATER) && dimensionIn.getFluidState(blockpos).getAmount() == 8) {
-                            dimensionIn.setBlock(blockpos, blockState, 3);
+                    if (blockState.canSurvive(level, blockpos)) {
+                        BlockState blockState1 = level.getBlockState(blockpos);
+                        if (blockState1.is(Blocks.WATER) && level.getFluidState(blockpos).getAmount() == 8) {
+                            level.setBlock(blockpos, blockState, 3);
                         } else if (blockState1.is(Blocks.SEAGRASS) && random.nextInt(10) == 0) {
-                            ((BonemealableBlock) Blocks.SEAGRASS).performBonemeal((ServerLevel) dimensionIn, random, blockpos, blockState1);
+                            ((BonemealableBlock) Blocks.SEAGRASS).performBonemeal((ServerLevel) level, random, blockpos, blockState1);
                         }
                     }
                 }
@@ -116,30 +116,31 @@ public class NatureStaffItem extends Item {
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void spawnBonemealParticles(LevelAccessor dimensionIn, BlockPos posIn, int data) {
+    public static void spawnBonemealParticles(LevelAccessor level, BlockPos posIn, int data) {
         if (data == 0) {
             data = 15;
         }
 
-        BlockState blockstate = dimensionIn.getBlockState(posIn);
-        //noinspection deprecation
-        if (!blockstate.isAir(dimensionIn, posIn)) {
+        Random random = level.getRandom();
+
+        BlockState blockstate = level.getBlockState(posIn);
+        if (!blockstate.isAir()) {
             double d0 = 0.5D;
             double d1;
             if (blockstate.is(Blocks.WATER)) {
                 data *= 3;
                 d1 = 1.0D;
                 d0 = 3.0D;
-            } else if (blockstate.isSolidRender(dimensionIn, posIn)) {
+            } else if (blockstate.isSolidRender(level, posIn)) {
                 posIn = posIn.above();
                 data *= 3;
                 d0 = 3.0D;
                 d1 = 1.0D;
             } else {
-                d1 = blockstate.getShape(dimensionIn, posIn).max(Direction.Axis.Y);
+                d1 = blockstate.getShape(level, posIn).max(Direction.Axis.Y);
             }
 
-            dimensionIn.addParticle(ParticleTypes.HAPPY_VILLAGER, (double) posIn.getX() + 0.5D, (double) posIn.getY() + 0.5D, (double) posIn.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
+            level.addParticle(ParticleTypes.HAPPY_VILLAGER, (double) posIn.getX() + 0.5D, (double) posIn.getY() + 0.5D, (double) posIn.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 
             for (int i = 0; i < data; ++i) {
                 double d2 = random.nextGaussian() * 0.02D;
@@ -149,9 +150,8 @@ public class NatureStaffItem extends Item {
                 double d6 = (double) posIn.getX() + d5 + random.nextDouble() * d0 * 2.0D;
                 double d7 = (double) posIn.getY() + random.nextDouble() * d1;
                 double d8 = (double) posIn.getZ() + d5 + random.nextDouble() * d0 * 2.0D;
-                //noinspection deprecation
-                if (!dimensionIn.getBlockState((new BlockPos(d6, d7, d8)).below()).isAir()) {
-                    dimensionIn.addParticle(ParticleTypes.HAPPY_VILLAGER, d6, d7, d8, d2, d3, d4);
+                if (!level.getBlockState((new BlockPos(d6, d7, d8)).below()).isAir()) {
+                    level.addParticle(ParticleTypes.HAPPY_VILLAGER, d6, d7, d8, d2, d3, d4);
                 }
             }
 
@@ -163,7 +163,7 @@ public class NatureStaffItem extends Item {
      */
     public @NotNull
     InteractionResult useOn(UseOnContext context) {
-        Level dimension = context.getLevel();
+        Level level = context.getLevel();
         BlockPos blockPos = context.getClickedPos();
         BlockPos blockPos1 = blockPos.relative(context.getClickedFace());
         Player player = context.getPlayer();
@@ -171,23 +171,23 @@ public class NatureStaffItem extends Item {
             return InteractionResult.FAIL;
         }
 
-        if (applyBonemeal(context.getItemInHand(), dimension, blockPos, player)) {
-            if (!dimension.isClientSide) {
-                dimension.levelEvent(2005, blockPos, 0);
+        if (applyBonemeal(context.getItemInHand(), level, blockPos, player)) {
+            if (!level.isClientSide) {
+                level.levelEvent(2005, blockPos, 0);
                 player.awardStat(Stats.ITEM_USED.get(this));
             }
 
-            return InteractionResult.sidedSuccess(dimension.isClientSide);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         } else {
-            BlockState blockstate = dimension.getBlockState(blockPos);
-            boolean flag = blockstate.isFaceSturdy(dimension, blockPos, context.getClickedFace());
-            if (flag && growSeagrass(context.getItemInHand(), dimension, blockPos1, context.getClickedFace())) {
-                if (!dimension.isClientSide) {
-                    dimension.levelEvent(2005, blockPos1, 0);
+            BlockState blockstate = level.getBlockState(blockPos);
+            boolean flag = blockstate.isFaceSturdy(level, blockPos, context.getClickedFace());
+            if (flag && growSeagrass(context.getItemInHand(), level, blockPos1, context.getClickedFace())) {
+                if (!level.isClientSide) {
+                    level.levelEvent(2005, blockPos1, 0);
                     player.awardStat(Stats.ITEM_USED.get(this));
                 }
 
-                return InteractionResult.sidedSuccess(dimension.isClientSide);
+                return InteractionResult.sidedSuccess(level.isClientSide);
             } else {
                 return InteractionResult.PASS;
             }

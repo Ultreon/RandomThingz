@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.pipe;
 
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class PipeTileEntity extends BlockEntity {
     public PipeTileEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.pipe, pos, state);
+        super(ModMachines.PIPE, pos, state);
     }
 
     public String getPipeNetworkData() {

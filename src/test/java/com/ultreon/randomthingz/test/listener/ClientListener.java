@@ -23,7 +23,7 @@ public class ClientListener {
     /**
      * Handle client chat event.<br>
      * <br>
-     * Author: Qboi123<br>
+     * @author Qboi123<br>
      *
      * @param event client chat.
      */

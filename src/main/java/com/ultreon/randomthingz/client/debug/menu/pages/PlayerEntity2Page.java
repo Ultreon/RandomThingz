@@ -42,7 +42,7 @@ public class PlayerEntity2Page extends DebugPage {
             return list;
         }
 
-        list.add(new DebugEntry("glowing", player::isGlowing));
+        list.add(new DebugEntry("glowing", player::isCurrentlyGlowing));
         list.add(new DebugEntry("invisible", player::isInvisible));
         list.add(new DebugEntry("onGround", player::isOnGround));
         list.add(new DebugEntry("onLadder", player::onClimbable));

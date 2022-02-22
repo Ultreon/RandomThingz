@@ -48,7 +48,7 @@ public class ItemPage extends DebugPage {
         list.add(new DebugEntry("stackLimit", () -> item.getItemStackLimit(stack)));
         list.add(new DebugEntry("maxDamage", () -> item.getMaxDamage(stack)));
         list.add(new DebugEntry("damage", () -> item.getDamage(stack)));
-        list.add(new DebugEntry("burnTime", () -> item.getBurnTime(stack)));
+//        list.add(new DebugEntry("burnTime", () -> item.getBurnTime(stack)));
         list.add(new DebugEntry("count", stack::getCount));
         list.add(new DebugEntry("repairCost", stack::getBaseRepairCost));
         list.add(new DebugEntry("useDuration", stack::getUseDuration));

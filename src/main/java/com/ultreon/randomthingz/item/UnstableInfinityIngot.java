@@ -29,23 +29,23 @@ public class UnstableInfinityIngot extends Item {
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, @NotNull Level dimensionIn, @NotNull Entity entityIn, int itemSlot, boolean isSelected) {
+    public void inventoryTick(ItemStack stack, @NotNull Level level, @NotNull Entity entity, int slot, boolean isSelected) {
         CompoundTag nbt = stack.getOrCreateTagElement("randomthingz");
         if (!nbt.contains("createTime")) {
-            nbt.putLong("createTime", dimensionIn.getGameTime());
+            nbt.putLong("createTime", level.getGameTime());
         } else {
             long createTime = nbt.getLong("createTime");
-            if ((createTime + 200) < dimensionIn.getGameTime()) {
-                trigger(stack, dimensionIn, entityIn, itemSlot);
+            if ((createTime + 200) < level.getGameTime()) {
+                trigger(stack, level, entity);
             }
         }
 
-        super.inventoryTick(stack, dimensionIn, entityIn, itemSlot, isSelected);
+        super.inventoryTick(stack, level, entity, slot, isSelected);
     }
 
-    public void trigger(ItemStack stack, @NotNull Level dimensionIn, @NotNull Entity entityIn, int itemSlot) {
-        entityIn.setSlot(itemSlot, ItemStack.EMPTY);
-        dimensionIn.explode(entityIn, entityIn.getX(), entityIn.getY(), entityIn.getZ(), 8f * (float) stack.getCount(), true, Explosion.BlockInteraction.DESTROY);
+    public void trigger(ItemStack stack, @NotNull Level level, @NotNull Entity entity) {
+        stack.setCount(0);
+        level.explode(entity, entity.getX(), entity.getY(), entity.getZ(), 8f * (float) stack.getCount(), true, Explosion.BlockInteraction.DESTROY);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class UnstableInfinityIngot extends Item {
             if ((createTime + 200) < dimension.getGameTime()) {
                 dimension.explode(entity, entity.getX(), entity.getY(), entity.getZ(), 8f * (float) stack.getCount(), true, Explosion.BlockInteraction.DESTROY);
                 if (entity.isAlive()) {
-                    entity.remove(false);
+                    entity.discard();
                 }
             }
         }

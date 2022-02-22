@@ -20,7 +20,8 @@ public enum ToolRequirement {
     IRON(BlockTags.NEEDS_IRON_TOOL, Tiers.IRON),
     DIAMOND(BlockTags.NEEDS_DIAMOND_TOOL, Tiers.DIAMOND),
     NETHERITE(Tags.Blocks.NEEDS_NETHERITE_TOOL, Tiers.NETHERITE),
-    COBALT(ModBlockTags.NEEDS_COBALT_TOOL, Tiers.NETHERITE),
+    COBALT(ModBlockTags.NEEDS_COBALT_TOOL, ModTiers.COBALT),
+    ULTRINIUM(ModBlockTags.NEEDS_COBALT_TOOL, ModTiers.ULTRINIUM),
     INFINITY(ModBlockTags.NEEDS_INFINITY_TOOL, ModTiers.INFINITY);
 
     private final Tag.Named<Block> tag;
@@ -44,6 +45,8 @@ public enum ToolRequirement {
     }
 
     public static void registerAll() {
-        COBALT.register(RandomThingz.rl("cobalt"), List.of("netherite"), List.of(INFINITY));
+        COBALT.register(RandomThingz.res("cobalt"), List.of("netherite"), List.of(ULTRINIUM.tier, INFINITY.tier));
+        ULTRINIUM.register(RandomThingz.res("ultrinium"), List.of(COBALT.tier), List.of(INFINITY.tier));
+        INFINITY.register(RandomThingz.res("infinity"), List.of(ULTRINIUM), List.of());
     }
 }

@@ -1,6 +1,7 @@
 package com.ultreon.randomthingz.client.model;
 
 import net.minecraft.client.model.ChickenModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.animal.Chicken;
 
 /**
@@ -10,7 +11,7 @@ import net.minecraft.world.entity.animal.Chicken;
  */
 @Deprecated
 public class FreeChickenModel<T extends Chicken> extends ChickenModel<T> {
-    public FreeChickenModel() {
-        super();
+    public FreeChickenModel(ModelPart modelPart) {
+        super(modelPart);
     }
 }

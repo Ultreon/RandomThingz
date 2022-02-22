@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class RefineryScreen extends AbstractMachineContainerScreen<RefineryContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/refinery.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/refinery.png");
 
     public RefineryScreen(RefineryContainer container, Inventory playerInventory, Component titleIn) {
         super(container, playerInventory, titleIn);

@@ -51,15 +51,14 @@ public abstract class AdvancedContainerScreen<T extends AbstractContainerMenu> e
         super.renderLabels(matrixStack, mouseX, mouseY);
 
         // Draw inventory names.
-        this.font.draw(matrixStack, this.title.getString(), 8.0f, 6.0f, 4210725);
-        this.font.draw(matrixStack, this.inventory.getDisplayName().getString(), 8.0f, 90.0f, 4210725);
+        this.font.draw(matrixStack, this.title.getString(), 8f, 6f, 4210725);
+        this.font.draw(matrixStack, this.playerInventoryTitle.getString(), 8f, 90f, 4210725);
     }
 
     @Override
     protected void renderBg(@NotNull PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         // Set color.
-        //noinspection deprecation
-        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 0.5f);
+        RenderSystem.setShaderColor(1f, 1f, 1f, .5f);
         if (this.minecraft != null) {
             for (AbstractWidget widget : widgets) {
                 widget.render(matrixStack, mouseX, mouseY, partialTicks);

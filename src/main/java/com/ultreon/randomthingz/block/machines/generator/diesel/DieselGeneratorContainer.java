@@ -23,7 +23,7 @@ public class DieselGeneratorContainer extends AbstractFluidGeneratorContainer<Di
         this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
         this.addSlot(new Slot(this.tileEntity, 1, 80, 59));
 
-        com.ultreon.modlib.embedded.silentlib.util.InventoryUtils.createPlayerSlots(player, 8, 84).forEach(this::addSlot);
+        com.ultreon.modlib.silentlib.util.InventoryUtils.createPlayerSlots(player, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
     }

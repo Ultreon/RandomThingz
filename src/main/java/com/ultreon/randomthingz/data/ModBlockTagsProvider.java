@@ -30,7 +30,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-@SuppressWarnings({"deprecation", "UnstableApiUsage"})
+@SuppressWarnings({"deprecation"})
 public class ModBlockTagsProvider extends BlockTagsProvider {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
@@ -47,20 +47,24 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags() {
         tag(ModTags.Blocks.DRYING_RACKS).add(Registration.getBlocks(DryingRackBlock.class).toArray(new Block[0]));
+        tag(ModTags.Blocks.MINEABLE_WITH_SWORD);
 
         for (ItemMaterial metal : ItemMaterial.values()) {
-            metal.getOreTag().ifPresent(tag ->
-                    tag(tag).add(metal.getOre().get()));
+            metal.getOreTag().ifPresent(tag -> {
+                tag(tag).add(metal.getStoneOre().get());
+                tag(tag).add(metal.getDeepslateOre().get());
+            });
             metal.getStorageBlockTag().ifPresent(tag ->
                     tag(tag).add(metal.getStorageBlock().get()));
             metal.getDataGenTags().forEach(tag -> {
-                metal.getStorageBlock().ifPresent(block -> {
-                    tag(tag).add(block);
-                });
-                metal.getOre().ifPresent(block -> {
-                    tag(tag).add(block);
-                });
+                metal.getStorageBlock().ifPresent(block -> tag(tag).add(block));
+                metal.getStoneOre().ifPresent(block -> tag(tag).add(block));
+                metal.getDeepslateOre().ifPresent(block -> tag(tag).add(block));
+                metal.getNetherOre().ifPresent(block -> tag(tag).add(block));
             });
+            metal.getStoneOre().ifPresent(block -> tag(metal.getHarvestRequirement().getTag()).add(block));
+            metal.getDeepslateOre().ifPresent(block -> tag(metal.getHarvestRequirement().getTag()).add(block));
+            metal.getNetherOre().ifPresent(block -> tag(metal.getHarvestRequirement().getTag()).add(block));
         }
 
         TagAppender<Block> mineableWithPickaxe = tag(BlockTags.MINEABLE_WITH_PICKAXE);

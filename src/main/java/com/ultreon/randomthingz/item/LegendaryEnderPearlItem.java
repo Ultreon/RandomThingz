@@ -27,19 +27,19 @@ public class LegendaryEnderPearlItem extends EnderpearlItem {
      * {@linkplain #onUseItem}.
      */
     public @NotNull
-    InteractionResultHolder<ItemStack> use(Level dimensionIn, Player playerIn, @NotNull InteractionHand handIn) {
-        ItemStack itemstack = playerIn.getItemInHand(handIn);
-        dimensionIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-        playerIn.getCooldowns().addCooldown(this, 5);
-        if (!dimensionIn.isClientSide) {
-            LegendaryEnderPearlEntity enderPearlEntity = new LegendaryEnderPearlEntity(dimensionIn, playerIn);
+    InteractionResultHolder<ItemStack> use(Level level, Player player, @NotNull InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENDER_PEARL_THROW, SoundSource.NEUTRAL, .5f, .4f / (player.getRandom().nextFloat() * .4f + .8f));
+        player.getCooldowns().addCooldown(this, 5);
+        if (!level.isClientSide) {
+            LegendaryEnderPearlEntity enderPearlEntity = new LegendaryEnderPearlEntity(level, player);
             enderPearlEntity.setItem(itemstack);
-            enderPearlEntity.shootFromRotation(playerIn, playerIn.xRot, playerIn.yRot, 0.0f, 1.5F, 1.0f);
-            dimensionIn.addFreshEntity(enderPearlEntity);
+            enderPearlEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0f, 1.5F, 1f);
+            level.addFreshEntity(enderPearlEntity);
         }
 
-        playerIn.awardStat(Stats.ITEM_USED.get(this));
+        player.awardStat(Stats.ITEM_USED.get(this));
 
-        return InteractionResultHolder.sidedSuccess(itemstack, dimensionIn.isClientSide());
+        return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
     }
 }

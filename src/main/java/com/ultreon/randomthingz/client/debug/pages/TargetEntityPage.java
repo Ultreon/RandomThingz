@@ -25,15 +25,15 @@ public class TargetEntityPage extends DebugPage {
 
         if (mc.player != null) {
             Player player = mc.player;
-            float playerPitch = player.xRot;
-            float playerYaw = player.yRot;
+            float playerPitch = player.getXRot();
+            float playerYaw = player.getYRot();
 
-            Vec3 playerEye = player.getEyePosition(1.0f);
+            Vec3 playerEye = player.getEyePosition(1f);
 
-            float f2 = Mth.cos(-playerYaw * ((float) Math.PI / 180F) - (float) Math.PI);
-            float f3 = Mth.sin(-playerYaw * ((float) Math.PI / 180F) - (float) Math.PI);
-            float f4 = -Mth.cos(-playerPitch * ((float) Math.PI / 180F));
-            float f5 = Mth.sin(-playerPitch * ((float) Math.PI / 180F));
+            float f2 = Mth.cos(-playerYaw * ((float) Math.PI / 180f) - (float) Math.PI);
+            float f3 = Mth.sin(-playerYaw * ((float) Math.PI / 180f) - (float) Math.PI);
+            float f4 = -Mth.cos(-playerPitch * ((float) Math.PI / 180f));
+            float f5 = Mth.sin(-playerPitch * ((float) Math.PI / 180f));
 
             float f6 = f3 * f4;
             float f7 = f2 * f4;
@@ -60,7 +60,7 @@ public class TargetEntityPage extends DebugPage {
 
                     debugText.addLeftText("translatedName", I18n.get(type.getDescriptionId()));
                     debugText.addLeftText("height", type.getHeight());
-                    debugText.addLeftText("lootTable", type.getDefaultLootTable());
+                    debugText.addLeftText("target", type.getDefaultLootTable());
                     debugText.addLeftText("name", type.getDescription().getString());
                     debugText.addLeftText("registryName", type.getRegistryName());
                     debugText.addLeftText("size", type.getDimensions().width, type.getDimensions().height);

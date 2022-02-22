@@ -2,7 +2,9 @@ package com.ultreon.randomthingz.item.tool;
 
 import com.google.common.collect.Streams;
 import com.ultreon.randomthingz.RandomThingz;
+import com.ultreon.randomthingz.item.ItemType;
 import com.ultreon.randomthingz.item.tool.trait.AbstractTrait;
+import com.ultreon.randomthingz.item.tool.types.ModToolTypes;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.EntityDamageSource;
@@ -28,7 +30,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -54,19 +55,14 @@ public class ArmorTool extends ArmorItem implements ITool {
     }
 
     @Override
-    public Set<ToolType> getQfmToolTypes() {
-        switch (slot) {
-            case HEAD:
-                return new HashSet<>(Collections.singletonList(ToolType.HELMET));
-            case CHEST:
-                return new HashSet<>(Collections.singletonList(ToolType.CHESTPLATE));
-            case LEGS:
-                return new HashSet<>(Collections.singletonList(ToolType.LEGGINGS));
-            case FEET:
-                return new HashSet<>(Collections.singletonList(ToolType.BOOTS));
-            default:
-                return new HashSet<>(Collections.emptyList());
-        }
+    public Set<ItemType> getQfmToolTypes() {
+        return switch (slot) {
+            case HEAD -> Set.of(ItemType.HELMET);
+            case CHEST -> Set.of(ItemType.CHESTPLATE);
+            case LEGS -> Set.of(ItemType.LEGGINGS);
+            case FEET -> Set.of(ItemType.BOOTS);
+            default -> new HashSet<>(Collections.emptyList());
+        };
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -81,18 +77,18 @@ public class ArmorTool extends ArmorItem implements ITool {
     @SubscribeEvent
     public static void onLivingDamageEvent(LivingDamageEvent e) {
         LivingEntity entityLiving = e.getEntityLiving();
-        for (ItemStack stack : Streams.stream(entityLiving.getAllSlots()).filter((itemStack) -> itemStack.getItem() instanceof ArmorTool).collect(Collectors.toList())) {
+        for (ItemStack stack : Streams.stream(entityLiving.getAllSlots()).filter((itemStack) -> itemStack.getItem() instanceof ArmorTool).toList()) {
             ArmorTool item = (ArmorTool) stack.getItem();
             item.livingDamage(stack, e);
         }
     }
 
     public void livingDamage(ItemStack stack, LivingDamageEvent e) {
-        float smite = 0.0f;
+        float smite = 0f;
         for (AbstractTrait trait : traits.get()) {
             trait.onLivingDamage(e);
             float smiteValue = trait.getSmiteValue(getQfmToolTypes(), stack, e.getEntityLiving());
-            if (smiteValue < 0.0f) {
+            if (smiteValue < 0f) {
                 RandomThingz.LOGGER.warn("Smite value is less that zero, this can cause weird behavior");
             }
 

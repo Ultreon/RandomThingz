@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 
 public class CompressorScreen extends AbstractMachineScreen<CompressorContainer> {
-    public static final ResourceLocation TEXTURE = RandomThingz.rl("textures/gui/compressor.png");
+    public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/compressor.png");
 
     public CompressorScreen(CompressorContainer containerIn, Inventory playerInventoryIn, Component titleIn) {
         super(containerIn, playerInventoryIn, titleIn);

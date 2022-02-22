@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines;
 
-import com.ultreon.modlib.embedded.silentlib.tile.BaseInventoryContainerBlockEntity;
-import com.ultreon.modlib.embedded.silentlib.tile.SyncVariable;
+import com.ultreon.modlib.silentlib.block.entity.BaseInventoryContainerBlockEntity;
+import com.ultreon.modlib.silentlib.block.entity.SyncVariable;
 import com.ultreon.randomthingz.capability.EnergyStorageImpl;
 import com.ultreon.randomthingz.util.EnergyUtils;
 import com.ultreon.texturedmodels.tileentity.ITickable;
@@ -18,6 +18,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public abstract class AbstractBaseEnergyInventoryBlockEntity extends BaseInventoryContainerBlockEntity implements EnergyHandler, ITickable {
     protected final EnergyStorageImpl energy;
@@ -89,7 +91,7 @@ public abstract class AbstractBaseEnergyInventoryBlockEntity extends BaseInvento
     @Override
     public CompoundTag save(CompoundTag tags) {
         super.save(tags);
-        SyncVariable.Helper.writeSyncVars(this, tags, SyncVariable.Type.WRITE);
+        SyncVariable.Helper.writeSyncVars(this, tags, SyncVariable.Type.SAVE);
         writeEnergy(tags);
         return tags;
     }
@@ -97,7 +99,7 @@ public abstract class AbstractBaseEnergyInventoryBlockEntity extends BaseInvento
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         super.onDataPacket(net, packet);
-        SyncVariable.Helper.readSyncVars(this, packet.getTag());
+        SyncVariable.Helper.readSyncVars(this, Objects.requireNonNull(packet.getTag()));
         readEnergy(packet.getTag());
     }
 
@@ -110,7 +112,7 @@ public abstract class AbstractBaseEnergyInventoryBlockEntity extends BaseInvento
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+    public <T> @NotNull LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (!this.remove && cap == CapabilityEnergy.ENERGY) {
             return getEnergy(side).cast();
         }

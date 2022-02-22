@@ -1,6 +1,7 @@
 package com.ultreon.randomthingz.client.model;
 
 import net.minecraft.client.model.EndermanModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.monster.EnderMan;
 
 /**
@@ -10,7 +11,7 @@ import net.minecraft.world.entity.monster.EnderMan;
  */
 @Deprecated
 public class FreeEndermanModel<T extends EnderMan> extends EndermanModel<T> {
-    public FreeEndermanModel(float scale) {
-        super(scale);
+    public FreeEndermanModel(ModelPart modelPart) {
+        super(modelPart);
     }
 }

@@ -10,15 +10,15 @@ import com.ultreon.randomthingz.common.tags.ModTags;
 import com.ultreon.randomthingz.item.CraftingItems;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
+import net.minecraft.data.HashCache;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.apache.logging.log4j.LogManager;
@@ -174,31 +174,25 @@ public class ModItemTagsProvider extends ItemTagsProvider {
             pickaxes.add(toolset.getPickaxe().get());
             shovels.add(toolset.getShovel().get());
             hoes.add(toolset.getHoe().get());
-            longswords.add(toolset.getLongsword().get());
-            broadswords.add(toolset.getBroadsword().get());
-            katanas.add(toolset.getKatana().get());
-            cutlasses.add(toolset.getCutlass().get());
-            battleaxes.add(toolset.getBattleaxe().get());
-            lumberAxes.add(toolset.getLumberAxe().get());
-            excavators.add(toolset.getExcavator().get());
-            hammers.add(toolset.getHammer().get());
         }
     }
 
     @SafeVarargs
 
-    private final void groupBuilder(ITag.INamedTag<Item> tag, Function<ItemMaterial, Optional<ITag.INamedTag<Item>>> tagGetter, ITag.INamedTag<Item>... extras) {
-        Builder<Item> builder = getOrCreateBuilder(tag);
+    private final void groupBuilder(Tag.Named<Item> tag, Function<ItemMaterial, Optional<Tag.Named<Item>>> tagGetter, Tag.Named<Item>... extras) {
+        Tag.Builder builder = getOrCreateRawBuilder(tag);
         for (ItemMaterial metal : ItemMaterial.values()) {
-            tagGetter.apply(metal).ifPresent(builder::addTag);
+            tagGetter.apply(metal).ifPresent(namedTag -> builder.add(new Tag.TagEntry(namedTag.getName()), modId));
         }
-        for (ITag.INamedTag<Item> extraTag : extras) {
-            builder.addTag(extraTag);
+        for (Tag.Named<Item> extraTag : extras) {
+            builder.addTag(extraTag.getName(), modId);
         }
     }
 
-    private void builder(ResourceLocation id, IItemProvider... items) {
-        getOrCreateBuilder(itemTag(id)).add(Arrays.stream(items).map(IItemProvider::asItem).toArray(Item[]::new));
+    private void builder(ResourceLocation id, ItemLike... items) {
+        for (Item item : Arrays.stream(items).map(ItemLike::asItem).toArray(Item[]::new)) {
+            getOrCreateRawBuilder(itemTag(id)).add(new Tag.ElementEntry(Objects.requireNonNull(item.getRegistryName())), modId);
+        }
     }
 
     @Override
@@ -207,22 +201,24 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         return "RandomThingz - Item Tags";
     }
 
+
+
     @SuppressWarnings("ConstantConditions")
     @Override
-    public void act(@NotNull DirectoryCache cache) {
+    public void run(@NotNull HashCache cache) {
         // Temp fix that removes the broken safety check
-        this.tagToBuilder.clear();
-        this.registerTags();
-        this.tagToBuilder.forEach((p_240524_4_, p_240524_5_) -> {
-            JsonObject jsonobject = p_240524_5_.serialize();
-            Path path = this.createPath(p_240524_4_);
+        this.builders.clear();
+        this.addTags();
+        this.builders.forEach((p_240524_4_, p_240524_5_) -> {
+            JsonObject jsonobject = p_240524_5_.serializeToJson();
+            Path path = this.getPath(p_240524_4_);
             if (path == null)
                 return; //Forge: Allow running this data provider without writing it. Recipe provider needs valid tags.
 
             try {
                 String s = GSON.toJson(jsonobject);
-                @SuppressWarnings("UnstableApiUsage") String s1 = HASH_FUNCTION.hashUnencodedChars(s).toString();
-                if (!Objects.equals(cache.getPreviousHash(path), s1) || !Files.exists(path)) {
+                String s1 = SHA1.hashUnencodedChars(s).toString();
+                if (!Objects.equals(cache.getHash(path), s1) || !Files.exists(path)) {
                     Files.createDirectories(path.getParent());
 
                     try (BufferedWriter bufferedwriter = Files.newBufferedWriter(path)) {
@@ -230,7 +226,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                     }
                 }
 
-                cache.recordHash(path, s1);
+                cache.putNew(path, s1);
             } catch (IOException ioexception) {
                 LOGGER.error("Couldn't write tags to {}", path, ioexception);
             }
@@ -238,7 +234,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         });
     }
 
-    private static ITag.INamedTag<Item> itemTag(String path) {
-        return ItemTags.createWrapperTag(new ResourceLocation(RandomThingz.MOD_ID, path).toString());
+    private static Tag.Named<Item> itemTag(String path) {
+        return ItemTags.bind(new ResourceLocation(RandomThingz.MOD_ID, path).toString());
     }
 }

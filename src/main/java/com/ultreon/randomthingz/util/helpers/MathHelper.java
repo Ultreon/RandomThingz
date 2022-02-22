@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 @SuppressWarnings("unused")
 @lombok.experimental.UtilityClass
-public final class Mth extends UtilityClass {
+public final class MathHelper extends UtilityClass {
     public static int getDecimalPlaces(Float d) {
         String s = d.toString();
         String[] split = s.split("\\.");

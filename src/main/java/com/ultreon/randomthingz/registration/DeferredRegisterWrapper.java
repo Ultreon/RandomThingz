@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.registration;
 
-import com.ultreon.modlib.embedded.silentlib.registry.RegistryObjectWrapper;
+import com.ultreon.modlib.silentlib.registry.RegistryObjectWrapper;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.*;
 

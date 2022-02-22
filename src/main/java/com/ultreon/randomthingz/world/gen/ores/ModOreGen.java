@@ -3,31 +3,19 @@ package com.ultreon.randomthingz.world.gen.ores;
 import com.mojang.datafixers.util.Pair;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.item.tier.ToolRequirement;
+import com.ultreon.randomthingz.item.tool.ToolType;
+import com.ultreon.randomthingz.world.gen.ores.configs.DefaultOreConfig;
 import lombok.Getter;
-import lombok.val;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.CountConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
-import net.minecraft.world.level.levelgen.placement.DepthAverageConfigation;
-import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
-import net.minecraft.world.level.levelgen.placement.FrequencyWithExtraChanceDecoratorConfiguration;
-import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
-import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -35,68 +23,66 @@ import java.util.function.Predicate;
  *
  * @author Qboi123
  */
-@SuppressWarnings({"unused", "deprecation"})
 public final class ModOreGen {
-    private static final ConcurrentHashMap<ResourceLocation, ArrayList<HashMap.SimpleEntry<GenerationStep.Decoration, ConfiguredFeature<?, ?>>>> oreMap = new ConcurrentHashMap<>();
-    private static final ArrayList<Pair<Predicate<BiomeLoadingEvent>, ConfiguredFeature<?, ?>>> ores = new ArrayList<>();
+    private static final ArrayList<Pair<Predicate<BiomeLoadingEvent>, PlacedFeature>> ores = new ArrayList<>();
 
     @Getter
     private static final ModOreGen instance = new ModOreGen();
 
     private ModOreGen() {
-        val windows = 3;
     }
 
-    @SuppressWarnings("unused")
+    @Deprecated
+    @SuppressWarnings("ALL")
     public static class OreProps {
-        private final ConfiguredFeature<?, ?> feature;
+        private final PlacedFeature feature;
 
-        public OreProps(ConfiguredFeature<OreConfiguration, ?> feature) {
+        public OreProps(PlacedFeature feature) {
             this.feature = feature;
         }
 
         public OreProps chance(int chance) {
-            feature.chance(chance);
+//            feature.placed();
             return this;
         }
 
         public OreProps count(int count) {
-            feature.count(count);
+//            feature.count(count);
             return this;
         }
 
         public OreProps countExtra(int count, int extraChance, int extraCount) {
-            feature.decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(count, extraChance, extraCount)));
+//            feature.decorated(FeatureDecorator.COUNT_EXTRA.configured(new FrequencyWithExtraChanceDecoratorConfiguration(count, extraChance, extraCount)));
             return this;
         }
 
         public OreProps countMultilayer(int base) {
-            feature.decorated(FeatureDecorator.COUNT_MULTILAYER.configured(new CountConfiguration(base)));
+//            feature.decorated(FeatureDecorator.COUNT_MULTILAYER.configured(new CountConfiguration(base)));
             return this;
         }
 
         public OreProps square() {
-            feature.squared();
+//            feature.squared();
             return this;
         }
 
         public OreProps range(int top) {
-            feature.range(top);
+//            feature.range(top);
             return this;
         }
 
         public OreProps range(int top, int bottom) {
-            feature.decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(bottom, 0, top)));
+//            feature.decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(bottom, 0, top)));
             return this;
         }
 
         public OreProps range(int top, int topOffset, int bottom) {
-            feature.decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(bottom, topOffset, top)));
+//            feature.decorated(FeatureDecorator.RANGE.configured(new RangeDecoratorConfiguration(bottom, topOffset, top)));
             return this;
         }
 
         public OreProps depthAverage(int baseline, int spread) {
-            feature.decorated(FeatureDecorator.DEPTH_AVERAGE.configured(new DepthAverageConfigation(baseline, spread)));
+//            feature.decorated(FeatureDecorator.DEPTH_AVERAGE.configured(new DepthAverageConfigation(baseline, spread)));
             return this;
         }
     }
@@ -110,10 +96,14 @@ public final class ModOreGen {
         // Started generating ores.
         RandomThingz.LOGGER.info("-===========- Create Ore Features [START] -===========-");
 
-        addOreFeature((a) -> a.count(12).range(30, 48), 6,
-                new BlockMatchTest(Blocks.DIRT), ModBlocks.GILDED_DIRT.get(),
+        addOreFeature(new GenericOre("gilded_dirt",
+                ModBlocks.GILDED_DIRT::asBlock,
+                new TagMatchTest(BlockTags.DIRT),
+                .5f, .5f,
+                ToolType.SHOVEL, ToolRequirement.IRON,
+                new DefaultOreConfig(12, 6, 30, 48),
                 (b) -> b.getCategory() == Biome.BiomeCategory.RIVER
-        );
+        ));
 //        addOreFeature((a) -> a.count(6).range(25, 8), 6, BASE_STONE_OVERWORLD, ModBlocks.RUBY_ORE.get(),
 //                (b) -> b.getCategory() == Biome.Category.EXTREME_HILLS
 //        );
@@ -127,16 +117,16 @@ public final class ModOreGen {
 //                (b) -> b.getCategory() == Biome.Category.EXTREME_HILLS || b.getCategory() == Biome.Category.DESERT
 //        );
 //        addOreFeature((a) -> a.count(4).range(15, 1), 2, BASE_STONE_OVERWORLD, ModBlocks.TANZANITE_ORE.get(),
-//                (b) -> b.getClimate().temperature >= 1.0f
+//                (b) -> b.getClimate().temperature >= 1f
 //        );
 //        addOreFeature((a) -> a.count(2).range(11, 8), 1, BASE_STONE_OVERWORLD, ModBlocks.ULTRINIUM_ORE.get(),
-//                (b) -> b.getClimate().temperature >= 1.0f
+//                (b) -> b.getClimate().temperature >= 1f
 //        );
 //        addOreFeature((a) -> a.chance(128).count(1).range(48, 0), 1, BASE_STONE_OVERWORLD, ModBlocks.INFINITY_ORE.get(),
-//                (b) -> b.getClimate().temperature >= 1.0f
+//                (b) -> b.getClimate().temperature >= 1f
 //        );
 
-        for (DefaultOre ore : DefaultOre.values()) {
+        for (ItemMaterialOre ore : ItemMaterialOre.values()) {
             addOreFeature(ore);
         }
 
@@ -144,21 +134,21 @@ public final class ModOreGen {
         RandomThingz.LOGGER.info("-===========- Create Ore Features [ END ] -===========-");
     }
 
-    public static void addOreFeature(Function<OreProps, OreProps> oreProps, int size, RuleTest filler, Block ore, Predicate<BiomeLoadingEvent> biome) {
-        // Ore Feature
-        BlockState blockState = ore.defaultBlockState();
-        OreConfiguration oreFeatureConfig = new OreConfiguration(filler, blockState, size);
+//    public static void addOreFeature(Function<OreProps, OreProps> oreProps, int size, RuleTest filler, Block ore, Predicate<BiomeLoadingEvent> biome) {
+//        // Ore Feature
+//        BlockState blockState = ore.defaultBlockState();
+//        OreConfiguration oreFeatureConfig = new OreConfiguration(filler, blockState, size);
+//
+//        // Configured Feature
+//        ConfiguredFeature<?, ?> configuredFeature = oreProps.apply(new OreProps(Feature.ORE.configured(oreFeatureConfig))).feature;
+//
+//        // Add ore to list.
+//        ores.add(new Pair<>(biome, configuredFeature));
+//    }
 
-        // Configured Feature
-        ConfiguredFeature<?, ?> configuredFeature = oreProps.apply(new OreProps(Feature.ORE.configured(oreFeatureConfig))).feature;
-
-        // Add ore to list.
-        ores.add(new Pair<>(biome, configuredFeature));
-    }
-
-    private static void addOreFeature(DefaultOre ore) {
+    private static void addOreFeature(Ore ore) {
         // Get configured feature.
-        ConfiguredFeature<?, ?> configuredFeature = ore.getConfiguredFeature();
+        PlacedFeature configuredFeature = ore.getPlacedFeature();
         Predicate<BiomeLoadingEvent> predicate = ore.getBiomePredicate();
 
         // Add ore to list.
@@ -182,7 +172,7 @@ public final class ModOreGen {
 //            }
 //        }
 
-        for (Pair<Predicate<BiomeLoadingEvent>, ConfiguredFeature<?, ?>> ore : ores) {
+        for (Pair<Predicate<BiomeLoadingEvent>, PlacedFeature> ore : ores) {
             if (ore.getFirst().test(event)) {
                 event.getGeneration().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ore.getSecond());
                 i++;

@@ -1,7 +1,7 @@
 package com.ultreon.texturedmodels.bakedmodels;
 
 import com.ultreon.texturedmodels.block.BedFrameBlock;
-import com.ultreon.texturedmodels.tileentity.BedFrameTile;
+import com.ultreon.texturedmodels.tileentity.BedFrameBlockEntity;
 import com.ultreon.texturedmodels.util.ModelHelper;
 import com.ultreon.texturedmodels.util.TextureHelper;
 import net.minecraft.client.Minecraft;
@@ -47,7 +47,7 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
     @NotNull
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull Random rand, @NotNull IModelData extraData) {
-        BlockState mimic = extraData.getData(BedFrameTile.MIMIC);
+        BlockState mimic = extraData.getData(BedFrameBlockEntity.MIMIC);
         if (mimic != null) {
             ModelResourceLocation location = BlockModelShaper.stateToModelLocation(mimic);
             if (location != null) {
@@ -65,22 +65,22 @@ public class IllusionBedBakedModel implements IDynamicBakedModel {
         if (side != null) {
             return Collections.emptyList();
         }
-        BlockState mimic = extraData.getData(BedFrameTile.MIMIC);
+        BlockState mimic = extraData.getData(BedFrameBlockEntity.MIMIC);
         if (mimic != null && state != null) {
             int tintIndex = -1;
             if (mimic.getBlock() instanceof GrassBlock) {
                 tintIndex = 1;
             }
             List<BakedQuad> quads = new ArrayList<>(ModelHelper.createSixFaceCuboid(0f, 1f, 3 / 16f, 5 / 16f, 0f, 1f, mimic, model, extraData, rand, tintIndex));
-            TextureAtlasSprite pillow = TextureHelper.getWoolTextures().get(extraData.getData(BedFrameTile.PILLOW));
-            TextureAtlasSprite blanket = TextureHelper.getWoolTextures().get(extraData.getData(BedFrameTile.BLANKET));
-            Integer design = extraData.getData(BedFrameTile.DESIGN);
+            TextureAtlasSprite pillow = TextureHelper.getWoolTextures().get(extraData.getData(BedFrameBlockEntity.PILLOW));
+            TextureAtlasSprite blanket = TextureHelper.getWoolTextures().get(extraData.getData(BedFrameBlockEntity.BLANKET));
+            Integer design = extraData.getData(BedFrameBlockEntity.DESIGN);
             if (design == null) {
                 return quads;
             }
             List<TextureAtlasSprite> planksList = TextureHelper.getPlanksTextures();
             TextureAtlasSprite planks;
-            Integer desTex = extraData.getData(BedFrameTile.DESIGN_TEXTURE);
+            Integer desTex = extraData.getData(BedFrameBlockEntity.DESIGN_TEXTURE);
             if (desTex == null || desTex < 0 || desTex > 7) {
                 return quads;
             } else {

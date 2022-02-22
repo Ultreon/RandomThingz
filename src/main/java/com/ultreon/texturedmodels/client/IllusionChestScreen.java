@@ -50,13 +50,13 @@ public class IllusionChestScreen extends AbstractContainerScreen<IllusionChestCo
     @Override
     protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
         super.renderLabels(matrixStack, mouseX, mouseY);
-        this.font.draw(matrixStack, this.title.getString(), 8.0f, 6.0f, 4210752);
-        //this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(), 8.0f, 90.0f, 4210752);
+        this.font.draw(matrixStack, this.title.getString(), 8f, 6f, 4210752);
+        //this.font.drawString(matrixStack, this.playerInventory.getDisplayName().getString(), 8f, 90f, 4210752);
     }
 
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         RenderSystem.setShaderTexture(0, CHEST_GUI_TEXTURE);
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;

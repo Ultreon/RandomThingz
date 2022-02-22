@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.solidifier;
 
 import com.ultreon.modlib.api.FluidContainer;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.AbstractFluidMachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.SolidifyingRecipe;
@@ -28,7 +28,7 @@ public class SolidifierBlockEntity extends AbstractFluidMachineBlockEntity<Solid
     public static final int ENERGY_PER_TICK = 50;
 
     public SolidifierBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.solidifier, pos, state, 3, 1, TANK_CAPACITY, MachineTier.STANDARD);
+        super(ModMachines.SOLIDIFIER, pos, state, 3, 1, TANK_CAPACITY, MachineTier.STANDARD);
     }
 
     @Override

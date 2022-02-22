@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.mixer;
 
 import com.ultreon.modlib.api.FluidContainer;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.AbstractFluidMachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.MixingRecipe;
@@ -27,7 +27,7 @@ public class MixerBlockEntity extends AbstractFluidMachineBlockEntity<MixingReci
     public static final int ENERGY_PER_TICK = 100;
 
     public MixerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.mixer, pos, state, 4, 5, TANK_CAPACITY, MachineTier.STANDARD);
+        super(ModMachines.MIXER, pos, state, 4, 5, TANK_CAPACITY, MachineTier.STANDARD);
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
-import com.ultreon.modlib.embedded.silentutils.MathUtils;
+import com.ultreon.modlib.silentutils.MathUtils;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
@@ -54,7 +54,7 @@ public class CrushingRecipe implements Recipe<Container> {
                     return MathUtils.tryPercentage(chance);
                 })
                 .map(e -> e.getKey().copy())
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
@@ -71,7 +71,7 @@ public class CrushingRecipe implements Recipe<Container> {
     public List<Pair<ItemStack, Float>> getPossibleResultsWithChances() {
         return results.entrySet().stream()
                 .map(e -> new Pair<>(e.getKey(), e.getValue()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

@@ -87,7 +87,7 @@ public class DebugChoiceScreen extends Screen {
         int y = height / 2 - textureHeight / 2;
 
         if (this.minecraft != null) {
-            this.minecraft.textureManager.bindTexture(GUI_LOCATION);
+            RenderSystem.setShaderTexture(0, GUI_LOCATION);
             blit(matrixStack, x, y, textureWidth, textureHeight, 0, 0, textureWidth, textureHeight, 256, 256);
         }
     }

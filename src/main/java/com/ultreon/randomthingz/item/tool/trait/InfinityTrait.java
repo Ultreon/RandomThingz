@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
-import com.ultreon.randomthingz.entity.damagesource.DamageSourceInfinitySword;
+import com.ultreon.randomthingz.entity.damagesource.InfinitySwordDamageSource;
 import com.ultreon.randomthingz.init.ModStats;
-import com.ultreon.randomthingz.item.tool.ToolType;
+import com.ultreon.randomthingz.item.ItemType;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -26,7 +26,7 @@ public class InfinityTrait extends AbstractTrait {
     }
 
     @Override
-    public boolean isEnchantable(Set<ToolType> type, ItemStack stack) {
+    public boolean isEnchantable(Set<ItemType> type, ItemStack stack) {
         return false;
     }
 
@@ -39,7 +39,7 @@ public class InfinityTrait extends AbstractTrait {
         if (victim instanceof Player playerVictim) {
             // Get victim
             if (isInfinite(playerVictim)) {
-                victim.hurt(new DamageSourceInfinitySword(attacker).bypassArmor(), 4.0f);
+                victim.hurt(new InfinitySwordDamageSource(attacker).bypassArmor(), 4f);
                 return true;
             }
             //noinspection ConstantConditions
@@ -50,7 +50,7 @@ public class InfinityTrait extends AbstractTrait {
 
         // Combat tracking.
         victim.lastHurtByPlayerTime = 60;
-        victim.getCombatTracker().recordDamage(new DamageSourceInfinitySword(attacker), victim.getHealth(), victim.getHealth());
+        victim.getCombatTracker().recordDamage(new InfinitySwordDamageSource(attacker), victim.getHealth(), victim.getHealth());
         victim.setHealth(0);
 
         // Death event.
@@ -88,7 +88,7 @@ public class InfinityTrait extends AbstractTrait {
     public void onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
         if (!entity.level.isClientSide && entity instanceof Player victim) {
             if (victim.isCreative() && !(victim.getHealth() <= 0) && victim.getHealth() > 0 && !isInfinite(victim)) {
-                victim.getCombatTracker().recordDamage(new DamageSourceInfinitySword(player), victim.getHealth(), victim.getHealth());
+                victim.getCombatTracker().recordDamage(new InfinitySwordDamageSource(player), victim.getHealth(), victim.getHealth());
                 victim.setHealth(0);
                 victim.die(new EntityDamageSource("infinity", player));
                 player.awardStat(ModStats.INFINITY_KILL, 1);

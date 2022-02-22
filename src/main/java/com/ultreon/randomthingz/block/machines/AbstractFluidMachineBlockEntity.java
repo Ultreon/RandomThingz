@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.block.machines;
 
 import com.ultreon.modlib.api.RedstoneMode;
-import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidInventory;
-import com.ultreon.modlib.api.crafting.recipe.fluid.BaseFluidRecipe;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidInventory;
+import com.ultreon.modlib.api.crafting.recipe.fluid.FluidRecipe;
 import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
-import com.ultreon.modlib.embedded.silentutils.EnumUtils;
+import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,7 +29,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.IntStream;
 
-public abstract class AbstractFluidMachineBlockEntity<R extends BaseFluidRecipe<?>> extends AbstractMachineBlockEntity<R> implements BaseFluidInventory {
+public abstract class AbstractFluidMachineBlockEntity<R extends FluidRecipe<?>> extends AbstractMachineBlockEntity<R> implements FluidInventory {
     protected final FluidTank[] tanks;
     protected final ContainerData fields = new ContainerData() {
         @SuppressWarnings("deprecation") // Use of Registry

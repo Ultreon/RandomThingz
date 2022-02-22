@@ -56,7 +56,7 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock impleme
     });
 
     public PipeBlock(Properties properties) {
-        super(0.125f, properties);
+        super(.125f, properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(NORTH, ConnectionType.NONE)
                 .setValue(EAST, ConnectionType.NONE)

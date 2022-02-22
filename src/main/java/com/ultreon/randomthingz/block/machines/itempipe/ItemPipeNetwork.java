@@ -162,8 +162,8 @@ public final class ItemPipeNetwork implements IItemHandler {
 
     @NotNull
     @Override
-    public ItemStack getItem(int slot) {
-        return itemTank.getItem(slot);
+    public ItemStack getStackInSlot(int slot) {
+        return itemTank.getStackInSlot(slot);
     }
 
     @NotNull
@@ -212,7 +212,7 @@ public final class ItemPipeNetwork implements IItemHandler {
 
         @NotNull
         @Override
-        public ItemStack getItem(int slot) {
+        public ItemStack getStackInSlot(int slot) {
             return network.itemTank.getStack();
         }
 

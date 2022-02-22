@@ -111,13 +111,13 @@ public class TickListener {
                 }
 
                 if (currState.lbJustPressed) {
-                    player.inventory.selected = Math.max(player.inventory.selected - 1, 0);
+                    player.getInventory().selected = Math.max(player.getInventory().selected - 1, 0);
                 }
                 if (currState.rbJustPressed) {
-                    player.inventory.selected = Math.min(player.inventory.selected + 1, 9);
+                    player.getInventory().selected = Math.min(player.getInventory().selected + 1, 9);
                 }
                 if (currState.dpadUp) {
-                    player.inventory.selected = Math.min(player.inventory.selected + 1, 9);
+                    player.getInventory().selected = Math.min(player.getInventory().selected + 1, 9);
                 }
 
                 if (currState.rightTrigger > 0.2) {

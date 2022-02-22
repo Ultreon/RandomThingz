@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.electricfurnace;
 
 import com.google.common.collect.ImmutableList;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.util.TextUtils;
@@ -33,7 +33,7 @@ public class ElectricFurnaceBlockEntity extends AbstractMachineBlockEntity<Abstr
     private static final int[] SLOTS_ALL = {0, 1};
 
     public ElectricFurnaceBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.electricFurnace, pos, state, INVENTORY_SIZE, MachineTier.STANDARD);
+        super(ModMachines.ELECTRIC_FURNACE, pos, state, INVENTORY_SIZE, MachineTier.STANDARD);
     }
 
     @Override

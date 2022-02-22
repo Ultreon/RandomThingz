@@ -1,6 +1,7 @@
 package com.ultreon.randomthingz.client.model;
 
 import net.minecraft.client.model.CreeperModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.world.entity.monster.Creeper;
 
 /**
@@ -10,11 +11,7 @@ import net.minecraft.world.entity.monster.Creeper;
  */
 @Deprecated
 public class FreeCreeperModel<T extends Creeper> extends CreeperModel<T> {
-    public FreeCreeperModel() {
-        super();
-    }
-
-    public FreeCreeperModel(float scale) {
-        super(scale);
+    public FreeCreeperModel(ModelPart modelPart) {
+        super(modelPart);
     }
 }

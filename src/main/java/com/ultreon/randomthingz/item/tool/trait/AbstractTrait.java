@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.tool.trait;
 
-import com.ultreon.randomthingz.item.tool.ToolType;
+import com.ultreon.randomthingz.item.ItemType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
@@ -24,17 +24,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
+@SuppressWarnings("unused")
 public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait> {
     private ResourceLocation name;
 
     /**
      * Return false if you want the item to be unenchantable.
      *
-     * @param type  an set of tool types of what the tool is
+     * @param type a set of item types of what the tool is
      * @param stack the item stack of the tool.
      * @return true to be enchantable, false otherwise.
      */
-    public boolean isEnchantable(Set<ToolType> type, ItemStack stack) {
+    public boolean isEnchantable(Set<ItemType> type, ItemStack stack) {
         return true;
     }
 
@@ -200,8 +201,8 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @param state the state of the block that is currently being mined.
      * @return the multiplication in block destroy speed. This will multiply before {@linkplain #getDestroyModifier(Set, ItemStack, BlockState)}.
      */
-    public float getDestroyMultiplier(Set<ToolType> type, ItemStack stack, BlockState state) {
-        return 1.0f;
+    public float getDestroyMultiplier(Set<ItemType> type, ItemStack stack, BlockState state) {
+        return 1f;
     }
 
     /**
@@ -212,8 +213,8 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @param state the state of the block that is currently being mined.
      * @return the addition in block destroy speed.
      */
-    public float getDestroyModifier(Set<ToolType> type, ItemStack stack, BlockState state) {
-        return 0.0f;
+    public float getDestroyModifier(Set<ItemType> type, ItemStack stack, BlockState state) {
+        return 0f;
     }
 
     /**
@@ -224,21 +225,21 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
      * @param state he state of the block that is currently being mined.
      * @return the multiplication of the total block destroy speed. This will multiply after {@linkplain #getDestroyModifier(Set, ItemStack, BlockState)}.
      */
-    public float getDestroyTotalMultiplier(Set<ToolType> type, ItemStack stack, BlockState state) {
-        return 1.0f;
+    public float getDestroyTotalMultiplier(Set<ItemType> type, ItemStack stack, BlockState state) {
+        return 1f;
     }
 
     /**
      * Return the smite value of the tool.
      * Smite is the attack damage against undead.
      *
-     * @param qfmToolTypes
+     * @param qfmItemTypes
      * @param stack
      * @param attacker
      * @return
      */
-    public float getSmiteValue(Set<ToolType> qfmToolTypes, ItemStack stack, LivingEntity attacker) {
-        return 0.0f;
+    public float getSmiteValue(Set<ItemType> qfmItemTypes, ItemStack stack, LivingEntity attacker) {
+        return 0f;
     }
 
     public void onLivingDamage(LivingDamageEvent e) {
@@ -252,7 +253,7 @@ public abstract class AbstractTrait implements IForgeRegistryEntry<AbstractTrait
         return InteractionResult.FAIL;
     }
 
-    public float getKnockback(Set<ToolType> qfmToolTypes) {
-        return 0.0f;
+    public float getKnockback(Set<ItemType> qfmItemTypes) {
+        return 0f;
     }
 }

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.dryingrack;
 
-import com.ultreon.modlib.embedded.silentlib.util.PlayerUtils;
-import com.ultreon.randomthingz.block.entity.ModMachineTileEntities;
+import com.ultreon.modlib.silentlib.util.PlayerUtils;
+import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.item.crafting.DryingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.ParticleUtils;
@@ -33,7 +33,7 @@ public class DryingRackTileEntity extends BlockEntity implements Container, ITic
     private int processTime;
 
     public DryingRackTileEntity(BlockPos pos, BlockState state) {
-        super(ModMachineTileEntities.dryingRack, pos, state);
+        super(ModMachines.DRYING_RACK, pos, state);
     }
 
     public ItemStack getItem() {

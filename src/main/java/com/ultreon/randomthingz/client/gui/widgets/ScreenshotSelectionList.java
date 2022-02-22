@@ -1,18 +1,19 @@
 package com.ultreon.randomthingz.client.gui.widgets;
 
-import com.mojang.blaze3d.matrix.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.client.common.Resizer;
 import com.ultreon.randomthingz.client.common.Screenshot;
 import com.ultreon.randomthingz.client.gui.screen.ScreenshotsScreen;
 import com.ultreon.randomthingz.common.FloatSize;
 import lombok.Getter;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Util;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
@@ -119,31 +120,30 @@ public class ScreenshotSelectionList extends ObjectSelectionList<ScreenshotSelec
             this.textureLocation = this.screenshot.getResourceLocation();
         }
 
-        @SuppressWarnings("deprecation")
         @Override
         public void render(@NotNull PoseStack matrixStack, int p_230432_2_, int scroll, int xOffset, int p_230432_5_, int p_230432_6_, int p_230432_7_, int p_230432_8_, boolean p_230432_9_, float p_230432_10_) {
             String name = this.file.getName();
             String size;
 
-            if (this.texture != null && this.texture.getTextureData() != null) {
-                size = this.texture.getTextureData().getWidth() + "x" + this.texture.getTextureData().getHeight();
+            if (this.texture != null && this.texture.getPixels() != null) {
+                size = this.texture.getPixels().getWidth() + "x" + this.texture.getPixels().getHeight();
             } else {
                 size = "Invalid screenshot.";
             }
 
-            StringTextComponent description = new StringTextComponent("");
+            TextComponent description = new TextComponent("");
 
-            this.minecraft.fontRenderer.drawString(matrixStack, name, (float) (xOffset + 32 + 3), (float) (scroll + 1), 0xffffff);
-            this.minecraft.fontRenderer.drawString(matrixStack, size, (float) (xOffset + 32 + 3), (float) (scroll + 9 + 3), 0x808080);
-            this.minecraft.fontRenderer.drawText(matrixStack, description, (float) (xOffset + 32 + 3), (float) (scroll + 9 + 9 + 3), 0x808080);
-            RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
-            this.minecraft.getTextureManager().bindTexture(this.texture != null ? this.textureLocation : ScreenshotSelectionList.UNKNOWN_IMAGE);
+            this.minecraft.font.draw(matrixStack, name, (float) (xOffset + 32 + 3), (float) (scroll + 1), 0xffffff);
+            this.minecraft.font.draw(matrixStack, size, (float) (xOffset + 32 + 3), (float) (scroll + 9 + 3), 0x808080);
+            this.minecraft.font.draw(matrixStack, description, (float) (xOffset + 32 + 3), (float) (scroll + 9 + 9 + 3), 0x808080);
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+            RenderSystem.setShaderTexture(0, this.texture != null ? this.textureLocation : ScreenshotSelectionList.UNKNOWN_IMAGE);
             RenderSystem.enableBlend();
-//         AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0.0f, 0.0f, 32, 32, 32, 32);
+//         AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0f, 0f, 32, 32, 32, 32);
 
             if (this.texture != null) {
-                int imgWidth = this.texture.getTextureData().getWidth();
-                int imgHeight = this.texture.getTextureData().getHeight();
+                int imgWidth = this.texture.getPixels().getWidth();
+                int imgHeight = this.texture.getPixels().getHeight();
 
                 Resizer resizer = new Resizer(imgWidth, imgHeight);
                 FloatSize size1 = resizer.thumbnail(32f, 22f);
@@ -158,32 +158,32 @@ public class ScreenshotSelectionList extends ObjectSelectionList<ScreenshotSelec
 
             RenderSystem.disableBlend();
 //         if (this.minecraft.gameSettings.touchscreen || p_230432_9_) {
-//            this.minecraft.getTextureManager().bindTexture(ScreenshotSelectionList.ICON_OVERLAY_LOCATION);
+//            RenderSystem.setShaderTexture(0, ScreenshotSelectionList.ICON_OVERLAY_LOCATION);
 ////            AbstractGui.fill(p_230432_1_, p_230432_4_, p_230432_3_, p_230432_4_ + 32, p_230432_3_ + 32, -1601138544);
-//            RenderSystem.color4f(1.0f, 1.0f, 1.0f, 1.0f);
+//            RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 //            int i = p_230432_7_ - p_230432_4_;
 //            boolean flag = i < 32;
 //            int j = flag ? 32 : 0;
 //            if (this.summary.isLocked()) {
-//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96.0f, (float)j, 32, 32, 256, 256);
+//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96f, (float)j, 32, 32, 256, 256);
 //               if (flag) {
-//                  this.gui.setToolTip(this.minecraft.fontRenderer.trimStringToWidth(ScreenshotSelectionList.WORLD_LOCKED_TOOLTIP, 175));
+//                  this.gui.setToolTip(this.minecraft.font.trimStringToWidth(ScreenshotSelectionList.WORLD_LOCKED_TOOLTIP, 175));
 //               }
 //            } else if (this.summary.markVersionInList()) {
-//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 32.0f, (float)j, 32, 32, 256, 256);
+//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 32f, (float)j, 32, 32, 256, 256);
 //               if (this.summary.askToOpenDimension()) {
-//                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96.0f, (float)j, 32, 32, 256, 256);
+//                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 96f, (float)j, 32, 32, 256, 256);
 //                  if (flag) {
 //                     this.gui.setToolTip(ImmutableList.of(ScreenshotSelectionList.FROM_NEWER_TOOLTIP_1.getVisualOrderText(), ScreenshotSelectionList.FROM_NEWER_TOOLTIP_2.getVisualOrderText()));
 //                  }
 //               } else if (!SharedConstants.getVersion().isStable()) {
-//                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 64.0f, (float)j, 32, 32, 256, 256);
+//                  AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 64f, (float)j, 32, 32, 256, 256);
 //                  if (flag) {
 //                     this.gui.setToolTip(ImmutableList.of(ScreenshotSelectionList.SNAPSHOT_TOOLTIP_1.getVisualOrderText(), ScreenshotSelectionList.SNAPSHOT_TOOLTIP_2.getVisualOrderText()));
 //                  }
 //               }
 //            } else {
-//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0.0f, (float)j, 32, 32, 256, 256);
+//               AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0f, (float)j, 32, 32, 256, 256);
 //            }
 //         }
         }
@@ -195,17 +195,22 @@ public class ScreenshotSelectionList extends ObjectSelectionList<ScreenshotSelec
             if (mouseX - (double) ScreenshotSelectionList.this.getRowLeft() <= 32.0D) {
 //            this.openScreenshot();
                 return true;
-            } else if (Util.milliTime() - this.lastClick < 250L) {
+            } else if (Util.getMillis() - this.lastClick < 250L) {
 //            this.openScreenshot();
                 return true;
             } else {
-                this.lastClick = Util.milliTime();
+                this.lastClick = Util.getMillis();
                 return false;
             }
         }
 
         public void close() {
 
+        }
+
+        @Override
+        public @NotNull Component getNarration() {
+            return new TextComponent("Screenshot entry");
         }
     }
 }

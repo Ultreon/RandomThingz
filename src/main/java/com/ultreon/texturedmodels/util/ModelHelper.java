@@ -3,7 +3,7 @@ package com.ultreon.texturedmodels.util;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.VertexFormatElement;
 import com.ultreon.texturedmodels.QTextureModels;
-import com.ultreon.texturedmodels.tileentity.FrameBlockTile;
+import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -56,10 +56,10 @@ public class ModelHelper {
             VertexFormatElement e = elements.get(j);
             switch (e.getUsage()) {
                 case POSITION:
-                    builder.put(j, (float) x, (float) y, (float) z, 1.0f);
+                    builder.put(j, (float) x, (float) y, (float) z, 1f);
                     break;
                 case COLOR:
-                    builder.put(j, r, g, b, 1.0f);
+                    builder.put(j, r, g, b, 1f);
                     break;
                 case UV:
                     switch (e.getIndex()) {
@@ -111,10 +111,10 @@ public class ModelHelper {
         builder.setQuadOrientation(Direction.getNearest(normal.x, normal.y, normal.z));
         builder.setApplyDiffuseLighting(true);
         builder.setQuadTint(tintIndex);
-        putVertex(builder, normal, v1.x, v1.y, v1.z, ulow, vlow, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v2.x, v2.y, v2.z, ulow, vhigh, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v3.x, v3.y, v3.z, uhigh, vhigh, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v4.x, v4.y, v4.z, uhigh, vlow, sprite, 1.0f, 1.0f, 1.0f);
+        putVertex(builder, normal, v1.x, v1.y, v1.z, ulow, vlow, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v2.x, v2.y, v2.z, ulow, vhigh, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v3.x, v3.y, v3.z, uhigh, vhigh, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v4.x, v4.y, v4.z, uhigh, vlow, sprite, 1f, 1f, 1f);
         return builder.build();
     }
 
@@ -125,10 +125,10 @@ public class ModelHelper {
         builder.setQuadOrientation(Direction.getNearest(normal.x, normal.y, normal.z));
         builder.setApplyDiffuseLighting(true);
         builder.setQuadTint(tintIndex);
-        putVertex(builder, normal, v1.x, v1.y, v1.z, ulow, vlow, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v2.x, v2.y, v2.z, uhigh, vlow, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v3.x, v3.y, v3.z, uhigh, vhigh, sprite, 1.0f, 1.0f, 1.0f);
-        putVertex(builder, normal, v4.x, v4.y, v4.z, ulow, vhigh, sprite, 1.0f, 1.0f, 1.0f);
+        putVertex(builder, normal, v1.x, v1.y, v1.z, ulow, vlow, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v2.x, v2.y, v2.z, uhigh, vlow, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v3.x, v3.y, v3.z, uhigh, vhigh, sprite, 1f, 1f, 1f);
+        putVertex(builder, normal, v4.x, v4.y, v4.z, ulow, vhigh, sprite, 1f, 1f, 1f);
         return builder.build();
     }
 
@@ -269,22 +269,22 @@ public class ModelHelper {
         TextureAtlasSprite textureWest = textureList.get(0);
         TextureAtlasSprite textureUp = textureList.get(0);
         TextureAtlasSprite textureDown = textureList.get(0);
-        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockTile.MIMIC), Direction.NORTH, rand, extraData)) {
+        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockEntity.MIMIC), Direction.NORTH, rand, extraData)) {
             textureNorth = quad.getSprite();
         }
-        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockTile.MIMIC), Direction.EAST, rand, extraData)) {
+        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockEntity.MIMIC), Direction.EAST, rand, extraData)) {
             textureEast = quad.getSprite();
         }
-        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockTile.MIMIC), Direction.SOUTH, rand, extraData)) {
+        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockEntity.MIMIC), Direction.SOUTH, rand, extraData)) {
             textureSouth = quad.getSprite();
         }
-        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockTile.MIMIC), Direction.WEST, rand, extraData)) {
+        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockEntity.MIMIC), Direction.WEST, rand, extraData)) {
             textureWest = quad.getSprite();
         }
-        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockTile.MIMIC), Direction.UP, rand, extraData)) {
+        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockEntity.MIMIC), Direction.UP, rand, extraData)) {
             textureUp = quad.getSprite();
         }
-        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockTile.MIMIC), Direction.DOWN, rand, extraData)) {
+        for (BakedQuad quad : model.getQuads(extraData.getData(FrameBlockEntity.MIMIC), Direction.DOWN, rand, extraData)) {
             textureDown = quad.getSprite();
         }
         if (up) quads.add(createQuad(NWU, NEU, SEU, SWU, textureUp, xl * 16, xh * 16, zl * 16, zh * 16, tintIndex));

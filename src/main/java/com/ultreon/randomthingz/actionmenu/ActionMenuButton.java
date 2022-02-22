@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.awt.*;
 
+@SuppressWarnings("unused")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ActionMenuButton extends TransparentButton implements IActionMenuIndexable {
@@ -36,20 +37,19 @@ public class ActionMenuButton extends TransparentButton implements IActionMenuIn
         this.item = item;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public void renderButton(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void renderButton(PoseStack pose, int mouseX, int mouseY, float partialTicks) {
         Minecraft mc = Minecraft.getInstance();
-        Font fontrenderer = mc.font;
+        Font font = mc.font;
 
-        int col = 0;
+        int col;
         if (screen.getActiveItem() == this) {
             col = new Color(0, 0, 0, (int) Math.min(Math.max(127 - (51.2 * (menuIndex - 1)), 0), 127)).getRGB();
         } else {
             col = new Color(0, 0, 0, (int) Math.min(Math.max(127 - (51.2 * (menuIndex)), 0), 127)).getRGB();
         }
 
-        fill(matrixStack, x, y, x + width, y + height, col);
+        fill(pose, x, y, x + width, y + height, col);
 
         int hov;
         int nrm;
@@ -68,7 +68,7 @@ public class ActionMenuButton extends TransparentButton implements IActionMenuIn
         if (this.active) {
             if (menuIndex != 0) {
                 if (screen.getActiveItem() == this) {
-                    if (isHovered()) {
+                    if (isHovered) {
                         j = hov;
                     } else {
                         j = nrm;
@@ -77,7 +77,7 @@ public class ActionMenuButton extends TransparentButton implements IActionMenuIn
                     j = nrm;
                 }
             } else {
-                if (isHovered()) {
+                if (isHovered) {
                     j = hov;
                 } else {
                     j = nrm;
@@ -87,57 +87,54 @@ public class ActionMenuButton extends TransparentButton implements IActionMenuIn
             j = dis;
         }
 
-        if (isHovered() && menuIndex == 0 && active) {
-            drawCenteredString(matrixStack, fontrenderer, this.getMessage(), (this.x + this.width / 2) + 1, (this.y + (this.height - 8) / 2) + 1, j);
+        if (isHovered && menuIndex == 0 && active) {
+            drawCenteredString(pose, font, this.getMessage(), (this.x + this.width / 2) + 1, (this.y + (this.height - 8) / 2) + 1, j);
         } else {
-            drawCenteredString(matrixStack, fontrenderer, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
+            drawCenteredString(pose, font, this.getMessage(), this.x + this.width / 2, this.y + (this.height - 8) / 2, j);
         }
 
         if (item instanceof SubmenuItem) {
-            Minecraft.getInstance().getTextureManager().bindTexture(ICONS);
+            RenderSystem.setShaderTexture(0, ICONS);
 
-            matrixStack.push();
-            RenderSystem.pushMatrix();
-            RenderSystem.color4f(1f, 1f, 1f, 1f / (menuIndex + 1));
+            pose.pushPose();
+            RenderSystem.setShaderColor(1f, 1f, 1f, 1f / (menuIndex + 1));
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
             RenderSystem.enableDepthTest();
             if (active) {
-                if (isHovered() && menuIndex == 0) {
-                    blit(matrixStack, x + width - 6, y + height / 2 - 4, 6, 9, 12, 0, 6, 9, 64, 64);
+                if (isHovered && menuIndex == 0) {
+                    blit(pose, x + width - 6, y + height / 2 - 4, 6, 9, 12, 0, 6, 9, 64, 64);
                 } else {
-                    blit(matrixStack, x + width - 6, y + height / 2 - 4, 6, 9, 6, 0, 6, 9, 64, 64);
+                    blit(pose, x + width - 6, y + height / 2 - 4, 6, 9, 6, 0, 6, 9, 64, 64);
                 }
             } else {
-                blit(matrixStack, x + width - 6, y + height / 2 - 4, 6, 9, 0, 0, 6, 9, 64, 64);
+                blit(pose, x + width - 6, y + height / 2 - 4, 6, 9, 0, 0, 6, 9, 64, 64);
             }
-            RenderSystem.popMatrix();
-            matrixStack.pop();
+            pose.popPose();
 
-            if (mc.currentScreen instanceof ActionMenuScreen) {
-                ActionMenuScreen currentScreen = (ActionMenuScreen) mc.currentScreen;
-                if (isHovered() && active) {
+            if (mc.screen instanceof ActionMenuScreen currentScreen) {
+                if (isHovered && active) {
                     if (currentScreen.getMenuIndex() >= screen.getMenuIndex()) {
                         screen.setButtonRectangle(new Rectangle(x, y, width + 1, height));
                         screen.setActiveItem(this);
-                        mc.displayGuiScreen(new ActionMenuScreen(screen, ((SubmenuItem) item).getHandler().getMenu(), screen.getMenuIndex() + 1, item.getText()));
+                        mc.setScreen(new ActionMenuScreen(screen, ((SubmenuItem) item).getHandler().getMenu(), screen.getMenuIndex() + 1, item.getText()));
                     }
-                } else if (isHovered() && !active) {
-                    if (mc.currentScreen != screen) {
+                } else if (isHovered) {
+                    if (mc.screen != screen) {
                         screen.scheduleDisplay(screen);
                     }
                 }
             }
         } else {
-            if (isHovered()) {
-                if (mc.currentScreen != screen) {
+            if (isHovered) {
+                if (mc.screen != screen) {
                     screen.scheduleDisplay(screen);
                 }
             }
         }
 
-        if (this.isHovered()) {
-            this.renderToolTip(matrixStack, mouseX, mouseY);
+        if (this.isHovered) {
+            this.renderToolTip(pose, mouseX, mouseY);
         }
     }
 

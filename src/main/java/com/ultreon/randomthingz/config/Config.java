@@ -4,7 +4,6 @@ import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.java.maps.SequencedHashMap;
 import com.ultreon.randomthingz.util.ExceptionUtil;
-import com.ultreon.randomthingz.world.gen.ores.DefaultOre;
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -12,11 +11,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -29,10 +27,6 @@ public final class Config {
     public static final ForgeConfigSpec.IntValue dimensionGenOilLakeChance;
     public static final ForgeConfigSpec.IntValue fluidGeneratorInjectionVolume;
     private static final ForgeConfigSpec commonSpec;
-
-    @Deprecated
-    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-    private static final Map<DefaultOre, OreConfig> oreConfigs = new HashMap<>();
 
     @Deprecated
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
@@ -76,12 +70,6 @@ public final class Config {
                             "Water is 4, lava is 80. Oil lakes will spawn underground about 90% of the time.",
                             "Note that disabling oil will make some items uncraftable unless recipes are changed")
                     .defineInRange("oilLake.chance", 6, 0, Integer.MAX_VALUE);
-
-            builder.comment("Configs for specific ores. Set veinCount to zero to disable an ore.");
-            builder.push("ores");
-//            Arrays.stream(DefaultOre.values()).forEach(ore -> oreConfigs.put(ore, new OreConfig(ore, builder, oreWorldGenMasterSwitch)));
-
-            builder.pop(2);
         }
 
         commonSpec = builder.build();
@@ -89,11 +77,6 @@ public final class Config {
 
     private Config() {
         throw ExceptionUtil.utilityConstructor();
-    }
-
-    @Deprecated
-    public static Optional<OreConfig> getOreConfig(DefaultOre ore) {
-        return Optional.ofNullable(oreConfigs.getOrDefault(ore, null));
     }
 
     public static void initialize() {
@@ -105,12 +88,12 @@ public final class Config {
     }
 
     @SubscribeEvent
-    public static void sync(ModConfig.Loading event) {
+    public static void sync(ModConfigEvent.Loading event) {
         sync();
     }
 
     @SubscribeEvent
-    public static void sync(ModConfig.Reloading event) {
+    public static void sync(ModConfigEvent.Reloading event) {
         sync();
     }
 
