@@ -16,7 +16,7 @@ public class WireBlockEntity extends BlockEntity {
     int energyStored;
 
     public WireBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.WIRE, pos, state);
+        super(ModMachines.WIRE.get(), pos, state);
     }
 
     public String getWireNetworkData() {

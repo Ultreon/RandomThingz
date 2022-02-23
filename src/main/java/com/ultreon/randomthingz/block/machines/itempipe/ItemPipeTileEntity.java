@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ItemPipeTileEntity extends BlockEntity {
     public ItemPipeTileEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.PIPE, pos, state);
+        super(ModMachines.ITEM_PIPE.get(), pos, state);
     }
 
     @SuppressWarnings("unused")

@@ -73,4 +73,8 @@ public class BabyCreeperModel<T extends BabyCreeper> extends AgeableListModel<T>
    protected @NotNull Iterable<ModelPart> bodyParts() {
       return List.of(body, leftFrontLeg, rightFrontLeg, leftHindLeg, rightHindLeg);
    }
+
+   public static LayerDefinition createBodyLayer() {
+      return createBodyLayer(CubeDeformation.NONE);
+   }
 }

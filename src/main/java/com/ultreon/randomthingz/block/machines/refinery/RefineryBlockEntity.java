@@ -27,7 +27,7 @@ public class RefineryBlockEntity extends AbstractFluidMachineBlockEntity<Refinin
     public static final int ENERGY_PER_TICK = 100;
 
     public RefineryBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.REFINERY, pos, state, 4, 5, TANK_CAPACITY, MachineTier.STANDARD);
+        super(ModMachines.REFINERY.get(), pos, state, 4, 5, TANK_CAPACITY, MachineTier.STANDARD);
     }
 
     @Nullable

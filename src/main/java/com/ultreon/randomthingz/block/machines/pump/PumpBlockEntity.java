@@ -74,7 +74,7 @@ public class PumpBlockEntity extends AbstractMachineBaseBlockEntity {
     private final LazyOptional<IFluidHandler> fluidCap = LazyOptional.of(() -> tank);
 
     public PumpBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.PUMP, pos, state, 2, 10_000, 100, 0, MachineTier.STANDARD);
+        super(ModMachines.PUMP.get(), pos, state, 2, 10_000, 100, 0, MachineTier.STANDARD);
     }
 
     private int getHorizontalRange() {

@@ -27,7 +27,7 @@ public class MixerBlockEntity extends AbstractFluidMachineBlockEntity<MixingReci
     public static final int ENERGY_PER_TICK = 100;
 
     public MixerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.MIXER, pos, state, 4, 5, TANK_CAPACITY, MachineTier.STANDARD);
+        super(ModMachines.MIXER.get(), pos, state, 4, 5, TANK_CAPACITY, MachineTier.STANDARD);
     }
 
     @Override

@@ -25,7 +25,7 @@ public class BlockEntitiesModule extends CoreRegisterModule<BlockEntityType<?>> 
 
     @Override
     public void onEnable() {
-        ModTileEntities.register();
+        ModBlockEntities.register();
         ModMachines.register();
 
         BLOCE_ENTITIES.register(modEventBus);

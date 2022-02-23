@@ -9,6 +9,8 @@ import java.util.Map;
 
 @SuppressWarnings("unused")
 public final class ToolType {
+    private static final Map<String, ToolType> mapping = new HashMap<>();
+
     public static final ToolType PICKAXE = get("pickaxe", BlockTags.MINEABLE_WITH_PICKAXE);
     public static final ToolType SHOVEL = get("shovel", BlockTags.MINEABLE_WITH_SHOVEL);
     public static final ToolType AXE = get("axe", BlockTags.MINEABLE_WITH_AXE);
@@ -17,7 +19,6 @@ public final class ToolType {
     private final String type;
     private final Tag<Block> tag;
 
-    private static final Map<String, ToolType> mapping = new HashMap<>();
     private boolean isVanilla;
 
     public ToolType(String type, Tag<Block> tag) {

@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz.block.furniture;
 
 import com.ultreon.randomthingz.block.DirectionalBlock;
-import com.ultreon.randomthingz.block.entity.ModTileEntities;
+import com.ultreon.randomthingz.block.entity.ModBlockEntities;
 import com.ultreon.randomthingz.common.RequiresToolMat;
 import com.ultreon.randomthingz.common.RequiresToolType;
 import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import com.ultreon.randomthingz.item.tool.ToolType;
-import com.ultreon.randomthingz.tileentity.CrateTileEntity;
+import com.ultreon.randomthingz.block.entity.CrateTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
@@ -43,7 +43,7 @@ public class WoodenCrateBlock extends DirectionalBlock implements EntityBlock, R
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModTileEntities.EXAMPLE_CHEST.get().create(pos, state);
+        return ModBlockEntities.EXAMPLE_CHEST.get().create(pos, state);
     }
 
     @Override

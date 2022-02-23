@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "randomthingz:cobalt_block",
+    "randomthingz:cobalt_ore",
+    "randomthingz:deepslate_cobalt_ore",
+    "randomthingz:cobalt_ore",
+    "randomthingz:deepslate_cobalt_ore"
+  ]
+}

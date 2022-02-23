@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:ultrinium_ore"
+    "randomthingz:ultrinium_ore",
+    "randomthingz:deepslate_ultrinium_ore"
   ]
 }

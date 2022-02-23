@@ -4,7 +4,7 @@ import com.ultreon.randomthingz.common.RequiresToolMat;
 import com.ultreon.randomthingz.common.RequiresToolType;
 import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import com.ultreon.randomthingz.item.tool.ToolType;
-import com.ultreon.randomthingz.tileentity.ChristmasChestTileEntity;
+import com.ultreon.randomthingz.block.entity.ChristmasChestTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;

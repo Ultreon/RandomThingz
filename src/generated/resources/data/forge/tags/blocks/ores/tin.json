@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:tin_ore"
+    "randomthingz:tin_ore",
+    "randomthingz:deepslate_tin_ore"
   ]
 }

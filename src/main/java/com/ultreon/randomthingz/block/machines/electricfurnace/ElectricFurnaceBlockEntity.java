@@ -33,7 +33,7 @@ public class ElectricFurnaceBlockEntity extends AbstractMachineBlockEntity<Abstr
     private static final int[] SLOTS_ALL = {0, 1};
 
     public ElectricFurnaceBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.ELECTRIC_FURNACE, pos, state, INVENTORY_SIZE, MachineTier.STANDARD);
+        super(ModMachines.ELECTRIC_FURNACE.get(), pos, state, INVENTORY_SIZE, MachineTier.STANDARD);
     }
 
     @Override

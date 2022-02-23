@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:topaz_ore"
+    "randomthingz:topaz_ore",
+    "randomthingz:deepslate_topaz_ore"
   ]
 }

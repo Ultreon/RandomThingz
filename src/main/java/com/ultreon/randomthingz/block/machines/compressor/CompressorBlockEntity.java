@@ -33,7 +33,7 @@ public class CompressorBlockEntity extends AbstractMachineBlockEntity<Compressin
     private static final int[] SLOTS_ALL = {0, 1};
 
     public CompressorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.COMPRESSOR, pos, state, 2, MachineTier.STANDARD);
+        super(ModMachines.COMPRESSOR.get(), pos, state, 2, MachineTier.STANDARD);
     }
 
     public CompressorBlockEntity() {

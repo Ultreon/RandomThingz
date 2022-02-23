@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:nickel_ore"
+    "randomthingz:nickel_ore",
+    "randomthingz:deepslate_nickel_ore"
   ]
 }

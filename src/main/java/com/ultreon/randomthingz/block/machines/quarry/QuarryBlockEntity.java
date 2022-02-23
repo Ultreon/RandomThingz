@@ -174,7 +174,7 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
      * Constructor.
      */
     public QuarryBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.QUARRY, pos, state, 0, 10_000, 100, 0, MachineTier.SUPER);
+        super(ModMachines.QUARRY.get(), pos, state, 0, 10_000, 100, 0, MachineTier.SUPER);
     }
 
     /**

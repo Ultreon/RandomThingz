@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:platinum_ore"
+    "randomthingz:platinum_ore",
+    "randomthingz:deepslate_platinum_ore"
   ]
 }

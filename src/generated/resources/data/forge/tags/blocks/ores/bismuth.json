@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:bismuth_ore"
+    "randomthingz:bismuth_ore",
+    "randomthingz:deepslate_bismuth_ore"
   ]
 }

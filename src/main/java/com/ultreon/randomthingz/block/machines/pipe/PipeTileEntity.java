@@ -19,7 +19,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class PipeTileEntity extends BlockEntity {
     public PipeTileEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.PIPE, pos, state);
+        super(ModMachines.PIPE.get(), pos, state);
     }
 
     public String getPipeNetworkData() {

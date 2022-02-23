@@ -31,7 +31,7 @@ public class DieselGeneratorBlockEntity extends FluidFuelGeneratorBlockEntity {
     static final Tag.Named<Fluid> FUEL_TAG = FluidTags.bind(new ResourceLocation("forge", "diesel").toString());
 
     public DieselGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.DIESEL_GENERATOR, pos, state, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(4000, s -> s.getFluid().is(FUEL_TAG)));
+        super(ModMachines.DIESEL_GENERATOR.get(), pos, state, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(4000, s -> s.getFluid().is(FUEL_TAG)));
     }
 
     public DieselGeneratorBlockEntity() {

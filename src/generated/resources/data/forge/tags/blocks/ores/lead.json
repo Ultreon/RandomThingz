@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:lead_ore"
+    "randomthingz:lead_ore",
+    "randomthingz:deepslate_lead_ore"
   ]
 }

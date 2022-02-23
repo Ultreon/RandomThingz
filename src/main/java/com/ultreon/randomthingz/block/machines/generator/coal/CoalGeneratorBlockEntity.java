@@ -26,7 +26,7 @@ public class CoalGeneratorBlockEntity extends GeneratorBlockEntity {
     public static final int ENERGY_CREATED_PER_TICK = 60;
 
     public CoalGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.COAL_GENERATOR, pos, state, 1, MAX_ENERGY, 0, MAX_SEND, MachineTier.BASIC);
+        super(ModMachines.COAL_GENERATOR.get(), pos, state, 1, MAX_ENERGY, 0, MAX_SEND, MachineTier.BASIC);
     }
 
     public CoalGeneratorBlockEntity() {

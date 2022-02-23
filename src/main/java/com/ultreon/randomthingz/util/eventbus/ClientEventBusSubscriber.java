@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.util.eventbus;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.entity.ModTileEntities;
+import com.ultreon.randomthingz.block.entity.ModBlockEntities;
 import com.ultreon.randomthingz.client.gui.screen.ExampleChestScreen;
 import com.ultreon.randomthingz.client.model.CluckshroomModel;
 import com.ultreon.randomthingz.client.model.MoobloomModel;
@@ -9,7 +9,7 @@ import com.ultreon.randomthingz.client.renderer.GlowSquidRenderer;
 import com.ultreon.randomthingz.client.renderer.*;
 import com.ultreon.randomthingz.common.entity.ModEntities;
 import com.ultreon.randomthingz.init.ModContainers;
-import com.ultreon.randomthingz.tileentity.renderer.ChristmasChestTileEntityRenderer;
+import com.ultreon.randomthingz.block.entity.renderer.ChristmasChestBlockEntityRenderer;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
@@ -83,7 +83,7 @@ public class ClientEventBusSubscriber {
         EntityRenderers.register(ModEntities.OX.get(), OxRenderer::new);
         EntityRenderers.register(ModEntities.DUCK.get(), DuckRenderer::new);
         EntityRenderers.register(ModEntities.CLUCKSHROOM.get(), CluckshroomRenderer::new);
-        EntityRenderers.register(ModEntities.CUSTOM_TNT.get(), CustomTNTRenderer::new);
+        EntityRenderers.register(ModEntities.CUSTOM_TNT.get(), CustomTntRenderer::new);
         EntityRenderers.register(ModEntities.MOOBLOOM.get(), MoobloomRenderer::new);
         EntityRenderers.register(ModEntities.ICE_ENDERMAN.get(), IceEndermanRenderer::new);
         EntityRenderers.register(ModEntities.FIRE_CREEPER.get(), FireCreeperRenderer::new);
@@ -96,6 +96,6 @@ public class ClientEventBusSubscriber {
      * Bind tile entity renderers.
      */
     private static void bindTileEntityRenderers() {
-        BlockEntityRenderers.register(ModTileEntities.CHRISTMAS_CHEST.get(), ChristmasChestTileEntityRenderer::new);
+        BlockEntityRenderers.register(ModBlockEntities.CHRISTMAS_CHEST.get(), ChristmasChestBlockEntityRenderer::new);
     }
 }

@@ -1,5 +1,5 @@
 modLoader="javafml" #mandatory
-loaderVersion="[36,)"
+loaderVersion="[39,)"
 issueTrackerURL="https://github.com/QTechCommunity/RandomThingz/issues" #optional
 license="""(C) Copyright 2020 - QTech Community.
 This project is licensed under the CC BY-NC-SA 4.0 license.
@@ -8,7 +8,7 @@ See this link for the full license: https://creativecommons.org/licenses/by-nc-s
 
 [[mods]] #mandatory
 modId="randomthingz" #mandatory
-version="37.53.5031" #mandatory
+version="37.54.2372" #mandatory
 displayName="Random Thingz: Main Mod" #mandatory
 #updateJSONURL="http://myurl.me/" #optional. Todo: add update URL for Forge.
 displayURL="https://github.com/Ultreon/RandomThingz" #optional
@@ -149,7 +149,7 @@ Forked from here: https://github.com/MrCrayfish/Filters
 """
 description='''
 A mod that improves the Creative GUI by introducing filters based on tags
-Ported to 1.18.1 by Qboi123.
+Ported to 1.16.3 by Qboi123.
 '''
 
 [[dependencies.qfilters]] #optional
@@ -194,13 +194,13 @@ side="BOTH"
 [[dependencies.randomthingz]]
 modId="umodlib"
 mandatory=true
-versionRange="[1.0-beta1,)"
+versionRange="[1.1.0,)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.randomthingz]] #optional
 modId="forge" #mandatory
 mandatory=true #mandatory
-versionRange="[36,)" #mandatory
+versionRange="[39,)" #mandatory
 ordering="NONE"
 side="BOTH"
 [[dependencies.randomthingz]]

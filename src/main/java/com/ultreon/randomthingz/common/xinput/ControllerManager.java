@@ -1,6 +1,5 @@
 package com.ultreon.randomthingz.common.xinput;
 
-import com.studiohartman.jamepad.ControllerIndex;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
@@ -21,10 +20,10 @@ public class ControllerManager {
     }
 
     private final AbstractController[] controllers = new AbstractController[MAX_CONTROLLERS];
-    private final com.studiohartman.jamepad.ControllerManager nativeManager = new com.studiohartman.jamepad.ControllerManager(MAX_CONTROLLERS);
+//    private final com.studiohartman.jamepad.ControllerManager nativeManager = new com.studiohartman.jamepad.ControllerManager(MAX_CONTROLLERS);
 
     private ControllerManager() {
-        this.nativeManager.initSDLGamepad();
+//        this.nativeManager.initSDLGamepad();
         this.mc = Minecraft.getInstance();
     }
 
@@ -47,16 +46,16 @@ public class ControllerManager {
 
     private void checkForNewControllers() {
         for (int i = 0; i < MAX_CONTROLLERS; i++) {
-            ControllerIndex controllerIndex = this.nativeManager.getControllerIndex(i);
-            boolean wasConnected = this.controllers[i] != null;
-            boolean currentConnected = controllerIndex.isConnected();
-            if (wasConnected != currentConnected) {
-                if (!currentConnected) {
-                    this.controllers[i] = null;
-                } else {
-                    this.controllers[i] = new XInputController(nativeManager, i);
-                }
-            }
+//            ControllerIndex controllerIndex = this.nativeManager.getControllerIndex(i);
+//            boolean wasConnected = this.controllers[i] != null;
+//            boolean currentConnected = controllerIndex.isConnected();
+//            if (wasConnected != currentConnected) {
+//                if (!currentConnected) {
+//                    this.controllers[i] = null;
+//                } else {
+//                    this.controllers[i] = new XInputController(nativeManager, i);
+//                }
+//            }
         }
     }
 }

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:amethyst_ore"
+    "randomthingz:amethyst_ore",
+    "randomthingz:deepslate_amethyst_ore"
   ]
 }

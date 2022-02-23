@@ -33,7 +33,7 @@ public class DryingRackTileEntity extends BlockEntity implements Container, ITic
     private int processTime;
 
     public DryingRackTileEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.DRYING_RACK, pos, state);
+        super(ModMachines.DRYING_RACK.get(), pos, state);
     }
 
     public ItemStack getItem() {

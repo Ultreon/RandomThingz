@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:peridot_ore"
+    "randomthingz:peridot_ore",
+    "randomthingz:deepslate_peridot_ore"
   ]
 }

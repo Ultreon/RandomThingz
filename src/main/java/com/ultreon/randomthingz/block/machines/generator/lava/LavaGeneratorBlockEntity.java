@@ -28,7 +28,7 @@ public class LavaGeneratorBlockEntity extends FluidFuelGeneratorBlockEntity {
     static final int TANK_CAPACITY = 4000;
 
     public LavaGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.LAVA_GENERATOR, pos, state, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(TANK_CAPACITY, s -> s.getFluid().is(FluidTags.LAVA)));
+        super(ModMachines.LAVA_GENERATOR.get(), pos, state, 2, MAX_ENERGY, 0, MAX_SEND, new FluidTank(TANK_CAPACITY, s -> s.getFluid().is(FluidTags.LAVA)));
     }
 
     public LavaGeneratorBlockEntity() {

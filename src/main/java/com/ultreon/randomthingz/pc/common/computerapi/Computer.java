@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.pc.common.computerapi;
 
 import com.ultreon.randomthingz.pc.common.device.AbstractBios;
-import com.ultreon.randomthingz.tileentity.ComputerTileEntity;
+import com.ultreon.randomthingz.block.entity.ComputerTileEntity;
 
 public abstract class Computer {
     private AbstractFileSystem fileSystem;

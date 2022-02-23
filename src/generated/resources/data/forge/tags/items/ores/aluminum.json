@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:bauxite_ore"
+    "randomthingz:bauxite_ore",
+    "randomthingz:deepslate_bauxite_ore"
   ]
 }

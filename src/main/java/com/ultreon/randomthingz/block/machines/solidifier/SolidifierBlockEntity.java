@@ -28,7 +28,7 @@ public class SolidifierBlockEntity extends AbstractFluidMachineBlockEntity<Solid
     public static final int ENERGY_PER_TICK = 50;
 
     public SolidifierBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.SOLIDIFIER, pos, state, 3, 1, TANK_CAPACITY, MachineTier.STANDARD);
+        super(ModMachines.SOLIDIFIER.get(), pos, state, 3, 1, TANK_CAPACITY, MachineTier.STANDARD);
     }
 
     @Override

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:aquamarine_ore"
+    "randomthingz:aquamarine_ore",
+    "randomthingz:deepslate_aquamarine_ore"
   ]
 }

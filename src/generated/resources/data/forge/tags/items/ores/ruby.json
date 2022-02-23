@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:ruby_ore"
+    "randomthingz:ruby_ore",
+    "randomthingz:deepslate_ruby_ore"
   ]
 }

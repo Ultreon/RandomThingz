@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.world.gen.features.common;
 
+import com.google.common.collect.ImmutableSet;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
@@ -65,7 +66,7 @@ public final class ModFeatures {
 
     // Lakes
     public static final ConfiguredFeature<SpringConfiguration, ?> OIL_SPRING = registerConfigured("lake_oil", Feature.SPRING.configured(
-                    new SpringConfiguration(ModFluids.OIL.defaultFluidState(), true, 5, 4, Set.of(Blocks.DIRT)))
+                    new SpringConfiguration(ModFluids.OIL.defaultFluidState(), true, 5, 4, ImmutableSet.of(Blocks.DIRT)))
             );
 
     private static <F extends Feature<FC>, FC extends FeatureConfiguration> ConfiguredFeature<FC, F> registerConfigured(String key, ConfiguredFeature<FC, F> configured) {

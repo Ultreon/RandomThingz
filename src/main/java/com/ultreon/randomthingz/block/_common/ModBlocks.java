@@ -9,7 +9,7 @@ import com.ultreon.randomthingz.block.custom.CustomButtonBlock;
 import com.ultreon.randomthingz.block.custom.render.CRDoorBlock;
 import com.ultreon.randomthingz.block.custom.render.CRFlowerBlock;
 import com.ultreon.randomthingz.block.door.DoorType;
-import com.ultreon.randomthingz.block.entity.ModTileEntities;
+import com.ultreon.randomthingz.block.entity.ModBlockEntities;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import com.ultreon.randomthingz.block.furniture.WoodenCrateBlock;
 import com.ultreon.randomthingz.block.machines.AbstractMachineBlock;
@@ -46,8 +46,8 @@ import com.ultreon.randomthingz.item.block.DeprecatedBlockItem;
 import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import com.ultreon.randomthingz.item.tool.ToolType;
 import com.ultreon.randomthingz.registration.Registration;
-import com.ultreon.randomthingz.tileentity.ChristmasChestTileEntity;
-import com.ultreon.randomthingz.tileentity.itemrenderer.ChristmasChestItemStackRenderer;
+import com.ultreon.randomthingz.block.entity.ChristmasChestTileEntity;
+import com.ultreon.randomthingz.block.entity.itemrenderer.ChristmasChestItemStackRenderer;
 import lombok.experimental.UtilityClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -305,7 +305,7 @@ public final class ModBlocks {
     public static final BlockRegistryObject<ChristmasChestBlock> CHRISTMAS_CHEST = registerChest(
             "christmas_chest", () -> new ChristmasChestBlock(Block.Properties.of(Material.WOOD)
                     .strength(2f, 3f)
-                    .sound(SoundType.WOOD), ModTileEntities.CHRISTMAS_CHEST::get),
+                    .sound(SoundType.WOOD), ModBlockEntities.CHRISTMAS_CHEST::get),
             () -> (pair, block) -> new ChristmasChestItemStackRenderer<>(pair.getFirst(), pair.getSecond(), ChristmasChestTileEntity::new));
 
     ////////////////////////

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:ores/aluminum"
+  },
+  "result": "randomthingz:bauxite_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

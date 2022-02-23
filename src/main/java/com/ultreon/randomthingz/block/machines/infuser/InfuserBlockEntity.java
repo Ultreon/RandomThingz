@@ -34,7 +34,7 @@ public class InfuserBlockEntity extends AbstractFluidMachineBlockEntity<Infusing
     public static final int SLOT_ITEM_OUT = 3;
 
     public InfuserBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.INFUSER, pos, state, 4, 1, TANK_CAPACITY, MachineTier.STANDARD);
+        super(ModMachines.INFUSER.get(), pos, state, 4, 1, TANK_CAPACITY, MachineTier.STANDARD);
     }
 
     public InfuserBlockEntity() {

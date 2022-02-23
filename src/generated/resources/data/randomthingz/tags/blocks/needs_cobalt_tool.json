@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "randomthingz:ultrinium_block",
+    "randomthingz:ultrinium_ore",
+    "randomthingz:deepslate_ultrinium_ore",
+    "randomthingz:ultrinium_ore",
+    "randomthingz:deepslate_ultrinium_ore",
+    "randomthingz:infinity_block",
+    "randomthingz:infinity_ore",
+    "randomthingz:deepslate_infinity_ore",
+    "randomthingz:infinity_ore",
+    "randomthingz:deepslate_infinity_ore"
+  ]
+}

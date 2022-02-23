@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "randomthingz:uranium_rod"
+            "items": [
+              "randomthingz:uranium_rod"
+            ]
           }
         ]
       }

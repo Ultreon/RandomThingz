@@ -35,6 +35,10 @@ import java.util.stream.Stream;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ItemMaterial implements BaseItemMaterial {
+    // Class preload.
+    private static final List<ItemMaterial> values = new ArrayList<>();
+    private static final Map<String, ItemMaterial> map = new HashMap<>();
+
     // Metals
     public static final ItemMaterial REDSTONE_ALLOY = new ItemMaterial(builderAlloy("redstone_alloy", ToolRequirement.IRON));
     public static final ItemMaterial REFINED_IRON = new ItemMaterial(builder("refined_iron").ingot());
@@ -77,7 +81,7 @@ public class ItemMaterial implements BaseItemMaterial {
     public static final ItemMaterial TANZANITE = new ItemMaterial(builder("tanzanite").overworldOre(Ores.TANZANITE).storageBlock(ToolRequirement.IRON));
     public static final ItemMaterial MALACHITE = new ItemMaterial(builder("malachite").overworldOre(Ores.MALACHITE).storageBlock(ToolRequirement.IRON));
 
-    private final String oreName;
+    private final String name;
     private final Supplier<Block> stoneOreSupplier;
     private final Supplier<Block> deepslateOreSupplier;
     private final Supplier<Block> netherOreSupplier;
@@ -106,19 +110,15 @@ public class ItemMaterial implements BaseItemMaterial {
     private ItemRegistryObject<Item> gem;
     private ItemRegistryObject<Item> nugget;
 
-    private static final List<ItemMaterial> values = new ArrayList<>();
-    private static final Map<String, ItemMaterial> map = new HashMap<>();
     private final Collection<Tag.Named<Block>> dataGenTags = new ArrayList<>();
 
     ItemMaterial(Builder builder) {
         this(builder, builder.name);
     }
 
-    ItemMaterial(Builder builder, String oreName) {
-        if (!builder.name.equals(this.getName())) {
-            throw new IllegalArgumentException("Builder name is incorrect, should be " + this.getName());
-        }
-        this.oreName = oreName;
+    ItemMaterial(Builder builder, String name) {
+        this.name = name;
+
         this.storageBlockSupplier = builder.storageBlock;
         this.stoneOreSupplier = builder.stoneOre;
         this.deepslateOreSupplier = builder.deepslateOre;
@@ -139,26 +139,26 @@ public class ItemMaterial implements BaseItemMaterial {
         this.harvestRequirement = builder.harvestRequirement;
         this.dataGenTags.addAll(builder.dataGenTags);
 
-        map.put(oreName, this);
+        map.put(name, this);
         values.add(this);
     }
 
     public static void registerBlocks() {
         for (ItemMaterial metal : values()) {
             if (metal.stoneOreSupplier != null) {
-                String name = metal.oreName + "_ore";
+                String name = metal.name + "_ore";
                 metal.stoneOre = Registration.BLOCKS.register(name, metal.stoneOreSupplier);
                 Registration.ITEMS.register(name, () ->
                         new BlockItem(metal.stoneOre.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
             }
             if (metal.deepslateOreSupplier != null) {
-                String name = "deepslate_" + metal.oreName + "_ore";
+                String name = "deepslate_" + metal.name + "_ore";
                 metal.deepslateOre = Registration.BLOCKS.register(name, metal.deepslateOreSupplier);
                 Registration.ITEMS.register(name, () ->
                         new BlockItem(metal.deepslateOre.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
             }
             if (metal.netherOreSupplier != null) {
-                String name = "nether_" + metal.oreName + "_ore";
+                String name = "nether_" + metal.name + "_ore";
                 metal.netherOre = Registration.BLOCKS.register(name, metal.netherOreSupplier);
                 Registration.ITEMS.register(name, () ->
                         new BlockItem(metal.netherOre.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
@@ -178,7 +178,7 @@ public class ItemMaterial implements BaseItemMaterial {
         for (ItemMaterial metal : values()) {
             if (metal.chunksSupplier != null) {
                 metal.chunks = Registration.ITEMS.register(
-                        metal.oreName + "_chunks", metal.chunksSupplier);
+                        metal.name + "_chunks", metal.chunksSupplier);
             }
             if (metal.dustSupplier != null) {
                 metal.dust = Registration.ITEMS.register(
@@ -486,7 +486,7 @@ public class ItemMaterial implements BaseItemMaterial {
     }
 
     public String name() {
-        return oreName;
+        return name;
     }
 
     public static ItemMaterial[] values() {

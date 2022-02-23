@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.inventory.container;
 
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.init.ModContainers;
-import com.ultreon.randomthingz.tileentity.CrateTileEntity;
+import com.ultreon.randomthingz.block.entity.CrateTileEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
