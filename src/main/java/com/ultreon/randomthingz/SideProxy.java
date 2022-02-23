@@ -26,6 +26,9 @@ import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerAboutToStartEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -40,19 +43,22 @@ class SideProxy implements IProxy {
         Registration.register();
 
         // Add listeners for common events
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(DataGenerators::gatherData);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::imcEnqueue);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::imcProcess);
+        IEventBus modEvents = FMLJavaModLoadingContext.get().getModEventBus();
+        modEvents.addListener(DataGenerators::gatherData);
+        modEvents.addListener(this::commonSetup);
+        modEvents.addListener(this::onImcEnqueue);
+        modEvents.addListener(this::onImcProcess);
 
         // Add listeners for registry events
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(MenuType.class, ModMachineContainers::registerAll);
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Fluid.class, ModFluids::registerFluids);
-//        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(BlockEntityType.class, ModMachines::registerAll);
+        modEvents.addGenericListener(MenuType.class, ModMachineContainers::registerAll);
+        modEvents.addGenericListener(Fluid.class, ModFluids::registerFluids);
         ModMachines.registerAll();
 
         // Other events
-        MinecraftForge.EVENT_BUS.addListener(this::serverAboutToStart);
+        IEventBus forgeEvents = MinecraftForge.EVENT_BUS;
+        forgeEvents.addListener(this::onServerAboutToStart);
+        forgeEvents.addListener(this::onServerStarting);
+        forgeEvents.addListener(this::onServerStarted);
 
         Greetings.addMessage(SideProxy::getBetaWelcomeMessage);
         Greetings.addMessage(ModBlocks::checkForMissingLootTables);
@@ -72,14 +78,24 @@ class SideProxy implements IProxy {
 //        }
     }
 
-    private void imcEnqueue(InterModEnqueueEvent event) {
+    private void onImcEnqueue(InterModEnqueueEvent event) {
+
     }
 
-    private void imcProcess(InterModProcessEvent event) {
+    private void onImcProcess(InterModProcessEvent event) {
+
     }
 
-    private void serverAboutToStart(ServerAboutToStartEvent event) {
+    private void onServerAboutToStart(ServerAboutToStartEvent event) {
         server = event.getServer();
+    }
+
+    private void onServerStarting(ServerStartingEvent event) {
+
+    }
+
+    private void onServerStarted(ServerStartedEvent event) {
+
     }
 
     @Override
@@ -90,11 +106,14 @@ class SideProxy implements IProxy {
     static class Client extends SideProxy {
         Client() {
             super();
-            FMLJavaModLoadingContext.get().getModEventBus().addListener(ModItems::registerItemColors);
-            FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
 
-            MinecraftForge.EVENT_BUS.addListener(this::setFogColors);
-            MinecraftForge.EVENT_BUS.addListener(this::setFogDensity);
+            IEventBus modEvents = FMLJavaModLoadingContext.get().getModEventBus();
+            modEvents.addListener(ModItems::registerItemColors);
+            modEvents.addListener(this::clientSetup);
+
+            IEventBus forgeEvents = MinecraftForge.EVENT_BUS;
+            forgeEvents.addListener(this::setFogColors);
+            forgeEvents.addListener(this::setFogDensity);
         }
 
         private void clientSetup(FMLClientSetupEvent event) {
@@ -103,8 +122,9 @@ class SideProxy implements IProxy {
             ModMachines.registerRenderers();
             ModModelProperties.register(event);
 
-            ModLoadingContext.get().registerExtensionPoint(ConfigGuiHandler.ConfigGuiFactory.class,
-                    () -> new ConfigGuiHandler.ConfigGuiFactory((mc, back) -> new SettingsScreen(back)));
+            ModLoadingContext.get().registerExtensionPoint(
+                    ConfigGuiHandler.ConfigGuiFactory.class, () -> new ConfigGuiHandler.ConfigGuiFactory((mc, back) -> new SettingsScreen(back))
+            );
         }
 
         public void setFogColors(EntityViewRenderEvent.FogColors fog) {
@@ -151,10 +171,11 @@ class SideProxy implements IProxy {
     static class Server extends SideProxy {
         Server() {
             super();
-            FMLJavaModLoadingContext.get().getModEventBus().addListener(this::serverSetup);
+            FMLJavaModLoadingContext.get().getModEventBus().addListener(this::dedicatedServerSetup);
         }
 
-        private void serverSetup(FMLDedicatedServerSetupEvent event) {
+        private void dedicatedServerSetup(FMLDedicatedServerSetupEvent event) {
+
         }
     }
 }

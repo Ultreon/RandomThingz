@@ -29,6 +29,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
@@ -62,6 +63,7 @@ public final class RandomThingz {
      * Random Thingz's Logger
      */
     public static final Logger LOGGER = LogManager.getLogger("RandomThingz:Generic");
+
     private static final boolean DEV_OVERRIDE = true;
 
     private static MinecraftServer server = null;
@@ -217,11 +219,6 @@ public final class RandomThingz {
         loader.initModules();
         loader.initLootInjections();
 
-        // Assign constants.
-        Constants.logger = LOGGER;
-        Constants.randomthingz = this;
-        Constants.proxy = proxy;
-
         // Final fields.
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -268,40 +265,12 @@ public final class RandomThingz {
     }
 
     /**
-     * Internal method.
+     * Check if Forge is running as developer mode.
      *
-     * @return boolean.
-     */
-    @OnlyIn(Dist.CLIENT)
-    private static boolean isModDev0() {
-        return Minecraft.getInstance().getLaunchedVersion().equals("MOD_DEV");
-    }
-
-    /**
-     * Check if Random Thingz is currently a development build.
-     *
-     * @return the QFM dev-state..
+     * @return the developer mode flag.
      */
     public static boolean isModDev() {
-        try {
-            return isModDev0();
-        } catch (NoSuchMethodError | NullPointerException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Check if Random Thingz is currently a development build.
-     *
-     * @param def the default value if failed to detect development mode.
-     * @return the QFM dev-state..
-     */
-    public static boolean isModDev(boolean def) {
-        try {
-            return isModDev0();
-        } catch (NoSuchMethodError | NullPointerException e) {
-            return def;
-        }
+        return !FMLEnvironment.production;
     }
 
     /**

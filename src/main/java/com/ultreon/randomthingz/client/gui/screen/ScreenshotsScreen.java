@@ -138,7 +138,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
 
         this.list = this.addWidget(new ScreenshotSelectionList(this, Minecraft.getInstance(),
                 200, this.height - 50, 10, this.height - 40, null));
-        this.addRenderableWidget(new Button(10, this.height - 30, 200, 20, CommonComponents.GUI_BACK, (btn) -> this.goBack()));
+        this.addRenderableWidget(new Button(10, this.height - 30, 200, 20, CommonComponents.GUI_BACK, (btn) -> this.back()));
     }
 
     /**
@@ -255,7 +255,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
     /**
      * Go back to previous screen.
      */
-    private void goBack() {
+    private void back() {
         // Go back to the previous screen.
         Objects.requireNonNull(this.minecraft).setScreen(this.backScreen);
     }
@@ -306,7 +306,7 @@ public class ScreenshotsScreen extends AdvancedScreen {
 
     @Override
     public void onClose() {
-        this.goBack();
+        this.back();
     }
 
     public List<File> getFiles() {

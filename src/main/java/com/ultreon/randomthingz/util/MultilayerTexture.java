@@ -5,14 +5,14 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultilayerTexture extends QFMTexture {
-    private final List<QFMTexture> textures = new ArrayList<>();
+public class MultilayerTexture extends RTTexture {
+    private final List<RTTexture> textures = new ArrayList<>();
 
     public MultilayerTexture() {
 
     }
 
-    public void addTexture(QFMTexture texture) {
+    public void addTexture(RTTexture texture) {
         this.textures.add(texture);
     }
 
@@ -26,7 +26,7 @@ public class MultilayerTexture extends QFMTexture {
         graphics.setColor(new Color(0, 0, 0, 0));
         graphics.fillRect(0, 0, width, height);
 
-        for (QFMTexture texture : textures) {
+        for (RTTexture texture : textures) {
             BufferedImage render = texture.render();
             graphics.drawImage(render, 0, 0, render.getWidth(), render.getHeight(), null);
         }

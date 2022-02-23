@@ -223,7 +223,7 @@ public abstract class WandItem extends HudItem {
             return;
         }
 
-        if (RandomThingz.isModDev(false)) {
+        if (RandomThingz.isModDev()) {
             boolean hasError = false;
             if (!nbt.contains("mana", 5)) {
                 hasError = true;

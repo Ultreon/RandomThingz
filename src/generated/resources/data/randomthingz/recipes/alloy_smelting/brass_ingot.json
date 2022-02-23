@@ -3,17 +3,9 @@
   "process_time": 400,
   "ingredients": [
     {
-      "value": [
-        {
-          "tag": "forge:ingots/copper"
-        },
-        {
-          "tag": "randomthingz:chunks/copper"
-        },
-        {
-          "tag": "forge:dusts/copper"
-        }
-      ],
+      "value": {
+        "item": "minecraft:copper_ingot"
+      },
       "count": 3
     },
     {

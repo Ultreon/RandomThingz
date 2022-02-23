@@ -1,5 +1,5 @@
 # Updates
-These are the updates for QForgeMod (QFM).
+These are the updates for Random Thingz (RT).
 
 ## 2.0 Beta 4
 [ ] Javascript console for MC.

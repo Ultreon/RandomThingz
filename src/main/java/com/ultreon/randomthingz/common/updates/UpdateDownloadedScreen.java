@@ -55,7 +55,7 @@ public class UpdateDownloadedScreen extends Screen {
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).options.narratorStatus;
 
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
-            Narrator.getNarrator().say("Downloading Update for Q Forge Mod is complete", true);
+            Narrator.getNarrator().say("Downloading Update for Random Thingz is complete", true);
         }
 
         this.clearWidgets();

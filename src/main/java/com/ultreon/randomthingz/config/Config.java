@@ -35,7 +35,7 @@ public final class Config {
     private static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 
     @Deprecated
-    public static final QFMConfig conf = QFMConfig.instance;
+    public static final RTConfig conf = RTConfig.instance;
 
     static {
         // Beta welcome message.
@@ -106,9 +106,9 @@ public final class Config {
     }
 
     @Deprecated
-    public static class QFMConfig {
+    public static class RTConfig {
         @Deprecated
-        private static final QFMConfig instance = new QFMConfig();
+        private static final RTConfig instance = new RTConfig();
 
         @Deprecated
         public UpdateConfig getUpdateConfig() {

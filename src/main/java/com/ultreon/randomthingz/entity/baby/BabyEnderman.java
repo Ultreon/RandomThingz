@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Baby enderman entity class.
  *
- * @author QTech Community.
+ * @author Ultreon Team.
  */
 public class BabyEnderman extends EnderMan implements BabyMob {
 

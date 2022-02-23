@@ -148,7 +148,7 @@ public class ActionMenuScreen extends Screen {
 
         if (mouseX < startX && Minecraft.getInstance().screen == this) {
             if (buttonRect != null && !buttonRect.contains(mouseX, mouseY)) {
-                goBack();
+                back();
             }
         }
 
@@ -158,7 +158,7 @@ public class ActionMenuScreen extends Screen {
         screens.clear();
     }
 
-    private void goBack() {
+    private void back() {
         Minecraft.getInstance().setScreen(parent);
     }
 

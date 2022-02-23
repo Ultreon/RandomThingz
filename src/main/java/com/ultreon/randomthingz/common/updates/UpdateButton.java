@@ -16,7 +16,7 @@ public class UpdateButton extends BetterButton {
             mc.setScreen(new UpdateScreen(mc.screen, updater.getReleaseUrl(), updater.getDependencies()));
         });
         this.updater = updater;
-        this.active = updater == AbstractUpdater.getQFMUpdater() ? !RandomThingz.isDevtest() && updater.hasUpdate() : updater.hasUpdate();
+        this.active = updater == AbstractUpdater.getUpdaterUpdater() ? !RandomThingz.isDevtest() && updater.hasUpdate() : updater.hasUpdate();
     }
 
     public UpdateButton(AbstractUpdater<?> updater, int x, int y, int width, OnTooltip onTooltip) {

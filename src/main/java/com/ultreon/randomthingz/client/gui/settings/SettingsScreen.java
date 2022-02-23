@@ -4,21 +4,29 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.text2speech.Narrator;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.screen.ScreenshotsScreen;
+import com.ultreon.randomthingz.common.interfaces.IVersion;
 import com.ultreon.randomthingz.common.updates.AbstractUpdater;
 import com.ultreon.randomthingz.common.updates.UpdateButton;
 import com.ultreon.randomthingz.config.Config;
 import net.minecraft.client.NarratorStatus;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
-@SuppressWarnings({"FieldCanBeLocal"})
+@SuppressWarnings({"FieldCanBeLocal", "UnusedReturnValue"})
 @Mod.EventBusSubscriber(modid = RandomThingz.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class SettingsScreen extends Screen {
 
@@ -42,19 +50,47 @@ public class SettingsScreen extends Screen {
         NarratorStatus narratorStatus = Objects.requireNonNull(this.minecraft).options.narratorStatus;
 
         if (narratorStatus == NarratorStatus.SYSTEM || narratorStatus == NarratorStatus.ALL) {
-            Narrator.getNarrator().say("Q Forge Mod Settings Screen, such as settings for closing minecraft, and allowing Q Forge Mod to shutdown your computer.", true);
+            Narrator.getNarrator().say("Random Thingz Settings Screen, such as settings for closing minecraft, and allowing Random Thingz to shutdown your computer.", true);
         }
 
-        int dy = -30;
-        addRenderableWidget(new UpdateButton(AbstractUpdater.getQFMUpdater(), width / 2 - 155, height / 6 + dy - 6, 310));
-
-        dy += 30;
-        dy += 30;
-
-        dy += 30;
+        AtomicInteger line = new AtomicInteger(0);
+        addUpdateButton(AbstractUpdater.getUpdaterUpdater(), line);
+        addButton(new TranslatableComponent("screen.randomthingz.settings.screenshots"), this::openScreenshots, line);
+        addButtons(CommonComponents.GUI_DONE, this::save, CommonComponents.GUI_CANCEL, this::cancel, line);
+    }
+    
+    private int calcRowY(int index) {
+        return height / 6 + (index - 1) * 30 - 6;
+    }
+    
+    private int nextRow(AtomicInteger row) {
+        return calcRowY(row.getAndIncrement());
     }
 
-    private void openScreenshotsScreen(Button button) {
+    public <T extends IVersion> UpdateButton addUpdateButton(AbstractUpdater<T> updater, AtomicInteger line) {
+        return addRenderableWidget(new UpdateButton(updater, width / 2 - 155, nextRow(line), 240));
+    }
+
+    public Button addButton(Component component, Button.OnPress onPress, AtomicInteger line) {
+        return addRenderableWidget(new Button(width / 2 - 65, nextRow(line), 130, 20, component, onPress));
+    }
+
+    public Pair<Button, Button> addButtons(Component componentLeft, Button.OnPress onPressLeft, Component componentRight, Button.OnPress onPressRight, AtomicInteger line) {
+        return new ImmutablePair<>(
+                addRenderableWidget(new Button(width / 2 - 65, nextRow(line), 60, 20, componentLeft, onPressLeft)),
+                addRenderableWidget(new Button(width / 2 + 5, nextRow(line), 60, 20, componentRight, onPressRight))
+        );
+    }
+
+    public Triple<Button, Button, Button> addButtons(Component componentLeft, Button.OnPress onPressLeft, Component componentMiddle, Button.OnPress onPressMiddle, Component componentRight, Button.OnPress onPressRight, AtomicInteger line) {
+        return new ImmutableTriple<>(
+                addRenderableWidget(new Button(width / 2 - 65, nextRow(line), 40, 20, componentLeft, onPressLeft)),
+                addRenderableWidget(new Button(width / 2 - 20, nextRow(line), 40, 20, componentMiddle, onPressMiddle)),
+                addRenderableWidget(new Button(width / 2 + 25, nextRow(line), 40, 20, componentRight, onPressRight))
+        );
+    }
+
+    private void openScreenshots(Button button) {
         Objects.requireNonNull(this.minecraft).setScreen(new ScreenshotsScreen(this, new TranslatableComponent("screen.randomthingz.modules")));
     }
 
@@ -63,19 +99,15 @@ public class SettingsScreen extends Screen {
         super.tick();
     }
 
-    public void tooltip(Button button, PoseStack matrixStack, int mouseX, int mouseY) {
-
-    }
-
-    public void saveAndGoBack(Button button) {
+    public void save(Button button) {
         // Save config.
         Config.save();
 
         // Go back.
-        goBack(button);
+        cancel(button);
     }
 
-    public void goBack(Button button) {
+    public void cancel(Button button) {
         if (minecraft != null) {
             // Display previous screen.
             minecraft.setScreen(back);

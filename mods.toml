@@ -1,7 +1,7 @@
 modLoader="javafml" #mandatory
 loaderVersion="[39,)"
-issueTrackerURL="https://github.com/QTechCommunity/RandomThingz/issues" #optional
-license="""(C) Copyright 2020 - QTech Community.
+issueTrackerURL="https://github.com/Ultreon/RandomThingz/issues" #optional
+license="""(C) Copyright 2020 - Ultreon Team.
 This project is licensed under the CC BY-NC-SA 4.0 license.
 See this link for the full license: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 """
@@ -28,11 +28,11 @@ description='''
 
 §l§nLinks:§r
   MultiTeam Discord Server: https://discord.gg/rudHdrJ
-  QTech Community Discord Server: https://www.discord.gg/WePT9v2CmQ
-  QTech Community home page: https://quintenjungblut.wixsite.com/qplaysoftware
+  Ultreon Team Discord Server: https://www.discord.gg/WePT9v2CmQ
+  Ultreon Team home page: https://ultreon.github.io/web/
 
 §l§nSource code:§r
-  https://github.com/QTechCommunity/RandomThingz
+  https://github.com/Ultreon/RandomThingz
 
 §l§nBugs / Feature requests§r
   §cIn Alpha / Beta releases stuff might change or break, it's recommended to use them for testing purposes only.§r
@@ -43,18 +43,6 @@ description='''
   If you want to request a feature you can also do it here.
 
 §l§nCredits:§r
-  §l"Modern Sofa" by JustinRustin (Modern Sofa)§r
-  Available for download at https://blockmodels.com/model/361/ §r
-
-  §l"Club" by Gengar (Club)§r
-  §oAvailable for download at https://blockmodels.com/model/496/ §r
-
-  §l"Table with tablecloth" by Miep_HD (Table)§r
-  §oAvailable for download at https://blockmodels.com/model/668/ §r
-
-  §l"Healing Potion" by Gengar (Healing Potion)§r
-  §oAvailable for download at https://blockmodels.com/model/531/ §r
-
   §l"Improved PC Gamer" by Giovanni_5656 (Game PC)§r
   §oAvailable for download at https://blockmodels.com/model/339/ §r
 
@@ -67,29 +55,8 @@ description='''
   §l"Minecraft Dungeons Textures for Minecraft Java Edition" by Kai1907 and Shadow_236§r
   §oAvailable for download at https://www.planetminecraft.com/texture-pack/minecraft-dungeons-textures-for-minecraft-java-edition/ §r
 
-  §l"Fresh CIT v1.2" by FreshLX§r
-  §oAvailable for download at https://www.planetminecraft.com/texture-pack/fresh-cit-v1-0/ §r
-
-  §l"GearPlus 1.16!" by Nate the Penguin§r
-  §oAvailable for download at https://www.planetminecraft.com/texture-pack/vanilla-more-items-armor-shields-and-more/ §r
-
-  §l"GearPlus - Terraria Edition" by Nate the Penguin§r
-  §oAvailable for download at https://www.planetminecraft.com/texture-pack/gearplus-terraria-edition/ §r
-
-  §l"Cocoa Cake" by The Sailor§r
-  §oAvailable for download at https://www.planetminecraft.com/texture-pack/cocoa-cake/ §r
-
-  §l"Bone meal into Fertilizer" by Sucro120§r
-  §oAvailable for download at https://www.planetminecraft.com/texture-pack/bone-meal-into-fertilizer/ §r
-
-  §l"ActuallyAssets - Hypixel Skyblock v1.6.6" by MotorGorilla1§r
-  §oAvailable for download at https://www.planetminecraft.com/texture-pack/actuallyassets-hypixel-skyblock-v-10/ §r
-
   §l"MoobLoom Update(Optifine)" by un_roman§r
   §oAvailable for download at https://www.planetminecraft.com/texture-pack/moobloom-update/ §r
-
-  §l"Avocados" by kekkman§r
-  §oAvailable for download at https://www.planetminecraft.com/texture-pack/avocados-4860171/ §r
 
   §l"Vanilla+ | 225 Custom Bookshelves Add-On" by sirkomplete, Etaris and Robert0213§r
   §oAvailable for download at https://www.planetminecraft.com/texture-pack/vanilla-225-custom-bookshelves-add-on/ §r

@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.pc.common.device.component;
 
 import com.google.common.annotations.Beta;
 import com.ultreon.randomthingz.pc.disk.PartitionTable;
-import com.ultreon.randomthingz.pc.disk.QFMFileLock;
+import com.ultreon.randomthingz.pc.disk.RTFileLock;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -103,27 +103,27 @@ public class Disk {
         return size;
     }
 
-    public QFMFileLock lock() throws IOException {
-        return new QFMFileLock(this.channel.lock());
+    public RTFileLock lock() throws IOException {
+        return new RTFileLock(this.channel.lock());
     }
 
-    public QFMFileLock lock(long pos, long size) throws IOException {
-        return new QFMFileLock(this.channel.lock(pos, size, false));
+    public RTFileLock lock(long pos, long size) throws IOException {
+        return new RTFileLock(this.channel.lock(pos, size, false));
     }
 
-    public QFMFileLock lock(long pos, long size, boolean shared) throws IOException {
-        return new QFMFileLock(this.channel.lock(pos, size, shared));
+    public RTFileLock lock(long pos, long size, boolean shared) throws IOException {
+        return new RTFileLock(this.channel.lock(pos, size, shared));
     }
 
-    public QFMFileLock tryLock() throws IOException {
-        return new QFMFileLock(this.channel.tryLock());
+    public RTFileLock tryLock() throws IOException {
+        return new RTFileLock(this.channel.tryLock());
     }
 
-    public QFMFileLock tryLock(long pos, long size) throws IOException {
-        return new QFMFileLock(this.channel.tryLock(pos, size, false));
+    public RTFileLock tryLock(long pos, long size) throws IOException {
+        return new RTFileLock(this.channel.tryLock(pos, size, false));
     }
 
-    public QFMFileLock tryLock(long pos, long size, boolean shared) throws IOException {
-        return new QFMFileLock(this.channel.tryLock(pos, size, shared));
+    public RTFileLock tryLock(long pos, long size, boolean shared) throws IOException {
+        return new RTFileLock(this.channel.tryLock(pos, size, shared));
     }
 }

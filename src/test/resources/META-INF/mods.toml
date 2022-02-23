@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[36,)"
-license="""(C) Copyright 2020 - QTech Community.
+license="""(C) Copyright 2020 - Ultreon Team.
 This project is licensed under the CC BY-NC-SA 4.0 license.
 See this link for the full license: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 """
@@ -10,7 +10,7 @@ See this link for the full license: https://creativecommons.org/licenses/by-nc-s
 modId="test" #mandatory
 version="$$MOD_VERSION$$" #mandatory
 displayName="Random Thingz: Test Mod" #mandatory
-displayURL="https://github.com/QTechCommunity/QForgeMod" #optional
+displayURL="https://github.com/Ultreon/RandomThingz" #optional
 credits="Qboi123" #optional
 authors="Qboi123" #optional
 description='''

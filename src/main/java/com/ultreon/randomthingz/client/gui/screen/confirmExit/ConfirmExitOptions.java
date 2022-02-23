@@ -78,7 +78,7 @@ public class ConfirmExitOptions extends ModuleOptionsScreen<ConfirmExitModule> {
         addRenderableWidget(new Button(width / 2 - 155, height / 6 + 120 - 6, 150, 20,
                 CommonComponents.GUI_DONE, this::saveAndGoBack));
         addRenderableWidget(new Button(width / 2 + 5, height / 6 + 120 - 6, 150, 20,
-                CommonComponents.GUI_CANCEL, this::goBack));
+                CommonComponents.GUI_CANCEL, this::back));
     }
 
     protected void toggleClosePrompt(Button button) {
@@ -161,10 +161,10 @@ public class ConfirmExitOptions extends ModuleOptionsScreen<ConfirmExitModule> {
         this.module.setChanged();
 
         // Go back.
-        goBack(button);
+        back(button);
     }
 
-    public void goBack(Button button) {
+    public void back(Button button) {
         // Check if the minecraft instance isn't null.
         if (minecraft != null) {
             // Display previous screen.

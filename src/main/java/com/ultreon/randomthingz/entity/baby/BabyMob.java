@@ -12,7 +12,7 @@ import java.util.UUID;
 /**
  * Base baby entity interface.
  *
- * @author QTech Community.
+ * @author Ultreon Team.
  */
 public interface BabyMob {
 

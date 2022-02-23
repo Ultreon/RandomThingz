@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Baby creeper entity class.
  *
- * @author QTech Community.
+ * @author Ultreon Team.
  */
 public class BabyCreeper extends Creeper implements BabyMob {
 

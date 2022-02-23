@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class CustomizedTexture extends QFMTexture {
+public class CustomizedTexture extends RTTexture {
     private final List<Consumer<Graphics2D>> actions = new ArrayList<>();
     private final InputStream stream;
 

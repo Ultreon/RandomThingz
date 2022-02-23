@@ -112,7 +112,7 @@ public class ConfirmExitScreen extends Screen {
         }
     }
 
-    public void goBack() {
+    public void back() {
         Minecraft.getInstance().setScreen(backScreen);
     }
 
@@ -122,6 +122,6 @@ public class ConfirmExitScreen extends Screen {
 
     @Override
     public void onClose() {
-        goBack();
+        back();
     }
 }

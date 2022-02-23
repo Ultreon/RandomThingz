@@ -1,9 +1,6 @@
 {
   "replace": false,
   "values": [
-    "randomthingz:copper_block",
-    "randomthingz:copper_ore",
-    "randomthingz:deepslate_copper_ore",
     "randomthingz:tin_block",
     "randomthingz:tin_ore",
     "randomthingz:deepslate_tin_ore",
@@ -92,7 +89,6 @@
     "randomthingz:lava_generator",
     "randomthingz:diesel_generator",
     "randomthingz:redstone_alloy_block",
-    "randomthingz:copper_block",
     "randomthingz:tin_block",
     "randomthingz:silver_block",
     "randomthingz:lead_block",

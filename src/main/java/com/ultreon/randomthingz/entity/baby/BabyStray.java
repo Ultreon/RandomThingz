@@ -24,7 +24,7 @@ import java.util.Random;
 /**
  * Baby stray entity class.
  *
- * @author QTech Community.
+ * @author Ultreon Team.
  */
 public class BabyStray extends Stray implements BabyMob {
 

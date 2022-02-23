@@ -45,7 +45,7 @@ public class ItemMaterial implements BaseItemMaterial {
     public static final ItemMaterial COMPRESSED_IRON = new ItemMaterial(builder("compressed_iron").ingot());
     public static final ItemMaterial IRON = new ItemMaterial(builder("iron").chunks().dust().ingotTagOnly().nuggetTagOnly());
     public static final ItemMaterial GOLD = new ItemMaterial(builder("gold").chunks().dust().ingotTagOnly().nuggetTagOnly());
-    public static final ItemMaterial COPPER = new ItemMaterial(builderBaseWithOre("copper", Ores.COPPER));
+//    public static final ItemMaterial COPPER = new ItemMaterial(builderBaseWithOre("copper", Ores.COPPER));
     public static final ItemMaterial TIN = new ItemMaterial(builderBaseWithOre("tin", Ores.TIN));
     public static final ItemMaterial SILVER = new ItemMaterial(builderBaseWithOre("silver", Ores.SILVER));
     public static final ItemMaterial LEAD = new ItemMaterial(builderBaseWithOre("lead", Ores.LEAD));

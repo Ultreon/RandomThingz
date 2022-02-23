@@ -32,7 +32,7 @@ import java.util.Map;
  * An abstract updater used for checking for updates.
  * Other modders can use this to create their own updaters.
  * They need to create an implementation of {@linkplain IVersion} to make it work with their own version systems -
- * Or use {@linkplain RtVersion} if modders want to use the QSoftware / QTech version system.
+ * Or use {@linkplain RtVersion} if modders want to use the Ultreon Team version system.
  *
  * @param <T> an implementation of {@linkplain IVersion}.
  */
@@ -97,8 +97,8 @@ public abstract class AbstractUpdater<T extends IVersion> {
      *
      * @return the Random Thingz updater.
      */
-    public static QFMUpdater getQFMUpdater() {
-        return QFMUpdater.getInstance();
+    public static UpdaterUpdater getUpdaterUpdater() {
+        return UpdaterUpdater.getInstance();
     }
 
     /**

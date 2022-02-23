@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
+@SuppressWarnings("ClassCanBeRecord")
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public class OresInitializer {
     @Getter

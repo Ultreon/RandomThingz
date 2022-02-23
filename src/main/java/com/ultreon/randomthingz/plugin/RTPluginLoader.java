@@ -20,7 +20,7 @@ import static net.minecraftforge.fml.Logging.LOADING;
 @Beta
 public class RTPluginLoader {
     private static final Logger LOGGER = LogManager.getLogger("RandomThingz:Plugins-Loader");
-    private static final Type AUTO_SUBSCRIBER = Type.getType(QFMPlugin.class);
+    private static final Type AUTO_SUBSCRIBER = Type.getType(RTPlugin.class);
     private static final Type MOD_TYPE = Type.getType(Mod.class);
 
     public RTPluginLoader() {
@@ -48,7 +48,7 @@ public class RTPluginLoader {
                     if (Objects.equals(modIdMap.getValue(), modId) && sides.contains(FMLEnvironment.dist)) {
                         try {
                             LOGGER.debug("Registering RandomThingz Plugin for Class name: {}", ad.clazz().getClassName());
-                            QFMPluginManager.get().registerPlugin(Class.forName(ad.clazz().getClassName(), true, loader));
+                            RTPluginManager.get().registerPlugin(Class.forName(ad.clazz().getClassName(), true, loader));
                         } catch (ClassNotFoundException e) {
                             LOGGER.fatal(LOADING, "Failed to read RandomThingz Plugin class {} for @RandomThingzPlugin annotation", ad.clazz(), e);
                             throw new RuntimeException(e);

@@ -221,7 +221,7 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         }
 
         // Get Random Thingz updater instance.
-        AbstractUpdater<RtVersion> updater = AbstractUpdater.getQFMUpdater();
+        AbstractUpdater<RtVersion> updater = AbstractUpdater.getUpdaterUpdater();
 
         // Check for Random Thingz updates.
         AbstractUpdater.UpdateInfo updateInfo = updater.checkForUpdates();

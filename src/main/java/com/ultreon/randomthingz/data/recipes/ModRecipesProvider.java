@@ -47,7 +47,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .ingredient(ItemMaterial.ALUMINUM, 1)
                 .build(consumer);
         AlloySmeltingRecipeBuilder.builder(ItemMaterial.BISMUTH_BRASS, 4, 400)
-                .ingredient(ItemMaterial.COPPER, 2)
+                .ingredient(Items.COPPER_INGOT, 2)
                 .ingredient(ItemMaterial.ZINC, 1)
                 .ingredient(ItemMaterial.BISMUTH, 1)
                 .build(consumer);
@@ -57,11 +57,11 @@ public class ModRecipesProvider extends RecipeProvider {
                 .ingredient(ItemMaterial.BISMUTH, 1)
                 .build(consumer);
         AlloySmeltingRecipeBuilder.builder(ItemMaterial.BRASS, 4, 400)
-                .ingredient(ItemMaterial.COPPER, 3)
+                .ingredient(Items.COPPER_INGOT, 3)
                 .ingredient(ItemMaterial.ZINC, 1)
                 .build(consumer);
         AlloySmeltingRecipeBuilder.builder(ItemMaterial.BRONZE, 4, 400)
-                .ingredient(ItemMaterial.COPPER, 3)
+                .ingredient(Items.COPPER_INGOT, 3)
                 .ingredient(ItemMaterial.TIN, 1)
                 .build(consumer);
         AlloySmeltingRecipeBuilder.builder(ItemMaterial.ELECTRUM, 2, 400)
@@ -87,7 +87,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .ingredient(Tags.Items.DUSTS_REDSTONE, 4)
                 .build(consumer);
         AlloySmeltingRecipeBuilder.builder(ItemMaterial.SIGNALUM, 4, 500)
-                .ingredient(ItemMaterial.COPPER, 3)
+                .ingredient(Items.COPPER_INGOT, 3)
                 .ingredient(ItemMaterial.SILVER, 1)
                 .ingredient(Tags.Items.DUSTS_REDSTONE, 10)
                 .build(consumer);
@@ -357,7 +357,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .pattern("/X/")
                 .pattern("O/O")
                 .define('#', ItemMaterial.TIN.getIngotTag().get())
-                .define('/', ItemMaterial.COPPER.getIngotTag().get())
+                .define('/', Tags.Items.INGOTS_COPPER)
                 .define('X', ModBlocks.STONE_MACHINE_FRAME)
                 .define('O', Blocks.BRICKS)
                 .unlockedBy("has_item", has(ModBlocks.STONE_MACHINE_FRAME))
@@ -518,7 +518,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .pattern("/X/")
                 .pattern("OAO")
                 .define('#', Tags.Items.INGOTS_IRON)
-                .define('/', ItemMaterial.COPPER.getIngotTag().get())
+                .define('/', Tags.Items.INGOTS_COPPER)
                 .define('X', ModBlocks.STONE_MACHINE_FRAME)
                 .define('O', Tags.Items.COBBLESTONE)
                 .define('A', ItemMaterial.REFINED_IRON.getIngotTag().get())
@@ -568,7 +568,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .pattern("///")
                 .pattern("###")
                 .define('/', Ingredient.fromValues(Stream.of(
-                        new Ingredient.TagValue(ItemMaterial.COPPER.getIngotTag().get()),
+                        new Ingredient.TagValue(Tags.Items.INGOTS_COPPER),
                         new Ingredient.TagValue(ItemMaterial.REFINED_IRON.getIngotTag().get())
                 )))
                 .define('#', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
@@ -580,7 +580,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .patternLine("/O/")
                 .patternLine("XEX")
                 .key('X', ItemMaterial.PLATINUM.getIngotTag().get())
-                .key('C', ItemMaterial.COPPER.getIngotTag().get())
+                .key('C', Tags.Items.INGOTS_COPPER)
                 .key('E', ItemMaterial.ELECTRUM.getIngotTag().get())
                 .key('/', ModItems.URANIUM_ROD)
                 .key('O', Items.GUNPOWDER)
@@ -611,7 +611,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .pattern("###")
                 .define('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .define('G', Tags.Items.INGOTS_GOLD)
-                .define('#', ItemMaterial.COPPER.getIngotTag().get())
+                .define('#', Tags.Items.INGOTS_COPPER)
                 .unlockedBy("has_item", has(ItemMaterial.REDSTONE_ALLOY.getIngotTag().get()))
                 .save(consumer);
 
@@ -619,7 +619,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .pattern("##")
                 .pattern("##")
                 .pattern("/ ")
-                .define('#', ItemMaterial.COPPER.getIngotTag().get())
+                .define('#', Tags.Items.INGOTS_COPPER)
                 .define('/', ItemMaterial.REDSTONE_ALLOY.getIngotTag().get())
                 .unlockedBy("has_item", has(ItemMaterial.REDSTONE_ALLOY.getIngotTag().get()))
                 .save(consumer);

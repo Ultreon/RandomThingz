@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Baby wither skeleton entity class.
  *
- * @author QTech Community.
+ * @author Ultreon Team.
  */
 public class BabyWitherSkeleton extends WitherSkeleton implements BabyMob {
 
