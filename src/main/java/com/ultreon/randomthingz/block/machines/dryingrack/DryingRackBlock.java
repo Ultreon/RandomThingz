@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.dryingrack;
 
-import com.ultreon.texturedmodels.tileentity.ITickable;
+import com.ultreon.texturedmodels.tileentity.Tickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
@@ -51,36 +51,36 @@ public class DryingRackBlock extends HorizontalDirectionalBlock implements Simpl
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
-        return ITickable::tickTE;
+        return Tickable::blockEntity;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public InteractionResult use(BlockState state, Level dimensionIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+        BlockEntity tileEntity = level.getBlockEntity(pos);
         if (tileEntity instanceof DryingRackTileEntity) {
             return ((DryingRackTileEntity) tileEntity).interact(player) ? InteractionResult.SUCCESS : InteractionResult.PASS;
         }
-        return super.use(state, dimensionIn, pos, player, handIn, hit);
+        return super.use(state, level, pos, player, handIn, hit);
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity entity = dimensionIn.getBlockEntity(pos);
+            BlockEntity entity = level.getBlockEntity(pos);
             if (entity instanceof Container container) {
-                Containers.dropContents(dimensionIn, pos, container);
-                dimensionIn.updateNeighbourForOutputSignal(pos, this);
+                Containers.dropContents(level, pos, container);
+                level.updateNeighbourForOutputSignal(pos, this);
             }
 
-            super.onRemove(state, dimensionIn, pos, newState, isMoving);
+            super.onRemove(state, level, pos, newState, isMoving);
         }
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter dimensionIn, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         Direction facing = state.getValue(FACING);
         return switch (facing) {
             case SOUTH -> SHAPE_SOUTH;

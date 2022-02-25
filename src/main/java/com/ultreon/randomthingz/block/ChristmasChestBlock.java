@@ -4,7 +4,7 @@ import com.ultreon.randomthingz.common.RequiresToolMat;
 import com.ultreon.randomthingz.common.RequiresToolType;
 import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import com.ultreon.randomthingz.item.tool.ToolType;
-import com.ultreon.randomthingz.block.entity.ChristmasChestTileEntity;
+import com.ultreon.randomthingz.block.entity.ChristmasChestBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -25,8 +25,8 @@ public class ChristmasChestBlock extends ChestBlock implements RequiresToolMat, 
     }
 
     @Override
-    public ChristmasChestTileEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ChristmasChestTileEntity(pos, state);
+    public ChristmasChestBlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new ChristmasChestBlockEntity(pos, state);
     }
 
     @Override

@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.block.machines.mixer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
+import com.ultreon.randomthingz.block.machines.MachineContainerScreen;
 import com.ultreon.randomthingz.util.TextUtils;
 import com.ultreon.randomthingz.util.render.RenderUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class MixerScreen extends AbstractMachineContainerScreen<MixerContainer> {
+public class MixerScreen extends MachineContainerScreen<MixerContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/mixer.png");
 
     public MixerScreen(MixerContainer container, Inventory playerInventory, Component titleIn) {

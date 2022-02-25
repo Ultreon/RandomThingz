@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.block.machines.infuser;
 import com.ultreon.modlib.api.FluidContainer;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachines;
-import com.ultreon.randomthingz.block.machines.AbstractFluidMachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.FluidMachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.InfusingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 
-public class InfuserBlockEntity extends AbstractFluidMachineBlockEntity<InfusingRecipe> {
+public class InfuserBlockEntity extends FluidMachineBlockEntity<InfusingRecipe> {
     public static final int FIELDS_COUNT = 9;
     public static final int TANK_CAPACITY = 4000;
     public static final int ENERGY_PER_TICK = 50;

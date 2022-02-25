@@ -8,15 +8,14 @@ import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.jetbrains.annotations.NotNull;
 
-public class DebugMenuModule extends Module {
-    private static final DebugMenuMenu debugMenuMenu = new DebugMenuMenu();
+public class DebugInfoModule extends Module {
+    private static final DebugInfoMenu debugMenuMenu = new DebugInfoMenu();
 
-    public DebugMenuModule() {
+    public DebugInfoModule() {
 
         MainActionMenu.registerHandler(new MenuHandler(new TextComponent("Debug Menu"), debugMenuMenu));
     }
@@ -42,12 +41,7 @@ public class DebugMenuModule extends Module {
 
     @SubscribeEvent
     public void onKeyReleased(InputEvent.KeyInputEvent event) {
-        DebugMenu.onKeyReleased(event);
-    }
-
-    @SubscribeEvent
-    public void renderGameOverlay(RenderGameOverlayEvent event) {
-        DebugMenu.renderGameOverlay(event);
+        DebugGui.get().onKeyReleased(event);
     }
 
     @Override

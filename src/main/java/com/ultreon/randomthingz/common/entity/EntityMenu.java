@@ -2,7 +2,8 @@ package com.ultreon.randomthingz.common.entity;
 
 import com.ultreon.randomthingz.actionmenu.AbstractActionMenu;
 import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
-import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
+import com.ultreon.randomthingz.client.debug.menu.DebugGui;
+import com.ultreon.randomthingz.client.debug.menu.DebugPages;
 import com.ultreon.randomthingz.util.Targeter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -83,7 +84,7 @@ public class EntityMenu extends AbstractActionMenu {
         addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
-                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.ENTITY;
+                DebugGui.get().setPage(DebugPages.ENTITY);
             }
 
             @Override

@@ -7,20 +7,21 @@ import com.ultreon.randomthingz.item.crafting.CompressingRecipe;
 import com.ultreon.randomthingz.util.Constants;
 import com.ultreon.randomthingz.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
+import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class CompressingRecipeCategoryJei implements IRecipeCategory<CompressingRecipe> {
     private static final int GUI_START_X = 55;
@@ -67,13 +68,30 @@ public class CompressingRecipeCategoryJei implements IRecipeCategory<Compressing
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, CompressingRecipe recipe, IFocusGroup focusGroup) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 55 - GUI_START_X, 34 - GUI_START_Y).addItemStacks(Arrays.asList(recipe.getIngredient().getItems()));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 115 - GUI_START_X, 34 - GUI_START_Y).addItemStack(recipe.getResultItem());
+    public void setIngredients(CompressingRecipe recipe, IIngredients ingredients) {
+        ingredients.setInputIngredients(Collections.singletonList(recipe.getIngredient()));
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
     }
 
     @Override
-    public void draw(CompressingRecipe recipe, IRecipeSlotsView slotsView, PoseStack pose, double mouseX, double mouseY) {
-        arrow.draw(pose, 79 - GUI_START_X, 35 - GUI_START_Y);
+    public void setRecipe(IRecipeLayout recipeLayout, CompressingRecipe recipe, IIngredients ingredients) {
+        IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
+        itemStacks.init(0, true, 55 - GUI_START_X, 34 - GUI_START_Y);
+        itemStacks.init(1, false, 115 - GUI_START_X, 34 - GUI_START_Y);
+
+        // Should only be one ingredient...
+        List<ItemStack> inputs = new ArrayList<>();
+        Arrays.stream(recipe.getIngredient().getItems()).map(s -> {
+            ItemStack stack = s.copy();
+            stack.setCount(recipe.getIngredientCount());
+            return stack;
+        }).forEach(inputs::add);
+        itemStacks.set(0, inputs);
+        itemStacks.set(1, recipe.getResultItem());
+    }
+
+    @Override
+    public void draw(CompressingRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
+        arrow.draw(matrixStack, 79 - GUI_START_X, 35 - GUI_START_Y);
     }
 }

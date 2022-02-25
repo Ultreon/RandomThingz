@@ -17,9 +17,9 @@ import net.minecraft.world.entity.player.Inventory;
 
 import java.util.Objects;
 
-public abstract class AbstractMachineContainerScreen<C extends BaseMachineBaseContainer<?>> extends AbstractContainerScreen<C> {
-    public AbstractMachineContainerScreen(C screenContainer, Inventory inv, Component titleIn) {
-        super(screenContainer, inv, titleIn);
+public abstract class MachineContainerScreen<C extends BaseMachineBaseContainer<?>> extends AbstractContainerScreen<C> {
+    public MachineContainerScreen(C menu, Inventory inv, Component title) {
+        super(menu, inv, title);
     }
 
     public abstract ResourceLocation getGuiTexture();
@@ -55,7 +55,7 @@ public abstract class AbstractMachineContainerScreen<C extends BaseMachineBaseCo
         blit(matrixStack, xPos, yPos, 0, 0, this.imageWidth, this.imageHeight);
 
         // Upgrade slots
-        for (int i = 0; i < Objects.requireNonNull(this.menu.tileEntity).tier.getUpgradeSlots(); ++i) {
+        for (int i = 0; i < Objects.requireNonNull(this.menu).getUpgradeSlots(); ++i) {
             blit(matrixStack, xPos + 5 + 18 * i, yPos - 11, 190, 0, 18, 14);
         }
     }

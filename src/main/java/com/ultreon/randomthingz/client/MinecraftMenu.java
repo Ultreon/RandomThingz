@@ -4,7 +4,8 @@ import com.ultreon.randomthingz.actionmenu.AbstractActionMenu;
 import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
 import com.ultreon.randomthingz.actionmenu.MenuHandler;
 import com.ultreon.randomthingz.actionmenu.SubmenuItem;
-import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
+import com.ultreon.randomthingz.client.debug.menu.DebugGui;
+import com.ultreon.randomthingz.client.debug.menu.DebugPages;
 import com.ultreon.randomthingz.util.WorldUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.OptionsScreen;
@@ -105,7 +106,7 @@ public class MinecraftMenu extends AbstractActionMenu {
         addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
-                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.MINECRAFT;
+                DebugGui.get().setPage(DebugPages.MINECRAFT);
             }
 
             @Override

@@ -4,7 +4,7 @@ import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
-import com.ultreon.texturedmodels.tileentity.ITickable;
+import com.ultreon.texturedmodels.tileentity.Tickable;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
@@ -99,7 +99,7 @@ public class FrameBlock extends Block implements IForgeBlockState, SimpleWaterlo
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
-        return ITickable::tickTE;
+        return Tickable::blockEntity;
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.generator.coal;
 
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,7 +15,7 @@ public class CoalGeneratorContainer extends BaseMachineBaseContainer<CoalGenerat
     final CoalGeneratorBlockEntity tileEntity;
 
     public CoalGeneratorContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new CoalGeneratorBlockEntity(), new SimpleContainerData(AbstractMachineBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, new CoalGeneratorBlockEntity(), new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
     }
 
     public CoalGeneratorContainer(int id, Inventory playerInventory, CoalGeneratorBlockEntity tileEntity, ContainerData fieldsIn) {
@@ -30,11 +30,11 @@ public class CoalGeneratorContainer extends BaseMachineBaseContainer<CoalGenerat
     }
 
     public int getBurnTime() {
-        return fields.get(5);
+        return fields.get(6);
     }
 
     public int getTotalBurnTime() {
-        return fields.get(6);
+        return fields.get(7);
     }
 
     public boolean isBurning() {

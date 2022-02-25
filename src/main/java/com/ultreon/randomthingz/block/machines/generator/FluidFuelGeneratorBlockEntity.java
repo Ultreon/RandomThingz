@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
 import java.util.Objects;
 
 public abstract class FluidFuelGeneratorBlockEntity extends GeneratorBlockEntity {
-    public static final int FIELDS_COUNT = 9;
+    public static final int FIELDS_COUNT = 10;
 
     protected final FluidTank tank;
     protected final ContainerData fields = new ContainerData() {
@@ -47,10 +47,11 @@ public abstract class FluidFuelGeneratorBlockEntity extends GeneratorBlockEntity
                 case 2 -> getMaxEnergyStored() & 0xFFFF;
                 case 3 -> (getMaxEnergyStored() >> 16) & 0xFFFF;
                 case 4 -> redstoneMode.ordinal();
-                case 5 -> burnTime;
-                case 6 -> totalBurnTime;
-                case 7 -> Registry.FLUID.getId(tank.getFluid().getFluid());
-                case 8 -> tank.getFluidAmount();
+                case 5 -> tier.getUpgradeSlots();
+                case 6 -> burnTime;
+                case 7 -> totalBurnTime;
+                case 8 -> Registry.FLUID.getId(tank.getFluid().getFluid());
+                case 9 -> tank.getFluidAmount();
                 default -> 0;
             };
         }
@@ -59,8 +60,8 @@ public abstract class FluidFuelGeneratorBlockEntity extends GeneratorBlockEntity
         public void set(int index, int value) {
             switch (index) {
                 case 4 -> redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
-                case 5 -> burnTime = value;
-                case 6 -> totalBurnTime = value;
+                case 6 -> burnTime = value;
+                case 7 -> totalBurnTime = value;
             }
         }
 

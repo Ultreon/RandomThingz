@@ -1,6 +1,5 @@
 package com.ultreon.randomthingz.block._common;
 
-import com.mojang.datafixers.util.Pair;
 import com.ultreon.modlib.silentlib.registry.BlockRegistryObject;
 import com.ultreon.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
@@ -10,9 +9,10 @@ import com.ultreon.randomthingz.block.custom.render.CRDoorBlock;
 import com.ultreon.randomthingz.block.custom.render.CRFlowerBlock;
 import com.ultreon.randomthingz.block.door.DoorType;
 import com.ultreon.randomthingz.block.entity.ModBlockEntities;
+import com.ultreon.randomthingz.block.entity.itemrenderer.CustomItemStackRenderer;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import com.ultreon.randomthingz.block.furniture.WoodenCrateBlock;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBlock;
+import com.ultreon.randomthingz.block.machines.MachineBlock;
 import com.ultreon.randomthingz.block.machines.MachineFrameBlock;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterBlock;
 import com.ultreon.randomthingz.block.machines.arcaneescalator.ArcaneEscalatorBlock;
@@ -46,17 +46,14 @@ import com.ultreon.randomthingz.item.block.DeprecatedBlockItem;
 import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import com.ultreon.randomthingz.item.tool.ToolType;
 import com.ultreon.randomthingz.registration.Registration;
-import com.ultreon.randomthingz.block.entity.ChristmasChestTileEntity;
-import com.ultreon.randomthingz.block.entity.itemrenderer.ChristmasChestItemStackRenderer;
+import com.ultreon.randomthingz.block.entity.ChristmasChestBlockEntity;
 import lombok.experimental.UtilityClass;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -69,6 +66,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -86,7 +84,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -306,7 +303,7 @@ public final class ModBlocks {
             "christmas_chest", () -> new ChristmasChestBlock(Block.Properties.of(Material.WOOD)
                     .strength(2f, 3f)
                     .sound(SoundType.WOOD), ModBlockEntities.CHRISTMAS_CHEST::get),
-            () -> (pair, block) -> new ChristmasChestItemStackRenderer<>(pair.getFirst(), pair.getSecond(), ChristmasChestTileEntity::new));
+            () -> ChristmasChestBlockEntity::new);
 
     ////////////////////////
     //     Ore blocks     //
@@ -353,7 +350,7 @@ public final class ModBlocks {
     public static void registerRenderTypes(FMLClientSetupEvent event) {
         ItemBlockRenderTypes.setRenderLayer(STONE_MACHINE_FRAME.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(ALLOY_MACHINE_FRAME.get(), RenderType.cutout());
-        Registration.getBlocks(AbstractMachineBlock.class).forEach(block ->
+        Registration.getBlocks(MachineBlock.class).forEach(block ->
                 ItemBlockRenderTypes.setRenderLayer(block, RenderType.translucent()));
     }
 
@@ -382,8 +379,8 @@ public final class ModBlocks {
         return register(name, block, ModBlocks::machineItem);
     }
 
-    private static <T extends ChestBlock> BlockRegistryObject<T> registerChest(String name, Supplier<T> block, Supplier<BiFunction<Pair<BlockEntityRenderDispatcher, EntityModelSet>, T, ? extends BlockEntityWithoutLevelRenderer>> renderMethod) {
-        return register(name, block, block1 -> chestItem(block1, () -> ((dispatcher, models) -> renderMethod.get().apply(new Pair<>(dispatcher, models), block1.get()))));
+    private static <T extends ChestBlock, E extends ChestBlockEntity> BlockRegistryObject<T> registerChest(String name, Supplier<T> block, Supplier<Supplier<E>> renderMethod) {
+        return register(name, block, block1 -> chestItem(block1, renderMethod));
     }
 
     private static <T extends Block> BlockRegistryObject<T> registerIngredient(String name, Supplier<T> block) {
@@ -449,28 +446,29 @@ public final class ModBlocks {
         return () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModCreativeTabs.MACHINES));
     }
 
-    private static <T extends ChestBlock> Supplier<DeprecatedBlockItem> chestItem(BlockRegistryObject<T> block, Supplier<BiFunction<BlockEntityRenderDispatcher, EntityModelSet, ? extends BlockEntityWithoutLevelRenderer>> renderMethod) {
-        ItemTileEntityRenderers.lazyRegister(() -> (dispatcher, models) -> (BlockEntityWithoutLevelRenderer) renderMethod.get().apply(dispatcher, models));
+    private static <T extends ChestBlock, E extends ChestBlockEntity> Supplier<DeprecatedBlockItem> chestItem(BlockRegistryObject<T> block, Supplier<Supplier<E>> renderMethod) {
+        return DistExecutor.unsafeRunForDist(() -> () -> () -> {
+            Minecraft mc = Minecraft.getInstance();
+            Supplier<Supplier<CustomItemStackRenderer<E>>> renderer = () -> () -> new CustomItemStackRenderer<>(mc.getBlockEntityRenderDispatcher(), mc.getEntityModels(), renderMethod.get());
+            ItemTileEntityRenderers.lazyRegister(() -> (dispatcher, models) -> (BlockEntityWithoutLevelRenderer) renderer.get().get());
 
+            return new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModCreativeTabs.MACHINES)) {
+                @Override
+                public Object getRenderPropertiesInternal() {
+                    return super.getRenderPropertiesInternal();
+                }
 
-        return DistExecutor.unsafeRunForDist(() -> () -> () -> new ChestBlockItem(block.get(), new Item.Properties().tab(ModCreativeTabs.MACHINES)), () -> () -> () -> new DeprecatedBlockItem(block.get(), new Item.Properties().tab(ModCreativeTabs.MACHINES)) {
-            @Override
-            public Object getRenderPropertiesInternal() {
-                return super.getRenderPropertiesInternal();
-            }
-
-            @Override
-            public void initializeClient(Consumer<IItemRenderProperties> consumer) {
-                consumer.accept(new IItemRenderProperties() {
-                    @Override
-                    public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
-                        Minecraft mc = Minecraft.getInstance();
-
-                        return renderMethod.get().apply(mc.getBlockEntityRenderDispatcher(), mc.getEntityModels());
-                    }
-                });
-            }
-        });
+                @Override
+                public void initializeClient(Consumer<IItemRenderProperties> consumer) {
+                    consumer.accept(new IItemRenderProperties() {
+                        @Override
+                        public BlockEntityWithoutLevelRenderer getItemStackRenderer() {
+                            return renderer.get().get();
+                        }
+                    });
+                }
+            };
+        }, () -> () -> () -> new ChestBlockItem(block.get(), new Item.Properties().tab(ModCreativeTabs.MACHINES)));
     }
 
     private static <T extends Block> Supplier<DeprecatedBlockItem> ingredientItem(BlockRegistryObject<T> block) {

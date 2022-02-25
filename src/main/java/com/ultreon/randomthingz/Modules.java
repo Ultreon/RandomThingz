@@ -4,7 +4,7 @@ import com.ultreon.randomthingz.actionmenu.ActionMenuModule;
 import com.ultreon.randomthingz.block._common.BlocksModule;
 import com.ultreon.randomthingz.block.entity.BlockEntitiesModule;
 import com.ultreon.randomthingz.client.ClientTweaksModule;
-import com.ultreon.randomthingz.client.debug.menu.DebugMenuModule;
+import com.ultreon.randomthingz.client.debug.menu.DebugInfoModule;
 import com.ultreon.randomthingz.client.gui.screen.confirmExit.ConfirmExitModule;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleManager;
@@ -53,7 +53,7 @@ public class Modules {
         public static final WorldGenerationModule BIOMES = new WorldGenerationModule();
         public static final OresModule ORES = new OresModule();
         public static final UpdatesModule UPDATES = new UpdatesModule();
-        public static final DebugMenuModule DEBUG_MENU = new DebugMenuModule();
+        public static final DebugInfoModule DEBUG_MENU = new DebugInfoModule();
         public static final ActionMenuModule ACTION_MENU = new ActionMenuModule();
 
         public static void initialize(ModuleManager manager) {

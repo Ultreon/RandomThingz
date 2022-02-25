@@ -23,12 +23,14 @@ public class RefineryContainer extends BaseMachineBaseContainer<RefineryBlockEnt
     public RefineryContainer(int id, Inventory playerInventory, @Nullable RefineryBlockEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.refinery, id, tileEntity, fieldsIn);
 
-        if (this.tileEntity != null) {
-            this.addSlot(new Slot(this.tileEntity, 0, 8, 16));
-            this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 8, 59));
-            this.addSlot(new Slot(this.tileEntity, 2, 134, 16));
-            this.addSlot(new SlotOutputOnly(this.tileEntity, 3, 134, 59));
+        if (this.tileEntity == null) {
+            return;
         }
+
+        this.addSlot(new Slot(this.tileEntity, 0, 8, 16));
+        this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 8, 59));
+        this.addSlot(new Slot(this.tileEntity, 2, 134, 16));
+        this.addSlot(new SlotOutputOnly(this.tileEntity, 3, 134, 59));
 
         InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
 
@@ -36,11 +38,11 @@ public class RefineryContainer extends BaseMachineBaseContainer<RefineryBlockEnt
     }
 
     public int getProgress() {
-        return fields.get(5);
+        return fields.get(6);
     }
 
     public int getProcessTime() {
-        return fields.get(6);
+        return fields.get(7);
     }
 
     @SuppressWarnings("deprecation") // Use of Registry

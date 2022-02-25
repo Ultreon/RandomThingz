@@ -4,7 +4,7 @@ import com.ultreon.modlib.silentlib.block.entity.BaseInventoryContainerBlockEnti
 import com.ultreon.modlib.silentlib.block.entity.SyncVariable;
 import com.ultreon.randomthingz.capability.EnergyStorageImpl;
 import com.ultreon.randomthingz.util.EnergyUtils;
-import com.ultreon.texturedmodels.tileentity.ITickable;
+import com.ultreon.texturedmodels.tileentity.Tickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public abstract class AbstractBaseEnergyInventoryBlockEntity extends BaseInventoryContainerBlockEntity implements EnergyHandler, ITickable {
+public abstract class BaseEnergyInventoryBlockEntity extends BaseInventoryContainerBlockEntity implements EnergyHandler, Tickable {
     protected final EnergyStorageImpl energy;
     private final int maxExtract;
 
@@ -32,16 +32,16 @@ public abstract class AbstractBaseEnergyInventoryBlockEntity extends BaseInvento
                 //Minecraft actually sends fields as shorts, so we need to split energy into 2 fields
                 case 0 ->
                         // Energy lower bytes
-                        AbstractBaseEnergyInventoryBlockEntity.this.getEnergyStored() & 0xFFFF;
+                        BaseEnergyInventoryBlockEntity.this.getEnergyStored() & 0xFFFF;
                 case 1 ->
                         // Energy upper bytes
-                        (AbstractBaseEnergyInventoryBlockEntity.this.getEnergyStored() >> 16) & 0xFFFF;
+                        (BaseEnergyInventoryBlockEntity.this.getEnergyStored() >> 16) & 0xFFFF;
                 case 2 ->
                         // Max energy lower bytes
-                        AbstractBaseEnergyInventoryBlockEntity.this.getMaxEnergyStored() & 0xFFFF;
+                        BaseEnergyInventoryBlockEntity.this.getMaxEnergyStored() & 0xFFFF;
                 case 3 ->
                         // Max energy upper bytes
-                        (AbstractBaseEnergyInventoryBlockEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
+                        (BaseEnergyInventoryBlockEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
                 default -> 0;
             };
         }
@@ -57,7 +57,7 @@ public abstract class AbstractBaseEnergyInventoryBlockEntity extends BaseInvento
         }
     };
 
-    protected AbstractBaseEnergyInventoryBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, int maxEnergy, int maxReceive, int maxExtract) {
+    protected BaseEnergyInventoryBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, int maxEnergy, int maxReceive, int maxExtract) {
         super(typeIn, pos, state, inventorySize);
         this.energy = new EnergyStorageImpl(maxEnergy, maxReceive, maxExtract, this);
         this.maxExtract = maxExtract;

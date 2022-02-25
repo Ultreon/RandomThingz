@@ -5,26 +5,23 @@ import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 
-import java.util.Locale;
-
-public class DebugMenuMenu extends AbstractActionMenu {
-    public DebugMenuMenu() {
+public class DebugInfoMenu extends AbstractActionMenu {
+    public DebugInfoMenu() {
 
     }
 
     @Override
     public void client() {
-
-        for (DebugMenu.PAGE page : DebugMenu.PAGE.values()) {
+        for (DebugPage page : DebugGui.get().getPages()) {
             addClient(new ActionMenuItem() {
                 @Override
                 public void onActivate() {
-                    DebugMenu.DEBUG_PAGE = page;
+                    DebugGui.get().setPage(page);
                 }
 
                 @Override
                 public Component getText() {
-                    return new TextComponent(page.name().toLowerCase(Locale.ROOT));
+                    return new TextComponent(page.registryName().toString());
                 }
 
                 @Override

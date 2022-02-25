@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.block.machines.infuser;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
+import com.ultreon.randomthingz.block.machines.MachineContainerScreen;
 import com.ultreon.randomthingz.util.TextUtils;
 import com.ultreon.randomthingz.util.render.RenderUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class InfuserScreen extends AbstractMachineContainerScreen<InfuserContainer> {
+public class InfuserScreen extends MachineContainerScreen<InfuserContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/infuser.png");
 
     public InfuserScreen(InfuserContainer container, Inventory playerInventory, Component titleIn) {

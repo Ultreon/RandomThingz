@@ -33,11 +33,11 @@ public class InfuserContainer extends BaseMachineBaseContainer<InfuserBlockEntit
     }
 
     public int getProgress() {
-        return fields.get(5);
+        return fields.get(6);
     }
 
     public int getProcessTime() {
-        return fields.get(6);
+        return fields.get(7);
     }
 
     @SuppressWarnings("deprecation") // Use of Registry

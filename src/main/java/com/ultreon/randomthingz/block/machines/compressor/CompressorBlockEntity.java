@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.block.machines.compressor;
 import com.google.common.collect.ImmutableList;
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachines;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.CompressingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class CompressorBlockEntity extends AbstractMachineBlockEntity<CompressingRecipe> {
+public class CompressorBlockEntity extends MachineBlockEntity<CompressingRecipe> {
     // Energy constant
     public static final int MAX_ENERGY = 50_000;
     public static final int MAX_RECEIVE = 500;

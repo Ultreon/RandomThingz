@@ -2,8 +2,8 @@ package com.ultreon.randomthingz.block.machines.compressor;
 
 import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
-import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
+import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,9 +12,9 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class CompressorContainer extends AbstractMachineContainer<CompressorBlockEntity> {
+public class CompressorContainer extends MachineContainer<CompressorBlockEntity> {
     public CompressorContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new CompressorBlockEntity(), new SimpleContainerData(AbstractMachineBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, new CompressorBlockEntity(), new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
     }
 
     public CompressorContainer(int id, Inventory playerInventory, CompressorBlockEntity tileEntity, ContainerData fieldsIn) {

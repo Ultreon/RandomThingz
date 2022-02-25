@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.crusher;
 
 import com.ultreon.randomthingz.block._common.MachineType;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.CrushingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.stream.IntStream;
 
-public class CrusherBlockEntity extends AbstractMachineBlockEntity<CrushingRecipe> {
+public class CrusherBlockEntity extends MachineBlockEntity<CrushingRecipe> {
     // Energy constant
     private static final int MAX_ENERGY = 50_000;
     private static final int MAX_RECEIVE = 500;

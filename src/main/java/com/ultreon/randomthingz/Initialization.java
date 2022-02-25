@@ -4,7 +4,6 @@ package com.ultreon.randomthingz;
 import com.ultreon.filters.Filters;
 import com.ultreon.randomthingz.block.ModBlockTags;
 import com.ultreon.randomthingz.block._common.ModBlocks;
-import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
 import com.ultreon.randomthingz.client.input.KeyBindingList;
 import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.entity.ModEntities;
@@ -17,7 +16,6 @@ import com.ultreon.randomthingz.entity.baby.*;
 import com.ultreon.randomthingz.item.CustomBowItem;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import com.ultreon.randomthingz.registration.Registration;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -125,9 +123,6 @@ class Initialization {
 
         this.logger.info("Registering keybindings");
         KeyBindingList.register();
-        if (Minecraft.getInstance().getLaunchedVersion().equals("MOD_DEV")) {
-            DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.PLAYER_1;
-        }
 
         for (Item item : Registration.getItems((item) -> item instanceof CustomBowItem)) {
             ItemProperties.register(item, new ResourceLocation("pull"), (stack, level, entity, param) -> {

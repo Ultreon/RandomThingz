@@ -4,7 +4,7 @@ import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.test.network.Network;
 import com.ultreon.randomthingz.test.network.OreProfilePacket;
 import lombok.experimental.UtilityClass;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

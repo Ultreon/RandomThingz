@@ -1,7 +1,9 @@
 package com.ultreon.randomthingz.client.debug.menu.pages;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.client.debug.menu.DebugEntry;
 import com.ultreon.randomthingz.client.debug.menu.DebugPage;
+import com.ultreon.randomthingz.client.debug.menu.DebugRenderContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -16,60 +18,34 @@ public class WorldPage extends DebugPage {
     }
 
     @Override
-    public List<DebugEntry> getLinesLeft() {
-        List<DebugEntry> list = new ArrayList<>();
-        Minecraft mc = Minecraft.getInstance();
-        ClientLevel dimension = mc.level;
-        if (dimension == null) {
-            list.add(new DebugEntry("$WORLD$", null));
-            return list;
+    public void render(PoseStack poseStack, DebugRenderContext ctx) {
+        if (Minecraft.getInstance().level != null) {
+            ClientLevel dimension = Minecraft.getInstance().level;
+
+            ctx.left("Lightning Flash Time", dimension.getSkyFlashTime());
+            ctx.left("Chunk Provider", dimension.gatherChunkSourceStats());
+            ctx.left("Loaded Entities", dimension.getEntityCount());
+            ctx.left("Difficulty", dimension.getDifficulty().getDisplayName().getString());
+            ctx.left("Sea Level", dimension.getSeaLevel());
+            ctx.left("Moon Phase", getMoonPhase(dimension.getMoonPhase()));
+            ctx.left("Spawn Angle", getAngle(dimension.getLevelData().getSpawnAngle()));
+            ctx.left("Dimension", dimension.dimension().location());
+            ctx.left("Day Time", dimension.getDayTime());
+            ctx.left("Game Time", dimension.getGameTime());
+            ctx.left("Cloud Color", getColor(dimension.getCloudColor(mc.getFrameTime())));
+            if (Minecraft.getInstance().player != null) {
+                LocalPlayer player = Minecraft.getInstance().player;
+                ctx.left("Sky Color", getColor(dimension.getSkyColor(player.position(), mc.getFrameTime())));
+            }
+            ctx.left("Star Brightness", getPercentage(dimension.getStarBrightness(mc.getFrameTime())));
+            ctx.left("Sun Brightness", getPercentage(dimension.getSkyDarken(mc.getFrameTime())));
+
+            ctx.right("Daytime Now", dimension.isDay());
+            ctx.right("Nighttime Now", dimension.isNight());
+            ctx.right("Raining", dimension.isRaining());
+            ctx.right("Thundering", dimension.isThundering());
+            ctx.right("No Saving", dimension.noSave());
+            ctx.right("Debug World", dimension.isDebug());
         }
-
-        list.add(new DebugEntry("timeLightningFlash", dimension::getSkyFlashTime));
-        list.add(new DebugEntry("providerName", dimension::gatherChunkSourceStats));
-        list.add(new DebugEntry("loadedEntities", dimension::getEntityCount));
-        list.add(new DebugEntry("nextMapId", dimension::getFreeMapId));
-        list.add(new DebugEntry("difficulty", () -> dimension.getDifficulty().getDisplayName().getString()));
-        list.add(new DebugEntry("seaLevel", dimension::getSeaLevel));
-        list.add(new DebugEntry("moonPhase", () -> getMoonPhase(dimension.getMoonPhase())));
-        list.add(new DebugEntry("spawnAngle", () -> getAngle(dimension.getLevelData().getSpawnAngle())));
-        list.add(new DebugEntry("dimension", () -> dimension.dimension().location()));
-        list.add(new DebugEntry("dayTime", dimension::getDayTime));
-        list.add(new DebugEntry("gameTime", dimension::getGameTime));
-        list.add(new DebugEntry("cloudColor", () -> getColor(dimension.getCloudColor(mc.getFrameTime()))));
-        if (Minecraft.getInstance().player != null) {
-            LocalPlayer player = Minecraft.getInstance().player;
-            list.add(new DebugEntry("skyColor", () -> getColor(dimension.getSkyColor(Vec3.atCenterOf(player.blockPosition()), mc.getFrameTime()))));
-        }
-        list.add(new DebugEntry("starBrightness", () -> getPercentage(dimension.getStarBrightness(mc.getFrameTime()))));
-        list.add(new DebugEntry("sunBrightness", () -> getPercentage(dimension.getSkyDarken(mc.getFrameTime()))));
-        return list;
-    }
-
-    @Override
-    public List<DebugEntry> getLinesRight() {
-        List<DebugEntry> list = new ArrayList<>();
-        ClientLevel dimension = Minecraft.getInstance().level;
-        if (dimension == null) {
-            list.add(new DebugEntry("$WORLD$", null));
-            return list;
-        }
-
-        list.add(new DebugEntry("daytime", dimension::isDay));
-        list.add(new DebugEntry("nightTime", dimension::isNight));
-        list.add(new DebugEntry("raining", dimension::isRaining));
-        list.add(new DebugEntry("thundering", dimension::isThundering));
-        list.add(new DebugEntry("saveDisabled", dimension::noSave));
-//        if (Minecraft.getInstance().player != null) {
-//            LocalPlayer player = Minecraft.getInstance().player;
-//            list.add(new DebugEntry("areaLoaded", () -> dimension.isAreaLoaded(player.blockPosition(), 1)));
-//        }
-        list.add(new DebugEntry("debug", dimension::isDebug));
-        return list;
-    }
-
-    @Override
-    public boolean hasRequiredComponents() {
-        return true;
     }
 }

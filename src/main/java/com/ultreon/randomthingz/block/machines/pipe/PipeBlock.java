@@ -8,7 +8,7 @@ import com.ultreon.randomthingz.block.machines.itempipe.ItemPipeBlock;
 import com.ultreon.randomthingz.block.machines.itempipe.ItemPipeConnection;
 import com.ultreon.randomthingz.block.machines.itempipe.ItemPipeTileEntity;
 import com.ultreon.randomthingz.util.FluidUtils;
-import com.ultreon.texturedmodels.tileentity.ITickable;
+import com.ultreon.texturedmodels.tileentity.Tickable;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -95,8 +95,8 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock impleme
         return Util.findNextInIterable(p_195959_0_, p_195959_1_);
     }
 
-    private static ConnectionType createConnection(BlockGetter dimensionIn, BlockPos pos, Direction side, ConnectionType current) {
-        BlockEntity tileEntity = dimensionIn.getBlockEntity(pos.relative(side));
+    private static ConnectionType createConnection(BlockGetter level, BlockPos pos, Direction side, ConnectionType current) {
+        BlockEntity tileEntity = level.getBlockEntity(pos.relative(side));
         if (tileEntity instanceof PipeTileEntity) {
             return ConnectionType.BOTH;
         } else if (tileEntity != null) {
@@ -120,7 +120,7 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock impleme
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
-        return ITickable::tickTE;
+        return Tickable::blockEntity;
     }
 
     @Override
@@ -158,25 +158,25 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock impleme
         return this.makeConnections(context.getLevel(), context.getClickedPos());
     }
 
-    public BlockState makeConnections(BlockGetter dimensionIn, BlockPos pos) {
+    public BlockState makeConnections(BlockGetter level, BlockPos pos) {
         return this.defaultBlockState()
-                .setValue(DOWN, createConnection(dimensionIn, pos, Direction.DOWN, ConnectionType.NONE))
-                .setValue(UP, createConnection(dimensionIn, pos, Direction.UP, ConnectionType.NONE))
-                .setValue(NORTH, createConnection(dimensionIn, pos, Direction.NORTH, ConnectionType.NONE))
-                .setValue(EAST, createConnection(dimensionIn, pos, Direction.EAST, ConnectionType.NONE))
-                .setValue(SOUTH, createConnection(dimensionIn, pos, Direction.SOUTH, ConnectionType.NONE))
-                .setValue(WEST, createConnection(dimensionIn, pos, Direction.WEST, ConnectionType.NONE));
+                .setValue(DOWN, createConnection(level, pos, Direction.DOWN, ConnectionType.NONE))
+                .setValue(UP, createConnection(level, pos, Direction.UP, ConnectionType.NONE))
+                .setValue(NORTH, createConnection(level, pos, Direction.NORTH, ConnectionType.NONE))
+                .setValue(EAST, createConnection(level, pos, Direction.EAST, ConnectionType.NONE))
+                .setValue(SOUTH, createConnection(level, pos, Direction.SOUTH, ConnectionType.NONE))
+                .setValue(WEST, createConnection(level, pos, Direction.WEST, ConnectionType.NONE));
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor dimensionIn, BlockPos currentPos, BlockPos facingPos) {
-        if (dimensionIn.getBlockEntity(facingPos) instanceof PipeTileEntity)
-            PipeConnection.invalidateNetwork(dimensionIn, currentPos);
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+        if (level.getBlockEntity(facingPos) instanceof PipeTileEntity)
+            PipeConnection.invalidateNetwork(level, currentPos);
 
         EnumProperty<ConnectionType> property = FACING_TO_PROPERTY_MAP.get(facing);
         ConnectionType current = stateIn.getValue(property);
-        return stateIn.setValue(property, createConnection(dimensionIn, currentPos, facing, current));
+        return stateIn.setValue(property, createConnection(level, currentPos, facing, current));
     }
 
     @Override

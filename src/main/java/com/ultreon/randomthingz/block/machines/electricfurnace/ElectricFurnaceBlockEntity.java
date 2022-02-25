@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.electricfurnace;
 
 import com.google.common.collect.ImmutableList;
 import com.ultreon.randomthingz.block.entity.ModMachines;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.core.BlockPos;
@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class ElectricFurnaceBlockEntity extends AbstractMachineBlockEntity<AbstractCookingRecipe> {
+public class ElectricFurnaceBlockEntity extends MachineBlockEntity<AbstractCookingRecipe> {
     // Energy constant
     public static final int MAX_ENERGY = 50_000;
     public static final int MAX_RECEIVE = 500;

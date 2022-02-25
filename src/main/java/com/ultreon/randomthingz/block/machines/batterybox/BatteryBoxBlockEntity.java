@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.batterybox;
 
 import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachines;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineBaseBlockEntity;
 import com.ultreon.randomthingz.capability.EnergyStorageImpl;
 import com.ultreon.randomthingz.capability.EnergyStorageWithBatteries;
 import com.ultreon.randomthingz.common.enums.MachineTier;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.IntStream;
 
-public class BatteryBoxBlockEntity extends AbstractMachineBaseBlockEntity {
+public class BatteryBoxBlockEntity extends MachineBaseBlockEntity {
     public static final int MAX_ENERGY = 500_000;
     public static final int MAX_RECEIVE = 500;
     public static final int MAX_SEND = 500;

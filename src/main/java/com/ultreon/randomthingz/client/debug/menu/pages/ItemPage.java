@@ -1,7 +1,8 @@
 package com.ultreon.randomthingz.client.debug.menu.pages;
 
-import com.ultreon.randomthingz.client.debug.menu.DebugEntry;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.client.debug.menu.DebugPage;
+import com.ultreon.randomthingz.client.debug.menu.DebugRenderContext;
 import com.ultreon.randomthingz.common.interfaces.Sliceable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
@@ -10,83 +11,58 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ItemPage extends DebugPage {
     public ItemPage(String modId, String name) {
         super(modId, name);
     }
 
     @Override
-    public List<DebugEntry> getLinesLeft() {
-        List<DebugEntry> list = new ArrayList<>();
+    public void render(PoseStack poseStack, DebugRenderContext ctx) {
+        if (Minecraft.getInstance().player != null) {
+            Player player = Minecraft.getInstance().player;
+            ItemStack stack = player.getMainHandItem();
+            Item item = stack.getItem();
+            FoodProperties food = item.getFoodProperties();
+            CreativeModeTab group = item.getItemCategory();
 
-        Player player = Minecraft.getInstance().player;
-        if (player == null) {
-            list.add(new DebugEntry("PLAYER", null));
-            return list;
+            //noinspection ConstantConditions
+            if (stack == null) {
+                ctx.top("<No Item Information>");
+                return;
+            }
+
+            ctx.left("Internal Name", stack.getItem().getRegistryName());
+            ctx.left("Item Type Name", stack.getItem().getDescription().getString());
+            if (stack.hasCustomHoverName()) {
+                ctx.left("Custom name", stack.getHoverName().getString());
+            }
+            if (food != null) {
+                ctx.left("Food Hunger Points", food.getNutrition());
+                ctx.left("Food Saturation", food.getSaturationModifier());
+            }
+            if (group != null) {
+                ctx.left("Creative Tab", group.getDisplayName().getString());
+            }
+            ctx.left("Rarity", item.getRarity(stack));
+            ctx.left("Enchantability", item.getItemEnchantability(stack));
+            ctx.left("Stack Limit", item.getItemStackLimit(stack));
+            ctx.left("Max Damage", item.getMaxDamage(stack));
+            ctx.left("Damage", item.getDamage(stack));
+            ctx.left("Count", stack.getCount());
+            ctx.left("Repair Cost", stack.getBaseRepairCost());
+            ctx.left("Use Duration", stack.getUseDuration());
+            ctx.left("XP Repair Ration", stack.getXpRepairRatio());
+
+            ctx.right("Complex", item.isComplex());
+            ctx.right("Immune To Fire", item.isFireResistant());
+            ctx.right("Enchantable", item.isEnchantable(stack));
+            ctx.right("Empty", stack.isEmpty());
+            ctx.right("Is Piglin Currency", stack.isPiglinCurrency());
+            ctx.right("Repairable", stack.isRepairable());
+            ctx.right("Stackable", stack.isStackable());
+            ctx.right("Sliceable", (item instanceof Sliceable));
+            ctx.right("Damageable", item.canBeDepleted());
+            ctx.right("Damaged", item.isDamaged(stack));
         }
-
-        ItemStack stack = player.getMainHandItem();
-        Item item = stack.getItem();
-        FoodProperties food = item.getFoodProperties();
-        CreativeModeTab group = item.getItemCategory();
-
-        int i = 0;
-
-        list.add(new DebugEntry("registryName", () -> stack.getItem().getRegistryName()));
-        if (food != null) {
-            list.add(new DebugEntry("foodHealing", food::getNutrition));
-            list.add(new DebugEntry("foodSaturation", food::getSaturationModifier));
-        }
-        if (group != null) {
-            list.add(new DebugEntry("groupName", () -> group.getDisplayName().getString()));
-        }
-        list.add(new DebugEntry("rarity", () -> item.getRarity(stack)));
-        list.add(new DebugEntry("enchantability", () -> item.getItemEnchantability(stack)));
-        list.add(new DebugEntry("stackLimit", () -> item.getItemStackLimit(stack)));
-        list.add(new DebugEntry("maxDamage", () -> item.getMaxDamage(stack)));
-        list.add(new DebugEntry("damage", () -> item.getDamage(stack)));
-//        list.add(new DebugEntry("burnTime", () -> item.getBurnTime(stack)));
-        list.add(new DebugEntry("count", stack::getCount));
-        list.add(new DebugEntry("repairCost", stack::getBaseRepairCost));
-        list.add(new DebugEntry("useDuration", stack::getUseDuration));
-        list.add(new DebugEntry("xpRepairRation", stack::getXpRepairRatio));
-        return list;
-    }
-
-    @Override
-    public List<DebugEntry> getLinesRight() {
-        List<DebugEntry> list = new ArrayList<>();
-
-        Player player = Minecraft.getInstance().player;
-        if (player == null) {
-            list.add(new DebugEntry("PLAYER", null));
-            return list;
-        }
-
-        ItemStack stack = player.getMainHandItem();
-        Item item = stack.getItem();
-        FoodProperties food = item.getFoodProperties();
-        CreativeModeTab group = item.getItemCategory();
-
-        int j = 0;
-        list.add(new DebugEntry("complex", item.isComplex()));
-        list.add(new DebugEntry("immuneToFire", item.isFireResistant()));
-        list.add(new DebugEntry("enchantable", item.isEnchantable(stack)));
-        list.add(new DebugEntry("empty", stack.isEmpty()));
-        list.add(new DebugEntry("isPiglinCurrency", stack.isPiglinCurrency()));
-        list.add(new DebugEntry("repairable", stack.isRepairable()));
-        list.add(new DebugEntry("stackable", stack.isStackable()));
-        list.add(new DebugEntry("sliceable", (item instanceof Sliceable)));
-        list.add(new DebugEntry("damageable", item.canBeDepleted()));
-        list.add(new DebugEntry("damaged", item.isDamaged(stack)));
-        return list;
-    }
-
-    @Override
-    public boolean hasRequiredComponents() {
-        return true;
     }
 }

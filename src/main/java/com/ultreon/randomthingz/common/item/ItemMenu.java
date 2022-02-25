@@ -2,7 +2,8 @@ package com.ultreon.randomthingz.common.item;
 
 import com.ultreon.randomthingz.actionmenu.AbstractActionMenu;
 import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
-import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
+import com.ultreon.randomthingz.client.debug.menu.DebugGui;
+import com.ultreon.randomthingz.client.debug.menu.DebugPages;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
@@ -112,7 +113,7 @@ public class ItemMenu extends AbstractActionMenu {
         addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
-                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.ITEM;
+                DebugGui.get().setPage(DebugPages.ITEM);
             }
 
             @Override

@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz.block.machines.crusher;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineScreen;
+import com.ultreon.randomthingz.block.machines.MachineScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class CrusherScreen extends AbstractMachineScreen<CrusherContainer> {
+public class CrusherScreen extends MachineScreen<CrusherContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/crusher.png");
 
     public CrusherScreen(CrusherContainer containerIn, Inventory playerInventoryIn, Component titleIn) {

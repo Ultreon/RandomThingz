@@ -4,7 +4,7 @@ import com.ultreon.texturedmodels.QTextureModels;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.setup.config.BCModConfig;
 import com.ultreon.texturedmodels.tileentity.ChestFrameBlockEntity;
-import com.ultreon.texturedmodels.tileentity.ITickable;
+import com.ultreon.texturedmodels.tileentity.Tickable;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;
 import net.minecraft.core.BlockPos;
@@ -96,7 +96,7 @@ public class ChestFrameBlock extends FrameBlock implements SimpleWaterloggedBloc
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
-        return ITickable::tickTE;
+        return Tickable::blockEntity;
     }
 
     @Override

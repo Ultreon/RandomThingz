@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block._common;
 
 import com.ultreon.modlib.silentlib.util.Lazy;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineBaseBlockEntity;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterBlockEntity;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterContainer;
 import com.ultreon.randomthingz.block.machines.arcaneescalator.ArcaneEscalatorBlockEntity;
@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public class MachineType<T extends AbstractMachineBaseBlockEntity, B extends T, S extends T, C extends AbstractContainerMenu> {
+public class MachineType<T extends MachineBaseBlockEntity, B extends T, S extends T, C extends AbstractContainerMenu> {
     public static final MachineType<ArcaneEscalatorBlockEntity, ArcaneEscalatorBlockEntity.Basic, ArcaneEscalatorBlockEntity, ArcaneEscalatorContainer> ARCANE_ESCALATOR = new MachineType<>(
             () -> BlockEntityType.Builder.of(ArcaneEscalatorBlockEntity.Basic::new, ModBlocks.BASIC_ARCANE_ESCALATOR.get()),
             () -> BlockEntityType.Builder.of(ArcaneEscalatorBlockEntity::new, ModBlocks.ARCANE_ESCALATOR.get()),

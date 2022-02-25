@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.solidifier;
 
 import com.ultreon.modlib.api.FluidContainer;
 import com.ultreon.randomthingz.block.entity.ModMachines;
-import com.ultreon.randomthingz.block.machines.AbstractFluidMachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.FluidMachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.SolidifyingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.Collections;
 
-public class SolidifierBlockEntity extends AbstractFluidMachineBlockEntity<SolidifyingRecipe> {
+public class SolidifierBlockEntity extends FluidMachineBlockEntity<SolidifyingRecipe> {
     public static final int FIELDS_COUNT = 9;
     public static final int TANK_CAPACITY = 4000;
     public static final int ENERGY_PER_TICK = 50;

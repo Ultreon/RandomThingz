@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz.block.machines.alloysmelter;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineScreen;
+import com.ultreon.randomthingz.block.machines.MachineScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class AlloySmelterScreen extends AbstractMachineScreen<AlloySmelterContainer> {
+public class AlloySmelterScreen extends MachineScreen<AlloySmelterContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/alloy_smelter.png");
 
     public AlloySmelterScreen(AlloySmelterContainer containerIn, Inventory playerInventoryIn, Component titleIn) {

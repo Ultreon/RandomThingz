@@ -9,15 +9,15 @@ import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen
 public class Hooks {
     public static int getPotionEffectOffset(EffectRenderingInventoryScreen<?> screen) {
         if (screen instanceof CreativeModeInventoryScreen) {
-            return 172;
+            return 0;
         }
-        return 124;
+        return 0;
     }
 
     public static int getEffectsGuiOffset(EffectRenderingInventoryScreen<?> screen) {
         if (screen instanceof CreativeModeInventoryScreen) {
-            return 182;
+            return 0;
         }
-        return 160;
+        return 0;
     }
 }

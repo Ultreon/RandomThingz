@@ -13,8 +13,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -23,9 +23,11 @@ import java.util.Set;
 /**
  * @author MrCrayfish
  */
-@Mod(Reference.MOD_ID)
+@Mod(Filters.MOD_ID)
 public class Filters {
     private static Filters instance;
+
+    public static final String MOD_ID = "qfilters";
 
     private final Map<CreativeModeTab, Set<FilterEntry>> filterMap = new HashMap<>();
     public Events events;
@@ -84,7 +86,7 @@ public class Filters {
         return instance;
     }
 
-    public void register(CreativeModeTab group, @Nullable ResourceLocation tag, ItemStack icon) {
+    public void register(CreativeModeTab group, @Nonnull ResourceLocation tag, ItemStack icon) {
         Set<FilterEntry> entries = this.filterMap.computeIfAbsent(group, itemGroup -> new LinkedHashSet<>());
         entries.add(new FilterEntry(tag, icon));
     }
@@ -99,5 +101,9 @@ public class Filters {
 
     public boolean hasFilters(CreativeModeTab group) {
         return this.filterMap.containsKey(group);
+    }
+
+    public ResourceLocation res(String path) {
+        return new ResourceLocation(MOD_ID, path);
     }
 }

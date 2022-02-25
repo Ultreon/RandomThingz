@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.test;
 
 import com.ultreon.randomthingz.test.network.Network;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +17,7 @@ public class TestMod {
         TestModules.initialize();
     }
 
-    public static ResourceLocation rl(String path) {
+    public static ResourceLocation res(String path) {
         return new ResourceLocation(MOD_ID, path);
     }
 }

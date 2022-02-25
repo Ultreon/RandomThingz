@@ -16,14 +16,14 @@ public abstract class AbstractFluidGeneratorContainer<T extends FluidFuelGenerat
     }
 
     public int getBurnTime() {
-        return fields.get(5);
+        return fields.get(6);
     }
 
     @SuppressWarnings("deprecation") // Use of Registry
     public FluidStack getFluidInTank() {
-        int fluidId = this.fields.get(7);
+        int fluidId = this.fields.get(8);
         Fluid fluid = Registry.FLUID.byId(fluidId);
-        int amount = this.fields.get(8);
+        int amount = this.fields.get(9);
         return new FluidStack(fluid, amount);
     }
 

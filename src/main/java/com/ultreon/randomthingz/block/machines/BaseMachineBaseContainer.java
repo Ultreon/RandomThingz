@@ -7,7 +7,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
 import org.jetbrains.annotations.Nullable;
 
-public class BaseMachineBaseContainer<T extends AbstractMachineBaseBlockEntity> extends BaseEnergyStorageContainer<T> {
+public class BaseMachineBaseContainer<T extends MachineBaseBlockEntity> extends BaseEnergyStorageContainer<T> {
     protected BaseMachineBaseContainer(MenuType<?> type, int id, @Nullable T tileEntityIn, ContainerData fieldsIn) {
         super(type, id, tileEntityIn, fieldsIn);
     }
@@ -30,5 +30,9 @@ public class BaseMachineBaseContainer<T extends AbstractMachineBaseBlockEntity> 
 
     public void setRedstoneMode(RedstoneMode mode) {
         fields.set(4, mode.ordinal());
+    }
+
+    public int getUpgradeSlots() {
+        return fields.get(5);
     }
 }

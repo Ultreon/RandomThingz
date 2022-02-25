@@ -22,11 +22,11 @@ public class ModSpawns {
     @SubscribeEvent
     public static void spawnEntities(BiomeLoadingEvent event) {
         // Nether mobs
-        if (event.getName().getPath().equals("basalt_deltas")) {
-            List<MobSpawnSettings.SpawnerData> monsterSpawns = event.getSpawns().getSpawner(MobCategory.MONSTER);
-            monsterSpawns.add(new MobSpawnSettings.SpawnerData(ModEntities.FIRE_CREEPER.get(), 13, 1, 3));
-            RandomThingz.LOGGER.debug("Added Fire Creeper to " + event.getName());
-        }
+//        if (event.getName().getPath().equals("basalt_deltas")) {
+//            List<MobSpawnSettings.SpawnerData> monsterSpawns = event.getSpawns().getSpawner(MobCategory.MONSTER);
+//            monsterSpawns.add(new MobSpawnSettings.SpawnerData(ModEntities.FIRE_CREEPER.get(), 13, 1, 3));
+//            RandomThingz.LOGGER.debug("Added Fire Creeper to " + event.getName());
+//        }
 
         // Overworld mobs
         if (event.getCategory() == Biome.BiomeCategory.FOREST ||

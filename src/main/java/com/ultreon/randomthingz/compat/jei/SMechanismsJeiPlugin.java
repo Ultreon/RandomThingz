@@ -34,6 +34,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @JeiPlugin
 public class SMechanismsJeiPlugin implements IModPlugin {
@@ -43,7 +44,7 @@ public class SMechanismsJeiPlugin implements IModPlugin {
         assert Minecraft.getInstance().level != null;
         return Minecraft.getInstance().level.getRecipeManager().getRecipes().stream()
                 .filter(r -> r.getType() == recipeType)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     @Override

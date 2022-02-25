@@ -6,7 +6,7 @@ import com.ultreon.randomthingz.actionmenu.MenuHandler;
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleSafety;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,11 +15,11 @@ public class DebuggingModule extends Module {
 
     public DebuggingModule() {
 
-        MainActionMenu.registerHandler(new MenuHandler(new StringTextComponent("Debugging"), debuggingMenu));
+        MainActionMenu.registerHandler(new MenuHandler(new TextComponent("Debugging"), debuggingMenu));
     }
 
     @Override
-    public ModuleSafety getSafety() {
+    public @NotNull ModuleSafety getSafety() {
         return ModuleSafety.SAFE;
     }
 

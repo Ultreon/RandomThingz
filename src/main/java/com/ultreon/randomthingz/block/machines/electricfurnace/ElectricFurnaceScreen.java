@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz.block.machines.electricfurnace;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineScreen;
+import com.ultreon.randomthingz.block.machines.MachineScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class ElectricFurnaceScreen extends AbstractMachineScreen<ElectricFurnaceContainer> {
+public class ElectricFurnaceScreen extends MachineScreen<ElectricFurnaceContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/electric_furnace.png");
 
     public ElectricFurnaceScreen(ElectricFurnaceContainer containerIn, Inventory playerInventory, Component titleIn) {

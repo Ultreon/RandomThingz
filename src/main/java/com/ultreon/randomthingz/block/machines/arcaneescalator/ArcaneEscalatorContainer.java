@@ -3,8 +3,8 @@ package com.ultreon.randomthingz.block.machines.arcaneescalator;
 import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block._common.MachineType;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
-import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
+import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineContainer;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -14,9 +14,9 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
 @SuppressWarnings("ConstantConditions")
-public class ArcaneEscalatorContainer extends AbstractMachineContainer<ArcaneEscalatorBlockEntity> {
+public class ArcaneEscalatorContainer extends MachineContainer<ArcaneEscalatorBlockEntity> {
     public ArcaneEscalatorContainer(int id, Inventory playerInventory, MachineTier tier) {
-        this(id, playerInventory, MachineType.ARCANE_ESCALATOR.create(tier), new SimpleContainerData(AbstractMachineBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, MachineType.ARCANE_ESCALATOR.create(tier), new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
     }
 
     protected ArcaneEscalatorContainer(int id, Inventory playerInventory, ArcaneEscalatorBlockEntity tileEntityIn, ContainerData fieldsIn) {

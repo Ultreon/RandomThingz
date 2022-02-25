@@ -15,7 +15,7 @@ public class ModBlockEntities extends ObjectInit<BlockEntityType<?>> {
 
     @SuppressWarnings("ConstantConditions")
     public static final RegistryObject<BlockEntityType<CrateTileEntity>> EXAMPLE_CHEST = register("example_chest", () -> BlockEntityType.Builder.of(CrateTileEntity::new, ModBlocks.WOODEN_CRATE.get()).build(null));
-    public static final RegistryObject<BlockEntityType<ChristmasChestTileEntity>> CHRISTMAS_CHEST = register("christmas_chest", () -> BlockEntityType.Builder.of(ChristmasChestTileEntity::new, ModBlocks.CHRISTMAS_CHEST.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ChristmasChestBlockEntity>> CHRISTMAS_CHEST = register("christmas_chest", () -> BlockEntityType.Builder.of(ChristmasChestBlockEntity::new, ModBlocks.CHRISTMAS_CHEST.get()).build(null));
 
     /**
      * Register tile entity.

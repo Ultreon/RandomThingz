@@ -1,11 +1,9 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
-import com.ultreon.texturedmodels.tileentity.ITickable;
+import com.ultreon.texturedmodels.tileentity.Tickable;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +24,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
 public class BatteryBoxBlock extends Block implements EntityBlock {
@@ -47,7 +46,7 @@ public class BatteryBoxBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
-        return ITickable::tickTE;
+        return Tickable::blockEntity;
     }
 
     @Override
@@ -69,30 +68,21 @@ public class BatteryBoxBlock extends Block implements EntityBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter dimensionIn, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public InteractionResult use(BlockState state, Level dimensionIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        if (!dimensionIn.isClientSide) {
-            this.openContainer(dimensionIn, pos, player);
-        }
-        return InteractionResult.SUCCESS;
-    }
-
-    public void openContainer(Level dimensionIn, BlockPos pos, Player player) {
-        BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
+    public void openContainer(Level level, BlockPos pos, Player player) {
+        BlockEntity tileEntity = level.getBlockEntity(pos);
         if (tileEntity instanceof BatteryBoxBlockEntity) {
             player.openMenu((MenuProvider) tileEntity);
         }
     }
 
     @Override
-    public void setPlacedBy(Level dimensionIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (stack.hasCustomHoverName()) {
-            BlockEntity entity = dimensionIn.getBlockEntity(pos);
+            BlockEntity entity = level.getBlockEntity(pos);
             if (entity instanceof BatteryBoxBlockEntity) {
                 ((BatteryBoxBlockEntity) entity).setCustomName(stack.getHoverName());
             }
@@ -101,15 +91,25 @@ public class BatteryBoxBlock extends Block implements EntityBlock {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void onRemove(BlockState state, Level dimensionIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
-            BlockEntity entity = dimensionIn.getBlockEntity(pos);
+            BlockEntity entity = level.getBlockEntity(pos);
             if (entity instanceof BatteryBoxBlockEntity) {
-                Containers.dropContents(dimensionIn, pos, (BatteryBoxBlockEntity) entity);
-                dimensionIn.updateNeighbourForOutputSignal(pos, this);
+                Containers.dropContents(level, pos, (BatteryBoxBlockEntity) entity);
+                level.updateNeighbourForOutputSignal(pos, this);
             }
 
-            super.onRemove(state, dimensionIn, pos, newState, isMoving);
+            super.onRemove(state, level, pos, newState, isMoving);
         }
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!level.isClientSide && level.getBlockEntity(pos) instanceof final BatteryBoxBlockEntity be) {
+            final MenuProvider container = new SimpleMenuProvider((id, inv, p) -> new BatteryBoxContainer(id, inv, be, be.getFields()), be.getDisplayName());
+            NetworkHooks.openGui((ServerPlayer) player, container, pos);
+        }
+
+        return InteractionResult.SUCCESS;
     }
 }

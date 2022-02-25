@@ -3,7 +3,8 @@ package com.ultreon.randomthingz.client;
 import com.ultreon.randomthingz.Modules;
 import com.ultreon.randomthingz.actionmenu.AbstractActionMenu;
 import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
-import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
+import com.ultreon.randomthingz.client.debug.menu.DebugGui;
+import com.ultreon.randomthingz.client.debug.menu.DebugPages;
 import com.ultreon.randomthingz.client.gui.screen.confirmExit.ConfirmExitScreen;
 import com.ultreon.randomthingz.common.ModuleManager;
 import net.minecraft.client.Minecraft;
@@ -51,7 +52,7 @@ public class WindowMenu extends AbstractActionMenu {
         addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
-                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.WINDOW;
+                DebugGui.get().setPage(DebugPages.WINDOW);
             }
 
             @Override

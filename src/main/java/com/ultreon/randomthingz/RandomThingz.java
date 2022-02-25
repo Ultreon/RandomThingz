@@ -118,7 +118,7 @@ public final class RandomThingz {
                             "MoobLoom Update(Optifine)", "un_roman", "", new URL("https://www.planetminecraft.com/texture-pack/moobloom-update/"))
                     .add("<Not yet included>",
                             "Avocados", "kekkman", "", new URL("https://www.planetminecraft.com/texture-pack/avocados-4860171/"))
-                    .add("Bookshelfs",
+                    .add("Bookshelves",
                             "Vanilla+ | 225 Custom Bookshelves Add-On", "sirkomplete, Etaris and Robert0213", "", new URL("https://www.planetminecraft.com/texture-pack/vanilla-225-custom-bookshelves-add-on/"))
                     .add("Empowered Rails (Modified Texture)",
                             "Shinier Rails", "StormDragon77", "", new URL("https://www.planetminecraft.com/texture-pack/shinier-rails/"))
@@ -208,11 +208,11 @@ public final class RandomThingz {
      * @see RandomThingz
      * @since 1.0-alpha1
      */
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"Convert2MethodRef"})
     public RandomThingz() {
         // Constants.
         RandomThingz.instance = this;
-        RandomThingz.proxy = DistExecutor.safeRunForDist(() -> SideProxy.Client::new, () -> SideProxy.Server::new);
+        RandomThingz.proxy = DistExecutor.unsafeRunForDist(() -> () -> new SideProxy.Client(), () -> () -> new SideProxy.Server());
         RandomThingz.init = new Initialization(this);
         Loader loader = new Loader();
 
@@ -278,6 +278,7 @@ public final class RandomThingz {
      *
      * @return true if Random Thingz is in test phase, false otherwise.
      */
+    @Deprecated
     public static boolean isTestPhase() {
         return isModDev() || MOD_TEST_PHASE;
     }

@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
-public abstract class AbstractMachineScreen<C extends AbstractMachineContainer<?>> extends AbstractMachineContainerScreen<C> {
-    public AbstractMachineScreen(C containerIn, Inventory playerInventoryIn, Component titleIn) {
+public abstract class MachineScreen<C extends MachineContainer<?>> extends MachineContainerScreen<C> {
+    public MachineScreen(C containerIn, Inventory playerInventoryIn, Component titleIn) {
         super(containerIn, playerInventoryIn, titleIn);
     }
 

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineBaseBlockEntity;
 import com.ultreon.randomthingz.block.machines.BaseEnergyStorageContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,7 +17,7 @@ public class BatteryBoxContainer extends BaseEnergyStorageContainer<BatteryBoxBl
     final BatteryBoxBlockEntity tileEntity;
 
     public BatteryBoxContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new BatteryBoxBlockEntity(), new SimpleContainerData(AbstractMachineBaseBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, new BatteryBoxBlockEntity(), new SimpleContainerData(MachineBaseBlockEntity.FIELDS_COUNT));
     }
 
     public BatteryBoxContainer(int id, Inventory playerInventory, @Nullable BatteryBoxBlockEntity tileEntity, ContainerData fieldsIn) {

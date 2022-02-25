@@ -20,9 +20,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Objects;
 
-public abstract class AbstractMachineBlockEntity<R extends Recipe<?>> extends AbstractMachineBaseBlockEntity implements MachineInventory {
-    public static final int FIELDS_COUNT = 7;
+public abstract class MachineBlockEntity<R extends Recipe<?>> extends MachineBaseBlockEntity implements MachineInventory {
+    public static final int FIELDS_COUNT = 8;
 
     protected float progress;
     protected int processTime;
@@ -34,19 +35,20 @@ public abstract class AbstractMachineBlockEntity<R extends Recipe<?>> extends Ab
                 //Minecraft actually sends fields as shorts, so we need to split energy into 2 fields
                 case 0 ->
                         // Energy lower bytes
-                        AbstractMachineBlockEntity.this.getEnergyStored() & 0xFFFF;
+                        MachineBlockEntity.this.getEnergyStored() & 0xFFFF;
                 case 1 ->
                         // Energy upper bytes
-                        (AbstractMachineBlockEntity.this.getEnergyStored() >> 16) & 0xFFFF;
+                        (MachineBlockEntity.this.getEnergyStored() >> 16) & 0xFFFF;
                 case 2 ->
                         // Max energy lower bytes
-                        AbstractMachineBlockEntity.this.getMaxEnergyStored() & 0xFFFF;
+                        MachineBlockEntity.this.getMaxEnergyStored() & 0xFFFF;
                 case 3 ->
                         // Max energy upper bytes
-                        (AbstractMachineBlockEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
-                case 4 -> AbstractMachineBlockEntity.this.redstoneMode.ordinal();
-                case 5 -> (int) AbstractMachineBlockEntity.this.progress;
-                case 6 -> AbstractMachineBlockEntity.this.processTime;
+                        (MachineBlockEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
+                case 4 -> MachineBlockEntity.this.redstoneMode.ordinal();
+                case 5 -> MachineBlockEntity.this.tier.getUpgradeSlots();
+                case 6 -> (int) MachineBlockEntity.this.progress;
+                case 7 -> MachineBlockEntity.this.processTime;
                 default -> 0;
             };
         }
@@ -54,9 +56,9 @@ public abstract class AbstractMachineBlockEntity<R extends Recipe<?>> extends Ab
         @Override
         public void set(int index, int value) {
             switch (index) {
-                case 4 -> AbstractMachineBlockEntity.this.redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
-                case 5 -> AbstractMachineBlockEntity.this.progress = value;
-                case 6 -> AbstractMachineBlockEntity.this.processTime = value;
+                case 4 -> MachineBlockEntity.this.redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
+                case 6 -> MachineBlockEntity.this.progress = value;
+                case 7 -> MachineBlockEntity.this.processTime = value;
             }
         }
 
@@ -66,7 +68,7 @@ public abstract class AbstractMachineBlockEntity<R extends Recipe<?>> extends Ab
         }
     };
 
-    protected AbstractMachineBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, MachineTier tier) {
+    protected MachineBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, MachineTier tier) {
         super(typeIn, pos, state, inventorySize, tier.getEnergyCapacity(), 500, 0, tier);
     }
 
@@ -258,7 +260,7 @@ public abstract class AbstractMachineBlockEntity<R extends Recipe<?>> extends Ab
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
         super.onDataPacket(net, packet);
         CompoundTag tags = packet.getTag();
-        this.progress = tags.getInt("Progress");
+        this.progress = Objects.requireNonNull(tags).getInt("Progress");
         this.processTime = tags.getInt("ProcessTime");
     }
 

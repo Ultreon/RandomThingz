@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.block;
 
-import com.ultreon.texturedmodels.tileentity.ITickable;
+import com.ultreon.texturedmodels.tileentity.Tickable;
 import com.ultreon.texturedmodels.tileentity.SignFrameBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -47,7 +47,7 @@ public class StandingSignFrameBlock extends StandingSignBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
-        return ITickable::tickTE;
+        return Tickable::blockEntity;
     }
 
     @Override

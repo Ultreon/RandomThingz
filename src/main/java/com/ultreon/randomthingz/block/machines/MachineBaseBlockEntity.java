@@ -16,8 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Objects;
 
-public abstract class AbstractMachineBaseBlockEntity extends AbstractBaseEnergyInventoryBlockEntity {
-    public static final int FIELDS_COUNT = 5;
+public abstract class MachineBaseBlockEntity extends BaseEnergyInventoryBlockEntity {
+    public static final int FIELDS_COUNT = 6;
     protected MachineTier tier;
 
     protected RedstoneMode redstoneMode = RedstoneMode.IGNORED;
@@ -29,17 +29,18 @@ public abstract class AbstractMachineBaseBlockEntity extends AbstractBaseEnergyI
                 //Minecraft actually sends fields as shorts, so we need to split energy into 2 fields
                 case 0 ->
                         // Energy lower bytes
-                        AbstractMachineBaseBlockEntity.this.getEnergyStored() & 0xFFFF;
+                        MachineBaseBlockEntity.this.getEnergyStored() & 0xFFFF;
                 case 1 ->
                         // Energy upper bytes
-                        (AbstractMachineBaseBlockEntity.this.getEnergyStored() >> 16) & 0xFFFF;
+                        (MachineBaseBlockEntity.this.getEnergyStored() >> 16) & 0xFFFF;
                 case 2 ->
                         // Max energy lower bytes
-                        AbstractMachineBaseBlockEntity.this.getMaxEnergyStored() & 0xFFFF;
+                        MachineBaseBlockEntity.this.getMaxEnergyStored() & 0xFFFF;
                 case 3 ->
                         // Max energy upper bytes
-                        (AbstractMachineBaseBlockEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
-                case 4 -> AbstractMachineBaseBlockEntity.this.redstoneMode.ordinal();
+                        (MachineBaseBlockEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
+                case 4 -> MachineBaseBlockEntity.this.redstoneMode.ordinal();
+                case 5 -> MachineBaseBlockEntity.this.tier.getUpgradeSlots();
                 default -> 0;
             };
         }
@@ -47,7 +48,7 @@ public abstract class AbstractMachineBaseBlockEntity extends AbstractBaseEnergyI
         @Override
         public void set(int index, int value) {
             if (index == 4) {
-                AbstractMachineBaseBlockEntity.this.redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
+                MachineBaseBlockEntity.this.redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
             }
         }
 
@@ -57,7 +58,7 @@ public abstract class AbstractMachineBaseBlockEntity extends AbstractBaseEnergyI
         }
     };
 
-    protected AbstractMachineBaseBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, MachineTier tier) {
+    protected MachineBaseBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, int maxEnergy, int maxReceive, int maxExtract, MachineTier tier) {
         super(typeIn, pos, state, inventorySize + tier.getUpgradeSlots(), maxEnergy, maxReceive, maxExtract);
         this.tier = tier;
     }

@@ -2,14 +2,14 @@ package com.ultreon.randomthingz.block.machines.refinery;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block.machines.AbstractMachineContainerScreen;
+import com.ultreon.randomthingz.block.machines.MachineContainerScreen;
 import com.ultreon.randomthingz.util.TextUtils;
 import com.ultreon.randomthingz.util.render.RenderUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class RefineryScreen extends AbstractMachineContainerScreen<RefineryContainer> {
+public class RefineryScreen extends MachineContainerScreen<RefineryContainer> {
     public static final ResourceLocation TEXTURE = RandomThingz.res("textures/gui/refinery.png");
 
     public RefineryScreen(RefineryContainer container, Inventory playerInventory, Component titleIn) {

@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.block.machines.quarry;
 import com.ultreon.modlib.api.RedstoneMode;
 import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.entity.ModMachines;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineBaseBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import com.ultreon.randomthingz.util.TextUtils;
@@ -22,10 +22,12 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -46,9 +48,9 @@ import java.util.Objects;
  * @author Qboi123
  */
 @SuppressWarnings({"CommentedOutCode"})
-public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
+public class QuarryBlockEntity extends MachineBaseBlockEntity {
     // Constants
-    public static final int DEPTH = 5;
+    public static final int DEPTH = -59;
     public static final int ENERGY_PER_TICK = 15;
     public static final int FIELDS_COUNT = 22;
 
@@ -101,30 +103,30 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
                         getEnergyStored() & 0xFFFF;
                 case 1 ->
                         // Energy upper bytes
-                        (getEnergyStored() >> 16) & 0xFFFF;
+                        getEnergyStored() >> 16 & 0xFFFF;
                 case 2 -> getMaxEnergyStored() & 0xFFFF;
-                case 3 -> (getMaxEnergyStored() >> 16) & 0xFFFF;
+                case 3 -> getMaxEnergyStored() >> 16 & 0xFFFF;
                 case 4 -> QuarryBlockEntity.this.redstoneMode.ordinal();
-                case 6 -> getCurrentX() & 0xFFFF;
-                case 7 -> (getCurrentX() >> 16) & 0xFFFF;
-                case 8 -> getCurrentY() & 0xFFFF;
-                case 9 -> (getCurrentY() >> 16) & 0xFFFF;
-                case 10 -> getCurrentZ() & 0xFFFF;
-                case 11 -> (getCurrentZ() >> 16) & 0xFFFF;
-//                case 12:
-//                    return getBreakProgress() & 0xFFFF;
+                case 5 -> QuarryBlockEntity.this.tier.getUpgradeSlots();
+                case 7 -> getCurrentX() & 0xFFFF;
+                case 8 -> getCurrentX() >> 16 & 0xFFFF;
+                case 9 -> getCurrentY() & 0xFFFF;
+                case 10 -> getCurrentY() >> 16 & 0xFFFF;
+                case 11 -> getCurrentZ() & 0xFFFF;
+                case 12 -> getCurrentZ() >> 16 & 0xFFFF;
 //                case 13:
+//                    return getBreakProgress() & 0xFFFF;
+//                case 14:
 //                    return (getBreakProgress() >> 16) & 0xFFFF;
-                case 14 -> getBlocksRemaining() & 0xFFFF;
-                case 15 -> (getBlocksRemaining() >> 16) & 0xFFFF;
-                case 16 -> getTotalBlocks() & 0xFFFF;
-                case 17 -> (getTotalBlocks() >> 16) & 0xFFFF;
+                case 15 -> getBlocksRemaining() & 0xFFFF;
+                case 16 -> getBlocksRemaining() >> 16 & 0xFFFF;
+                case 17 -> getTotalBlocks() & 0xFFFF;
+                case 18 -> getTotalBlocks() >> 16 & 0xFFFF;
 //                case 18:
 //                    return getBreakProcessTime() & 0xFFFF;
 //                case 19:
 //                    return (getBreakProcessTime() >> 16) & 0xFFFF;
-                case 20 -> getStatus().ordinal() & 0xFFFF;
-                case 21 -> (getStatus().ordinal() >> 16) & 0xFFFF;
+                case 19 -> getStatus().ordinal() & 0xFFFF;
                 default -> 0;
             };
         }
@@ -155,10 +157,16 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
         }
     };
 
+    /**
+     * @return the current beak progress.
+     */
     public float getBreakProgress() {
         return breakProgress;
     }
 
+    /**
+     * @return break processing time for the current block.
+     */
     public float getBreakProcessTime() {
         return breakProcessTime;
     }
@@ -189,7 +197,7 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
 
         int c;
 //        if (bx == 3) {
-        c = 8 - (ax + (az * 3));
+        c = 8 - (ax + az * 3);
 //        } else {
 //            c = ax * bz + az;
 //        }
@@ -331,8 +339,6 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
             return;
         }
 
-//        this.dimension.getBlockState(posToBreak).getBlock();
-
         this.status = Status.NO_PROBLEM;
         if (!level.getBlockState(worldPosition).getValue(AbstractFurnaceBlock.LIT)) {
             sendUpdate(getActiveState(this.level.getBlockState(this.worldPosition)));
@@ -344,12 +350,12 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
             destroyBlock(posToBreak, true, null);
 
             this.x++;
-            if (this.x > this.worldPosition.getX() + (1 + (getUpgradeCount(MachineUpgrades.RANGE)))) {
-                this.x = this.worldPosition.getX() - (1 + (getUpgradeCount(MachineUpgrades.RANGE)));
+            if (this.x > this.worldPosition.getX() + 1 + getUpgradeCount(MachineUpgrades.RANGE)) {
+                this.x = this.worldPosition.getX() - (1 + getUpgradeCount(MachineUpgrades.RANGE));
                 this.z++;
             }
-            if (this.z > this.worldPosition.getZ() + (1 + (getUpgradeCount(MachineUpgrades.RANGE)))) {
-                this.z = this.worldPosition.getZ() - (1 + (getUpgradeCount(MachineUpgrades.RANGE)));
+            if (this.z > this.worldPosition.getZ() + 1 + getUpgradeCount(MachineUpgrades.RANGE)) {
+                this.z = this.worldPosition.getZ() - (1 + getUpgradeCount(MachineUpgrades.RANGE));
                 this.y--;
             }
 
@@ -357,24 +363,34 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
             BlockState blockState = level.getBlockState(newPos);
             breakProcessTime = blockState.getDestroySpeed(level, worldPosition);
         } else {
-            int i = (int) ((breakProcessTime / breakProgress) * 10f);
+            int i = (int) (breakProcessTime / breakProgress * 10f);
             level.destroyBlockProgress(this.worldPosition.hashCode(), posToBreak, i);
-            breakProgress += .2f * ((getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) * 2f) + 1f);
+            breakProgress += .2f * (getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) * 2f + 1.5f);
         }
+    }
 
-        // Process
-//        energy.consumeEnergy((int) (getEnergyUsedPerTick() * getUpgradesEnergyMultiplier()));
-//        execute();
-//
-//        this.tick++;
-//
-//        int speed = 10 - getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) * 2;
-//        if (this.tick >= speed) {
-//            this.tick = 0;
-//            this.status = Status.NO_PROBLEM;
-//            execute();
-//            this.energy.consumeEnergy((int) (getEnergyUsedPerTick() * getUpgradesEnergyMultiplier()));
-//        }
+    public BlockPos getCurrentBlockPos() {
+        return new BlockPos(x, y, z);
+    }
+
+    public BlockState getCurrentBlockState() {
+        return getCurrentBlockState(Objects.requireNonNull(level));
+    }
+
+    public BlockState getCurrentBlockState(Level level) {
+        return level.getBlockState(getCurrentBlockPos());
+    }
+
+    public Block getCurrentBlock() {
+        return getCurrentBlockState().getBlock();
+    }
+
+    public Block getCurrentBlock(Level level) {
+        return getCurrentBlockState(level).getBlock();
+    }
+
+    private boolean isLit() {
+        return Objects.requireNonNull(level).getBlockState(worldPosition).getValue(BlockStateProperties.LIT);
     }
 
     /**
@@ -431,10 +447,8 @@ public class QuarryBlockEntity extends AbstractMachineBaseBlockEntity {
             this.level.sendBlockUpdated(this.worldPosition, oldState, newState, 3);
             this.level.updateNeighborsAt(this.worldPosition, newState.getBlock());
 
-//            setChanged();
-
             if (this.level instanceof ServerLevel serverLevel) {
-                serverLevel.getServer().getPlayerList().getPlayers().forEach((player) -> player.connection.send(new ClientboundBlockUpdatePacket(serverLevel, worldPosition)));
+                serverLevel.getServer().getPlayerList().getPlayers().forEach(player -> player.connection.send(new ClientboundBlockUpdatePacket(serverLevel, worldPosition)));
             }
         }
     }

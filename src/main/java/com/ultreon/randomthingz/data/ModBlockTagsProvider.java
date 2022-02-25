@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBlock;
+import com.ultreon.randomthingz.block.machines.MachineBlock;
 import com.ultreon.randomthingz.block.machines.MetalBlock;
 import com.ultreon.randomthingz.block.machines.dryingrack.DryingRackBlock;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
@@ -71,7 +71,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         TagAppender<Block> needsStoneTool = tag(BlockTags.NEEDS_IRON_TOOL);
         for (Block block : Registration.getBlocks()) {
             if (block instanceof MetalBlock ||
-                block instanceof AbstractMachineBlock) {
+                block instanceof MachineBlock) {
                 mineableWithPickaxe.add(block);
                 needsStoneTool.add(block);
             }

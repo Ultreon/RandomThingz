@@ -1,8 +1,11 @@
 package com.ultreon.randomthingz.client.debug.menu.pages;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.randomthingz.client.debug.menu.DebugEntry;
 import com.ultreon.randomthingz.client.debug.menu.DebugPage;
+import com.ultreon.randomthingz.client.debug.menu.DebugRenderContext;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,32 +16,20 @@ public class MinecraftPage extends DebugPage {
     }
 
     @Override
-    public List<DebugEntry> getLinesLeft() {
-        List<DebugEntry> list = new ArrayList<>();
-        Minecraft mc = Minecraft.getInstance();
+    public void render(PoseStack poseStack, DebugRenderContext ctx) {
+        Screen screen = mc.screen;
 
-        list.add(new DebugEntry("version", mc::getLaunchedVersion));
-        list.add(new DebugEntry("versionType", mc::getVersionType));
-        list.add(new DebugEntry("name", mc::name));
-        list.add(new DebugEntry("forceUnicodeFont", mc::isEnforceUnicode));
-        return list;
-    }
+        ctx.left("Name", mc.name());
+        ctx.left("Version", mc.getLaunchedVersion());
+        ctx.left("Version Type", mc.getVersionType());
+        ctx.left("Enforce Unicode", mc.isEnforceUnicode());
+        ctx.left("Frame Time", mc.getFrameTime());
+        ctx.left("Pending Tasks", mc.getPendingTasksCount());
+        ctx.left("Open Screen", screen == null ? null : screen.getClass());
 
-    @Override
-    public List<DebugEntry> getLinesRight() {
-        List<DebugEntry> list = new ArrayList<>();
-        Minecraft mc = Minecraft.getInstance();
-
-        list.add(new DebugEntry("demoMode", mc::isDemo));
-//        list.add(new DebugEntry("chatEnabled", mc::allowsChat));
-        list.add(new DebugEntry("gameFocused", mc::isWindowActive));
-        list.add(new DebugEntry("gamePaused", mc::isPaused));
-        list.add(new DebugEntry("integratedServerRunning", mc::isLocalServer));
-        return list;
-    }
-
-    @Override
-    public boolean hasRequiredComponents() {
-        return true;
+        ctx.right("Demo Mode", mc.isDemo());
+        ctx.right("Game Focused", mc.isWindowActive());
+        ctx.right("Game Paused", mc.isPaused());
+        ctx.right("Local Server", mc.isLocalServer());
     }
 }

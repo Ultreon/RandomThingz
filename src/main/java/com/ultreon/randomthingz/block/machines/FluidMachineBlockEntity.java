@@ -29,7 +29,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.IntStream;
 
-public abstract class AbstractFluidMachineBlockEntity<R extends FluidRecipe<?>> extends AbstractMachineBlockEntity<R> implements FluidInventory {
+public abstract class FluidMachineBlockEntity<R extends FluidRecipe<?>> extends MachineBlockEntity<R> implements FluidInventory {
     protected final FluidTank[] tanks;
     protected final ContainerData fields = new ContainerData() {
         @SuppressWarnings("deprecation") // Use of Registry
@@ -50,8 +50,10 @@ public abstract class AbstractFluidMachineBlockEntity<R extends FluidRecipe<?>> 
                 case 4:
                     return redstoneMode.ordinal();
                 case 5:
-                    return (int) progress;
+                    return tier.getUpgradeSlots();
                 case 6:
+                    return (int) progress;
+                case 7:
                     return processTime;
                 default:
                     int tankIndex = (index - 7) / 2;
@@ -69,19 +71,19 @@ public abstract class AbstractFluidMachineBlockEntity<R extends FluidRecipe<?>> 
         public void set(int index, int value) {
             switch (index) {
                 case 4 -> redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
-                case 5 -> progress = value;
-                case 6 -> processTime = value;
+                case 6 -> progress = value;
+                case 7 -> processTime = value;
             }
         }
 
         @Override
         public int getCount() {
-            return 7 + 2 * tanks.length;
+            return 8 + 2 * tanks.length;
         }
     };
     private final LazyOptional<IFluidHandler> fluidHandlerCap;
 
-    protected AbstractFluidMachineBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, int tankCount, int tankCapacity, MachineTier tier) {
+    protected FluidMachineBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, int tankCount, int tankCapacity, MachineTier tier) {
         super(typeIn, pos, state, inventorySize, tier);
         this.tanks = IntStream.range(0, tankCount).mapToObj(k -> new FluidTank(tankCapacity)).toArray(FluidTank[]::new);
         this.fluidHandlerCap = LazyOptional.of(() -> this);

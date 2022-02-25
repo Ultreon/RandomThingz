@@ -7,7 +7,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
 import org.jetbrains.annotations.Nullable;
 
-public class BaseEnergyStorageContainer<T extends AbstractBaseEnergyInventoryBlockEntity> extends AbstractContainerMenu {
+public class BaseEnergyStorageContainer<T extends BaseEnergyInventoryBlockEntity> extends AbstractContainerMenu {
     @Nullable
     protected final T tileEntity;
     protected final ContainerData fields;

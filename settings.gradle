@@ -1,1 +1,3 @@
 rootProject.name = "randomthingz"
+
+System.setProperty("line.separator", "\n")

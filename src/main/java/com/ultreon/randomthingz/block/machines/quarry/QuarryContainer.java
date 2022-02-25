@@ -27,54 +27,52 @@ public class QuarryContainer extends BaseMachineBaseContainer<QuarryBlockEntity>
     }
 
     public int getCurrentX() {
-        int upper = fields.get(7) & 0xFFFF;
-        int lower = fields.get(6) & 0xFFFF;
+        int upper = fields.get(8) & 0xFFFF;
+        int lower = fields.get(7) & 0xFFFF;
         return (upper << 16) + lower;
     }
 
     public int getCurrentY() {
-        int upper = fields.get(9) & 0xFFFF;
-        int lower = fields.get(8) & 0xFFFF;
+        int upper = fields.get(10) & 0xFFFF;
+        int lower = fields.get(9) & 0xFFFF;
         return (upper << 16) + lower;
     }
 
     public int getCurrentZ() {
-        int upper = fields.get(11) & 0xFFFF;
-        int lower = fields.get(10) & 0xFFFF;
+        int upper = fields.get(12) & 0xFFFF;
+        int lower = fields.get(11) & 0xFFFF;
         return (upper << 16) + lower;
     }
 
     public int getBlocksRemaining() {
-        int upper = fields.get(15) & 0xFFFF;
-        int lower = fields.get(14) & 0xFFFF;
+        int upper = fields.get(16) & 0xFFFF;
+        int lower = fields.get(15) & 0xFFFF;
         return (upper << 16) + lower;
     }
 
     public int getTotalBlocks() {
-        int upper = fields.get(17) & 0xFFFF;
-        int lower = fields.get(16) & 0xFFFF;
+        int upper = fields.get(18) & 0xFFFF;
+        int lower = fields.get(17) & 0xFFFF;
         return (upper << 16) + lower;
     }
 
 //    public boolean isInitialized() {
-//        int value = fields.get(12) & 0xFFFF;
-//        return value == 1;
-//    }
-
-//    public boolean isDone() {
 //        int value = fields.get(13) & 0xFFFF;
 //        return value == 1;
 //    }
 
+//    public boolean isDone() {
+//        int value = fields.get(14) & 0xFFFF;
+//        return value == 1;
+//    }
+
     public QuarryBlockEntity.Status getStatus() {
-        int upper = fields.get(21) & 0xFFFF;
-        int lower = fields.get(20) & 0xFFFF;
-        int i = (upper << 16) + lower;
+        int i = fields.get(19) & 0xFFFF;
         return QuarryBlockEntity.Status.values()[i];
     }
 
 //    public boolean isIllegalPosition() {
-//        int value = fields.get(18) & 0xFFFF;
+//        int value = fields.get(19) & 0xFFFF;
 //        return value == 1;
 //    }
 

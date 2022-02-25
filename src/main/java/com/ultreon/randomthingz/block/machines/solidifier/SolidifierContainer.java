@@ -23,11 +23,13 @@ public class SolidifierContainer extends BaseMachineBaseContainer<SolidifierBloc
     public SolidifierContainer(int id, Inventory playerInventory, @Nullable SolidifierBlockEntity tileEntity, ContainerData fieldsIn) {
         super(ModMachineContainers.solidifier, id, tileEntity, fieldsIn);
 
-        if (this.tileEntity != null) {
-            this.addSlot(new Slot(this.tileEntity, 0, 35, 15));
-            this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 36, 59));
-            this.addSlot(new SlotOutputOnly(this.tileEntity, 2, 116, 35));
+        if (this.tileEntity == null) {
+            return;
         }
+
+        this.addSlot(new Slot(this.tileEntity, 0, 35, 15));
+        this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 36, 59));
+        this.addSlot(new SlotOutputOnly(this.tileEntity, 2, 116, 35));
 
         InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
 
@@ -35,11 +37,11 @@ public class SolidifierContainer extends BaseMachineBaseContainer<SolidifierBloc
     }
 
     public int getProgress() {
-        return fields.get(5);
+        return fields.get(6);
     }
 
     public int getProcessTime() {
-        return fields.get(6);
+        return fields.get(7);
     }
 
     @SuppressWarnings("deprecation") // Use of Registry

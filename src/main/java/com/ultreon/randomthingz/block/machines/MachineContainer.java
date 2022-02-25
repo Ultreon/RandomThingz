@@ -4,16 +4,16 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractMachineContainer<T extends AbstractMachineBlockEntity<?>> extends BaseMachineBaseContainer<T> {
-    protected AbstractMachineContainer(MenuType<?> containerTypeIn, int id, @Nullable T tileEntityIn, ContainerData fieldsIn) {
+public abstract class MachineContainer<T extends MachineBlockEntity<?>> extends BaseMachineBaseContainer<T> {
+    protected MachineContainer(MenuType<?> containerTypeIn, int id, @Nullable T tileEntityIn, ContainerData fieldsIn) {
         super(containerTypeIn, id, tileEntityIn, fieldsIn);
     }
 
     public int getProgress() {
-        return fields.get(5);
+        return fields.get(6);
     }
 
     public int getProcessTime() {
-        return fields.get(6);
+        return fields.get(7);
     }
 }

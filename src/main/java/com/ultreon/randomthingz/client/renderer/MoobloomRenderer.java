@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 public class MoobloomRenderer extends MobRenderer<Moobloom, MoobloomModel<Moobloom>> {
     public MoobloomRenderer(EntityRendererProvider.Context ctx) {
         super(ctx, new MoobloomModel<>(ctx.bakeLayer(MoobloomModel.LAYER_LOCATION)), .7f);
-        this.addLayer(new MoobloomFlowerLayer<Moobloom>(this));
+//        this.addLayer(new MoobloomFlowerLayer<Moobloom>(this));
     }
 
     /**

@@ -3,11 +3,9 @@ package com.ultreon.randomthingz.block.machines.alloysmelter;
 import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block._common.MachineType;
-import com.ultreon.randomthingz.block._common.ModBlocks;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
-import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
+import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineContainer;
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -15,9 +13,9 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class AlloySmelterContainer extends AbstractMachineContainer<AlloySmelterBlockEntity> {
+public class AlloySmelterContainer extends MachineContainer<AlloySmelterBlockEntity> {
     public AlloySmelterContainer(int id, Inventory playerInventory, MachineTier tier) {
-        this(id, playerInventory, MachineType.ALLOY_SMELTER.create(tier), new SimpleContainerData(AbstractMachineBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, MachineType.ALLOY_SMELTER.create(tier), new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
     }
 
     protected AlloySmelterContainer(int id, Inventory playerInventory, AlloySmelterBlockEntity tileEntityIn, ContainerData fieldsIn) {

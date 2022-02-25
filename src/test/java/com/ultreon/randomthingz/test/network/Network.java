@@ -4,9 +4,9 @@ import com.ultreon.randomthingz.network.LoginPacket;
 import com.ultreon.randomthingz.test.TestMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.Connection;
-import net.minecraftforge.fml.network.FMLHandshakeHandler;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.network.HandshakeHandler;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 import java.util.Objects;
 
@@ -22,7 +22,7 @@ public final class Network {
 
     static {
         int id = 0;
-        channel = NetworkRegistry.ChannelBuilder.named(TestMod.rl("network-test"))
+        channel = NetworkRegistry.ChannelBuilder.named(TestMod.res("network-test"))
                 .clientAcceptedVersions(s -> Objects.equals(s, VERSION))
                 .serverAcceptedVersions(s -> Objects.equals(s, VERSION))
                 .networkProtocolVersion(() -> VERSION)
@@ -33,7 +33,7 @@ public final class Network {
                 .encoder((msg, buffer) -> {
 
                 })
-                .consumer(FMLHandshakeHandler.indexFirst((hh, msg, ctx) -> msg.handle(ctx)))
+                .consumer(HandshakeHandler.indexFirst((hh, msg, ctx) -> msg.handle(ctx)))
                 .add();
         channel.messageBuilder(OreProfilePacket.class, id++)
                 .decoder(OreProfilePacket::fromBytes)

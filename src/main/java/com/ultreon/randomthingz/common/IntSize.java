@@ -4,6 +4,11 @@ import com.ultreon.randomthingz.common.interfaces.Formattable;
 import lombok.AllArgsConstructor;
 import net.minecraft.ChatFormatting;
 
+import java.util.Objects;
+
+import static net.minecraft.ChatFormatting.BLUE;
+import static net.minecraft.ChatFormatting.GRAY;
+
 @AllArgsConstructor
 public class IntSize implements Formattable {
     public int width;
@@ -27,6 +32,19 @@ public class IntSize implements Formattable {
 
     @Override
     public String toFormattedString() {
-        return ChatFormatting.GOLD.toString() + this.width + ChatFormatting.GRAY + " x " + ChatFormatting.GOLD + this.height;
+        return BLUE.toString() + this.width + GRAY + " x " + BLUE + this.height;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IntSize size = (IntSize) o;
+        return width == size.width && height == size.height;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(width, height);
     }
 }

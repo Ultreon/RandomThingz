@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.generator;
 
 import com.ultreon.modlib.api.RedstoneMode;
 import com.ultreon.modlib.silentutils.EnumUtils;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineBaseBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Objects;
 
-public abstract class GeneratorBlockEntity extends AbstractMachineBaseBlockEntity {
+public abstract class GeneratorBlockEntity extends MachineBaseBlockEntity {
     public static final int FIELDS_COUNT = 7;
 
     protected int burnTime;
@@ -39,7 +39,8 @@ public abstract class GeneratorBlockEntity extends AbstractMachineBaseBlockEntit
                         // Max energy upper bytes
                         (GeneratorBlockEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
                 case 4 -> redstoneMode.ordinal();
-                case 5 -> burnTime;
+                case 5 -> tier.getUpgradeSlots();
+                case 7 -> burnTime;
                 case 6 -> totalBurnTime;
                 default -> 0;
             };
@@ -49,8 +50,8 @@ public abstract class GeneratorBlockEntity extends AbstractMachineBaseBlockEntit
         public void set(int index, int value) {
             switch (index) {
                 case 4 -> redstoneMode = EnumUtils.byOrdinal(value, RedstoneMode.IGNORED);
-                case 5 -> burnTime = value;
-                case 6 -> totalBurnTime = value;
+                case 6 -> burnTime = value;
+                case 7 -> totalBurnTime = value;
             }
         }
 

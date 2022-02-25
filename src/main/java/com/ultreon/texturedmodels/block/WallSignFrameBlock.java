@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.block;
 
-import com.ultreon.texturedmodels.tileentity.ITickable;
+import com.ultreon.texturedmodels.tileentity.Tickable;
 import com.ultreon.texturedmodels.tileentity.SignFrameBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -52,7 +52,7 @@ public class WallSignFrameBlock extends WallSignBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level p_153212_, @NotNull BlockState p_153213_, @NotNull BlockEntityType<T> p_153214_) {
-        return ITickable::tickTE;
+        return Tickable::blockEntity;
     }
 
     @Override

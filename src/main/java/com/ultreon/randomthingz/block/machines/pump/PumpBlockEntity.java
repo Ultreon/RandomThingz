@@ -5,7 +5,7 @@ import com.ultreon.modlib.api.RedstoneMode;
 import com.ultreon.modlib.silentlib.util.TimeUtils;
 import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.entity.ModMachines;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBaseBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineBaseBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import com.ultreon.randomthingz.util.Constants;
@@ -33,7 +33,7 @@ import net.minecraftforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PumpBlockEntity extends AbstractMachineBaseBlockEntity {
+public class PumpBlockEntity extends MachineBaseBlockEntity {
     public static final int ENERGY_PER_BUCKET = 500;
     public static final int PUMP_DELAY = TimeUtils.ticksFromSeconds(5);
     public static final int FIELDS_COUNT = 9;
@@ -53,6 +53,7 @@ public class PumpBlockEntity extends AbstractMachineBaseBlockEntity {
                 case 2 -> getMaxEnergyStored() & 0xFFFF;
                 case 3 -> (getMaxEnergyStored() >> 16) & 0xFFFF;
                 case 4 -> redstoneMode.ordinal();
+                case 5 -> tier.getUpgradeSlots();
                 case 7 -> Registry.FLUID.getId(tank.getFluid().getFluid());
                 case 8 -> tank.getFluid().getAmount();
                 default -> 0;

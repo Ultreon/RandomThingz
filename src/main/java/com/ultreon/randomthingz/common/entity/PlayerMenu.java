@@ -4,7 +4,8 @@ import com.mojang.authlib.GameProfile;
 import com.ultreon.randomthingz.actionmenu.AbstractActionMenu;
 import com.ultreon.randomthingz.actionmenu.ActionMenuItem;
 import com.ultreon.randomthingz.actionmenu.ServerActionMenuItem;
-import com.ultreon.randomthingz.client.debug.menu.DebugMenu;
+import com.ultreon.randomthingz.client.debug.menu.DebugGui;
+import com.ultreon.randomthingz.client.debug.menu.DebugPages;
 import com.ultreon.randomthingz.common.enums.TextColors;
 import com.ultreon.randomthingz.util.Targeter;
 import net.minecraft.client.Minecraft;
@@ -96,7 +97,7 @@ public class PlayerMenu extends AbstractActionMenu {
         addClient(new ActionMenuItem() {
             @Override
             public void onActivate() {
-                DebugMenu.DEBUG_PAGE = DebugMenu.PAGE.ENTITY;
+                DebugGui.get().setPage(DebugPages.PLAYER_PAGE1);
             }
 
             @Override

@@ -1,7 +1,6 @@
 package com.ultreon.filters.jei;
 
 import com.ultreon.filters.Filters;
-import com.ultreon.filters.Reference;
 import com.ultreon.filters.gui.widget.button.IconButton;
 import com.ultreon.filters.gui.widget.button.TagButton;
 import mezz.jei.api.IModPlugin;
@@ -14,6 +13,7 @@ import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,15 +25,15 @@ import java.util.List;
 @JeiPlugin
 public class FiltersJeiPlugin implements IModPlugin {
     @Override
-    public ResourceLocation getPluginUid() {
-        return new ResourceLocation(Reference.MOD_ID, Reference.MOD_ID);
+    public @NotNull ResourceLocation getPluginUid() {
+        return new ResourceLocation(Filters.MOD_ID, Filters.MOD_ID);
     }
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-        registration.addGuiContainerHandler(CreativeModeInventoryScreen.class, new IGuiContainerHandler<CreativeModeInventoryScreen>() {
+        registration.addGuiContainerHandler(CreativeModeInventoryScreen.class, new IGuiContainerHandler<>() {
             @Override
-            public List<Rect2i> getGuiExtraAreas(CreativeModeInventoryScreen screen) {
+            public @NotNull List<Rect2i> getGuiExtraAreas(@NotNull CreativeModeInventoryScreen screen) {
                 if (Filters.get().hasFilters(CreativeModeTab.TABS[screen.getSelectedTab()])) {
                     List<Rect2i> areas = new ArrayList<>();
 

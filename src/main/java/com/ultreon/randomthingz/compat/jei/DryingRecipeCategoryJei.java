@@ -8,22 +8,22 @@ import com.ultreon.randomthingz.item.crafting.DryingRecipe;
 import com.ultreon.randomthingz.util.Constants;
 import com.ultreon.randomthingz.util.TextUtils;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
-import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class DryingRecipeCategoryJei implements IRecipeCategory<DryingRecipe> {
     private static final int GUI_START_X = 55;
@@ -34,7 +34,7 @@ public class DryingRecipeCategoryJei implements IRecipeCategory<DryingRecipe> {
     private final IDrawable background;
     private final IDrawable icon;
     private final IDrawableAnimated arrow;
-    private final MutableComponent title;
+    private final Component title;
 
     public DryingRecipeCategoryJei(IGuiHelper guiHelper) {
         background = guiHelper.createDrawable(CompressorScreen.TEXTURE, GUI_START_X, GUI_START_Y, GUI_WIDTH, GUI_HEIGHT);
@@ -68,17 +68,28 @@ public class DryingRecipeCategoryJei implements IRecipeCategory<DryingRecipe> {
     public IDrawable getIcon() {
         return icon;
     }
+
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, DryingRecipe recipe, IFocusGroup ingredients) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 55 - GUI_START_X, 34 - GUI_START_Y).addItemStacks(List.of(recipe.getIngredient().getItems()));
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 55 - GUI_START_X, 34 - GUI_START_Y).addItemStack(recipe.getResultItem());
+    public void setIngredients(DryingRecipe recipe, IIngredients ingredients) {
+        ingredients.setInputIngredients(Collections.singletonList(recipe.getIngredient()));
+        ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
     }
 
     @Override
-    public void draw(DryingRecipe recipe, IRecipeSlotsView slotsView, PoseStack pose, double mouseX, double mouseY) {
-        arrow.draw(pose, 79 - GUI_START_X, 35 - GUI_START_Y);
+    public void setRecipe(IRecipeLayout recipeLayout, DryingRecipe recipe, IIngredients ingredients) {
+        IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
+        itemStacks.init(0, true, 55 - GUI_START_X, 34 - GUI_START_Y);
+        itemStacks.init(1, false, 115 - GUI_START_X, 34 - GUI_START_Y);
+
+        itemStacks.set(0, new ArrayList<>(Arrays.asList(recipe.getIngredient().getItems())));
+        itemStacks.set(1, recipe.getResultItem());
+    }
+
+    @Override
+    public void draw(DryingRecipe recipe, PoseStack matrixStack, double mouseX, double mouseY) {
+        arrow.draw(matrixStack, 79 - GUI_START_X, 35 - GUI_START_Y);
         Font font = Minecraft.getInstance().font;
         Component text = TextUtils.translate("misc", "timeInSeconds", recipe.getProcessTime() / 20);
-        TextRenderUtils.renderScaled(pose, font, text.getVisualOrderText(), 24, 20, .67f, 0xFFFFFF, true);
+        TextRenderUtils.renderScaled(matrixStack, font, text.getVisualOrderText(), 24, 20, 0.67f, 0xFFFFFF, true);
     }
 }

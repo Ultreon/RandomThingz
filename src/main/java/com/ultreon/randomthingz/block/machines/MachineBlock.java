@@ -13,15 +13,15 @@ import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
+public abstract class MachineBlock extends AbstractFurnaceBlock {
     protected final MachineTier tier;
 
-    public AbstractMachineBlock(MachineTier tier, Properties properties) {
+    public MachineBlock(MachineTier tier, Properties properties) {
         super(properties.requiresCorrectToolForDrops());
         this.tier = tier;
     }
 
-    private static int calcRedstoneFromInventory(AbstractMachineBaseBlockEntity inv) {
+    private static int calcRedstoneFromInventory(MachineBaseBlockEntity inv) {
         // Copied from AbstractContainerMenu.calcRedstoneFromInventory
         int slotsFilled = 0;
         float fillRatio = 0f;
@@ -39,8 +39,8 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
     }
 
     @Override
-    protected void openContainer(Level dimensionIn, BlockPos pos, Player player) {
-        BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
+    protected void openContainer(Level level, BlockPos pos, Player player) {
+        BlockEntity tileEntity = level.getBlockEntity(pos);
         if (tileEntity instanceof MenuProvider menuProvider) {
             player.openMenu(menuProvider);
         }
@@ -60,11 +60,11 @@ public abstract class AbstractMachineBlock extends AbstractFurnaceBlock {
     }
 
     @Override
-    public int getAnalogOutputSignal(BlockState blockState, Level dimensionIn, BlockPos pos) {
-        BlockEntity tileEntity = dimensionIn.getBlockEntity(pos);
-        if (tileEntity instanceof AbstractMachineBaseBlockEntity) {
-            return calcRedstoneFromInventory((AbstractMachineBaseBlockEntity) tileEntity);
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+        BlockEntity tileEntity = level.getBlockEntity(pos);
+        if (tileEntity instanceof MachineBaseBlockEntity) {
+            return calcRedstoneFromInventory((MachineBaseBlockEntity) tileEntity);
         }
-        return super.getAnalogOutputSignal(blockState, dimensionIn, pos);
+        return super.getAnalogOutputSignal(blockState, level, pos);
     }
 }

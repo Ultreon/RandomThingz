@@ -51,12 +51,12 @@ public class DevtestWarningScreen extends Screen {
 
         this.clearWidgets();
 
-        this.addRenderableWidget(new Button(this.width / 2 - 105, this.height / 6 + 96, 100, 20, this.yesButtonText, (p_213006_1_) -> {
+        this.addRenderableWidget(new Button(this.width / 2 - 105, Math.max(this.height / 6 + 96, 140), 100, 20, this.yesButtonText, (p_213006_1_) -> {
             if (this.minecraft != null) {
                 this.minecraft.setScreen(backScreen);
             }
         }));
-        this.addRenderableWidget(new Button(this.width / 2 + 5, this.height / 6 + 96, 100, 20, this.noButtonText, (p_213004_1_) -> {
+        this.addRenderableWidget(new Button(this.width / 2 + 5, Math.max(this.height / 6 + 96, 140), 100, 20, this.noButtonText, (p_213004_1_) -> {
             if (this.minecraft != null) {
                 this.minecraft.stop();
             }
@@ -73,11 +73,12 @@ public class DevtestWarningScreen extends Screen {
         drawCenteredString(matrixStack, this.font, new TranslatableComponent("screen.randomthingz.dev_warning.description.1"), this.width / 2, 90, 0xbfbfbf);
         drawCenteredString(matrixStack, this.font, new TranslatableComponent("screen.randomthingz.dev_warning.description.2"), this.width / 2, 100, 0xbfbfbf);
         drawCenteredString(matrixStack, this.font, new TranslatableComponent("screen.randomthingz.dev_warning.description.3"), this.width / 2, 110, 0xbfbfbf);
+        drawCenteredString(matrixStack, this.font, new TranslatableComponent("screen.randomthingz.dev_warning.description.4"), this.width / 2, 120, 0xbfbfbf);
         if (this.ticksUntilEnable > 0) {
             if (ticksUntilEnable / 20 != 1) {
-                drawCenteredString(matrixStack, this.font, new TranslatableComponent("screen.randomthingz.dev_warning.description.4a", ticksUntilEnable / 20), width / 2, this.height / 6 + 136, 0xbfbfbf);
+                drawCenteredString(matrixStack, this.font, new TranslatableComponent("screen.randomthingz.dev_warning.description.4a", ticksUntilEnable / 20), width / 2, Math.max(this.height / 6 + 134, 160), 0xbfbfbf);
             } else {
-                drawCenteredString(matrixStack, this.font, new TranslatableComponent("screen.randomthingz.dev_warning.description.4b", ticksUntilEnable / 20), width / 2, this.height / 6 + 136, 0xbfbfbf);
+                drawCenteredString(matrixStack, this.font, new TranslatableComponent("screen.randomthingz.dev_warning.description.4b", ticksUntilEnable / 20), width / 2, Math.max(this.height / 6 + 134, 160), 0xbfbfbf);
             }
         }
         this.message.renderCentered(matrixStack, this.width / 2, 90);
@@ -108,7 +109,7 @@ public class DevtestWarningScreen extends Screen {
         if (this.ticksUntilEnable == 0) {
             for (GuiEventListener listener : this.children) {
                 if (listener instanceof AbstractWidget widget) {
-                    widget.active = false;
+                    widget.active = true;
                 }
             }
         }

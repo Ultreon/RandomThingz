@@ -22,10 +22,12 @@ public class PumpContainer extends BaseMachineBaseContainer<PumpBlockEntity> {
     public PumpContainer(int id, Inventory playerInventory, @Nullable PumpBlockEntity tileEntity, ContainerData fields) {
         super(ModMachineContainers.pump, id, tileEntity, fields);
 
-        if (this.tileEntity != null) {
-            this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
-            this.addSlot(new Slot(this.tileEntity, 1, 80, 59));
+        if (this.tileEntity == null) {
+            return;
         }
+
+        this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
+        this.addSlot(new Slot(this.tileEntity, 1, 80, 59));
 
         com.ultreon.modlib.silentlib.util.InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
 
@@ -34,9 +36,9 @@ public class PumpContainer extends BaseMachineBaseContainer<PumpBlockEntity> {
 
     @SuppressWarnings("deprecation") // Use of Registry
     public FluidStack getFluidInTank() {
-        int fluidId = this.fields.get(7);
+        int fluidId = this.fields.get(8);
         Fluid fluid = Registry.FLUID.byId(fluidId);
-        int amount = this.fields.get(8);
+        int amount = this.fields.get(9);
         return new FluidStack(fluid, amount);
     }
 

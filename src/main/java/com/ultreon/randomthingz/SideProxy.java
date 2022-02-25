@@ -9,7 +9,9 @@ import com.ultreon.randomthingz.client.gui.settings.SettingsScreen;
 import com.ultreon.randomthingz.common.item.ModItems;
 import com.ultreon.randomthingz.config.Config;
 import com.ultreon.randomthingz.data.DataGenerators;
+import com.ultreon.randomthingz.init.ModDebugFormatters;
 import com.ultreon.randomthingz.init.ModMachineContainers;
+import com.ultreon.randomthingz.init.ModOverlays;
 import com.ultreon.randomthingz.network.Network;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.core.BlockPos;
@@ -22,6 +24,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -125,6 +129,9 @@ class SideProxy implements IProxy {
             ModLoadingContext.get().registerExtensionPoint(
                     ConfigGuiHandler.ConfigGuiFactory.class, () -> new ConfigGuiHandler.ConfigGuiFactory((mc, back) -> new SettingsScreen(back))
             );
+
+            ModOverlays.registerAll();
+            ModDebugFormatters.initClass();
         }
 
         public void setFogColors(EntityViewRenderEvent.FogColors fog) {

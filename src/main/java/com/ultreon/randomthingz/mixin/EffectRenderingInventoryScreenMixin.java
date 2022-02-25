@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @Mixin(EffectRenderingInventoryScreen.class)
 public abstract class EffectRenderingInventoryScreenMixin<T extends AbstractContainerMenu> extends AbstractContainerScreen<T> {
-    @Shadow
+    @Shadow(remap = false)
     boolean cancelShift;
 
     @Shadow protected abstract Component getEffectName(MobEffectInstance p_194001_);
@@ -64,7 +64,7 @@ public abstract class EffectRenderingInventoryScreenMixin<T extends AbstractCont
         if (cancelShift)
             i = (this.width - this.imageWidth) / 2;
         else
-            i = Hooks.getPotionEffectOffset((EffectRenderingInventoryScreen<?>) (Screen)this) + this.imageWidth + 2;
+            i = leftPos - Hooks.getPotionEffectOffset((EffectRenderingInventoryScreen<?>) (Screen)this) + this.imageWidth + 2;
         int j = this.width - i;
         Collection<MobEffectInstance> collection = Objects.requireNonNull(Objects.requireNonNull(this.minecraft).player).getActiveEffects();
         if (!collection.isEmpty() && j >= 32) {

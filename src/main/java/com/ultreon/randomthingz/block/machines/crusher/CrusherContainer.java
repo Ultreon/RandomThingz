@@ -3,8 +3,8 @@ package com.ultreon.randomthingz.block.machines.crusher;
 import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block._common.MachineType;
-import com.ultreon.randomthingz.block.machines.AbstractMachineBlockEntity;
-import com.ultreon.randomthingz.block.machines.AbstractMachineContainer;
+import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
+import com.ultreon.randomthingz.block.machines.MachineContainer;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,9 +13,9 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
-public class CrusherContainer extends AbstractMachineContainer<CrusherBlockEntity> {
+public class CrusherContainer extends MachineContainer<CrusherBlockEntity> {
     public CrusherContainer(int id, Inventory playerInventory, MachineTier tier) {
-        this(id, playerInventory, MachineType.CRUSHER.create(tier), new SimpleContainerData(AbstractMachineBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, MachineType.CRUSHER.create(tier), new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
     }
 
     public CrusherContainer(int id, Inventory playerInventory, CrusherBlockEntity tileEntity, ContainerData fieldsIn) {
