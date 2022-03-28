@@ -1,10 +1,10 @@
 package com.ultreon.randomthingz.client.debug;
 
-import com.ultreon.randomthingz.common.java.maps.SequencedHashMap;
+import com.ultreon.randomthingz.common.java.maps.OrderedHashMap;
 
 public class DebugText {
-    private final SequencedHashMap<String, Object[]> left = new SequencedHashMap<>();
-    private final SequencedHashMap<String, Object[]> right = new SequencedHashMap<>();
+    private final OrderedHashMap<String, Object[]> left = new OrderedHashMap<>();
+    private final OrderedHashMap<String, Object[]> right = new OrderedHashMap<>();
 
     public DebugText() {
 
@@ -18,11 +18,11 @@ public class DebugText {
         right.put(key, value);
     }
 
-    public SequencedHashMap<String, Object[]> getLeft() {
+    public OrderedHashMap<String, Object[]> getLeft() {
         return left;
     }
 
-    public SequencedHashMap<String, Object[]> getRight() {
+    public OrderedHashMap<String, Object[]> getRight() {
         return right;
     }
 }

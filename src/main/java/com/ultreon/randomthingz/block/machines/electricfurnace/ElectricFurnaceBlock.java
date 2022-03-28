@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.block.machines.electricfurnace;
 
+import com.ultreon.modlib.block.entity.Tickable;
 import com.ultreon.randomthingz.block.machines.MachineBlock;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.core.BlockPos;
@@ -17,6 +18,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -31,19 +34,25 @@ public class ElectricFurnaceBlock extends MachineBlock {
         super(MachineTier.STANDARD, BlockBehaviour.Properties.of(Material.METAL).strength(6, 20).sound(SoundType.METAL));
     }
 
-    @Override
-    protected void openContainer(Level level, BlockPos pos, Player player) {
-        BlockEntity tileEntity = level.getBlockEntity(pos);
-        if (tileEntity instanceof ElectricFurnaceBlockEntity) {
-            player.openMenu((MenuProvider) tileEntity);
-            player.awardStat(Stats.INTERACT_WITH_FURNACE);
-        }
-    }
+//    @Override
+//    protected void openContainer(Level level, BlockPos pos, Player player) {
+//        BlockEntity tileEntity = level.getBlockEntity(pos);
+//        if (tileEntity instanceof ElectricFurnaceBlockEntity) {
+//            player.openMenu((MenuProvider) tileEntity);
+//            player.awardStat(Stats.INTERACT_WITH_FURNACE);
+//        }
+//    }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new ElectricFurnaceBlockEntity(pos, state);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
+        return Tickable::blockEntity;
     }
 
     @Override
@@ -71,7 +80,7 @@ public class ElectricFurnaceBlock extends MachineBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof final ElectricFurnaceBlockEntity be) {
-            final MenuProvider container = new SimpleMenuProvider((id, inv, p) -> new ElectricFurnaceContainer(id, inv, be, be.getFields()), be.getDisplayName());
+            final MenuProvider container = new SimpleMenuProvider((id, inv, p) -> new ElectricFurnaceContainer(id, inv, be.inventory, pos, be.getFields()), be.getDisplayName());
             NetworkHooks.openGui((ServerPlayer) player, container, pos);
         }
 

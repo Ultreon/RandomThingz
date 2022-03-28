@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.common.updates;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.settings.SettingsScreen;
 import com.ultreon.randomthingz.common.Ticker;
-import com.ultreon.randomthingz.common.interfaces.IVersion;
+import com.ultreon.randomthingz.common.interfaces.Version;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,7 +18,7 @@ public class UpdateChecker {
     private static final int delay = 10;
     private static final int tickDelay = 20 * delay;
     //    private static int ticks = tickDelay - 1;
-    private static final HashMap<AbstractUpdater<?>, IVersion> latestKnownMap = new HashMap<>();
+    private static final HashMap<AbstractUpdater<?>, Version> latestKnownMap = new HashMap<>();
     private static final Ticker ticker = new Ticker(tickDelay - 1);
     private final UpdatesModule module;
 
@@ -51,11 +51,11 @@ public class UpdateChecker {
             AbstractUpdater<?>[] updaters = AbstractUpdater.getInstances();
             for (AbstractUpdater<?> updater : updaters) {
                 AbstractUpdater.UpdateInfo updateInfo = updater.checkForUpdates();
-                IVersion latest = updater.getLatestVersion();
+                Version latest = updater.getLatestVersion();
                 if (!latestKnownMap.containsKey(updater)) {
                     latestKnownMap.put(updater, updater.getCurrentVersion());
                 }
-                IVersion latestKnown = latestKnownMap.get(updater);
+                Version latestKnown = latestKnownMap.get(updater);
                 if (latestKnown == null || latest == null) {
                     continue;  // Todo: show error notification.
                 }

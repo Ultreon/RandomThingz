@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.wand;
 
-import com.ultreon.randomthingz.common.item.ModCreativeTabs;
+import com.ultreon.randomthingz.init.ModCreativeTabs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;

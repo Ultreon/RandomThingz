@@ -28,7 +28,7 @@ public class BatteryBoxScreen extends AbstractContainerScreen<BatteryBoxContaine
     @Override
     protected void renderTooltip(PoseStack matrixStack, int x, int y) {
         if (isHovering(153, 17, 13, 51, x, y)) {
-            Component text = TextUtils.energyWithMax(menu.getEnergyStored(), Objects.requireNonNull(menu.getTileEntity()).getMaxEnergyStored());
+            Component text = TextUtils.energyWithMax(menu.getEnergyStored(), Objects.requireNonNull(menu).getMaxEnergyStored());
             renderTooltip(matrixStack, text, x, y);
         }
         super.renderTooltip(matrixStack, x, y);
@@ -44,7 +44,12 @@ public class BatteryBoxScreen extends AbstractContainerScreen<BatteryBoxContaine
         blit(matrixStack, xPos, yPos, 0, 0, this.imageWidth, this.imageHeight);
 
         // Energy meter
-        int energyBarHeight = 50 * menu.getEnergyStored() / menu.tileEntity.getMaxEnergyStored();
+        int energyBarHeight;
+        if (menu.getMaxEnergyStored() <= 0) {
+            energyBarHeight = 50 * menu.getEnergyStored() / menu.getMaxEnergyStored();
+        } else {
+            energyBarHeight = -50;
+        }
         if (energyBarHeight > 0) {
             blit(matrixStack, xPos + 154, yPos + 68 - energyBarHeight, 176, 31, 12, energyBarHeight);
         }

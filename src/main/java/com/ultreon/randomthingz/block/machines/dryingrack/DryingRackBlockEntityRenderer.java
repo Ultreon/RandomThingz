@@ -15,12 +15,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class DryingRackBlockEntityRenderer implements BlockEntityRenderer<DryingRackTileEntity> {
+public class DryingRackBlockEntityRenderer implements BlockEntityRenderer<DryingRackBlockEntity> {
     public DryingRackBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
 
     }
 
-    private static Direction getFacing(DryingRackTileEntity tileEntity) {
+    private static Direction getFacing(DryingRackBlockEntity tileEntity) {
         Level dimension = tileEntity.getLevel();
         if (dimension != null) {
             BlockState state = dimension.getBlockState(tileEntity.getBlockPos());
@@ -30,7 +30,7 @@ public class DryingRackBlockEntityRenderer implements BlockEntityRenderer<Drying
     }
 
     @Override
-    public void render(DryingRackTileEntity tileEntityIn, float partialTicks, PoseStack poses, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+    public void render(DryingRackBlockEntity tileEntityIn, float partialTicks, PoseStack poses, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
         ItemStack stack = tileEntityIn.getItem();
         if (!stack.isEmpty()) {
             poses.pushPose();

@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.data.loot;
 
 import com.ultreon.modlib.api.holders.BlockHolder;
 import com.ultreon.modlib.silentlib.registry.BlockRegistryObject;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;

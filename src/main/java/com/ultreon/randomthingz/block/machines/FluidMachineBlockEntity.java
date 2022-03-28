@@ -229,13 +229,12 @@ public abstract class FluidMachineBlockEntity<R extends FluidRecipe<?>> extends 
     }
 
     @Override
-    public CompoundTag save(CompoundTag tags) {
+    public void saveAdditional(CompoundTag tags) {
         ListTag list = new ListTag();
         for (FluidTank tank : tanks) {
             list.add(tank.writeToNBT(new CompoundTag()));
         }
         tags.put("Tanks", list);
-        return super.save(tags);
     }
 
     @Override

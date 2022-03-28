@@ -4,7 +4,7 @@ import com.mojang.text2speech.Narrator;
 import com.ultreon.modlib.graphics.MCGraphics;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.screen.AdvancedScreen;
-import com.ultreon.randomthingz.common.interfaces.IVersion;
+import com.ultreon.randomthingz.common.interfaces.Version;
 import com.ultreon.randomthingz.common.internal.RtVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.NarratorStatus;
@@ -53,8 +53,8 @@ public class UpdateAvailableScreen extends AdvancedScreen {
 
     // AbstractUpdater.
     private final AbstractUpdater<?> updater;
-    private final IVersion latestVersion;
-    private final IVersion currentVersion;
+    private final Version latestVersion;
+    private final Version currentVersion;
 
     // Values.
     private int ticksUntilEnable;
@@ -242,11 +242,11 @@ public class UpdateAvailableScreen extends AdvancedScreen {
         AbstractUpdater.DEBUG = false;
     }
 
-    public IVersion getLatestVersion() {
+    public Version getLatestVersion() {
         return latestVersion;
     }
 
-    public IVersion getCurrentVersion() {
+    public Version getCurrentVersion() {
         return currentVersion;
     }
 }

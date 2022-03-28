@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.block.fluid;
 
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModItems;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

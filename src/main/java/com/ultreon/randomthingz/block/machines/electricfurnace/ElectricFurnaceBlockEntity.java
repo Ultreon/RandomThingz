@@ -93,7 +93,7 @@ public class ElectricFurnaceBlockEntity extends MachineBlockEntity<AbstractCooki
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new ElectricFurnaceContainer(id, playerInventory, this, this.fields);
+        return new ElectricFurnaceContainer(id, playerInventory, inventory, worldPosition, fields);
     }
 
     List<String> getDebugText() {

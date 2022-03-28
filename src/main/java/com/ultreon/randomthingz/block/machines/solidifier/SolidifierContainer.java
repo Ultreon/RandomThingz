@@ -1,9 +1,12 @@
 package com.ultreon.randomthingz.block.machines.solidifier;
 
-import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.block.entity.UmlItemStackHandler;
+import com.ultreon.modlib.inventory.OutputSlot;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineContainer;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.init.ModMachineContainers;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,27 +16,28 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import org.jetbrains.annotations.Nullable;
+import net.minecraftforge.items.SlotItemHandler;
 
-public class SolidifierContainer extends BaseMachineBaseContainer<SolidifierBlockEntity> {
+public class SolidifierContainer extends BaseMachineContainer<SolidifierBlockEntity> {
     public SolidifierContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, null, new SimpleContainerData(SolidifierBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, new UmlItemStackHandler(3 + MachineTier.STANDARD.getUpgradeSlots()), BlockPos.ZERO, new SimpleContainerData(SolidifierBlockEntity.FIELDS_COUNT));
     }
 
-    public SolidifierContainer(int id, Inventory playerInventory, @Nullable SolidifierBlockEntity tileEntity, ContainerData fieldsIn) {
-        super(ModMachineContainers.solidifier, id, tileEntity, fieldsIn);
+    public SolidifierContainer(int id, Inventory inv, UmlItemStackHandler stackHandler, BlockPos pos, ContainerData fieldsIn) {
+        super(ModMachineContainers.solidifier, id, inv, stackHandler, pos, fieldsIn);
 
-        if (this.tileEntity == null) {
-            return;
-        }
+        this.addSlot(new SlotItemHandler(stackHandler, 0, 35, 15));
+        this.addSlot(new OutputSlot(stackHandler, 1, 36, 59));
+        this.addSlot(new OutputSlot(stackHandler, 2, 116, 35));
 
-        this.addSlot(new Slot(this.tileEntity, 0, 35, 15));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 36, 59));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, 2, 116, 35));
-
-        InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        InventoryUtils.createPlayerSlots(inv, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
+    }
+
+    @Override
+    public MachineTier getTier() {
+        return MachineTier.STANDARD;
     }
 
     public int getProgress() {

@@ -6,6 +6,8 @@ import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.ultreon.randomthingz.common.CoreRegisterWrapperModule;
 import com.ultreon.randomthingz.common.ModuleSafety;
+import com.ultreon.randomthingz.init.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocksAlt;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;

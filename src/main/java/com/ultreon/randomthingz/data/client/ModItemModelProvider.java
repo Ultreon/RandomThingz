@@ -4,12 +4,12 @@ import com.ultreon.modlib.silentlib.block.BlockLike;
 import com.ultreon.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.StoneType;
-import com.ultreon.randomthingz.block._common.ModBlocks;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModBlocks;
+import com.ultreon.randomthingz.init.ModItems;
+import com.ultreon.randomthingz.init.ModMachineUpgrades;
 import com.ultreon.randomthingz.item.CraftingItems;
 import com.ultreon.randomthingz.item.tool.Toolset;
-import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
 import com.ultreon.randomthingz.registration.Registration;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.ItemLike;
@@ -40,7 +40,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         ModelFile itemHandheld = getExistingFile(mcLoc("item/handheld"));
 
         //noinspection OverlyLongLambda
-        Arrays.stream(ItemMaterial.values()).forEach(metal -> {
+        ItemMaterial.getValues().forEach(metal -> {
             metal.getStoneOre().ifPresent(this::blockBuilder);
             metal.getDeepslateOre().ifPresent(this::blockBuilder);
             metal.getNetherOre().ifPresent(this::blockBuilder);
@@ -72,7 +72,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         }
 
         Arrays.stream(CraftingItems.values()).forEach(item -> builder(item, itemGenerated));
-        Arrays.stream(MachineUpgrades.values()).forEach(item -> builder(item, itemGenerated));
+        ModMachineUpgrades.registry().getValues().forEach(item -> builder(item, itemGenerated));
 
         blockBuilder(ModBlocks.HEAVY_QUARRY);
         blockBuilder(ModBlocks.SUPER_QUARRY);

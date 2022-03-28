@@ -6,7 +6,7 @@ import com.ultreon.randomthingz.common.RequiresToolMat;
 import com.ultreon.randomthingz.common.RequiresToolType;
 import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import com.ultreon.randomthingz.item.tool.ToolType;
-import com.ultreon.randomthingz.block.entity.CrateTileEntity;
+import com.ultreon.randomthingz.block.entity.CrateBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
  * Wooden crate block class.
  *
  * @author Qboi123
- * @see CrateTileEntity
+ * @see CrateBlockEntity
  */
 @SuppressWarnings("deprecation")
 public class WoodenCrateBlock extends DirectionalBlock implements EntityBlock, RequiresToolMat, RequiresToolType {
@@ -52,8 +52,8 @@ public class WoodenCrateBlock extends DirectionalBlock implements EntityBlock, R
         if (!dimensionIn.isClientSide()) {
             BlockEntity tile = dimensionIn.getBlockEntity(pos);
 
-            if (tile instanceof CrateTileEntity) {
-                NetworkHooks.openGui((ServerPlayer) player, (CrateTileEntity) tile, pos);
+            if (tile instanceof CrateBlockEntity) {
+                NetworkHooks.openGui((ServerPlayer) player, (CrateBlockEntity) tile, pos);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -65,8 +65,8 @@ public class WoodenCrateBlock extends DirectionalBlock implements EntityBlock, R
     public void onRemove(BlockState state, @NotNull Level dimensionIn, @NotNull BlockPos pos, BlockState newState, boolean isMoving) {
         if (state.getBlock() != newState.getBlock()) {
             BlockEntity te = dimensionIn.getBlockEntity(pos);
-            if (te instanceof CrateTileEntity) {
-                Containers.dropContents(dimensionIn, pos, new SimpleContainer(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
+            if (te instanceof CrateBlockEntity) {
+                Containers.dropContents(dimensionIn, pos, new SimpleContainer(((CrateBlockEntity) te).getItems().toArray(new ItemStack[]{})));
             }
         }
     }
@@ -74,8 +74,8 @@ public class WoodenCrateBlock extends DirectionalBlock implements EntityBlock, R
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level dimension, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
         BlockEntity te = dimension.getBlockEntity(pos);
-        if (te instanceof CrateTileEntity) {
-            Containers.dropContents(dimension, pos, ((CrateTileEntity) te).getInventory());
+        if (te instanceof CrateBlockEntity) {
+            Containers.dropContents(dimension, pos, ((CrateBlockEntity) te).getInventory());
         }
         return super.onDestroyedByPlayer(state, dimension, pos, player, willHarvest, fluid);
     }
@@ -91,8 +91,8 @@ public class WoodenCrateBlock extends DirectionalBlock implements EntityBlock, R
         super.wasExploded(dimensionIn, pos, explosionIn);
 
         BlockEntity te = dimensionIn.getBlockEntity(pos);
-        if (te instanceof CrateTileEntity) {
-            Containers.dropContents(dimensionIn, pos, new SimpleContainer(((CrateTileEntity) te).getItems().toArray(new ItemStack[]{})));
+        if (te instanceof CrateBlockEntity) {
+            Containers.dropContents(dimensionIn, pos, new SimpleContainer(((CrateBlockEntity) te).getItems().toArray(new ItemStack[]{})));
         }
     }
 

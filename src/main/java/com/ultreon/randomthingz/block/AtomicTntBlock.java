@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block;
 
 import com.ultreon.randomthingz.common.TntProperties;
-import com.ultreon.randomthingz.effect.common.ModEffects;
+import com.ultreon.randomthingz.init.ModEffects;
 import com.ultreon.randomthingz.entity.custom.CustomPrimedTnt;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;

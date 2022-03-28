@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.entity;
 
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.LidBlockEntity;

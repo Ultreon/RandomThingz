@@ -9,8 +9,10 @@ import com.ultreon.randomthingz.client.ClientRegistrationUtil;
 import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.ultreon.randomthingz.common.CoreRegisterWrapperModule;
 import com.ultreon.randomthingz.common.ModuleSafety;
-import com.ultreon.randomthingz.common.interfaces.IHasDyeColor;
-import com.ultreon.randomthingz.common.interfaces.IHasMaterialColor;
+import com.ultreon.randomthingz.common.interfaces.DyeColorHolder;
+import com.ultreon.randomthingz.common.interfaces.MaterilColorHolder;
+import com.ultreon.randomthingz.init.ModItems;
+import com.ultreon.randomthingz.init.ModItemsAlt;
 import com.ultreon.randomthingz.item.CustomSpawnEggItem;
 import com.ultreon.randomthingz.item.DyeColorizedItem;
 import com.ultreon.randomthingz.item.MaterialColorizedItem;
@@ -69,15 +71,15 @@ public class ItemsModule extends CoreRegisterWrapperModule<Item> {
                 ModItemsAlt.OX_SPAWN_EGG
         );
 
-        Collection<Item> dyeColorItems = Registration.getItems((item) -> item instanceof IHasDyeColor);
+        Collection<Item> dyeColorItems = Registration.getItems((item) -> item instanceof DyeColorHolder);
         for (Item dyeColorItem : dyeColorItems) {
-            IHasDyeColor dyeColorProvider = (IHasDyeColor) dyeColorItem;
+            DyeColorHolder dyeColorProvider = (DyeColorHolder) dyeColorItem;
             ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, tintIndex) -> dyeColorProvider.getDyeColor().getMaterialColor().col, () -> dyeColorItem);
         }
 
-        Collection<Item> materialColorItems = Registration.getItems((item) -> item instanceof IHasMaterialColor);
+        Collection<Item> materialColorItems = Registration.getItems((item) -> item instanceof MaterilColorHolder);
         for (Item materialColorItem : materialColorItems) {
-            IHasMaterialColor materialColorProvider = (IHasMaterialColor) materialColorItem;
+            MaterilColorHolder materialColorProvider = (MaterilColorHolder) materialColorItem;
             ClientRegistrationUtil.registerItemColorHandler(itemColors, (stack, tintIndex) -> materialColorProvider.getMaterialColor().col, () -> materialColorItem);
         }
 

@@ -31,8 +31,9 @@ public class NBTHelper {
     }
 
     private static CompoundTag writeQuarry(QuarryBlockEntity o) {
-        CompoundTag compound = new CompoundTag();
-        return o.save(compound);
+        CompoundTag tag = new CompoundTag();
+        o.saveAdditional(tag);
+        return tag;
     }
 
     @SuppressWarnings("ConstantConditions")

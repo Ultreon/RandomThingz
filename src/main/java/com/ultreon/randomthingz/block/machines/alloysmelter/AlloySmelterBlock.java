@@ -1,6 +1,7 @@
 package com.ultreon.randomthingz.block.machines.alloysmelter;
 
-import com.ultreon.randomthingz.block._common.MachineType;
+import com.ultreon.modlib.block.entity.Tickable;
+import com.ultreon.randomthingz.block.machines.MachineType;
 import com.ultreon.randomthingz.block.machines.MachineBlock;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.core.BlockPos;
@@ -17,6 +18,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -45,32 +48,38 @@ public class AlloySmelterBlock extends MachineBlock {
         return MachineType.ALLOY_SMELTER.getTileEntityType(tier).create(pos, state);
     }
 
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return Tickable::blockEntity;
+    }
+
     @Override
     public void animateTick(BlockState stateIn, Level level, BlockPos pos, Random rand) {
         // TODO: Unique sound and particles? Copied from BlastFurnaceBlock.
         if (stateIn.getValue(LIT)) {
-            double d0 = (double) pos.getX() + 0.5D;
-            double d1 = pos.getY();
-            double d2 = (double) pos.getZ() + 0.5D;
+            double spawnX = (double) pos.getX() + 0.5D;
+            double spawnY = pos.getY();
+            double spawnZ = (double) pos.getZ() + 0.5D;
             if (rand.nextDouble() < 0.1D) {
-                level.playLocalSound(d0, d1, d2, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1f, 1f, false);
+                level.playLocalSound(spawnX, spawnY, spawnZ, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1f, 1f, false);
             }
 
-            Direction direction = stateIn.getValue(FACING);
-            Direction.Axis direction$axis = direction.getAxis();
-            double d3 = 0.52D;
-            double d4 = rand.nextDouble() * 0.6D - 0.3D;
-            double d5 = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * 0.52D : d4;
-            double d6 = rand.nextDouble() * 9.0D / 16.0D;
-            double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.52D : d4;
-            level.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+            Direction facing = stateIn.getValue(FACING);
+            Direction.Axis axis = facing.getAxis();
+            final double delta = 0.52d;
+            double altDelta = rand.nextDouble() * 0.6D - 0.3D;
+            double deltaX = axis == Direction.Axis.X ? (double) facing.getStepX() * delta : altDelta;
+            double deltaY = rand.nextDouble() * 9.0D / 16.0D;
+            double deltaZ = axis == Direction.Axis.Z ? (double) facing.getStepZ() * delta : altDelta;
+            level.addParticle(ParticleTypes.SMOKE, spawnX + deltaX, spawnY + deltaY, spawnZ + deltaZ, 0.0D, 0.0D, 0.0D);
         }
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof final AlloySmelterBlockEntity be) {
-            final MenuProvider container = new SimpleMenuProvider((id, inv, p) -> new AlloySmelterContainer(id, inv, be, be.getFields()), be.getDisplayName());
+            final MenuProvider container = new SimpleMenuProvider((id, inv, p) -> new AlloySmelterContainer(id, inv, tier, be.inventory, pos, be.getFields()), be.getDisplayName());
             NetworkHooks.openGui((ServerPlayer) player, container, pos);
         }
 

@@ -1,14 +1,14 @@
 package com.ultreon.randomthingz.common.internal;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.common.interfaces.IVersion;
+import com.ultreon.randomthingz.common.interfaces.Version;
 import lombok.Getter;
 import lombok.NonNull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RtVersion implements IVersion {
+public class RtVersion implements Version {
     @Getter
     private final int version;
     @Getter
@@ -40,24 +40,11 @@ public class RtVersion implements IVersion {
             buildNumber = Integer.parseInt(m.group(3));
 
             switch (m.group(4)) {
-                case "alpha":
-                case "a":
-                    stage = Stage.ALPHA;
-                    break;
-                case "beta":
-                case "b":
-                    stage = Stage.BETA;
-                    break;
-                case "pre":
-                case "rc":
-                    stage = Stage.PRE;
-                    break;
-                case "release":
-                case "r":
-                    stage = Stage.RELEASE;
-                    break;
-                default:
-                    throw new InternalError("Regex has invalid output.");
+                case "alpha", "a" -> stage = Stage.ALPHA;
+                case "beta", "b" -> stage = Stage.BETA;
+                case "pre", "rc" -> stage = Stage.PRE;
+                case "release", "r" -> stage = Stage.RELEASE;
+                default -> throw new InternalError("Regex has invalid output.");
             }
 
             stageRelease = Integer.parseInt(m.group(5));
@@ -70,24 +57,11 @@ public class RtVersion implements IVersion {
         this.version = version;
         this.release = release;
         switch (stage) {
-            case "alpha":
-            case "a":
-                this.stage = Stage.ALPHA;
-                break;
-            case "beta":
-            case "b":
-                this.stage = Stage.BETA;
-                break;
-            case "pre":
-            case "rc":
-                this.stage = Stage.PRE;
-                break;
-            case "release":
-            case "r":
-                this.stage = Stage.RELEASE;
-                break;
-            default:
-                throw new InternalError("Invalid RandomThingz version stage!");
+            case "alpha", "a" -> this.stage = Stage.ALPHA;
+            case "beta", "b" -> this.stage = Stage.BETA;
+            case "pre", "rc" -> this.stage = Stage.PRE;
+            case "release", "r" -> this.stage = Stage.RELEASE;
+            default -> throw new InternalError("Invalid RandomThingz version stage!");
         }
 
         this.stageRelease = stageRelease;
@@ -155,12 +129,10 @@ public class RtVersion implements IVersion {
     }
 
     @Override
-    public int compareTo(@NonNull IVersion o) {
-        if (!(o instanceof RtVersion)) {
+    public int compareTo(@NonNull Version o) {
+        if (!(o instanceof RtVersion version)) {
             throw new IllegalArgumentException("Can't compare other than QVersion");
         }
-
-        RtVersion version = (RtVersion) o;
 
         return Integer.compare(this.buildNumber, version.buildNumber);
 

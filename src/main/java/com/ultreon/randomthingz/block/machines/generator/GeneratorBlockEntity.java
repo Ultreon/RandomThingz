@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -39,7 +40,7 @@ public abstract class GeneratorBlockEntity extends MachineBaseBlockEntity {
                         // Max energy upper bytes
                         (GeneratorBlockEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
                 case 4 -> redstoneMode.ordinal();
-                case 5 -> tier.getUpgradeSlots();
+                case 5 -> tier.ordinal();
                 case 7 -> burnTime;
                 case 6 -> totalBurnTime;
                 default -> 0;
@@ -121,10 +122,9 @@ public abstract class GeneratorBlockEntity extends MachineBaseBlockEntity {
     }
 
     @Override
-    public CompoundTag save(CompoundTag tags) {
+    public void saveAdditional(CompoundTag tags) {
         tags.putInt("BurnTime", this.burnTime);
         tags.putInt("TotalBurnTime", this.totalBurnTime);
-        return super.save(tags);
     }
 
     @Override
@@ -136,7 +136,7 @@ public abstract class GeneratorBlockEntity extends MachineBaseBlockEntity {
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag() {
         CompoundTag tags = super.getUpdateTag();
         tags.putInt("BurnTime", this.burnTime);
         tags.putInt("TotalBurnTime", this.totalBurnTime);

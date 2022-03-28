@@ -4,7 +4,7 @@ import com.ultreon.randomthingz.pc.common.computerapi.Computer;
 import com.ultreon.randomthingz.pc.common.device.AbstractBios;
 
 public class UltreonPC extends Computer {
-    public UltreonPC(ComputerTileEntity tileEntity) {
+    public UltreonPC(ComputerBlockEntity tileEntity) {
         super(tileEntity);
     }
 

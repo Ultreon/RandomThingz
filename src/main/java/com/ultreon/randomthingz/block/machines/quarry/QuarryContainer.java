@@ -1,7 +1,9 @@
 package com.ultreon.randomthingz.block.machines.quarry;
 
+import com.ultreon.modlib.block.entity.UmlItemStackHandler;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineContainer;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
@@ -10,20 +12,24 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("unused")
-public class QuarryContainer extends BaseMachineBaseContainer<QuarryBlockEntity> {
+public class QuarryContainer extends BaseMachineContainer<QuarryBlockEntity> {
     public QuarryContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, null, new SimpleContainerData(QuarryBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, new UmlItemStackHandler(0 + MachineTier.HEAVY.getUpgradeSlots()), BlockPos.ZERO, new SimpleContainerData(QuarryBlockEntity.FIELDS_COUNT));
     }
 
-    public QuarryContainer(int id, Inventory playerInventory, @Nullable QuarryBlockEntity tileEntity, ContainerData fields) {
-        super(ModMachineContainers.quarry, id, tileEntity, fields);
+    public QuarryContainer(int id, Inventory inv, UmlItemStackHandler stackHandler, BlockPos pos, ContainerData fields) {
+        super(ModMachineContainers.quarry, id, inv, stackHandler, pos, fields);
 
-        InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        InventoryUtils.createPlayerSlots(inv, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
+    }
+
+    @Override
+    public MachineTier getTier() {
+        return MachineTier.HEAVY;
     }
 
     public int getCurrentX() {

@@ -7,7 +7,8 @@ import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.MachineBaseBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
+import com.ultreon.randomthingz.init.ModMachineUpgrades;
+import com.ultreon.randomthingz.item.upgrade.MachineUpgrade;
 import com.ultreon.randomthingz.util.Constants;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import com.ultreon.randomthingz.util.TextUtils;
@@ -53,7 +54,7 @@ public class PumpBlockEntity extends MachineBaseBlockEntity {
                 case 2 -> getMaxEnergyStored() & 0xFFFF;
                 case 3 -> (getMaxEnergyStored() >> 16) & 0xFFFF;
                 case 4 -> redstoneMode.ordinal();
-                case 5 -> tier.getUpgradeSlots();
+                case 5 -> tier.ordinal();
                 case 7 -> Registry.FLUID.getId(tank.getFluid().getFluid());
                 case 8 -> tank.getFluid().getAmount();
                 default -> 0;
@@ -79,7 +80,7 @@ public class PumpBlockEntity extends MachineBaseBlockEntity {
     }
 
     private int getHorizontalRange() {
-        return 3 + getUpgradeCount(MachineUpgrades.RANGE) * Constants.UPGRADE_RANGE_AMOUNT;
+        return 3 + getUpgradeCount(ModMachineUpgrades.RANGE.get()) * Constants.UPGRADE_RANGE_AMOUNT;
     }
 
     private int getVerticalRange() {
@@ -91,7 +92,7 @@ public class PumpBlockEntity extends MachineBaseBlockEntity {
     }
 
     private int getPumpDelay() {
-        int upgrades = getUpgradeCount(MachineUpgrades.PROCESSING_SPEED);
+        int upgrades = getUpgradeCount(ModMachineUpgrades.PROCESSING_SPEED.get());
         return (int) (PUMP_DELAY / (1f + upgrades * Constants.UPGRADE_PROCESSING_SPEED_AMOUNT));
     }
 
@@ -182,7 +183,7 @@ public class PumpBlockEntity extends MachineBaseBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
-        return new PumpContainer(id, player, this, this.fields);
+        return new PumpContainer(id, player, inventory, worldPosition, fields);
     }
 
     @Override
@@ -192,9 +193,8 @@ public class PumpBlockEntity extends MachineBaseBlockEntity {
     }
 
     @Override
-    public CompoundTag save(CompoundTag tags) {
+    public void saveAdditional(CompoundTag tags) {
         tags.put("Tank", this.tank.writeToNBT(new CompoundTag()));
-        return super.save(tags);
     }
 
     @Override

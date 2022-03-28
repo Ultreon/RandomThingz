@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.listener;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.modules.ModuleScreen;
 import com.ultreon.randomthingz.common.ModuleManager;
-import com.ultreon.randomthingz.common.interfaces.IFOVUpdateItem;
+import com.ultreon.randomthingz.common.interfaces.FovUpdater;
 import lombok.experimental.UtilityClass;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
@@ -34,8 +34,8 @@ public class ClientListener {
     public static void handleFOVUpdateEvent(FOVModifierEvent event) {
         ItemStack stack = event.getEntity().getUseItem();
 
-        if (stack.getItem() instanceof IFOVUpdateItem) {
-            event.setNewfov(event.getFov() - ((IFOVUpdateItem) stack.getItem()).getFOVMod(stack, event.getEntity()));
+        if (stack.getItem() instanceof FovUpdater) {
+            event.setNewfov(event.getFov() - ((FovUpdater) stack.getItem()).getFovMod(stack, event.getEntity()));
         }
     }
 

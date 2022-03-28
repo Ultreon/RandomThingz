@@ -1,9 +1,12 @@
 package com.ultreon.randomthingz.common.item;
 
+import com.ultreon.modlib.silentlib.registry.BlockDeferredRegister;
 import com.ultreon.modlib.silentlib.registry.BlockRegistryObject;
+import com.ultreon.modlib.silentlib.registry.ItemDeferredRegister;
 import com.ultreon.modlib.silentlib.registry.ItemRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.machines.MetalBlock;
+import com.ultreon.randomthingz.init.ModCreativeTabs;
 import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import com.ultreon.randomthingz.item.tool.Toolset;
 import com.ultreon.randomthingz.registration.Registration;
@@ -25,7 +28,9 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.fml.ModLoadingContext;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.function.Supplier;
@@ -36,8 +41,8 @@ import java.util.stream.Stream;
 @MethodsReturnNonnullByDefault
 public class ItemMaterial implements BaseItemMaterial {
     // Class preload.
-    private static final List<ItemMaterial> values = new ArrayList<>();
-    private static final Map<String, ItemMaterial> map = new HashMap<>();
+    private static final List<ItemMaterial> all = new ArrayList<>();
+    private static final Map<ResourceLocation, ItemMaterial> map = new HashMap<>();
 
     // Metals
     public static final ItemMaterial REDSTONE_ALLOY = new ItemMaterial(builderAlloy("redstone_alloy", ToolRequirement.IRON));
@@ -54,7 +59,7 @@ public class ItemMaterial implements BaseItemMaterial {
     public static final ItemMaterial TUNGSTEN = new ItemMaterial(builderAlloy("tungsten", ToolRequirement.IRON));
     public static final ItemMaterial ZINC = new ItemMaterial(builderBaseWithOre("zinc", Ores.ZINC));
     public static final ItemMaterial BISMUTH = new ItemMaterial(builderBaseWithOre("bismuth", Ores.BISMUTH));
-    public static final ItemMaterial ALUMINUM = new ItemMaterial(builderBaseWithOre("aluminum", Ores.BAUXITE), "bauxite");
+    public static final ItemMaterial ALUMINUM = new ItemMaterial(builderBaseWithOre("aluminum", Ores.BAUXITE), RandomThingz.res("bauxite"));
     public static final ItemMaterial URANIUM = new ItemMaterial(builderBaseWithOre("uranium", Ores.URANIUM));
     public static final ItemMaterial BRONZE = new ItemMaterial(builderAlloy("bronze", ToolRequirement.STONE));
     public static final ItemMaterial BRASS = new ItemMaterial(builderAlloy("brass", ToolRequirement.STONE));
@@ -81,7 +86,10 @@ public class ItemMaterial implements BaseItemMaterial {
     public static final ItemMaterial TANZANITE = new ItemMaterial(builder("tanzanite").overworldOre(Ores.TANZANITE).storageBlock(ToolRequirement.IRON));
     public static final ItemMaterial MALACHITE = new ItemMaterial(builder("malachite").overworldOre(Ores.MALACHITE).storageBlock(ToolRequirement.IRON));
 
-    private final String name;
+    private final ResourceLocation registryName;
+
+    private final Supplier<Toolset> tools;
+
     private final Supplier<Block> stoneOreSupplier;
     private final Supplier<Block> deepslateOreSupplier;
     private final Supplier<Block> netherOreSupplier;
@@ -100,6 +108,7 @@ public class ItemMaterial implements BaseItemMaterial {
     private final Tag.Named<Item> ingotTag;
     private final Tag.Named<Item> nuggetTag;
     private final ToolRequirement harvestRequirement;
+    private final Tag.Named<Item> gemTag;
     private BlockRegistryObject<Block> stoneOre;
     private BlockRegistryObject<Block> deepslateOre;
     private BlockRegistryObject<Block> netherOre;
@@ -110,14 +119,17 @@ public class ItemMaterial implements BaseItemMaterial {
     private ItemRegistryObject<Item> gem;
     private ItemRegistryObject<Item> nugget;
 
+    private final BlockDeferredRegister blocks;
+    private final ItemDeferredRegister items;
+
     private final Collection<Tag.Named<Block>> dataGenTags = new ArrayList<>();
 
-    ItemMaterial(Builder builder) {
-        this(builder, builder.name);
+    public ItemMaterial(Builder builder) {
+        this(builder, builder.registryName);
     }
 
-    ItemMaterial(Builder builder, String name) {
-        this.name = name;
+    public ItemMaterial(Builder builder, ResourceLocation registryName) {
+        this.registryName = registryName;
 
         this.storageBlockSupplier = builder.storageBlock;
         this.stoneOreSupplier = builder.stoneOre;
@@ -135,39 +147,43 @@ public class ItemMaterial implements BaseItemMaterial {
         this.chunksTag = builder.chunksTag;
         this.dustTag = builder.dustTag;
         this.ingotTag = builder.ingotTag;
+        this.gemTag = builder.gemTag;
         this.nuggetTag = builder.nuggetTag;
         this.harvestRequirement = builder.harvestRequirement;
         this.dataGenTags.addAll(builder.dataGenTags);
 
-        map.put(name, this);
-        values.add(this);
+        this.blocks = builder.blocks;
+        this.items = builder.items;
+
+        this.tools = builder.tools;
+
+        map.put(registryName, this);
+        all.add(this);
     }
 
     public static void registerBlocks() {
-        for (ItemMaterial metal : values()) {
+        for (ItemMaterial metal : getValues()) {
             if (metal.stoneOreSupplier != null) {
-                String name = metal.name + "_ore";
-                metal.stoneOre = Registration.BLOCKS.register(name, metal.stoneOreSupplier);
+                String name = metal.registryName.getPath() + "_ore";
+                metal.stoneOre = metal.blocks.register(name, metal.stoneOreSupplier);
                 Registration.ITEMS.register(name, () ->
                         new BlockItem(metal.stoneOre.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
             }
             if (metal.deepslateOreSupplier != null) {
-                String name = "deepslate_" + metal.name + "_ore";
-                metal.deepslateOre = Registration.BLOCKS.register(name, metal.deepslateOreSupplier);
+                String name = "deepslate_" + metal.registryName.getPath() + "_ore";
+                metal.deepslateOre = metal.blocks.register(name, metal.deepslateOreSupplier);
                 Registration.ITEMS.register(name, () ->
                         new BlockItem(metal.deepslateOre.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
             }
             if (metal.netherOreSupplier != null) {
-                String name = "nether_" + metal.name + "_ore";
-                metal.netherOre = Registration.BLOCKS.register(name, metal.netherOreSupplier);
+                String name = "nether_" + metal.registryName.getPath() + "_ore";
+                metal.netherOre = metal.blocks.register(name, metal.netherOreSupplier);
                 Registration.ITEMS.register(name, () ->
                         new BlockItem(metal.netherOre.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
             }
-        }
-        for (ItemMaterial metal : values()) {
             if (metal.storageBlockSupplier != null) {
-                String name = metal.getName() + "_block";
-                metal.storageBlock = Registration.BLOCKS.register(name, metal.storageBlockSupplier);
+                String name = metal.registryName.getPath() + "_block";
+                metal.storageBlock = metal.blocks.register(name, metal.storageBlockSupplier);
                 Registration.ITEMS.register(name, () ->
                         new BlockItem(metal.storageBlock.get(), new Item.Properties().tab(ModCreativeTabs.ORES)));
             }
@@ -175,32 +191,36 @@ public class ItemMaterial implements BaseItemMaterial {
     }
 
     public static void registerItems() {
-        for (ItemMaterial metal : values()) {
+        for (ItemMaterial metal : getValues()) {
             if (metal.chunksSupplier != null) {
-                metal.chunks = Registration.ITEMS.register(
-                        metal.name + "_chunks", metal.chunksSupplier);
+                metal.chunks = metal.items.register(
+                        metal.registryName.getPath() + "_chunks", metal.chunksSupplier);
             }
             if (metal.dustSupplier != null) {
-                metal.dust = Registration.ITEMS.register(
-                        metal.getName() + "_dust", metal.dustSupplier);
+                metal.dust = metal.items.register(
+                        metal.registryName.getPath() + "_dust", metal.dustSupplier);
             }
             if (metal.ingotSupplier != null) {
-                metal.ingot = Registration.ITEMS.register(
-                        metal.getName() + "_ingot", metal.ingotSupplier);
+                metal.ingot = metal.items.register(
+                        metal.registryName.getPath() + "_ingot", metal.ingotSupplier);
             }
             if (metal.gemSupplier != null) {
-                metal.gem = Registration.ITEMS.register(
-                        metal.getName(), metal.gemSupplier);
+                metal.gem = metal.items.register(
+                        metal.registryName.getPath(), metal.gemSupplier);
             }
             if (metal.nuggetSupplier != null) {
-                metal.nugget = Registration.ITEMS.register(
-                        metal.getName() + "_nugget", metal.nuggetSupplier);
+                metal.nugget = metal.items.register(
+                        metal.registryName.getPath() + "_nugget", metal.nuggetSupplier);
             }
         }
     }
 
     private static Builder builder(String name) {
-        return new Builder(name);
+        return new Builder(name, Registration.BLOCKS, Registration.ITEMS);
+    }
+
+    public static Builder builder(String name, BlockDeferredRegister blocks, ItemDeferredRegister items) {
+        return new Builder(name, blocks, items);
     }
 
     /**
@@ -267,10 +287,21 @@ public class ItemMaterial implements BaseItemMaterial {
     }
 
     /**
+     * Get the toolset bound to this material.
+     *
+     * @return toolset instance.
+     */
+    @Nullable
+    public Toolset getToolset() {
+        return tools.get();
+    }
+
+    /**
      * Get the material's name.
      *
      * @return resource path name for the item material.
      */
+    @Deprecated(forRemoval = true)
     @Override
     public String getName() {
         return name().toLowerCase(Locale.ROOT);
@@ -283,7 +314,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Block> getStoneOre() {
-        return stoneOre != null ? Optional.of(stoneOre.get()) : Optional.empty();
+        return stoneOre != null && stoneOre.isPresent() ? Optional.of(stoneOre.get()) : Optional.empty();
     }
 
     /**
@@ -293,7 +324,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Block> getDeepslateOre() {
-        return deepslateOre != null ? Optional.of(deepslateOre.get()) : Optional.empty();
+        return deepslateOre != null && deepslateOre.isPresent() ? Optional.of(deepslateOre.get()) : Optional.empty();
     }
 
     /**
@@ -303,7 +334,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Block> getNetherOre() {
-        return netherOre != null ? Optional.of(netherOre.get()) : Optional.empty();
+        return netherOre != null && netherOre.isPresent() ? Optional.of(netherOre.get()) : Optional.empty();
     }
 
     /**
@@ -313,7 +344,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Block> getStorageBlock() {
-        return storageBlock != null ? Optional.of(storageBlock.get()) : Optional.empty();
+        return storageBlock != null && storageBlock.isPresent() ? Optional.of(storageBlock.get()) : Optional.empty();
     }
 
     /**
@@ -323,7 +354,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Item> getChunks() {
-        return chunks != null ? Optional.of(chunks.get()) : Optional.empty();
+        return chunks != null && chunks.isPresent() ? Optional.of(chunks.get()) : Optional.empty();
     }
 
     /**
@@ -333,7 +364,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Item> getDust() {
-        return dust != null ? Optional.of(dust.get()) : Optional.empty();
+        return dust != null && dust.isPresent() ? Optional.of(dust.get()) : Optional.empty();
     }
 
     /**
@@ -343,7 +374,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Item> getIngot() {
-        return ingot != null ? Optional.of(ingot.get()) : Optional.empty();
+        return ingot != null && ingot.isPresent() ? Optional.of(ingot.get()) : Optional.empty();
     }
 
     /**
@@ -353,7 +384,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Item> getGem() {
-        return gem != null ? Optional.of(gem.get()) : Optional.empty();
+        return gem != null && gem.isPresent() ? Optional.of(gem.get()) : Optional.empty();
     }
 
     /**
@@ -363,7 +394,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Item> getNugget() {
-        return nugget != null ? Optional.of(nugget.get()) : Optional.empty();
+        return nugget != null && nugget.isPresent() ? Optional.of(nugget.get()) : Optional.empty();
     }
 
     /**
@@ -373,7 +404,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Tag.Named<Block>> getOreTag() {
-        return oreTag != null ? Optional.of(oreTag) : Optional.empty();
+        return Optional.ofNullable(oreTag);
     }
 
     /**
@@ -383,7 +414,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Tag.Named<Block>> getStorageBlockTag() {
-        return storageBlockTag != null ? Optional.of(storageBlockTag) : Optional.empty();
+        return Optional.ofNullable(storageBlockTag);
     }
 
     /**
@@ -393,7 +424,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Tag.Named<Item>> getOreItemTag() {
-        return oreItemTag != null ? Optional.of(oreItemTag) : Optional.empty();
+        return Optional.ofNullable(oreItemTag);
     }
 
     /**
@@ -403,7 +434,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Tag.Named<Item>> getStorageBlockItemTag() {
-        return storageBlockItemTag != null ? Optional.of(storageBlockItemTag) : Optional.empty();
+        return Optional.ofNullable(storageBlockItemTag);
     }
 
     /**
@@ -413,7 +444,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Tag.Named<Item>> getChunksTag() {
-        return chunksTag != null ? Optional.of(chunksTag) : Optional.empty();
+        return Optional.ofNullable(chunksTag);
     }
 
     /**
@@ -423,7 +454,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Tag.Named<Item>> getDustTag() {
-        return dustTag != null ? Optional.of(dustTag) : Optional.empty();
+        return Optional.ofNullable(dustTag);
     }
 
     /**
@@ -433,7 +464,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Tag.Named<Item>> getIngotTag() {
-        return ingotTag != null ? Optional.of(ingotTag) : Optional.empty();
+        return Optional.ofNullable(ingotTag);
     }
 
     /**
@@ -443,7 +474,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Tag.Named<Item>> getGemTag() {
-        return Optional.empty();
+        return Optional.ofNullable(gemTag);
     }
 
     /**
@@ -453,7 +484,7 @@ public class ItemMaterial implements BaseItemMaterial {
      */
     @Override
     public Optional<Tag.Named<Item>> getNuggetTag() {
-        return nuggetTag != null ? Optional.of(nuggetTag) : Optional.empty();
+        return Optional.ofNullable(nuggetTag);
     }
 
     public ToolRequirement getHarvestRequirement() {
@@ -485,19 +516,35 @@ public class ItemMaterial implements BaseItemMaterial {
         return Ingredient.fromValues(builder.build().map(Ingredient.TagValue::new));
     }
 
+    @Deprecated(forRemoval = true)
     public String name() {
-        return name;
+        return registryName.toString();
     }
 
+    public ResourceLocation getRegistryName() {
+        return registryName;
+    }
+
+    @Deprecated(forRemoval = true)
     public static ItemMaterial[] values() {
-        return values.toArray(new ItemMaterial[0]);
+        return all.toArray(new ItemMaterial[0]);
     }
 
+    public static Collection<ItemMaterial> getValues() {
+        return map.values();
+    }
+
+    @Deprecated(forRemoval = true)
     public static ItemMaterial fromIndex(int index) {
-        return values.get(index);
+        return all.get(index);
     }
 
+    @Deprecated(forRemoval = true)
     public static ItemMaterial fromName(String name) {
+        return map.get(new ResourceLocation(name));
+    }
+
+    public static ItemMaterial fromName(ResourceLocation name) {
         return map.get(name);
     }
 
@@ -509,33 +556,37 @@ public class ItemMaterial implements BaseItemMaterial {
      * @author Qboi
      */
     public static class Builder {
-        final String name;
-        Supplier<Block> stoneOre;
-        Supplier<Block> deepslateOre;
-        Supplier<Block> netherOre;
-        Supplier<Block> storageBlock;
-        Supplier<Item> chunks;
-        Supplier<Item> dust;
-        Supplier<Item> ingot;
-        Supplier<Item> gem;
-        Supplier<Item> nugget;
-        Tag.Named<Block> oreTag;
-        Tag.Named<Block> storageBlockTag;
-        Tag.Named<Item> chunksTag;
-        Tag.Named<Item> dustTag;
-        Tag.Named<Item> ingotTag;
-        Tag.Named<Item> gemTag;
-        Tag.Named<Item> nuggetTag;
-        ToolRequirement harvestRequirement;
+        private final ResourceLocation registryName;
+        private final BlockDeferredRegister blocks;
+        private final ItemDeferredRegister items;
+        private Supplier<Block> stoneOre;
+        private Supplier<Block> deepslateOre;
+        private Supplier<Block> netherOre;
+        private Supplier<Block> storageBlock;
+        private Supplier<Item> chunks;
+        private Supplier<Item> dust;
+        private Supplier<Item> ingot;
+        private Supplier<Item> gem;
+        private Supplier<Item> nugget;
+        private Tag.Named<Block> oreTag;
+        private Tag.Named<Block> storageBlockTag;
+        private Tag.Named<Item> chunksTag;
+        private Tag.Named<Item> dustTag;
+        private Tag.Named<Item> ingotTag;
+        private Tag.Named<Item> gemTag;
+        private Tag.Named<Item> nuggetTag;
+        private ToolRequirement harvestRequirement;
 
-        Supplier<Toolset> tools;
+        private Supplier<Toolset> tools;
         private final List<Tag.Named<Block>> dataGenTags = new ArrayList<>();
 
         /**
          * @param name name of the item material.
          */
-        Builder(String name) {
-            this.name = name;
+        private Builder(String name, BlockDeferredRegister blocks, ItemDeferredRegister items) {
+            this.registryName = new ResourceLocation(ModLoadingContext.get().getActiveNamespace(), name);
+            this.blocks = blocks;
+            this.items = items;
         }
 
         public static Tag.Named<Block> blockTag(String path) {
@@ -563,7 +614,7 @@ public class ItemMaterial implements BaseItemMaterial {
             this.dataGenTags.add(ore.getToolRequirement().getTag());
             this.harvestRequirement = ore.getToolRequirement();
             if (oreTag == null) {
-                this.oreTag = blockTag("ores/" + name);
+                this.oreTag = blockTag("ores/" + registryName);
             }
             return this;
         }
@@ -577,7 +628,7 @@ public class ItemMaterial implements BaseItemMaterial {
             this.dataGenTags.add(toolRequirement.getTag());
             this.harvestRequirement = toolRequirement;
             if (oreTag == null) {
-                this.oreTag = blockTag("ores/" + name);
+                this.oreTag = blockTag("ores/" + registryName);
             }
             return this;
         }
@@ -589,48 +640,48 @@ public class ItemMaterial implements BaseItemMaterial {
 
         public Builder storageBlock(ToolRequirement tool) {
             this.storageBlock = () -> new MetalBlock(tool);
-            this.storageBlockTag = blockTag("storage_blocks/" + name);
+            this.storageBlockTag = blockTag("storage_blocks/" + registryName);
             this.harvestRequirement = tool;
             return this;
         }
 
         public Builder chunks() {
             this.chunks = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
-            this.chunksTag = itemTag(RandomThingz.res("chunks/" + name));
+            this.chunksTag = itemTag(RandomThingz.res("chunks/" + registryName));
             return this;
         }
 
         public Builder dust() {
             this.dust = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
-            this.dustTag = itemTag("dusts/" + name);
+            this.dustTag = itemTag("dusts/" + registryName);
             return this;
         }
 
         public Builder ingot() {
             this.ingot = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
-            this.ingotTag = itemTag("ingots/" + name);
+            this.ingotTag = itemTag("ingots/" + registryName);
             return this;
         }
 
         public Builder ingotTagOnly() {
-            this.ingotTag = itemTag("ingots/" + name);
+            this.ingotTag = itemTag("ingots/" + registryName);
             return this;
         }
 
         public Builder nugget() {
             this.nugget = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
-            this.nuggetTag = itemTag("nuggets/" + name);
+            this.nuggetTag = itemTag("nuggets/" + registryName);
             return this;
         }
 
         public Builder nuggetTagOnly() {
-            this.nuggetTag = itemTag("nuggets/" + name);
+            this.nuggetTag = itemTag("nuggets/" + registryName);
             return this;
         }
 
         public Builder gem() {
             this.gem = () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC));
-            this.gemTag = itemTag("gems/" + name);
+            this.gemTag = itemTag("gems/" + registryName);
             return this;
         }
 

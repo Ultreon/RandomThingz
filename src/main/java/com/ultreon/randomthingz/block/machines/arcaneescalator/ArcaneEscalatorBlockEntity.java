@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.arcaneescalator;
 
-import com.ultreon.randomthingz.block._common.MachineType;
+import com.ultreon.randomthingz.block.machines.MachineType;
 import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.ArcaneEscalatingRecipe;
@@ -64,7 +64,7 @@ public class ArcaneEscalatorBlockEntity extends MachineBlockEntity<ArcaneEscalat
 
     @Override
     protected Collection<ItemStack> getProcessResults(ArcaneEscalatingRecipe recipe) {
-        return Collections.singleton(recipe.getResultItem());
+        return Collections.singleton(recipe.assemble(this));
     }
 
     @Override
@@ -100,7 +100,7 @@ public class ArcaneEscalatorBlockEntity extends MachineBlockEntity<ArcaneEscalat
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new ArcaneEscalatorContainer(id, playerInventory, this, this.fields);
+        return new ArcaneEscalatorContainer(id, playerInventory, tier, inventory, worldPosition, fields);
     }
 
     public static class Basic extends ArcaneEscalatorBlockEntity {

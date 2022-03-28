@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item.wand;
 
 import com.ultreon.randomthingz.common.enums.TextColors;
-import com.ultreon.randomthingz.common.item.ModCreativeTabs;
+import com.ultreon.randomthingz.init.ModCreativeTabs;
 import com.ultreon.randomthingz.util.helpers.KeyboardHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;

@@ -1,14 +1,15 @@
 package com.ultreon.randomthingz.api;
 
 import com.ultreon.randomthingz.item.MachineUpgradeItem;
-import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
+import com.ultreon.randomthingz.item.upgrade.MachineUpgrade;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
 /**
  * A machine upgrade item, which goes into the upgrade slots of machines. Also see {@link
  * MachineUpgradeItem} and {@link
- * MachineUpgrades}.
+ * MachineUpgrade}.
  */
-public interface IMachineUpgrade {
+public interface IMachineUpgrade extends IForgeRegistryEntry<MachineUpgrade> {
     /**
      * Added to machine energy consumption as a multiplier. Positive numbers will increase energy
      * usage, negative numbers will decrease it instead.

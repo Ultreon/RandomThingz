@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.entity;
 
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.common.init.ObjectInit;
 import lombok.experimental.UtilityClass;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class ModBlockEntities extends ObjectInit<BlockEntityType<?>> {
 
     @SuppressWarnings("ConstantConditions")
-    public static final RegistryObject<BlockEntityType<CrateTileEntity>> EXAMPLE_CHEST = register("example_chest", () -> BlockEntityType.Builder.of(CrateTileEntity::new, ModBlocks.WOODEN_CRATE.get()).build(null));
+    public static final RegistryObject<BlockEntityType<CrateBlockEntity>> EXAMPLE_CHEST = register("example_chest", () -> BlockEntityType.Builder.of(CrateBlockEntity::new, ModBlocks.WOODEN_CRATE.get()).build(null));
     public static final RegistryObject<BlockEntityType<ChristmasChestBlockEntity>> CHRISTMAS_CHEST = register("christmas_chest", () -> BlockEntityType.Builder.of(ChristmasChestBlockEntity::new, ModBlocks.CHRISTMAS_CHEST.get()).build(null));
 
     /**

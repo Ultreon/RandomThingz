@@ -1,12 +1,12 @@
 package com.ultreon.randomthingz;
 
 import com.ultreon.modlib.silentlib.event.Greetings;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import com.ultreon.randomthingz.client.ModModelProperties;
 import com.ultreon.randomthingz.client.gui.settings.SettingsScreen;
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModItems;
 import com.ultreon.randomthingz.config.Config;
 import com.ultreon.randomthingz.data.DataGenerators;
 import com.ultreon.randomthingz.init.ModDebugFormatters;
@@ -24,8 +24,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.ConfigGuiHandler;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.common.MinecraftForge;

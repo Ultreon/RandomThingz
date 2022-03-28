@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item.type;
 
-import com.ultreon.randomthingz.common.item.ModCreativeTabs;
-import com.ultreon.randomthingz.item.group.MetalCraftablesTab;
+import com.ultreon.randomthingz.init.ModCreativeTabs;
+import com.ultreon.randomthingz.item.creativetab.MetalCraftablesTab;
 import net.minecraft.world.item.Item;
 
 /**

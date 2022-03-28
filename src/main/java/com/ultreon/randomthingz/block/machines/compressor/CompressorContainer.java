@@ -1,31 +1,40 @@
 package com.ultreon.randomthingz.block.machines.compressor;
 
-import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.block.entity.UmlItemStackHandler;
+import com.ultreon.modlib.inventory.OutputSlot;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.block.machines.MachineContainer;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.init.ModMachineContainers;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class CompressorContainer extends MachineContainer<CompressorBlockEntity> {
-    public CompressorContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new CompressorBlockEntity(), new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
+    public CompressorContainer(int id, Inventory inv) {
+        this(id, inv, new UmlItemStackHandler(2 + MachineTier.STANDARD.getUpgradeSlots()), BlockPos.ZERO, new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
     }
 
-    public CompressorContainer(int id, Inventory playerInventory, CompressorBlockEntity tileEntity, ContainerData fieldsIn) {
-        super(ModMachineContainers.compressor, id, tileEntity, fieldsIn);
+    public CompressorContainer(int id, Inventory inv, UmlItemStackHandler stackHandler, BlockPos pos, ContainerData fieldsIn) {
+        super(ModMachineContainers.compressor, id, inv, stackHandler, pos, fieldsIn);
 
-        this.addSlot(new Slot(this.tileEntity, 0, 56, 35));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 117, 35));
+        this.addSlot(new SlotItemHandler(stackHandler, 0, 56, 35));
+        this.addSlot(new OutputSlot(stackHandler, 1, 117, 35));
 
-        InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        InventoryUtils.createPlayerSlots(inv, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
+    }
+
+    @Override
+    public MachineTier getTier() {
+        return MachineTier.STANDARD;
     }
 
     @Override

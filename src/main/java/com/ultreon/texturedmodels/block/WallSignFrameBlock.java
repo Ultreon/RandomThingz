@@ -1,6 +1,6 @@
 package com.ultreon.texturedmodels.block;
 
-import com.ultreon.texturedmodels.tileentity.Tickable;
+import com.ultreon.modlib.block.entity.Tickable;
 import com.ultreon.texturedmodels.tileentity.SignFrameBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

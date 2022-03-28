@@ -1,7 +1,10 @@
 package com.ultreon.randomthingz.block.machines.generator;
 
-import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
+import com.ultreon.modlib.block.entity.UmlItemStackHandler;
+import com.ultreon.randomthingz.block.machines.BaseMachineContainer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
@@ -9,10 +12,11 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.items.IItemHandler;
 
-public abstract class AbstractFluidGeneratorContainer<T extends FluidFuelGeneratorBlockEntity> extends BaseMachineBaseContainer<T> {
-    public AbstractFluidGeneratorContainer(MenuType<?> type, int id, T tileEntityIn, ContainerData fieldsIn) {
-        super(type, id, tileEntityIn, fieldsIn);
+public abstract class AbstractFluidGeneratorContainer<T extends FluidFuelGeneratorBlockEntity> extends BaseMachineContainer<T> {
+    public AbstractFluidGeneratorContainer(MenuType<?> type, int id, Inventory inv, UmlItemStackHandler stackHandler, BlockPos pos, ContainerData fieldsIn) {
+        super(type, id, inv, stackHandler, pos, fieldsIn);
     }
 
     public int getBurnTime() {
@@ -33,7 +37,7 @@ public abstract class AbstractFluidGeneratorContainer<T extends FluidFuelGenerat
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
 

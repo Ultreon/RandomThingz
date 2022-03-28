@@ -2,10 +2,10 @@ package com.ultreon.randomthingz.compat.jei;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.machines.refinery.RefineryBlockEntity;
 import com.ultreon.randomthingz.block.machines.refinery.RefineryScreen;
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModItems;
 import com.ultreon.randomthingz.item.CanisterItem;
 import com.ultreon.randomthingz.item.crafting.RefiningRecipe;
 import com.ultreon.randomthingz.util.Constants;

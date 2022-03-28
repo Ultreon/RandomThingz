@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.config;
 
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.common.Module;
-import com.ultreon.randomthingz.common.java.maps.SequencedHashMap;
+import com.ultreon.randomthingz.common.java.maps.OrderedHashMap;
 import com.ultreon.randomthingz.util.ExceptionUtil;
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -30,7 +30,7 @@ public final class Config {
 
     @Deprecated
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
-    private static final Map<Module, ForgeConfigSpec.BooleanValue> modules = new SequencedHashMap<>();
+    private static final Map<Module, ForgeConfigSpec.BooleanValue> modules = new OrderedHashMap<>();
 
     private static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
 

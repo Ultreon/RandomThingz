@@ -24,7 +24,7 @@ import java.util.List;
  * @author Qboi123
  * @deprecated replaced with {@linkplain com.ultreon.modlib.graphics.MCGraphics}
  */
-@SuppressWarnings("UnstableApiUsage")
+@SuppressWarnings("ALL")
 @Deprecated(forRemoval = true)
 @Beta
 public class MCGraphics {

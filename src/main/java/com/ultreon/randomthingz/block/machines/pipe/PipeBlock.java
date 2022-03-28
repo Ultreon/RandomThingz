@@ -6,9 +6,9 @@ import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.api.IWrenchable;
 import com.ultreon.randomthingz.block.machines.itempipe.ItemPipeBlock;
 import com.ultreon.randomthingz.block.machines.itempipe.ItemPipeConnection;
-import com.ultreon.randomthingz.block.machines.itempipe.ItemPipeTileEntity;
+import com.ultreon.randomthingz.block.machines.itempipe.ItemPipeBlockEntity;
 import com.ultreon.randomthingz.util.FluidUtils;
-import com.ultreon.texturedmodels.tileentity.Tickable;
+import com.ultreon.modlib.block.entity.Tickable;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -97,7 +97,7 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock impleme
 
     private static ConnectionType createConnection(BlockGetter level, BlockPos pos, Direction side, ConnectionType current) {
         BlockEntity tileEntity = level.getBlockEntity(pos.relative(side));
-        if (tileEntity instanceof PipeTileEntity) {
+        if (tileEntity instanceof PipeBlockEntity) {
             return ConnectionType.BOTH;
         } else if (tileEntity != null) {
             IFluidHandler fluid = FluidUtils.getFluidFromSideOrNull(tileEntity, side.getOpposite());
@@ -114,7 +114,7 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock impleme
 
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return new PipeTileEntity(pos, state);
+        return new PipeBlockEntity(pos, state);
     }
 
     @Nullable
@@ -135,7 +135,7 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock impleme
         if (side != null) {
             BlockEntity other = dimension.getBlockEntity(pos.relative(side));
             Block otherBlock = dimension.getBlockState(pos.relative(side)).getBlock();
-            if (!(other instanceof ItemPipeTileEntity) && !(otherBlock instanceof ItemPipeBlock)) {
+            if (!(other instanceof ItemPipeBlockEntity) && !(otherBlock instanceof ItemPipeBlock)) {
                 BlockState state1 = cycleProperty(state, FACING_TO_PROPERTY_MAP.get(side));
                 if (other != null && other.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).isPresent()) {
                     dimension.setBlock(pos, state1, 18);
@@ -171,7 +171,7 @@ public class PipeBlock extends net.minecraft.world.level.block.PipeBlock impleme
     @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-        if (level.getBlockEntity(facingPos) instanceof PipeTileEntity)
+        if (level.getBlockEntity(facingPos) instanceof PipeBlockEntity)
             PipeConnection.invalidateNetwork(level, currentPos);
 
         EnumProperty<ConnectionType> property = FACING_TO_PROPERTY_MAP.get(facing);

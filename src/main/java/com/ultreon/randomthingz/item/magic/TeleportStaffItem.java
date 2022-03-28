@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item.magic;
 
-import com.ultreon.randomthingz.common.item.ModCreativeTabs;
+import com.ultreon.randomthingz.init.ModCreativeTabs;
 import com.ultreon.randomthingz.item.WandItem;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;

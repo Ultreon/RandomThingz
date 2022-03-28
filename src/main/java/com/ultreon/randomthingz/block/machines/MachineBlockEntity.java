@@ -4,7 +4,8 @@ import com.ultreon.modlib.api.RedstoneMode;
 import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.capability.EnergyStorageImpl;
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
+import com.ultreon.randomthingz.init.ModMachineUpgrades;
+import com.ultreon.randomthingz.item.upgrade.MachineUpgrade;
 import com.ultreon.randomthingz.util.Constants;
 import com.ultreon.randomthingz.util.InventoryUtils;
 import net.minecraft.core.BlockPos;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -46,7 +48,7 @@ public abstract class MachineBlockEntity<R extends Recipe<?>> extends MachineBas
                         // Max energy upper bytes
                         (MachineBlockEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
                 case 4 -> MachineBlockEntity.this.redstoneMode.ordinal();
-                case 5 -> MachineBlockEntity.this.tier.getUpgradeSlots();
+                case 5 -> MachineBlockEntity.this.tier.ordinal();
                 case 6 -> (int) MachineBlockEntity.this.progress;
                 case 7 -> MachineBlockEntity.this.processTime;
                 default -> 0;
@@ -118,7 +120,7 @@ public abstract class MachineBlockEntity<R extends Recipe<?>> extends MachineBas
      * @return The processing speed
      */
     protected float getProcessSpeed() {
-        int speedUpgrades = getUpgradeCount(MachineUpgrades.PROCESSING_SPEED);
+        int speedUpgrades = getUpgradeCount(ModMachineUpgrades.PROCESSING_SPEED.get());
         return tier.getProcessingSpeed() * (1f + speedUpgrades * Constants.UPGRADE_PROCESSING_SPEED_AMOUNT);
     }
 
@@ -225,6 +227,9 @@ public abstract class MachineBlockEntity<R extends Recipe<?>> extends MachineBas
                 if (output.isEmpty()) {
                     setItem(i, stack);
                 } else {
+                    System.out.println("output.getCount() = " + output.getCount());
+                    System.out.println("stack.getCount() = " + stack.getCount());
+                    System.out.println("(output.getCount() + stack.getCount()) = " + (output.getCount() + stack.getCount()));
                     output.setCount(output.getCount() + stack.getCount());
                 }
                 return;
@@ -249,11 +254,10 @@ public abstract class MachineBlockEntity<R extends Recipe<?>> extends MachineBas
     }
 
     @Override
-    public CompoundTag save(CompoundTag tags) {
-        super.save(tags);
+    public void saveAdditional(CompoundTag tags) {
+        super.saveAdditional(tags);
         tags.putInt("Progress", (int) this.progress);
         tags.putInt("ProcessTime", this.processTime);
-        return tags;
     }
 
     @Override
@@ -265,7 +269,7 @@ public abstract class MachineBlockEntity<R extends Recipe<?>> extends MachineBas
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag() {
         CompoundTag tags = super.getUpdateTag();
         tags.putInt("Progress", (int) this.progress);
         tags.putInt("ProcessTime", this.processTime);

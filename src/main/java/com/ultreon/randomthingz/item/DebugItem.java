@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.item;
 
+import com.ultreon.randomthingz.block.machines.itempipe.ItemPipeBlockEntity;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
@@ -36,6 +37,7 @@ public class DebugItem extends Item {
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(e -> {
                 Component energyText = TextUtils.energyWithMax(e.getEnergyStored(), e.getMaxEnergyStored());
+                player.sendMessage(new TextComponent(ChatFormatting.GRAY + "[" + ChatFormatting.GOLD + "ENERGY HANDLER" + ChatFormatting.GRAY + "]"), Util.NIL_UUID);
                 player.sendMessage(new TextComponent("Energy: ").append(energyText), Util.NIL_UUID);
                 player.sendMessage(new TextComponent("Receive/Extract: " + e.canReceive() + "/" + e.canExtract()), Util.NIL_UUID);
                 player.sendMessage(new TextComponent(e.getClass().getName()).withStyle(ChatFormatting.ITALIC), Util.NIL_UUID);
@@ -44,16 +46,24 @@ public class DebugItem extends Item {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(e -> {
                 ItemStack stackInSlot = e.getStackInSlot(0);
                 String text = stackInSlot.getCount() + "x " + stackInSlot.getItem().getRegistryName();
+                player.sendMessage(new TextComponent(ChatFormatting.GRAY + "[" + ChatFormatting.GOLD + "ITEM HANDLER" + ChatFormatting.GRAY + "]"), Util.NIL_UUID);
                 player.sendMessage(new TextComponent("Item Stack: ").append(new TextComponent(text)), Util.NIL_UUID);
                 player.sendMessage(new TextComponent(e.getClass().getName()).withStyle(ChatFormatting.ITALIC), Util.NIL_UUID);
             });
 
             tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).ifPresent(e -> {
                 FluidStack stackInSlot = e.getFluidInTank(0);
-                String text = stackInSlot.getAmount() + "L of " + stackInSlot.getFluid().getRegistryName();
+                String text = stackInSlot.getAmount() + " Milliliters of " + stackInSlot.getFluid().getRegistryName();
+                player.sendMessage(new TextComponent(ChatFormatting.GRAY + "[" + ChatFormatting.GOLD + "FLUID HANDLER" + ChatFormatting.GRAY + "]"), Util.NIL_UUID);
                 player.sendMessage(new TextComponent("Fluid Stack: ").append(new TextComponent(text)), Util.NIL_UUID);
                 player.sendMessage(new TextComponent(e.getClass().getName()).withStyle(ChatFormatting.ITALIC), Util.NIL_UUID);
             });
+
+            if (tileEntity instanceof ItemPipeBlockEntity) {
+                player.sendMessage(new TextComponent(ChatFormatting.GRAY + "[" + ChatFormatting.GOLD + "ITEM PIPE" + ChatFormatting.GRAY + "]"), Util.NIL_UUID);
+                player.sendMessage(new TextComponent("Networking Data:"), Util.NIL_UUID);
+                player.sendMessage(new TextComponent(((ItemPipeBlockEntity) tileEntity).getPipeNetworkData()), Util.NIL_UUID);
+            }
 
             for (Direction side : Direction.values()) {
                 BlockEntity other = level.getBlockEntity(pos.relative(side));

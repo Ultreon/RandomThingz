@@ -5,16 +5,16 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.ultreon.modlib.api.RedstoneMode;
 import com.ultreon.modlib.silentutils.EnumUtils;
-import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.TextComponent;
 import org.jetbrains.annotations.NotNull;
 
 public class RedstoneModeButton extends Button {
-    private final BaseMachineBaseContainer container;
+    private final BaseMachineContainer container;
 
-    public RedstoneModeButton(BaseMachineBaseContainer container, int x, int y, int width, int height, OnPress onPress) {
+    public RedstoneModeButton(BaseMachineContainer container, int x, int y, int width, int height, OnPress onPress) {
         super(x, y, width, height, new TextComponent(""), button -> {
             ((RedstoneModeButton) button).cycleMode();
             onPress.onPress(button);

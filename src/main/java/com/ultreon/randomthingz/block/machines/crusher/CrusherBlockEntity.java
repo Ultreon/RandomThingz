@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.crusher;
 
-import com.ultreon.randomthingz.block._common.MachineType;
+import com.ultreon.randomthingz.block.machines.MachineType;
 import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.CrushingRecipe;
@@ -100,8 +100,8 @@ public class CrusherBlockEntity extends MachineBlockEntity<CrushingRecipe> {
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new CrusherContainer(id, playerInventory, this, this.fields);
+    protected AbstractContainerMenu createMenu(int id, Inventory inv) {
+        return new CrusherContainer(id, inv, tier, inventory, worldPosition, this.fields);
     }
 
     public static class Basic extends CrusherBlockEntity {

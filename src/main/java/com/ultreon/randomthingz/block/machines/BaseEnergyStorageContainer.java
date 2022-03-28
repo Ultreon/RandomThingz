@@ -9,15 +9,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class BaseEnergyStorageContainer<T extends BaseEnergyInventoryBlockEntity> extends AbstractContainerMenu {
     @Nullable
-    protected final T tileEntity;
+    protected final T tileEntity = null;
     protected final ContainerData fields;
 
-    protected BaseEnergyStorageContainer(MenuType<?> type, int id, @Nullable T tileEntityIn, ContainerData fieldsIn) {
+    protected BaseEnergyStorageContainer(MenuType<?> type, int id, ContainerData data) {
         super(type, id);
-        this.tileEntity = tileEntityIn;
-        this.fields = fieldsIn;
+        this.fields = data;
 
-        addDataSlots(this.fields);
+        addDataSlots(data);
     }
 
     @Override
@@ -28,7 +27,7 @@ public class BaseEnergyStorageContainer<T extends BaseEnergyInventoryBlockEntity
 
     @Nullable
     public T getTileEntity() {
-        return tileEntity;
+        return null;
     }
 
     public ContainerData getFields() {

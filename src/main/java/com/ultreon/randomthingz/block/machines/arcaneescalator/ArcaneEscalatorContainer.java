@@ -1,33 +1,40 @@
 package com.ultreon.randomthingz.block.machines.arcaneescalator;
 
-import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.block.entity.UmlItemStackHandler;
+import com.ultreon.modlib.inventory.OutputSlot;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block._common.MachineType;
+import com.ultreon.randomthingz.block.machines.MachineType;
 import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.block.machines.MachineContainer;
 import com.ultreon.randomthingz.common.enums.MachineTier;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.SlotItemHandler;
 
 @SuppressWarnings("ConstantConditions")
 public class ArcaneEscalatorContainer extends MachineContainer<ArcaneEscalatorBlockEntity> {
-    public ArcaneEscalatorContainer(int id, Inventory playerInventory, MachineTier tier) {
-        this(id, playerInventory, MachineType.ARCANE_ESCALATOR.create(tier), new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
+    private final MachineTier tier;
+
+    public ArcaneEscalatorContainer(int id, Inventory inv, MachineTier tier) {
+        this(id, inv, tier, new UmlItemStackHandler(ArcaneEscalatorBlockEntity.INPUT_SLOT_COUNT + 1), BlockPos.ZERO, new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
     }
 
-    protected ArcaneEscalatorContainer(int id, Inventory playerInventory, ArcaneEscalatorBlockEntity tileEntityIn, ContainerData fieldsIn) {
-        super(MachineType.ARCANE_ESCALATOR.getContainerType(tileEntityIn.getMachineTier()), id, tileEntityIn, fieldsIn);
+    protected ArcaneEscalatorContainer(int id, Inventory inv, MachineTier tier, UmlItemStackHandler itemHandler, BlockPos pos, ContainerData fieldsIn) {
+        super(MachineType.ARCANE_ESCALATOR.getContainerType(tier), id, inv, itemHandler, pos, fieldsIn);
+
+        this.tier = tier;
 
         for (int i = 0; i < ArcaneEscalatorBlockEntity.INPUT_SLOT_COUNT; ++i) {
-            this.addSlot(new Slot(this.tileEntity, i, 17 + 18 * i, 35));
+            this.addSlot(new SlotItemHandler(itemHandler, i, 17 + 18 * i, 35));
         }
-        this.addSlot(new SlotOutputOnly(this.tileEntity, ArcaneEscalatorBlockEntity.INPUT_SLOT_COUNT, 126, 35));
+        this.addSlot(new OutputSlot(itemHandler, ArcaneEscalatorBlockEntity.INPUT_SLOT_COUNT, 126, 35));
 
-        InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        InventoryUtils.createPlayerSlots(inv, 8, 84).forEach(this::addSlot);
         this.addUpgradeSlots();
     }
 
@@ -84,5 +91,10 @@ public class ArcaneEscalatorContainer extends MachineContainer<ArcaneEscalatorBl
     private boolean isArcaneEscalatingIngredient(ItemStack stack) {
         // TODO
         return true;
+    }
+
+    @Override
+    public MachineTier getTier() {
+        return tier;
     }
 }

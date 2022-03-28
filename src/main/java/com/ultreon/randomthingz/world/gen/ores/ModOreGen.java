@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.world.gen.ores;
 
 import com.mojang.datafixers.util.Pair;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.item.tier.ToolRequirement;
 import com.ultreon.randomthingz.item.tool.ToolType;
 import com.ultreon.randomthingz.world.gen.ores.configs.DefaultOreConfig;

@@ -18,8 +18,10 @@ package com.ultreon.randomthingz.common;
 
 import org.apache.commons.lang3.Validate;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.Objects;
 
 /**
  * <p>An immutable range of objects from a minimum to maximum point inclusive.</p>
@@ -56,6 +58,7 @@ public class Range<T> implements Serializable {
      *
      * @see java.io.Serializable
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -172,11 +175,7 @@ public class Range<T> implements Serializable {
             throw new IllegalArgumentException("Elements in a range must not be null: element1=" +
                     element1 + ", element2=" + element2);
         }
-        if (comp == null) {
-            this.comparator = ComparableComparator.INSTANCE;
-        } else {
-            this.comparator = comp;
-        }
+        this.comparator = Objects.requireNonNullElse(comp, ComparableComparator.INSTANCE);
         if (this.comparator.compare(element1, element2) < 1) {
             this.minimum = element1;
             this.maximum = element2;

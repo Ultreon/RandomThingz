@@ -1,16 +1,21 @@
 package com.ultreon.randomthingz.block.machines;
 
-import com.ultreon.modlib.silentlib.block.entity.BaseInventoryContainerBlockEntity;
+import com.ultreon.modlib.block.entity.InventoryBlockEntity;
 import com.ultreon.modlib.silentlib.block.entity.SyncVariable;
 import com.ultreon.randomthingz.capability.EnergyStorageImpl;
 import com.ultreon.randomthingz.util.EnergyUtils;
-import com.ultreon.texturedmodels.tileentity.Tickable;
+import com.ultreon.modlib.block.entity.Tickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -21,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public abstract class BaseEnergyInventoryBlockEntity extends BaseInventoryContainerBlockEntity implements EnergyHandler, Tickable {
+public abstract class BaseEnergyInventoryBlockEntity extends InventoryBlockEntity implements EnergyHandler, Tickable {
     protected final EnergyStorageImpl energy;
     private final int maxExtract;
 
@@ -56,7 +61,6 @@ public abstract class BaseEnergyInventoryBlockEntity extends BaseInventoryContai
             return 4;
         }
     };
-
     protected BaseEnergyInventoryBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state, int inventorySize, int maxEnergy, int maxReceive, int maxExtract) {
         super(typeIn, pos, state, inventorySize);
         this.energy = new EnergyStorageImpl(maxEnergy, maxReceive, maxExtract, this);
@@ -82,6 +86,11 @@ public abstract class BaseEnergyInventoryBlockEntity extends BaseInventoryContai
     }
 
     @Override
+    public void tick(Level level, BlockPos pos, BlockState state) {
+        this.tick();
+    }
+
+    @Override
     public void load(CompoundTag tags) {
         super.load(tags);
         SyncVariable.Helper.readSyncVars(this, tags);
@@ -89,11 +98,16 @@ public abstract class BaseEnergyInventoryBlockEntity extends BaseInventoryContai
     }
 
     @Override
-    public CompoundTag save(CompoundTag tags) {
+    protected abstract Component getDefaultName();
+
+    @Override
+    protected abstract AbstractContainerMenu createMenu(int p_58627_, Inventory p_58628_);
+
+    @Override
+    public void saveAdditional(CompoundTag tags) {
         super.save(tags);
         SyncVariable.Helper.writeSyncVars(this, tags, SyncVariable.Type.SAVE);
         writeEnergy(tags);
-        return tags;
     }
 
     @Override
@@ -104,7 +118,7 @@ public abstract class BaseEnergyInventoryBlockEntity extends BaseInventoryContai
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag() {
         CompoundTag tags = super.getUpdateTag();
         SyncVariable.Helper.writeSyncVars(this, tags, SyncVariable.Type.PACKET);
         writeEnergy(tags);
@@ -124,4 +138,13 @@ public abstract class BaseEnergyInventoryBlockEntity extends BaseInventoryContai
         super.setRemoved();
         energy.invalidate();
     }
+
+    @Override
+    public abstract int[] getSlotsForFace(Direction p_19238_);
+
+    @Override
+    public abstract boolean canPlaceItemThroughFace(int p_19235_, ItemStack p_19236_, @Nullable Direction p_19237_);
+
+    @Override
+    public abstract boolean canTakeItemThroughFace(int p_19239_, ItemStack p_19240_, Direction p_19241_);
 }

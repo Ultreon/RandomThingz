@@ -1,9 +1,12 @@
 package com.ultreon.randomthingz.block.machines.generator.lava;
 
+import com.ultreon.modlib.block.entity.UmlItemStackHandler;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.generator.AbstractFluidGeneratorContainer;
 import com.ultreon.randomthingz.block.machines.generator.FluidFuelGeneratorBlockEntity;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.init.ModMachineContainers;
+import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,21 +15,31 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class LavaGeneratorContainer extends AbstractFluidGeneratorContainer<LavaGeneratorBlockEntity> {
     public LavaGeneratorContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new LavaGeneratorBlockEntity(), new SimpleContainerData(FluidFuelGeneratorBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, new UmlItemStackHandler(2 + MachineTier.STANDARD.getUpgradeSlots()), BlockPos.ZERO, new SimpleContainerData(FluidFuelGeneratorBlockEntity.FIELDS_COUNT));
     }
 
-    public LavaGeneratorContainer(int id, Inventory playerInventory, LavaGeneratorBlockEntity tileEntity, ContainerData fieldsIn) {
-        super(ModMachineContainers.lavaGenerator, id, tileEntity, fieldsIn);
+    public LavaGeneratorContainer(int id, Inventory inv, UmlItemStackHandler itemHandler, BlockPos pos, ContainerData fieldsIn) {
+        super(ModMachineContainers.lavaGenerator, id, inv, itemHandler, pos, fieldsIn);
 
-        this.addSlot(new Slot(tileEntity, 0, 80, 16));
-        this.addSlot(new Slot(tileEntity, 1, 80, 59));
+        this.addSlot(new SlotItemHandler(itemHandler, 0, 80, 16));
+        this.addSlot(new SlotItemHandler(itemHandler, 1, 80, 59));
 
-        InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        InventoryUtils.createPlayerSlots(inv, 8, 84).forEach(this::addSlot);
 
-        this.addUpgradeSlots();
+        if (itemHandler.getSlots() > 2) {
+            this.addUpgradeSlots();
+        }
+    }
+
+    @Override
+    public MachineTier getTier() {
+        return MachineTier.STANDARD;
     }
 
     @Override

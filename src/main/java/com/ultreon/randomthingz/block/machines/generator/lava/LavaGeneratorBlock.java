@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.block.machines.generator.lava;
 
 import com.ultreon.randomthingz.block.machines.generator.BaseGeneratorBlock;
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import com.ultreon.texturedmodels.tileentity.Tickable;
+import com.ultreon.modlib.block.entity.Tickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -83,7 +83,7 @@ public class LavaGeneratorBlock extends BaseGeneratorBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof final LavaGeneratorBlockEntity be) {
-            final MenuProvider container = new SimpleMenuProvider((id, inv, p) -> new LavaGeneratorContainer(id, inv, be, be.getFields()), be.getDisplayName());
+            final MenuProvider container = new SimpleMenuProvider((id, inv, p) -> new LavaGeneratorContainer(id, inv, be.inventory, pos, be.getFields()), be.getDisplayName());
             NetworkHooks.openGui((ServerPlayer) player, container, pos);
         }
 

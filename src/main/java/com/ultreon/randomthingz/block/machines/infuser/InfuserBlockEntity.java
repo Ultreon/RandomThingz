@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.infuser;
 
 import com.ultreon.modlib.api.FluidContainer;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.FluidMachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
@@ -149,6 +149,6 @@ public class InfuserBlockEntity extends FluidMachineBlockEntity<InfusingRecipe> 
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
-        return new InfuserContainer(id, player, this, this.fields);
+        return new InfuserContainer(id, player, inventory, worldPosition, fields);
     }
 }

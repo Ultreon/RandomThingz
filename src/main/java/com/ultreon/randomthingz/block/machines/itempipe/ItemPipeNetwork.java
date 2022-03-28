@@ -1,7 +1,6 @@
 package com.ultreon.randomthingz.block.machines.itempipe;
 
 import com.ultreon.modlib.api.ConnectionType;
-import com.ultreon.randomthingz.util.ItemCapabilityUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -20,12 +19,12 @@ public final class ItemPipeNetwork implements IItemHandler {
     private final LevelReader dimension;
     private final Map<BlockPos, Set<Connection>> connections = new HashMap<>();
     private boolean connectionsBuilt;
-    private final ItemContainer itemTank;
+    private final ItemContainer itemContainer;
 
     private ItemPipeNetwork(LevelReader dimension, Set<BlockPos> wires) {
         this.dimension = dimension;
         wires.forEach(pos -> connections.put(pos, Collections.emptySet()));
-        this.itemTank = new ItemContainer(250);
+        this.itemContainer = new ItemContainer(250);
     }
 
     static ItemPipeNetwork buildNetwork(LevelReader dimension, BlockPos pos) {
@@ -46,7 +45,7 @@ public final class ItemPipeNetwork implements IItemHandler {
         set.add(pos);
         for (Direction side : Direction.values()) {
             BlockPos pos1 = pos.relative(side);
-            if (!set.contains(pos1) && dimension.getBlockEntity(pos1) instanceof ItemPipeTileEntity) {
+            if (!set.contains(pos1) && dimension.getBlockEntity(pos1) instanceof ItemPipeBlockEntity) {
                 set.add(pos1);
                 set.addAll(buildPipeSet(dimension, pos1, set));
             }
@@ -100,7 +99,7 @@ public final class ItemPipeNetwork implements IItemHandler {
         Set<Connection> connections = new HashSet<>();
         for (Direction direction : Direction.values()) {
             BlockEntity te = dimension.getBlockEntity(pos.relative(direction));
-            if (te != null && !(te instanceof ItemPipeTileEntity) && te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).isPresent()) {
+            if (te != null && !(te instanceof ItemPipeBlockEntity) && te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).isPresent()) {
                 ConnectionType type = ItemPipeBlock.getConnection(dimension.getBlockState(pos), direction);
                 connections.add(new Connection(this, direction, type));
             }
@@ -118,13 +117,13 @@ public final class ItemPipeNetwork implements IItemHandler {
                 if (con.type.canExtract()) {
                     IItemHandler itemHandler = getItemHandler(dimension, pos, con.side);
                     if (itemHandler != null) {
-//                        ItemStack toSend = itemHandler.extractItem(0, 10, true);
-                        ItemCapabilityUtils.trySendItems(4, itemHandler, this);
-//                        if (!toSend.isEmpty()) {
-//                            if (insertItem(0, toSend, false).getCount() > 0) {
-//                                break;
-//                            }
-//                        }
+                        ItemStack toSend = itemHandler.extractItem(0, 10, true);
+//                        ItemCapabilityUtils.trySendItems(4, itemHandler, this);
+                        if (!toSend.isEmpty()) {
+                            if (insertItem(0, toSend, false).getCount() > 0) {
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -132,13 +131,13 @@ public final class ItemPipeNetwork implements IItemHandler {
                 if (con.type.canReceive()) {
                     IItemHandler itemHandler = getItemHandler(dimension, pos, con.side);
                     if (itemHandler != null) {
-//                        ItemStack toSend = extractItem(0, 10, true);
-//                        if (!toSend.isEmpty()) {
-//                            if (itemHandler.insertItem(0, toSend, false).getCount() > 0) {
-//                                break;
-//                            }
-//                        }
-                        ItemCapabilityUtils.trySendItems(4, this, itemHandler);
+                        ItemStack toSend = extractItem(0, 10, true);
+                        if (!toSend.isEmpty()) {
+                            if (itemHandler.insertItem(0, toSend, false).getCount() > 0) {
+                                break;
+                            }
+                        }
+//                        ItemCapabilityUtils.trySendItems(4, this, itemHandler);
                     }
                 }
             }
@@ -152,7 +151,7 @@ public final class ItemPipeNetwork implements IItemHandler {
 
     @Override
     public boolean isItemValid(int tank, @NotNull ItemStack stack) {
-        return itemTank.isItemValid(tank, stack);
+        return itemContainer.isItemValid(tank, stack);
     }
 
     @Override
@@ -163,19 +162,19 @@ public final class ItemPipeNetwork implements IItemHandler {
     @NotNull
     @Override
     public ItemStack getStackInSlot(int slot) {
-        return itemTank.getStackInSlot(slot);
+        return itemContainer.getStackInSlot(slot);
     }
 
     @NotNull
     @Override
     public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-        return itemTank.insertItem(slot, stack, simulate);
+        return itemContainer.insertItem(slot, stack, simulate);
     }
 
     @NotNull
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        return itemTank.extractItem(slot, amount, simulate);
+        return itemContainer.extractItem(slot, amount, simulate);
     }
 
     @Override
@@ -202,7 +201,7 @@ public final class ItemPipeNetwork implements IItemHandler {
 
         @Override
         public boolean isItemValid(int tank, @NotNull ItemStack stack) {
-            return network.itemTank.isItemValid(tank, stack);
+            return network.itemContainer.isItemValid(tank, stack);
         }
 
         @Override
@@ -213,7 +212,7 @@ public final class ItemPipeNetwork implements IItemHandler {
         @NotNull
         @Override
         public ItemStack getStackInSlot(int slot) {
-            return network.itemTank.getStack();
+            return network.itemContainer.getStack();
         }
 
         @NotNull
@@ -222,7 +221,7 @@ public final class ItemPipeNetwork implements IItemHandler {
             if (!type.canReceive()) {
                 return ItemStack.EMPTY;
             }
-            return network.itemTank.insertItem(slot, stack, simulate);
+            return network.itemContainer.insertItem(slot, stack, simulate);
         }
 
         @NotNull
@@ -231,7 +230,7 @@ public final class ItemPipeNetwork implements IItemHandler {
             if (!type.canExtract()) {
                 return ItemStack.EMPTY;
             }
-            return network.itemTank.extractItem(slot, amount, simulate);
+            return network.itemContainer.extractItem(slot, amount, simulate);
         }
 
         @Override

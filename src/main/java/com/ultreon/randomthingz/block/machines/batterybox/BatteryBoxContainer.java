@@ -1,40 +1,37 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
+import com.ultreon.modlib.block.entity.UmlItemStackHandler;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
 import com.ultreon.randomthingz.block.machines.MachineBaseBlockEntity;
 import com.ultreon.randomthingz.block.machines.BaseEnergyStorageContainer;
 import com.ultreon.randomthingz.init.ModMachineContainers;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.energy.CapabilityEnergy;
-import org.jetbrains.annotations.Nullable;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class BatteryBoxContainer extends BaseEnergyStorageContainer<BatteryBoxBlockEntity> {
-    final BatteryBoxBlockEntity tileEntity;
-
-    public BatteryBoxContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new BatteryBoxBlockEntity(), new SimpleContainerData(MachineBaseBlockEntity.FIELDS_COUNT));
+    public BatteryBoxContainer(int id, Inventory inv) {
+        this(id, inv, new UmlItemStackHandler(6), BlockPos.ZERO, new SimpleContainerData(MachineBaseBlockEntity.FIELDS_COUNT));
     }
 
-    public BatteryBoxContainer(int id, Inventory playerInventory, @Nullable BatteryBoxBlockEntity tileEntity, ContainerData fieldsIn) {
-        super(ModMachineContainers.batteryBox, id, tileEntity, fieldsIn);
-        this.tileEntity = tileEntity;
+    public BatteryBoxContainer(int id, Inventory inv, UmlItemStackHandler stackHandler, BlockPos pos, ContainerData fieldsIn) {
+        super(ModMachineContainers.batteryBox, id, fieldsIn);
 
-        if (this.tileEntity == null) {
-            return;
-        }
-        this.addSlot(new Slot(this.tileEntity, 0, 71, 19));
-        this.addSlot(new Slot(this.tileEntity, 1, 71, 37));
-        this.addSlot(new Slot(this.tileEntity, 2, 71, 55));
-        this.addSlot(new Slot(this.tileEntity, 3, 89, 19));
-        this.addSlot(new Slot(this.tileEntity, 4, 89, 37));
-        this.addSlot(new Slot(this.tileEntity, 5, 89, 55));
+        this.addSlot(new SlotItemHandler(stackHandler, 0, 71, 19));
+        this.addSlot(new SlotItemHandler(stackHandler, 1, 71, 37));
+        this.addSlot(new SlotItemHandler(stackHandler, 2, 71, 55));
+        this.addSlot(new SlotItemHandler(stackHandler, 3, 89, 19));
+        this.addSlot(new SlotItemHandler(stackHandler, 4, 89, 37));
+        this.addSlot(new SlotItemHandler(stackHandler, 5, 89, 55));
 
-        InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        InventoryUtils.createPlayerSlots(inv, 8, 84).forEach(this::addSlot);
     }
 
     @Override
@@ -50,7 +47,7 @@ public class BatteryBoxContainer extends BaseEnergyStorageContainer<BatteryBoxBl
             final int playerHotbarEnd = playerInventoryEnd + 9;
 
             if (index >= inventorySize) {
-                if (this.isBattery(stack)) {
+                if (this.isEnergyContainer(stack)) {
                     if (!this.moveItemStackTo(stack, 0, inventorySize, false)) {
                         return ItemStack.EMPTY;
                     }
@@ -81,7 +78,7 @@ public class BatteryBoxContainer extends BaseEnergyStorageContainer<BatteryBoxBl
         return stackCopy;
     }
 
-    private boolean isBattery(ItemStack stack) {
+    private boolean isEnergyContainer(ItemStack stack) {
         return stack.getCapability(CapabilityEnergy.ENERGY).isPresent();
     }
 }

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.entity;
 
 import com.ultreon.randomthingz.common.entity.ModEntities;
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModItems;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;

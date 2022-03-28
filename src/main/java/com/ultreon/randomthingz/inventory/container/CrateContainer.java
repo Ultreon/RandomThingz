@@ -1,8 +1,8 @@
 package com.ultreon.randomthingz.inventory.container;
 
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.init.ModContainers;
-import com.ultreon.randomthingz.block.entity.CrateTileEntity;
+import com.ultreon.randomthingz.block.entity.CrateBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -21,10 +21,10 @@ import java.util.Objects;
  * @author Qboi123
  */
 public class CrateContainer extends AbstractContainerMenu {
-    public final CrateTileEntity tileEntity;
+    public final CrateBlockEntity tileEntity;
     private final ContainerLevelAccess canInteractWithCallable;
 
-    public CrateContainer(final int windowId, final Inventory playerInventory, final CrateTileEntity tileEntity) {
+    public CrateContainer(final int windowId, final Inventory playerInventory, final CrateBlockEntity tileEntity) {
         super(ModContainers.WOODEN_CRATE.get(), windowId);
         this.tileEntity = tileEntity;
         this.canInteractWithCallable = ContainerLevelAccess.create(Objects.requireNonNull(tileEntity.getLevel()), tileEntity.getBlockPos());
@@ -101,15 +101,15 @@ public class CrateContainer extends AbstractContainerMenu {
         this(windowId, playerInventory, getTileEntity(playerInventory, data));
     }
 
-    private static CrateTileEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
+    private static CrateBlockEntity getTileEntity(final Inventory playerInventory, final FriendlyByteBuf data) {
 //        return tileEntity;
         Objects.requireNonNull(playerInventory, "playerInventory cannot be null");
         Objects.requireNonNull(data, "data cannot be null");
 
         final BlockEntity tileAtPos = playerInventory.player.level.getBlockEntity(data.readBlockPos());
 
-        if (tileAtPos instanceof CrateTileEntity) {
-            return (CrateTileEntity) tileAtPos;
+        if (tileAtPos instanceof CrateBlockEntity) {
+            return (CrateBlockEntity) tileAtPos;
         }
 
         throw new IllegalStateException("Tile entity is not of the expected class! " + tileAtPos);

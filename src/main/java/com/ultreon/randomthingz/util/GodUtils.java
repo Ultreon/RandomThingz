@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.util;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.effect.common.ModEffects;
+import com.ultreon.randomthingz.init.ModEffects;
 import lombok.experimental.UtilityClass;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;

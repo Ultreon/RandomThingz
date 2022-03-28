@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.world.gen.features.common;
 
 import com.google.common.collect.ImmutableSet;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.fluid.common.ModFluids;
 import lombok.experimental.UtilityClass;
 import net.minecraft.core.Registry;
@@ -24,7 +24,6 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlac
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import java.util.OptionalInt;
-import java.util.Set;
 
 /**
  * Features initialization class.

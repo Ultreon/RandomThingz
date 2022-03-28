@@ -109,7 +109,7 @@ public class SolidifierBlockEntity extends FluidMachineBlockEntity<SolidifyingRe
 
     @Override
     protected Collection<ItemStack> getProcessResults(SolidifyingRecipe recipe) {
-        return Collections.singletonList(recipe.getResultItem());
+        return Collections.singletonList(recipe.assemble(this));
     }
 
     @Override
@@ -139,6 +139,6 @@ public class SolidifierBlockEntity extends FluidMachineBlockEntity<SolidifyingRe
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
-        return new SolidifierContainer(id, player, this, this.fields);
+        return new SolidifierContainer(id, player, inventory, worldPosition, this.fields);
     }
 }

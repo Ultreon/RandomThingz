@@ -30,7 +30,7 @@ public class CoalGeneratorScreen extends MachineContainerScreen<CoalGeneratorCon
     @Override
     protected void renderTooltip(PoseStack matrixStack, int x, int y) {
         if (isHovering(153, 17, 13, 51, x, y)) {
-            Component text = TextUtils.energyWithMax(menu.getEnergyStored(), menu.tileEntity.getMaxEnergyStored());
+            Component text = TextUtils.energyWithMax(menu.getEnergyStored(), menu.getMaxEnergyStored());
             renderTooltip(matrixStack, text, x, y);
         }
         super.renderTooltip(matrixStack, x, y);
@@ -55,13 +55,6 @@ public class CoalGeneratorScreen extends MachineContainerScreen<CoalGeneratorCon
         if (energyBarHeight > 0) {
             blit(matrixStack, xPos + 154, yPos + 68 - energyBarHeight, 176, 31, 12, energyBarHeight);
         }
-
-        // Debug text
-//        int y = 5;
-//        for (String line : container.tileEntity.getDebugText()) {
-//            font.drawString(line, 5, y, 0xFFFFFF);
-//            y += 10;
-//        }
     }
 
     private int getFlameIconHeight() {

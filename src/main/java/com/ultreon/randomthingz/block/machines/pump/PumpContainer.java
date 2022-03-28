@@ -1,8 +1,11 @@
 package com.ultreon.randomthingz.block.machines.pump;
 
-import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
+import com.ultreon.modlib.block.entity.UmlItemStackHandler;
+import com.ultreon.randomthingz.block.machines.BaseMachineContainer;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.init.ModMachineContainers;
 import com.ultreon.randomthingz.util.InventoryUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,26 +15,27 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import org.jetbrains.annotations.Nullable;
+import net.minecraftforge.items.SlotItemHandler;
 
-public class PumpContainer extends BaseMachineBaseContainer<PumpBlockEntity> {
+public class PumpContainer extends BaseMachineContainer<PumpBlockEntity> {
     public PumpContainer(int id, Inventory inventory) {
-        this(id, inventory, null, new SimpleContainerData(PumpBlockEntity.FIELDS_COUNT));
+        this(id, inventory, new UmlItemStackHandler(2 + MachineTier.STANDARD.getUpgradeSlots()), BlockPos.ZERO, new SimpleContainerData(PumpBlockEntity.FIELDS_COUNT));
     }
 
-    public PumpContainer(int id, Inventory playerInventory, @Nullable PumpBlockEntity tileEntity, ContainerData fields) {
-        super(ModMachineContainers.pump, id, tileEntity, fields);
+    public PumpContainer(int id, Inventory inv, UmlItemStackHandler stackHandler, BlockPos pos, ContainerData fields) {
+        super(ModMachineContainers.pump, id, inv, stackHandler, pos, fields);
 
-        if (this.tileEntity == null) {
-            return;
-        }
+        this.addSlot(new SlotItemHandler(stackHandler, 0, 80, 16));
+        this.addSlot(new SlotItemHandler(stackHandler, 1, 80, 59));
 
-        this.addSlot(new Slot(this.tileEntity, 0, 80, 16));
-        this.addSlot(new Slot(this.tileEntity, 1, 80, 59));
-
-        com.ultreon.modlib.silentlib.util.InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        com.ultreon.modlib.silentlib.util.InventoryUtils.createPlayerSlots(inv, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
+    }
+
+    @Override
+    public MachineTier getTier() {
+        return MachineTier.STANDARD;
     }
 
     @SuppressWarnings("deprecation") // Use of Registry

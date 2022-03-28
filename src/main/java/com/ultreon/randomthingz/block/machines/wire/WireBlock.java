@@ -5,7 +5,7 @@ import com.ultreon.modlib.api.ConnectionType;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.api.IWrenchable;
 import com.ultreon.randomthingz.util.EnergyUtils;
-import com.ultreon.texturedmodels.tileentity.Tickable;
+import com.ultreon.modlib.block.entity.Tickable;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

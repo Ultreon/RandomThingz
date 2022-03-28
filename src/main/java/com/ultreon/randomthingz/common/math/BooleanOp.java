@@ -16,7 +16,7 @@ public interface BooleanOp {
         return () -> this.calc() && var1.calc();
     }
 
-    default BooleanOp negate() {
+    default BooleanOp not() {
         return () -> !this.calc();
     }
 

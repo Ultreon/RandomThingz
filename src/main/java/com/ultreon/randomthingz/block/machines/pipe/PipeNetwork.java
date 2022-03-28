@@ -46,7 +46,7 @@ public final class PipeNetwork implements IFluidHandler {
         set.add(pos);
         for (Direction side : Direction.values()) {
             BlockPos pos1 = pos.relative(side);
-            if (!set.contains(pos1) && dimension.getBlockEntity(pos1) instanceof PipeTileEntity) {
+            if (!set.contains(pos1) && dimension.getBlockEntity(pos1) instanceof PipeBlockEntity) {
                 set.add(pos1);
                 set.addAll(buildPipeSet(dimension, pos1, set));
             }
@@ -100,7 +100,7 @@ public final class PipeNetwork implements IFluidHandler {
         Set<Connection> connections = new HashSet<>();
         for (Direction direction : Direction.values()) {
             BlockEntity te = dimension.getBlockEntity(pos.relative(direction));
-            if (te != null && !(te instanceof PipeTileEntity) && te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).isPresent()) {
+            if (te != null && !(te instanceof PipeBlockEntity) && te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY).isPresent()) {
                 ConnectionType type = PipeBlock.getConnection(dimension.getBlockState(pos), direction);
                 connections.add(new Connection(this, direction, type));
             }

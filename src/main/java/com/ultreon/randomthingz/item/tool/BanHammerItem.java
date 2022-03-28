@@ -2,7 +2,7 @@ package com.ultreon.randomthingz.item.tool;
 
 import com.mojang.authlib.GameProfile;
 import com.ultreon.randomthingz.common.enums.TextColors;
-import com.ultreon.randomthingz.common.item.ModCreativeTabs;
+import com.ultreon.randomthingz.init.ModCreativeTabs;
 import com.ultreon.randomthingz.util.Targeter;
 import net.minecraft.network.chat.ComponentUtils;
 import net.minecraft.network.chat.TranslatableComponent;

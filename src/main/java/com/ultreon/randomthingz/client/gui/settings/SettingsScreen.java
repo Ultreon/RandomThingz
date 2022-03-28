@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.text2speech.Narrator;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.client.gui.screen.ScreenshotsScreen;
-import com.ultreon.randomthingz.common.interfaces.IVersion;
+import com.ultreon.randomthingz.common.interfaces.Version;
 import com.ultreon.randomthingz.common.updates.AbstractUpdater;
 import com.ultreon.randomthingz.common.updates.UpdateButton;
 import com.ultreon.randomthingz.config.Config;
@@ -67,7 +67,7 @@ public class SettingsScreen extends Screen {
         return calcRowY(row.getAndIncrement());
     }
 
-    public <T extends IVersion> UpdateButton addUpdateButton(AbstractUpdater<T> updater, AtomicInteger line) {
+    public <T extends Version> UpdateButton addUpdateButton(AbstractUpdater<T> updater, AtomicInteger line) {
         return addRenderableWidget(new UpdateButton(updater, width / 2 - 155, nextRow(line), 240));
     }
 

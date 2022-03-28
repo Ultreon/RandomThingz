@@ -1,33 +1,40 @@
 package com.ultreon.randomthingz.block.machines.crusher;
 
-import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.block.entity.UmlItemStackHandler;
+import com.ultreon.modlib.inventory.OutputSlot;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block._common.MachineType;
+import com.ultreon.randomthingz.block.machines.MachineType;
 import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.block.machines.MachineContainer;
 import com.ultreon.randomthingz.common.enums.MachineTier;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class CrusherContainer extends MachineContainer<CrusherBlockEntity> {
-    public CrusherContainer(int id, Inventory playerInventory, MachineTier tier) {
-        this(id, playerInventory, MachineType.CRUSHER.create(tier), new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
+    private final MachineTier tier;
+
+    public CrusherContainer(int id, Inventory inv, MachineTier tier) {
+        this(id, inv, tier, new UmlItemStackHandler(5), BlockPos.ZERO, new SimpleContainerData(MachineBlockEntity.FIELDS_COUNT));
     }
 
-    public CrusherContainer(int id, Inventory playerInventory, CrusherBlockEntity tileEntity, ContainerData fieldsIn) {
-        super(MachineType.CRUSHER.getContainerType(tileEntity.getMachineTier()), id, tileEntity, fieldsIn);
+    public CrusherContainer(int id, Inventory inv, MachineTier tier, UmlItemStackHandler stackHandler, BlockPos pos, ContainerData fieldsIn) {
+        super(MachineType.CRUSHER.getContainerType(tier), id, inv, stackHandler, pos, fieldsIn);
 
-        this.addSlot(new Slot(this.tileEntity, 0, 26, 35));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, 1, 80, 35));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, 2, 98, 35));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, 3, 116, 35));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, 4, 134, 35));
+        this.tier = tier;
 
-        InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        this.addSlot(new SlotItemHandler(stackHandler, 0, 26, 35));
+        this.addSlot(new OutputSlot(stackHandler, 1, 80, 35));
+        this.addSlot(new OutputSlot(stackHandler, 2, 98, 35));
+        this.addSlot(new OutputSlot(stackHandler, 3, 116, 35));
+        this.addSlot(new OutputSlot(stackHandler, 4, 134, 35));
+
+        InventoryUtils.createPlayerSlots(inv, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
     }
@@ -85,5 +92,10 @@ public class CrusherContainer extends MachineContainer<CrusherBlockEntity> {
     private boolean isCrushingIngredient(ItemStack stack) {
         // TODO
         return true;
+    }
+
+    @Override
+    public MachineTier getTier() {
+        return tier;
     }
 }

@@ -5,7 +5,8 @@ import com.ultreon.modlib.silentutils.EnumUtils;
 import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.MachineBaseBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
-import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
+import com.ultreon.randomthingz.init.ModMachineUpgrades;
+import com.ultreon.randomthingz.item.upgrade.MachineUpgrade;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -106,8 +107,8 @@ public class QuarryBlockEntity extends MachineBaseBlockEntity {
                         getEnergyStored() >> 16 & 0xFFFF;
                 case 2 -> getMaxEnergyStored() & 0xFFFF;
                 case 3 -> getMaxEnergyStored() >> 16 & 0xFFFF;
-                case 4 -> QuarryBlockEntity.this.redstoneMode.ordinal();
-                case 5 -> QuarryBlockEntity.this.tier.getUpgradeSlots();
+                case 4 -> redstoneMode.ordinal();
+                case 5 -> tier.ordinal();
                 case 7 -> getCurrentX() & 0xFFFF;
                 case 8 -> getCurrentX() >> 16 & 0xFFFF;
                 case 9 -> getCurrentY() & 0xFFFF;
@@ -182,7 +183,7 @@ public class QuarryBlockEntity extends MachineBaseBlockEntity {
      * Constructor.
      */
     public QuarryBlockEntity(BlockPos pos, BlockState state) {
-        super(ModMachines.QUARRY.get(), pos, state, 0, 10_000, 100, 0, MachineTier.SUPER);
+        super(ModMachines.QUARRY.get(), pos, state, 0, 10_000, 100, 0, MachineTier.HEAVY);
     }
 
     /**
@@ -350,12 +351,12 @@ public class QuarryBlockEntity extends MachineBaseBlockEntity {
             destroyBlock(posToBreak, true, null);
 
             this.x++;
-            if (this.x > this.worldPosition.getX() + 1 + getUpgradeCount(MachineUpgrades.RANGE)) {
-                this.x = this.worldPosition.getX() - (1 + getUpgradeCount(MachineUpgrades.RANGE));
+            if (this.x > this.worldPosition.getX() + 1 + getUpgradeCount(ModMachineUpgrades.RANGE.get())) {
+                this.x = this.worldPosition.getX() - (1 + getUpgradeCount(ModMachineUpgrades.RANGE.get()));
                 this.z++;
             }
-            if (this.z > this.worldPosition.getZ() + 1 + getUpgradeCount(MachineUpgrades.RANGE)) {
-                this.z = this.worldPosition.getZ() - (1 + getUpgradeCount(MachineUpgrades.RANGE));
+            if (this.z > this.worldPosition.getZ() + 1 + getUpgradeCount(ModMachineUpgrades.RANGE.get())) {
+                this.z = this.worldPosition.getZ() - (1 + getUpgradeCount(ModMachineUpgrades.RANGE.get()));
                 this.y--;
             }
 
@@ -365,7 +366,7 @@ public class QuarryBlockEntity extends MachineBaseBlockEntity {
         } else {
             int i = (int) (breakProcessTime / breakProgress * 10f);
             level.destroyBlockProgress(this.worldPosition.hashCode(), posToBreak, i);
-            breakProgress += .2f * (getUpgradeCount(MachineUpgrades.PROCESSING_SPEED) * 2f + 1.5f);
+            breakProgress += .2f * (getUpgradeCount(ModMachineUpgrades.PROCESSING_SPEED.get()) * 2f + 1.5f);
         }
     }
 
@@ -524,14 +525,6 @@ public class QuarryBlockEntity extends MachineBaseBlockEntity {
                 } else {
                     Block.dropResources(blockState, this.level, this.worldPosition.offset(0, 1.5, 0), tileEntity, entity, ItemStack.EMPTY);
                 }
-
-//                BlockPos above = this.pos.add(0, 1, 0);
-//                @Nullable BlockEntity aboveTE = this.dimension.getTileEntity(above);
-//                if (aboveTE != null) {
-//                    if (aboveTE instanceof Container) {
-//                        Container inventory = (Container) aboveTE;
-//                    }
-//                }
             }
             return this.level.setBlock(pos, fluidState.createLegacyBlock(), 3);
         }
@@ -541,11 +534,10 @@ public class QuarryBlockEntity extends MachineBaseBlockEntity {
      * Write the quarry tile-entity data to a nbt compound.
      *
      * @param nbt the nbt data to write to.
-     * @return the newly written tile-entity data of the quarry.
      */
     @Override
-    public CompoundTag save(CompoundTag nbt) {
-        nbt = super.save(nbt);
+    public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
         nbt.putBoolean("Initialized", this.initialized);
         nbt.putInt("CurrentX", this.x);
         nbt.putInt("CurrentY", this.y);
@@ -555,7 +547,6 @@ public class QuarryBlockEntity extends MachineBaseBlockEntity {
         nbt.putFloat("BreakProcessTime", this.breakProcessTime);
         nbt.putString("Status", this.status.name());
         nbt.putString("Tier", this.tier.name());
-        return nbt;
     }
 
     /**
@@ -704,7 +695,7 @@ public class QuarryBlockEntity extends MachineBaseBlockEntity {
      */
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
-        return new QuarryContainer(id, player, this, this.fields);
+        return new QuarryContainer(id, player, inventory, worldPosition, fields);
     }
 
     /**

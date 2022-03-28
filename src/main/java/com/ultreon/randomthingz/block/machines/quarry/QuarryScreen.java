@@ -102,22 +102,5 @@ public class QuarryScreen extends MachineContainerScreen<QuarryContainer> {
                 fontRenderer.draw(matrixStack, "  Unknown error", xPos + 5, yPos + 48, 0xbf0000);
             }
         }
-
-//        if (container.isInitialized()) {
-//            if (container.isIllegalPosition()) {
-//                fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
-//                fontRenderer.drawString(matrixStack, "  Illegal Position, move to above y=5", xPos + 5, yPos + 48, 0xbf0000);
-//            } else if (container.isDone()) {
-//                fontRenderer.drawString(matrixStack, "Done!", xPos + 5, yPos + 36, 0x007f00);
-//            } else {
-//                fontRenderer.drawString(matrixStack, "Mining...", xPos + 5, yPos + 36, 0x3f3f3f);
-//                fontRenderer.drawString(matrixStack, "Total blocks: " + container.getTotalBlocks(), xPos + 5, yPos + 48, 0x7f7f7f);
-//                fontRenderer.drawString(matrixStack, "Remaining: " + container.getBlocksRemaining(), xPos + 5, yPos + 60, 0x7f7f7f);
-//                fontRenderer.drawString(matrixStack, "Y: " + container.getCurrentY(), xPos + 5, yPos + 72, 0x7f7f7f);
-//            }
-//        } else {
-//            fontRenderer.drawString(matrixStack, "Error:", xPos + 5, yPos + 36, 0x7f0000);
-//            fontRenderer.drawString(matrixStack, "  Not initialized yet.", xPos + 5, yPos + 48, 0xbf0000);
-//        }
     }
 }

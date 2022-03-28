@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item;
 
 import com.ultreon.modlib.api.FluidContainer;
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModItems;
 import com.ultreon.randomthingz.util.TextUtils;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;

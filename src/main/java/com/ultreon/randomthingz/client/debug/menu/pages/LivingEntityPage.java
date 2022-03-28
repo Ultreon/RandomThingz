@@ -19,6 +19,8 @@ import net.minecraft.world.phys.Vec3;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.minecraft.ChatFormatting.RED;
+
 public class LivingEntityPage extends EntityPage {
     public LivingEntityPage(String modId, String name) {
         super(modId, name);
@@ -91,8 +93,15 @@ public class LivingEntityPage extends EntityPage {
                         ctx.right("Using Item", entity.isUsingItem());
                         ctx.right("Visually Swimming", entity.isVisuallySwimming());
                     }
+                } else {
+                    // not looking at a block, or too far away from one to tell
+                    ctx.top(RED + "<No Entity Was Found>");
                 }
+            } else {
+                ctx.top(RED + "<World / Dimension Not Found>");
             }
+        } else {
+            ctx.top(RED + "<Local Player Not Found>");
         }
     }
 }

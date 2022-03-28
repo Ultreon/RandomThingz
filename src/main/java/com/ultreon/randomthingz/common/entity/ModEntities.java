@@ -3,7 +3,7 @@ package com.ultreon.randomthingz.common.entity;
 import com.ultreon.modlib.silentlib.registry.EntityTypeDeferredRegister;
 import com.ultreon.modlib.silentlib.registry.EntityTypeRegistryObject;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.common.init.ObjectInit;
 import com.ultreon.randomthingz.entity.*;
 import com.ultreon.randomthingz.entity.baby.*;

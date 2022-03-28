@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.init;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block._common.MachineType;
+import com.ultreon.randomthingz.block.machines.MachineType;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterScreen;
 import com.ultreon.randomthingz.block.machines.arcaneescalator.ArcaneEscalatorScreen;
 import com.ultreon.randomthingz.block.machines.batterybox.BatteryBoxContainer;

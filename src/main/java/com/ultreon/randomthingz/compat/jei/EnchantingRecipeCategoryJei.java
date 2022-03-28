@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.compat.jei;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterScreen;
 import com.ultreon.randomthingz.item.crafting.AlloySmeltingRecipe;
 import com.ultreon.randomthingz.util.Constants;

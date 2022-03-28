@@ -3,14 +3,14 @@ package com.ultreon.randomthingz;
 
 import com.ultreon.filters.Filters;
 import com.ultreon.randomthingz.block.ModBlockTags;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.client.input.KeyBindingList;
 import com.ultreon.randomthingz.common.ModuleManager;
 import com.ultreon.randomthingz.common.entity.ModEntities;
-import com.ultreon.randomthingz.common.interfaces.IHasRenderType;
+import com.ultreon.randomthingz.common.interfaces.RenderTypeHolder;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
-import com.ultreon.randomthingz.common.item.ModCreativeTabs;
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModCreativeTabs;
+import com.ultreon.randomthingz.init.ModItems;
 import com.ultreon.randomthingz.entity.*;
 import com.ultreon.randomthingz.entity.baby.*;
 import com.ultreon.randomthingz.item.CustomBowItem;
@@ -116,7 +116,7 @@ class Initialization {
 
         this.logger.info("Setting render layers for blocks.");
         for (Block block : Registration.getBlocks()) {
-            if (block instanceof IHasRenderType hasRenderType) {
+            if (block instanceof RenderTypeHolder hasRenderType) {
                 ItemBlockRenderTypes.setRenderLayer(block, hasRenderType.getRenderType());
             }
         }

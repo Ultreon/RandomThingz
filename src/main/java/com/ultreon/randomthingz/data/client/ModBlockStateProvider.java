@@ -4,7 +4,7 @@ import com.ultreon.modlib.silentlib.registry.BlockRegistryObject;
 import com.ultreon.modlib.silentlib.util.NameUtils;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.block.StoneType;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.machines.dryingrack.DryingRackBlock;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
 import net.minecraft.core.Direction;

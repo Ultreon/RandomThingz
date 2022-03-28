@@ -47,7 +47,7 @@ public class RtVersionInfo implements DevStringConvertible {
     @Override
     public String toDevString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("QfmVersion{");
+        sb.append("RtVersion{");
         sb.append("version=").append(version).append(";");
         sb.append("release=").append(release).append(";");
         sb.append("build=").append(build).append(";");

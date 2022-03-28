@@ -1,13 +1,18 @@
 package com.ultreon.randomthingz.block.machines.alloysmelter;
 
-import com.ultreon.randomthingz.block._common.MachineType;
+import com.ultreon.randomthingz.block.machines.MachineType;
 import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.item.crafting.AlloySmeltingRecipe;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.util.TextUtils;
+import net.minecraft.CrashReport;
+import net.minecraft.CrashReportCategory;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -15,8 +20,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class AlloySmelterBlockEntity extends MachineBlockEntity<AlloySmeltingRecipe> {
@@ -36,7 +46,7 @@ public class AlloySmelterBlockEntity extends MachineBlockEntity<AlloySmeltingRec
     }
 
     public AlloySmelterBlockEntity(MachineTier tier, BlockPos pos, BlockState state) {
-        super(MachineType.ALLOY_SMELTER.getTileEntityType(tier), pos, state, SLOTS_ALL.length, tier);
+        super(MachineType.ALLOY_SMELTER.getTileEntityType(tier), pos, state, SLOTS_ALL.length + 2, tier);
     }
 
     @Override
@@ -58,13 +68,61 @@ public class AlloySmelterBlockEntity extends MachineBlockEntity<AlloySmeltingRec
     }
 
     @Override
+    public void load(CompoundTag tags) {
+        System.out.println("[alloy_smelter] -----------------------");
+        System.out.println("[alloy_smelter] worldPosition = " + worldPosition);
+        System.out.println("[alloy_smelter[ level = " + level);
+        System.out.println("[alloy_smelter] tags = " + tags);
+        System.out.println("[alloy_smelter] -----------------------");
+
+        String path = "randomthingz-debug/load-dump/block-entity/" + Objects.requireNonNull(level).dimension().location().toDebugFileName() + " " + worldPosition.getX() + "." + worldPosition.getY() + "." + worldPosition.getZ() + " " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")) + ".nbt";
+        try {
+            File file = new File(Minecraft.getInstance().getLevelSource().getBaseDir().toFile(), path);
+            file.getParentFile().mkdirs();
+            NbtIo.writeCompressed(tags, file);
+        } catch (IOException e) {
+            CrashReport crashReport = new CrashReport("Debugging dump failure", e);
+            CrashReportCategory dump_details = crashReport.addCategory("Dump Details");
+            dump_details.setDetail("Dump Path", () -> path);
+            Minecraft.crash(crashReport);
+        }
+
+        super.load(tags);
+    }
+
+    @Override
+    public void saveAdditional(CompoundTag tags) {
+        super.saveAdditional(tags);
+        System.out.println("[alloy_smelter] -----------------------");
+        System.out.println("[alloy_smelter] worldPosition = " + worldPosition);
+        System.out.println("[alloy_smelter[ level = " + level);
+        System.out.println("[alloy_smelter] saved = " + tags);
+        System.out.println("[alloy_smelter] -----------------------");
+
+        String path = "randomthingz-debug/save-dump/block-entity/" + Objects.requireNonNull(level).dimension().location().toDebugFileName() + " " + worldPosition.getX() + "." + worldPosition.getY() + "." + worldPosition.getZ() + " " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")) + ".nbt";
+        try {
+            File file = new File(Minecraft.getInstance().getLevelSource().getBaseDir().toFile(), path);
+            file.getParentFile().mkdirs();
+            NbtIo.writeCompressed(tags, file);
+        } catch (IOException e) {
+            CrashReport crashReport = new CrashReport("Debugging dump failure", e);
+            CrashReportCategory dump_details = crashReport.addCategory("Dump Details");
+            dump_details.setDetail("Dump Path", () -> path);
+            Minecraft.crash(crashReport);
+        }
+    }
+
+    @Override
     protected int getProcessTime(AlloySmeltingRecipe recipe) {
         return recipe.getProcessTime();
     }
 
     @Override
     protected Collection<ItemStack> getProcessResults(AlloySmeltingRecipe recipe) {
-        return Collections.singleton(recipe.getResult());
+        ItemStack resultItem = recipe.assemble(this);
+        System.out.println("recipe.getResult() = " + recipe.getResult());
+        System.out.println("recipe.assemble(this) = " + recipe.assemble(this));
+        return Collections.singleton(resultItem);
     }
 
     @Override
@@ -100,7 +158,7 @@ public class AlloySmelterBlockEntity extends MachineBlockEntity<AlloySmeltingRec
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new AlloySmelterContainer(id, playerInventory, this, this.fields);
+        return new AlloySmelterContainer(id, playerInventory, tier, inventory, worldPosition, fields);
     }
 
     public static class Basic extends AlloySmelterBlockEntity {

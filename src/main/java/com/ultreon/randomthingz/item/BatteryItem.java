@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.item;
 
-import com.ultreon.randomthingz.common.item.ModCreativeTabs;
+import com.ultreon.randomthingz.init.ModCreativeTabs;
 import com.ultreon.randomthingz.item.energy.EnergyStoringItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;

@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.entity;
 
 import com.ultreon.randomthingz.common.entity.ModEntities;
-import com.ultreon.randomthingz.sound.ModSounds;
+import com.ultreon.randomthingz.init.ModSounds;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;

@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.client;
 
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModItems;
 import com.ultreon.randomthingz.item.type.EnergyStoringItem;
 import com.ultreon.randomthingz.util.ExceptionUtil;
 import net.minecraft.client.renderer.item.ItemProperties;

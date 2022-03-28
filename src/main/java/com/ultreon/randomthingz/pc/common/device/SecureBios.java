@@ -1,9 +1,9 @@
 package com.ultreon.randomthingz.pc.common.device;
 
-import com.ultreon.randomthingz.block.entity.ComputerTileEntity;
+import com.ultreon.randomthingz.block.entity.ComputerBlockEntity;
 
 public class SecureBios extends AbstractBios {
-    public SecureBios(ComputerTileEntity te, PowerController controller) {
+    public SecureBios(ComputerBlockEntity te, PowerController controller) {
         super(te.getComputer(), controller);
     }
 

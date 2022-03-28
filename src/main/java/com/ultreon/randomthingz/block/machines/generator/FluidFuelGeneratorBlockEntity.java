@@ -47,7 +47,7 @@ public abstract class FluidFuelGeneratorBlockEntity extends GeneratorBlockEntity
                 case 2 -> getMaxEnergyStored() & 0xFFFF;
                 case 3 -> (getMaxEnergyStored() >> 16) & 0xFFFF;
                 case 4 -> redstoneMode.ordinal();
-                case 5 -> tier.getUpgradeSlots();
+                case 5 -> tier.ordinal();
                 case 6 -> burnTime;
                 case 7 -> totalBurnTime;
                 case 8 -> Registry.FLUID.getId(tank.getFluid().getFluid());
@@ -132,9 +132,8 @@ public abstract class FluidFuelGeneratorBlockEntity extends GeneratorBlockEntity
     }
 
     @Override
-    public CompoundTag save(CompoundTag tags) {
+    public void saveAdditional(CompoundTag tags) {
         tags.put("FluidTank", this.tank.writeToNBT(new CompoundTag()));
-        return super.save(tags);
     }
 
     @Override
@@ -147,7 +146,7 @@ public abstract class FluidFuelGeneratorBlockEntity extends GeneratorBlockEntity
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag() {
         CompoundTag tags = super.getUpdateTag();
         tags.put("FluidTank", this.tank.writeToNBT(new CompoundTag()));
         return tags;

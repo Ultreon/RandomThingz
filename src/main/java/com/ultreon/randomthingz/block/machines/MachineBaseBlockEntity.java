@@ -13,6 +13,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -40,7 +41,7 @@ public abstract class MachineBaseBlockEntity extends BaseEnergyInventoryBlockEnt
                         // Max energy upper bytes
                         (MachineBaseBlockEntity.this.getMaxEnergyStored() >> 16) & 0xFFFF;
                 case 4 -> MachineBaseBlockEntity.this.redstoneMode.ordinal();
-                case 5 -> MachineBaseBlockEntity.this.tier.getUpgradeSlots();
+                case 5 -> MachineBaseBlockEntity.this.tier.ordinal();
                 default -> 0;
             };
         }
@@ -109,10 +110,9 @@ public abstract class MachineBaseBlockEntity extends BaseEnergyInventoryBlockEnt
     }
 
     @Override
-    public CompoundTag save(CompoundTag tags) {
-        super.save(tags);
+    public void saveAdditional(CompoundTag tags) {
+        super.saveAdditional(tags);
         tags.putByte("RedstoneMode", (byte) this.redstoneMode.ordinal());
-        return tags;
     }
 
     @Override
@@ -123,7 +123,7 @@ public abstract class MachineBaseBlockEntity extends BaseEnergyInventoryBlockEnt
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
+    public @NotNull CompoundTag getUpdateTag() {
         CompoundTag tags = super.getUpdateTag();
         tags.putByte("RedstoneMode", (byte) this.redstoneMode.ordinal());
         return tags;

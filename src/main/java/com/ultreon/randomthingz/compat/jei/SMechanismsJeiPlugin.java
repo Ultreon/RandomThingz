@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.compat.jei;
 
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterContainer;
 import com.ultreon.randomthingz.block.machines.alloysmelter.AlloySmelterScreen;
 import com.ultreon.randomthingz.block.machines.arcaneescalator.ArcaneEscalatorContainer;
@@ -17,7 +17,7 @@ import com.ultreon.randomthingz.block.machines.infuser.InfuserScreen;
 import com.ultreon.randomthingz.block.machines.mixer.MixerScreen;
 import com.ultreon.randomthingz.block.machines.refinery.RefineryScreen;
 import com.ultreon.randomthingz.block.machines.solidifier.SolidifierScreen;
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModItems;
 import com.ultreon.randomthingz.item.CanisterItem;
 import com.ultreon.randomthingz.item.crafting.common.ModRecipes;
 import com.ultreon.randomthingz.registration.Registration;

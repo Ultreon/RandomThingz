@@ -1,5 +1,6 @@
 package com.ultreon.randomthingz.block.machines.compressor;
 
+import com.ultreon.modlib.block.entity.Tickable;
 import com.ultreon.randomthingz.block.machines.MachineBlock;
 import com.ultreon.randomthingz.common.enums.MachineTier;
 import net.minecraft.core.BlockPos;
@@ -16,6 +17,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -44,6 +47,12 @@ public class CompressorBlock extends MachineBlock {
         return new CompressorBlockEntity(pos, state);
     }
 
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return Tickable::blockEntity;
+    }
+
     @Override
     public void animateTick(BlockState stateIn, Level level, BlockPos pos, Random rand) {
         // TODO: Unique sound and particles? Copied from BlastFurnaceBlock.
@@ -69,7 +78,7 @@ public class CompressorBlock extends MachineBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide && level.getBlockEntity(pos) instanceof final CompressorBlockEntity be) {
-            final MenuProvider container = new SimpleMenuProvider((id, inv, p) -> new CompressorContainer(id, inv, be, be.getFields()), be.getDisplayName());
+            final MenuProvider container = new SimpleMenuProvider((id, inv, p) -> new CompressorContainer(id, inv, be.inventory, pos, be.getFields()), be.getDisplayName());
             NetworkHooks.openGui((ServerPlayer) player, container, pos);
         }
 

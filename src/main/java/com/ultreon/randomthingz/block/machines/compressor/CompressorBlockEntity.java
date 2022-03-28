@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.compressor;
 
 import com.google.common.collect.ImmutableList;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.MachineBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
@@ -65,7 +65,7 @@ public class CompressorBlockEntity extends MachineBlockEntity<CompressingRecipe>
 
     @Override
     protected Collection<ItemStack> getProcessResults(CompressingRecipe recipe) {
-        return Collections.singleton(recipe.getResultItem());
+        return Collections.singleton(recipe.assemble(this));
     }
 
     @Override
@@ -96,7 +96,7 @@ public class CompressorBlockEntity extends MachineBlockEntity<CompressingRecipe>
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new CompressorContainer(id, playerInventory, this, this.fields);
+        return new CompressorContainer(id, playerInventory, inventory, worldPosition, fields);
     }
 
     List<String> getDebugText() {

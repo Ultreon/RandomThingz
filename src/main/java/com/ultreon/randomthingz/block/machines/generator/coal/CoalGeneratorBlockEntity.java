@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.generator.coal;
 
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.generator.GeneratorBlockEntity;
 import com.ultreon.randomthingz.common.enums.MachineTier;
@@ -101,6 +101,6 @@ public class CoalGeneratorBlockEntity extends GeneratorBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new CoalGeneratorContainer(id, playerInventory, this, this.fields);
+        return new CoalGeneratorContainer(id, playerInventory, inventory, worldPosition, fields);
     }
 }

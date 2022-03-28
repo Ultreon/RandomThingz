@@ -5,10 +5,12 @@ import com.ultreon.randomthingz.util.Constants;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
-public class MachineUpgradeSlot extends Slot {
-    public MachineUpgradeSlot(Container inventoryIn, int index, int xPosition, int yPosition) {
-        super(inventoryIn, index, xPosition, yPosition);
+public class MachineUpgradeSlot extends SlotItemHandler {
+    public MachineUpgradeSlot(IItemHandler slots, int index, int xPosition, int yPosition) {
+        super(slots, index, xPosition, yPosition);
     }
 
     @Override

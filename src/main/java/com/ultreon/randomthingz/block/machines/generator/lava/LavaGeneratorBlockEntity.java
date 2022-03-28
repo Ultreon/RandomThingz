@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.generator.lava;
 
 import com.ultreon.modlib.api.FluidContainer;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.generator.FluidFuelGeneratorBlockEntity;
 import com.ultreon.randomthingz.util.TextUtils;
@@ -76,6 +76,6 @@ public class LavaGeneratorBlockEntity extends FluidFuelGeneratorBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new LavaGeneratorContainer(id, playerInventory, this, this.fields);
+        return new LavaGeneratorContainer(id, playerInventory, this.inventory, this.worldPosition, this.fields);
     }
 }

@@ -1,9 +1,12 @@
 package com.ultreon.randomthingz.block.machines.infuser;
 
-import com.ultreon.modlib.silentlib.inventory.SlotOutputOnly;
+import com.ultreon.modlib.block.entity.UmlItemStackHandler;
+import com.ultreon.modlib.inventory.OutputSlot;
 import com.ultreon.modlib.silentlib.util.InventoryUtils;
-import com.ultreon.randomthingz.block.machines.BaseMachineBaseContainer;
+import com.ultreon.randomthingz.block.machines.BaseMachineContainer;
+import com.ultreon.randomthingz.common.enums.MachineTier;
 import com.ultreon.randomthingz.init.ModMachineContainers;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,23 +16,29 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.items.SlotItemHandler;
 
-public class InfuserContainer extends BaseMachineBaseContainer<InfuserBlockEntity> {
+public class InfuserContainer extends BaseMachineContainer<InfuserBlockEntity> {
     public InfuserContainer(int id, Inventory playerInventory) {
-        this(id, playerInventory, new InfuserBlockEntity(), new SimpleContainerData(InfuserBlockEntity.FIELDS_COUNT));
+        this(id, playerInventory, new UmlItemStackHandler(4 + MachineTier.STANDARD.getUpgradeSlots()), BlockPos.ZERO, new SimpleContainerData(InfuserBlockEntity.FIELDS_COUNT));
     }
 
-    public InfuserContainer(int id, Inventory playerInventory, InfuserBlockEntity tileEntity, ContainerData fieldsIn) {
-        super(ModMachineContainers.infuser, id, tileEntity, fieldsIn);
+    public InfuserContainer(int id, Inventory inv, UmlItemStackHandler stackHandler, BlockPos pos, ContainerData fieldsIn) {
+        super(ModMachineContainers.infuser, id, inv, stackHandler, pos, fieldsIn);
 
-        this.addSlot(new Slot(this.tileEntity, InfuserBlockEntity.SLOT_FLUID_CONTAINER_IN, 8, 16));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, InfuserBlockEntity.SLOT_FLUID_CONTAINER_OUT, 8, 59));
-        this.addSlot(new Slot(this.tileEntity, InfuserBlockEntity.SLOT_ITEM_IN, 54, 35));
-        this.addSlot(new SlotOutputOnly(this.tileEntity, InfuserBlockEntity.SLOT_ITEM_OUT, 116, 35));
+        this.addSlot(new SlotItemHandler(stackHandler, InfuserBlockEntity.SLOT_FLUID_CONTAINER_IN, 8, 16));
+        this.addSlot(new OutputSlot(stackHandler, InfuserBlockEntity.SLOT_FLUID_CONTAINER_OUT, 8, 59));
+        this.addSlot(new SlotItemHandler(stackHandler, InfuserBlockEntity.SLOT_ITEM_IN, 54, 35));
+        this.addSlot(new OutputSlot(stackHandler, InfuserBlockEntity.SLOT_ITEM_OUT, 116, 35));
 
-        InventoryUtils.createPlayerSlots(playerInventory, 8, 84).forEach(this::addSlot);
+        InventoryUtils.createPlayerSlots(inv, 8, 84).forEach(this::addSlot);
 
         this.addUpgradeSlots();
+    }
+
+    @Override
+    public MachineTier getTier() {
+        return MachineTier.STANDARD;
     }
 
     public int getProgress() {

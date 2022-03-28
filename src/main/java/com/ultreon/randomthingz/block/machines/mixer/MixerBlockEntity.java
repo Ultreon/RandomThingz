@@ -171,6 +171,6 @@ public class MixerBlockEntity extends FluidMachineBlockEntity<MixingRecipe> {
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
-        return new MixerContainer(id, player, this, this.fields);
+        return new MixerContainer(id, player, inventory, worldPosition, this.fields);
     }
 }

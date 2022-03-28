@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.item;
 
-import com.ultreon.randomthingz.common.item.ModCreativeTabs;
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModCreativeTabs;
+import com.ultreon.randomthingz.init.ModItems;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.LivingEntity;

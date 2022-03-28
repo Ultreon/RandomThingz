@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.batterybox;
 
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.MachineBaseBlockEntity;
 import com.ultreon.randomthingz.capability.EnergyStorageImpl;
@@ -92,8 +92,8 @@ public class BatteryBoxBlockEntity extends MachineBaseBlockEntity {
     }
 
     @Override
-    protected AbstractContainerMenu createMenu(int id, Inventory playerInventory) {
-        return new BatteryBoxContainer(id, playerInventory, this, this.getFields());
+    protected AbstractContainerMenu createMenu(int id, Inventory inv) {
+        return new BatteryBoxContainer(id, inv, inventory, worldPosition, fields);
     }
 
     @Override

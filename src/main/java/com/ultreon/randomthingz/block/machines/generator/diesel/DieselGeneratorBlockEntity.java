@@ -1,7 +1,7 @@
 package com.ultreon.randomthingz.block.machines.generator.diesel;
 
 import com.ultreon.modlib.api.FluidContainer;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.block.entity.ModMachines;
 import com.ultreon.randomthingz.block.machines.generator.FluidFuelGeneratorBlockEntity;
 import com.ultreon.randomthingz.util.InventoryUtils;
@@ -77,6 +77,6 @@ public class DieselGeneratorBlockEntity extends FluidFuelGeneratorBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
-        return new DieselGeneratorContainer(id, player, this, this.fields);
+        return new DieselGeneratorContainer(id, player, this.inventory, this.worldPosition, this.fields);
     }
 }

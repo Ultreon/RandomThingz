@@ -1,11 +1,11 @@
 package com.ultreon.randomthingz.common.enums;
 
-import com.ultreon.randomthingz.common.interfaces.Indexable;
+import com.ultreon.randomthingz.common.interfaces.Indexed;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum MoonPhase implements Indexable {
+public enum MoonPhase implements Indexed {
     FULL(0),
     WANING_GIBBOUS(1),
     THIRD_QUARTER(2),

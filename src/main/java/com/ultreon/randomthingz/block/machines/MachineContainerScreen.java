@@ -17,7 +17,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 import java.util.Objects;
 
-public abstract class MachineContainerScreen<C extends BaseMachineBaseContainer<?>> extends AbstractContainerScreen<C> {
+public abstract class MachineContainerScreen<C extends BaseMachineContainer<?>> extends AbstractContainerScreen<C> {
     public MachineContainerScreen(C menu, Inventory inv, Component title) {
         super(menu, inv, title);
     }

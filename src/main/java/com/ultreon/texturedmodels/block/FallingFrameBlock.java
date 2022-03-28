@@ -3,7 +3,7 @@ package com.ultreon.texturedmodels.block;
 import com.ultreon.texturedmodels.setup.Registration;
 import com.ultreon.texturedmodels.tileentity.FallingFrameBlockEntity;
 import com.ultreon.texturedmodels.tileentity.FrameBlockEntity;
-import com.ultreon.texturedmodels.tileentity.Tickable;
+import com.ultreon.modlib.block.entity.Tickable;
 import com.ultreon.texturedmodels.util.BCBlockStateProperties;
 import com.ultreon.texturedmodels.util.BlockAppearanceHelper;
 import com.ultreon.texturedmodels.util.BlockSavingHelper;

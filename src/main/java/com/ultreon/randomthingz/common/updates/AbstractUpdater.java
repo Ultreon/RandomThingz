@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.common.interfaces.IVersion;
+import com.ultreon.randomthingz.common.interfaces.Version;
 import com.ultreon.randomthingz.common.internal.RtVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.ModContainer;
@@ -31,13 +31,13 @@ import java.util.Map;
 /**
  * An abstract updater used for checking for updates.
  * Other modders can use this to create their own updaters.
- * They need to create an implementation of {@linkplain IVersion} to make it work with their own version systems -
+ * They need to create an implementation of {@linkplain Version} to make it work with their own version systems -
  * Or use {@linkplain RtVersion} if modders want to use the Ultreon Team version system.
  *
- * @param <T> an implementation of {@linkplain IVersion}.
+ * @param <T> an implementation of {@linkplain Version}.
  */
 @SuppressWarnings("unused")
-public abstract class AbstractUpdater<T extends IVersion> {
+public abstract class AbstractUpdater<T extends Version> {
     private static final List<AbstractUpdater<?>> INSTANCES = new ArrayList<>();
     private static final Map<String, AbstractUpdater<?>> MOD_UPDATER_MAP = new HashMap<>();
     public static boolean DEBUG = true;

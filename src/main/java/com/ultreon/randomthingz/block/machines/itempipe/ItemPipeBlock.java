@@ -5,7 +5,7 @@ import com.ultreon.modlib.api.ConnectionType;
 import com.ultreon.randomthingz.RandomThingz;
 import com.ultreon.randomthingz.api.IWrenchable;
 import com.ultreon.randomthingz.util.ItemCapabilityUtils;
-import com.ultreon.texturedmodels.tileentity.Tickable;
+import com.ultreon.modlib.block.entity.Tickable;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -91,7 +91,7 @@ public class ItemPipeBlock extends PipeBlock implements IWrenchable, EntityBlock
 
     private static ConnectionType createConnection(BlockGetter level, BlockPos pos, Direction side, ConnectionType current) {
         BlockEntity tileEntity = level.getBlockEntity(pos.relative(side));
-        if (tileEntity instanceof ItemPipeTileEntity) {
+        if (tileEntity instanceof ItemPipeBlockEntity) {
             return ConnectionType.BOTH;
         } else if (tileEntity != null) {
             IItemHandler itemHandler = ItemCapabilityUtils.getItemHandlerFromSideOrNull(tileEntity, side.getOpposite());
@@ -109,7 +109,7 @@ public class ItemPipeBlock extends PipeBlock implements IWrenchable, EntityBlock
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ItemPipeTileEntity(pos, state);
+        return new ItemPipeBlockEntity(pos, state);
     }
 
     @Nullable
@@ -130,7 +130,7 @@ public class ItemPipeBlock extends PipeBlock implements IWrenchable, EntityBlock
         if (side != null) {
             BlockEntity other = dimension.getBlockEntity(pos.relative(side));
             Block otherBlock = dimension.getBlockState(pos.relative(side)).getBlock();
-            if (!(other instanceof ItemPipeTileEntity) && !(otherBlock instanceof ItemPipeBlock)) {
+            if (!(other instanceof ItemPipeBlockEntity) && !(otherBlock instanceof ItemPipeBlock)) {
                 BlockState state1 = cycleProperty(state, FACING_TO_PROPERTY_MAP.get(side));
                 if (other != null && other.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).isPresent()) {
                     dimension.setBlock(pos, state1, 18);
@@ -166,7 +166,7 @@ public class ItemPipeBlock extends PipeBlock implements IWrenchable, EntityBlock
     @SuppressWarnings("deprecation")
     @Override
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-        if (level.getBlockEntity(facingPos) instanceof ItemPipeTileEntity)
+        if (level.getBlockEntity(facingPos) instanceof ItemPipeBlockEntity)
             ItemPipeConnection.invalidateNetwork(level, currentPos);
 
         EnumProperty<ConnectionType> property = FACING_TO_PROPERTY_MAP.get(facing);

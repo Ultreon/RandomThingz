@@ -150,6 +150,6 @@ public class RefineryBlockEntity extends FluidMachineBlockEntity<RefiningRecipe>
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory player) {
-        return new RefineryContainer(id, player, this, this.fields);
+        return new RefineryContainer(id, player, inventory, worldPosition, fields);
     }
 }

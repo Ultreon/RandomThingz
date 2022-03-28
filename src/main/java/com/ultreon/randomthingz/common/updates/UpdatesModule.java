@@ -5,7 +5,7 @@ import com.ultreon.randomthingz.client.gui.modules.ModuleCompatibility;
 import com.ultreon.randomthingz.common.Module;
 import com.ultreon.randomthingz.common.ModuleSafety;
 import com.ultreon.randomthingz.common.Ticker;
-import com.ultreon.randomthingz.common.interfaces.IVersion;
+import com.ultreon.randomthingz.common.interfaces.Version;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -170,7 +170,7 @@ public class UpdatesModule extends Module {
     private static class ServerSide extends Module.ServerSide {
         private static final int delay = 3600;
         private static final int tickDelay = 40 * delay;
-        private static final HashMap<AbstractUpdater<?>, IVersion> latestKnownMap = new HashMap<>();
+        private static final HashMap<AbstractUpdater<?>, Version> latestKnownMap = new HashMap<>();
         private static final Ticker ticker = new Ticker(tickDelay - 1);
 
         public ServerSide() {
@@ -198,11 +198,11 @@ public class UpdatesModule extends Module {
                 AbstractUpdater<?>[] updaters = AbstractUpdater.getInstances();
                 for (AbstractUpdater<?> updater : updaters) {
                     AbstractUpdater.UpdateInfo updateInfo = updater.checkForUpdates();
-                    IVersion latest = updater.getLatestVersion();
+                    Version latest = updater.getLatestVersion();
                     if (!latestKnownMap.containsKey(updater)) {
                         latestKnownMap.put(updater, updater.getCurrentVersion());
                     }
-                    IVersion latestKnown = latestKnownMap.get(updater);
+                    Version latestKnown = latestKnownMap.get(updater);
                     if (latestKnown == null || latest == null) {
                         continue;  // Todo: show error notification.
                     }

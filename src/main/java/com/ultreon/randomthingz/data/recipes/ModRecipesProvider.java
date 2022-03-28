@@ -4,14 +4,15 @@ import com.ultreon.modlib.api.crafting.recipe.fluid.FluidIngredient;
 import com.ultreon.modlib.silentlib.data.ExtendedShapedRecipeBuilder;
 import com.ultreon.modlib.silentlib.data.ExtendedShapelessRecipeBuilder;
 import com.ultreon.randomthingz.RandomThingz;
-import com.ultreon.randomthingz.block._common.ModBlocks;
+import com.ultreon.randomthingz.init.ModBlocks;
 import com.ultreon.randomthingz.common.FeatureStatus;
 import com.ultreon.randomthingz.common.item.ItemMaterial;
-import com.ultreon.randomthingz.common.item.ModItems;
+import com.ultreon.randomthingz.init.ModItems;
 import com.ultreon.randomthingz.common.tags.ModTags;
+import com.ultreon.randomthingz.init.ModMachineUpgrades;
 import com.ultreon.randomthingz.item.CraftingItems;
 import com.ultreon.randomthingz.item.tool.Toolset;
-import com.ultreon.randomthingz.item.upgrade.MachineUpgrades;
+import com.ultreon.randomthingz.item.upgrade.MachineUpgrade;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -640,7 +641,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(ModTags.Items.PLASTIC))
                 .save(consumer);
 
-        ShapelessRecipeBuilder.shapeless(MachineUpgrades.PROCESSING_SPEED)
+        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.PROCESSING_SPEED.get())
                 .requires(CraftingItems.UPGRADE_CASE)
                 .requires(Tags.Items.STORAGE_BLOCKS_REDSTONE)
                 .requires(ItemMaterial.SILVER.getIngotTag().get())
@@ -648,7 +649,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(CraftingItems.UPGRADE_CASE))
                 .save(consumer);
 
-        ShapelessRecipeBuilder.shapeless(MachineUpgrades.OUTPUT_CHANCE)
+        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.OUTPUT_CHANCE.get())
                 .requires(CraftingItems.UPGRADE_CASE)
                 .requires(Tags.Items.STORAGE_BLOCKS_LAPIS)
                 .requires(ItemMaterial.PLATINUM.getIngotTag().get())
@@ -656,7 +657,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(CraftingItems.UPGRADE_CASE))
                 .save(consumer);
 
-        ShapelessRecipeBuilder.shapeless(MachineUpgrades.ENERGY_EFFICIENCY)
+        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.ENERGY_EFFICIENCY.get())
                 .requires(CraftingItems.UPGRADE_CASE)
                 .requires(Items.GLOWSTONE)
                 .requires(ItemMaterial.ELECTRUM.getIngotTag().get())
@@ -664,7 +665,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(CraftingItems.UPGRADE_CASE))
                 .save(consumer);
 
-        ShapelessRecipeBuilder.shapeless(MachineUpgrades.RANGE)
+        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.RANGE.get())
                 .requires(CraftingItems.UPGRADE_CASE)
                 .requires(Tags.Items.ENDER_PEARLS)
                 .requires(ItemMaterial.INVAR.getIngotTag().get())

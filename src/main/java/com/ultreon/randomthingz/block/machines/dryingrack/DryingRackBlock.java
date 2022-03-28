@@ -1,6 +1,6 @@
 package com.ultreon.randomthingz.block.machines.dryingrack;
 
-import com.ultreon.texturedmodels.tileentity.Tickable;
+import com.ultreon.modlib.block.entity.Tickable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
@@ -45,7 +45,7 @@ public class DryingRackBlock extends HorizontalDirectionalBlock implements Simpl
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new DryingRackTileEntity(pos, state);
+        return new DryingRackBlockEntity(pos, state);
     }
 
     @Nullable
@@ -58,8 +58,8 @@ public class DryingRackBlock extends HorizontalDirectionalBlock implements Simpl
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         BlockEntity tileEntity = level.getBlockEntity(pos);
-        if (tileEntity instanceof DryingRackTileEntity) {
-            return ((DryingRackTileEntity) tileEntity).interact(player) ? InteractionResult.SUCCESS : InteractionResult.PASS;
+        if (tileEntity instanceof DryingRackBlockEntity) {
+            return ((DryingRackBlockEntity) tileEntity).interact(player) ? InteractionResult.SUCCESS : InteractionResult.PASS;
         }
         return super.use(state, level, pos, player, handIn, hit);
     }
