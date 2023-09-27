@@ -42,7 +42,6 @@ public final class ModItems {
         ItemMaterial.registerItems();
         Toolset.registerItems();
         CraftingItems.register();
-        MachineUpgrade.register();
     }
 
     public static final ItemRegistryObject<WrenchItem> WRENCH = register("wrench", WrenchItem::new);

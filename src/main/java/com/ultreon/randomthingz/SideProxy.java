@@ -41,7 +41,6 @@ class SideProxy implements IProxy {
 
     SideProxy() {
         Config.initialize();
-        Network.initialize();
         Registration.register();
 
         // Add listeners for common events
@@ -78,6 +77,7 @@ class SideProxy implements IProxy {
 //        if (ModList.get().isLoaded("computercraft")) {
 //            SMechComputerCraftCompat.initialize();
 //        }
+        Network.init();
     }
 
     private void onImcEnqueue(InterModEnqueueEvent event) {

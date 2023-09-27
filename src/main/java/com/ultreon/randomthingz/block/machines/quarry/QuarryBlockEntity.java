@@ -351,12 +351,12 @@ public class QuarryBlockEntity extends MachineBaseBlockEntity {
             destroyBlock(posToBreak, true, null);
 
             this.x++;
-            if (this.x > this.worldPosition.getX() + 1 + getUpgradeCount(ModMachineUpgrades.RANGE.get())) {
-                this.x = this.worldPosition.getX() - (1 + getUpgradeCount(ModMachineUpgrades.RANGE.get()));
+            if (this.x > this.worldPosition.getX() + 1 + getUpgradeCount(ModMachineUpgrades.RANGE)) {
+                this.x = this.worldPosition.getX() - (1 + getUpgradeCount(ModMachineUpgrades.RANGE));
                 this.z++;
             }
-            if (this.z > this.worldPosition.getZ() + 1 + getUpgradeCount(ModMachineUpgrades.RANGE.get())) {
-                this.z = this.worldPosition.getZ() - (1 + getUpgradeCount(ModMachineUpgrades.RANGE.get()));
+            if (this.z > this.worldPosition.getZ() + 1 + getUpgradeCount(ModMachineUpgrades.RANGE)) {
+                this.z = this.worldPosition.getZ() - (1 + getUpgradeCount(ModMachineUpgrades.RANGE));
                 this.y--;
             }
 
@@ -366,7 +366,7 @@ public class QuarryBlockEntity extends MachineBaseBlockEntity {
         } else {
             int i = (int) (breakProcessTime / breakProgress * 10f);
             level.destroyBlockProgress(this.worldPosition.hashCode(), posToBreak, i);
-            breakProgress += .2f * (getUpgradeCount(ModMachineUpgrades.PROCESSING_SPEED.get()) * 2f + 1.5f);
+            breakProgress += .2f * (getUpgradeCount(ModMachineUpgrades.PROCESSING_SPEED) * 2f + 1.5f);
         }
     }
 

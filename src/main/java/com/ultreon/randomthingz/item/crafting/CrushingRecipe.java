@@ -46,7 +46,7 @@ public class CrushingRecipe implements Recipe<Container> {
      */
     public List<ItemStack> getResults(Container inv) {
         int outputUpgrades = inv instanceof MachineBlockEntity
-                ? ((MachineBlockEntity<?>) inv).getUpgradeCount(ModMachineUpgrades.OUTPUT_CHANCE.get())
+                ? ((MachineBlockEntity<?>) inv).getUpgradeCount(ModMachineUpgrades.OUTPUT_CHANCE)
                 : 0;
         return results.entrySet().stream()
                 .filter(e -> {

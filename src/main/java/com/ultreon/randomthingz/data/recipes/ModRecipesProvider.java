@@ -641,7 +641,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(ModTags.Items.PLASTIC))
                 .save(consumer);
 
-        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.PROCESSING_SPEED.get())
+        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.PROCESSING_SPEED)
                 .requires(CraftingItems.UPGRADE_CASE)
                 .requires(Tags.Items.STORAGE_BLOCKS_REDSTONE)
                 .requires(ItemMaterial.SILVER.getIngotTag().get())
@@ -649,7 +649,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(CraftingItems.UPGRADE_CASE))
                 .save(consumer);
 
-        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.OUTPUT_CHANCE.get())
+        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.OUTPUT_CHANCE)
                 .requires(CraftingItems.UPGRADE_CASE)
                 .requires(Tags.Items.STORAGE_BLOCKS_LAPIS)
                 .requires(ItemMaterial.PLATINUM.getIngotTag().get())
@@ -657,7 +657,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(CraftingItems.UPGRADE_CASE))
                 .save(consumer);
 
-        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.ENERGY_EFFICIENCY.get())
+        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.ENERGY_EFFICIENCY)
                 .requires(CraftingItems.UPGRADE_CASE)
                 .requires(Items.GLOWSTONE)
                 .requires(ItemMaterial.ELECTRUM.getIngotTag().get())
@@ -665,7 +665,7 @@ public class ModRecipesProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(CraftingItems.UPGRADE_CASE))
                 .save(consumer);
 
-        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.RANGE.get())
+        ShapelessRecipeBuilder.shapeless(ModMachineUpgrades.RANGE)
                 .requires(CraftingItems.UPGRADE_CASE)
                 .requires(Tags.Items.ENDER_PEARLS)
                 .requires(ItemMaterial.INVAR.getIngotTag().get())

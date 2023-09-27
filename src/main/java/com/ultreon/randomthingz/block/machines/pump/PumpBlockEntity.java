@@ -80,7 +80,7 @@ public class PumpBlockEntity extends MachineBaseBlockEntity {
     }
 
     private int getHorizontalRange() {
-        return 3 + getUpgradeCount(ModMachineUpgrades.RANGE.get()) * Constants.UPGRADE_RANGE_AMOUNT;
+        return 3 + getUpgradeCount(ModMachineUpgrades.RANGE) * Constants.UPGRADE_RANGE_AMOUNT;
     }
 
     private int getVerticalRange() {
@@ -92,7 +92,7 @@ public class PumpBlockEntity extends MachineBaseBlockEntity {
     }
 
     private int getPumpDelay() {
-        int upgrades = getUpgradeCount(ModMachineUpgrades.PROCESSING_SPEED.get());
+        int upgrades = getUpgradeCount(ModMachineUpgrades.PROCESSING_SPEED);
         return (int) (PUMP_DELAY / (1f + upgrades * Constants.UPGRADE_PROCESSING_SPEED_AMOUNT));
     }
 

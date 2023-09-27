@@ -22,7 +22,7 @@ public final class Network {
 
     public static SimpleChannel channel;
 
-    static {
+    public static void init() {
         int id = 0;
         channel = NetworkRegistry.ChannelBuilder.named(RandomThingz.res("network"))
                 .clientAcceptedVersions(s -> Objects.equals(s, VERSION))

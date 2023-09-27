@@ -120,7 +120,7 @@ public abstract class MachineBlockEntity<R extends Recipe<?>> extends MachineBas
      * @return The processing speed
      */
     protected float getProcessSpeed() {
-        int speedUpgrades = getUpgradeCount(ModMachineUpgrades.PROCESSING_SPEED.get());
+        int speedUpgrades = getUpgradeCount(ModMachineUpgrades.PROCESSING_SPEED);
         return tier.getProcessingSpeed() * (1f + speedUpgrades * Constants.UPGRADE_PROCESSING_SPEED_AMOUNT);
     }
 

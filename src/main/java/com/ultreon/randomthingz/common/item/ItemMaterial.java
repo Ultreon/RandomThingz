@@ -614,7 +614,7 @@ public class ItemMaterial implements BaseItemMaterial {
             this.dataGenTags.add(ore.getToolRequirement().getTag());
             this.harvestRequirement = ore.getToolRequirement();
             if (oreTag == null) {
-                this.oreTag = blockTag("ores/" + registryName);
+                this.oreTag = blockTag("ores/" + registryName.getPath());
             }
             return this;
         }
@@ -628,7 +628,7 @@ public class ItemMaterial implements BaseItemMaterial {
             this.dataGenTags.add(toolRequirement.getTag());
             this.harvestRequirement = toolRequirement;
             if (oreTag == null) {
-                this.oreTag = blockTag("ores/" + registryName);
+                this.oreTag = blockTag("ores/" + registryName.getPath());
             }
             return this;
         }
@@ -640,48 +640,48 @@ public class ItemMaterial implements BaseItemMaterial {
 
         public Builder storageBlock(ToolRequirement tool) {
             this.storageBlock = () -> new MetalBlock(tool);
-            this.storageBlockTag = blockTag("storage_blocks/" + registryName);
+            this.storageBlockTag = blockTag("storage_blocks/" + registryName.getPath());
             this.harvestRequirement = tool;
             return this;
         }
 
         public Builder chunks() {
             this.chunks = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
-            this.chunksTag = itemTag(RandomThingz.res("chunks/" + registryName));
+            this.chunksTag = itemTag(RandomThingz.res("chunks/" + registryName.getPath()));
             return this;
         }
 
         public Builder dust() {
             this.dust = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
-            this.dustTag = itemTag("dusts/" + registryName);
+            this.dustTag = itemTag("dusts/" + registryName.getPath());
             return this;
         }
 
         public Builder ingot() {
             this.ingot = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
-            this.ingotTag = itemTag("ingots/" + registryName);
+            this.ingotTag = itemTag("ingots/" + registryName.getPath());
             return this;
         }
 
         public Builder ingotTagOnly() {
-            this.ingotTag = itemTag("ingots/" + registryName);
+            this.ingotTag = itemTag("ingots/" + registryName.getPath());
             return this;
         }
 
         public Builder nugget() {
             this.nugget = () -> new Item(new Item.Properties().tab(ModCreativeTabs.METAL_CRAFTABLES));
-            this.nuggetTag = itemTag("nuggets/" + registryName);
+            this.nuggetTag = itemTag("nuggets/" + registryName.getPath());
             return this;
         }
 
         public Builder nuggetTagOnly() {
-            this.nuggetTag = itemTag("nuggets/" + registryName);
+            this.nuggetTag = itemTag("nuggets/" + registryName.getPath());
             return this;
         }
 
         public Builder gem() {
             this.gem = () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC));
-            this.gemTag = itemTag("gems/" + registryName);
+            this.gemTag = itemTag("gems/" + registryName.getPath());
             return this;
         }
 
