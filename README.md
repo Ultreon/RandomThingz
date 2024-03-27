@@ -1,3 +1,10 @@
+> [!IMPORTANT]
+> THIS PROJECT IS OFFICIALLY DISCONTINUED.  
+> NO SUPPORT FOR THIS PROJECT WILL BE AVAILABLE ANYMORE!  
+> DISCONTINUED SINCE `MARCH 27TH 2024 04:50`
+>
+> R.I.P RandomThingz 2020 - 2024 🪦
+
 # Ultreon Team
 *Probably just another random things mod.*
 
